@@ -1,9 +1,14 @@
+import { PROJECTS } from '../constants'
 import _ from 'lodash'
 import Vue from 'vue'
+import VueLazyload from 'vue-lazyload'
 import Router from 'vue-router'
-import { PROJECTS } from '../constants'
 
 Vue.use(Router)
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  attempt: 1
+})
 
 // route-level code splitting
 const Project = () => import('../views/Project.vue')
