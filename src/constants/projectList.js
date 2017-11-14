@@ -5,6 +5,7 @@ export default {
   // |----YourProject
   // |------YourProject.vue
 //  'proj1': () => import('../components/Proj1/Proj1.vue')
+  'marathon': 'Marathon',
   'proj1': 'Proj1',
   // 'proj2': 'Proj2'
 }
