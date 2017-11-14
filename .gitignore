@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+.idea
+*.iml
+
+err.log
+npm-debug.log*
+debug.log
+.idea
+api/config.js
+/tmp
+gcskeyfile.json
+archives
