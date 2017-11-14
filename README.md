@@ -29,4 +29,4 @@ yarn start
 
 based on [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0)
 
-Copyright (c) 2016 MirroMedia
+Copyright (c) 2017 MirroMedia
