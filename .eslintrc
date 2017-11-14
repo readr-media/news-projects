@@ -1,0 +1,16 @@
+{
+  "parser": "babel-eslint",
+  "extends": "vue",
+  "plugins": [
+      "import"
+  ],
+  "rules": { 
+    "array-bracket-spacing": [ 2, "always" ],
+    "camelcase": [ 0, "" ],
+    "yoda": [ 0, "never" ]
+  },
+  "globals": {
+    "location": true,
+    "source": true
+  }
+}
