@@ -86,12 +86,14 @@ app.use('/service-worker.js', serve('./dist/service-worker.js'))
 app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl))
 
 function render (req, res, next) {
+  const s = Date.now()
+  console.log('got req at ', s)
+  
   if (req.url.indexOf('/api/') === 0) {
     next()
     return
   }
 
-  const s = Date.now()
   let isPageNotFound = false
   let isErrorOccurred = false  
 
