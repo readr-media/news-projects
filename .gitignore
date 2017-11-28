@@ -14,3 +14,5 @@ api/config.js
 /tmp
 gcskeyfile.json
 archives
+
+projects/
