@@ -92,6 +92,8 @@ app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl))
 function render (req, res, next) {
   const s = Date.now()
   console.log('got req at ', s)
+  console.log('req.url', req.url)
+  console.log('req(complete)', req)
   
   if (req.url.indexOf('/api/') === 0) {
     next()
