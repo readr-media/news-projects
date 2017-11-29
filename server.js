@@ -93,6 +93,7 @@ function render (req, res, next) {
   const s = Date.now()
   console.log('got req at ', s)
   console.log('req.url', req.url)
+  console.log('dist path:', path.join(__dirname, '../project/dist'))
   
   if (req.url.indexOf('/api/') === 0) {
     next()
