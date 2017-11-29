@@ -72,7 +72,7 @@ const serve = (path, cache) => express.static(resolve(path), {
 
 app.use(compression({ threshold: 0 }))
 app.use(favicon('./public/favicon-48x48.png'))
-app.use('/dist', serve('../project/dist', true))
+app.use('/dist', serve('../src/dist', true))
 app.use('/public', serve('./public', true))
 app.use('/manifest.json', serve('./manifest.json', true))
 app.use('/service-worker.js', serve('./dist/service-worker.js'))
@@ -93,7 +93,8 @@ function render (req, res, next) {
   const s = Date.now()
   console.log('got req at ', s)
   console.log('req.url', req.url)
-  console.log('dist path:', path.join(__dirname, '../project/dist'))
+  console.log('dist path: (../src/dist)', path.join(__dirname, '../src/dist'))
+  console.log('dist path: (./dist)', path.join(__dirname, './dist'))
   
   if (req.url.indexOf('/api/') === 0) {
     next()
