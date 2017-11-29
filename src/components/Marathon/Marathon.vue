@@ -1,64 +1,6 @@
 <template>
   <div class="marathon">
-    <section class="map">
-      <div class="map__menu">
-        <div>
-          <button class="boston" :class="[this.race === 'boston' ? 'selected' : '']" @click="$_marathon_changeRace('boston')">波士頓</button>
-          <button class="chicago" :class="[this.race === 'chicago' ? 'selected' : '']" @click="$_marathon_changeRace('chicago')">芝加哥</button>
-          <button class="newyork" :class="[this.race === 'newyork' ? 'selected' : '']" @click="$_marathon_changeRace('newyork')">紐約</button>
-          <button class="berlin" :class="[this.race === 'berlin' ? 'selected' : '']" @click="$_marathon_changeRace('berlin')">柏林</button>
-          <button class="london" :class="[this.race === 'london' ? 'selected' : '']" @click="$_marathon_changeRace('london')">倫敦</button>
-          <button class="tokyo" :class="[this.race === 'tokyo' ? 'selected' : '']" @click="$_marathon_changeRace('tokyo')">東京</button>
-        </div>
-        <div>
-          <span>我的全馬完賽時間</span>
-          <div class="map__userTime">
-            <input ref="userTimeTrack" type="range" @change="$_marathon_updateUserTime">
-          </div>
-        </div>
-        <div class="map__userTimeInfo">
-          <img src="https://www.mirrormedia.mg/projects/images/marathon/userTime.png">
-          <span ref="userTimeInfo" v-text="raceAverageTime"></span>
-        </div>
-      </div>
-      <div class="map__images">
-        <img ref="mapImage" src="http://www.mirrormedia.mg/projects/images/marathon/berlin.png">
-        <canvas id="js-pixi"></canvas>
-        <img class="map__images--compass" src="https://www.mirrormedia.mg/projects/images/marathon/compass.png">
-      </div>
-      <div class="map__control">
-        <div class="map__timeInfo">
-          <div id="timerMobile" class="map__timeInfo--timerMobile">00:00:00</div>
-          <div class="map__timeInfo--control">
-            <button class="btn--img mobile-only" ref="togglePlayMobile" @click="$_marathon_togglePlay()"><img src="https://www.mirrormedia.mg/projects/images/marathon/pause.png"></button>
-            <button class="btn--img mobile-only" @click="$_marathon_restart()"><img src="https://www.mirrormedia.mg/projects/images/marathon/restart.png"></button>
-            <button class="btn--filter desktop-only" :class="[this.filterCountry === 'all' ? 'selected' : '']" ref="filterCountryall" @click="$_marathon_filterCountry('all')">全部</button>
-            <button class="btn--filter desktop-only" :class="[this.filterCountry === 'twn' ? 'selected' : '']" ref="filterCountrytwn" @click="$_marathon_filterCountry('twn')">台灣</button>
-            <button class="btn--filter desktop-only" :class="[this.filterCountry === 'other' ? 'selected' : '']" ref="filterCountryother" @click="$_marathon_filterCountry('other')">非台灣</button>
-            <button class="btn--filter desktop-only" :class="[this.filterGender === 'all' ? 'selected' : '']" ref="filterGenderall" @click="$_marathon_filterGender('all')">全部</button>
-            <button class="btn--filter desktop-only" :class="[this.filterGender === 'm' ? 'selected' : '']" ref="filterGenderm" @click="$_marathon_filterGender('m')">男</button>
-            <button class="btn--filter desktop-only" :class="[this.filterGender === 'w' ? 'selected' : '']" ref="filterGenderw" @click="$_marathon_filterGender('w')">女</button>
-          </div>
-        </div>
-        <div class="map__sliderBar">
-          <div id="js-track" class="map__sliderBarTrack">
-            <div class="map__sliderBarTrack--fullTime" @click="$_marathon_moveTrackBar"></div>
-            <div id="js-currentTrackTime" class="map__sliderBarTrack--currentTime" @click="$_marathon_moveTrackBar"></div>
-            <div id="js-trackbutton" class="map__sliderBarTrack--trackbutton"></div>
-          </div>
-          <div class="map__sliderBarControl">
-            <div id="timerDesktop" class="map__timeInfo--timerDesktop">00:00:00</div>
-            <div>
-              <button class="btn--img desktop-only" ref="togglePlayDesktop" @click="$_marathon_togglePlay()"><img src="https://www.mirrormedia.mg/projects/images/marathon/pause.png"></button>
-              <button class="btn--img desktop-only" @click="$_marathon_restart()"><img src="https://www.mirrormedia.mg/projects/images/marathon/restart.png"></button>
-              <button :class="[this.speedRatio === 1 ? 'selected' : '']" @click="$_marathon_adjustSpeed(1)">60x</button>
-              <button :class="[this.speedRatio === 2 ? 'selected' : '']" @click="$_marathon_adjustSpeed(2)">120x</button>
-              <button :class="[this.speedRatio === 10 ? 'selected' : '']" @click="$_marathon_adjustSpeed(10)">600x</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <marathon-game></marathon-game>
     <section class="intro">
       <div class="intro__content">
         <p>看完了六大馬，台灣跑者的跑步習慣又是什麼呢？因為台北馬不願意提供資料，我們嘗試從 Garmin 的用戶資料來看看，跑台北馬的人都是什麼樣的人，如果你想要完成一個馬拉松，並在時限內完賽（台北馬限時 5 小時 30 分）又需要什麼樣的訓練呢？</p>
@@ -164,8 +106,8 @@
 <script>
   import { smoothScroll } from 'kc-scroll'
   import _ from 'lodash'
-  import Highcharts from 'highcharts'
   import MarathonChart from './MarathonChart.vue'
+  import MarathonGame from './MarathonGame.vue'
   import moment from 'moment'
 
   import superagent from 'superagent'
@@ -447,7 +389,8 @@
   export default {
     name: 'MarathonProject',
     components: {
-      'marathon-chart': MarathonChart
+      'marathon-chart': MarathonChart,
+      'marathon-game': MarathonGame
     },
     data () {
       return {
@@ -465,17 +408,17 @@
       
     },
     mounted () {
-      window.PIXI = require('pixi.js')
-      window.filters = require('pixi-filters')
+      // window.PIXI = require('pixi.js')
+      // window.filters = require('pixi-filters')
       // window.superagent = require('superagent')
-      this.$_marathon_detectWebGLSupported()
-      canvasW = document.querySelector('.map__images').offsetWidth
-      canvasH = document.querySelector('.map__images').offsetHeight
+      // this.$_marathon_detectWebGLSupported()
+      // canvasW = document.querySelector('.map__images').offsetWidth
+      // canvasH = document.querySelector('.map__images').offsetHeight
 
-      app = new PIXI.Application(canvasW, canvasH, { antialias: false, transparent: true, view: document.querySelector('#js-pixi') })
-      this.$_marathon_setRaceInfo('berlin')
+      // app = new PIXI.Application(canvasW, canvasH, { antialias: false, transparent: true, view: document.querySelector('#js-pixi') })
+      // this.$_marathon_setRaceInfo('berlin')
       // this.$_marathon_resize()
-      window.addEventListener('resize', this.$_marathon_resize)
+      // window.addEventListener('resize', this.$_marathon_resize)
     },
     methods: {
       calculateRunnerTrack(data) {
