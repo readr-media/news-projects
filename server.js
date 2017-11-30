@@ -75,7 +75,7 @@ app.use(favicon(path.join(__dirname, './public/favicon-48x48.png')))
 app.use('/dist', serve(path.join(__dirname, './dist'), true))
 app.use('/public', serve(path.join(__dirname, './public'), true))
 app.use('/manifest.json', serve(path.join(__dirname, './manifest.json'), true))
-app.use('/service-worker.js', serve(path.join(__dirname, './dist/service-worker.js')))
+app.use('/service-worker.js', serve('./dist/service-worker.js'))
 
 if (!isProd) {
   app.use('/proj-assets', serve(path.join(__dirname, './proj-assets'), true))

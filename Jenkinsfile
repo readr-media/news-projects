@@ -128,7 +128,7 @@ node {
             [
                 color: "#3A7BD1",
                 title: "Deploy Success",
-                text: "@${slack_user} @alvinhsu, open up! You have a new <https://dev.mirrormedia.mg|deploy>",
+                text: "@${slack_user} @alvinhsu @mushin, open up! You have a new <https://dev.readr.tw/project/|deploy>",
         		mrkdwn_in: ["text"]
     		]
         ])
