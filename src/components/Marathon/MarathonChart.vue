@@ -3,7 +3,7 @@
     <h1 v-if="chartTitle" v-text="chartTitle"></h1>
     <h2 v-if="chartSubtitle" v-text="chartSubtitle"></h2>
     <div class="marathonChart__chart" :class="chartPosition">
-      <img v-if="chartPeopleImage" :src="`https://www.mirrormedia.mg/projects/images/marathon/chart-${chartPeopleImage}.png`">
+      <img v-if="chartPeopleImage" :src="`/proj-assets/marathon/images/chart-${chartPeopleImage}.png`">
       <div :id="`js-chart-${chart}`"></div>
     </div>
     <h3 v-if="chartDescr" v-text="chartDescr"></h3>
@@ -462,7 +462,7 @@ h3
       z-index 999
       width 35px
       height 100px
-      background-image url(https://www.mirrormedia.mg/projects/images/marathon/road-03.png)
+      background-image url(/proj-assets/marathon/images/road-03.png)
       background-size 40px auto
       background-repeat repeat-y
       background-position right top

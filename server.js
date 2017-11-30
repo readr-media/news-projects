@@ -78,7 +78,7 @@ app.use('/manifest.json', serve(path.join(__dirname, './manifest.json'), true))
 app.use('/service-worker.js', serve(path.join(__dirname, './dist/service-worker.js')))
 
 if (!isProd) {
-  app.use('/projects', serve(path.join(__dirname, './projects'), true))
+  app.use('/proj-assets', serve(path.join(__dirname, './proj-assets'), true))
 }
 
 // since this app has no user-specific content, every page is micro-cacheable.

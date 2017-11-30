@@ -1,5 +1,5 @@
 <template>
-  <section class="marathonGame">
+  <section ref="marathonGame" class="marathonGame">
     <div class="marathonGame__menu">
       <div>
         <button class="boston" :class="[this.race === 'boston' ? 'selected' : '']" @click="$_marathon_changeRace('boston')">波士頓</button>
@@ -16,27 +16,27 @@
         </div>
       </div>
       <div class="marathonGame__selectedTimeInfo">
-        <img src="https://www.mirrormedia.mg/projects/images/marathon/userTime.png">
+        <img src="/proj-assets/marathon/images/userTime.png">
         <span ref="selectedTimeInfo" v-text="convertedAverage"></span>
       </div>
     </div>
     <div class="marathonGame__map">
-      <img ref="marathonGameMap" src="http://www.mirrormedia.mg/projects/images/marathon/berlin.png">
+      <img ref="marathonGameMap" src="/proj-assets/marathon/images/boston.png">
       <canvas id="js-pixi"></canvas>
-      <img class="marathonGame__map--compass" src="https://www.mirrormedia.mg/projects/images/marathon/compass.png">
+      <img class="marathonGame__map--compass" :class="this.race" src="/proj-assets/marathon/images/compass.png">
     </div>
     <div class="marathonGame__control">
       <div class="marathonGame__filterContainer">
         <div id="timerMobile" class="marathonGame__timerMobile">00:00:00</div>
         <div class="marathonGame__filter">
-          <button class="btn--img mobile-only" ref="togglePlayMobile" @click="$_marathon_togglePlay()"><img src="https://www.mirrormedia.mg/projects/images/marathon/pause.png"></button>
-          <button class="btn--img mobile-only" @click="$_marathon_restart()"><img src="https://www.mirrormedia.mg/projects/images/marathon/restart.png"></button>
-          <button class="btn--filter desktop-only" :class="[this.filterCountry === 'all' ? 'selected' : '']" ref="filterCountryall" @click="$_marathon_filterCountry('all')">全部</button>
-          <button class="btn--filter desktop-only" :class="[this.filterCountry === 'twn' ? 'selected' : '']" ref="filterCountrytwn" @click="$_marathon_filterCountry('twn')">台灣</button>
-          <button class="btn--filter desktop-only" :class="[this.filterCountry === 'other' ? 'selected' : '']" ref="filterCountryother" @click="$_marathon_filterCountry('other')">非台灣</button>
-          <button class="btn--filter desktop-only" :class="[this.filterGender === 'all' ? 'selected' : '']" ref="filterGenderall" @click="$_marathon_filterGender('all')">全部</button>
-          <button class="btn--filter desktop-only" :class="[this.filterGender === 'm' ? 'selected' : '']" ref="filterGenderm" @click="$_marathon_filterGender('m')">男</button>
-          <button class="btn--filter desktop-only" :class="[this.filterGender === 'w' ? 'selected' : '']" ref="filterGenderw" @click="$_marathon_filterGender('w')">女</button>
+          <button ref="togglePlayMobile" class="btn--img mobile-only" @click="$_marathon_togglePlay()"><img src="/proj-assets/marathon/images/pause.png"></button>
+          <button class="btn--img mobile-only" @click="$_marathon_restart()"><img src="/proj-assets/marathon/images/restart.png"></button>
+          <button ref="filterCountryall" class="btn--filter desktop-only" :class="[this.filterCountry === 'all' ? 'selected' : '']" @click="$_marathon_filterCountry('all')">全部</button>
+          <button ref="filterCountrytwn" class="btn--filter desktop-only" :class="[this.filterCountry === 'twn' ? 'selected' : '']" @click="$_marathon_filterCountry('twn')">台灣</button>
+          <button ref="filterCountryother" class="btn--filter desktop-only" :class="[this.filterCountry === 'other' ? 'selected' : '']" @click="$_marathon_filterCountry('other')">非台灣</button>
+          <button ref="filterGenderall" class="btn--filter desktop-only" :class="[this.filterGender === 'all' ? 'selected' : '']" @click="$_marathon_filterGender('all')">全部</button>
+          <button ref="filterGenderm" class="btn--filter desktop-only" :class="[this.filterGender === 'm' ? 'selected' : '']" @click="$_marathon_filterGender('m')">男</button>
+          <button ref="filterGenderw" class="btn--filter desktop-only" :class="[this.filterGender === 'w' ? 'selected' : '']" @click="$_marathon_filterGender('w')">女</button>
         </div>
       </div>
       <div class="marathonGame__sliderBarContainer">
@@ -48,8 +48,8 @@
         <div class="marathonGame__speedControl">
           <div id="timerDesktop" class="marathonGame__timerDesktop">00:00:00</div>
           <div>
-            <button class="btn--img desktop-only" ref="togglePlayDesktop" @click="$_marathon_togglePlay()"><img src="https://www.mirrormedia.mg/projects/images/marathon/pause.png"></button>
-            <button class="btn--img desktop-only" @click="$_marathon_restart()"><img src="https://www.mirrormedia.mg/projects/images/marathon/restart.png"></button>
+            <button class="btn--img desktop-only" ref="togglePlayDesktop" @click="$_marathon_togglePlay()"><img src="/proj-assets/marathon/images/pause.png"></button>
+            <button class="btn--img desktop-only" @click="$_marathon_restart()"><img src="/proj-assets/marathon/images/restart.png"></button>
             <button :class="[this.speedRatio === 1 ? 'selected' : '']" @click="$_marathon_changeSpeed(1)">60x</button>
             <button :class="[this.speedRatio === 2 ? 'selected' : '']" @click="$_marathon_changeSpeed(2)">120x</button>
             <button :class="[this.speedRatio === 10 ? 'selected' : '']" @click="$_marathon_changeSpeed(10)">600x</button>
@@ -60,6 +60,7 @@
   </section>
 </template>
 <script>
+  import { currentYPosition, elmYPosition } from 'kc-scroll'
   import _ from 'lodash'
   import moment from 'moment'
   import superagent from 'superagent'
@@ -139,7 +140,7 @@
         filterGender: 'all',
         isPause: false,
         loading: true,
-        race: 'berlin',
+        race: 'boston',
         speedRatio: 1
       }
     },
@@ -148,7 +149,8 @@
       this.canvasW = this.$refs.marathonGameMap.offsetWidth
       this.canvasH = this.$refs.marathonGameMap.offsetHeight
       this.$_marathon_detectWebGLSupported()
-      this.$_marathon_setRace('berlin')
+      this.$_marathon_setRace('boston')
+      window.addEventListener('scroll', this.$_marathon_detectScroll)
     },
     methods: {
       $_marathon_calculateCurrentSplit(second, timeAccumulativePerSplit) {
@@ -377,6 +379,14 @@
         }
         return paths
       },
+      $_marathon_detectScroll(e) {
+        const marathonGameTop = this.elmYPosition('.marathonGame') + this.$refs.marathonGame.offsetHeight
+        if (this.currentYPosition() > marathonGameTop) {
+          app.ticker.stop()
+          this.$refs.togglePlayMobile.querySelector('img').src = `/proj-assets/marathon/images/play.png`
+          this.$refs.togglePlayDesktop.querySelector('img').src = `/proj-assets/marathon/images/play.png`
+        }
+      },
       $_marathon_detectWebGLSupported() {
         let type = 'WebGL'
         if (!PIXI.utils.isWebGLSupported()) {
@@ -424,8 +434,8 @@
         raceTimeMin = _.min(_.map(dataRunners, r => r[4]))
 
         this.isPause = false
-        this.$refs.togglePlayMobile.querySelector('img').src = `https://www.mirrormedia.mg/projects/images/marathon/pause.png`
-        this.$refs.togglePlayDesktop.querySelector('img').src = `https://www.mirrormedia.mg/projects/images/marathon/pause.png`
+        this.$refs.togglePlayMobile.querySelector('img').src = `/proj-assets/marathon/images/pause.png`
+        this.$refs.togglePlayDesktop.querySelector('img').src = `/proj-assets/marathon/images/pause.png`
         this.filterCountry = 'all'
         this.filterGender = 'all'
         tickerValue = 1
@@ -479,6 +489,8 @@
         }
 
         const runnerAmount = runners.length
+        // const runnerAmount = 3
+
         const raceTimeAverage = _.floor(_.sum(_.map(dataRunners, r => r[4])) / runners.length)
         this.convertedAverage = secondToHHMMSS(raceTimeAverage)
         this.$refs.selectedTimeControl.max = raceTimeMax
@@ -490,7 +502,7 @@
         // set selected time point
         containerSelectedTime = new PIXI.Container()
         app.stage.addChild(containerSelectedTime)
-        const textureSelectedTime = PIXI.Texture.fromImage('/projects/images/marathon/userTime-icon.png')
+        const textureSelectedTime = PIXI.Texture.fromImage('/proj-assets/marathon/images/userTime-icon.png')
         spriteSelectedTime = new PIXI.Sprite(textureSelectedTime)
         spriteSelectedTime.anchor.set(0.5, 1)
         spriteSelectedTime.scale.set(0.25)
@@ -565,8 +577,11 @@
           }
         })
       },
-      $_marathon_moveTrackBar () {
-
+      $_marathon_moveTrackBar (e) {
+        app.ticker.stop()
+        const newPercentageTime = e.layerX / e.target.parentNode.offsetWidth
+        tickerTimer = Math.floor(raceTimeMax * newPercentageTime)
+        this.$_marathon_updatePointPos(tickerTimer)
       },
       $_marathon_restart() {
         app.ticker.stop()
@@ -582,22 +597,20 @@
       $_marathon_setRace(race) {
         const raceRunners = _.get(this.data, [ race, 'runners', 0 ])
         const raceMap = _.get(this.data, [ race, 'map', 'race' ])
-        console.log(this.canvasW)
-        console.log(this.canvasH)
         app = new PIXI.Application(this.canvasW, this.canvasH, { antialias: false, transparent: true, view: document.querySelector('#js-pixi') })
 
         if (!raceRunners || !raceMap) {
-          Promise.all([fetchData(`/projects/data/marathon/${race}Map.json`), fetchData(`/projects/data/marathon/${race}Data.json`)])
+          Promise.all([fetchData(`/proj-assets/marathon/data/${race}Map.json`), fetchData(`/proj-assets/marathon/data/${race}Data.json`)])
           .then((data) => {
             this.data[race]['map'] = data[0]
             this.data[race]['runners'] = data[1]
             this.race = race
-            this.$refs.marathonGameMap.src = `http://www.mirrormedia.mg/projects/images/marathon/${race}.png`
+            this.$refs.marathonGameMap.src = `/proj-assets/marathon/images/${race}.png`
             this.$_marathon_initRace()
           })
         } else {
           this.race = race
-          this.$refs.marathonGameMap.src = `http://www.mirrormedia.mg/projects/images/marathon/${race}.png`
+          this.$refs.marathonGameMap.src = `/proj-assets/marathon/images/${race}.png`
           this.$_marathon_initRace()
         }
       },
@@ -605,13 +618,55 @@
         this.isPause = !this.isPause
         if (this.isPause) {
           app.ticker.stop()
-          this.$refs.togglePlayMobile.querySelector('img').src = `https://www.mirrormedia.mg/projects/images/marathon/play.png`
-          this.$refs.togglePlayDesktop.querySelector('img').src = `https://www.mirrormedia.mg/projects/images/marathon/play.png`
+          this.$refs.togglePlayMobile.querySelector('img').src = `/proj-assets/marathon/images/play.png`
+          this.$refs.togglePlayDesktop.querySelector('img').src = `/proj-assets/marathon/images/play.png`
         } else {
           app.ticker.start()
-          this.$refs.togglePlayMobile.querySelector('img').src = `https://www.mirrormedia.mg/projects/images/marathon/pause.png`
-          this.$refs.togglePlayDesktop.querySelector('img').src = `https://www.mirrormedia.mg/projects/images/marathon/pause.png`
+          this.$refs.togglePlayMobile.querySelector('img').src = `/proj-assets/marathon/images/pause.png`
+          this.$refs.togglePlayDesktop.querySelector('img').src = `/proj-assets/marathon/images/pause.png`
         }
+      },
+      $_marathon_updatePointPos(tickerTimer) {
+        const runnersAmount = _.get(runners, ['length'], 0)
+
+        spriteSelectedTime.currentSplit = this.$_marathon_calculateCurrentSplit(tickerTimer, spriteSelectedTime.timeAccumulativePerSplit)
+        if (tickerTimer < spriteSelectedTime.speedData[0]) {
+          let secondInSplit
+          if (spriteSelectedTime.currentSplit === 0) {
+            secondInSplit = tickerTimer
+          } else {
+            secondInSplit = tickerTimer - spriteSelectedTime.timeAccumulativePerSplit[spriteSelectedTime.currentSplit - 1]
+          }
+          const splitOrigin = paths[spriteSelectedTime.pathIndex][spriteSelectedTime.currentSplit]
+          const deltaMoveX = secondInSplit * spriteSelectedTime.deltaPerSplitBySecond[spriteSelectedTime.currentSplit][0]
+          const deltaMoveY = secondInSplit * spriteSelectedTime.deltaPerSplitBySecond[spriteSelectedTime.currentSplit][1]
+          spriteSelectedTime.x = splitOrigin[0] + deltaMoveX
+          spriteSelectedTime.y = splitOrigin[1] + deltaMoveY
+        } else {
+          spriteSelectedTime.x = -1
+          spriteSelectedTime.y = -1
+        }
+
+        for (let i = 0; i < runnersAmount; i += 1) {
+          runners[i].currentSplit = this.$_marathon_calculateCurrentSplit(tickerTimer, runners[i].timeAccumulativePerSplit)
+          if (tickerTimer < runners[i].speedData[0]) {
+            let secondInSplit
+            if (runners[i].currentSplit === 0) {
+              secondInSplit = tickerTimer
+            } else {
+              secondInSplit = tickerTimer - runners[i].timeAccumulativePerSplit[runners[i].currentSplit - 1]
+            }
+            const splitOrigin = paths[runners[i].pathIndex][runners[i].currentSplit]
+            const deltaMoveX = secondInSplit * runners[i].deltaPerSplitBySecond[runners[i].currentSplit][0]
+            const deltaMoveY = secondInSplit * runners[i].deltaPerSplitBySecond[runners[i].currentSplit][1]
+            runners[i].x = splitOrigin[0] + deltaMoveX
+            runners[i].y = splitOrigin[1] + deltaMoveY
+          } else {
+            runners[i].x = -1
+            runners[i].y = -1
+          }
+        }
+        app.ticker.start()
       },
       $_marathon_updateSelectedTime(e) {
         const selectedTime = e.target.value
@@ -645,7 +700,9 @@
           spriteSelectedTime.y = -1
         }
         app.ticker.start()
-      }
+      },
+      currentYPosition,
+      elmYPosition
     },
   }
 </script>
@@ -687,7 +744,7 @@ img
     padding 38px 0 0
     padding-left calc((100% - 300px) / 2)
     padding-right calc((100% - 300px) / 2)
-    background-image url(https://www.mirrormedia.mg/projects/images/marathon/road-02.png)
+    background-image url(/proj-assets/marathon/images/road-02.png)
     background-repeat repeat-x
     background-size 19px 38px
     > div
@@ -731,27 +788,27 @@ img
       &.boston
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-boston.jpg)    
+            background-image url(/proj-assets/marathon/images/logo-boston.jpg)    
       &.chicago
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-chicago.jpg)
+            background-image url(/proj-assets/marathon/images/logo-chicago.jpg)
       &.newyork
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-newyork.jpg)
+            background-image url(/proj-assets/marathon/images/logo-newyork.jpg)
       &.berlin
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-berlin.jpg)
+            background-image url(/proj-assets/marathon/images/logo-berlin.jpg)
       &.london
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-london.jpg)
+            background-image url(/proj-assets/marathon/images/logo-london.jpg)
       &.tokyo
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-tokyo.jpg)
+            background-image url(/proj-assets/marathon/images/logo-tokyo.jpg)
   
   &__selectedTimeControl
     display flex
@@ -847,7 +904,10 @@ img
       right calc((100% - 300px) / 2)
       width 30px
       height auto
-  
+      &.newyork
+        transform rotate(90deg)
+      &.chicago
+        transform rotate(-90deg)
   &__control
     padding 10px 0
     padding-left calc((100% - 300px) / 2)

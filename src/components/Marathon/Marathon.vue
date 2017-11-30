@@ -9,31 +9,31 @@
         <div class="triangle" @click="smoothScroll('.chart--01')"></div>
         <div class="intro__menu">
           <div @click="smoothScroll('.chart--1')">
-            <img src="https://www.mirrormedia.mg/projects/images/marathon/intro-icon-01.png">
+            <img src="/proj-assets/marathon/images/intro-icon-01.png">
             <p>平常有運動習慣嗎？</p>
           </div>
           <div @click="smoothScroll('.chart--2')">
-            <img src="https://www.mirrormedia.mg/projects/images/marathon/intro-icon-02.png">
+            <img src="/proj-assets/marathon/images/intro-icon-02.png">
             <p>平均每週跑多少公里？</p>
           </div>
           <div @click="smoothScroll('.chart--3')">
-            <img src="https://www.mirrormedia.mg/projects/images/marathon/intro-icon-03.png">
+            <img src="/proj-assets/marathon/images/intro-icon-03.png">
             <p>臨時抱佛腳指數？</p>
           </div>
           <div @click="smoothScroll('.chart--5')">
-            <img src="https://www.mirrormedia.mg/projects/images/marathon/intro-icon-04.png">
+            <img src="/proj-assets/marathon/images/intro-icon-04.png">
             <p>大家平常都在哪裡練習？</p>
           </div>
           <div @click="smoothScroll('.chart--6')">
-            <img src="https://www.mirrormedia.mg/projects/images/marathon/intro-icon-05.png">
+            <img src="/proj-assets/marathon/images/intro-icon-05.png">
             <p>高手們都怎麼練習？</p>
           </div>
         </div>
-        <img class="intro__decoration--mobile" src="https://www.mirrormedia.mg/projects/images/marathon/intro-m.png">
+        <img class="intro__decoration--mobile" src="/proj-assets/marathon/images/intro-m.png">
       </div>
       <div class="intro__decoration--desktop">
         <div class="intro__decoration--lroad"></div>
-        <img class="intro__decoration--sroad" src="https://www.mirrormedia.mg/projects/images/marathon/intro-d.png">
+        <img class="intro__decoration--sroad" src="/proj-assets/marathon/images/intro-d.png">
       </div>
     </section>
     <section class="chart">
@@ -90,13 +90,16 @@
     </section>
     <section class="credit">
       <div class="mobile">
-        <span>文字：李又如 視覺設計：許玲瑋、v_k 網頁製作：ttt</span>
-        <img src="https://www.mirrormedia.mg/projects/images/marathon/credit-m.png">
+        <span>文字：李又如 視覺設計：許玲瑋、v_k 網頁製作： HY Tan</span>
+        <img src="/proj-assets/marathon/images/credit-m.png">
       </div>
       <div class="desktop">
-        <span>文字：李又如<br>視覺設計：許玲瑋、v_k<br>網頁製作：ttt</span>
-        <img src="https://www.mirrormedia.mg/projects/images/marathon/credit-d.png">
+        <span>文字：李又如<br>視覺設計：許玲瑋、v_k<br>網頁製作：HY Tan</span>
+        <img src="/proj-assets/marathon/images/credit-d.png">
       </div>
+    </section>
+    <section class="related">
+      <iframe src="https://www.mirrormedia.mg/project-list/dark?excluding=marathon"  width="100%" frameborder="0" scrolling="no" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
     </section>
     <section class="facebook">
       <div class="fb-comments" data-href="https://www.mirrormedia.mg/projects/rent-house/" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
@@ -105,286 +108,8 @@
 </template>
 <script>
   import { smoothScroll } from 'kc-scroll'
-  import _ from 'lodash'
   import MarathonChart from './MarathonChart.vue'
   import MarathonGame from './MarathonGame.vue'
-  import moment from 'moment'
-
-  import superagent from 'superagent'
-  const currentSplit = []
-  const timeAccumulativePerSplit = []
-  const deltaPerSplitBySecond = []
-  const speedData = []
-  const point = []
-  const group = []
-  const colorSelected = '0x493b5c'
-  const colorUnselected = '0xb7a3d1'
-  const pathAmount = 10
-  const containers = []
-  // 0xF45B69
-  let runners = []
-  let canvasW
-  let canvasH
-  let tickerTimer
-  let tickerValue = 1
-  let isPause = false
-  let isCompleted = false
-  let app
-  let container
-  let containerUserTime
-  let containerTwnMale
-  let containerTwnFemale
-  let containerOtherMale
-  let containerOtherFemale
-  
-
-  let dataRunner
-  let maxRunnerTime
-  let minRunnerTime
-  let averageTime
-  let paths
-  let pathIndex
-  let spriteUserTime
-
-  let pathsTotalDistance
-  let pathsRatioBySplit
-  let pathsDeltaBySplit
-
-  function fetchData(url) {
-    return new Promise((resolve, reject) => {
-      superagent
-      .get(url)
-      .end((err, res) => {
-        if (!err && res) {
-          return resolve(JSON.parse(res.text))
-        } else {
-          return reject(err)
-        }
-      })
-    })
-  }
-
-  function convertCoordinates(data, zoomRatio) {
-    return _.map(data, d => [Number((d[0] * zoomRatio).toFixed(4)), Number((d[1] * zoomRatio).toFixed(4))])
-  }
-
-  function createPaths(innerTrack, outerTrack, pathAmount = 10) {
-    const splitAmount = innerTrack.length
-    const paths = []
-    // let diffX
-    for (let i = 0; i < pathAmount; i += 1) {
-      const path = []
-      // console.log('-------')
-      for (let j = 0; j < splitAmount; j += 1) {
-        if (i === 0) {
-          path.push(innerTrack[j])
-        } else if (i === (pathAmount - 1)) {
-          path.push(outerTrack[j])
-        } else {
-          const shiftX = (outerTrack[j][0] - innerTrack[j][0]) / (pathAmount - 1)
-          const shiftY = (outerTrack[j][1] - innerTrack[j][1]) / (pathAmount - 1)
-          const coordinate = [(innerTrack[j][0] + (i * shiftX)), (innerTrack[j][1] + (i * shiftY))]
-          path.push(coordinate)
-          // diffX = Math.abs(outerTrack[j][0] - innerTrack[j][0]) / (pathAmount - 1)
-          // path.push(getLI(innerTrack[j], outerTrack[j], (diffX * (i + 1))))
-        }
-      }
-      paths.push(path)
-    }
-    return paths
-  }
-
-  function getPathDistanceBySplit(paths, pathAmount, splitAmount) {
-    const distancePerSplit = []
-    for (let i = 0; i < pathAmount; i += 1) {
-      const distances = []
-      for (let j = 0; j < splitAmount - 1; j += 1) {
-        distances.push(getPythagoreanValue(paths[i][j], paths[i][j + 1]))
-      }
-      distancePerSplit.push(distances)
-    }
-    return distancePerSplit
-  }
-
-  function calculatePathsTotalDistance(pathDistances, pathAmount) {
-    const distancePerPath = []
-    for (let i = 0; i < pathAmount; i += 1) {
-      const splitAmount = pathDistances[i].length
-      let distance = 0
-      for (let j = 0; j < splitAmount; j += 1) {
-        distance += pathDistances[i][j]
-      }
-      distancePerPath.push(distance)
-    }
-    return distancePerPath
-  }
-
-  function calculatePathsRatioBySplit(pathDistances, pathsTotalDistance, pathAmount) {
-    const ratioPerPath = []
-    for (let i = 0; i < pathAmount; i += 1) {
-      const splitAmount = pathDistances[i].length
-      const ratioPerSplit = []
-      for (let j = 0; j < splitAmount; j += 1) {
-        const ratio = pathDistances[i][j] / pathsTotalDistance[i]
-        ratioPerSplit.push(ratio)
-      }
-      ratioPerPath.push(ratioPerSplit)
-    }
-    return ratioPerPath
-  }
-
-  function calculateTimePerSplit(pathsRatioBySplit, totalTime) {
-    const splitAmount = _.get(pathsRatioBySplit, ['length'])
-    const timePerSplit = []
-    for (let i = 0; i < splitAmount; i += 1) {
-      const time = Math.round(pathsRatioBySplit[i] * totalTime)
-      timePerSplit.push(time)
-    }
-    return timePerSplit
-  }
-
-  function calculateTimeAccumulativePerSplit(timePerSplit, totalTime) {
-    const splitAmount = _.get(timePerSplit, ['length'])
-    const timeAccumulativePerSplit = []
-    for (let i = 0; i < splitAmount; i += 1) {
-      if (i === 0) {
-        timeAccumulativePerSplit.push(timePerSplit[i])
-      } else if (i === (splitAmount - 1)) {
-        timeAccumulativePerSplit.push(totalTime)
-      } else {
-        timeAccumulativePerSplit.push(timeAccumulativePerSplit[i - 1] + timePerSplit[i])
-      }
-    }
-    return timeAccumulativePerSplit
-  }
-
-  function calculatePathsDeltaBySplit(paths) {
-    const pathAmount = _.get(paths, ['length'])
-    const pathsDeltaBySplit = []
-    for (let i = 0; i < pathAmount; i += 1) {
-      const splitAmount = _.get(paths, [i, 'length'])
-      const deltaBysplit = []
-      for (let j = 0; j < splitAmount - 1; j += 1) {
-        const deltaX = paths[i][j + 1][0] - paths[i][j][0]
-        const deltaY = paths[i][j + 1][1] - paths[i][j][1]
-        deltaBysplit.push([deltaX, deltaY])
-      }
-      pathsDeltaBySplit.push(deltaBysplit)
-    }
-    return pathsDeltaBySplit
-  }
-
-  function calculateDeltaPerSplitBySecond(timePerSplit, pathsDeltaBySplit) {
-    const splitAmount = _.get(timePerSplit, ['length'])
-    const deltaPerSecondBySplit = []
-    for (let i = 0; i < splitAmount; i += 1) {
-      const deltaXPerSecond = pathsDeltaBySplit[i][0] / timePerSplit[i]
-      const deltaYPerSecond = pathsDeltaBySplit[i][1] / timePerSplit[i]
-      deltaPerSecondBySplit.push([deltaXPerSecond, deltaYPerSecond])
-    }
-    return deltaPerSecondBySplit
-  }
-
-  function calculateCurrentSplit(second, timeAccumulativePerSplit) {
-    const splitAmount = _.get(timeAccumulativePerSplit, ['length'])
-    let currentSplit
-    for (let i = 0; i < splitAmount; i += 1) {
-      if (timeAccumulativePerSplit[i] > second) {
-        return i
-      }
-    }
-    return splitAmount
-  }
-
-  function updatePoint(second) {
-    const runnerAmount = _.get(runners, [ 'length' ])
-    // const runnerPoint = new PIXI.Graphics()
-    // runnerPoint.beginFill(0xF45B69)
-    // runnerPoint.drawCircle(0, 0, 2)
-    // const texture = app.renderer.generateTexture(runnerPoint)
-    // runners = []
-    // for (let i = 0; i < runnerAmount; i += 1) {
-    //   if (second < speedData[i][0]) {
-    //     const point = new PIXI.Sprite(texture)
-    //     point.anchor.set(0.5)
-    //     point.scale.set(0.6)
-    //     currentSplit[i] = calculateCurrentSplit(tickerTimer, timeAccumulativePerSplit[i])
-    //     let secondInSplit
-    //     if (currentSplit[i] === 0) {
-    //       secondInSplit = second
-    //     } else {
-    //       secondInSplit = second - timeAccumulativePerSplit[i][currentSplit[i] - 1]
-    //     }
-    //     const splitOrigin = paths[pathIndex[i]][currentSplit[i]]
-    //     const deltaMoveX = secondInSplit * deltaPerSplitBySecond[i][currentSplit[i]][0]
-    //     const deltaMoveY = secondInSplit * deltaPerSplitBySecond[i][currentSplit[i]][1]
-    //     point.x = splitOrigin[0] + deltaMoveX
-    //     point.y = splitOrigin[1] + deltaMoveY
-    //     runners.push(point)
-    //     container.addChild(point)
-    //   } else {
-    //     runners.push('')
-    //   }
-    // }
-  }
-
-  function getPythagoreanValue(startPoint, endPoint) {
-    return Number(Math.sqrt(((startPoint[0] - endPoint[0]) ** 2) + ((startPoint[1] - endPoint[1]) ** 2)).toFixed(4))
-  }
-
-  function secondToHHMMSS(second) {
-    return moment.utc(second * 1000).format('HH:mm:ss')
-  }
-
-  function setSlider(maxRunnerTime) {
-    const slider = document.querySelector('#js-track')
-    noUiSlider.create(slider, {
-      start: 0,
-      connect: true,
-      range: {
-        min: 0,
-        max: maxRunnerTime,
-      },
-    })
-    slider.noUiSlider.on('start', () => {
-      app.ticker.stop()
-    })
-    slider.noUiSlider.on('end', (e) => {
-      tickerTimer = e[0]
-      app.ticker.start()
-    })
-  }
-
-  function getHighlightIndex(second) {
-    // points = _.map(_.filter(dataRunner, r => r[2] === 'TWN'), r => r[0])
-    // points = points.map(i => _.findIndex(dataRunner, d => d[0] === i))
-    const origin = _.map(dataRunner, r => r[4])
-    origin.push(second)
-    const sorted = _.sortBy(origin)
-    let index
-    let finded
-    for (let i = 0; i < sorted.length; i += 1) {
-      if (sorted[i] === second) {
-        index = i
-        break
-      }
-    }
-    // console.log('origin', origin)
-    // console.log('second', second)
-    // console.log('sorted', sorted)
-    if (!(index === 0 || index === (sorted.length - 2))) {
-      let before = sorted[index - 1]
-      let after = sorted[index + 1]
-      if (Math.abs(after - second) < Math.abs(before - second)) {
-        finded = after
-      } else {
-        finded = before
-      }
-    } else {
-      finded = sorted[index]
-    }
-    return _.findIndex(origin, d => d === finded)
-  }
 
   export default {
     name: 'MarathonProject',
@@ -394,377 +119,20 @@
     },
     data () {
       return {
-        chart01: undefined,
-        filterCountry: 'all',
-        filterGender: 'all',
-        loading: true,
-        race: 'berlin',
-        raceAverageTime: '00:00:00',
-        speedRatio: 1
       }
     },
     beforeMount () {
-      // this.$_marathon_setRaceInfo('berlin')
-      
     },
     mounted () {
-      // window.PIXI = require('pixi.js')
-      // window.filters = require('pixi-filters')
-      // window.superagent = require('superagent')
-      // this.$_marathon_detectWebGLSupported()
-      // canvasW = document.querySelector('.map__images').offsetWidth
-      // canvasH = document.querySelector('.map__images').offsetHeight
-
-      // app = new PIXI.Application(canvasW, canvasH, { antialias: false, transparent: true, view: document.querySelector('#js-pixi') })
-      // this.$_marathon_setRaceInfo('berlin')
-      // this.$_marathon_resize()
       // window.addEventListener('resize', this.$_marathon_resize)
     },
     methods: {
-      calculateRunnerTrack(data) {
-        const dataMap = data[0]
-        dataRunner = data[1]
-        tickerTimer = 0
-        
-        const splitAmount = _.get(dataMap, ['coordinates', 'length'])
-        maxRunnerTime = _.max(_.map(dataRunner, r => r[4]))
-        minRunnerTime = _.min(_.map(dataRunner, r => r[4]))
-
-        group[0] = this.$_marathon_filter('twnmale')
-        group[1] = this.$_marathon_filter('twnfemale')
-        group[2] = this.$_marathon_filter('otmale')
-        group[3] = this.$_marathon_filter('otfemale')
-        console.log('group', group)
-        const total = group[0].length + group[1].length + group[2].length + group[3].length
-
-        for (let i = 0; i < 4; i += 1) {
-          containers[i] = new PIXI.particles.ParticleContainer(total, {
-            scale: true,
-            position: true,
-            uvs: true,
-            tint: true,
-          })
-          app.stage.addChild(containers[i])
-        }
-
-        const runnerPoint = new PIXI.Graphics()
-        runnerPoint.beginFill(colorSelected)
-        runnerPoint.drawCircle(0, 0, 2)
-        const texture = app.renderer.generateTexture(runnerPoint)
-        const innerTrack = convertCoordinates(_.get(dataMap, ['inner']), canvasW / 2560)
-        const outerTrack = convertCoordinates(_.get(dataMap, ['outer']), canvasW / 2560)
-        paths = createPaths(innerTrack, outerTrack, pathAmount)
-        const pathDistances = getPathDistanceBySplit(paths, pathAmount, splitAmount)
-        pathsTotalDistance = calculatePathsTotalDistance(pathDistances, pathAmount)
-        pathsRatioBySplit = calculatePathsRatioBySplit(pathDistances, pathsTotalDistance, pathAmount)
-        pathsDeltaBySplit = calculatePathsDeltaBySplit(paths)
-
-        for (let i = 0; i < 4; i += 1) {
-          const amount = group[i].length
-          for (let j = 0; j < amount; j += 1) {
-            const point = new PIXI.Sprite(texture)
-            point.anchor.set(0.5)
-            point.scale.set(0.6)
-            point.totalTime = _.get(group[i], [j, 4])
-            point.pathIndex = _.get(group[i], [j, 0]) % pathAmount
-            point.timePerSplit = calculateTimePerSplit(pathsRatioBySplit[point.pathIndex], point.totalTime)
-            point.timeAccumulativePerSplit = calculateTimeAccumulativePerSplit(point.timePerSplit, point.totalTime)
-            point.deltaPerSplitBySecond = calculateDeltaPerSplitBySecond(point.timePerSplit, pathsDeltaBySplit[point.pathIndex])
-            point.speedData = _.slice(group[i][j], 4)
-            point.currentSplit = 0
-            point.isFinished = false
-            runners.push(point)
-            containers[i].addChild(point)
-          }
-        }
-
-        const runnerAmount = runners.length
-        // const runnerAmount = 3
-        averageTime = _.floor(_.sum(_.map(dataRunner, r => r[4])) / runners.length)
-        this.raceAverageTime = secondToHHMMSS(averageTime)
-        this.$refs.userTimeTrack.max = maxRunnerTime
-        this.$refs.userTimeTrack.value = averageTime
-        this.$refs.userTimeTrack.min = minRunnerTime
-        const highlightIndex =  getHighlightIndex(averageTime)
-        containerUserTime = new PIXI.Container()
-        app.stage.addChild(containerUserTime)
-        const textureUserTime = PIXI.Texture.fromImage('/projects/images/marathon/userTime-icon.png')
-        spriteUserTime = new PIXI.Sprite(textureUserTime)
-        spriteUserTime.anchor.set(0.5, 1)
-        spriteUserTime.scale.set(0.25)
-        spriteUserTime.totalTime = _.get(dataRunner, [highlightIndex, 4])
-        spriteUserTime.pathIndex = _.get(dataRunner, [highlightIndex, 0]) % pathAmount
-        spriteUserTime.timePerSplit = calculateTimePerSplit(pathsRatioBySplit[spriteUserTime.pathIndex], spriteUserTime.totalTime)
-        spriteUserTime.timeAccumulativePerSplit = calculateTimeAccumulativePerSplit(spriteUserTime.timePerSplit, spriteUserTime.totalTime)
-        spriteUserTime.deltaPerSplitBySecond = calculateDeltaPerSplitBySecond(spriteUserTime.timePerSplit, pathsDeltaBySplit[spriteUserTime.pathIndex])
-        spriteUserTime.speedData = _.slice(dataRunner[highlightIndex], 4)
-        spriteUserTime.currentSplit = 0
-        spriteUserTime.isFinished = false
-        
-        // console.log('spriteUserTime', spriteUserTime)
-
-        containerUserTime.addChild(spriteUserTime)
-        this.loading = false
-
-        app.ticker.add(() => {
-
-          if (!isCompleted) {
-            tickerTimer += tickerValue
-            if (tickerTimer >= maxRunnerTime) {
-              isCompleted = true
-            } else {
-              isCompleted = false
-            }
-            document.querySelector('#timerMobile').innerText = secondToHHMMSS(tickerTimer)
-            document.querySelector('#timerDesktop').innerText = secondToHHMMSS(tickerTimer)
-            document.querySelector('#js-currentTrackTime').style.width = `${(tickerTimer / maxRunnerTime) * 100}%`
-            document.querySelector('#js-trackbutton').style.left = `${(tickerTimer / maxRunnerTime) * 100}%`
-
-            if (tickerTimer < spriteUserTime.speedData[0]) {
-              let secondInSplit
-              if (tickerTimer > spriteUserTime.timeAccumulativePerSplit[spriteUserTime.currentSplit]) {
-                spriteUserTime.currentSplit += 1
-              }
-              if (spriteUserTime.currentSplit === 0) {
-                secondInSplit = tickerTimer
-              } else {
-                secondInSplit = tickerTimer - spriteUserTime.timeAccumulativePerSplit[spriteUserTime.currentSplit - 1]
-              }
-              const splitOrigin = paths[spriteUserTime.pathIndex][spriteUserTime.currentSplit]
-              const deltaMoveX = secondInSplit * spriteUserTime.deltaPerSplitBySecond[spriteUserTime.currentSplit][0]
-              const deltaMoveY = secondInSplit * spriteUserTime.deltaPerSplitBySecond[spriteUserTime.currentSplit][1]
-              spriteUserTime.x = splitOrigin[0] + deltaMoveX
-              spriteUserTime.y = splitOrigin[1] + deltaMoveY
-            } else {
-              spriteUserTime.x = -1
-              spriteUserTime.y = -1
-            }
-
-            for (let i = 0; i < runnerAmount; i += 1) {
-              const runner = runners[i]
-              if (tickerTimer < runner.speedData[0]) {
-                let secondInSplit
-                if (tickerTimer > runner.timeAccumulativePerSplit[runner.currentSplit]) {
-                  runner.currentSplit += 1
-                }
-                if (runner.currentSplit === 0) {
-                  secondInSplit = tickerTimer
-                } else {
-                  secondInSplit = tickerTimer - runner.timeAccumulativePerSplit[runner.currentSplit - 1]
-                }
-                const splitOrigin = paths[runner.pathIndex][runner.currentSplit]
-                const deltaMoveX = secondInSplit * runner.deltaPerSplitBySecond[runner.currentSplit][0]
-                const deltaMoveY = secondInSplit * runner.deltaPerSplitBySecond[runner.currentSplit][1]
-                runner.x = splitOrigin[0] + deltaMoveX
-                runner.y = splitOrigin[1] + deltaMoveY
-              } else {
-                runner.x = -1
-                runner.y = -1
-                // console.log(runner)
-                // runner.visible = 0
-                // runner.updateTransform()
-                // runner.destroy()
-              }
-            }
-          }
-        })
-      },
-      $_marathon_adjustSpeed(speed) {
-        tickerValue = speed
-        this.speedRatio = speed
-      },
-      $_marathon_changeRace(race) {
-        for (let i = 0; i < 4; i += 1) {
-          app.stage.removeChild(containers[i])
-        }
-        app.stage.removeChild(containerUserTime)
-        this.race = race
-        this.$refs.mapImage.src = `http://www.mirrormedia.mg/projects/images/marathon/${race}.png`
-        this.$_marathon_setRaceInfo(race)
-        // setRace
-      },
-      $_marathon_detectWebGLSupported() {
-        let type = 'WebGL'
-        if (!PIXI.utils.isWebGLSupported()) {
-          type = 'canvas'
-        }
-        PIXI.utils.sayHello(type)
-      },
-      $_marathon_filter(category) {
-        switch (category) {
-          case 'twnmale':
-            return _.filter(dataRunner, (r) => {
-              return (r[2] === 'TWN') && (r[3] === 'M')
-            })
-          case 'twnfemale':
-            return _.filter(dataRunner, (r) => {
-              return (r[2] === 'TWN') && (r[3] === 'W' || r[3] === 'F')
-            })
-          case 'otmale':
-            return _.filter(dataRunner, (r) => {
-              return (r[2] !== 'TWN') && (r[3] === 'M')
-            })
-          case 'otfemale':
-            return _.filter(dataRunner, (r) => {
-              return (r[2] !== 'TWN') && (r[3] === 'W' || r[3] === 'F')
-            })
-          default:
-            return
-        }
-      },
-      $_marathon_filterCountry(option) {
-        this.filterCountry = option
-        this.$_marathon_adjustCategory()
-      },
-      $_marathon_filterGender(option) {
-        this.filterGender = option
-        this.$_marathon_adjustCategory()
-      },
-      $_marathon_adjustCategory() {
-        const greyPoint = new PIXI.Graphics()
-        greyPoint.beginFill(colorUnselected)
-        greyPoint.drawCircle(0, 0, 2)
-        const redPoint = new PIXI.Graphics()
-        redPoint.beginFill(colorSelected)
-        redPoint.drawCircle(0, 0, 2)
-        const twnFemaleIndex = group[0].length
-        const otherMaleIndex = group[0].length + group[1].length
-        const otherFemaleIndex = group[0].length + group[1].length + group[2].length
-        app.ticker.stop()
-        if (this.filterCountry === 'all' && this.filterGender === 'all') {
-          runners[0].texture = app.renderer.generateTexture(redPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-        }
-        if (this.filterCountry === 'twn' && this.filterGender === 'all') {
-          runners[0].texture = app.renderer.generateTexture(redPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-        }
-        if (this.filterCountry === 'other' && this.filterGender === 'all') {
-          runners[0].texture = app.renderer.generateTexture(greyPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-        }
-        if (this.filterCountry === 'all' && this.filterGender === 'm') {
-          runners[0].texture = app.renderer.generateTexture(redPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-        }
-        if (this.filterCountry === 'all' && this.filterGender === 'w') {
-          runners[0].texture = app.renderer.generateTexture(greyPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-        }
-        if (this.filterCountry === 'twn' && this.filterGender === 'm') {
-          runners[0].texture = app.renderer.generateTexture(redPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-        }
-        if (this.filterCountry === 'twn' && this.filterGender === 'w') {
-          runners[0].texture = app.renderer.generateTexture(greyPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-        }
-        if (this.filterCountry === 'other' && this.filterGender === 'm') {
-          runners[0].texture = app.renderer.generateTexture(greyPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-        }
-        if (this.filterCountry === 'other' && this.filterGender === 'w') {
-          runners[0].texture = app.renderer.generateTexture(greyPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-        }
-        app.ticker.start()
-      },
-      $_marathon_moveTrackBar(e) {
-        app.ticker.stop()
-        const runnersAmount = _.get(runners, [ 'length' ])
-        const newPercentageTime = e.layerX / e.target.parentNode.offsetWidth
-        tickerTimer = Math.floor(maxRunnerTime * newPercentageTime)
-        for (let i = 0; i < runnersAmount; i += 1) {
-          runners[i].currentSplit = calculateCurrentSplit(tickerTimer, runners[i].timeAccumulativePerSplit)
-        }
-        // updatePoint(tickerTimer)
-        app.ticker.start()
-      },
       $_marathon_resize() {
-        canvasW = document.querySelector('.map__images').offsetWidth
-        canvasH = document.querySelector('.map__images').offsetHeight
-        const ratio = Math.min(canvasW / app.renderer.width, canvasH / app.renderer.height)
-        app.stage.scale.x = ratio
-        app.stage.scale.y = ratio
-      },
-      $_marathon_restart() {
-        const runnerAmount = _.get(dataRunner, ['length'], 0)
-        tickerTimer = 0
-        for (let i = 0; i < runnerAmount; i += 1) {
-          currentSplit[i] = 0
-        }
-      },
-      $_marathon_setRaceInfo(race) {
-        Promise.all([fetchData(`/projects/data/marathon/${race}Map.json`), fetchData(`/projects/data/marathon/${race}Data.json`)])
-        .then((data) => {
-          console.log(data)
-          this.race = race
-          this.$refs.mapImage.src = `http://www.mirrormedia.mg/projects/images/marathon/${race}.png`
-          this.calculateRunnerTrack(data)
-        })
-      },
-      $_marathon_togglePlay() {
-        isPause = !isPause
-        if (isPause) {
-          app.ticker.stop()
-          this.$refs.togglePlayMobile.querySelector('img').src = `https://www.mirrormedia.mg/projects/images/marathon/play.png`
-          this.$refs.togglePlayDesktop.querySelector('img').src = `https://www.mirrormedia.mg/projects/images/marathon/play.png`
-        } else {
-          app.ticker.start()
-          this.$refs.togglePlayMobile.querySelector('img').src = `https://www.mirrormedia.mg/projects/images/marathon/pause.png`
-          this.$refs.togglePlayDesktop.querySelector('img').src = `https://www.mirrormedia.mg/projects/images/marathon/pause.png`
-        }
-      },
-      $_marathon_updateUserTime(e) {
-        const selectedTime = e.target.value
-        const highlightIndex =  getHighlightIndex(selectedTime)
-        this.raceAverageTime = secondToHHMMSS(selectedTime)
-        this.$_marathon_updateUserTimePoint(highlightIndex)
-      },
-      $_marathon_updateUserTimePoint(highlightIndex) {
-        app.ticker.stop()
-        spriteUserTime.totalTime = _.get(dataRunner, [highlightIndex, 4])
-        spriteUserTime.pathIndex = _.get(dataRunner, [highlightIndex, 0]) % pathAmount
-        spriteUserTime.timePerSplit = calculateTimePerSplit(pathsRatioBySplit[spriteUserTime.pathIndex], spriteUserTime.totalTime)
-        spriteUserTime.timeAccumulativePerSplit = calculateTimeAccumulativePerSplit(spriteUserTime.timePerSplit, spriteUserTime.totalTime)
-        spriteUserTime.deltaPerSplitBySecond = calculateDeltaPerSplitBySecond(spriteUserTime.timePerSplit, pathsDeltaBySplit[spriteUserTime.pathIndex])
-        spriteUserTime.speedData = _.slice(dataRunner[highlightIndex], 4)
-        spriteUserTime.currentSplit = calculateCurrentSplit(tickerTimer, spriteUserTime.timeAccumulativePerSplit)
-        if (tickerTimer < spriteUserTime.speedData[0]) {
-          let secondInSplit
-          if (spriteUserTime.currentSplit === 0) {
-            secondInSplit = tickerTimer
-          } else {
-            secondInSplit = tickerTimer - spriteUserTime.timeAccumulativePerSplit[spriteUserTime.currentSplit - 1]
-          }
-          const splitOrigin = paths[spriteUserTime.pathIndex][spriteUserTime.currentSplit]
-          const deltaMoveX = secondInSplit * spriteUserTime.deltaPerSplitBySecond[spriteUserTime.currentSplit][0]
-          const deltaMoveY = secondInSplit * spriteUserTime.deltaPerSplitBySecond[spriteUserTime.currentSplit][1]
-          spriteUserTime.x = splitOrigin[0] + deltaMoveX
-          spriteUserTime.y = splitOrigin[1] + deltaMoveY
-        } else {
-          spriteUserTime.x = -1
-          spriteUserTime.y = -1
-        }
-        app.ticker.start()
+        // canvasW = document.querySelector('.map__images').offsetWidth
+        // canvasH = document.querySelector('.map__images').offsetHeight
+        // const ratio = Math.min(canvasW / app.renderer.width, canvasH / app.renderer.height)
+        // app.stage.scale.x = ratio
+        // app.stage.scale.y = ratio
       },
       smoothScroll
     },
@@ -807,7 +175,7 @@ img
     margin-right 20px
 .marathon
   width 100%
-  background-image url(https://www.mirrormedia.mg/projects/images/marathon/bg.png)
+  background-image url(/proj-assets/marathon/images/bg.png)
   background-repeat repeat
   background-size 36px 768px
   overflow hidden
@@ -826,7 +194,7 @@ img
     padding 38px 0 0
     padding-left calc((100% - 300px) / 2)
     padding-right calc((100% - 300px) / 2)
-    background-image url(https://www.mirrormedia.mg/projects/images/marathon/road-02.png)
+    background-image url(/proj-assets/marathon/images/road-02.png)
     background-repeat repeat-x
     background-size 19px 38px
     
@@ -870,27 +238,27 @@ img
       &.boston
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-boston.jpg)    
+            background-image url(/proj-assets/marathon/images/logo-boston.jpg)    
       &.chicago
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-chicago.jpg)
+            background-image url(/proj-assets/marathon/images/logo-chicago.jpg)
       &.newyork
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-newyork.jpg)
+            background-image url(/proj-assets/marathon/images/logo-newyork.jpg)
       &.berlin
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-berlin.jpg)
+            background-image url(/proj-assets/marathon/images/logo-berlin.jpg)
       &.london
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-london.jpg)
+            background-image url(/proj-assets/marathon/images/logo-london.jpg)
       &.tokyo
         &.selected
           &:after
-            background-image url(https://www.mirrormedia.mg/projects/images/marathon/logo-tokyo.jpg)
+            background-image url(/proj-assets/marathon/images/logo-tokyo.jpg)
   &__userTime
     display flex
     align-items center
@@ -1104,7 +472,7 @@ img
     z-index 10
     width 100%
     height 38px
-    background-image url(https://www.mirrormedia.mg/projects/images/marathon/road-02.png)
+    background-image url(/proj-assets/marathon/images/road-02.png)
     background-repeat repeat-x
     background-size 19px 38px
   &::after
@@ -1116,7 +484,7 @@ img
     z-index 10
     width 100%
     height 38px
-    background-image url(https://www.mirrormedia.mg/projects/images/marathon/road-02.png)
+    background-image url(/proj-assets/marathon/images/road-02.png)
     background-repeat repeat-x
     background-size 19px 38px
   span
@@ -1162,7 +530,7 @@ img
     z-index 10
     width 100%
     height 38px
-    background-image url(https://www.mirrormedia.mg/projects/images/marathon/road-02.png)
+    background-image url(/proj-assets/marathon/images/road-02.png)
     background-repeat repeat-x
     background-size 19px 38px
 
@@ -1187,6 +555,13 @@ img
       display block
       width 60px
       margin 10px auto
+
+.related
+  padding 0 5%
+  min-height 100px
+  margin-bottom 10px
+  iframe
+    height 343px
 .facebook
   width 90%
   margin 0 auto 20px
@@ -1243,8 +618,14 @@ img
     .mobile
       width 100px
       margin 20px auto
+  .related
+    padding 0 10%
   .facebook
     width 80%
+@media (min-width: 768px)
+  .related
+    iframe
+      height 331px
 @media (min-width: 900px)
   section:not(:first-of-type)
     // padding 20% 0 40%
@@ -1353,7 +734,7 @@ img
         display block
         width 100%
         flex-grow 1
-        background-image url(https://www.mirrormedia.mg/projects/images/marathon/road-03.png)
+        background-image url(/proj-assets/marathon/images/road-03.png)
         background-repeat repeat-y
         background-size 35px auto
       &--sroad
@@ -1444,12 +825,16 @@ img
         z-index 10
         width calc((100% - 800px) / 2)
         height 33px
-        background-image url(https://www.mirrormedia.mg/projects/images/marathon/road-02.png)
+        background-image url(/proj-assets/marathon/images/road-02.png)
         background-repeat repeat-x
         background-size auto 33px
     .mobile
       display none
-    
+  .related
+    width 755px
+    padding 0
+    margin-left auto
+    margin-right auto
   .facebook
     width 60%
 
