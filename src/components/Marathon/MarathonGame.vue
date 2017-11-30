@@ -68,7 +68,7 @@
   const groups = []
   const containers = []
   const colorSelected = '0x493b5c'
-  const colorUnselected = '0xb7a3d1'
+  const colorUnselected = '0xebe1fa'
   const pathAmount = 10
 
   let app
