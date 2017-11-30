@@ -150,6 +150,7 @@
       this.canvasH = this.$refs.marathonGameMap.offsetHeight
       this.$_marathon_detectWebGLSupported()
       this.$_marathon_setRace('boston')
+      window.addEventListener('resize', this.$_marathon_resize)
       window.addEventListener('scroll', this.$_marathon_detectScroll)
     },
     methods: {
@@ -282,63 +283,64 @@
         const redPoint = new PIXI.Graphics()
         redPoint.beginFill(colorSelected)
         redPoint.drawCircle(0, 0, 2)
-        const twnFemaleIndex = groups[0].length
-        const otherMaleIndex = groups[0].length + groups[1].length
-        const otherFemaleIndex = groups[0].length + groups[1].length + groups[2].length
+        const twnMaleIndex = groups[0].length
+        const twnFemaleIndex = 0
+        const otherMaleIndex = groups[0].length + groups[1].length + groups[2].length
+        const otherFemaleIndex = groups[0].length + groups[1].length
         app.ticker.stop()
         if (this.filterCountry === 'all' && this.filterGender === 'all') {
-          runners[0].texture = app.renderer.generateTexture(redPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(redPoint)
+          containers[0].visible = true
+          containers[1].visible = true
+          containers[2].visible = true
+          containers[3].visible = true
         }
         if (this.filterCountry === 'twn' && this.filterGender === 'all') {
-          runners[0].texture = app.renderer.generateTexture(redPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
+          containers[0].visible = true
+          containers[1].visible = true
+          containers[2].visible = false
+          containers[3].visible = false
         }
         if (this.filterCountry === 'other' && this.filterGender === 'all') {
-          runners[0].texture = app.renderer.generateTexture(greyPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(redPoint)
+          containers[0].visible = false
+          containers[1].visible = false
+          containers[2].visible = true
+          containers[3].visible = true
         }
         if (this.filterCountry === 'all' && this.filterGender === 'm') {
-          runners[0].texture = app.renderer.generateTexture(redPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
+          containers[0].visible = false
+          containers[1].visible = true
+          containers[2].visible = false
+          containers[3].visible = true
         }
         if (this.filterCountry === 'all' && this.filterGender === 'w') {
-          runners[0].texture = app.renderer.generateTexture(greyPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(redPoint)
+          containers[0].visible = true
+          containers[1].visible = false
+          containers[2].visible = true
+          containers[3].visible = false
         }
         if (this.filterCountry === 'twn' && this.filterGender === 'm') {
-          runners[0].texture = app.renderer.generateTexture(redPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
+          containers[0].visible = false
+          containers[1].visible = true
+          containers[2].visible = false
+          containers[3].visible = false
         }
         if (this.filterCountry === 'twn' && this.filterGender === 'w') {
-          runners[0].texture = app.renderer.generateTexture(greyPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
+          containers[0].visible = true
+          containers[1].visible = false
+          containers[2].visible = false
+          containers[3].visible = false
         }
         if (this.filterCountry === 'other' && this.filterGender === 'm') {
-          runners[0].texture = app.renderer.generateTexture(greyPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(redPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
+          containers[0].visible = false
+          containers[1].visible = false
+          containers[2].visible = false
+          containers[3].visible = true
         }
         if (this.filterCountry === 'other' && this.filterGender === 'w') {
-          runners[0].texture = app.renderer.generateTexture(greyPoint)
-          runners[twnFemaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherMaleIndex].texture = app.renderer.generateTexture(greyPoint)
-          runners[otherFemaleIndex].texture = app.renderer.generateTexture(redPoint)
+          containers[0].visible = false
+          containers[1].visible = false
+          containers[2].visible = true
+          containers[3].visible = false
         }
         app.ticker.start()
       },
@@ -441,10 +443,10 @@
         tickerValue = 1
         this.speedRatio = 1
 
-        groups[0] = this.$_marathon_filter(dataRunners, 'twnmale')
-        groups[1] = this.$_marathon_filter(dataRunners, 'twnfemale')
-        groups[2] = this.$_marathon_filter(dataRunners, 'otmale')
-        groups[3] = this.$_marathon_filter(dataRunners, 'otfemale')
+        groups[0] = this.$_marathon_filter(dataRunners, 'twnfemale')
+        groups[1] = this.$_marathon_filter(dataRunners, 'twnmale')
+        groups[2] = this.$_marathon_filter(dataRunners, 'otfemale')
+        groups[3] = this.$_marathon_filter(dataRunners, 'otmale')
         
         for (let i = 0; i < groups.length; i += 1) {
           const amount = groups[i].length + 1000
@@ -474,7 +476,7 @@
           for (let j = 0; j < amount; j += 1) {
             const point = new PIXI.Sprite(texture)
             point.anchor.set(0.5)
-            point.scale.set(0.6)
+            point.scale.set(0.5)
             point.totalTime = _.get(groups[i], [j, 4])
             point.pathIndex = _.get(groups[i], [j, 0]) % pathAmount
             point.timePerSplit = this.$_marathon_calculateTimePerSplit(pathsRatioBySplit[point.pathIndex], point.totalTime)
@@ -583,6 +585,19 @@
         tickerTimer = Math.floor(raceTimeMax * newPercentageTime)
         this.$_marathon_updatePointPos(tickerTimer)
       },
+      $_marathon_resize() {
+        app.ticker.stop()
+        const current = tickerTimer
+        this.canvasW = this.$refs.marathonGameMap.offsetWidth
+        this.canvasH = this.$refs.marathonGameMap.offsetHeight
+        // app.renderer.resize(this.canvasW, this.canvasH)
+        this.$_marathon_setRace(this.race, current)
+        // const ratio = Math.min(this.canvasW / app.renderer.width, this.canvasH / app.renderer.height)
+        // app.stage.scale.x = ratio
+        // app.stage.scale.y = ratio
+        // this.$_marathon_updatePointPos(current)
+        // app.ticker.start()
+      },
       $_marathon_restart() {
         app.ticker.stop()
         // const runnerAmount = _.get(dataRunners, ['length'], 0)
@@ -597,6 +612,8 @@
       $_marathon_setRace(race) {
         const raceRunners = _.get(this.data, [ race, 'runners', 0 ])
         const raceMap = _.get(this.data, [ race, 'map', 'race' ])
+        // app = new PIXI.Application()
+        // document.querySelector('#js-pixi').appendChild(app.view)
         app = new PIXI.Application(this.canvasW, this.canvasH, { antialias: false, transparent: true, view: document.querySelector('#js-pixi') })
 
         if (!raceRunners || !raceMap) {
