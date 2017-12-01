@@ -50,10 +50,10 @@ const clientMetaInfoMixin = {
         document.head.querySelector(`meta[property='og:description']`).content = description
       }
       if (metaUrl) {
-        document.head.querySelector(`meta[property='og:url']`).content = metaUrl
+        document.head.querySelector(`meta[property='og:url']`).content = SITE_URL + metaUrl
       }
       if (metaImage) {
-        document.head.querySelector(`meta[property='og:image']`).content = metaImage
+        document.head.querySelector(`meta[property='og:image']`).content = SITE_ASSETS_URL + metaImage
       }
     }
   }
