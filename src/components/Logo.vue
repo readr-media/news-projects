@@ -9,7 +9,8 @@
       zIndex: `${zIndex}`,
       backgroundColor: `${bgColor}`,
       backgroundImage: `url(${bgImage})`,
-      border: `${border}` } ]">
+      border: `${border}` } ]"
+    @click="$_logo_ga">
   </a>
 </template>
 <script>
@@ -57,7 +58,11 @@
         
       }
     },
-    methods: {},
+    methods: {
+      $_logo_ga() {
+        window.ga('send', 'event', 'projects', 'click', 'back to home', { nonInteraction: true })
+      }
+    },
     mounted () {},
   }
 </script>

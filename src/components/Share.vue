@@ -8,9 +8,14 @@
       left: `${left}`,
       zIndex: `${zIndex}` } ]" @click="$_share_toggleItmes">
     <a class="share__item toggle" :style="[{ backgroundColor: `${bgColor}`, border: `${border}` } ]"></a>
-    <a class="share__item fb" :href="`javascript: void(window.open('https://www.facebook.com/share.php?u='.concat(encodeURIComponent(${shareUrl})) ));`"></a>
-    <a class="share__item line" :href="`javascript: void(window.open('https://line.me/R/msg/text/?'+encodeURIComponent(document.title)+' '.concat(encodeURIComponent(${shareUrl})) ));`"></a>
-    <a class="share__item gplus" :href="`javascript: void(window.open('https://plus.google.com/share?url='.concat(encodeURIComponent(${shareUrl})) ));`"></a>
+    <a class="share__item fb"
+      :href="`javascript: void(window.open('https://www.facebook.com/share.php?u='.concat(encodeURIComponent(${shareUrl})) ));`"
+      @click="$_share_ga('fb')"></a>
+    <a class="share__item line"
+      :href="`javascript: void(window.open('https://line.me/R/msg/text/?'+encodeURIComponent(document.title)+' '.concat(encodeURIComponent(${shareUrl})) ));`"
+      @click="$_share_ga('line')"></a>
+    <a class="share__item gplus" :href="`javascript: void(window.open('https://plus.google.com/share?url='.concat(encodeURIComponent(${shareUrl})) ));`"
+      @click="$_share_ga('gplus')"></a>
   </div>
 </template>
 <script>
@@ -59,6 +64,9 @@
       }
     },
     methods: {
+      $_share_ga(media) {
+        window.ga('send', 'event', 'projects', 'click', `share to ${media}`, { nonInteraction: true })
+      },
       $_share_toggleItmes() {
         this.isOpen = !this.isOpen
       }

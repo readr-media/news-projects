@@ -110,10 +110,12 @@
 </template>
 <script>
   import { smoothScroll } from 'kc-scroll'
+  import _ from 'lodash'
   import Logo from '../Logo.vue'
   import MarathonChart from './MarathonChart.vue'
   import MarathonGame from './MarathonGame.vue'
   import Share from '../Share.vue'
+  import moment from 'moment'
   import titleMeta from '../../util/titleMeta'
 
   export default {
@@ -130,26 +132,47 @@
       }
     },
     metaInfo () {
+      let description = 'default'
+      let ogImage = 'marathon/images/og.jpg'
+
+      if (this.$route.query.q1 && this.$route.query.q2 && this.$route.query.q3) {
+        const time = moment.utc(this.$route.query.q2 * 1000).format('HH:mm:ss')
+        let race
+        switch(this.$route.query.q1) {
+          case 'chicago':
+            race = '芝加哥'
+            ogImage = 'marathon/images/og-chicago.jpg'
+          case 'newyork':
+            race = '紐約'
+            ogImage = 'marathon/images/og-newyork.jpg'
+          case 'berlin':
+            race = '柏林'
+            ogImage = 'marathon/images/og-berlin.jpg'
+          case 'london':
+            race = '倫敦'
+            ogImage = 'marathon/images/og-london.jpg'
+          case 'tokyo':
+            race = '東京'
+            ogImage = 'marathon/images/og-tokyo.jpg'
+          default:
+            race = '波士頓'
+            ogImage = 'marathon/images/og-boston.jpg'
+        }
+        description = `我剛剛跑完了${race}馬拉松第${this.$route.query.q3}名 時間${time}！你也一起來吧！`
+      }
       return {
         title: 'marathon',
-        description: 'test marathon',
+        description: description,
         metaUrl: 'marathon',
-        metaImage: 'marathon/images/aaa.png'
+        metaImage: ogImage
       }
     },
     beforeMount () {
     },
     mounted () {
-      // window.addEventListener('resize', this.$_marathon_resize)
+      // window.ga('send', 'pageview')
     },
     methods: {
-      $_marathon_resize() {
-        // canvasW = document.querySelector('.map__images').offsetWidth
-        // canvasH = document.querySelector('.map__images').offsetHeight
-        // const ratio = Math.min(canvasW / app.renderer.width, canvasH / app.renderer.height)
-        // app.stage.scale.x = ratio
-        // app.stage.scale.y = ratio
-      },
       smoothScroll
     },
   }
