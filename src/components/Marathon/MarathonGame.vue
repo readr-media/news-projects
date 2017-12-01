@@ -43,7 +43,7 @@
         <div id="js-track" class="marathonGame__sliderBar">
           <div class="marathonGame__sliderBar--fullTime" @click="$_marathon_moveTrackBar"></div>
           <div id="js-currentTrackTime" class="marathonGame__sliderBar--currentTime" @click="$_marathon_moveTrackBar"></div>
-          <div id="js-trackbutton" class="marathonGame__sliderBar--trackbutton"></div>
+          <div id="js-trackbutton" class="marathonGame__sliderBar--trackbutton" draggable></div>
         </div>
         <div class="marathonGame__speedControl">
           <div id="timerDesktop" class="marathonGame__timerDesktop">00:00:00</div>
