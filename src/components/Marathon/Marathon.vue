@@ -1,5 +1,7 @@
 <template>
   <div class="marathon">
+    <logo :top="`10px`" :left="`10px`" :bgColor="`#000`" :border="`1px solid #fff`"></logo>
+    <share :top="`60px`" :left="`10px`" :bgColor="`#000`" :border="`1px solid #fff`"></share>
     <marathon-game></marathon-game>
     <section class="intro">
       <div class="intro__content">
@@ -9,23 +11,23 @@
         <div class="triangle" @click="smoothScroll('.chart--01')"></div>
         <div class="intro__menu">
           <div @click="smoothScroll('.chart--1')">
-            <img src="/proj-assets/marathon/images/intro-icon-01.png">
+            <img v-lazy="`/proj-assets/marathon/images/intro-icon-01.png`">
             <p>平常有運動習慣嗎？</p>
           </div>
           <div @click="smoothScroll('.chart--2')">
-            <img src="/proj-assets/marathon/images/intro-icon-02.png">
+            <img v-lazy="`/proj-assets/marathon/images/intro-icon-02.png`">
             <p>平均每週跑多少公里？</p>
           </div>
           <div @click="smoothScroll('.chart--3')">
-            <img src="/proj-assets/marathon/images/intro-icon-03.png">
+            <img v-lazy="`/proj-assets/marathon/images/intro-icon-03.png`">
             <p>臨時抱佛腳指數？</p>
           </div>
           <div @click="smoothScroll('.chart--5')">
-            <img src="/proj-assets/marathon/images/intro-icon-04.png">
+            <img v-lazy="`/proj-assets/marathon/images/intro-icon-04.png`">
             <p>大家平常都在哪裡練習？</p>
           </div>
           <div @click="smoothScroll('.chart--6')">
-            <img src="/proj-assets/marathon/images/intro-icon-05.png">
+            <img v-lazy="`/proj-assets/marathon/images/intro-icon-05.png`">
             <p>高手們都怎麼練習？</p>
           </div>
         </div>
@@ -33,7 +35,7 @@
       </div>
       <div class="intro__decoration--desktop">
         <div class="intro__decoration--lroad"></div>
-        <img class="intro__decoration--sroad" src="/proj-assets/marathon/images/intro-d.png">
+        <img class="intro__decoration--sroad" v-lazy="`/proj-assets/marathon/images/intro-d.png`">
       </div>
     </section>
     <section class="chart">
@@ -91,11 +93,11 @@
     <section class="credit">
       <div class="mobile">
         <span>文字：李又如 視覺設計：許玲瑋、v_k 網頁製作： HY Tan</span>
-        <img src="/proj-assets/marathon/images/credit-m.png">
+        <img v-lazy="`/proj-assets/marathon/images/credit-m.png`">
       </div>
       <div class="desktop">
         <span>文字：李又如<br>視覺設計：許玲瑋、v_k<br>網頁製作：HY Tan</span>
-        <img src="/proj-assets/marathon/images/credit-d.png">
+        <img v-lazy="`/proj-assets/marathon/images/credit-d.png`">
       </div>
     </section>
     <section class="related">
@@ -108,17 +110,31 @@
 </template>
 <script>
   import { smoothScroll } from 'kc-scroll'
+  import Logo from '../Logo.vue'
   import MarathonChart from './MarathonChart.vue'
   import MarathonGame from './MarathonGame.vue'
+  import Share from '../Share.vue'
+  import titleMeta from '../../util/titleMeta'
 
   export default {
     name: 'MarathonProject',
     components: {
+      'logo': Logo,
       'marathon-chart': MarathonChart,
-      'marathon-game': MarathonGame
+      'marathon-game': MarathonGame,
+      'share': Share,
     },
+    mixins: [ titleMeta ],
     data () {
       return {
+      }
+    },
+    metaInfo () {
+      return {
+        title: 'marathon',
+        description: 'test marathon',
+        metaUrl: 'marathon',
+        metaImage: 'marathon/images/aaa.png'
       }
     },
     beforeMount () {

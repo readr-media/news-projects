@@ -6,7 +6,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 Vue.use(VueLazyload, {
-  preLoad: 1.3,
+  preLoad: 1.5,
   attempt: 1
 })
 
