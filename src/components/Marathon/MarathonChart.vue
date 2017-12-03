@@ -1,12 +1,6 @@
 <template>
-  <div class="marathonChart" :class="`chart--${chart}`">
-    <h1 v-if="chartTitle" v-text="chartTitle"></h1>
-    <h2 v-if="chartSubtitle" v-text="chartSubtitle"></h2>
-    <div class="marathonChart__chart" :class="chartPosition">
-      <img v-if="chartPeopleImage" v-lazy="`/proj-assets/marathon/images/chart-${chartPeopleImage}.png`">
-      <div :id="`js-chart-${chart}`"></div>
-    </div>
-    <h3 v-if="chartDescr" v-text="chartDescr"></h3>
+  <div class="marathonChart">
+    <div :id="`js-chart-${chart}`" ></div>
   </div>
 </template>
 <script>
@@ -18,26 +12,6 @@
       chart: {
         type: Number,
         required: true,
-      },
-      chartDescr: {
-        type: String,
-        default: undefined,
-      },
-      chartPeopleImage: {
-        type: String,
-        default: undefined,
-      },
-      chartPosition: {
-        type: String,
-        default: '',
-      },
-      chartSubtitle: {
-        type: String,
-        default: undefined,
-      },
-      chartTitle: {
-        type: String,
-        default: undefined,
       }
     },
     mounted() {
@@ -70,7 +44,7 @@
           title: { text: '' },
           xAxis: {
             title: { text: '次數/週', align: 'middle', style: { color: '#4d4d4d' }, x: -20 },
-            categories: ['<3', '3-5', '5-9', '10-14', '15-20', '>20'],
+            categories: ['小於1', '1', '2', '3', '4', '5', '6', '7', '大於7'],
             crosshair: true,
             labels: { style: { fontSize: '12px', color: '#4d4d4d' } },
             tickColor: '#fff',
@@ -79,7 +53,7 @@
             lineColor: '#fff'
           },
           yAxis: {
-            title: { text: '數量 (間)', align: 'high', style: { color: '#4d4d4d' }, rotation: 0, y: -20, offset: 5, },
+            title: { text: '人數', align: 'high', style: { color: '#4d4d4d' }, rotation: 0, y: -20, offset: 15, },
             labels: { overflow: 'justify', style: { fontSize: '12px', color: '#4d4d4d' } },
             gridLineColor: '#fff',
           },
@@ -96,10 +70,10 @@
             },
           },
           series: [{
-            name: '數量',
+            name: '人數',
             showInLegend: false,
             color: '#f45b69',
-            data: [958, 541, 236, 18, 2, 1],
+            data: [89, 346, 447, 316, 211, 128, 70, 58, 91],
           }],
           credits: { enabled: false },
         })
@@ -110,7 +84,7 @@
           title: { text: '' },
           xAxis: {
             title: { text: '公里/週', align: 'middle', style: { color: '#4d4d4d' }, x: -20 },
-            categories: ['<10', '10-14', '15-19', '20-24', '25-29', '30-34', '35-39', '40-44', '45-49', '>50'],
+            categories: ['小於 10', '10-19', '20-29', '30-39', '40-49', '大於 50'],
             crosshair: true,
             labels: { style: { fontSize: '12px', color: '#4d4d4d' } },
             tickColor: '#fff',
@@ -139,18 +113,18 @@
             name: '數量',
             showInLegend: false,
             color: '#ffbf55',
-            data: [0, 58, 192, 296, 274, 244, 185, 139, 115, 253],
+            data: [129, 335, 408, 322, 238, 324],
           }],
           credits: { enabled: false },
         })
       },
       $_marathon_drawChart3() {
         Highcharts.chart('js-chart-3', {
-          chart: { type: 'line', backgroundColor: 'rgba(0, 152, 218, .1)', borderRadius: 5, spacingTop: 50 },
+          chart: { type: 'column', backgroundColor: 'rgba(0, 152, 218, .1)', borderRadius: 5, spacingTop: 50 },
           title: { text: '' },
           xAxis: {
-            title: { text: '月份', align: 'middle', style: { color: '#4d4d4d' }, x: -20 },
-            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+            title: { text: '完賽時間', align: 'middle', style: { color: '#4d4d4d' }, x: -20 },
+            categories: ['3 hr', '4 hr', '5 hr', '5.5 hr'],
             crosshair: true,
             labels: { style: { fontSize: '12px', color: '#4d4d4d' } },
             tickColor: '#fff',
@@ -159,7 +133,7 @@
             lineColor: '#fff'
           },
           yAxis: {
-            title: { text: '平均<br>次數', align: 'high', style: { color: '#4d4d4d' }, rotation: 0, y: -30, offset: 0, },
+            title: { text: '平均<br>週跑次數', align: 'high', style: { color: '#4d4d4d' }, rotation: 0, x: 10, y: -30, offset: 0, },
             labels: { overflow: 'justify', style: { fontSize: '12px', color: '#4d4d4d' } },
             gridLineColor: '#fff',
           },
@@ -176,21 +150,21 @@
             },
           },
           series: [{
-            name: '數量',
+            name: '次數',
             showInLegend: false,
             color: '#0098da',
-            data: [7, 7, 8, 9, 10, 11, 12, 13, 13, 14, 14, 13],
+            data: [2.0, 2.5, 4.3, 6.7],
           }],
           credits: { enabled: false },
         })
       },
       $_marathon_drawChart4() {
         Highcharts.chart('js-chart-4', {
-          chart: { type: 'line', backgroundColor: 'rgba(0, 152, 218, .1)', borderRadius: 5, spacingTop: 50 },
+          chart: { type: 'column', backgroundColor: 'rgba(0, 152, 218, .1)', borderRadius: 5, spacingTop: 50 },
           title: { text: '' },
           xAxis: {
-            title: { text: '月份', align: 'middle', style: { color: '#4d4d4d' }, x: -20 },
-            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+            title: { text: '完賽時間', align: 'middle', style: { color: '#4d4d4d' }, x: -20 },
+            categories: ['3 hr', '4 hr', '5 hr', '5.5 hr'],
             crosshair: true,
             labels: { style: { fontSize: '12px', color: '#4d4d4d' } },
             tickColor: '#fff',
@@ -199,7 +173,7 @@
             lineColor: '#fff'
           },
           yAxis: {
-            title: { text: '平均<br>公里', align: 'high', style: { color: '#4d4d4d' }, rotation: 0, y: -30, offset: 0, },
+            title: { text: '平均週跑<br>距離(km)', align: 'high', style: { color: '#4d4d4d' }, rotation: 0, x: 10, y: -30, offset: 0, },
             labels: { overflow: 'justify', style: { fontSize: '12px', color: '#4d4d4d' } },
             gridLineColor: '#fff',
           },
@@ -216,10 +190,10 @@
             },
           },
           series: [{
-            name: '數量',
+            name: '距離',
             showInLegend: false,
             color: '#0098da',
-            data: [84.7, 80.7, 89.4, 89.0, 93.6, 85.5, 97.1, 109.7, 114.5, 144.7, 149.3, 162.2],
+            data: [21.4, 29.2, 46.2, 63.6],
           }],
           credits: { enabled: false },
         })
@@ -229,7 +203,7 @@
           chart: { type: 'bar', backgroundColor: 'rgba(255, 191, 85, .1)', borderRadius: 5, spacingTop: 10 },
           title: { text: '' },
           xAxis: {
-            categories: ['台南市立<br>田徑場', '新竹田徑場', '鳳山體育場', '板橋<br>重慶國小', '浮洲橋<br>→ 城林橋', '衛武營<br>都會公園', '文心花栗鼠', '四號公園', '植物園<br>→ 科博館', '板橋<br>五權公園'],
+            categories: ['台南市立<br>田徑場', '新竹田徑場', '鳳山體育場', '板橋<br>重慶國小', '浮洲橋<br>→ 城林橋', '衛武營<br>都會公園', '文心森林公園', '四號公園', '植物園<br>→ 科博館', '板橋<br>五權公園'],
             crosshair: true,
             labels: { style: { fontSize: '12px', color: '#4d4d4d' } },
             tickColor: '#fff',
@@ -339,220 +313,16 @@
 </script>
 <style lang="stylus" scoped>
 
-h1
-  width 6em
-h1, h2, h3
-  line-height 1.3
-h2, h3
-  color #4d4d4d
-h3
-  position relative
-  padding-left 35px
-  font-size 16px
-  text-align justify
-  font-weight 300
-  &:before
-    content ''
-    position absolute
-    top 2px
-    left 0
-    width 20px
-    height 20px
-    background-color #000
-  &:after
-    content ''
-    position absolute
-    top 2px
-    left 20px
-    width 20px
-    height 20px
-    border-style solid
-    border-width 10px 0 10px 10px
-    border-color transparent transparent transparent #000
-
 .marathonChart
-  img
-    position absolute
-    top 0
-    right 10px
-    width 35%
-    z-index 10
-  &__chart
-    position relative
+  width 100%
+  margin-top 16px
+  > div
     width 100%
-    min-height 50px
-    margin-top 20px
-    padding 10px 0
-    border-radius 5px
-
-.chart--1
-  h3
-    &:before
-      background-color #f45b69
-    &:after
-      border-color transparent transparent transparent #f45b69
-  img
-    transform translate(20%, -40%)
-.chart--2
-  h3
-    &:before
-      background-color #ffbf55
-    &:after
-      border-color transparent transparent transparent #ffbf55
-  img
-    transform translate(30%, -80%)
-.chart--3
-  img
-    transform translate(20%, -90%)
-.chart--4
-  h3
-    &:before
-      background-color #0098da
-    &:after
-      border-color transparent transparent transparent #0098da
-
-.chart--5
-  img
-    top auto
-    bottom 0
-    right -10px
-    transform translateY(-50%)
-
-.chart--6
-  .highcharts-legend
-    &g:before
-      content '最後時間'
-
-.chart--7
-  img
-    left 0
-    right auto
-    width 25%
-    transform translate(60%, 45%)
-
-@media (min-width: 600px)
-  h1
-    width auto
-  .marathonChart
-    img
-      width 25%
-  .chart--2
-    img
-      transform translate(30%, -60%)
-  .chart--3
-    img
-      transform translate(20%, -70%)
-  .chart--7
-    img
-      width 20%
-      transform translate(50%, -20%)
 
 @media (min-width: 900px)
   .marathonChart
-    position relative
-    width 800px
-    padding 5% 0
-    margin 0 auto 100px
-    &::after
-      content ''
-      display block
-      position absolute
-      right 0
-      bottom -100px
-      z-index 999
-      width 35px
-      height 100px
-      background-image url(/proj-assets/marathon/images/road-03.png)
-      background-size 40px auto
-      background-repeat repeat-y
-      background-position right top
-    img
-      width 25%
-    &__chart
-      position static
-      width 70%
-      &.right
-        margin-left auto
-        margin-right 0
-  .chart--3.marathonChart::after, .chart--6.marathonChart::after, .chart--7.marathonChart::after
-    display none
-  .chart--5.marathonChart::after
-    left 0
-    right auto
-  .chart--1
-    img
-      top auto
-      right auto
-      left 0
-      bottom 0
-      transform translate(0, 15%)
-  .chart--2
-    h3
-      position absolute
-      top 70%
-      right 0
-      width 25%
-      transform translateY(-50%)
-    img
-      top 0
-      right 0
-      left auto
-      bottom auto
-      transform translate(0, -20%)
-  .chart--3
-    margin-bottom 0
-    padding-bottom 0
-    img
-      top auto
-      right auto
-      left 0
-      bottom 0
-      transform translate(0, 100%)
-  .chart--4
-    padding-top 0
-    h3
-      position absolute
-      top -30%
-      left 0
-      width 25%
-      transform translateY(-50%)
-  .chart--5
-    img
-      top 0
-      right 0
-      left auto
-      bottom auto
-      transform translate(0, -20%)
-    .marathonChart__chart
-      width 80%
-      
-  .chart--6
-    margin-bottom 0
-    padding-bottom 0
-  .chart--7
-    padding-top 0
-    margin-bottom 0
-    img
-      top auto
-      right auto
-      left 10%
-      bottom 0
-      width 30%
-      transform translate(-50%, 10%)
-
-@media (min-width: 1100px)
-  .marathonChart
-    width 900px
-
-@media (min-width: 1500px)
-  .marathonChart
-    width 1100px
-    &::after
-      width 47px
-      background-size 47px auto
-  .chart--2
-    img
-      transform translate(0, -30%)
+    padding-bottom 40px
+    
 
 // highcharts
 #js-chart-1, #js-chart-2, #js-chart-3, #js-chart-4, #js-chart-6, #js-chart-7
