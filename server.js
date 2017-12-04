@@ -8,6 +8,7 @@ const compression = require('compression')
 const microcache = require('route-cache')
 const requestIp = require('request-ip')
 const resolve = file => path.resolve(__dirname, file)
+const useragent = require('useragent')
 // const { VALID_PREVIEW_IP_ADD } = require('./api/config')
 const { createBundleRenderer } = require('vue-server-renderer')
 
@@ -73,7 +74,7 @@ const serve = (path, cache) => express.static(resolve(path), {
 app.use(compression({ threshold: 0 }))
 app.use(favicon(path.join(__dirname, './public/favicon-48x48.png')))
 app.use('/dist', serve(path.join(__dirname, './dist'), true))
-app.use('/public', serve(path.join(__dirname, './public'), true))
+app.use('/public', serve('./public', true))
 app.use('/manifest.json', serve(path.join(__dirname, './manifest.json'), true))
 app.use('/service-worker.js', serve('./dist/service-worker.js'))
 
@@ -90,10 +91,10 @@ if (!isProd) {
 app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl))
 
 function render (req, res, next) {
+  const agent = useragent.parse(req.headers['user-agent'], req.query.jsuseragent)
   const s = Date.now()
   console.log('got req at ', s)
   console.log('req.url', req.url)
-  console.log('dist path: (../src/dist)', path.join(__dirname, '../src/dist'))
   console.log('dist path: (./dist)', path.join(__dirname, './dist'))
   
   if (req.url.indexOf('/api/') === 0) {
@@ -124,7 +125,8 @@ function render (req, res, next) {
 
   const context = {
     title: 'Readr Projects', // default title
-    url: req.url
+    url: req.url,
+    os: agent.os.toString()
   }
   renderer.renderToString(context, (err, html) => {
     if (err) {

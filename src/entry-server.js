@@ -12,7 +12,7 @@ export default context => {
     const s = isDev && Date.now()
     const { app, router, store } = createApp()
 
-    const { url } = context
+    const { url, os } = context
     const { fullPath } = router.resolve(url).route
 
     if (fullPath !== url) {
@@ -45,6 +45,7 @@ export default context => {
         // store to pick-up the server-side state without having to duplicate
         // the initial data fetching on the client.
         context.state = store.state
+        context.state.os = os
         resolve(app)
       }).catch(reject)
     }, reject)
