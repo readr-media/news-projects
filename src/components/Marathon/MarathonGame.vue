@@ -827,6 +827,7 @@ img
       display flex
       flex-wrap wrap
       justify-content space-between
+      width 260px
       margin 5px auto
       span
         margin 10px auto 0
@@ -1061,12 +1062,12 @@ img
   .desktop-only
     display none
 
-@media (min-width: 375px)
-  .marathonGame
-    &__menu
-      button
-        width 90px
-        height 90px
+// @media (min-width: 375px)
+//   .marathonGame
+//     &__menu
+//       button
+//         width 90px
+//         height 90px
 
 @media (min-width: 600px)
   .marathonGame
