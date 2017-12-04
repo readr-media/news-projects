@@ -13,7 +13,7 @@ const fetchStaticJson = (req, res, next, jsonFileName) => {
     } else {
       res.send('{\'error\':' + err + '}')
       console.error(`error during fetch data from ${jsonFileName} : ${url}`)
-      console.error(err)  
+      console.error(err)
     }
   })
 }
