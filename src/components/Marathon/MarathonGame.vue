@@ -744,7 +744,7 @@
       $_marathon_updateSelectedTime(e) {
         const selectedTime = e.target.value
         const highlightIndex =  this.$_marathon_calculateSelectedTimeIndex(selectedTime)
-        const shareLink = `?q1=${this.race}&q2=${selectedTime}&q3=${highlightIndex}`
+        const shareLink = `/${this.race}-${selectedTime}-${highlightIndex}`
         this.convertedAverage = secondToHHMMSS(selectedTime)
         this.$_marathon_updateSelectedTimePoint(highlightIndex)
         this.$emit('changeSelectedTime', shareLink)

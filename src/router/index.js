@@ -23,7 +23,7 @@ export function createRouter () {
     fallback: false,
     scrollBehavior: () => ({ y: 0 }),
     routes: [
-      { path: '/project/:project', component: Project, beforeEnter: (to, from, next) => {
+      { path: '/project/:project/:params?', component: Project, beforeEnter: (to, from, next) => {
         if (!PROJECTS[ _.get(to, [ 'params', 'project' ]) ]) {
           const e = new Error()
           e.massage = 'Page Not Found'
