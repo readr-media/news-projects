@@ -134,7 +134,7 @@
       }
     },
     metaInfo () {
-      let description = 'default'
+      let description = '台灣人瘋路跑， 2016 年全年就有 599 場大大小小的路跑，還瘋到國外去！你知道全球六大馬是哪六大嗎？你也許抽過東京馬拉松卻槓龜，沒關係，鏡傳媒帶你一次玩跑！'
       let ogImage = 'marathon/images/og.jpg'
       let metaUrl = 'marathon'
 
@@ -163,7 +163,7 @@
             race = '波士頓'
             ogImage = 'marathon/images/og-boston.jpg'
         }
-        description = `我剛剛跑完了${race}馬拉松第${rank}名 時間${time}！你也一起來吧！`
+        description = `我剛剛跑完${race}馬拉松獲得第${rank}名 時間${time}！你也一起來吧！台灣人瘋路跑， 2016 年全年就有 599 場大大小小的路跑，還瘋到國外去！你知道全球六大馬是哪六大嗎？你也許抽過東京馬拉松卻槓龜，沒關係，鏡傳媒帶你一次玩跑！`
         metaUrl = `marathon/${this.$route.params.params}`
       }
       return {
@@ -177,7 +177,7 @@
     },
     mounted () {
       window.addEventListener('scroll', this.$_marathon_scrollEvent)
-      // window.ga('send', 'pageview')
+      window.ga('send', 'pageview')
     },
     methods: {
       $_marathon_changeSelectedTime(shareLink) {
@@ -302,7 +302,7 @@ img
   width 100%
   height 100vh
   background-color rgba(0,0,0,.5)
-  background-image url(/proj-assets/marathon/images/loading-d.png)
+  background-image url(/proj-assets/marathon/images/loading-m.png)
   background-repeat no-repeat
   background-size cover
   background-position center center
@@ -875,6 +875,8 @@ img
       width 100%
       > div
         display flex
+  .opening
+    background-image url(/proj-assets/marathon/images/loading-d.png)
   .intro
     max-height none
     padding 0

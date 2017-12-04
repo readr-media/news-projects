@@ -1,7 +1,7 @@
 <template>
   <section ref="marathonGame" class="marathonGame">
     <div class="marathonGame__menu">
-      <div class="marathonGame__menu--raceName" v-text="raceName"></div>
+      <div class="marathonGame__menu--raceName" v-html="raceN"></div>
       <div>
         <button class="boston" :class="[this.race === 'boston' ? 'selected' : '']" @click="$_marathon_changeRace('boston')">波士頓</button>
         <button class="chicago" :class="[this.race === 'chicago' ? 'selected' : '']" @click="$_marathon_changeRace('chicago')">芝加哥</button>
@@ -44,7 +44,7 @@
         <div id="js-track" class="marathonGame__sliderBar">
           <div class="marathonGame__sliderBar--fullTime" @click="$_marathon_moveTrackBar"></div>
           <div id="js-currentTrackTime" class="marathonGame__sliderBar--currentTime" @click="$_marathon_moveTrackBar"></div>
-          <div id="js-trackbutton" class="marathonGame__sliderBar--trackbutton" draggable @dragstart="$_marathon_dragstart" @drag="$_marathon_drag" @dragend="$_marathon_dragend"></div>
+          <div id="js-trackbutton" class="marathonGame__sliderBar--trackbutton"></div>
         </div>
         <div class="marathonGame__speedControl">
           <div id="timerDesktop" class="marathonGame__timerDesktop">00:00:00</div>
@@ -139,10 +139,11 @@
         },
         filterCountry: 'all',
         filterGender: 'all',
+        hasChangeTime: false,
         isPause: false,
         loading: true,
         race: 'boston',
-        raceName: '2017 年波士頓馬拉松',
+        raceN: '2017 年波士頓馬拉松',
         speedRatio: 1
       }
     },
@@ -354,24 +355,10 @@
         app.ticker.start()
       },
       $_marathon_changeRace(race) {
+        
         if (this.race !== race) {
           app.ticker.stop()
           this.loading = true
-          console.log(race)
-          switch(race) {
-            case 'chicago':
-              this.raceName = '2016 年芝加哥馬拉松'
-            case 'newyork':
-              this.raceName = '2016 年紐約馬拉松'
-            case 'berlin':
-              this.raceName = '2017 年柏林馬拉松'
-            case 'london':
-              this.raceName = '2017 年倫敦馬拉松'
-            case 'tokyo':
-              this.raceName = '2017 年東京馬拉松'
-            default:
-              this.raceName = '2017 年波士頓馬拉松'
-          }
 
           window.ga('send', 'event', 'projects', 'click', `select ${race}`, { nonInteraction: true })
           for (let i = 0; i < groups.length; i += 1) {
@@ -422,18 +409,6 @@
           type = 'canvas'
         }
         PIXI.utils.sayHello(type)
-      },
-      $_marathon_dragstart(e) {
-        // e.preventDefault();
-        console.log('dragstart', e)
-      },
-      $_marathon_drag(e) {
-        e.preventDefault();
-        console.log('drag', e)
-      },
-      $_marathon_dragend(e) {
-        // e.preventDefault();
-        console.log('dragend', e)
       },
       $_marathon_filter(data, category) {
         switch (category) {
@@ -494,8 +469,6 @@
         tickerValue = 1
         this.speedRatio = 1
 
-        // this.$_marathon_setSlider()
-
         groups[0] = this.$_marathon_filter(dataRunners, 'twnfemale')
         groups[1] = this.$_marathon_filter(dataRunners, 'twnmale')
         groups[2] = this.$_marathon_filter(dataRunners, 'otfemale')
@@ -544,8 +517,6 @@
         }
 
         const runnerAmount = runners.length
-        // const runnerAmount = 3
-
         const raceTimeAverage = _.floor(_.sum(_.map(dataRunners, r => r[4])) / runners.length)
         this.convertedAverage = secondToHHMMSS(raceTimeAverage)
         this.$refs.selectedTimeControl.max = raceTimeMax
@@ -584,7 +555,6 @@
             }
             document.querySelector('#timerMobile').innerText = secondToHHMMSS(tickerTimer)
             document.querySelector('#timerDesktop').innerText = secondToHHMMSS(tickerTimer)
-            // slider.noUiSlider.set(tickerTimer)
             document.querySelector('#js-currentTrackTime').style.width = `${(tickerTimer / raceTimeMax) * 100}%`
             document.querySelector('#js-trackbutton').style.left = `${(tickerTimer / raceTimeMax) * 100}%`
 
@@ -635,6 +605,10 @@
       },
       $_marathon_moveTrackBar (e) {
         app.ticker.stop()
+        if (!this.hasChangeTime) {
+          this.hasChangeTime = true
+          window.ga('send', 'event', 'projects', 'click', `progress bar`, { nonInteraction: true })
+        }
         const newPercentageTime = e.layerX / e.target.parentNode.offsetWidth
         tickerTimer = Math.floor(raceTimeMax * newPercentageTime)
         this.$_marathon_updatePointPos(tickerTimer)
@@ -644,45 +618,35 @@
         const current = tickerTimer
         this.canvasW = this.$refs.marathonGameMap.offsetWidth
         this.canvasH = this.$refs.marathonGameMap.offsetHeight
-        // app.renderer.resize(this.canvasW, this.canvasH)
         this.$_marathon_setRace(this.race, current)
-        // const ratio = Math.min(this.canvasW / app.renderer.width, this.canvasH / app.renderer.height)
-        // app.stage.scale.x = ratio
-        // app.stage.scale.y = ratio
-        // this.$_marathon_updatePointPos(current)
-        // app.ticker.start()
       },
       $_marathon_restart() {
         app.ticker.stop()
-        // const runnerAmount = _.get(dataRunners, ['length'], 0)
-        // tickerTimer = 0
-        // spriteSelectedTime.currentSplit = 0
-        // for (let i = 0; i < runnerAmount; i += 1) {
-        //   runners[i].currentSplit = 0
-        // }
         this.$_marathon_setRace(this.race)
-        // app.ticker.start()
       },
       $_marathon_setRace(race) {
         const raceRunners = _.get(this.data, [ race, 'runners', 0 ])
         const raceMap = _.get(this.data, [ race, 'map', 'race' ])
-        // app = new PIXI.Application()
-        // document.querySelector('#js-pixi').appendChild(app.view)
         app = new PIXI.Application(this.canvasW, this.canvasH, { antialias: false, transparent: true, view: document.querySelector('#js-pixi') })
 
         switch(race) {
           case 'chicago':
-            this.raceName = '2016 年芝加哥馬拉松'
+            this.raceN = '2016 年芝加哥馬拉松'
+            break
           case 'newyork':
-            this.raceName = '2016 年紐約馬拉松'
+            this.raceN = '2016 年紐約馬拉松'
+            break
           case 'berlin':
-            this.raceName = '2017 年柏林馬拉松'
+            this.raceN = '2017 年柏林馬拉松'
+            break
           case 'london':
-            this.raceName = '2017 年倫敦馬拉松'
+            this.raceN = '2017 年倫敦馬拉松'
+            break
           case 'tokyo':
-            this.raceName = '2017 年東京馬拉松'
+            this.raceN = '2017 年東京馬拉松'
+            break
           default:
-            this.raceName = '2017 年波士頓馬拉松'
+            this.raceN = '2017 年波士頓馬拉松'
         }
 
         if (!raceRunners || !raceMap) {
@@ -691,6 +655,7 @@
             this.data[race]['map'] = data[0]
             this.data[race]['runners'] = data[1]
             this.race = race
+            
             this.$_marathon_initRace()
           })
           .catch(() => {
@@ -737,8 +702,6 @@
         const runnersAmount = _.get(runners, ['length'], 0)
 
         spriteSelectedTime.currentSplit = this.$_marathon_calculateCurrentSplit(tickerTimer, spriteSelectedTime.timeAccumulativePerSplit)
-        console.log('tickerTimer', tickerTimer)
-        console.log('spriteSelectedTime', spriteSelectedTime)
         if (tickerTimer < spriteSelectedTime.speedData[0]) {
           let secondInSplit
           if (spriteSelectedTime.currentSplit === 0) {
@@ -755,7 +718,6 @@
           spriteSelectedTime.x = -1
           spriteSelectedTime.y = -1
         }
-        console.log('spriteSelectedTime', spriteSelectedTime)
         for (let i = 0; i < runnersAmount; i += 1) {
           runners[i].currentSplit = this.$_marathon_calculateCurrentSplit(tickerTimer, runners[i].timeAccumulativePerSplit)
           if (tickerTimer < runners[i].speedData[0]) {
