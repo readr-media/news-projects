@@ -9,21 +9,21 @@
         <p>看完了六大馬，台灣跑者的跑步習慣又是什麼呢？因為台北馬不提供資料，我們嘗試從 Garmin 的用戶資料來看看，能夠在時限內完成台北馬（ 5 小時 30 分）的人都是什麼樣的人？跑完一個馬拉松，又需要什麼樣的訓練呢？</p>
         <p>參加 2016 年台北馬拉松的 5560 名參賽者，有 34% 的人使用 Garmin 手錶紀錄。這些成功完賽的選手們⋯⋯</p>
         <span>這些成功完賽的選手們</span>
-        <div class="triangle" @click="smoothScroll('.chart--01')"></div>
+        <div class="triangle" @click="$_marathon_scrollTo(1)"></div>
         <div class="intro__menu">
-          <div @click="smoothScroll('.chart--1')">
+          <div @click="$_marathon_scrollTo(1)">
             <img v-lazy="`/proj-assets/marathon/images/intro-icon-01.png`">
             <p>平常有運動習慣嗎？</p>
           </div>
-          <div @click="smoothScroll('.chart--2')">
+          <div @click="$_marathon_scrollTo(2)">
             <img v-lazy="`/proj-assets/marathon/images/intro-icon-02.png`">
             <p>練習的強度如何呢？</p>
           </div>
-          <div @click="smoothScroll('.chart--3')">
+          <div @click="$_marathon_scrollTo(3)">
             <img v-lazy="`/proj-assets/marathon/images/intro-icon-03.png`">
             <p>我想要變更厲害！</p>
           </div>
-          <div @click="smoothScroll('.chart--5')">
+          <div @click="$_marathon_scrollTo(5)">
             <img v-lazy="`/proj-assets/marathon/images/intro-icon-04.png`">
             <p>大家平常都在哪裡練習呢？</p>
           </div>
@@ -63,7 +63,7 @@
         <p>若將這些選手以完賽時間加以分組，則完全印證了「一分耕耘，一分收穫」的說法。</p>
         <p>我們將選手分成四組，分別是成功完賽在關門時間前通過終點的「5.5 小時」、以及馬拉松跑者用以評估自己實力的「SUB 5」（意即在 5 小時內完賽）、「SUB 4」、「SUB 3」。發現隨著成績提升，每週的訓練強度就要愈強。</p>
         <p>若想要微笑通過終點，平時的努力真是不能少啊！</p>
-        <marathon-chart :chart="3" ></marathon-chart>
+        <marathon-chart class="chart--3" :chart="3" ></marathon-chart>
         <marathon-chart :chart="4" ></marathon-chart>
         <img class="left" v-lazy="`/proj-assets/marathon/images/chart-03.png`">
       </div>
@@ -127,6 +127,7 @@
     mixins: [ titleMeta ],
     data () {
       return {
+        currentScroll: 0,
         hasChangeSelectedTime: false,
         isLoading: true,
         shareLink: 'location.href'
@@ -171,6 +172,7 @@
     beforeMount () {
     },
     mounted () {
+      window.addEventListener('scroll', this.$_marathon_scrollEvent)
       // window.ga('send', 'pageview')
     },
     methods: {
@@ -180,6 +182,62 @@
       },
       $_marathon_detectLoading(value) {
         this.isLoading = value
+      },
+      $_marathon_scrollEvent() {
+        const vh = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+        const intro = document.querySelector('.intro').offsetTop
+        const chart1 = document.querySelector('.chart--1').offsetTop
+        const chart2 = document.querySelector('.chart--2').offsetTop
+        const chart3 = document.querySelector('.chart--3').offsetTop
+        const chart5 = document.querySelector('.chart--5').offsetTop
+        const chart6 = document.querySelector('.chart--6').offsetTop
+        const related = document.querySelector('.related').offsetTop
+
+        if (scrollTop > (intro - ((vh / 3) * 2)) && this.currentScroll < 1) {
+          this.currentScroll += 1
+          ga('send', 'event', 'projects', 'scroll', 'scroll to 2', { nonInteraction: true })
+        }
+        if (scrollTop > (chart1 - ((vh / 3) * 2)) && this.currentScroll < 2) {
+          this.currentScroll += 1
+          ga('send', 'event', 'projects', 'scroll', 'scroll to 3', { nonInteraction: true })
+        }
+        if (scrollTop > (chart2 - ((vh / 3) * 2)) && this.currentScroll < 3) {
+          this.currentScroll += 1
+          ga('send', 'event', 'projects', 'scroll', 'scroll to 4', { nonInteraction: true })
+        }
+        if (scrollTop > (chart3 - ((vh / 3) * 2)) && this.currentScroll < 4) {
+          this.currentScroll += 1
+          ga('send', 'event', 'projects', 'scroll', 'scroll to 5', { nonInteraction: true })
+        }
+        if (scrollTop > (chart5 - ((vh / 3) * 2)) && this.currentScroll < 5) {
+          this.currentScroll += 1
+          ga('send', 'event', 'projects', 'scroll', 'scroll to 6', { nonInteraction: true })
+        }
+        if (scrollTop > (chart6 - ((vh / 3) * 2)) && this.currentScroll < 6) {
+          this.currentScroll += 1
+          ga('send', 'event', 'projects', 'scroll', 'scroll to 7', { nonInteraction: true })
+        }
+        if (scrollTop > (related - ((vh / 3) * 2)) && this.currentScroll < 7) {
+          this.currentScroll += 1
+          ga('send', 'event', 'projects', 'scroll', 'scroll to 8', { nonInteraction: true })
+        }
+      },
+      $_marathon_scrollTo(chart) {
+        switch(chart) {
+          case 2:
+            this.smoothScroll('.chart--2')
+            window.ga('send', 'event', 'projects', 'click', `select avg km`, { nonInteraction: true })
+          case 3:
+            this.smoothScroll('.chart--3')
+            window.ga('send', 'event', 'projects', 'click', `select how`, { nonInteraction: true })
+          case 4:
+            this.smoothScroll('.chart--5')
+            window.ga('send', 'event', 'projects', 'click', `select where`, { nonInteraction: true })
+          default:
+            this.smoothScroll('.chart--1')
+            window.ga('send', 'event', 'projects', 'click', `select habits`, { nonInteraction: true })
+        }
       },
       smoothScroll
     },
@@ -616,7 +674,8 @@ img
     font-size 28px
     margin-bottom 16px
   h2
-    margin-bottom 16px
+    margin-bottom 30px
+    color #4d4d4d
     font-size 20px
   p
     font-size 16px
@@ -913,7 +972,7 @@ img
     &__content
       position relative
       width 800px
-      padding 5% 0
+      padding 70px 0 30px
       margin 0 auto
       &::after
         content ''
@@ -927,6 +986,11 @@ img
         background-size 40px auto
         background-repeat repeat-y
         background-position right top
+    p
+      width 700px
+      margin-left auto
+      margin-right auto
+      line-height 1.7
     &.chart--6
       padding-bottom 5%
       
@@ -987,12 +1051,12 @@ img
       position absolute
       top 0
       z-index 510
-      width 200px
+      width 230px
       &.left
-        left -50px
+        left 20px
         transform translate(-50%, -25%)
       &.right
-        right -50px
+        right 30px
         transform translate(50%, -25%)
     &__content
       width 900px
@@ -1040,6 +1104,11 @@ img
       &--compass
         bottom 15%
   .chart
+    img
+      &.left
+        left 70px
+      &.right
+        right 70px
     &__content
       width 1100px
       &::after
