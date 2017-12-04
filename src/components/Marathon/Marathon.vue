@@ -137,10 +137,12 @@
       let description = 'default'
       let ogImage = 'marathon/images/og.jpg'
 
-      if (this.$route.query.q1 && this.$route.query.q2 && this.$route.query.q3) {
-        const time = moment.utc(this.$route.query.q2 * 1000).format('HH:mm:ss')
+      if (this.$route.params.params) {
+        const raceEN = _.split(this.$route.params.params, '-')[0]
+        const time = moment.utc(_.split(this.$route.params.params, '-')[1] * 1000).format('HH:mm:ss')
+        const rank = _.split(this.$route.params.params, '-')[2]
         let race
-        switch(this.$route.query.q1) {
+        switch(raceEN) {
           case 'chicago':
             race = '芝加哥'
             ogImage = 'marathon/images/og-chicago.jpg'
@@ -160,7 +162,7 @@
             race = '波士頓'
             ogImage = 'marathon/images/og-boston.jpg'
         }
-        description = `我剛剛跑完了${race}馬拉松第${this.$route.query.q3}名 時間${time}！你也一起來吧！`
+        description = `我剛剛跑完了${race}馬拉松第${rank}名 時間${time}！你也一起來吧！`
       }
       return {
         title: 'marathon',
