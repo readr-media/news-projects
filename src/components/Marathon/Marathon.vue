@@ -136,6 +136,7 @@
     metaInfo () {
       let description = 'default'
       let ogImage = 'marathon/images/og.jpg'
+      let metaUrl = 'marathon'
 
       if (this.$route.params.params) {
         const raceEN = _.split(this.$route.params.params, '-')[0]
@@ -163,11 +164,12 @@
             ogImage = 'marathon/images/og-boston.jpg'
         }
         description = `我剛剛跑完了${race}馬拉松第${rank}名 時間${time}！你也一起來吧！`
+        metaUrl = `marathon/${this.$route.params.params}`
       }
       return {
         title: 'marathon',
         description: description,
-        metaUrl: 'marathon',
+        metaUrl: metaUrl,
         metaImage: ogImage
       }
     },

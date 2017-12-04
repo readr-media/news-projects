@@ -1,6 +1,7 @@
 <template>
   <section ref="marathonGame" class="marathonGame">
     <div class="marathonGame__menu">
+      <div class="marathonGame__menu--raceName" v-text="raceName"></div>
       <div>
         <button class="boston" :class="[this.race === 'boston' ? 'selected' : '']" @click="$_marathon_changeRace('boston')">波士頓</button>
         <button class="chicago" :class="[this.race === 'chicago' ? 'selected' : '']" @click="$_marathon_changeRace('chicago')">芝加哥</button>
@@ -141,6 +142,7 @@
         isPause: false,
         loading: true,
         race: 'boston',
+        raceName: '2017 年波士頓馬拉松',
         speedRatio: 1
       }
     },
@@ -157,8 +159,8 @@
       this.canvasH = this.$refs.marathonGameMap.offsetHeight
       this.$_marathon_detectWebGLSupported()
       this.$_marathon_setRace('boston')
-      // window.addEventListener('resize', this.$_marathon_resize)
-      // window.addEventListener('scroll', this.$_marathon_detectScroll)
+      window.addEventListener('resize', this.$_marathon_resize)
+      window.addEventListener('scroll', this.$_marathon_detectScroll)
     },
     methods: {
       $_marathon_calculateCurrentSplit(second, timeAccumulativePerSplit) {
@@ -355,6 +357,22 @@
         if (this.race !== race) {
           app.ticker.stop()
           this.loading = true
+          console.log(race)
+          switch(race) {
+            case 'chicago':
+              this.raceName = '2016 年芝加哥馬拉松'
+            case 'newyork':
+              this.raceName = '2016 年紐約馬拉松'
+            case 'berlin':
+              this.raceName = '2017 年柏林馬拉松'
+            case 'london':
+              this.raceName = '2017 年倫敦馬拉松'
+            case 'tokyo':
+              this.raceName = '2017 年東京馬拉松'
+            default:
+              this.raceName = '2017 年波士頓馬拉松'
+          }
+
           window.ga('send', 'event', 'projects', 'click', `select ${race}`, { nonInteraction: true })
           for (let i = 0; i < groups.length; i += 1) {
             app.stage.removeChild(containers[i])
@@ -652,6 +670,21 @@
         // document.querySelector('#js-pixi').appendChild(app.view)
         app = new PIXI.Application(this.canvasW, this.canvasH, { antialias: false, transparent: true, view: document.querySelector('#js-pixi') })
 
+        switch(race) {
+          case 'chicago':
+            this.raceName = '2016 年芝加哥馬拉松'
+          case 'newyork':
+            this.raceName = '2016 年紐約馬拉松'
+          case 'berlin':
+            this.raceName = '2017 年柏林馬拉松'
+          case 'london':
+            this.raceName = '2017 年倫敦馬拉松'
+          case 'tokyo':
+            this.raceName = '2017 年東京馬拉松'
+          default:
+            this.raceName = '2017 年波士頓馬拉松'
+        }
+
         if (!raceRunners || !raceMap) {
           Promise.all([fetchData(`/proj-assets/marathon/data/${race}Map.json`), fetchData(`/proj-assets/marathon/data/${race}Data.json`)])
           .then((data) => {
@@ -659,6 +692,9 @@
             this.data[race]['runners'] = data[1]
             this.race = race
             this.$_marathon_initRace()
+          })
+          .catch(() => {
+            this.loading = false
           })
         } else {
           this.race = race
@@ -817,18 +853,29 @@ img
   background-color #cbc6bf
   &__menu
     position relative
-    padding 38px 0 0
+    padding 48px 0 0
     padding-left calc((100% - 300px) / 2)
     padding-right calc((100% - 300px) / 2)
     background-image url(/proj-assets/marathon/images/road-02.png)
     background-repeat repeat-x
     background-size 19px 38px
+    &::before
+      content ""
+      position absolute
+      top 18px
+      left 50%
+      z-index 10
+      transform translateX(-50%)
+      width 255px
+      height 30px
+      background-image url(/proj-assets/marathon/images/raceName.png)
+      background-repeat no-repeat
     > div
       display flex
       flex-wrap wrap
       justify-content space-between
       width 260px
-      margin 5px auto
+      margin 0 auto
       span
         margin 10px auto 0
     button
@@ -886,7 +933,18 @@ img
         &.selected
           &:after
             background-image url(/proj-assets/marathon/images/logo-tokyo.jpg)
-  
+
+    &--raceName
+      position absolute
+      top 21px
+      left 50%
+      transform translateX(-50%)
+      z-index 500
+      width 160px !important
+      height 20px
+      margin 0 !important
+      color #4d4d4d
+      font-size 16px
   &__selectedTimeControl
     display flex
     align-items center
@@ -1103,12 +1161,14 @@ img
     height auto
     &__menu
       position absolute
-      top 0
+      top 10px
       left 70px
       z-index 10
       padding 16px 12px
       background-image none
       background-color rgba(233,237,243, .6)
+      &::before
+        top -5px
       > div
         span
           margin 0
@@ -1129,6 +1189,8 @@ img
         margin-left 0
       button:last-of-type
         margin-right 0
+      &--raceName
+        top -1px
     &__selectedTimeControl
       flex-grow 1
       display flex

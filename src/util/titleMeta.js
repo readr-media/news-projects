@@ -18,7 +18,7 @@ const serverMetaInfoMixin = {
       const metaUrl = metaInfo.metaUrl
       const metaImage = metaInfo.metaImage
       if (title) {
-        this.$ssrContext.title = `Readr | ${title}`
+        this.$ssrContext.title = `${title} - 鏡週刊 Mirror Media`
       }
       if (description) {
         this.$ssrContext.description = description
@@ -43,7 +43,7 @@ const clientMetaInfoMixin = {
       const metaImage = metaInfo.metaImage
       if (title) {
         document.title = `Readr | ${title}`
-        document.head.querySelector(`meta[property='og:title']`).content = `Readr | ${title}`
+        document.head.querySelector(`meta[property='og:title']`).content = `${title} - 鏡週刊 Mirror Media`
       }
       if (description) {
         document.head.querySelector(`meta[name=description]`).content = description
