@@ -1,5 +1,6 @@
 <template>
   <section ref="marathonGame" class="marathonGame">
+    <spinner class="marathonGame__loading" :show="loading"></spinner>
     <div class="marathonGame__menu">
       <div class="marathonGame__menu--raceName" v-html="raceN"></div>
       <div>
@@ -63,6 +64,7 @@
 <script>
   import { currentYPosition, elmYPosition } from 'kc-scroll'
   import _ from 'lodash'
+  import Spinner from '../Spinner.vue'
   import moment from 'moment'
   import superagent from 'superagent'
 
@@ -106,6 +108,9 @@
 
   export default {
     name: 'MarathonGame',
+    components: {
+      'spinner': Spinner
+    },
     data () {
       return {
         canvasW: 0,
@@ -141,15 +146,10 @@
         filterGender: 'all',
         hasChangeTime: false,
         isPause: false,
-        loading: true,
+        loading: false,
         race: 'boston',
         raceN: '2017 年波士頓馬拉松',
         speedRatio: 1
-      }
-    },
-    watch: {
-      loading () {
-        this.$emit('detectLoading', this.loading)
       }
     },
     mounted () {
@@ -396,7 +396,7 @@
         return paths
       },
       $_marathon_detectScroll(e) {
-        const marathonGameTop = this.elmYPosition('.marathonGame') + this.$refs.marathonGame.offsetHeight
+        const marathonGameTop = this.$refs.marathonGame.offsetHeight
         if (this.currentYPosition() > marathonGameTop) {
           app.ticker.stop()
           this.$refs.togglePlayMobile.querySelector('img').src = `/proj-assets/marathon/images/play.png`
@@ -655,10 +655,11 @@
             this.data[race]['map'] = data[0]
             this.data[race]['runners'] = data[1]
             this.race = race
-            
+            this.$emit('detectFirstLoaded')
             this.$_marathon_initRace()
           })
           .catch(() => {
+            this.$emit('detectFirstLoaded')
             this.loading = false
           })
         } else {
@@ -813,6 +814,13 @@ img
   color #333
   font-size 18px
   background-color #cbc6bf
+  &__loading
+    position absolute
+    top 50%
+    left calc(50% - 40px)
+    z-index 510
+    width 80px
+    height 80px
   &__menu
     position relative
     padding 48px 0 0

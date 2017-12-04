@@ -42,7 +42,7 @@ const clientMetaInfoMixin = {
       const metaUrl = metaInfo.metaUrl
       const metaImage = metaInfo.metaImage
       if (title) {
-        document.title = `Readr | ${title}`
+        document.title = `${title} - 鏡週刊 Mirror Media`
         document.head.querySelector(`meta[property='og:title']`).content = `${title} - 鏡週刊 Mirror Media`
       }
       if (description) {

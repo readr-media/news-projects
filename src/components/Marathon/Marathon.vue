@@ -1,9 +1,9 @@
 <template>
-  <div class="marathon" :class="{ loading: isLoading }">
+  <div class="marathon" :class="{ loading: isFirstLoading }">
     <logo :top="`10px`" :left="`10px`" :bgColor="`#000`" :border="`1px solid #fff`"></logo>
     <share :shareUrl="shareLink" :top="`60px`" :left="`10px`" :bgColor="`#000`" :border="`1px solid #fff`"></share>
-    <div class="opening" v-show="isLoading"></div>
-    <marathon-game v-on:changeSelectedTime="$_marathon_changeSelectedTime" v-on:detectLoading="$_marathon_detectLoading"></marathon-game>
+    <div class="opening" v-show="isFirstLoading"></div>
+    <marathon-game v-on:changeSelectedTime="$_marathon_changeSelectedTime" v-on:detectFirstLoaded="$_marathon_detectFirstLoaded"></marathon-game>
     <section class="intro">
       <div class="intro__content">
         <p>看完了六大馬，台灣跑者的跑步習慣又是什麼呢？因為台北馬不提供資料，我們嘗試從 Garmin 的用戶資料來看看，能夠在時限內完成台北馬（ 5 小時 30 分）的人都是什麼樣的人？跑完一個馬拉松，又需要什麼樣的訓練呢？</p>
@@ -129,6 +129,7 @@
       return {
         currentScroll: 0,
         hasChangeSelectedTime: false,
+        isFirstLoading: true,
         isLoading: true,
         shareLink: 'location.href'
       }
@@ -167,7 +168,7 @@
         metaUrl = `marathon/${this.$route.params.params}`
       }
       return {
-        title: 'marathon',
+        title: '鍵盤玩跑六大馬',
         description: description,
         metaUrl: metaUrl,
         metaImage: ogImage
@@ -184,8 +185,8 @@
         this.hasChangeSelectedTime = true
         this.shareLink = `${SITE_URL}marathon${shareLink}`
       },
-      $_marathon_detectLoading(value) {
-        this.isLoading = value
+      $_marathon_detectFirstLoaded() {
+        this.isFirstLoading = false
       },
       $_marathon_scrollEvent() {
         const vh = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
@@ -230,16 +231,19 @@
       $_marathon_scrollTo(chart) {
         switch(chart) {
           case 2:
-            this.smoothScroll('.chart--2')
+            this.smoothScroll('.chart.chart--2')
             window.ga('send', 'event', 'projects', 'click', `select avg km`, { nonInteraction: true })
+            return
           case 3:
-            this.smoothScroll('.chart--3')
+            this.smoothScroll('.chart.chart--3')
             window.ga('send', 'event', 'projects', 'click', `select how`, { nonInteraction: true })
-          case 4:
-            this.smoothScroll('.chart--5')
+            return
+          case 5:
+            this.smoothScroll('.chart.chart--5')
             window.ga('send', 'event', 'projects', 'click', `select where`, { nonInteraction: true })
+            return
           default:
-            this.smoothScroll('.chart--1')
+            this.smoothScroll('.chart.chart--1')
             window.ga('send', 'event', 'projects', 'click', `select habits`, { nonInteraction: true })
         }
       },
