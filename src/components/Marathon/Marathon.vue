@@ -1,11 +1,12 @@
 <template>
-  <div class="marathon">
+  <div class="marathon" :class="{ loading: isLoading }">
     <logo :top="`10px`" :left="`10px`" :bgColor="`#000`" :border="`1px solid #fff`"></logo>
-    <share :top="`60px`" :left="`10px`" :bgColor="`#000`" :border="`1px solid #fff`"></share>
-    <marathon-game></marathon-game>
+    <share :shareUrl="shareLink" :top="`60px`" :left="`10px`" :bgColor="`#000`" :border="`1px solid #fff`"></share>
+    <div class="opening" v-show="isLoading"></div>
+    <marathon-game v-on:changeSelectedTime="$_marathon_changeSelectedTime" v-on:detectLoading="$_marathon_detectLoading"></marathon-game>
     <section class="intro">
       <div class="intro__content">
-        <p>看完了六大馬，台灣跑者的跑步習慣又是什麼呢？因為台北馬不願意提供資料，我們嘗試從 Garmin 的用戶資料來看看，跑台北馬的人都是什麼樣的人，如果你想要完成一個馬拉松，並在時限內完賽（台北馬限時 5 小時 30 分）又需要什麼樣的訓練呢？</p>
+        <p>看完了六大馬，台灣跑者的跑步習慣又是什麼呢？因為台北馬不提供資料，我們嘗試從 Garmin 的用戶資料來看看，能夠在時限內完成台北馬（ 5 小時 30 分）的人都是什麼樣的人？跑完一個馬拉松，又需要什麼樣的訓練呢？</p>
         <p>參加 2016 年台北馬拉松的 5560 名參賽者，有 34% 的人使用 Garmin 手錶紀錄。這些成功完賽的選手們⋯⋯</p>
         <span>這些成功完賽的選手們</span>
         <div class="triangle" @click="smoothScroll('.chart--01')"></div>
@@ -16,19 +17,15 @@
           </div>
           <div @click="smoothScroll('.chart--2')">
             <img v-lazy="`/proj-assets/marathon/images/intro-icon-02.png`">
-            <p>平均每週跑多少公里？</p>
+            <p>練習的強度如何呢？</p>
           </div>
           <div @click="smoothScroll('.chart--3')">
             <img v-lazy="`/proj-assets/marathon/images/intro-icon-03.png`">
-            <p>臨時抱佛腳指數？</p>
+            <p>我想要變更厲害！</p>
           </div>
           <div @click="smoothScroll('.chart--5')">
             <img v-lazy="`/proj-assets/marathon/images/intro-icon-04.png`">
-            <p>大家平常都在哪裡練習？</p>
-          </div>
-          <div @click="smoothScroll('.chart--6')">
-            <img v-lazy="`/proj-assets/marathon/images/intro-icon-05.png`">
-            <p>高手們都怎麼練習？</p>
+            <p>大家平常都在哪裡練習呢？</p>
           </div>
         </div>
         <img class="intro__decoration--mobile" src="/proj-assets/marathon/images/intro-m.png">
@@ -38,61 +35,61 @@
         <img class="intro__decoration--sroad" v-lazy="`/proj-assets/marathon/images/intro-d.png`">
       </div>
     </section>
-    <section class="chart">
-      <marathon-chart
-        :chart="1"
-        :chartPosition="`right`"
-        :chartPeopleImage="`01`"
-        :chartSubtitle="`每週跑步次數`"
-        :chartTitle="`平常有運動習慣嗎？`">
-      </marathon-chart>
+    <section class="chart chart--1">
+      <div class="chart__content">
+        <h1>平常有運動習慣嗎？</h1>
+        <h2>每週跑步次數</h2>
+        <p>想要完成一個馬拉松，要花多少時間訓練呢？ Garmin 跑步學堂教練林駿豪表示，訓練週期最少是 12 週，但 16 週以上為佳。我們以 16 週（台北馬拉松在 12 月舉行，往回推 4 個月，一般跑者也會避開難以密集訓練的溽暑）為週期，分析成功完賽的跑者們的訓練情形。</p>
+        <p>林駿豪提到，一週「最少」要能抽出 3 至 4 天跑步，其他時間可以做其他運動來平衡，如游泳、單車、肌力訓練等等。</p>
+        <p>從數據看來，正好從每週跑步（大於、小於） 3 次將全部的人分成一半，要堅持運動習慣真不是一件容易的事啊！</p>
+        <marathon-chart :chart="1" ></marathon-chart>
+        <img class="left" v-lazy="`/proj-assets/marathon/images/chart-01.png`">
+      </div>
     </section>
-    <section class="chart">
-      <marathon-chart
-        :chart="2"
-        :chartDescr="`小於10K的是零！看來每週都至少要有一點付出，才能成功完成全馬喔！`"
-        :chartPeopleImage="`02`"
-        :chartTitle="`平均每週跑多少公里？`">
-      </marathon-chart>
+    <section class="chart chart--2">
+      <div class="chart__content">
+        <h1>練習的強度如何呢？</h1>
+        <h2>每週跑步距離</h2>
+        <p>林駿豪建議以時間來做跑量的評估，週間一次至少 1 小時，週末則可以做 1.5 小時至 2 小時的練習。若以 6 分鐘一公里的速度來看，週跑量會落在 40 至 60 公里。</p>
+        <p>從數據來看，有 30% 的人達到這個標準。看來每週都至少要有一點付出，才能成功完成全馬喔！</p>
+        <marathon-chart :chart="2" ></marathon-chart>
+        <img class="right" v-lazy="`/proj-assets/marathon/images/chart-02.png`">
+      </div>
     </section>
-    <section class="chart">
-      <marathon-chart
-        :chart="3"
-        :chartPosition="`right`"
-        :chartPeopleImage="`03`"
-        :chartSubtitle="`每月跑量`"
-        :chartTitle="`臨時抱佛腳指數？`">
-      </marathon-chart>
-      <marathon-chart
-        :chart="4"
-        :chartDescr="`愈靠近比賽，跑步的次數跟里程數果然愈高！`"
-        :chartPosition="`right`">
-      </marathon-chart>
+    <section class="chart chart--3">
+      <div class="chart__content">
+        <h1>我想要變更厲害！</h1>
+        <h2>高手們平常是怎麼練習？</h2>
+        <p>若將這些選手以完賽時間加以分組，則完全印證了「一分耕耘，一分收穫」的說法。</p>
+        <p>我們將選手分成四組，分別是成功完賽在關門時間前通過終點的「5.5 小時」、以及馬拉松跑者用以評估自己實力的「SUB 5」（意即在 5 小時內完賽）、「SUB 4」、「SUB 3」。發現隨著成績提升，每週的訓練強度就要愈強。</p>
+        <p>若想要微笑通過終點，平時的努力真是不能少啊！</p>
+        <marathon-chart :chart="3" ></marathon-chart>
+        <marathon-chart :chart="4" ></marathon-chart>
+        <img class="left" v-lazy="`/proj-assets/marathon/images/chart-03.png`">
+      </div>
     </section>
-    <section class="chart">
-      <marathon-chart
-        :chart="5"
-        :chartPeopleImage="`04`"
-        :chartSubtitle="`我也想加入！`"
-        :chartTitle="`這些人平常都在哪裡練習呢？`">
-      </marathon-chart>
+    <section class="chart chart--5">
+      <div class="chart__content">
+        <h1>大家平常都在哪裡練習呢？</h1>
+        <h2>我也想加入！</h2>
+        <p>台北馬拉松果然是台灣最盛大的一場路跑賽事，吸引了全台灣的人來報名參加！看來台南的鄉親最熱情！</p>
+        <marathon-chart :chart="5" ></marathon-chart>
+        <img class="right" v-lazy="`/proj-assets/marathon/images/chart-04.png`">
+      </div>
     </section>
-    <section class="chart">
-      <marathon-chart
-        :chart="6"
-        :chartPosition="`right`"
-        :chartSubtitle="`我想要變更厲害！`"
-        :chartTitle="`高手們平常是怎麼練習？`">
-      </marathon-chart>
-      <marathon-chart
-        :chart="7"
-        :chartPeopleImage="`05`"
-        :chartPosition="`right`">
-      </marathon-chart>
+    <section class="chart chart--6">
+      <div class="chart__content">
+        <h1>2017 年台北馬拉松即將開始！</h1>
+        <p>你是選手嗎？歡迎完賽之後在頁首輸入你的完賽時間，我們讓你在線上與全世界的跑者較勁！如果你沒有報名， 12 月 17 日一起到會場為選手們加油吧！</p>
+        <img class="left" v-lazy="`/proj-assets/marathon/images/chart-05.png`">
+      </div>
     </section>
     <section class="credit">
       <div class="mobile">
-        <span>文字：李又如 視覺設計：許玲瑋、v_k 網頁製作： HY Tan</span>
+        <span>文字：李又如</span>
+        <span>視覺設計：許玲瑋、v_k</span>
+        <span>網頁製作：HY Tan</span>
+        <span>Mirrormedia 2017.12</span>
         <img v-lazy="`/proj-assets/marathon/images/credit-m.png`">
       </div>
       <div class="desktop">
@@ -110,6 +107,7 @@
 </template>
 <script>
   import { smoothScroll } from 'kc-scroll'
+  import { SITE_URL } from '../../constants'
   import _ from 'lodash'
   import Logo from '../Logo.vue'
   import MarathonChart from './MarathonChart.vue'
@@ -129,6 +127,9 @@
     mixins: [ titleMeta ],
     data () {
       return {
+        hasChangeSelectedTime: false,
+        isLoading: true,
+        shareLink: 'location.href'
       }
     },
     metaInfo () {
@@ -173,6 +174,13 @@
       // window.ga('send', 'pageview')
     },
     methods: {
+      $_marathon_changeSelectedTime(shareLink) {
+        this.hasChangeSelectedTime = true
+        this.shareLink = `${SITE_URL}marathon${shareLink}`
+      },
+      $_marathon_detectLoading(value) {
+        this.isLoading = value
+      },
       smoothScroll
     },
   }
@@ -213,11 +221,29 @@ img
   &:nth-last-of-type(4)
     margin-right 20px
 .marathon
+  position relative
   width 100%
+  height auto
   background-image url(/proj-assets/marathon/images/bg.png)
   background-repeat repeat
   background-size 36px 768px
   overflow hidden
+  &.loading
+    height 100vh
+.opening
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  z-index 900
+  width 100%
+  height 100vh
+  background-color rgba(0,0,0,.5)
+  background-image url(/proj-assets/marathon/images/loading-d.png)
+  background-repeat no-repeat
+  background-size cover
+  background-position center center
 .map
   display flex
   flex-direction column
@@ -558,8 +584,20 @@ img
       cursor pointer
 .chart
   position relative
-  padding 5% 5% 48px
+  padding 110px 5% 58px
+  text-align center
   background-color #fff
+  &::before
+    content ""
+    position absolute
+    top -20px
+    left 50%
+    z-index 10
+    width 100px
+    height 100px
+    transform translateX(-50%)
+    background-repeat no-repeat
+    background-size 100px 100px
   &::after
     content ""
     position absolute
@@ -572,11 +610,38 @@ img
     background-image url(/proj-assets/marathon/images/road-02.png)
     background-repeat repeat-x
     background-size 19px 38px
-
+  &__content
+    width 100%
+  h1
+    font-size 28px
+    margin-bottom 16px
+  h2
+    margin-bottom 16px
+    font-size 20px
+  p
+    font-size 16px
+  img
+    display none
+  &.chart--1
+    &::before
+      background-image url(/proj-assets/marathon/images/intro-icon-01.png)
+  &.chart--2
+    &::before
+      background-image url(/proj-assets/marathon/images/intro-icon-02.png)
+  &.chart--3
+    &::before
+      background-image url(/proj-assets/marathon/images/intro-icon-03.png)
+  &.chart--5
+    &::before
+      background-image url(/proj-assets/marathon/images/intro-icon-04.png)
+  &.chart--6
+    &::before
+      background-image url(/proj-assets/marathon/images/intro-icon-05.png)
 .credit
   position relative
   span
     display block
+    margin .5em 0
     color #fff
     font-size 12px
     font-weight 300
@@ -588,7 +653,7 @@ img
       left 50%
       transform translateX(-50%)
   .mobile
-    margin 20px 0 40px
+    margin 20px 0 20px
     text-align center
     img
       display block
@@ -655,7 +720,7 @@ img
     span
       font-size 16px
     .mobile
-      width 100px
+      width 300px
       margin 20px auto
   .related
     padding 0 10%
@@ -840,9 +905,41 @@ img
     //   background-size contain
   .chart
     position relative
-    padding-top 0
-    padding-bottom 0
-  
+    padding 0
+    margin-bottom 100px
+    &::before
+      content none
+    
+    &__content
+      position relative
+      width 800px
+      padding 5% 0
+      margin 0 auto
+      &::after
+        content ''
+        display block
+        position absolute
+        bottom -100px
+        z-index 500
+        width 35px
+        height 100px
+        background-image url(/proj-assets/marathon/images/road-03.png)
+        background-size 40px auto
+        background-repeat repeat-y
+        background-position right top
+    &.chart--6
+      padding-bottom 5%
+      
+  .chart--1, .chart--2
+    .chart__content::after
+      right 0
+  .chart--3, .chart--4
+    .chart__content::after
+      left 0
+  .chart--6
+    margin-bottom 0
+    .chart__content::after
+      content none
   .credit
     position relative
     margin-bottom 100px
@@ -884,7 +981,21 @@ img
         width 900px !important
       &--lroad
         background-size 39px auto
-  
+  .chart
+    img
+      display inline
+      position absolute
+      top 0
+      z-index 510
+      width 200px
+      &.left
+        left -50px
+        transform translate(-50%, -25%)
+      &.right
+        right -50px
+        transform translate(50%, -25%)
+    &__content
+      width 900px
   .credit
     .desktop
       width 900px
@@ -928,7 +1039,12 @@ img
       margin-bottom 0
       &--compass
         bottom 15%
-  
+  .chart
+    &__content
+      width 1100px
+      &::after
+        width 47px
+        background-size 47px auto
   .credit
     .desktop
       width 1100px

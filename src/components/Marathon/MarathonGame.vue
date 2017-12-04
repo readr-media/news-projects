@@ -144,14 +144,19 @@
         speedRatio: 1
       }
     },
+    watch: {
+      loading () {
+        this.$emit('detectLoading', this.loading)
+      }
+    },
     mounted () {
       window.PIXI = require('pixi.js')
       this.canvasW = this.$refs.marathonGameMap.offsetWidth
       this.canvasH = this.$refs.marathonGameMap.offsetHeight
       this.$_marathon_detectWebGLSupported()
       this.$_marathon_setRace('boston')
-      window.addEventListener('resize', this.$_marathon_resize)
-      window.addEventListener('scroll', this.$_marathon_detectScroll)
+      // window.addEventListener('resize', this.$_marathon_resize)
+      // window.addEventListener('scroll', this.$_marathon_detectScroll)
     },
     methods: {
       $_marathon_calculateCurrentSplit(second, timeAccumulativePerSplit) {
@@ -347,6 +352,7 @@
       $_marathon_changeRace(race) {
         if (this.race !== race) {
           app.ticker.stop()
+          this.loading = true
           for (let i = 0; i < groups.length; i += 1) {
             app.stage.removeChild(containers[i])
           }
@@ -517,7 +523,7 @@
         spriteSelectedTime.currentSplit = 0
         spriteSelectedTime.isFinished = false
         containerSelectedTime.addChild(spriteSelectedTime)
-
+        
         this.loading = false
 
         app.ticker.add(() => {
@@ -688,8 +694,10 @@
       $_marathon_updateSelectedTime(e) {
         const selectedTime = e.target.value
         const highlightIndex =  this.$_marathon_calculateSelectedTimeIndex(selectedTime)
+        const shareLink = `?q1=${this.race}&q2=${selectedTime}&q3=${highlightIndex}`
         this.convertedAverage = secondToHHMMSS(selectedTime)
         this.$_marathon_updateSelectedTimePoint(highlightIndex)
+        this.$emit('changeSelectedTime', shareLink)
       },
       $_marathon_updateSelectedTimePoint(highlightIndex) {
         app.ticker.stop()
