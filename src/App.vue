@@ -14,7 +14,7 @@
   width 100%
   height 5px
   border-radius 5px
-  background-color #f45b69
+  background-color #ffad5e
 .noUi-origin
   position absolute
   right 0
@@ -29,7 +29,7 @@
   display inline-block
   width 20px
   height 20px
-  background #f45b69
+  background #ffad5e
   position absolute
   top -8px
   left 0

@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="marathonGame__map">
-      <img ref="marathonGameMap" src="/proj-assets/marathon/images/boston.png">
+      <img ref="marathonGameMap" :src="`/proj-assets/marathon/images/${race}.png`" :srcset="`/proj-assets/marathon/images/${race}-m.png 1000w`">
       <canvas id="js-pixi"></canvas>
       <img class="marathonGame__map--compass" :class="this.race" src="/proj-assets/marathon/images/compass.png">
     </div>
@@ -43,7 +43,7 @@
         <div id="js-track" class="marathonGame__sliderBar">
           <div class="marathonGame__sliderBar--fullTime" @click="$_marathon_moveTrackBar"></div>
           <div id="js-currentTrackTime" class="marathonGame__sliderBar--currentTime" @click="$_marathon_moveTrackBar"></div>
-          <div id="js-trackbutton" class="marathonGame__sliderBar--trackbutton" draggable></div>
+          <div id="js-trackbutton" class="marathonGame__sliderBar--trackbutton" draggable @dragstart="$_marathon_dragstart" @drag="$_marathon_drag" @dragend="$_marathon_dragend"></div>
         </div>
         <div class="marathonGame__speedControl">
           <div id="timerDesktop" class="marathonGame__timerDesktop">00:00:00</div>
@@ -151,6 +151,8 @@
     },
     mounted () {
       window.PIXI = require('pixi.js')
+      window.noUiSlider = require('nouislider')
+      
       this.canvasW = this.$refs.marathonGameMap.offsetWidth
       this.canvasH = this.$refs.marathonGameMap.offsetHeight
       this.$_marathon_detectWebGLSupported()
@@ -353,6 +355,7 @@
         if (this.race !== race) {
           app.ticker.stop()
           this.loading = true
+          window.ga('send', 'event', 'projects', 'click', `select ${race}`, { nonInteraction: true })
           for (let i = 0; i < groups.length; i += 1) {
             app.stage.removeChild(containers[i])
           }
@@ -402,6 +405,18 @@
         }
         PIXI.utils.sayHello(type)
       },
+      $_marathon_dragstart(e) {
+        // e.preventDefault();
+        console.log('dragstart', e)
+      },
+      $_marathon_drag(e) {
+        e.preventDefault();
+        console.log('drag', e)
+      },
+      $_marathon_dragend(e) {
+        // e.preventDefault();
+        console.log('dragend', e)
+      },
       $_marathon_filter(data, category) {
         switch (category) {
           case 'twnmale':
@@ -426,13 +441,25 @@
       },
       $_marathon_filterCountry(option) {
         this.filterCountry = option
+        window.ga('send', 'event', 'projects', 'click', `filter ${option}`, { nonInteraction: true })
         this.$_marathon_changePointColor()
       },
       $_marathon_filterGender(option) {
         this.filterGender = option
+        if (option === 'all') {
+          window.ga('send', 'event', 'projects', 'click', `filter allsex`, { nonInteraction: true })
+        }
+        if (option === 'm') {
+          window.ga('send', 'event', 'projects', 'click', `filter male`, { nonInteraction: true })
+        }
+        if (option === 'w') {
+          window.ga('send', 'event', 'projects', 'click', `filter female`, { nonInteraction: true })
+        }
+        
         this.$_marathon_changePointColor()
       },
       $_marathon_initRace() {
+        const slider = document.querySelector('#js-track')
         const dataMap = _.get(this.data, [ this.race, 'map' ])
         dataRunners = _.get(this.data, [ this.race, 'runners' ])
         runners = []
@@ -448,6 +475,8 @@
         this.filterGender = 'all'
         tickerValue = 1
         this.speedRatio = 1
+
+        // this.$_marathon_setSlider()
 
         groups[0] = this.$_marathon_filter(dataRunners, 'twnfemale')
         groups[1] = this.$_marathon_filter(dataRunners, 'twnmale')
@@ -537,6 +566,7 @@
             }
             document.querySelector('#timerMobile').innerText = secondToHHMMSS(tickerTimer)
             document.querySelector('#timerDesktop').innerText = secondToHHMMSS(tickerTimer)
+            // slider.noUiSlider.set(tickerTimer)
             document.querySelector('#js-currentTrackTime').style.width = `${(tickerTimer / raceTimeMax) * 100}%`
             document.querySelector('#js-trackbutton').style.left = `${(tickerTimer / raceTimeMax) * 100}%`
 
@@ -628,14 +658,32 @@
             this.data[race]['map'] = data[0]
             this.data[race]['runners'] = data[1]
             this.race = race
-            this.$refs.marathonGameMap.src = `/proj-assets/marathon/images/${race}.png`
             this.$_marathon_initRace()
           })
         } else {
           this.race = race
-          this.$refs.marathonGameMap.src = `/proj-assets/marathon/images/${race}.png`
           this.$_marathon_initRace()
         }
+      },
+      $_marathon_setSlider() {
+        const slider = document.querySelector('#js-track')
+        noUiSlider.create(slider, {
+          start: 0,
+          connect: true,
+          range: {
+            min: 0,
+            max: raceTimeMax,
+          },
+        })
+
+        slider.noUiSlider.on('start', () => {
+          app.ticker.stop()
+        })
+        slider.noUiSlider.on('end', (e) => {
+          const second = Math.floor(e[0])
+          this.$_marathon_updatePointPos(second)
+          // app.ticker.start()
+        })
       },
       $_marathon_togglePlay() {
         this.isPause = !this.isPause
@@ -653,6 +701,8 @@
         const runnersAmount = _.get(runners, ['length'], 0)
 
         spriteSelectedTime.currentSplit = this.$_marathon_calculateCurrentSplit(tickerTimer, spriteSelectedTime.timeAccumulativePerSplit)
+        console.log('tickerTimer', tickerTimer)
+        console.log('spriteSelectedTime', spriteSelectedTime)
         if (tickerTimer < spriteSelectedTime.speedData[0]) {
           let secondInSplit
           if (spriteSelectedTime.currentSplit === 0) {
@@ -669,7 +719,7 @@
           spriteSelectedTime.x = -1
           spriteSelectedTime.y = -1
         }
-
+        console.log('spriteSelectedTime', spriteSelectedTime)
         for (let i = 0; i < runnersAmount; i += 1) {
           runners[i].currentSplit = this.$_marathon_calculateCurrentSplit(tickerTimer, runners[i].timeAccumulativePerSplit)
           if (tickerTimer < runners[i].speedData[0]) {
@@ -698,6 +748,7 @@
         this.convertedAverage = secondToHHMMSS(selectedTime)
         this.$_marathon_updateSelectedTimePoint(highlightIndex)
         this.$emit('changeSelectedTime', shareLink)
+        window.ga('send', 'event', 'projects', 'drag', `select time`, { nonInteraction: true })
       },
       $_marathon_updateSelectedTimePoint(highlightIndex) {
         app.ticker.stop()

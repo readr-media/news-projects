@@ -2,9 +2,9 @@ import projectList from './projectList'
 
 export const PROJECTS = projectList
 
-export const SITE_URL = 'https://projects.mirrormedia.mg/project/'
+export const SITE_URL = 'https://dev.readr.tw/project/'
 
-export const SITE_ASSETS_URL = 'https://projects.mirrormedia.mg/proj-assets/'
+export const SITE_ASSETS_URL = 'https://dev.readr.tw/proj-assets/'
 
 export const GA_ID = 'UA-83609754-1'
 

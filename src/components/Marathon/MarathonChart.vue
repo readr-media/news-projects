@@ -315,14 +315,18 @@
 
 .marathonChart
   width 100%
-  margin-top 16px
+  margin-top 40px
   > div
     width 100%
 
 @media (min-width: 900px)
   .marathonChart
+    width 700px
+    margin-left auto
+    margin-right auto
     padding-bottom 40px
-    
+    &.chart--3
+      padding-bottom 0
 
 // highcharts
 #js-chart-1, #js-chart-2, #js-chart-3, #js-chart-4, #js-chart-6, #js-chart-7
