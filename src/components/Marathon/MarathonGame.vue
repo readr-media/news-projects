@@ -12,19 +12,23 @@
         <button class="tokyo" :class="[this.race === 'tokyo' ? 'selected' : '']" @click="$_marathon_changeRace('tokyo')">東京</button>
       </div>
       <div>
-        <span>我的全馬完賽時間</span>
+        <div>
+          <span>我的全馬完賽時間</span>
+          <div class="marathonGame__selectedTimeInfo">
+            <img src="/proj-assets/marathon/images/userTime.png">
+            <span ref="selectedTimeInfo" v-text="convertedAverage"></span>
+          </div>
+        </div>
         <div class="marathonGame__selectedTimeControl">
           <input ref="selectedTimeControl" type="range" @change="$_marathon_updateSelectedTime">
         </div>
       </div>
-      <div class="marathonGame__selectedTimeInfo">
-        <img src="/proj-assets/marathon/images/userTime.png">
-        <span ref="selectedTimeInfo" v-text="convertedAverage"></span>
-      </div>
+      
     </div>
     <div class="marathonGame__map">
-      <img ref="marathonGameMap" :src="`/proj-assets/marathon/images/${race}.png`" :srcset="`/proj-assets/marathon/images/${race}-m.png 1000w`">
+      <img ref="marathonGameMap" sizes="100vw" :src="`/proj-assets/marathon/images/${race}.png`" :srcset="`/proj-assets/marathon/images/${race}-m.png 1000w, /proj-assets/marathon/images/${race}.png 2560w`">
       <canvas id="js-pixi"></canvas>
+      <div class="marathonGame__map--curtain"></div>
       <img class="marathonGame__map--compass" :class="this.race" src="/proj-assets/marathon/images/compass.png">
     </div>
     <div class="marathonGame__control">
@@ -805,8 +809,8 @@ img
     margin-right 20px
 
 .marathonGame
-  display flex
-  flex-direction column
+  // display flex
+  // flex-direction column
   position relative
   width 100%
   height 100vh
@@ -844,18 +848,25 @@ img
       display flex
       flex-wrap wrap
       justify-content space-between
-      width 260px
+      width 220px
       margin 0 auto
+      > div
+        display flex
+        justify-content space-between
+        align-items center
+        width 100%
+        margin-top 10px
       span
-        margin 10px auto 0
+        display block
+        font-size 12px
     button
       display flex
       justify-content center
       align-items center
       position relative
-      width 80px
-      height 80px
-      margin 5px 0
+      width 70px
+      height 70px
+      margin 2.5px 0
       padding 0
       color #fff
       font-size 20px
@@ -996,13 +1007,25 @@ img
     align-items center
     position relative
     width 100%
+    margin 10px 0
     canvas
       position absolute
       top 50%
       left 0
       right 0
       bottom 0
+      z-index 100
       transform translateY(-50%)
+    &--curtain
+      position absolute
+      top 0
+      left 0
+      right 0
+      bottom 0
+      z-index 110
+      width 100%
+      height 100%
+
     &--compass
       position absolute
       bottom 5%
@@ -1045,7 +1068,7 @@ img
     align-items center
     position relative
     width 100%
-    height 20px
+    height 15px
     &--fullTime
       position absolute
       top 5px
@@ -1113,16 +1136,14 @@ img
         height 100px
         margin 5px 10px
     &__map
-      margin 2% 0
       &--compass
         width 50px
         right calc((100% - 360px) / 2)
     &__control
       padding-top 0
-      padding-bottom 0
+      padding-bottom 10px
       padding-left calc((100% - 360px) / 2)
       padding-right calc((100% - 360px) / 2)
-      margin 2% 0
 
 @media (min-width: 900px)
   .mobile-only
@@ -1133,13 +1154,15 @@ img
       position absolute
       top 10px
       left 70px
-      z-index 10
-      padding 16px 12px
+      z-index 110
+      padding 20px 12px 8px
       background-image none
       background-color rgba(233,237,243, .6)
       &::before
         top -5px
       > div
+        > div
+          margin-top 5px
         span
           margin 0
           font-size 16px
@@ -1166,26 +1189,26 @@ img
       display flex
       align-items center
       width auto
-      margin 0 0 0 10px
-    &__selectedTimeInfo
-      margin 10px auto 0 !important
-      justify-content flex-end !important
+      margin 0
+    
     &__map
-      max-width 1000px
-      margin 0 auto 70px
+      margin 0 auto
       canvas
         top 0
         transform none
+        width 100%
+      &--curtain
+        display none
       &--compass
-        right 10%
-        bottom 10%
+        right 20px
+        bottom 100px
       
     &__control
       position absolute
       left auto
       right 10%
       bottom 5%
-      z-index 10
+      z-index 110
       width auto
       padding 0
       margin 0
@@ -1208,9 +1231,15 @@ img
 
 @media (min-width: 1500px)
   .marathonGame
-    &__map
-      max-width 1200px
     &__control
       right 20%
 
+@media (min-width: 1700px)
+  .marathonGame
+    &__map
+      &--compass
+        right 100px
+        bottom 300px
+    &__control
+      bottom 15%
 </style>

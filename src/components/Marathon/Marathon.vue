@@ -89,11 +89,13 @@
         <span>文字：李又如</span>
         <span>視覺設計：許玲瑋、v_k</span>
         <span>網頁製作：HY Tan</span>
+        <span>特別感謝： Garmin</span>
         <span>Mirrormedia 2017.12</span>
         <img v-lazy="`/proj-assets/marathon/images/credit-m.png`">
       </div>
       <div class="desktop">
-        <span>文字：李又如<br>視覺設計：許玲瑋、v_k<br>網頁製作：HY Tan</span>
+        <span></span>
+        <span>文字：李又如&nbsp;&nbsp;視覺設計：許玲瑋、v_k&nbsp;&nbsp;網頁製作：HY Tan<br>特別感謝： Garmin<br>Mirrormedia 2017.12</span>
         <img v-lazy="`/proj-assets/marathon/images/credit-d.png`">
       </div>
     </section>
@@ -310,279 +312,6 @@ img
   background-repeat no-repeat
   background-size cover
   background-position center center
-.map
-  display flex
-  flex-direction column
-  position relative
-  width 100%
-  height 100vh
-  max-height 736px
-  color #333
-  font-size 18px
-  background-color #cbc6bf
-  &__menu
-    position relative
-    padding 38px 0 0
-    padding-left calc((100% - 300px) / 2)
-    padding-right calc((100% - 300px) / 2)
-    background-image url(/proj-assets/marathon/images/road-02.png)
-    background-repeat repeat-x
-    background-size 19px 38px
-    
-    > div
-      display flex
-      flex-wrap wrap
-      justify-content space-between
-      margin 5px auto
-      span
-        margin 10px auto 0
-    button
-      display flex
-      justify-content center
-      align-items center
-      position relative
-      width 80px
-      height 80px
-      margin 5px 0
-      padding 0
-      color #fff
-      font-size 20px
-      text-align center
-      background-color #333
-      border none
-      border-radius 5px
-      &.selected
-        &:after
-          content ""
-          position absolute
-          top 0
-          left 0
-          right 0
-          bottom 0
-          width 100%
-          height 100%
-          background-color #fff
-          background-size 60px 60px
-          background-repeat no-repeat
-          background-position center center
-          border-radius 5px
-      &.boston
-        &.selected
-          &:after
-            background-image url(/proj-assets/marathon/images/logo-boston.jpg)    
-      &.chicago
-        &.selected
-          &:after
-            background-image url(/proj-assets/marathon/images/logo-chicago.jpg)
-      &.newyork
-        &.selected
-          &:after
-            background-image url(/proj-assets/marathon/images/logo-newyork.jpg)
-      &.berlin
-        &.selected
-          &:after
-            background-image url(/proj-assets/marathon/images/logo-berlin.jpg)
-      &.london
-        &.selected
-          &:after
-            background-image url(/proj-assets/marathon/images/logo-london.jpg)
-      &.tokyo
-        &.selected
-          &:after
-            background-image url(/proj-assets/marathon/images/logo-tokyo.jpg)
-  &__userTime
-    display flex
-    align-items center
-    position relative
-    width 100%
-    height 18px
-    margin 5px 0
-    input[type="range"]
-      -webkit-appearance none
-      appearance none
-      width 100%
-      margin 0 auto
-      background transparent
-    input[type=range]:focus
-      outline none
-    input[type=range]::-ms-track
-      width 100%
-      cursor pointer
-      background transparent
-      border-color transparent
-      color transparent
-    input[type=range]::-webkit-slider-thumb
-      -webkit-appearance none
-      width 8px
-      height 16px
-      padding 2.5px
-      margin-top -5px
-      background #e9edf3
-      border 2px solid #333
-      cursor pointer
-      pointer-events auto
-    input[type=range]::-moz-range-thumb
-      width 8px
-      height 16px
-      padding 2.5px
-      background #e9edf3
-      border 2px solid #333
-      cursor pointer
-      pointer-events auto
-    input[type=range]::-ms-thumb
-      width 8px
-      height 16px
-      padding 2.5px
-      background #e9edf3
-      border 2px solid #333
-      cursor pointer
-      pointer-events auto
-    input[type=range]::-webkit-slider-runnable-track
-      width: 100%
-      height 5px
-      cursor pointer
-      background: #fff
-      border-radius 5px
-    input[type="range"]::-moz-range-track
-      width: 100%
-      height 5px
-      cursor pointer
-      background: #fff
-      border-radius 5px
-    input[type=range]::-ms-track
-      width: 100%
-      height 5px
-      cursor pointer
-      background: #fff
-      border-radius 5px
-    // &--full
-    //   position absolute
-    //   top 5px
-    //   left 0
-    //   right 0
-    //   width 100%
-    //   height 5px
-    //   background-color #fff
-    //   border-radius 5px
-    // &--current
-    //   position absolute
-    //   top 5px
-    //   left 0
-    //   right 0
-    //   width 50%
-    //   height 5px
-    //   background-color #000
-    //   border-radius 5px
-    // &--btn
-    //   position absolute
-    //   top 0
-    //   left 50%
-    //   right 0
-    //   width 8px
-    //   height 15px
-    //   background-color #e9edf3
-    //   border 2px solid #333
-    //   transform translateX(-50%)
-  &__userTimeInfo
-    display flex
-    justify-content center !important
-    align-items center
-    img
-      width 29px
-      height 20px
-    span
-      margin 0 0 0 10px !important
-  &__images
-    flex-grow 1
-    display flex
-    align-items center
-    position relative
-    width 100%
-    canvas
-      position absolute
-      top 0
-      left 0
-      right 0
-      bottom 0
-    &--compass
-      position absolute
-      bottom 5%
-      right calc((100% - 300px) / 2)
-      width 30px
-      height auto
-  &__control
-    padding 10px 0
-    padding-left calc((100% - 300px) / 2)
-    padding-right calc((100% - 300px) / 2)
-    button
-      padding 0
-      margin 0 5px
-      background none
-      border none
-      img
-        width auto
-        height 18px
-    button:last-of-type
-      margin-right 0
-  &__timeInfo
-    display flex
-    justify-content space-between
-    &--timerMobile
-      font-size 18px
-    &--timerDesktop
-      display none
-    &--control
-      display flex
-    
-  &__sliderBar
-    display flex
-    flex-direction column
-    margin-top 5px
-  &__sliderBarTrack
-    display flex
-    align-items center
-    position relative
-    width 100%
-    height 20px
-    &--fullTime
-      position absolute
-      top 5px
-      left 0
-      right 0
-      width 100%
-      height 5px
-      background-color #000
-      border-radius 5px
-      cursor pointer
-    &--currentTime
-      position absolute
-      top 5px
-      left 0
-      width 0
-      height 5px
-      background-color #ffad5e
-      cursor pointer
-    &--trackbutton
-      position absolute
-      top 2px
-      left 0
-      width 11px
-      height 11px
-      background-color #ffad5e
-      border-radius 11px
-  &__sliderBarControl
-    display flex
-    align-self flex-end
-    button
-      padding 0
-      margin 0 5px
-      font-size 14px
-      background none
-      border none
-      &.selected
-        color #ffad5e
-    button:last-of-type
-      margin-right 0
 
 .intro
   display flex
@@ -740,38 +469,9 @@ img
   .desktop-only
     display none
 
-@media (min-width: 375px)
-  .map__menu
-    button
-      width 90px
-      height 90px
+
 @media (min-width: 600px)
-  .map
-    height auto
-    max-height none
-    &__menu
-      flex-grow 0
-      padding-left calc((100% - 360px) / 2)
-      padding-right calc((100% - 360px) / 2)
-      > div
-        width 360px
-        margin 5px auto
-      button
-        width 100px
-        height 100px
-        margin 5px 10px
-    &__images
-      margin 2% 0
-      &--compass
-        width 50px
-        right calc((100% - 360px) / 2)
-    
-    &__control
-      padding-top 0
-      padding-bottom 0
-      padding-left calc((100% - 360px) / 2)
-      padding-right calc((100% - 360px) / 2)
-      margin 2% 0
+  
   .intro
     height auto
     padding 30% 20%
@@ -806,79 +506,7 @@ img
       display none
   .mobile-only
     display none
-  .map
-    height auto
-    &__menu
-      position absolute
-      top 0
-      left 70px
-      z-index 10
-      padding 16px 12px
-      background-image none
-      background-color rgba(233,237,243, .6)
-      > div
-        span
-          margin 0
-          font-size 16px
-      > div:nth-of-type(2)
-        margin-top 10px
-      button
-        width 50px
-        height 50px
-        margin 0 5px
-        font-size 14px
-        border-radius 5px
-        &.selected
-          &:after
-            background-size 40px 40px
-            border-radius 5px
-      button:first-of-type
-        margin-left 0
-      button:last-of-type
-        margin-right 0
-    &__images
-      max-width 1500px
-      margin 0 auto 70px
-      &--compass
-        right 10%
-        bottom 10%
-    &__userTime
-      flex-grow 1
-      display flex
-      align-items center
-      width auto
-      margin 0 0 0 10px
-    &__userTimeInfo
-      margin 10px auto 0 !important
-      justify-content flex-end !important
-    &__control
-      position absolute
-      left auto
-      right 10%
-      bottom 5%
-      z-index 10
-      width auto
-      padding 0
-      margin 0
-      button
-        img
-          height 14px
-    &__timeInfo
-      &--control
-        width 100%
-        button:nth-of-type(3)
-          margin-left 0
-      &--timerMobile
-        display none
-      &--timerDesktop
-        display block
-    &__sliderBarControl
-      display flex
-      justify-content space-between
-      align-items center
-      width 100%
-      > div
-        display flex
+  
   .opening
     background-image url(/proj-assets/marathon/images/loading-d.png)
   .intro
@@ -1106,13 +734,7 @@ img
       p
         width 110px
         padding 0 28px
-  .map
-    &__control
-      right 20%
-    &__images
-      margin-bottom 0
-      &--compass
-        bottom 15%
+  
   .chart
     img
       &.left
