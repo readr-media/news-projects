@@ -30,10 +30,6 @@
             return this.$_marathon_drawChart4()
           case 5:
             return this.$_marathon_drawChart5()
-          case 6:
-            return this.$_marathon_drawChart6()
-          case 7:
-            return this.$_marathon_drawChart7()
           default:
             this.$_marathon_drawChart1()
         }
@@ -137,7 +133,7 @@
             labels: { overflow: 'justify', style: { fontSize: '12px', color: '#4d4d4d' } },
             gridLineColor: '#fff',
           },
-          tooltip: { headerFormat: '<b>{point.x}月平均</b>', pointFormat: ' {point.y} 次' },
+          tooltip: { headerFormat: '', pointFormat: '平均每週跑 {point.y} 次' },
           plotOptions: {
             column: {
               dataLabels: {
@@ -153,7 +149,7 @@
             name: '次數',
             showInLegend: false,
             color: '#0098da',
-            data: [2.0, 2.5, 4.3, 6.7],
+            data: [6.7, 4.3, 2.5, 2.0 ],
           }],
           credits: { enabled: false },
         })
@@ -177,7 +173,7 @@
             labels: { overflow: 'justify', style: { fontSize: '12px', color: '#4d4d4d' } },
             gridLineColor: '#fff',
           },
-          tooltip: { headerFormat: '<b>{point.x}月平均</b>', pointFormat: ' {point.y} 公里' },
+          tooltip: { headerFormat: '', pointFormat: '平均每週跑 {point.y} 公里' },
           plotOptions: {
             column: {
               dataLabels: {
@@ -193,7 +189,7 @@
             name: '距離',
             showInLegend: false,
             color: '#0098da',
-            data: [21.4, 29.2, 46.2, 63.6],
+            data: [63.6, 46.2, 29.2, 21.4 ],
           }],
           credits: { enabled: false },
         })
@@ -237,77 +233,6 @@
           credits: { enabled: false },
         })
       },
-      $_marathon_drawChart6() {
-        Highcharts.chart('js-chart-6', {
-          chart: { type: 'column', backgroundColor: 'rgba(244, 91, 105, .1)', borderRadius: 5, spacingTop: 20 },
-          title: { text: '' },
-          xAxis: {
-            title: { text: '次數/週', align: 'middle', style: { color: '#4d4d4d' }, x: -20 },
-            categories: ['<3', '3-5', '5-9', '10-14', '15-20'],
-            crosshair: true,
-            labels: { style: { fontSize: '12px', color: '#4d4d4d' } },
-            tickColor: '#fff',
-            gridLineColor: '#fff',
-            gridLineWidth: '1',
-            lineColor: '#fff'
-          },
-          tooltip: { headerFormat: '<b>佔 {series.name} 跑者的</b>', pointFormat: ' {point.y} %' },
-          yAxis: {
-            title: { text: '(%)', align: 'high', style: { color: '#4d4d4d' }, rotation: 0, y: -20, offset: 15, },
-            labels: { overflow: 'justify', style: { fontSize: '12px', color: '#4d4d4d' } },
-            gridLineColor: '#fff',
-          },
-          legend: {
-            align: 'right',
-            verticalAlign: 'top',
-            symbolRadius: 0,
-            itemDistance: 10
-          },
-          series: [
-            { name: '< 3hr', color: '#f45b69', data: [6.1, 33.3, 48.5, 12.1, 0.0] },
-            { name: '3~4hr', color: '#ffbf55', data: [22.6, 53.1, 22.2, 2.1, 0.0] },
-            { name: '4~5hr', color: '#0098da', data: [33.0, 55.2, 10.8, 0.9, 0.1] }
-          ],
-          credits: { enabled: false },
-        })
-      },
-      $_marathon_drawChart7() {
-        Highcharts.chart('js-chart-7', {
-          chart: { type: 'line', backgroundColor: 'rgba(244, 91, 105, .1)', borderRadius: 5, spacingTop: 20 },
-          title: { text: '' },
-          xAxis: {
-            title: { text: '公里/週', align: 'middle', style: { color: '#4d4d4d' }, x: -20 },
-            categories: ['<10', '10-19', '20-29', '30-39', '40-49', '>50'],
-            crosshair: true,
-            labels: { style: { fontSize: '12px', color: '#4d4d4d' } },
-            tickColor: '#fff',
-            gridLineColor: '#fff',
-            gridLineWidth: '1',
-            lineColor: '#fff'
-          },
-          yAxis: {
-            title: { text: '(%)', align: 'high', style: { color: '#4d4d4d' }, rotation: 0, y: -20, offset: 15, },
-            labels: { overflow: 'justify', style: { fontSize: '12px', color: '#4d4d4d' } },
-            gridLineColor: '#fff',
-          },
-          tooltip: { headerFormat: '<b>佔 {series.name} 跑者的</b>', pointFormat: ' {point.y} %' },
-          plotOptions: {
-            line: { marker: { symbol: 'circle' } },
-          },
-          legend: {
-            align: 'right',
-            verticalAlign: 'top',
-            symbolRadius: 0,
-            itemDistance: 10
-          },
-          series: [
-            { name: '< 3hr', color: '#f45b69', data: [0.0, 6, 10, 10, 16, 58] },
-            { name: '3~4hr', color: '#ffbf55', data: [0.0, 4, 16, 27, 23, 31] },
-            { name: '4~5hr', color: '#0098da', data: [0.0, 16, 39, 26, 12, 7] }
-          ],
-          credits: { enabled: false },
-        })
-      },
     }
   }
 </script>
@@ -329,9 +254,10 @@
       padding-bottom 0
 
 // highcharts
-#js-chart-1, #js-chart-2, #js-chart-3, #js-chart-4, #js-chart-6, #js-chart-7
+#js-chart-1, #js-chart-2, #js-chart-4
   height 300px
+#js-chart-3
+  height 350px
 #js-chart-5
   height 500px
-
 </style>
