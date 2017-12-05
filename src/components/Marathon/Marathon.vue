@@ -150,18 +150,23 @@
           case 'chicago':
             race = '芝加哥'
             ogImage = 'marathon/images/og-chicago.jpg'
+            break
           case 'newyork':
             race = '紐約'
             ogImage = 'marathon/images/og-newyork.jpg'
+            break
           case 'berlin':
             race = '柏林'
             ogImage = 'marathon/images/og-berlin.jpg'
+            break
           case 'london':
             race = '倫敦'
             ogImage = 'marathon/images/og-london.jpg'
+            break
           case 'tokyo':
             race = '東京'
             ogImage = 'marathon/images/og-tokyo.jpg'
+            break
           default:
             race = '波士頓'
             ogImage = 'marathon/images/og-boston.jpg'
