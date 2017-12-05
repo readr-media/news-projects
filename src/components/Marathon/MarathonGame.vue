@@ -153,13 +153,14 @@
         loading: false,
         race: 'boston',
         raceN: '2017 年波士頓馬拉松',
-        speedRatio: 1
+        speedRatio: 1,
+        viewWidth: 0,
       }
     },
     mounted () {
       window.PIXI = require('pixi.js')
       window.noUiSlider = require('nouislider')
-      
+      this.viewWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
       this.canvasW = this.$refs.marathonGameMap.offsetWidth
       this.canvasH = this.$refs.marathonGameMap.offsetHeight
       this.$_marathon_detectWebGLSupported()
@@ -618,11 +619,14 @@
         this.$_marathon_updatePointPos(tickerTimer)
       },
       $_marathon_resize() {
-        app.ticker.stop()
-        const current = tickerTimer
-        this.canvasW = this.$refs.marathonGameMap.offsetWidth
-        this.canvasH = this.$refs.marathonGameMap.offsetHeight
-        this.$_marathon_setRace(this.race, current)
+        this.viewWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+        if (this.viewWidth >= 900) {
+          app.ticker.stop()
+          const current = tickerTimer
+          this.canvasW = this.$refs.marathonGameMap.offsetWidth
+          this.canvasH = this.$refs.marathonGameMap.offsetHeight
+          this.$_marathon_setRace(this.race, current)
+        }
       },
       $_marathon_restart() {
         app.ticker.stop()
