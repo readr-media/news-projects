@@ -4,12 +4,12 @@
     <div class="marathonGame__menu">
       <div class="marathonGame__menu--raceName" v-html="raceN"></div>
       <div>
-        <button class="boston" :class="[this.race === 'boston' ? 'selected' : '']" @click="$_marathon_changeRace('boston')">波士頓</button>
-        <button class="chicago" :class="[this.race === 'chicago' ? 'selected' : '']" @click="$_marathon_changeRace('chicago')">芝加哥</button>
-        <button class="newyork" :class="[this.race === 'newyork' ? 'selected' : '']" @click="$_marathon_changeRace('newyork')">紐約</button>
-        <button class="berlin" :class="[this.race === 'berlin' ? 'selected' : '']" @click="$_marathon_changeRace('berlin')">柏林</button>
-        <button class="london" :class="[this.race === 'london' ? 'selected' : '']" @click="$_marathon_changeRace('london')">倫敦</button>
-        <button class="tokyo" :class="[this.race === 'tokyo' ? 'selected' : '']" @click="$_marathon_changeRace('tokyo')">東京</button>
+        <button class="boston" :class="[this.race === 'boston' ? 'selected' : '']" :disabled="loading" @click="$_marathon_changeRace('boston')">波士頓</button>
+        <button class="chicago" :class="[this.race === 'chicago' ? 'selected' : '']" :disabled="loading" @click="$_marathon_changeRace('chicago')">芝加哥</button>
+        <button class="newyork" :class="[this.race === 'newyork' ? 'selected' : '']" :disabled="loading" @click="$_marathon_changeRace('newyork')">紐約</button>
+        <button class="berlin" :class="[this.race === 'berlin' ? 'selected' : '']" :disabled="loading" @click="$_marathon_changeRace('berlin')">柏林</button>
+        <button class="london" :class="[this.race === 'london' ? 'selected' : '']" :disabled="loading" @click="$_marathon_changeRace('london')">倫敦</button>
+        <button class="tokyo" :class="[this.race === 'tokyo' ? 'selected' : '']" :disabled="loading" @click="$_marathon_changeRace('tokyo')">東京</button>
       </div>
       <div>
         <div>
@@ -459,6 +459,7 @@
       $_marathon_initRace() {
         const slider = document.querySelector('#js-track')
         const dataMap = _.get(this.data, [ this.race, 'map' ])
+        let scaleRatio
         dataRunners = _.get(this.data, [ this.race, 'runners' ])
         runners = []
         tickerTimer = 0
@@ -473,7 +474,13 @@
         this.filterGender = 'all'
         tickerValue = 1
         this.speedRatio = 1
-
+        if (this.canvasW >= 1700) {
+          scaleRatio = 0.9
+        } else if (this.canvasW < 1700 && this.canvasW >= 1300) {
+          scaleRatio = 0.7
+        } else {
+          scaleRatio = 0.5
+        }
         groups[0] = this.$_marathon_filter(dataRunners, 'twnfemale')
         groups[1] = this.$_marathon_filter(dataRunners, 'twnmale')
         groups[2] = this.$_marathon_filter(dataRunners, 'otfemale')
@@ -507,7 +514,7 @@
           for (let j = 0; j < amount; j += 1) {
             const point = new PIXI.Sprite(texture)
             point.anchor.set(0.5)
-            point.scale.set(0.5)
+            point.scale.set(scaleRatio)
             point.totalTime = _.get(groups[i], [j, 4])
             point.pathIndex = _.get(groups[i], [j, 0]) % pathAmount
             point.timePerSplit = this.$_marathon_calculateTimePerSplit(pathsRatioBySplit[point.pathIndex], point.totalTime)
