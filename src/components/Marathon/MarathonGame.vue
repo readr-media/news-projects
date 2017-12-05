@@ -871,9 +871,6 @@ img
         display block
         font-size 12px
     button
-      display flex
-      justify-content center
-      align-items center
       position relative
       width 70px
       height 70px
