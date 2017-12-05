@@ -24,7 +24,7 @@
     props: {
       shareUrl: {
         type: String,
-        default: 'location.href' 
+        required: true
       },
       direction: { // options: up, down, left, right
         type: String,

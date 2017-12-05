@@ -133,7 +133,7 @@
         hasChangeSelectedTime: false,
         isFirstLoading: true,
         isLoading: true,
-        shareLink: 'location.href'
+        shareLink: `${SITE_URL}marathon`
       }
     },
     metaInfo () {
