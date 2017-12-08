@@ -9,18 +9,11 @@
     name: '',
     mixins: [ titleMeta ],
     metaInfo () {
-      let description = 'proj 1 description'
-      let ogImage = 'marathon/images/og.jpg'
-      let metaUrl = 'proj1'
-      if (this.$route.query.q1) {
-        ogImage = 'marathon/images/og-chicago.jpg'
-        description = 'proj 1 q1'
-      }
       return {
         title: 'proj 1',
-        description: description,
-        metaUrl: metaUrl,
-        metaImage: ogImage
+        description: 'proj 1 description',
+        metaUrl: 'proj1',
+        metaImage: ''
       }
     },
     methods: {},
