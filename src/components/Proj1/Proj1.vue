@@ -15,7 +15,6 @@
       if (this.$route.query.q1) {
         ogImage = 'marathon/images/og-chicago.jpg'
         description = 'proj 1 q1'
-        metaUrl = `proj1?q1=${this.$route.query.q1}`
       }
       return {
         title: 'proj 1',
