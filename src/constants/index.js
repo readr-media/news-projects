@@ -2,7 +2,9 @@ import projectList from './projectList'
 
 export const PROJECTS = projectList
 
-export const SITE_URL = 'https://projects.mirrormedia.mg/project/'
+// http://dev.readr.tw/project/
+// https://projects.mirrormedia.mg/project/
+export const SITE_URL = 'http://dev.readr.tw/project/'
 
 export const SITE_ASSETS_URL = 'https://projects.mirrormedia.mg/proj-assets/'
 

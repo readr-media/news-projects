@@ -17,18 +17,15 @@ const serverMetaInfoMixin = {
       const description = metaInfo.description
       const metaUrl = metaInfo.metaUrl
       const metaImage = metaInfo.metaImage
+      
       if (title) {
         this.$ssrContext.title = `${title} - 鏡週刊 Mirror Media`
-      }
-      if (description) {
-        this.$ssrContext.description = description
       }
       if (metaUrl) {
         this.$ssrContext.metaUrl = SITE_URL + metaUrl
       }
-      if (metaImage) {
-        this.$ssrContext.metaImage = SITE_ASSETS_URL + metaImage
-      }
+      this.$ssrContext.description = description
+      this.$ssrContext.metaImage = SITE_ASSETS_URL + metaImage
     }
   }
 }
