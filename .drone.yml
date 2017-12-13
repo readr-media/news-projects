@@ -1,0 +1,69 @@
+workspace:
+  base: /vue
+  path: src/github.com/readr-media/news-projects
+pipeline:
+  start_slack:
+    image: plugins/slack
+    channel: jenkins
+    secrets: [slack_webhook]
+    username: drone
+    icon_url: https://avatars2.githubusercontent.com/u/2181346?s=200&v=4
+    template: >
+      *start* building *{{repo.name}}*.
+      *{{build.author}}* gave *{{build.branch}}* a little push.
+  builds:
+    image: node:9.2.0-alpine
+    commands:
+    - yarn install
+    - yarn run build
+    when:
+      event: [push, pull_request]
+      branch: [master, dev]
+  get_config:
+    image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
+    secrets: [google_credentials]
+    commands:
+    - gcloud source repos clone default default
+  publish:
+    image: plugins/gcr
+    repo: mirrormedia-1470651750304/${DRONE_REPO_NAME}
+    tag: ${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER}
+    environment:
+      - DOCKER_LAUNCH_DEBUG=true
+    secrets: [google_credentials]
+    when:
+      event: [push, pull_request]
+  deploy_dev:
+    image: nytimes/drone-gke:develop
+    zone: asia-east1-a
+    cluster: dev
+    namespace: default
+    
+    # For debugging
+    dry_run: false
+    verbose: true
+    secrets:
+      - source: google_credentials
+        target: token
+    vars:
+      image: gcr.io/mirrormedia-1470651750304/${DRONE_REPO_NAME}:${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER}
+      app: news-projects
+      tier: frontend
+    when:
+      event: [push, pull_request]
+      branch: dev
+  finish_slack:
+    image: plugins/slack
+    channel: jenkins
+    secrets: [slack_webhook]
+    username: drone
+    icon_url: https://avatars2.githubusercontent.com/u/2181346?s=200&v=4
+    when:
+      status: [success, failure]
+    template: >
+      {{#success build.status}}
+        *success* ${DRONE_REPO_NAME}:${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER} was well served.
+        Check out our new <https://dev.readr.tw/project/marathon|project>.
+      {{else}}
+        Houston, we have a problem. Build <${DRONE_BUILD_LINK}|#{{build.number}}> failed. Fix me please, {{build.author}}
+      {{/success}}
