@@ -11,19 +11,27 @@ pipeline:
     template: >
       *start* building *{{repo.name}}*.
       *{{build.author}}* gave *{{build.branch}}* a little push.
+    when:
+      event: [push]
+  
   builds:
     image: node:9.2.0-alpine
     commands:
     - yarn install
     - yarn run build
     when:
-      event: [push, pull_request]
+      event: [push]
       branch: [master, dev]
+  
   get_config:
     image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
     secrets: [google_credentials]
     commands:
     - gcloud source repos clone default default
+    when:
+      event: [push]
+      branch: [master, dev]
+  
   publish:
     image: plugins/gcr
     repo: mirrormedia-1470651750304/${DRONE_REPO_NAME}
@@ -32,13 +40,14 @@ pipeline:
       - DOCKER_LAUNCH_DEBUG=true
     secrets: [google_credentials]
     when:
-      event: [push, pull_request]
+      event: [push]
+      branch: [master, dev]
+  
   deploy_dev:
     image: nytimes/drone-gke:develop
     zone: asia-east1-a
     cluster: dev
     namespace: default
-    
     # For debugging
     dry_run: false
     verbose: true
@@ -50,8 +59,9 @@ pipeline:
       app: news-projects
       tier: frontend
     when:
-      event: [push, pull_request]
+      event: [push]
       branch: dev
+ 
   finish_slack:
     image: plugins/slack
     channel: jenkins
@@ -60,6 +70,7 @@ pipeline:
     icon_url: https://avatars2.githubusercontent.com/u/2181346?s=200&v=4
     when:
       status: [success, failure]
+      event: [push]
     template: >
       {{#success build.status}}
         *success* ${DRONE_REPO_NAME}:${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER} was well served.
