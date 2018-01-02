@@ -56,6 +56,7 @@ const sceneConfig = {
               this.playing.vid1 = true
               ga('send', 'event', 'projects', 'autoplay', `play_story${this.storyIndex}`, { nonInteraction: false })
             }
+            this.shouldplay.vid1 = true
             this.$el.querySelector('#vid1-container').style.zIndex = '1'
             this.$el.querySelector('#vid2-container').style.zIndex = '2'
           } else if (event.scrollDirection === 'REVERSE') {
@@ -64,6 +65,7 @@ const sceneConfig = {
               this.playing.vid2 = true
               ga('send', 'event', 'projects', 'autoplay', `play_story${this.storyIndex}`, { nonInteraction: false })
             }
+            this.shouldplay.vid2 = true
             this.$el.querySelector('#vid1-container').style.zIndex = '1'
             this.$el.querySelector('#vid2-container').style.zIndex = '2'
           }
@@ -75,6 +77,7 @@ const sceneConfig = {
               this.$el.querySelector('#vid1').pause()
               this.playing.vid1 = false
             }
+            this.shouldplay.vid1 = false
             if (this.$el.querySelector('#vid2').paused) {
               if (!isMobile) {
                 this.$el.querySelector('#vid2').play()
@@ -82,6 +85,7 @@ const sceneConfig = {
                 ga('send', 'event', 'projects', 'autoplay', `play_story${this.storyIndex}`, { nonInteraction: false })
               }
             }
+            this.shouldplay.vid2 = true
           } else if (event.progress <= 0.5) {
             if (this.$el.querySelector('#vid1').paused) {
               if (!isMobile) {
@@ -90,10 +94,12 @@ const sceneConfig = {
                 ga('send', 'event', 'projects', 'autoplay', `play_story${this.storyIndex}`, { nonInteraction: false })
               }
             }
+            this.shouldplay.vid1 = true
             if (!this.$el.querySelector('#vid2').paused) {
               this.$el.querySelector('#vid2').pause()
               this.playing.vid2 = false
             }
+            this.shouldplay.vid2 = false
           }
         })
 
@@ -102,6 +108,8 @@ const sceneConfig = {
           this.$el.querySelector('#vid2').pause()
           this.playing.vid1 = false
           this.playing.vid2 = false
+          this.shouldplay.vid1 = false
+          this.shouldplay.vid2 = false
 
           // if (isMobile) {
           //   this.muted = true

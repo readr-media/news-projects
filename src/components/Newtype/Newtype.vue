@@ -30,7 +30,7 @@ export default {
     Story
   },
   metaInfo () {
-    if (this.$route.params.params) {
+    if (this.$store.state.route.query.single === 'true' && this.$route.params.params) {
       return {
         title: this.storyData[this.$route.params.params].meta.title,
         description: this.storyData[this.$route.params.params].meta.description,

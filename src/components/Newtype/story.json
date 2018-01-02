@@ -1,15 +1,15 @@
 {
   "meta": {
     "title": "新二代的難題",
-    "description": "newtype description",
+    "description": "許多東南亞跨國婚姻家庭是相對經濟弱勢，配偶從東南亞來到台灣後，還得要工作補貼家庭經濟，加上台灣的托育資源稀缺，有些家庭在生育兒女後，會面臨「養不起」或「沒人幫忙帶小孩」的困境。這時，將兒女送回越南、印尼等「母國」扶養，就成了更便宜經濟的選擇。",
     "metaUrl": "newtype",
     "metaImage": "newtype/images/og.jpg"
   },
   "story1": {
     "meta": {
-      "title": "新二代的難題",
-      "description": "story1 description",
-      "metaUrl": "newtype/story1",
+      "title": "聽不懂放假的小學生",
+      "description": "洪金晶今年 9 歲，隨著父親從印尼回台灣已經兩年，卻還是幾乎不會說中文。直到現在，金晶家裡面還是以印尼文溝通，而她和哥哥每天到學校報到，卻還是幾乎聽不懂老師和同學們的話，誰能幫助他們儘早融入台灣社會？",
+      "metaUrl": "newtype/story1?single=true",
       "metaImage": "newtype/images/story1/og.jpg"
     },
     "background": {
@@ -135,9 +135,9 @@
   },
   "story2": {
     "meta": {
-      "title": "新二代的難題",
-      "description": "story2 description",
-      "metaUrl": "newtype/story2",
+      "title": "跨國新二代的兩人三腳大作戰",
+      "description": "吳觀玲從越南回台灣兩年了，雖然讀的學校是擁有大量新二代學童的桃園市大成國中，但學校老師從來沒遇過不會說中文的學生，不知如何是好。幸運的是，吳觀玲遇上了簡雅婕，她也是從小就往返越南和台灣兩地，中文和越語都非常流利⋯",
+      "metaUrl": "newtype/story2?single=true",
       "metaImage": "newtype/images/story2/og.jpg"
     },
     "background": {
@@ -267,9 +267,9 @@
   },
   "story3": {
     "meta": {
-      "title": "新二代的難題",
-      "description": "story3 description",
-      "metaUrl": "newtype/story3",
+      "title": "什麼是華語補救教學？",
+      "description": "賽珍珠基金會執行長張美茹指出：「（在台灣生活）再辛苦，也比在越南好。所以她在台灣賺錢，（把小孩）送回越南養，是比較簡單的⋯⋯但他們沒有想到孩子回來會有適應問題。」",
+      "metaUrl": "newtype/story3?single=true",
       "metaImage": "newtype/images/story3/og.jpg"
     },
     "background": {
@@ -394,9 +394,9 @@
   },
   "story4": {
     "meta": {
-      "title": "新二代的難題",
-      "description": "story4 description",
-      "metaUrl": "newtype/story4",
+      "title": "我是台灣人，我想學好中文",
+      "description": "朱家賢的母親來自越南，在他 5 歲的時候選擇和台灣籍父親離婚，隨後帶著他返回越南生活。家賢在越南一待就是 7 年，他的越南語越來越流利；而原先在台灣時，母親和他講的台語卻漸漸被他遺忘了。家賢也是台灣人，但他的母語是什麼？",
+      "metaUrl": "newtype/story4?single=true",
       "metaImage": "newtype/images/story4/og.jpg"
     },
     "background": {
@@ -545,9 +545,9 @@
   },
   "story5": {
     "meta": {
-      "title": "新二代的難題",
-      "description": "story5 description",
-      "metaUrl": "newtype/story5",
+      "title": "從華語補救看台灣人才政策",
+      "description": "在鍾鎮城眼中，這些從小在「母國」長大，後來才回台灣受教育的「新台灣人」，從來都不該是教育上的棘手問題，而是一群潛在的優秀人力。他認為，這些孩子同時受到兩種以上的文化薰陶，不僅符合當前蔡英文政府「新南向」政策對於人才的要求，在當今全球化的浪潮下，也享有一定的優勢。",
+      "metaUrl": "newtype/story5?single=true",
       "metaImage": "newtype/images/story5/og.jpg"
     },
     "background": {

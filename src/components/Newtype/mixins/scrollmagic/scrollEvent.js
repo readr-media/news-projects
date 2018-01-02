@@ -15,7 +15,7 @@ const sceneConfig = {
       // dimensions
       // Story1
       const story1Video = new ScrollMagic.Scene({ triggerElement: `.article-landing--story1`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story1Video.on('enter', () => {
         if (this.currentScroll < 1) {
@@ -24,7 +24,7 @@ const sceneConfig = {
         }
       })
       const story1Animation = new ScrollMagic.Scene({ triggerElement: `.animation--story1`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story1Animation.on('enter', () => {
         if (this.currentScroll < 2) {
@@ -33,7 +33,7 @@ const sceneConfig = {
         }
       })
       const story1ReadNext = new ScrollMagic.Scene({ triggerElement: `.read-next--story1`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story1ReadNext.on('enter', () => {
         if (this.currentScroll < 3) {
@@ -43,7 +43,7 @@ const sceneConfig = {
       })
       // Story2
       const story2Video = new ScrollMagic.Scene({ triggerElement: `.article-landing--story2`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story2Video.on('enter', () => {
         if (this.currentScroll < 4) {
@@ -52,7 +52,7 @@ const sceneConfig = {
         }
       })
       const story2Animation = new ScrollMagic.Scene({ triggerElement: `.animation--story2`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story2Animation.on('enter', () => {
         if (this.currentScroll < 5) {
@@ -61,7 +61,7 @@ const sceneConfig = {
         }
       })
       const story2ReadNext = new ScrollMagic.Scene({ triggerElement: `.read-next--story2`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story2ReadNext.on('enter', () => {
         if (this.currentScroll < 6) {
@@ -71,7 +71,7 @@ const sceneConfig = {
       })
       // Story3
       const story3Title1 = new ScrollMagic.Scene({ triggerElement: `#story3-section3`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story3Title1.on('enter', () => {
         if (this.currentScroll < 7) {
@@ -80,7 +80,7 @@ const sceneConfig = {
         }
       })
       const story3Title2 = new ScrollMagic.Scene({ triggerElement: `#story3-section4`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story3Title2.on('enter', () => {
         if (this.currentScroll < 8) {
@@ -89,7 +89,7 @@ const sceneConfig = {
         }
       })
       const story3ReadNext = new ScrollMagic.Scene({ triggerElement: `.read-next--story3`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story3ReadNext.on('enter', () => {
         if (this.currentScroll < 9) {
@@ -99,7 +99,7 @@ const sceneConfig = {
       })
       // Story4
       const story4Video = new ScrollMagic.Scene({ triggerElement: `.article-landing--story4`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story4Video.on('enter', () => {
         if (this.currentScroll < 10) {
@@ -108,7 +108,7 @@ const sceneConfig = {
         }
       })
       const story4Animation = new ScrollMagic.Scene({ triggerElement: `.animation--story4`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story4Animation.on('enter', () => {
         if (this.currentScroll < 11) {
@@ -116,8 +116,8 @@ const sceneConfig = {
           ga('send', 'event', 'projects', 'scroll', 'scroll to 12', { nonInteraction: false })
         }
       })
-      const story4Chart = new ScrollMagic.Scene({ triggerElement: `#story4-section3`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+      const story4Chart = new ScrollMagic.Scene({ triggerElement: `.story4chart-container`, duration: 0, offset: 0 })
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story4Chart.on('enter', () => {
         if (this.currentScroll < 12) {
@@ -126,7 +126,7 @@ const sceneConfig = {
         }
       })
       const story4ReadNext = new ScrollMagic.Scene({ triggerElement: `.read-next--story4`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       story4ReadNext.on('enter', () => {
         if (this.currentScroll < 13) {
@@ -136,7 +136,7 @@ const sceneConfig = {
       })
       // Story5
       const stroy5Title1 = new ScrollMagic.Scene({ triggerElement: `#story5-section3`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       stroy5Title1.on('enter', () => {
         if (this.currentScroll < 14) {
@@ -145,7 +145,7 @@ const sceneConfig = {
         }
       })
       const moreProjects = new ScrollMagic.Scene({ triggerElement: `.projects`, duration: 0, offset: 0 })
-                          .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
+                          // .addIndicators({ name: 'moving' }) // add indicators (requires plugin)
                           .addTo(controller)
       moreProjects.on('enter', () => {
         if (this.currentScroll < 15) {

@@ -79,6 +79,8 @@ section
       position absolute
       height 150px
       bottom -75px
+      left 50%
+      transform translateX(-50%)
   .next-icon
     cursor pointer
     content ''
@@ -91,6 +93,8 @@ section
     position absolute
     bottom 5%
     padding 0
+    left calc(50% - 40px)
+    transform translateX(-50%)
     // z-index 2
 
 @media (max-width: 767px)

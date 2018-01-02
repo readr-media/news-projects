@@ -8,6 +8,7 @@ const sceneConfig = {
 
       // dimensions
       const isMobile = window.innerWidth <= 767
+      const isLaptop = window.innerWidth <= 1440 && window.innerWidth > 767
       const protagonistHeight = this.$el.querySelector('.description__protagonist').clientHeight
 
       // init controller
@@ -17,8 +18,8 @@ const sceneConfig = {
       const tweenProtagonist = TweenMax.fromTo(
         `.header--story${this.storyOrderToNumber} .description__protagonist`,
         1,
-        isMobile ? { y: -window.innerHeight * 0 } : { y: 0 },
-        isMobile ? { y: -window.innerHeight * 0.3, ease: Cubic.easeOut } : { y: -protagonistHeight * 0.3, ease: Cubic.easeOut }
+        isMobile ? { x: '-50%', y: -window.innerHeight * 0 } : { x: '-50%', y: 0 },
+        isMobile ? { x: '-50%', y: -window.innerHeight * 0.25, ease: Cubic.easeOut } : { x: '-50%', y: -protagonistHeight * 0.25, ease: Cubic.easeOut }
       )
       const timeline = new TimelineMax().add([tweenProtagonist])
 
@@ -44,8 +45,8 @@ const sceneConfig = {
           const tweenProtagonist = TweenMax.fromTo(
             `.header--story${this.storyOrderToNumber} .description__protagonist`,
             1,
-            isMobile ? { y: -window.innerHeight * 0 } : { y: 0 },
-            isMobile ? { y: -window.innerHeight * 0.3, ease: Cubic.easeOut } : { y: -protagonistHeight * 0.3, ease: Cubic.easeOut }
+            isMobile ? { x: '-50%', y: -window.innerHeight * 0 } : { x: '-50%', y: 0 },
+            isMobile ? { x: '-50%', y: -window.innerHeight * 0.25, ease: Cubic.easeOut } : { x: '-50%', y: -protagonistHeight * 0.25, ease: Cubic.easeOut }
           )
           scene.setTween(tweenProtagonist)
         })
