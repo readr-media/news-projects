@@ -12,8 +12,8 @@
 import sectionParallax from '../../mixins/scrollmagic/sectionParallax.js'
 
 export default {
-  props: [ 'parallaxProps', 'storyIndex' ]
-  // mixins: [ sectionParallax ]
+  props: [ 'parallaxProps', 'storyIndex' ],
+  mixins: [ sectionParallax ]
 }
 </script>
 
@@ -48,12 +48,19 @@ export default {
   blockquote
     background-color #FAE1E4
     width 500px
-    height 250px
+    height 200px
     clip-path polygon(22% 0%, 0% 21%, 10% 100%, 87% 92%, 100% 44%, 87% 0%)
     left 100px
 #story2
   blockquote
     background-color #F4E5D2
+    width 500px
+    height 200px
+    clip-path polygon(0% 40%, 12% 3%, 82% 0%, 100% 18%, 88% 99%, 11% 91%)
+    right 100px
+#story4
+  blockquote
+    background-color #c4d3ce
     width 500px
     height 200px
     clip-path polygon(0% 40%, 12% 3%, 82% 0%, 100% 18%, 88% 99%, 11% 91%)
@@ -69,7 +76,7 @@ export default {
       display block
       width 100vw
       position static
-  #story1, #story2
+  #story1, #story2, #story4
     blockquote
       width 100vw
       height auto

@@ -5,7 +5,7 @@
       <!-- parallax background containers -->
       <div :class="['parallax-bg', `long-polygon-bg--story${index}`]" :style="storyData.background.longPolygon"></div>
       <div :class="['parallax-bg', `fat-polygon-bg--story${index}`]" :style="storyData.background.fatPolygon"></div>
-      <div class="commentary-bg--top" v-if="index >= 3">
+      <div class="commentary-bg--top" v-if="index === 3 || index === 5">
         <img src="/proj-assets/newtype/images/story3/bg-top.png" alt="">
       </div>
       <!--  -->
@@ -23,18 +23,20 @@
                                :currentVisible="currentVisible[`story${index}-section${i + 1}-subsection${j + 1}`] ? currentVisible[`story${index}-section${i + 1}-subsection${j + 1}`] : false"
                                :class="[ 'subsection-container', { 'subsection': section.content.length > 1 }]" 
                                :id="`story${index}-section${i + 1}-subsection${j + 1}`"
-                               :sectionContent="subsection">
+                               :sectionContent="subsection"
+                               @refreshWaypoint="refreshWaypoint">
           </StoryArticleSection>
         </section>
         <StoryAnimation v-if="!isCommentary && i === storyData.parallax.ordering - 2" :key="i" :storyIndex="index"></StoryAnimation>
         <StoryParallax v-if="!isCommentary && i === storyData.parallax.ordering - 1" :key="i" :parallaxProps="storyData.parallax" :storyIndex="index"></StoryParallax>
       </template>
-      <div class="commentary-bg--bottom" v-if="index >= 3">
-        <img src="/proj-assets/newtype/images/story3/bg-bottom.png" alt="">
+      <div class="commentary-bg--bottom">
+        <img :src="`/proj-assets/newtype/images/story${index === 5 ? '3' : index}/bg-bottom.png`" alt="">
       </div>
       <!-- Story end -->
-      <StoryReadNext v-if="index !== 5" :index="index" :descriptions="storyData.readNextDescription"/>
+      <StoryReadNext v-if="$store.state.route.query.single === 'true' || index !== 5" :index="index" :descriptions="storyData.readNextDescription"/>
     </article>
+    <AppFooter v-if="$store.state.route.query.single === 'true' || index === 5"/>
   </div>
 </template>
 
@@ -45,6 +47,8 @@ import StoryArticleSection from './Story/StoryArticleSection.vue'
 import StoryAnimation from './Story/StoryAnimation.vue'
 import StoryParallax from './Story/StoryParallax.vue'
 import StoryReadNext from './Story/StoryReadNext.vue'
+import AppFooter from './AppFooter.vue'
+// import FBComment from './FBComment.vue'
 
 import storyWaypoints from '../mixins/waypoints/storyOnChange.js'
 import articleSectionWaypoints from '../mixins/waypoints/articleSectionOnChange.js'
@@ -58,7 +62,9 @@ export default {
     StoryArticleSection,
     StoryAnimation,
     StoryParallax,
-    StoryReadNext
+    StoryReadNext,
+    AppFooter
+    // FBComment
   },
   mixins: [ storyWaypoints, articleSectionWaypoints ],
   // mixins: [ storyWaypoints, articleSectionWaypoints, storyBackgroundTransform ],
@@ -73,6 +79,9 @@ export default {
     }
   },
   methods: {
+    refreshWaypoint () {
+      this.refreshWaypoints()
+    },
     setCurrentVisible () {
       let obj = {}
       this.storyData.articleSection.forEach((section, i) => {
@@ -87,8 +96,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#story1, #story2, #story3, #story5
+#story1, #story2, #story3, #story4, #story5
   background-color #f8f8f8
+  // &#story4
+  //   background-color #f1f5f5
   height 100%
   article
     position relative
@@ -128,6 +139,11 @@ export default {
       height auto
       img
         width 100%
+#story4
+  article
+    .section-container
+      &.self-background
+        background-color #567067
 #story3, #story5
   background-color #606060
 
@@ -137,6 +153,11 @@ export default {
       .section-container
         &.self-background
           background-position -250px 0%, 150% 0%
+  #story4
+    article
+      .section-container
+        &.self-background
+          background-position -2000px 0%, 100% 0%
 
 @media (max-width: 413px)
   #story2
@@ -144,6 +165,11 @@ export default {
       .section-container
         &.self-background
             background-position -300px 0%, 150% 0%
+  #story4
+    article
+      .section-container
+        &.self-background
+          background-position -2000px 0%, 150% 0%
 
 @media (max-width: 374px)
   #story2
@@ -151,5 +177,10 @@ export default {
       .section-container
         &.self-background
           background-position -250px 0%, 150% 0%
+  #story4
+    article
+      .section-container
+        &.self-background
+          background-position -2000px 0%, 100% 0%
 </style>
 

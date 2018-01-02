@@ -19,6 +19,10 @@
         <img v-show="story2Ending" id="story2-ending" src="/proj-assets/newtype/images/story2/animation/both.png" alt="">
       </transition>
     </template>
+    <template v-if="storyIndex === 4">
+      <img id="taiwan" src="/proj-assets/newtype/images/story4/animation/taiwan.png" alt="">
+      <img id="bird" src="/proj-assets/newtype/images/story4/animation/bird.png" alt="">
+    </template>
   </div>
 </template>
 
@@ -48,6 +52,8 @@ export default {
     height 60vh
   &.animation--story2
     height 80vh
+  &.animation--story4
+    height 60vh
   img
     // width 85vw
     // max-height 70vh
@@ -74,6 +80,13 @@ export default {
     &#story2-ending
       width 100vw
       // bottom 20vh
+    &#bird
+      width 50vw
+      left -50vw
+    &#taiwan
+      width 30vw
+      right 20vw
+      top 50%
     &.fade-enter-active, &.fade-leave-active
       transition opacity .25s
     &.fade-enter, &.fade-leave-to
@@ -84,6 +97,8 @@ export default {
     &.animation--story1
       height 50vh
     &.animation--story2
+      height 50vh
+    &.animation--story4
       height 50vh
     img
       &#writing-hand
@@ -106,6 +121,14 @@ export default {
         width 150vw
         left -25vw
         top 10vh
+      &#bird
+        width 70vw
+        left -70vw
+        bottom 0
+      &#taiwan
+        width 100vw
+        right -20vw
+        top 30%
 </style>
 
 

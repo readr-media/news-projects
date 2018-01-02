@@ -2,11 +2,11 @@
   <div id="newtype">
     <AppHeader :shareUrl="url"></AppHeader>
     <Landing></Landing>
-    <Story :index="1" :storyData="storyData.story1" @urlChange="urlChange"></Story>
-    <Story :index="2" :storyData="storyData.story2" @urlChange="urlChange"></Story>
-    <Story :index="3" :storyData="storyData.story3" @urlChange="urlChange"></Story>
-    <Story :index="5" :storyData="storyData.story5" @urlChange="urlChange"></Story>
-    <FBComment/>
+    <Story v-if="($route.params.params === 'story1' && $route.query.single === 'true') || !$route.query.single" :index="1" :storyData="storyData.story1" @urlChange="urlChange"></Story>
+    <Story v-if="($route.params.params === 'story2' && $route.query.single === 'true') || !$route.query.single" :index="2" :storyData="storyData.story2" @urlChange="urlChange"></Story>
+    <Story v-if="($route.params.params === 'story3' && $route.query.single === 'true') || !$route.query.single" :index="3" :storyData="storyData.story3" @urlChange="urlChange"></Story>
+    <Story v-if="($route.params.params === 'story4' && $route.query.single === 'true') || !$route.query.single" :index="4" :storyData="storyData.story4" @urlChange="urlChange"></Story>
+    <Story v-if="($route.params.params === 'story5' && $route.query.single === 'true') || !$route.query.single" :index="5" :storyData="storyData.story5" @urlChange="urlChange"></Story>
   </div>
 </template>
 
@@ -18,15 +18,16 @@ Vue.use(VueScrollTo)
 import AppHeader from './components/AppHeader.vue'
 import Landing from './components/Landing.vue'
 import Story from './components/Story.vue'
-import FBComment from './components/FBComment.vue'
 import storyData from './story.json'
 
+import scrollEvent from './mixins/scrollmagic/scrollEvent.js'
+
 export default {
+  mixins: [ scrollEvent ],
   components: {
     AppHeader,
     Landing,
-    Story,
-    FBComment
+    Story
   },
   metaInfo () {
     if (this.$route.params.params) {
@@ -54,12 +55,10 @@ export default {
   methods: {
     urlChange (url) {
       this.url = url
-    },
-    handler () {
-      console.log('lazy load success!')
     }
   },
   mounted () {
+    window.ga('send', 'pageview')
     if (this.$route.params.params) {
       this.$scrollTo(`#${this.$route.params.params}`)
     }
