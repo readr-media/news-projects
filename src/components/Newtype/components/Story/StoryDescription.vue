@@ -87,7 +87,7 @@ header
       display none
   .description
     position relative
-    margin-top 30vh
+    margin-top 35vh
     flex(column, center, center)
     // .element
     //   background-color green
@@ -102,6 +102,8 @@ header
       position absolute
       bottom 0px
       width 40%
+      left 50%
+      transform translateX(-50%)
     &__dock
       position relative
       bottom -1px

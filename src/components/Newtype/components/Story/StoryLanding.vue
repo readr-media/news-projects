@@ -4,6 +4,8 @@
       <StorySwiper v-if="device" :responsiveSrc="responsiveSrc" :storyIndex="storyIndex"></StorySwiper>
     </template>
     <template v-if="storyIndex === 2">
+      <img class="landing-hint" v-show="shouldplay.vid1" src="/proj-assets/newtype/images/story2/video/viethint.png" alt="">
+      <img class="landing-hint" v-show="shouldplay.vid2" src="/proj-assets/newtype/images/story2/video/chinesehint.png" alt="">
       <div class="vid-container" id="vid1-container">
         <video id="vid1" loop playsinline :muted="muted" onloadstart="this.volume=1" @click="tap('vid1')" :poster="device === 'phone' ? `/proj-assets/newtype/images/story2/video/phoneviet.png` : null">
           <source v-if="device" :src="`${responsiveSrc}viet.mp4`" type='video/mp4'/>
@@ -19,6 +21,9 @@
         <transition name="fade">
           <div class="play-icon" alt="" v-show="!playing.vid2" @click="tap('vid2')"></div>
         </transition>
+        <!-- <transition name="fade">
+          <img class="landing-hint" v-show="playing.vid2" src="/proj-assets/newtype/images/story2/video/viethint.png" alt="">
+        </transition>  -->
       </div>
       <transition name="fade">
         <div v-show="!inViewport" :class="[ 'opening', { 'opening--visible': !inViewport } ]">
@@ -50,6 +55,10 @@ export default {
       device: undefined,
       inViewport: false,
       playing: {
+        vid1: false,
+        vid2: false
+      },
+      shouldplay: {
         vid1: false,
         vid2: false
       },
@@ -181,6 +190,13 @@ export default {
 #vid2-container
   width 100%
   height 100%
+
+.landing-hint
+  width 44px
+  position fixed
+  top calc(10px + 44px + 10px + 44px + 10px)
+  right 10px
+  z-index 998
 
 .play-icon
   -webkit-mask-image url(/proj-assets/newtype/images/playicon.png)

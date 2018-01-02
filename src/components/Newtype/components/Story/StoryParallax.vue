@@ -24,6 +24,7 @@ export default {
   background-position center center
   background-attachment fixed
   position relative
+  margin-bottom 100px
   &__image-container
     width 100%
     height 100%
@@ -72,6 +73,7 @@ export default {
     display flex
     flex-direction column
     background none
+    margin-bottom 0
     &__image
       display block
       width 100vw
