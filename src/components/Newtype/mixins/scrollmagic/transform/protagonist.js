@@ -19,7 +19,7 @@ const sceneConfig = {
         `.header--story${this.storyOrderToNumber} .description__protagonist`,
         1,
         isMobile ? { x: '-50%', y: -window.innerHeight * 0 } : { x: '-50%', y: 0 },
-        isMobile ? { x: '-50%', y: -window.innerHeight * 0.25, ease: Cubic.easeOut } : { x: '-50%', y: -protagonistHeight * 0.25, ease: Cubic.easeOut }
+        isMobile ? { x: '-50%', y: -window.innerHeight * 0.25, ease: Cubic.easeOut } : { x: '-50%', y: -protagonistHeight * 0.8, ease: Cubic.easeOut }
       )
       const timeline = new TimelineMax().add([tweenProtagonist])
 
@@ -38,15 +38,15 @@ const sceneConfig = {
       require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js')
       if (!this.isCommentary) {
         let scene
-        const isMobile = window.innerWidth <= 767
-        const protagonistHeight = this.$el.querySelector('.description__protagonist').clientHeight
         setTimeout(() => { scene = this.setScene() }, 500)
         window.addEventListener('resize', () => {
+          const isMobile = window.innerWidth <= 767
+          const protagonistHeight = this.$el.querySelector('.description__protagonist').clientHeight
           const tweenProtagonist = TweenMax.fromTo(
             `.header--story${this.storyOrderToNumber} .description__protagonist`,
             1,
             isMobile ? { x: '-50%', y: -window.innerHeight * 0 } : { x: '-50%', y: 0 },
-            isMobile ? { x: '-50%', y: -window.innerHeight * 0.25, ease: Cubic.easeOut } : { x: '-50%', y: -protagonistHeight * 0.25, ease: Cubic.easeOut }
+            isMobile ? { x: '-50%', y: -window.innerHeight * 0.25, ease: Cubic.easeOut } : { x: '-50%', y: -protagonistHeight * 0.8, ease: Cubic.easeOut }
           )
           scene.setTween(tweenProtagonist)
         })

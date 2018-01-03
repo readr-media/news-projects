@@ -187,7 +187,7 @@ section
       opacity 0
 
   main
-    width 65%
+    width 60%
     display flex
     flex-direction column
     justify-content flex-start
@@ -267,7 +267,7 @@ section
         font-weight bold
       .highlight
         color #e5e973
-        font-weight bold
+        // font-weight 400
       .anchor
         cursor pointer
         color #fddcb6
@@ -304,6 +304,9 @@ section
     p
       color white
 
+#story5-section4-subsection1
+  padding-bottom 0
+
 .article-section--story3, .article-section--story5
   display flex
   flex-direction column
@@ -313,10 +316,20 @@ section
   aside
     width 0
   main
-    width 970px
+    width 900px
     // align-items center
     h2
       align-self center
+
+@media (max-width: 1440px)
+  .article-section--story3, .article-section--story5
+    main
+      width 800px
+
+@media (max-width: 1280px)
+  .article-section--story3, .article-section--story5
+    main
+      width 700px
 
 @media (max-width: 767px)
   section

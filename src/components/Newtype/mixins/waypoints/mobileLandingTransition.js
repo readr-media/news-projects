@@ -5,23 +5,23 @@ if (process.browser) {
 const setWaypoints = {
   methods: {
     setMobileLandingTransition () {
-      const mainConcept = this.$el.querySelector('.newtype-landing__main-concept')
+      const mainTitle = this.$el.querySelector('.newtype-landing__title')
       new Waypoint({
-        element: mainConcept,
+        element: mainTitle,
         handler: (direction) => {
-          if (window.innerWidth <= 767) {
-            if (direction === 'down') {
-              // console.log('show des, hide title')
+          // if (window.innerWidth <= 767) {
+          if (direction === 'down') {
+            if (window.innerWidth <= 767) {
               this.showTitle = false
-              this.showDescritpion = true
-            } else {
-              // console.log('hide des, show title')
-              this.showTitle = true
-              this.showDescritpion = false
             }
+            this.showDescritpion = true
+          } else {
+            this.showTitle = true
+            this.showDescritpion = false
           }
+          // }
         },
-        offset: '20%'
+        offset: '0'
       })
     }
   },

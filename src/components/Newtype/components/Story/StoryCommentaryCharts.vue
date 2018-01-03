@@ -17,7 +17,7 @@
       <!-- <img v-if="device" v-lazy="{ src: `${responsiveSrc}${chartIndex}.png`, loading: '/proj-assets/newtype/images/spinner.svg' }" alt=""> -->
       <img v-if="device" :src="`${responsiveSrc}${chartIndex}.png`" alt="">
       <span class="figcaption">擁有最多外籍新二代國中小學生的前十名區域分別是中壢區、新莊區、桃園區、板橋區、三重區、平鎮區、鳳山區、 中和區、楊梅區及樹林區。光是這 10 區的外籍新二代學生就有 17,482 人，占全國新二代國中小學生 14.67%。以分佈來看，擁有最多新二代小學生的前十名行政區，有 5 個屬於新北市、 4 個歸桃園市管轄。</span>
-      <span class="figcaption figcaption--caveat">註：以上資料皆不含中國港澳籍配偶新二代</span>
+      <span class="figcaption figcaption--source">註：以上資料皆不含中國港澳籍配偶新二代</span>
     </template>
     <template v-else-if="chartIndex === 4">
       <span class="title">華語補救申請數 6 年成長 2.4 倍</span>

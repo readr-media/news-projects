@@ -87,7 +87,7 @@ header
       display none
   .description
     position relative
-    margin-top 35vh
+    margin-top 188px
     flex(column, center, center)
     // .element
     //   background-color green
@@ -100,7 +100,8 @@ header
     //   opacity .5
     &__protagonist
       position absolute
-      bottom 0px
+      // bottom 50%
+      top 0
       width 40%
       left 50%
       transform translateX(-50%)
