@@ -14,10 +14,10 @@
 </template>
 
 <script>
-import mobileWatpoints from '../mixins/waypoints/mobileLandingTransition.js'
+import mobileWaypoints from '../mixins/waypoints/mobileLandingTransition.js'
 
 export default {
-  mixins: [ mobileWatpoints ],
+  mixins: [ mobileWaypoints ],
   data () {
     return {
       showTitle: true,
@@ -82,6 +82,59 @@ export default {
       color white !important
       line-height 1.8
       font-weight 300
+
+@media (min-width: 768px)
+  .newtype-landing
+    background-size auto auto
+    background-position 70% center
+    height 130vh
+    &__main-concept
+      max-width 100vw
+      height 100vh
+      top 0
+      left 0
+      margin auto
+    &__lighting
+      display none
+    &__content
+      width 100vw
+      position static
+      padding-top 90px
+      padding-bottom 10%
+    &__title
+      opacity 0
+      transition opacity 1s
+      width 50%
+      z-index 990
+      padding 30px
+      &--active
+        opacity 1
+    &__description
+      // margin-top 50vh
+      position absolute
+      bottom 58px
+      left 0
+      right 0
+      clip-path none
+      z-index 1
+      padding 45px 161px
+      // margin 0 20% 58px 20%
+      margin auto
+      max-width calc(900px + 161px + 161px)
+      width auto
+      opacity 0
+      transition opacity 1s
+      &--active
+        opacity 1
+
+@media(max-width: 1440px)
+  .newtype-landing
+    &__description
+      max-width calc(800px + 161px + 161px)
+@media(max-width: 1280px)
+  .newtype-landing
+    &__description
+      max-width calc(700px + 161px + 161px)
 
 @media (max-width: 767px)
   .newtype-landing

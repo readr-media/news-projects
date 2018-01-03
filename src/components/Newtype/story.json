@@ -24,12 +24,6 @@
         "backgroundRepeat": "repeat-y",
         "backgroundSize": "100% auto",
         "backgroundPosition": "0% 0%"
-      },
-      "fatPolygon": {
-        "backgroundImage": "url(/proj-assets/newtype/images/story1/bg-fat-polygon.png)",
-        "backgroundRepeat": "repeat-y",
-        "backgroundSize": "100% auto",
-        "backgroundPosition": "0% 0%"
       }
     },
     "header": {
@@ -152,12 +146,6 @@
         "backgroundRepeat": "repeat-y",
         "backgroundSize": "100% auto",
         "backgroundPosition": "0% 0%"
-      },
-      "fatPolygon": {
-        "backgroundImage": "url(/proj-assets/newtype/images/story2/bg-fat-polygon.png)",
-        "backgroundRepeat": "repeat-y",
-        "backgroundSize": "100% auto",
-        "backgroundPosition": "0% 0%"
       }
     },
     "header": {
@@ -275,12 +263,6 @@
     "background": {
       "top": null,
       "longPolygon": {
-        "backgroundImage": "none",
-        "backgroundRepeat": "repeat-y",
-        "backgroundSize": "100% auto",
-        "backgroundPosition": "0% 0%"
-      },
-      "fatPolygon": {
         "backgroundImage": "none",
         "backgroundRepeat": "repeat-y",
         "backgroundSize": "100% auto",
@@ -408,12 +390,6 @@
       },
       "longPolygon": {
         "backgroundImage": "url(/proj-assets/newtype/images/story4/bg-long-polygon.png)",
-        "backgroundRepeat": "repeat-y",
-        "backgroundSize": "100% auto",
-        "backgroundPosition": "0% 0%"
-      },
-      "fatPolygon": {
-        "backgroundImage": "url(/proj-assets/newtype/images/story4/bg-fat-polygon.png)",
         "backgroundRepeat": "repeat-y",
         "backgroundSize": "100% auto",
         "backgroundPosition": "0% 0%"
@@ -553,12 +529,6 @@
     "background": {
       "top": null,
       "longPolygon": {
-        "backgroundImage": "none",
-        "backgroundRepeat": "repeat-y",
-        "backgroundSize": "100% auto",
-        "backgroundPosition": "0% 0%"
-      },
-      "fatPolygon": {
         "backgroundImage": "none",
         "backgroundRepeat": "repeat-y",
         "backgroundSize": "100% auto",

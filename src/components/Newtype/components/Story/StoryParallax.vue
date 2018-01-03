@@ -27,7 +27,9 @@ export default {
   margin-bottom 100px
   &__image-container
     width 100%
-    height 100%
+    // height 100%
+    height 600px
+    // min-height 300px
     overflow hidden
     position relative
   &__image
@@ -74,6 +76,8 @@ export default {
     flex-direction column
     background none
     margin-bottom 0
+    &__image-container
+      height auto
     &__image
       display block
       width 100vw
