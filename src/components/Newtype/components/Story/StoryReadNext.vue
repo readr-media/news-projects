@@ -67,7 +67,7 @@ section
     display flex
     flex-direction column
     align-items center
-    padding 1% 0 8% 0
+    padding 38px 0 111px 0
     position relative
     h2
       color #f8f8f8 !important

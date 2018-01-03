@@ -74,7 +74,7 @@ export default {
       text-align center
   &__description
     width 90%
-    padding 2% 10%
+    padding 30px 10%
     background-color #577167
     clip-path polygon(8% 0%, 0% 94%, 78% 100%, 100% 66%, 92% 1%)
     text-align justify
