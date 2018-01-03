@@ -27,7 +27,7 @@ const sceneConfig = {
         var sceneStory2Landing = new ScrollMagic.Scene({ 
                                   triggerElement: '.article-landing--story2',
                                   // duration: vidHeight + vidHeight,
-                                  duration: isMobile ? 2 * vidHeight : vidHeight + vidHeight,
+                                  duration: '200%',
                                   triggerHook: 'onLeave'
                                 })
                                 .setTween(tweenStory2Landing)
