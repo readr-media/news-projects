@@ -92,13 +92,6 @@ export default {
   mounted () {
     if (process.browser) {
       window.innerWidth <= 767 ? this.device = 'phone' : this.device = 'web'
-      if (this.storyIndex === 2) {
-        const vidHeight = window.innerWidth <= 767 ? this.$el.querySelector('#vid1').clientWidth / 9 * 16 : this.$el.querySelector('#vid1').clientWidth / 16 * 9
-        this.$el.style.height = window.innerWidth <= 767 ? `${vidHeight * 2 + vidHeight}px` : `${vidHeight * 2 + vidHeight}px`
-        // window.addEventListener('resize', () => {
-        //   this.setStoryLandingHeight()
-        // })
-      }
     }
   }
 }
@@ -113,7 +106,7 @@ export default {
     height 100vh
   &--story2
     background-color gray
-    // height 200vh
+    height 300vh
   .opening
     width 100vw
     height 100vh

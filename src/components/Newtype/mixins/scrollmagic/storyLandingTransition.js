@@ -15,7 +15,7 @@ const sceneConfig = {
       const vidControlScene = new ScrollMagic.Scene({
                                 triggerElement: `.article-landing--story${this.storyIndex}`,
                                 // duration: (this.storyIndex === 1 || this.storyIndex === 4) ? '50%' : vidHeight + vidHeight,
-                                duration: (this.storyIndex === 1 || this.storyIndex === 4) ? '50%' : (window.innerWidth <= 767 ? vidHeight * 3 : vidHeight * 2 + vidHeight),
+                                duration: (this.storyIndex === 1 || this.storyIndex === 4) ? '50%' : '300%',
                                 // offset: '50%'
                                 triggerHook: 'onLeave'
                               })
