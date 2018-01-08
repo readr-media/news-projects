@@ -53,7 +53,8 @@
       <!-- opening container -->
       <div :class="[ 'opening', { 'opening--visible': !inViewport } ]">
         <img class="title" :src="`/proj-assets/newtype/images/story${storyIndex}/video/title.png`" alt="">
-        <h2>點擊播放鍵，聽新二代說說他們的故事</h2>
+        <h2 class="landing-hint">點擊播放鍵，聽新二代說說他們的故事</h2>
+        <h2 class="landing-credits">旁白、插圖{{ storyIndex === 1 ? '洪金晶' : '朱家賢' }}</h2>
       </div>
       <transition name="fade">
         <div class="play-icon" alt="" v-show="!playing"></div>
@@ -177,7 +178,7 @@ export default {
     width 50vw
   &--visible
     opacity 1
-  h2
+  .landing-hint
     color white
     font-weight 400
     &:before
@@ -189,6 +190,13 @@ export default {
       content ''
       margin-right 25px
       vertical-align bottom
+  .landing-credits
+    color white
+    font-weight 400
+    position absolute
+    right 80px
+    bottom 40px
+    margin 0
     // &:after
     //   background-image url(/proj-assets/newtype/images/click-the-sound.png)
     //   background-size calc(384px / 4) calc(440px / 4)
@@ -267,7 +275,7 @@ export default {
   .opening
     .title
       width 100vw
-    h2
+    .landing-hint
       display flex
       flex-direction row
       width 80%
@@ -275,6 +283,8 @@ export default {
         padding-right 50px
       &:after
         display none
+    .landing-credits
+      right initial
 </style>
 
 
