@@ -28,7 +28,8 @@
       <transition name="fade">
         <div v-show="!inViewport" :class="[ 'opening', { 'opening--visible': !inViewport } ]">
           <img class="title" src="/proj-assets/newtype/images/story2/video/title.png" alt="">
-          <h2>點擊播放鍵，聽新二代說說他們的故事</h2>
+          <h2 class="landing-playhint">點擊播放鍵，聽新二代說說他們的故事</h2>
+          <h2 class="landing-credits">旁白、作文吳觀玲</h2>
         </div>
       </transition>
       <div class="sound-indicator" v-show="inViewport" :style="{ maskImage: muted ? 'url(/proj-assets/newtype/images/soundoff.png)' : 'url(/proj-assets/newtype/images/soundon.png)' }" @click="toggleMuted()"></div>
@@ -138,7 +139,7 @@ export default {
       transition opacity .5s
     &.fade-enter, &.fade-leave-to
       opacity 0
-    h2
+    .landing-playhint
       color white
       font-weight 400
       &:before
@@ -158,6 +159,13 @@ export default {
       //   height calc(440px / 4)
       //   content ''
       //   margin-left 25px
+    .landing-credits
+      color white
+      font-weight 400
+      position absolute
+      right 80px
+      bottom 40px
+      margin 0
 
   .sound-indicator
     // -webkit-mask-image url(/proj-assets/newtype/images/soundoff.png)
@@ -232,7 +240,7 @@ export default {
     .opening
       .title
         width 100vw
-      h2
+      .landing-playhint
         display flex
         flex-direction row
         width 80%
@@ -240,5 +248,7 @@ export default {
           padding-right 50px
         &:after
           display none
+      .landing-credits
+        right initial
 </style>
 
