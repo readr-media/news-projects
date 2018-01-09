@@ -46,7 +46,7 @@
       },
       bgImage: {
         type: String,
-        default: '/public/navbtn.png'
+        default: '/proj-assets/navbtn.png'
       },
       border: {
         type: String,

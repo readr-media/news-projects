@@ -17,7 +17,6 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'public': path.resolve(__dirname, '../public'),
       'proj-assets': path.resolve(__dirname, '../proj-assets'),
     }
   },
