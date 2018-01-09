@@ -96,20 +96,20 @@
     transition-duration .19s
   .toggle
     z-index 910
-    background-image url(/public/navbtn.png)
+    background-image url(/proj-assets/navbtn.png)
     background-size 100px auto
     background-repeat no-repeat
     background-position -58px 0
   .fb
     background-color #3b5998
-    background-image url(/public/facebook.png)
+    background-image url(/proj-assets/facebook.png)
     background-size 20px
   .line
     background-color #00b900
-    background-image url(/public/line.png)
+    background-image url(/proj-assets/line.png)
     background-size 30px auto
   .gplus
-    background-image url(/public/gplus.png)
+    background-image url(/proj-assets/gplus.png)
     background-size 47px
 .share.open
   &.up
