@@ -1,10 +1,10 @@
 <template>
 
-<article class="farmhouse faq" v-if="getParams == 'opinion'">
+<article class="farmhouse opinion" v-if="getParams == 'opinion'">
   <!-- /project/farmhouse/opinion -->
   <!-- 農舍面面觀 -->
-  <logo :top="`8px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLinkFaq" :top="`8px`" :left="`69px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></share>
+  <logo :top="`15px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
+  <share :shareUrl="shareLinkOpinion" :top="`15px`" :left="`69px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></share>
   
   <opinion v-on:expand="expandable"></opinion>
 </article>
@@ -13,7 +13,7 @@
   <!-- /project/farmhouse/faq -->
   <!-- 來來來看完你就變農舍達人了 -->
   <logo :top="`8px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLinkFaq" :top="`8px`" :left="`69px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></share>
+  <share :shareUrl="shareLink" :top="`8px`" :left="`69px`" :bgColor="`#79cfa8`"></share>
   
   <faq v-on:expand="expandable"></faq>
 </article>
@@ -22,19 +22,9 @@
   <!-- /project/farmhouse/gallery -->
   <!-- 田中央 -->
   <logo :top="`25px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLinkGallery" :top="`25px`" :left="`69px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></share>
+  <share :shareUrl="shareLink" :top="`25px`" :left="`69px`" :bgColor="`#79cfa8`"></share>
   
   <gallery></gallery>
-
-</article>
-
-<article class="farmhouse opinion" v-else-if="getParams == 'opinion'">
-  <!-- /project/farmhouse/opinion -->
-  <!-- 農舍面面觀 -->
-  <logo :top="`8px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLinkFaq" :top="`8px`" :left="`69px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></share>
-
-  <opinion v-on:expand="expandable"></opinion>
 
 </article>
 
@@ -42,7 +32,8 @@
 <!-- /project/farmhouse/   -->
 <!-- 主文 -->
   <logo :top="`15px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLink" :top="`15px`" :left="`69px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></share>
+  <!-- <share :shareUrl="shareLink" :top="`15px`" :left="`69px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></share> -->
+  <share :shareUrl="shareLink" :top="`15px`" :left="`69px`" :bgColor="`#79cfa8`"></share>
  
   <!-- 通通拿去種農舍 -->
   <opening v-on:noteToggle="noteToggleContent"></opening>
@@ -203,6 +194,7 @@
     data () {
       return {
         shareLink: `${SITE_URL}farmhouse`,
+        shareLinkOpinion: `${SITE_URL}farmhouse/opinion`,
         shareLinkFaq: `${SITE_URL}farmhouse/faq`,
         shareLinkGallery: `${SITE_URL}farmhouse/gallery`,
 
@@ -300,6 +292,13 @@
 /* Common */
 .farmhouse {
 font-size:19px; line-height:1.8; color:#1a1a1a;
+}
+
+.logo {background-size:auto 100% !important;}
+.share__item.toggle {
+background-image:url("/proj-assets/farmhouse/images/navbtn.png") !important;
+background-size:auto 100% !important;
+background-position:right top !important;
 }
 
 section {padding:50px 0 100px 0; position:relative;
@@ -499,12 +498,15 @@ background-color:#c5c5c5;
 
 /* Chart */
 .chartwpr {margin-top:45px; margin-bottom:15px;}
-.chart--title {padding-left:10px; display:inline-block;
-font-size:22px; line-height:1.5;
-border-left:4px solid #333;
+.chart--header {padding-left:10px; border-left:4px solid #333;
+margin-bottom:20px; padding-bottom:1px;
 }
-.dark .chart--title {border-left:4px solid #fff;}
-.chart--source {font-size:16px; color:#888;}
+.dark .chart--header {border-left:4px solid #fff;}
+
+.chart--title {font-size:22px; line-height:1;
+margin-bottom:10px;
+}
+.chart--source {font-size:16px; color:#888; line-height:1;}
 .chart--note {font-size:16px; color:#888;}
 
 /* read position */
@@ -537,15 +539,18 @@ opacity:0;
 #progresswpr:hover .progress:hover .progress--title {opacity:1;}
 
 /* 註 */
-.noteTrigger {display:inline-block; position:relative;
-cursor:pointer; color:#888; margin-left:6px;
+.noteTrigger {display:inline-block; position:relative; margin-left:6px;
+cursor:pointer; color:#fff; text-align:center; line-height:32px;
+width:32px; height:32px; border-radius:50%;
+background-color:#acaaab; vertical-align:center;
 }
-.noteTrigger:after {content:""; width:30px; height:1px; margin-left:-15px;
+.dark .noteTrigger {color:#273947;}
+/* .noteTrigger:after {content:""; width:30px; height:1px; margin-left:-15px;
 position:absolute; left:50%; bottom:2px;
 background-color:#888;
 display:none;
 }
-.noteTrigger:hover:after {display:block;}
+.noteTrigger:hover:after {display:block;} */
 
 .noteBlock {display:none; margin:15px 0; padding:10px 20px;
 color:#888; font-size:17px; line-height:1.5;

@@ -45,8 +45,8 @@
 
       <!-- Google Map -->
       <!-- <div id="mapPinTrigger"></div> -->
-      <!-- <google-map></google-map> -->
-      <div class="map-container" style="width:100%; height:100vh; background-image:url('/proj-assets/farmhouse/images/newsmarket/farmhouse-01.jpg'); background-size:cover; background-position:center top;"></div>
+      <google-map></google-map>
+      <!-- <div class="map-container" style="width:100%; height:100vh; background-image:url('/proj-assets/farmhouse/images/newsmarket/farmhouse-01.jpg'); background-size:cover; background-position:center top;"></div> -->
 
       <div id="mapPinContainer">
       <div class="centerwpr dark" id="mapText">

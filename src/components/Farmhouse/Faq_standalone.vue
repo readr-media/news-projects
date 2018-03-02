@@ -168,13 +168,15 @@ color:#273947; font-size:26px;
 position:relative; 
 display:flex; align-items:center;
 }
-.faq--q:hover {color:#7ccfa5;}
+/* .faq--q:hover {color:#7ccfa5;} */
 .faq--q:before {content:"Q"; width:40px; height:40px; margin-right:14px;
 color:#7ccfa5; font-weight:700; text-align:center; font-size:22px;
 background-color:#273947; border-radius:4px;
 display:flex; align-items:center; justify-content:center;
 flex-shrink:0;
 }
+
+.faq--a.eContent {max-height:none;}
 
 .faq--readmore {clear:both; position:relative;
 color:#273947; font-weight:bold; text-align:center;

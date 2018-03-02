@@ -15,8 +15,7 @@
                 <div class="extend--overlay"></div>
                 <div class="extend--title">農舍面面觀</div>
             </a>
-        <!-- </div>
-        <div class="extendwpr"> -->
+
             <a class="extend--entry faq" href="/project/farmhouse/faq" target="_blank">
                 <img src="/proj-assets/farmhouse/images/sample/extend03.jpg" />
                 <div class="extend--overlay"></div>
@@ -54,8 +53,6 @@
 </template>
 
 <script>
-
-// import credit from './Credit.vue';
 
 export default {
   data() {
@@ -105,6 +102,26 @@ transition:400ms; transition-property:opacity;
 }
 .extend--entry:hover .extend--title {opacity:0;}
 
+/* home, standalone page */
+.home .extend--entry.home {pointer-events:none; cursor:default;}
+.home .extend--entry.home .extend--overlay {opacity:0.9 !important;}
+.home .extend--entry.home .extend--title {opacity:0.8 !important;}
+
+.opinion .extend--entry.opinion {pointer-events:none; cursor:default;}
+.opinion .extend--entry.opinion .extend--overlay {opacity:0.9 !important;}
+.opinion .extend--entry.opinion .extend--title {opacity:0.8 !important;}
+
+.faq .extend--entry.faq {pointer-events:none; cursor:default;}
+.faq .extend--entry.faq .extend--overlay {opacity:0.9 !important;}
+.faq .extend--entry.faq .extend--title {opacity:0.8 !important;}
+
+.gallery .extend--entry.gallery {pointer-events:none; cursor:default;}
+.gallery .extend--entry.gallery .extend--overlay {opacity:0.9 !important;}
+.gallery .extend--entry.gallery .extend--title {opacity:0.8 !important;}
+
+
+
+
 /* Credit List */
 .credit {padding-left:0; margin:0;
 list-style:none; text-align:center;
@@ -118,10 +135,8 @@ font-size:14px; line-height:1.7; color:#1a1a1a;
 background-color:#273947;
 }
 .extra .centerwpr {padding:60px 0 0 0;}
-/* .extra section {background-color:transparent;} */
 
 .related {padding:0 8px; min-height:100px;
-/* background-color:#fff; */
 background-color:transparent;
 }
 .related iframe {height:326px; background-color:#fff;}

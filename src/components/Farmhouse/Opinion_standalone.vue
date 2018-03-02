@@ -102,8 +102,7 @@ export default {
 
 
 <style scoped>
-.opinion {text-align:center; 
-padding-top:0;
+.opinion {text-align:center; padding:0;
 background-color:#273947; color:#fff;
 }
 .opinion:after {content:""; display:table; clear:both;}
