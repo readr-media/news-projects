@@ -1694,6 +1694,12 @@ dom7@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/dom7/-/dom7-2.0.1.tgz#a8a2c802cf17c20b051d9414143061472201a233"
 
+dom7@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/dom7/-/dom7-2.0.3.tgz#610c530d32ebd9690d3959b19a0f379584f24fc4"
+  dependencies:
+    ssr-window "^1.0.0"
+
 domain-browser@^1.1.1:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.1.7.tgz#867aa4b093faa05f1de08c06f4d7b21fdf8698bc"
@@ -2443,6 +2449,12 @@ fstream@^1.0.0, fstream@^1.0.10, fstream@^1.0.2:
     mkdirp ">=0.5 0"
     rimraf "2"
 
+fullpage.js@^2.9.6:
+  version "2.9.6"
+  resolved "https://registry.yarnpkg.com/fullpage.js/-/fullpage.js-2.9.6.tgz#8ab8ea65fd99c3abd58f0d7be290b83fb1c0999d"
+  dependencies:
+    jquery ">=1.6.0"
+
 function-bind@^1.0.2, function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
@@ -2732,6 +2744,10 @@ ieee754@^1.1.4:
 ignore@^3.3.3:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.7.tgz#612289bfb3c220e186a58118618d5be8c1bab021"
+
+image-comparison@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/image-comparison/-/image-comparison-2.0.4.tgz#f3ec4661bb25bcb3afa1800c9f712b40052d3d66"
 
 imports-loader@^0.7.1:
   version "0.7.1"
@@ -3037,6 +3053,10 @@ joi@^6.10.1:
     isemail "1.x.x"
     moment "2.x.x"
     topo "1.x.x"
+
+jquery@>=1.6.0, jquery@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
 js-base64@^2.1.9:
   version "2.3.2"
@@ -4885,6 +4905,10 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
+ssr-window@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-1.0.0.tgz#8ed1b6beaa0a371ba7e74d6515d584c3f1cf973c"
+
 stack-trace@0.0.x:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
@@ -5090,6 +5114,13 @@ swiper@^4.0.7:
   resolved "https://registry.yarnpkg.com/swiper/-/swiper-4.0.7.tgz#89175c2a23d86622eda8344740c24a3701a6b270"
   dependencies:
     dom7 "^2.0.1"
+
+swiper@^4.1.6:
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-4.1.6.tgz#8e426a741f211a38a3713c8fa0d5c0152c8a6a87"
+  dependencies:
+    dom7 "^2.0.2"
+    ssr-window "^1.0.0"
 
 table@^4.0.1:
   version "4.0.2"
@@ -5411,6 +5442,10 @@ vue-awesome-swiper@^3.0.6:
   dependencies:
     object-assign "^4.1.1"
     swiper "^4.0.7"
+
+vue-highcharts@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/vue-highcharts/-/vue-highcharts-0.0.10.tgz#a4b90098ede77a65cca87e62bed87549e1e1c985"
 
 vue-hot-reload-api@^2.2.0:
   version "2.2.3"
