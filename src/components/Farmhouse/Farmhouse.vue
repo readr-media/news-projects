@@ -41,65 +41,26 @@
   <!-- 農地不農用，又怎樣？ -->
   <sowhat></sowhat>
 
-  <!-- 透過數據看見農舍危機 -->
-  <!-- <trade-data></trade-data> -->
+  <!-- 宜蘭農舍四多：數量多、違規多、佔用農地多、交易多 -->
   <data-crisis v-on:noteToggle="noteToggleContent"></data-crisis>
 
   <!-- 為什麼是宜蘭？ -->
   <why-yilan>為什麼是宜蘭？</why-yilan>
 
-  <!-- 農舍在哪裡？ -->
-  <!-- <data-map></data-map> -->
+  <!-- 老農成為農舍主力賣家 -->
+  <trade-data v-on:noteToggle="noteToggleContent"></trade-data>
 
-  <!-- 農舍買賣狀況大公開 -->
-  <trade-data></trade-data>
+  <!-- 農民困境：前有斷崖，後有追兵 -->
+  <helpless v-on:noteToggle="noteToggleContent"></helpless>
 
-  <!-- 農舍背後的無奈 -->
-  <helpless>農舍背後的無奈</helpless>
+  <!-- 農舍違法多，六萬護一生 -->
+  <violation></violation>
 
-  <!-- 農舍違法多，六萬護一生？ -->
-  <violation>農舍違法多，六萬護一生？</violation>
-
-
-
-  <!-- 農舍大全配 -->
-  <!-- <blueprint></blueprint> -->
-
-  <!-- 來來來看完你就變農舍達人了 -->
-  <!-- 自定義事件名稱：expand，觸發執行 expandable -->
-  <!-- <faq v-on:expand="expandable"></faq> -->
-
-  <!-- 環景 -->
-  <!-- <panorama></panorama> -->
-
-  <!-- 田中央 -->
-  <!-- <gallery></gallery> -->
-
-  <!-- 結語 -->
+  <!-- 顧好農業，才能管好農舍 -->
   <conclusion></conclusion>
-
-  <!-- 農舍面面觀 -->
-  <!-- <opinion v-on:expand="expandable"></opinion> -->
 
   <!-- ending -->
   <ending></ending>
-  <!--
-  <section class="chapter ending">
-    <extend></extend>
-    <credit v-bind:credit="creditList"></credit>
-  <div class="extra">
-    <div class="centerwpr">
-      <section class="related">
-        <iframe src="https://www.mirrormedia.mg/project-list/dark?excluding=marathon"  width="100%" frameborder="0" scrolling="no" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
-      </section>
-      <section class="facebook">
-        <div class="fb-comments" data-href="https://projects.mirrormedia.mg/project/marathon/" data-colorscheme="light" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
-      </section>
-  </div>
-  </div>
-  </section>
-  -->
-
 
 
   <div class="navwpr" v-bind:class="{open: navOpen}">
@@ -166,6 +127,9 @@
   //scene
   import {setScene} from './scene/main.js';
 
+  //check device
+  import {currDevice} from '../../util/comm.js';
+
   export default {
     name: 'FarmhouseProject',
     components: {
@@ -183,7 +147,6 @@
       'violation': violation,    
       'conclusion': conclusion,      
       'ending': ending,
-      // 'credit': credit,
 
       //standalone
       'faq': Faq,
@@ -232,6 +195,12 @@
           this.setScene();
         }
 
+        //ckeck current device
+        let currOS = this.$store.state.os;
+        console.log("current OS: " + currOS);
+
+        console.log("current Device: " + this.currDevice(currOS));
+
       }    
       // console.log(this.$route);
 
@@ -239,7 +208,7 @@
       // console.log(this.getParams);
       
       //get state
-      // console.log(this.$store.state)
+      //console.log(this.$store.state);
     },
     methods: {
 
@@ -275,13 +244,14 @@
         this.navOpen = !this.navOpen;
 
       },
+
       noteToggleContent: function(event){
         let trigger = event.currentTarget;
         let content = trigger.nextElementSibling;
         content.classList.toggle("expand");
+      },
 
-
-      }
+      currDevice
 
 
     } //methods
@@ -342,7 +312,14 @@ text-align:justify; text-justify:distribute;
 p.quote {font-size:22px;}
 p strong {color:#ff788d;}
 
+a {color:#79caa1;}
+
 img {display:block; max-width:100%;}
+
+.additional {padding:20px 35px; margin-top:30px;
+color:#1a1a1a;
+background-color:#ababab; border-radius:10px;
+}
 
 /* 收闔區塊 */
 .eContent {overflow:hidden; max-height:0;
@@ -503,11 +480,11 @@ margin-bottom:20px; padding-bottom:1px;
 }
 .dark .chart--header {border-left:4px solid #fff;}
 
-.chart--title {font-size:22px; line-height:1;
+.chart--title {font-size:22px; line-height:1.1;
 margin-bottom:10px;
 }
 .chart--source {font-size:16px; color:#888; line-height:1;}
-.chart--note {font-size:16px; color:#888;}
+.chart--note {font-size:16px; color:#888; margin-top:10px;}
 
 /* read position */
 #progresswpr {position:fixed; left:16px; bottom:0; width:12px; height:100%; z-index:9999;

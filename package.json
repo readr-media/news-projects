@@ -26,6 +26,7 @@
     "fullpage.js": "^2.9.6",
     "highcharts": "^6.0.3",
     "image-comparison": "^2.0.4",
+    "imagesloaded": "^4.1.4",
     "jquery": "^3.3.1",
     "kc-scroll": "^0.2.70",
     "lodash": "^4.17.4",

@@ -5,7 +5,10 @@ export default function chartData() {
             plotBackgroundColor: '',
             plotBorderWidth: null,
             plotShadow: false,
-            type: 'pie'
+            type: 'pie',
+            marginTop:20,
+            marginBottom: 40,
+            backgroundColor: '#273947'
         },
         credits: {
             enabled: false
@@ -30,9 +33,9 @@ export default function chartData() {
                 dataLabels: {
                     enabled: true,
                     format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    color: '#1A1A1A',
+                    color: '#ababab',
                              style:{
-                                 fontSize: '16px',
+                                 fontSize: '12px',
                                  textOutline: '0px'
                         }
                 }
@@ -44,11 +47,11 @@ export default function chartData() {
             data: [{
                 name: '一般農業區',
                 y: 19.6,
-                color:'#808080'
+                color:'#ababab'
             }, {
                 name: '特定農業區',
                 y: 80.4,
-                color:'#C1272D',
+                color:'#ff7b8f',
                 sliced: true,
                 selected: true
             }]

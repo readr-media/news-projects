@@ -2,8 +2,8 @@
 <div class="comparisonwpr">
 
     <div class="js-comparison-container">
-          <img class="comparison-image" src="/proj-assets/farmhouse/images/sample/fhsample-03.jpg">
-          <img class="comparison-image" src="/proj-assets/farmhouse/images/sample/fhsample-02.jpg">
+          <img class="comparison-image" src="/proj-assets/farmhouse/images/gallery/com-before.jpg">
+          <img class="comparison-image" src="/proj-assets/farmhouse/images/gallery/com-after.jpg">
     </div>
 
 </div>
@@ -11,6 +11,7 @@
 
 <script>
 import ImageComparison from "image-comparison";
+import imagesLoaded from 'imagesLoaded';
 
 export default {
   components: {},
@@ -40,7 +41,29 @@ export default {
       $afterContainer.append(afterEl);
 
       let handEl = '<div class="separator--hand"></div>';
-      $(".comparison-separator").append(handEl);
+      $(".comparison-separator").append(handEl);  
+
+    },
+    setDescWidth: function(){
+
+      //set desc width
+      let comparisonWidget = document.querySelector(".comparison-widget");
+      let compareDesc = document.querySelectorAll(".compare--desc");
+
+      window.addEventListener('resize',function(event){
+        let widgetWidth = comparisonWidget.offsetWidth;
+        // console.log(widgetWidth);
+        for(let i = 0; i < compareDesc.length; i++){
+
+          compareDesc[i].style.width = widgetWidth + "px";
+
+        }
+
+      });
+
+      let resizeEvent = new Event('resize');
+      window.dispatchEvent(resizeEvent);
+
 
     }
 
@@ -54,6 +77,7 @@ export default {
 
     new ImageComparison({
       container: imgContainer,
+      // startPosition: 55,
       data: [
         {
           image: images[0],
@@ -68,6 +92,13 @@ export default {
 
     this.insertContent();
 
+    let setDescWidth = this.setDescWidth;
+
+    imagesLoaded( document.querySelector('.comparisonwpr'), function() {
+      // console.log('all images are loaded');
+      setDescWidth();
+    });
+
   }
 };
 </script>
@@ -79,20 +110,23 @@ export default {
 .comparisonwpr {width:100%; height:100vh; margin:0 auto;
 display:flex; justify-content:center; align-items:center;
 position:relative;
-padding-top:15px;
+/* padding-top:15px; */
 box-sizing:border-box;
 }
 
-.compare--desc {width:100vw; height:30vh;
+.comparison-item__image {max-height:100vh;}
+.comparison-item__label {top:15px;}
+
+.compare--desc {width:100%; height:30vh;
 position:absolute; left:0; bottom:0;
 display:flex; justify-content:center; align-items:center;
 }
-.compare--desc .innerwpr {width:70%;
+.compare--desc .innerwpr {
 font-size:16px; text-shadow:0 1px 1px rgba(0, 0, 0, 0.8);
 color:#fff; text-align:center;
 }
 
-.separator--hand {width:100px; height:100%; position:absolute; left:50%; top:0;
+.separator--hand {width:100px; height:60%; position:absolute; left:50%; top:20%;
 margin-left:-50px;
 }
 .separator--hand:before {content:""; display:block;

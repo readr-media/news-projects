@@ -5,6 +5,8 @@ export function setScene() {
     require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap');
     require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
 
+    const common = require('../util/common.js');
+
     //scrollmagic controller       
     const controller = new ScrollMagic.Controller();
 
@@ -152,7 +154,7 @@ export function setScene() {
         //不設定 duration，將 setPin 設定在子內容區塊，nav 捲動定位才會正確
     }).setPin("#mapPinContainer", {
         pushFollowers: false
-    });
+    })
     // .addIndicators({name: "opinion"});
 
     //conclusion 往上蓋住 violation    
@@ -237,6 +239,7 @@ export function setScene() {
 
         //fix ios 100vh height issue
         openingHeightFix(wheight);
+
         
         /*
         //get window width

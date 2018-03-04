@@ -2,11 +2,11 @@ export default function chartData() {
 
     return {
         chart: {
-            type: 'spline',
+            type: 'line',
             borderWidth: 0,
             marginTop:20,
-            marginBottom: 40,
-            backgroundColor: '',
+            marginBottom: 60,
+            backgroundColor: '#273947',
         },
         credits: {
             enabled: false
@@ -21,64 +21,56 @@ export default function chartData() {
             text: ''
         },
         xAxis: {
-            type: 'datetime',
-            dateTimeLabelFormats: { // don't display the dummy year
-                month: '%b',
-                year: '%y'
-            },
-            title: {
-                text: '年份'
-            }
-        },
-        yAxis: {
-            title: {
-                text: '農舍交易量 (棟)'
-            },
-            min: 0
-        },
-        tooltip: {
-            headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x:%y}: {point.y:.0f} 棟',
-            enabled: true
-        },
-    
-        plotOptions: {
-            spline: {
-                marker: {
-                    enabled: false
+        
+            categories: ['2012 Q3', '2012 Q4', '2013 Q1', '2013 Q2', '2013 Q3', '2013 Q4', '2014 Q1', '2014 Q2', '2014 Q3', '2014 Q4', '2015 Q1', '2015 Q2', '2015 Q3','2015 Q4', '2016 Q1','2016 Q2', '2016 Q3', '2016 Q4', '2017 Q1', '2017 Q2', '2017 Q3', '2017 Q4',],
+            labels: {
+                overflow: 'justify',
+                style: {
+                    color: '#ababab'
                 }
             }
         },
-    
+        yAxis: {
+                gridLineColor: '#ababab',
+            gridLineWidth: 1,
+            title: {
+                text: '件數',
+                style: {
+                color: '#ababab'
+                }
+            },
+            labels: {
+                overflow: 'justify',
+                style: {
+                    color: '#ababab'
+                }
+            }
+        },
+        tooltip: {
+        //borderColor: null
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> 件<br/>',
+            shared: false,
+            backgroundColor: '#ffffff',
+            borderWidth: 0,
+            enabled:true
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: false,
+                    color: '#ababab',
+                             style:{
+                             fontSize: '9px',
+                             textOutline: '0px'
+                    }
+                },
+                enableMouseTracking: true
+            }
+        },
         series: [{
-            name: '2012-2017 農舍交易量',
-            // Define the data points. All series have a dummy year
-            // of 1970/71 in order to be compared on the same x axis. Note
-            // that in JavaScript, months start at 0 for January, 1 for February etc.
-            data: [
-                [Date.UTC(2012, 7), 45],
-                [Date.UTC(2012, 10), 77],
-                [Date.UTC(2013, 1), 50],
-                [Date.UTC(2013, 4), 94],
-                [Date.UTC(2013, 7), 80],
-                [Date.UTC(2013, 10), 118],
-                [Date.UTC(2014, 1), 91],
-                [Date.UTC(2014, 4), 104],
-                [Date.UTC(2014, 7), 97],
-                [Date.UTC(2014, 10), 127],
-                [Date.UTC(2015, 1), 89],
-                [Date.UTC(2015, 4), 81],
-                [Date.UTC(2015, 7), 50],
-                [Date.UTC(2015, 10), 38],
-                [Date.UTC(2016, 1), 37],
-                [Date.UTC(2016, 4), 63],
-                [Date.UTC(2016, 7), 55],
-                [Date.UTC(2016, 10), 47],
-                [Date.UTC(2017, 1), 40],
-                [Date.UTC(2017, 4), 40],
-                [Date.UTC(2017, 7), 37],
-                [Date.UTC(2017, 10), 7]
-            ]
+            name: '件數',
+            data: [45, 77, 50, 94, 80, 118, 91, 104, 97, 127, 89, 81, 50, 38, 37, 63, 55, 47, 40, 40, 37, 7],
+            color: '#ff7b8f'
         }]
 
     }; //return

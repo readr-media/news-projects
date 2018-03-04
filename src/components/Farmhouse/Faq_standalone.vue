@@ -5,7 +5,7 @@
       <div class="header--content">
         <div class="centerwpr">
           <h2>來來來看完你就變農舍達人了</h2>
-          <p>此處一段引言，負家還不南行生較學裝生代可麼說場又賣腦處也問入不之仍始現人眾，不世景畫爸，員前那工機最腦片任工終少意成打政定年人部道放子，果開小打間爸社人懷，看通省到首品天他極類笑二手長半之麗立完里。來雖個深起是念用還，算刻結可消是看色！突體的論……突低開夜事樣保時防只法面說界去英時：一候西而名國史本影可將準界方投。</p>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo.</p>
         </div>
       </div>
     </div>
@@ -144,6 +144,10 @@ export default {
 
 </script>
 
+<style>
+.faq--a p {margin-top:15px;}
+.faq--a ol {margin-top:15px; margin-bottom:0;}
+</style>
 
 <style scoped>
 
@@ -162,11 +166,13 @@ margin-bottom:50px;
 
 /* .faq--container {padding-top:50px;} */
 .faq--entry {margin-bottom:50px;}
+.faq--entry:last-child {margin-bottom:0;}
 
-.faq--q {margin-bottom:0px; cursor:pointer;
+.faq--q {margin-bottom:0px;
 color:#273947; font-size:26px;
 position:relative; 
 display:flex; align-items:center;
+/* cursor:pointer; */
 }
 /* .faq--q:hover {color:#7ccfa5;} */
 .faq--q:before {content:"Q"; width:40px; height:40px; margin-right:14px;
@@ -177,6 +183,7 @@ flex-shrink:0;
 }
 
 .faq--a.eContent {max-height:none;}
+.faq--a {padding-top:10px;}
 
 .faq--readmore {clear:both; position:relative;
 color:#273947; font-weight:bold; text-align:center;

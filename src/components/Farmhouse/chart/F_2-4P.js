@@ -5,7 +5,10 @@ export default function chartData() {
             plotBackgroundColor: '',
             plotBorderWidth: null,
             plotShadow: false,
-            type: 'pie'
+            type: 'pie',
+            marginTop:20,
+            marginBottom: 40,
+            backgroundColor: '#273947'
         },
         credits: {
             enabled: false
@@ -30,9 +33,9 @@ export default function chartData() {
                 dataLabels: {
                     enabled: true,
                     format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    color: '#1A1A1A',
+                    color: '#ababab',
                              style:{
-                                 fontSize: '16px',
+                                 fontSize: '12px',
                                  textOutline: '0px'
                         }
                 }
@@ -42,29 +45,13 @@ export default function chartData() {
             name: '完工農舍交易時間',
             colorByPoint: true,
             data: [{
-                name: '5 年以上',
-                y: 40.5,
-                color:'#eeeeee'
-            },{
-                name: '4-5 年',
-                y: 7.1,
-                color:'#dddddd'
-            },{
-                name: '3-4 年',
-                y: 6.9,
-                color:'#cccccc'
-            },{
-                name: '2-3 年',
-                y: 6.8,
-                color:'#bbbbbb'
-            },{
-                name: '1-2 年',
-                y: 8.3,
-                color:'#aaaaaa'
+                name: '五年內售出',
+                y: 60,
+                color:'#ff7b8f'
             }, {
-                name: '1 年內',
-                y: 30.4,
-                color:'#C1272D',
+                name: '五年後售出',
+                y: 40,
+                color:'#ababab',
                 sliced: true,
                 selected: true
             }]
