@@ -46,6 +46,14 @@
     <!-- ending -->
     <ending></ending>
 
+    <div id="fixHeader">
+      <h2>農舍面面觀</h2>
+    </div>
+
+    <div id="standProgress">
+      <div class="stand--percentage"></div>
+    </div>
+
   </section>
 </template>
 
@@ -85,11 +93,79 @@ export default {
         }
 
 
-    }
+    },
+
+    setScene: function(){
+
+          const ScrollMagic = require("scrollmagic");
+          const { TweenMax, TimelineMax } = require('gsap');
+          require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap');
+          require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
+
+          let controller = new ScrollMagic.Controller();          
+
+          let navScene = new ScrollMagic.Scene({
+            triggerElement: ".header--content",
+            triggerHook: "onLeave"
+          })
+          .setTween(TweenMax.fromTo(
+              "#fixHeader", 1, {top:"-60px"}, {top:"0"}
+          ));
+          // .addIndicators({name: "nav", colorStart: "red"});
+
+          let standProgress = new ScrollMagic.Scene({
+            // duration: ""
+          })
+          .setTween(TweenMax.fromTo(
+              ".stand--percentage", 1, {width:"0"}, {width:"100%"}
+          ));
+
+          controller.addScene([
+            navScene,
+            standProgress
+          ]);
+
+          let header = document.querySelector(".header--content");
+
+          function resetProgress(){
+            setTimeout(function(){
+              let fullPage = document.querySelector(".standalone");
+              let fullPageHeight = fullPage.offsetHeight;
+              standProgress.duration(fullPageHeight).refresh();
+              console.log("progress update");
+            },500);            
+          } 
+
+          $(".eTrigger").click(function(){
+            resetProgress();
+          });
+
+          window.addEventListener('resize',function(event){
+            
+            let headerHeight = header.offsetHeight;
+            navScene.duration(headerHeight).refresh();
+
+            resetProgress();
+
+
+          });
+
+          let resizeEvent = new Event('resize');
+
+          //trigger window resize once
+          window.dispatchEvent(resizeEvent);
+
+        }
 
 
   },
   mounted: function(){
+
+    window.$ = require('jquery');
+
+    if (process.browser) {
+        this.setScene();
+      }
 
     
   }

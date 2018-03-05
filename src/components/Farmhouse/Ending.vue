@@ -2,7 +2,7 @@
   <div class="chapter ending">
   <section class="extend">
     <div class="centerwpr">
-        <h2>延伸閱讀</h2>        
+        <h2>繼續閱讀</h2>        
         <div class="extendwpr">
             <a class="extend--entry home" href="/project/farmhouse/" target="_blank">
                 <img src="/proj-assets/farmhouse/images/sample/extend01.jpg" />
@@ -104,19 +104,19 @@ transition:400ms; transition-property:opacity;
 
 /* home, standalone page */
 .home .extend--entry.home {pointer-events:none; cursor:default;}
-.home .extend--entry.home .extend--overlay {opacity:0.9 !important;}
+.home .extend--entry.home .extend--overlay {opacity:1 !important;}
 .home .extend--entry.home .extend--title {opacity:0.8 !important;}
 
 .opinion .extend--entry.opinion {pointer-events:none; cursor:default;}
-.opinion .extend--entry.opinion .extend--overlay {opacity:0.9 !important;}
+.opinion .extend--entry.opinion .extend--overlay {opacity:1 !important;}
 .opinion .extend--entry.opinion .extend--title {opacity:0.8 !important;}
 
 .faq .extend--entry.faq {pointer-events:none; cursor:default;}
-.faq .extend--entry.faq .extend--overlay {opacity:0.9 !important;}
+.faq .extend--entry.faq .extend--overlay {opacity:1 !important;}
 .faq .extend--entry.faq .extend--title {opacity:0.8 !important;}
 
 .gallery .extend--entry.gallery {pointer-events:none; cursor:default;}
-.gallery .extend--entry.gallery .extend--overlay {opacity:0.9 !important;}
+.gallery .extend--entry.gallery .extend--overlay {opacity:1 !important;}
 .gallery .extend--entry.gallery .extend--title {opacity:0.8 !important;}
 
 
@@ -145,6 +145,15 @@ background-color:transparent;
 background-color:transparent;
 }
 
+@media screen and (max-width: 800px) {
 
+  .extend .centerwpr {padding:0 30px;}
+  .extendwpr {flex-wrap:wrap;}
+  .extend--entry {width:calc(50% - 15px);}
+
+  .extend--entry.faq {margin-top:30px;}
+  .extend--entry.gallery {margin-top:30px;}
+
+}
 
 </style>

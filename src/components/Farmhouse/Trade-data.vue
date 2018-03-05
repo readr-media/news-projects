@@ -4,6 +4,10 @@
     <div class="centerwpr dark">
 
       <h2>老農成為農舍主力賣家</h2>
+
+      <!-- <div v-if="currDevice == 'desktop'">Desktop</div>
+      <div v-if="currDevice == 'mobile'">Mobile</div> -->
+
       <p>農舍成為住宅產品，在當前的法規要求下，自然也需要公開透明，讓所有人了解農舍的交易狀況。而我們從資料中發現，宜蘭農舍的主力賣家，是在西元 2000 年前就擁有農地的農民，也就是俗稱的「老農」。</p>
       <p>根據內政部實價登錄公開資訊，從 2012 ～ 2017 這 5 年間，宜蘭在農舍交易總量再度拿下全國第一。問題在於，宜蘭縣農舍交易中，共計 1,183 筆農舍（80.4%）交易位在特定農業區中，土地總面積達 165.64 公頃。</p>
 
@@ -11,14 +15,23 @@
         <div class="chart--header">
           <div class="chart--title">全國農舍交易量前五名縣市</div>
           <div class="chart--source">資料來源：內政部實價登錄系統；鏡傳媒整理</div>
+        </div>        
+
+        <div v-if="currDevice == 'mobile'">
+          <img src="/proj-assets/farmhouse/images/chart/2-1-phone.png" />
         </div>
-        <highcharts :options="chartDataF_2_1()" ref="highcharts"></highcharts>
-        <div class="chart--note"></div>
+        <div v-else>
+          <highcharts :options="chartDataF_2_1()" ref="highcharts"></highcharts>
+        </div>
+
+        <div class="chart--note"><strong>補充說明：</strong><br />本文所統計之農舍實價交易資訊，皆為交易筆數，而非實際農舍筆數。舉例來說，假如同一棟農舍經多次轉手交易，會被計算為多筆，所以在統計上的交易「農舍數量」，會略低於「交易筆數」。問題在於，由於實價登錄並沒有要求農地交易（不會註記為農舍）一定要註記老農配建農舍，而農地交易又高達 7,557筆，所以這邊可能會有不小的黑數，這也是本文的研究限制，特此說明。</div>
       </div>
+
+      <!-- <div class="additional"><strong>補充說明：</strong><br />本文所統計之農舍實價交易資訊，皆為交易筆數，而非實際農舍筆數。舉例來說，假如同一棟農舍經多次轉手交易，會被計算為多筆，所以在統計上的交易「農舍數量」，會略低於「交易筆數」。問題在於，由於實價登錄並沒有要求農地交易（不會註記為農舍）一定要註記老農配建農舍，而農地交易又高達 7,557筆，所以這邊可能會有不小的黑數，這也是本文的研究限制，特此說明。</div> -->
 
       <div class="chartwpr">
         <div class="chart--header">
-          <div class="chart--title">宜蘭縣農舍交易時間曲線圖</div>
+          <div class="chart--title">宜蘭縣農舍交易時間折線圖</div>
           <div class="chart--source">資料來源：內政部實價登錄系統；鏡傳媒整理</div>
         </div>
         <highcharts :options="chartDataF_2_2()" ref="highcharts"></highcharts>
@@ -32,8 +45,8 @@
 
       <!-- Google Map -->
       <!-- <div id="mapPinTrigger"></div> -->
-      <!-- <google-map></google-map> -->
-      <div class="map-container" style="width:100%; height:100vh; background-image:url('/proj-assets/farmhouse/images/newsmarket/farmhouse-01.jpg'); background-size:cover; background-position:center top;"></div>
+      <google-map></google-map>
+      <!-- <div class="map-container" style="width:100%; height:100vh; background-image:url('/proj-assets/farmhouse/images/newsmarket/farmhouse-01.jpg'); background-size:cover; background-position:center top;"></div> -->
 
       <div id="mapPinContainer">
       <div class="centerwpr dark" id="mapText">
@@ -52,7 +65,13 @@
               <div class="chart--source">資料來源：農委會</div>
             </div> -->
             <div class="chart--source"></div>
-            <highcharts :options="chartDataF_2_1P()" ref="highcharts"></highcharts>
+            <!-- <highcharts :options="chartDataF_2_1P()" ref="highcharts"></highcharts> -->
+            <div v-if="currDevice == 'mobile'">
+              <img src="/proj-assets/farmhouse/images/chart/p-1-phone.png" />
+            </div>
+            <div v-else>
+              <highcharts :options="chartDataF_2_1P()" ref="highcharts"></highcharts>
+            </div>
             <!-- <div class="chart--note"></div> -->
           </div>
 
@@ -64,7 +83,13 @@
               <div class="chart--source">資料來源：農委會</div>
             </div> -->
             <div class="chart--source"></div>
-            <highcharts :options="chartDataF_2_2P()" ref="highcharts"></highcharts>
+            <!-- <highcharts :options="chartDataF_2_2P()" ref="highcharts"></highcharts> -->
+            <div v-if="currDevice == 'mobile'">
+              <img src="/proj-assets/farmhouse/images/chart/p-2-phone.png" />
+            </div>
+            <div v-else>
+              <highcharts :options="chartDataF_2_2P()" ref="highcharts"></highcharts>
+            </div>
             <!-- <div class="chart--note"></div> -->
           </div>
 
@@ -76,7 +101,13 @@
               <div class="chart--source">資料來源：農委會</div>
             </div> -->
             <div class="chart--source"></div>
-            <highcharts :options="chartDataF_2_3P()" ref="highcharts"></highcharts>
+            <!-- <highcharts :options="chartDataF_2_3P()" ref="highcharts"></highcharts> -->
+            <div v-if="currDevice == 'mobile'">
+              <img src="/proj-assets/farmhouse/images/chart/p-3-phone.png" />
+            </div>
+            <div v-else>
+              <highcharts :options="chartDataF_2_3P()" ref="highcharts"></highcharts>
+            </div>
             <div class="chart--note">註：根據宜蘭縣政府統計資料，2006~2017年共發出 6,662 張農舍使用執照</div>
           </div>
 
@@ -88,14 +119,18 @@
               <div class="chart--source">資料來源：農委會</div>
             </div> -->
             <div class="chart--source"></div>
-            <highcharts :options="chartDataF_2_4P()" ref="highcharts"></highcharts>
+            <!-- <highcharts :options="chartDataF_2_4P()" ref="highcharts"></highcharts> -->
+            <div v-if="currDevice == 'mobile'">
+              <img src="/proj-assets/farmhouse/images/chart/p-4-phone.png" />
+            </div>
+            <div v-else>
+              <highcharts :options="chartDataF_2_4P()" ref="highcharts"></highcharts>
+            </div>
             <div class="chart--note">註：有 13 筆交易資料沒有完工時間，所以交易總量定為 1,458 筆。另，有 14 筆資料的交易時間早於完工時間，所以我們將之納入 0～1 年的交易區間。</div>
           </div>
 
           <p><strong>這些交易資訊所傳達的警訊是——農舍交易的主力賣家，是早在 2000 年《農發條例》修訂前就持有農地的「老農」。</strong>宜蘭房仲呂柏凱觀察：「申請蓋農舍的，講白了就是打算放棄（農業）的人。」</p>
-          <p>宜蘭農民陳章楠則直言：<strong>「你賣地（農舍）就是想離開農業啊，所以禁農舍，實際上就是影響他們離開農業的權益，而不是留下來。大家說農民要放棄農業，活不下去了，那以前還不是活下來了？現在農地一坪賣兩萬，你幹嘛還種田？」</strong></p>
-
-          <div class="additional"><strong>補充說明：</strong><br />本文所統計之農舍實價交易資訊，皆為交易筆數，而非實際農舍筆數。舉例來說，假如同一棟農舍經多次轉手交易，會被計算為多筆，所以在統計上的交易「農舍數量」，會略低於「交易筆數」。問題在於，由於實價登錄並沒有要求農地交易（不會註記為農舍）一定要註記老農配建農舍，而農地交易又高達 7,557筆，所以這邊可能會有不小的黑數，這也是本文的研究限制，特此說明。</div>
+          <p><strong>宜蘭農民陳章楠則直言：「你賣地（農舍）就是想離開農業啊，所以禁農舍，實際上就是影響他們離開農業的權益，而不是留下來。大家說農民要放棄農業，活不下去了，那以前還不是活下來了？現在農地一坪賣兩萬，你幹嘛還種田？」</strong></p>
 
       </div>
       </div>
@@ -119,6 +154,9 @@ import chartDataF_2_4P from './chart/F_2-4P.js';
 
 import googleMap from './Google-map.vue';
 
+//check device
+// import {currDevice} from '../../util/comm.js';
+
 export default {
 
   data () {
@@ -134,6 +172,10 @@ export default {
 
   components: {
       'google-map': googleMap
+  },
+
+  props: {    
+    currDevice: String
   },
 
   methods: {
@@ -163,14 +205,20 @@ export default {
         pinMap
       ]);
 
-    }
+    },
+
+    // currDevice
     
   },
   mounted: function(){
 
     if (process.browser) {
-      this.setSceneMap();
+      this.setSceneMap();      
     }
+
+    // let currOS = this.$store.state.os;
+    // console.log("current Device: " + this.currDevice(currOS));
+    // console.log(currDevice);
 
   }
     
@@ -193,5 +241,10 @@ color:#1a1a1a;
 background-color:#fff;
 }
 
+@media screen and (max-width: 800px) {
+
+  #mapPinContainer {padding-bottom:0;}
+  
+}
 
 </style>

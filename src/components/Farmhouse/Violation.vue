@@ -14,7 +14,13 @@
           </div>
 
           <div class="expandable">              
-              <div class="eTable" id="tableFull"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div>
+              <!-- <div class="eTable" id="tableFull"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div> -->
+              <div v-if="currDevice == 'mobile'">
+                <div class="eTable" id="tablePhone"><img src="/proj-assets/farmhouse/images/chart/c4-1-phone.png" /></div>
+              </div>
+              <div v-else>
+                <div class="eTable" id="tableFull"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div>
+              </div>
               <div class="eTrigger" v-on:click="toggleContent"><div class="icon"></div></div>
           </div>
 
@@ -50,6 +56,10 @@
 import imagesLoaded from 'imagesLoaded';
 
 export default {
+
+  props: {    
+    currDevice: String
+  },
 
   methods: {     
 
@@ -180,7 +190,7 @@ export default {
 
 #vioHeader {width:100%; height:100vh; position:relative;
 top:0 !important;
-background-image:url("/proj-assets/farmhouse/images/newsmarket/material-03.jpg");
+background-image:url("/proj-assets/farmhouse/images/IMG_7169.jpg");
 background-repeat:no-repeat; background-size:cover;
 background-position:center top;
 }
@@ -216,15 +226,20 @@ position:absolute; left:50%; bottom:10px; margin-left:-27px;
 border:5px solid #b4c6d5; border-radius:50%; cursor:pointer;
 display:flex; justify-content:center; align-items:center;
 }
-.eTrigger .icon:before {content:"+"; 
-font-size:36px; color:#b4c6d5; font-weight:bold; line-height:1;
+.eTrigger .icon:before {content:""; display:block; width:34px; height:34px;
+position:absolute; left:0; top:0;
+background-image:url("/proj-assets/farmhouse/images/slice02.png");
+background-size:34px auto; background-repeat:no-repeat;
+background-position:left top;
 }
-.expand .eTrigger .icon:before {content:"-";}
+.expand .eTrigger .icon:before {background-position:left bottom;}
 
 
 @media screen and (max-width: 800px) {
 
   .violation .centerwpr {padding:50px 30px 80px 30px;}
+
+  #vioPinContainer {padding-bottom:0;}
 
 }
 

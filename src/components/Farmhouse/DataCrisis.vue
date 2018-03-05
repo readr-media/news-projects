@@ -12,10 +12,17 @@
 
       <div class="chartwpr">
         <div class="chart--header">
-          <div class="chart--title">全國擁有最多農舍的前五名縣市。農委會農地現況盤查發現，宜蘭農舍最多，違規情況最嚴重。</div>
+          <div class="chart--title">全國擁有最多農舍的前五名縣市。農委會農地現況盤查發現，宜蘭農舍最多，違規情況最嚴重</div>
           <div class="chart--source">資料來源：農委會，鏡傳媒整理</div>
         </div>
-        <highcharts :options="chartDataF_1_1()" ref="highcharts"></highcharts>
+
+        <div v-if="currDevice == 'mobile'">
+          <img src="/proj-assets/farmhouse/images/chart/1-1-phone.png" />
+        </div>
+        <div v-else>
+          <highcharts :options="chartDataF_1_1()" ref="highcharts"></highcharts>
+        </div>
+
         <div class="chart--note">註1：此農舍統計只包含平地農業土地，不包含山坡地。<br />註2：此處單位為「土地筆數」，因此一筆土地上可能會有數棟建築。<br />註3：此處所註記的違規，是農舍興建後剩餘農地沒有農用，也就是所謂的農地違規；至於農舍建築違規，因非農委會主管項目，故不列入統計。</div>
       </div>
 
@@ -24,10 +31,17 @@
 
       <div class="chartwpr">
         <div class="chart--header">
-          <div class="chart--title">前五大農舍縣市，農舍佔用平地農地面積。</div>
+          <div class="chart--title">前五大農舍縣市，農舍佔用平地農地面積</div>
           <div class="chart--source">資料來源：農委會，鏡傳媒整理</div>
         </div>
-        <highcharts :options="chartDataF_1_2()" ref="highcharts"></highcharts>
+        <!-- <highcharts :options="chartDataF_1_2()" ref="highcharts"></highcharts> -->
+        <div v-if="currDevice == 'mobile'">
+          <img src="/proj-assets/farmhouse/images/chart/1-2-phone.png" />
+        </div>
+        <div v-else>
+          <highcharts :options="chartDataF_1_2()" ref="highcharts"></highcharts>
+        </div>
+
         <div class="chart--note"></div>
       </div>
 
@@ -52,6 +66,10 @@ export default {
       chartDataF_1_1: chartDataF_1_1,
       chartDataF_1_2: chartDataF_1_2
     }
+  },
+
+  props: {    
+    currDevice: String
   },
 
   methods: {

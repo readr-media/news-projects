@@ -75,7 +75,7 @@ export default {
 
 #soHeader {width:100%; height:100vh; position:relative;
 top:0 !important;
-background-image:url("/proj-assets/farmhouse/images/newsmarket/material-05.jpg");
+background-image:url("/proj-assets/farmhouse/images/EDD_5082.jpg");
 background-repeat:no-repeat; background-size:cover;
 background-position:center top;
 }

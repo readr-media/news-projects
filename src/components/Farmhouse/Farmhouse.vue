@@ -3,8 +3,8 @@
 <article class="farmhouse opinion" v-if="getParams == 'opinion'">
   <!-- /project/farmhouse/opinion -->
   <!-- 農舍面面觀 -->
-  <logo :top="`15px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLinkOpinion" :top="`15px`" :left="`69px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></share>
+  <logo :top="`8px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
+  <share :shareUrl="shareLinkOpinion" :top="`8px`" :left="`69px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></share>
   
   <opinion v-on:expand="expandable"></opinion>
 </article>
@@ -21,8 +21,8 @@
 <article class="farmhouse gallery" v-else-if="getParams == 'gallery'">
   <!-- /project/farmhouse/gallery -->
   <!-- 田中央 -->
-  <logo :top="`25px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLink" :top="`25px`" :left="`69px`" :bgColor="`#79cfa8`"></share>
+  <logo :top="`15px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
+  <share :shareUrl="shareLink" :top="`15px`" :left="`69px`" :bgColor="`#79cfa8`"></share>
   
   <gallery></gallery>
 
@@ -42,19 +42,19 @@
   <sowhat></sowhat>
 
   <!-- 宜蘭農舍四多：數量多、違規多、佔用農地多、交易多 -->
-  <data-crisis v-on:noteToggle="noteToggleContent"></data-crisis>
+  <data-crisis v-on:noteToggle="noteToggleContent" v-bind:currDevice="currentDevice"></data-crisis>
 
   <!-- 為什麼是宜蘭？ -->
   <why-yilan>為什麼是宜蘭？</why-yilan>
 
   <!-- 老農成為農舍主力賣家 -->
-  <trade-data v-on:noteToggle="noteToggleContent"></trade-data>
+  <trade-data v-on:noteToggle="noteToggleContent" v-bind:currDevice="currentDevice"></trade-data>
 
   <!-- 農民困境：前有斷崖，後有追兵 -->
   <helpless v-on:noteToggle="noteToggleContent"></helpless>
 
   <!-- 農舍違法多，六萬護一生 -->
-  <violation></violation>
+  <violation v-bind:currDevice="currentDevice"></violation>
 
   <!-- 顧好農業，才能管好農舍 -->
   <conclusion></conclusion>
@@ -65,7 +65,7 @@
 
   <div class="navwpr" v-bind:class="{open: navOpen}">
     <ul class="nav">
-      <li v-for="item in chapterTitle" class="navList" v-scroll-to="item.id">{{item.title}}</li>
+      <li v-for="item in chapterTitle" class="navList" v-scroll-to="item.id" v-on:click="navSlide">{{item.abbr}}</li>
     </ul>
     <div class="navClose" v-on:click="navSlide">
       <div class="icon"></div>
@@ -79,7 +79,7 @@
   <div id="progresswpr">
     <div class="progress" v-for="item in chapterTitle" v-scroll-to="item.id">
         <div class="progress--percentage"></div>
-        <div class="progress--title">{{item.title}}</div>
+        <div class="progress--title">{{item.abbr}}</div>
     </div>
   </div>
 
@@ -162,7 +162,9 @@
         shareLinkGallery: `${SITE_URL}farmhouse/gallery`,
 
         chapterTitle: chapterTitle,
-        navOpen: false
+        navOpen: false,
+
+        currentDevice: ''
 
       }
     },
@@ -189,17 +191,20 @@
     },
     mounted () { 
 
-      if (process.browser) {
+      if (process.browser) {        
 
         if(!this.getParams){
-          this.setScene();
-        }
+
+          this.setScene();        
+          
+        }        
 
         //ckeck current device
         let currOS = this.$store.state.os;
-        console.log("current OS: " + currOS);
-
-        console.log("current Device: " + this.currDevice(currOS));
+        // console.log("current OS: " + currOS);
+        // console.log("current Device: " + this.currDevice(currOS));
+        this.currentDevice = this.currDevice(currOS);
+        console.log(this.currentDevice);
 
       }    
       // console.log(this.$route);
@@ -262,6 +267,7 @@
 /* Common */
 .farmhouse {
 font-size:19px; line-height:1.8; color:#1a1a1a;
+font-family:"微軟正黑體", "Microsoft JhengHei", sans-serif;
 }
 
 .logo {background-size:auto 100% !important;}
@@ -290,6 +296,10 @@ background-color:#273947; color:#fff;
 
 .standalone .centerwpr {padding:50px 30px; max-width:900px;}
 .standalone .header--content .centerwpr {padding:0 30px;}
+
+h1,h2,h3,h4,h5,h6 {
+font-family:"Noto Sans TC", "Microsoft JhengHei", -apple-system, sans-serif;  
+}
 
 h2,h3,h4,h5 {margin:0;
 letter-spacing:1px; line-height:1.2; 
@@ -405,8 +415,9 @@ display:flex; flex-direction:column; justify-content:flex-end;
 }
 .header--content {
 padding:50px 0; color:#fff;  
-background-color:#273947;  
+background-color:rgba(39,57,71,1);  
 }
+.faq .header--content {background-color:rgba(39,57,71,0.9);}
 .header--content h2 {color:#fff;}
 
 /* Chapter Nav */
@@ -487,7 +498,7 @@ margin-bottom:10px;
 .chart--note {font-size:16px; color:#888; margin-top:10px;}
 
 /* read position */
-#progresswpr {position:fixed; left:16px; bottom:0; width:12px; height:100%; z-index:9999;
+#progresswpr {position:fixed; left:16px; top:10%; width:12px; height:80%; z-index:9999;
 display:flex; justify-content:center; align-items:center;
 flex-direction:column;
 transition:700ms; transition-property:left;
@@ -515,6 +526,18 @@ opacity:0;
 #progresswpr:hover .progress--title {opacity:0;}
 #progresswpr:hover .progress:hover .progress--title {opacity:1;}
 
+/* standalone progress */
+#standProgress {width:100%; height:10px;
+position:fixed; left:0; bottom:0;
+background-color:#273947;
+}
+#standProgress .stand--percentage {
+height:10px; width:0;
+background-color:#79cfa8;
+}
+
+
+
 /* 註 */
 .noteTrigger {display:inline-block; position:relative; margin-left:6px;
 cursor:pointer; color:#fff; text-align:center; line-height:32px;
@@ -536,6 +559,15 @@ border:2px solid #aaa; border-radius:8px;
 .dark .noteBlock {border:2px solid #888;}
 .noteBlock.expand {display:block;}
 
+/* standalone fix header */
+#fixHeader {width:100%; height:60px;
+position:fixed; left:0; top:-60px;
+background-color:#273947;
+display:flex; justify-content:center; align-items:center;
+}
+#fixHeader h2 {margin-bottom:0;
+font-size:24px; color:#fff;
+}
 
 /* expandable trigger */
 /* .eTrigger {clear:both; position:relative;

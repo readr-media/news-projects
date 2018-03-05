@@ -115,11 +115,12 @@ box-sizing:border-box;
 }
 
 .comparison-item__image {max-height:100vh;}
-.comparison-item__label {top:15px;}
+.comparison-item__label {top:15px; display:none;}
 
-.compare--desc {width:100%; height:30vh;
+.compare--desc {width:100%;
 position:absolute; left:0; bottom:0;
 display:flex; justify-content:center; align-items:center;
+padding-bottom:90px;
 }
 .compare--desc .innerwpr {
 font-size:16px; text-shadow:0 1px 1px rgba(0, 0, 0, 0.8);

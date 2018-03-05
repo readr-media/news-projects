@@ -162,7 +162,7 @@ export function setScene() {
         triggerElement: '.conclusion',
         triggerHook: "onEnter"
         //不設定 duration，將 setPin 設定在子內容區塊，nav 捲動定位才會正確
-    }).setPin("#vioPinContainer", {
+    }).setPin(".violation", {
         pushFollowers: false
     });
     // .addIndicators({name: "opinion"});

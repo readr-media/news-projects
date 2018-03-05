@@ -16,6 +16,8 @@ export default function chartData() {
                 color: '#ababab',
                 fontWeight: ''
             },
+    itemHiddenStyle: { color: '#1A1A1A' },
+    itemHoverStyle: { color: '#7ac9a2' },
             enabled:true,
             align: 'right',
             verticalAlign: 'bottom',
@@ -99,7 +101,7 @@ export default function chartData() {
             }
         },
         series: [{ name: '宜蘭縣',
-            data: [101, 71, 85, 43, 57, 76, 59, 113, 224,587, 431, 645,677, 674],
+            data: [101, 71, 85, 43, 57, 76, 59, 113, 224,587, 431, 645,677, 674, 535],
             color: '#ff7b8f'
         },{
             name: '苗栗縣',
