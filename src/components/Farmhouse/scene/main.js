@@ -35,6 +35,7 @@ export function setScene() {
 
         //相對應的進度條 (to set class toggle)
         let progressTarget = progressbar[i];
+        progressTarget.classList.add("pr" + i);
 
         //sibling
         // let navPrev = navTarget.previousElementSibling;

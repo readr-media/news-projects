@@ -44,7 +44,6 @@
     </div>  
 
       <!-- Google Map -->
-      <!-- <div id="mapPinTrigger"></div> -->
       <google-map></google-map>
       <!-- <div class="map-container" style="width:100%; height:100vh; background-image:url('/proj-assets/farmhouse/images/newsmarket/farmhouse-01.jpg'); background-size:cover; background-position:center top;"></div> -->
 
@@ -59,73 +58,85 @@
           <p>更值得關注的是，<strong>總交易農舍中，有 1,358 筆交易基地面積小於 2,500 平方公尺，比例高達 92%，而這些很明顯就是屬於所謂的「老農配建」</strong><a class="noteTrigger" v-on:click="noteToggleContent">註</a><span class="noteBlock">因為《農發條例》規定可興建農舍的農地，面積必須大於 2,500 平方公尺，但在 2000 年之前已取得，且後續沒有轉手的農地，不受此限制，而當時只有農民可以擁有農地，所以這些不受法規限制的農地，就被稱為「老農地」，後續配合「非農民」所興建的農舍，就被稱為「配建」。詳細說明請見<a href="/project/farmhouse/faq" target="_blank">〈來來來，看完你就變成農舍達人了！〉</a>章節。</span>。此外，在沒有包含建築物移轉的 7,557 筆農地交易中，也還有 295 筆被註記為老農配建，但因為實價登錄並沒有強制要求一定要備註農舍配建，所以實際上的農舍交易量，絕對會比統計數據更多。</p>
 
           <p>從交易面積分析，可發現宜蘭農舍主力賣方，是在《農發條例》修訂前就擁有農地的「老農」</p>
-          <div class="chartwpr">
+          <div class="chartwpr pie">
             <!-- <div class="chart--header">
               <div class="chart--title"></div>
               <div class="chart--source">資料來源：農委會</div>
             </div> -->
-            <div class="chart--source"></div>
-            <!-- <highcharts :options="chartDataF_2_1P()" ref="highcharts"></highcharts> -->
-            <div v-if="currDevice == 'mobile'">
+            <!-- <div class="chart--source"></div> -->
+
+            <div class="piewpr">
+              <img src="/proj-assets/farmhouse/images/chart/p-1-phone.png" />
+            </div>
+            <!-- <div v-if="currDevice == 'mobile'">
               <img src="/proj-assets/farmhouse/images/chart/p-1-phone.png" />
             </div>
             <div v-else>
               <highcharts :options="chartDataF_2_1P()" ref="highcharts"></highcharts>
-            </div>
+            </div> -->
             <!-- <div class="chart--note"></div> -->
           </div>
 
           <p>「特定農業區」是指需要特別保護，且經過農地重劃、改良灌溉渠道和農路的農業區，是台灣最重要糧倉。資料分析發現，超過 8 成的宜蘭交易農舍，竟然都位在特定農業區中，不啻為農業警訊。</p>
 
-          <div class="chartwpr">
+          <div class="chartwpr pie">
             <!-- <div class="chart--header">
               <div class="chart--title"></div>
               <div class="chart--source">資料來源：農委會</div>
             </div> -->
-            <div class="chart--source"></div>
-            <!-- <highcharts :options="chartDataF_2_2P()" ref="highcharts"></highcharts> -->
-            <div v-if="currDevice == 'mobile'">
+            <!-- <div class="chart--source"></div> -->
+            
+            <div class="piewpr">
+              <img src="/proj-assets/farmhouse/images/chart/p-2-phone.png" />
+            </div>
+            <!-- <div v-if="currDevice == 'mobile'">
               <img src="/proj-assets/farmhouse/images/chart/p-2-phone.png" />
             </div>
             <div v-else>
               <highcharts :options="chartDataF_2_2P()" ref="highcharts"></highcharts>
-            </div>
+            </div> -->
             <!-- <div class="chart--note"></div> -->
           </div>
 
           <p>77.5% 交易農舍是在 2006 年雪山隧道通車後完工，可看出交通便利程度，是影響宜蘭農舍的關鍵。</p>
 
-          <div class="chartwpr">
+          <div class="chartwpr pie">
             <!-- <div class="chart--header">
               <div class="chart--title"></div>
               <div class="chart--source">資料來源：農委會</div>
             </div> -->
-            <div class="chart--source"></div>
-            <!-- <highcharts :options="chartDataF_2_3P()" ref="highcharts"></highcharts> -->
-            <div v-if="currDevice == 'mobile'">
+            <!-- <div class="chart--source"></div> -->
+            
+            <div class="piewpr">
+              <img src="/proj-assets/farmhouse/images/chart/p-3-phone.png" />
+            </div>
+            <!-- <div v-if="currDevice == 'mobile'">
               <img src="/proj-assets/farmhouse/images/chart/p-3-phone.png" />
             </div>
             <div v-else>
               <highcharts :options="chartDataF_2_3P()" ref="highcharts"></highcharts>
-            </div>
+            </div> -->
             <div class="chart--note">註：根據宜蘭縣政府統計資料，2006~2017年共發出 6,662 張農舍使用執照</div>
           </div>
 
           <p>60% 農舍是在完工 5 年內賣出。《農發條例》規定「新農地」所建農舍在完工 5 年內不得移轉，所以從交易時間也能發現，農舍主要供應源來自「老農配建」。此外，高達 30% 農舍是在完工一年內售出，可見市場活絡程度。</p>
 
-          <div class="chartwpr">
+          <div class="chartwpr pie">
             <!-- <div class="chart--header">
               <div class="chart--title"></div>
               <div class="chart--source">資料來源：農委會</div>
             </div> -->
-            <div class="chart--source"></div>
-            <!-- <highcharts :options="chartDataF_2_4P()" ref="highcharts"></highcharts> -->
-            <div v-if="currDevice == 'mobile'">
+            <!-- <div class="chart--source"></div> -->
+            
+            <div class="piewpr">
+              <img src="/proj-assets/farmhouse/images/chart/p-4-phone.png" />
+            </div>
+            <!-- <div v-if="currDevice == 'mobile'">
               <img src="/proj-assets/farmhouse/images/chart/p-4-phone.png" />
             </div>
             <div v-else>
               <highcharts :options="chartDataF_2_4P()" ref="highcharts"></highcharts>
-            </div>
+            </div> -->
             <div class="chart--note">註：有 13 筆交易資料沒有完工時間，所以交易總量定為 1,458 筆。另，有 14 筆資料的交易時間早於完工時間，所以我們將之納入 0～1 年的交易區間。</div>
           </div>
 
@@ -240,6 +251,9 @@ background-color:#273947; color:#fff;
 color:#1a1a1a;
 background-color:#fff;
 }
+
+.chartwpr.pie {margin-top:20px; margin-bottom:45px;}
+.piewpr {max-width:400px; margin:0 auto;}
 
 @media screen and (max-width: 800px) {
 

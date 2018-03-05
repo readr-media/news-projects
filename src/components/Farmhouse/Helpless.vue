@@ -22,13 +22,15 @@
 
       <p>農業不振，究竟是農舍的因還是果？抑或皆如是？</p>
 
-
+      <swiper></swiper>
 
     </div>
   </section>
 </template>
 
 <script>
+
+import swiper from './swiper.vue';
 
 export default {
 
@@ -37,7 +39,11 @@ export default {
 
     }
   },
+  components: {
 
+    'swiper': swiper
+
+  },
   methods: {
 
     noteToggleContent: function(event){

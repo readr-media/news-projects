@@ -168,13 +168,16 @@ export default {
   mounted: function(){
 
     if (process.browser) {
-          this.setSceneVio();
+          // this.setSceneVio();
 
           let setTableHeight = this.setTableHeight;
+          let setSceneVio = this.setSceneVio;
 
           imagesLoaded( document.querySelector('#vioPinContainer'), function() {
             // console.log('all images are loaded');
             setTableHeight();
+            setSceneVio();
+
           });
 
 

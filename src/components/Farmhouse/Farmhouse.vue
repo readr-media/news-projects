@@ -526,6 +526,10 @@ opacity:0;
 #progresswpr:hover .progress--title {opacity:0;}
 #progresswpr:hover .progress:hover .progress--title {opacity:1;}
 
+.progress--title {color:#888;}
+
+
+
 /* standalone progress */
 #standProgress {width:100%; height:10px;
 position:fixed; left:0; bottom:0;

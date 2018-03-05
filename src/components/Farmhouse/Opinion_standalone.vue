@@ -132,7 +132,7 @@ export default {
               let fullPage = document.querySelector(".standalone");
               let fullPageHeight = fullPage.offsetHeight;
               standProgress.duration(fullPageHeight).refresh();
-              console.log("progress update");
+              // console.log("progress update");
             },500);            
           } 
 

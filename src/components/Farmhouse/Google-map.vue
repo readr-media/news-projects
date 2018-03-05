@@ -68,7 +68,28 @@ export default {
                 this.heatActive = true;
                 heatmap.setMap(map);
             }
+        },
+        setScene: function(){
+            const ScrollMagic = require("scrollmagic");
+            const { TweenMax, TimelineMax } = require('gsap');
+            require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap');
+            require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
+
+            let controller = new ScrollMagic.Controller();
+
+            let canvasScene = new ScrollMagic.Scene({
+                triggerElement: ".map-container",
+                triggerHook: 0.15
+            })
+            .setClassToggle("#mapAll","active")
+            // .addIndicators({name: "nav", colorStart: "red"});
+
+            controller.addScene([
+                canvasScene
+            ]);
+
         }
+
     },
     mounted: function(){
 
@@ -114,11 +135,23 @@ export default {
         window.addEventListener('resize', function(event){
             google.maps.event.trigger(map, 'resize');
         });
+
+        if (process.browser) {
+            this.setScene();            
+        }   
        
     } //mounted
 
 }    
 </script>
+
+<style>
+#mapAll canvas {opacity:0;
+transition:1200ms; transition-property:opacity; 
+}
+#mapAll.active canvas {opacity:1;}
+.gm-style-pbc {background-color:transparent !important;}
+</style>
 
 <style scoped>
 .map-container {position:relative;}

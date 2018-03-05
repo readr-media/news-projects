@@ -2409,6 +2409,16 @@ if ( typeof module != 'undefined' && module.exports ) {
             this.wrapper.removeEventListener('DOMMouseScroll', this);
         };
 
+        //Move getPaddings to upper scope
+        //to fix getPaddings is not defined error
+        function getPaddings(element){
+            var section = element.closest(SECTION_SEL);
+            if(section.length){
+                return parseInt(section.css('padding-bottom')) + parseInt(section.css('padding-top'));
+            }
+            return 0;
+        }
+
 
         function scrollBarHandler(){
             var self = this;
@@ -2446,13 +2456,13 @@ if ( typeof module != 'undefined' && module.exports ) {
             /**
             * Returns an integer representing the padding dimensions in px.
             */
-            function getPaddings(element){
-                var section = element.closest(SECTION_SEL);
-                if(section.length){
-                    return parseInt(section.css('padding-bottom')) + parseInt(section.css('padding-top'));
-                }
-                return 0;
-            }
+            // function getPaddings(element){
+            //     var section = element.closest(SECTION_SEL);
+            //     if(section.length){
+            //         return parseInt(section.css('padding-bottom')) + parseInt(section.css('padding-top'));
+            //     }
+            //     return 0;
+            // }
 
             /**
             * Checks if the element needs scrollbar and if the user wants to apply it.
