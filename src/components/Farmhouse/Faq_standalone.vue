@@ -84,6 +84,9 @@ export default {
     components: {
       'ending': ending      
     },
+    props: {
+      currDevice: String
+    },
     methods: {
         expandContent: function(event){
             //定義事件名稱 expand，並附帶參數傳到上層
