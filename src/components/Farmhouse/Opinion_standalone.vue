@@ -2,10 +2,10 @@
   <section class="standalone opinion">
 
     <div class="chapter--header">
-      <div id="mediaContainer">
-         <video id="herovid" playsinline autoplay loop>
-          <source v-if="currDevice == 'mobile'" src="/proj-assets/farmhouse/video/farmhouse03_phone.mp4" type="video/mp4">
-          <source v-else src="/proj-assets/farmhouse/video/farmhouse03.mp4" type="video/mp4">
+      <div id="mediaContainer" v-bind:class="{mobile: (currDevice == 'mobile')}">
+        <div v-if="currDevice == 'mobile'" class="heroimg"></div>
+         <video v-else id="herovid" playsinline autoplay>
+            <source src="/proj-assets/farmhouse/video/farmhouse03.mp4" type="video/mp4">
          </video> 
       </div>
       <div class="header--content">

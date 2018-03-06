@@ -161,8 +161,8 @@ html.normal {overflow:visible;}
 .gallery--desc .innerwpr,
 .intro {width:70%; padding:0 30px; max-width:700px;}
 
-@media screen and (max-width: 800px) {
-    /* html {overflow:visible;} */
+@media screen and (max-width: 500px) {
+    html.normal .alter {display:block;}
 }
 </style>
 
@@ -180,7 +180,7 @@ background-color:#000;
 .imgwpr {width:100%; height:100vh; 
 /* padding-top:10px; */
 box-sizing:border-box; position:relative;
-display:flex; justify-content:center; align-items:center;
+display:flex; justify-content:center; align-items:flex-end;
 background-size:contain; background-position:center center;
 background-repeat:no-repeat;
 }

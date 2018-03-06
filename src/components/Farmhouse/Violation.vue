@@ -21,7 +21,9 @@
               <div v-else>
                 <div class="eTable" id="tableFull"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div>
               </div>
-              <div class="eTrigger" v-on:click="toggleContent"><div class="icon"></div></div>
+              <div class="eTrigger">
+                <a class="icon" v-on:click="toggleContent"></a>
+              </div>
           </div>
 
           <!-- <div class="chart--note"></div> -->
@@ -62,86 +64,89 @@ export default {
   },
 
   methods: {     
+    
+    // setSceneVio: function(){
 
-    setSceneVio: function(){
+    //   const ScrollMagic = require('scrollmagic');     
+    // //   require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
 
-      const ScrollMagic = require('scrollmagic');     
-    //   require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
+    //   const controllerVio = new ScrollMagic.Controller();
 
-      const controllerVio = new ScrollMagic.Controller();
+    //   //get offset top
+    // //   let concTrigger = document.getElementById('concPinTrigger');
 
-      //get offset top
-    //   let concTrigger = document.getElementById('concPinTrigger');
+    //   // console.log(concTrigger);
+    // //   let concOffset = this.getOffset(concTrigger);
 
-      // console.log(concTrigger);
-    //   let concOffset = this.getOffset(concTrigger);
+    // //   console.log("Before:" + concOffset.top)
 
-    //   console.log("Before:" + concOffset.top)
+    // //   const pinHeader = new ScrollMagic.Scene({
+    // //       //主圖固定不捲動
+    // //       // triggerElement: '#concPinTrigger',
+    // //       offset: concOffset.top,
+    // //       triggerHook: "onLeave",
+    // //       duration: 0
+    // //   }).setPin("#concHeader",{
+    // //       pushFollowers: false
+    // //   });
 
     //   const pinHeader = new ScrollMagic.Scene({
     //       //主圖固定不捲動
-    //       // triggerElement: '#concPinTrigger',
-    //       offset: concOffset.top,
-    //       triggerHook: "onLeave",
-    //       duration: 0
-    //   }).setPin("#concHeader",{
+    //       triggerElement: '#vioHeader',
+    //     //   offset: concOffset.top,
+    //       triggerHook: "onLeave"
+    //   }).setPin("#vioHeader",{
     //       pushFollowers: false
     //   });
+    // //   .addIndicators({name: "conc"});
 
-      const pinHeader = new ScrollMagic.Scene({
-          //主圖固定不捲動
-          triggerElement: '#vioHeader',
-        //   offset: concOffset.top,
-          triggerHook: "onLeave"
-      }).setPin("#vioHeader",{
-          pushFollowers: false
-      });
-    //   .addIndicators({name: "conc"});
+    //   /*
+    //   const dialogQ1 = new ScrollMagic.Scene({
+    //       //dialog Q1
+    //       triggerElement: '#dialogConQ1',
+    //       triggerHook: "onEnter"
+    //   }).setClassToggle("#dialogConQ1","active");
 
-      /*
-      const dialogQ1 = new ScrollMagic.Scene({
-          //dialog Q1
-          triggerElement: '#dialogConQ1',
-          triggerHook: "onEnter"
-      }).setClassToggle("#dialogConQ1","active");
+    //   const dialogA1 = new ScrollMagic.Scene({
+    //       //dialog A1
+    //       triggerElement: '#dialogConA1',
+    //       triggerHook: "onEnter",
+    //       offset: 200
+    //   }).setClassToggle("#dialogConA1","active");
+    //   */
+    //   controllerVio.addScene([
+    //       pinHeader
+    //       // dialogQ1,
+    //       // dialogA1  
+    //   ]);
 
-      const dialogA1 = new ScrollMagic.Scene({
-          //dialog A1
-          triggerElement: '#dialogConA1',
-          triggerHook: "onEnter",
-          offset: 200
-      }).setClassToggle("#dialogConA1","active");
-      */
-      controllerVio.addScene([
-          pinHeader
-          // dialogQ1,
-          // dialogA1  
-      ]);
-
-    }, //setScene
-
+    // }, //setScene
+    
     toggleContent: function(event){
 
       //event target
-        let target = event.currentTarget;
-        let parent = target.parentNode;
+        let icon = event.currentTarget;
+        let trigger = icon.parentNode;
+        let parent = trigger.parentNode;
+        const targClassName = icon.getAttribute('class')
 
         //收闔的內容區塊
         let eContent = parent.querySelector(".eTable");
 
         //收闔內容區塊原始高度
         let maxHeight = eContent.scrollHeight;
-        
-        if(parent.classList.contains("expand")){
-              //關閉
-              parent.classList.remove("expand");
-              eContent.style.maxHeight  = maxHeight / 2.5 + "px";
-
-          } else {
-              //展開
-              parent.classList.add("expand");
-              eContent.style.maxHeight  = maxHeight + "px";
-          }  
+        if(targClassName && targClassName.indexOf('icon') > -1 && icon.tagName === 'A') {
+          if(parent.classList.contains("expand")){
+                //關閉
+                parent.classList.remove("expand");
+                eContent.style.maxHeight  = maxHeight / 2.5 + "px";
+  
+            } else {
+                //展開
+                parent.classList.add("expand");
+                eContent.style.maxHeight  = maxHeight + "px";
+            }  
+        }
 
     },
 
@@ -171,12 +176,12 @@ export default {
           // this.setSceneVio();
 
           let setTableHeight = this.setTableHeight;
-          let setSceneVio = this.setSceneVio;
+          // let setSceneVio = this.setSceneVio;
 
           imagesLoaded( document.querySelector('#vioPinContainer'), function() {
             // console.log('all images are loaded');
             setTableHeight();
-            setSceneVio();
+            // setSceneVio();
 
           });
 
@@ -222,7 +227,7 @@ background: linear-gradient(to bottom, rgba(248,248,248,0) 0%,rgba(248,248,248,1
 .expand .eTrigger:before,
 .expand .eTrigger:after {display:none;}
 
-.eTrigger .icon {width:44px; height:44px; z-index:100;
+.eTrigger .icon {width:44px; height:44px; z-index:900;
 position:absolute; left:50%; bottom:10px; margin-left:-27px;
 border:5px solid #b4c6d5; border-radius:50%; cursor:pointer;
 display:flex; justify-content:center; align-items:center;

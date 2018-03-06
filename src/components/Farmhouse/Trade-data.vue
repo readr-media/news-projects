@@ -193,8 +193,8 @@ export default {
 
     noteToggleContent: function(event){
         this.$emit('noteToggle',event);
-    },
-    
+    }
+    /*
     setSceneMap: function(){
 
       const ScrollMagic = require('scrollmagic');   
@@ -213,20 +213,20 @@ export default {
       // .addIndicators({name: "map"});
 
       controllerMap.addScene([
-        pinMap
+        // pinMap
       ]);
 
     },
-
+    */
     // currDevice
     
   },
   mounted: function(){
-
+    /*
     if (process.browser) {
       this.setSceneMap();      
     }
-
+    */
     // let currOS = this.$store.state.os;
     // console.log("current Device: " + this.currDevice(currOS));
     // console.log(currDevice);

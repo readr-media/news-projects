@@ -159,7 +159,7 @@ line-height:1.5;
   }
 
   .compare--desc {display:none;}
-  .alter {display:block;}
+  /* .alter {display:block;} */
 
 
 

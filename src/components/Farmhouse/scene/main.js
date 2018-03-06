@@ -3,7 +3,7 @@ export function setScene() {
     const ScrollMagic = require('scrollmagic');
     const { TweenMax, TimelineMax } = require('gsap');
     require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap');
-    require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
+    // require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
 
     const common = require('../util/common.js');
 
@@ -126,8 +126,8 @@ export function setScene() {
 
     /* --- Pin Section --- */
     
-    let pinSceneCollection = [];   
-
+    // let pinSceneCollection = [];   
+    /*
     //開場 pin
     const scenePinOpening = new ScrollMagic.Scene({
         triggerElement: "#openingPinContainer",
@@ -167,13 +167,13 @@ export function setScene() {
         pushFollowers: false
     });
     // .addIndicators({name: "opinion"});
-    
+    */
 
     // check device
-    let currOS = this.$store.state.os;
-    let device =  this.currDevice(currOS);
+    // let currOS = this.$store.state.os;
+    // let device =  this.currDevice(currOS);
     // console.log("main.js: " + device);
-
+    /*
     if(device == "mobile"){
         //mobile scene
         console.log("mobile scene");
@@ -195,11 +195,11 @@ export function setScene() {
             scenePinVio
         );
     }    
-
-    //add pin scene to controller
-    for(let i = 0; i < pinSceneCollection.length; i++){
-        pinSceneCollection[i].addTo(controller);
-    }
+    */
+    // add pin scene to controller
+    // for(let i = 0; i < pinSceneCollection.length; i++){
+    //     pinSceneCollection[i].addTo(controller);
+    // }
 
     
     let openingEl = document.getElementById("openingPinContainer");

@@ -30,6 +30,9 @@ export default function chartData() {
         subtitle: {
             text: ''
         },
+        exporting: { 
+            enabled: false 
+        },
         xAxis: {
             labels: {
                 overflow: 'justify',
@@ -40,7 +43,7 @@ export default function chartData() {
             categories: ['2001','2002', '2003', '2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015'],
             plotLines: [{
               color: '#ffffff', // Color value
-              dashStyle: 'shortdot', // Style of the plot line. Default to solid
+              dashStyle: 'shortdash', // Style of the plot line. Default to solid
               value: 5, // Value of where the line will appear
               width: 4, // Width of the line 
               label:{
@@ -54,12 +57,13 @@ export default function chartData() {
                    color: '#ffffff'
                  }
               }
-            }]
+            }],
+            
         },
         yAxis: {
             gridLineColor: '#ababab',
             title: {
-                text: '筆',
+                text: '',
                 style: {
                     color: '#ababab'
                 }

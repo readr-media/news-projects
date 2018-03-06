@@ -17,6 +17,8 @@ export default function chartData() {
         credits: {
             enabled: false
         },
+        exporting: { 
+            enabled: false },
         xAxis: {
             categories: ['宜蘭縣', '台中市', '彰化縣', '桃園市', '高雄市'],
             title: {
@@ -75,7 +77,7 @@ export default function chartData() {
             y: 20
         },
         series: [{
-            name: '違規數',
+            name: '違規筆數',
             data: [6213, 2074, 3449, 1107, 1013],
             color: '#ff7b8f'
         }, {

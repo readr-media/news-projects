@@ -20,9 +20,45 @@ export default function chartData() {
         subtitle: {
             text: ''
         },
+        exporting: { 
+            enabled: false 
+        },
         xAxis: {
         
             categories: ['2012 Q3', '2012 Q4', '2013 Q1', '2013 Q2', '2013 Q3', '2013 Q4', '2014 Q1', '2014 Q2', '2014 Q3', '2014 Q4', '2015 Q1', '2015 Q2', '2015 Q3','2015 Q4', '2016 Q1','2016 Q2', '2016 Q3', '2016 Q4', '2017 Q1', '2017 Q2', '2017 Q3', '2017 Q4',],
+            plotLines: [{
+              color: '#ffffff', // Color value
+              dashStyle: 'shortdash', // Style of the plot line. Default to solid
+              value: 10, // Value of where the line will appear
+              width: 4, // Width of the line 
+              label:{
+                 text: '宜蘭縣<br/>暫停核發<br/>農舍建照',
+                 verticlAlign: 'top',
+                 rotation: '0',
+                 x: -70,
+                 y: 270,
+                 style:{
+                   fontSize: '14px',
+                   color: '#ffffff'
+                 }
+              }
+            },{
+              color: '#ffffff', // Color value
+              dashStyle: 'shortdash', // Style of the plot line. Default to solid
+              value: 13, // Value of where the line will appear
+              width: 4, // Width of the line 
+              label:{
+                 text: '宜蘭縣<br/>廢止加嚴<br/>審查辦法',
+                 verticlAlign: 'top',
+                 rotation: '0',
+                 x: 10,
+                 y: 20,
+                 style:{
+                   fontSize: '14px',
+                   color: '#ffffff'
+                 }
+              }
+            }],
             labels: {
                 overflow: 'justify',
                 style: {
@@ -34,7 +70,7 @@ export default function chartData() {
                 gridLineColor: '#ababab',
             gridLineWidth: 1,
             title: {
-                text: '件數',
+                text: '',
                 style: {
                 color: '#ababab'
                 }

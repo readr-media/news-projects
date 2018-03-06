@@ -587,7 +587,15 @@ min-width:100%; min-height:100%;
 position:absolute; left:50%; top:50%;
 transform:translateX(-50%) translateY(-50%);
 }
-.mobile #herovid {height:100%;}
+.mobile #herovid {display:none;}
+
+.heroimg {width:100%; height:100%;
+position:absolute; left:0; top:0;
+background-size:cover; background-repeat:no-repeat;
+}
+.opening .heroimg {background-image:url("/proj-assets/farmhouse/images/landing/phonelandingpic01.jpg");}
+.faq .heroimg {background-image:url("/proj-assets/farmhouse/images/landing/phonelandingpic02.jpg");}
+.opinion .heroimg {background-image:url("/proj-assets/farmhouse/images/landing/phonelandingpic03.jpg");}
 
 /* expandable trigger */
 /* .eTrigger {clear:both; position:relative;

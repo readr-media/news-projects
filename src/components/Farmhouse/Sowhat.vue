@@ -24,7 +24,7 @@ export default {
   methods: {
 
     // getOffset,
-
+    /*
     setSceneSo: function(){
 
       const ScrollMagic = require('scrollmagic');     
@@ -56,14 +56,14 @@ export default {
 
 
     } //setScene
-
+    */
   },
 
   mounted: function(){
 
-    if (process.browser) {
-            this.setSceneSo();
-        }
+    // if (process.browser) {
+    //         this.setSceneSo();
+    //     }
 
   }
     
@@ -75,7 +75,7 @@ export default {
 
 #soHeader {width:100%; height:100vh; position:relative;
 top:0 !important;
-background-image:url("/proj-assets/farmhouse/images/EDD_5082.jpg");
+background-image:url("/proj-assets/farmhouse/images/EDD_5196.jpg");
 background-repeat:no-repeat; background-size:cover;
 background-position:center top;
 }

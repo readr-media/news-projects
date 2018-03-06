@@ -20,6 +20,9 @@ export default function chartData() {
         subtitle: {
             text: ''
         },
+        exporting: { 
+            enabled: false 
+        },
         xAxis: {
             categories: ['宜蘭縣', '桃園市', '花蓮縣', '彰化縣', '南投縣'],
             title: {
@@ -37,7 +40,7 @@ export default function chartData() {
             gridLineColor: '#ababab',
             gridLineWidth: 1,
             title: {
-                text: '筆',
+                text: '筆數',
                 align: 'high',
                 style: {
                     color: '#ababab'
