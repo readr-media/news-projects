@@ -36,7 +36,7 @@
   <share :shareUrl="shareLink" :top="`15px`" :left="`69px`" :bgColor="`#79cfa8`"></share>
  
   <!-- 通通拿去種農舍 -->
-  <opening v-on:noteToggle="noteToggleContent"></opening>
+  <opening v-on:noteToggle="noteToggleContent" v-bind:currDevice="currentDevice"></opening>
 
   <!-- 農地不農用，又怎樣？ -->
   <sowhat></sowhat>
@@ -204,7 +204,7 @@
         // console.log("current OS: " + currOS);
         // console.log("current Device: " + this.currDevice(currOS));
         this.currentDevice = this.currDevice(currOS);
-        console.log(this.currentDevice);
+        // console.log(this.currentDevice);
 
       }    
       // console.log(this.$route);
@@ -278,13 +278,12 @@ background-position:right top !important;
 }
 
 section {padding:50px 0 100px 0; position:relative;
-background-color:#fff;
+background-color:#f8f8f8;
 }
 .dark section {background-color:#273947;}
 
 .centerwpr {max-width:860px; position:relative;
 margin:0 auto; 
-/* max-width:890px; padding:0 30px; */
 padding:60px 90px 100px 90px;
 box-sizing:border-box;
 }
@@ -294,8 +293,8 @@ background-color:#273947; color:#fff;
 }
 .centerwpr:after {content:""; display:table; clear:both;}
 
-.standalone .centerwpr {padding:50px 30px; max-width:900px;}
-.standalone .header--content .centerwpr {padding:0 30px;}
+.standalone .centerwpr {padding:50px 20px; max-width:900px;}
+.standalone .header--content .centerwpr {padding:0 20px;}
 
 h1,h2,h3,h4,h5,h6 {
 font-family:"Noto Sans TC", "Microsoft JhengHei", -apple-system, sans-serif;  
@@ -413,11 +412,16 @@ background-position:center top;
 display:flex; flex-direction:column; justify-content:flex-end;
 /* margin-bottom:30px; */
 }
-.header--content {
+.standalone .chapter--header {height:auto;
+padding-top:85vh;
+}
+
+
+.header--content {position:relative;
 padding:50px 0; color:#fff;  
 background-color:rgba(39,57,71,1);  
 }
-.faq .header--content {background-color:rgba(39,57,71,0.9);}
+/* .faq .header--content {background-color:rgba(39,57,71,0.9);} */
 .header--content h2 {color:#fff;}
 
 /* Chapter Nav */
@@ -533,7 +537,7 @@ opacity:0;
 /* standalone progress */
 #standProgress {width:100%; height:10px;
 position:fixed; left:0; bottom:0;
-background-color:#273947;
+background-color:#969da2;
 }
 #standProgress .stand--percentage {
 height:10px; width:0;
@@ -572,6 +576,19 @@ display:flex; justify-content:center; align-items:center;
 #fixHeader h2 {margin-bottom:0;
 font-size:24px; color:#fff;
 }
+
+/* hero video */
+#mediaContainer {width:100%; height:100vh; position:absolute; left:0; top:0;
+overflow:hidden;
+}
+#herovid {
+width:auto; height:auto;
+min-width:100%; min-height:100%;
+position:absolute; left:50%; top:50%;
+transform:translateX(-50%) translateY(-50%);
+z-index: -100;
+}
+.mobile #herovid {height:100%;}
 
 /* expandable trigger */
 /* .eTrigger {clear:both; position:relative;
@@ -634,7 +651,8 @@ font-size:44px;
 
 @media screen and (max-width: 800px) {
 
-  .centerwpr.dark {padding:50px 30px;}
+  .centerwpr {padding:70px 20px;}
+  .centerwpr.dark {padding:70px 20px;}
 
   .dialog--portrait {width:60px; height:60px;}
   .question .dialog--portrait {margin-right:10px;}

@@ -200,10 +200,8 @@ background-position:center top;
 
 #vioPinContainer {padding-bottom:140px;}
 .violation .centerwpr {
-max-width:860px; 
 margin-top:-120px;
-padding:60px 90px 90px 90px;
-background-color:#fff;  
+background-color:#f8f8f8;  
 }
 
 .expandable {position:relative;}
@@ -214,7 +212,7 @@ transition:400ms; transition-property:max-height;}
 .eTrigger:before,
 .eTrigger:after {position:absolute; left:0; bottom:0;
 width:100%; height:120px;
-background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+background: linear-gradient(to bottom, rgba(248,248,248,0) 0%,rgba(248,248,248,1) 100%);
 }
 
 .eTrigger:before,
@@ -240,7 +238,7 @@ background-position:left top;
 
 @media screen and (max-width: 800px) {
 
-  .violation .centerwpr {padding:50px 30px 80px 30px;}
+  .violation .centerwpr {padding-bottom:100px;}
 
   #vioPinContainer {padding-bottom:0;}
 

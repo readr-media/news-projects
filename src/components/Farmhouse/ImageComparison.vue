@@ -5,6 +5,10 @@
           <img class="comparison-image" src="/proj-assets/farmhouse/images/gallery/com-before.jpg">
           <img class="comparison-image" src="/proj-assets/farmhouse/images/gallery/com-after.jpg">
     </div>
+    <div class="alter">
+      <p>左：初春的蘭陽平原，原本應該是遍插秧苗的水田裡，卻不斷冒出鋼筋，直上雲霄，一根根的鋼筋被強勁的東北風撞擊而發出刺耳的響聲，彷彿為蘭陽平原流失的農地敲起喪鐘。</p>
+      <p class="right">右：農舍完工後的模樣。</p>
+    </div>
 
 </div>
 </template>
@@ -109,8 +113,8 @@ export default {
 
 .comparisonwpr {width:100%; height:100vh; margin:0 auto;
 display:flex; justify-content:center; align-items:center;
+flex-direction:column;
 position:relative;
-/* padding-top:15px; */
 box-sizing:border-box;
 }
 
@@ -141,12 +145,23 @@ transition:400ms; transition-property:opacity,margin-top;
 }
 .separator--hand:hover:before {opacity:0; margin-top:20px;}
 
+.alter {margin-top:10px; padding:0 10px; display:none;
+font-size:16px; text-shadow:0 1px 1px rgba(0, 0, 0, 0.8); color:#fff;
+line-height:1.5;
+}
+.alter p {margin-top:5px;}
+/* .alter .right {text-align:right;} */
 
 @media screen and (max-width: 500px) {
 
   .comparison-separator:before {
     transform:scale(0.6);  transform-origin:0 0;
   }
+
+  .compare--desc {display:none;}
+  .alter {display:block;}
+
+
 
 }
 

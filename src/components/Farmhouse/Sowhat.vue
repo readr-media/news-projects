@@ -82,12 +82,13 @@ background-position:center top;
 
 #soPinContainer {padding-bottom:140px;}
 .sowhat .centerwpr {margin-top:-120px;
-background-color:#fff;
+background-color:#f8f8f8;
 }
 
 @media screen and (max-width: 800px) {
 
-  .sowhat .centerwpr {padding:50px 30px 80px 30px;}
+  #soPinContainer {padding-bottom:0;}
+  .sowhat .centerwpr {padding-bottom:100px;}
 
 }
 

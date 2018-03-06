@@ -64,7 +64,7 @@ export default {
 
 @media screen and (max-width: 800px) {
 
-  .helpless .centerwpr {padding:50px 30px 80px 30px;}
+  /* .helpless .centerwpr {padding:50px 30px 80px 30px;} */
 
 }
 

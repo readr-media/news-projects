@@ -76,8 +76,8 @@ export default {
 </script>
 
 <style scoped>
-.extend {padding-bottom:50px;}
-.extend .centerwpr {padding:0 8px;}
+.extend {padding:0;}
+.extend .centerwpr {padding:60px 20px;}
 
 .extendwpr {display:flex; justify-content:space-between; align-items:center;
 margin:40px auto;
@@ -134,7 +134,7 @@ font-size:14px; line-height:1.7; color:#1a1a1a;
 .extra {position:relative;
 background-color:#273947;
 }
-.extra .centerwpr {padding:60px 0 0 0;}
+.extra .centerwpr {padding:60px 12px 0 12px;}
 
 .related {padding:0 8px; min-height:100px;
 background-color:transparent;
@@ -147,12 +147,13 @@ background-color:transparent;
 
 @media screen and (max-width: 800px) {
 
-  .extend .centerwpr {padding:0 30px;}
   .extendwpr {flex-wrap:wrap;}
-  .extend--entry {width:calc(50% - 15px);}
+  .extend--entry {width:calc(50% - 10px);}
 
-  .extend--entry.faq {margin-top:30px;}
-  .extend--entry.gallery {margin-top:30px;}
+  .extend--entry.faq {margin-top:20px;}
+  .extend--entry.gallery {margin-top:20px;}
+
+  .extend--title {font-size:18px;}
 
 }
 

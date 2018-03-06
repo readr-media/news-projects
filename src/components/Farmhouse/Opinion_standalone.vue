@@ -2,6 +2,12 @@
   <section class="standalone opinion">
 
     <div class="chapter--header">
+      <div id="mediaContainer">
+         <video id="herovid" playsinline autoplay loop>
+          <source v-if="currDevice == 'mobile'" src="/proj-assets/farmhouse/video/farmhouse03_phone.mp4" type="video/mp4">
+          <source v-else src="/proj-assets/farmhouse/video/farmhouse03.mp4" type="video/mp4">
+         </video> 
+      </div>
       <div class="header--content">
         <div class="centerwpr">
           <h2>農舍面面觀</h2>
@@ -273,6 +279,8 @@ background-position:left -586px;
 
   .opinion--bubble_content {padding:30px 20px;}
   .opinion--bubble:before {display:none;}
+
+  #fixHeader {display:none;}
 
 
 }

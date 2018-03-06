@@ -35,7 +35,7 @@
           <div class="chart--source">資料來源：內政部實價登錄系統；鏡傳媒整理</div>
         </div>
         <highcharts :options="chartDataF_2_2()" ref="highcharts"></highcharts>
-        <div class="chart--note">圖表說明：宜蘭縣農舍平均交易基地面積約為 1,443 平方公尺，樓地板面積約為 81 坪，價格則落在 1,528 萬元左右。以平均坪數和價格觀察，不難想像為何宜蘭農舍對台北退休族群來說，為何會有那麼大的吸引力。</div>
+        <!-- <div class="chart--note">圖表說明：宜蘭縣農舍平均交易基地面積約為 1,443 平方公尺，樓地板面積約為 81 坪，價格則落在 1,528 萬元左右。以平均坪數和價格觀察，不難想像為何宜蘭農舍對台北退休族群來說，為何會有那麼大的吸引力。</div> -->
       </div>
         
       <p>比對「農委會農地盤查結果」及「內政部實價登錄資訊」，可發現農舍蓋最多的三個鄉鎮，同時也是農舍交易最熱絡的市場。</p>
@@ -257,6 +257,7 @@ background-color:#fff;
 
 @media screen and (max-width: 800px) {
 
+  #mapText {padding-bottom:100px;}
   #mapPinContainer {padding-bottom:0;}
   
 }

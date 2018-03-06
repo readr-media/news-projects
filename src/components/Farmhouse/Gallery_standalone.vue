@@ -26,18 +26,20 @@
 <progress value="0"></progress>
 
 <div id="galleryOpening">
+<!-- <div class="mobileCenter"> -->
 <div class="intro">
-<h1>《宜蘭田中央》<br />張良一攝影專題</h1>
-<p>在宜蘭，總是可以看見有著竹林環繞，如小島般浮在稻田的紅瓦厝。一座又一座的竹林稻子海浮島，因應自然環境而生，從冬尾注滿田水時倒映著天光雲影，到初春的青綠綠再到盛夏稻穗滿滿的黃澄澄，四時風景轉變，很令人動容。</p>
-<p>只是，現在的蘭陽平原在傳統綠竹林紅磚厝之外，更多的是，一棟比一棟還誇張的宅邸，有西班牙式的紅瓦石屋、有藍白相間的愛琴海式，或是瀰漫著熱帶氣息的峇里島風農舍，個個極盡絢麗！宜蘭農地地景快速翻轉，目不暇給，每每讓人有不知身在何處的錯覺！</p>
+    <h1>《宜蘭田中央》<br />張良一攝影專題</h1>
+    <p>在宜蘭，總是可以看見有著竹林環繞，如小島般浮在稻田的紅瓦厝。一座又一座的竹林稻子海浮島，因應自然環境而生，從冬尾注滿田水時倒映著天光雲影，到初春的青綠綠再到盛夏稻穗滿滿的黃澄澄，四時風景轉變，很令人動容。</p>
+    <p>只是，現在的蘭陽平原在傳統綠竹林紅磚厝之外，更多的是，一棟比一棟還誇張的宅邸，有西班牙式的紅瓦石屋、有藍白相間的愛琴海式，或是瀰漫著熱帶氣息的峇里島風農舍，個個極盡絢麗！宜蘭農地地景快速翻轉，目不暇給，每每讓人有不知身在何處的錯覺！</p>
 
-<div class="author">
-    <h4>作者簡介</h4>
-    <p>張良一，長期關注土地與農業議題，曾任中央社、中國時報、蘋果日報攝影記者，亦曾舉辦《站在田中央》攝影個展，現為自由攝影師。此處所呈現的影像，為張良一以宜蘭農舍為主題，多年來陸續拍攝發表的《田中央》攝影系列，此為節選之作。</p>
+    <div class="author">
+        <h4>作者簡介</h4>
+        <p>張良一，長期關注土地與農業議題，曾任中央社、中國時報、蘋果日報攝影記者，亦曾舉辦《站在田中央》攝影個展，現為自由攝影師。此處所呈現的影像，為張良一以宜蘭農舍為主題，多年來陸續拍攝發表的《田中央》攝影系列，此為節選之作。</p>
+    </div>
+
+    <div id="start"></div>
 </div>
-
-<div id="start"></div></div>
-
+<!-- </div> -->
 </div>
 
 </section>
@@ -158,6 +160,10 @@ html.normal {overflow:visible;}
 .compare--desc .innerwpr,
 .gallery--desc .innerwpr,
 .intro {width:70%; padding:0 30px; max-width:700px;}
+
+@media screen and (max-width: 800px) {
+    /* html {overflow:visible;} */
+}
 </style>
 
 <style scoped>
@@ -227,7 +233,7 @@ background-repeat:no-repeat;
 
 .continue {width:50px; height:50px; margin:0 auto; cursor:pointer;
 border-radius:50%;
-background-color:#273947;
+/* background-color:#273947; */
 position:absolute; left:50%; bottom:25px; z-index:9000;
 margin-left:-25px;
 background-image:url("/proj-assets/farmhouse/images/slice01.png");
@@ -236,7 +242,7 @@ background-repeat:no-repeat;
 opacity:0;
 }
 .continue.show {opacity:1;}
-.continue:hover {background-color:#76c2ac; background-position:13px -620px;}
+/* .continue:hover {background-color:#76c2ac; background-position:13px -620px;} */
 
 /* footer */
 /* #footer {padding-bottom:100px;} */
@@ -256,5 +262,30 @@ progress::-webkit-progress-bar {background-color:#273947;}
 progress::-webkit-progress-value {background-color:#79cfa8;}
 progress::-moz-progress-bar {background-color: #79cfa8;}
 
+@media screen and (max-width: 800px) {
+
+    #galleryOpening {display:block; overflow-y:auto;
+        line-height:1.7;
+    }
+    /* .mobileCenter {width:100%; height:100%; overflow-y:auto;
+    display:flex; justify-content:center; align-items:center;
+    } */
+    
+    .compare--desc .innerwpr,
+    .gallery--desc .innerwpr,
+    .intro {width:auto; padding:0 10px; max-width:none;}
+
+    .intro {padding:25px 10px;}
+    .author {margin:20px 0;}
+
+    #galleryOpening h1 {font-size:30px; margin-bottom:0;}
+    .intro p {margin-top:10px;}
+    #galleryOpening h4 {font-size:22px;}
+
+    .continue {bottom:10px;}
+
+    .gallery--desc {padding-bottom:60px;}
+
+}
 
 </style>

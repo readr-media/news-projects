@@ -126,7 +126,7 @@ export function setScene() {
 
     /* --- Pin Section --- */
     
-    let pinSceneCollection = [];
+    let pinSceneCollection = [];   
 
     //開場 pin
     const scenePinOpening = new ScrollMagic.Scene({
@@ -169,13 +169,32 @@ export function setScene() {
     // .addIndicators({name: "opinion"});
     
 
-    //push pin scene to array
-    pinSceneCollection.push(
-        scenePinOpening,
-        scenePinSo,
-        scenePinTrade,
-        scenePinVio
-    );
+    // check device
+    let currOS = this.$store.state.os;
+    let device =  this.currDevice(currOS);
+    // console.log("main.js: " + device);
+
+    if(device == "mobile"){
+        //mobile scene
+        console.log("mobile scene");
+        pinSceneCollection.push(
+            // scenePinOpening,
+            scenePinSo,
+            scenePinTrade,
+            scenePinVio
+        );
+
+    } else {
+        // normal scene
+        console.log("normal scene");
+        //push pin scene to array
+        pinSceneCollection.push(
+            scenePinOpening,
+            scenePinSo,
+            scenePinTrade,
+            scenePinVio
+        );
+    }    
 
     //add pin scene to controller
     for(let i = 0; i < pinSceneCollection.length; i++){

@@ -2,6 +2,12 @@
   <section class="standalone faq" v-bind:class="{expand:expandAll}">
 
     <div class="chapter--header">
+      <div id="mediaContainer">
+         <video id="herovid" playsinline autoplay loop>
+          <source v-if="currDevice == 'mobile'" src="/proj-assets/farmhouse/video/farmhouse02_phone.mp4" type="video/mp4">
+          <source v-else src="/proj-assets/farmhouse/video/farmhouse02.mp4" type="video/mp4">
+         </video> 
+      </div>
       <div class="header--content">
         <div class="centerwpr">
           <h2>來來來看完你就變農舍達人了</h2>
@@ -199,8 +205,8 @@ export default {
 
 .faq {padding:0;}
 .faq .chapter--header {
-  background-image:url("/proj-assets/farmhouse/images/newsmarket/material-05.jpg");
-  background-attachment:fixed; 
+  /* background-image:url("/proj-assets/farmhouse/images/newsmarket/material-05.jpg");
+  background-attachment:fixed;  */
 }
 
 .faq--intro {display:flex; align-items:center; justify-content:center;
@@ -210,7 +216,6 @@ margin-bottom:50px;
 .faq--intro-pic img {width:100%;}
 .faq--intro-text {float:right; width:65%; padding-left:60px;}
 
-/* .faq--container {padding-top:50px;} */
 .faq--entry {margin-bottom:50px;}
 .faq--entry:last-child {margin-bottom:0;}
 
@@ -228,7 +233,6 @@ display:flex; align-items:center; justify-content:center;
 flex-shrink:0;
 }
 
-/* .faq--a.eContent {max-height:0;} */
 .faq--a {padding-top:10px;}
 
 .faq--readmore {clear:both; position:relative;
@@ -260,6 +264,9 @@ position:absolute; right:10px; top:10px;
 
     .faq--intro-pic {display:none;}
     .faq--intro-text {float:none; width:auto; padding-left:0;}
+
+    #fixHeader h2 {display:none;}
+    .faq--readmore.top {display:none;}
 
 
 }
