@@ -15,7 +15,7 @@
 
 <script>
 import ImageComparison from "image-comparison";
-import imagesLoaded from 'imagesLoaded';
+import imagesLoaded from 'imagesloaded';
 
 export default {
   components: {},
