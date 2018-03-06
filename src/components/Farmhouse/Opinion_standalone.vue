@@ -83,6 +83,9 @@ export default {
   components: {
     'ending': ending
   },
+  props: {
+    currDevice: String
+  },
   methods: {
 
     expandContent: function(event){

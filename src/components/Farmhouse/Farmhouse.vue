@@ -6,7 +6,7 @@
   <logo :top="`8px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
   <share :shareUrl="shareLinkOpinion" :top="`8px`" :left="`69px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></share>
   
-  <opinion v-on:expand="expandable"></opinion>
+  <opinion v-on:expand="expandable" v-bind:currDevice="currentDevice"></opinion>
 </article>
 
 <article class="farmhouse faq" v-else-if="getParams == 'faq'">
@@ -15,7 +15,7 @@
   <logo :top="`8px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
   <share :shareUrl="shareLink" :top="`8px`" :left="`69px`" :bgColor="`#79cfa8`"></share>
   
-  <faq v-on:expand="expandable"></faq>
+  <faq v-on:expand="expandable" v-bind:currDevice="currentDevice"></faq>
 </article>
 
 <article class="farmhouse gallery" v-else-if="getParams == 'gallery'">
@@ -586,7 +586,6 @@ width:auto; height:auto;
 min-width:100%; min-height:100%;
 position:absolute; left:50%; top:50%;
 transform:translateX(-50%) translateY(-50%);
-z-index: -100;
 }
 .mobile #herovid {height:100%;}
 
