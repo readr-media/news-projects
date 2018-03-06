@@ -1,7 +1,7 @@
 <template>
-  <section class="chapter conclusion">
+  <section class="chapter conclusion dark">
 
-    <div class="centerwpr dark">
+    <div class="centerwpr">
 
       <h2>顧好農業，才能管好農舍</h2>
       <p>談起多年來總是被當作眾矢之的的宜蘭農舍，老農葉慶文難掩激動地說：<strong>「簡短來講，我認為就兩個核心問題而已，農業無法生存，和農舍無法落實管理，就這麼簡單，別的都不用講，吵那些都不重要。」</strong></p>
@@ -39,12 +39,6 @@ export default {
 </script>
 
 <style scoped>
-.conclusion {padding-top:0; padding-bottom:0;
-background-color:#273947; color:#fff;
-}
-.conclusion h2 {color:#fff;}
-
-
 
 
 </style>

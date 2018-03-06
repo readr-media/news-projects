@@ -79,7 +79,7 @@ export default {
 
             let canvasScene = new ScrollMagic.Scene({
                 triggerElement: ".map-container",
-                triggerHook: 0.15
+                triggerHook: 0.2
             })
             .setClassToggle("#mapAll","active")
             // .addIndicators({name: "nav", colorStart: "red"});

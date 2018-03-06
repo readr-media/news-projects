@@ -1,13 +1,15 @@
 <template>
   <section class="standalone faq" v-bind:class="{expand:expandAll}">
 
-    <div class="chapter--header">
-      <div id="mediaContainer" v-bind:class="{mobile: (currDevice == 'mobile')}">
-        <div v-if="currDevice == 'mobile'" class="heroimg"></div>
-         <video v-else id="herovid" playsinline autoplay>
+    <div class="chapter--header" v-bind:class="{mobile: (currDevice == 'mobile')}">
+
+      <div v-if="currDevice == 'mobile'" class="heroimg"></div>
+      <div v-else id="mediaContainer">
+         <video id="herovid" playsinline autoplay>
             <source src="/proj-assets/farmhouse/video/farmhouse02.mp4" type="video/mp4">
          </video> 
       </div>
+      
       <div class="header--content">
         <div class="centerwpr">
           <h2>來來來看完你就變農舍達人了</h2>

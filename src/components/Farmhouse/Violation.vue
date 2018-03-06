@@ -3,7 +3,7 @@
     <!-- <div id="vioPinTrigger"></div> -->
     <div id="vioHeader"></div>
 
-    <div id="vioPinContainer">
+    <!-- <div id="vioPinContainer"> -->
     <div class="centerwpr">
         <h2>農舍違法多，六萬護一生</h2>
 
@@ -15,14 +15,14 @@
 
           <div class="expandable">              
               <!-- <div class="eTable" id="tableFull"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div> -->
-              <div v-if="currDevice == 'mobile'">
-                <div class="eTable" id="tablePhone"><img src="/proj-assets/farmhouse/images/chart/c4-1-phone.png" /></div>
-              </div>
-              <div v-else>
-                <div class="eTable" id="tableFull"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div>
-              </div>
+              <!-- <div v-if="currDevice == 'mobile'"> -->
+                <div class="eTable" id="tablePhone" v-if="currDevice == 'mobile'"><img src="/proj-assets/farmhouse/images/chart/c4-1-phone.png" /></div>
+              <!-- </div> -->
+              <!-- <div v-else> -->
+                <div class="eTable" id="tableFull" v-else-if="currDevice == 'desktop'"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div>
+              <!-- </div> -->
               <div class="eTrigger">
-                <a class="icon" v-on:click="toggleContent"></a>
+                <a class="icon" id="tbTrigger" v-on:click="toggleContent($event)"></a>
               </div>
           </div>
 
@@ -49,7 +49,7 @@
 
 
     </div>    
-    </div>
+    <!-- </div> -->
 
   </section>
 </template>
@@ -63,90 +63,53 @@ export default {
     currDevice: String
   },
 
-  methods: {     
-    
-    // setSceneVio: function(){
-
-    //   const ScrollMagic = require('scrollmagic');     
-    // //   require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
-
-    //   const controllerVio = new ScrollMagic.Controller();
-
-    //   //get offset top
-    // //   let concTrigger = document.getElementById('concPinTrigger');
-
-    //   // console.log(concTrigger);
-    // //   let concOffset = this.getOffset(concTrigger);
-
-    // //   console.log("Before:" + concOffset.top)
-
-    // //   const pinHeader = new ScrollMagic.Scene({
-    // //       //主圖固定不捲動
-    // //       // triggerElement: '#concPinTrigger',
-    // //       offset: concOffset.top,
-    // //       triggerHook: "onLeave",
-    // //       duration: 0
-    // //   }).setPin("#concHeader",{
-    // //       pushFollowers: false
-    // //   });
-
-    //   const pinHeader = new ScrollMagic.Scene({
-    //       //主圖固定不捲動
-    //       triggerElement: '#vioHeader',
-    //     //   offset: concOffset.top,
-    //       triggerHook: "onLeave"
-    //   }).setPin("#vioHeader",{
-    //       pushFollowers: false
-    //   });
-    // //   .addIndicators({name: "conc"});
-
-    //   /*
-    //   const dialogQ1 = new ScrollMagic.Scene({
-    //       //dialog Q1
-    //       triggerElement: '#dialogConQ1',
-    //       triggerHook: "onEnter"
-    //   }).setClassToggle("#dialogConQ1","active");
-
-    //   const dialogA1 = new ScrollMagic.Scene({
-    //       //dialog A1
-    //       triggerElement: '#dialogConA1',
-    //       triggerHook: "onEnter",
-    //       offset: 200
-    //   }).setClassToggle("#dialogConA1","active");
-    //   */
-    //   controllerVio.addScene([
-    //       pinHeader
-    //       // dialogQ1,
-    //       // dialogA1  
-    //   ]);
-
-    // }, //setScene
+  methods: {
     
     toggleContent: function(event){
-
+      
       //event target
-        let icon = event.currentTarget;
-        let trigger = icon.parentNode;
-        let parent = trigger.parentNode;
-        const targClassName = icon.getAttribute('class')
+        // let icon = event.currentTarget;
+        // let trigger = icon.parentNode;
+        // let parent = trigger.parentNode;
+        // const targClassName = icon.getAttribute('class')
 
-        //收闔的內容區塊
-        let eContent = parent.querySelector(".eTable");
+        // //收闔的內容區塊
+        // let eContent = parent.querySelector(".eTable");
 
-        //收闔內容區塊原始高度
-        let maxHeight = eContent.scrollHeight;
-        if(targClassName && targClassName.indexOf('icon') > -1 && icon.tagName === 'A') {
-          if(parent.classList.contains("expand")){
-                //關閉
-                parent.classList.remove("expand");
-                eContent.style.maxHeight  = maxHeight / 2.5 + "px";
+        // //收闔內容區塊原始高度
+        // let maxHeight = eContent.scrollHeight;
+        // if(targClassName && targClassName.indexOf('icon') > -1 && icon.tagName === 'A') {
+        //   if(parent.classList.contains("expand")){
+        //         //關閉
+        //         parent.classList.remove("expand");
+        //         eContent.style.maxHeight  = maxHeight / 2.5 + "px";
   
+        //     } else {
+        //         //展開
+        //         parent.classList.add("expand");
+        //         eContent.style.maxHeight  = maxHeight + "px";
+        //     }  
+        // }
+      const eventTarget = event.currentTarget;
+      const trigger = document.getElementById("tbTrigger");
+      const content = document.querySelector(".eTable");
+      const wrapper = document.querySelector(".expandable");
+
+      let maxHeight = content.scrollHeight;
+
+      if(eventTarget === trigger){
+
+        if(wrapper.classList.contains("expand")){
+                //關閉
+                wrapper.classList.remove("expand");
+                content.style.maxHeight  = maxHeight / 2.5 + "px";  
             } else {
                 //展開
-                parent.classList.add("expand");
-                eContent.style.maxHeight  = maxHeight + "px";
+                wrapper.classList.add("expand");
+                content.style.maxHeight  = maxHeight + "px";
             }  
-        }
+
+      }      
 
     },
 
@@ -158,6 +121,7 @@ export default {
         for(let i = 0; i < eTable.length; i++){
           let height = eTable[i].scrollHeight;
           eTable[i].style.maxHeight = height / 2.5 + "px";
+          console.log(height);
         }
 
       });
@@ -173,20 +137,23 @@ export default {
   mounted: function(){
 
     if (process.browser) {
-          // this.setSceneVio();
 
           let setTableHeight = this.setTableHeight;
-          // let setSceneVio = this.setSceneVio;
+          // let currDevice = this.currDevice;
 
-          imagesLoaded( document.querySelector('#vioPinContainer'), function() {
-            // console.log('all images are loaded');
-            setTableHeight();
-            // setSceneVio();
+          // if(currDevice){
+            imagesLoaded( document.querySelector('.eTable'), function() {
+              // console.log('all images are loaded');
+              setTableHeight();              
 
-          });
+              // let currDevice = this.currDevice;
+              // console.log(currDevice);
 
-
+            });
+          // }
         }
+
+        // console.log(this.currDevice)
 
   }
     
@@ -194,19 +161,11 @@ export default {
 </script>
 
 <style scoped>
-.violation {position:relative; padding:0;}
 
-#vioHeader {width:100%; height:100vh; position:relative;
-top:0 !important;
+#vioHeader {width:100%; height:70vh; position:relative;
 background-image:url("/proj-assets/farmhouse/images/IMG_7169.jpg");
 background-repeat:no-repeat; background-size:cover;
 background-position:center top;
-}
-
-#vioPinContainer {padding-bottom:140px;}
-.violation .centerwpr {
-margin-top:-120px;
-background-color:#f8f8f8;  
 }
 
 .expandable {position:relative;}
@@ -243,9 +202,9 @@ background-position:left top;
 
 @media screen and (max-width: 800px) {
 
-  .violation .centerwpr {padding-bottom:100px;}
+  /* .violation .centerwpr {padding-bottom:100px;} */
 
-  #vioPinContainer {padding-bottom:0;}
+  /* #vioPinContainer {padding-bottom:0;} */
 
 }
 

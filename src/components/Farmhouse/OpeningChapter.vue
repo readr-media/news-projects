@@ -4,7 +4,6 @@
       <div id="mediaContainer" v-bind:class="{mobile: (currDevice == 'mobile')}">
         <div v-if="currDevice == 'mobile'" class="heroimg"></div>
          <video v-else id="herovid" playsinline autoplay>
-            <!-- <source v-if="currDevice == 'mobile'" src="/proj-assets/farmhouse/video/farmhouse01_phone.mp4" type="video/mp4"> -->
             <source src="/proj-assets/farmhouse/video/farmhouse01.mp4" type="video/mp4">
          </video> 
       </div>

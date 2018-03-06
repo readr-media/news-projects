@@ -1,13 +1,20 @@
 <template>
   <section class="standalone opinion">
 
-    <div class="chapter--header">
-      <div id="mediaContainer" v-bind:class="{mobile: (currDevice == 'mobile')}">
+    <div class="chapter--header" v-bind:class="{mobile: (currDevice == 'mobile')}">
+      <!-- <div id="mediaContainer">
         <div v-if="currDevice == 'mobile'" class="heroimg"></div>
          <video v-else id="herovid" playsinline autoplay>
             <source src="/proj-assets/farmhouse/video/farmhouse03.mp4" type="video/mp4">
          </video> 
+      </div> -->
+      <div v-if="currDevice == 'mobile'" class="heroimg"></div>
+      <div v-else id="mediaContainer">
+         <video id="herovid" playsinline autoplay>
+            <source src="/proj-assets/farmhouse/video/farmhouse03.mp4" type="video/mp4">
+         </video> 
       </div>
+
       <div class="header--content">
         <div class="centerwpr">
           <h2>農舍面面觀</h2>
@@ -192,8 +199,8 @@ background-color:#273947; color:#fff;
 .opinion:after {content:""; display:table; clear:both;}
 
 .opinion .chapter--header {
-  background-image:url("/proj-assets/farmhouse/images/newsmarket/material-04.jpg");
-  background-attachment:fixed; 
+  /* background-image:url("/proj-assets/farmhouse/images/newsmarket/material-04.jpg");
+  background-attachment:fixed;  */
 }
 
 .opinionwpr {padding-top:0;}

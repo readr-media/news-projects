@@ -8,6 +8,7 @@
     <div class="alter">
       <p>左：初春的蘭陽平原，原本應該是遍插秧苗的水田裡，卻不斷冒出鋼筋，直上雲霄，一根根的鋼筋被強勁的東北風撞擊而發出刺耳的響聲，彷彿為蘭陽平原流失的農地敲起喪鐘。</p>
       <p class="right">右：農舍完工後的模樣。</p>
+      <div class="continue"></div>
     </div>
 
 </div>
@@ -33,8 +34,8 @@ export default {
       const before = this.before;
       const after = this.after;
       
-      let beforeEl = '<div class="compare--desc"><div class="innerwpr">' + before + '</div></div>';
-      let afterEl = '<div class="compare--desc"><div class="innerwpr">' + after + '</div></div>';
+      let beforeEl = '<div class="gallery--desc"><div class="innerwpr">' + before + '</div><div class="continue"></div></div>';
+      let afterEl = '<div class="gallery--desc"><div class="innerwpr">' + after + '</div><div class="continue"></div></div>';
 
       let comparisonItem = document.querySelectorAll(".comparison-item__content");
 
@@ -52,7 +53,7 @@ export default {
 
       //set desc width
       let comparisonWidget = document.querySelector(".comparison-widget");
-      let compareDesc = document.querySelectorAll(".compare--desc");
+      let compareDesc = document.querySelectorAll(".gallery--desc");
 
       window.addEventListener('resize',function(event){
         let widgetWidth = comparisonWidget.offsetWidth;
@@ -81,7 +82,7 @@ export default {
 
     new ImageComparison({
       container: imgContainer,
-      // startPosition: 55,
+      startPosition: 55,
       data: [
         {
           image: images[0],
@@ -121,7 +122,7 @@ box-sizing:border-box;
 .comparison-item__image {max-height:100vh;}
 .comparison-item__label {top:15px; display:none;}
 
-.compare--desc {width:100%;
+/* .compare--desc {width:100%;
 position:absolute; left:0; bottom:0;
 display:flex; justify-content:center; align-items:center;
 padding-bottom:90px;
@@ -129,7 +130,7 @@ padding-bottom:90px;
 .compare--desc .innerwpr {
 font-size:16px; text-shadow:0 1px 1px rgba(0, 0, 0, 0.8);
 color:#fff; text-align:center;
-}
+} */
 
 .separator--hand {width:100px; height:60%; position:absolute; left:50%; top:20%;
 margin-left:-50px;
@@ -146,11 +147,16 @@ transition:400ms; transition-property:opacity,margin-top;
 .separator--hand:hover:before {opacity:0; margin-top:20px;}
 
 .alter {margin-top:10px; padding:0 10px; display:none;
-font-size:16px; text-shadow:0 1px 1px rgba(0, 0, 0, 0.8); color:#fff;
-line-height:1.5;
+font-size:15px; text-shadow:0 1px 1px rgba(0, 0, 0, 0.8); color:#fff;
+line-height:1.4;
+position:absolute; left:0; bottom:0; z-index:99;
 }
 .alter p {margin-top:5px;}
 /* .alter .right {text-align:right;} */
+
+@media screen and (max-width: 800px) {
+  .comparisonwpr {height:90vh;}
+}
 
 @media screen and (max-width: 500px) {
 
@@ -158,8 +164,8 @@ line-height:1.5;
     transform:scale(0.6);  transform-origin:0 0;
   }
 
-  .compare--desc {display:none;}
-  /* .alter {display:block;} */
+  .comparison-item .gallery--desc {display:none;}
+  .alter {display:block;}
 
 
 

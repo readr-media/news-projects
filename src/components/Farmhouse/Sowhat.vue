@@ -3,7 +3,7 @@
     <!-- <div id="soPinTrigger"></div> -->
     <div id="soHeader"></div>
 
-    <div id="soPinContainer">
+    <!-- <div id="soPinContainer"> -->
     <div class="centerwpr">
         <h2>農地不農用，又怎樣？</h2>
           <p>雖然《農發條例》在開放興建農舍之初，就已明文要求「不影響農業生產」和「維持農地農用」必須是前提，然而如今從現況來看，前提看似消失，許多人卻還在爭論如「農舍應該怎麼蓋」等枝微末節，未免讓人感嘆到底是劃錯了重點，又抑或是別無選擇的悲哀。</p>
@@ -12,7 +12,7 @@
           <p>「（農舍）這樣氾濫下去，當然會影響農業生產環境。問題是現在已經有這麼多的負面影響，為什麼大家還是不在乎？<strong>最根本問題就是，農業價值沒有被凸顯，被看成是弱勢。農業產值一年才 5,600 億，比不上台積電或鴻海等高科技產業，可是它對生態環境糧食的貢獻，不管 NGO 或農委會再怎麼講，一般人也沒辦法體會。只有當全球極端氣候發生時，大家糧食短缺才會感受出來，否則我講再多大家也無法感受。」</strong></p>
 
     </div>    
-    </div>
+    <!-- </div> -->
 
   </section>
 </template>
@@ -71,24 +71,17 @@ export default {
 </script>
 
 <style scoped>
-.chapter.sowhat {position:relative; padding:0;}
+/* .chapter.sowhat {position:relative; padding:0;} */
 
-#soHeader {width:100%; height:100vh; position:relative;
-top:0 !important;
+#soHeader {width:100%; height:70vh; position:relative;
 background-image:url("/proj-assets/farmhouse/images/EDD_5196.jpg");
 background-repeat:no-repeat; background-size:cover;
 background-position:center top;
 }
 
-#soPinContainer {padding-bottom:140px;}
-.sowhat .centerwpr {margin-top:-120px;
-background-color:#f8f8f8;
-}
-
 @media screen and (max-width: 800px) {
 
-  #soPinContainer {padding-bottom:0;}
-  .sowhat .centerwpr {padding-bottom:100px;}
+  /* .sowhat .centerwpr {padding-bottom:100px;} */
 
 }
 
