@@ -155,7 +155,11 @@ position:absolute; left:0; bottom:0; z-index:99;
 /* .alter .right {text-align:right;} */
 
 @media screen and (max-width: 800px) {
-  .comparisonwpr {height:90vh;}
+  .comparisonwpr {height:90vh;
+  justify-content:flex-start;
+  }
+  .comparison-widget {margin-top:74px;}
+  
 }
 
 @media screen and (max-width: 500px) {

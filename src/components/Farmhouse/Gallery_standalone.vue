@@ -34,8 +34,11 @@
         </div>        
     </div>
 
-    <div class="section fp-auto-height" id="footer">
+    <div class="section" id="footer">
         <ending></ending>
+        <div class="footer--btnwpr">
+            <div id="prevBtn"></div>
+        </div>
     </div>
     
 </div>
@@ -122,31 +125,15 @@ export default {
         require('./util/scrolloverflow.js');
         require('fullpage.js');
 
-        // if (process.browser) {
-
-        //     this.setFullpage();
-
-        //     // Next Page
-        //     $('.continue').on('click', function() {
-        //         $.fn.fullpage.moveSectionDown();
-        //     });
-        // }
-
-        window.addEventListener('resize', function (event) {
-            var wheight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-
-            // $(".section").css("height",wheight+"px");
-        });
-
-        let resizeEvent = new Event('resize');
-        //trigger window resize once
-        window.dispatchEvent(resizeEvent);
-
         this.setFullpage();
 
         // Next Page
         $('.continue').on('click', function() {
             $.fn.fullpage.moveSectionDown();
+        });
+
+        $('#prevBtn').on('click', function() {
+            $.fn.fullpage.moveSectionUp();
         });
 
 
@@ -226,10 +213,10 @@ font-size:24px; letter-spacing:1px; line-height:1; font-weight:400;
 .author {margin-top:30px;}
 .author h4 {font-size:24px;}
 
-.continue {width:50px; height:40px; cursor:pointer;
+.continue {width:50px; height:50px; cursor:pointer;
 position:relative; margin:0 auto 0 auto;
 background-image:url("/proj-assets/farmhouse/images/slice01.png");
-background-size:60px auto; background-position:13px -520px;
+background-size:60px auto; background-position:13px -515px;
 background-repeat:no-repeat;
 }
 
@@ -240,6 +227,21 @@ background-size:70px auto; background-position:16px -598px;
 margin:20px auto 0 auto;
 }
 #start:hover {background-color:#76c2ac; background-position:16px -722px;}
+
+.extra {min-height:580px;}
+.extend .centerwpr {padding:20px !important;}
+.extra .centerwpr {padding:20px !important;}
+
+.footer--btnwpr {position:relative; padding-bottom:20px;
+background-color:#273947;
+}
+#prevBtn {width:60px; height:60px; cursor:pointer; position:relative;
+border-radius:50%; background-color:#76c2ac;
+background-image:url("/proj-assets/farmhouse/images/slice01.png");
+background-size:70px auto; background-position:16px -600px;
+margin:0 auto;
+transform:rotate(180deg);
+}
 
 
 /* progress bar */
@@ -261,6 +263,7 @@ progress::-moz-progress-bar {background-color: #79cfa8;}
         line-height:1.7;
     }
     
+    .gallery--desc {padding-bottom:0;}
     .gallery--desc .innerwpr {
         width:auto; padding:0 10px; max-width:none;
         font-size:15px; line-height:1.4;
@@ -272,8 +275,13 @@ progress::-moz-progress-bar {background-color: #79cfa8;}
     .intro p {margin-top:10px; font-size:15px; line-height:1.4;}
     #galleryOpening h4 {font-size:22px;}
 
-    .imgwpr {height:90vh;}
-    /* .comparisonwpr {height:90vh;} */
+    .fp-tableCell {vertical-align:top;}
+    .imgwpr {height:90vh; background-position:center 74px;}
+    /* .comparisonwpr {height:90vh;} */   
+
+    .extend .centerwpr {padding:20px !important;}
+    .extra .centerwpr {padding:20px !important;}
+    /* .extra .centerwpr {padding-left:30px !important; padding-right:30px !important;} */
 
 
 }

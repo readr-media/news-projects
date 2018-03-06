@@ -145,6 +145,8 @@ background-color:transparent;
 background-color:transparent;
 }
 
+.gallery .facebook {padding-bottom:0;}
+
 @media screen and (max-width: 800px) {
 
   .extendwpr {flex-wrap:wrap;}
@@ -153,7 +155,7 @@ background-color:transparent;
   .extend--entry.faq {margin-top:20px;}
   .extend--entry.gallery {margin-top:20px;}
 
-  .extend--title {font-size:18px;}
+  .extend--title {font-size:18px;} 
 
 }
 
