@@ -9,7 +9,7 @@ pipeline:
     username: drone
     icon_url: https://avatars2.githubusercontent.com/u/2181346?s=200&v=4
     template: >
-      *start* building *{{repo.name}}*.
+      *start* building *{{repo.name}}* <${DRONE_BUILD_LINK}|#{{build.number}}>.
       *{{build.author}}* gave *{{build.branch}}* a little push.
     when:
       event: [push]
