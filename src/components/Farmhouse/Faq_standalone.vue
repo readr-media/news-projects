@@ -33,7 +33,7 @@
         
       <div class="faq--container">
 
-        <div class="faq--entry expandable" v-for="(item, index) in faqData" :key="'item-'+ index" v-bind:class="{expand:expandAll}">
+        <div class="faq--entry expandable" v-for="(item, index) in faqData" :key="'item-'+ index" v-bind:class="[{ expand:expandAll }, `q${index + 1}` ]">
             <h4 class="faq--q eTrigger" v-text="item.question" v-on:click="expandContent($event, `q${index + 1}`)"></h4>
             <div class="faq--a eContent" v-html="item.answer"></div>
         </div>
@@ -96,6 +96,7 @@ export default {
         },
 
         faqExpand: function(){
+            this.$emit('faqExpand', true);
             window.ga('send', 'event', 'projects', 'click', 'all_open', { nonInteraction: false })
             this.expandAll = true;
             let faqA = document.querySelectorAll(".faq--a");
@@ -108,6 +109,7 @@ export default {
         },
 
         faqCollapse: function(){
+            this.$emit('faqExpand', false);
             window.ga('send', 'event', 'projects', 'click', 'all_close', { nonInteraction: false })
             this.expandAll = false;
             let faqA = document.querySelectorAll(".faq--a");

@@ -42,7 +42,7 @@
         <iframe src="https://www.mirrormedia.mg/project-list/light?excluding=farmhouse"  width="100%" frameborder="0" scrolling="no" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
       </section>
       <section class="facebook">
-        <div class="fb-comments" data-href="https://projects.mirrormedia.mg/project/marathon/" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
+        <div class="fb-comments" data-href="https://projects.mirrormedia.mg/project/farmhouse/" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
       </section>
   </div>
   </div>
