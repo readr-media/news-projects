@@ -73,13 +73,13 @@ export default {
             const ScrollMagic = require("scrollmagic");
             const { TweenMax, TimelineMax } = require('gsap');
             require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap');
-            require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
+            // require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
 
             let controller = new ScrollMagic.Controller();
 
             let canvasScene = new ScrollMagic.Scene({
                 triggerElement: ".map-container",
-                triggerHook: 0.15
+                triggerHook: 0.2
             })
             .setClassToggle("#mapAll","active")
             // .addIndicators({name: "nav", colorStart: "red"});

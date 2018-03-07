@@ -1,7 +1,7 @@
 <template>
-  <section class="chapter whyYilan">
+  <section class="chapter whyYilan dark">
 
-    <div class="centerwpr dark">
+    <div class="centerwpr">
 
       <h2>為什麼是宜蘭？</h2>
 
@@ -83,15 +83,5 @@ export default {
 </script>
 
 <style scoped>
-.whyYilan {padding-top:0; padding-bottom:0;
-background-color:#273947; color:#fff;
-}
-.whyYilan h2 {color:#fff;}
-/* .chapter.tradeData {padding-top:0;}
-.tradeData .chapter--header {
-  background-image:url("/proj-assets/farmhouse/images/newsmarket/material-08.jpg");
-} */
-
-
 
 </style>

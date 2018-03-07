@@ -2,9 +2,9 @@
   <section class="chapter opening">
     <div id="openingPinContainer">
       <div id="mediaContainer" v-bind:class="{mobile: (currDevice == 'mobile')}">
-         <video id="herovid" playsinline autoplay>
-          <source v-if="currDevice == 'mobile'" src="/proj-assets/farmhouse/video/farmhouse01_phone.mp4" type="video/mp4">
-          <source v-else src="/proj-assets/farmhouse/video/farmhouse01.mp4" type="video/mp4">
+        <div v-if="currDevice == 'mobile'" class="heroimg"></div>
+         <video v-else id="herovid" playsinline autoplay>
+            <source src="/proj-assets/farmhouse/video/farmhouse01.mp4" type="video/mp4">
          </video> 
       </div>
       <!-- <div class="centerwpr"> -->
@@ -98,21 +98,27 @@ font-size:16px;
 
   #openingPinContainer {height:auto;
     justify-content:center; align-items:center;
-    padding-top:80vh;
+    padding-top:60vh;
   }
   .opening--container {margin-top:0;
   padding:0 20px; text-align:center;
   }
   .opening #mediaContainer {position:fixed;}
-  .mobilewpr {padding-bottom:100px;
-  background-color:#f8f8f8;
+
+  .opening--title {line-height:1.1; margin-bottom:15px;}
+
+  .mobilewpr {margin-bottom:80px; padding:30px 20px;
+  color:#1a1a1a; text-shadow:none;
+  font-size:17px; line-height:1.7;
+  background-color:rgba(248,248,248,0.85); border-radius:8px;
   }
+  .mobilewpr p:first-child {margin-top:0;}
 
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 350px) {
 
-  .opening--title {font-size:50px;}
+  .opening--title {font-size:46px;}
 
 }
 

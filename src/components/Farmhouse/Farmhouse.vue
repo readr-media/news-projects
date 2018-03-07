@@ -48,7 +48,7 @@
   <why-yilan>為什麼是宜蘭？</why-yilan>
 
   <!-- 老農成為農舍主力賣家 -->
-  <trade-data v-on:noteToggle="noteToggleContent" v-bind:currDevice="currentDevice"></trade-data>
+  <trade-data v-on:noteToggle="noteToggleContent" v-bind:currDevice="currentDevice" v-bind:loaded="isObloaded"></trade-data>
 
   <!-- 農民困境：前有斷崖，後有追兵 -->
   <helpless v-on:noteToggle="noteToggleContent"></helpless>
@@ -164,7 +164,8 @@
         chapterTitle: chapterTitle,
         navOpen: false,
 
-        currentDevice: ''
+        currentDevice: '',
+        isObloaded: false
 
       }
     },
@@ -186,6 +187,13 @@
         metaImage: ogImage
       }
     },
+    created () {
+
+      let currOS = this.$store.state.os;
+      this.currentDevice = this.currDevice(currOS);
+      // console.log(this.currentDevice);
+
+    },
     beforeMount () {
 
     },
@@ -200,10 +208,10 @@
         }        
 
         //ckeck current device
-        let currOS = this.$store.state.os;
+        // let currOS = this.$store.state.os;
         // console.log("current OS: " + currOS);
         // console.log("current Device: " + this.currDevice(currOS));
-        this.currentDevice = this.currDevice(currOS);
+        // this.currentDevice = this.currDevice(currOS);
         // console.log(this.currentDevice);
 
       }    
@@ -214,6 +222,12 @@
       
       //get state
       //console.log(this.$store.state);
+
+      window.addEventListener('load', () => {
+        this.isObloaded = true;
+        console.log(this.isObloaded);
+      });
+
     },
     methods: {
 
@@ -277,20 +291,20 @@ background-size:auto 100% !important;
 background-position:right top !important;
 }
 
-section {padding:50px 0 100px 0; position:relative;
+section {
+/* padding:50px 0 100px 0;  */
+position:relative;
 background-color:#f8f8f8;
 }
-.dark section {background-color:#273947;}
+section.dark {background-color:#273947; color:#fff;}
 
 .centerwpr {max-width:860px; position:relative;
-margin:0 auto; 
-padding:60px 90px 100px 90px;
+margin:0 auto; padding:70px 90px;
 box-sizing:border-box;
 }
-.centerwpr.dark {
-/* max-width:860px; padding:60px 90px 100px 90px; */
+/* .centerwpr.dark {
 background-color:#273947; color:#fff;
-}
+} */
 .centerwpr:after {content:""; display:table; clear:both;}
 
 .standalone .centerwpr {padding:50px 20px; max-width:900px;}
@@ -415,6 +429,7 @@ display:flex; flex-direction:column; justify-content:flex-end;
 .standalone .chapter--header {height:auto;
 padding-top:85vh;
 }
+.standalone .mobile.chapter--header {padding-top:0;}
 
 
 .header--content {position:relative;
@@ -587,7 +602,24 @@ min-width:100%; min-height:100%;
 position:absolute; left:50%; top:50%;
 transform:translateX(-50%) translateY(-50%);
 }
-.mobile #herovid {height:100%;}
+.mobile #herovid {display:none;}
+
+.heroimg {width:100%; height:100%; position:relative;
+/* position:absolute; left:0; top:0; */
+background-size:cover; background-repeat:no-repeat;
+background-position:center center;
+}
+.opening .heroimg {
+position:absolute; left:0; top:0;  
+background-image:url("/proj-assets/farmhouse/images/landing/phonelandingpic01.jpg");
+}
+
+.faq .heroimg {height:60vh;
+background-image:url("/proj-assets/farmhouse/images/landing/phonelandingpic02.jpg");
+}
+.opinion .heroimg {height:60vh;
+background-image:url("/proj-assets/farmhouse/images/landing/phonelandingpic03.jpg");
+}
 
 /* expandable trigger */
 /* .eTrigger {clear:both; position:relative;
@@ -651,7 +683,7 @@ font-size:44px;
 @media screen and (max-width: 800px) {
 
   .centerwpr {padding:70px 20px;}
-  .centerwpr.dark {padding:70px 20px;}
+  /* .centerwpr.dark {padding:70px 20px;} */
 
   .dialog--portrait {width:60px; height:60px;}
   .question .dialog--portrait {margin-right:10px;}

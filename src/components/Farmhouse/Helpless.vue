@@ -59,12 +59,12 @@ export default {
 </script>
 
 <style scoped>
-.helpless {padding-top:0; padding-bottom:0;}
+/* .helpless {padding-top:0; padding-bottom:0;} */
 
 
 @media screen and (max-width: 800px) {
 
-  /* .helpless .centerwpr {padding:50px 30px 80px 30px;} */
+
 
 }
 

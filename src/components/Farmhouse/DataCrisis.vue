@@ -1,5 +1,5 @@
 <template>
-  <section class="chapter dataCrisis">
+  <section class="chapter dataCrisis dark">
 
     <div class="centerwpr dark">
 
@@ -116,18 +116,5 @@ export default {
 </script>
 
 <style scoped>
-.dataCrisis {padding-bottom:0;
-background-color:#273947; color:#fff;
-}
-.dataCrisis h2 {color:#fff;}
-/* .chapter.tradeData {padding-top:0;}
-.tradeData .chapter--header {
-  background-image:url("/proj-assets/farmhouse/images/newsmarket/material-08.jpg");
-} */
-
-@media screen and (max-width: 800px) {
-  .dataCrisis {padding-top:0;}
-}
-
 
 </style>
