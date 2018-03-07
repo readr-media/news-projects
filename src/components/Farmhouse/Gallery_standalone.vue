@@ -6,7 +6,7 @@
     <div class="section fp-auto-height">
         <div id="galleryOpening">
             <div class="intro">
-                <h1>《宜蘭田中央》<br />張良一攝影專題</h1>
+                <h1>《宜蘭田中央》</h1>
                 <p>在宜蘭，總是可以看見有著竹林環繞，如小島般浮在稻田的紅瓦厝。一座又一座的竹林稻子海浮島，因應自然環境而生，從冬尾注滿田水時倒映著天光雲影，到初春的青綠綠再到盛夏稻穗滿滿的黃澄澄，四時風景轉變，很令人動容。</p>
                 <p>只是，現在的蘭陽平原在傳統綠竹林紅磚厝之外，更多的是，一棟比一棟還誇張的宅邸，有西班牙式的紅瓦石屋、有藍白相間的愛琴海式，或是瀰漫著熱帶氣息的峇里島風農舍，個個極盡絢麗！宜蘭農地地景快速翻轉，目不暇給，每每讓人有不知身在何處的錯覺！</p>
 
@@ -201,16 +201,16 @@ background-color:rgba(0,0,0,0.5);
 .intro {padding:30px 10px; max-width:660px;
 font-size:16px; position:relative;
 }
-.intro p {text-align:center; margin-top:10px;}
+.intro p {margin-top:10px;}
 
-#galleryOpening h1 {margin-top:0; margin-bottom:10px;
+#galleryOpening h1 {margin-top:0; margin-bottom:15px;
 font-size:42px; letter-spacing:1px; line-height:1.4; font-weight:400;
 }
 #galleryOpening h4 {
 font-size:24px; letter-spacing:1px; line-height:1; font-weight:400;
 }
 
-.author {margin-top:30px;}
+.author {margin-top:40px;}
 .author h4 {font-size:24px;}
 
 .continue {width:50px; height:50px; cursor:pointer;

@@ -424,10 +424,6 @@ display:inline-flex; align-items:center; justify-content:center;
 background-repeat:no-repeat; background-size:cover;
 background-position:center top;
 display:flex; flex-direction:column; justify-content:flex-end;
-/* margin-bottom:30px; */
-}
-.standalone .chapter--header {height:auto;
-padding-top:85vh;
 }
 .standalone .mobile.chapter--header {padding-top:0;}
 
@@ -436,8 +432,13 @@ padding-top:85vh;
 padding:50px 0; color:#fff;  
 background-color:rgba(39,57,71,1);  
 }
-/* .faq .header--content {background-color:rgba(39,57,71,0.9);} */
 .header--content h2 {color:#fff;}
+
+.standalone .header--content {padding:30px 0 40px 0;}
+.standalone .header--content h2 {margin-bottom:0;}
+.standalone .header--content p {margin-top:20px;}
+
+.standalone.opinion {padding-bottom:0;}
 
 /* Chapter Nav */
 .navwpr {position:fixed; left:0; top:0; height:100vh;
@@ -596,6 +597,9 @@ font-size:24px; color:#fff;
 #mediaContainer {width:100%; height:100vh; position:absolute; left:0; top:0;
 overflow:hidden;
 }
+
+.standalone.faq #mediaContainer {height:80vh;}
+
 #herovid {
 width:auto; height:auto;
 min-width:100%; min-height:100%;
@@ -603,6 +607,10 @@ position:absolute; left:50%; top:50%;
 transform:translateX(-50%) translateY(-50%);
 }
 .mobile #herovid {display:none;}
+
+.standalone.faq #herovid {left:0; bottom:0; top:auto;
+transform:none;
+}
 
 .heroimg {width:100%; height:100%; position:relative;
 /* position:absolute; left:0; top:0; */

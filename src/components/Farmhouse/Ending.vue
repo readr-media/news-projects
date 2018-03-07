@@ -7,7 +7,7 @@
             <a class="extend--entry home" href="/project/farmhouse/" target="_blank">
                 <img src="/proj-assets/farmhouse/images/extend/extend01.jpg" />
                 <div class="extend--overlay"></div>
-                <div class="extend--title">不許動！<br />通通拿去種農舍！</div>
+                <div class="extend--title">萬畝農舍良田起</div>
             </a> 
 
             <a class="extend--entry opinion" href="/project/farmhouse/opinion" target="_blank">

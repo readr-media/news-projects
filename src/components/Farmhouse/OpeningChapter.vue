@@ -9,7 +9,7 @@
       </div>
       <!-- <div class="centerwpr"> -->
         <div class="opening--container">
-          <h1 class="opening--title">萬畝農舍<br />良田起</h1>
+          <h1 class="opening--title">萬畝農舍良田起</h1>
           <div class="mobilewpr">
             <p>2000 年，政府為了因應台灣加入世界貿易組織（WTO）可能帶來的衝擊，打出「富麗農村」口號，希望台灣轉型為大面積整合耕種，修正了新版《農業發展條例》，開放農地自由買放，同時特許農民在農地上興建農舍。17 年過去，農地價格漲了，我們的農業卻持續積弱、耕種面積減少，而我們的農村，除了「種」出越來越多鐵皮工廠和壯麗的農舍外，卻沒有因此變得富麗⋯⋯</p>
             <p>2006 年，雪山隧道通車後，鄰近台北卻仍保有好山好水的宜蘭縣，從農業大縣搖身一變，成了「農舍大縣」。這一切，到底怎麼了？</p>
@@ -72,15 +72,16 @@ justify-content:flex-start; align-items:flex-end;
 #openingPinContainer .centerwpr {
 max-width:1100px;
 }
-.opening--container {position:relative; max-width:600px;
-line-height:1.2; color:#fff; text-align:left;
-text-shadow:0 1px 4px rgba(0,0,0,0.4);
+.opening--container {position:relative; max-width:800px;
+line-height:1.4; color:#fff; text-align:left;
+text-shadow:0 2px 10px rgba(0,0,0,1);
 padding:60px;
 }
-
-.opening--title {margin:0 0 40px 0;
+.opening--title {margin:0 0 30px 0;
 font-size:66px; letter-spacing:1px; font-weight:300;
+line-height:1.2;
 }
+.opening--container p {margin-top:25px;}
 
 #openingIntro {position:relative; padding:0;
 /* background-color:#fff; */
