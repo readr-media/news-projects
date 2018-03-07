@@ -38,12 +38,12 @@
           <div class="opinion--bubble">
             <div class="opinion--bubble_content">
               <div class="opinion--quote" v-html="item.quote"></div>
-              <div class="opinion--trigger eTrigger top" v-on:click="expandContent">
+              <div class="opinion--trigger eTrigger top" v-on:click="expandContent($event, `more${index + 1}`)">
                 <div class="text">閱讀更多內容</div>
                 <i class="icon"></i>
               </div>              
               <div class="opinion--statement eContent" v-html="item.statement"></div>
-              <div class="opinion--trigger eTrigger bottom" v-on:click="expandContent">
+              <div class="opinion--trigger eTrigger bottom" v-on:click="expandContent($event, `more${index + 1}`)">
                 <!-- <div class="text">收折</div> -->
                 <i class="icon"></i>
               </div>
@@ -95,9 +95,9 @@ export default {
   },
   methods: {
 
-    expandContent: function(event){
+    expandContent: function(event, name){
         //定義事件名稱 expand，並附帶參數傳到上層
-        this.$emit('expand',event);
+        this.$emit('expand', event, name);
 
         let thisDOM = event.currentTarget;
         

@@ -100,6 +100,7 @@ export default {
                 content.style.maxHeight  = maxHeight / 2.5 + "px";  
             } else {
                 //展開
+                window.ga('send', 'event', 'projects', 'click', `graph_more`, { nonInteraction: false })
                 wrapper.classList.add("expand");
                 content.style.maxHeight  = maxHeight + "px";
             }  

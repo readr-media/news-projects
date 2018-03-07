@@ -48,6 +48,7 @@ export default {
     },
     methods: {
         togglePoly(){
+            window.ga('send', 'event', 'projects', 'click', 'all_farmhouse', { nonInteraction: false })
             if(this.polyActive){
                 //隱藏圖層
                 this.polyActive = false;
@@ -59,6 +60,7 @@ export default {
             }
         },
         toggleHeat(){
+            window.ga('send', 'event', 'projects', 'click', 'hotspot', { nonInteraction: false })
             if(this.heatActive){
                 //隱藏圖層
                 this.heatActive = false;

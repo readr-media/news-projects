@@ -18,7 +18,7 @@
 
       <p>雖然宜蘭縣在大家的傳統印象中，一直都是「農業大縣」的形象，然而，根據主計處 2016 年統計資料，宜蘭縣一年的農業產值不過 67.25 億產值，全國排行第 12 名，總產值僅佔第一名雲林縣的 16%。</p>
 
-      <p>有趣的是，<a href="http://agri.e-land.gov.tw/Default.aspx" target="_blank">宜蘭縣農業處官方網頁</a>的「重要農業政策及資源專區」中，首先擺放的就是「農業用地興建農舍辦法」，第三個則是「農舍申請人資格切結書」。</p>
+      <p>有趣的是，<a href="http://agri.e-land.gov.tw/Default.aspx" target="_blank" @click="clickGA">宜蘭縣農業處官方網頁</a>的「重要農業政策及資源專區」中，首先擺放的就是「農業用地興建農舍辦法」，第三個則是「農舍申請人資格切結書」。</p>
 
       <p>農業不振，究竟是農舍的因還是果？抑或皆如是？</p>
 
@@ -48,7 +48,11 @@ export default {
 
     noteToggleContent: function(event){
         this.$emit('noteToggle',event);
-    }
+    },
+
+    clickGA () {
+      window.ga('send', 'event', 'projects', 'click', `e_land`, { nonInteraction: false })
+    },
 
   },
   mounted: function(){
