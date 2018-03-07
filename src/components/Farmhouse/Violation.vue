@@ -1,9 +1,7 @@
 <template>
   <section class="chapter violation">
-    <!-- <div id="vioPinTrigger"></div> -->
     <div id="vioHeader"></div>
 
-    <!-- <div id="vioPinContainer"> -->
     <div class="centerwpr">
         <h2>農舍違法多，六萬護一生</h2>
 
@@ -13,20 +11,17 @@
             <div class="chart--source">資料來源：農委會；統計數據及辦理結果由各地方政府回報</div>
           </div>
 
-          <div class="expandable">              
-              <!-- <div class="eTable" id="tableFull"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div> -->
-              <!-- <div v-if="currDevice == 'mobile'"> -->
+          <div class="expandable">
                 <div class="eTable" id="tablePhone" v-if="currDevice == 'mobile'"><img src="/proj-assets/farmhouse/images/chart/c4-1-phone.png" /></div>
-              <!-- </div> -->
-              <!-- <div v-else> -->
+
                 <div class="eTable" id="tableFull" v-else-if="currDevice == 'desktop'"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div>
-              <!-- </div> -->
+
               <div class="eTrigger">
                 <a class="icon" id="tbTrigger" v-on:click="toggleContent($event)"></a>
               </div>
           </div>
 
-          <!-- <div class="chart--note"></div> -->
+
         </div>
 
         <p>那麼嚴重的農舍問題又該如何導正呢？
@@ -49,7 +44,7 @@
 
 
     </div>    
-    <!-- </div> -->
+
 
   </section>
 </template>
@@ -121,7 +116,7 @@ export default {
         for(let i = 0; i < eTable.length; i++){
           let height = eTable[i].scrollHeight;
           eTable[i].style.maxHeight = height / 2.5 + "px";
-          console.log(height);
+          // console.log(height);
         }
 
       });

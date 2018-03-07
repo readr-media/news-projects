@@ -38,7 +38,7 @@
     </div>  
 
       <!-- Google Map -->
-      <!-- <google-map></google-map> -->
+      <google-map v-if="getMap"></google-map>
 
       <div id="mapPinContainer">
       <div class="centerwpr dark" id="mapText">
@@ -117,7 +117,9 @@ export default {
       chartDataF_2_1P: chartDataF_2_1P,
       chartDataF_2_2P: chartDataF_2_2P,
       chartDataF_2_3P: chartDataF_2_3P,
-      chartDataF_2_4P: chartDataF_2_4P
+      chartDataF_2_4P: chartDataF_2_4P,
+
+      getMap: false
     }
   },
 
@@ -126,14 +128,16 @@ export default {
   },
 
   props: {    
-    currDevice: String
+    currDevice: String,
+    loaded: Boolean
   },
 
   methods: {
 
     noteToggleContent: function(event){
         this.$emit('noteToggle',event);
-    }
+    }   
+
     /*
     setSceneMap: function(){
 
@@ -170,7 +174,16 @@ export default {
     // let currOS = this.$store.state.os;
     // console.log("current Device: " + this.currDevice(currOS));
     // console.log(currDevice);
+    // this.getMap = 
+    // this.getMap = this.loaded;
+    // console.log("get map: " + this.getMap);
 
+  },
+  watch: {
+    loaded: function () {
+      // console.log('this.getMap change detected.', this.getMap)
+      this.getMap = this.loaded;
+    }
   }
     
 }

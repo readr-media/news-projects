@@ -48,7 +48,7 @@
   <why-yilan>為什麼是宜蘭？</why-yilan>
 
   <!-- 老農成為農舍主力賣家 -->
-  <trade-data v-on:noteToggle="noteToggleContent" v-bind:currDevice="currentDevice"></trade-data>
+  <trade-data v-on:noteToggle="noteToggleContent" v-bind:currDevice="currentDevice" v-bind:loaded="isObloaded"></trade-data>
 
   <!-- 農民困境：前有斷崖，後有追兵 -->
   <helpless v-on:noteToggle="noteToggleContent"></helpless>
@@ -164,7 +164,8 @@
         chapterTitle: chapterTitle,
         navOpen: false,
 
-        currentDevice: ''
+        currentDevice: '',
+        isObloaded: false
 
       }
     },
@@ -193,6 +194,9 @@
       // console.log(this.currentDevice);
 
     },
+    beforeMount () {
+
+    },
     mounted () { 
 
       if (process.browser) {        
@@ -218,6 +222,12 @@
       
       //get state
       //console.log(this.$store.state);
+
+      window.addEventListener('load', () => {
+        this.isObloaded = true;
+        console.log(this.isObloaded);
+      });
+
     },
     methods: {
 

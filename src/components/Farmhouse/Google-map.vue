@@ -73,7 +73,7 @@ export default {
             const ScrollMagic = require("scrollmagic");
             const { TweenMax, TimelineMax } = require('gsap');
             require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap');
-            require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
+            // require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
 
             let controller = new ScrollMagic.Controller();
 
