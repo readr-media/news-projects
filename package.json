@@ -19,6 +19,7 @@
   "dependencies": {
     "compression": "^1.7.0",
     "cross-env": "^5.0.5",
+    "debug": "^3.1.0",
     "es6-promise": "^4.1.1",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import 'es6-promise/auto'
 import { createApp } from './app'
 import ProgressBar from './components/ProgressBar.vue'
+
+const debug = require('debug')('CLIENT:entry-client')
 const path = require('path')
 
 // global progress bar
@@ -65,5 +67,7 @@ router.onReady(() => {
 
 // service worker
 if ('https:' === location.protocol && navigator.serviceWorker) {
-  navigator.serviceWorker.register(path.join(__dirname, './service-worker.js'))
+  const serviceWorkPath = path.join(__dirname, './service-worker.js')
+  debug(serviceWorkPath)
+  navigator.serviceWorker.register(serviceWorkPath)
 }
