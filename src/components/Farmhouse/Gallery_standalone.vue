@@ -69,7 +69,7 @@ export default {
         setFullpage: function(){
 
             var progressBar = $('progress');
-
+            let maxIndex = 0
             // Set the Max attr for the first time
             progressBar.attr({
                 value: 1,
@@ -95,11 +95,17 @@ export default {
                 },
                 onLeave: function(index, nextIndex, direction){
                     var leavingSection = $(this);
-
+                    
                     // console.log('scroll to ', nextIndex);
                     // ga('send', 'event', 'projects', 'scroll', 'scroll to '+nextIndex);
 
                     if(direction =='down'){
+                        console.log(maxIndex, nextIndex)
+                        if (maxIndex < nextIndex) {
+                            console.log('ga')
+                            maxIndex = nextIndex
+                            window.ga('send', 'event', 'projects', 'scroll', `scroll to ${nextIndex}`, { nonInteraction: false })
+                        }
                         progressBar.animate({
                             value: nextIndex
                         }, 600);

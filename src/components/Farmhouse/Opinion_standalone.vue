@@ -26,7 +26,7 @@
 
     <div class="centerwpr opinionwpr">
 
-      <div class="opinion--entry" v-for="(item, index) in opinionData">
+      <div class="opinion--entry" :class="`q${index}`" v-for="(item, index) in opinionData">
 
         <div class="opinion--portrait">
           <img v-bind:src="item.portrait" />          

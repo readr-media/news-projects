@@ -15,7 +15,7 @@
   <logo :top="`8px`" :left="`15px`" :bgColor="`#79cfa8`" :bgImage="`/proj-assets/farmhouse/images/navbtn.png`"></logo>
   <share :shareUrl="shareLink" :top="`8px`" :left="`69px`" :bgColor="`#79cfa8`"></share>
   
-  <faq v-on:expand="expandable" v-bind:currDevice="currentDevice"></faq>
+  <faq v-on:expand="expandable" v-bind:currDevice="currentDevice" v-on:faqExpand="faqExpand"></faq>
 </article>
 
 <article class="farmhouse gallery" v-else-if="getParams == 'gallery'">
@@ -72,7 +72,7 @@
     </div>
   </div>
 
-  <div class="navTrigger" v-on:click="navSlide">
+  <div class="navTrigger" v-on:click="navSlide(-1)">
     <div class="icon"></div>
   </div>
 
@@ -91,6 +91,7 @@
 
 <script>
   import { SITE_URL } from '../../constants';
+  import { elmYPosition } from 'kc-scroll'
   import _ from 'lodash';
   import Logo from '../Logo.vue';
   import Share from '../Share.vue';
@@ -166,10 +167,18 @@
 
         currentDevice: '',
         isObloaded: false,
-        currentIndex: 0
-
+        currentIndex: 0,
+        maxIndex: 0,
+        isOpened: false
       }
     },
+    watch: {
+      getParams () {
+        this.isOpened = false
+        this.currentIndex =  0
+        this.maxIndex = 0
+      }
+    }, 
     computed: {
       getParams () {
         //取得網址列參數
@@ -180,9 +189,25 @@
       let description = '《鏡傳媒》透過數據分析調查發現，宜蘭不只農舍多，違規農舍竟然還比合法多！更教人意外的是，農舍買賣市場的主要賣方，竟然是所謂的「老農」⋯⋯'
       let ogImage = 'farmhouse/images/og.jpg'
       let metaUrl = 'farmhouse'
+      let ogTitle = '萬畝農舍良田起'
+      switch (this.$route.params.params) {
+        case 'opinion':
+          ogTitle = '農舍面面觀'
+          ogImage = 'farmhouse/images/og2.jpg'
+          break
+        case 'faq':
+          ogTitle = '來來來!看完你就變農舍達人了'
+          ogImage = 'farmhouse/images/og3.jpg'
+          break
+        case 'gallery':
+          ogTitle = '田中央攝影集'
+          ogImage = 'farmhouse/images/og4.jpg'
+          break
+        
+      }
 
       return {
-        title: '萬畝農舍良田起',
+        title: ogTitle,
         description: description,
         metaUrl: metaUrl,
         metaImage: ogImage
@@ -229,6 +254,98 @@
         console.log(this.isObloaded);
       });
 
+      window.addEventListener('scroll', () => {
+        const vh = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+        
+        switch (this.getParams) {
+          case 'opinion':
+            if (this.isOpened) {
+              if (scrollTop > elmYPosition(`.opinion--entry.q1`) && this.maxIndex < 1) {
+                this.maxIndex = 1
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 2`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.opinion--entry.q2`) && this.maxIndex < 2) {
+                this.maxIndex = 2
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 3`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.opinion--entry.q3`) && this.maxIndex < 3) {
+                this.maxIndex = 3
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 4`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.opinion--entry.q4`) && this.maxIndex < 4) {
+                this.maxIndex = 4
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 5`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.opinion--entry.q5`) && this.maxIndex < 5) {
+                this.maxIndex = 5
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 6`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.opinion--entry.q6`) && this.maxIndex < 6) {
+                this.maxIndex = 6
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 7`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.chapter.ending`) && this.maxIndex < 7) {
+                this.maxIndex = 7
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 8`, { nonInteraction: false })
+              }
+            } else {
+              if (scrollTop > elmYPosition(`.opinion--entry.q3`) && this.maxIndex < 3) {
+                this.maxIndex = 3
+                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to 4`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.opinion--entry.q6`) && this.maxIndex < 6) {
+                this.maxIndex = 6
+                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to 7`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.chapter.ending`) && this.maxIndex < 7) {
+                this.maxIndex = 7
+                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to 8`, { nonInteraction: false })
+              }
+              
+            }
+            break
+          case 'faq':
+            if (this.isOpened) {
+              if (scrollTop > elmYPosition(`.faq--entry.q6`) && this.maxIndex < 6) {
+                this.maxIndex = 6
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 6`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.faq--entry.q12`) && this.maxIndex < 12) {
+                this.maxIndex = 12
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 12`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.faq--entry.q18`) && this.maxIndex < 18) {
+                this.maxIndex = 18
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 18`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.chapter.ending`) && this.maxIndex < 26) {
+                this.maxIndex = 26
+                window.ga('send', 'event', 'projects', 'sscroll', `scroll to more`, { nonInteraction: false })
+              }
+            } else {
+              if (scrollTop > elmYPosition(`.faq--entry.q10`) && this.maxIndex < 10) {
+                this.maxIndex = 10
+                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to 10`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.faq--entry.q20`) && this.maxIndex < 20) {
+                this.maxIndex = 20
+                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to 20`, { nonInteraction: false })
+              } else if (scrollTop > elmYPosition(`.chapter.ending`) && this.maxIndex < 26) {
+                this.maxIndex = 26
+                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to more`, { nonInteraction: false })
+              }
+            }
+            break
+          case 'gallery':
+            break
+          default:
+            const breakpointPlus = document.querySelector(`#chapter${this.currentIndex + 1}`)
+            const breakpointPlusTop = breakpointPlus ? breakpointPlus.offsetTop : document.querySelector(`#chapter${this.currentIndex}`).offsetTop
+            const breakpointSub = document.querySelector(`#chapter${this.currentIndex}`)
+            const breakpointSubTop = breakpointSub ? breakpointSub.offsetTop : document.querySelector(`#chapter${this.currentIndex - 1}`).offsetTop
+            if (scrollTop > breakpointPlusTop && this.currentIndex < 8) {
+              if (this.currentIndex + 1 > this.maxIndex) {
+                this.maxIndex = this.currentIndex + 1
+                window.ga('send', 'event', 'projects', 'scroll', `scroll to ${this.currentIndex + 2}`, { nonInteraction: false })
+              }
+
+              this.currentIndex += 1
+
+            } else if (scrollTop < breakpointSubTop && this.currentIndex > 0) {
+              this.currentIndex -= 1
+            }
+        }
+      });
+
     },
     methods: {
 
@@ -252,6 +369,9 @@
 
           } else {
               //展開
+              if (this.getParams === 'opinion') {
+                this.isOpened = true
+              }
               window.ga('send', 'event', 'projects', 'click', name, { nonInteraction: false })
               parent.classList.add("expand");
               eContent.style.maxHeight  = maxHeight + "px";
@@ -261,8 +381,7 @@
       setScene,
 
       navSlide (index){
-        if (index !== this.currentIndex) {
-          this.currentIndex = index
+        if (index > -1 && index !== this.currentIndex) {
           window.ga('send', 'event', 'projects', 'click', `nav${index + 1}`, { nonInteraction: false })
         }
         this.navOpen = !this.navOpen;
@@ -276,6 +395,10 @@
       },
 
       currDevice,
+
+      faqExpand (value) {
+        this.isOpened = value
+      },
 
       clickGA (index) {
         if (index !== this.currentIndex) {
