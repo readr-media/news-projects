@@ -6,7 +6,7 @@
       <h2>宜蘭農舍四多：數量多、違規多、佔用農地多、交易多</h2>
 
       <p>怎麼做，才能讓民眾有感？</p>
-      <p>2017 年 9 月，農委會喊出「不能只有政府知道」、「訴諸輿論力量」口號，<a href="https://map.coa.gov.tw/farmland/survey.html" target="_blank">公開農業及農地資源盤查結果查詢圖台</a>，要讓民眾知道台灣農地上，到底長出了多少奇特的「農產品」。</p>
+      <p>2017 年 9 月，農委會喊出「不能只有政府知道」、「訴諸輿論力量」口號，<a href="https://map.coa.gov.tw/farmland/survey.html" target="_blank" @click="clickGA">公開農業及農地資源盤查結果查詢圖台</a>，要讓民眾知道台灣農地上，到底長出了多少奇特的「農產品」。</p>
       <p>暫且不談更為嚴重的違章工廠問題<a class="noteTrigger" v-on:click="noteToggleContent">註</a>，<span class="noteBlock">違章工廠佔用總農地面積為 13,859公頃，農舍則為 4,930 公頃，而違章工廠佔據農地，也和《農發條例》開放自然人買賣農地有關。</span>從盤查結果可知，宜蘭正是農舍聚集的重鎮。
 </p>
 
@@ -76,6 +76,10 @@ export default {
 
     noteToggleContent: function(event){
         this.$emit('noteToggle',event);
+    },
+
+    clickGA () {
+      window.ga('send', 'event', 'projects', 'click', `farmland`, { nonInteraction: false })
     }
     /*
     setScene: function(){

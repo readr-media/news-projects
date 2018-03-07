@@ -8,7 +8,7 @@
     <div class="alter">
       <p>左：初春的蘭陽平原，原本應該是遍插秧苗的水田裡，卻不斷冒出鋼筋，直上雲霄，一根根的鋼筋被強勁的東北風撞擊而發出刺耳的響聲，彷彿為蘭陽平原流失的農地敲起喪鐘。</p>
       <p class="right">右：農舍完工後的模樣。</p>
-      <div class="continue"></div>
+      <div class="continue" @click="clickGA"></div>
     </div>
 
 </div>
@@ -23,7 +23,8 @@ export default {
   data() {
     return {
       'before': '初春的蘭陽平原，原本應該是遍插秧苗的水田裡，卻不斷冒出鋼筋，直上雲霄，一根根的鋼筋被強勁的東北風撞擊而發出刺耳的響聲，彷彿為蘭陽平原流失的農地敲起喪鐘。',
-      'after': '農舍完工後的模樣。'
+      'after': '農舍完工後的模樣。',
+      clicked: false
     };
   },
   methods: {
@@ -70,6 +71,30 @@ export default {
       window.dispatchEvent(resizeEvent);
 
 
+    },
+    clickGA () {
+        window.ga('send', 'event', 'projects', 'click', 'next2', { nonInteraction: false })
+    },
+
+    setGAEvent () {
+      const btn = document.querySelector('.comparison-item .continue')
+      const separator = document.querySelector('.comparison-separator')
+      const hand = document.querySelector('.separator--hand')
+      hand.addEventListener('click', () => {
+        if (!this.clicked) {
+          this.clicked = true
+          window.ga('send', 'event', 'projects', 'drop', 'hand', { nonInteraction: false })
+        }
+      })
+      separator.addEventListener('click', () => {
+        if (!this.clicked) {
+          this.clicked = true
+          window.ga('send', 'event', 'projects', 'drop', 'hand', { nonInteraction: false })
+        }
+      })
+      btn.addEventListener('click', () => {
+        window.ga('send', 'event', 'projects', 'click', 'next2', { nonInteraction: false })
+      })
     }
 
   },
@@ -103,7 +128,8 @@ export default {
       // console.log('all images are loaded');
       setDescWidth();
     });
-
+    
+    this.setGAEvent()
   }
 };
 </script>

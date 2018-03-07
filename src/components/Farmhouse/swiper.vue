@@ -20,8 +20,8 @@
 <div class="swiper-controlwpr">
     <div class="swiper-pagination"></div>
     <div class="swiper-buttonwpr">
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev" @click="clickGA"></div>
+        <div class="swiper-button-next" @click="clickGA"></div>
     </div>
 </div>
 
@@ -44,11 +44,18 @@ export default {
     },
     data (){
         return {
-            imgSrc: imgSrc
+            imgSrc: imgSrc,
+            clicked: false
         }
     },    
     methods: {
 
+        clickGA () {
+            if (!this.clicked) {
+                this.clicked = true
+                window.ga('send', 'event', 'projects', 'click', `photoswith`, { nonInteraction: false })
+            }
+        },
 
     },
     mounted: function(){

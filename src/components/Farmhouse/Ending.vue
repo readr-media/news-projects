@@ -4,25 +4,25 @@
     <div class="centerwpr">
         <h2>繼續閱讀</h2>        
         <div class="extendwpr">
-            <a class="extend--entry home" href="/project/farmhouse/" target="_blank">
+            <a class="extend--entry home" href="/project/farmhouse/" target="_blank" @click="$_ending_ga('main')">
                 <img src="/proj-assets/farmhouse/images/extend/extend01.jpg" />
                 <div class="extend--overlay"></div>
                 <div class="extend--title">不許動！<br />通通拿去種農舍！</div>
             </a> 
 
-            <a class="extend--entry opinion" href="/project/farmhouse/opinion" target="_blank">
+            <a class="extend--entry opinion" href="/project/farmhouse/opinion" target="_blank" @click="$_ending_ga('opinion')">
                 <img src="/proj-assets/farmhouse/images/extend/extend02.jpg" />
                 <div class="extend--overlay"></div>
                 <div class="extend--title">農舍面面觀</div>
             </a>
 
-            <a class="extend--entry faq" href="/project/farmhouse/faq" target="_blank">
+            <a class="extend--entry faq" href="/project/farmhouse/faq" target="_blank" @click="$_ending_ga('faq')">
                 <img src="/proj-assets/farmhouse/images/extend/extend03.jpg" />
                 <div class="extend--overlay"></div>
                 <div class="extend--title">來來來<br />看完你就變農舍達人了</div>
             </a>
 
-            <a class="extend--entry gallery" href="/project/farmhouse/gallery" target="_blank">
+            <a class="extend--entry gallery" href="/project/farmhouse/gallery" target="_blank" @click="$_ending_ga('gallery')">
                  <img src="/proj-assets/farmhouse/images/extend/extend04.jpg" />
                  <div class="extend--overlay"></div>
                  <div class="extend--title">田中央攝影集</div>
@@ -70,7 +70,11 @@ export default {
   props: {
     credit: Array
   },
-  methods: {},
+  methods: {
+    $_ending_ga (name) {
+      window.ga('send', 'event', 'projects', 'click', `link_${name}`, { nonInteraction: false })
+    }
+  },
   mounted: function() {}
 };
 </script>

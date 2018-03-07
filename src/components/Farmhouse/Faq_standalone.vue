@@ -34,7 +34,7 @@
       <div class="faq--container">
 
         <div class="faq--entry expandable" v-for="(item, index) in faqData" :key="'item-'+ index" v-bind:class="{expand:expandAll}">
-            <h4 class="faq--q eTrigger" v-text="item.question" v-on:click="expandContent"></h4>
+            <h4 class="faq--q eTrigger" v-text="item.question" v-on:click="expandContent($event, `q${index + 1}`)"></h4>
             <div class="faq--a eContent" v-html="item.answer"></div>
         </div>
       </div><!-- faq container -->      
@@ -90,12 +90,13 @@ export default {
       currDevice: String
     },
     methods: {
-        expandContent: function(event){
+        expandContent: function(event, name){
             //定義事件名稱 expand，並附帶參數傳到上層
-            this.$emit('expand',event);
+            this.$emit('expand', event, name);
         },
 
         faqExpand: function(){
+            window.ga('send', 'event', 'projects', 'click', 'all_open', { nonInteraction: false })
             this.expandAll = true;
             let faqA = document.querySelectorAll(".faq--a");
             for(let i = 0; i < faqA.length; i++){
@@ -107,6 +108,7 @@ export default {
         },
 
         faqCollapse: function(){
+            window.ga('send', 'event', 'projects', 'click', 'all_close', { nonInteraction: false })
             this.expandAll = false;
             let faqA = document.querySelectorAll(".faq--a");
             for(let i = 0; i < faqA.length; i++){

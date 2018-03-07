@@ -14,7 +14,7 @@
                     <h4>作者簡介</h4>
                     <p>張良一，長期關注土地與農業議題，曾任中央社、中國時報、蘋果日報攝影記者，亦曾舉辦《站在田中央》攝影個展，現為自由攝影師。此處所呈現的影像，為張良一以宜蘭農舍為主題，多年來陸續拍攝發表的《田中央》攝影系列，此為節選之作。</p>
                 </div>                
-                <div id="start" class="continue"></div>
+                <div id="start" class="continue" @click="clickGA('next1')"></div>
             </div>            
         </div>
 
@@ -25,11 +25,11 @@
         <!-- <div class="continue"></div> -->
     </div>
 
-	<div class="section fp-noscroll fp-auto-height-responsive" v-for="item in imgSrc" :key="item.id">
+	<div class="section fp-noscroll fp-auto-height-responsive" v-for="(item, index) in imgSrc" :key="item.id">
         <div class="imgwpr" v-bind:style="{ backgroundImage: 'url(' + item.url + ')' }">
             <div class="gallery--desc">
                 <div class="innerwpr">{{item.description}}</div>
-                <div class="continue"></div>
+                <div class="continue" @click="clickGA(`next${index + 3}`)"></div>
             </div>            
         </div>        
     </div>
@@ -115,7 +115,11 @@ export default {
             // $(".continue").addClass("show");
             // console.log(window.iScroll);
 
-        }
+        },
+
+        clickGA (name) {
+            window.ga('send', 'event', 'projects', 'click', name, { nonInteraction: false })
+        },
 
     },
     mounted: function(){

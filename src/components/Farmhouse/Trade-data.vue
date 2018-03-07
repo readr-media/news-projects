@@ -46,7 +46,7 @@
             <div class="chart--title">農委會農地農舍盤查結果 / 交易熱點對照圖</div>
             <div class="chart--source">資料來源：農委會農地盤查結果、內政部實價登錄資訊，鏡傳媒整理</div>
           </div>
-          <div class="chart--note">註1：有 13 筆交易資料因沒有登錄地址，所以此處交易總量為 1,458 筆。<br />註2：此處的農舍盤查數量，是我們直接從農委會<a href="https://map.coa.gov.tw/farmland/survey.html" target="_blank">《農業及農地資源盤查結果查詢圖台》</a>後台撈出，總計數字和農委會後來提供的數字有 177 筆落差，特此說明。</div>
+          <div class="chart--note">註1：有 13 筆交易資料因沒有登錄地址，所以此處交易總量為 1,458 筆。<br />註2：此處的農舍盤查數量，是我們直接從農委會<a href="https://map.coa.gov.tw/farmland/survey.html" target="_blank" @click="clickGA">《農業及農地資源盤查結果查詢圖台》</a>後台撈出，總計數字和農委會後來提供的數字有 177 筆落差，特此說明。</div>
           <p>更值得關注的是，<strong>總交易農舍中，有 1,358 筆交易基地面積小於 2,500 平方公尺，比例高達 92%，而這些很明顯就是屬於所謂的「老農配建」</strong><a class="noteTrigger" v-on:click="noteToggleContent">註</a><span class="noteBlock">因為《農發條例》規定可興建農舍的農地，面積必須大於 2,500 平方公尺，但在 2000 年之前已取得，且後續沒有轉手的農地，不受此限制，而當時只有農民可以擁有農地，所以這些不受法規限制的農地，就被稱為「老農地」，後續配合「非農民」所興建的農舍，就被稱為「配建」。詳細說明請見<a href="/project/farmhouse/faq" target="_blank">〈來來來，看完你就變成農舍達人了！〉</a>章節。</span>。此外，在沒有包含建築物移轉的 7,557 筆農地交易中，也還有 295 筆被註記為老農配建，但因為實價登錄並沒有強制要求一定要備註農舍配建，所以實際上的農舍交易量，絕對會比統計數據更多。</p>
 
           <p>從交易面積分析，可發現宜蘭農舍主力賣方，是在《農發條例》修訂前就擁有農地的「老農」</p>
@@ -136,7 +136,11 @@ export default {
 
     noteToggleContent: function(event){
         this.$emit('noteToggle',event);
-    }   
+    },
+
+    clickGA () {
+      window.ga('send', 'event', 'projects', 'click', `farmland`, { nonInteraction: false })
+    },
 
     /*
     setSceneMap: function(){
@@ -162,6 +166,7 @@ export default {
 
     },
     */
+
     // currDevice
     
   },

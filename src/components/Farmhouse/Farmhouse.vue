@@ -65,7 +65,7 @@
 
   <div class="navwpr" v-bind:class="{open: navOpen}">
     <ul class="nav">
-      <li v-for="item in chapterTitle" class="navList" v-scroll-to="item.id" v-on:click="navSlide">{{item.abbr}}</li>
+      <li v-for="(item, index) in chapterTitle" class="navList" v-scroll-to="item.id" v-on:click="navSlide(index)">{{item.abbr}}</li>
     </ul>
     <div class="navClose" v-on:click="navSlide">
       <div class="icon"></div>
@@ -77,7 +77,7 @@
   </div>
 
   <div id="progresswpr">
-    <div class="progress" v-for="item in chapterTitle" v-scroll-to="item.id">
+    <div class="progress" v-for="(item, index) in chapterTitle" v-scroll-to="item.id" @click="clickGA(index)">
         <div class="progress--percentage"></div>
         <div class="progress--title">{{item.abbr}}</div>
     </div>
@@ -165,7 +165,8 @@
         navOpen: false,
 
         currentDevice: '',
-        isObloaded: false
+        isObloaded: false,
+        currentIndex: 0
 
       }
     },
@@ -176,12 +177,12 @@
       }
     },
     metaInfo () {
-      let description = '農舍專題 description'
+      let description = '《鏡傳媒》透過數據分析調查發現，宜蘭不只農舍多，違規農舍竟然還比合法多！更教人意外的是，農舍買賣市場的主要賣方，竟然是所謂的「老農」⋯⋯'
       let ogImage = 'farmhouse/images/og.jpg'
       let metaUrl = 'farmhouse'
 
       return {
-        title: '農舍專題大標',
+        title: '萬畝農舍良田起',
         description: description,
         metaUrl: metaUrl,
         metaImage: ogImage
@@ -232,7 +233,7 @@
     methods: {
 
       //可收闔內容
-      expandable: function(event){
+      expandable: function(event, name){
 
         //event target
         let target = event.currentTarget;
@@ -251,6 +252,7 @@
 
           } else {
               //展開
+              window.ga('send', 'event', 'projects', 'click', name, { nonInteraction: false })
               parent.classList.add("expand");
               eContent.style.maxHeight  = maxHeight + "px";
           }  
@@ -258,8 +260,11 @@
 
       setScene,
 
-      navSlide: function(){
-
+      navSlide (index){
+        if (index !== this.currentIndex) {
+          this.currentIndex = index
+          window.ga('send', 'event', 'projects', 'click', `nav${index + 1}`, { nonInteraction: false })
+        }
         this.navOpen = !this.navOpen;
 
       },
@@ -270,7 +275,14 @@
         content.classList.toggle("expand");
       },
 
-      currDevice
+      currDevice,
+
+      clickGA (index) {
+        if (index !== this.currentIndex) {
+          this.currentIndex = index
+          window.ga('send', 'event', 'projects', 'click', `nav${index + 1}`, { nonInteraction: false })
+        }
+      }
 
 
     } //methods
