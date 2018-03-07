@@ -67,7 +67,7 @@ router.onReady(() => {
 
 // service worker
 if ('https:' === location.protocol && navigator.serviceWorker) {
-  const serviceWorkPath = path.join(__dirname, './service-worker.js')
+  const serviceWorkPath = './service-worker.js'
   debug(serviceWorkPath)
   navigator.serviceWorker.register(serviceWorkPath)
 }

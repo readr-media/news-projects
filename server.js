@@ -76,6 +76,7 @@ app.use(compression({ threshold: 0 }))
 app.use('/dist', serve(path.join(__dirname, './dist'), true))
 // app.use('/public', serve(path.join(__dirname, './public'), true))
 app.use('/manifest.json', serve(path.join(__dirname, './manifest.json'), true))
+app.use('/project/service-worker.js', serve(path.join(__dirname, './dist/service-worker.js')))
 app.use('/service-worker.js', serve(path.join(__dirname, './dist/service-worker.js')))
 
 if (!isProd) {
