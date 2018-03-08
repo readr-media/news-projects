@@ -54,6 +54,8 @@ pipeline:
     secrets:
       - source: google_credentials
         target: token
+    command:
+      - kubectl rollout status deployment/project-deploy -w
     vars:
       image: gcr.io/mirrormedia-1470651750304/${DRONE_REPO_NAME}:${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER}
       app: news-projects
