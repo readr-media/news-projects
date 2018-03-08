@@ -48,7 +48,7 @@
   <why-yilan>為什麼是宜蘭？</why-yilan>
 
   <!-- 老農成為農舍主力賣家 -->
-  <trade-data v-on:noteToggle="noteToggleContent" v-bind:currDevice="currentDevice" v-bind:loaded="isObloaded"></trade-data>
+  <trade-data v-on:noteToggle="noteToggleContent" v-bind:currDevice="currentDevice" v-bind:loaded="isObloaded" :abrole="abRole"></trade-data>
 
   <!-- 農民困境：前有斷崖，後有追兵 -->
   <helpless v-on:noteToggle="noteToggleContent"></helpless>
@@ -138,6 +138,9 @@
   //check device
   import {currDevice} from '../../util/comm.js';
 
+  import { getMmid } from 'src/util/comm';
+  const debug = require('debug')('CLIENT:farmhouse')
+
   export default {
     name: 'FarmhouseProject',
     components: {
@@ -176,7 +179,8 @@
         isObloaded: false,
         currentIndex: 0,
         maxIndex: 0,
-        isOpened: false
+        isOpened: false,
+        abRole: ''
       }
     },
     watch: {
@@ -190,7 +194,7 @@
       getParams () {
         //取得網址列參數
         return _.get(this.$route, 'params.params');
-      }
+      },
     },
     metaInfo () {
       let description = '《鏡傳媒》透過數據分析調查發現，宜蘭不只農舍多，違規農舍竟然還比合法多！更教人意外的是，農舍買賣市場的主要賣方，竟然是所謂的「老農」⋯⋯'
@@ -231,13 +235,21 @@
     beforeMount () {
 
     },
-    mounted () { 
-
+    mounted () {
+      this.abRole = getMmid({ 
+        assisgnedRole:  _.get(this.$route, 'query.ab'),
+        distribution: [
+          { id: 'A', weight: 50 },
+          { id: 'B', weight: 50 }
+        ]
+      });
+      debug('role', this.abRole)
+      window.ga('set', 'contentGroup3', `project:farmhouse:${this.abIndicator}`)
       if (process.browser) {        
 
         if(!this.getParams){
 
-          this.setScene();        
+          this.setScene(this.$store.state.os);        
           
         }        
 
@@ -335,6 +347,7 @@
           case 'gallery':
             break
           default:
+            // if (true) { return }
             const breakpointPlus = document.querySelector(`#chapter${this.currentIndex + 1}`)
             const breakpointPlusTop = breakpointPlus ? breakpointPlus.offsetTop : document.querySelector(`#chapter${this.currentIndex}`).offsetTop
             const breakpointSub = document.querySelector(`#chapter${this.currentIndex}`)
@@ -355,7 +368,7 @@
 
     },
     methods: {
-
+      getMmid,
       //可收闔內容
       expandable: function(event, name){
 

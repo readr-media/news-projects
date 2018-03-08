@@ -17,7 +17,9 @@
     "npm": ">=4.0"
   },
   "dependencies": {
+    "big-integer": "^1.6.26",
     "compression": "^1.7.0",
+    "cookies": "^0.7.1",
     "cross-env": "^5.0.5",
     "debug": "^3.1.0",
     "es6-promise": "^4.1.1",
@@ -42,7 +44,9 @@
     "superagent": "^3.8.1",
     "swiper": "^4.1.6",
     "useragent": "^2.2.1",
+    "uuid": "^3.2.1",
     "vue": "^2.4.4",
+    "vue-cookie": "^1.1.4",
     "vue-highcharts": "^0.0.10",
     "vue-lazyload": "^1.1.4",
     "vue-router": "^3.0.0",

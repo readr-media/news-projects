@@ -38,7 +38,7 @@
     </div>  
 
       <!-- Google Map -->
-      <google-map v-if="getMap"></google-map>
+      <google-map v-if="getMap && abrole === 'A'"></google-map>
 
       <div id="mapPinContainer">
       <div class="centerwpr dark" id="mapText">
@@ -128,12 +128,13 @@ export default {
   },
 
   props: {    
+    abrole: String,
     currDevice: String,
     loaded: Boolean
   },
 
   methods: {
-
+    
     noteToggleContent: function(event){
         this.$emit('noteToggle',event);
     },
@@ -166,9 +167,7 @@ export default {
 
     },
     */
-
     // currDevice
-    
   },
   mounted: function(){
     /*
