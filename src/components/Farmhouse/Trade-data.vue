@@ -38,8 +38,21 @@
     </div>  
 
       <!-- Google Map -->
-      <google-map v-if="getMap && abrole === 'A' && currDevice == 'desktop'"></google-map>
-      <div v-else class="staticMap"></div>
+      <google-map v-if="getMap && (currDevice == 'desktop'" || (abrole === 'A' && currDevice == 'mobile'"))></google-map>
+      <div v-else class="staticMap" v-bind:class="{
+          'poly': mapPoly,
+          'heat': mapHeat,
+          'all': mapPoly && mapHeat
+        }">
+        <div class="btnwpr">
+          <div class="btn poly" v-bind:class="{active:mapPoly}" v-on:click="staticPoly">
+              <i></i><span class="text">所有農舍</span>
+          </div>
+          <div class="btn heat" v-bind:class="{active:mapHeat}" v-on:click="staticHeat">
+              <i></i><span class="text">交易熱點</span>
+          </div>
+        </div>
+      </div>
 
       <div id="mapPinContainer">
       <div class="centerwpr dark" id="mapText">
@@ -120,7 +133,10 @@ export default {
       chartDataF_2_3P: chartDataF_2_3P,
       chartDataF_2_4P: chartDataF_2_4P,
 
-      getMap: false
+      getMap: false,
+
+      mapPoly: true,
+      mapHeat: true
     }
   },
 
@@ -140,48 +156,21 @@ export default {
         this.$emit('noteToggle',event);
     },
 
+    staticPoly: function(){
+      this.mapPoly = !this.mapPoly;
+    },
+
+    staticHeat: function(){
+      this.mapHeat = !this.mapHeat;
+    },
+
     clickGA () {
       window.ga('send', 'event', 'projects', 'click', `farmland`, { nonInteraction: false })
     },
 
-    /*
-    setSceneMap: function(){
 
-      const ScrollMagic = require('scrollmagic');   
-      require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js');
-
-      const controllerMap = new ScrollMagic.Controller();
-
-      const pinMap = new ScrollMagic.Scene({
-          //google map 固定不捲動
-          // triggerElement: '#mapPinTrigger', //trigger 跟 pin 不要設在同一個元素上會比較順嗎？
-          triggerElement: '.map-container',
-          triggerHook: "onLeave"
-      }).setPin(".map-container",{
-          pushFollowers: false
-      });
-      // .addIndicators({name: "map"});
-
-      controllerMap.addScene([
-        // pinMap
-      ]);
-
-    },
-    */
-    // currDevice
   },
   mounted: function(){
-    /*
-    if (process.browser) {
-      this.setSceneMap();      
-    }
-    */
-    // let currOS = this.$store.state.os;
-    // console.log("current Device: " + this.currDevice(currOS));
-    // console.log(currDevice);
-    // this.getMap = 
-    // this.getMap = this.loaded;
-    // console.log("get map: " + this.getMap);
 
   },
   watch: {
@@ -194,13 +183,42 @@ export default {
 }
 </script>
 
+<style>
+/* btn style */
+.btnwpr {position:absolute; left:0; top:15px; width:100%; 
+text-align:center; z-index:200;
+}
+.btn {width:130px; height:40px;
+cursor:pointer; margin:0 5px;
+font-size:17px; font-weight:400; color:#273947;
+background-color:#c5c5c5; border-radius:25px;
+display:inline-flex; justify-content:center; align-items:center;
+}
+.btn.active {
+color:#fff;    
+background-color:#ff7b90;
+}
+
+.btn i {width:26px; height:26px; display:block; margin-right:6px;
+background-image:url("/proj-assets/farmhouse/images/slice01.png");
+background-size:60px auto; background-repeat:no-repeat;
+}
+.poly i {background-position:-34px 1px;}
+.heat i {background-position:-28px -58px;}
+
+.active.poly i {background-position:0 1px;}
+.active.heat i {background-position:6px -58px;}
+</style>
+
 <style scoped>
 .staticMap {position:relative; height:100vh;
-background-image:url("/proj-assets/farmhouse/images/staticmap.jpg");
+background-image:url("/proj-assets/farmhouse/images/staticmap-none.jpg");
 background-size:cover; background-repeat:no-repeat;
 background-position:center center;
 }
-
+.staticMap.poly {background-image:url("/proj-assets/farmhouse/images/staticmap-poly.jpg");}
+.staticMap.heat {background-image:url("/proj-assets/farmhouse/images/staticmap-heat.jpg");}
+.staticMap.all {background-image:url("/proj-assets/farmhouse/images/staticmap.jpg");}
 
 .chartwpr.pie {margin-top:20px; margin-bottom:45px;}
 .piewpr {max-width:400px; margin:0 auto;}
