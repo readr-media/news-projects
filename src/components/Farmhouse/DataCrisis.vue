@@ -16,11 +16,11 @@
           <div class="chart--source">資料來源：農委會，鏡傳媒整理</div>
         </div>
 
-        <div v-if="currDevice == 'mobile'">
-          <img src="/proj-assets/farmhouse/images/chart/1-1-phone.png" />
+        <div v-if="currDevice == 'desktop'">
+          <highcharts :options="chartDataF_1_1()" ref="highcharts"></highcharts>
         </div>
         <div v-else>
-          <highcharts :options="chartDataF_1_1()" ref="highcharts"></highcharts>
+          <img src="/proj-assets/farmhouse/images/chart/1-1-phone.png" />
         </div>
 
         <div class="chart--note">註1：此農舍統計只包含平地農業土地，不包含山坡地。<br />註2：此處單位為「土地筆數」，因此一筆土地上可能會有數棟建築。<br />註3：此處所註記的違規，是農舍興建後剩餘農地沒有農用，也就是所謂的農地違規；至於農舍建築違規，因非農委會主管項目，故不列入統計。</div>
@@ -34,12 +34,12 @@
           <div class="chart--title">前五大農舍縣市，農舍佔用平地農地面積</div>
           <div class="chart--source">資料來源：農委會，鏡傳媒整理</div>
         </div>
-        <!-- <highcharts :options="chartDataF_1_2()" ref="highcharts"></highcharts> -->
-        <div v-if="currDevice == 'mobile'">
-          <img src="/proj-assets/farmhouse/images/chart/1-2-phone.png" />
+
+        <div v-if="currDevice == 'desktop'">
+          <highcharts :options="chartDataF_1_2()" ref="highcharts"></highcharts>
         </div>
         <div v-else>
-          <highcharts :options="chartDataF_1_2()" ref="highcharts"></highcharts>
+          <img src="/proj-assets/farmhouse/images/chart/1-2-phone.png" />
         </div>
 
         <div class="chart--note"></div>
