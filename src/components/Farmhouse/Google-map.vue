@@ -160,7 +160,7 @@ transition:1200ms; transition-property:opacity;
 .mapwpr {position:relative; 
 height:100vh; overflow:hidden;
 }
-.btnwpr {position:absolute; left:0; top:15px; width:100%; 
+/* .btnwpr {position:absolute; left:0; top:15px; width:100%; 
 text-align:center; z-index:200;
 }
 .btn {width:130px; height:40px;
@@ -182,6 +182,6 @@ background-size:60px auto; background-repeat:no-repeat;
 .heat i {background-position:-28px -58px;}
 
 .active.poly i {background-position:0 1px;}
-.active.heat i {background-position:6px -58px;}
+.active.heat i {background-position:6px -58px;} */
 
 </style>
