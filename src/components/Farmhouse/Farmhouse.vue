@@ -178,7 +178,7 @@
         currentDevice: '',
         isObloaded: false,
         currentIndex: 0,
-        maxIndex: 0,
+        maxIndex: 1,
         isOpened: false,
         abRole: ''
       }
@@ -187,7 +187,7 @@
       getParams () {
         this.isOpened = false
         this.currentIndex =  0
-        this.maxIndex = 0
+        this.maxIndex = 1
       }
     }, 
     computed: {
@@ -280,67 +280,52 @@
         switch (this.getParams) {
           case 'opinion':
             if (this.isOpened) {
-              if (scrollTop > elmYPosition(`.opinion--entry.q1`) && this.maxIndex < 1) {
-                this.maxIndex = 1
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 2`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.opinion--entry.q2`) && this.maxIndex < 2) {
-                this.maxIndex = 2
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 3`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.opinion--entry.q3`) && this.maxIndex < 3) {
-                this.maxIndex = 3
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 4`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.opinion--entry.q4`) && this.maxIndex < 4) {
-                this.maxIndex = 4
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 5`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.opinion--entry.q5`) && this.maxIndex < 5) {
-                this.maxIndex = 5
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 6`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.opinion--entry.q6`) && this.maxIndex < 6) {
-                this.maxIndex = 6
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 7`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.chapter.ending`) && this.maxIndex < 7) {
-                this.maxIndex = 7
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 8`, { nonInteraction: false })
+              const toNextPage = scrollTop > (elmYPosition(`.opinion--entry.opinion${this.maxIndex + 1}`) - ((vh / 3) * 2))
+              if (toNextPage) {
+                this.maxIndex += 1
+                window.ga('send', 'event', 'projects', 'scroll', `scroll to ${this.maxIndex}`, { nonInteraction: false })
+              } else if (scrollTop > (elmYPosition(`.chapter.ending`) - ((vh / 3) * 2)) && this.maxIndex < 8) {
+                this.maxIndex = 8
+                window.ga('send', 'event', 'projects', 'scroll', `scroll to 8`, { nonInteraction: false })
               }
             } else {
-              if (scrollTop > elmYPosition(`.opinion--entry.q3`) && this.maxIndex < 3) {
-                this.maxIndex = 3
-                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to 4`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.opinion--entry.q6`) && this.maxIndex < 6) {
-                this.maxIndex = 6
-                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to 7`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.chapter.ending`) && this.maxIndex < 7) {
+              if (scrollTop > (elmYPosition(`.opinion--entry.opinion4`) - ((vh / 3) * 2)) && this.maxIndex < 4) {
+                this.maxIndex = 4
+                window.ga('send', 'event', 'projects', 'scroll', `sscroll to 4`, { nonInteraction: false })
+              } else if (scrollTop > (elmYPosition(`.opinion--entry.opinion7`) - ((vh / 3) * 2)) && this.maxIndex < 7) {
                 this.maxIndex = 7
-                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to 8`, { nonInteraction: false })
+                window.ga('send', 'event', 'projects', 'scroll', `sscroll to 7`, { nonInteraction: false })
+              } else if (scrollTop > (elmYPosition(`.chapter.ending`) - ((vh / 3) * 2)) && this.maxIndex < 8) {
+                this.maxIndex = 8
+                window.ga('send', 'event', 'projects', 'scroll', `sscroll to 8`, { nonInteraction: false })
               }
-              
             }
             break
           case 'faq':
             if (this.isOpened) {
-              if (scrollTop > elmYPosition(`.faq--entry.q6`) && this.maxIndex < 6) {
+              if (scrollTop > (elmYPosition(`.faq--entry.q6`) - ((vh / 3) * 2)) && this.maxIndex < 6) {
                 this.maxIndex = 6
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 6`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.faq--entry.q12`) && this.maxIndex < 12) {
+                window.ga('send', 'event', 'projects', 'scroll', `scroll to 6`, { nonInteraction: false })
+              } else if (scrollTop > (elmYPosition(`.faq--entry.q12`) - ((vh / 3) * 2)) && this.maxIndex < 12) {
                 this.maxIndex = 12
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 12`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.faq--entry.q18`) && this.maxIndex < 18) {
+                window.ga('send', 'event', 'projects', 'scroll', `scroll to 12`, { nonInteraction: false })
+              } else if (scrollTop > (elmYPosition(`.faq--entry.q18`) - ((vh / 3) * 2)) && this.maxIndex < 18) {
                 this.maxIndex = 18
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to 18`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.chapter.ending`) && this.maxIndex < 26) {
+                window.ga('send', 'event', 'projects', 'scroll', `scroll to 18`, { nonInteraction: false })
+              } else if (scrollTop > (elmYPosition(`.chapter.ending`) ) && this.maxIndex < 26) {
                 this.maxIndex = 26
-                window.ga('send', 'event', 'projects', 'sscroll', `scroll to more`, { nonInteraction: false })
+                window.ga('send', 'event', 'projects', 'scroll', `scroll to more`, { nonInteraction: false })
               }
             } else {
-              if (scrollTop > elmYPosition(`.faq--entry.q10`) && this.maxIndex < 10) {
+              if (scrollTop > (elmYPosition(`.faq--entry.q10`) - ((vh / 3) * 2)) && this.maxIndex < 10) {
                 this.maxIndex = 10
-                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to 10`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.faq--entry.q20`) && this.maxIndex < 20) {
+                window.ga('send', 'event', 'projects', 'scroll', `sscroll to 10`, { nonInteraction: false })
+              } else if (scrollTop > (elmYPosition(`.faq--entry.q20`) - ((vh / 3) * 2)) && this.maxIndex < 20) {
                 this.maxIndex = 20
-                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to 20`, { nonInteraction: false })
-              } else if (scrollTop > elmYPosition(`.chapter.ending`) && this.maxIndex < 26) {
+                window.ga('send', 'event', 'projects', 'scroll', `sscroll to 20`, { nonInteraction: false })
+              } else if (scrollTop > (elmYPosition(`.chapter.ending`) - ((vh / 3) * 2)) && this.maxIndex < 26) {
                 this.maxIndex = 26
-                window.ga('send', 'event', 'projects', 'sscroll', `sscroll to more`, { nonInteraction: false })
+                window.ga('send', 'event', 'projects', 'scroll', `sscroll to more`, { nonInteraction: false })
               }
             }
             break
@@ -353,13 +338,11 @@
             const breakpointSub = document.querySelector(`#chapter${this.currentIndex}`)
             const breakpointSubTop = breakpointSub ? breakpointSub.offsetTop : document.querySelector(`#chapter${this.currentIndex - 1}`).offsetTop
             if (scrollTop > breakpointPlusTop && this.currentIndex < 8) {
+              this.currentIndex += 1
               if (this.currentIndex + 1 > this.maxIndex) {
                 this.maxIndex = this.currentIndex + 1
-                window.ga('send', 'event', 'projects', 'scroll', `scroll to ${this.currentIndex + 2}`, { nonInteraction: false })
+                window.ga('send', 'event', 'projects', 'scroll', `scroll to ${this.currentIndex + 1}`, { nonInteraction: false })
               }
-
-              this.currentIndex += 1
-
             } else if (scrollTop < breakpointSubTop && this.currentIndex > 0) {
               this.currentIndex -= 1
             }

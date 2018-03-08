@@ -95,14 +95,8 @@ export default {
                 },
                 onLeave: function(index, nextIndex, direction){
                     var leavingSection = $(this);
-                    
-                    // console.log('scroll to ', nextIndex);
-                    // ga('send', 'event', 'projects', 'scroll', 'scroll to '+nextIndex);
-
                     if(direction =='down'){
-                        console.log(maxIndex, nextIndex)
-                        if (maxIndex < nextIndex) {
-                            console.log('ga')
+                        if (maxIndex < nextIndex && nextIndex < 14) {
                             maxIndex = nextIndex
                             window.ga('send', 'event', 'projects', 'scroll', `scroll to ${nextIndex}`, { nonInteraction: false })
                         }
