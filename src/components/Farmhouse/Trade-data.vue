@@ -38,7 +38,8 @@
     </div>  
 
       <!-- Google Map -->
-      <google-map v-if="getMap && abrole === 'A'"></google-map>
+      <google-map v-if="getMap && abrole === 'A' && currDevice == 'desktop'"></google-map>
+      <div v-else class="staticMap"></div>
 
       <div id="mapPinContainer">
       <div class="centerwpr dark" id="mapText">
@@ -194,6 +195,12 @@ export default {
 </script>
 
 <style scoped>
+.staticMap {position:relative; height:100vh;
+background-image:url("/proj-assets/farmhouse/images/staticmap.jpg");
+background-size:cover; background-repeat:no-repeat;
+background-position:center center;
+}
+
 
 .chartwpr.pie {margin-top:20px; margin-bottom:45px;}
 .piewpr {max-width:400px; margin:0 auto;}
