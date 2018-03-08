@@ -2,13 +2,13 @@
   <section class="standalone faq" v-bind:class="{expand:expandAll}">
 
     <div class="chapter--header" v-bind:class="{mobile: (currDevice == 'mobile')}">
-
-      <div v-if="currDevice == 'mobile'" class="heroimg"></div>
-      <div v-else id="mediaContainer">
+      
+      <div v-if="currDevice == 'desktop'" id="mediaContainer">
          <video id="herovid" playsinline autoplay>
             <source src="/proj-assets/farmhouse/video/farmhouse02.mp4" type="video/mp4">
          </video> 
       </div>
+      <div v-else class="heroimg"></div>
       
       <div class="header--content">
         <div class="centerwpr">

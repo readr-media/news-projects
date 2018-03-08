@@ -14,11 +14,11 @@
           <div class="chart--source">資料來源：內政部實價登錄系統；鏡傳媒整理</div>
         </div>        
 
-        <div v-if="currDevice == 'mobile'">
-          <img src="/proj-assets/farmhouse/images/chart/2-1-phone.png" />
+        <div v-if="currDevice == 'desktop'">
+          <highcharts :options="chartDataF_2_1()" ref="highcharts"></highcharts>
         </div>
         <div v-else>
-          <highcharts :options="chartDataF_2_1()" ref="highcharts"></highcharts>
+          <img src="/proj-assets/farmhouse/images/chart/2-1-phone.png" />
         </div>
 
         <div class="chart--note"><strong>補充說明：</strong><br />本文所統計之農舍實價交易資訊，皆為交易筆數，而非實際農舍筆數。舉例來說，假如同一棟農舍經多次轉手交易，會被計算為多筆，所以在統計上的交易「農舍數量」，會略低於「交易筆數」。問題在於，由於實價登錄並沒有要求農地交易（不會註記為農舍）一定要註記老農配建農舍，而農地交易又高達 7,557筆，所以這邊可能會有不小的黑數，這也是本文的研究限制，特此說明。</div>

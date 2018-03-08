@@ -12,9 +12,8 @@
           </div>
 
           <div class="expandable">
-                <div class="eTable" id="tablePhone" v-if="currDevice == 'mobile'"><img src="/proj-assets/farmhouse/images/chart/c4-1-phone.png" /></div>
-
-                <div class="eTable" id="tableFull" v-else-if="currDevice == 'desktop'"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div>
+                <div class="eTable" id="tableFull" v-if="currDevice == 'desktop'"><img src="/proj-assets/farmhouse/images/chart/c4-1-web.png" /></div>
+                <div class="eTable" id="tablePhone" v-else><img src="/proj-assets/farmhouse/images/chart/c4-1-phone.png" /></div>
 
               <div class="eTrigger">
                 <a class="icon" id="tbTrigger" v-on:click="toggleContent($event)"></a>

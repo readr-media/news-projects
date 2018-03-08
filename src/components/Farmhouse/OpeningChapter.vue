@@ -2,10 +2,12 @@
   <section class="chapter opening">
     <div id="openingPinContainer">
       <div id="mediaContainer" v-bind:class="{mobile: (currDevice == 'mobile')}">
-        <div v-if="currDevice == 'mobile'" class="heroimg"></div>
-         <video v-else id="herovid" playsinline autoplay>
+
+         <video v-if="currDevice == 'desktop'" id="herovid" playsinline autoplay>
             <source src="/proj-assets/farmhouse/video/farmhouse01.mp4" type="video/mp4">
          </video> 
+         <div v-else class="heroimg"></div>
+
       </div>
       <!-- <div class="centerwpr"> -->
         <div class="opening--container">

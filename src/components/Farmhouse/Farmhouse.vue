@@ -191,7 +191,7 @@
 
       let currOS = this.$store.state.os;
       this.currentDevice = this.currDevice(currOS);
-      // console.log(this.currentDevice);
+      console.log(this.currentDevice);
 
     },
     beforeMount () {

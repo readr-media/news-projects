@@ -2,18 +2,13 @@
   <section class="standalone opinion">
 
     <div class="chapter--header" v-bind:class="{mobile: (currDevice == 'mobile')}">
-      <!-- <div id="mediaContainer">
-        <div v-if="currDevice == 'mobile'" class="heroimg"></div>
-         <video v-else id="herovid" playsinline autoplay>
-            <source src="/proj-assets/farmhouse/video/farmhouse03.mp4" type="video/mp4">
-         </video> 
-      </div> -->
-      <div v-if="currDevice == 'mobile'" class="heroimg"></div>
-      <div v-else id="mediaContainer">
+
+      <div v-if="currDevice == 'desktop'" id="mediaContainer">
          <video id="herovid" playsinline autoplay>
             <source src="/proj-assets/farmhouse/video/farmhouse03.mp4" type="video/mp4">
          </video> 
       </div>
+      <div v-else class="heroimg"></div>
 
       <div class="header--content">
         <div class="centerwpr">
