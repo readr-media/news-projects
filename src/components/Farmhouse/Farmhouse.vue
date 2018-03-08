@@ -229,7 +229,7 @@
 
         if(!this.getParams){
 
-          this.setScene();        
+          this.setScene(this.$store.state.os);        
           
         }        
 
@@ -328,6 +328,7 @@
           case 'gallery':
             break
           default:
+            // if (true) { return }
             const breakpointPlus = document.querySelector(`#chapter${this.currentIndex + 1}`)
             const breakpointPlusTop = breakpointPlus ? breakpointPlus.offsetTop : document.querySelector(`#chapter${this.currentIndex}`).offsetTop
             const breakpointSub = document.querySelector(`#chapter${this.currentIndex}`)
