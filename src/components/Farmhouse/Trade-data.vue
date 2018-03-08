@@ -38,7 +38,7 @@
     </div>  
 
       <!-- Google Map -->
-      <google-map v-if="getMap && abrole === 'A' && currDevice == 'desktop'"></google-map>
+      <google-map v-if="getMap && (currDevice == 'desktop'" || (abrole === 'A' && currDevice == 'mobile'"))></google-map>
       <div v-else class="staticMap" v-bind:class="{
           'poly': mapPoly,
           'heat': mapHeat,
