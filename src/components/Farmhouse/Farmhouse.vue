@@ -194,18 +194,19 @@
         case 'opinion':
           ogTitle = '農舍面面觀'
           ogImage = 'farmhouse/images/og2.jpg'
+          metaUrl = 'farmhouse/opinion'
           break
         case 'faq':
           ogTitle = '來來來!看完你就變農舍達人了'
           ogImage = 'farmhouse/images/og3.jpg'
+          metaUrl = 'farmhouse/faq'
           break
         case 'gallery':
           ogTitle = '田中央攝影集'
           ogImage = 'farmhouse/images/og4.jpg'
+          metaUrl = 'farmhouse/gallery'
           break
-        
       }
-
       return {
         title: ogTitle,
         description: description,
