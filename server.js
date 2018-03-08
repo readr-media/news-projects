@@ -1,4 +1,5 @@
 const _ = require('lodash')
+const Cookies = require( "cookies" )
 const fs = require('fs')
 const path = require('path')
 const LRU = require('lru-cache')
@@ -9,6 +10,7 @@ const microcache = require('route-cache')
 const requestIp = require('request-ip')
 const resolve = file => path.resolve(__dirname, file)
 const useragent = require('useragent')
+const uuidv4 = require('uuid/v4')
 // const { VALID_PREVIEW_IP_ADD } = require('./api/config')
 const { createBundleRenderer } = require('vue-server-renderer')
 
@@ -109,6 +111,12 @@ function render (req, res, next) {
   res.setHeader('Cache-Control', 'public, max-age=3600')  
   res.setHeader("Content-Type", "text/html")
   res.setHeader("Server", serverInfo)
+
+  const cookies = new Cookies( req, res, {} )
+  const mmid = cookies.get('mmid')
+  if (!mmid) {
+    cookies.set('mmid', uuidv4(), { httpOnly: false, expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) })
+  }
 
   const handleError = err => {
     if (err.url) {
