@@ -66,6 +66,13 @@
   <div class="navwpr" v-bind:class="{open: navOpen}">
     <ul class="nav">
       <li v-for="(item, index) in chapterTitle" class="navList" v-scroll-to="item.id" v-on:click="navSlide(index)">{{item.abbr}}</li>
+      <li v-if="currentDevice == 'mobile'" class="extendnav">
+        <ul>
+          <li><a href="/project/farmhouse/opinion" target="_blank">農舍面面觀</a></li>
+          <li><a href="/project/farmhouse/faq" target="_blank">看完你就變農舍達人</a></li>
+          <li><a href="/project/farmhouse/gallery" target="_blank">田中央攝影集</a></li>
+        </ul>
+      </li>
     </ul>
     <div class="navClose" v-on:click="navSlide">
       <div class="icon"></div>
@@ -218,7 +225,7 @@
 
       let currOS = this.$store.state.os;
       this.currentDevice = this.currDevice(currOS);
-      console.log(this.currentDevice);
+      console.log("device: " + this.currentDevice);
 
     },
     beforeMount () {
@@ -240,7 +247,6 @@
         // console.log("current Device: " + this.currDevice(currOS));
         // this.currentDevice = this.currDevice(currOS);
         // console.log(this.currentDevice);
-
       }    
       // console.log(this.$route);
 
@@ -588,7 +594,7 @@ border-radius:2px;
 }
 .nav li {cursor:pointer; list-style:none;
 padding:8px 10px; max-width:160px;
-font-size:17px; line-height:1.2;
+font-size:17px; line-height:1.1;
 display:none;
 }
 .nav li.sibling {display:block;}
@@ -628,7 +634,7 @@ background-color:rgba(255,255,255,0.15);
 .open .navClose {opacity:1;}
 
 .navClose .icon {width:20px; height:2px; position:absolute; left:50%; top:50%;
-margin-left:-10px; margin-top:-1px;
+margin-left:-10px; margin-top:-1px; pointer-events:none;
 background-color:#c5c5c5;
 }
 .navClose .icon:before {content:""; display:block; width:2px; height:20px;
@@ -639,6 +645,15 @@ background-color:#c5c5c5;
 
 .navClose:hover .icon {background-color:#fff;}
 .navClose:hover .icon:before {background-color:#fff;}
+
+li.extendnav {padding:0;}
+.extendnav ul {padding-left:5px;}
+.extendnav ul li {padding:8px 0 0 0;
+list-style-type:disc; list-style-position:outside;
+}
+.extendnav li a {font-size:16px; text-decoration:none;}
+.extendnav li a:before {content:"•"; margin-right:5px;}
+
 
 /* Chart */
 .chartwpr {margin-top:45px; margin-bottom:15px;}
@@ -804,9 +819,9 @@ font-size:44px;
   .navwpr {left:auto; right:-300px;
     background-color:#273947;
     transition:500ms; transition-property:right;
-    display:flex;
+    display:flex; pointer-events:none;
   }
-  .navwpr.open {right:0;}
+  .navwpr.open {right:0; pointer-events:auto;}
   .nav {margin-left:0;
     background-color:transparent;
   }
