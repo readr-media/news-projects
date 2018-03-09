@@ -1,7 +1,8 @@
-import Cookie from 'vue-cookie'
-import uuidv4 from 'uuid/v4'
+import { SITE_DOMAIN_PROD } from '../constants'
 import { get } from 'lodash'
 import { getRole } from 'src/util/ABRoleAssign'
+import Cookie from 'vue-cookie'
+import uuidv4 from 'uuid/v4'
 
 export function currDevice (osString) {
  /**
@@ -13,6 +14,17 @@ export function currDevice (osString) {
     return 'mobile'
   }
 }
+
+export function currEnv () {
+  if (process.env.VUE_ENV === 'client') {
+    if (location.host.indexOf(SITE_DOMAIN_PROD) === 0 || location.host.indexOf(`www.${SITE_DOMAIN_PROD}`) === 0) {
+      return 'prod'
+    } else {
+      return 'dev'
+    }
+  }
+}
+
 export function setMmCookie () {
   const uuid = uuidv4()
   Cookie.set('mmid', uuid, { expires: (10 * 365 * 24) + 'h' })

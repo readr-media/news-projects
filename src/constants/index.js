@@ -2,6 +2,10 @@ import projectList from './projectList'
 
 export const PROJECTS = projectList
 
+export const SITE_DOMAIN_DEV = 'readr.tw'
+
+export const SITE_DOMAIN_PROD = 'mirrormedia.mg'
+
 export const SITE_URL = 'https://projects.mirrormedia.mg/project/'
 
 export const SITE_ASSETS_URL = 'https://projects.mirrormedia.mg/proj-assets/'

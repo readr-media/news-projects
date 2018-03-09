@@ -42,7 +42,7 @@
         <iframe src="https://www.mirrormedia.mg/project-list/light?excluding=farmhouse"  width="100%" frameborder="0" scrolling="no" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
       </section>
       <section class="facebook">
-        <div class="fb-comments" data-href="https://projects.mirrormedia.mg/project/farmhouse/" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
+        <div class="fb-comments" :data-href="commentsUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
       </section>
   </div>
   </div>
@@ -54,9 +54,13 @@
 
 <script>
 
+import { SITE_DOMAIN_DEV, SITE_DOMAIN_PROD } from '../../constants'
+import { currEnv } from '../../util/comm'
+
 export default {
   data() {
     return {
+      commentsUrl: `https://dev.${SITE_DOMAIN_DEV}/project/farmhouse/`,
       creditList: [
           "文字：鐘聖雄",
           "攝影：林俊耀、鐘聖雄",
@@ -75,7 +79,11 @@ export default {
       window.ga('send', 'event', 'projects', 'click', `link_${name}`, { nonInteraction: false })
     }
   },
-  mounted: function() {}
+  mounted () {
+    if (currEnv() === 'prod') {
+      this.commentsUrl = `https://projects.${SITE_DOMAIN_PROD}/project/farmhouse/`
+    }
+  }
 };
 </script>
 
