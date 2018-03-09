@@ -151,20 +151,22 @@ export default {
             resetProgress();
           });
 
-          window.addEventListener('resize',function(event){
-            
+
+          function setDuration(){
             let headerHeight = header.offsetHeight;
             navScene.duration(headerHeight).refresh();
+            // console.log("header duration set");
+          }
 
+          window.addEventListener('resize',function(event){            
+
+            setDuration();
             resetProgress();
-
 
           });
 
-          let resizeEvent = new Event('resize');
-
-          //trigger window resize once
-          window.dispatchEvent(resizeEvent);
+          setDuration();
+          resetProgress();
 
         }
 
