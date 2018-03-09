@@ -244,7 +244,7 @@
         ]
       });
       debug('role', this.abRole)
-      window.ga('set', 'contentGroup3', `project:farmhouse:${this.abIndicator}`)
+      window.ga('set', 'contentGroup3', `project:farmhouse:${this.abRole}`)
       if (process.browser) {        
 
         if(!this.getParams){
