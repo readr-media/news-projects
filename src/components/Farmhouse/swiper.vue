@@ -30,7 +30,7 @@
 
 <script>
 
-import Swiper from 'swiper';
+import Swiper from 'swiper/dist/js/swiper.js'
 import imgSrc from './data/swiper.json';
 
 // import comparison from './ImageComparison.vue';
