@@ -56,19 +56,21 @@ export default {
       let comparisonWidget = document.querySelector(".comparison-widget");
       let compareDesc = document.querySelectorAll(".gallery--desc");
 
-      window.addEventListener('resize',function(event){
+      function setDesc(){
         let widgetWidth = comparisonWidget.offsetWidth;
         // console.log(widgetWidth);
         for(let i = 0; i < compareDesc.length; i++){
 
           compareDesc[i].style.width = widgetWidth + "px";
-
+          // console.log("desc width set");
         }
+      }
 
+      window.addEventListener('resize',function(event){
+        setDesc();
       });
 
-      let resizeEvent = new Event('resize');
-      window.dispatchEvent(resizeEvent);
+      setDesc();
 
 
     },

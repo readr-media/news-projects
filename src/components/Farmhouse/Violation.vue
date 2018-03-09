@@ -110,20 +110,22 @@ export default {
 
     setTableHeight: function(){
 
-      window.addEventListener('resize', function(event){
-        
+      function initTable(){
         let eTable = document.querySelectorAll(".eTable");
         for(let i = 0; i < eTable.length; i++){
           let height = eTable[i].scrollHeight;
           eTable[i].style.maxHeight = height / 2.5 + "px";
-          // console.log(height);
+          // console.log("table height set");
         }
+      }
+
+      window.addEventListener('resize', function(event){        
+
+        initTable();
 
       });
 
-      let resizeEvent = new Event('resize');
-      //trigger window resize once
-      window.dispatchEvent(resizeEvent);
+      initTable();
 
     }
 
