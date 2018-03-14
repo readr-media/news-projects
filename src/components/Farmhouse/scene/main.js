@@ -1,11 +1,9 @@
 import { currDevice } from 'src/util/comm';
 const debug = require('debug')('CLIENT:farmhouse:scene:main');
 
-export function setScene(os) {
-    debug('os:', os)
-    debug('currDevice(os):', currDevice(os))
+export function setScene(isMobile) {
+    debug('isMobile:', isMobile)
 
-    const isMobile = currDevice(os) === 'mobile';
     const ScrollMagic = require('scrollmagic');
     const { TweenMax, TimelineMax } = require('gsap');
     require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap');

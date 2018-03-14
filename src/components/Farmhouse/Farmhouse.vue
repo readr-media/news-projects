@@ -135,9 +135,6 @@
   //scene
   import {setScene} from './scene/main.js';
 
-  //check device
-  import {currDevice} from '../../util/comm.js';
-
   import { getMmid } from 'src/util/comm';
   const debug = require('debug')('CLIENT:farmhouse')
 
@@ -227,8 +224,7 @@
     },
     created () {
 
-      let currOS = this.$store.state.os;
-      this.currentDevice = this.currDevice(currOS);
+      this.currentDevice = this.$store.state.isMobile ? 'mobile' : 'desktop';
       console.log("device: " + this.currentDevice);
 
     },
@@ -246,22 +242,11 @@
       debug('role', this.abRole)
       window.ga('set', 'contentGroup3', `project:farmhouse:${this.abRole}`)
       window.ga('send', 'pageview')
-      if (process.browser) {        
-
+      if (process.browser) {
         if(!this.getParams){
-
-          this.setScene(this.$store.state.os);        
-          
-        }        
-
-        //ckeck current device
-        // let currOS = this.$store.state.os;
-        // console.log("current OS: " + currOS);
-        // console.log("current Device: " + this.currDevice(currOS));
-        // this.currentDevice = this.currDevice(currOS);
-        // console.log(this.currentDevice);
+          this.setScene(this.$store.state.isMobile);        
+        }
       }    
-      // console.log(this.$route);
 
       //網址 farmhouse/XXX 值
       // console.log(this.getParams);
@@ -397,8 +382,6 @@
         let content = trigger.nextElementSibling;
         content.classList.toggle("expand");
       },
-
-      currDevice,
 
       faqExpand (value) {
         this.isOpened = value
