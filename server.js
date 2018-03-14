@@ -1,5 +1,6 @@
 const _ = require('lodash')
-const Cookies = require( "cookies" )
+const Cookies = require('cookies')
+const debug = require('debug')('NEWS-PROJECT:server.js')
 const fs = require('fs')
 const path = require('path')
 const LRU = require('lru-cache')
@@ -9,7 +10,7 @@ const compression = require('compression')
 const microcache = require('route-cache')
 const requestIp = require('request-ip')
 const resolve = file => path.resolve(__dirname, file)
-const useragent = require('useragent')
+const useragent = require('express-useragent')
 const uuidv4 = require('uuid/v4')
 // const { VALID_PREVIEW_IP_ADD } = require('./api/config')
 const { createBundleRenderer } = require('vue-server-renderer')
@@ -37,6 +38,7 @@ function createRenderer (bundle, options) {
   }))
 }
 
+app.use(useragent.express())
 app.use(requestIp.mw())
 app.set('views', path.join(__dirname, 'src/views'))
 app.set('view engine', 'ejs')
@@ -94,7 +96,8 @@ if (!isProd) {
 app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl))
 
 function render (req, res, next) {
-  const agent = useragent.parse(req.headers['user-agent'], req.query.jsuseragent)
+  debug('req.useragent:')
+  debug(req.useragent)
   const s = Date.now()
   console.log('got req at ', s)
   console.log('req.url', req.url)
@@ -135,7 +138,7 @@ function render (req, res, next) {
   const context = {
     title: 'Readr Projects', // default title
     url: req.url,
-    os: agent.os.toString()
+    useragent: req.useragent
   }
   renderer.renderToString(context, (err, html) => {
     if (err) {
