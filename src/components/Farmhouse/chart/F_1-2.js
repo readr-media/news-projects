@@ -5,7 +5,7 @@ export default function chartData() {
             type: 'bar',
             borderWidth: 0,
             marginTop:20,
-            marginBottom: 40,
+            // marginBottom: 40,
             backgroundColor: '#273947',
         },
         credits: {
@@ -41,7 +41,7 @@ export default function chartData() {
             gridLineColor: '#ababab',
             gridLineWidth: 1,
             title: {
-                text: '筆數',
+                text: '公頃',
                 align: 'high',
                 style: {
                     color: '#ababab'
