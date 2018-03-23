@@ -5,7 +5,7 @@ export default function chartData() {
             type: 'bar',
             borderWidth: 0,
             marginTop:20,
-            marginBottom: 40,
+            // marginBottom: 40,
             backgroundColor: '#273947',
         },
         credits: {
