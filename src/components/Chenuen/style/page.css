@@ -1,0 +1,104 @@
+.pagewpr {
+display:flex; justify-content:flex-start; align-items:stretch;
+height:100vh;
+}
+.pagewpr:after {content:""; display:table; clear:both;} 
+
+.page--aside {width:180px; position:relative;
+padding:0 20px; 
+flex-shrink:0;
+}
+
+.page--title {width:118px; height:317px; 
+position:absolute; left:20px; top:70px;
+background-image:url("/proj-assets/chenuen/images/page-title.png");
+background-repeat:no-repeat; background-position:center center;
+background-size:100% auto;
+}
+
+.page--navpanel {position:absolute; left:0; bottom:35px;
+width:100%; padding:0 20px;
+}
+
+.page--navbtn {cursor:pointer;
+padding-left:75px; position:relative; z-index:200; 
+}
+.page--navbtn-icon {width:66px; height:36px; display:block;
+position:absolute; left:0; top:50%; margin-top:-18px;
+background-image:url("/proj-assets/chenuen/images/page-navbtn.png");
+background-repeat:no-repeat; background-position:0 0;
+background-size:100% auto;
+}
+.page--navbtn-icon.expand {background-position:0 bottom;}
+
+.page--navbtn-txt {white-space:nowrap; line-height:1;}
+.navbtn-txt1 {margin-bottom:4px;
+color:#eba433; font-size:19px; font-weight:bold;
+}
+.navbtn-txt2 {font-size:14px; color:#8c8c8c;}
+.navbtn-txt2 strong {color:#eba433;}
+
+/* swiper pagination */
+#galleryFraction {position:relative; left:auto; bottom:auto;
+font-size:26px; text-align:left; margin-bottom:12px;
+font-family:"source-han-serif-tc",serif; font-weight:400;    
+display:flex; justify-content:flex-start; align-items:center;
+}
+#galleryFraction span {font-size:32px; font-weight:700;}
+#galleryFraction .swiper-pagination-current {color:#eaa332; margin-right:6px;}
+#galleryFraction .swiper-pagination-total {margin-left:6px;}
+
+/* page--desc */
+.page--desc {width:0; height:100%; overflow:hidden;
+position:relative;    
+}
+.page--desc.expand {width:320px;}
+
+.page--desc .innerwpr {padding:0 20px; min-height:100%;
+display:flex; justify-content:center; align-items:center;
+flex-direction:column;
+}
+
+/* swiper slide */
+.page--gallery {flex:1; padding-top:5px; position:relative;}
+
+.swiper-slide {width:100%; height:100%;
+display:flex; justify-content:center; align-items:center;
+}
+.swiper-slide img {max-width:100%; max-height:100%;}
+
+/* swiper progress */
+.gallery--progress {position:absolute; left:0; top:0;
+width:100%; height:5px;
+background-color:#eee;
+}
+.gallery--progress .swiper-wrapper {display:none;}
+#galleryProgress {position:absolute; left:0; top:0;
+width:100%; height:5px; margin-bottom:0;
+}
+#galleryProgress .swiper-pagination-progressbar-fill {
+background-color:#eba432;    
+}
+
+/* note */
+.note--wrapper {width:100%; height:100%; position:absolute; left:0; top:0;
+display:none; justify-content:center; align-items:center;    
+}
+.collapse .note--wrapper {display:flex;}
+
+.note--container {position:relative;}
+
+.note--entry {width:24px; height:24px;
+position:absolute; margin:-12px 0 0 -12px;  
+}
+
+.note--marker {width:24px; height:24px; cursor:pointer;
+color:#fff; font-size:15px;
+font-family:"source-han-serif-tc",serif; font-weight:700;
+background-color:#eba432; border-radius:50%;
+display:flex; justify-content:center; align-items:center;
+}
+.note--marker:hover {transform:scale(1.2);}
+
+
+

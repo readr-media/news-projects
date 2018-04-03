@@ -7,7 +7,8 @@ export default {
 //  'proj1': () => import('../components/Proj1/Proj1.vue')
   'marathon': 'Marathon',
   'newtype': 'Newtype',
-  'farmhouse': 'Farmhouse'
-  //'proj1': 'Proj1',
+  'farmhouse': 'Farmhouse',
+  'chenuen': 'Chenuen'
+  // 'proj1': 'Proj1'
   // 'proj2': 'Proj2'
 }
