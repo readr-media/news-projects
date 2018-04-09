@@ -17,7 +17,7 @@ background-size:100% auto;
 }
 
 .page--navpanel {position:absolute; left:0; bottom:35px;
-width:100%; padding:0 20px;
+width:100%; padding-left:20px;
 }
 
 .page--navbtn {cursor:pointer;
@@ -38,15 +38,42 @@ color:#eba433; font-size:19px; font-weight:bold;
 .navbtn-txt2 {font-size:14px; color:#8c8c8c;}
 .navbtn-txt2 strong {color:#eba433;}
 
+/* swiper control wrapper */
+.swiper--control {
+display:flex; justify-content:space-between; align-items:center;
+margin-bottom:12px; width:154px;
+}
+
 /* swiper pagination */
 #galleryFraction {position:relative; left:auto; bottom:auto;
-font-size:26px; text-align:left; margin-bottom:12px;
+font-size:26px; text-align:left;
 font-family:"source-han-serif-tc",serif; font-weight:400;    
 display:flex; justify-content:flex-start; align-items:center;
+flex-shrink:0; width:90px; height:40px;
 }
-#galleryFraction span {font-size:32px; font-weight:700;}
-#galleryFraction .swiper-pagination-current {color:#eaa332; margin-right:6px;}
-#galleryFraction .swiper-pagination-total {margin-left:6px;}
+#galleryFraction span {font-size:30px; font-weight:700;}
+#galleryFraction .swiper-pagination-current {color:#eaa332; margin-right:5px;}
+#galleryFraction .swiper-pagination-total {margin-left:5px;}
+
+/* swiper navigation buttons */
+.swiper-btnwpr {position:relative; width:60px; height:40px;
+flex-shrink:0;
+}
+.swiper-button-next, .swiper-button-prev {
+width:24px; height:40px; margin-top:0; top:0;    
+background-image:url("/proj-assets/chenuen/images/swiper-navbtn.png");
+background-repeat:no-repeat;
+background-size:60PX auto;
+}
+.swiper-button-prev {left:0;
+background-position:3px 5px;
+}
+.swiper-button-prev:hover {background-position:3px -62px;}
+
+.swiper-button-next {right:0;    
+background-position:-39px 5px;
+}
+.swiper-button-next:hover {background-position:-39px -62px;}
 
 /* page--desc */
 .page--desc {width:0; height:100%; overflow:hidden;
@@ -54,42 +81,63 @@ position:relative;
 }
 .page--desc.expand {width:320px;}
 
-.page--desc .innerwpr {padding:0 20px; min-height:100%;
-display:flex; justify-content:center; align-items:center;
+.page--desc .innerwpr {padding:0 30px 0 20px; min-height:100%;
+display:flex; justify-content:center; align-items:flex-start;
 flex-direction:column;
 }
 
 /* swiper slide */
-.page--gallery {flex:1; padding-top:5px; position:relative;}
+.page--gallery {flex:1; padding-top:5px; position:relative;
+background-color:#f5f5f5;
+}
 
 .swiper-slide {width:100%; height:100%;
-display:flex; justify-content:center; align-items:center;
+/* display:flex; justify-content:center; align-items:center; */
+background-repeat:no-repeat; background-position:center center;
+background-size:contain;
 }
-.swiper-slide img {max-width:100%; max-height:100%;}
+.swiper-slide__image {max-width:100%; max-height:100%;
+opacity:0; visibility:hidden; pointer-events:none;
+}
 
 /* swiper progress */
-.gallery--progress {position:absolute; left:0; top:0;
-width:100%; height:5px;
-background-color:#eee;
+.gallery--progress {position:absolute; left:0; top:0; z-index:999;
+width:100%; height:100%;
 }
-.gallery--progress .swiper-wrapper {display:none;}
-#galleryProgress {position:absolute; left:0; top:0;
+/* .gallery--progress .swiper-wrapper {display:none;} */
+#galleryProgress {position:fixed; left:0; top:0;
 width:100%; height:5px; margin-bottom:0;
+background-color:#eee;
 }
 #galleryProgress .swiper-pagination-progressbar-fill {
 background-color:#eba432;    
 }
 
+.gallery--progress .swiper-slide {
+padding:0 30px 0 20px; min-height:100%;
+box-sizing:border-box;
+background-color:#fff;
+}
+
+.gallery--progress .scrollwpr {width:100%; height:100%; position:relative;
+display:flex; justify-content:center; align-items:center;    
+/* background-color:pink; */
+}
+
+.gallery--progress .content {flex-shrink:0; padding:20px 0;}
+
+
 /* note */
 .note--wrapper {width:100%; height:100%; position:absolute; left:0; top:0;
-display:none; justify-content:center; align-items:center;    
+display:flex; justify-content:center; align-items:center;    
+/* display:none; */
 }
 .collapse .note--wrapper {display:flex;}
 
 .note--container {position:relative;}
 
 .note--entry {width:24px; height:24px;
-position:absolute; margin:-12px 0 0 -12px;  
+position:absolute; margin:-12px 0 0 -12px;
 }
 
 .note--marker {width:24px; height:24px; cursor:pointer;
@@ -97,8 +145,35 @@ color:#fff; font-size:15px;
 font-family:"source-han-serif-tc",serif; font-weight:700;
 background-color:#eba432; border-radius:50%;
 display:flex; justify-content:center; align-items:center;
+position:relative;
 }
-.note--marker:hover {transform:scale(1.2);}
+.note--marker:before {content:""; display:block; width:40px; height:40px;
+position:absolute; left:50%; top:50%;
+margin-left:-20px; margin-top:-20px;
+border-radius:50%;
+}
 
+.note--entry:hover .note--marker {
+z-index:1000; transform:scale(1.2);
+}
 
+.note--content {width:240px;   
+position:absolute; left:12px; top:12px; z-index:999;     
+border:1px solid #eba73b;
+/* display:none; */
+opacity:0; pointer-events:none; visibility:hidden;
+}
+.note--entry:hover .note--content {
+opacity:1; pointer-events:auto; visibility:visible;    
+}
 
+.note--content__image img {width:100%;}
+
+.note--content__text {padding:12px 18px;
+font-size:14px; line-height:1.5;    
+background-color:#fff;
+}
+
+.note--content__text h4 {margin-bottom:8px;
+font-size:20px;
+}

@@ -98,6 +98,14 @@ transform:scale(0.9);
 body {color:#4d4d4d; font-size:17px; line-height:1.5;
 font-family:"微軟正黑體", "Microsoft JhengHei", sans-serif;
 }
+h1,h2,h3,h4,h5,h6 {
+margin:0 0 20px 0;  
+}
+p {margin:0;
+text-align:justify; text-justify:distribute;
+}
+p+p {margin-top:20px;}
+img {display:block;}
 </style>
 
 
