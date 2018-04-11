@@ -9,6 +9,15 @@
   <page></page>
 </div>
 
+<!-- /project/chenuen/pagem 手機版暫時 -->
+<div v-else-if="getParams == 'pagem'">
+
+  <logo :top="`2px`" :left="`6px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
+  <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`"></share>
+
+  <pagem></pagem>
+</div>
+
 <!-- /project/chenuen/ -->
 <div v-else>
   首頁
@@ -28,6 +37,7 @@ import _ from 'lodash';
 
 // pages
 import page from './Page.vue';
+import pagem from './Pagem.vue';
 
 export default {
 
@@ -39,7 +49,8 @@ export default {
     'logo': Logo,
     'share': Share,
 
-    'page': page
+    'page': page,
+    'pagem': pagem
   },
 
   computed: {
@@ -61,8 +72,8 @@ export default {
   metaInfo() {
     let ogTitle = "鄭問專題";
     let description = "鄭問專題";
-    let metaUrl = "farmhouse";
-    let ogImage = "farmhouse/images/og.jpg";
+    let metaUrl = "chenuen";
+    let ogImage = "chenuen/images/og.jpg";
 
     return {
       title: ogTitle,
@@ -84,28 +95,8 @@ export default {
 </script>
 
 <style>
-.logo {background-size:auto 100% !important;
-transform:scale(0.9);
-}
-.share__item {transform:scale(0.85);}
-.share__item.toggle {
-background-image:url("/proj-assets/chenuen/images/navbtn.png") !important;
-background-size:auto 100% !important;
-background-position:right top !important;
-transform:scale(0.9);
-}
+@import './style/common.css';
 
-body {color:#4d4d4d; font-size:17px; line-height:1.5;
-font-family:"微軟正黑體", "Microsoft JhengHei", sans-serif;
-}
-h1,h2,h3,h4,h5,h6 {
-margin:0 0 20px 0;  
-}
-p {margin:0;
-text-align:justify; text-justify:distribute;
-}
-p+p {margin-top:20px;}
-img {display:block;}
 </style>
 
 

@@ -14,7 +14,7 @@ export function initNoteContainer() {
             let width = image.offsetWidth;
             let height = image.offsetHeight;
 
-            console.log(width + ", " + height);
+            // console.log(width + ", " + height);
 
             let container = element.querySelector(".note--container");
             if (container) {
@@ -38,10 +38,11 @@ export function initNoteContainer() {
 
             if(rectBottom > vh) {
                 //set margin-top
-                let marginTop = (rectBottom - vh + 20) * -1 + "px";
+                let marginTop = (rectBottom - vh + 10) * -1 + "px";
                 element.style.marginTop = marginTop;
             }
         });
     }
 
 }
+

@@ -1,0 +1,75 @@
+.pagewpr {min-height:100vh; background-color:#f5f5f5;}
+.centerwpr {margin:0 auto; max-width:1000px;}
+
+h2 {font-size:26px;}
+
+/* header */
+.header {width:100%; height:48px;
+position:fixed; left:0; top:0; z-index:900;
+background-color:#fff; 
+}
+
+/* swiper */
+#mGallery {margin-top:48px;}
+.swiper-slide__image {width:100%;}
+
+/* swiper: intro */
+.swiper-slide__content {padding:30px;}
+
+/* swiper: note */
+.note--container {padding:30px;}
+.note--entry+.note--entry {margin-top:40px;}
+.note--marker {display:none;}
+.note--content__image {margin:0 -30px 10px -30px;}
+.note--content__image img {width:100%;}
+
+h4.alternate {font-size:22px; margin-bottom:10px;}
+
+.note--content__text h4 {display:none;}
+
+
+/* swiper navigation buttons */
+.swiper-btnwpr {position:absolute; right:0; top:0;
+width:80px; height:100%;
+}
+.swiper-button-next, .swiper-button-prev {
+width:40px; height:100%; margin-top:0; top:0;    
+background-image:url("/proj-assets/chenuen/images/swiper-navbtn.png");
+background-repeat:no-repeat;
+background-size:60PX auto;
+}
+.swiper-button-prev {left:0;
+background-position:10px 8px;
+}
+.swiper-button-prev:hover {background-position:10px -59px;}
+
+.swiper-button-next {right:0;    
+background-position:-28px 8px;
+}
+.swiper-button-next:hover {background-position:-28px -59px;}
+
+/* swiper pagination */
+#mFraction {position:absolute; left:auto; bottom:auto; right:80px; top:-1px;
+font-size:26px; text-align:left;
+font-family:"source-han-serif-tc",serif; font-weight:400;    
+display:flex; justify-content:flex-start; align-items:center;
+flex-shrink:0; width:90px; height:100%;
+}
+#mFraction span {font-size:30px; font-weight:700;}
+#mFraction .swiper-pagination-current {color:#eaa332; margin-right:5px;}
+#mFraction .swiper-pagination-total {margin-left:5px;}
+
+/* swiper next */
+.swiper-nexttbn {padding:20px 30px;
+cursor:pointer; position:relative;
+}
+.swiper-nexttbn .text {font-weight:bold;}
+.swiper-nexttbn h2 {margin-bottom:0;
+position:relative; line-height:1.2;
+}
+.swiper-nexttbn i {display:block; width:20px; height:32px;
+position:absolute; right:30px; bottom:22px;    
+background-image:url("/proj-assets/chenuen/images/swiper-navbtn.png");
+background-repeat:no-repeat; background-position:-41px 0;
+background-size:60PX auto;
+}
