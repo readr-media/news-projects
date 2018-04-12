@@ -62,10 +62,11 @@ export default {
 
   data: function() {
     return {
-      shareLink: `${SITE_URL}chenuen`
+      shareLink: `${SITE_URL}chenuen`,
       // shareLinkOpinion: `${SITE_URL}farmhouse/opinion`,
       // shareLinkFaq: `${SITE_URL}farmhouse/faq`,
       // shareLinkGallery: `${SITE_URL}farmhouse/gallery`
+      currentDevice: ''
     };
   },
 
@@ -87,6 +88,12 @@ export default {
 
   },
 
+  created () {    
+    //current device
+    this.currentDevice = this.$store.state.isMobile ? 'mobile' : 'desktop';
+    console.log("device: " + this.currentDevice);
+  },
+
   mounted: function() {
 
   }
@@ -96,12 +103,4 @@ export default {
 
 <style>
 @import './style/common.css';
-
-</style>
-
-
-
-<style scoped>
-
-
 </style>

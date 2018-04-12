@@ -2,15 +2,13 @@
 <div class="pagewpr">
 
 <div class="header">
-
     <!-- pagination -->
     <div class="swiper-pagination" id="mFraction"></div>
  
     <div class="swiper-btnwpr">
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
-    </div>
-    
+    </div>    
 
 </div>
 
@@ -31,13 +29,29 @@
 
           <div class="swiper-nexttbn">
             <div class="text">下一篇：</div>
-            <h2 v-text="get(galleryData, [index + 1,'title'], galleryData[0].title)"></h2>
+            <h2 v-text="_get(galleryData, [index + 1,'title'], galleryData[0].title)"></h2>
             <i></i>
           </div>
 
         </div>     
     </div> 
 
+</div>
+
+<div class="footer">
+  <div class="footer--bg"></div>
+  <h5>作品一覽：</h5>
+  <ul class="table">
+    <li class="table-list"
+      v-for="(item,index) in galleryData" 
+      :key="item.id"
+    >
+      <div class="table-list__item">
+        <span class="table-list__index" v-text="index + 1 + '.'"></span>
+        <span class="table-list__text" v-text="item.title"></span>
+      </div>        
+    </li>
+  </ul>
 </div>
 
 
@@ -47,7 +61,7 @@
 
 <script>
 //plugins
-import {get} from 'lodash'; 
+import {get,indexOf} from 'lodash'; 
 import Swiper from 'swiper/dist/js/swiper.js';
 
 //主圖資料
@@ -82,11 +96,32 @@ export default {
 
   methods: {  
     
-    get //lodash get
+    // lodash
+    _get: get,
+    _indexOf: indexOf,
+
+    setFooterTriangle: function(){
+      let vw = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      let el = document.querySelector(".footer--bg");
+
+      el.style.borderRightWidth = vw + "px";
+    },
+
+    setTableList: function(swiper){
+      let index = swiper.realIndex;
+      let tableLists = document.querySelectorAll(".table-list");
+
+      tableLists.forEach(function(element){
+        element.classList.remove("current");
+      });
+      tableLists[index].classList.add("current");
+    }
 
   },
 
   mounted: function(){
+
+    let _setTableList = this.setTableList;
 
     this.gallery = new Swiper ('#mGallery', {
       loop: true,
@@ -107,6 +142,10 @@ export default {
         slideChangeTransitionStart: function () {
           window.scrollTo(0,0);
         },
+
+        slideChange: function() {
+          _setTableList(this);
+        }
       },
 
     });
@@ -123,6 +162,31 @@ export default {
       });
     }
 
+    {
+      //table of contents
+      let thatGallery = this.gallery;
+      let tableLists = document.querySelectorAll(".table-list");
+
+      let _indexOf = this._indexOf;
+
+      tableLists.forEach(function(element){
+        element.addEventListener("click",() => {
+
+          let index = _indexOf(tableLists,element) 
+          thatGallery.slideToLoop(index);
+
+        });
+      });
+
+      this.setTableList(thatGallery);
+
+    }
+
+    this.setFooterTriangle();
+
+    window.addEventListener("resize",() => {
+      this.setFooterTriangle();
+    },false);
 
   }
 

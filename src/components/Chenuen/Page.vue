@@ -214,23 +214,7 @@ export default {
 
     imagesLoaded( document.querySelector('.page--gallery'), () => {
       this.initNoteContainer();
-    });
-    
-    //說明區自訂卷軸
-    // const pageDescScroll = new PerfectScrollbar('.scrollwpr');
-    // {
-    //   let scrollArray = this.scrollwprGroup;
-    //   let descScrollwpr = document.querySelectorAll(".scrollwpr");
-
-    //   descScrollwpr.forEach(function(element,index){
-
-    //     let ps = {};
-    //     ps.scroll = new PerfectScrollbar(element);
-    //     scrollArray.push(ps);
-
-    //   });
-
-    // } 
+    });  
 
     this.initScroll();
 
