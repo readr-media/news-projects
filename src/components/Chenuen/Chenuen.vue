@@ -18,9 +18,13 @@
   <pagem></pagem>
 </div>
 
-<!-- /project/chenuen/ -->
+<!-- Homepage -->
 <div v-else>
-  首頁
+
+  <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
+  <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`"></share>
+
+  <home></home>
 </div>
 
 </template>
@@ -36,6 +40,7 @@ import Share from '../Share.vue';
 import _ from 'lodash';
 
 // pages
+import home from './Home.vue';
 import page from './Page.vue';
 import pagem from './Pagem.vue';
 
@@ -49,6 +54,7 @@ export default {
     'logo': Logo,
     'share': Share,
 
+    'home': home,
     'page': page,
     'pagem': pagem
   },

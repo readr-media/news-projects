@@ -68,7 +68,7 @@ cursor:pointer; position:relative;
 position:relative; line-height:1.2;
 }
 .swiper-nexttbn i {display:block; width:20px; height:32px;
-position:absolute; right:30px; bottom:22px;    
+position:absolute; right:30px; bottom:32px;    
 background-image:url("/proj-assets/chenuen/images/swiper-navbtn.png");
 background-repeat:no-repeat; background-position:-41px 0;
 background-size:60PX auto;

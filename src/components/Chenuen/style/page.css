@@ -137,8 +137,8 @@ background-color:#eba432;
 .gallery--progress .swiper-slide {
 box-sizing:border-box;
 background-color:#fff;
-visibility:hidden;
-pointer-events:none;
+/* visibility:hidden; */
+/* pointer-events:none; */
 }
 
 .gallery--progress .swiper-slide-active {pointer-events:auto; visibility:visible;}
@@ -156,7 +156,7 @@ flex-direction:column;
 .note--wrapper {width:100%; height:100%; position:absolute; left:0; top:0;
 display:flex; justify-content:center; align-items:center;    
 }
-.note--wrapper.hide {
+.hide .note--wrapper {
 opacity:0; pointer-events:none; visibility:hidden;    
 }
 

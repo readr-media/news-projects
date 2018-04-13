@@ -59,7 +59,7 @@
   
 </div>
 
-<div class="swiper-container page--gallery">
+<div class="swiper-container page--gallery" v-bind:class="{hide: !noteActive}">
 
     <div class="swiper-wrapper">
         <div class="swiper-slide" 
@@ -68,7 +68,7 @@
           v-bind:style="{ backgroundImage: 'url(' + item.url + ')' }"
         >
           <img class="swiper-slide__image" v-bind:src="item.url" />
-          <div class="note--wrapper" v-bind:class="{hide: !noteActive}">
+          <div class="note--wrapper">  
             <div class="note--container" v-html="item.note">
 
             </div>
@@ -149,7 +149,6 @@ export default {
           this.initScroll();
         }
       },0);
-                 
     },
 
     toggleNote: function(){
