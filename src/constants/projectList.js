@@ -7,7 +7,8 @@ export default {
 //  'proj1': () => import('../components/Proj1/Proj1.vue')
   'marathon': 'Marathon',
   'newtype': 'Newtype',
-  'farmhouse': 'Farmhouse'
+  'farmhouse': 'Farmhouse',
+  'foreign-labour': 'ForeignLabour'
   //'proj1': 'Proj1',
   // 'proj2': 'Proj2'
 }
