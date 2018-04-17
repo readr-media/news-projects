@@ -22,7 +22,7 @@
       </div>
     </section>
     <section class="foreign-labour__sec sec-text">
-      <p>2018 年 3 月 19 日凌晨，兩名越南籍偷渡客在台東縣潭年村塔瓦溪出海口溺斃，同行二十幾名同樣來自越南的偷渡客，還有兩名台灣籍人蛇集團成員也一併被逮。溺斃的其中一名越南人名叫潘同甘，原本在越南河靜省的老家捕魚維生，2004 年時輾轉來到台灣當漁民。沒兩年，潘同甘發現薪資扣完仲介費後所剩無幾，於是逃跑四處打零工，最後落腳在山區菜園當農民。</p>
+      <p>2018 年 3 月 19 日凌晨，兩名越南籍偷渡客在台東縣潭年村塔瓦溪出海口溺斃，同行二十幾名同樣來自越南的偷渡客，還有兩名台灣籍人蛇集團成員也一併被逮<a href="https://www.mirrormedia.mg/story/foreign-labour-escape/" target="_blank">（延伸閱讀）</a>。溺斃的其中一名越南人名叫潘同甘，原本在越南河靜省的老家捕魚維生，2004 年時輾轉來到台灣當漁民。沒兩年，潘同甘發現薪資扣完仲介費後所剩無幾，於是逃跑四處打零工，最後落腳在山區菜園當農民。</p>
       <p>2015 年，潘文善跟上老爸腳步，花了 8,000 美金仲介費來到台灣。兩人命運相似，潘文善只在第一家紙箱工廠待了 20 個月，就因為實領所得太低而展開逃逸生活，最後索性和潘文甘一起上山種菜。去年 9 月，潘文甘在宿舍為其他同鄉的農工們煮晚餐，遭警方突襲逮補，潘文善和同鄉們連忙從後門逃跑，躲過一劫。潘文善說，爸爸回去沒多久，就一直擔心他在台灣過得太苦，逃逸生活又非常壓抑，主動提議要偷渡來台灣照顧他。未想，潘同甘再次踏上台灣土地的那一刻就沒了呼吸，再也無法照顧兒子了。</p>
     </section>
     <section class="foreign-labour__sec sec-full">
@@ -32,7 +32,9 @@
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
         <h2>自首</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 1)"></button>
-        <p>收到爸爸死訊的那天傍晚，潘文善還在農地裡忙著種菜。第二天，潘文善忙不迭趕下山，想先去移民署投案，再去殯儀館認屍。好巧不巧，潘文善在下山的路上就被警察逮補，解釋了老半天才讓警察相信他正要去投案，最後放他自行搭車前往台東自首。</p>
+        <div>
+          <p>收到爸爸死訊的那天傍晚，潘文善還在農地裡忙著種菜。第二天，潘文善忙不迭趕下山，想先去移民署投案，再去殯儀館認屍。好巧不巧，潘文善在下山的路上就被警察逮補，解釋了老半天才讓警察相信他正要去投案，最後放他自行搭車前往台東自首。</p>
+        </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full">
@@ -42,7 +44,9 @@
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
         <h2>再見</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 2)"></button>
-        <p>結束一連串投案自首的筆錄程序後，移民署官員帶著潘文善前往殯儀館認屍。一路上，潘文善看似沈穩淡定，沒想到冰櫃才當打開，他就激動得無法自己。</p>
+        <div>
+          <p>結束一連串投案自首的筆錄程序後，移民署官員帶著潘文善前往殯儀館認屍。一路上，潘文善看似沈穩淡定，沒想到冰櫃才當打開，他就激動得無法自己。</p>
+        </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full">
@@ -52,7 +56,9 @@
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
         <h2>傾訴</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 3)"></button>
-        <p>那天，潘文善伏臥在父親的遺體上，說了好多好多的話。</p>
+        <div>
+          <p>那天，潘文善伏臥在父親的遺體上，說了好多好多的話。</p>
+        </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full">
@@ -69,7 +75,9 @@
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
         <h2>蓋棺</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 4)"></button>
-        <p>「潘同甘，雖然你在台灣不幸過世，但我們會帶著你的靈魂返回越南。」</p>
+        <div>
+          <p>「潘同甘，雖然你在台灣不幸過世，但我們會帶著你的靈魂返回越南。」</p>
+        </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full">
@@ -79,7 +87,9 @@
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
         <h2>送行</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 5)"></button>
-        <p>潘同甘要火化的那天，他的許多越南同鄉都特地請假來見他最後一面。只是，勢必有更多和他一樣處於逃跑狀態的人，無法親自到場送他最後一程。</p>
+        <div>
+          <p>潘同甘要火化的那天，他的許多越南同鄉都特地請假來見他最後一面。只是，勢必有更多和他一樣處於逃跑狀態的人，無法親自到場送他最後一程。</p>
+        </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full">
@@ -89,7 +99,9 @@
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
         <h2>不捨</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 6)"></button>
-        <p>潘同甘的棺木準備送進焚化爐的前一刻，潘文善再也壓抑不住自己的悲傷，想要攔住父親的棺木。</p>
+        <div>
+          <p>潘同甘的棺木準備送進焚化爐的前一刻，潘文善再也壓抑不住自己的悲傷，想要攔住父親的棺木。</p>
+        </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full">
@@ -99,12 +111,26 @@
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
         <h2>慰</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 7)"></button>
-        <p>火化的過程中，來自台東聖母醫院的越南籍修女，以及同樣在醫院工作的服務人員，不停安撫潘文善的情緒。</p>
+        <div>
+          <p>火化的過程中，來自台東聖母醫院的越南籍修女，以及同樣在醫院工作的服務人員，不停安撫潘文善的情緒。</p>
+        </div>
+      </div>
+    </section>
+    <section class="foreign-labour__sec sec-full">
+      <figure class="foreign-labour__media" @click="$_foreignLabour_closeDescription">
+        <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-09${imgSelector}.jpg`" alt="">
+      </figure>
+      <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
+        <h2>上路</h2>
+        <button @click.stop="$_foreignLabour_toggleDescription($event, 8)"></button>
+        <div>
+          <p>按照越南習俗，亡者的骨灰在回到家的路上，一路上要不停丟躑錢幣作為「過路費」。那天夜裡，從台 11 線一路到國道 1 號的路面上，陸續響起了銅板落地的清脆聲響——那是潘家父子在台灣最後的足聲。</p>
+        </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full">
       <figure class="foreign-labour__media">
-        <video ref="foreignLabourVideo" preload="auto" loop playsinline poster="/proj-assets/foreign-labour/images/video-poster.jpg">
+        <video ref="foreignLabourVideo" preload="auto" loop muted playsinline poster="/proj-assets/foreign-labour/images/video-poster.jpg">
           <source src="/proj-assets/foreign-labour/videos/media-08.mp4" type="video/mp4">
           <source src="/proj-assets/foreign-labour/videos/media-08.mov">
         </video>
@@ -118,22 +144,14 @@
     </section>
     <section class="foreign-labour__sec sec-full">
       <figure class="foreign-labour__media" @click="$_foreignLabour_closeDescription">
-        <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-09${imgSelector}.jpg`" alt="">
-      </figure>
-      <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>上路</h2>
-        <button @click.stop="$_foreignLabour_toggleDescription($event, 8)"></button>
-        <p>按照越南習俗，亡者的骨灰在回到家的路上，一路上要不停丟躑錢幣作為「過路費」。那天夜裡，從台 11 線一路到國道 1 號的路面上，陸續響起了銅板落地的清脆聲響——那是潘家父子在台灣最後的足聲。</p>
-      </div>
-    </section>
-    <section class="foreign-labour__sec sec-full">
-      <figure class="foreign-labour__media" @click="$_foreignLabour_closeDescription">
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-10${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
         <h2>歇</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 9)"></button>
-        <p>夜裏，潘文善堅持不肯到任何人家裡留宿，一行人索性直接找個安靜的角落，彼此無言地等待天明。</p>
+        <div>
+          <p>夜裏，潘文善堅持不肯到任何人家裡留宿，一行人索性直接找個安靜的角落，彼此無言地等待天明。</p>
+        </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full">
@@ -143,8 +161,10 @@
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
         <h2>靠岸</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 10)"></button>
-        <p>潘文善的脖子上有個十分惹眼的船錨刺青。</p>
-        <p>他說，在到台灣前，他也曾在東南亞其他國家的工廠裡打工，但多數人看到這刺青時，聯想到的，都是他在老家的漁民身份。但潘文善卻說：「但我刺這個其實不是想要再出海打漁，而是希望不要再漂泊，有一個可以靠岸的港口⋯⋯我想安定下來，有一個家可以給我回去。」</p>
+        <div>
+          <p>潘文善的脖子上有個十分惹眼的船錨刺青。</p>
+          <p>他說，在到台灣前，他也曾在東南亞其他國家的工廠裡打工，但多數人看到這刺青時，聯想到的，都是他在老家的漁民身份。但潘文善卻說：「但我刺這個其實不是想要再出海打漁，而是希望不要再漂泊，有一個可以靠岸的港口⋯⋯我想安定下來，有一個家可以給我回去。」</p>
+        </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full">
@@ -187,7 +207,7 @@
       return {
         currentSection: 0,
         gaScroll: 0,
-        gaScrollIndex: [ 3, 7, 10, 12, 17 ],
+        gaScrollIndex: [ 3, 7, 10, 13, 17 ],
         inAction: false,
         sectionsTop: [],
         shareLink: `${SITE_URL}foreign-labour`,
@@ -250,7 +270,7 @@
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1})`).classList.remove('sec-active')
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1})`).classList.remove('caption-active')
             }
-            if (index == 12) {
+            if (index == 13) {
               this.$refs.foreignLabourVideo.play()
             } else {
               this.$refs.foreignLabourVideo.pause()
@@ -359,6 +379,18 @@
         p
           max-width calc(100% - 40px)
           margin 0 0 1em 0
+          a
+            position relative
+          a:before
+            content ''
+            position absolute
+            bottom -2px
+            left 0
+            right 0
+            border-bottom 1px solid #d2b8d3
+          a:link, a:visited, a:hover, a:active
+            color #d2b8d3
+            text-decoration none
       &.sec-active
         .foreign-labour__media
           opacity 1
@@ -388,8 +420,8 @@
         object-fit cover
         object-position center
         transition filter .7s
-        &.hasDescr
-          height auto
+        // &.hasDescr
+        //   height auto
       video
         max-width 100%
         min-width 100%
@@ -533,7 +565,19 @@
           .foreign-labour__media
             img
               object-fit cover
-        
+      &__descr
+        position relative
+        width 130vh
+        max-width calc(100% - 40px)
+        > div
+          position absolute
+          top 0
+          right 0
+          width 60%
+          p
+            margin 0 0 1em
+            &:last-of-type
+              margin-bottom 0
       &__media
         img
           object-fit contain
