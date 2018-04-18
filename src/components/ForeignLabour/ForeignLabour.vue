@@ -23,7 +23,7 @@
     </section>
     <section class="foreign-labour__sec sec-text">
       <p>2018 年 3 月 19 日凌晨，兩名越南籍偷渡客在台東縣潭年村塔瓦溪出海口溺斃，同行二十幾名同樣來自越南的偷渡客，還有兩名台灣籍人蛇集團成員也一併被逮<a href="https://www.mirrormedia.mg/story/foreign-labour-escape/" target="_blank">（延伸閱讀）</a>。溺斃的其中一名越南人名叫潘同甘，原本在越南河靜省的老家捕魚維生，2004 年時輾轉來到台灣當漁民。沒兩年，潘同甘發現薪資扣完仲介費後所剩無幾，於是逃跑四處打零工，最後落腳在山區菜園當農民。</p>
-      <p>2015 年，潘文善跟上老爸腳步，花了 8,000 美金仲介費來到台灣。兩人命運相似，潘文善只在第一家紙箱工廠待了 20 個月，就因為實領所得太低而展開逃逸生活，最後索性和潘文甘一起上山種菜。去年 9 月，潘文甘在宿舍為其他同鄉的農工們煮晚餐，遭警方突襲逮補，潘文善和同鄉們連忙從後門逃跑，躲過一劫。潘文善說，爸爸回去沒多久，就一直擔心他在台灣過得太苦，逃逸生活又非常壓抑，主動提議要偷渡來台灣照顧他。未想，潘同甘再次踏上台灣土地的那一刻就沒了呼吸，再也無法照顧兒子了。</p>
+      <p>2015 年，潘文善跟上老爸腳步，花了 8,000 美金仲介費來到台灣。兩人命運相似，潘文善只在第一家紙箱工廠待了 20 個月，就因為實領所得太低而展開逃逸生活，最後索性和潘同甘一起上山種菜。去年 9 月，潘文甘在宿舍為其他同鄉的農工們煮晚餐，遭警方突襲逮補，潘文善和同鄉們連忙從後門逃跑，躲過一劫。潘文善說，爸爸回去沒多久，就一直擔心他在台灣過得太苦，逃逸生活又非常壓抑，主動提議要偷渡來台灣照顧他。未想，潘同甘再次踏上台灣土地的那一刻就沒了呼吸，再也無法照顧兒子了。</p>
     </section>
     <section class="foreign-labour__sec sec-full">
       <figure class="foreign-labour__media" @click="$_foreignLabour_closeDescription">
@@ -45,7 +45,7 @@
         <h2>再見</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 2)"></button>
         <div>
-          <p>結束一連串投案自首的筆錄程序後，移民署官員帶著潘文善前往殯儀館認屍。一路上，潘文善看似沈穩淡定，沒想到冰櫃才當打開，他就激動得無法自己。</p>
+          <p>結束一連串投案自首的筆錄程序後，移民署官員帶著潘文善前往殯儀館認屍。一路上，潘文善看似沉穩淡定，沒想到冰櫃才當打開，他就激動得無法自己。</p>
         </div>
       </div>
     </section>
@@ -121,10 +121,10 @@
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-09${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>上路</h2>
+        <h2>背負</h2>
         <button @click.stop="$_foreignLabour_toggleDescription($event, 8)"></button>
         <div>
-          <p>按照越南習俗，亡者的骨灰在回到家的路上，一路上要不停丟躑錢幣作為「過路費」。那天夜裡，從台 11 線一路到國道 1 號的路面上，陸續響起了銅板落地的清脆聲響——那是潘家父子在台灣最後的足聲。</p>
+          <p>離開殯儀館後，潘文善一路背著爸爸的骨灰不願放下。一名嫁到台灣十幾年的親戚主動提供自己的車，打算載著潘文善去桃園機場搭乘隔日的班機。即便在車上將近十小時的路程中，潘文善一刻也沒有放下過父親。</p>
         </div>
       </div>
     </section>
@@ -136,11 +136,11 @@
         </video>
       </figure>
       <div class="foreign-labour__descr">
-        <h2>背負</h2>
+        <h2>上路</h2>
       </div>
     </section>
     <section class="foreign-labour__sec sec-text">
-      <p>離開殯儀館後，潘文善一路背著爸爸的骨灰不願放下。一名嫁到台灣十幾年的親戚主動提供自己的車，打算載著潘文善去桃園機場搭乘隔日的班機。即便在車上將近十小時的路程中，潘文善一刻也沒有放下過父親。</p>
+      <p>按照越南習俗，亡者的骨灰在回到家的路上，一路上要不停丟躑錢幣作為「過路費」。那天夜裡，從台 11 線一路到國道 1 號的路面上，陸續響起了銅板落地的清脆聲響——那是潘家父子在台灣最後的足聲。</p>
     </section>
     <section class="foreign-labour__sec sec-full">
       <figure class="foreign-labour__media" @click="$_foreignLabour_closeDescription">
@@ -380,13 +380,6 @@
           max-width calc(100% - 40px)
           margin 0 0 1em 0
           a
-            position relative
-          a:before
-            content ''
-            position absolute
-            bottom -2px
-            left 0
-            right 0
             border-bottom 1px solid #d2b8d3
           a:link, a:visited, a:hover, a:active
             color #d2b8d3
