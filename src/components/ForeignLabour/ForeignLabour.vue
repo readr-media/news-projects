@@ -6,7 +6,7 @@
       <div class="foreign-labour__header-content">
         <img :src="`/proj-assets/foreign-labour/images/landing-title${imgSelector}.png`" alt="">
         <p>文字、攝影：鐘聖雄</p>
-        <p>網頁：譚學勇<span></span>設計：許玲瑋</p>
+        <p>網頁：HY Tan<span></span>設計：許玲瑋</p>
       </div>
     </header>
     <section class="foreign-labour__sec sec-full sec-active">
@@ -178,12 +178,13 @@
       <iframe src="https://www.mirrormedia.mg/project-list/dark?excluding=marathon"  width="100%" frameborder="0" scrolling="no" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
     </section>
     <section class="foreign-labour__comment">
-      <div class="fb-comments" data-href="https://projects.mirrormedia.mg/project/farmhouse/" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
+      <div class="fb-comments" :data-href="commentsUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
   </main>
 </template>
 <script>
-  import { SITE_URL } from '../../constants'
+  import { SITE_DOMAIN_DEV, SITE_DOMAIN_PROD, SITE_URL } from '../../constants'
+  import { currEnv } from '../../util/comm'
   import { currentYPosition, elmYPosition, smoothScroll } from 'kc-scroll'
   import { map } from 'lodash'
   import Logo from '../Logo.vue'
@@ -197,14 +198,15 @@
     },
     metaInfo () {
       return {
-        title: 'ForeignLabour',
+        title: '爸爸要回家',
         description: ' ',
-        metaUrl: 'ForeignLabour',
+        metaUrl: 'foreign-labour',
         metaImage: ' '
       }
     },
     data () {
       return {
+        commentsUrl: `https://dev.${SITE_DOMAIN_DEV}/project/foreign-labour/`,
         currentSection: 0,
         gaScroll: 0,
         gaScrollIndex: [ 3, 7, 10, 13, 17 ],
@@ -223,15 +225,19 @@
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual'
       }
+
+      if (currEnv() === 'prod') {
+        this.commentsUrl = `https://projects.${SITE_DOMAIN_PROD}/project/farmhouse/`
+      }
+
       this.$_foreignLabour_calcImagesScrollTop()
       this.$_foreignLabour_getViewport()
 
       window.addEventListener('scroll', this.$_foreignLabour_imageScrollHandler)
+      window.addEventListener('scroll', this.$_foreignLabour_captionScrollHandler)
       window.addEventListener('resize', this.$_foreignLabour_getViewport)
       window.addEventListener('resize', this.$_foreignLabour_calcImagesScrollTop)
-      window.addEventListener('mouseover', () => {
-        this.inAction = true
-      })
+      window.addEventListener('mouseover', () => this.inAction = true)
 
       window.ga('send', 'pageview')
 
@@ -250,6 +256,24 @@
           this.sectionsTop.push(elmYPosition(`section[class*="foreign-labour__sec"]:nth-of-type(${i + 1})`))
         }
       },
+      $_foreignLabour_captionScrollHandler () {
+        for (let [index, value] of this.sectionsTop.entries()) {
+          if (value > currentYPosition() + (this.viewport[1] * 1 / 4)) {
+            if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`)) {
+              document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`).classList.remove('caption-in')
+            }
+            if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1})`)) {
+              document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1})`).classList.remove('caption-in')
+            }
+            if (currentYPosition() + (this.viewport[1] * 3 / 4) > value) {
+              document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index})`).classList.remove('caption-in')
+              return
+            }
+            document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index})`).classList.add('caption-in')
+            return
+          }
+        }
+      },
       $_foreignLabour_closeDescription (event) {
         event.target.parentNode.classList.remove('caption-active')
       },
@@ -260,8 +284,9 @@
       },
       $_foreignLabour_imageScrollHandler () {
         this.inAction = true
+        const offset = 1 / 3
         for (let [index, value] of this.sectionsTop.entries()) {
-          if (value > currentYPosition() + (this.viewport[1] *  2 / 3)) {
+          if (value > currentYPosition() + (this.viewport[1] * offset)) {
             if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`)) {
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`).classList.remove('sec-active')
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`).classList.remove('caption-active')
@@ -283,7 +308,7 @@
             return 
           }
         }
-        if (currentYPosition() + (this.viewport[1] *  2 / 3) > this.sectionsTop[this.sectionsTop.length - 1]) {
+        if (currentYPosition() + (this.viewport[1] * offset) > this.sectionsTop[this.sectionsTop.length - 1]) {
           document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${this.sectionsTop.length - 1})`).classList.remove('sec-active')
           document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${this.sectionsTop.length - 1})`).classList.remove('caption-active')
           document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${this.sectionsTop.length})`).classList.add('sec-active')
@@ -313,9 +338,10 @@
           &:after
             opacity 1
             transition opacity .3s
-      .foreign-labour__descr
-        opacity 1
-        transition opacity .3s
+      .caption-in
+        .foreign-labour__descr
+          opacity 1
+          transition opacity .3s
     figure
       margin 0
     &__header
@@ -361,7 +387,7 @@
             width 100%
             height 100%
             background transparent
-            background linear-gradient(90deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.5) 20%, transparent 30%)
+            background linear-gradient(90deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.5) 10%, rgba(10,10,10,0.3) 20%, transparent 30%)
             opacity 0
             transition opacity 1s
         &:first-of-type
@@ -371,7 +397,7 @@
       &.sec-text
         position relative
         z-index 10
-        padding 80px 0
+        padding 80px 0 150px
         font-size 1.125rem
         font-weight 300
         line-height 1.67
@@ -501,6 +527,8 @@
         cursor pointer
         &:after
           content '顯示說明'
+      > div
+        display none
     &__comment
       padding 0 10px
       
@@ -516,6 +544,8 @@
         button
           &:after
             content '隱藏說明'
+        > div
+          display block
 
   @media (min-width: 768px)
     .foreign-labour
@@ -524,7 +554,11 @@
         p
           font-size 1.5rem
       &__text
+        display flex
+        justify-content center
+        align-items center
         text-align center
+        min-height 160px
       &__text-border
         max-width 50%
         min-width 550px
