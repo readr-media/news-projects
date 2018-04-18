@@ -1,7 +1,10 @@
 # news-projects
-For the news projects of new site called 'READr'
 
-This project is based on [Vue-hacknews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
+| Title |
+|--------------------------------------------------------------|
+| [萬畝農舍良田起](https://www.readr.tw/project/farmhouse) |
+| [新二代的難題](https://www.readr.tw/project/newtype) |
+| [鍵盤玩跑六大馬](https://www.readr.tw/project/marathon) |
 
 ## Build Setup
 
