@@ -14,7 +14,7 @@
         <img :src="`/proj-assets/foreign-labour/images/landing-bg${imgSelector}.jpg`" alt="">
       </figure>
     </section>
-    <section class="foreign-labour__sec sec-full">
+    <section class="foreign-labour__sec sec-full sec-text-border">
       <div class="foreign-labour__text-border">
         <div class="foreign-labour__text">
           <p>我爸爸說他要來台灣照顧我，我說他老了不要再來，爸爸我已經會工作，坐船很危險不要來，可是他說我在這邊一個人，不放心，所以要來照顧我，跟我一起工作。</p>
@@ -61,7 +61,7 @@
         </div>
       </div>
     </section>
-    <section class="foreign-labour__sec sec-full">
+    <section class="foreign-labour__sec sec-full sec-text-border">
       <div class="foreign-labour__text-border">
         <div class="foreign-labour__text text-fix">
           <p>爸爸，錢不重要了，我要帶你回家。</p>
@@ -167,7 +167,7 @@
         </div>
       </div>
     </section>
-    <section class="foreign-labour__sec sec-full">
+    <section class="foreign-labour__sec sec-full sec-text-border">
       <div class="foreign-labour__text-border">
         <div class="foreign-labour__text">
           <p>其實我知道爸爸辛苦工作，也是想讓我可以存錢蓋房子娶老婆，因為我們在越南沒有房子，就沒辦法結婚有自己的家。現在爸爸這樣，沒有錢我覺得也沒關係了，我不想要再四處工作了，我要帶爸爸回家，以後我在越南海邊抓魚也可以生活了。</p>
@@ -201,7 +201,7 @@
         title: '爸爸要回家',
         description: ' ',
         metaUrl: 'foreign-labour',
-        metaImage: ' '
+        metaImage: 'foreign-labour/images/ogimage.jpg'
       }
     },
     data () {
@@ -305,7 +305,7 @@
               window.ga('send', 'event', 'projects', 'scroll', `scroll to ${index}`, { nonInteraction: false })
             }
             document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index})`).classList.add('sec-active')
-            return 
+            return
           }
         }
         if (currentYPosition() + (this.viewport[1] * offset) > this.sectionsTop[this.sectionsTop.length - 1]) {
@@ -410,6 +410,8 @@
           a:link, a:visited, a:hover, a:active
             color #d2b8d3
             text-decoration none
+      &.sec-text-border
+        padding 50vh 0
       &.sec-active
         .foreign-labour__media
           opacity 1
@@ -439,8 +441,8 @@
         object-fit cover
         object-position center
         transition filter .7s
-        // &.hasDescr
-        //   height auto
+        &.hasDescr
+          height auto
       video
         max-width 100%
         min-width 100%
@@ -559,6 +561,8 @@
         align-items center
         text-align center
         min-height 160px
+        p
+          text-align justify
       &__text-border
         max-width 50%
         min-width 550px
@@ -608,4 +612,6 @@
       &__media
         img
           object-fit contain
+          &.hasDescr
+            height 100%
 </style>
