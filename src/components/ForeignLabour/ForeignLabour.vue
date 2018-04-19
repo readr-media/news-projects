@@ -5,14 +5,16 @@
     <header class="foreign-labour__header">
       <div class="foreign-labour__header-content">
         <img :src="`/proj-assets/foreign-labour/images/landing-title${imgSelector}.png`" alt="">
-        <p>文字、攝影：鐘聖雄</p>
-        <p>網頁：HY Tan<span></span>設計：許玲瑋</p>
+        <p>在故鄉，他們窮得只剩一條命。</p>
+        <p>在這座島，他們即便能掙到錢，也不一定有命回家⋯⋯</p>
       </div>
     </header>
     <section class="foreign-labour__sec sec-full sec-active">
-      <figure class="foreign-labour__media">
-        <img :src="`/proj-assets/foreign-labour/images/landing-bg${imgSelector}.jpg`" alt="">
-      </figure>
+      <div class="foreign-labour__media video-full">
+        <video preload="auto" loop muted autoplay playsinline poster="/proj-assets/foreign-labour/images/video-opening.jpg">
+          <source src="/proj-assets/foreign-labour/videos/opening.mp4" type="video/mp4">
+        </video>
+      </div>
     </section>
     <section class="foreign-labour__sec sec-full sec-text-border">
       <div class="foreign-labour__text-border">
@@ -173,6 +175,7 @@
           <p>其實我知道爸爸辛苦工作，也是想讓我可以存錢蓋房子娶老婆，因為我們在越南沒有房子，就沒辦法結婚有自己的家。現在爸爸這樣，沒有錢我覺得也沒關係了，我不想要再四處工作了，我要帶爸爸回家，以後我在越南海邊抓魚也可以生活了。</p>
         </div>
       </div>
+      <p class="foreign-labour__credit">文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋</p>
     </section>
     <section class="foreign-labour__sec sec-related">
       <iframe src="https://www.mirrormedia.mg/project-list/dark?excluding=marathon"  width="100%" frameborder="0" scrolling="no" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
@@ -199,7 +202,7 @@
     metaInfo () {
       return {
         title: '爸爸要回家',
-        description: ' ',
+        description: '在故鄉，他們窮得只剩一條命。在這座島，他們即便能掙到錢，也不一定有命回家⋯⋯',
         metaUrl: 'foreign-labour',
         metaImage: 'foreign-labour/images/ogimage.jpg'
       }
@@ -354,7 +357,7 @@
       overflow hidden
       &-content
         position absolute
-        top 19%
+        top 16%
         left 50%
         transform translateX(-50%)
         width 75%
@@ -362,19 +365,21 @@
           width 100%
           height auto
         p
-          margin 0
+          margin 0 1.5em
           color #fff
           font-size .875rem
           line-height 1.71
+          text-align justify
           span
             margin-left 15px
         p:first-of-type
-          margin-top 25px
+          margin-top 70px
     &__sec
       display flex
       flex-direction column
       justify-content center
       align-items center
+      position relative
       &.sec-full
         min-height 100vh
         .foreign-labour__media
@@ -434,6 +439,12 @@
       visibility hidden
       transition opacity 1s, visibility 1s 1s
       pointer-events none
+      &.video-full
+        overflow hidden
+        video
+          height 100vh
+          object-fit cover
+          object-position 80% 50%
       
       img
         width 100%
@@ -531,6 +542,18 @@
           content '顯示說明'
       > div
         display none
+    &__credit
+      position absolute
+      left 50%
+      bottom 80px
+      transform translateX(-50%)
+      width 195px
+      margin 0
+      font-size .875rem
+      line-height 1.7
+      text-align center
+      span
+        margin-right 10px
     &__comment
       padding 0 10px
       
@@ -585,12 +608,15 @@
   @media (min-width: 900px)
     .foreign-labour
       &__header-content
-        top 25%
+        top 30%
         left 10%
         width 45%
         transform initial
         p
           font-size 1rem
+          text-align center
+          &:first-of-type
+            margin-top 120px
       &__sec
         &:first-of-type
           .foreign-labour__media
@@ -614,4 +640,10 @@
           object-fit contain
           &.hasDescr
             height 100%
+      &__credit
+        bottom 25vh
+        width auto
+        font-size 1rem
+        br
+          display none
 </style>
