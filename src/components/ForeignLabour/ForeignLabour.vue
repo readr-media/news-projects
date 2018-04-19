@@ -11,7 +11,7 @@
     </header>
     <section class="foreign-labour__sec sec-full sec-active">
       <div class="foreign-labour__media video-full">
-        <video preload="auto" loop muted autoplay playsinline poster="/proj-assets/foreign-labour/images/video-opening.jpg">
+        <video ref="foreignLabourOPVideo" preload="auto" loop :muted="videoMuted" autoplay playsinline poster="/proj-assets/foreign-labour/images/video-opening.jpg">
           <source src="/proj-assets/foreign-labour/videos/opening.mp4" type="video/mp4">
         </video>
       </div>
@@ -132,7 +132,7 @@
     </section>
     <section class="foreign-labour__sec sec-full">
       <figure class="foreign-labour__media">
-        <video ref="foreignLabourVideo" preload="auto" loop muted playsinline poster="/proj-assets/foreign-labour/images/video-poster.jpg">
+        <video ref="foreignLabourVideo" preload="auto" :muted="videoMuted" loop playsinline poster="/proj-assets/foreign-labour/images/video-poster.jpg">
           <source src="/proj-assets/foreign-labour/videos/media-08.mp4" type="video/mp4">
           <source src="/proj-assets/foreign-labour/videos/media-08.mov">
         </video>
@@ -176,6 +176,12 @@
         </div>
       </div>
       <p class="foreign-labour__credit">文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋</p>
+    </section>
+    <section class="foreign-labour__sec sec-related">
+      <h2>相關文章</h2>
+      <p><a href="https://www.mirrormedia.mg/story/foreign-labour-escape/" target="_blank">她渡台打工險溺死 丈夫卻用她的血汗錢養小三</a></p>
+      <p><a href="https://www.youtube.com/watch?v=Tp5f7xK1nz0" target="_blank">移工阮國非之死 凸顯外勞警政體系缺失</a></p>
+      <p><a href="https://www.mirrormedia.mg/story/20180125pol025/" target="_blank">異鄉安魂曲　越南移工阮國非之死</a></p>
     </section>
     <section class="foreign-labour__sec sec-related">
       <iframe src="https://www.mirrormedia.mg/project-list/dark?excluding=marathon"  width="100%" frameborder="0" scrolling="no" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
@@ -222,6 +228,9 @@
     computed: {
       imgSelector () {
         return this.viewport[0] >= 900 ? '' : '-m'
+      },
+      videoMuted () {
+        return this.viewport[0] >= 900 ? false : true
       }
     },
     mounted () {
@@ -291,22 +300,28 @@
         for (let [index, value] of this.sectionsTop.entries()) {
           if (value > currentYPosition() + (this.viewport[1] * offset)) {
             if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`)) {
+              if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1}) video`)) {
+                document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1}) video`).pause()
+              }
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`).classList.remove('sec-active')
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`).classList.remove('caption-active')
             }
             if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1})`)) {
+              if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1}) video`)) {
+                document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1}) video`).pause()
+              }
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1})`).classList.remove('sec-active')
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1})`).classList.remove('caption-active')
             }
-            if (index == 13) {
-              this.$refs.foreignLabourVideo.play()
-            } else {
-              this.$refs.foreignLabourVideo.pause()
-            }
+            
             if (this.gaScrollIndex.includes(index) && this.gaScroll < index) {
               this.gaScroll = index
               window.ga('send', 'event', 'projects', 'scroll', `scroll to ${index}`, { nonInteraction: false })
             }
+            if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index}) video`)) {
+              document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index}) video`).play()
+            }
+
             document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index})`).classList.add('sec-active')
             return
           }
@@ -423,6 +438,20 @@
           visibility visible
           transition opacity 1s, visibility 1s 0s
           pointer-events auto
+      &.sec-related
+        h2
+          margin 0
+          font-size 1.5rem
+          font-weight 300
+        p
+          width 75%
+          line-height 1.67
+          text-align justify
+          &:first-of-type
+            margin-top 50px
+        a:link, a:visited, a:hover, a:active
+            color #d2b8d3
+            text-decoration none
       iframe
         min-height 355px
         margin-top 50px
@@ -597,6 +626,11 @@
             min-width 550px
         &.sec-related
           padding 0 20%
+        &.sec-related
+          p
+            width calc(100%- 60px)
+          p:last-of-type
+            margin-bottom 50px
         iframe
           min-height 380px
           margin-top 0
@@ -622,6 +656,9 @@
           .foreign-labour__media
             img
               object-fit cover
+        &.sec-related
+          p
+            text-align center
       &__descr
         position relative
         width 130vh
