@@ -239,7 +239,7 @@
       }
 
       if (currEnv() === 'prod') {
-        this.commentsUrl = `https://projects.${SITE_DOMAIN_PROD}/project/farmhouse/`
+        this.commentsUrl = `https://projects.${SITE_DOMAIN_PROD}/project/foreign-labour/`
       }
 
       this.$_foreignLabour_calcImagesScrollTop()
