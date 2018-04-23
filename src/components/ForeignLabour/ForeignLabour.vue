@@ -165,7 +165,7 @@
         <button @click.stop="$_foreignLabour_toggleDescription($event, 10)"></button>
         <div>
           <p>潘文善的脖子上有個十分惹眼的船錨刺青。</p>
-          <p>他說，在到台灣前，他也曾在東南亞其他國家的工廠裡打工，但多數人看到這刺青時，聯想到的，都是他在老家的漁民身份。但潘文善卻說：「但我刺這個其實不是想要再出海打漁，而是希望不要再漂泊，有一個可以靠岸的港口⋯⋯我想安定下來，有一個家可以給我回去。」</p>
+          <p>他說，在到台灣前，他也曾在東南亞其他國家的工廠裡打工，但多數人看到這刺青時，聯想到的，都是他在老家的漁民身份。潘文善卻說：「我刺這個其實不是想要再出海打漁，而是希望不要再漂泊，有一個可以靠岸的港口⋯⋯我想安定下來，有一個家可以給我回去。」</p>
         </div>
       </div>
     </section>
@@ -195,7 +195,7 @@
   import { SITE_DOMAIN_DEV, SITE_DOMAIN_PROD, SITE_URL } from '../../constants'
   import { currEnv } from '../../util/comm'
   import { currentYPosition, elmYPosition, smoothScroll } from 'kc-scroll'
-  import { map } from 'lodash'
+  import { get, map } from 'lodash'
   import Logo from '../Logo.vue'
   import Share from '../Share.vue'
 
@@ -230,7 +230,7 @@
         return this.viewport[0] >= 900 ? '' : '-m'
       },
       videoMuted () {
-        return this.viewport[0] >= 900 ? false : true
+        return get(this.$store, [ 'state', 'useragent', 'isMobile' ], true)
       }
     },
     mounted () {
