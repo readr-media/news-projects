@@ -21,11 +21,28 @@
           <img class="swiper-slide__image" v-bind:src="item.url" />
 
           <div class="swiper-slide__content">
-            <h2 v-text="item.title"><!-- 標題 --></h2>
-            <div v-html="item.desc"><!-- 內容 HTML --></div>
+            <h2 v-text="item.title"></h2>
+            <div v-html="item.desc"></div>
           </div>
 
-          <div class="note--container" v-html="item.note"></div>
+          <div class="note--container">
+            <!-- note--entry -->
+            <div class="note--entry" 
+              v-for="(entry) in item.note" :key="entry.id"
+            >
+                <h4 class="alternate">{{entry.title}}</h4>
+                <div class="note--content">
+                    <div class="note--content__image">
+                        <img v-bind:src="entry.url" />
+                    </div>
+                    <div class="note--content__text">
+                        <div v-html="entry.desc"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- note--entry -->
+
+          </div>
 
           <div class="swiper-nexttbn">
             <div class="text">下一篇：</div>
@@ -65,7 +82,7 @@ import {get,indexOf} from 'lodash';
 import Swiper from 'swiper/dist/js/swiper.js';
 
 //主圖資料
-import {galleryData} from './data/gallery.js'
+import galleryData from './data/gallery.json'
 
 export default {
 

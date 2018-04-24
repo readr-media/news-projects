@@ -39,13 +39,13 @@
     <div class="swiper-container gallery--progress">
 
         <div class="swiper-wrapper">
-            <div class="swiper-slide swiper-no-swiping" 
+            <div class="swiper-slide swiper-no-swiping"
               v-for="item in galleryData" 
               :key="item.id">
               <div class="scrollwpr">
                 <div class="content">
-                  <h2 v-text="item.title"><!-- 標題 --></h2>
-                  <div v-html="item.desc"><!-- 內容 HTML --></div>
+                  <h2 v-text="item.title"></h2>
+                  <div v-html="item.desc"></div>
                 </div>   
               </div>                     
             </div>
@@ -69,8 +69,27 @@
         >
           <img class="swiper-slide__image" v-bind:src="item.url" />
           <div class="note--wrapper">  
-            <div class="note--container" v-html="item.note">
-
+            <div class="note--container">
+              <!-- note--entry -->
+              <div class="note--entry" 
+                v-for="(entry,index) in item.note" :key="entry.id"                
+                v-bind:style="{
+                  left: entry.left,
+                  top: entry.top
+                }"
+              >
+                  <div class="note--marker">{{index + 1}}</div>
+                  <div class="note--content">
+                      <div class="note--content__image">
+                          <img v-bind:src="entry.url" />
+                      </div>
+                      <div class="note--content__text">
+                          <h4>{{entry.title}}</h4>
+                          <div v-html="entry.desc"></div>
+                      </div>
+                  </div>
+              </div>
+              <!-- note--entry -->
             </div>
           </div>
 
@@ -85,26 +104,25 @@
 
 <script>
 //plugins
-import Swiper from 'swiper/dist/js/swiper.js';
-import imagesLoaded from 'imagesloaded';
-import PerfectScrollbar from 'perfect-scrollbar';
+// import superagent from "superagent";
+import Swiper from "swiper/dist/js/swiper.js";
+import imagesLoaded from "imagesloaded";
+import PerfectScrollbar from "perfect-scrollbar";
 
 //function
-import {initNoteContainer} from './common/page.js'
+import { initNoteContainer } from "./common/page.js";
 
 //主圖資料
-import {galleryData} from './data/gallery.js'
+import galleryData from './data/gallery.json'
 
 export default {
-
-  components: {
-
-  },
+  components: {},
 
   // Component data must be a function.
   data: function() {
     return {
       galleryData: galleryData,
+      // loaded: false,
 
       descActive: true,
       noteActive: true,
@@ -113,64 +131,52 @@ export default {
       galleryProgress: {},
 
       scrollwprGroup: []
-
     };
   },
 
-  props: {
+  props: {},
 
-  },
+  computed: {},
 
-  watch: {
+  methods: {
 
-  },
-
-  computed: {
-
-  },
-
-  methods: {  
-    
-    // toggleDesc: toggleDesc,
     initNoteContainer: initNoteContainer,
 
-    toggleDesc: function(){
+    toggleDesc: function() {
       // 展開收闔額外的說明文字
       this.descActive = !this.descActive;
-    
+
       setTimeout(() => {
         this.gallery.update();
         this.galleryProgress.update();
         this.initNoteContainer();
         this.destoryScroll();
 
-        if(this.descActive){
+        if (this.descActive) {
           //show desc, reinit scroll
           this.initScroll();
         }
-      },0);
+      }, 0);
     },
 
-    toggleNote: function(){
+    toggleNote: function() {
       // 展開收闔圖片上的說明
       this.noteActive = !this.noteActive;
     },
 
-    initScroll: function(){
+    initScroll: function() {
       //說明區自訂卷軸
       let scrollArray = this.scrollwprGroup;
       let descScrollwpr = document.querySelectorAll(".scrollwpr");
 
-      descScrollwpr.forEach(function(element,index){
-
+      descScrollwpr.forEach(function(element, index) {
         let ps = new PerfectScrollbar(element);
         scrollArray.push(ps);
-
       });
     },
 
-    destoryScroll: function(){
-      this.scrollwprGroup.forEach(function(element,index){
+    destoryScroll: function() {
+      this.scrollwprGroup.forEach(function(element, index) {
         element.destroy();
         element = null;
       });
@@ -178,9 +184,9 @@ export default {
 
   },
 
-  mounted: function(){
-
-    //主圖
+  mounted: function() {
+    
+    // 主圖
     this.gallery = new Swiper ('.page--gallery', {
       loop: true,
       observer: true,
@@ -220,21 +226,17 @@ export default {
     window.addEventListener("resize",() => {
       this.initNoteContainer();
     },false);
-
-
-
-
+    
   }
-
 };
 </script>
 
 <style>
-@import './style/common.css';
-@import './style/swiper.min.css';
-@import './style/perfect-scrollbar.css';
+@import "./style/common.css";
+@import "./style/swiper.min.css";
+@import "./style/perfect-scrollbar.css";
 </style>
 
 <style scoped>
-@import './style/page.css';
+@import "./style/page.css";
 </style>
