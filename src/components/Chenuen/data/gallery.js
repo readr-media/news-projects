@@ -18,8 +18,44 @@ export let galleryData = [
     {
         title: '深邃美麗的亞細亞',
         url: '/proj-assets/chenuen/images/sample/sample01.jpg',
-        desc: '<p>《深邃美麗的亞細亞》兼具了脫離世界、遺世獨立的特質，以及體現普世性的寓意，既分裂又交融。這就是鬥爭權衡之美的所在！作品中更充滿了傳承自中國文學《山海經》、《封神演義》，交融奇幻文學的想像力、與超現實主義，可說是跨越時空、鄭問最年輕張狂的經典之作！</p><p>其中許多獨特的角色，如百兵衛（倒霉王）、理想王、完美王、潰爛王、收妖王、善意王、蜘蛛人、蛤蟆精、傀儡王、南魔天、蛇郎君、痛苦女等，他們有神性、有魔性、有人性。在物慾橫流的世界裡，他們都在尋求些「什麼」，有人追逐名利，有人迷戀權勢，有人等待幸福……什麼樣的世界才是人類夢寐以求的「美麗新世界」？鄭問運用他那出神入化的筆勾勒出一幅人性藍圖，善與惡交織成一篇篇動人的故事。</p>',
-        note: '<div class="note--entry" style="left:15%; top:25%;"><h4 class="alternate">段落標題</h4> <div class="note--marker">1</div><div class="note--content"> <div class="note--content__image"> <img src="/proj-assets/chenuen/images/sample/zoom_sample01.jpg"/> </div><div class="note--content__text"> <h4>段落標題</h4> <p>其中許多獨特的角色，如百兵衛（倒霉王）、理想王、完美王、潰爛王、收妖王、善意王、蜘蛛人、蛤蟆精、傀儡王、南魔天、蛇郎君、痛苦女等，他們有神性、有魔性、有人性。在物慾橫流的世界裡，他們都在尋求些「什麼」。</p></div></div></div><div class="note--entry" style="left:35%; top:55%;"><h4 class="alternate">段落標題</h4> <div class="note--marker">2</div><div class="note--content"> <div class="note--content__image"> <img src="/proj-assets/chenuen/images/sample/zoom_sample02.jpg"/> </div><div class="note--content__text"> <h4>段落標題</h4> <p>脫離世界、遺世獨立的特質，以及體現普世性的寓意，既分裂又交融。這就是鬥爭權衡之美的所在！作品中更充滿了傳承自中國文學</p></div></div></div><div class="note--entry" style="left:62%; top:43%;"><h4 class="alternate">段落標題</h4> <div class="note--marker">3</div><div class="note--content"> <div class="note--content__image"> <img src="/proj-assets/chenuen/images/sample/zoom_sample01.jpg"/> </div><div class="note--content__text"> <h4>段落標題</h4> <p>其中許多獨特的角色，如百兵衛（倒霉王）、理想王、完美王、潰爛王、收妖王、善意王、蜘蛛人、蛤蟆精、傀儡王、南魔天、蛇郎君、痛苦女等，他們有神性、有魔性、有人性。在物慾橫流的世界裡，他們都在尋求些「什麼」。</p></div></div></div>'
+        desc: `<p>《深邃美麗的亞細亞》兼具了脫離世界、遺世獨立的特質，以及體現普世性的寓意，既分裂又交融。這就是鬥爭權衡之美的所在！作品中更充滿了傳承自中國文學《山海經》、《封神演義》，交融奇幻文學的想像力、與超現實主義，可說是跨越時空、鄭問最年輕張狂的經典之作！</p>
+        <p>其中許多獨特的角色，如百兵衛（倒霉王）、理想王、完美王、潰爛王、收妖王、善意王、蜘蛛人、蛤蟆精、傀儡王、南魔天、蛇郎君、痛苦女等，他們有神性、有魔性、有人性。在物慾橫流的世界裡，他們都在尋求些「什麼」，有人追逐名利，有人迷戀權勢，有人等待幸福……什麼樣的世界才是人類夢寐以求的「美麗新世界」？鄭問運用他那出神入化的筆勾勒出一幅人性藍圖，善與惡交織成一篇篇動人的故事。</p>`,
+        note: `<div class="note--entry" style="left:15%; top:25%;">
+        <h4 class="alternate">段落標題</h4>
+        <div class="note--marker">1</div>
+        <div class="note--content">
+            <div class="note--content__image">
+                <img src="/proj-assets/chenuen/images/sample/zoom_sample01.jpg" /> </div>
+            <div class="note--content__text">
+                <h4>段落標題</h4>
+                <p>其中許多獨特的角色，如百兵衛（倒霉王）、理想王、完美王、潰爛王、收妖王、善意王、蜘蛛人、蛤蟆精、傀儡王、南魔天、蛇郎君、痛苦女等，他們有神性、有魔性、有人性。在物慾橫流的世界裡，他們都在尋求些「什麼」。</p>
+            </div>
+        </div>
+    </div>
+    <div class="note--entry" style="left:35%; top:55%;">
+        <h4 class="alternate">段落標題</h4>
+        <div class="note--marker">2</div>
+        <div class="note--content">
+            <div class="note--content__image">
+                <img src="/proj-assets/chenuen/images/sample/zoom_sample02.jpg" /> </div>
+            <div class="note--content__text">
+                <h4>段落標題</h4>
+                <p>脫離世界、遺世獨立的特質，以及體現普世性的寓意，既分裂又交融。這就是鬥爭權衡之美的所在！作品中更充滿了傳承自中國文學</p>
+            </div>
+        </div>
+    </div>
+    <div class="note--entry" style="left:62%; top:43%;">
+        <h4 class="alternate">段落標題</h4>
+        <div class="note--marker">3</div>
+        <div class="note--content">
+            <div class="note--content__image">
+                <img src="/proj-assets/chenuen/images/sample/zoom_sample01.jpg" /> </div>
+            <div class="note--content__text">
+                <h4>段落標題</h4>
+                <p>其中許多獨特的角色，如百兵衛（倒霉王）、理想王、完美王、潰爛王、收妖王、善意王、蜘蛛人、蛤蟆精、傀儡王、南魔天、蛇郎君、痛苦女等，他們有神性、有魔性、有人性。在物慾橫流的世界裡，他們都在尋求些「什麼」。</p>
+            </div>
+        </div>
+    </div>`
     },
     {
         title: '筆學文遊爾無充',
