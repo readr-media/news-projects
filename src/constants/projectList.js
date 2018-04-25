@@ -9,7 +9,8 @@ export default {
   'newtype': 'Newtype',
   'farmhouse': 'Farmhouse',
   'chenuen': 'Chenuen',
-  'foreign-labour': 'ForeignLabour'
+  'foreign-labour': 'ForeignLabour',
+  'dollclaw': 'Dollclaw'
   //'proj1': 'Proj1',
   //'proj2': 'Proj2'
 }
