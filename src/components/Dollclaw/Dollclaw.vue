@@ -5,7 +5,7 @@
 <logo :top="`12px`" :left="`15px`" :bgColor="`#333`" :bgImage="`/proj-assets/dollclaw/images/navbtn.png`"></logo>
 <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#333`"></share>
 
-<maptest></maptest>
+<main-map></main-map>
 
 </div>
 
@@ -18,7 +18,7 @@ import titleMeta from "../../util/titleMeta";
 import Logo from "../Logo.vue";
 import Share from "../Share.vue";
 
-import maptest from "./Maptest.vue";
+import mainMap from "./Map.vue";
 
 export default {
   // name: 'componentName',
@@ -29,7 +29,7 @@ export default {
     'logo': Logo,
     'share': Share,
 
-    'maptest': maptest
+    'mainMap': mainMap
 
 
   },
