@@ -13,11 +13,14 @@
 </template>
 
 <script>
+
+import superagent from "superagent";
+
 //所有農舍 GeoJSON polygon
-import mapData_all from './data/yilan-geo-min.json';
+// import mapData_all from './data/yilan-geo-min.json';
 
 //實價交易資料 JSON 座標
-import mapData_trans from './data/yilan-transaction.json';
+// import mapData_trans from './data/yilan-transaction.json';
 
 //地圖樣式 Night style
 import mapStyle from './data/mapStyle-night.json';
@@ -28,6 +31,7 @@ const mapcenter  = {lat:24.733178, lng:121.732370};
 let map;
 let dataLayer_all;
 let heatmap;
+let heatmapData = [];
 
 //所有農舍 poly 樣式
 let polyStyle = {
@@ -93,6 +97,7 @@ export default {
         }
 
     },
+
     mounted: function(){
 
         let mapOptions = {
@@ -104,35 +109,54 @@ export default {
 
         map = new google.maps.Map(document.getElementById('mapAll'), mapOptions);
 
-        //所有農舍
-        dataLayer_all = new google.maps.Data({map: map});
-        dataLayer_all.addGeoJson(mapData_all);
-        dataLayer_all.setStyle(polyStyle);
+        superagent
+            .get("/proj-assets/farmhouse/data/yilan-geo-min.json")
+            .then(res => {
+                const data = JSON.parse(res.text);
 
-        // 實價交易資料
-        var heatmapData = [];  
-        
-        for(let i =0; i < mapData_trans.results.length; i++){
+                // 所有農舍
+                dataLayer_all = new google.maps.Data({map: map});
+                dataLayer_all.addGeoJson(data);
+                dataLayer_all.setStyle(polyStyle);
+            })
+            .catch(err => {
+                console.log(err);
+            });
 
-            let lat = Number(mapData_trans.results[i].geometry.location.lat);
-            let lng = Number(mapData_trans.results[i].geometry.location.lng);
+        superagent
+            .get("/proj-assets/farmhouse/data/yilan-transaction-min.json")
+            .then(res => {
+                const data = JSON.parse(res.text);
 
-            var latLng = new google.maps.LatLng(lat, lng);
+                const dataLength = data.results.length;
 
-            var pushData = {
-                location: latLng
-            };
+                // 實價交易資料                
+                for(let i =0; i < dataLength; i++){
 
-            heatmapData.push(pushData);
-        }        
-        
-        heatmap = new google.maps.visualization.HeatmapLayer({
-            data: heatmapData,
-            radius: 10,
-            maxIntensity: 2,
-            opacity: 0.7
-        });
-        heatmap.setMap(map);
+                    let lat = Number(data.results[i].geometry.location.lat);
+                    let lng = Number(data.results[i].geometry.location.lng);
+
+                    let latLng = new google.maps.LatLng(lat, lng);
+
+                    let pushData = {
+                        location: latLng
+                    };
+
+                    heatmapData.push(pushData);                    
+                }
+
+                heatmap = new google.maps.visualization.HeatmapLayer({
+                    data: heatmapData,
+                    radius: 10,
+                    maxIntensity: 2,
+                    opacity: 0.7
+                });
+                heatmap.setMap(map);
+
+            })
+            .catch(err => {
+                console.log(err);
+            });
 
         window.addEventListener('resize', function(event){
             google.maps.event.trigger(map, 'resize');
