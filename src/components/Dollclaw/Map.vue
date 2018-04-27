@@ -5,15 +5,70 @@
 
 <div class="btnwpr">
     <div class="btn" 
-        v-on:click="toggleMarker(markers.o2008,visibility.o2008); 
+        v-on:click="toggleMarker(markers.o2008, visibility.o2008); 
         visibility.o2008 = !visibility.o2008"
         v-bind:class="{hide: !visibility.o2008}"
     >2008</div>
+    
     <div class="btn" 
-        v-on:click="toggleMarker(markers.o2009,visibility.o2009); 
+        v-on:click="toggleMarker(markers.o2009, visibility.o2009); 
         visibility.o2009 = !visibility.o2009"
         v-bind:class="{hide: !visibility.o2009}"
     >2009</div>
+
+    <div class="btn" 
+        v-on:click="toggleMarker(markers.o2010, visibility.o2010); 
+        visibility.o2010 = !visibility.o2010"
+        v-bind:class="{hide: !visibility.o2010}"
+    >2010</div>
+
+    <div class="btn" 
+        v-on:click="toggleMarker(markers.o2011, visibility.o2011); 
+        visibility.o2011 = !visibility.o2011"
+        v-bind:class="{hide: !visibility.o2011}"
+    >2011</div>
+
+    <div class="btn" 
+        v-on:click="toggleMarker(markers.o2012, visibility.o2012); 
+        visibility.o2012 = !visibility.o2012"
+        v-bind:class="{hide: !visibility.o2012}"
+    >2012</div>
+
+    <div class="btn" 
+        v-on:click="toggleMarker(markers.o2013, visibility.o2013); 
+        visibility.o2013 = !visibility.o2013"
+        v-bind:class="{hide: !visibility.o2013}"
+    >2013</div>
+
+    <div class="btn" 
+        v-on:click="toggleMarker(markers.o2014, visibility.o2014); 
+        visibility.o2014 = !visibility.o2014"
+        v-bind:class="{hide: !visibility.o2014}"
+    >2014</div>
+    
+    <div class="btn" 
+        v-on:click="toggleMarker(markers.o2015, visibility.o2015); 
+        visibility.o2015 = !visibility.o2015"
+        v-bind:class="{hide: !visibility.o2015}"
+    >2015</div>
+
+    <div class="btn" 
+        v-on:click="toggleMarker(markers.o2016, visibility.o2016); 
+        visibility.o2016 = !visibility.o2016"
+        v-bind:class="{hide: !visibility.o2016}"
+    >2016</div>
+
+    <div class="btn" 
+        v-on:click="toggleMarker(markers.o2017, visibility.o2017); 
+        visibility.o2017 = !visibility.o2017"
+        v-bind:class="{hide: !visibility.o2017}"
+    >2017</div>
+
+    <div class="btn" 
+        v-on:click="toggleMarker(markers.o2018, visibility.o2018); 
+        visibility.o2018 = !visibility.o2018"
+        v-bind:class="{hide: !visibility.o2018}"
+    >2018</div>
 </div>
 
 </div>
@@ -24,7 +79,7 @@ import superagent from "superagent";
 import {fetchData} from "./script/fetchData.js";
 
 //map style: retro
-import mapStyle from "./style/mapRetro.json";
+// import mapStyle from "./style/mapStyle-night.json";
 
 export default {
   data: function() {
@@ -48,19 +103,19 @@ export default {
       },
 
       //map data
-      data: {
-        o2008: [],
-        o2009: [],
-        o2010: [],
-        o2011: [],
-        o2012: [],
-        o2013: [],
-        o2014: [],
-        o2015: [],
-        o2016: [],
-        o2017: [],
-        o2018: []
-      },
+      // data: {
+      //   o2008: [],
+      //   o2009: [],
+      //   o2010: [],
+      //   o2011: [],
+      //   o2012: [],
+      //   o2013: [],
+      //   o2014: [],
+      //   o2015: [],
+      //   o2016: [],
+      //   o2017: [],
+      //   o2018: []
+      // },
 
       // map marker collection
       markers: {
@@ -102,11 +157,7 @@ export default {
         mapOptions
       );
     },
-
-    getDataFail: (err) => {
-      console.log(err);
-    },
-
+    /*
     storeData: (storage, data) => {
 
       setTimeout(() => {
@@ -114,27 +165,25 @@ export default {
       },0);
 
     },
-
+    */
     setMark: function(data, color, markers, radius) {
       const map = this.map;
-      // console.log(map);
+      const dataLength = data.length;
 
-      for (let i = 0, length = data.length; i < length; i++) {
-        let lat = Number(data[i].lat.toFixed(6));
-        let lng = Number(data[i].lng.toFixed(6));
+      //store map data
+      // storage.splice(0, storage.length, ...data);
+
+      for (let i = 0; i < dataLength; i++) {
+        let lat = Number(data[i].location.lat.toFixed(6));
+        let lng = Number(data[i].location.lng.toFixed(6));
 
         const position = {
           lat: lat,
           lng: lng
         };
 
+        // init and store marker
         markers.push(
-          //marker
-          //   new google.maps.Marker({
-          //     position: position,
-          //     map: map
-          //   })
-
           //circle mark
           new google.maps.Circle({
             strokeColor: color,
@@ -148,6 +197,7 @@ export default {
           })
         );
       }
+
     },
 
     removeMarker: function(markers){
@@ -157,31 +207,25 @@ export default {
       markers = [];
     },
 
-    // resetMarker: (data, color, markers, radius, that) => {
-
-    //   // console.log(this.map);
-
-    //   if(markers.length > 0){
-    //     markers.forEach(element => {            
-    //       element.setMap(null);
-    //     });
-    //     markers = []; 
-    //   }
-    //   that.setMark(data, color, markers, radius);
-
-    // },
-
-    toggleMarker: function(markers, state) {
+    toggleMarker: function(markers, state) {      
       if (state) {
         markers.forEach(element => {
           //hide marker
-          element.setMap(null);
+          // element.setMap(null);
+          // element.setVisible(false);
+          element.set("strokeOpacity",0);
+          element.set("fillOpacity",0);
         });
+
       } else {
         markers.forEach(element => {
           //show marker
-          element.setMap(this.map);
+          // element.setMap(this.map);
+          // element.setVisible(true);
+          element.set("strokeOpacity",0.8);
+          element.set("fillOpacity",0.35);
         });
+
       }
     }
   },
@@ -192,61 +236,30 @@ export default {
     this.initMap();
 
     this.fetchData(superagent, this);
-    /*
-    superagent
-      .get("/proj-assets/dollclaw/data/o2008.json")
-      .then(res => {
 
-        const data = JSON.parse(res.text);
-        this.setMark(data, "#943126", this.markers.o2008, 2000);
-        this.storeData(this.data.o2008, data);
-       
-      })
-      .catch(err => {
-        this.getDataFail(err);
-      });
-
-    superagent
-      .get("/proj-assets/dollclaw/data/o2009.json")
-      .then(res => {
-
-        const data = JSON.parse(res.text);
-        this.setMark(data, "#0abab5", this.markers.o2009, 6000);
-        this.storeData(this.data.o2009, data);
-
-      })
-      .catch(err => {
-        this.getDataFail(err);
-      });
-    */
-
-    //get zoom level
+    //get zoom level    
     google.maps.event.addListener(this.map, "zoom_changed", () => {
       let zoom = this.map.getZoom();
       console.log("zoom level: " + zoom);
 
-      if(zoom == 9){
-
-        this.removeMarker(this.markers.o2008);
-        this.setMark(this.data.o2008, "#943126", this.markers.o2008, 12000);
-        // this.resetMarker(this.data.o2008, "#943126", this.markers.o2008, 12000, this);
-
-      } else if(zoom == 7) {
-
-        this.removeMarker(this.markers.o2008);
-        this.setMark(this.data.o2008, "#943126", this.markers.o2008, 2000);
-        // this.resetMarker(this.data.o2008, "black", this.markers.o2008, 2000, this);
-      }
+      // if(zoom == 9){
+      //   this.removeMarker(this.markers.o2008);
+      //   this.setMark(this.data.o2008, "#943126", this.markers.o2008, 12000);
+      // } else if(zoom == 7) {
+      //   this.removeMarker(this.markers.o2008);
+      //   this.setMark(this.data.o2008, "#943126", this.markers.o2008, 2000);
+      // }
 
     });
+    
 
-    setTimeout(() => {
-      console.log(this.data.o2008);
-    },600);
+    // setTimeout(() => {
+    //   console.log(this.data.o2008);
+    // },1000);
 
-    setTimeout(() => {
-      console.log(this.data.o2009);
-    },600);
+    // setTimeout(() => {
+    //   console.log(this.data.o2009);
+    // },1000);
 
   }
 };
