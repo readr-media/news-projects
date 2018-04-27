@@ -174,8 +174,10 @@ export default {
       // storage.splice(0, storage.length, ...data);
 
       for (let i = 0; i < dataLength; i++) {
-        let lat = Number(data[i].location.lat.toFixed(6));
-        let lng = Number(data[i].location.lng.toFixed(6));
+        // let lat = Number(data[i].location.lat.toFixed(6));
+        // let lng = Number(data[i].location.lng.toFixed(6));
+        let lat = data[i].location.lat;
+        let lng = data[i].location.lng;
 
         const position = {
           lat: lat,
