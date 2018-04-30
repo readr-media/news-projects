@@ -4,6 +4,12 @@ export const PROJECTS = projectList
 
 export const READR_DOMAIN_PROD = 'www.readr.tw'
 
+export const READR_GA_ID = 'UA-118025678-1'
+
+export const READR_SITE_URL = 'https://www.readr.tw/project/'
+
+export const READR_SITE_ASSETS_URL = 'https://www.readr.tw/proj-assets/'
+
 export const SITE_DOMAIN_DEV = 'readr.tw'
 
 export const SITE_DOMAIN_PROD = 'mirrormedia.mg' 

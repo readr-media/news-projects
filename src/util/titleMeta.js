@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_ASSETS_URL } from '../constants'
+import { READR_SITE_ASSETS_URL, READR_SITE_URL } from '../constants'
 
 function getMetaInfo (vm) {
   const { metaInfo } = vm.$options
@@ -19,16 +19,16 @@ const serverMetaInfoMixin = {
       const metaImage = metaInfo.metaImage
       
       if (title) {
-        this.$ssrContext.title = `${title} - 鏡週刊 Mirror Media`
+        this.$ssrContext.title = `${title} - 讀＋READr`
       }
       if (description) { 
         this.$ssrContext.description = description 
       }
       if (metaUrl) {
-        this.$ssrContext.metaUrl = SITE_URL + metaUrl
+        this.$ssrContext.metaUrl = READR_SITE_URL + metaUrl
       }
       if (metaImage) { 
-        this.$ssrContext.metaImage = SITE_ASSETS_URL + metaImage 
+        this.$ssrContext.metaImage = READR_SITE_ASSETS_URL + metaImage 
       }
     }
   }
@@ -43,18 +43,18 @@ const clientMetaInfoMixin = {
       const metaUrl = metaInfo.metaUrl
       const metaImage = metaInfo.metaImage
       if (title) {
-        document.title = `${title} - 鏡週刊 Mirror Media`
-        document.head.querySelector(`meta[property='og:title']`).content = `${title} - 鏡週刊 Mirror Media`
+        document.title = `${title} - 讀＋READr`
+        document.head.querySelector(`meta[property='og:title']`).content = `${title} - 讀＋READr`
       }
       if (description) {
         document.head.querySelector(`meta[name=description]`).content = description
         document.head.querySelector(`meta[property='og:description']`).content = description
       }
       if (metaUrl) {
-        document.head.querySelector(`meta[property='og:url']`).content = SITE_URL + metaUrl
+        document.head.querySelector(`meta[property='og:url']`).content = READR_SITE_URL + metaUrl
       }
       if (metaImage) {
-        document.head.querySelector(`meta[property='og:image']`).content = SITE_ASSETS_URL + metaImage
+        document.head.querySelector(`meta[property='og:image']`).content = READR_SITE_ASSETS_URL + metaImage
       }
     }
   }

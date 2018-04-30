@@ -1,4 +1,4 @@
-import { GA_ID, PROJECTS } from '../constants'
+import { PROJECTS, READR_GA_ID } from '../constants'
 import _ from 'lodash'
 import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
@@ -16,7 +16,7 @@ const ProjectList = () => import('../views/ProjectList.vue')
 
 export function createRouter () {
   if (process.env.VUE_ENV === 'client') {
-    window.ga('create', GA_ID, 'auto')
+    window.ga('create', READR_GA_ID, 'auto')
   }
   return new Router({
     mode: 'history',
