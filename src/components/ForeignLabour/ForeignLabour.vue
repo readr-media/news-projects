@@ -4,7 +4,8 @@
     <app-share :shareUrl="shareLink" top="10px" left="60px" bgColor="#000" direction="right"></app-share>
     <header class="foreign-labour__header">
       <div class="foreign-labour__header-content">
-        <img :src="`/proj-assets/foreign-labour/images/landing-title${imgSelector}.png`" alt="">
+        <!-- <img :src="`/proj-assets/foreign-labour/images/landing-title${imgSelector}.png`" alt=""> -->
+        <h1>窮得只剩一條命</h1>
         <p>在故鄉，他們窮得只剩一條命。</p>
         <p>在這座島，他們即便能掙到錢，也不一定有命回家⋯⋯</p>
       </div>
@@ -32,7 +33,7 @@
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-01${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>自首</h2>
+        <!-- <h2>自首</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 1)"></button>
         <div>
           <p>收到爸爸死訊的那天傍晚，潘文善還在農地裡忙著種菜。第二天，潘文善忙不迭趕下山，想先去移民署投案，再去殯儀館認屍。好巧不巧，潘文善在下山的路上就被警察逮補，解釋了老半天才讓警察相信他正要去投案，最後放他自行搭車前往台東自首。</p>
@@ -44,7 +45,7 @@
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-02${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>再見</h2>
+        <!-- <h2>再見</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 2)"></button>
         <div>
           <p>結束一連串投案自首的筆錄程序後，移民署官員帶著潘文善前往殯儀館認屍。一路上，潘文善看似沉穩淡定，沒想到冰櫃才剛打開，他就激動得無法自己。</p>
@@ -56,7 +57,7 @@
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-03${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>傾訴</h2>
+        <!-- <h2>傾訴</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 3)"></button>
         <div>
           <p>那天，潘文善伏臥在父親的遺體上，說了好多好多的話。</p>
@@ -75,7 +76,7 @@
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-04${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>蓋棺</h2>
+        <!-- <h2>蓋棺</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 4)"></button>
         <div>
           <p>「潘同甘，雖然你在台灣不幸過世，但我們會帶著你的靈魂返回越南。」</p>
@@ -87,7 +88,7 @@
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-05${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>送行</h2>
+        <!-- <h2>送行</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 5)"></button>
         <div>
           <p>潘同甘要火化的那天，他的許多越南同鄉都特地請假來見他最後一面。只是，勢必有更多和他一樣處於逃跑狀態的人，無法親自到場送他最後一程。</p>
@@ -99,7 +100,7 @@
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-06${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>不捨</h2>
+        <!-- <h2>不捨</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 6)"></button>
         <div>
           <p>潘同甘的棺木準備送進焚化爐的前一刻，潘文善再也壓抑不住自己的悲傷，想要攔住父親的棺木。</p>
@@ -111,7 +112,7 @@
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-07${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>慰</h2>
+        <!-- <h2>慰</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 7)"></button>
         <div>
           <p>火化的過程中，來自台東聖母醫院的越南籍修女，以及同樣在醫院工作的服務人員，不停安撫潘文善的情緒。</p>
@@ -123,7 +124,7 @@
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-09${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>背負</h2>
+        <!-- <h2>背負</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 8)"></button>
         <div>
           <p>離開殯儀館後，潘文善一路背著爸爸的骨灰不願放下。一名嫁到台灣十幾年的親戚主動提供自己的車，打算載著潘文善去桃園機場搭乘隔日的班機。即便在車上將近十小時的路程中，潘文善一刻也沒有放下過父親。</p>
@@ -138,18 +139,21 @@
         </video>
       </figure>
       <div class="foreign-labour__descr">
-        <h2>上路</h2>
+        <!-- <h2>上路</h2> -->
+        <div>
+          <p>按照越南習俗，亡者的骨灰在回到家的路上，一路上要不停丟擲錢幣作為「過路費」。那天夜裡，從台 11 線一路到國道 1 號的路面上，陸續響起了銅板落地的清脆聲響——那是潘家父子在台灣最後的足聲。</p>
+        </div>
       </div>
     </section>
-    <section class="foreign-labour__sec sec-text">
+    <!-- <section class="foreign-labour__sec sec-text">
       <p>按照越南習俗，亡者的骨灰在回到家的路上，一路上要不停丟擲錢幣作為「過路費」。那天夜裡，從台 11 線一路到國道 1 號的路面上，陸續響起了銅板落地的清脆聲響——那是潘家父子在台灣最後的足聲。</p>
-    </section>
+    </section> -->
     <section class="foreign-labour__sec sec-full">
       <figure class="foreign-labour__media" @click="$_foreignLabour_closeDescription">
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-10${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>歇</h2>
+        <!-- <h2>歇</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 9)"></button>
         <div>
           <p>夜裏，潘文善堅持不肯到任何人家裡留宿，一行人索性直接找個安靜的角落，彼此無言地等待天明。</p>
@@ -161,7 +165,7 @@
         <img class="hasDescr" :src="`/proj-assets/foreign-labour/images/media-11${imgSelector}.jpg`" alt="">
       </figure>
       <div class="foreign-labour__descr" @click="$_foreignLabour_closeDescription">
-        <h2>靠岸</h2>
+        <!-- <h2>靠岸</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 10)"></button>
         <div>
           <p>潘文善的脖子上有個十分惹眼的船錨刺青。</p>
@@ -207,10 +211,10 @@
     },
     metaInfo () {
       return {
-        title: '爸爸要回家',
+        title: '窮得只剩一條命',
         description: '在故鄉，他們窮得只剩一條命。在這座島，他們即便能掙到錢，也不一定有命回家⋯⋯',
         metaUrl: 'foreign-labour',
-        metaImage: 'foreign-labour/images/ogimage.jpg'
+        metaImage: 'foreign-labour/images/ogimage2.jpg'
       }
     },
     data () {
@@ -218,7 +222,7 @@
         commentsUrl: `https://dev.${SITE_DOMAIN_DEV}/project/foreign-labour/`,
         currentSection: 0,
         gaScroll: 0,
-        gaScrollIndex: [ 3, 7, 10, 13, 17 ],
+        gaScrollIndex: [ 3, 7, 10, 13, 17  ],
         inAction: false,
         sectionsTop: [],
         shareLink: `${SITE_URL}foreign-labour`,
@@ -241,7 +245,7 @@
       if (currEnv() === 'prod') {
         this.commentsUrl = `https://projects.${SITE_DOMAIN_PROD}/project/foreign-labour/`
       }
-
+      this.$refs.foreignLabourVideo.playbackRate = 0.5
       this.$_foreignLabour_calcImagesScrollTop()
       this.$_foreignLabour_getViewport()
 
@@ -253,12 +257,12 @@
 
       window.ga('send', 'pageview')
 
-      setInterval(() => {
-        if (this.inAction) {
-          this.inAction = false
-          document.querySelector('.foreign-labour').classList.remove('in-action')
-        }
-      }, 3000)
+      // setInterval(() => {
+      //   if (this.inAction) {
+      //     this.inAction = false
+      //     document.querySelector('.foreign-labour').classList.remove('in-action')
+      //   }
+      // }, 10000)
     },
     methods: {
       $_foreignLabour_calcImagesScrollTop () {
@@ -270,14 +274,14 @@
       },
       $_foreignLabour_captionScrollHandler () {
         for (let [index, value] of this.sectionsTop.entries()) {
-          if (value > currentYPosition() + (this.viewport[1] * 1 / 4)) {
+          if (value > currentYPosition() + (this.viewport[1] * 1 / 10)) {
             if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`)) {
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`).classList.remove('caption-in')
             }
             if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1})`)) {
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index + 1})`).classList.remove('caption-in')
             }
-            if (currentYPosition() + (this.viewport[1] * 3 / 4) > value) {
+            if (currentYPosition() + (this.viewport[1] * 1) > value) {
               document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index})`).classList.remove('caption-in')
               return
             }
@@ -296,7 +300,7 @@
       },
       $_foreignLabour_imageScrollHandler () {
         this.inAction = true
-        const offset = 1 / 3
+        const offset = 1 / 2
         for (let [index, value] of this.sectionsTop.entries()) {
           if (value > currentYPosition() + (this.viewport[1] * offset)) {
             if (document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index - 1})`)) {
@@ -348,7 +352,7 @@
     font-size 16px
     font-style normal
     font-family "source-han-sans-traditional", sans-serif
-    text-shadow 1.3px 1.5px 9.4px rgba(0, 0, 0, 0.3)
+    text-shadow 1.3px 1.5px 9.4px rgba(0, 0, 0, .3)
     background-color #000
     &.in-action
       .foreign-labour__sec.sec-full
@@ -360,6 +364,8 @@
         .foreign-labour__descr
           opacity 1
           transition opacity .3s
+          p
+            opacity 1
     figure
       margin 0
     &__header
@@ -372,15 +378,20 @@
       overflow hidden
       &-content
         position absolute
-        top 16%
+        top 20%
         left 50%
         transform translateX(-50%)
         width 75%
-        img
-          width 100%
-          height auto
+        // img
+        //   width 100%
+        //   height auto
+        h1
+          max-width 90%
+          margin 0 auto
+          font-size 16vw
+          font-family "source-han-serif-tc", serif
         p
-          margin 0 1.5em
+          margin 0
           color #fff
           font-size .875rem
           line-height 1.71
@@ -388,7 +399,7 @@
           span
             margin-left 15px
         p:first-of-type
-          margin-top 70px
+          margin-top 17vh
     &__sec
       display flex
       flex-direction column
@@ -396,21 +407,24 @@
       align-items center
       position relative
       &.sec-full
-        min-height 100vh
-        .foreign-labour__media
-          &:after
-            content ''
-            display block
-            position absolute
-            top 0
-            left 0
-            width 100%
-            height 100%
-            background transparent
-            background linear-gradient(90deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.5) 10%, rgba(10,10,10,0.3) 20%, transparent 30%)
-            opacity 0
-            transition opacity 1s
+        min-height 150vh
+        // padding 50vh 0 0
+        // margin 0 0 25vh
+        // .foreign-labour__media
+        //   &:after
+        //     content ''
+        //     display block
+        //     position absolute
+        //     top 0
+        //     left 0
+        //     width 100%
+        //     height 100%
+        //     background transparent
+        //     background linear-gradient(90deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.5) 10%, rgba(10,10,10,0.3) 20%, transparent 30%)
+        //     opacity 0
+        //     transition opacity 1s
         &:first-of-type
+          margin 0
           .foreign-labour__media
             &:after
               content none
@@ -560,6 +574,7 @@
         opacity 0
         transition opacity 0.3s
       button
+        display none
         padding 2px
         color #bb93bc
         font-size .875rem
@@ -569,8 +584,8 @@
         cursor pointer
         &:after
           content '顯示說明'
-      > div
-        display none
+      // > div
+      //   display none
     &__credit
       position absolute
       left 50%
@@ -605,6 +620,8 @@
     .foreign-labour
       &__header-content
         width 65%
+        h1
+          font-size 14vw
         p
           font-size 1.5rem
       &__text
@@ -642,15 +659,19 @@
   @media (min-width: 900px)
     .foreign-labour
       &__header-content
-        top 30%
+        top 32%
         left 10%
         width 45%
         transform initial
+        h1
+          max-width none
+          margin 0
+          font-size 5.125rem
+          text-align left
         p
-          font-size 1rem
-          text-align center
+          font-size 1.125rem
           &:first-of-type
-            margin-top 120px
+            margin-top 15vh
       &__sec
         &:first-of-type
           .foreign-labour__media
@@ -670,6 +691,7 @@
           width 60%
           p
             margin 0 0 1em
+            text-shadow 1.3px 1.5px 9.4px rgba(0, 0, 0, .7)
             &:last-of-type
               margin-bottom 0
       &__media
