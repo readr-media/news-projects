@@ -77,5 +77,8 @@
   background-repeat no-repeat
   border-radius 50%
   cursor pointer
-
+  &.no-sprite
+    background-size 44px auto
+    background-position center center
+    border-radius 0
 </style>

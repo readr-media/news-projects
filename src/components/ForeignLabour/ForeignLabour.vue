@@ -1,7 +1,7 @@
 <template>
   <main class="foreign-labour" :class="{ 'in-action': inAction }">
-    <app-logo top="10px" left="10px" bgColor="#000"></app-logo>
-    <app-share :shareUrl="shareLink" top="10px" left="60px" bgColor="#000" direction="right"></app-share>
+    <app-logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/logo_readr.png"></app-logo>
+    <app-share :shareUrl="shareLink" top="15px" right="15px" bgColor="#000" direction="down"></app-share>
     <header class="foreign-labour__header">
       <div class="foreign-labour__header-content">
         <!-- <img :src="`/proj-assets/foreign-labour/images/landing-title${imgSelector}.png`" alt=""> -->
@@ -187,21 +187,23 @@
       <p><a href="https://www.youtube.com/watch?v=Tp5f7xK1nz0" target="_blank">移工阮國非之死 凸顯外勞警政體系缺失</a></p>
       <p><a href="https://www.mirrormedia.mg/story/20180125pol025/" target="_blank">異鄉安魂曲　越南移工阮國非之死</a></p>
     </section>
-    <section class="foreign-labour__sec sec-related">
+    <!-- <section class="foreign-labour__sec sec-related">
       <iframe src="https://www.mirrormedia.mg/project-list/dark?excluding=marathon"  width="100%" frameborder="0" scrolling="no" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
-    </section>
+    </section> -->
     <section class="foreign-labour__comment">
       <div class="fb-comments" :data-href="commentsUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
   </main>
 </template>
 <script>
-  import { SITE_DOMAIN_DEV, SITE_DOMAIN_PROD, SITE_URL } from '../../constants'
+  import { READR_SITE_URL, SITE_DOMAIN_DEV } from '../../constants'
   import { currEnv } from '../../util/comm'
   import { currentYPosition, elmYPosition, smoothScroll } from 'kc-scroll'
   import { get, map } from 'lodash'
   import Logo from '../Logo.vue'
   import Share from '../Share.vue'
+
+  const PROJECT_NAME = 'foreign-labour'
 
   export default {
     name: 'ForeignLabour',
@@ -213,19 +215,19 @@
       return {
         title: '窮得只剩一條命',
         description: '在故鄉，他們窮得只剩一條命。在這座島，他們即便能掙到錢，也不一定有命回家⋯⋯',
-        metaUrl: 'foreign-labour',
-        metaImage: 'foreign-labour/images/ogimage2.jpg'
+        metaUrl: PROJECT_NAME,
+        metaImage: `${PROJECT_NAME}/images/ogimage2.jpg`
       }
     },
     data () {
       return {
-        commentsUrl: `https://dev.${SITE_DOMAIN_DEV}/project/foreign-labour/`,
+        commentsUrl: `https://dev.${SITE_DOMAIN_DEV}/project/${PROJECT_NAME}/`,
         currentSection: 0,
         gaScroll: 0,
         gaScrollIndex: [ 3, 7, 10, 13, 17  ],
         inAction: false,
         sectionsTop: [],
-        shareLink: `${SITE_URL}foreign-labour`,
+        shareLink: `${READR_SITE_URL}${PROJECT_NAME}`,
         viewport: []
       }
     },
@@ -243,7 +245,7 @@
       }
 
       if (currEnv() === 'prod') {
-        this.commentsUrl = `https://projects.${SITE_DOMAIN_PROD}/project/foreign-labour/`
+        this.commentsUrl = `${READR_SITE_URL}${PROJECT_NAME}`
       }
       this.$refs.foreignLabourVideo.playbackRate = 0.5
       this.$_foreignLabour_calcImagesScrollTop()
