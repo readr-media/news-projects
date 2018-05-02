@@ -247,7 +247,6 @@
       if (currEnv() === 'prod') {
         this.commentsUrl = `${READR_SITE_URL}${PROJECT_NAME}`
       }
-      this.$refs.foreignLabourVideo.playbackRate = 0.5
       this.$_foreignLabour_calcImagesScrollTop()
       this.$_foreignLabour_getViewport()
 
