@@ -264,9 +264,9 @@
         history.scrollRestoration = 'manual'
       }
 
-      if (currEnv() === 'prod' && isVietnamese) {
+      if (currEnv() === 'prod' && this.isVietnamese) {
         this.commentsUrl = `${READR_SITE_URL}${PROJECT_NAME}/vn/`
-      } else if (currEnv() === 'prod' && !isVietnamese) {
+      } else if (currEnv() === 'prod' && !this.isVietnamese) {
         this.commentsUrl = `${READR_SITE_URL}${PROJECT_NAME}`
       } 
       this.$_foreignLabour_calcImagesScrollTop()
