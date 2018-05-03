@@ -225,7 +225,7 @@
       return {
         title: `${this.$t('FOREIGN_LABOUR.TITLE_1')}${this.$t('FOREIGN_LABOUR.TITLE_2')}`,
         description: `${this.$t('FOREIGN_LABOUR.HEADER_CONTENT_1')}${this.$t('FOREIGN_LABOUR.HEADER_CONTENT_2')}`,
-        metaUrl: PROJECT_NAME,
+        metaUrl: metaUrl,
         metaImage: metaImage
       }
     },
