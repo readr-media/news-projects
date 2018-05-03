@@ -213,8 +213,10 @@
       'app-share': Share,
     },
     metaInfo () {
+      let metaUrl = PROJECT_NAME
       let metaImage = `${PROJECT_NAME}/images/ogimage2.jpg`
       if (this.$route.params.params === 'vn') {
+        metaUrl = `${PROJECT_NAME}/vn/`
         metaImage = `${PROJECT_NAME}/images/ogimage_vi.jpg`
         this.$i18n.locale = 'vi'
       } else {
@@ -262,9 +264,11 @@
         history.scrollRestoration = 'manual'
       }
 
-      if (currEnv() === 'prod') {
+      if (currEnv() === 'prod' && isVietnamese) {
+        this.commentsUrl = `${READR_SITE_URL}${PROJECT_NAME}/vn/`
+      } else if (currEnv() === 'prod' && !isVietnamese) {
         this.commentsUrl = `${READR_SITE_URL}${PROJECT_NAME}`
-      }
+      } 
       this.$_foreignLabour_calcImagesScrollTop()
       this.$_foreignLabour_getViewport()
 
