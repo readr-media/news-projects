@@ -180,7 +180,7 @@
           <p v-text="$t('FOREIGN_LABOUR.SECTION_16')"></p>
         </div>
       </div>
-      <p class="foreign-labour__credit">文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋</p>
+      <p class="foreign-labour__credit">文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋<br>翻譯：好心人</p>
     </section>
     <section class="foreign-labour__sec sec-related">
       <h2>相關文章</h2>
