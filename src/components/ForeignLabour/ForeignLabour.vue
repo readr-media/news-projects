@@ -617,10 +617,12 @@
         font-family "source-han-serif-tc", serif
       p
         margin 20px 0 0
+        color #bb93bc
         font-size 1.125rem
         text-align justify
         font-weight 300
         line-height 1.67
+        text-shadow 1.3px 1.5px 9.4px rgba(0, 0, 0, .5)
         opacity 0
         transition opacity 0.3s
       button
@@ -753,7 +755,7 @@
           width 60%
           p
             margin 0 0 1em
-            text-shadow 1.3px 1.5px 9.4px rgba(0, 0, 0, .7)
+            
             &:last-of-type
               margin-bottom 0
       &__media
