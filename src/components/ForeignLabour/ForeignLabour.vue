@@ -1,7 +1,7 @@
 <template>
   <main class="foreign-labour" :class="{ 'in-action': inAction, 'vietnamese': isVietnamese }">
     <app-logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/logo_readr.png"></app-logo>
-    <a :href="isVietnamese ? '/project/foreign-labour/': '/project/foreign-labour/vn/'" class="foreign-labour__i18n" v-text="$t('FOREIGN_LABOUR.I18N')"></a>
+    <a :href="isVietnamese ? '/project/foreign-labour/': '/project/foreign-labour/vn/'" class="foreign-labour__i18n" @click="$_foreignLabour_langGAEvent" v-text="$t('FOREIGN_LABOUR.I18N')"></a>
     <app-share :shareUrl="shareLink" top="15px" right="15px" bgColor="#000" direction="down"></app-share>
     <header class="foreign-labour__header">
       <div class="foreign-labour__header-content">
@@ -310,6 +310,13 @@
             document.querySelector(`section[class*="foreign-labour__sec"]:nth-of-type(${index})`).classList.add('caption-in')
             return
           }
+        }
+      },
+      $_foreignLabour_langGAEvent () {
+        if (this.isVietnamese) {
+          window.ga('send', 'event', 'projects', 'click', `change to tw`, { nonInteraction: false })
+        } else {
+          window.ga('send', 'event', 'projects', 'click', `change to vn`, { nonInteraction: false })
         }
       },
       $_foreignLabour_closeDescription (event) {
