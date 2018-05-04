@@ -4,71 +4,17 @@
 <div class="mapwpr" id="mapContent"></div>
 
 <div class="btnwpr">
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2008, visibility.o2008); 
-        visibility.o2008 = !visibility.o2008"
-        v-bind:class="{hide: !visibility.o2008}"
-    >2008</div>
-    
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2009, visibility.o2009); 
-        visibility.o2009 = !visibility.o2009"
-        v-bind:class="{hide: !visibility.o2009}"
-    >2009</div>
 
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2010, visibility.o2010); 
-        visibility.o2010 = !visibility.o2010"
-        v-bind:class="{hide: !visibility.o2010}"
-    >2010</div>
+    <div 
+      class="btn" 
+      v-for="(item) in markers" 
+      :key="item.id"
+      v-on:click="toggleMarker(item.group, item.visible); 
+        item.visible = !item.visible"
+        v-bind:class="{hide: !item.visible}"
+    >{{item.year}}
+    </div>
 
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2011, visibility.o2011); 
-        visibility.o2011 = !visibility.o2011"
-        v-bind:class="{hide: !visibility.o2011}"
-    >2011</div>
-
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2012, visibility.o2012); 
-        visibility.o2012 = !visibility.o2012"
-        v-bind:class="{hide: !visibility.o2012}"
-    >2012</div>
-
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2013, visibility.o2013); 
-        visibility.o2013 = !visibility.o2013"
-        v-bind:class="{hide: !visibility.o2013}"
-    >2013</div>
-
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2014, visibility.o2014); 
-        visibility.o2014 = !visibility.o2014"
-        v-bind:class="{hide: !visibility.o2014}"
-    >2014</div>
-    
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2015, visibility.o2015); 
-        visibility.o2015 = !visibility.o2015"
-        v-bind:class="{hide: !visibility.o2015}"
-    >2015</div>
-
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2016, visibility.o2016); 
-        visibility.o2016 = !visibility.o2016"
-        v-bind:class="{hide: !visibility.o2016}"
-    >2016</div>
-
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2017, visibility.o2017); 
-        visibility.o2017 = !visibility.o2017"
-        v-bind:class="{hide: !visibility.o2017}"
-    >2017</div>
-
-    <div class="btn" 
-        v-on:click="toggleMarker(markers.o2018, visibility.o2018); 
-        visibility.o2018 = !visibility.o2018"
-        v-bind:class="{hide: !visibility.o2018}"
-    >2018</div>
 </div>
 
 </div>
@@ -87,50 +33,20 @@ export default {
       //google map container
       map: {},
 
-      //map visibility
-      visibility: {
-        o2008: true,
-        o2009: true,
-        o2010: true,
-        o2011: true,
-        o2012: true,
-        o2013: true,
-        o2014: true,
-        o2015: true,
-        o2016: true,
-        o2017: true,
-        o2018: true
-      },
-
-      //map data
-      // data: {
-      //   o2008: [],
-      //   o2009: [],
-      //   o2010: [],
-      //   o2011: [],
-      //   o2012: [],
-      //   o2013: [],
-      //   o2014: [],
-      //   o2015: [],
-      //   o2016: [],
-      //   o2017: [],
-      //   o2018: []
-      // },
-
       // map marker collection
-      markers: {
-        o2008: [],
-        o2009: [],
-        o2010: [],
-        o2011: [],
-        o2012: [],
-        o2013: [],
-        o2014: [],
-        o2015: [],
-        o2016: [],
-        o2017: [],
-        o2018: []
-      },
+      markers: [
+        {year: 2008, group: [], visible: true, color: "#DC143C", radius: 1500},
+        {year: 2009, group: [], visible: true, color: "#D2691E", radius: 1500},
+        {year: 2010, group: [], visible: true, color: "#00008B", radius: 1500},
+        {year: 2011, group: [], visible: true, color: "#008B8B", radius: 1500},
+        {year: 2012, group: [], visible: true, color: "#B8860B", radius: 1500},
+        {year: 2013, group: [], visible: true, color: "#006400", radius: 1500},
+        {year: 2014, group: [], visible: true, color: "#8B008B", radius: 1500},
+        {year: 2015, group: [], visible: true, color: "#943126", radius: 1500},
+        {year: 2016, group: [], visible: true, color: "#8B0000", radius: 1500},
+        {year: 2017, group: [], visible: true, color: "#8FBC8F", radius: 1500},
+        {year: 2018, group: [], visible: true, color: "#2F4F4F", radius: 1500}
+      ]
 
     };
   },
@@ -157,16 +73,8 @@ export default {
         mapOptions
       );
     },
-    /*
-    storeData: (storage, data) => {
 
-      setTimeout(() => {
-        storage.splice(0, storage.length, ...data);
-      },0);
-
-    },
-    */
-    setMark: function(data, color, markers, radius) {
+    setMark: function(data, color, group, radius) {
       const map = this.map;
       const dataLength = data.length;
 
@@ -174,8 +82,6 @@ export default {
       // storage.splice(0, storage.length, ...data);
 
       for (let i = 0; i < dataLength; i++) {
-        // let lat = Number(data[i].location.lat.toFixed(6));
-        // let lng = Number(data[i].location.lng.toFixed(6));
         let lat = data[i].location.lat;
         let lng = data[i].location.lng;
 
@@ -185,7 +91,7 @@ export default {
         };
 
         // init and store marker
-        markers.push(
+        group.push(
           //circle mark
           new google.maps.Circle({
             strokeColor: color,
@@ -202,32 +108,32 @@ export default {
 
     },
 
-    removeMarker: function(markers){
-      markers.forEach(element => {            
-        element.setMap(null);
-      });
-      markers = [];
-    },
+    // setRadius: function(group, radius){
+    //   group.forEach(element => {
+    //     element.set("radius",radius);
+    //   });
+    // },
 
-    toggleMarker: function(markers, state) {      
+    // removeMarker: function(group){
+    //   group.forEach(element => {            
+    //     element.setMap(null);
+    //   });
+    //   group = [];
+    // },
+
+    toggleMarker: function(group, state) {      
       if (state) {
-        markers.forEach(element => {
+        group.forEach(element => {
           //hide marker
-          // element.setMap(null);
-          // element.setVisible(false);
           element.set("strokeOpacity",0);
           element.set("fillOpacity",0);
         });
-
       } else {
-        markers.forEach(element => {
+        group.forEach(element => {
           //show marker
-          // element.setMap(this.map);
-          // element.setVisible(true);
           element.set("strokeOpacity",0.8);
           element.set("fillOpacity",0.35);
         });
-
       }
     }
   },
@@ -244,24 +150,18 @@ export default {
       let zoom = this.map.getZoom();
       console.log("zoom level: " + zoom);
 
-      // if(zoom == 9){
-      //   this.removeMarker(this.markers.o2008);
-      //   this.setMark(this.data.o2008, "#943126", this.markers.o2008, 12000);
-      // } else if(zoom == 7) {
-      //   this.removeMarker(this.markers.o2008);
-      //   this.setMark(this.data.o2008, "#943126", this.markers.o2008, 2000);
-      // }
+      if(zoom == 12){
+ 
+        // this.setRadius(this.markers[1].group, 400);
+
+      } else if(zoom == 11) {
+
+        // this.setRadius(this.markers[1].group, 1500);
+
+      }
 
     });
-    
 
-    // setTimeout(() => {
-    //   console.log(this.data.o2008);
-    // },1000);
-
-    // setTimeout(() => {
-    //   console.log(this.data.o2009);
-    // },1000);
 
   }
 };
