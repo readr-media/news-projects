@@ -617,7 +617,7 @@
         font-family "source-han-serif-tc", serif
       p
         margin 20px 0 0
-        color #fee3ff
+        color #bb93bc
         font-size 1.125rem
         text-align justify
         font-weight 300
