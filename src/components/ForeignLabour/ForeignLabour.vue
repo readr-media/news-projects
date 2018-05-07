@@ -37,7 +37,7 @@
         <!-- <h2>自首</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 1)"></button>
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_4')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_4')"></span></p>
         </div>
       </div>
     </section>
@@ -49,7 +49,7 @@
         <!-- <h2>再見</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 2)"></button>
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_5')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_5')"></span></p>
         </div>
       </div>
     </section>
@@ -61,14 +61,14 @@
         <!-- <h2>傾訴</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 3)"></button>
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_6')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_6')"></span></p>
         </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full sec-text-border">
       <div class="foreign-labour__text-border">
         <div class="foreign-labour__text text-fix">
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_7')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_7')"></span></p>
         </div>
       </div>
     </section>
@@ -80,7 +80,7 @@
         <!-- <h2>蓋棺</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 4)"></button>
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_8')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_8')"></span></p>
         </div>
       </div>
     </section>
@@ -92,7 +92,7 @@
         <!-- <h2>送行</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 5)"></button>
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_9')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_9')"></span></p>
         </div>
       </div>
     </section>
@@ -104,7 +104,7 @@
         <!-- <h2>不捨</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 6)"></button>
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_10')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_10')"></span></p>
         </div>
       </div>
     </section>
@@ -116,7 +116,7 @@
         <!-- <h2>慰</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 7)"></button>
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_11')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_11')"></span></p>
         </div>
       </div>
     </section>
@@ -128,7 +128,7 @@
         <!-- <h2>背負</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 8)"></button>
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_12')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_12')"></span></p>
         </div>
       </div>
     </section>
@@ -142,7 +142,7 @@
       <div class="foreign-labour__descr">
         <!-- <h2>上路</h2> -->
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_13')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_13')"></span></p>
         </div>
       </div>
     </section>
@@ -157,7 +157,7 @@
         <!-- <h2>歇</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 9)"></button>
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_14')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_14')"></span></p>
         </div>
       </div>
     </section>
@@ -169,15 +169,15 @@
         <!-- <h2>靠岸</h2> -->
         <button @click.stop="$_foreignLabour_toggleDescription($event, 10)"></button>
         <div>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_15_1')"></p>
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_15_2')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_15_1')"></span></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_15_2')"></span></p>
         </div>
       </div>
     </section>
     <section class="foreign-labour__sec sec-full sec-text-border">
       <div class="foreign-labour__text-border">
         <div class="foreign-labour__text">
-          <p v-text="$t('FOREIGN_LABOUR.SECTION_16')"></p>
+          <p><span v-text="$t('FOREIGN_LABOUR.SECTION_16')"></span></p>
         </div>
       </div>
       <p class="foreign-labour__credit">文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋<span></span><br>翻譯：好心人</p>
@@ -617,14 +617,19 @@
         font-family "source-han-serif-tc", serif
       p
         margin 20px 0 0
-        color #bb93bc
+        color #fff
         font-size 1.125rem
         text-align justify
         font-weight 300
         line-height 1.67
-        text-shadow 1.3px 1.5px 9.4px rgba(0, 0, 0, .5)
+        // text-shadow 1.3px 1.5px 9.4px rgba(0, 0, 0, .5)
+        
         opacity 0
         transition opacity 0.3s
+        span
+          background-color rgba(0, 0, 0, .7)
+          border-radius 5px
+          box-shadow 5px 0 0 rgba(0,0,0,0.7), -5px 0 0 rgba(0,0,0,0.7)
       button
         display none
         padding 2px
