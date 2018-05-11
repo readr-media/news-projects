@@ -517,9 +517,13 @@
             color #d2b8d3
             text-decoration none
       &.caption-in
-        .foreign-labour__media
+        &:not(:first-of-type)
+          filter brightness(1)
           transition filter .5s
-          filter brightness(.5)
+          .foreign-labour__media
+            filter brightness(.5)
+            transition filter .5s
+            
       iframe
         min-height 355px
         margin-top 50px
