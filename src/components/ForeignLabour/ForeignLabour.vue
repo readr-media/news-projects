@@ -516,6 +516,10 @@
         a:link, a:visited, a:hover, a:active
             color #d2b8d3
             text-decoration none
+      &.caption-in
+        .foreign-labour__media
+          transition filter .5s
+          filter brightness(.5)
       iframe
         min-height 355px
         margin-top 50px
@@ -626,10 +630,10 @@
         
         opacity 0
         transition opacity 0.3s
-        span
-          background-color rgba(0, 0, 0, .7)
-          border-radius 5px
-          box-shadow 5px 0 0 rgba(0,0,0,0.7), -5px 0 0 rgba(0,0,0,0.7)
+        // span
+        //   background-color rgba(0, 0, 0, .7)
+        //   border-radius 5px
+        //   box-shadow 5px 0 0 rgba(0,0,0,0.7), -5px 0 0 rgba(0,0,0,0.7)
       button
         display none
         padding 2px
