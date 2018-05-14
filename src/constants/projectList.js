@@ -8,8 +8,9 @@ export default {
   'marathon': 'Marathon',
   'newtype': 'Newtype',
   'farmhouse': 'Farmhouse',
-  'chenuen': 'Chenuen',
   'foreign-labour': 'ForeignLabour',
+  'president-promise': 'PresidentPromise',
+  'chenuen': 'Chenuen',
   'dollclaw': 'Dollclaw'
   //'proj1': 'Proj1',
   //'proj2': 'Proj2'
