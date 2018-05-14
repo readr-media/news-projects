@@ -1,6 +1,7 @@
 const { SERVER_PROTOCOL, SERVER_HOST } = require('./config')
 const express = require('express')
 const router = express.Router()
+const bodyParser = require('body-parser')
 const superagent = require('superagent')
 
 const fetchStaticJson = (req, res, next, jsonFileName) => {
@@ -26,5 +27,12 @@ router.use('/grouped', function(req, res, next) {
   console.log('got req')
   fetchStaticJson(req, res, next, 'grouped')
 })
+
+// parse application/x-www-form-urlencoded
+router.use(bodyParser.urlencoded({ extended: false, }))
+// parse application/json
+router.use(bodyParser.json())
+
+router.use('/googlesheet', require('./middle/googlesheet'))
 
 module.exports = router
