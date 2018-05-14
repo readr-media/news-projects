@@ -1,7 +1,8 @@
 <template>
 <div class="pagewpr">
 
-<div class="page--aside" v-bind:class="{expand: descActive}">
+<!-- <div class="page--aside" v-bind:class="{expand: descActive}"> -->
+<div class="page--aside expand">
 
   <div class="page--title"></div>
 
@@ -59,7 +60,8 @@
   
 </div>
 
-<div class="swiper-container page--gallery" v-bind:class="{hide: !noteActive}">
+<!-- <div class="swiper-container page--gallery" v-bind:class="{hide: !noteActive}"> -->
+<div class="swiper-container page--gallery">  
 
     <div class="swiper-wrapper">
         <div class="swiper-slide" 
@@ -144,7 +146,8 @@ export default {
 
     toggleDesc: function() {
       // 展開收闔額外的說明文字
-      this.descActive = !this.descActive;
+      // this.descActive = !this.descActive;
+      document.querySelector('.page--aside').classList.toggle('expand');
 
       setTimeout(() => {
         this.gallery.update();
@@ -152,16 +155,21 @@ export default {
         this.initNoteContainer();
         this.destoryScroll();
 
-        if (this.descActive) {
-          //show desc, reinit scroll
+        // if (this.descActive) {
+        //   //show desc, reinit scroll
+        //   this.initScroll();
+        // }
+        if(document.querySelector('.page--aside').classList.contains('expand')){
           this.initScroll();
-        }
+        }     
+
       }, 0);
     },
 
     toggleNote: function() {
       // 展開收闔圖片上的說明
-      this.noteActive = !this.noteActive;
+      // this.noteActive = !this.noteActive;
+      document.querySelector('.page--gallery').classList.toggle('hide');
     },
 
     initScroll: function() {
