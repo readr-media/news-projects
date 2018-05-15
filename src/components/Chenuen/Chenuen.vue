@@ -24,7 +24,11 @@
   <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
   <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`"></share>
 
-  <home></home>
+  <div class="outerwpr">
+    <home></home>
+    <page></page>
+  </div>  
+
 </div>
 
 </template>
@@ -92,6 +96,10 @@ export default {
 
   methods: {
 
+    showGallery: function(){
+      document.querySelector('.pagewpr').classList.add('show');
+    }
+
   },
 
   created () {    
@@ -102,11 +110,47 @@ export default {
 
   mounted: function() {
 
+    let homewpr = document.querySelector('.homewpr');
+    let pagewpr = document.querySelector('.pagewpr');
+
+    document.getElementById('showGallery').addEventListener('click',() => {
+      this.showGallery();
+    });
+
+    homewpr.addEventListener('wheel',(e) => {
+
+      console.log(e.deltaY);
+    
+      if (e.deltaY > 0 && homewpr.classList.contains('up')){
+        pagewpr.classList.add('show');  
+        // return false;      
+      }
+      
+    });
+
+    pagewpr.addEventListener('wheel',(e) => {
+    
+      if (e.deltaY < 0){
+        pagewpr.classList.remove('show');
+        // return false; 
+      }
+      
+    });
+
+
   }
 
 };
 </script>
 
 <style>
+@import './style/animate.css';
 @import './style/common.css';
+
+/* .pagewpr {display:block;}
+.fp-tableCell {display:flex; width:100%;} */
+</style>
+
+<style scoped>
+.outerwpr {width:100%; height:100vh; position:relative; overflow:hidden;}
 </style>

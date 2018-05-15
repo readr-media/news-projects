@@ -1,7 +1,12 @@
 .pagewpr {
 display:flex; justify-content:flex-start; align-items:stretch;
-height:100vh;
+width:100%; height:100vh;
+position:absolute; left:0; top:110vh;
+transition:500ms; transition-property:top;
+background-color:#fff;
 }
+.pagewpr.show {top:0;}
+
 .pagewpr:after {content:""; display:table; clear:both;} 
 
 .page--aside {position:relative;
@@ -51,6 +56,12 @@ background-size:75px auto;
 .expand .page--btn.note {margin-top:0; margin-left:30px;}
 .page--btn.note.active {color:#eba432;}
 .page--btn.note.active i {background-position:-49px -60px;}
+
+.page--btn .close {display:none;}
+.page--btn.active .close {display:inline;}
+
+.page--btn .open {display:inline;}
+.page--btn.active .open {display:none;}
 
 /* swiper control wrapper */
 .swiper--control {
@@ -104,7 +115,7 @@ flex-direction:column;
 .page--desc h2 {font-size:24px;}
 
 /* swiper slide */
-.page--gallery {flex:1; padding-top:5px; position:relative;
+.page--gallery {flex:1; position:relative;
 background-color:#f5f5f5;
 }
 
@@ -112,27 +123,34 @@ background-color:#f5f5f5;
 background-repeat:no-repeat; background-position:center center;
 background-size:contain;
 opacity:0;
-transition:600ms; transition-property:opacity; 
+transition:600ms; transition-property:opacity;
+/* background-image:none !important; */
 }
 
 .swiper-slide-active {opacity:1;}
 
 .swiper-slide__image {
-/* width:100%; height:100%;     */
 max-width:100%; max-height:100%;
 opacity:0; visibility:hidden; pointer-events:none;
-/* object-fit:contain; */
+/* position:absolute; left:50%; top:50%; */
 }
+
 
 /* swiper progress */
 .gallery--progress {position:relative; left:0; top:0;
 width:100%; height:100%;
 }
-/* .gallery--progress .swiper-wrapper {display:none;} */
-#galleryProgress {position:fixed; left:0; top:0;
+
+#galleryProgress {position:fixed; left:0;
 width:100%; height:5px; margin-bottom:0;
 background-color:#eee;
+background-color:transparent;
+visibility:hidden; top:-5px; 
+transition:700ms; transition-property:visibility,top;
+transition-delay:500ms;
 }
+.show #galleryProgress {visibility:visible; top:0;}
+
 #galleryProgress .swiper-pagination-progressbar-fill {
 background-color:#eba432;    
 }

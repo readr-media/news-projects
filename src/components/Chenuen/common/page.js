@@ -14,6 +14,9 @@ export function initNoteContainer() {
             let width = image.offsetWidth;
             let height = image.offsetHeight;
 
+            // image.style.marginLeft = width / 2 * -1 + "px";
+            // image.style.marginTop = height / 2 * -1 + "px";
+
             // console.log(width + ", " + height);
 
             let container = element.querySelector(".note--container");

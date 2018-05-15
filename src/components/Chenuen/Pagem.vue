@@ -211,7 +211,6 @@ export default {
 </script>
 
 <style>
-@import './style/common.css';
 @import './style/swiper.min.css';
 </style>
 

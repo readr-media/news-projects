@@ -1,25 +1,22 @@
 <template>
 <div class="pagewpr">
 
-<!-- <div class="page--aside" v-bind:class="{expand: descActive}"> -->
 <div class="page--aside expand">
 
   <div class="page--title"></div>
 
   <div class="page--btnwpr">
-    <div class="page--btn desc" 
-      v-on:click="toggleDesc"
-      v-bind:class="{active: descActive}">
+
+    <div class="page--btn desc" id="btnDesc" v-on:click="toggleDesc">
       <i></i>
-      <span v-show="descActive">關閉故事</span>
-      <span v-show="!descActive">顯示故事</span>
+      <span class="close">關閉故事</span>
+      <span class="open">顯示故事</span>
     </div>
-    <div class="page--btn note" 
-      v-on:click="toggleNote"
-      v-bind:class="{active: noteActive}">
+
+    <div class="page--btn note" id="btnNote" v-on:click="toggleNote">
       <i></i>
-      <span v-show="noteActive">關閉細節</span>
-      <span v-show="!noteActive">顯示細節</span>
+      <span class="close">關閉細節</span>
+      <span class="open">顯示細節</span>
     </div>
   </div>
 
@@ -60,7 +57,6 @@
   
 </div>
 
-<!-- <div class="swiper-container page--gallery" v-bind:class="{hide: !noteActive}"> -->
 <div class="swiper-container page--gallery">  
 
     <div class="swiper-wrapper">
@@ -69,6 +65,7 @@
           :key="item.id"
           v-bind:style="{ backgroundImage: 'url(' + item.url + ')' }"
         >
+        <!-- <div class="swiper-slide" v-for="item in galleryData" :key="item.id"> -->
           <img class="swiper-slide__image" v-bind:src="item.url" />
           <div class="note--wrapper">  
             <div class="note--container">
@@ -124,10 +121,6 @@ export default {
   data: function() {
     return {
       galleryData: galleryData,
-      // loaded: false,
-
-      descActive: true,
-      noteActive: true,
 
       gallery: {},
       galleryProgress: {},
@@ -146,7 +139,7 @@ export default {
 
     toggleDesc: function() {
       // 展開收闔額外的說明文字
-      // this.descActive = !this.descActive;
+      document.getElementById('btnDesc').classList.toggle('active');
       document.querySelector('.page--aside').classList.toggle('expand');
 
       setTimeout(() => {
@@ -155,10 +148,6 @@ export default {
         this.initNoteContainer();
         this.destoryScroll();
 
-        // if (this.descActive) {
-        //   //show desc, reinit scroll
-        //   this.initScroll();
-        // }
         if(document.querySelector('.page--aside').classList.contains('expand')){
           this.initScroll();
         }     
@@ -166,10 +155,10 @@ export default {
       }, 0);
     },
 
-    toggleNote: function() {
+    toggleNote: function(event) {
       // 展開收闔圖片上的說明
-      // this.noteActive = !this.noteActive;
-      document.querySelector('.page--gallery').classList.toggle('hide');
+      document.getElementById('btnNote').classList.toggle('active');
+      document.querySelector('.page--gallery').classList.toggle('hide');     
     },
 
     initScroll: function() {
@@ -198,6 +187,8 @@ export default {
     this.gallery = new Swiper ('.page--gallery', {
       loop: true,
       observer: true,
+      loopedSlides:1,
+      normalizeSlideIndex: false,
 
       pagination: {
         el: '#galleryFraction',
@@ -215,6 +206,9 @@ export default {
     this.galleryProgress = new Swiper ('.gallery--progress', {
       loop: true,
       effect: "fade",
+      observer: true,
+      loopedSlides:1,
+      normalizeSlideIndex: false,
 
       pagination: {
         el: '#galleryProgress',
@@ -240,7 +234,6 @@ export default {
 </script>
 
 <style>
-@import "./style/common.css";
 @import "./style/swiper.min.css";
 @import "./style/perfect-scrollbar.css";
 </style>
