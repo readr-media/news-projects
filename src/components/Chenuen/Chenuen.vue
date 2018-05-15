@@ -76,7 +76,10 @@ export default {
       // shareLinkOpinion: `${SITE_URL}farmhouse/opinion`,
       // shareLinkFaq: `${SITE_URL}farmhouse/faq`,
       // shareLinkGallery: `${SITE_URL}farmhouse/gallery`
-      currentDevice: ''
+      currentDevice: '',
+
+      introVisibility: false
+
     };
   },
 
@@ -96,8 +99,18 @@ export default {
 
   methods: {
 
-    showGallery: function(){
-      document.querySelector('.pagewpr').classList.add('show');
+    slideIntro: function(){
+      
+      let homewpr = document.querySelector('.homewpr');
+      let offset = document.querySelector('.home-intro').offsetHeight;
+
+      //主圖往上捲動，露出 intro section
+      homewpr.style.top = offset * -1 + 'px';
+      
+      setTimeout(() => {
+        this.introVisibility = true;
+      },500);     
+      
     }
 
   },
@@ -112,30 +125,46 @@ export default {
 
     let homewpr = document.querySelector('.homewpr');
     let pagewpr = document.querySelector('.pagewpr');
-
-    document.getElementById('showGallery').addEventListener('click',() => {
-      this.showGallery();
-    });
-
+    
     homewpr.addEventListener('wheel',(e) => {
 
-      console.log(e.deltaY);
-    
-      if (e.deltaY > 0 && homewpr.classList.contains('up')){
-        pagewpr.classList.add('show');  
-        // return false;      
+      let y = e.deltaY;
+
+      if(y > 0 && !this.introVisibility){
+        // 往下捲動，且 intro 還沒出現
+        // 顯示 intro
+        this.slideIntro();
+
+      } else if (y > 0 && this.introVisibility){
+        // 往下捲動，且 intro 已顯示
+        // 顯示 gallery
+        pagewpr.classList.add('show');
+
+      } else if (y < 0){
+        // 往上捲動，回復到初始狀態
+        homewpr.style.top = '0';
+        this.introVisibility = false;
       }
       
     });
 
     pagewpr.addEventListener('wheel',(e) => {
-    
+
       if (e.deltaY < 0){
-        pagewpr.classList.remove('show');
-        // return false; 
+        //往上捲動，隱藏 gallery
+        pagewpr.classList.remove('show');       
       }
       
     });
+
+    document.getElementById('showGallery').addEventListener('click',() => {
+      //click to show gallery section
+      pagewpr.classList.add('show');
+    });
+
+    document.getElementById('showIntro').addEventListener('click',() => {
+      this.slideIntro();
+    });   
 
 
   }
@@ -146,9 +175,6 @@ export default {
 <style>
 @import './style/animate.css';
 @import './style/common.css';
-
-/* .pagewpr {display:block;}
-.fp-tableCell {display:flex; width:100%;} */
 </style>
 
 <style scoped>

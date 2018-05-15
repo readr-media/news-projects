@@ -44,42 +44,42 @@ export default {
 
   methods: {
 
-    slideIntro: function(){
+    // slideIntro: function(){
 
-      let homewpr = document.querySelector('.homewpr');
+    //   let homewpr = document.querySelector('.homewpr');
 
-      let offset = document.querySelector('.home-intro').offsetHeight;
-      homewpr.style.top = offset * -1 + 'px';
+    //   let offset = document.querySelector('.home-intro').offsetHeight;
+    //   homewpr.style.top = offset * -1 + 'px';
       
-      setTimeout(() => {
-        homewpr.classList.add('up');
-      },500);
+    //   setTimeout(() => {
+    //     homewpr.classList.add('up');
+    //   },500);
       
-      return false;
-    }
+    //   return false;
+    // }
 
   },
 
   mounted: function(){
 
-    let homewpr = document.querySelector('.homewpr');
+    // let homewpr = document.querySelector('.homewpr');
 
-    homewpr.addEventListener('wheel',(e) => {      
+    // homewpr.addEventListener('wheel',(e) => {      
       
-      if (e.deltaY > 0){
-        this.slideIntro();
-        // return false; 
-      } else if (e.deltaY < 0){
-        homewpr.style.top = '0';
-        homewpr.classList.remove('up');
-        // return false; 
-      }
+    //   if (e.deltaY > 0){
+    //     this.slideIntro();
+    //     // return false; 
+    //   } else if (e.deltaY < 0){
+    //     homewpr.style.top = '0';
+    //     homewpr.classList.remove('up');
+    //     // return false; 
+    //   }
       
-    });
+    // });
 
-    document.getElementById('showIntro').addEventListener('click',() => {
-      this.slideIntro();
-    });    
+    // document.getElementById('showIntro').addEventListener('click',() => {
+    //   this.slideIntro();
+    // });    
 
   }
 
