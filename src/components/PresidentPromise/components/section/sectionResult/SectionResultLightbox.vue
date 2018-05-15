@@ -28,7 +28,7 @@ import LightboxInput from '../../lightbox/LightboxInput.vue'
 import LightboxRecaptcha from '../../lightbox/LightboxRecaptcha.vue'
 import LightboxSubmit from '../../lightbox/LightboxSubmit.vue'
 import LightboxThank from '../../lightbox/LightboxThank.vue'
-import { PRESIDENT_PROMISE_FEEDBACK_SHEET_ID, } from 'api/config'
+import { PRESIDENT_PROMISE_FEEDBACK_SHEET_ID, } from '../../../../../../api/config'
 
 const DEFAULT_VALUEINPUTOPTION = 'RAW'
 const appendSheet = (store, {
