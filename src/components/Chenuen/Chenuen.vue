@@ -78,7 +78,14 @@ export default {
       // shareLinkGallery: `${SITE_URL}farmhouse/gallery`
       currentDevice: '',
 
-      introVisibility: false
+      introVisibility: false,
+      wheelTimer: null,
+  
+      homeTransitionEnd: false,
+      galleryTransitionEnd: false,
+
+      galleryVisibility: false
+
 
     };
   },
@@ -99,18 +106,88 @@ export default {
 
   methods: {
 
-    slideIntro: function(){
-      
-      let homewpr = document.querySelector('.homewpr');
-      let offset = document.querySelector('.home-intro').offsetHeight;
+    getIntroHeight: function(){
+      return document.querySelector('.home-intro').offsetHeight;
+    },
+    
+    slideIntro: function(element, top){
 
-      //主圖往上捲動，露出 intro section
-      homewpr.style.top = offset * -1 + 'px';
+      if(element.style.top == '0px'){
+        element.style.top = top * -1 + 'px';    
+      } 
       
-      setTimeout(() => {
-        this.introVisibility = true;
-      },500);     
+    },
+
+    checkHomePosition: function(that, home){ 
+
+      that.homeTransitionEnd = true;
+      let top = home.style.top;
+
+      if(top == '0px'){
+        that.introVisibility = false;
+      } else {
+        that.introVisibility = true;
+      }
+
       
+    },
+
+    homeWheel: function(that,e,homewpr,pagewpr,offset,wrapper){
+
+      wrapper.classList.add('run');
+           
+      let y = e.deltaY;
+
+      console.log(y);
+
+      if(y > 0){ //往下捲動
+
+        if(that.introVisibility == false){
+          // 當 intro 還沒出現
+          that.slideIntro(homewpr,offset);
+          return false;  
+
+        } else if (that.introVisibility == true) {
+          // 當 intro 已顯示  
+          if(that.homeTransitionEnd == true){
+            pagewpr.classList.add('show');          
+            that.galleryVisibility == true;
+          } 
+          return false;
+        }
+
+      } else if (y < 0 && that.homeTransitionEnd == true){ //往上捲動
+
+          if(that.introVisibility == true){
+
+            homewpr.style.top = offset * -1 + 'px';
+            that.introVisibility = false;
+            return false;
+
+          } else {
+            homewpr.style.top = '0px';  
+            that.homeTransitionEnd = false;
+            return false;
+          }   
+
+        }
+
+          
+    },
+    
+    pageWheel: function(that,e,pagewpr,wrapper){
+
+      wrapper.classList.add('run');
+
+      let y = e.deltaY;
+
+      if (y < 0){
+        //往上捲動，隱藏 gallery
+        pagewpr.classList.remove('show'); 
+        that.galleryVisibility == false;  
+        return false;    
+      }
+
     }
 
   },
@@ -125,46 +202,82 @@ export default {
 
     let homewpr = document.querySelector('.homewpr');
     let pagewpr = document.querySelector('.pagewpr');
+
+    let wrapper = document.querySelector('.outerwpr');
+
+    homewpr.style.top = '0px';
+
+    //get intro height
+    let offset = this.getIntroHeight();
+
+    // resize
+    window.addEventListener('resize',() => {
+      offset = this.getIntroHeight();
+    }, false);
+
+    // transition start
+    // use webkitAnimationStart
+    // homewpr.addEventListener('transitionstart',() => {
+
+    //   if(homewpr.style.top != '0px') {
+    //     this.homeTransitionEnd = false;
+    //     wrapper.classList.add('run');
+    //     console.log('class add (homepwr)');
+    //   }      
+
+    // },false);
+
     
-    homewpr.addEventListener('wheel',(e) => {
-
-      let y = e.deltaY;
-
-      if(y > 0 && !this.introVisibility){
-        // 往下捲動，且 intro 還沒出現
-        // 顯示 intro
-        this.slideIntro();
-
-      } else if (y > 0 && this.introVisibility){
-        // 往下捲動，且 intro 已顯示
-        // 顯示 gallery
-        pagewpr.classList.add('show');
-
-      } else if (y < 0){
-        // 往上捲動，回復到初始狀態
-        homewpr.style.top = '0';
-        this.introVisibility = false;
-      }
+    // transition end
+    homewpr.addEventListener('transitionend',() => {
       
-    });
+      this.checkHomePosition(this,homewpr);
+      wrapper.classList.remove('run');
+      console.log('class remove (homepwr)');
+      
+        
+    },false);
+    
+    // wheel: homewpr
+    homewpr.addEventListener('wheel',(e) => { 
+      this.homeWheel(this,e,homewpr,pagewpr,offset,wrapper);    
+    }, false);
 
+    // transition start
+    // pagewpr.addEventListener('transitionstart',() => {
+
+    //   this.galleryTransitionEnd = false;   
+    //   wrapper.classList.add('run');
+    //   console.log('class add: gallery');
+
+    // },false);
+    
+    // transition end
+    pagewpr.addEventListener('transitionend',() => {
+
+      this.galleryTransitionEnd = true;   
+      wrapper.classList.remove('run'); 
+      console.log('class remove: gallery');
+
+    },false);
+
+    //wheel pagewpr
     pagewpr.addEventListener('wheel',(e) => {
 
-      if (e.deltaY < 0){
-        //往上捲動，隱藏 gallery
-        pagewpr.classList.remove('show');       
+      if(this.galleryTransitionEnd == true) {
+        this.pageWheel(this,e,pagewpr,wrapper);
       }
-      
+
     });
 
-    document.getElementById('showGallery').addEventListener('click',() => {
-      //click to show gallery section
-      pagewpr.classList.add('show');
-    });
+    // document.getElementById('showGallery').addEventListener('click',() => {
+    //   //click to show gallery section
+    //   pagewpr.classList.add('show');
+    // });
 
-    document.getElementById('showIntro').addEventListener('click',() => {
-      this.slideIntro();
-    });   
+    // document.getElementById('showIntro').addEventListener('click',() => {
+    //   this.slideIntro();
+    // });   
 
 
   }
@@ -175,6 +288,9 @@ export default {
 <style>
 @import './style/animate.css';
 @import './style/common.css';
+
+.run .homewpr,
+.run .pagewpr {pointer-events:none; opacity:0.3;}
 </style>
 
 <style scoped>

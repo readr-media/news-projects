@@ -90,9 +90,10 @@ export default {
 .homewpr {
 width:100%; height:100vh;
 position:absolute; left:0; top:0;  
-transition:500ms; transition-property:top;
+transition:700ms; transition-property:top;
+/* transition-timing-function:linear; */
 }
-/* .homewpr.slideUp {top:-300px;} */
+/* .run .homewpr {pointer-events:none; opacity:0.3;} */
 
 .opening {width:100%; height:100vh; position:relative;
 background-color:#fff;
