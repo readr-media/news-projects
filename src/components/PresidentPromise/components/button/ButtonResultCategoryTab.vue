@@ -7,6 +7,7 @@
     @mouseout="toggleActive"
     @touchstart="toggleActive"
     @touchend="toggleActive"
+    @click="sendGA"
   >
   </button>
 </template>
@@ -31,6 +32,11 @@ export default {
     return {
       categories
     }
+  },
+  methods: {
+    sendGA () {
+      window.ga('send', 'event', 'projects', 'click', categories[this.categoryName], { nonInteraction: false })
+    }
   }
 }
 </script>
@@ -52,6 +58,8 @@ export default {
     border-bottom 2px solid #b2dbd5
   &--orange
     color #fa8d62
+    &.result-category-tab--active
+      border-bottom 2px solid #fa8d62
   &--hover
     color white
     transition color .25s

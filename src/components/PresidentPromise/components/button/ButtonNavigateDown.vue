@@ -5,6 +5,7 @@
     @mouseout="toggleActive"
     @touchstart="toggleActive"
     @touchend="toggleActive"
+    @click="clicked"
   >
     <div class="down__arrow-down"></div>
   </button>
@@ -15,6 +16,12 @@ import buttonToogleActive from '../../mixins/buttonToogleActive'
 
 export default {
   mixins: [ buttonToogleActive ],
+  methods: {
+    clicked () {
+      this.$store.commit('PresidentPromise/CLICK_LANDING_BUTTON')
+      window.ga('send', 'event', 'projects', 'click', 'start', { nonInteraction: false })
+    }
+  }
 }
 </script>
 

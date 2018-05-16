@@ -44,5 +44,11 @@ export default {
   },
   DISABLE_NEXT_ROUND_BUTTON: (state) => {
     state.showNextRoundButton = false
-  }
+  },
+  CLICK_LANDING_BUTTON: (state) => {
+    state.isLandingButtonClicked = true
+  },
+  SURVEY_SECTION_NAVIGATED: (state) => {
+    state.surveySectionBeenNavigated = true
+  },
 }

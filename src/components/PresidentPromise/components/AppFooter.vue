@@ -11,11 +11,17 @@
 
 <script>
 import { SITE_DOMAIN_DEV, } from '../../../constants'
+import { currEnv } from '../../../util/comm'
 
 export default {
   data () {
     return {
       commentsUrl: `https://dev.${SITE_DOMAIN_DEV}/project/president-promise/`,
+    }
+  },
+  mounted () {
+    if (currEnv() === 'prod') {
+      this.commentsUrl = `https://www.${SITE_DOMAIN_DEV}/project/president-promise/`
     }
   }
 }

@@ -1,10 +1,10 @@
 <template>
   <div class="president-promise">
     <transition-group name="fade" mode="out-in">
-      <a v-show="$store.state.PresidentPromise.showHeader" :key="'president-promise__readr-link'" class="president-promise__readr-link" href="https://www.readr.tw/" target="_blank">
+      <a v-show="$store.state.PresidentPromise.showHeader" :key="'president-promise__readr-link'" class="president-promise__readr-link" href="https://www.readr.tw/" target="_blank" @click="sendGAHome">
         <img class="president-promise__readr-logo" src="/proj-assets/logo_readr.png" alt="">
       </a>
-      <AppShareIcon v-show="$store.state.PresidentPromise.showHeader" :key="'president-promise__share-icon'" class="president-promise__share-icon" :shareUrl="shareLink" :bgColor="'#2b616d'" top="0px" right="0px" direction="down"/>
+      <AppShareIcon v-show="$store.state.PresidentPromise.showHeader" :key="'president-promise__share-icon'" class="president-promise__share-icon" :shareUrl="shareLink" top="0px" right="0px" direction="down"/>
     </transition-group>
     <full-page :options="options" ref="fullpage" @after-load="afterLoad" @after-slide-load="afterSlideLoad">
       <SectionLanding ref="t0"/>
@@ -87,9 +87,22 @@ export default {
       }
       // this.setAllowScrolling(false)
 
+      // landing to survey GA handle
+      if (anchorLink === 'section-promise-survey') {
+        if (!this.$store.state.PresidentPromise.surveySectionBeenNavigated) {
+          this.$store.commit('PresidentPromise/SURVEY_SECTION_NAVIGATED')
+          if (!this.$store.state.PresidentPromise.isLandingButtonClicked) {
+            window.ga('send', 'event', 'projects', 'scroll', 'scroll to start', { nonInteraction: false })
+          }
+        }
+      }
+
     },
     afterSlideLoad (anchorLink, index, slideAnchor, slideIndex) {
       this.$store.commit('PresidentPromise/SET_CURRENT_SLIDE_INDEX', slideIndex)
+    },
+    sendGAHome () {
+      window.ga('send', 'event', 'projects', 'click', 'back to home', { nonInteraction: false })
     }
   },
   created () {
@@ -103,6 +116,9 @@ export default {
       spreadsheetId: '18LjwTRLQM9TqVHt5dfY3Dlk-nmb7okxaZ4gjiLr5PZc',
       range: 'sheet1',
     })
+  },
+  mounted () {
+    window.ga('send', 'pageview')
   }
 }
 </script>

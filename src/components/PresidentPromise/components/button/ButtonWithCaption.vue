@@ -30,6 +30,7 @@ export default {
   methods: {
     toggleLightbox () {
       this.$emit('toggleLightbox')
+      window.ga('send', 'event', 'projects', 'click', 'feedback', { nonInteraction: false })
     },
   },
 }

@@ -5,6 +5,7 @@
     @mouseout="toggleActive"
     @touchstart="toggleActive"
     @touchend="toggleActive"
+    @click="sendGA"
   >
     <div :class="[ 'move-to__icon', `move-to__icon--${navigateType}`]" :style="{ maskImage: `url(/proj-assets/president-promise/icon/icon_${navigateType}.png)` }"></div>
     <div class="move-to__hint-container">
@@ -38,6 +39,11 @@ export default {
       },
     }
   },
+  methods: {
+    sendGA () {
+      window.ga('send', 'event', 'projects', 'click', `${this.navigateType === 'more' ? 'more10' : 'popular'}`, { nonInteraction: false })
+    }
+  }
 }
 </script>
 
