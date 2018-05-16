@@ -2,7 +2,6 @@ import { camelizeKeys, } from 'humps'
 import _ from 'lodash'
 import qs from 'qs'
 import superagent from 'superagent'
-import { NEWS_PROJECTS_API_NAME, } from 'api/config'
 
 function _buildQuery (params = {}) {
   let query = {}
@@ -57,7 +56,7 @@ function _doPost (url, params) {
 }
 
 export function getSheet ({ params = {} } = {}) {
-  let url = `http://${NEWS_PROJECTS_API_NAME}/api/googlesheet`
+  let url = `/project-api/googlesheet`
   const query = _buildQuery(params)
   if (query && (query.length > 0)) {
     url = url + `?${query}`
@@ -66,7 +65,7 @@ export function getSheet ({ params = {} } = {}) {
 }
 
 export function appendSheet ({ params = {} } = {}) {
-  let url = `http://${NEWS_PROJECTS_API_NAME}/api/googlesheet`
+  let url = `/project-api/googlesheet`
   const query = _buildQuery(params)
   if (query && (query.length > 0)) {
     url = url + `?${query}`
