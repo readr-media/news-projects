@@ -62,7 +62,7 @@ export default {
     return {
       shareLink: `${READR_SITE_URL}president-promise`,
       options: {
-        // keyboardScrolling: false,
+        keyboardScrolling: false,
         lockAnchors: true,
         recordHistory: true,
         controlArrows: false,
