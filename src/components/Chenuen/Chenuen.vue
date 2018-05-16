@@ -79,12 +79,12 @@ export default {
       currentDevice: '',
 
       introVisibility: false,
-      wheelTimer: null,
+      // wheelTimer: null,
   
       homeTransitionEnd: false,
       galleryTransitionEnd: false,
 
-      galleryVisibility: false
+      // galleryVisibility: false
 
 
     };
@@ -110,17 +110,12 @@ export default {
       return document.querySelector('.home-intro').offsetHeight;
     },
     
-    slideIntro: function(element, top){
-
-      if(element.style.top == '0px'){
-        element.style.top = top * -1 + 'px';    
-      } 
-      
+    showIntro: function(element, top){     
+      element.style.top = top * -1 + 'px';          
     },
 
     checkHomePosition: function(that, home){ 
-
-      that.homeTransitionEnd = true;
+      
       let top = home.style.top;
 
       if(top == '0px'){
@@ -128,13 +123,10 @@ export default {
       } else {
         that.introVisibility = true;
       }
-
       
     },
 
-    homeWheel: function(that,e,homewpr,pagewpr,offset,wrapper){
-
-      wrapper.classList.add('run');
+    homeWheel: function(that,e,homewpr,pagewpr,offset,wrapper){  
            
       let y = e.deltaY;
 
@@ -144,48 +136,49 @@ export default {
 
         if(that.introVisibility == false){
           // 當 intro 還沒出現
-          that.slideIntro(homewpr,offset);
+          that.showIntro(homewpr,offset);
+          wrapper.classList.add('run');
           return false;  
 
-        } else if (that.introVisibility == true) {
+        } else if (that.introVisibility == true && that.homeTransitionEnd == true) {
           // 當 intro 已顯示  
-          if(that.homeTransitionEnd == true){
-            pagewpr.classList.add('show');          
-            that.galleryVisibility == true;
-          } 
+            wrapper.classList.add('run');
+            pagewpr.classList.add('show');  
           return false;
         }
 
       } else if (y < 0 && that.homeTransitionEnd == true){ //往上捲動
 
-          if(that.introVisibility == true){
+          if(that.introVisibility == false){
 
-            homewpr.style.top = offset * -1 + 'px';
-            that.introVisibility = false;
+            console.log('不動作');
             return false;
 
-          } else {
-            homewpr.style.top = '0px';  
-            that.homeTransitionEnd = false;
-            return false;
-          }   
+          } else {            
+              wrapper.classList.add('run');
+              homewpr.style.top = '0px';  
+              that.homeTransitionEnd = false;
+              return false;
+          }        
 
         }
 
           
     },
     
-    pageWheel: function(that,e,pagewpr,wrapper){
-
-      wrapper.classList.add('run');
+    pageWheel: function(that,e,pagewpr,wrapper){  
 
       let y = e.deltaY;
 
-      if (y < 0){
+      if (y < 0 && this.galleryTransitionEnd == true){
         //往上捲動，隱藏 gallery
-        pagewpr.classList.remove('show'); 
-        that.galleryVisibility == false;  
+        wrapper.classList.add('run');
+        pagewpr.classList.remove('show');  
         return false;    
+
+      } else {
+        console.log('不動作');
+        return false;
       }
 
     }
@@ -215,69 +208,57 @@ export default {
       offset = this.getIntroHeight();
     }, false);
 
-    // transition start
-    // use webkitAnimationStart
-    // homewpr.addEventListener('transitionstart',() => {
+    //window prevent wheel
+    window.addEventListener('wheel',() => {
 
-    //   if(homewpr.style.top != '0px') {
-    //     this.homeTransitionEnd = false;
-    //     wrapper.classList.add('run');
-    //     console.log('class add (homepwr)');
-    //   }      
+      if(this.homeTransitionEnd == false || this.galleryTransitionEnd == false){
+        console.log("禁止滾動");
+        return false
+      }
 
-    // },false);
+    }, false);
 
     
     // transition end
     homewpr.addEventListener('transitionend',() => {
       
-      this.checkHomePosition(this,homewpr);
+      this.homeTransitionEnd = true;
       wrapper.classList.remove('run');
-      console.log('class remove (homepwr)');
-      
+
+      this.checkHomePosition(this,homewpr);      
+      console.log('run remove (homepwr)');      
         
     },false);
     
     // wheel: homewpr
-    homewpr.addEventListener('wheel',(e) => { 
+    homewpr.addEventListener('wheel',(e) => {   
       this.homeWheel(this,e,homewpr,pagewpr,offset,wrapper);    
-    }, false);
-
-    // transition start
-    // pagewpr.addEventListener('transitionstart',() => {
-
-    //   this.galleryTransitionEnd = false;   
-    //   wrapper.classList.add('run');
-    //   console.log('class add: gallery');
-
-    // },false);
+    }, false);  
     
     // transition end
     pagewpr.addEventListener('transitionend',() => {
 
       this.galleryTransitionEnd = true;   
       wrapper.classList.remove('run'); 
-      console.log('class remove: gallery');
+      console.log('run remove (gallery)');
 
     },false);
 
     //wheel pagewpr
     pagewpr.addEventListener('wheel',(e) => {
-
-      if(this.galleryTransitionEnd == true) {
-        this.pageWheel(this,e,pagewpr,wrapper);
-      }
+ 
+      this.pageWheel(this,e,pagewpr,wrapper);   
 
     });
 
-    // document.getElementById('showGallery').addEventListener('click',() => {
-    //   //click to show gallery section
-    //   pagewpr.classList.add('show');
-    // });
+    document.getElementById('showGallery').addEventListener('click',() => {
+      //click to show gallery section
+      pagewpr.classList.add('show');
+    });
 
-    // document.getElementById('showIntro').addEventListener('click',() => {
-    //   this.slideIntro();
-    // });   
+    document.getElementById('showIntro').addEventListener('click',() => {
+      this.showIntro(homewpr,offset);
+    });   
 
 
   }
@@ -290,7 +271,9 @@ export default {
 @import './style/common.css';
 
 .run .homewpr,
-.run .pagewpr {pointer-events:none; opacity:0.3;}
+.run .pagewpr {pointer-events:none;
+opacity:0.3;
+}
 </style>
 
 <style scoped>
