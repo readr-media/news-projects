@@ -10,11 +10,14 @@
     <a class="share__item toggle" :style="[{ backgroundColor: `${bgColor}`, border: `${border}` } ]"></a>
     <a class="share__item fb"
       :href="`https://www.facebook.com/share.php?u=${shareUrl}`"
+      target="_blank"
       @click="$_share_ga('fb')"></a>
     <a class="share__item line"
       :href="`https://line.me/R/msg/text/?${shareUrl}`"
+      target="_blank"
       @click="$_share_ga('line')"></a>
     <a class="share__item gplus" :href="`https://plus.google.com/share?url=${shareUrl}`"
+      target="_blank"
       @click="$_share_ga('gplus')"></a>
   </div>
 </template>
@@ -78,8 +81,8 @@
 
 .share
   position fixed
-  width 36px
-  height 40px
+  width 66px
+  height 66px
   cursor pointer
   &__item
     position absolute
@@ -94,27 +97,28 @@
     background-repeat no-repeat
     // border-radius 50%
     transition-duration .19s
+    background-color #2b616d
   .toggle
     z-index 910
     background-image url(/proj-assets/president-promise/icon/share/share.png)
-    background-size 100% auto
+    background-size 60% auto
     background-repeat no-repeat
     // background-position -58px 0
   .fb
     // background-color #3b5998
     background-image url(/proj-assets/president-promise/icon/share/share_FB.png)
-    background-size 100% auto
+    background-size 60% auto
     opacity 0
     transition opacity .25s, transform .25s
   .line
     // background-color #00b900
     background-image url(/proj-assets/president-promise/icon/share/share_line.png)
-    background-size 100% auto
+    background-size 60% auto
     opacity 0
     transition opacity .25s, transform .25s
   .gplus
     background-image url(/proj-assets/president-promise/icon/share/share_google.png)
-    background-size 100% auto
+    background-size 60% auto
     opacity 0
     transition opacity .25s, transform .25s
 .share.open
@@ -127,15 +131,15 @@
   //     transform translate3d(0,-147px,0)
   &.down
     .fb
-      transform translate3d(0,64px,0)
+      transform translate3d(0,66px,0)
       opacity 1
       transition opacity .25s, transform .25s
     .line
-      transform translate3d(0,128px,0)
+      transform translate3d(0,132px,0)
       opacity 1
       transition opacity .25s, transform .25s
     .gplus
-      transform translate3d(0,192px,0)
+      transform translate3d(0,198px,0)
       opacity 1
       transition opacity .25s, transform .25s
   // &.left

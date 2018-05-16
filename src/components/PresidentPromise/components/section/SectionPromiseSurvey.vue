@@ -9,6 +9,7 @@
       :key="i"
       :order="i"
       :promise="promise"
+      :surveysPerRoundLength="surveysPerRound.length"
       @surveySubmit="surveySubmit"
     />
     <SlidePromiseSurveyEasterEgg/>
@@ -16,14 +17,12 @@
 </template>
 
 <script>
-import fullPageMixin from '../../_vue-fullpage/fullPageMixin'
 import { find } from 'lodash'
 import SlidePromiseSurvey from '../slide/SlidePromiseSurvey.vue'
 import SlidePromiseSurveyEasterEgg from '../slide/SlidePromiseSurveyEasterEgg.vue'
 import SectionPromiseSurveyProgress from './sectionPromiseSurvey/SectionPromiseSurveyProgress.vue'
 
 export default {
-  mixins: [ fullPageMixin ],
   components: {
     SlidePromiseSurvey,
     SlidePromiseSurveyEasterEgg,

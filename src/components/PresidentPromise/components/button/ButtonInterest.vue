@@ -1,9 +1,11 @@
 <template>
-  <button :class="[ 'interest', { 'interest--active': isActive } ]"
-          @mouseover="toggleActive"
-          @mouseout="toggleActive"
-          @touchstart="toggleActive"
-          @touchend="toggleActive">
+  <button
+    :class="[ 'interest', { 'interest--active': isActive } ]"
+    @mouseover="toggleActive"
+    @mouseout="toggleActive"
+    @touchstart="toggleActive"
+    @touchend="toggleActive"
+  >
     <div class="interest__emotion" :style="{ maskImage: `url(/proj-assets/president-promise/icon/icon_${emotionType}.png)` }"></div>
     <p class="interest__emotion-hint" v-text="EMOTION_HINT_WORDING[emotionType]"></p>
   </button>
@@ -23,9 +25,9 @@ export default {
   data () {
     return {
       EMOTION_HINT_WORDING: {
-        'very-interest': '我有興趣',
+        'very-interest': '我關心',
         'idk': '不知道',
-        'not-interest': '我沒興趣',
+        'not-interest': '我不關心',
       },
     }
   },

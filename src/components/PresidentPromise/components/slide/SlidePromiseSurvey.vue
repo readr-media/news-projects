@@ -1,15 +1,15 @@
 <template>
   <div class="slide" :data-anchor="`slide-${order}`" :ref="`section-promise-survey-${order}`">
     <div class="promise-survey">
-      <h1 class="promise-survey__hint">請挑選出感興趣的政策</h1>
+      <h1 class="promise-survey__hint">請挑選出你關心的政策</h1>
       <!-- No SSR for random generate content -->
       <NoSSR>
         <CardPromiseSurvey class="promise-survey__card" :category="promise.category" :title="promise.title"/>
       </NoSSR>
       <div class="interest-container">
-        <ButtonInterest class="interest-container__button" :emotionType="'very-interest'" @click.native="clickInterest('very-interest')"/>
-        <ButtonInterest class="interest-container__button" :emotionType="'idk'" @click.native="clickInterest('idk')"/>
         <ButtonInterest class="interest-container__button" :emotionType="'not-interest'" @click.native="clickInterest('not-interest')"/>
+        <ButtonInterest class="interest-container__button" :emotionType="'idk'" @click.native="clickInterest('idk')"/>
+        <ButtonInterest class="interest-container__button" :emotionType="'very-interest'" @click.native="clickInterest('very-interest')"/>
       </div>
     </div>
   </div>
@@ -30,6 +30,10 @@ export default {
     promise: {
       type: Object,
       required: true,
+    },
+    surveysPerRoundLength: {
+      type: Number,
+      required: true,
     }
   },
   mixins: [ fullPageMixin, ],
@@ -38,10 +42,26 @@ export default {
     CardPromiseSurvey,
     ButtonInterest,
   },
+  computed: {
+    isCurrentSlideLoaded () {
+      return this.$store.state.PresidentPromise.currentSlideIndex === this.order
+    }
+  },
   methods: {
     clickInterest (interest) {
-      this.order === 9 ? this.moveSectionDown() : this.moveSlideRight()
-      this.$emit('surveySubmit', this.promise.pid, interest)
+      if (this.isCurrentSlideLoaded) {
+        if (this.order === this.surveysPerRoundLength - 1) {
+          if (this.$store.state.PresidentPromise.surveyRoundNum * this.$store.state.PresidentPromise.surveySampleSize >= this.$store.state.PresidentPromise.promiseData.length) {
+            this.moveSlideRight()
+            this.$store.commit('PresidentPromise/DISABLE_NEXT_ROUND_BUTTON')
+          } else {
+            this.moveSectionDown()
+          }
+        } else {
+          this.moveSlideRight()
+        }
+        this.$emit('surveySubmit', this.promise.pid, interest)
+      }
     },
   },
 }

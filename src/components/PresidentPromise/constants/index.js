@@ -1,6 +1,6 @@
 export const categories = {
   '全部': 'all',
-  '感興趣': 'interest',
+  '我關心': 'interest',
   '內政': 'interior',
   '兩岸': 'china',
   '動保': 'animal',

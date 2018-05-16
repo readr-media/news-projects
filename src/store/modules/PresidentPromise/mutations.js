@@ -27,8 +27,8 @@ export default {
     state.surveyBasis = state.surveyBasis.filter(promise => !shouldFilterPids.includes(promise.pid))
   },
   // End of mutations while navigating to the next round survey
-  UPDATE_INTEREST: (state, { interest, promise }) => {
-    state.surveyGroupByInterest[`round${state.surveyRoundNum}`][interest].push(promise)
+  UPDATE_INTEREST: (state, { isUptatedAtResult = false, interest, promise }) => {
+    isUptatedAtResult ? state.surveyGroupByInterest['result']['very-interest'].push(promise) : state.surveyGroupByInterest[`round${state.surveyRoundNum}`][interest].push(promise)
   },
   RESULT_SECTION_NAVIGATED: (state) => {
     state.resultSectionBeenNavigated = true
@@ -36,7 +36,13 @@ export default {
   UPDATE_EMAIL_KEEPTRACKING: (state, email) => {
     state.emailKeepTracking = email
   },
+  SUBMIT_EMAIL_KEEPTRACKING: (state) => {
+    state.emailKeepTrackingIsSubmitted = true
+  },
   UPDATE_SHOWHEADER: (state, bool) => {
     state.showHeader = bool
+  },
+  DISABLE_NEXT_ROUND_BUTTON: (state) => {
+    state.showNextRoundButton = false
   }
 }

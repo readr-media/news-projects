@@ -17,8 +17,8 @@ export default {
     commit('SET_NEXTROUND_SURVEY')
     commit('UPDATE_SURVEYBASIS', getters.surveysPerRoundPids)
   },
-  UPDATE_INTEREST: ({ dispatch, commit }, { interest, promise }) => {
-    commit('UPDATE_INTEREST', { interest, promise })
+  UPDATE_INTEREST: ({ dispatch, commit }, { isUptatedAtResult, interest, promise }) => {
+    commit('UPDATE_INTEREST', { isUptatedAtResult, interest, promise })
     // send data to redis
     sendPromiseInterestRequest(promise, interest)
     if (interest === 'very-interest') {

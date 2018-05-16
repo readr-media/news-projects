@@ -1,15 +1,17 @@
 <template>
   <div class="container">
-    <div v-if="caption" :class="[ 'caption-container', { 'caption-container--fade-out': $store.state.PresidentPromise.resultSectionBeenNavigated } ]">
+    <!-- <div v-if="caption" :class="[ 'caption-container', { 'caption-container--fade-out': $store.state.PresidentPromise.resultSectionBeenNavigated } ]">
       <p class="caption-container__caption" v-text="caption"></p>
       <img class="caption-container__arrow" src="/proj-assets/president-promise/pic_arrow.png" alt="caption-container__arrow">
-    </div>
-    <button :class="[ 'button-with-caption', { 'button-with-caption--active': isActive } ]"
-            @click="toggleLightbox"
-            @mouseover="toggleActive"
-            @mouseout="toggleActive"
-            @touchstart="toggleActive"
-            @touchend="toggleActive">
+    </div> -->
+    <button
+      :class="[ 'button-with-caption', { 'button-with-caption--active': isActive } ]"
+      @click="toggleLightbox"
+      @mouseover="toggleActive"
+      @mouseout="toggleActive"
+      @touchstart="toggleActive"
+      @touchend="toggleActive"
+    >
       <img class="button-with-caption__icon" src="/proj-assets/president-promise/icon/icon_bulb.png" alt="button-with-caption__icon">
     </button>
   </div>
@@ -19,11 +21,11 @@
 import buttonToogleActive from '../../mixins/buttonToogleActive'
 
 export default {
-  props: {
-    caption: {
-      type: String,
-    },
-  },
+  // props: {
+  //   caption: {
+  //     type: String,
+  //   },
+  // },
   mixins: [ buttonToogleActive],
   methods: {
     toggleLightbox () {
@@ -54,7 +56,7 @@ export default {
   align-items center
   transform translate(30px, -20px)
   &--fade-out
-    animation fadeOut 1s linear 2s 1 normal forwards
+    animation fadeOut 1s linear 5s 1 normal forwards
   &__caption
     width 190px
     height 66px

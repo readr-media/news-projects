@@ -73,7 +73,7 @@ export default {
     let result = {}
 
     result['全部'] = state.promiseData
-    result['感興趣'] = getters.surveyVeryInterestPromises
+    result['我關心'] = getters.surveyVeryInterestPromises
     state.promiseData.forEach(promise => {
       const categories = promise.category
       categories.forEach(category => {

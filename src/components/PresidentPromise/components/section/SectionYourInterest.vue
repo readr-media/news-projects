@@ -3,7 +3,7 @@
     <!-- Fullpage will inject scrollOverflow wrapper here -->
     <div class="scroll-container" ref="scroll-container">
       <div class="your-interest">
-        <h1 class="your-interest__hint">你感興趣的政策</h1>
+        <h1 class="your-interest__hint">你關心的政策</h1>
         <template v-if="interests.length === 0">
           <SectionYourInterestNoInterest/>
         </template>
@@ -11,7 +11,7 @@
           <SectionYourInterestPromise v-for="(interest, i) in interests" :key="interest.pid" :order="i" :interest="interest"/>
         </template>
         <div class="your-interest__button-container">
-          <ButtonNavigateMoveTo :navigateType="'more'" @click.native="nextRoundSurvey"/>
+          <ButtonNavigateMoveTo v-if="$store.state.PresidentPromise.showNextRoundButton" :navigateType="'more'" @click.native="nextRoundSurvey"/>
           <ButtonNavigateMoveTo :navigateType="'see-statistic'" @click.native="moveSectionDown"/>
         </div>
       </div>

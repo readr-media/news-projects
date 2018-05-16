@@ -49,7 +49,7 @@ export default {
   position absolute
   top 0
   left 0
-  z-index 9999
+  z-index 10001
   &__dimmed
     width 100vw
     height 100vh

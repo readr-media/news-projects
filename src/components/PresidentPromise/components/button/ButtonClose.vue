@@ -1,9 +1,11 @@
 <template>
-  <button :class="[ 'close', { 'close--active': isActive }, { 'close--small': isOnTooltip } ]"
-          @mouseover="toggleActive"
-          @mouseout="toggleActive"
-          @touchstart="toggleActive"
-          @touchend="toggleActive">
+  <button 
+    :class="[ 'close', { 'close--active': isActive }, { 'close--small': isOnTooltip } ]"
+    @mouseover="toggleActive"
+    @mouseout="toggleActive"
+    @touchstart="toggleActive"
+    @touchend="toggleActive"
+  >
     <div class="close__icon"></div>
   </button>
 </template>

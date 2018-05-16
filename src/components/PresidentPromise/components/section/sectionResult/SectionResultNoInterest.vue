@@ -1,7 +1,7 @@
 <template>
   <div class="no-interest">
     <h1 class="no-interest__icon">!</h1>
-    <p class="no-interest__hint">目前<span class="no-interest__hint--orange">沒有</span>感興趣的政策，何不試試<span class="no-interest__hint--orange">再來十題</span>，找出感興趣的政策吧！</p>
+    <p class="no-interest__hint">目前<span class="no-interest__hint--orange">沒有</span>關心的政策<span v-show="$store.state.PresidentPromise.showNextRoundButton">，何不試試<span class="no-interest__hint--orange">再來十題</span>，找出你關心的政策吧！</span></p>
   </div>
 </template>
 
