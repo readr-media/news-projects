@@ -1,10 +1,12 @@
 <template>
-  <button :class="[ 'lightbox-submit', { 'lightbox-submit--active': isActive } ]"
-          @mouseover="toggleActive"
-          @mouseout="toggleActive"
-          @touchstart="toggleActive"
-          @touchend="toggleActive"
-          v-text="'確定'">
+  <button 
+    :class="[ 'lightbox-submit', { 'lightbox-submit--active': isActive } ]"
+    @mouseover="toggleActive"
+    @mouseout="toggleActive"
+    @touchstart="toggleActive"
+    @touchend="toggleActive"
+    v-text="'確定'"
+  >
   </button>
 </template>
 

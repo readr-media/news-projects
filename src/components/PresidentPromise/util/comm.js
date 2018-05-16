@@ -17,9 +17,11 @@ function promiseDataPreprocess (data) {
 export function promiseDataInit (data) {
   const preprocessed = promiseDataPreprocess(data)
   return preprocessed.map((d, i) => ({
-    pid: `promise-${i}`,
+    pid: `promise-${d['pid']}`,
     title: d['承諾內容'],
     description: d['狀態'],
+    source: d['來源'],
+    sourceLink: d['來源網址'],
     category: d['標籤'].split(','),
     categoryEN: d['標籤'].split(',').map(chineseName => categories[chineseName]),
     promiseDone: d['有做到'] === 'v',

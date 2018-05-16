@@ -16,7 +16,7 @@
             <!--  -->
             <ButtonNavigateMoveTo
               class="swiper-slide__no-interest-moveto"
-              v-show="categoriesFetchStat[category].fetchStat === 'fetchedEmpty'"
+              v-show="categoriesFetchStat[category].fetchStat === 'fetchedEmpty' && $store.state.PresidentPromise.showNextRoundButton"
               :navigateType="'more'"
               @click.native="nextRoundSurvey"
             />
@@ -33,6 +33,7 @@
                 :isInterest="promise.surveyResult === 'very-interest'"
                 :promise="promise"
                 @click.native="handleTooltip(promise, $event)"
+                @reFetchInterestStat="reFetchInterestStat"
               />
             </div>
             <!--  -->
@@ -40,20 +41,22 @@
         </div>
       </div>
     </div>
-    <div class="tooltip-desktop" v-if="isDesktop" v-show="showTooltip">
+    <div class="tooltip-desktop" v-if="VW > 425" v-show="showTooltip" ref="tooltip-desktop">
       <div class="content">
         <TagPromise v-show="currTooltipPromise.promiseDone || currTooltipPromise.isStuck" :tagType="currTooltipPromise.isStuck ? 'stuck' : 'success'"/>
         <blockquote class="tooltip-desktop__stuck-reason" v-show="currTooltipPromise.isStuck"><span>“</span><span>{{ currTooltipPromise.stuckReason }}</span></blockquote>
         <p class="tooltip-desktop__description" v-html="currTooltipPromise.description"></p>
+        <a class="tooltip-desktop__source" :href="currTooltipPromise.sourceLink" target="_blank" v-text="currTooltipPromise.source"></a>
       </div>
       <ButtonClose class="tooltip-desktop__close" :isOnTooltip="true" @click.native="showTooltip = false"/>
+      <div class="tooltip-desktop__indicator"></div>
     </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import { sortBy, isEmpty, mapValues, map, get, } from 'lodash'
+import { sortBy, isEmpty, mapValues, map, debounce } from 'lodash'
 import fullPageMixin from '../../../_vue-fullpage/fullPageMixin'
 import SectionResultCategoryNav from './SectionResultCategoryNav.vue'
 import SectionResultPromise from './SectionResultPromise.vue'
@@ -64,6 +67,7 @@ import TagPromise from '../../TagPromise.vue'
 import ButtonClose from '../../button/ButtonClose.vue'
 import { categories, } from '../../../constants'
 import { getCategoryAllRequest, getCategoryInterestRequest, } from '../../../util/service'
+import { observeDOM, } from '../../../util/comm'
 if (process.browser) {
   const VueAwesomeSwiper = require('vue-awesome-swiper/dist/ssr')
   Vue.use(VueAwesomeSwiper)
@@ -98,13 +102,13 @@ export default {
         this.handleFetchStatAndResult(body.result, '全部')
       })
       // interest
-      this.handleFetchStatAndResult(this.$store.getters['PresidentPromise/promiseDataGroupByCategory']['感興趣'], '感興趣')
+      this.handleFetchStatAndResult(this.$store.getters['PresidentPromise/promiseDataGroupByCategory']['我關心'], '我關心')
     },
     activeIndex () {
       // slide
       this.mySwiper.slideTo(this.activeIndex)
       // fetch
-      if (this.activeCategory !== '全部' && this.activeCategory !== '感興趣' && this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetched' && this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetchedEmpty') {
+      if (this.activeCategory !== '全部' && this.activeCategory !== '我關心' && this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetched' && this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetchedEmpty') {
         this.categoriesFetchStat[this.activeCategory].fetchStat = 'loading'
         getCategoryInterestRequest(this.activeCategory)
         .then(({ body } = data) => {
@@ -147,7 +151,8 @@ export default {
         // },
         // mousewheel: true,
       },
-      isDesktop: get(this.$store.state, 'useragent.isDesktop', false),
+      // isDesktop: get(this.$store.state, 'useragent.isDesktop', false),
+      VW: 0,
     }
   },
   computed: {
@@ -157,7 +162,7 @@ export default {
     promiseRankGroupByCategory () {
       return mapValues(this.$store.getters['PresidentPromise/promiseDataGroupByCategory'], (promises, category) => {
         if (this.activeCategory !== category) return []
-        if (category === '感興趣') return promises
+        if (category === '我關心') return promises
         const categoryPidsInPoll = Object.keys(this.categoriesPollPidData[category])
         const filterOutNotInPollPromises = promises.filter(promise => categoryPidsInPoll.includes(promise.pid))
         return sortBy(filterOutNotInPollPromises, promise => -this.categoriesPollPidData[category][promise.pid])
@@ -181,23 +186,47 @@ export default {
         this.categoriesFetchStat[category].fetchStat = 'fetchedEmpty'
       } else {
         this.categoriesFetchStat[category].fetchStat = 'fetched'
-        if (category !== '感興趣') {
+        if (category !== '我關心') {
           this.categoriesPollPidData[category] = result
         }
       }
     },
     handleTooltip (promise, e) {
-      if (this.isDesktop) {
-        document.querySelector(`.tooltip-desktop`).style.top = `${e.clientY + this.scrollContainerRef.scrollTop - 190}px`
+      if (this.VW > 425) {
+        const YPos = e.clientY + this.scrollContainerRef.scrollTop - 190
         const marginWidth = (window.innerWidth - document.querySelector('.result-swiper-container').clientWidth) / 2
-        document.querySelector(`.tooltip-desktop`).style.left = `${marginWidth + document.querySelector('.result-swiper-container').clientWidth - 100}px`
+        const XPos = marginWidth + document.querySelector('.result-swiper-container').clientWidth - 100
+        // document.querySelector(`.tooltip-desktop`).style.top = `${YPos}px`
+        document.querySelector(`.tooltip-desktop`).style.left = `${XPos}px`
         this.currTooltipPromise = promise
         this.showTooltip = true
+        
+        this.$nextTick()
+        .then(() => {
+          // DOM updated
+          const tooltipHeight = this.$refs['tooltip-desktop'].clientHeight
+          if (e.clientY + tooltipHeight > window.innerHeight) {
+            document.querySelector(`.tooltip-desktop`).style.top = `${YPos - tooltipHeight + 40}px`
+            document.querySelector('.tooltip-desktop__indicator').style.top = 'initial'
+            document.querySelector('.tooltip-desktop__indicator').style.bottom = '12px'
+          } else {
+            document.querySelector(`.tooltip-desktop`).style.top = `${YPos}px`
+            document.querySelector('.tooltip-desktop__indicator').style.top = '12px'
+            document.querySelector('.tooltip-desktop__indicator').style.bottom = 'initial'
+          }
+        })
       }
+    },
+    reFetchInterestStat () {
+      this.handleFetchStatAndResult(this.$store.getters['PresidentPromise/promiseDataGroupByCategory']['我關心'], '我關心')
     }
   },
   mounted () {
-    window.addEventListener('resize', () => { this.showTooltip = false })
+    window.addEventListener('resize', debounce(() => {
+      this.showTooltip = false
+      this.VW = window.innerWidth
+    }, 500))
+    this.VW = window.innerWidth
   }
 }
 </script>
@@ -218,8 +247,10 @@ export default {
   top 0px
   width 260px
   background-color #ffffff
-  z-index 9998
+  z-index 10000
   padding 17px 20px
+  display flex
+  flex-direction column
   &__stuck-reason
     margin 12px 0 auto 0
     position relative
@@ -248,11 +279,22 @@ export default {
       content ""
       display block
       margin 30px 0
+  &__source
+    font-size 14px
+    font-weight 300
+    line-height 0.86
+    text-align right
+    color #1b1b1b
+    text-decoration none
+    border-bottom 1px solid #1b1b1b
+    padding 0 0 6px 0
+    align-self flex-end
+    float right
   &__close
     position absolute
     top calc(-36px / 2)
     right calc(-36px / 2)
-  &:after
+  &__indicator
     position absolute
     top 12px
     left -12px

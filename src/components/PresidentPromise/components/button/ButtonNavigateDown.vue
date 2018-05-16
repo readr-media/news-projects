@@ -1,9 +1,11 @@
 <template>
-  <button :class="[ 'down', { 'down--active': isActive } ]"
-          @mouseover="toggleActive"
-          @mouseout="toggleActive"
-          @touchstart="toggleActive"
-          @touchend="toggleActive">
+  <button
+    :class="[ 'down', { 'down--active': isActive } ]"
+    @mouseover="toggleActive"
+    @mouseout="toggleActive"
+    @touchstart="toggleActive"
+    @touchend="toggleActive"
+  >
     <div class="down__arrow-down"></div>
   </button>
 </template>

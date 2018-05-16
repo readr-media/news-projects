@@ -1,15 +1,19 @@
 <template>
-  <button :class="[ 'move-to', { 'move-to--active': isActive } ]"
-          @mouseover="toggleActive"
-          @mouseout="toggleActive"
-          @touchstart="toggleActive"
-          @touchend="toggleActive">
+  <button 
+    :class="[ 'move-to', { 'move-to--active': isActive } ]"
+    @mouseover="toggleActive"
+    @mouseout="toggleActive"
+    @touchstart="toggleActive"
+    @touchend="toggleActive"
+  >
     <div :class="[ 'move-to__icon', `move-to__icon--${navigateType}`]" :style="{ maskImage: `url(/proj-assets/president-promise/icon/icon_${navigateType}.png)` }"></div>
     <div class="move-to__hint-container">
-      <p class="move-to__hint"
+      <p 
+        class="move-to__hint"
         v-for="(hintParagraph, i) in NAVIGATE_HINT_WORDING[navigateType]"
         :key="`${navigateType}-${i}`"
-        v-text="hintParagraph">
+        v-text="hintParagraph"
+      >
       </p>
     </div>
   </button>
@@ -29,8 +33,8 @@ export default {
   data () {
     return {
       NAVIGATE_HINT_WORDING: {
-        'more': [ '再來十題', '解鎖雷達圖', ],
-        'see-statistic': [ '哪些政策', '大家感興趣', ],
+        'more': [ '再來十題', ],
+        'see-statistic': [ '哪些政策', '大家最關心', ],
       },
     }
   },
@@ -48,7 +52,8 @@ export default {
   transition border .25s
   padding 0 24px
   display flex
-  justify-content space-between
+  justify-content space-around
+  align-items center
   &:focus
     outline none
   &--active
@@ -90,16 +95,19 @@ export default {
     min-width 130px
     min-height 114px
     flex-direction column
+    justify-content flex-start
     align-items center
     padding 16px 0 10px 0
     &__icon
       max-width 36px
       height 38px
-      margin auto auto 8px auto
+      // margin 0 0 8px 0
       &--more
         width 30px
+        margin 0 auto 18px auto
       &--see-statistic
         width 36px
+        margin 0 auto 8px auto
     &__hint-container
       align-items center
     &__hint

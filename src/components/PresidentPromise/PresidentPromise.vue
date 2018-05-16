@@ -1,9 +1,11 @@
 <template>
   <div class="president-promise">
-    <a :class="[ 'president-promise__readr-link', { 'president-promise__readr-link--active': $store.state.PresidentPromise.showHeader } ]" href="https://www.readr.tw/" target="_blank">
-      <img class="president-promise__readr-logo" src="/proj-assets/logo_readr.png" alt="">
-    </a>
-    <AppShareIcon :class="[ 'president-promise__share-icon', { 'president-promise__share-icon--active': $store.state.PresidentPromise.showHeader } ]" :shareUrl="shareLink" top="15px" right="15px" direction="down"/>
+    <transition-group name="fade" mode="out-in">
+      <a v-show="$store.state.PresidentPromise.showHeader" :key="'president-promise__readr-link'" class="president-promise__readr-link" href="https://www.readr.tw/" target="_blank">
+        <img class="president-promise__readr-logo" src="/proj-assets/logo_readr.png" alt="">
+      </a>
+      <AppShareIcon v-show="$store.state.PresidentPromise.showHeader" :key="'president-promise__share-icon'" class="president-promise__share-icon" :shareUrl="shareLink" :bgColor="'#2b616d'" top="0px" right="0px" direction="down"/>
+    </transition-group>
     <full-page :options="options" ref="fullpage" @after-load="afterLoad" @after-slide-load="afterSlideLoad">
       <SectionLanding ref="t0"/>
       <SectionPromiseSurvey ref="t1"/>
@@ -60,11 +62,11 @@ export default {
     return {
       shareLink: `${READR_SITE_URL}president-promise`,
       options: {
+        keyboardScrolling: false,
         lockAnchors: true,
         recordHistory: true,
         controlArrows: false,
         sectionsColor: [ '#2b616d', '#2b616d', '#1f464f', '#2b616d', ],
-        // sectionsColor: [ 'black', '#2b616d', ],
       },
     }
   },
@@ -112,21 +114,11 @@ export default {
     top 14px
     left 14px
     z-index 9997
-    pointer-events none
-    opacity 0
-    transition opacity .25s
-    &--active
-      pointer-events initial
-      opacity 1
-      transition opacity .25s
   &__readr-logo
     width 52px
-  &__share-icon
-    pointer-events none
-    opacity 0
-    transition opacity .25s
-    &--active
-      pointer-events initial
-      opacity 1
-      transition opacity .25s
+
+.fade-enter-active, .fade-leave-active
+  transition all .25s ease
+.fade-enter, .fade-leave-active
+  opacity 0
 </style>
