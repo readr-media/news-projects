@@ -103,7 +103,7 @@ function render (req, res, next) {
   console.log('req.url', req.url)
   console.log('dist path: (./dist)', path.join(__dirname, './dist'))
   
-  if (req.url.indexOf('/api/') === 0) {
+  if (req.url.indexOf('/project-api/') === 0) {
     next()
     return
   }
@@ -155,7 +155,7 @@ app.get('*', isProd ? render : (req, res, next) => {
   readyPromise.then(() => render(req, res, next))
 })
 
-app.use('/api', require('./api/index'))
+app.use('/project-api', require('./api/index'))
 
 const port = process.env.PORT || 8080
 app.listen(port, () => {

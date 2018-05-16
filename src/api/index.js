@@ -56,7 +56,7 @@ function _doPost (url, params) {
 }
 
 export function getSheet ({ params = {} } = {}) {
-  let url = '/api/googlesheet'
+  let url = `/project-api/googlesheet`
   const query = _buildQuery(params)
   if (query && (query.length > 0)) {
     url = url + `?${query}`
@@ -65,7 +65,7 @@ export function getSheet ({ params = {} } = {}) {
 }
 
 export function appendSheet ({ params = {} } = {}) {
-  let url = '/api/googlesheet'
+  let url = `/project-api/googlesheet`
   const query = _buildQuery(params)
   if (query && (query.length > 0)) {
     url = url + `?${query}`
