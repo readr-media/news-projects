@@ -48,7 +48,6 @@ export default {
   watch: {
     isCurrentSectionActive () {
       if (this.isCurrentSectionActive && !this.$store.state.PresidentPromise.resultSectionBeenNavigated) {
-        console.log('section-result');
         this.$store.commit('PresidentPromise/RESULT_SECTION_NAVIGATED')
         this.$store.commit('PresidentPromise/UPDATE_SHOWHEADER', false)
         setTimeout(() => {

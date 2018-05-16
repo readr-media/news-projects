@@ -62,7 +62,7 @@ export default {
     return {
       shareLink: `${READR_SITE_URL}president-promise`,
       options: {
-        keyboardScrolling: false,
+        // keyboardScrolling: false,
         lockAnchors: true,
         recordHistory: true,
         controlArrows: false,
@@ -107,7 +107,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .president-promise
   &__readr-link
     position fixed
@@ -120,5 +120,8 @@ export default {
 .fade-enter-active, .fade-leave-active
   transition all .25s ease
 .fade-enter, .fade-leave-active
+  opacity 0
+
+.grecaptcha-badge
   opacity 0
 </style>

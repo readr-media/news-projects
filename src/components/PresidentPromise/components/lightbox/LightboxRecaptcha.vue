@@ -1,6 +1,6 @@
 <template>
   <div class="lightbox-recaptcha">
-    <vue-recaptcha :sitekey="sitekey" @verify="onVerify">
+    <vue-recaptcha :sitekey="sitekey" @verify="onVerify" size="invisible">
       <button :class="[ 'validate-button', { 'validate-button--alert': alert } ]">
         <div class="validate-button__check-icon" v-show="isHuman"></div>
       </button>
