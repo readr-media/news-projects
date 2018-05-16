@@ -12,6 +12,8 @@ export default {
     currentSlideIndex: 0,
     showHeader: true,
     resultSectionBeenNavigated: false,
+    isLandingButtonClicked: false,
+    surveySectionBeenNavigated: false,
     showNextRoundButton: true,
     // data related store
     promiseData: [],

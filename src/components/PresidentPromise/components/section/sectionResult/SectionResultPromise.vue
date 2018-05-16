@@ -73,6 +73,7 @@ export default {
   methods: {
     handleTooltip () {
       this.showTooltip = !this.showTooltip
+      window.ga('send', 'event', 'projects', 'click', this.promise.pid, { nonInteraction: false })
     }
   },
   mounted () {

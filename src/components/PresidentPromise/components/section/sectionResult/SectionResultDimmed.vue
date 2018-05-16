@@ -27,6 +27,7 @@ export default {
   methods: {
     fadeDimmedOut () {
       this.$emit('fadeDimmedOut')
+      window.ga('send', 'event', 'projects', 'click', 'ok', { nonInteraction: false })
     },
     calcDimensions () {
       // Using JS to calculate the dimensions except using CSS viewport, in order to avoid browser's bottom nav bar causing vh inconsistent

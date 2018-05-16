@@ -5,7 +5,7 @@
       <h1 class="easteregg__h1">恭喜你</h1>
       <h2 class="easteregg__h2">你已經看完小英全部的政策<br>（共 {{ promisesTotal }} 則）</h2>
       <p class="easteregg__description"><span>{{ remainingTimeToNextSection }} 秒後</span>將自動跳轉到你關心的政策，看看哪些政策大家最關心吧！</p>
-      <a class="easteregg__share-button" :href="`https://www.facebook.com/share.php?u=${READR_SITE_URL}president-promise`" target="_blank">分享給朋友</a>
+      <a class="easteregg__share-button" :href="`https://www.facebook.com/share.php?u=${READR_SITE_URL}president-promise`" target="_blank" @click="sendGAFB">分享給朋友</a>
     </div>
   </div>
 </template>
@@ -56,6 +56,9 @@ export default {
       this.countDownInterval = undefined
       this.remainingTimeToNextSection = 3
     },
+    sendGAFB () {
+      window.ga('send', 'event', 'projects', 'click', 'share to fb', { nonInteraction: false })
+    }
   }
 }
 </script>
@@ -105,6 +108,7 @@ export default {
     display flex
     justify-content center
     align-items center
+    text-decoration none
 
 @media (max-width 425px)
   .easteregg

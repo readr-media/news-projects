@@ -7,7 +7,7 @@
       bottom: `${bottom}`,
       left: `${left}`,
       zIndex: `${zIndex}` } ]" @click="$_share_toggleItmes">
-    <a class="share__item toggle" :style="[{ backgroundColor: `${bgColor}`, border: `${border}` } ]"></a>
+    <a class="share__item toggle" :style="[{ border: `${border}` } ]"></a>
     <a class="share__item fb"
       :href="`https://www.facebook.com/share.php?u=${shareUrl}`"
       target="_blank"
@@ -97,7 +97,7 @@
     background-repeat no-repeat
     // border-radius 50%
     transition-duration .19s
-    background-color #2b616d
+    background-color rgba(43, 97, 109, .75)
   .toggle
     z-index 910
     background-image url(/proj-assets/president-promise/icon/share/share.png)

@@ -307,8 +307,8 @@ export default {
 
 .result-swiper-container
   max-width 760px
+  min-width 760px
   margin 37px auto 0 auto
-// .swiper-container
 //   z-index -1
 // .swiper-wrapper
 //   z-index -1
@@ -317,7 +317,7 @@ export default {
   // height calc(100vh - 69px - 44px - 60px - 95px - 37px)
   height auto
   background-color transparent
-  overflow-y scroll
+  // overflow-y scroll
   &__loading
     margin auto
     width auto
@@ -326,8 +326,13 @@ export default {
   &__no-interest-moveto
     margin auto
     box-sizing border-box
-
-
+  &::-webkit-scrollbar
+    display none
+    background-color transparent
+  &::-webkit-scrollbar-track
+    background-color transparent
+  &::-webkit-scrollbar-thumb
+    background-color transparent
 
 @media (max-width 425px)
   .tooltip-desktop
