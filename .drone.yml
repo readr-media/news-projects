@@ -19,6 +19,7 @@ pipeline:
     secrets: [google_credentials]
     commands:
     - gcloud source repos clone default default
+    - cp default/news-projects/config.js api/
     when:
       event: [push]
       branch: [master, dev]
