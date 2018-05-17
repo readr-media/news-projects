@@ -4,6 +4,7 @@
       class="section-result-swiper__nav"
       :activeIndex.sync="activeIndex"
     />
+    <p class="section-result-swiper__modified-time--desktop">政策內容最後更新時間：{{ modifiedTime }}</p>
     <div class="result-swiper-container">
       <div v-swiper:mySwiper="swiperOption" @slideChange="slideChange">
         <div class="swiper-wrapper">
@@ -17,8 +18,8 @@
             <ButtonNavigateMoveTo
               class="swiper-slide__no-interest-moveto"
               v-show="categoriesFetchStat[category].fetchStat === 'fetchedEmpty' && $store.state.PresidentPromise.showNextRoundButton"
-              :navigateType="'more'"
-              @click.native="nextRoundSurvey"
+              :navigateType="$store.getters['PresidentPromise/hadSurveyTaken'] ? 'more' : 'take-survey'"
+              @click.native="$store.getters['PresidentPromise/hadSurveyTaken'] ? nextRoundSurvey : moveTo('section-promise-survey')"
             />
             <Loading
               class="swiper-slide__loading"
@@ -41,6 +42,7 @@
         </div>
       </div>
     </div>
+    <p class="section-result-swiper__modified-time--mobile">政策內容最後更新時間：{{ modifiedTime }}</p>
     <div class="tooltip-desktop" v-if="VW > 425" v-show="showTooltip" ref="tooltip-desktop">
       <div class="content">
         <TagPromise v-show="currTooltipPromise.promiseDone || currTooltipPromise.isStuck" :tagType="currTooltipPromise.isStuck ? 'stuck' : 'success'"/>
@@ -65,12 +67,21 @@ import ButtonNavigateMoveTo from '../../button/ButtonNavigateMoveTo.vue'
 import Loading from '../../Loading.vue'
 import TagPromise from '../../TagPromise.vue'
 import ButtonClose from '../../button/ButtonClose.vue'
-import { categories, } from '../../../constants'
+import { categories, PROMISES_SHEET_ID, DEFAULT_DRIVE_FILE_FIELDS, } from '../../../constants'
 import { getCategoryAllRequest, getCategoryInterestRequest, } from '../../../util/service'
 import { observeDOM, } from '../../../util/comm'
 if (process.browser) {
   const VueAwesomeSwiper = require('vue-awesome-swiper/dist/ssr')
   Vue.use(VueAwesomeSwiper)
+}
+
+const fetchSheetModifiedTime = (store, { fileId, fields }) => {
+  return store.dispatch('PresidentPromise/FETCH_PROMISEDATA_DRIVE_FILE', {
+    params: {
+      fileId: fileId,
+      fields: fields,
+    }
+  })
 }
 
 export default {
@@ -153,6 +164,7 @@ export default {
       },
       // isDesktop: get(this.$store.state, 'useragent.isDesktop', false),
       VW: 0,
+      modifiedTime: '',
     }
   },
   computed: {
@@ -221,6 +233,16 @@ export default {
       this.handleFetchStatAndResult(this.$store.getters['PresidentPromise/promiseDataGroupByCategory']['我關心'], '我關心')
     }
   },
+  beforeMount () {
+    fetchSheetModifiedTime(this.$store, {
+      fileId: PROMISES_SHEET_ID,
+      fields: DEFAULT_DRIVE_FILE_FIELDS,
+    })
+    .then(({ modifiedTime })=> {
+      const date = new Date(modifiedTime)
+      this.modifiedTime = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${date.getDate()}`
+    })
+  },
   mounted () {
     window.addEventListener('resize', debounce(() => {
       this.showTooltip = false
@@ -241,6 +263,17 @@ export default {
     top 0
     left 0
     z-index 9999
+  &__modified-time
+    &--desktop
+      font-size 14px
+      font-weight 300
+      line-height 1.71
+      text-align right
+      color #c9c9c9
+      width 760px
+      margin 18px auto
+    &--mobile
+      display none
 .tooltip-desktop
   position absolute
   right 0px
@@ -306,9 +339,8 @@ export default {
     border-color transparent white transparent transparent
 
 .result-swiper-container
-  max-width 760px
-  min-width 760px
-  margin 37px auto 0 auto
+  width 760px
+  margin 0 auto
 //   z-index -1
 // .swiper-wrapper
 //   z-index -1
@@ -335,10 +367,23 @@ export default {
     background-color transparent
 
 @media (max-width 425px)
+  .section-result-swiper
+    &__modified-time
+      &--desktop
+        display none
+      &--mobile
+        display block
+        font-size 14px
+        font-weight 300
+        line-height 1.71
+        text-align center
+        color #c9c9c9
+        width 100%
+        margin 19px 0
   .tooltip-desktop
     display none
   .result-swiper-container
-    max-width 100%
+    width 100%
     margin 0 auto
   .swiper-slide
     &__no-interest

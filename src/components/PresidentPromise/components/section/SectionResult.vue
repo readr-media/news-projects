@@ -63,7 +63,7 @@ export default {
     return {
       showLightbox: false,
       showLightboxToogleButton: false,
-      showDimmed: true
+      showDimmed: true,
       // shouldLoadmore: false,
     }
   },

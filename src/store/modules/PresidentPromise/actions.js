@@ -12,6 +12,11 @@ export default {
     })
     .catch(err => { console.log(err) })
   },
+  FETCH_PROMISEDATA_DRIVE_FILE: ({ dispatch, commit }, { params }) => {
+    return dispatch('FETCH_DRIVE_FILE', { params }, { root: true })
+    .then(({ body }) => body)
+    .catch(err => { console.log(err) })
+  },
   SURVEY_NEXT_ROUND: ({ commit, getters }) => {
     commit('INCREMENT_SURVEY_ROUND')
     commit('SET_NEXTROUND_SURVEY')

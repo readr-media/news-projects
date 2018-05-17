@@ -1,6 +1,7 @@
 import {
   getSheet,
   appendSheet,
+  getDriveFile,
 } from '../api'
 
 export default {
@@ -20,6 +21,15 @@ export default {
     })
     .catch(err => {
       console.error('Error while appending sheet', err)
+    })
+  },
+  FETCH_DRIVE_FILE: ({ state }, { params }) => {
+    return getDriveFile({ params })
+    .then(({ status, body }) => {
+      return { status, body }
+    })
+    .catch(err => {
+      console.error('Error while fetching sheet', err)
     })
   },
 }

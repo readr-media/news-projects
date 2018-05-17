@@ -9,6 +9,8 @@ function _buildQuery (params = {}) {
     'spreadsheet_id',
     'range',
     'value_input_option',
+    'file_id',
+    'fields',
   ]
   const snakeCaseParams = _.mapKeys(params, (value, key) => _.snakeCase(key))
   whitelist.forEach((ele) => {
@@ -71,4 +73,13 @@ export function appendSheet ({ params = {} } = {}) {
     url = url + `?${query}`
   }
   return _doPost(url, params.resource)
+}
+
+export function getDriveFile ({ params = {} } = {}) {
+  let url = `/project-api/googledrive`
+  const query = _buildQuery(params)
+  if (query && (query.length > 0)) {
+    url = url + `?${query}`
+  }
+  return _doFetch(url)
 }
