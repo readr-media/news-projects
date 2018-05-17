@@ -100,6 +100,7 @@ export default {
     },
     fadeDimmedOut () {
       this.showDimmed = false
+      this.showResult = true
       this.showLightboxToogleButton = true
       this.$store.commit('PresidentPromise/UPDATE_SHOWHEADER', true)
     }
