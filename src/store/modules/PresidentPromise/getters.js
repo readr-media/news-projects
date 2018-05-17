@@ -84,6 +84,11 @@ export default {
     
     return result
   },
+  hadSurveyTaken: (state) => {
+    return state.surveyGroupByInterest.round1['not-interest'].length !== 0 ||
+      state.surveyGroupByInterest.round1['idk'].length !== 0 ||
+      state.surveyGroupByInterest.round1['very-interest'].length !== 0
+  },
   heightMobile: () => {
     return getVH()
   }

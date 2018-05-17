@@ -4,7 +4,7 @@
       class="section-result-swiper__nav"
       :activeIndex.sync="activeIndex"
     />
-    <p class="section-result-swiper__modified-time">政策內容最後更新時間：{{ modifiedTime }}</p>
+    <p class="section-result-swiper__modified-time--desktop">政策內容最後更新時間：{{ modifiedTime }}</p>
     <div class="result-swiper-container">
       <div v-swiper:mySwiper="swiperOption" @slideChange="slideChange">
         <div class="swiper-wrapper">
@@ -18,8 +18,8 @@
             <ButtonNavigateMoveTo
               class="swiper-slide__no-interest-moveto"
               v-show="categoriesFetchStat[category].fetchStat === 'fetchedEmpty' && $store.state.PresidentPromise.showNextRoundButton"
-              :navigateType="'more'"
-              @click.native="nextRoundSurvey"
+              :navigateType="$store.getters['PresidentPromise/hadSurveyTaken'] ? 'more' : 'take-survey'"
+              @click.native="$store.getters['PresidentPromise/hadSurveyTaken'] ? nextRoundSurvey : moveTo('section-promise-survey')"
             />
             <Loading
               class="swiper-slide__loading"
@@ -42,6 +42,7 @@
         </div>
       </div>
     </div>
+    <p class="section-result-swiper__modified-time--mobile">政策內容最後更新時間：{{ modifiedTime }}</p>
     <div class="tooltip-desktop" v-if="VW > 425" v-show="showTooltip" ref="tooltip-desktop">
       <div class="content">
         <TagPromise v-show="currTooltipPromise.promiseDone || currTooltipPromise.isStuck" :tagType="currTooltipPromise.isStuck ? 'stuck' : 'success'"/>
@@ -237,7 +238,7 @@ export default {
       fileId: PROMISES_SHEET_ID,
       fields: DEFAULT_DRIVE_FILE_FIELDS,
     })
-    .then(({ modifiedTime } )=> {
+    .then(({ modifiedTime })=> {
       const date = new Date(modifiedTime)
       this.modifiedTime = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${date.getDate()}`
     })
@@ -263,13 +264,16 @@ export default {
     left 0
     z-index 9999
   &__modified-time
-    font-size 14px
-    font-weight 300
-    line-height 1.71
-    text-align right
-    color #c9c9c9
-    width 760px
-    margin 18px auto
+    &--desktop
+      font-size 14px
+      font-weight 300
+      line-height 1.71
+      text-align right
+      color #c9c9c9
+      width 760px
+      margin 18px auto
+    &--mobile
+      display none
 .tooltip-desktop
   position absolute
   right 0px
@@ -363,6 +367,19 @@ export default {
     background-color transparent
 
 @media (max-width 425px)
+  .section-result-swiper
+    &__modified-time
+      &--desktop
+        display none
+      &--mobile
+        display block
+        font-size 14px
+        font-weight 300
+        line-height 1.71
+        text-align center
+        color #c9c9c9
+        width 100%
+        margin 19px 0
   .tooltip-desktop
     display none
   .result-swiper-container

@@ -5,6 +5,7 @@
         <img class="president-promise__readr-logo" src="/proj-assets/logo_readr.png" alt="">
       </a>
       <AppShareIcon v-show="$store.state.PresidentPromise.showHeader" :key="'president-promise__share-icon'" class="president-promise__share-icon" :shareUrl="shareLink" top="0px" right="0px" direction="down"/>
+      <ButtonToResult v-show="$store.state.PresidentPromise.showHeader && showToResultButton" :key="'president-promise__move-to-result'" class="president-promise__move-to-result"/>
     </transition-group>
     <full-page :options="options" ref="fullpage" @after-load="afterLoad" @after-slide-load="afterSlideLoad">
       <SectionLanding ref="t0"/>
@@ -18,6 +19,8 @@
 <script>
 // share icon
 import AppShareIcon from './components/AppShareIcon.vue'
+// move to result navigation button
+import ButtonToResult from './components/button/ButtonToResult.vue'
 // Fullpage.js Vue wrapper 
 import FullPage from './_vue-fullpage/FullPage.vue'
 import fullPageMixin from './_vue-fullpage/fullPageMixin'
@@ -52,6 +55,7 @@ export default {
   },
   components: {
     AppShareIcon,
+    ButtonToResult,
     FullPage,
     SectionLanding,
     SectionPromiseSurvey,
@@ -69,6 +73,11 @@ export default {
         controlArrows: false,
         sectionsColor: [ '#2b616d', '#2b616d', '#1f464f', '#2b616d', ],
       },
+    }
+  },
+  computed: {
+    showToResultButton () {
+      return this.$store.state.PresidentPromise.currentSection === 'section-landing' || this.$store.state.PresidentPromise.currentSection === 'section-promise-survey'
     }
   },
   methods: {
@@ -133,6 +142,11 @@ export default {
     z-index 9997
   &__readr-logo
     width 52px
+  &__move-to-result
+    position fixed
+    top 14px
+    right 96px
+    z-index 9997
 
 .fade-enter-active, .fade-leave-active
   transition all .25s ease
@@ -141,4 +155,9 @@ export default {
 
 .grecaptcha-badge
   opacity 0
+
+@media (max-width 425px)
+  .president-promise
+    &__move-to-result
+      right 70px
 </style>

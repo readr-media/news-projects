@@ -7,7 +7,11 @@
     @touchend="toggleActive"
     @click="sendGA"
   >
-    <div :class="[ 'move-to__icon', `move-to__icon--${navigateType}`]" :style="{ maskImage: `url(/proj-assets/president-promise/icon/icon_${navigateType}.png)` }"></div>
+    <div 
+      :class="[ 'move-to__icon', `move-to__icon--${navigateType}`]"
+      :style="{ maskImage: `url(/proj-assets/president-promise/icon/icon_${navigateType === 'see-statistic' ? 'see-statistic' : 'more'}.png)` }"
+    >
+    </div>
     <div class="move-to__hint-container">
       <p 
         class="move-to__hint"
@@ -36,12 +40,13 @@ export default {
       NAVIGATE_HINT_WORDING: {
         'more': [ '再來十題', ],
         'see-statistic': [ '哪些政策', '大家最關心', ],
+        'take-survey' : [ '篩選政策', '（10 題）' ],
       },
     }
   },
   methods: {
     sendGA () {
-      window.ga('send', 'event', 'projects', 'click', `${this.navigateType === 'more' ? 'more10' : 'popular'}`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', `${this.navigateType}`, { nonInteraction: false })
     }
   }
 }
@@ -56,7 +61,7 @@ export default {
   background-color transparent
   border 2px solid white
   transition border .25s
-  padding 0 24px
+  padding 0 18px 0 24px
   display flex
   justify-content space-around
   align-items center
@@ -73,8 +78,8 @@ export default {
     -webkit-mask-repeat no-repeat
     background-color white
     transition background-color .25s
-    &--more
-      width 37px
+    &--more, &--take-survey
+      width 35px
     &--see-statistic
       width 42px
     ~/--active &
@@ -113,6 +118,9 @@ export default {
         margin 0 auto 18px auto
       &--see-statistic
         width 36px
+        margin 0 auto 8px auto
+      &--take-survey
+        width 30px
         margin 0 auto 8px auto
     &__hint-container
       align-items center
