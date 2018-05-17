@@ -47,8 +47,8 @@ const fetchSheet = (store, { spreadsheetId, range }) => {
 export default {
   metaInfo () {
     return {
-      title: '小英，說好的承諾呢？',
-      description: '520 兩週年政見追蹤',
+      title: '小英，說好的承諾呢？——520兩週年政見追蹤',
+      description: '兩年了，你還記得總統曾經對人民許下的承諾嗎？來看看你關心的事情有沒有被兌現！',
       metaUrl: 'president-promise',
       metaImage: 'president-promise/ogimage.jpg'
     }
