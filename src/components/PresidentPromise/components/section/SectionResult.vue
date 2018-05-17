@@ -1,7 +1,7 @@
 <template>
   <div class="section" data-anchor="section-result" ref="section-result">
     <!-- <div class="scroll-container" ref="scroll-container" @scroll="scroll"> -->
-    <div class="scroll-container" ref="scroll-container" @scroll="scroll">
+    <div v-show="showResult" class="scroll-container" ref="scroll-container" @scroll="scroll">
       <div class="result" ref="result">
         <h1 class="result__title">政策追蹤排行榜</h1>
         <h2 class="result__subtitle">排行榜會隨著大家關心的程度變化！READr 的記者也會針對這些政策作追蹤報導，敬請期待！</h2>
@@ -52,6 +52,7 @@ export default {
         this.$store.commit('PresidentPromise/UPDATE_SHOWHEADER', false)
         setTimeout(() => {
           this.fadeDimmedOut()
+          this.showResult = true
         }, 5000)
       }
     },
@@ -64,6 +65,7 @@ export default {
       showLightbox: false,
       showLightboxToogleButton: false,
       showDimmed: true,
+      showResult: false,
       // shouldLoadmore: false,
     }
   },
@@ -98,6 +100,7 @@ export default {
     },
     fadeDimmedOut () {
       this.showDimmed = false
+      this.showResult = true
       this.showLightboxToogleButton = true
       this.$store.commit('PresidentPromise/UPDATE_SHOWHEADER', true)
     }
