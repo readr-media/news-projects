@@ -34,5 +34,6 @@ router.use(bodyParser.urlencoded({ extended: false, }))
 router.use(bodyParser.json())
 
 router.use('/googlesheet', require('./middle/googlesheet'))
+router.use('/googledrive', require('./middle/googledrive'))
 
 module.exports = router

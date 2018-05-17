@@ -1,3 +1,6 @@
+export const PROMISES_SHEET_ID = '18LjwTRLQM9TqVHt5dfY3Dlk-nmb7okxaZ4gjiLr5PZc'
+export const DEFAULT_SHEET_RANGE = 'sheet1'
+export const DEFAULT_DRIVE_FILE_FIELDS = 'modifiedTime'
 export const categories = {
   '全部': 'all',
   '我關心': 'interest',

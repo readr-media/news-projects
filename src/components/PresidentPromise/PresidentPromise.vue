@@ -30,6 +30,7 @@ import SectionResult from './components/section/SectionResult.vue'
 import PresidentPromiseStoreModule from '../../store/modules/PresidentPromise'
 // constants
 import { READR_SITE_URL, SITE_DOMAIN_DEV } from '../../constants'
+import { PROMISES_SHEET_ID, DEFAULT_SHEET_RANGE } from './constants'
 
 const fetchSheet = (store, { spreadsheetId, range }) => {
   return store.dispatch('PresidentPromise/FETCH_PROMISEDATA', {
@@ -62,7 +63,7 @@ export default {
     return {
       shareLink: `${READR_SITE_URL}president-promise`,
       options: {
-        keyboardScrolling: false,
+        // keyboardScrolling: false,
         lockAnchors: true,
         recordHistory: true,
         controlArrows: false,
@@ -113,8 +114,8 @@ export default {
   },
   beforeMount () {
     fetchSheet(this.$store, {
-      spreadsheetId: '18LjwTRLQM9TqVHt5dfY3Dlk-nmb7okxaZ4gjiLr5PZc',
-      range: 'sheet1',
+      spreadsheetId: PROMISES_SHEET_ID,
+      range: DEFAULT_SHEET_RANGE,
     })
   },
   mounted () {

@@ -4,6 +4,7 @@
       class="section-result-swiper__nav"
       :activeIndex.sync="activeIndex"
     />
+    <p class="section-result-swiper__modified-time">政策內容最後更新時間：{{ modifiedTime }}</p>
     <div class="result-swiper-container">
       <div v-swiper:mySwiper="swiperOption" @slideChange="slideChange">
         <div class="swiper-wrapper">
@@ -65,12 +66,21 @@ import ButtonNavigateMoveTo from '../../button/ButtonNavigateMoveTo.vue'
 import Loading from '../../Loading.vue'
 import TagPromise from '../../TagPromise.vue'
 import ButtonClose from '../../button/ButtonClose.vue'
-import { categories, } from '../../../constants'
+import { categories, PROMISES_SHEET_ID, DEFAULT_DRIVE_FILE_FIELDS, } from '../../../constants'
 import { getCategoryAllRequest, getCategoryInterestRequest, } from '../../../util/service'
 import { observeDOM, } from '../../../util/comm'
 if (process.browser) {
   const VueAwesomeSwiper = require('vue-awesome-swiper/dist/ssr')
   Vue.use(VueAwesomeSwiper)
+}
+
+const fetchSheetModifiedTime = (store, { fileId, fields }) => {
+  return store.dispatch('PresidentPromise/FETCH_PROMISEDATA_DRIVE_FILE', {
+    params: {
+      fileId: fileId,
+      fields: fields,
+    }
+  })
 }
 
 export default {
@@ -153,6 +163,7 @@ export default {
       },
       // isDesktop: get(this.$store.state, 'useragent.isDesktop', false),
       VW: 0,
+      modifiedTime: '',
     }
   },
   computed: {
@@ -221,6 +232,16 @@ export default {
       this.handleFetchStatAndResult(this.$store.getters['PresidentPromise/promiseDataGroupByCategory']['我關心'], '我關心')
     }
   },
+  beforeMount () {
+    fetchSheetModifiedTime(this.$store, {
+      fileId: PROMISES_SHEET_ID,
+      fields: DEFAULT_DRIVE_FILE_FIELDS,
+    })
+    .then(({ modifiedTime } )=> {
+      const date = new Date(modifiedTime)
+      this.modifiedTime = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${date.getDate()}`
+    })
+  },
   mounted () {
     window.addEventListener('resize', debounce(() => {
       this.showTooltip = false
@@ -241,6 +262,14 @@ export default {
     top 0
     left 0
     z-index 9999
+  &__modified-time
+    font-size 14px
+    font-weight 300
+    line-height 1.71
+    text-align right
+    color #c9c9c9
+    width 760px
+    margin 18px auto
 .tooltip-desktop
   position absolute
   right 0px
@@ -307,7 +336,7 @@ export default {
 
 .result-swiper-container
   width 760px
-  margin 37px auto 0 auto
+  margin 0 auto
 //   z-index -1
 // .swiper-wrapper
 //   z-index -1
