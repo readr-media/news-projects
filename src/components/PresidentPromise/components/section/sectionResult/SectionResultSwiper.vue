@@ -306,8 +306,7 @@ export default {
     border-color transparent white transparent transparent
 
 .result-swiper-container
-  max-width 760px
-  min-width 760px
+  width 760px
   margin 37px auto 0 auto
 //   z-index -1
 // .swiper-wrapper
@@ -338,7 +337,7 @@ export default {
   .tooltip-desktop
     display none
   .result-swiper-container
-    max-width 100%
+    width 100%
     margin 0 auto
   .swiper-slide
     &__no-interest
