@@ -25,8 +25,11 @@
   <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`"></share>
 
   <div class="outerwpr">
-    <home></home>
-    <page></page>
+    <!-- <div class="scroller"></div> -->
+    <div class="container">      
+      <home></home>
+      <page></page>
+    </div>
   </div>  
 
 </div>
@@ -78,11 +81,14 @@ export default {
       // shareLinkGallery: `${SITE_URL}farmhouse/gallery`
       currentDevice: '',
 
-      introVisibility: false,
+      scrollPosition: 0,
+      scrollDirection: '',
+
+      // introVisibility: false,
       // wheelTimer: null,
   
-      homeTransitionEnd: false,
-      galleryTransitionEnd: false,
+      // homeTransitionEnd: false,
+      // galleryTransitionEnd: false,
 
       // galleryVisibility: false
 
@@ -106,82 +112,14 @@ export default {
 
   methods: {
 
-    getIntroHeight: function(){
+    getIntroHeight: () => {
       return document.querySelector('.home-intro').offsetHeight;
-    },
-    
-    showIntro: function(element, top){     
-      element.style.top = top * -1 + 'px';          
-    },
+    },   
 
-    checkHomePosition: function(that, home){ 
-      
-      let top = home.style.top;
-
-      if(top == '0px'){
-        that.introVisibility = false;
-      } else {
-        that.introVisibility = true;
-      }
-      
-    },
-
-    homeWheel: function(that,e,homewpr,pagewpr,offset,wrapper){  
-           
-      let y = e.deltaY;
-
-      console.log(y);
-
-      if(y > 0){ //往下捲動
-
-        if(that.introVisibility == false){
-          // 當 intro 還沒出現
-          that.showIntro(homewpr,offset);
-          wrapper.classList.add('run');
-          return false;  
-
-        } else if (that.introVisibility == true && that.homeTransitionEnd == true) {
-          // 當 intro 已顯示  
-            wrapper.classList.add('run');
-            pagewpr.classList.add('show');  
-          return false;
-        }
-
-      } else if (y < 0 && that.homeTransitionEnd == true){ //往上捲動
-
-          if(that.introVisibility == false){
-
-            console.log('不動作');
-            return false;
-
-          } else {            
-              wrapper.classList.add('run');
-              homewpr.style.top = '0px';  
-              that.homeTransitionEnd = false;
-              return false;
-          }        
-
-        }
-
-          
-    },
-    
-    pageWheel: function(that,e,pagewpr,wrapper){  
-
-      let y = e.deltaY;
-
-      if (y < 0 && this.galleryTransitionEnd == true){
-        //往上捲動，隱藏 gallery
-        wrapper.classList.add('run');
-        pagewpr.classList.remove('show');  
-        return false;    
-
-      } else {
-        console.log('不動作');
-        return false;
-      }
-
+    getScrollPosition: (element) => {
+      return element.getBoundingClientRect().top;
     }
+
 
   },
 
@@ -193,73 +131,55 @@ export default {
 
   mounted: function() {
 
+    // const scrollDir = require('./common/scrolldir.auto.min.js');
+    // console.log(scrollDir);
+
+    let wrapper = document.querySelector('.outerwpr');
+    let container = document.querySelector('.container');
+    // let scroller = document.querySelector('.scroller');
+
     let homewpr = document.querySelector('.homewpr');
     let pagewpr = document.querySelector('.pagewpr');
 
-    let wrapper = document.querySelector('.outerwpr');
+    if(this.currentDevice == 'desktop'){
 
-    homewpr.style.top = '0px';
-
-    //get intro height
-    let offset = this.getIntroHeight();
-
-    // resize
-    window.addEventListener('resize',() => {
-      offset = this.getIntroHeight();
-    }, false);
-
-    //window prevent wheel
-    window.addEventListener('wheel',() => {
-
-      if(this.homeTransitionEnd == false || this.galleryTransitionEnd == false){
-        console.log("禁止滾動");
-        return false
-      }
-
-    }, false);
-
-    
-    // transition end
-    homewpr.addEventListener('transitionend',() => {
+      // wrapper.scrollTo(0,0);
       
-      this.homeTransitionEnd = true;
-      wrapper.classList.remove('run');
+      this.scrollPosition = this.getScrollPosition(container);
 
-      this.checkHomePosition(this,homewpr);      
-      console.log('run remove (homepwr)');      
-        
-    },false);
-    
-    // wheel: homewpr
-    homewpr.addEventListener('wheel',(e) => {   
-      this.homeWheel(this,e,homewpr,pagewpr,offset,wrapper);    
-    }, false);  
-    
-    // transition end
-    pagewpr.addEventListener('transitionend',() => {
+      // intro 高度
+      let introHeight = this.getIntroHeight();    
+     
+      wrapper.addEventListener('scroll',(e) => {        
 
-      this.galleryTransitionEnd = true;   
-      wrapper.classList.remove('run'); 
-      console.log('run remove (gallery)');
+        let position = this.getScrollPosition(container);
 
-    },false);
+        console.log(position);
 
-    //wheel pagewpr
-    pagewpr.addEventListener('wheel',(e) => {
- 
-      this.pageWheel(this,e,pagewpr,wrapper);   
+        if(position > this.scrollPosition){
+          // scroll up
+          this.scrollDirection = 'up';
+          console.log('up');
 
-    });
+        } else {
+          // scroll down
+          this.scrollDirection = 'down';
+          console.log('down');
 
-    document.getElementById('showGallery').addEventListener('click',() => {
-      //click to show gallery section
-      pagewpr.classList.add('show');
-    });
+          // container.style.top = introHeight * -1 + 'px';
 
-    document.getElementById('showIntro').addEventListener('click',() => {
-      this.showIntro(homewpr,offset);
-    });   
+        }
 
+        this.scrollPosition = position;
+
+
+
+      }, false);
+
+    //  console.log(container.getBoundingClientRect().top);
+
+
+    }
 
   }
 
@@ -270,12 +190,24 @@ export default {
 @import './style/animate.css';
 @import './style/common.css';
 
-.run .homewpr,
+body {width:100%; height:100vh; overflow:hidden;}
+/* .run .homewpr,
 .run .pagewpr {pointer-events:none;
 opacity:0.3;
-}
+} */
 </style>
 
 <style scoped>
-.outerwpr {width:100%; height:100vh; position:relative; overflow:hidden;}
+
+.outerwpr {position:fixed; left:0; top:0; 
+width:calc(100% + 50px); height:100vh; overflow-y:scroll;
+touch-action: pan-y pan-x;
+}
+.container {position:absolute; left:0; top:0; width:100%;
+transition:500ms; transition-property:top;
+}
+/* .scroller {width:100%; height:200vh; position:relative;
+background-color:pink; opacity:0.3;
+} */
+
 </style>

@@ -87,10 +87,10 @@ export default {
 </script>
 
 <style scoped>
-.homewpr {
-width:100%; height:100vh;
+.homewpr {position:relative;
+/* width:100%; height:100vh;
 position:absolute; left:0; top:0;  
-transition:700ms; transition-property:top;
+transition:700ms; transition-property:top; */
 /* transition-timing-function:linear; */
 }
 /* .run .homewpr {pointer-events:none; opacity:0.3;} */
