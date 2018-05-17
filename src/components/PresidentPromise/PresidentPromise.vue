@@ -47,8 +47,8 @@ const fetchSheet = (store, { spreadsheetId, range }) => {
 export default {
   metaInfo () {
     return {
-      title: '520 週年政策隨機篩',
-      description: '透過 10 項政策快篩，看小英目前的施政方向是否擊中你的心。',
+      title: '小英，說好的承諾呢？',
+      description: '520 兩週年政見追蹤',
       metaUrl: 'president-promise',
       metaImage: 'president-promise/ogimage.jpg'
     }
