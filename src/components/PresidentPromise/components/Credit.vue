@@ -6,8 +6,8 @@
       <p>網站／熊凱文</p>
     </div>
     <div class="credit__external">
-      <p>原住民族政策合作／<br>原住民族青年陣線政策監督平台</p>
-      <p>政策諮詢／<br>台灣高等教育產業工會、<br>全國教師工會總聯合會、<br>台灣勞工陣線、<br>台灣文化政策研究學會、<br>台北市醫師職業工會、<br class="important">經濟民主連合、<br>綠色公民行動聯盟、<br>大學改革陣線、<br>技職3.0、<br>民間監督健保聯盟、<br>婦女新知基金會</p>
+      <p>原住民族政策合作／<br><a href="https://watching-tsai.indigenousyf.tw" target="_blank">原住民族青年陣線政策監督平台</a></p>
+      <p>政策諮詢／<br>台灣高等教育產業工會、<br>全國教師工會總聯合會、<br>台灣勞工陣線、<br>台灣文化政策研究學會、<br>台北市醫師職業工會、<br class="important">經濟民主連合、<br>綠色公民行動聯盟、<br>大學改革陣線、<br>《技職3.0》執行長黃偉翔、<br>民間監督健保聯盟、<br>婦女新知基金會</p>
     </div>
   </div>
 </template>
@@ -46,6 +46,8 @@
         display none
         &.important
           display initial
+      > a
+        color #c9c9c9
     > p + p
       margin 10px 0 0 0
 
