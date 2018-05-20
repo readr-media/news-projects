@@ -22,8 +22,7 @@ export default {
   components: {
 
   },
-
-  // Component data must be a function.
+ 
   data: function() {
     return {
 
@@ -44,42 +43,11 @@ export default {
 
   methods: {
 
-    // slideIntro: function(){
-
-    //   let homewpr = document.querySelector('.homewpr');
-
-    //   let offset = document.querySelector('.home-intro').offsetHeight;
-    //   homewpr.style.top = offset * -1 + 'px';
-      
-    //   setTimeout(() => {
-    //     homewpr.classList.add('up');
-    //   },500);
-      
-    //   return false;
-    // }
 
   },
 
   mounted: function(){
-
-    // let homewpr = document.querySelector('.homewpr');
-
-    // homewpr.addEventListener('wheel',(e) => {      
-      
-    //   if (e.deltaY > 0){
-    //     this.slideIntro();
-    //     // return false; 
-    //   } else if (e.deltaY < 0){
-    //     homewpr.style.top = '0';
-    //     homewpr.classList.remove('up');
-    //     // return false; 
-    //   }
-      
-    // });
-
-    // document.getElementById('showIntro').addEventListener('click',() => {
-    //   this.slideIntro();
-    // });    
+   
 
   }
 
@@ -87,13 +55,7 @@ export default {
 </script>
 
 <style scoped>
-.homewpr {position:relative;
-/* width:100%; height:100vh;
-position:absolute; left:0; top:0;  
-transition:700ms; transition-property:top; */
-/* transition-timing-function:linear; */
-}
-/* .run .homewpr {pointer-events:none; opacity:0.3;} */
+.homewpr {position:relative;}
 
 .opening {width:100%; height:100vh; position:relative;
 background-color:#fff;

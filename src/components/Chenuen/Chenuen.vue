@@ -25,10 +25,11 @@
   <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`"></share>
 
   <div class="outerwpr">
-    <!-- <div class="scroller"></div> -->
-    <div class="container">      
-      <home></home>
-      <page></page>
+    <div class="scroller">
+      <div class="container">      
+        <home></home>
+        <page></page>
+      </div>
     </div>
   </div>  
 
@@ -50,6 +51,15 @@ import _ from 'lodash';
 import home from './Home.vue';
 import page from './Page.vue';
 import pagem from './Pagem.vue';
+
+// script
+import {
+  getContentHeight,
+  scrollAction,
+  wheelContent,
+  resizeAction,
+  slideToSection
+} from './common/desktopScroll.js';
 
 export default {
 
@@ -81,17 +91,19 @@ export default {
       // shareLinkGallery: `${SITE_URL}farmhouse/gallery`
       currentDevice: '',
 
-      scrollPosition: 0,
-      scrollDirection: '',
+      wheelDirection: '',  
+      
+      // wrapperTimer: null, 
+      scrollTimer: null,
 
-      // introVisibility: false,
-      // wheelTimer: null,
-  
-      // homeTransitionEnd: false,
-      // galleryTransitionEnd: false,
+      // scroller: null,
+      container: null,
+      homewpr: null,
+      homeIntro: null,
+      galleryProgress: null,
 
-      // galleryVisibility: false
-
+      introVisibility: false,
+      galleryVisibility: false
 
     };
   },
@@ -112,14 +124,11 @@ export default {
 
   methods: {
 
-    getIntroHeight: () => {
-      return document.querySelector('.home-intro').offsetHeight;
-    },   
-
-    getScrollPosition: (element) => {
-      return element.getBoundingClientRect().top;
-    }
-
+    getContentHeight,  
+    scrollAction,
+    wheelContent,
+    resizeAction,
+    slideToSection
 
   },
 
@@ -131,55 +140,106 @@ export default {
 
   mounted: function() {
 
-    // const scrollDir = require('./common/scrolldir.auto.min.js');
-    // console.log(scrollDir);
-
     let wrapper = document.querySelector('.outerwpr');
-    let container = document.querySelector('.container');
-    // let scroller = document.querySelector('.scroller');
 
-    let homewpr = document.querySelector('.homewpr');
-    let pagewpr = document.querySelector('.pagewpr');
+    // this.scroller = document.querySelector('.scroller');
+    this.container = document.querySelector('.container');    
+    this.homewpr = document.querySelector('.homewpr');
+    this.homeIntro = document.querySelector('.home-intro');
+    this.galleryProgress = document.getElementById('galleryProgress');
+
+/* -------------------- desktop start -------------------- */
 
     if(this.currentDevice == 'desktop'){
 
-      // wrapper.scrollTo(0,0);
+      if(wrapper.scrollTop != 1){
+        wrapper.scrollTop = 1;
+      }  
+
+      //reset container top position 
+      this.container.style.top = '0px';    
+ 
+    /* ---------- scroll ---------- */
+
+      // 用 throttle 包住要執行的動作
+      let scrollThrottle = _.throttle(() => {    
+
+        console.log('--- invoke function ---');
+        this.scrollAction(this);         
+
+      }, 1200, {
+        'trailing': false
+      });
+
+      // wrapper scroll (with throttle)
+      wrapper.addEventListener('scroll', scrollThrottle);
+
+      wrapper.addEventListener('scroll', () => {
+        // 讓內容鎖住不捲動，只需要判斷有觸發 scroll event        
+        wrapper.scrollTop  = 1;
+        console.log('scroll');
+      });
+
+    /* ---------- wheel ---------- */
+
+      // 用 throttle 包住要執行的動作
+      let wheelThrottle = _.throttle((event) => {
+
+        this.wheelContent(event,this);
+
+      }, 1200, {
+        'trailing': false
+      });
+
+      wrapper.addEventListener('wheel', wheelThrottle);
+
+    /* ---------- resize ---------- */
+
+      // 用 throttle 包住要執行的動作
+      let resizeThrottle = _.throttle(() => {
+
+        this.resizeAction(this);
+
+      }, 300, {
+        'leading': false
+      });
       
-      this.scrollPosition = this.getScrollPosition(container);
+      window.addEventListener('resize', resizeThrottle);
 
-      // intro 高度
-      let introHeight = this.getIntroHeight();    
-     
-      wrapper.addEventListener('scroll',(e) => {        
+      wrapper.addEventListener('resize', () => {
+        // 讓內容鎖住不捲動
+        wrapper.scrollTop  = 1;
+      });
 
-        let position = this.getScrollPosition(container);
+    /* ---------- click button ---------- */
 
-        console.log(position);
+      document.getElementById('showIntro').addEventListener('click',(event) => {
 
-        if(position > this.scrollPosition){
-          // scroll up
-          this.scrollDirection = 'up';
-          console.log('up');
-
-        } else {
-          // scroll down
-          this.scrollDirection = 'down';
-          console.log('down');
-
-          // container.style.top = introHeight * -1 + 'px';
-
-        }
-
-        this.scrollPosition = position;
-
-
+        event.preventDefault();
+        event.stopPropagation();
+        this.slideToSection(this,'intro',false);
 
       }, false);
 
-    //  console.log(container.getBoundingClientRect().top);
+      document.getElementById('showGallery').addEventListener('click',(event) => {
+   
+        event.preventDefault();
+        event.stopPropagation();
+        this.slideToSection(this,'gallery',false);
+
+      }, false);
 
 
-    }
+
+    } // current device: desktop
+
+/* -------------------- desktop end -------------------- */    
+
+
+
+
+
+
 
   }
 
@@ -191,23 +251,23 @@ export default {
 @import './style/common.css';
 
 body {width:100%; height:100vh; overflow:hidden;}
-/* .run .homewpr,
-.run .pagewpr {pointer-events:none;
-opacity:0.3;
-} */
 </style>
 
 <style scoped>
 
-.outerwpr {position:fixed; left:0; top:0; 
+.outerwpr {position:fixed; left:0; bottom:0; 
 width:calc(100% + 50px); height:100vh; overflow-y:scroll;
-touch-action: pan-y pan-x;
+touch-action:none;
 }
-.container {position:absolute; left:0; top:0; width:100%;
-transition:500ms; transition-property:top;
+
+.scroller {position:absolute; left:0; top:0; width:100vw;
+height:calc(100vh + 2px); 
+overflow:hidden;
 }
-/* .scroller {width:100%; height:200vh; position:relative;
-background-color:pink; opacity:0.3;
-} */
+
+.container {position:relative; top:0; margin-top:1px;
+transition-duration:1100ms; transition-property:top;
+}
+
 
 </style>

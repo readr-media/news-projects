@@ -143,9 +143,11 @@ background-color:#eee;
 background-color:transparent;
 visibility:hidden; top:-5px; 
 transition:700ms; transition-property:visibility,top;
-transition-delay:500ms;
+/* visibility:visible; top:0; */
 }
-.show #galleryProgress {visibility:visible; top:0;}
+#galleryProgress.show {visibility:visible; top:0;
+transition-delay:1200ms;
+}
 
 #galleryProgress .swiper-pagination-progressbar-fill {
 background-color:#eba432;    
