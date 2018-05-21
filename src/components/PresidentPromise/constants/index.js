@@ -1,6 +1,9 @@
+export const PROMISES_SHEET_ID = '18LjwTRLQM9TqVHt5dfY3Dlk-nmb7okxaZ4gjiLr5PZc'
+export const DEFAULT_SHEET_RANGE = 'sheet1'
+export const DEFAULT_DRIVE_FILE_FIELDS = 'modifiedTime'
 export const categories = {
   '全部': 'all',
-  '感興趣': 'interest',
+  '我關心': 'interest',
   '內政': 'interior',
   '兩岸': 'china',
   '動保': 'animal',

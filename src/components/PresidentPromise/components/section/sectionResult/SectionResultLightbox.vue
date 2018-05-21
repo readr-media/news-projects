@@ -1,22 +1,30 @@
 <template>
-  <AppLightbox @closeLightbox="resetLightbox">
+  <AppLightbox @closeLightbox="closeLightbox">
     <div class="form" :key="'form'" v-show="lightboxPhase === 'form'">
-      <LightboxTextarea :title="'還有一些政策...'"
-                        :placeholder="'請輸入您的意見，經查證屬實後，會加入列表中。'"
-                        :textareaContent.sync="textareaContent"
-                        :alert="alertTextareaContent"/>
-      <LightboxInput :title="'有消息請通知我！'"
-                     :placeholder="'請輸入您的 email'"
-                     :email.sync="email"
-                     :alert="alertEmail"/>
-      <LightboxRecaptcha v-if="showLightbox"
-                         :isHuman.sync="isHuman"
-                         :alert="alertIsHuman"/>
+      <LightboxTextarea
+        :title="'還有一些政策...'"
+        :placeholder="'請輸入您的意見，經查證屬實後，會加入列表中。'"
+        :textareaContent.sync="textareaContent"
+        :alert="alertTextareaContent"
+      />
+      <LightboxInput 
+        :title="'有消息請通知我！'"
+        :placeholder="'請輸入您的 email'"
+        :email.sync="email"
+        :alert="alertEmail"
+      />
+      <LightboxRecaptcha 
+        v-if="showLightbox"
+        :isHuman.sync="isHuman"
+        :alert="alertIsHuman"
+      />
       <LightboxSubmit @click.native="submit"/>
     </div>
-    <LightboxThank :key="'thank'"
-                   v-show="lightboxPhase === 'thank'"
-                   :remainingTimeBackToForm="remainingTimeBackToForm"/>
+    <LightboxThank 
+      :key="'thank'"
+      v-show="lightboxPhase === 'thank'"
+      :remainingTimeBackToForm="remainingTimeBackToForm"
+    />
   </AppLightbox>
 </template>
 
@@ -28,7 +36,7 @@ import LightboxInput from '../../lightbox/LightboxInput.vue'
 import LightboxRecaptcha from '../../lightbox/LightboxRecaptcha.vue'
 import LightboxSubmit from '../../lightbox/LightboxSubmit.vue'
 import LightboxThank from '../../lightbox/LightboxThank.vue'
-import { PRESIDENT_PROMISE_FEEDBACK_SHEET_ID, } from '../../../../../../api/config'
+import { PRESIDENT_PROMISE_FEEDBACK_SHEET_ID, } from 'api/config'
 
 const DEFAULT_VALUEINPUTOPTION = 'RAW'
 const appendSheet = (store, {
@@ -64,10 +72,10 @@ export default {
   },
   watch: {
     showLightbox () {
-      if (!this.showLightbox) this.resetLightbox()
+      if (!this.showLightbox) this.closeLightbox()
     },
     remainingTimeBackToForm () {
-      if (this.remainingTimeBackToForm <= 0) this.backToForm()
+      if (this.remainingTimeBackToForm <= 0) this.closeLightbox()
     },
     lightboxPhase () {
       if (this.lightboxPhase === 'thank') this.startCountDown()
@@ -117,15 +125,20 @@ export default {
             ],
           }
         })
-        appendSheet(this.$store, {
-          range: 'follow',
-          resource: {
-            'majorDimension': DEFAULT_MAJORDIMENSION,
-            'values': [
-              [ this.email ]
-            ],
-          }
-        })
+        if (!this.$store.state.PresidentPromise.emailKeepTrackingIsSubmitted) {
+          this.$store.commit('PresidentPromise/UPDATE_EMAIL_KEEPTRACKING', this.email)
+          this.$store.commit('PresidentPromise/SUBMIT_EMAIL_KEEPTRACKING')
+
+          appendSheet(this.$store, {
+            range: 'follow',
+            resource: {
+              'majorDimension': DEFAULT_MAJORDIMENSION,
+              'values': [
+                [ this.email ]
+              ],
+            }
+          })
+        }
       } else {
         appendSheet(this.$store, {
           range: 'feedback',
@@ -149,7 +162,7 @@ export default {
     },
     resetForm () {
       this.textareaContent = ''
-      this.email = ''
+      this.email = this.$store.state.PresidentPromise.emailKeepTrackingIsSubmitted ? this.$store.state.PresidentPromise.emailKeepTracking : ''
       // this.isHuman = false
       this.alertIsHuman = false
       this.alertTextareaContent = false
@@ -161,7 +174,7 @@ export default {
       this.resetForm()
       this.resetCountDown()
     },
-    resetLightbox () {
+    closeLightbox () {
       this.$emit('update:showLightbox', false)
       this.backToForm()
     }

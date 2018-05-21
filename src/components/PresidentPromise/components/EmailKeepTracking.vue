@@ -3,13 +3,36 @@
     <h1 class="email-keep-tracking__hint">持續追蹤</h1>
     <div class="email-keep-tracking__input-container">
       <input class="email-keep-tracking__input" type="text" placeholder="請輸入您的 email" v-model="emailKeepTracking">
-      <button class="email-keep-tracking__submit" @click="submit">確定</button>
+      <button :class="[ 'email-keep-tracking__submit', { 'email-keep-tracking__submit--disabled': !isEmailValid || showCheckIcon } ]" @click="submit">
+        <span v-show="!showCheckIcon">確定</span>
+        <div class="email-keep-tracking__check-icon-container" v-show="showCheckIcon">
+          <div class="email-keep-tracking__check-icon"></div>
+        </div>
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import { isEmail, } from 'validator'
+import { isEmail, isEmpty, } from 'validator'
+import { PRESIDENT_PROMISE_FEEDBACK_SHEET_ID, } from 'api/config'
+
+const DEFAULT_VALUEINPUTOPTION = 'RAW'
+const appendSheet = (store, {
+  spreadsheetId = PRESIDENT_PROMISE_FEEDBACK_SHEET_ID,
+  range,
+  valueInputOption = DEFAULT_VALUEINPUTOPTION,
+  resource
+}) => {
+  return store.dispatch('APPEND_SHEET', {
+    params: {
+      spreadsheetId: spreadsheetId,
+      range: range,
+      valueInputOption: valueInputOption,
+      resource: resource,
+    }
+  })
+}
 
 export default {
   watch: {
@@ -22,14 +45,35 @@ export default {
       emailKeepTracking: ''
     }
   },
+  computed: {
+    isEmailValid () {
+      return isEmail(this.emailKeepTracking)
+    },
+    showCheckIcon () {
+      return !isEmpty(this.$store.state.PresidentPromise.emailKeepTracking) && this.emailKeepTracking === this.$store.state.PresidentPromise.emailKeepTracking
+    }
+  },
   methods: {
     submit () {
-      if (isEmail(this.emailKeepTracking)) this.$store.commit('PresidentPromise/UPDATE_EMAIL_KEEPTRACKING', this.emailKeepTracking)
+      if (this.isEmailValid && !this.$store.state.PresidentPromise.emailKeepTrackingIsSubmitted) {
+        this.$store.commit('PresidentPromise/UPDATE_EMAIL_KEEPTRACKING', this.emailKeepTracking)
+        this.$store.commit('PresidentPromise/SUBMIT_EMAIL_KEEPTRACKING')
+
+        const DEFAULT_MAJORDIMENSION = 'ROWS'
+        appendSheet(this.$store, {
+          range: 'follow',
+          resource: {
+            'majorDimension': DEFAULT_MAJORDIMENSION,
+            'values': [
+              [ this.emailKeepTracking ]
+            ],
+          }
+        })
+      }
     }
   }
 }
 </script>
-
 
 <style lang="stylus" scoped>
 .email-keep-tracking
@@ -76,8 +120,26 @@ export default {
     line-height 1.17
     text-align center
     color #b2dbd5
+    transition color .25s
     &:focus
       outline none
+    &--disabled
+      color #2b616d
+      transition color .25s
+      pointer-events none
+  &__check-icon-container
+    padding 0 5px
+  &__check-icon
+    width 26px
+    height 26px
+    background-color #fa8d62
+    transition background-color .15s
+    transform rotate(45deg)
+    clip-path polygon(85% 0, 100% 0, 100% 100%, 43% 100%, 43% 85%, 85% 85%)
+    position relative
+    bottom 6px
+    right 1px
+    margin auto
     
 @media (max-width 425px)
   .email-keep-tracking

@@ -73,7 +73,7 @@ export default {
     let result = {}
 
     result['全部'] = state.promiseData
-    result['感興趣'] = getters.surveyVeryInterestPromises
+    result['我關心'] = getters.surveyVeryInterestPromises
     state.promiseData.forEach(promise => {
       const categories = promise.category
       categories.forEach(category => {
@@ -83,6 +83,11 @@ export default {
     })
     
     return result
+  },
+  hadSurveyTaken: (state) => {
+    return state.surveyGroupByInterest.round1['not-interest'].length !== 0 ||
+      state.surveyGroupByInterest.round1['idk'].length !== 0 ||
+      state.surveyGroupByInterest.round1['very-interest'].length !== 0
   },
   heightMobile: () => {
     return getVH()

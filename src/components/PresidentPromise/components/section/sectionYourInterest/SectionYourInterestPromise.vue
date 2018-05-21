@@ -9,6 +9,7 @@
       <TagPromise v-show="interest.promiseDone || interest.isStuck" :tagType="interest.isStuck ? 'stuck' : 'success'"/>
       <blockquote class="section-your-interest-promise__stuck-reason" v-show="interest.isStuck"><span>“</span><span>{{ interest.stuckReason }}</span></blockquote>
       <p class="section-your-interest-promise__description" v-html="interest.description"></p>
+      <a class="section-your-interest-promise__source" :href="interest.sourceLink" target="_blank" v-text="interest.source"></a>
     </div>
   </div>
 </template>
@@ -41,6 +42,10 @@ export default {
   display flex
   width 755px
   margin 0 0 70px 0
+  &__container
+    display flex
+    flex-direction column
+    min-width 657px
   &__title
     font-size 24px
     font-weight normal
@@ -74,6 +79,16 @@ export default {
       content ""
       display block
       margin 30px 0
+  &__source
+    font-size 16px
+    font-weight 300
+    line-height 0.86
+    text-align right
+    color #b5b5b5
+    text-decoration none
+    border-bottom 1px solid #b5b5b5
+    padding 0 0 6px 0
+    align-self flex-end
 
 .order
   width 56px
@@ -93,6 +108,8 @@ export default {
   .section-your-interest-promise
     width 100%
     margin 0 0 28px 0
+    &__container
+      min-width calc(100% - 28px - 24px)
     &__title
       font-size 22px
       line-height 1.36
@@ -103,6 +120,8 @@ export default {
       line-height 1.5
       > br
         margin 15px 0
+    &__source
+      font-size 14px
 
   .order
     min-width 28px

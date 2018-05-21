@@ -5,6 +5,7 @@
 | [萬畝農舍良田起](https://www.readr.tw/project/farmhouse) |
 | [新二代的難題](https://www.readr.tw/project/newtype) |
 | [鍵盤玩跑六大馬](https://www.readr.tw/project/marathon) |
+| [小英，說好的承諾呢？](https://www.readr.tw/project/president-promise) |
 
 ## Build Setup
 

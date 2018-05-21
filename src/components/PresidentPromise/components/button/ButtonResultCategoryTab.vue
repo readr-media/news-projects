@@ -1,16 +1,20 @@
 <template>
-  <button :class="[ 'result-category-tab', { 'result-category-tab--active': active }, { 'result-category-tab--hover': isActive } ]"
-          :id="`result-category-tab--${categoryEN[categoryName]}`"
-          v-text="categoryName"
-          @mouseover="toggleActive"
-          @mouseout="toggleActive"
-          @touchstart="toggleActive"
-          @touchend="toggleActive">
+  <button 
+    :class="[ 'result-category-tab', { 'result-category-tab--active': active }, { 'result-category-tab--orange': categoryName === '我關心' }, { 'result-category-tab--hover': isActive }, ]"
+    :id="`result-category-tab--${categories[categoryName]}`"
+    v-text="categoryName"
+    @mouseover="toggleActive"
+    @mouseout="toggleActive"
+    @touchstart="toggleActive"
+    @touchend="toggleActive"
+    @click="sendGA"
+  >
   </button>
 </template>
 
 <script>
 import buttonToogleActive from '../../mixins/buttonToogleActive'
+import { categories } from '../../constants'
 
 export default {
   props: {
@@ -26,28 +30,12 @@ export default {
   mixins: [ buttonToogleActive ],
   data () {
     return {
-      categoryEN: {
-        '全部': 'all',
-        '感興趣': 'interest',
-        '內政': 'interior',
-        '兩岸': 'china',
-        '動保': 'animal',
-        '勞動': 'labor',
-        '司法': 'judicial',
-        '國防': 'defense',
-        '外交': 'foreign',
-        '建設': 'construct',
-        '教育': 'education',
-        '文化': 'culture',
-        '族群': 'people',
-        '環保': 'Ecology',
-        '科技': 'tech',
-        '經濟': 'economy',
-        '衛福': 'health',
-        '財政': 'finance',
-        '轉型正義': 'transitional-justice',
-        '農業': 'agriculture',
-      }
+      categories
+    }
+  },
+  methods: {
+    sendGA () {
+      window.ga('send', 'event', 'projects', 'click', categories[this.categoryName], { nonInteraction: false })
     }
   }
 }
@@ -66,7 +54,12 @@ export default {
   transition color .25s
   padding 11px 4px 9px 4px
   &--active
+    color #b2dbd5
     border-bottom 2px solid #b2dbd5
+  &--orange
+    color #fa8d62
+    &.result-category-tab--active
+      border-bottom 2px solid #fa8d62
   &--hover
     color white
     transition color .25s

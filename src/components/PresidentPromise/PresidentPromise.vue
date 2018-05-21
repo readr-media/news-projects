@@ -1,9 +1,12 @@
 <template>
   <div class="president-promise">
-    <a :class="[ 'president-promise__readr-link', { 'president-promise__readr-link--active': $store.state.PresidentPromise.showHeader } ]" href="https://www.readr.tw/" target="_blank">
-      <img class="president-promise__readr-logo" src="/proj-assets/logo_readr.png" alt="">
-    </a>
-    <AppShareIcon :class="[ 'president-promise__share-icon', { 'president-promise__share-icon--active': $store.state.PresidentPromise.showHeader } ]" :shareUrl="shareLink" top="15px" right="15px" direction="down"/>
+    <transition-group name="fade" mode="out-in">
+      <a v-show="$store.state.PresidentPromise.showHeader" :key="'president-promise__readr-link'" class="president-promise__readr-link" href="https://www.readr.tw/" target="_blank" @click="sendGAHome">
+        <img class="president-promise__readr-logo" src="/proj-assets/logo_readr.png" alt="">
+      </a>
+      <AppShareIcon v-show="$store.state.PresidentPromise.showHeader" :key="'president-promise__share-icon'" class="president-promise__share-icon" :shareUrl="shareLink" top="0px" right="0px" direction="down"/>
+      <ButtonToResult v-show="$store.state.PresidentPromise.showHeader && showToResultButton" :key="'president-promise__move-to-result'" class="president-promise__move-to-result"/>
+    </transition-group>
     <full-page :options="options" ref="fullpage" @after-load="afterLoad" @after-slide-load="afterSlideLoad">
       <SectionLanding ref="t0"/>
       <SectionPromiseSurvey ref="t1"/>
@@ -16,6 +19,8 @@
 <script>
 // share icon
 import AppShareIcon from './components/AppShareIcon.vue'
+// move to result navigation button
+import ButtonToResult from './components/button/ButtonToResult.vue'
 // Fullpage.js Vue wrapper 
 import FullPage from './_vue-fullpage/FullPage.vue'
 import fullPageMixin from './_vue-fullpage/fullPageMixin'
@@ -28,6 +33,7 @@ import SectionResult from './components/section/SectionResult.vue'
 import PresidentPromiseStoreModule from '../../store/modules/PresidentPromise'
 // constants
 import { READR_SITE_URL, SITE_DOMAIN_DEV } from '../../constants'
+import { PROMISES_SHEET_ID, DEFAULT_SHEET_RANGE } from './constants'
 
 const fetchSheet = (store, { spreadsheetId, range }) => {
   return store.dispatch('PresidentPromise/FETCH_PROMISEDATA', {
@@ -41,14 +47,15 @@ const fetchSheet = (store, { spreadsheetId, range }) => {
 export default {
   metaInfo () {
     return {
-      title: '520 週年政策隨機篩',
-      description: '透過 10 項政策快篩，看小英目前的施政方向是否擊中你的心。',
+      title: '小英，說好的承諾呢？——520兩週年政見追蹤',
+      description: '兩年了，你還記得總統曾經對人民許下的承諾嗎？來看看你關心的事情有沒有被兌現！',
       metaUrl: 'president-promise',
       metaImage: 'president-promise/ogimage.jpg'
     }
   },
   components: {
     AppShareIcon,
+    ButtonToResult,
     FullPage,
     SectionLanding,
     SectionPromiseSurvey,
@@ -60,12 +67,17 @@ export default {
     return {
       shareLink: `${READR_SITE_URL}president-promise`,
       options: {
+        keyboardScrolling: false,
         lockAnchors: true,
         recordHistory: true,
         controlArrows: false,
         sectionsColor: [ '#2b616d', '#2b616d', '#1f464f', '#2b616d', ],
-        // sectionsColor: [ 'black', '#2b616d', ],
       },
+    }
+  },
+  computed: {
+    showToResultButton () {
+      return this.$store.state.PresidentPromise.currentSection === 'section-landing' || this.$store.state.PresidentPromise.currentSection === 'section-promise-survey'
     }
   },
   methods: {
@@ -85,9 +97,22 @@ export default {
       }
       // this.setAllowScrolling(false)
 
+      // landing to survey GA handle
+      if (anchorLink === 'section-promise-survey') {
+        if (!this.$store.state.PresidentPromise.surveySectionBeenNavigated) {
+          this.$store.commit('PresidentPromise/SURVEY_SECTION_NAVIGATED')
+          if (!this.$store.state.PresidentPromise.isLandingButtonClicked) {
+            window.ga('send', 'event', 'projects', 'scroll', 'scroll to start', { nonInteraction: false })
+          }
+        }
+      }
+
     },
     afterSlideLoad (anchorLink, index, slideAnchor, slideIndex) {
       this.$store.commit('PresidentPromise/SET_CURRENT_SLIDE_INDEX', slideIndex)
+    },
+    sendGAHome () {
+      window.ga('send', 'event', 'projects', 'click', 'back to home', { nonInteraction: false })
     }
   },
   created () {
@@ -98,35 +123,41 @@ export default {
   },
   beforeMount () {
     fetchSheet(this.$store, {
-      spreadsheetId: '18LjwTRLQM9TqVHt5dfY3Dlk-nmb7okxaZ4gjiLr5PZc',
-      range: 'sheet1',
+      spreadsheetId: PROMISES_SHEET_ID,
+      range: DEFAULT_SHEET_RANGE,
     })
+  },
+  mounted () {
+    window.ga('send', 'pageview')
   }
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .president-promise
   &__readr-link
     position fixed
     top 14px
     left 14px
     z-index 9997
-    pointer-events none
-    opacity 0
-    transition opacity .25s
-    &--active
-      pointer-events initial
-      opacity 1
-      transition opacity .25s
   &__readr-logo
     width 52px
-  &__share-icon
-    pointer-events none
-    opacity 0
-    transition opacity .25s
-    &--active
-      pointer-events initial
-      opacity 1
-      transition opacity .25s
+  &__move-to-result
+    position fixed
+    top 14px
+    right 96px
+    z-index 9997
+
+.fade-enter-active, .fade-leave-active
+  transition all .25s ease
+.fade-enter, .fade-leave-active
+  opacity 0
+
+.grecaptcha-badge
+  opacity 0
+
+@media (max-width 425px)
+  .president-promise
+    &__move-to-result
+      right 70px
 </style>

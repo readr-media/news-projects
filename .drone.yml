@@ -14,20 +14,21 @@ pipeline:
     when:
       event: [push]
   
-  builds:
-    image: node:9.2.0-alpine
-    commands:
-    - yarn install
-    - yarn run build
-    when:
-      event: [push]
-      branch: [master, dev]
-  
   get_config:
     image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
     secrets: [google_credentials]
     commands:
     - gcloud source repos clone default default
+    - cp default/news-projects/config.js api/
+    when:
+      event: [push]
+      branch: [master, dev]
+
+  builds:
+    image: node:9.2.0-alpine
+    commands:
+    - yarn install
+    - yarn run build
     when:
       event: [push]
       branch: [master, dev]

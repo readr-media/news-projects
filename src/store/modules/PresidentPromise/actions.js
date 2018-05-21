@@ -12,13 +12,18 @@ export default {
     })
     .catch(err => { console.log(err) })
   },
+  FETCH_PROMISEDATA_DRIVE_FILE: ({ dispatch, commit }, { params }) => {
+    return dispatch('FETCH_DRIVE_FILE', { params }, { root: true })
+    .then(({ body }) => body)
+    .catch(err => { console.log(err) })
+  },
   SURVEY_NEXT_ROUND: ({ commit, getters }) => {
     commit('INCREMENT_SURVEY_ROUND')
     commit('SET_NEXTROUND_SURVEY')
     commit('UPDATE_SURVEYBASIS', getters.surveysPerRoundPids)
   },
-  UPDATE_INTEREST: ({ dispatch, commit }, { interest, promise }) => {
-    commit('UPDATE_INTEREST', { interest, promise })
+  UPDATE_INTEREST: ({ dispatch, commit }, { isUptatedAtResult, interest, promise }) => {
+    commit('UPDATE_INTEREST', { isUptatedAtResult, interest, promise })
     // send data to redis
     sendPromiseInterestRequest(promise, interest)
     if (interest === 'very-interest') {

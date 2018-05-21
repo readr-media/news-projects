@@ -1,11 +1,12 @@
 <template>
   <div class="category-nav-container">
     <nav class="category-nav">
-      <ButtonResultCategoryTab v-for="(category, i) in Object.keys(categories)"
-                               :key="category"
-                               :active="activeIndex === i"
-                               :categoryName="category"
-                               @click.native="changeCategory(category, i)"
+      <ButtonResultCategoryTab
+        v-for="(category, i) in Object.keys(categories)"
+        :key="category"
+        :active="activeIndex === i"
+        :categoryName="category"
+        @click.native="changeCategory(category, i)"
       />
     </nav>
   </div>
