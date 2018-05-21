@@ -1,16 +1,16 @@
 <template>
 
 <!-- /project/chenuen/page -->
-<div v-if="getParams == 'page'">
+<div v-if="getParams == 'mobile'">
 
   <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
   <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`"></share>
 
-  <page></page>
+  <homem></homem>
 </div>
 
 <!-- /project/chenuen/pagem 手機版暫時 -->
-<div v-else-if="getParams == 'pagem'">
+<div v-else-if="getParams == 'gallery'">
 
   <logo :top="`2px`" :left="`6px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
   <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`"></share>
@@ -18,7 +18,7 @@
   <pagem></pagem>
 </div>
 
-<!-- Homepage -->
+<!-- desktop -->
 <div v-else>
 
   <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
@@ -48,9 +48,11 @@ import Share from '../Share.vue';
 import _ from 'lodash';
 
 // pages
-import home from './Home.vue';
-import page from './Page.vue';
-import pagem from './Pagem.vue';
+import home from './Home.vue'; //desktop
+import page from './Page.vue'; //desktop
+
+import homem from './Homem.vue'; //mobile
+import pagem from './Pagem.vue'; //mobile
 
 // script
 import {
@@ -73,6 +75,8 @@ export default {
 
     'home': home,
     'page': page,
+
+    'homem': homem,
     'pagem': pagem
   },
 
@@ -138,19 +142,26 @@ export default {
     console.log("device: " + this.currentDevice);
   },
 
-  mounted: function() {
+  mounted: function() {      
 
-    let wrapper = document.querySelector('.outerwpr');
+    if(this.getParams == 'mobile' || this.getParams == 'gallery'){
 
-    // this.scroller = document.querySelector('.scroller');
-    this.container = document.querySelector('.container');    
-    this.homewpr = document.querySelector('.homewpr');
-    this.homeIntro = document.querySelector('.home-intro');
-    this.galleryProgress = document.getElementById('galleryProgress');
+      console.log('mobile layout');
 
-/* -------------------- desktop start -------------------- */
 
-    if(this.currentDevice == 'desktop'){
+    } else {    
+    // TODO: 正式上線要改用 current device
+    // if(this.currentDevice == 'desktop'){
+
+    /* -------------------- desktop start -------------------- */  
+
+      document.querySelector('body').classList.add('fixed');
+
+      let wrapper = document.querySelector('.outerwpr');
+      this.container = document.querySelector('.container');    
+      this.homewpr = document.querySelector('.homewpr');
+      this.homeIntro = document.querySelector('.home-intro');
+      this.galleryProgress = document.getElementById('galleryProgress');
 
       if(wrapper.scrollTop != 1){
         wrapper.scrollTop = 1;
@@ -229,11 +240,11 @@ export default {
 
       }, false);
 
+    /* -------------------- desktop end -------------------- */       
 
+    }
 
-    } // current device: desktop
-
-/* -------------------- desktop end -------------------- */    
+  
 
 
 
@@ -250,7 +261,7 @@ export default {
 @import './style/animate.css';
 @import './style/common.css';
 
-body {width:100%; height:100vh; overflow:hidden;}
+body.fixed {width:100%; height:100vh; overflow:hidden;}
 </style>
 
 <style scoped>

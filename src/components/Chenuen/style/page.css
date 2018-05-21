@@ -11,10 +11,10 @@ flex-shrink:0;
 }
 .page--aside.expand {width:350px;}
 
-.page--title {width:118px; height:317px; 
-position:absolute; left:20px; top:70px;
+.page--title {width:104px; height:360px; 
+position:absolute; left:10px; top:70px;
 background-image:url("/proj-assets/chenuen/images/page-title.png");
-background-repeat:no-repeat; background-position:center center;
+background-repeat:no-repeat; background-position:0 0;
 background-size:100% auto;
 filter:opacity(10%); pointer-events:none;
 z-index:100;

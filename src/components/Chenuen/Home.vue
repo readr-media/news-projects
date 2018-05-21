@@ -80,7 +80,7 @@ cursor:pointer;
 #showIntro:hover {background-position:0 -168px;}
 
 .home-intro {padding:60px 20px 50px 20px;
-color:#fff; font-size:18px; line-height:1.8;
+color:#fff; font-size:17px; line-height:1.7;
 text-align:justify;
 background-color:#ac7431;
 }
