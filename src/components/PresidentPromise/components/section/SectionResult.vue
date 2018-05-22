@@ -1,18 +1,22 @@
 <template>
   <div class="section" data-anchor="section-result" ref="section-result">
     <!-- <div class="scroll-container" ref="scroll-container" @scroll="scroll"> -->
-    <div class="scroll-container" ref="scroll-container" @scroll="scroll">
+    <div v-show="showResult" class="scroll-container" ref="scroll-container" @scroll="scroll">
       <div class="result" ref="result">
-        <h1 class="result__hint">政策追蹤排行榜</h1>
+        <h1 class="result__title">政策追蹤排行榜</h1>
+        <h2 class="result__subtitle">排行榜會隨著大家關心的程度變化！READr 的記者也會針對這些政策作追蹤報導，敬請期待！</h2>
         <SectionResultSwiper :scrollContainerRef="$refs['scroll-container']"/>
       </div>
       <EmailKeepTracking class="footer"/>
       <Credit/>
+      <AppFooter/>
     </div>
-    <div :class="['section__dimmed', { 'section__dimmed--fade-dimmed-out': $store.state.PresidentPromise.resultSectionBeenNavigated }]"></div>
-    <ButtonWithCaption 
+    <transition name="fade" mode="out-in">
+      <SectionResultDimmed v-show="showDimmed" @fadeDimmedOut="fadeDimmedOut"/>
+    </transition>
+    <ButtonWithCaption
+      v-show="showLightboxToogleButton" 
       class="section__toogle-lightbox"
-      :caption="'找不到您關心的政策？請點擊這裡，告訴我們遺漏了哪些。'"
       @toggleLightbox="toogleLightbox"
     />
     <transition name="fade" mode="out-in">
@@ -23,19 +27,23 @@
 
 <script>
 import ButtonWithCaption from '../button/ButtonWithCaption.vue'
+import SectionResultDimmed from './sectionResult/SectionResultDimmed.vue'
 import SectionResultLightbox from './sectionResult/SectionResultLightbox.vue'
 import SectionResultSwiper from './sectionResult/SectionResultSwiper.vue'
 import EmailKeepTracking from '../EmailKeepTracking.vue'
 import Credit from '../Credit.vue'
+import AppFooter from '../AppFooter.vue'
 import { isElementReachEnd, } from '../../util/comm'
 
 export default {
   components: {
     ButtonWithCaption,
+    SectionResultDimmed,
     SectionResultLightbox,
     SectionResultSwiper,
     EmailKeepTracking,
     Credit,
+    AppFooter,
   },
   watch: {
     isCurrentSectionActive () {
@@ -43,8 +51,9 @@ export default {
         this.$store.commit('PresidentPromise/RESULT_SECTION_NAVIGATED')
         this.$store.commit('PresidentPromise/UPDATE_SHOWHEADER', false)
         setTimeout(() => {
-          this.$store.commit('PresidentPromise/UPDATE_SHOWHEADER', true)
-        }, 2500)
+          this.fadeDimmedOut()
+          this.showResult = true
+        }, 5000)
       }
     },
     showLightbox (value) {
@@ -54,6 +63,9 @@ export default {
   data () {
     return {
       showLightbox: false,
+      showLightboxToogleButton: false,
+      showDimmed: true,
+      showResult: false,
       // shouldLoadmore: false,
     }
   },
@@ -85,6 +97,12 @@ export default {
           this.$store.commit('PresidentPromise/UPDATE_SHOWHEADER', false)
         }
       }
+    },
+    fadeDimmedOut () {
+      this.showDimmed = false
+      this.showResult = true
+      this.showLightboxToogleButton = true
+      this.$store.commit('PresidentPromise/UPDATE_SHOWHEADER', true)
     }
   },
   mounted () {
@@ -102,50 +120,43 @@ export default {
   -webkit-overflow-scrolling touch
 .result
   max-width 100%
-  &__hint
+  &__title
     font-size 40px
     font-weight 900
     line-height 1.1
     text-align center
     color #b2dbd5
-    padding 69px 0 60px 0
+    padding 69px 0 22px 0
     margin 0
-
-@keyframes fadeDimmedOut
-  from
-    z-index 9999
-    background-color rgba(0, 0, 0, .5)
-  to
-    z-index -1
-    background-color transparent
+  &__subtitle
+    font-size 18px
+    line-height 1.33
+    text-align center
+    color #ffffff
+    margin 0 0 19px 0
 .section
   position relative
-  &__dimmed
-    width 100vw
-    height 100vh
-    background-color rgba(0, 0, 0, .5)
-    position absolute
-    top 0
-    left 0
-    z-index 9999
-    &--fade-dimmed-out
-      animation fadeDimmedOut 1s linear 2s 1 normal forwards
   &__toogle-lightbox
     position absolute
     right 20px
     bottom 20px
-
 .footer
   margin 143px 0 0 0
 
 @media (max-width 425px)
   .result
-    &__hint
+    &__title
       font-size 24px
       line-height 1.58
       text-align left
       padding 88px 0 23px 20px
       margin 0
+    &__subtitle
+      font-size 18px
+      line-height 1.58
+      text-align justify
+      padding 0px 20px
+      // margin 0
   .section
     &__toogle-lightbox
       right 10px

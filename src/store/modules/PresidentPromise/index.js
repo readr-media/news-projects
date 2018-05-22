@@ -12,6 +12,9 @@ export default {
     currentSlideIndex: 0,
     showHeader: true,
     resultSectionBeenNavigated: false,
+    isLandingButtonClicked: false,
+    surveySectionBeenNavigated: false,
+    showNextRoundButton: true,
     // data related store
     promiseData: [],
     surveyBasis: [], // surveyBasis is equal to promiseData when init
@@ -23,9 +26,13 @@ export default {
         'idk': [],
         'not-interest': [],
       },
+      'result': {
+        'very-interest': [],
+      }
     },
     // email store
     emailKeepTracking: '',
+    emailKeepTrackingIsSubmitted: false,
   }),
   actions,
   mutations,

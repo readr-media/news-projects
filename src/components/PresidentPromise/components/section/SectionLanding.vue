@@ -2,23 +2,37 @@
   <div class="section" data-anchor="section-landing" ref="section-landing">
     <div class="landing">
       <img class="landing__icon" src="/proj-assets/president-promise/category/520_landing.gif" alt="landing__icon">
-      <h1 class="landing__title">520</h1>
-      <h2 class="landing__subtitle">週年政策隨機篩</h2>
-      <p class="landing__description">透過 10 項政策快篩，看小英目前的施政方向是否擊中你的心。</p>
-      <ButtonNavigateDown @click.native="moveSectionDown"/>
+      <h1 class="landing__title">小英</h1>
+      <h2 class="landing__subtitle">說好的承諾呢</h2>
+      <p class="landing__description">透過政策快篩告訴我們你關心什麼！</p>
+      <!-- <ButtonNavigateDown @click.native="moveSectionDown"/> -->
+      <div class="navigation-container">
+        <ButtonNavigateMoveTo :navigateType="'take-survey'" @click.native="moveToSurvey"/>
+        <ButtonNavigateMoveTo :navigateType="'see-statistic'" @click.native="moveToResult"/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import fullPageMixin from '../../_vue-fullpage/fullPageMixin'
-import ButtonNavigateDown from '../button/ButtonNavigateDown.vue'
+// import ButtonNavigateDown from '../button/ButtonNavigateDown.vue'
+import ButtonNavigateMoveTo from '../button/ButtonNavigateMoveTo.vue'
 
 export default {
   components: {
-    ButtonNavigateDown,
+    // ButtonNavigateDown,
+    ButtonNavigateMoveTo,
   },
   mixins: [ fullPageMixin, ],
+  methods: {
+    moveToSurvey () {
+      this.moveSectionDown()
+    },
+    moveToResult () {
+      this.moveTo('section-result')
+    }
+  }
 }
 </script>
 
@@ -38,22 +52,27 @@ export default {
     height side
     margin 0 0 12px 0
   &__title
-    font-size 160px
+    font-size 120px
     color transparent
-    -webkit-text-stroke 2px white
-    margin 0 0 15px 0
+    -webkit-text-stroke 3px white
+    margin 0 0 36px 0
   &__subtitle
     font-size 52px
     font-weight 900
     line-height 0.85
     color #ffffff
-    margin 0 0 32px 0
+    margin 0 0 39px 0
   &__description
     font-size 24px
     line-height 1.33
     color #c9c9c9
-    margin 0 0 36px 0
+    margin 0 0 45px 0
     text-align justify
+
+.navigation-container
+  display flex
+  > button + button
+    margin-left 46px
 
 @media (max-width 425px)
   .landing
@@ -63,16 +82,34 @@ export default {
       side = 80px
       width side
       height side
+      margin 0 0 22px 0
     &__title
       font-size 80px
-      margin 0
+      margin 0 0 19px 0
     &__subtitle
       font-size 38px
       line-height 1.16
+      margin 0 0 26px 0
     &__description
       font-size 22px
       line-height 1.36
       padding 0 40px
+      margin 0 0 27px 0
+
+  .navigation-container
+    > button + button
+      margin-left 20px
+
+@media (max-width 320px)
+  .landing
+    &__icon
+      margin 0
+    &__title
+      margin 0
+    &__subtitle
+      margin 0 0 26px 0
+    &__description
+      margin 0 0 27px 0
 </style>
 
 

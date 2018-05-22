@@ -1,6 +1,6 @@
 <template>
   <div class="lightbox-recaptcha">
-    <vue-recaptcha :sitekey="sitekey" @verify="onVerify">
+    <vue-recaptcha :sitekey="sitekey" @verify="onVerify" size="invisible">
       <button :class="[ 'validate-button', { 'validate-button--alert': alert } ]">
         <div class="validate-button__check-icon" v-show="isHuman"></div>
       </button>
@@ -11,7 +11,7 @@
 
 <script>
 import VueRecaptcha from 'vue-recaptcha'
-import { GOOGLE_RECAPTCHA_SITE_KEY, } from '../../../../../api/config'
+import { GOOGLE_RECAPTCHA_SITE_KEY, } from 'api/config'
 
 export default {
   props: {
@@ -29,8 +29,8 @@ export default {
   },
   data () {
     return {
-      // sitekey: GOOGLE_RECAPTCHA_SITE_KEY
-      sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+      sitekey: GOOGLE_RECAPTCHA_SITE_KEY
+      // sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
     }
   },
   methods: {

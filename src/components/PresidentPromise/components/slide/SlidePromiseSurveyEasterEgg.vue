@@ -4,20 +4,27 @@
       <img class="easteregg__president" src="/proj-assets/president-promise/easteregg.png" alt="easteregg__president">
       <h1 class="easteregg__h1">恭喜你</h1>
       <h2 class="easteregg__h2">你已經看完小英全部的政策<br>（共 {{ promisesTotal }} 則）</h2>
-      <p class="easteregg__description"><span>{{ remainingTimeToNextSection }} 秒後</span>將自動跳轉到你感興趣的政策，看看哪些政策大家感興趣吧！</p>
-      <button class="easteregg__share-button">分享給朋友</button>
+      <p class="easteregg__description"><span>{{ remainingTimeToNextSection }} 秒後</span>將自動跳轉到你關心的政策，看看哪些政策大家最關心吧！</p>
+      <a class="easteregg__share-button" :href="`https://www.facebook.com/share.php?u=${READR_SITE_URL}president-promise`" target="_blank" @click="sendGAFB">分享給朋友</a>
     </div>
   </div>
 </template>
 
 <script>
 import fullPageMixin from '../../_vue-fullpage/fullPageMixin'
+import { READR_SITE_URL } from '../../../../constants'
 
 export default {
   mixins: [ fullPageMixin ],
   watch: {
-    '$store.state.PresidentPromise.currentSlideIndex' (value) {
-      if (value === 10) {
+    // '$store.state.PresidentPromise.currentSlideIndex' (value) {
+    //   if (value === 10) {
+    //     setTimeout(() => { this.moveSectionDown() }, 3000)
+    //     this.startCountDown()
+    //   }
+    // },
+    '$store.state.PresidentPromise.showNextRoundButton' (value) {
+      if (!value) {
         setTimeout(() => { this.moveSectionDown() }, 3000)
         this.startCountDown()
       }
@@ -30,6 +37,7 @@ export default {
     return {
       remainingTimeToNextSection: 3,
       countDownInterval: undefined,
+      READR_SITE_URL,
     }
   },
   computed: {
@@ -48,6 +56,9 @@ export default {
       this.countDownInterval = undefined
       this.remainingTimeToNextSection = 3
     },
+    sendGAFB () {
+      window.ga('send', 'event', 'projects', 'click', 'share to fb', { nonInteraction: false })
+    }
   }
 }
 </script>
@@ -94,6 +105,10 @@ export default {
     border solid 2px #ffffff
     color white
     cursor pointer
+    display flex
+    justify-content center
+    align-items center
+    text-decoration none
 
 @media (max-width 425px)
   .easteregg

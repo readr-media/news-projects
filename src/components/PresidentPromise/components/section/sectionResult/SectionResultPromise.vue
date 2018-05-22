@@ -8,16 +8,17 @@
       <p :class="[ 'section-result-promise__description', { 'section-result-promise__description--is-interest': interested } ]" v-text="promise.title"></p>
       <ButtonCheckBox class="section-result-promise__checkbox section-result-promise__checkbox--desktop" :checked="interested" :interested.sync="interested"/>
     </div>
-    <div class="tooltip-mobile" v-if="!isDesktop" v-show="showTooltip">
+    <div class="tooltip-mobile" v-if="VW <= 425" v-show="showTooltip">
       <TagPromise v-show="promise.promiseDone || promise.isStuck" :tagType="promise.isStuck ? 'stuck' : 'success'"/>
       <blockquote class="tooltip-mobile__stuck-reason" v-show="promise.isStuck"><span>“</span><span>{{ promise.stuckReason }}</span></blockquote>
       <p class="tooltip-mobile__description" v-html="promise.description"></p>
+      <a class="tooltip-mobile__source" :href="promise.sourceLink" target="_blank" v-text="promise.source"></a>
     </div>
   </div>
 </template>
 
 <script>
-import { get, } from 'lodash'
+import { find, debounce, } from 'lodash'
 import ButtonCheckBox from '../../button/ButtonCheckBox.vue'
 import TagPromise from '../../TagPromise.vue'
 
@@ -42,17 +43,44 @@ export default {
     ButtonCheckBox,
     TagPromise,
   },
+  watch: {
+    interested (value) {
+      if (value) {
+        let submittedRef = find(this.promiseData, [ 'pid', this.promise.pid ])
+        
+        // prevent sending duplicated result that is already send
+        if (submittedRef.surveyResult !== 'no-ans') return
+
+        submittedRef.surveyResult = 'very-interest'
+        this.$store.dispatch('PresidentPromise/UPDATE_INTEREST', { isUptatedAtResult: true, promise: this.promise })
+        this.$emit('reFetchInterestStat')
+      }
+    }
+  },
   data () {
     return {
       interested: this.isInterest,
       showTooltip: false,
-      isDesktop: get(this.$store.state, 'useragent.isDesktop', false),
+      // isDesktop: get(this.$store.state, 'useragent.isDesktop', false),
+      VW: 0
     }
+  },
+  computed: {
+    promiseData () {
+      return this.$store.state.PresidentPromise.promiseData
+    },
   },
   methods: {
     handleTooltip () {
       this.showTooltip = !this.showTooltip
+      window.ga('send', 'event', 'projects', 'click', this.promise.pid, { nonInteraction: false })
     }
+  },
+  mounted () {
+    window.addEventListener('resize', debounce(() => {
+      this.VW = window.innerWidth
+    }, 500))
+    this.VW = window.innerWidth
   }
 }
 </script>
@@ -126,6 +154,8 @@ export default {
     background-color #ffffff
     padding 20px
     position relative
+    display flex
+    flex-direction column
     &__stuck-reason
       margin 12px 0 auto 0
       position relative
@@ -150,6 +180,16 @@ export default {
       line-height 1.71
       text-align justify
       color #1f464f
+    &__source
+      font-size 14px
+      font-weight 300
+      line-height 0.86
+      text-align right
+      color #1b1b1b
+      text-decoration none
+      border-bottom 1px solid #1b1b1b
+      padding 0 0 6px 0
+      align-self flex-end
     &:after
       position absolute
       top -12px

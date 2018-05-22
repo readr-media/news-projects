@@ -15,7 +15,7 @@ router.get('/', authGoogleAPI, (req, res) => {
     if (rows.length) {
       res.status(200).json(rows)
     } else {
-      res.status(200).send('No data found.')
+      res.status(200).send('No data found in Google Sheet.')
     }
   })
 })
@@ -34,7 +34,7 @@ router.post('/', authGoogleAPI, (req, res) => {
     if (updates) {
       res.status(200).send(updates)
     } else {
-      res.status(200).send('No updates found.')
+      res.status(200).send('No updates found in Google Sheet.')
     }
   })
 })

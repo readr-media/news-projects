@@ -1,11 +1,13 @@
 <template>
-  <button :class="[ 'checkbox', 
-                    { 'checkbox--is-checked': isChecked },
-                    { 'checkbox--is-hovered': !isChecked && isMouseOver }
-                  ]"
-          @click="clicked"
-          @mouseover="hovered"
-          @mouseout="hovered">
+  <button 
+    :class="[ 'checkbox', 
+              { 'checkbox--is-checked': isChecked },
+              { 'checkbox--is-hovered': !isChecked && isMouseOver }
+            ]"
+    @click="clicked"
+    @mouseover="hovered"
+    @mouseout="hovered"
+  >
     <div class="checkbox__check-icon" v-show="showCheckedIcon"></div>
   </button>
 </template>
@@ -39,7 +41,7 @@ export default {
   },
   methods: {
     clicked () {
-      this.isChecked = !this.isChecked
+      this.isChecked = true
     },
     hovered () {
       if (!this.isDesktop) return

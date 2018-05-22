@@ -49,7 +49,7 @@ export default {
   position absolute
   top 0
   left 0
-  z-index 9999
+  z-index 10001
   &__dimmed
     width 100vw
     height 100vh
@@ -71,6 +71,13 @@ export default {
   background-color #2b616d
   padding 34px 10px 36px 10px
   overflow-y scroll
+  &::-webkit-scrollbar
+    display none
+    background-color transparent
+  &::-webkit-scrollbar-track
+    background-color transparent
+  &::-webkit-scrollbar-thumb
+    background-color transparent
 
 @media (max-width 425px)
   .app-lightbox-container
