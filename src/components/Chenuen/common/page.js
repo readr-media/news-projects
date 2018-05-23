@@ -29,6 +29,13 @@ export function initNoteContainer() {
 
     //檢查 note--content 是否超出 viewport 顯示範圍
     let noteContent = document.querySelectorAll(".note--content");
+    
+    // let container = document.querySelector('.container');
+    let containerRectBottom = 
+        document.querySelector('.container').getBoundingClientRect().bottom;
+
+    // console.log('containerRectBottom: ' + containerRectBottom);
+
     if (noteContent) {
         noteContent.forEach(function(element, index){  
 
@@ -36,12 +43,15 @@ export function initNoteContainer() {
             element.style.marginTop = 0;
             
             //與 viewport 的距離
-            let domRect = element.getBoundingClientRect();
-            let rectBottom = domRect.bottom;
+            // let domRect = element.getBoundingClientRect();
+            let rectBottom = element.getBoundingClientRect().bottom;
 
-            if(rectBottom > vh) {
+            // console.log(domRect);
+            // console.log(rectBottom);
+
+            if(rectBottom > containerRectBottom) {
                 //set margin-top
-                let marginTop = (rectBottom - vh + 10) * -1 + "px";
+                let marginTop = (rectBottom - containerRectBottom + 10) * -1 + "px";
                 element.style.marginTop = marginTop;
             }
         });
