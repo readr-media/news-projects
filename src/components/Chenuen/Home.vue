@@ -7,11 +7,28 @@
 </div>
 
 <div class="home-intro">
-  <div class="centerwpr">計你和之思時要議印了。認素表然的業良布導個這光加消全活子文的響呢展病議！開向認連也他成八中戰笑優來子美，不定好常久的國女待照為全，情傳氣表經然下了招黨動十、管民知書臺下心自學現外時教、的用已不況在成！特們心呢她生育但處減一一媽自，我者世夠續平認，空易必天，器斯提車究臺收收也自式……情觀學突的，因一不人是日覺是所手東人品話金生減以機球來！種人大地獨政子道本然裝。過生的不議小去校！親門這意代檢該書我不假出，官園果友的方很山了的，健書業票。且公製器技消學如麼……及不運許候來到死城口筆，歡資靈破校舉覺反學面詩新來是！計你和之思時要議印了。認素表然的業良布導個這光加消全活子文的響呢展病議！開向認連也他成八中戰笑優來子美，不定好常久的國女待照為全，情傳氣表經然下了招黨動十、管民知書臺下心自學現外時教、的用已不況在成！特們心呢她生育但處減一一媽自，我者世夠續平認，空易必天，器斯提車究臺收收也自式……情觀學突的，因一不人是日覺是所手東人品話金生減以機球來！種人大地獨政子道本然裝。過生的不議小去校！親門這意代檢該書我不假出，官園果友的方很山了的，健書業票。且公製器技消學如麼……及不運許候來到死城口筆，歡資靈破校舉覺反學面詩新來是！</div>
+  <div class="centerwpr">
+
+  <p>台灣漫畫大師鄭問去年三月因心肌梗塞病逝，在各界努力下，成為全世界第一位進入故宮展覽的漫畫家。鄭問故宮大展「千年一問」於6月16日開展，「千年一問」意義即為「一千年才會出現一位鄭問這樣的奇才」，鏡週刊獨家取得鄭問的數位畫作大檔，並專訪鄭問故宮大展策展人鍾孟舜，請他解析展覽必看的12張鄭問明星圖，讓大家先睹為快，也藉由畫作思念一代宗師，緬懷鄭問帶給世人的美好。</p>  
+
+  <h3>鄭問小檔案</h3>
+  <p>鄭問，本名鄭進文，台灣漫畫家，以水墨結合西方繪畫技巧聞名。日本媒體讚嘆他是漫畫界二十年內無人能出其右的「天才、鬼才、異才」，被譽為「亞洲至寶」，於2017年3月26日因心肌梗塞過世，享年58歲。 2018年6月在台灣故宮將舉行鄭問畫展，是全世界第一個踏進故宮的漫畫家。</p>
 
   <div class="btnwpr">
     <div id="showGallery">開始欣賞</div>
   </div>
+
+  <div class="credit">
+    <ul>
+      <li>文字採訪：楊政勳</li>
+      <li>畫作提供：鄭問工作室</li>
+      <li>設計：許玲瑋</li>
+      <li>網頁製作：v_k</li>
+      <li>畫作解析：鍾孟舜</li>
+    </ul>
+  </div>
+
+  </div>  
   
 </div>
 
@@ -79,15 +96,19 @@ cursor:pointer;
 }
 #showIntro:hover {background-position:0 -168px;}
 
-.home-intro {padding:60px 20px 50px 20px;
+.home-intro {padding:50px 20px 20px 20px;
 color:#fff; font-size:17px; line-height:1.7;
 text-align:justify;
 background-color:#ac7431;
 }
 .home-intro .centerwpr {max-width:900px; margin:0 auto;}
 
+.home-intro h3 {margin-top:50px; margin-bottom:10px;
+font-size:24px; text-align:center;
+}
+
 .btnwpr {display:flex; justify-content:center; align-items:center;
-padding-top:25px;
+margin-top:50px;
 }
 #showGallery {cursor:pointer;
 font-weight:bold; font-size:30px; color:#f3eae0;
@@ -95,6 +116,15 @@ letter-spacing:1px; line-height:1.3;
 border-bottom:3px solid #f3eae0;
 }
 #showGallery:hover {color:#fff; border-bottom:3px solid #fff;}
+
+.credit {margin-top:50px;
+font-size:15px; text-align:center; opacity:0.9;
+}
+.credit ul {display:flex; justify-content:center; align-items:center;
+flex-wrap:wrap;
+}
+.credit li {flex-shrink:0;}
+.credit li+li {margin-left:20px;}
 
 /* ----- animate bounce custom ----- */
 @-webkit-keyframes bounce {
