@@ -17,6 +17,10 @@ export default {
     })
   },
 
+  SET_REPORTS: (state, { reports }) => {
+    state.reports = reports
+  },
+
   SET_USER: (state, { id, user }) => {
     Vue.set(state.users, id, user || false) /* false means user not found */
   }

@@ -12,6 +12,7 @@ export function createStore () {
       activeType: null,
       itemsPerPage: 20,
       items: {/* [id: number]: Item */},
+      reports: [],
       users: {/* [id: string]: User */},
       lists: {
         top: [/* number */],
