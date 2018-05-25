@@ -23,7 +23,7 @@
       <figure ref="media9" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-04-2.jpg)"></figure>
       <figure ref="media10" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-04-3.jpg)"></figure>
       <figure ref="media11" class="media media--video media--contain">
-        <video preload="auto" loop :muted="videoMuted" autoplay playsinline poster="/proj-assets/foreign-labour-ii/images/media-05.jpg">
+        <video preload="auto" loop :muted="videoMuted" playsinline poster="/proj-assets/foreign-labour-ii/images/media-05.jpg">
           <source src="/proj-assets/foreign-labour-ii/videos/media-05.mp4" type="video/mp4">
         </video>
       </figure>
@@ -274,7 +274,9 @@
         for (let [index, value] of this.sectionsTop.entries()) {
           if (currentYPosition() < (this.viewport[1] * offset)) {
             this.$refs[`media1`].classList.add('media--active')
-            this.$refs[`media1`].querySelector('video').play()
+            if (this.$refs[`media1`].querySelector('video')) {
+              this.$refs[`media1`].querySelector('video').play()
+            }
             this.$refs[`media2`].classList.remove('media--active')
           } else if (value > currentYPosition() + (this.viewport[1] * offset)) {
             this.$refs[`media1`].classList.remove('media--active')
@@ -452,6 +454,7 @@
     &--video
       overflow hidden
       video
+        width 100%
         height 100vh
         object-fit cover
         object-position 80% 50%
