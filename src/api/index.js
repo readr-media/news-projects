@@ -1,7 +1,10 @@
 import { camelizeKeys, } from 'humps'
+import { getHost } from '../util/comm'
 import _ from 'lodash'
 import qs from 'qs'
 import superagent from 'superagent'
+
+const host = getHost()
 
 function _buildQuery (params = {}) {
   let query = {}
@@ -11,10 +14,22 @@ function _buildQuery (params = {}) {
     'value_input_option',
     'file_id',
     'fields',
+    'max_result',
+    'where',
+    'page',
+    'sort',
   ]
   const snakeCaseParams = _.mapKeys(params, (value, key) => _.snakeCase(key))
   whitelist.forEach((ele) => {
-    if (snakeCaseParams.hasOwnProperty(ele)) {
+    if (ele === 'where') {
+      const where = _.mapValues(snakeCaseParams[ele], (value) => {
+        value = Array.isArray(value) ? value : [ value, ]
+        return { '$in': value, }
+      })
+      Object.keys(where).forEach((key) => {
+        query[key] = JSON.stringify(where[key])
+      })
+    } else if (snakeCaseParams.hasOwnProperty(ele)) {
       query[ele] = snakeCaseParams[ele]
     }
   })
@@ -55,6 +70,15 @@ function _doPost (url, params) {
         }
       })
   })
+}
+
+export function getReports ({ params = {}} = {}) {
+  let url = `${host}/project-api/reports`
+  const query = _buildQuery(params)
+  if (query && (query.length > 0)) {
+    url = url + `?${query}`
+  }
+  return _doFetch(url)
 }
 
 export function getSheet ({ params = {} } = {}) {

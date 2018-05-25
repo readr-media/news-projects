@@ -15,6 +15,7 @@ const serverMetaInfoMixin = {
     if (metaInfo) {
       const title = metaInfo.title
       const description = metaInfo.description
+      const locale = metaInfo.locale || 'zh_TW'
       const metaUrl = metaInfo.metaUrl
       const metaImage = metaInfo.metaImage
       
@@ -23,6 +24,9 @@ const serverMetaInfoMixin = {
       }
       if (description) { 
         this.$ssrContext.description = description 
+      }
+      if (locale) {
+        this.$ssrContext.locale = locale
       }
       if (metaUrl) {
         this.$ssrContext.metaUrl = READR_SITE_URL + metaUrl
@@ -40,6 +44,7 @@ const clientMetaInfoMixin = {
     if (metaInfo) {
       const title = metaInfo.title
       const description = metaInfo.description
+      const locale = metaInfo.locale || 'zh_TW'
       const metaUrl = metaInfo.metaUrl
       const metaImage = metaInfo.metaImage
       if (title) {
@@ -49,6 +54,9 @@ const clientMetaInfoMixin = {
       if (description) {
         document.head.querySelector(`meta[name=description]`).content = description
         document.head.querySelector(`meta[property='og:description']`).content = description
+      }
+      if (locale) {
+        document.head.querySelector(`meta[property='og:locale']`).content = locale
       }
       if (metaUrl) {
         document.head.querySelector(`meta[property='og:url']`).content = READR_SITE_URL + metaUrl

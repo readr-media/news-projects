@@ -1,4 +1,4 @@
-import { READR_DOMAIN_PROD, SITE_DOMAIN_PROD } from '../constants'
+import { READR_DOMAIN_PROD, SITE_DOMAIN_PROD, OLD_PROJECTS_SLUGS } from '../constants'
 import { getRole } from 'src/util/ABRoleAssign'
 import Cookie from 'vue-cookie'
 import uuidv4 from 'uuid/v4'
@@ -17,6 +17,18 @@ export function setMmCookie () {
   Cookie.set('mmid', uuid, { expires: (10 * 365 * 24) + 'h' })
   return uuid
 }
+
+export function getHost () {
+  const browser = typeof window !== 'undefined'
+  if (browser) {
+    return `//${location.host}`
+  } else {
+    const host = process.env.HOST || 'localhost'
+    const port = parseInt(process.env.PORT) || 8080
+    return `${host}:${port}`
+  }
+}
+
 export function getMmid ({ assisgnedRole, distribution }) {
   const mmid = Cookie.get('mmid')
   if (assisgnedRole) {
@@ -25,4 +37,8 @@ export function getMmid ({ assisgnedRole, distribution }) {
     const role = getRole({ mmid, distribution })
     return role
   }
+}
+
+export function getReportUrl (slug) {
+  return OLD_PROJECTS_SLUGS.includes(slug) ? `https://${SITE_DOMAIN_PROD}/projects/${slug}` : `https://${READR_DOMAIN_PROD}/project/${slug}`
 }
