@@ -30,7 +30,7 @@
       <figure ref="media12" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-06-1.jpg)"></figure>
       <figure ref="media13" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-06-2.jpg)"></figure>
       <figure ref="media14" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-06-3.jpg)"></figure>
-      <figure ref="media15" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-07.jpg)">
+      <figure ref="media15" class="media media--vert" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-07.jpg)">
         <p class="media__souce">照片由黃文團家屬提供</p>
       </figure>
       <figure ref="media16" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-08.jpg)"></figure>
@@ -208,7 +208,7 @@
     data () {
       return {
         gaScroll: 0,
-        gaScrollIndex: [ 3, 7, 10, 13, 17  ],
+        gaScrollIndex: [ 2, 3, 4, 6, 11, 15, 17, 20, 23, 25  ],
         captionsIndex: [ 7, 8, 9, 10, 11, 12, 15, 16, 17, 19, 20, 24, 25 ],
         captionsTop: [],
         commentsUrl: `https://dev.${SITE_DOMAIN_DEV}/project/${PROJECT_NAME}/`,
@@ -291,6 +291,10 @@
                 this.$refs[`media${index + 1}`].querySelector('video').pause()
               }
               this.$refs[`media${index + 1}`].classList.remove('media--active')
+            }
+            if (this.gaScrollIndex.includes(index) && this.gaScroll < index) {
+              this.gaScroll = index
+              window.ga('send', 'event', 'projects', 'scroll', `scroll to ${index}`, { nonInteraction: false })
             }
             if (this.$refs[`media${index}`]) {
               if (this.$refs[`media${index}`].querySelector('video')) {
@@ -544,7 +548,7 @@
       margin-right 10px
 
   .comment
-    padding 0 10px
+    padding 5vh 10px
 
   .foreign-labour.vietnamese
     .heading
@@ -598,12 +602,15 @@
         margin 2em 0 0
         text-align center
         font-size 1.5rem
+    .media
+      &--vert
+        background-position 33% 50%
     .credit
       font-size 1rem
       br
         display none
     .comment
-      padding 0 20%
+      padding 5vh 20%
     .only-desktop
       display block
     .only-mobile
