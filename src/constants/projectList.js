@@ -11,6 +11,7 @@ export default {
   'foreign-labour': 'ForeignLabour',
   'foreign-labour-ii': 'ForeignLabourII',
   'president-promise': 'PresidentPromise',
+  'chenuen': 'Chenuen'
   //'proj1': 'Proj1',
-  // 'proj2': 'Proj2'
+  //'proj2': 'Proj2'
 }

@@ -1,0 +1,220 @@
+.pagewpr {position:relative;
+display:flex; justify-content:flex-start; align-items:stretch;
+width:100%; height:100vh;
+}
+
+.pagewpr:after {content:""; display:table; clear:both;} 
+
+.page--aside {position:relative;
+padding:0 10px 0 35px; width:195px; 
+flex-shrink:0;
+}
+.page--aside.expand {width:350px;}
+
+.page--title {width:104px; height:360px; 
+position:absolute; left:10px; top:70px;
+background-image:url("/proj-assets/chenuen/images/page-title.png");
+background-repeat:no-repeat; background-position:0 0;
+background-size:100% auto;
+filter:opacity(10%); pointer-events:none;
+z-index:100;
+}
+
+.page--navpanel {position:absolute; left:35px; bottom:30px;
+z-index:100;
+}
+
+.page--btnwpr {position:absolute; left:35px; top:80px; 
+z-index:110; cursor:pointer;    
+}
+
+.page--btn {height:30px;
+display:flex; justify-content:flex-start; align-items:center;
+font-weight:bold;
+}
+.expand .page--btn {display:inline-flex;}
+
+.page--btn+.page--btn {margin-top:15px;}
+
+.page--btn i {flex-shrink:0; display:block;
+width:32px; height:100%; 
+background-image:url("/proj-assets/chenuen/images/page-navbtn.png");
+background-repeat:no-repeat;
+background-size:75px auto;
+}
+
+.desc i {background-position:2px 1px;}
+.note i {background-position:0 -60px;}
+
+.page--btn.desc.active {color:#eba432;}
+.page--btn.desc.active i {background-position:-52px 1px;}
+
+.expand .page--btn.note {margin-top:0; margin-left:30px;}
+.page--btn.note.active {color:#eba432;}
+.page--btn.note.active i {background-position:-49px -60px;}
+
+
+/* swiper control wrapper */
+.swiper--control {
+display:flex; justify-content:space-between; align-items:center;
+margin-bottom:12px; width:152px;
+}
+
+/* swiper pagination */
+#galleryFraction {position:relative; left:auto; bottom:auto;
+font-size:26px; text-align:left;
+font-family:"source-han-serif-tc",serif; font-weight:400;    
+display:flex; justify-content:flex-start; align-items:center;
+flex-shrink:0; width:90px; height:40px;
+}
+#galleryFraction span {font-size:30px; font-weight:700;}
+#galleryFraction .swiper-pagination-current {color:#eaa332; margin-right:5px;}
+#galleryFraction .swiper-pagination-total {margin-left:5px;}
+
+/* swiper navigation buttons */
+.swiper-btnwpr {position:relative; width:60px; height:40px;
+flex-shrink:0;
+}
+.swiper-button-next, .swiper-button-prev {
+width:24px; height:40px; margin-top:0; top:0;    
+background-image:url("/proj-assets/chenuen/images/swiper-navbtn.png");
+background-repeat:no-repeat;
+background-size:60PX auto;
+}
+.swiper-button-prev {left:0;
+background-position:3px 5px;
+}
+.swiper-button-prev:hover {background-position:3px -62px;}
+
+.swiper-button-next {right:0;    
+background-position:-39px 5px;
+}
+.swiper-button-next:hover {background-position:-39px -62px;}
+
+/* page--desc */
+.page--desc {width:0; height:100%; overflow:hidden;
+position:relative; padding:210px 0 160px 0; box-sizing:border-box;   
+z-index:90;
+}
+.expand .page--desc {width:100%;}
+
+.page--desc .innerwpr {padding:0 30px 0 20px; min-height:100%;
+display:flex; justify-content:center; align-items:flex-start;
+flex-direction:column;
+}
+
+.page--desc h2 {font-size:24px;}
+
+/* swiper slide */
+.page--gallery {flex:1; position:relative;
+background-color:#f5f5f5;
+}
+
+.swiper-slide {width:100%; height:100%; position:relative;
+background-repeat:no-repeat; background-position:center center;
+background-size:contain;
+opacity:0;
+transition:600ms; transition-property:opacity;
+/* background-image:none !important; */
+}
+
+.swiper-slide-active {opacity:1;}
+
+.swiper-slide__image {
+max-width:100%; max-height:100%;
+opacity:0; visibility:hidden; pointer-events:none;
+/* position:absolute; left:50%; top:50%; */
+}
+
+
+/* swiper progress */
+.gallery--progress {position:relative; left:0; top:0;
+width:100%; height:100%;
+}
+
+#galleryProgress {position:fixed; left:0;
+width:100%; height:5px; margin-bottom:0;
+background-color:#eee;
+background-color:transparent;
+visibility:hidden; top:-5px; 
+transition:700ms; transition-property:visibility,top;
+}
+/* #galleryProgress.show {visibility:visible; top:0;
+transition-delay:1200ms;
+} */
+
+#galleryProgress .swiper-pagination-progressbar-fill {
+background-color:#eba432;    
+}
+
+.gallery--progress .swiper-slide {
+box-sizing:border-box;
+background-color:#fff;
+/* visibility:hidden; */
+/* pointer-events:none; */
+}
+
+.gallery--progress .swiper-slide-active {pointer-events:auto; visibility:visible;}
+
+.gallery--progress .scrollwpr {width:100%; height:100%; position:relative;}
+
+.gallery--progress .content {flex-shrink:0;
+min-height:100%; padding-right:20px;
+display:flex; justify-content:center; align-items:flex-start;
+flex-direction:column;
+}
+
+
+/* note */
+.note--wrapper {width:100%; height:100%; position:absolute; left:0; top:0;
+display:flex; justify-content:center; align-items:center;  
+background-image:url("/proj-assets/chenuen/images/spacer.png");  
+background-repeat:repeat;
+}
+.hide .note--wrapper {
+opacity:0; pointer-events:none; visibility:hidden;    
+}
+
+.note--container {position:relative;}
+
+.note--entry {width:24px; height:24px;
+position:absolute; margin:-12px 0 0 -12px;
+}
+h4.alternate {display:none;}
+
+.note--marker {width:24px; height:24px; cursor:pointer;
+color:#fff; font-size:15px;
+font-family:"source-han-serif-tc",serif; font-weight:700;
+background-color:#333; border-radius:50%;
+display:flex; justify-content:center; align-items:center;
+position:relative;
+}
+.note--marker:before {content:""; display:block; width:40px; height:40px;
+position:absolute; left:50%; top:50%;
+margin-left:-20px; margin-top:-20px;
+border-radius:50%;
+}
+
+.note--entry:hover .note--marker {
+z-index:1000; transform:scale(1.2);
+}
+
+.note--content {width:240px;   
+position:absolute; left:12px; top:12px; z-index:999;     
+border:1px solid #eba73b;
+opacity:0; pointer-events:none; visibility:hidden;
+}
+.note--entry:hover .note--content {
+opacity:1; pointer-events:auto; visibility:visible;    
+}
+
+.note--content__image img {width:240px; height:240px;}
+
+.note--content__text {padding:12px 18px;
+font-size:14px; line-height:1.5;    
+background-color:#fff;
+}
+
+.note--content__text h4 {margin-bottom:8px;
+font-size:20px;
+}
