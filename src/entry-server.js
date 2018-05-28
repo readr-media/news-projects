@@ -12,7 +12,7 @@ export default context => {
     const s = isDev && Date.now()
     const { app, router, store } = createApp()
 
-    const { url, useragent } = context
+    const { setting, url, useragent } = context
     const { fullPath } = router.resolve(url).route
 
     if (fullPath !== url) {
@@ -21,7 +21,7 @@ export default context => {
 
     // set router's location
     router.push(url)
-
+    setting && (store.state.setting = setting)
     // wait until router has resolved possible async hooks
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents()
