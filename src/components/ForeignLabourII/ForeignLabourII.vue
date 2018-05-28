@@ -4,7 +4,7 @@
     <a :href="isVietnamese ? '/project/foreign-labour-ii/': '/project/foreign-labour-ii/vn/'" class="foreign-labour__i18n" @click="$_foreignLabour_langGAEvent" v-text="$t('FOREIGN_LABOUR_II.I18N')"></a>
     <app-share :shareUrl="shareLink" top="10px" right="10px" bgColor="#000" direction="down"></app-share>
     <section class="foreign-labour__media">
-      <div ref="media1" class="media media--video media--active">
+      <div ref="media1" class="media media--video media--active media--video-heading">
         <video preload="auto" loop :muted="videoMuted" autoplay playsinline poster="/proj-assets/foreign-labour-ii/images/media-00.jpg">
           <source src="/proj-assets/foreign-labour-ii/videos/media-00.mp4" type="video/mp4">
         </video>
@@ -36,8 +36,13 @@
       <figure ref="media16" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-08.jpg)"></figure>
       <figure ref="media18" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-09.jpg)"></figure>
       <figure ref="media19" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-10.jpg)"></figure>
-      <figure ref="media23" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-12.jpg)"></figure>
-      <figure ref="media24" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-13.jpg)"></figure>
+      <figure ref="media20" class="media media--video media--contain">
+        <video preload="auto" loop :muted="videoMuted" playsinline poster="/proj-assets/foreign-labour-ii/images/media-11.jpg">
+          <source src="/proj-assets/foreign-labour-ii/videos/media-10.mp4" type="video/mp4">
+        </video>
+      </figure>
+      <figure ref="media24" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-12.jpg)"></figure>
+      <figure ref="media25" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-13.jpg)"></figure>
     </section>
     <section class="scene scene--full"></section>
     <section class="scene scene--full"></section>
@@ -122,6 +127,7 @@
         <p><span v-text="$t('FOREIGN_LABOUR_II.SECTION_14')"></span></p>
       </div>
     </section>
+    <section class="scene scene--full"></section>
     <section class="scene scene--full">
       <div class="text-border">
         <div class="text-border__text text-fix">
@@ -208,8 +214,8 @@
     data () {
       return {
         gaScroll: 0,
-        gaScrollIndex: [ 2, 3, 4, 6, 11, 15, 17, 20, 23, 25  ],
-        captionsIndex: [ 7, 8, 9, 10, 11, 12, 15, 16, 17, 19, 20, 24, 25 ],
+        gaScrollIndex: [ 2, 3, 4, 6, 11, 15, 17, 20, 24, 26  ],
+        captionsIndex: [ 7, 8, 9, 10, 11, 12, 15, 16, 17, 19, 20, 25, 26 ],
         captionsTop: [],
         commentsUrl: `https://dev.${SITE_DOMAIN_DEV}/project/${PROJECT_NAME}/`,
         sectionsTop: [],
@@ -462,7 +468,9 @@
         height 100vh
         object-fit cover
         object-position 80% 50%
-
+      &-heading
+        video
+          object-position 0% 50%
   .heading
     position absolute
     top 10%

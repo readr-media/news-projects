@@ -15,6 +15,7 @@ const uuidv4 = require('uuid/v4')
 // const { VALID_PREVIEW_IP_ADD } = require('./api/config')
 const { createBundleRenderer } = require('vue-server-renderer')
 
+const config = require('./api/config')
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
 const serverInfo =
@@ -138,7 +139,10 @@ function render (req, res, next) {
   const context = {
     title: 'Readr Projects', // default title
     url: req.url,
-    useragent: req.useragent
+    useragent: req.useragent,
+    setting: {
+      GOOGLE_RECAPTCHA_SITE_KEY: config.GOOGLE_RECAPTCHA_SITE_KEY
+    }
   }
   renderer.renderToString(context, (err, html) => {
     if (err) {
