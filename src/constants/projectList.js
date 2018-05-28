@@ -9,6 +9,7 @@ export default {
   'newtype': 'Newtype',
   'farmhouse': 'Farmhouse',
   'foreign-labour': 'ForeignLabour',
+  'foreign-labour-ii': 'ForeignLabourII',
   'president-promise': 'PresidentPromise',
   'chenuen': 'Chenuen',
   'dollclaw': 'Dollclaw'

@@ -516,13 +516,13 @@
         a:link, a:visited, a:hover, a:active
             color #d2b8d3
             text-decoration none
-      &.caption-in
-        &:not(:first-of-type)
-          filter brightness(1)
-          transition filter .5s
-          .foreign-labour__media
-            filter brightness(.5)
-            transition filter .5s
+      // &.caption-in
+      //   &:not(:first-of-type)
+      //     filter brightness(1)
+      //     transition filter .5s
+      //     .foreign-labour__media
+      //       filter brightness(.5)
+      //       transition filter .5s
             
       iframe
         min-height 355px
@@ -634,10 +634,10 @@
         
         opacity 0
         transition opacity 0.3s
-        // span
-        //   background-color rgba(0, 0, 0, .7)
-        //   border-radius 5px
-        //   box-shadow 5px 0 0 rgba(0,0,0,0.7), -5px 0 0 rgba(0,0,0,0.7)
+        span
+          background-color rgba(0, 0, 0, .7)
+          border-radius 5px
+          box-shadow 5px 0 0 rgba(0,0,0,0.7), -5px 0 0 rgba(0,0,0,0.7)
       button
         display none
         padding 2px

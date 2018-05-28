@@ -1,25 +1,7 @@
 <template>
 
-<!-- /project/chenuen/page -->
-<div v-if="getParams == 'mobile'">
-
-  <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`"></share>
-
-  <homem></homem>
-</div>
-
-<!-- /project/chenuen/pagem 手機版暫時 -->
-<div v-else-if="getParams == 'gallery'">
-
-  <logo :top="`2px`" :left="`6px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`"></share>
-
-  <pagem></pagem>
-</div>
-
-<!-- desktop -->
-<div v-else>
+<!-- ///// 電腦版 ///// -->
+<div v-if="currentDevice == 'desktop' && getParams != 'gallery'">
 
   <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
   <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`"></share>
@@ -31,9 +13,31 @@
         <page></page>
       </div>
     </div>
-  </div>  
+  </div> 
+
+  <!-- <h1 class="test">{{currentDevice}}</h1>  -->
 
 </div>
+
+<!-- ///// 手機版 gallery ///// -->
+<div v-else-if="getParams == 'gallery'">
+
+  <logo :top="`2px`" :left="`6px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
+  <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`"></share>
+
+  <pagem></pagem>
+  <!-- <h1 class="test">{{currentDevice}}</h1>  -->
+</div>
+
+<!-- ///// 手機版首頁 ///// -->
+<div v-else>
+
+  <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
+  <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`"></share>
+
+  <homem></homem>
+  <!-- <h1 class="test">{{currentDevice}}</h1>  -->
+</div>  
 
 </template>
 
@@ -138,20 +142,13 @@ export default {
 
   created () {    
     //current device
-    this.currentDevice = this.$store.state.isMobile ? 'mobile' : 'desktop';
+    this.currentDevice = this.$store.state.useragent.isMobile ? 'mobile' : 'desktop';
     console.log("device: " + this.currentDevice);
   },
 
   mounted: function() {      
 
-    if(this.getParams == 'mobile' || this.getParams == 'gallery'){
-
-      console.log('mobile layout');
-
-
-    } else {    
-    // TODO: 正式上線要改用 current device
-    // if(this.currentDevice == 'desktop'){
+    if(this.currentDevice == 'desktop'){
 
     /* -------------------- desktop start -------------------- */  
 
@@ -280,5 +277,8 @@ overflow:hidden;
 transition-duration:1100ms; transition-property:top;
 }
 
+h1.test {position:fixed; left:0; top:0;
+background-color:#111; color:#fff; z-index:999999;
+}
 
 </style>

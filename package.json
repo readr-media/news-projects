@@ -45,6 +45,7 @@
     "pixi-filters": "^2.3.0",
     "pixi.js": "^4.6.1",
     "qs": "^6.5.2",
+    "redis-connection-pool": "^1.6.1",
     "request-ip": "^2.0.2",
     "route-cache": "0.4.3",
     "serve-favicon": "^2.4.4",
