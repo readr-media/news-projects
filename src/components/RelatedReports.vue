@@ -35,32 +35,33 @@ const fetchReports = (store, {
   })
 }
 
+const fetchReportsCount = (store) => {
+  return store.dispatch('FETCH_REPORTS_COUNT')
+}
+
 export default {
   name: 'RelatedReports',
   data () {
     return {
-      hasMore: true,
       page: DEFAULT_PAGE,
     }
   },
   computed: {
+    hasMore () {
+      return get(this.$store, 'state.reports.length', 0) < get(this.$store, 'state.reportsCount', 0)
+    },
     reports () {
       return get(this.$store, 'state.reports') || []
     }
   },
   beforeMount () {
-    fetchReports(this.$store)
+    Promise.all([fetchReports(this.$store), fetchReportsCount(this.$store)])
   },
   methods: {
     loadmore () {
-      const amount = this.reports.length || 0
-      fetchReports(this.$store, { page: this.page + 1 })
-      .then(() => {
-        const newAmount = this.reports.length
-        if (newAmount <= amount) {
-          this.hasMore = false
-        }
-      })
+      if (this.hasMore) {
+        fetchReports(this.$store, { page: this.page + 1 })
+      }
     },
     getReportUrl
   }
