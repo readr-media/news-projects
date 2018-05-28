@@ -4,7 +4,7 @@
 <div v-if="currentDevice == 'desktop' && getParams != 'gallery'">
 
   <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`"></share>
+  <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`" :direction="`right`"></share>
 
   <div class="outerwpr">
     <div class="scroller">
@@ -23,7 +23,7 @@
 <div v-else-if="getParams == 'gallery'">
 
   <logo :top="`2px`" :left="`6px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`"></share>
+  <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`" :direction="`right`"></share>
 
   <pagem></pagem>
   <!-- <h1 class="test">{{currentDevice}}</h1>  -->
@@ -33,7 +33,7 @@
 <div v-else>
 
   <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`"></share>
+  <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`" :direction="`right`"></share>
 
   <homem></homem>
   <!-- <h1 class="test">{{currentDevice}}</h1>  -->

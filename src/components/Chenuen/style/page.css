@@ -53,11 +53,6 @@ background-size:75px auto;
 .page--btn.note.active {color:#eba432;}
 .page--btn.note.active i {background-position:-49px -60px;}
 
-.page--btn .close {display:none;}
-.page--btn.active .close {display:inline;}
-
-.page--btn .open {display:inline;}
-.page--btn.active .open {display:none;}
 
 /* swiper control wrapper */
 .swiper--control {
@@ -190,7 +185,7 @@ h4.alternate {display:none;}
 .note--marker {width:24px; height:24px; cursor:pointer;
 color:#fff; font-size:15px;
 font-family:"source-han-serif-tc",serif; font-weight:700;
-background-color:#eba432; border-radius:50%;
+background-color:#333; border-radius:50%;
 display:flex; justify-content:center; align-items:center;
 position:relative;
 }

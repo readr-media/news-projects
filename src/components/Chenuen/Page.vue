@@ -7,16 +7,14 @@
 
   <div class="page--btnwpr">
 
-    <div class="page--btn desc" id="btnDesc" v-on:click="toggleDesc">
+    <div class="page--btn desc active" id="btnDesc" v-on:click="toggleDesc">
       <i></i>
-      <span class="close">關閉故事</span>
-      <span class="open">顯示故事</span>
+      <span>故事</span>
     </div>
 
-    <div class="page--btn note" id="btnNote" v-on:click="toggleNote">
+    <div class="page--btn note active" id="btnNote" v-on:click="toggleNote">
       <i></i>
-      <span class="close">關閉細節</span>
-      <span class="open">顯示細節</span>
+      <span>細節</span>
     </div>
   </div>
 

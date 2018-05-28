@@ -9,15 +9,6 @@
 <div class="home-intro">
   <div class="centerwpr">
 
-  <p>台灣漫畫大師鄭問去年三月因心肌梗塞病逝，在各界努力下，成為全世界第一位進入故宮展覽的漫畫家。鄭問故宮大展「千年一問」於6月16日開展，「千年一問」意義即為「一千年才會出現一位鄭問這樣的奇才」，鏡週刊獨家取得鄭問的數位畫作大檔，並專訪鄭問故宮大展策展人鍾孟舜，請他解析展覽必看的12張鄭問明星圖，讓大家先睹為快，也藉由畫作思念一代宗師，緬懷鄭問帶給世人的美好。</p>  
-
-  <h3>鄭問小檔案</h3>
-  <p>鄭問，本名鄭進文，台灣漫畫家，以水墨結合西方繪畫技巧聞名。日本媒體讚嘆他是漫畫界二十年內無人能出其右的「天才、鬼才、異才」，被譽為「亞洲至寶」，於2017年3月26日因心肌梗塞過世，享年58歲。 2018年6月在台灣故宮將舉行鄭問畫展，是全世界第一個踏進故宮的漫畫家。</p>
-
-  <div class="btnwpr">
-    <div id="showGallery">開始欣賞</div>
-  </div>
-
   <div class="credit">
     <ul>
       <li>文字採訪：楊政勳</li>
@@ -27,6 +18,15 @@
       <li>畫作解析：鍾孟舜</li>
     </ul>
   </div>
+
+  <p>台灣漫畫大師鄭問去年三月因心肌梗塞病逝，在各界努力下，成為全世界第一位進入故宮展覽的漫畫家。鄭問故宮大展「千年一問」於6月16日開展，「千年一問」意義即為「一千年才會出現一位鄭問這樣的奇才」，鏡週刊獨家取得鄭問的數位畫作大檔，並專訪鄭問故宮大展策展人鍾孟舜，請他解析展覽必看的12張鄭問明星圖，讓大家先睹為快，也藉由畫作思念一代宗師，緬懷鄭問帶給世人的美好。</p>  
+
+  <h3>鄭問小檔案</h3>
+  <p>鄭問，本名鄭進文，台灣漫畫家，以水墨結合西方繪畫技巧聞名。日本媒體讚嘆他是漫畫界二十年內無人能出其右的「天才、鬼才、異才」，被譽為「亞洲至寶」，於2017年3月26日因心肌梗塞過世，享年58歲。 2018年6月在台灣故宮將舉行鄭問畫展，是全世界第一個踏進故宮的漫畫家。</p>
+
+  <div class="btnwpr">
+    <div id="showGallery">開始欣賞</div>
+  </div>  
 
   </div>  
   
@@ -96,12 +96,12 @@ cursor:pointer;
 }
 #showIntro:hover {background-position:0 -168px;}
 
-.home-intro {padding:50px 20px 20px 20px;
+.home-intro {padding:50px 20px 50px 20px;
 color:#fff; font-size:17px; line-height:1.7;
 text-align:justify;
 background-color:#ac7431;
 }
-.home-intro .centerwpr {max-width:900px; margin:0 auto;}
+.home-intro .centerwpr {max-width:680px; margin:0 auto;}
 
 .home-intro h3 {margin-top:50px; margin-bottom:10px;
 font-size:24px; text-align:center;
@@ -117,7 +117,7 @@ border-bottom:3px solid #f3eae0;
 }
 #showGallery:hover {color:#fff; border-bottom:3px solid #fff;}
 
-.credit {margin-top:50px;
+.credit {margin-bottom:15px;
 font-size:15px; text-align:center; opacity:0.9;
 }
 .credit ul {display:flex; justify-content:center; align-items:center;
