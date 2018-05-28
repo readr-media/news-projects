@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import {
   getReports,
+  getReportsCount,
   getSheet,
   appendSheet,
   getDriveFile,
@@ -17,6 +18,17 @@ export default {
           body.items = _.concat(orig, body.items)
         }
         commit('SET_REPORTS', { reports: body.items })
+      }
+    })
+    .catch(err => {
+      console.error('Error while fetching sheet', err)
+    })
+  },
+  FETCH_REPORTS_COUNT: ({ state, commit }) => {
+    return getReportsCount()
+    .then(({ status, body }) => {
+      if (status === 200) {
+        commit('SET_REPORTS_COUNT', { count: body.meta.total })
       }
     })
     .catch(err => {
