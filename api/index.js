@@ -40,8 +40,34 @@ router.use(bodyParser.json())
 router.use('/googlesheet', require('./middle/googlesheet'))
 router.use('/googledrive', require('./middle/googledrive'))
 
-router.use('/reports', fetchFromRedis, (req, res, next) => {
-  const url = `/report/list${req.url}`
+router.get('/reports', fetchFromRedis, (req, res, next) => {
+  req.url = req.url.replace('/reports', '/report/list')
+  if (res.redis) {
+    console.error('fetch data from Redis.', req.url)
+    const resData = JSON.parse(res.redis)
+    res.json(resData)
+  } else {
+    superagent
+    .get(`${apiHost}${req.url}`)
+    .timeout(
+      {
+        response: API_TIMEOUT, // Wait 5 seconds for the server to start sending,
+        deadline: API_DEADLINE || 60000 // but allow 1 minute for the file to finish loading.
+      }
+    )
+    .end((err, response) => {
+      if (!err && response) {
+        res.json(JSON.parse(response.text))
+      } else {
+        res.send('{\'error\':' + err + '}')
+        console.error(err)
+      }
+    })
+  }
+}, insertIntoRedis)
+
+router.get('/report/count', fetchFromRedis, (req, res, next) => {
+  const url = `/report/count`
   if (res.redis) {
     console.error('fetch data from Redis.', url)
     const resData = JSON.parse(res.redis)

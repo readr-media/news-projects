@@ -23,7 +23,7 @@
       <figure ref="media9" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-04-2.jpg)"></figure>
       <figure ref="media10" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-04-3.jpg)"></figure>
       <figure ref="media11" class="media media--video media--contain">
-        <video preload="auto" loop :muted="videoMuted" playsinline poster="/proj-assets/foreign-labour-ii/images/media-05.jpg">
+        <video preload="metadata" loop :muted="videoMuted" playsinline poster="/proj-assets/foreign-labour-ii/images/media-05.jpg">
           <source src="/proj-assets/foreign-labour-ii/videos/media-05.mp4" type="video/mp4">
         </video>
       </figure>
@@ -36,8 +36,8 @@
       <figure ref="media16" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-08.jpg)"></figure>
       <figure ref="media18" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-09.jpg)"></figure>
       <figure ref="media19" class="media" style="background-image: url(/proj-assets/foreign-labour-ii/images/media-10.jpg)"></figure>
-      <figure ref="media20" class="media media--video media--contain">
-        <video preload="auto" loop :muted="videoMuted" playsinline poster="/proj-assets/foreign-labour-ii/images/media-11.jpg">
+      <figure ref="media23" class="media media--video media--contain">
+        <video preload="metadata" loop :muted="videoMuted" playsinline poster="/proj-assets/foreign-labour-ii/images/media-11.jpg">
           <source src="/proj-assets/foreign-labour-ii/videos/media-10.mp4" type="video/mp4">
         </video>
       </figure>
@@ -99,7 +99,7 @@
         <p><span v-text="$t('FOREIGN_LABOUR_II.SECTION_9')"></span></p>
       </div>
     </section>
-    <section class="scene scene--photo-text">
+    <section class="scene scene--photo-text scene--photo-vert">
       <div class="scene__descr">
         <p><span v-text="$t('FOREIGN_LABOUR_II.SECTION_10_1')"></span></p>
         <p><span v-text="$t('FOREIGN_LABOUR_II.SECTION_10_2')"></span></p>
@@ -127,7 +127,6 @@
         <p><span v-text="$t('FOREIGN_LABOUR_II.SECTION_14')"></span></p>
       </div>
     </section>
-    <section class="scene scene--full"></section>
     <section class="scene scene--full">
       <div class="text-border">
         <div class="text-border__text text-fix">
@@ -148,6 +147,7 @@
       <p v-text="$t('FOREIGN_LABOUR_II.SECTION_16_2')"></p>
       <p v-text="$t('FOREIGN_LABOUR_II.SECTION_16_3')"></p>
     </section>
+    <section class="scene scene--full"></section>
     <section class="scene scene--photo-text">
       <div class="scene__descr">
         <p><span v-text="$t('FOREIGN_LABOUR_II.SECTION_17')"></span></p>
@@ -228,7 +228,7 @@
         return this.$route.params.params === 'vn'
       },
       videoMuted () {
-        return get(this.$store, [ 'state', 'useragent', 'isMobile' ], true)
+        return get(this.$store, [ 'state', 'useragent', 'isMobile' ], true) || get(this.$store, [ 'state', 'useragent', 'isSafari' ], false)
       }
     },
     beforeMount () {
@@ -438,19 +438,16 @@
     background-repeat no-repeat
     opacity 0
     visibility hidden
-    transition opacity 2s, visibility 1s 2s
+    transition opacity 2.5s, visibility 1s 2.5s
     &.media--cover
       background-size cover
-    &.media--contain
-      video
-        width 100%
-        object-fit contain
+    
     &.media--heading
       background-position 63% 50%
     &.media--active
       opacity 1
       visibility visible
-      transition opacity 2s, visibility 1s 0s
+      transition opacity 2.5s, visibility 1s 0s
     // &.caption-in
     //   filter brightness(.5)
     //   transition filter 1s, opacity 2s, visibility 1s 0s
@@ -572,6 +569,11 @@
           text-align left
   .only-desktop
     display none
+  @media (max-width: 767px)
+    &.media--contain
+      video
+        width 100%
+        object-fit contain
   @media (min-width: 768px)
     .scene
       > p
@@ -595,6 +597,9 @@
         transform translateX(-30%)
       &--photo-text
         justify-content flex-end
+      &--photo-vert
+        .scene__descr
+          width 30%
     .heading
       top 20%
       left 10%

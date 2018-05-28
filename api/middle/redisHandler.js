@@ -152,13 +152,11 @@ const redisWriteCmd = (cmd, key, value, callback) => {
 }
 
 const insertIntoRedis = (req, res) => {
-  console.log('-- insertIntoRedis')
   redisWriting(req.url, res.dataString, () => {
     // next()
   })
 }
 const fetchFromRedis = (req, res, next) => {
-  console.log('-- fetchFromRedis')
   redisFetching(req.url, ({ error, data, }) => {
     if (!error) {
       res.redis = data
