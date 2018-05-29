@@ -205,7 +205,7 @@
       }
       return {
         title: this.$t('FOREIGN_LABOUR_II.TITLE'),
-        description: this.$t('FOREIGN_LABOUR_II.SUB_TITLE'),
+        description: this.$t('FOREIGN_LABOUR_II.OG_DESCR'),
         locale: ogLocale,
         metaUrl: metaUrl,
         metaImage: metaImage
