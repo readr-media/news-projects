@@ -29,6 +29,7 @@ export default {
     'I18N': '中文',
     'TITLE': 'Chủ đề: Đường cùng',
     'SUB_TITLE': 'Phụ đề:Nhìn phía trước thấy đen tối,quay phía sau chỉ thấy hoang vu',
+    'OG_DESCR': 'Phụ đề:Nhìn phía trước thấy đen tối,quay phía sau chỉ thấy hoang vu',
     'SECTION_1': 'Tôi là bạn cùng làm trên dnúi cùng Hoàng Văn Đoàn,anh ấy mấy ngày trước trên  núi bị cảnh sát bắt và còng tay, đầu còn bị súng của cảnh sát đánh chảy máu,bây giờ không biết chết hay sống, mọi người lên núi tìm anh ấy đi.',
     'SECTION_2_1': 'Ngày 8 tháng 4 năm 2018, Hoàng Văn Lập dùng Visa du lịch từ Việt Nam đến Đài Loan,vừa xuống máy bay đã vội vàng đi tìm gặp người em trai đã 2 năm không gặp.  Đoàn đến Đài tháng 6 năm 2016,vì không cam tâm làm ngư công với thu nhập quá thấp, không thể nào trả được số nợ quá lớn cho phí môi giới, nên không tới nửa năm đã chọn từ bỏ công việc hợp pháp để lên núi làm bất hợp phát khắp nơi, lúc thì đi hái trà cũng có lúc đi chặt trộm các loại gỗ quý hiếm.',
     'SECTION_2_2': 'Anh trai gặp mặt ngay lúc đó và đoàn cũng nói với anh rằng công việc trên núi và công việc trước cũng không khác nhau mấy, cũng chỉ là những việc không cố định nhưng lại kiếm được tiền hơn nên anh trai cũng không cần lo lắng quá, yên tâm đến Đài đi du lịch hưởng thụ.',
