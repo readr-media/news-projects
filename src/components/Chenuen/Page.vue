@@ -123,8 +123,6 @@ import { initNoteContainer } from "./common/page.js";
 //主圖資料
 import galleryData from './data/gallery.json'
 
-// Vue.use(Viewer)
-
 export default {
   components: {},
 

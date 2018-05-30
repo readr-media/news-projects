@@ -53,3 +53,8 @@ export const OLD_PROJECTS_SLUGS = [
   'political-contribution',
   'fertility',
 ]
+
+// include project url path name if we want project's GA ID is mirrormedia's GA ID 
+export const PROJECTS_GAID_BELONGS_MM = [
+  'chenuen'
+]
