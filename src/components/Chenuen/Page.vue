@@ -69,9 +69,7 @@
           v-bind:style="{ backgroundImage: 'url(' + item.url + ')' }"
         >
         <!-- <div class="swiper-slide" v-for="item in galleryData" :key="item.id"> -->
-          <div :class="[`swiper-slide__image-viewer`, `swiper-slide__image-viewer--${i}`]" v-viewer="imageViewerOptions">
-            <img class="swiper-slide__image" v-bind:src="item.url"/>
-          </div>
+          <img class="swiper-slide__image" v-bind:src="item.url"/>
           <div class="note--wrapper">
             <div class="note--container">
               <!-- note--entry -->
@@ -102,6 +100,10 @@
 
 </div>
 <!-- </div> -->
+
+<div class="image-viewer" v-viewer="imageViewerOptions" v-show="false">
+  <img :src="`/proj-assets/chenuen/images/gallery/raw/${currentViewerImagePath}`" @load="showViewer">
+</div>
 
 </div>
 </template>
@@ -143,7 +145,8 @@ export default {
           reset: 'large'
         },
         title: false,
-      }
+      },
+      currentViewerImagePath: ''
     };
   },
 
@@ -152,23 +155,17 @@ export default {
   computed: {},
 
   methods: {
-    showViewer (selector) {
-      const viewer = selector.$viewer
-      viewer.show()
-      viewer.viewer.oncontextmenu = event => event.preventDefault()
-    },
-    getCurrentViewerContainer () {
-      if (this.gallery.activeIndex === 0 || this.gallery.activeIndex === this.galleryData.length) {
-        return this.$el.querySelectorAll(`.swiper-slide__image-viewer--${this.galleryData.length - 1}`)[1]
-      } else if (this.gallery.activeIndex === this.galleryData.length + 1) {
-        return this.$el.querySelector(`.swiper-slide__image-viewer--0`)
-      } else {
-        return this.$el.querySelector(`.swiper-slide__image-viewer--${this.gallery.activeIndex - 1}`)
-      }
+    showViewer () {
+      this.$el.querySelector('.image-viewer').$viewer.show()
+      this.$el.querySelector('.image-viewer').$viewer.viewer.oncontextmenu = event => event.preventDefault()
     },
     toogleViewer () {
-      const currentViewerContainer = this.getCurrentViewerContainer()
-      this.showViewer(currentViewerContainer)
+      const imagePath = `${this.gallery.realIndex + 1}.jpg`
+      if (this.currentViewerImagePath !== imagePath) {
+        this.currentViewerImagePath = `${this.gallery.realIndex + 1}.jpg`
+      } else {
+        this.showViewer()
+      }
     },
 
     initNoteContainer: initNoteContainer,
