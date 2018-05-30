@@ -16,6 +16,11 @@
       <i></i>
       <span>細節</span>
     </div>
+
+    <div class="page--btn viewer active" id="btnNote" v-on:click="toogleViewer">
+      <i></i>
+      <span>看原圖</span>
+    </div>
   </div>
 
   <div class="page--navpanel">
@@ -56,19 +61,21 @@
 </div>
 
 <div class="swiper-container page--gallery">  
-
     <div class="swiper-wrapper">
-        <div class="swiper-slide" 
-          v-for="item in galleryData" 
+        <div 
+          class="swiper-slide"
+          v-for="(item, i) in galleryData" 
           :key="item.id"
           v-bind:style="{ backgroundImage: 'url(' + item.url + ')' }"
         >
         <!-- <div class="swiper-slide" v-for="item in galleryData" :key="item.id"> -->
-          <img class="swiper-slide__image" v-bind:src="item.url" />
-          <div class="note--wrapper">  
+          <div :class="[`swiper-slide__image-viewer`, `swiper-slide__image-viewer--${i}`]" v-viewer="imageViewerOptions">
+            <img class="swiper-slide__image" v-bind:src="item.url"/>
+          </div>
+          <div class="note--wrapper">
             <div class="note--container">
               <!-- note--entry -->
-              <div class="note--entry" 
+              <div class="note--entry"
                 v-for="(entry,index) in item.note" :key="entry.id"                
                 v-bind:style="{
                   left: entry.left,
@@ -105,12 +112,18 @@
 import Swiper from "swiper/dist/js/swiper.js";
 import imagesLoaded from "imagesloaded";
 import PerfectScrollbar from "perfect-scrollbar";
+// image viewer
+import Viewer from 'v-viewer'
+import Vue from 'vue'
+Vue.use(Viewer)
 
 //function
 import { initNoteContainer } from "./common/page.js";
 
 //主圖資料
 import galleryData from './data/gallery.json'
+
+// Vue.use(Viewer)
 
 export default {
   components: {},
@@ -123,7 +136,16 @@ export default {
       gallery: {},
       galleryProgress: {},
 
-      scrollwprGroup: []
+      scrollwprGroup: [],
+      imageViewerOptions: {
+        navbar: false,
+        toolbar: {
+          zoomIn: 'large',
+          zoomOut: 'large',
+          reset: 'large'
+        },
+        title: false,
+      }
     };
   },
 
@@ -132,6 +154,24 @@ export default {
   computed: {},
 
   methods: {
+    showViewer (selector) {
+      const viewer = selector.$viewer
+      viewer.show()
+      viewer.viewer.oncontextmenu = event => event.preventDefault()
+    },
+    getCurrentViewerContainer () {
+      if (this.gallery.activeIndex === 0 || this.gallery.activeIndex === this.galleryData.length) {
+        return this.$el.querySelectorAll(`.swiper-slide__image-viewer--${this.galleryData.length - 1}`)[1]
+      } else if (this.gallery.activeIndex === this.galleryData.length + 1) {
+        return this.$el.querySelector(`.swiper-slide__image-viewer--0`)
+      } else {
+        return this.$el.querySelector(`.swiper-slide__image-viewer--${this.gallery.activeIndex - 1}`)
+      }
+    },
+    toogleViewer () {
+      const currentViewerContainer = this.getCurrentViewerContainer()
+      this.showViewer(currentViewerContainer)
+    },
 
     initNoteContainer: initNoteContainer,
 
@@ -238,4 +278,5 @@ export default {
 
 <style scoped>
 @import "./style/page.css";
+@import "../../../node_modules/viewerjs/dist/viewer.css";
 </style>
