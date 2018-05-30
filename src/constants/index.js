@@ -10,6 +10,8 @@ export const READR_SITE_URL = 'https://www.readr.tw/project/'
 
 export const READR_SITE_ASSETS_URL = 'https://www.readr.tw/proj-assets/'
 
+export const READR_SITE_NAME = '讀＋READr'
+
 export const SITE_DOMAIN_DEV = 'readr.tw'
 
 export const SITE_DOMAIN_PROD = 'mirrormedia.mg' 
@@ -17,6 +19,8 @@ export const SITE_DOMAIN_PROD = 'mirrormedia.mg'
 export const SITE_URL = 'https://projects.mirrormedia.mg/project/'
 
 export const SITE_ASSETS_URL = 'https://projects.mirrormedia.mg/proj-assets/'
+
+export const SITE_NAME = '鏡週刊 Mirror Media'
 
 export const GA_ID = 'UA-83609754-1'
 

@@ -64,7 +64,7 @@
     <div class="swiper-wrapper">
         <div 
           class="swiper-slide"
-          v-for="(item, i) in galleryData" 
+          v-for="item in galleryData" 
           :key="item.id"
           v-bind:style="{ backgroundImage: 'url(' + item.url + ')' }"
         >
@@ -102,7 +102,7 @@
 <!-- </div> -->
 
 <div class="image-viewer" v-viewer="imageViewerOptions" v-show="false">
-  <img :src="`/proj-assets/chenuen/images/gallery/raw/${currentViewerImagePath}`" @load="showViewer">
+  <img v-if="currentViewerImagePath !== ''" :src="`/proj-assets/chenuen/images/gallery/raw/${currentViewerImagePath}`" @load="showViewer">
 </div>
 
 </div>
