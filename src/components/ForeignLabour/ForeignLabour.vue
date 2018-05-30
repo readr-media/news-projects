@@ -188,9 +188,7 @@
       <p><a href="https://www.youtube.com/watch?v=Tp5f7xK1nz0" target="_blank">移工阮國非之死 凸顯外勞警政體系缺失</a></p>
       <p><a href="https://www.mirrormedia.mg/story/20180125pol025/" target="_blank">異鄉安魂曲　越南移工阮國非之死</a></p>
     </section>
-    <!-- <section class="foreign-labour__sec sec-related">
-      <iframe src="https://www.mirrormedia.mg/project-list/dark?excluding=marathon"  width="100%" frameborder="0" scrolling="no" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
-    </section> -->
+    <related-reports></related-reports>
     <section class="foreign-labour__comment">
       <div class="fb-comments" :data-href="commentsUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
@@ -202,6 +200,7 @@
   import { currentYPosition, elmYPosition, smoothScroll } from 'kc-scroll'
   import { get, map } from 'lodash'
   import Logo from '../Logo.vue'
+  import RelatedReports from '../RelatedReports.vue'
   import Share from '../Share.vue'
 
   const PROJECT_NAME = 'foreign-labour'
@@ -211,6 +210,7 @@
     components: {
       'app-logo': Logo,
       'app-share': Share,
+      'related-reports': RelatedReports
     },
     metaInfo () {
       let metaUrl = PROJECT_NAME

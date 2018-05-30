@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import { get } from 'lodash'
+import { filter, get } from 'lodash'
 import { getReportUrl } from 'src/util/comm'
 import superagent from 'superagent'
 
-const MAXRESULT_REPORTS = 3
+const MAXRESULT_REPORTS = 4
 const DEFAULT_PAGE = 1
 const DEFAULT_SORT = '-published_at'
 
@@ -47,11 +47,14 @@ export default {
     }
   },
   computed: {
+    currentSlug () {
+      return get(this.$route, 'params.project', '')
+    },
     hasMore () {
       return get(this.$store, 'state.reports.length', 0) < get(this.$store, 'state.reportsCount', 0)
     },
     reports () {
-      return get(this.$store, 'state.reports') || []
+      return filter(get(this.$store, 'state.reports'), i => i.slug !== this.currentSlug) || []
     }
   },
   beforeMount () {
@@ -60,7 +63,9 @@ export default {
   methods: {
     loadmore () {
       if (this.hasMore) {
-        fetchReports(this.$store, { page: this.page + 1 })
+        this.page += 1
+        console.log('this.page', this.page)
+        fetchReports(this.$store, { page: this.page })
       }
     },
     getReportUrl
@@ -87,6 +92,9 @@ export default {
   padding 25px 0
   color #fff
   text-decoration none
+  transition background-color .5s
+  &:hover
+    background-color #434343
   h1, p
     margin 0
   h1
@@ -112,11 +120,12 @@ export default {
   .related-reports
     display flex
     flex-wrap wrap
-    justify-content space-between
+    justify-content flex-start
 
   .report
-    width 30%
-
+    width calc((100% - 60px) / 3)
+    margin 10px 10px
+    padding 25px 20px
 @media (min-width: 900px)
   .related-reports
     padding 20px 20%
