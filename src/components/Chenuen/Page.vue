@@ -29,8 +29,8 @@
       <div class="swiper-pagination" id="galleryFraction"></div>
       <!-- navigation buttons -->
       <div class="swiper-btnwpr">
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev" @click="toogleSwiperButtonPrev"></div>
+        <div class="swiper-button-next" @click="toogleSwiperButtonNext"></div>
       </div>   
     </div>
 
@@ -64,14 +64,12 @@
     <div class="swiper-wrapper">
         <div 
           class="swiper-slide"
-          v-for="(item, i) in galleryData" 
+          v-for="item in galleryData" 
           :key="item.id"
           v-bind:style="{ backgroundImage: 'url(' + item.url + ')' }"
         >
         <!-- <div class="swiper-slide" v-for="item in galleryData" :key="item.id"> -->
-          <div :class="[`swiper-slide__image-viewer`, `swiper-slide__image-viewer--${i}`]" v-viewer="imageViewerOptions">
-            <img class="swiper-slide__image" v-bind:src="item.url"/>
-          </div>
+          <img class="swiper-slide__image" v-bind:src="item.url"/>
           <div class="note--wrapper">
             <div class="note--container">
               <!-- note--entry -->
@@ -82,7 +80,7 @@
                   top: entry.top
                 }"
               >
-                  <div class="note--marker">{{index + 1}}</div>
+                  <div class="note--marker" @mouseover="sendMouseoverEvent(index + 1)">{{index + 1}}</div>
                   <div class="note--content">
                       <div class="note--content__image">
                           <img v-bind:src="entry.url" />
@@ -102,6 +100,10 @@
 
 </div>
 <!-- </div> -->
+
+<div class="image-viewer" v-viewer="imageViewerOptions" v-show="false">
+  <img v-if="currentViewerImagePath !== ''" :src="`/proj-assets/chenuen/images/gallery/raw/${currentViewerImagePath}`" @load="showViewer">
+</div>
 
 </div>
 </template>
@@ -123,11 +125,17 @@ import { initNoteContainer } from "./common/page.js";
 //主圖資料
 import galleryData from './data/gallery.json'
 
-// Vue.use(Viewer)
-
 export default {
   components: {},
 
+  watch: {
+    'gallery.realIndex' (value) {
+      if (!this.slideBeenViewed[value]) {
+        window.ga('send', 'event', 'projects', 'scroll', `slide ${value + 1}`, { nonInteraction: false })
+        this.slideBeenViewed[value] = true
+      }
+    }
+  },
   // Component data must be a function.
   data: function() {
     return {
@@ -145,7 +153,9 @@ export default {
           reset: 'large'
         },
         title: false,
-      }
+      },
+      currentViewerImagePath: '',
+      slideBeenViewed: Array(galleryData.length).fill(false)
     };
   },
 
@@ -154,23 +164,18 @@ export default {
   computed: {},
 
   methods: {
-    showViewer (selector) {
-      const viewer = selector.$viewer
-      viewer.show()
-      viewer.viewer.oncontextmenu = event => event.preventDefault()
-    },
-    getCurrentViewerContainer () {
-      if (this.gallery.activeIndex === 0 || this.gallery.activeIndex === this.galleryData.length) {
-        return this.$el.querySelectorAll(`.swiper-slide__image-viewer--${this.galleryData.length - 1}`)[1]
-      } else if (this.gallery.activeIndex === this.galleryData.length + 1) {
-        return this.$el.querySelector(`.swiper-slide__image-viewer--0`)
-      } else {
-        return this.$el.querySelector(`.swiper-slide__image-viewer--${this.gallery.activeIndex - 1}`)
-      }
+    showViewer () {
+      this.$el.querySelector('.image-viewer').$viewer.show()
+      this.$el.querySelector('.image-viewer').$viewer.viewer.oncontextmenu = event => event.preventDefault()
     },
     toogleViewer () {
-      const currentViewerContainer = this.getCurrentViewerContainer()
-      this.showViewer(currentViewerContainer)
+      const imagePath = `${this.gallery.realIndex + 1}.jpg`
+      if (this.currentViewerImagePath !== imagePath) {
+        this.currentViewerImagePath = `${this.gallery.realIndex + 1}.jpg`
+      } else {
+        this.showViewer()
+      }
+      window.ga('send', 'event', 'projects', 'click', 'toogleViewer', { nonInteraction: false })
     },
 
     initNoteContainer: initNoteContainer,
@@ -191,12 +196,22 @@ export default {
         }     
 
       }, 0);
+      window.ga('send', 'event', 'projects', 'click', 'toggleDesc', { nonInteraction: false })
     },
 
     toggleNote: function(event) {
       // 展開收闔圖片上的說明
       document.getElementById('btnNote').classList.toggle('active');
-      document.querySelector('.page--gallery').classList.toggle('hide');     
+      document.querySelector('.page--gallery').classList.toggle('hide');
+      window.ga('send', 'event', 'projects', 'click', 'toggleNote', { nonInteraction: false })     
+    },
+
+    toogleSwiperButtonPrev () {
+      window.ga('send', 'event', 'projects', 'click', 'toogleSwiperButtonPrev', { nonInteraction: false })
+    },
+
+    toogleSwiperButtonNext () {
+      window.ga('send', 'event', 'projects', 'click', 'toogleSwiperButtonNext', { nonInteraction: false })
     },
 
     initScroll: function() {
@@ -215,6 +230,10 @@ export default {
         element.destroy();
         element = null;
       });
+    },
+
+    sendMouseoverEvent (markerIndex) {
+      window.ga('send', 'event', 'projects', 'mouseover', `slide${this.gallery.realIndex + 1}-${markerIndex}`, { nonInteraction: false })
     }
 
   },

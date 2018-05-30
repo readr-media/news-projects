@@ -10,6 +10,8 @@ export const READR_SITE_URL = 'https://www.readr.tw/project/'
 
 export const READR_SITE_ASSETS_URL = 'https://www.readr.tw/proj-assets/'
 
+export const READR_SITE_NAME = '讀＋READr'
+
 export const SITE_DOMAIN_DEV = 'readr.tw'
 
 export const SITE_DOMAIN_PROD = 'mirrormedia.mg' 
@@ -17,6 +19,8 @@ export const SITE_DOMAIN_PROD = 'mirrormedia.mg'
 export const SITE_URL = 'https://projects.mirrormedia.mg/project/'
 
 export const SITE_ASSETS_URL = 'https://projects.mirrormedia.mg/proj-assets/'
+
+export const SITE_NAME = '鏡週刊 Mirror Media'
 
 export const GA_ID = 'UA-83609754-1'
 
@@ -52,4 +56,9 @@ export const OLD_PROJECTS_SLUGS = [
   'rent-house',
   'political-contribution',
   'fertility',
+]
+
+// include project url path name if we want project's GA ID is mirrormedia's GA ID 
+export const PROJECTS_GAID_BELONGS_MM = [
+  'chenuen'
 ]
