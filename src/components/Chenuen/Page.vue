@@ -29,8 +29,8 @@
       <div class="swiper-pagination" id="galleryFraction"></div>
       <!-- navigation buttons -->
       <div class="swiper-btnwpr">
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev" @click="toogleSwiperButtonPrev"></div>
+        <div class="swiper-button-next" @click="toogleSwiperButtonNext"></div>
       </div>   
     </div>
 
@@ -80,7 +80,7 @@
                   top: entry.top
                 }"
               >
-                  <div class="note--marker">{{index + 1}}</div>
+                  <div class="note--marker" @mouseover="sendMouseoverEvent(index + 1)">{{index + 1}}</div>
                   <div class="note--content">
                       <div class="note--content__image">
                           <img v-bind:src="entry.url" />
@@ -128,6 +128,14 @@ import galleryData from './data/gallery.json'
 export default {
   components: {},
 
+  watch: {
+    'gallery.realIndex' (value) {
+      if (!this.slideBeenViewed[value]) {
+        window.ga('send', 'event', 'projects', 'scroll', `slide ${value + 1}`, { nonInteraction: false })
+        this.slideBeenViewed[value] = true
+      }
+    }
+  },
   // Component data must be a function.
   data: function() {
     return {
@@ -146,7 +154,8 @@ export default {
         },
         title: false,
       },
-      currentViewerImagePath: ''
+      currentViewerImagePath: '',
+      slideBeenViewed: Array(galleryData.length).fill(false)
     };
   },
 
@@ -166,6 +175,7 @@ export default {
       } else {
         this.showViewer()
       }
+      window.ga('send', 'event', 'projects', 'click', 'toogleViewer', { nonInteraction: false })
     },
 
     initNoteContainer: initNoteContainer,
@@ -186,12 +196,22 @@ export default {
         }     
 
       }, 0);
+      window.ga('send', 'event', 'projects', 'click', 'toggleDesc', { nonInteraction: false })
     },
 
     toggleNote: function(event) {
       // 展開收闔圖片上的說明
       document.getElementById('btnNote').classList.toggle('active');
-      document.querySelector('.page--gallery').classList.toggle('hide');     
+      document.querySelector('.page--gallery').classList.toggle('hide');
+      window.ga('send', 'event', 'projects', 'click', 'toggleNote', { nonInteraction: false })     
+    },
+
+    toogleSwiperButtonPrev () {
+      window.ga('send', 'event', 'projects', 'click', 'toogleSwiperButtonPrev', { nonInteraction: false })
+    },
+
+    toogleSwiperButtonNext () {
+      window.ga('send', 'event', 'projects', 'click', 'toogleSwiperButtonNext', { nonInteraction: false })
     },
 
     initScroll: function() {
@@ -210,6 +230,10 @@ export default {
         element.destroy();
         element = null;
       });
+    },
+
+    sendMouseoverEvent (markerIndex) {
+      window.ga('send', 'event', 'projects', 'mouseover', `slide${this.gallery.realIndex + 1}-${markerIndex}`, { nonInteraction: false })
     }
 
   },
