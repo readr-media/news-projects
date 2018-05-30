@@ -38,20 +38,27 @@ font-weight:bold;
 
 .page--btn i {flex-shrink:0; display:block;
 width:32px; height:100%; 
-background-image:url("/proj-assets/chenuen/images/page-navbtn.png");
-background-repeat:no-repeat;
-background-size:75px auto;
+/* background-image:url("/proj-assets/chenuen/images/page-navbtn.png"); */
+-webkit-mask-repeat:no-repeat;
+-webkit-mask-size:30px auto;
+-webkit-mask-position:center center;
+margin-right:5px;
 }
 
-.desc i {background-position:2px 1px;}
-.note i {background-position:0 -60px;}
+.desc i {-webkit-mask-image:url("/proj-assets/chenuen/images/icon/story.png");background-color:#4d4d4d;}
+.note i {-webkit-mask-image:url("/proj-assets/chenuen/images/icon/detail.png");background-color:#4d4d4d;}
+.viewer i {-webkit-mask-image:url("/proj-assets/chenuen/images/icon/magnify.png");background-color:#4d4d4d;}
 
 .page--btn.desc.active {color:#eba432;}
-.page--btn.desc.active i {background-position:-52px 1px;}
+.page--btn.desc.active i {background-color:#eba432;}
 
 .expand .page--btn.note {margin-top:0; margin-left:30px;}
 .page--btn.note.active {color:#eba432;}
-.page--btn.note.active i {background-position:-49px -60px;}
+.page--btn.note.active i {background-color:#eba432;}
+
+.expand .page--btn.viewer {margin-top:0; margin-left:30px;}
+.page--btn.viewer.active {color:#a0a0a0;}
+.page--btn.viewer.active i {background-color:#a0a0a0;}
 
 
 /* swiper control wrapper */
@@ -120,7 +127,11 @@ transition:600ms; transition-property:opacity;
 
 .swiper-slide-active {opacity:1;}
 
-.swiper-slide__image {
+.swiper-slide__image-viewer {
+  display:inline;
+  opacity:0; visibility:hidden; pointer-events:none;
+}
+.swiper-slide__image{
 max-width:100%; max-height:100%;
 opacity:0; visibility:hidden; pointer-events:none;
 /* position:absolute; left:50%; top:50%; */

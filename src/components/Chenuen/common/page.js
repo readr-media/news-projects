@@ -8,7 +8,7 @@ export function initNoteContainer() {
     let slide = document.querySelectorAll(".swiper-slide");
     slide.forEach(function (element, index) {
 
-        const image = element.querySelector("img");
+        const image = element.querySelector(".swiper-slide__image");
 
         if (image) {
             let width = image.offsetWidth;
