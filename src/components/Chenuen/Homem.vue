@@ -9,10 +9,10 @@
   <div class="credit">
     <ul>
       <li>文字採訪：楊政勳</li>
-      <li>畫作提供：鄭問工作室</li>
       <li>設計：許玲瑋</li>
       <li>網頁製作：v_k</li>
       <li>畫作解析：鍾孟舜</li>
+      <li>畫作提供：鄭問工作室</li>
     </ul>
   </div>
 
@@ -22,7 +22,7 @@
   <p>鄭問，本名鄭進文，台灣漫畫家，以水墨結合西方繪畫技巧聞名。日本媒體讚嘆他是「亞洲至寶」，漫畫界二十年內無人能出其右的「天才、鬼才、異才」。鄭問於2017年3月26日因心肌梗塞過世，享年58歲。2018年6月台灣故宮將舉行鄭問畫展，使他成第一位踏進故宮的漫畫家。</p>
 
   <div class="btnwpr">
-    <a id="showGallery" href="gallery">開始欣賞</a>
+    <a id="showGallery" href="/project/chenuen/gallery">開始欣賞</a>
   </div>  
 
   </div>  
