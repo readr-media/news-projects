@@ -24,9 +24,9 @@ background-color:#fff;
 .note--content__image {margin:0 -30px 10px -30px;}
 .note--content__image img {width:100%;}
 
-h4.alternate {font-size:20px; margin-bottom:10px;}
 
 .note--content__text h4 {display:none;}
+h4.alternate {font-size:20px; margin:15px 0px 10px 0px;display:block;}
 
 
 /* swiper navigation buttons */

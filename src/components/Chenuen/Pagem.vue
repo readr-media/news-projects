@@ -30,12 +30,13 @@
             <div class="note--entry" 
               v-for="(entry) in item.note" :key="entry.id"
             >
-                <h4 class="alternate">{{entry.title}}</h4>
+                <!-- <h4 class="alternate">{{entry.title}}</h4> -->
                 <div class="note--content">
                     <div class="note--content__image">
                         <img v-bind:src="entry.url" />
                     </div>
                     <div class="note--content__text">
+                        <h4 class="alternate">{{entry.title}}</h4>
                         <div v-html="entry.desc"></div>
                     </div>
                 </div>
@@ -92,7 +93,6 @@ export default {
 
   watch: {
     'gallery.realIndex' (value) {
-      console.log(value);
       if (!this.slideBeenViewed[value]) {
         window.ga('send', 'event', 'projects', 'scroll', `slide ${value + 1}`, { nonInteraction: false })
         this.slideBeenViewed[value] = true
