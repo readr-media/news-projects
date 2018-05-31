@@ -6,8 +6,8 @@
     <div class="swiper-pagination" id="mFraction"></div>
  
     <div class="swiper-btnwpr">
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev" @click="toogleSwiperButtonPrev"></div>
+      <div class="swiper-button-next" @click="toogleSwiperButtonNext"></div>
     </div>    
 
 </div>
@@ -90,20 +90,26 @@ export default {
 
   },
 
+  watch: {
+    'gallery.realIndex' (value) {
+      console.log(value);
+      if (!this.slideBeenViewed[value]) {
+        window.ga('send', 'event', 'projects', 'scroll', `slide ${value + 1}`, { nonInteraction: false })
+        this.slideBeenViewed[value] = true
+      }
+    }
+  },
+
   // Component data must be a function.
   data: function() {
     return {
       galleryData: galleryData,
-      gallery: {}
-
+      gallery: {},
+      slideBeenViewed: Array(galleryData.length).fill(false)
     };
   },
 
   props: {
-
-  },
-
-  watch: {
 
   },
 
@@ -132,7 +138,15 @@ export default {
         element.classList.remove("current");
       });
       tableLists[index].classList.add("current");
-    }
+    },
+
+    toogleSwiperButtonPrev () {
+      window.ga('send', 'event', 'projects', 'click', 'toogleSwiperButtonPrev', { nonInteraction: false })
+    },
+
+    toogleSwiperButtonNext () {
+      window.ga('send', 'event', 'projects', 'click', 'toogleSwiperButtonNext', { nonInteraction: false })
+    },
 
   },
 
@@ -175,6 +189,7 @@ export default {
       slideNextBtns.forEach(function(element){
         element.addEventListener("click",() => {
           thatGallery.slideNext();
+          window.ga('send', 'event', 'projects', 'click', 'nextSlide', { nonInteraction: false })
         });
       });
     }
@@ -191,6 +206,7 @@ export default {
 
           let index = _indexOf(tableLists,element) 
           thatGallery.slideToLoop(index);
+          window.ga('send', 'event', 'projects', 'click', `jumpSlide${index + 1}`, { nonInteraction: false })
 
         });
       });
