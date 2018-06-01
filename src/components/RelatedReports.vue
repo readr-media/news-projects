@@ -1,16 +1,25 @@
 <template>
-  <section class="related-reports">
-    <a v-for="report in reports" :key="report.id" class="report" :href="getReportUrl(report.slug)" target="_blank">
+  <section class="related-reports" :class="theme">
+    <a v-for="report in highlight" :key="report.id" class="report" :href="getReportUrl(report.slug)" target="_blank">
       <div class="report__img" :style="{ 'background-image': `url(${report.ogImage})` }"></div>
       <h1 v-text="report.title"></h1>
       <p v-text="report.description"></p>
     </a>
-    <button v-if="hasMore" @click="loadmore">看更多</button>
+    <template v-for="items in loadmoreItems" v-if="showLoadmore">
+      <a v-for="report in items" v-if="items.length === 3 || (!hasMore && items.length < 3)" :key="report.id" class="report" :href="getReportUrl(report.slug)" target="_blank">
+        <div class="report__img" :style="{ 'background-image': `url(${report.ogImage})` }"></div>
+        <h1 v-text="report.title"></h1>
+        <p v-text="report.description"></p>
+      </a>
+    </template>
+    <div>
+      <button v-if="hasMore" @click="loadmore">看更多</button>
+    </div>
   </section>
 </template>
 
 <script>
-import { filter, get } from 'lodash'
+import { chunk, filter, get, slice, take } from 'lodash'
 import { getReportUrl } from 'src/util/comm'
 import superagent from 'superagent'
 
@@ -41,17 +50,30 @@ const fetchReportsCount = (store) => {
 
 export default {
   name: 'RelatedReports',
+  props: {
+    theme: {
+      type: String,
+      default: 'dark',
+    }
+  },
   data () {
     return {
       page: DEFAULT_PAGE,
+      showLoadmore: false,
     }
   },
   computed: {
     currentSlug () {
       return get(this.$route, 'params.project', '')
     },
+    highlight () {
+      return take(this.reports, 3)
+    },
     hasMore () {
       return get(this.$store, 'state.reports.length', 0) < get(this.$store, 'state.reportsCount', 0)
+    },
+    loadmoreItems () {
+      return chunk(slice(this.reports, 3), 3)
     },
     reports () {
       return filter(get(this.$store, 'state.reports'), i => i.slug !== this.currentSlug) || []
@@ -62,11 +84,9 @@ export default {
   },
   methods: {
     loadmore () {
-      if (this.hasMore) {
-        this.page += 1
-        console.log('this.page', this.page)
-        fetchReports(this.$store, { page: this.page })
-      }
+      this.showLoadmore = true
+      this.page += 1
+      fetchReports(this.$store, { page: this.page })
     },
     getReportUrl
   }
@@ -78,11 +98,12 @@ export default {
 .related-reports
   position relative
   padding 20px
-  color #fff
+  > div
+    width 100%
   button
+    display block
     width 100%
     padding .8em 0
-    background-color #fff
     border none
     border-radius 30px
     cursor pointer
@@ -90,11 +111,8 @@ export default {
 .report
   display block
   padding 25px 0
-  color #fff
   text-decoration none
   transition background-color .5s
-  &:hover
-    background-color #434343
   h1, p
     margin 0
   h1
@@ -116,12 +134,35 @@ export default {
     background-position center center
     background-repeat no-repeat
 
+.related-reports.dark
+  color #fff
+  background-color #000
+  button
+    color #000
+    background-color #fff
+  .report
+    color #fff
+    &:hover
+      background-color #434343
+.related-reports.white
+  color #000
+  background-color #fff
+  button
+    color #fff
+    background-color #000
+  .report
+    color #000
+    &:hover
+      background-color #dbdbdb
+
 @media (min-width: 768px)
   .related-reports
     display flex
     flex-wrap wrap
     justify-content flex-start
-
+    button
+      width calc((100% - 60px) / 3)
+      margin 0 auto
   .report
     width calc((100% - 60px) / 3)
     margin 10px 10px

@@ -111,16 +111,21 @@
     <section class="credit">
       <p>文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋<span></span><br>翻譯：好心人</p>
     </section>
+    <related-reports></related-reports>
   </main>
 </template>
 <script>
   import { currentYPosition, elmYPosition } from 'kc-scroll'
   import { truncate } from 'lodash'
+  import RelatedReports from '../RelatedReports.vue'
 
   const PROJECT_NAME = 'foreign-labour-iii'
 
   export default {
     name: 'ForeignLabourIII',
+    components: {
+      'related-reports': RelatedReports
+    },
     metaInfo () {
       let metaUrl = PROJECT_NAME
       let metaImage = `${PROJECT_NAME}/images/ogImage-tw.jpg`
