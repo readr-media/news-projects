@@ -10,6 +10,7 @@ export default {
   'farmhouse': 'Farmhouse',
   'foreign-labour': 'ForeignLabour',
   'foreign-labour-ii': 'ForeignLabourII',
+  'foreign-labour-iii': 'ForeignLabourIII',
   'president-promise': 'PresidentPromise',
   'chenuen': 'Chenuen'
   //'proj1': 'Proj1',
