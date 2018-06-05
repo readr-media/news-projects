@@ -21,6 +21,9 @@ const serverMetaInfoMixin = {
       const metaImage = metaInfo.metaImage
       const project = _.get(this.$route, [ 'params', 'project' ])
       const siteName = PROJECTS_GAID_BELONGS_MM.includes(project) ? SITE_NAME : READR_SITE_NAME
+      const favicon = metaInfo.favicon
+      
+      this.$ssrContext.siteName = siteName
       
       if (title) {
         this.$ssrContext.title = `${title} - ${siteName}`
@@ -37,6 +40,9 @@ const serverMetaInfoMixin = {
       if (metaImage) { 
         this.$ssrContext.metaImage = READR_SITE_ASSETS_URL + metaImage 
       }
+      if (favicon) { 
+        this.$ssrContext.favicon = favicon
+      }
     }
   }
 }
@@ -52,6 +58,9 @@ const clientMetaInfoMixin = {
       const metaImage = metaInfo.metaImage
       const project = _.get(this.$route, [ 'params', 'project' ])
       const siteName = PROJECTS_GAID_BELONGS_MM.includes(project) ? SITE_NAME : READR_SITE_NAME
+      const favicon = metaInfo.favicon
+
+      document.head.querySelector(`meta[property='og:site_name']`).content = siteName
 
       if (title) {
         document.title = `${title} - ${siteName}`
@@ -69,6 +78,10 @@ const clientMetaInfoMixin = {
       }
       if (metaImage) {
         document.head.querySelector(`meta[property='og:image']`).content = READR_SITE_ASSETS_URL + metaImage
+      }
+      if (favicon) {
+        document.head.querySelector(`link[rel='apple-touch-icon']`).href = favicon
+        document.head.querySelector(`link[rel='shortcut icon']`).href = favicon
       }
     }
   }

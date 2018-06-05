@@ -142,7 +142,9 @@ function render (req, res, next) {
     useragent: req.useragent,
     setting: {
       GOOGLE_RECAPTCHA_SITE_KEY: config.GOOGLE_RECAPTCHA_SITE_KEY
-    }
+    },
+    favicon: 'https://www.readr.tw/public/favicon.png',
+    siteName: '讀＋READr'
   }
   renderer.renderToString(context, (err, html) => {
     if (err) {
