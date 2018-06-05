@@ -3,6 +3,10 @@ import 'es6-promise/auto'
 import { createApp } from './app'
 import ProgressBar from './components/ProgressBar.vue'
 
+const { app, router, store } = createApp()
+const EU = require('express-useragent')
+const userAgent = new EU.UserAgent().parse(navigator.userAgent)
+
 const debug = require('debug')('CLIENT:entry-client')
 const path = require('path')
 
@@ -25,13 +29,14 @@ Vue.mixin({
   }
 })
 
-const { app, router, store } = createApp()
 
 // prime the store with server-initialized state.
 // the state is determined during SSR and inlined in the page markup.
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__)
 }
+
+store.state.useragent = userAgent
 
 // wait until router has resolved all async before hooks
 // and async components...
