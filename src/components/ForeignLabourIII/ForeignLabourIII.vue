@@ -121,7 +121,7 @@
       <p>文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋<span></span><br>翻譯：好心人</p>
     </section>
     <related-reports></related-reports>
-    <section class="comment">
+    <section v-if="commentsUrl" class="comment">
       <div class="fb-comments" :data-href="commentsUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
   </main>
@@ -168,12 +168,12 @@
     beforeMount () {
       this.$_foreignLabour_getViewport()
       this.$_foreignLabour_calcSectionTop()
-      this.commentsUrl = getFBCommentsUrl()
     },
     mounted () {
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual'
       }
+      this.commentsUrl = getFBCommentsUrl()
       window.addEventListener('scroll', this.$_foreignLabour_handleScroll)
       window.addEventListener('scroll', this.$_foreignLabour_handleScrollForCaption)
       window.addEventListener('resize', this.$_foreignLabour_getViewport)
