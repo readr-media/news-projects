@@ -1,9 +1,15 @@
 <template>
   <main class="foreign-labour">
+    <app-logo class="no-sprite" href="https://www.readr.tw/" top="10px" left="10px" bgImage="/proj-assets/logo_readr.png"></app-logo>
+    <app-share :shareUrl="commentsUrl" top="10px" right="10px" bgColor="#000" direction="down"></app-share>
     <section class="scene scene--full" :class="{ 'scene--active': currentScene === 0 }">
       <figure class="media media--cover">
         <img :src="`/proj-assets/foreign-labour-iii/images/0.jpg`" :alt="truncate($t('FOREIGN_LABOUR_III.TITLE'))">
       </figure>
+      <header>
+        <h1>{{ $t('FOREIGN_LABOUR_III.TITLE_1') }}<br>{{ $t('FOREIGN_LABOUR_III.TITLE_2') }}</h1>
+        <h2 v-text="$t('FOREIGN_LABOUR_III.SUB_TITLE')"></h2>
+      </header>
     </section>
     <section class="scene scene--text" :class="{ 'scene--active': currentScene === 1 }">
       <p v-text="$t('FOREIGN_LABOUR_III.SECTION_2_1')"></p>
@@ -11,6 +17,8 @@
       <p v-text="$t('FOREIGN_LABOUR_III.SECTION_2_3')"></p>
       <p v-text="$t('FOREIGN_LABOUR_III.SECTION_2_4')"></p>
       <p v-text="$t('FOREIGN_LABOUR_III.SECTION_2_5')"></p>
+      <p><strong v-text="$t('FOREIGN_LABOUR_III.SECTION_2_6')"></strong></p>
+      <p><strong v-text="$t('FOREIGN_LABOUR_III.SECTION_2_7_1')"></strong>{{ $t('FOREIGN_LABOUR_III.SECTION_2_7_2') }}</p>
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 2 }">
       <figure class="media lazy">
@@ -74,6 +82,7 @@
         <div class="text-border__text">
           <p v-text="$t('FOREIGN_LABOUR_III.SECTION_10')"></p>
         </div>
+        <span v-text="$t('FOREIGN_LABOUR_III.SECTION_10_credit')"></span>
       </div>
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 10 }">
@@ -112,23 +121,31 @@
       <p>文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋<span></span><br>翻譯：好心人</p>
     </section>
     <related-reports></related-reports>
+    <section class="comment">
+      <div class="fb-comments" :data-href="commentsUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
+    </section>
   </main>
 </template>
 <script>
   import { currentYPosition, elmYPosition } from 'kc-scroll'
+  import { getFBCommentsUrl } from '../../util/comm'
   import { truncate } from 'lodash'
+  import Logo from '../Logo.vue'
   import RelatedReports from '../RelatedReports.vue'
+  import Share from '../Share.vue'
 
   const PROJECT_NAME = 'foreign-labour-iii'
 
   export default {
     name: 'ForeignLabourIII',
     components: {
+      'app-logo': Logo,
+      'app-share': Share,
       'related-reports': RelatedReports
     },
     metaInfo () {
       let metaUrl = PROJECT_NAME
-      let metaImage = `${PROJECT_NAME}/images/ogImage-tw.jpg`
+      let metaImage = `${PROJECT_NAME}/images/og-tw.jpg`
       let ogLocale = 'zh_TW'
       
       return {
@@ -142,6 +159,7 @@
     data () {
       return {
         captionsTop: [],
+        commentsUrl: '',
         currentScene: 0,
         sectionsTop: [],
         viewport: []
@@ -150,6 +168,7 @@
     beforeMount () {
       this.$_foreignLabour_getViewport()
       this.$_foreignLabour_calcSectionTop()
+      this.commentsUrl = getFBCommentsUrl()
     },
     mounted () {
       if ('scrollRestoration' in history) {
@@ -159,7 +178,6 @@
       window.addEventListener('scroll', this.$_foreignLabour_handleScrollForCaption)
       window.addEventListener('resize', this.$_foreignLabour_getViewport)
       window.addEventListener('resize', this.$_foreignLabour_calcSectionTop)
-      
     },
     beforeDestroy () {
       window.removeEventListener('scroll', this.$_foreignLabour_handleScroll)
@@ -224,12 +242,13 @@
           }
         }
       },
+      getFBCommentsUrl,
       truncate
     }
   }
 </script>
 <style lang="stylus" scoped>
-  theme-color = hsl(123.6,24.8%,73.9%)
+  theme-color = hsl(37.2,41.8%,62.9%)
 
   .foreign-labour
     color #fff
@@ -239,6 +258,25 @@
     background-color #000
     figure
       margin 0
+    header
+      position absolute
+      left 50%
+      bottom 8%
+      transform translateX(-50%)
+      width 85%
+    strong
+      color theme-color
+    h1, h2
+      margin 0 auto
+      font-family "source-han-serif-tc", serif
+      text-shadow 1.4px 1.4px 9.4px rgba(0, 0, 0, 0.3)
+    h1
+      font-size 3.375rem
+      line-height 1.3
+    h2
+      margin-top 20px
+      font-size .875rem
+      text-align justify
     p
       margin 0
   .scene
@@ -298,6 +336,7 @@
     &.media--cover
       img
         object-fit cover
+        object-position 28% 50%
     img
       width 100%
       height 100%
@@ -331,6 +370,13 @@
       height 20px
       border-top 2px solid theme-color
       border-right 2px solid theme-color
+    span
+      position absolute
+      right 0
+      bottom calc(-1em - 25px)
+      color #898989
+      font-size .875rem
+
     &__text
       position relative
       padding 20px
@@ -368,8 +414,20 @@
       line-height 1.7
     span
       margin-right 10px
+  
+  .comment
+    padding 5vh 10px
 
   @media (min-width: 768px)
+    .foreign-labour
+      header
+        top 15%
+        left auto
+        right 5%
+        bottom auto
+        width 40%
+        transform none
+        
     .scene
       > p
         max-width 50%
@@ -380,14 +438,40 @@
     .text-border
       max-width 50%
       line-height 1.67
+    .media
+      &.media--cover
+        img
+          object-position 70% 50%
 
   @media (min-width: 900px)
+    .foreign-labour
+      header
+        right 2%
+        h1
+          font-size 5.125rem
+        h2
+          width 90%
+          margin 40px 0 0
+          font-size 1.125rem
     .scene
       &__descr
         max-width 40%
         transform translateX(30%)
+    .text-border
+      span
+        font-size 1.125rem
+    .media
+      &.media--cover
+        img
+          position relative
+          left -14%
+          width 114%
+          height 114%
+          object-position 50% 0%
     .credit
       font-size 1rem
       br
         display none
+    .comment
+      padding 5vh 20%
 </style>
