@@ -1,11 +1,11 @@
-import { READR_DOMAIN_PROD, READR_SITE_URL, SITE_DOMAIN_DEV, SITE_DOMAIN_PROD, OLD_PROJECTS_SLUGS } from '../constants'
+import { MM_DOMAIN, OLD_PROJECTS_SLUGS, READR_DOMAIN, READR_DOMAIN_PROD, READR_SITE_URL } from '../constants'
 import { getRole } from 'src/util/ABRoleAssign'
 import Cookie from 'vue-cookie'
 import uuidv4 from 'uuid/v4'
 
 export function currEnv () {
   if (process.env.VUE_ENV === 'client') {
-    if (location.host.indexOf(SITE_DOMAIN_PROD) === 0 || location.host.indexOf(`projects.${SITE_DOMAIN_PROD}`) === 0 || location.host.indexOf(READR_DOMAIN_PROD) === 0) {
+    if (location.host.indexOf(MM_DOMAIN) === 0 || location.host.indexOf(`projects.${MM_DOMAIN}`) === 0 || location.host.indexOf(READR_DOMAIN_PROD) === 0) {
       return 'prod'
     } else {
       return 'dev'
@@ -24,7 +24,7 @@ export function getFBCommentsUrl () {
     if (location.hostname.indexOf(READR_DOMAIN_PROD) !== -1) {
       return `${READR_SITE_URL}${path}`
     }
-    return `https://dev.${SITE_DOMAIN_DEV}/${path}`
+    return `https://dev.${READR_DOMAIN}/${path}`
   }
   return ''
 }
@@ -51,5 +51,5 @@ export function getMmid ({ assisgnedRole, distribution }) {
 }
 
 export function getReportUrl (slug) {
-  return OLD_PROJECTS_SLUGS.includes(slug) ? `https://${SITE_DOMAIN_PROD}/projects/${slug}` : `https://${READR_DOMAIN_PROD}/project/${slug}`
+  return OLD_PROJECTS_SLUGS.includes(slug) ? `https://${MM_DOMAIN}/projects/${slug}` : `https://${READR_DOMAIN_PROD}/project/${slug}`
 }

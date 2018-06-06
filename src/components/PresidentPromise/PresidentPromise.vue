@@ -32,7 +32,7 @@ import SectionResult from './components/section/SectionResult.vue'
 // store module
 import PresidentPromiseStoreModule from '../../store/modules/PresidentPromise'
 // constants
-import { READR_SITE_URL, SITE_DOMAIN_DEV } from '../../constants'
+import { READR_SITE_URL } from '../../constants'
 import { PROMISES_SHEET_ID, DEFAULT_SHEET_RANGE } from './constants'
 
 const fetchSheet = (store, { spreadsheetId, range }) => {

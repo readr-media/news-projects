@@ -5,14 +5,14 @@ export default {
   // |----YourProject
   // |------YourProject.vue
 //  'proj1': () => import('../components/Proj1/Proj1.vue')
-  'marathon': 'Marathon',
-  'newtype': 'Newtype',
+  'chenuen': 'Chenuen',
   'farmhouse': 'Farmhouse',
   'foreign-labour': 'ForeignLabour',
   'foreign-labour-ii': 'ForeignLabourII',
   'foreign-labour-iii': 'ForeignLabourIII',
+  'marathon': 'Marathon',
+  'newtype': 'Newtype',
   'president-promise': 'PresidentPromise',
-  'chenuen': 'Chenuen'
   //'proj1': 'Proj1',
   //'proj2': 'Proj2'
 }

@@ -54,13 +54,13 @@
 
 <script>
 
-import { SITE_DOMAIN_DEV, SITE_DOMAIN_PROD } from '../../constants'
+import { MM_DOMAIN, READR_DOMAIN } from '../../constants'
 import { currEnv } from '../../util/comm'
 
 export default {
   data() {
     return {
-      commentsUrl: `https://dev.${SITE_DOMAIN_DEV}/project/farmhouse/`,
+      commentsUrl: `https://dev.${READR_DOMAIN}/project/farmhouse/`,
       creditList: [
           "文字：鐘聖雄",
           "攝影：林俊耀、鐘聖雄",
@@ -81,7 +81,7 @@ export default {
   },
   mounted () {
     if (currEnv() === 'prod') {
-      this.commentsUrl = `https://projects.${SITE_DOMAIN_PROD}/project/farmhouse/`
+      this.commentsUrl = `https://projects.${MM_DOMAIN}/project/farmhouse/`
     }
   }
 };

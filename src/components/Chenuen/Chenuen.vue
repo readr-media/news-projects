@@ -43,7 +43,7 @@
 
 <script>
 //common
-import { SITE_URL } from "../../constants";
+import { MM_SITE_URL } from "../../constants";
 import titleMeta from "../../util/titleMeta";
 import Logo from '../Logo.vue';
 import Share from '../Share.vue';
@@ -93,10 +93,10 @@ export default {
 
   data: function() {
     return {
-      shareLink: `${SITE_URL}chenuen`,
-      // shareLinkOpinion: `${SITE_URL}farmhouse/opinion`,
-      // shareLinkFaq: `${SITE_URL}farmhouse/faq`,
-      // shareLinkGallery: `${SITE_URL}farmhouse/gallery`
+      shareLink: `${MM_SITE_URL}chenuen`,
+      // shareLinkOpinion: `${MM_SITE_URL}farmhouse/opinion`,
+      // shareLinkFaq: `${MM_SITE_URL}farmhouse/faq`,
+      // shareLinkGallery: `${MM_SITE_URL}farmhouse/gallery`
       currentDevice: '',
 
       wheelDirection: '',  
