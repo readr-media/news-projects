@@ -107,7 +107,6 @@
       <p v-text="$t('FOREIGN_LABOUR_III.SECTION_13_3')"></p>
       <p v-text="$t('FOREIGN_LABOUR_III.SECTION_13_4')"></p>
       <p v-html="$t('FOREIGN_LABOUR_III.SECTION_13_5')"></p>
-      <p v-text="$t('FOREIGN_LABOUR_III.SECTION_13_6')"></p>
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 13 }">
       <figure class="media lazy">
@@ -149,8 +148,8 @@
       let ogLocale = 'zh_TW'
       
       return {
-        title: '農地上的 Andy Lau',
-        description: '農地上的 Andy Lau',
+        title: this.$t('FOREIGN_LABOUR_III.TITLE'),
+        description: this.$t('FOREIGN_LABOUR_III.SUB_TITLE'),
         locale: ogLocale,
         metaUrl: metaUrl,
         metaImage: metaImage
@@ -161,6 +160,8 @@
         captionsTop: [],
         commentsUrl: '',
         currentScene: 0,
+        gaScroll: 0,
+        gaScrollIndex: [ 2, 3, 7, 10, 13, 15 ],
         sectionsTop: [],
         viewport: []
       }
@@ -178,6 +179,7 @@
       window.addEventListener('scroll', this.$_foreignLabour_handleScrollForCaption)
       window.addEventListener('resize', this.$_foreignLabour_getViewport)
       window.addEventListener('resize', this.$_foreignLabour_calcSectionTop)
+      ga('send', 'pageview')
     },
     beforeDestroy () {
       window.removeEventListener('scroll', this.$_foreignLabour_handleScroll)
@@ -219,6 +221,10 @@
               const lazyImage = document.querySelector(`section:nth-of-type(${index + 1}) .media.lazy img`)
               lazyImage.src = `/proj-assets/foreign-labour-iii/images/${index}.jpg`
               lazyImage.classList.remove('lazy')
+            }
+            if (this.gaScrollIndex.includes(index) && this.gaScroll < index) {
+              this.gaScroll = index
+              ga('send', 'event', 'projects', 'scroll', `scroll to ${index}`, { nonInteraction: false })
             }
             return this.currentScene = index - 1
           }
