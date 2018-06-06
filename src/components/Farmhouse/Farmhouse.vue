@@ -97,7 +97,7 @@
 </template>
 
 <script>
-  import { SITE_URL } from '../../constants';
+  import { MM_SITE_URL } from '../../constants';
   import { elmYPosition } from 'kc-scroll'
   import _ from 'lodash';
   import Logo from '../Logo.vue';
@@ -164,10 +164,10 @@
     mixins: [ titleMeta ],
     data () {
       return {
-        shareLink: `${SITE_URL}farmhouse`,
-        shareLinkOpinion: `${SITE_URL}farmhouse/opinion`,
-        shareLinkFaq: `${SITE_URL}farmhouse/faq`,
-        shareLinkGallery: `${SITE_URL}farmhouse/gallery`,
+        shareLink: `${MM_SITE_URL}farmhouse`,
+        shareLinkOpinion: `${MM_SITE_URL}farmhouse/opinion`,
+        shareLinkFaq: `${MM_SITE_URL}farmhouse/faq`,
+        shareLinkGallery: `${MM_SITE_URL}farmhouse/gallery`,
 
         chapterTitle: chapterTitle,
         navOpen: false,

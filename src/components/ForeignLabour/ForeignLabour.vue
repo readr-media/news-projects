@@ -195,7 +195,7 @@
   </main>
 </template>
 <script>
-  import { READR_SITE_URL, SITE_DOMAIN_DEV } from '../../constants'
+  import { READR_DOMAIN, READR_SITE_URL } from '../../constants'
   import { currEnv } from '../../util/comm'
   import { currentYPosition, elmYPosition, smoothScroll } from 'kc-scroll'
   import { get, map } from 'lodash'
@@ -231,7 +231,7 @@
     },
     data () {
       return {
-        commentsUrl: `https://dev.${SITE_DOMAIN_DEV}/project/${PROJECT_NAME}/`,
+        commentsUrl: `https://dev.${READR_DOMAIN}/project/${PROJECT_NAME}/`,
         currentSection: 0,
         gaScroll: 0,
         gaScrollIndex: [ 3, 7, 10, 13, 17  ],
