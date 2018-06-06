@@ -242,17 +242,8 @@ export default {
     /* -------------------- desktop end -------------------- */       
 
     }
-
-  
-
-
-
-
-
-
-
+    window.ga('send', 'pageview')
   }
-
 };
 </script>
 
