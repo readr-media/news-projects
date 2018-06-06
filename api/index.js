@@ -1,6 +1,6 @@
 const { API_DEADLINE, API_HOST, API_PORT, API_PROTOCOL, API_TIMEOUT, } = require('./config')
 const { SERVER_PROTOCOL, SERVER_HOST } = require('./config')
-const { fetchFromRedis, insertIntoRedis, redisFetching, } = require('./middle/redisHandler')
+const { fetchFromRedis, insertIntoRedis, } = require('./middle/redisHandler')
 const express = require('express')
 const router = express.Router()
 const bodyParser = require('body-parser')
@@ -57,7 +57,12 @@ router.get('/reports', fetchFromRedis, (req, res, next) => {
     )
     .end((err, response) => {
       if (!err && response) {
-        res.json(JSON.parse(response.text))
+        const dt = JSON.parse(response.text)
+        if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
+          res.dataString = response.text
+        }
+        res.json(dt)
+        next()
       } else {
         res.send('{\'error\':' + err + '}')
         console.error(err)
@@ -83,7 +88,12 @@ router.get('/report/count', fetchFromRedis, (req, res, next) => {
     )
     .end((err, response) => {
       if (!err && response) {
-        res.json(JSON.parse(response.text))
+        const dt = JSON.parse(response.text)
+        if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
+          res.dataString = response.text
+        }
+        res.json(dt)
+        next()
       } else {
         res.send('{\'error\':' + err + '}')
         console.error(err)

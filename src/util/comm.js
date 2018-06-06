@@ -1,4 +1,4 @@
-import { READR_DOMAIN_PROD, SITE_DOMAIN_PROD, OLD_PROJECTS_SLUGS } from '../constants'
+import { READR_DOMAIN_PROD, READR_SITE_URL, SITE_DOMAIN_DEV, SITE_DOMAIN_PROD, OLD_PROJECTS_SLUGS } from '../constants'
 import { getRole } from 'src/util/ABRoleAssign'
 import Cookie from 'vue-cookie'
 import uuidv4 from 'uuid/v4'
@@ -16,6 +16,17 @@ export function setMmCookie () {
   const uuid = uuidv4()
   Cookie.set('mmid', uuid, { expires: (10 * 365 * 24) + 'h' })
   return uuid
+}
+
+export function getFBCommentsUrl () {
+  if (process.env.VUE_ENV === 'client') {
+    const path = location.pathname.slice(1)
+    if (location.hostname.indexOf(READR_DOMAIN_PROD) !== -1) {
+      return `${READR_SITE_URL}${path}`
+    }
+    return `https://dev.${SITE_DOMAIN_DEV}/${path}`
+  }
+  return ''
 }
 
 export function getHost () {
