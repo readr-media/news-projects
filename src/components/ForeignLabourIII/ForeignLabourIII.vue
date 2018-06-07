@@ -248,7 +248,6 @@
           }
         }
       },
-      getFBCommentsUrl,
       truncate
     }
   }
