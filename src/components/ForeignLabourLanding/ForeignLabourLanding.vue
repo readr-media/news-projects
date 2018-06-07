@@ -120,12 +120,14 @@ theme-color-iii = hsl(37.2,41.8%,62.9%)
     object-position 70% 50%
     transform scale(1)
     transition transform 3s
+    pointer-events none
   &.in-action
     > img
       transform scale(1.1)
       transition transform 3s
 .list
   position relative
+  z-index 10
   padding-top calc(100vh - 254px)
   background-color transparent
   img
@@ -136,6 +138,7 @@ theme-color-iii = hsl(37.2,41.8%,62.9%)
     transform translateX(-50%)
     width 250px
     height auto
+    pointer-events none
   &__subTitle
     padding 25px 0
     text-align center
