@@ -274,7 +274,7 @@ export default {
     });
 
     //主圖與進度條連動
-    this.gallery.controller.control = this.galleryProgress;
+    this.gallery.controller && (this.gallery.controller.control = this.galleryProgress);
 
     imagesLoaded( document.querySelector('.page--gallery'), () => {
       this.initNoteContainer();
