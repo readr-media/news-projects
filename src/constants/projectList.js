@@ -10,6 +10,7 @@ export default {
   'foreign-labour': 'ForeignLabour',
   'foreign-labour-ii': 'ForeignLabourII',
   'foreign-labour-iii': 'ForeignLabourIII',
+  'foreign-labour-landing': 'ForeignLabourLanding',
   'marathon': 'Marathon',
   'newtype': 'Newtype',
   'president-promise': 'PresidentPromise',
