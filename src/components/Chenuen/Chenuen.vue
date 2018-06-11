@@ -9,8 +9,8 @@
   <div class="outerwpr">
     <div class="scroller">
       <div class="container">      
-        <home></home>
-        <page></page>
+        <chenuen-home></chenuen-home>
+        <chenuen-page></chenuen-page>
       </div>
     </div>
   </div> 
@@ -25,7 +25,7 @@
   <logo :top="`2px`" :left="`6px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
   <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`" :direction="`right`"></share>
 
-  <pagem></pagem>
+  <chenuen-pagem></chenuen-pagem>
   <!-- <h1 class="test">{{currentDevice}}</h1>  -->
 </div>
 
@@ -35,7 +35,7 @@
   <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
   <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`" :direction="`right`"></share>
 
-  <homem></homem>
+  <chenuen-homem></chenuen-homem>
   <!-- <h1 class="test">{{currentDevice}}</h1>  -->
 </div>  
 
@@ -52,11 +52,11 @@ import Share from '../Share.vue';
 import _ from 'lodash';
 
 // pages
-import home from './Home.vue'; //desktop
-import page from './Page.vue'; //desktop
+import ChenuenHome from './ChenuenHome.vue'; //desktop
+import ChenuenPage from './ChenuenPage.vue'; //desktop
 
-import homem from './Homem.vue'; //mobile
-import pagem from './Pagem.vue'; //mobile
+import ChenuenHomem from './ChenuenHomem.vue'; //mobile
+import ChenuenPagem from './ChenuenPagem.vue'; //mobile
 
 // script
 import {
@@ -77,11 +77,11 @@ export default {
     'logo': Logo,
     'share': Share,
 
-    'home': home,
-    'page': page,
+    'chenuen-home': ChenuenHome,
+    'chenuen-page': ChenuenPage,
 
-    'homem': homem,
-    'pagem': pagem
+    'chenuen-homem': ChenuenHomem,
+    'chenuen-pagem': ChenuenPagem
   },
 
   computed: {
