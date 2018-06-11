@@ -3,32 +3,37 @@
     <app-logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/logo_readr_black.png"></app-logo>
     <app-share :shareUrl="url" top="15px" right="15px" bgColor="#000" direction="down"></app-share>
     <img src="/proj-assets/foreign-labour-landing/images/landing.jpg">
-    <section ref="foreignLabourList" class="list" @mouseover="$_foreignLabour_handleMouseover" @mouseout="$_foreignLabour_handleMouseout">
+    <div class="foreign-labour__title" :style="{ bottom: titleStyleBottom }">
       <img src="/proj-assets/foreign-labour-landing/images/title.png" alt="">
-      <div class="list__subTitle">
-        外籍移工專題
+      <h2>在台失聯移工追蹤報導</h2>
+    </div>
+    <section ref="list" class="list" @mouseover="$_foreignLabour_handleMouseover" @mouseout="$_foreignLabour_handleMouseout">
+      <img ref="title" src="/proj-assets/foreign-labour-landing/images/title.png" alt="" :style="{ top: titleStyleTop, bottom: titleStyleBottom }">
+      <div class="list__subTitle">在台失聯移工追蹤報導</div>
+      <div class="list__items">
+        <a href="/project/foreign-labour" class="item" target="_blank" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
+          <h3>窮得只剩一條命</h3>
+          <p>在台灣逃了十幾年，潘同甘在去年被抓後，選擇再次偷渡來台。沒想到，這次上岸時，他已沒了呼吸⋯⋯</p>
+        </a>
+        <a href="/project/foreign-labour-ii" class="item" target="_blank" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
+          <h3>沒有路的地方</h3>
+          <p>黃文團的遺體在阿里山上一處極隱密的樹林中被哥哥發現時，頭部已經腐爛，雙手卻仍銬著警用手銬⋯⋯</p>
+        </a>
+        <a href="/project/foreign-labour-iii" class="item" target="_blank" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
+          <h3>農地上的 Andy Lau</h3>
+          <p>當他們合法工作時，往往只能得到非法的對待。無奈之下，他們只好非法進入農業，耕種餵飽台灣人⋯⋯⋯</p>
+        </a>
       </div>
-      <a href="/project/foreign-labour" class="item" target="_blank" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
-        <h3>窮得只剩一條命</h3>
-        <p>在這座島，他們即便能掙到錢，也不一定有命回家……</p>
-      </a>
-      <a href="/project/foreign-labour-ii" class="item" target="_blank" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
-        <h3>沒有路的地方</h3>
-        <p>往前望是漆黑，往後看是荒蕪</p>
-      </a>
-      <a href="/project/foreign-labour-iii" class="item" target="_blank" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
-        <h3>農地上的 Andy Lau</h3>
-        <p>當他們合法工作時，往往只能得到非法的對待。無奈之下，他們只好非法進入農業，耕種餵飽台灣人⋯⋯⋯</p>
-      </a>
     </section>
   </main>
 </template>
 <script>
+  import { get } from 'lodash'
   import { getFBCommentsUrl } from '../../util/comm'
   import Logo from '../Logo.vue'
   import Share from '../Share.vue'
 
-  const PROJECT_NAME = 'foreign-labour-iii'
+  const PROJECT_NAME = 'foreign-labour-landing'
 
   export default {
     name: 'ForeignLabourLanding',
@@ -38,7 +43,7 @@
     },
     metaInfo () {
       let metaUrl = PROJECT_NAME
-      let metaImage = `${PROJECT_NAME}/images/og-tw.jpg`
+      let metaImage = `${PROJECT_NAME}/images/og.jpg`
       
       return {
         title: '外籍移工專題',
@@ -51,18 +56,52 @@
       return {
         inAction: false,
         pos: undefined,
-        url: ''
+        url: '',
+        viewport: [],
+        listHeight: 0,
+        titleHeight: 0
       }
+    },
+    computed: {
+      titleStyleBottom () {
+        if (this.viewport[0] >= 768) {
+          return `${this.listHeight + 20}px`
+        }
+        return 'auto'
+      },
+      titleStyleTop () {
+        if (this.viewport[0] >= 768) {
+          return 'auto'
+        }
+        return `calc(67vh - ${this.titleHeight + 20}px)`
+      },
+    },
+    watch: {
+      viewport () {
+        this.listHeight = get(this.$refs, 'list.offsetHeight', 0)
+        this.titleHeight = get(this.$refs, 'title.offsetHeight', 0)
+      }
+    },
+    beforeMount () {
+      this.$_foreignLabour_getViewport()
     },
     mounted () {
       this.url = getFBCommentsUrl()
-
+      this.listHeight = get(this.$refs, 'list.offsetHeight', 0)
+      this.titleHeight = get(this.$refs, 'title.offsetHeight', 0)
       window.addEventListener('scroll', this.$_foreignLabour_handleScroll)
+      window.addEventListener('resize', this.$_foreignLabour_getViewport)
     },
     beforeDestroy () {
       window.removeEventListener('scroll', this.$_foreignLabour_handleScroll)
+      window.addEventListener('resize', this.$_foreignLabour_getViewport)
     },
     methods: {
+      $_foreignLabour_getViewport () {
+        const w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+        const h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+        this.viewport = [ w, h ]
+      },
       $_foreignLabour_handleMouseout () {
         this.$refs.foreignLabour.classList.remove('in-action')
       },
@@ -100,22 +139,28 @@
 </script>
 <style lang="stylus" scoped>
 theme-color-i = hsl(298.5,23.4%,65.7%)
+theme-color-i-dark = hsl(298.5,23.4%,55.7%)
 theme-color-ii = hsl(123.6,24.8%,73.9%)
+theme-color-ii-dark = hsl(123.6,24.8%,63.9%)
 theme-color-iii = hsl(37.2,41.8%,62.9%)
+theme-color-iii-dark = hsl(37.2,41.8%,52.9%)
 
 .foreign-labour
   color #fff
+  font-family "source-han-sans-traditional", sans-serif
   line-height 1.67
-  background-color #000
+  background-color #1a1a1a
   h1, h2, h3, p
     margin 0
+  h3
+    transition color .5s
   > img
     position fixed
     top 0
     left 0
     z-index 1
     width 100%
-    height calc(100vh - 254px)
+    height 67vh
     object-fit cover
     object-position 70% 50%
     transform scale(1)
@@ -125,25 +170,26 @@ theme-color-iii = hsl(37.2,41.8%,62.9%)
     > img
       transform scale(1.1)
       transition transform 3s
+  &__title
+    display none
 .list
   position relative
   z-index 10
-  padding-top calc(100vh - 254px)
+  padding-top 67vh
   background-color transparent
   img
     position absolute
-    top calc(100vh - 254px - 58px - 20px)
     left 50%
     z-index 10
     transform translateX(-50%)
-    width 250px
+    width 85%
     height auto
     pointer-events none
   &__subTitle
     padding 25px 0
     text-align center
     font-size 1.5rem
-    font-family "source-han-serif-tc", serif
+    font-weight 300
     letter-spacing 3px
     background-color #1a1a1a
 .item
@@ -158,16 +204,22 @@ theme-color-iii = hsl(37.2,41.8%,62.9%)
   &:nth-of-type(1)
     h3
       color theme-color-i
+      &:hover
+        color theme-color-i-dark
     p
       border-color theme-color-i
   &:nth-of-type(2)
     h3
       color theme-color-ii
+      &:hover
+        color theme-color-ii-dark
     p
       border-color theme-color-ii
   &:nth-of-type(3)
     h3
       color theme-color-iii
+      &:hover
+        color theme-color-iii-dark
     p
       border-color theme-color-iii
   &.touch
@@ -185,9 +237,51 @@ theme-color-iii = hsl(37.2,41.8%,62.9%)
 @media (min-width: 768px)
   .foreign-labour
     > img
-      height calc(100vh - 228px)
+      height calc(100vh - 224px)
+      object-position 50% 100%
+    &__title
+      display block
+      position fixed
+      left 10%
+      bottom 245px
+      z-index 10
+      width 60%
+      line-height 1
+      img
+        width 100%
+      h2
+        position absolute
+        left 80%
+        bottom 0
+        font-weight 300
+        letter-spacing 2px
+        white-space nowrap
   .list
-    padding-top calc(100vh - 228px)
+    display inline
+    position fixed
+    left 0
+    bottom 0
+    z-index 10
+    width 100%
+    padding 0
+    background-color #1a1a1a
+    overflow-x scroll
+    overflow-y hidden
+    img
+      display none
+    &__subTitle
+      display none
+    &__items
+      display flex
+      width 125%
+      
+  .item
+    display block
+    width 40%
+    padding-bottom 2.5em
+    float left
+    &:first-of-type
+      margin-left 5%
 
 @media (min-width: 900px)
   .foreign-labour
@@ -195,7 +289,12 @@ theme-color-iii = hsl(37.2,41.8%,62.9%)
     height 100vh
     > img
       height 100vh
-  
+    &__title
+      width 500px
+      left 5%
+      h2
+        font-size 1.5rem
+        letter-spacing 4px
   .list
     display flex
     position absolute
@@ -206,19 +305,6 @@ theme-color-iii = hsl(37.2,41.8%,62.9%)
     width 878px
     padding 30px 35px 60px 0
     background-color rgba(0, 0, 0, .7)
-    img
-      top auto
-      left 50px
-      bottom calc(236px + 15px)
-      transform none
-      width 500px
-    &__subTitle
-      position absolute
-      right 70px
-      bottom calc(236px + 15px)
-      padding 0
-      font-size 2.1875rem
-      background-color transparent
   .item
     display block
     max-width calc(78% / 3)
@@ -229,6 +315,6 @@ theme-color-iii = hsl(37.2,41.8%,62.9%)
     & + .item
       margin-left 6%
     h3
-      font-size 1.3rem
+      font-size 1.5rem
     
 </style>
