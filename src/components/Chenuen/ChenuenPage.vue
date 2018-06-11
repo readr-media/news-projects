@@ -1,110 +1,92 @@
 <template>
 <div class="pagewpr">
-
-<div class="page--aside expand">
-
-  <div class="page--title"></div>
-
-  <div class="page--btnwpr">
-
-    <div class="page--btn desc active" id="btnDesc" v-on:click="toggleDesc">
-      <i></i>
-      <span>故事</span>
+  <div class="page--aside expand">
+    <div class="page--title"></div>
+    <div class="page--btnwpr">
+      <div class="page--btn desc active" id="btnDesc" v-on:click="toggleDesc">
+        <i></i>
+        <span>故事</span>
+      </div>
+      <div class="page--btn note active" id="btnNote" v-on:click="toggleNote">
+        <i></i>
+        <span>細節</span>
+      </div>
+      <div class="page--btn viewer active" id="btnNote" v-on:click="toogleViewer">
+        <i></i>
+        <span>看原圖</span>
+      </div>
     </div>
-
-    <div class="page--btn note active" id="btnNote" v-on:click="toggleNote">
-      <i></i>
-      <span>細節</span>
+    <div class="page--navpanel">
+      <div class="swiper--control">
+        <!-- swiper pagination -->
+        <div class="swiper-pagination" id="galleryFraction"></div>
+        <!-- navigation buttons -->
+        <div class="swiper-btnwpr">
+          <div class="swiper-button-prev" @click="toogleSwiperButtonPrev"></div>
+          <div class="swiper-button-next" @click="toogleSwiperButtonNext"></div>
+        </div>   
+      </div>
     </div>
-
-    <div class="page--btn viewer active" id="btnNote" v-on:click="toogleViewer">
-      <i></i>
-      <span>看原圖</span>
-    </div>
-  </div>
-
-  <div class="page--navpanel">
-    <div class="swiper--control">
-      <!-- swiper pagination -->
-      <div class="swiper-pagination" id="galleryFraction"></div>
-      <!-- navigation buttons -->
-      <div class="swiper-btnwpr">
-        <div class="swiper-button-prev" @click="toogleSwiperButtonPrev"></div>
-        <div class="swiper-button-next" @click="toogleSwiperButtonNext"></div>
-      </div>   
-    </div>
-
-  </div>
-
-  <div class="page--desc">
-    <div class="swiper-container gallery--progress">
-
+    <div class="page--desc">
+      <div class="swiper-container gallery--progress">
         <div class="swiper-wrapper">
-            <div class="swiper-slide swiper-no-swiping"
-              v-for="item in galleryData" 
-              :key="item.id">
-              <div class="scrollwpr">
-                <div class="content">
-                  <h2 v-text="item.title"></h2>
-                  <div v-html="item.desc"></div>
-                </div>   
-              </div>                     
-            </div>
+          <div class="swiper-slide swiper-no-swiping"
+            v-for="item in galleryData" 
+            :key="item.id">
+            <div class="scrollwpr">
+              <div class="content">
+                <h2 v-text="item.title"></h2>
+                <div v-html="item.desc"></div>
+              </div>   
+            </div>                     
+          </div>
         </div>
-
         <!-- Pagination -->
         <div class="swiper-pagination swiper-pagination-progressbar" id="galleryProgress"></div>
-
-    </div>
+      </div>
+    </div> 
   </div>
-  
-</div>
-
-<div class="swiper-container page--gallery">  
+  <div class="swiper-container page--gallery">  
     <div class="swiper-wrapper">
-        <div 
-          class="swiper-slide"
-          v-for="item in galleryData" 
-          :key="item.id"
-          v-bind:style="{ backgroundImage: 'url(' + item.url + ')' }"
-        >
-        <!-- <div class="swiper-slide" v-for="item in galleryData" :key="item.id"> -->
-          <img class="swiper-slide__image" v-bind:src="item.url"/>
-          <div class="note--wrapper">
-            <div class="note--container">
-              <!-- note--entry -->
-              <div class="note--entry"
-                v-for="(entry,index) in item.note" :key="entry.id"                
-                v-bind:style="{
-                  left: entry.left,
-                  top: entry.top
-                }"
-              >
-                  <div class="note--marker" @mouseover="sendMouseoverEvent(index + 1)">{{index + 1}}</div>
-                  <div class="note--content">
-                      <div class="note--content__image">
-                          <img v-bind:src="entry.url" />
-                      </div>
-                      <div class="note--content__text">
-                          <h4>{{entry.title}}</h4>
-                          <div v-html="entry.desc"></div>
-                      </div>
-                  </div>
+      <div 
+        class="swiper-slide"
+        v-for="item in galleryData" 
+        :key="item.id"
+        v-bind:style="{ backgroundImage: 'url(' + item.url + ')' }"
+      >
+      <!-- <div class="swiper-slide" v-for="item in galleryData" :key="item.id"> -->
+        <img class="swiper-slide__image" v-bind:src="item.url"/>
+        <div class="note--wrapper">
+          <div class="note--container">
+            <!-- note--entry -->
+            <div class="note--entry"
+              v-for="(entry,index) in item.note" :key="entry.id"                
+              v-bind:style="{
+                left: entry.left,
+                top: entry.top
+              }"
+            >
+              <div class="note--marker" @mouseover="sendMouseoverEvent(index + 1)">{{index + 1}}</div>
+              <div class="note--content">
+                <div class="note--content__image">
+                  <img v-bind:src="entry.url" />
+                </div>
+                <div class="note--content__text">
+                  <h4>{{entry.title}}</h4>
+                  <div v-html="entry.desc"></div>
+                </div>
               </div>
-              <!-- note--entry -->
             </div>
+            <!-- note--entry -->
           </div>
-
         </div>
+      </div>
     </div>    
-
-</div>
+  </div>
 <!-- </div> -->
-
-<div class="image-viewer" v-viewer="imageViewerOptions" v-show="false">
-  <img v-if="currentViewerImagePath !== ''" :src="`/proj-assets/chenuen/images/gallery/raw/${currentViewerImagePath}`" @load="showViewer">
-</div>
-
+  <div class="image-viewer" v-viewer="imageViewerOptions" v-show="false">
+    <img v-if="currentViewerImagePath !== ''" :src="`/proj-assets/chenuen/images/gallery/raw/${currentViewerImagePath}`" @load="showViewer">
+  </div>
 </div>
 </template>
 
