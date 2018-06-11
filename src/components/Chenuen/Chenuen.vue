@@ -1,43 +1,45 @@
 <template>
-<div v-if="!isClientSide"></div>
-<!-- ///// 電腦版 ///// -->
-<div v-else-if="currentDevice === 'desktop' && getParams !== 'gallery'">
+<div id="chenuen">
+  <!-- <div v-if="!isClientSide"></div> -->
+  <!-- ///// 電腦版 ///// -->
+  <div v-if="currentDevice === 'desktop' && getParams !== 'gallery'">
 
-  <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`" :direction="`right`"></share>
+    <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
+    <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`" :direction="`right`"></share>
 
-  <div class="outerwpr">
-    <div class="scroller">
-      <div class="container">      
-        <chenuen-home></chenuen-home>
-        <chenuen-page></chenuen-page>
+    <div class="outerwpr" ref="outerwpr">
+      <div class="scroller">
+        <div class="container">      
+          <chenuen-home></chenuen-home>
+          <chenuen-page></chenuen-page>
+        </div>
       </div>
-    </div>
-  </div> 
+    </div> 
 
-  <!-- <h1 class="test">{{currentDevice}}</h1>  -->
+    <!-- <h1 class="test">{{currentDevice}}</h1>  -->
 
+  </div>
+
+  <!-- ///// 手機版 gallery ///// -->
+  <div v-if="getParams === 'gallery'">
+
+    <logo :top="`2px`" :left="`6px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
+    <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`" :direction="`right`"></share>
+
+    <chenuen-pagem></chenuen-pagem>
+    <!-- <h1 class="test">{{currentDevice}}</h1>  -->
+  </div>
+
+  <!-- ///// 手機版首頁 ///// -->
+  <div v-if="currentDevice === 'mobile' && getParams !== 'gallery'">
+
+    <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
+    <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`" :direction="`right`"></share>
+
+    <chenuen-homem></chenuen-homem>
+    <!-- <h1 class="test">{{currentDevice}}</h1>  -->
+  </div>  
 </div>
-
-<!-- ///// 手機版 gallery ///// -->
-<div v-else-if="getParams === 'gallery'">
-
-  <logo :top="`2px`" :left="`6px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`" :direction="`right`"></share>
-
-  <chenuen-pagem></chenuen-pagem>
-  <!-- <h1 class="test">{{currentDevice}}</h1>  -->
-</div>
-
-<!-- ///// 手機版首頁 ///// -->
-<div v-else>
-
-  <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
-  <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`" :direction="`right`"></share>
-
-  <chenuen-homem></chenuen-homem>
-  <!-- <h1 class="test">{{currentDevice}}</h1>  -->
-</div>  
 
 </template>
 
@@ -148,101 +150,107 @@ export default {
     this.currentDevice = this.$store.state.useragent.isMobile ? 'mobile' : 'desktop';
     console.log("device: " + this.currentDevice);
   },
+  watch: {
+    isClientSide (value) {
+      if (value) {
+        if(this.currentDevice === 'desktop'){
 
+        /* -------------------- desktop start -------------------- */  
+
+          document.querySelector('body').classList.add('fixed');
+
+          // let wrapper = document.querySelector('.outerwpr');
+          let wrapper = this.$refs['outerwpr']
+          this.container = document.querySelector('.container');    
+          this.homewpr = document.querySelector('.homewpr');
+          this.homeIntro = document.querySelector('.home-intro');
+          this.galleryProgress = document.getElementById('galleryProgress');
+
+          if(wrapper.scrollTop !== 1){
+            wrapper.scrollTop = 1;
+          }  
+
+          //reset container top position 
+          this.container.style.top = '0px';    
+    
+        /* ---------- scroll ---------- */
+
+          // 用 throttle 包住要執行的動作
+          let scrollThrottle = _.throttle(() => {    
+
+            console.log('--- invoke function ---');
+            this.scrollAction(this);         
+
+          }, 1200, {
+            'trailing': false
+          });
+
+          // wrapper scroll (with throttle)
+          wrapper.addEventListener('scroll', scrollThrottle);
+
+          wrapper.addEventListener('scroll', () => {
+            // 讓內容鎖住不捲動，只需要判斷有觸發 scroll event        
+            wrapper.scrollTop  = 1;
+            console.log('scroll');
+          });
+
+        /* ---------- wheel ---------- */
+
+          // 用 throttle 包住要執行的動作
+          let wheelThrottle = _.throttle((event) => {
+
+            this.wheelContent(event,this);
+
+          }, 1200, {
+            'trailing': false
+          });
+
+          wrapper.addEventListener('wheel', wheelThrottle);
+
+        /* ---------- resize ---------- */
+
+          // 用 throttle 包住要執行的動作
+          let resizeThrottle = _.throttle(() => {
+
+            this.resizeAction(this);
+
+          }, 300, {
+            'leading': false
+          });
+          
+          window.addEventListener('resize', resizeThrottle);
+
+          wrapper.addEventListener('resize', () => {
+            // 讓內容鎖住不捲動
+            wrapper.scrollTop  = 1;
+          });
+
+        /* ---------- click button ---------- */
+
+          document.getElementById('showIntro').addEventListener('click',(event) => {
+
+            event.preventDefault();
+            event.stopPropagation();
+            this.slideToSection(this,'intro',false);
+
+          }, false);
+
+          document.getElementById('showGallery').addEventListener('click',(event) => {
+      
+            event.preventDefault();
+            event.stopPropagation();
+            this.slideToSection(this,'gallery',false);
+
+          }, false);
+
+        /* -------------------- desktop end -------------------- */       
+
+        }
+      }
+    }
+  },
   mounted: function() {      
     this.isClientSide = true;
-    if(this.currentDevice == 'desktop'){
-
-    /* -------------------- desktop start -------------------- */  
-
-      document.querySelector('body').classList.add('fixed');
-
-      let wrapper = document.querySelector('.outerwpr');
-      this.container = document.querySelector('.container');    
-      this.homewpr = document.querySelector('.homewpr');
-      this.homeIntro = document.querySelector('.home-intro');
-      this.galleryProgress = document.getElementById('galleryProgress');
-
-      if(wrapper.scrollTop != 1){
-        wrapper.scrollTop = 1;
-      }  
-
-      //reset container top position 
-      this.container.style.top = '0px';    
- 
-    /* ---------- scroll ---------- */
-
-      // 用 throttle 包住要執行的動作
-      let scrollThrottle = _.throttle(() => {    
-
-        console.log('--- invoke function ---');
-        this.scrollAction(this);         
-
-      }, 1200, {
-        'trailing': false
-      });
-
-      // wrapper scroll (with throttle)
-      wrapper.addEventListener('scroll', scrollThrottle);
-
-      wrapper.addEventListener('scroll', () => {
-        // 讓內容鎖住不捲動，只需要判斷有觸發 scroll event        
-        wrapper.scrollTop  = 1;
-        console.log('scroll');
-      });
-
-    /* ---------- wheel ---------- */
-
-      // 用 throttle 包住要執行的動作
-      let wheelThrottle = _.throttle((event) => {
-
-        this.wheelContent(event,this);
-
-      }, 1200, {
-        'trailing': false
-      });
-
-      wrapper.addEventListener('wheel', wheelThrottle);
-
-    /* ---------- resize ---------- */
-
-      // 用 throttle 包住要執行的動作
-      let resizeThrottle = _.throttle(() => {
-
-        this.resizeAction(this);
-
-      }, 300, {
-        'leading': false
-      });
-      
-      window.addEventListener('resize', resizeThrottle);
-
-      wrapper.addEventListener('resize', () => {
-        // 讓內容鎖住不捲動
-        wrapper.scrollTop  = 1;
-      });
-
-    /* ---------- click button ---------- */
-
-      document.getElementById('showIntro').addEventListener('click',(event) => {
-
-        event.preventDefault();
-        event.stopPropagation();
-        this.slideToSection(this,'intro',false);
-
-      }, false);
-
-      document.getElementById('showGallery').addEventListener('click',(event) => {
-   
-        event.preventDefault();
-        event.stopPropagation();
-        this.slideToSection(this,'gallery',false);
-
-      }, false);
-
-    /* -------------------- desktop end -------------------- */       
-
-    }
     window.ga('send', 'pageview')
   }
 };
