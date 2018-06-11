@@ -1,7 +1,7 @@
 <template>
-
+<div v-if="!isClientSide"></div>
 <!-- ///// 電腦版 ///// -->
-<div v-if="currentDevice == 'desktop' && getParams != 'gallery'">
+<div v-else-if="currentDevice === 'desktop' && getParams !== 'gallery'">
 
   <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
   <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`" :direction="`right`"></share>
@@ -20,7 +20,7 @@
 </div>
 
 <!-- ///// 手機版 gallery ///// -->
-<div v-else-if="getParams == 'gallery'">
+<div v-else-if="getParams === 'gallery'">
 
   <logo :top="`2px`" :left="`6px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
   <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`" :direction="`right`"></share>
@@ -97,7 +97,7 @@ export default {
       // shareLinkOpinion: `${MM_SITE_URL}farmhouse/opinion`,
       // shareLinkFaq: `${MM_SITE_URL}farmhouse/faq`,
       // shareLinkGallery: `${MM_SITE_URL}farmhouse/gallery`
-      currentDevice: '',
+      currentDevice: 'desktop',
 
       wheelDirection: '',  
       
@@ -111,7 +111,8 @@ export default {
       galleryProgress: null,
 
       introVisibility: false,
-      galleryVisibility: false
+      galleryVisibility: false,
+      isClientSide: false,
 
     };
   },
@@ -149,7 +150,7 @@ export default {
   },
 
   mounted: function() {      
-
+    this.isClientSide = true;
     if(this.currentDevice == 'desktop'){
 
     /* -------------------- desktop start -------------------- */  
