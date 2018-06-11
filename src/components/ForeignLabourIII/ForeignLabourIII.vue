@@ -117,7 +117,7 @@
       </div>
     </section>
     <section class="credit">
-      <p>文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋<span></span><br>翻譯：好心人</p>
+      <p>文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋</p>
     </section>
     <related-reports></related-reports>
     <section v-if="commentsUrl" class="comment">

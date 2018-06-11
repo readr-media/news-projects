@@ -2,7 +2,7 @@
   <main ref="foreignLabour" class="foreign-labour">
     <app-logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/logo_readr_black.png"></app-logo>
     <app-share :shareUrl="url" top="15px" right="15px" bgColor="#000" direction="down"></app-share>
-    <img src="/proj-assets/foreign-labour-landing/images/landing.jpg">
+    <img src="/proj-assets/foreign-labour-landing/images/landing.jpg" :style="{ height: bgImgHeight }">
     <div class="foreign-labour__title" :style="{ bottom: titleStyleBottom }">
       <img src="/proj-assets/foreign-labour-landing/images/title.png" alt="">
       <h2>在台失聯移工追蹤報導</h2>
@@ -11,15 +11,15 @@
       <img ref="title" src="/proj-assets/foreign-labour-landing/images/title.png" alt="" :style="{ top: titleStyleTop, bottom: titleStyleBottom }">
       <div class="list__subTitle">在台失聯移工追蹤報導</div>
       <div class="list__items">
-        <a href="/project/foreign-labour" class="item" target="_blank" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
+        <a href="/project/foreign-labour" class="item" target="_blank" @click="$_foreignLabour_ga('i')" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
           <h3>窮得只剩一條命</h3>
           <p>在台灣逃了十幾年，潘同甘在去年被抓後，選擇再次偷渡來台。沒想到，這次上岸時，他已沒了呼吸⋯⋯</p>
         </a>
-        <a href="/project/foreign-labour-ii" class="item" target="_blank" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
+        <a href="/project/foreign-labour-ii" class="item" target="_blank" @click="$_foreignLabour_ga('ii')" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
           <h3>沒有路的地方</h3>
           <p>黃文團的遺體在阿里山上一處極隱密的樹林中被哥哥發現時，頭部已經腐爛，雙手卻仍銬著警用手銬⋯⋯</p>
         </a>
-        <a href="/project/foreign-labour-iii" class="item" target="_blank" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
+        <a href="/project/foreign-labour-iii" class="item" target="_blank" @click="$_foreignLabour_ga('iii')" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
           <h3>農地上的 Andy Lau</h3>
           <p>當他們合法工作時，往往只能得到非法的對待。無奈之下，他們只好非法進入農業，耕種餵飽台灣人⋯⋯⋯</p>
         </a>
@@ -46,8 +46,8 @@
       let metaImage = `${PROJECT_NAME}/images/og.jpg`
       
       return {
-        title: '外籍移工專題',
-        description: '外籍移工專題',
+        title: '《異鄉人 - 在台失聯移工追蹤報導》',
+        description: '目前台灣共有超過 5.1 萬名失聯移工，過著朝不保夕又毫無保障的生活，也為台灣社會帶來全新的挑戰。本專題將鏡頭對準他們，帶領讀者共同探究他們為何「逃」，「逃跑」後又如何生活。',
         metaUrl: metaUrl,
         metaImage: metaImage
       }
@@ -63,6 +63,15 @@
       }
     },
     computed: {
+      bgImgHeight () {
+        if (this.viewport[0] >= 900) {
+          return '100vh'
+        } else if (this.viewport[0] >= 768) {
+          return `calc(100vh - ${this.listHeight}px)`
+        } else {
+          return '67vh'
+        }
+      },
       titleStyleBottom () {
         if (this.viewport[0] >= 768) {
           return `${this.listHeight + 20}px`
@@ -91,12 +100,16 @@
       this.titleHeight = get(this.$refs, 'title.offsetHeight', 0)
       window.addEventListener('scroll', this.$_foreignLabour_handleScroll)
       window.addEventListener('resize', this.$_foreignLabour_getViewport)
+      ga('send', 'pageview')
     },
     beforeDestroy () {
       window.removeEventListener('scroll', this.$_foreignLabour_handleScroll)
       window.addEventListener('resize', this.$_foreignLabour_getViewport)
     },
     methods: {
+      $_foreignLabour_ga (index) {
+        ga('send', 'event', 'projects', 'click', `go to ${index}`, { nonInteraction: false })
+      },
       $_foreignLabour_getViewport () {
         const w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
         const h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
@@ -265,8 +278,10 @@ theme-color-iii-dark = hsl(37.2,41.8%,52.9%)
     width 100%
     padding 0
     background-color #1a1a1a
-    overflow-x scroll
+    overflow-x auto
     overflow-y hidden
+    ::-webkit-scrollbar
+      display none
     img
       display none
     &__subTitle
