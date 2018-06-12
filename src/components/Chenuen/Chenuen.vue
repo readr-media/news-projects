@@ -21,7 +21,7 @@
   </div>
 
   <!-- ///// 手機版 gallery ///// -->
-  <div v-if="getParams === 'gallery'">
+  <div v-if="isClientSide && getParams === 'gallery'">
 
     <logo :top="`2px`" :left="`6px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
     <share :shareUrl="shareLink" :top="`2px`" :left="`54px`" :bgColor="`#b1adca`" :direction="`right`"></share>
@@ -31,7 +31,7 @@
   </div>
 
   <!-- ///// 手機版首頁 ///// -->
-  <div v-if="currentDevice === 'mobile' && getParams !== 'gallery'">
+  <div v-if="isClientSide && currentDevice === 'mobile' && getParams !== 'gallery'">
 
     <logo :top="`12px`" :left="`15px`" :bgColor="`#b1adca`" :bgImage="`/proj-assets/chenuen/images/navbtn.png`"></logo>
     <share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#b1adca`" :direction="`right`"></share>
@@ -90,7 +90,10 @@ export default {
     getParams() {
       //取得網址列參數
       return _.get(this.$route, "params.params");
-    }
+    },
+    currentDevice () {
+      return this.$store.state.useragent.isMobile ? 'mobile' : 'desktop';
+    },
   },
 
   data: function() {
@@ -99,7 +102,7 @@ export default {
       // shareLinkOpinion: `${MM_SITE_URL}farmhouse/opinion`,
       // shareLinkFaq: `${MM_SITE_URL}farmhouse/faq`,
       // shareLinkGallery: `${MM_SITE_URL}farmhouse/gallery`
-      currentDevice: 'desktop',
+      // currentDevice: 'desktop',
 
       wheelDirection: '',  
       
@@ -145,11 +148,11 @@ export default {
 
   },
 
-  created () {    
-    //current device
-    this.currentDevice = this.$store.state.useragent.isMobile ? 'mobile' : 'desktop';
-    console.log("device: " + this.currentDevice);
-  },
+  // created () {    
+  //   //current device
+  //   this.currentDevice = this.$store.state.useragent.isMobile ? 'mobile' : 'desktop';
+  //   console.log("device: " + this.currentDevice);
+  // },
   watch: {
     isClientSide (value) {
       if (value) {
