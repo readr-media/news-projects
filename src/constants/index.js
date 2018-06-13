@@ -12,14 +12,20 @@ export const READR_FB_APP_ID = '2138298816406811'
 
 export const READR_FB_PAGE_ID = '563994370665617'
 
+export const READR_FB_PAGE_URL = 'https://www.facebook.com/Readr-563994370665617/'
+
 export const MM_FB_APP_ID = '175313259598308'
 
 export const MM_FB_PAGE_ID = '1855418728011324'
+
+export const MM_FB_PAGE_URL = 'https://www.facebook.com/mirrormediamg/'
 
 // Other
 export const READR_DOMAIN = 'readr.tw'
 
 export const READR_DOMAIN_PROD = 'www.readr.tw'
+
+export const READR_FAVICON_URL = 'https://www.readr.tw/public/favicon.png'
 
 export const READR_SITE_URL = 'https://www.readr.tw/project/'
 
@@ -28,6 +34,8 @@ export const READR_SITE_ASSETS_URL = 'https://www.readr.tw/proj-assets/'
 export const READR_SITE_NAME = '讀＋READr'
 
 export const MM_DOMAIN = 'mirrormedia.mg'
+
+export const MM_FAVICON_URL = 'https://www.mirrormedia.mg/public/favicon-120x120.png'
 
 export const MM_SITE_URL = 'https://projects.mirrormedia.mg/project/'
 
