@@ -73,7 +73,21 @@ export const OLD_PROJECTS_SLUGS = [
   'fertility',
 ]
 
-// include project url path name if we want project's GA ID is mirrormedia's GA ID 
-export const PROJECTS_GAID_BELONGS_MM = [
+// include project url path name if we want project to use mirrormedia's meta and GA setting
+export const PROJECTS_BELONGS_MM = [
   'chenuen'
 ]
+
+// include project url path name which need google map
+export const PROJECTS_NEED_GOOGLE_MAP = [
+  'farmhouse'
+]
+
+// include project url path name which need google reCAPTCHA
+export const PROJECTS_NEED_GOOGLE_RECAPTCHA = [
+  'president-promise'
+]
+
+export const SCRIPT_GOOGLE_MAP = `<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgwPtUjWMKGKdp62Hnank6TTl3lhXwa3o&libraries=visualization" async defer></script>`
+
+export const SCRIPT_GOOGLE_RECAPTCHA = `<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=en" async defer></script>`
