@@ -5,7 +5,30 @@
     </transition>
   </div>
 </template>
-
+<script>
+const updateViewport = (store) => {
+  const w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+  const h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+  const viewport = [ w, h ]
+  return store.dispatch('UPDATE_VIEWPORT', viewport)
+}
+export default {
+  beforeMount () {
+    updateViewport(this.$store)
+  },
+  mounted () {
+    window.addEventListener('resize', this.$_app_updateViewport)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.$_app_updateViewport)
+  },
+  methods: {
+    $_app_updateViewport () {
+      updateViewport(this.$store)
+    }
+  }
+}
+</script>
 <style lang="stylus">
 
 // noUi

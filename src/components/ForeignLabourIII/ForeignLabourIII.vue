@@ -184,8 +184,8 @@
     beforeDestroy () {
       window.removeEventListener('scroll', this.$_foreignLabour_handleScroll)
       window.removeEventListener('scroll', this.$_foreignLabour_handleScrollForCaption)
-      window.addEventListener('resize', this.$_foreignLabour_getViewport)
-      window.addEventListener('resize', this.$_foreignLabour_calcSectionTop)
+      window.removeEventListener('resize', this.$_foreignLabour_getViewport)
+      window.removeEventListener('resize', this.$_foreignLabour_calcSectionTop)
     },
     methods: {
       $_foreignLabour_calcSectionTop () {
