@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
+import VueLazyload from 'vue-lazyload'
 import App from './App.vue'
 import { createStore } from './store'
 import { createRouter } from './router'
@@ -10,6 +11,10 @@ import titleMeta from './util/titleMeta'
 import * as filters from './util/filters'
 
 Vue.use(VueI18n)
+Vue.use(VueLazyload, {
+  preLoad: 1.5,
+  attempt: 1
+})
 
 // mixin for handling title
 Vue.mixin(titleMeta)

@@ -25,6 +25,7 @@ export function createStore () {
     },
     actions,
     mutations,
-    getters
+    getters,
+    viewport: [ 0, 0 ]
   })
 }

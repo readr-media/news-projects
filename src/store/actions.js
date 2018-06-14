@@ -62,4 +62,7 @@ export default {
       console.error('Error while fetching sheet', err)
     })
   },
+  UPDATE_VIEWPORT: ({ state, commit }, viewport) => {
+    commit('SET_VIEWPORT', viewport)
+  }
 }
