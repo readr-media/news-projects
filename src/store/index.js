@@ -9,23 +9,12 @@ Vue.use(Vuex)
 export function createStore () {
   return new Vuex.Store({
     state: {
-      activeType: null,
-      itemsPerPage: 20,
-      items: {/* [id: number]: Item */},
       reports: [],
       reportsCount: 0,
-      users: {/* [id: string]: User */},
-      lists: {
-        top: [/* number */],
-        new: [],
-        show: [],
-        ask: [],
-        job: []
-      }
+      viewport: [ 0, 0 ]
     },
     actions,
     mutations,
-    getters,
-    viewport: [ 0, 0 ]
+    getters
   })
 }
