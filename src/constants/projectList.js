@@ -13,5 +13,6 @@ export default {
   'marathon': 'Marathon',
   'newtype': 'Newtype',
   'president-promise': 'PresidentPromise',
+  'dollclaw': 'Dollclaw',
   //'proj1': 'Proj1',
 }
