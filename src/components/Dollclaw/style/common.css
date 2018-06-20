@@ -10,6 +10,7 @@ article,aside,canvas,figure,figure img,figcaption,footer,header,hgroup,menu,nav,
 html {overflow-y:scroll;}
 body {text-align:center; font-size:18px; line-height:1.6; 
 font-family:"source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif; color:#544356;
+background-color:#f8f5f3;
 }
 h1,h2,h3,h4,h5,h6 {margin:0; line-height:1.1;}
 p {text-align:justify; text-justify:distribute;}
@@ -35,11 +36,13 @@ background-size:100% auto; background-position:0 0;
 }
 
 /*--- section ---*/
-.sectionwpr {padding:60px 0;}
-.centerwpr {max-width:800px; padding:0 20px; margin:0 auto;}
+.sectionwpr {padding:70px 0;}
+.centerwpr {max-width:800px; padding:0 20px; margin:0 auto;
+position:relative;
+}
 
-h1 {margin-bottom:25px;
-font-size:36px;
+h1 {margin-bottom:30px;
+font-size:32px;
 }
 
 

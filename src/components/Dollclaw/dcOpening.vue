@@ -3,25 +3,33 @@
     <div class="openingwpr">
         
         <div class="fontPreload">
-            <ul>
+            <ul id="board1">
                 <li>700</li>
                 <li>550</li>
             </ul>
 
-            <ul>
+            <ul id="board2">
                 <li>截至 2018 年 7 月</li>
                 <li>30,667</li>
             </ul>
 
-            <ol>
+            <ol id="board3">
                 <li>台北市</li>
                 <li>新北市</li>
                 <li>台中市</li>
             </ol>
-        </div>
+        </div>        
         
-        
-        <canvas id="openingLandscape" width="1488" height="1116"></canvas>    
+        <div id="openingwprL" class="canvaswpr">
+            <canvas id="openingLandscape" width="1488" height="1116"></canvas>
+            <div class="btn-scrolldown"></div>
+        </div>          
+
+        <div id="openingwprP" class="canvaswpr">
+            <canvas id="openingPortrait" width="1032" height="1290"></canvas> 
+            <div class="btn-scrolldown"></div>
+        </div>  
+          
 
     </div>
 
@@ -29,60 +37,69 @@
 
 <script>
 
-import {drawOpeningLandscape} from './js/drawOpening.js';
+import { throttle } from 'lodash'
+
+import {
+    setCanvasSize,
+    drawOpeningLandscape,
+    drawOpeningPortrait
+} from './js/drawOpening.js';
 
 export default {
 
   data: function() {
       return {
 
-        openingLandscape: null,    
+        openingwprL: null,
+        openingwprP: null,
+
+        openingLandscape: null, 
+        openingPortrait: null   
 
       }
   },
 
   props: {
-    wwidth: Number,
-    wheight: Number
+
   },
 
   watch: {
-    wwidth: function () {
-      this.setCanvasSize();
-    }
 
   },
 
-  methods: {
+  methods: {    
 
+      setCanvasSize,
       drawOpeningLandscape,
-
-      setCanvasSize: function(){
-
-        if(this.wheight / this.wwidth > 0.75){
-
-            this.openingLandscape.style.width = this.wwidth * 0.9 + 'px';
-            this.openingLandscape.style.height = this.wwidth * 0.9 * 0.75 + 'px';
-        
-        } else {
-     
-            this.openingLandscape.style.width = this.wheight * 0.9 / 0.75 + 'px';
-            this.openingLandscape.style.height = this.wheight * 0.9 + 'px';
-        }
-
-      },
+      drawOpeningPortrait
 
   },
 
   mounted: function(){
 
-      const FontFaceObserver = require('fontfaceobserver');
+    const FontFaceObserver = require('fontfaceobserver');
+    const typekitFont = new FontFaceObserver('source-han-sans-traditional');
 
-      this.openingLandscape = document.getElementById('openingLandscape');
+    this.openingwprL = document.getElementById('openingwprL');
+    this.openingwprP = document.getElementById('openingwprP');
 
-      this.setCanvasSize();      
-      
-      this.drawOpeningLandscape(FontFaceObserver);
+    this.openingLandscape = document.getElementById('openingLandscape');
+    this.openingPortrait = document.getElementById('openingPortrait');
+
+    this.setCanvasSize();
+
+    const resizeThrottle = throttle(this.setCanvasSize,300,{
+        'leading': false
+    });
+
+    window.addEventListener('resize',() => {
+
+        resizeThrottle();
+
+    }, false);
+    
+    this.drawOpeningLandscape(typekitFont);
+    this.drawOpeningPortrait(typekitFont);     
 
   }
 
@@ -90,13 +107,36 @@ export default {
 </script>
 
 <style scoped>
-.openingwpr {width:100%; height:100vh;
+.openingwpr {width:100%; height:100vh; position:relative;
 margin:0 auto; display:flex; justify-content:center; align-items:center;
-background-color:#fbdfdb;
+background-color:#fbdad8;
 }
 
 .fontPreload {display:none;}
 
+/* ---------- Canvas ---------- */
+.canvaswpr {position:relative;}
+.canvaswpr canvas {width:100%; height:100%;}
+
+#openingwprL {display:block;}
+#openingwprP {display:none;}
+
+.btn-scrolldown {position:absolute; right:0; bottom:0;
+cursor:pointer; border-radius:10px;
+/* background-color:rgba(42,255,0,0.3); */
+}
+#openingwprL .btn-scrolldown {width:30%; height:18%; right:3%;}
+#openingwprP .btn-scrolldown {width:20%; height:13%; right:6%;}
+
+@media screen and (max-width: 1000px) {
+
+    .openingwpr {height:auto; padding:50px 0;}
+
+    /* ---------- Canvas ---------- */
+    #openingwprL {display:none;}
+    #openingwprP {display:block;}
+
+}
 
 </style>
 

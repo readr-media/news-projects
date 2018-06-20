@@ -2,12 +2,16 @@
 
 <div id="mainWrapper">
 
-<!-- <logo :top="`12px`" :left="`15px`" :bgColor="`#544356`" :bgImage="`/proj-assets/dollclaw/images/navbtn.png`"></logo>
-<share :shareUrl="shareLink" :top="`12px`" :left="`69px`" :bgColor="`#544356`"></share> -->
 <app-logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/dollclaw/images/logo_readr.png"></app-logo>
 <app-share :shareUrl="shareLink" top="20px" right="20px" bgColor="#544356" direction="down"></app-share>
 
-<dc-opening v-bind:wwidth="wwidth" v-bind:wheight="wheight"></dc-opening>
+<div class="deco-claw">
+  <div class="centerwpr">
+    <div class="deco-claw--pic"></div>
+  </div>
+</div>
+
+<dc-opening></dc-opening>
 <dc-article></dc-article>
 
 </div>
@@ -16,17 +20,16 @@
 
 <script>
 // common
-import { READR_SITE_URL } from '../../constants'
-import titleMeta from "../../util/titleMeta";
-import Logo from "../Logo.vue";
-import Share from "../Share.vue";
+import { READR_SITE_URL } from '../../constants';
+import titleMeta from '../../util/titleMeta';
+import Logo from '../Logo.vue';
+import Share from '../Share.vue';
 
 // section
-import dcOpening from "./dcOpening.vue";
-import dcArticle from "./dcArticle.vue";
+import dcOpening from './dcOpening.vue';
+import dcArticle from './dcArticle.vue';
 
 export default {
-
   mixins: [titleMeta],
 
   components: {
@@ -35,25 +38,19 @@ export default {
 
     'dc-opening': dcOpening,
     'dc-article': dcArticle
-
-
   },
 
   data: function() {
     return {
-      shareLink: `${READR_SITE_URL}dollclaw`,
-
-      wwidth: 0,
-      wheight: 0
-
+      shareLink: `${READR_SITE_URL}dollclaw`
     };
   },
 
   metaInfo() {
-    let ogTitle = "夾娃娃機專題";
-    let description = "夾娃娃機專題";
-    let metaUrl = "dollclaw";
-    let ogImage = "dollclaw/images/og.jpg";
+    let ogTitle = '夾娃娃機專題';
+    let description = '夾娃娃機專題';
+    let metaUrl = 'dollclaw';
+    let ogImage = 'dollclaw/images/og.jpg';
 
     return {
       title: ogTitle,
@@ -69,18 +66,7 @@ export default {
 
   computed: {},
 
-  methods: {
-
-    getWindowSize: function(){
-   
-        let w = document.getElementById('mainWrapper').offsetWidth;      
-        let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-
-        this.wwidth = w;
-        this.wheight = h;
-      }
-
-  },
+  methods: {},
 
   created() {
     //current device
@@ -88,31 +74,48 @@ export default {
     // console.log("device: " + this.currentDevice);
   },
 
-  beforeMount: function(){
-
-    this.getWindowSize()
-
-    window.addEventListener('resize', () => {
-      this.getWindowSize();
-    });
-
-  },
+  beforeMount: function() {},
 
   mounted: function() {
+    // scroll to content
+    document.querySelectorAll('.btn-scrolldown').forEach(element => {
+      element.addEventListener('click', () => {
 
-    // this.getWindowSize()
+        let offset = document.querySelector('.openingwpr').offsetHeight;
 
-    // window.addEventListener('resize', () => {
-    //   this.getWindowSize();
-    // });
-
-
-    
+        window.scroll({
+          top: offset, 
+          left: 0, 
+          behavior: 'smooth' 
+        });
+          // document.querySelector('.sectionwpr.intro').scrollIntoView({
+          //   behavior: 'smooth'
+          // });
+        },
+        false
+      );
+    });
   }
-
 };
 </script>
 
 <style>
-@import "./style/common.css";
+@import './style/common.css';
+</style>
+
+<style scoped>
+
+.deco-claw {position:fixed; width:100%; left:0; top:0;}
+.deco-claw--pic {width:83px; height:393px;
+position:absolute; right:-83px; top:-45px;
+background-image:url("/proj-assets/dollclaw/images/deco-claw.png");
+background-size:100% auto; background-repeat:no-repeat;
+}
+
+@media screen and (max-width: 1000px) {
+
+  .deco-claw {display:none;}
+
+}
+
 </style>

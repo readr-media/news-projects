@@ -2,7 +2,7 @@
     
 <div class="sectionContainer">
 
-<div class="sectionwpr">
+<div class="sectionwpr intro">
   <div class="centerwpr">
 
     <h1>介紹這次的瘋狂風潮</h1>
@@ -56,6 +56,19 @@
   </div>  
 </div>
 
+<div class="sectionwpr credit">
+  <div class="centerwpr">
+
+    <ul>
+      <li>文字：李又如</li>
+      <li>網頁：v_k</li>      
+      <li>資料整理：李又如、陳彥宇</li>
+      <li>鏡傳媒 MirrorMedia 2018/7/3</li>
+    </ul>
+    
+  </div>  
+</div>
+
 
 
 </div>
@@ -68,7 +81,24 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+/* .sectionwpr.intro {border-top:8px solid #6bd5cb;} */
+
+.sectionwpr+.sectionwpr .centerwpr:before{content:""; display:block;
+width:100%; height:4px; position:relative; top:-68px;
+background-image:url("/proj-assets/dollclaw/images/bg-dot.png"); background-repeat:repeat-x;
+background-size:auto 100%;
+}
+
+.sectionwpr.credit {padding:20px 0;
+background-color:#544356;
+border-top:10px solid #6bd5cb;
+}
+.sectionwpr.credit .centerwpr:before {display:none;}
+.credit li {font-size:14px; color:#f8f5f3; letter-spacing:1px;}
+
+
 
 </style>
 
