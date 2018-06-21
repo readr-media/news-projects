@@ -51,7 +51,7 @@ const fetchReportsCount = (store) => {
 export default {
   name: 'RelatedReports',
   props: {
-    theme: {
+    theme: { // value: dark, white
       type: String,
       default: 'dark',
     }
@@ -133,25 +133,24 @@ export default {
     background-size cover
     background-position center center
     background-repeat no-repeat
-
 .related-reports.dark
   color #fff
-  background-color #000
   button
     color #000
     background-color #fff
   .report
     color #fff
+    background-color #000
     &:hover
       background-color #434343
 .related-reports.white
   color #000
-  background-color #fff
   button
     color #fff
     background-color #000
   .report
     color #000
+    background-color #fff
     &:hover
       background-color #dbdbdb
 
