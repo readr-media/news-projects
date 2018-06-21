@@ -47,9 +47,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-@import '../../../../../node_modules/animate.css/animate.min.css'
-
+<style src="../../../../../node_modules/animate.css/animate.min.css" lang="stylus" scoped>
 section
   width 100vw
   // height 50vh
