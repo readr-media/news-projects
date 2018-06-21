@@ -13,6 +13,7 @@
 
 <dc-opening></dc-opening>
 <dc-article></dc-article>
+<dc-footer></dc-footer>
 
 </div>
 
@@ -28,8 +29,12 @@ import Share from '../Share.vue';
 // section
 import dcOpening from './dcOpening.vue';
 import dcArticle from './dcArticle.vue';
+import dcFooter from './dcFooter.vue';
 
 export default {
+
+  name: 'Dollclaw',
+
   mixins: [titleMeta],
 
   components: {
@@ -37,14 +42,9 @@ export default {
     'app-share': Share,
 
     'dc-opening': dcOpening,
-    'dc-article': dcArticle
-  },
-
-  data: function() {
-    return {
-      shareLink: `${READR_SITE_URL}dollclaw`
-    };
-  },
+    'dc-article': dcArticle,
+    'dc-footer': dcFooter
+  },  
 
   metaInfo() {
     let ogTitle = '夾娃娃機專題';
@@ -57,6 +57,12 @@ export default {
       description: description,
       metaUrl: metaUrl,
       metaImage: ogImage
+    };
+  },
+
+  data: function() {
+    return {
+      shareLink: `${READR_SITE_URL}dollclaw`
     };
   },
 

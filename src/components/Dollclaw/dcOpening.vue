@@ -109,13 +109,24 @@ export default {
 <style scoped>
 .openingwpr {width:100%; height:100vh; position:relative;
 margin:0 auto; display:flex; justify-content:center; align-items:center;
-background-color:#fbdad8;
+background-color:#fcdcd7; overflow:hidden;
+}
+
+.openingwpr:before {content:""; display:block; width:100%; height:35vh;
+position:absolute; left:0; bottom:0;
+background-color:#fcd5cd;
+}
+
+.openingwpr:after {content:""; display:block; width:0; height:0;
+position:absolute; left:0; bottom:35vh;
+border-style:solid; border-width:0 0 25vh 100vw;
+border-color:transparent transparent #fcd5cd transparent;
 }
 
 .fontPreload {display:none;}
 
 /* ---------- Canvas ---------- */
-.canvaswpr {position:relative;}
+.canvaswpr {position:relative; z-index:100;}
 .canvaswpr canvas {width:100%; height:100%;}
 
 #openingwprL {display:block;}
