@@ -96,9 +96,7 @@ export default {
 .swiper-pagination-current {color:#273744; font-size:50px;}
 </style>
 
-<style scoped>
-@import './style/swiper.css';
-
+<style src="./style/swiper.css" scoped>
 /* .gallery {position:relative;}
 
 .gallery h2 {text-align:center;} */
