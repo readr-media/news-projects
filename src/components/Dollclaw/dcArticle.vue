@@ -7,6 +7,18 @@
 
     <h1>介紹這次的瘋狂風潮</h1>
     <p>「小海螺 700 收，無限」、「500 收腰」、⋯⋯ 這些在部分臉書社團流傳，看起來有些難以理解的文字，其實跟大街小巷都見得到的夾娃娃機有關。</p>
+
+    <div class="speakerwpr">
+      <div class="speaker">
+        <img src="/proj-assets/dollclaw/images/pic-k88.png">
+        <p>小海螺</p>
+      </div>
+      <div class="speaker">
+        <img src="/proj-assets/dollclaw/images/pic-bv300.png">
+        <p>小蠻腰</p>
+      </div>
+    </div>
+
     <p>呂秉怡提供一間溫州街租金 22000 元的出租房子為例，比較大的影響是地價稅，從原來自用的千分之二稅率，提升到千分之十，等於漲了四倍，一年要繳 28736 元。房屋稅相較之下比較穩定，但自住與非自住的稅率仍差了 2 倍，從 1.2% 至 2.4% （依個案不同，區間是 1.5%~3.6%），一年要繳 4744元。</p>
     <p>另外還要加上一年的租金收入 264000 元，扣除成本 43%，增加了15萬多的報稅額，再乘上累進稅率，以一個家庭月收入 8 萬元來說，稅率 11%，就增加 17033 元稅額，「如果剛好在跳級的臨界點，等於加了這 15 萬就跳到下一個累進稅率，那負擔就比較大。」呂秉怡解釋。</p>
     
@@ -131,12 +143,12 @@ background-repeat:no-repeat; background-size:100% auto;
 
 
 
-.sectionContainer {position:relative; padding-top:50px;
+.sectionContainer {position:relative; padding-top:40px;
 overflow:hidden;
 }
 .sectionContainer:before {content:""; display:block; width:0; height:0;
 position:absolute; left:0; top:0;
-border-style:solid; border-width:90px 100vw 0 0;
+border-style:solid; border-width:60px 100vw 0 0;
 border-color:#fcd5cd transparent transparent transparent;
 }
 
@@ -147,12 +159,25 @@ background-image:url("/proj-assets/dollclaw/images/bg-dot.png"); background-repe
 background-size:auto 100%;
 }
 
-.sectionwpr.credit {padding:20px 0;
+.speakerwpr {display:flex; justify-content:center; align-items:flex-start;
+margin:50px auto;
+}
+.speaker {flex-shrink:0; width:175px;}
+.speaker+.speaker {margin-left:100px;}
+.speaker img {width:100%;}
+.speaker p {padding-top:15px;
+font-size:26px; font-weight:700; text-align:center; line-height:1;
+}
+
+/* ---------- Credit ---------- */
+.sectionwpr.credit {padding:30px 0;
 background-color:#544356;
-border-top:10px solid #fdded6;
+/* border-top:10px solid #fdded6; */
 }
 .sectionwpr.credit .centerwpr:before {display:none;}
-.credit li {font-size:14px; color:#f8f5f3; letter-spacing:1px;}
+.credit li {font-size:14px; color:#fff; letter-spacing:1px;}
+
+
 
 @media screen and (max-width: 1000px) {
 

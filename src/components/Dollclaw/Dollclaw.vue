@@ -118,6 +118,10 @@ background-image:url("/proj-assets/dollclaw/images/deco-claw.png");
 background-size:100% auto; background-repeat:no-repeat;
 }
 
+
+
+
+/* ---------- RWD ---------- */
 @media screen and (max-width: 1000px) {
 
   .deco-claw {display:none;}
