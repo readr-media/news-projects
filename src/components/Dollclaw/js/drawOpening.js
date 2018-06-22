@@ -31,26 +31,37 @@ export function drawOpeningLandscape(typekitFont) {
   if (this.openingLandscape.getContext) {
     let ctx = this.openingLandscape.getContext('2d');
 
-    let heroImage = new Image();
-    heroImage.src = '/proj-assets/dollclaw/images/opening-landscape.png';
+    // let heroImage = new Image();
+    // heroImage.src = '/proj-assets/dollclaw/images/opening-landscape.png';
 
-    heroImage.addEventListener(
-      'load',
+    // heroImage.addEventListener(
+    //   'load',
+    //   function() {
+    //     ctx.drawImage(heroImage, 0, 0);
+
+    //     typekitFont.load().then(
+    //       function() {
+    //         console.log('typekit is available');
+    //         addTextL();
+    //       },
+    //       function() {
+    //         console.log('typekit is not available after waiting 3 seconds');
+    //         addTextL();
+    //       }
+    //     );
+    //   },
+    //   false
+    // );
+
+    typekitFont.load().then(
       function() {
-        ctx.drawImage(heroImage, 0, 0);
-
-        typekitFont.load().then(
-          function() {
-            console.log('typekit is available');
-            addTextL();
-          },
-          function() {
-            console.log('typekit is not available after waiting 3 seconds');
-            addTextL();
-          }
-        );
+        console.log('typekit is available');
+        addTextL();
       },
-      false
+      function() {
+        console.log('typekit is not available after waiting 3 seconds');
+        addTextL();
+      }
     );
 
     function addTextL() {
@@ -106,33 +117,46 @@ export function drawOpeningPortrait(typekitFont) {
   if (this.openingPortrait.getContext) {
     let ctx = this.openingPortrait.getContext('2d');
 
-    let heroImage = new Image();
-    heroImage.src = '/proj-assets/dollclaw/images/opening-portrait.png';
+    // let heroImage = new Image();
+    // heroImage.src = '/proj-assets/dollclaw/images/opening-portrait.png';
 
-    heroImage.addEventListener(
-      'load',
-      function() {
-        ctx.drawImage(heroImage, 0, 0);
+    // heroImage.addEventListener(
+    //   'load',
+    //   function() {
+    //     ctx.drawImage(heroImage, 0, 0);
 
-        typekitFont.load().then(
-          function() {
-            console.log('typekit is available');
-            addTextP();
-          },
-          function() {
-            console.log('typekit is not available after waiting 3 seconds');
-            addTextP();
-          }
-        );
-      },
-      false
-    );
+    //     typekitFont.load().then(
+    //       function() {
+    //         console.log('typekit is available');
+    //         addTextP();
+    //       },
+    //       function() {
+    //         console.log('typekit is not available after waiting 3 seconds');
+    //         addTextP();
+    //       }
+    //     );
+    //   },
+    //   false
+    // );
+
+    // typekitFont.load().then(
+    //   function() {
+    //     console.log('typekit is available');
+    //     addTextP();
+    //   },
+    //   function() {
+    //     console.log('typekit is not available after waiting 3 seconds');
+    //     addTextP();
+    //   }
+    // );
+
+    addTextP();
 
     function addTextP() {
       ctx.save();
 
       ctx.font =
-        '700 56px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
+        '700 56px "微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
       ctx.fillText('700', 300, 372);
 
@@ -144,7 +168,7 @@ export function drawOpeningPortrait(typekitFont) {
       ctx.save();
 
       ctx.font =
-        '700 50px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
+        '700 50px "微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
       ctx.rotate((6 * Math.PI) / 180);
       ctx.fillText('台北市', 528, 696);
@@ -159,13 +183,13 @@ export function drawOpeningPortrait(typekitFont) {
       ctx.save();
 
       ctx.font =
-        '700 31px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
+        '700 31px "微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
       ctx.rotate(((5.5 * Math.PI) / 180) * -1);
       ctx.fillText('截至 2018 年 7 月', 528, 350);
 
       ctx.font =
-        '700 74px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
+        '700 74px "微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.rotate((0.1 * Math.PI) / 180);
       ctx.fillText('30,667', 530, 440);
 

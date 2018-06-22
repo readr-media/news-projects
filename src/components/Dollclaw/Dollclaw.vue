@@ -13,7 +13,7 @@
 
 <dc-opening></dc-opening>
 <dc-article></dc-article>
-<dc-footer></dc-footer>
+<!-- <dc-footer></dc-footer> -->
 
 </div>
 
@@ -26,10 +26,13 @@ import titleMeta from '../../util/titleMeta';
 import Logo from '../Logo.vue';
 import Share from '../Share.vue';
 
+// style
+import './style/common.css';
+
 // section
 import dcOpening from './dcOpening.vue';
 import dcArticle from './dcArticle.vue';
-import dcFooter from './dcFooter.vue';
+// import dcFooter from './dcFooter.vue';
 
 export default {
 
@@ -43,7 +46,7 @@ export default {
 
     'dc-opening': dcOpening,
     'dc-article': dcArticle,
-    'dc-footer': dcFooter
+    // 'dc-footer': dcFooter
   },  
 
   metaInfo() {
@@ -74,12 +77,6 @@ export default {
 
   methods: {},
 
-  created() {
-    //current device
-    // this.currentDevice = this.$store.state.isMobile ? "mobile" : "desktop";
-    // console.log("device: " + this.currentDevice);
-  },
-
   beforeMount: function() {},
 
   mounted: function() {
@@ -94,9 +91,7 @@ export default {
           left: 0, 
           behavior: 'smooth' 
         });
-          // document.querySelector('.sectionwpr.intro').scrollIntoView({
-          //   behavior: 'smooth'
-          // });
+
         },
         false
       );
@@ -105,12 +100,9 @@ export default {
 };
 </script>
 
-<style>
-@import './style/common.css';
-</style>
-
 <style scoped>
 
+/* ---------- Aside illustration ---------- */
 .deco-claw {position:fixed; width:100%; left:0; top:0;}
 .deco-claw--pic {width:83px; height:393px;
 position:absolute; right:-83px; top:-45px;

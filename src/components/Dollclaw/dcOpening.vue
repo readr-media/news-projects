@@ -127,21 +127,36 @@ border-color:transparent transparent #fcd5cd transparent;
 
 /* ---------- Canvas ---------- */
 .canvaswpr {position:relative; z-index:100;}
-.canvaswpr canvas {width:100%; height:100%;}
+.canvaswpr canvas {width:100%; height:100%;
+position:absolute; left:0; top:0;
+}
 
-#openingwprL {display:block;}
-#openingwprP {display:none;}
+#openingwprL {display:none;
+background-image:url("/proj-assets/dollclaw/images/opening-landscape.png");
+background-size:100% auto;
+}
+#openingwprP {display:none;
+background-image:url("/proj-assets/dollclaw/images/opening-portrait.png");
+background-size:100% auto;
+}
 
 .btn-scrolldown {position:absolute; right:0; bottom:0;
 cursor:pointer; border-radius:10px;
-/* background-color:rgba(42,255,0,0.3); */
 }
 #openingwprL .btn-scrolldown {width:30%; height:18%; right:3%;}
 #openingwprP .btn-scrolldown {width:20%; height:13%; right:6%;}
 
+@media screen and (min-width: 1001px) {
+
+    /* ---------- Canvas ---------- */
+    #openingwprL {display:block;}
+    #openingwprP {display:none;}
+
+}
+
 @media screen and (max-width: 1000px) {
 
-    .openingwpr {height:auto; padding:50px 0;}
+    .openingwpr {height:auto; min-height:100vh; padding:50px 0;}
 
     /* ---------- Canvas ---------- */
     #openingwprL {display:none;}

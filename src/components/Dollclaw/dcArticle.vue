@@ -11,15 +11,25 @@
     <div class="speakerwpr">
       <div class="speaker">
         <img src="/proj-assets/dollclaw/images/pic-k88.png">
-        <p>小海螺</p>
+        <h3>小海螺</h3>
+        <p>如果你是夾客，對「小海螺」應不陌生。它是金冠 K88 藍牙音箱的暱稱，是這波娃娃機熱潮中最強商品⋯⋯</p>
       </div>
       <div class="speaker">
         <img src="/proj-assets/dollclaw/images/pic-bv300.png">
-        <p>小蠻腰</p>
+        <h3>小蠻腰</h3>
+        <p>小蠻腰音響沒有實體專賣店面，只能透過網路或娃娃機取得，在娃娃機業界可是大家都搶著夾，也讓它的價值等同貨幣⋯⋯</p>
       </div>
     </div>
 
-    <p>呂秉怡提供一間溫州街租金 22000 元的出租房子為例，比較大的影響是地價稅，從原來自用的千分之二稅率，提升到千分之十，等於漲了四倍，一年要繳 28736 元。房屋稅相較之下比較穩定，但自住與非自住的稅率仍差了 2 倍，從 1.2% 至 2.4% （依個案不同，區間是 1.5%~3.6%），一年要繳 4744元。</p>
+    <p>呂秉怡提供一間溫州街租金 22000 元的出租房子為例，<strong>比較大的影響是地價稅，從原來自用的千分之二稅率，提升到千分之十</strong>，等於漲了四倍，一年要繳 28736 元。房屋稅相較之下比較穩定，但自住與非自住的稅率仍差了 2 倍，從 1.2% 至 2.4% （依個案不同，區間是 1.5%~3.6%），一年要繳 4744元。</p>
+
+    <div class="charwpr">
+      <h3>夾娃娃機數量快速增長</h3>
+      <p class="data-source">資料來源：財政部</p>
+      <img src="/proj-assets/dollclaw/images/chart/chart01.png">
+    </div>
+
+
     <p>另外還要加上一年的租金收入 264000 元，扣除成本 43%，增加了15萬多的報稅額，再乘上累進稅率，以一個家庭月收入 8 萬元來說，稅率 11%，就增加 17033 元稅額，「如果剛好在跳級的臨界點，等於加了這 15 萬就跳到下一個累進稅率，那負擔就比較大。」呂秉怡解釋。</p>
     
   </div>  
@@ -116,18 +126,22 @@ export default {
 
 <style scoped>
 
-/* h1 {position:relative;}
-h1:before,h1:after {content:""; display:inline-block; width:0; height:0;
-border-style:solid;
+.sectionContainer {position:relative; padding-top:40px;
+overflow:hidden;
 }
-h1:before {margin-right:15px;
-border-width:20px 12px 0 12px;
-border-color:#fdded6 transparent transparent transparent;
+.sectionContainer:before {content:""; display:block; width:0; height:0;
+position:absolute; left:0; top:0;
+border-style:solid; border-width:60px 100vw 0 0;
+border-color:#fcd5cd transparent transparent transparent;
 }
-h1:after {margin-left:15px;
-border-width:0 12px 20px 12px;
-border-color:transparent transparent #fdded6 transparent;
-} */
+
+.sectionwpr+.sectionwpr .centerwpr:before{content:""; display:block;
+width:100%; height:4px; position:relative; top:-68px;
+background-image:url("/proj-assets/dollclaw/images/bg-dot.png"); background-repeat:repeat-x;
+background-size:auto 100%;
+}
+
+/* ---------- Section Title ---------- */
 h1 {position:relative;}
 h1:before {content:""; display:inline-block; position:relative; top:6px;
 width:43px; height:48px; margin-right:15px;
@@ -141,38 +155,42 @@ background-repeat:no-repeat; background-size:100% auto;
 .section4 h1:before {background-image:url("/proj-assets/dollclaw/images/deco-pac4.png");}
 .section5 h1:before {background-image:url("/proj-assets/dollclaw/images/deco-pac5.png");}
 
-
-
-.sectionContainer {position:relative; padding-top:40px;
-overflow:hidden;
-}
-.sectionContainer:before {content:""; display:block; width:0; height:0;
-position:absolute; left:0; top:0;
-border-style:solid; border-width:60px 100vw 0 0;
-border-color:#fcd5cd transparent transparent transparent;
+/* ---------- Section ---------- */
+strong {padding:0 5px; font-weight:400;
+background-color:#f4e6d8; border-bottom:2px solid #efd9d6;
+border-radius:1px;
 }
 
-
-.sectionwpr+.sectionwpr .centerwpr:before{content:""; display:block;
-width:100%; height:4px; position:relative; top:-68px;
-background-image:url("/proj-assets/dollclaw/images/bg-dot.png"); background-repeat:repeat-x;
-background-size:auto 100%;
+/* ---------- Section: chart ---------- */
+.charwpr {margin:60px auto;}
+.charwpr img {max-width:100%;}
+.charwpr h3 {font-size:24px;}
+.charwpr .data-source {margin-top:5px;
+font-size:16px; text-align:center; line-height:1.5;
 }
 
+
+
+
+/* ---------- Speaker image ---------- */
 .speakerwpr {display:flex; justify-content:center; align-items:flex-start;
-margin:50px auto;
+margin:60px auto;
 }
-.speaker {flex-shrink:0; width:175px;}
-.speaker+.speaker {margin-left:100px;}
-.speaker img {width:100%;}
-.speaker p {padding-top:15px;
+.speaker {flex-shrink:0; flex:1; padding:15px;
+background-color:#fdfcfb;
+}
+.speaker+.speaker {background-color:#f0eceb;}
+.speaker img {width:100%; max-width:175px; margin:0 auto;}
+.speaker h3 {padding-top:15px;
 font-size:26px; font-weight:700; text-align:center; line-height:1;
+}
+.speaker p {margin:10px auto 0 auto;
+font-size:15px; text-align:center; line-height:1.5;
 }
 
 /* ---------- Credit ---------- */
 .sectionwpr.credit {padding:30px 0;
 background-color:#544356;
-/* border-top:10px solid #fdded6; */
 }
 .sectionwpr.credit .centerwpr:before {display:none;}
 .credit li {font-size:14px; color:#fff; letter-spacing:1px;}
