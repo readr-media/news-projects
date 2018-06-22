@@ -231,6 +231,5 @@ export default {
 </style>
 
 
-<style scoped>
-@import './style/pagem.css';
+<style src="./style/pagem.css" scoped>
 </style>

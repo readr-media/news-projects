@@ -277,7 +277,8 @@ export default {
 @import "./style/perfect-scrollbar.css";
 </style>
 
-<style scoped>
-@import "./style/page.css";
-@import "../../../node_modules/viewerjs/dist/viewer.css";
+<style src="./style/page.css" scoped>
+</style>
+
+<style src="../../../node_modules/viewerjs/dist/viewer.css">
 </style>

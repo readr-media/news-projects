@@ -1,16 +1,26 @@
 {
-  "parser": "babel-eslint",
-  "extends": "vue",
-  "plugins": [
-      "import"
+  "extends": [
+    "airbnb-base",
+    "plugin:vue/recommended",
+    "plugin:import/errors"
   ],
-  "rules": { 
-    "array-bracket-spacing": [ 2, "always" ],
-    "camelcase": [ 0, "" ],
-    "yoda": [ 0, "never" ]
+  "parserOptions": {
+    "parser": "babel-eslint"
   },
+  "plugins": [
+    "vue"
+  ],
+  // "rules": { 
+  //   "array-bracket-spacing": [ 2, "always" ],
+  //   "camelcase": [ 0, "" ],
+  //   "yoda": [ 0, "never" ]
+  // },
   "globals": {
     "location": true,
     "source": true
+  },
+  "env": {
+    "es6": true,
+    "node": true
   }
 }

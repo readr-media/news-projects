@@ -40,8 +40,9 @@ export default {
 }
 </script>
 
+<style src="../../../../../node_modules/swiper/dist/css/swiper.css" scoped></style>
+
 <style lang="stylus" scoped>
-@import '../../../../../node_modules/swiper/dist/css/swiper.css'
 span
   display block
 
