@@ -149,7 +149,9 @@ export default {
 }
 </script>
 
-<style src="../../../../../node_modules/swiper/dist/css/swiper.css" lang="stylus" scoped>
+<style src="../../../../../node_modules/swiper/dist/css/swiper.css" scoped></style>
+
+<style lang="stylus" scoped>
 .opening
   width 100vw
   height 100vh
