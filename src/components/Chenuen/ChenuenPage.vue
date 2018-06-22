@@ -280,5 +280,5 @@ export default {
 <style src="./style/page.css" scoped>
 </style>
 
-<style src="../../../node_modules/viewerjs/dist/viewer.css" scoped>
+<style src="../../../node_modules/viewerjs/dist/viewer.css">
 </style>

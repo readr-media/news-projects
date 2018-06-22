@@ -92,14 +92,10 @@ export default {
 }
 </script>
 
+<style src="./style/swiper.css"></style>
+
 <style>
 .swiper-pagination-current {color:#273744; font-size:50px;}
-</style>
-
-<style src="./style/swiper.css" scoped>
-/* .gallery {position:relative;}
-
-.gallery h2 {text-align:center;} */
 
 .swiper-container {margin-top:30px;}
 .swiper-wrapper {position:relative; width:100%;}
@@ -135,6 +131,12 @@ border-right:none;
 
 .swiper-button-next {background-position:13px -142px;}
 .swiper-button-next:hover {background-position:13px -217px;}
+</style>
+
+<style scoped>
+/* .gallery {position:relative;}
+
+.gallery h2 {text-align:center;} */
 
 .chart--note {margin:15px 0; line-height:1.6;}
 
