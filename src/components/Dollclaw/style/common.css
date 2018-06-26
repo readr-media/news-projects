@@ -14,7 +14,7 @@ background-color:#f8f5f3;
 }
 h1,h2,h3,h4,h5,h6 {margin:0; line-height:1.1;}
 p {text-align:justify; text-justify:distribute;}
-p+p {margin-top:25px;}
+p+p {margin-top:30px;}
 table {border-collapse:collapse; border-spacing:0; border:none;}
 th {border:none;}
 td {border:none;}

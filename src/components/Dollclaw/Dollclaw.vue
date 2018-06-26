@@ -13,7 +13,7 @@
 
 <dc-opening></dc-opening>
 <dc-article></dc-article>
-<!-- <dc-footer></dc-footer> -->
+<dc-footer></dc-footer>
 
 </div>
 
@@ -32,7 +32,7 @@ import './style/common.css';
 // section
 import dcOpening from './dcOpening.vue';
 import dcArticle from './dcArticle.vue';
-// import dcFooter from './dcFooter.vue';
+import dcFooter from './dcFooter.vue';
 
 export default {
 
@@ -46,7 +46,7 @@ export default {
 
     'dc-opening': dcOpening,
     'dc-article': dcArticle,
-    // 'dc-footer': dcFooter
+    'dc-footer': dcFooter
   },  
 
   metaInfo() {
