@@ -682,13 +682,13 @@
 
 <script>
 
-import chart07data from './data/chart07.json';
+// import chart07data from './data/chart07.json';
 
 export default {
 
   data: function(){
     return {
-      chart07data
+      // chart07data
     }
   },
 
