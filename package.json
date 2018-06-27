@@ -27,6 +27,7 @@
     "express": "^4.15.4",
     "express-useragent": "^1.0.12",
     "extract-text-webpack-plugin": "^3.0.0",
+    "fontfaceobserver": "^2.0.13",
     "fullpage.js": "^2.9.6",
     "googleapis": "^32.0.0",
     "highcharts": "^6.0.3",
