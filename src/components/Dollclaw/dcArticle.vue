@@ -31,9 +31,7 @@
   <div class="charwpr">
     <h3>藍芽音響的魅力？</h3>
     <p class="data-source">小海螺、小蠻腰轉手價格波動</p> 
-    <div class="c01--img">    
-      <img src="/proj-assets/dollclaw/images/chart/chart01-2.png">
-    </div>      
+    <div id="js-price-chart"></div>
   </div>
 
   <div class="descbox">
@@ -681,14 +679,32 @@
 </template>
 
 <script>
-
+import Highcharts from 'highcharts'
 // import chart07data from './data/chart07.json';
+import moment from 'moment'
+import superagent from 'superagent'
+
+function fetchData(url) {
+  return new Promise((resolve, reject) => {
+    superagent
+    .get(url)
+    .end((err, res) => {
+      if (!err && res) {
+        return resolve(JSON.parse(res.text))
+      } else {
+        return reject(err)
+      }
+    })
+  })
+}
 
 export default {
 
   data: function(){
     return {
       // chart07data
+      conchFormatted: [],
+      waistFormatted: [],
     }
   },
 
@@ -699,10 +715,40 @@ export default {
       const number = element.querySelector('.number').textContent;
       const barWidth = number / max * 100 + '%';
       element.querySelector('.bar').style.width = barWidth;    
+    },
+
+    drawPriceChart () {
+      Highcharts.setOptions({ global: { useUTC: false } })
+      Highcharts.chart('js-price-chart', {
+        chart: { type: 'line' },
+        title: { text: '' },
+        xAxis: {
+          type: 'datetime',
+          labels: {
+            formatter: function () {
+              return moment(this.value).format('YYYY/MM')
+            }
+          }
+        },
+        series: [
+          { name: '小海螺', data: this.conchFormatted },
+          { name: '小蠻腰', data: this.waistFormatted }
+        ],
+        credits: { enabled: false }
+      })
     }
 
   },
-
+  beforeMount () {
+    fetchData('/proj-assets/dollclaw/data/price.json')
+    .then((data) => {
+      const conch = data.conch || []
+      const waist = data.waist || []
+      this.conchFormatted = conch.map(c => [ moment(c.date, 'YYYY-M-D').valueOf(), c.price ])
+      this.waistFormatted = waist.map(w => [ moment(w.date, 'YYYY-M-D').valueOf(), w.price ])
+      this.drawPriceChart()
+    })
+  },
   mounted: function(){
 
     document.querySelectorAll('.descbox').forEach((element,index) => {
@@ -721,14 +767,9 @@ export default {
     document.querySelectorAll('.c05 li').forEach((element) => {
       this.setBarWidth(element,25);
     });
-
-    // console.log(chart07data);
-
-
-
-
-  }
     
+    // console.log(chart07data);
+  },
 }
 </script>
 
