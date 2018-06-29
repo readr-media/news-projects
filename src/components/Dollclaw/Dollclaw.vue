@@ -182,7 +182,7 @@ export default {
     superagent.get('/proj-assets/dollclaw/data/data.json')
         .then((res) => {
             // data for opening
-            const source = JSON.parse(res.text);
+            const source = JSON.parse(res.text);         
 
             const openingData = {
                 'price_conch': source.price_conch,
@@ -199,8 +199,8 @@ export default {
             document.getElementById('fontPreload').textContent = preLoadString;
 
             // 文章中的價格
-            document.getElementById('price_conch').textContent = openingData.price_conch;
-            document.getElementById('price_waist').textContent = openingData.price_waist;
+            // document.getElementById('price_conch').textContent = openingData.price_conch;
+            // document.getElementById('price_waist').textContent = openingData.price_waist;
 
             setTimeout(() => {
 
@@ -222,68 +222,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-
-/* ---------- Aside illustration ---------- */
-.deco-claw {position:fixed; width:100%; left:0; top:0; z-index:999;}
-.deco-claw--pic {width:83px; height:393px;
-position:absolute; right:-83px; top:-45px;
-background-image:url("/proj-assets/dollclaw/images/deco-claw.png");
-background-size:100% auto; background-repeat:no-repeat;
-}
-.deco-claw__container {
-  width:85px;
-  height:100vh;
-  position:absolute; right:-85px;
-}
-.claw {
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* position: relative; */
-  height: calc(100% - 58px);
-  /* padding-bottom: 58px; */
-}
-.claw__line {
-  /* flex: 1; */
-  background-size: 9px 6px;
-  background-image: url(/proj-assets/dollclaw/images/deco-rope.png);
-  background-repeat: no-repeat repeat;
-  background-position: 50% 50%;
-}
-.claw__line .fixed{
-  height: 150px;
-}
-.claw__line .dynamic{
-  height: calc((100vh - 323px) * 0);
-}
-.claw__main {
-  position: relative;
-  top: -1px;
-  width: 85px;
-  height: 115px;
-  background-image:url("/proj-assets/dollclaw/images/deco-clawpart.png");
-  background-size:69px 115px; background-repeat:no-repeat;
-  background-position: 50% 50%;
-}
-.deco-claw--doll {
-  position:absolute; left:10px; bottom:10px;
-  width:65px;
-  height:auto;
-}
-.deco-claw--cloud {
-  position:absolute; left:4px; bottom:-10px;
-  width:77px;
-  height:auto;
-}
-
-
-
-/* ---------- RWD ---------- */
-@media screen and (max-width: 1000px) {
-
-  .deco-claw {display:none;}
-
-}
-
-</style>

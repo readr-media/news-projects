@@ -45,19 +45,70 @@ background-color:#f8f5f3;
 background-color:#f5f1ef;
 }
 
-/* .sectionwpr.part1 {padding-bottom:0;}
-.sectionwpr.part2 {padding-top:0;}
-.sectionwpr.part3 {padding-top:0;} */
-
 .centerwpr {max-width:800px; padding:0 20px; margin:0 auto;
 position:relative;
 }
-.centerwpr.wide {max-width:100%;}
-.sectionwpr.part2 .centerwpr {max-width:100%; padding:0;}
+.centerwpr.wide {max-width:100%; padding:0 30px;}
+/* .sectionwpr.part2 .centerwpr {max-width:100%; padding:0;} */
 
 h1 {margin-bottom:30px;
 font-size:32px;
 }
+
+/* ---------- Aside illustration ---------- */
+.deco-claw {position:fixed; width:100%; left:0; top:0; z-index:999;}
+.deco-claw--pic {width:83px; height:393px;
+position:absolute; right:-83px; top:-45px;
+background-image:url("/proj-assets/dollclaw/images/deco-claw.png");
+background-size:100% auto; background-repeat:no-repeat;
+}
+
+.deco-claw__container {
+    width:85px;
+    height:100vh;
+    position:absolute; right:-85px;
+  }
+  .claw {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* position: relative; */
+    height: calc(100% - 58px);
+    /* padding-bottom: 58px; */
+  }
+  .claw__line {
+    /* flex: 1; */
+    background-size: 9px 6px;
+    background-image: url(/proj-assets/dollclaw/images/deco-rope.png);
+    background-repeat: no-repeat repeat;
+    background-position: 50% 50%;
+  }
+  .claw__line .fixed{
+    height: 150px;
+  }
+  .claw__line .dynamic{
+    height: calc((100vh - 323px) * 0);
+  }
+  .claw__main {
+    position: relative;
+    top: -4px;
+    width: 85px;
+    height: 115px;
+    background-image:url("/proj-assets/dollclaw/images/deco-clawpart.png");
+    background-size:69px 115px; background-repeat:no-repeat;
+    background-position: 50% 50%;
+  }
+  .deco-claw--doll {
+    position:absolute; left:10px; bottom:10px;
+    width:65px;
+    height:auto;
+
+    width:85px; left:-3px;
+  }
+  .deco-claw--cloud {
+    position:absolute; left:12px; bottom:-10px;
+    width:77px;
+    height:auto;
+  }
 
 
 /* ---------- footer: related reports ---------- */
@@ -71,4 +122,10 @@ margin-top:15px;
 }
 
 
+/* ---------- RWD ---------- */
+@media screen and (max-width: 1000px) {
+
+    .deco-claw {display:none;}
+  
+  }
 

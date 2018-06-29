@@ -1,18 +1,4 @@
-.sectionContainer {position:relative; 
-/* padding-top:40px; */
-overflow:hidden;
-}
-/* .sectionContainer:before {content:""; display:block; width:0; height:0;
-position:absolute; left:0; top:0;
-border-style:solid; border-width:60px 100vw 0 0;
-border-color:#fcd5cd transparent transparent transparent;
-} */
-
-/* .sectionwpr+.sectionwpr .centerwpr:before{content:""; display:block;
-width:100%; height:4px; position:relative; top:-68px;
-background-image:url("/proj-assets/dollclaw/images/bg-dot.png"); background-repeat:repeat-x;
-background-size:auto 100%;
-} */
+.sectionContainer {position:relative; overflow:hidden;}
 
 hr {width:100%; height:4px; position:relative; margin:50px 0;
 background-image:url("/proj-assets/dollclaw/images/bg-dot.png"); background-repeat:repeat-x;
@@ -40,7 +26,7 @@ background-color:#fcebce; border-bottom:2px solid #f3ddb7;
 border-radius:1px;
 }
 
-.descbox {padding:25px 35px; margin-top:-20px; position:relative;
+/* .descbox {padding:25px 35px; margin-top:-20px; position:relative;
 font-size:17px; color:#fff;
 background-color:#784d62; border-radius:14px;
 }
@@ -49,23 +35,31 @@ width:0; height:0; position:absolute; right:55px; top:-22px;
 border-style:solid; border-width:0 20px 22px 20px;
 border-color:transparent transparent #784d62 transparent;
 }
-.descbox.even:before {right:auto; left:55px;}
+.descbox.even:before {right:auto; left:55px;} */
+
+.descbox {padding:25px 30px; margin-bottom:30px; position:relative;
+font-size:16px; line-height:1.7;
+background-color:rgba(255,255,255,1); border-radius:12px;
+border:2px solid #f1eeed;
+}
+
+.sectionwpr:nth-child(2n) .descbox {background-color:rgba(255,255,255,0.8);}
 
 .descbox+p {margin-top:60px;}
 
 .descbox p+p {margin-top:15px;}
 
-.quotewpr {position:relative; padding:50px 0;}
-.quotewpr+p {margin-top:50px;}
+.quotewpr {position:relative; padding:48px 0;}
+.quotewpr+p {margin-top:25px;}
 
 .quotewpr:before,
 .quotewpr:after {content:""; display:block; opacity:0.85;
-width:60px; height:64px; position:absolute;
+width:50px; height:50px; position:absolute;
 background-image:url("/proj-assets/dollclaw/images/bg-quote.png");
 background-repeat:no-repeat; background-size:100% auto;
 }
-.quotewpr:before {left:0; top:-20px;}
-.quotewpr:after {right:0; bottom:-5px; background-position:right bottom;}
+.quotewpr:before {left:0; top:-10px;}
+.quotewpr:after {right:0; bottom:5px; background-position:right bottom;}
 
 .quotewpr .innerwpr {position:relative;}
 .quotewpr .innerwpr:before,
@@ -73,13 +67,13 @@ background-repeat:no-repeat; background-size:100% auto;
 background-image:url("/proj-assets/dollclaw/images/bg-dot.png");
 background-repeat:repeat-x; background-size:auto 100%;
 }
-.quotewpr .innerwpr:before {margin-left:90px; top:-26px;}
-.quotewpr .innerwpr:after {margin-right:90px; bottom:-26px;}
+.quotewpr .innerwpr:before {margin-left:70px; top:-26px;}
+.quotewpr .innerwpr:after {margin-right:70px; bottom:-26px;}
 
 .quotewpr p {position:relative; color:#746170;}
 
 /* ---------- Section: chart ---------- */
-.chartwpr {margin:60px auto;}
+.chartwpr {margin:0 auto 60px auto;}
 .chartwpr img {max-width:100%;}
 .chartwpr h3 {font-size:32px;}
 .chartwpr .data-source {margin-top:5px; margin-bottom:15px;
@@ -87,31 +81,22 @@ font-size:16px; text-align:center; line-height:1.5;
 }
 
 /* chart 01 */
-.c01wpr {display:flex;
+.c01wpr {display:flex; position:relative; z-index:1000;
 border:3px solid #776070; border-radius:3px;
 }
 
 #js-price-chart {
-width:calc(100% - 300px); min-height:550px;    
+width:calc(100% - 350px); min-height:550px;    
 padding:60px 0 30px 0;
-background-color:#f6f3f1;  
-/* border:3px solid #776070; border-right:none; border-radius:3px 0 0 3px; */
+background-color:#f6f3f1;
 }
 
-.c01 .descbox {width:300px; flex-shrink:0;
-display:flex; align-items:center;    
-margin-top:0; border-radius:0 3px 3px 0;
+.c01--desc {width:350px; flex-shrink:0; padding:25px 35px;
+display:flex; flex-direction:column; justify-content:center;    
+font-size:17px; color:#544356; position:relative;
+background-color:#ede8e6;
 }
-.c01 .descbox:before {display:none;}
-/* .c01--img {position:relative; width:100%; height:0; padding-top:48.6%;
-background-image:url("/proj-assets/dollclaw/images/chart/chart01-1.png");
-background-repeat:no-repeat; background-size:100% auto;
-}
-.c01--img img {position:absolute; left:0; top:0; width:100%; height:auto;
-opacity:0; visibility:hidden;
-transition-duration:200ms; transition-property:opacity,visibility;
-}
-.c01--img:hover img {opacity:1; visibility:visible;} */
+.c01--desc:before {display:none;}
 
 /* barchart common */
 .barchart li {display:flex; align-items:center;}
@@ -150,7 +135,6 @@ background-color:#ffd58b; border-radius:4px;
 .c05 li:nth-child(4) .bar {background-color:#ffcf8b;}
 
 /* chart 04 */
-/* .c04+.c04 {margin-top:15px;} */
 .c04 li {display:flex; justify-content:space-between;  
 background-image:url("/proj-assets/dollclaw/images/bg-dot.png");
 background-repeat:repeat-x; background-position:left calc(50% + 2px);
@@ -163,7 +147,6 @@ background-size:auto 4px;
 
 /* table common */
 .table {border:3px solid #666; border-radius:2px;}
-/* .table table {table-layout:fixed;} */
 .table th,
 .table td {padding:10px 12px;
 font-weight:400; font-size:17px; line-height:1.2;
@@ -181,11 +164,11 @@ border-bottom:3px solid #666;
 }
 
 /* chart 07 */
-.part2 .chartwpr {margin:0;}
-.c07 {position:relative;
+/* .part2 .chartwpr {margin:0;} */
+.c07 {position:relative; z-index:1000;
 font-size:15px; line-height:1;
 overflow-x:auto;
-/* border:3px solid #666; border-radius:2px; */
+border:3px solid #776070; border-radius:3px;
 }
 .c07 .row {position:relative; padding:6px 20px;
 display:inline-flex;
@@ -198,7 +181,6 @@ display:inline-flex;
 
 .c07 .cell {flex-grow:1; flex-shrink:0; width:40px;
 padding:5px;
-/* border:1px solid #aaa; */
 }
 
 .c07 .t1 {width:80px; padding:10px;
@@ -215,31 +197,32 @@ border-radius:4px;
 .c07 .fail {background-color:#ff5a52;}
 
 
-
-/* .c07 .t1 {width:80px;}
-.c07 .t2 {width:22%;}
-.c07 .t3 {width:22%;}
-.c07 .t4 {width:22%;}
-.c07 .t5 {width:22%;}
-
-.c07 .pass,.c07 .fail {
-display:flex; align-items:center;  
-font-size:16px; line-height:1.2; text-align:left;
-}
-.c07 .pass:before,
-.c07 .fail:before {content:""; display:block; flex-shrink:0;
-width:16px; height:16px; margin-right:5px;
-background-image:url("/proj-assets/dollclaw/images/icon-passfail.png");
-background-repeat:no-repeat;
-background-size:16px auto;
-}
-.c07 .pass:before {background-position:left bottom;}
-.c07 .fail:before {background-position:left top;} */
-
 /* ---------- Expandable Chart ---------- */
 .expandableChart--trigger {cursor:pointer;
-height:40px; background-color:red;
+width:170px; height:44px; margin:0 auto;
+background-color:#fff; border:2px solid #f1eeed;
+border-radius:24px;
+display:flex; justify-content:center; align-items:center;
 }
+
+.expandableChart--trigger div {flex-shrink:0; position:relative;}
+
+.expandableChart--trigger .dotted {margin-left:5px; top:-5px;}
+
+.expandableChart--trigger .exp:before {content: "\276F";
+display:inline-block; margin-right:10px;
+transform:rotate(90deg); position:relative; top:1px;
+}
+.expandableChart--trigger .col:before {content: "\276F";
+display:inline-block; margin-right:10px;
+transform:rotate(-90deg); position:relative; top:1px;
+}
+
+.expandableChart--trigger .col {display:none;}
+
+.expandableChart--trigger.expand .exp {display:none;}
+.expandableChart--trigger.expand .col {display:block;}
+
 .expandableChart--collapse {height:0; overflow:hidden;
 margin-top:15px;
 transition-duration:300ms; transition-property:height;
@@ -248,9 +231,6 @@ transition-duration:300ms; transition-property:height;
 
 
 /* ---------- Speaker image ---------- */
-/* .speakerwpr {display:flex; justify-content:center; align-items:flex-start;
-margin:60px auto;
-} */
 .speakerwpr {width:300px; display:flex; flex-direction:column;
 flex-shrink:0;
 }
