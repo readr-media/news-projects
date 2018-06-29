@@ -36,14 +36,29 @@ background-size:100% auto; background-position:0 0;
 }
 
 /*--- section ---*/
-.sectionwpr {padding:70px 0;}
+.sectionwpr {padding:70px 0;
+background-color:#fbf9f8;
+}
+
+.sectionwpr:nth-child(even) {
+background-color:#f8f5f3;
+background-color:#f5f1ef;
+}
+
+/* .sectionwpr.part1 {padding-bottom:0;}
+.sectionwpr.part2 {padding-top:0;}
+.sectionwpr.part3 {padding-top:0;} */
+
 .centerwpr {max-width:800px; padding:0 20px; margin:0 auto;
 position:relative;
 }
+.centerwpr.wide {max-width:100%;}
+.sectionwpr.part2 .centerwpr {max-width:100%; padding:0;}
 
 h1 {margin-bottom:30px;
 font-size:32px;
 }
+
 
 /* ---------- footer: related reports ---------- */
 .footerwpr .related-reports.dark .report {background-color:#544356;}
