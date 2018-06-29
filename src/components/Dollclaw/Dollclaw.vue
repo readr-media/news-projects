@@ -7,7 +7,23 @@
 
 <div class="deco-claw">
   <div class="centerwpr">
-    <div class="deco-claw--pic"></div>
+    <!-- <div class="deco-claw--pic"></div> -->
+    <div class="deco-claw__container">
+      <div class="claw">
+        <div class="claw__line">
+          <div class="fixed"></div>
+          <div class="dynamic" :style="{ height: `calc((100vh - 323px) * ${clawHeightPercentage})` }"></div>
+        </div>
+        <div class="claw__main"></div>
+      </div>
+      <img :src="[ scrollPercentage > 0.5 ? '/proj-assets/dollclaw/images/deco-doll1.png' : '/proj-assets/dollclaw/images/deco-doll2.png' ]"
+        class="deco-claw--doll"
+        :style="[ scrollPercentage > 0.5 ? { bottom: `calc((100vh - 313px) * ${1 - clawHeightPercentage})`  } : { botom: '10px' } ]">
+      <img v-show="scrollPercentage > 0.5"
+        src="/proj-assets/dollclaw/images/deco-cloud.png"
+        class="deco-claw--cloud"
+        :style="[ scrollPercentage > 0.5 ? { bottom: `calc( (100vh - 313px) * ${1 - clawHeightPercentage} - 50px)`  } : { botom: '10px' } ]">
+    </div>
   </div>
 </div>
 
@@ -22,6 +38,7 @@
 <script>
 // common
 import { READR_SITE_URL } from '../../constants';
+import { currentYPosition } from 'kc-scroll'
 import titleMeta from '../../util/titleMeta';
 import Logo from '../Logo.vue';
 import Share from '../Share.vue';
@@ -80,7 +97,10 @@ export default {
       openingwprL: null,
       openingwprP: null,
       openingLandscape: null, 
-      openingPortrait: null 
+      openingPortrait: null, 
+      bodyHeight: 0,
+      scrollPercentage: 0,
+      clawHeightPercentage: 0,
     };
   },
 
@@ -94,13 +114,32 @@ export default {
 
     setCanvasSize,
     drawOpeningLandscape,
-    drawOpeningPortrait
+    drawOpeningPortrait,
 
+    handleScroll () {
+      if (this.$store.state.viewport[0] > 1000) {
+        let percent = currentYPosition() / (this.bodyHeight - this.$store.state.viewport[1])
+        if (percent > 1) {
+          percent = 1
+        } else if (percent < 0) {
+          percent = 0
+        }
+        this.scrollPercentage = percent
+        if (percent > 0.5) {
+          this.clawHeightPercentage = 1 - (percent - 0.5) * 2
+        } else {
+          this.clawHeightPercentage = percent * 2
+        }
+      }
+    }
   },
 
-  beforeMount: function() {},
+  beforeMount: function() {
+    this.bodyHeight = document.querySelector('body').offsetHeight || 0
+  },
 
   mounted: function() {
+    window.addEventListener('scroll', this.handleScroll)
     // scroll to content
     document.querySelectorAll('.btn-scrolldown').forEach(element => {
       element.addEventListener('click', () => {
@@ -176,6 +215,10 @@ export default {
             console.log('get data fail');
         });
 
+  },
+
+  beforeDestroy: function() {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 };
 </script>
@@ -189,7 +232,50 @@ position:absolute; right:-83px; top:-45px;
 background-image:url("/proj-assets/dollclaw/images/deco-claw.png");
 background-size:100% auto; background-repeat:no-repeat;
 }
-
+.deco-claw__container {
+  width:85px;
+  height:100vh;
+  position:absolute; right:-85px;
+}
+.claw {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* position: relative; */
+  height: calc(100% - 58px);
+  /* padding-bottom: 58px; */
+}
+.claw__line {
+  /* flex: 1; */
+  background-size: 9px 6px;
+  background-image: url(/proj-assets/dollclaw/images/deco-rope.png);
+  background-repeat: no-repeat repeat;
+  background-position: 50% 50%;
+}
+.claw__line .fixed{
+  height: 150px;
+}
+.claw__line .dynamic{
+  height: calc((100vh - 323px) * 0);
+}
+.claw__main {
+  position: relative;
+  top: -1px;
+  width: 85px;
+  height: 115px;
+  background-image:url("/proj-assets/dollclaw/images/deco-clawpart.png");
+  background-size:69px 115px; background-repeat:no-repeat;
+  background-position: 50% 50%;
+}
+.deco-claw--doll {
+  position:absolute; left:10px; bottom:10px;
+  width:65px;
+  height:auto;
+}
+.deco-claw--cloud {
+  position:absolute; left:4px; bottom:-10px;
+  width:77px;
+  height:auto;
+}
 
 
 
