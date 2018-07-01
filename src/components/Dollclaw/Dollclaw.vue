@@ -29,7 +29,6 @@
 
 <dc-opening></dc-opening>
 <dc-article></dc-article>
-<dc-footer></dc-footer>
 
 </div>
 
@@ -52,7 +51,6 @@ import './style/common.css';
 // section
 import dcOpening from './dcOpening.vue';
 import dcArticle from './dcArticle.vue';
-import dcFooter from './dcFooter.vue';
 
 // opening
 import {
@@ -72,8 +70,7 @@ export default {
     'app-share': Share,
 
     'dc-opening': dcOpening,
-    'dc-article': dcArticle,
-    'dc-footer': dcFooter
+    'dc-article': dcArticle,    
   },  
 
   metaInfo() {
@@ -222,3 +219,62 @@ export default {
   }
 };
 </script>
+
+<style>
+/* ---------- Aside illustration ---------- */
+.deco-claw {position:fixed; width:100%; left:0; top:0; z-index:999;}
+.deco-claw--pic {width:83px; height:393px;
+position:absolute; right:-83px; top:-45px;
+background-image:url("/proj-assets/dollclaw/images/deco-claw.png");
+background-size:100% auto; background-repeat:no-repeat;
+}
+.deco-claw__container {
+  width:85px;
+  height:100vh;
+  position:absolute; right:-85px;
+}
+.claw {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* position: relative; */
+  height: calc(100% - 58px);
+  /* padding-bottom: 58px; */
+}
+.claw__line {
+  /* flex: 1; */
+  background-size: 9px 6px;
+  background-image: url(/proj-assets/dollclaw/images/deco-rope.png);
+  background-repeat: no-repeat repeat;
+  background-position: 50% 50%;
+}
+.claw__line .fixed{
+  height: 150px;
+}
+.claw__line .dynamic{
+  height: calc((100vh - 323px) * 0);
+}
+.claw__main {
+  position: relative;
+  top: -4px;
+  width: 85px;
+  height: 115px;
+  background-image:url("/proj-assets/dollclaw/images/deco-clawpart.png");
+  background-size:69px 115px; background-repeat:no-repeat;
+  background-position: 50% 50%;
+}
+.deco-claw--doll {
+  position:absolute; left:10px; bottom:10px;
+  width:65px;
+  height:auto;
+  width:85px; left:-3px;
+}
+.deco-claw--cloud {
+  position:absolute; left:12px; bottom:-10px;
+  width:77px;
+  height:auto;
+}
+/* ---------- RWD ---------- */
+@media screen and (max-width: 1000px) {
+  .deco-claw {display:none;}
+}
+</style>

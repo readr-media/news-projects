@@ -26,6 +26,13 @@ background-color:#fcebce; border-bottom:2px solid #f3ddb7;
 border-radius:1px;
 }
 
+.sectionwpr p a {color:#a86476; padding:0 4px;
+border-bottom:2px dotted #784d62; border-radius:2px;
+}
+.sectionwpr p a:hover {
+background-color:#855669; color:#fff;
+}
+
 /* .descbox {padding:25px 35px; margin-top:-20px; position:relative;
 font-size:17px; color:#fff;
 background-color:#784d62; border-radius:14px;
@@ -75,6 +82,9 @@ background-repeat:repeat-x; background-size:auto 100%;
 /* ---------- Section: chart ---------- */
 .chartwpr {margin:0 auto 60px auto;}
 .chartwpr img {max-width:100%;}
+
+.chartwpr .mobile {display:none;}
+
 .chartwpr h3 {font-size:32px;}
 .chartwpr .data-source {margin-top:5px; margin-bottom:15px;
 font-size:16px; text-align:center; line-height:1.5;
@@ -96,7 +106,7 @@ display:flex; flex-direction:column; justify-content:center;
 font-size:17px; color:#544356; position:relative;
 background-color:#ede8e6;
 }
-.c01--desc:before {display:none;}
+.c01--desc__mobile {display:none;}
 
 /* barchart common */
 .barchart li {display:flex; align-items:center;}
@@ -141,7 +151,7 @@ background-repeat:repeat-x; background-position:left calc(50% + 2px);
 background-size:auto 4px;
 }
 .c04 li+li {margin-top:15px;}
-.c04 li span {background-color:#f8f5f3; flex-shrink:0;}
+.c04 li span {background-color:#f5f1ef; flex-shrink:0;}
 .c04 li .type {padding-right:15px;}
 .c04 li .number {padding-left:15px;}
 
@@ -163,8 +173,10 @@ background-color:#e9e3e0;
 border-bottom:3px solid #666;
 }
 
+/* chart 06 */
+.c06 {margin-top:60px;}
+
 /* chart 07 */
-/* .part2 .chartwpr {margin:0;} */
 .c07 {position:relative; z-index:1000;
 font-size:15px; line-height:1;
 overflow-x:auto;
@@ -196,6 +208,19 @@ border-radius:4px;
 .c07 .pass {background-color:#3ea978;}
 .c07 .fail {background-color:#ff5a52;}
 
+.c07-legend {display:flex; justify-content:center; align-items:center;
+margin-bottom:15px;
+}
+.c07-legend div {display:inline-block; font-size:16px; line-height:1;}
+.c07-legend .entry {display:inline-flex; align-items:center;
+margin-left:10px;
+}
+.c07-legend .entry+.entry {margin-left:20px;}
+.c07-legend .icon {width:18px; height:18px; margin-right:4px;
+border-radius:4px;
+}
+.c07-legend .fail .icon {background-color:#ff5a52;}
+.c07-legend .pass .icon {background-color:#3ea978;}
 
 /* ---------- Expandable Chart ---------- */
 .expandableChart--trigger {cursor:pointer;
@@ -252,18 +277,37 @@ background-color:transparent;
 }
 .descbox.speakerDesc:before {display:none;}
 
-/* ---------- Credit ---------- */
-.sectionwpr.credit {padding:30px 0; margin-top:30px;
-background-color:#60465a;
-}
-.sectionwpr.credit .centerwpr:before {display:none;}
-.credit li {font-size:14px; color:#fff; letter-spacing:1px;}
+/* ---------- Footer ---------- */
+.sectionwpr.footer {padding:0;}
 
 
 /* ---------- RWD ---------- */
 @media screen and (max-width: 1000px) {
 
-    .sectionContainer {padding-top:15px;}
-    .sectionContainer:before {border-width:40px 100vw 0 0;}
+    .chartwpr h3 {font-size:27px;}
+
+    .chartwpr .desktop {display:none;}
+    .chartwpr .mobile {display:block;}
+
+    .descbox {padding:25px 20px;}    
+
+    /* c01 */
+    #js-price-chart {width:100%;}
+    .c01--desc {display:none;}
+    .c01--desc__mobile {display:block;}
+
+    /* c05 */
+    .c05 .title {font-size:16px; width:100px;}
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .sectionwpr {padding:40px 0;}
+
+    .c03 .title,.c03 .number {font-size:16px;}
+    .c04 .type,.c04 .number {font-size:16px;}
+
+    .credit {padding:20px 0;}
 
 }
