@@ -765,6 +765,8 @@ export default {
       sectionsHeight: [],
       sectionsTop: [],
       sectionsBottom: [],
+
+      gaScroll: 0,
     }
   },
 
@@ -853,34 +855,6 @@ export default {
       })
     }, //drawPriceChart
 
-    toggleChart: function(){
-
-      document.querySelectorAll('.expandableChart').forEach((element) => {
-
-        const collapsePart = element.querySelector('.expandableChart--collapse');
-        const trigger = element.querySelector('.expandableChart--trigger');
-
-        function toggle(trigger,content){  
-
-          if(trigger.classList.contains('expand')){
-            trigger.classList.remove('expand');
-            collapsePart.style.height = '0px';     
-
-          } else {
-            trigger.classList.add('expand');
-            collapsePart.style.height = collapsePart.scrollHeight + 'px';
-
-          }
-        }
-
-        trigger.addEventListener('click',() => {
-          toggle(trigger,collapsePart);
-        }, false);
-
-      });
-
-    }, //toggleChart
-    
     calcParallaxSetting () {
       const sections = document.querySelectorAll('.sectionContainer .sectionwpr') || []
       let sectionContainerHeight = 0
@@ -910,6 +884,10 @@ export default {
     handleScrollForParallax () {
       for (let [index, value] of this.sectionsBottom.entries()) {
         if (value > currentYPosition() + this.$store.state.viewport[1]) {
+          if (index > this.gaScroll) {
+            this.gaScroll = index
+            ga('send', 'event', 'projects', 'scroll', `scroll to ${index}`, { nonInteraction: false })
+          }
           return this.currentSection = index
         }
       }
@@ -926,6 +904,7 @@ export default {
         target.classList.add('expand')
         collapsePart.style.height = collapsePart.scrollHeight + 'px';
         this.updateParallaxSetting(index, collapsePart.scrollHeight, 'add')
+        ga('send', 'event', 'projects', 'click', `expand ${index}`, { nonInteraction: false })
       }
     },
 
