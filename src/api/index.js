@@ -27,7 +27,7 @@ function _buildQuery (params = {}) {
         return { '$in': value, }
       })
       Object.keys(where).forEach((key) => {
-        query[key] = JSON.stringify(where[key])
+        query[_.snakeCase(key)] = JSON.stringify(where[key])
       })
     } else if (snakeCaseParams.hasOwnProperty(ele)) {
       query[ele] = snakeCaseParams[ele]
