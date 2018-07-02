@@ -27,31 +27,10 @@ export function setCanvasSize() {
 }
 
 /* --------------- draw Opening (Landscape) --------------- */
-export function drawOpeningLandscape(typekitFont) {
-  if (this.openingLandscape.getContext) {
-    let ctx = this.openingLandscape.getContext('2d');
+export function drawOpeningLandscape(that,typekitFont,data) {
 
-    // let heroImage = new Image();
-    // heroImage.src = '/proj-assets/dollclaw/images/opening-landscape.png';
-
-    // heroImage.addEventListener(
-    //   'load',
-    //   function() {
-    //     ctx.drawImage(heroImage, 0, 0);
-
-    //     typekitFont.load().then(
-    //       function() {
-    //         console.log('typekit is available');
-    //         addTextL();
-    //       },
-    //       function() {
-    //         console.log('typekit is not available after waiting 3 seconds');
-    //         addTextL();
-    //       }
-    //     );
-    //   },
-    //   false
-    // );
+  if (that.openingLandscape.getContext) {
+    let ctx = that.openingLandscape.getContext('2d'); 
 
     typekitFont.load().then(
       function() {
@@ -65,15 +44,16 @@ export function drawOpeningLandscape(typekitFont) {
     );
 
     function addTextL() {
+
       ctx.save();
 
       ctx.font =
         '700 56px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
-      ctx.fillText('700', 320, 572);
+      ctx.fillText(data.price_conch, 320, 572);
 
       ctx.rotate((1 * Math.PI) / 180);
-      ctx.fillText('550', 328, 724);
+      ctx.fillText(data.price_waist, 328, 724);
 
       ctx.restore();
 
@@ -83,12 +63,12 @@ export function drawOpeningLandscape(typekitFont) {
         '700 50px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
       ctx.rotate((6 * Math.PI) / 180);
-      ctx.fillText('台北市', 1138, 454);
+      ctx.fillText(data.popular_city[0], 1138, 454);
 
-      ctx.fillText('新北市', 1138, 574);
+      ctx.fillText(data.popular_city[1], 1138, 574);
 
       ctx.rotate((2 * Math.PI) / 180);
-      ctx.fillText('台中市', 1150, 650);
+      ctx.fillText(data.popular_city[2], 1150, 650);
 
       ctx.restore();
 
@@ -98,12 +78,33 @@ export function drawOpeningLandscape(typekitFont) {
         '700 31px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
       ctx.rotate(((5.5 * Math.PI) / 180) * -1);
-      ctx.fillText('截至 2018 年 7 月', 558, 530);
+      ctx.fillText(data.date, 558, 530);
 
-      ctx.font =
-        '700 74px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
-      ctx.rotate((0.1 * Math.PI) / 180);
-      ctx.fillText('30,667', 560, 620);
+      const totalLength = data.total.toString().length;
+      const localeString = data.total.toLocaleString('en');   
+
+      switch(totalLength){   
+
+        case 5:
+          ctx.font =
+          '700 74px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
+          ctx.rotate((0.1 * Math.PI) / 180);
+          ctx.fillText(localeString, 560, 620);
+          break;
+          
+        case 6:
+          ctx.font =
+          '700 66px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
+          ctx.rotate((0.1 * Math.PI) / 180);
+          ctx.fillText(localeString, 555, 620);
+          break;  
+
+        default:  
+          ctx.font =
+          '700 76px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
+          ctx.rotate((0.1 * Math.PI) / 180);
+          ctx.fillText(localeString, 580, 620);
+      }          
 
       ctx.restore();
     }
@@ -113,42 +114,9 @@ export function drawOpeningLandscape(typekitFont) {
 }
 
 /* --------------- draw Opening (Portrait) --------------- */
-export function drawOpeningPortrait(typekitFont) {
-  if (this.openingPortrait.getContext) {
-    let ctx = this.openingPortrait.getContext('2d');
-
-    // let heroImage = new Image();
-    // heroImage.src = '/proj-assets/dollclaw/images/opening-portrait.png';
-
-    // heroImage.addEventListener(
-    //   'load',
-    //   function() {
-    //     ctx.drawImage(heroImage, 0, 0);
-
-    //     typekitFont.load().then(
-    //       function() {
-    //         console.log('typekit is available');
-    //         addTextP();
-    //       },
-    //       function() {
-    //         console.log('typekit is not available after waiting 3 seconds');
-    //         addTextP();
-    //       }
-    //     );
-    //   },
-    //   false
-    // );
-
-    // typekitFont.load().then(
-    //   function() {
-    //     console.log('typekit is available');
-    //     addTextP();
-    //   },
-    //   function() {
-    //     console.log('typekit is not available after waiting 3 seconds');
-    //     addTextP();
-    //   }
-    // );
+export function drawOpeningPortrait(that,typekitFont,data) {
+  if (that.openingPortrait.getContext) {
+    let ctx = that.openingPortrait.getContext('2d');
 
     addTextP();
 
@@ -158,10 +126,10 @@ export function drawOpeningPortrait(typekitFont) {
       ctx.font =
         '700 56px "微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
-      ctx.fillText('700', 300, 372);
+      ctx.fillText(data.price_conch, 300, 372);
 
       ctx.rotate((1 * Math.PI) / 180);
-      ctx.fillText('550', 298, 524);
+      ctx.fillText(data.price_waist, 298, 524);
 
       ctx.restore();
 
@@ -171,12 +139,12 @@ export function drawOpeningPortrait(typekitFont) {
         '700 50px "微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
       ctx.rotate((6 * Math.PI) / 180);
-      ctx.fillText('台北市', 528, 696);
+      ctx.fillText(data.popular_city[0], 528, 696);
 
-      ctx.fillText('新北市', 528, 815);
+      ctx.fillText(data.popular_city[1], 528, 815);
 
       ctx.rotate((2 * Math.PI) / 180);
-      ctx.fillText('台中市', 550, 915);
+      ctx.fillText(data.popular_city[2], 550, 915);
 
       ctx.restore();
 
@@ -186,12 +154,33 @@ export function drawOpeningPortrait(typekitFont) {
         '700 31px "微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
       ctx.rotate(((5.5 * Math.PI) / 180) * -1);
-      ctx.fillText('截至 2018 年 7 月', 528, 350);
+      ctx.fillText(data.date, 528, 350);
 
-      ctx.font =
-        '700 74px "微軟正黑體", "Microsoft JhengHei", sans-serif';
-      ctx.rotate((0.1 * Math.PI) / 180);
-      ctx.fillText('30,667', 530, 440);
+      const totalLength = data.total.toString().length;
+      const localeString = data.total.toLocaleString('en');   
+
+      switch(totalLength){   
+
+        case 5:
+          ctx.font =
+          '700 74px "微軟正黑體", "Microsoft JhengHei", sans-serif';
+          ctx.rotate((0.1 * Math.PI) / 180);
+          ctx.fillText(localeString, 530, 440);
+          break;
+          
+        case 6:
+          ctx.font =
+          '700 66px "微軟正黑體", "Microsoft JhengHei", sans-serif';
+          ctx.rotate((0.1 * Math.PI) / 180);
+          ctx.fillText(localeString, 520, 440);
+          break;  
+
+        default:  
+          ctx.font =
+          '700 76px "微軟正黑體", "Microsoft JhengHei", sans-serif';
+          ctx.rotate((0.1 * Math.PI) / 180);
+          ctx.fillText(localeString, 550, 440);
+      }    
 
       ctx.restore();
     }
