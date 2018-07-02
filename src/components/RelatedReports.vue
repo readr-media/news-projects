@@ -36,7 +36,7 @@ const fetchReports = (store, {
     params: {
       maxResult: maxResult,
       where: {
-        publishStatus: 2,
+        reportPublishStatus: 2,
       },
       page: page,
       sort: sort,

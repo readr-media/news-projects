@@ -45,9 +45,6 @@ import Share from '../Share.vue';
 import { throttle } from 'lodash'
 import superagent from "superagent";
 
-// style
-import './style/common.css';
-
 // section
 import dcOpening from './dcOpening.vue';
 import dcArticle from './dcArticle.vue';
@@ -116,19 +113,13 @@ export default {
     handleScroll () {
       if (this.$store.state.viewport[0] > 1000) {
         let percent = currentYPosition() / (this.bodyHeight - this.$store.state.viewport[1])
-        if (percent > 1) {
-          percent = 1
-        } else if (percent < 0) {
-          percent = 0
-        }
+        if (percent > 1) { percent = 1 } 
+        else if (percent < 0) { percent = 0 }
         this.scrollPercentage = percent
-        if (percent > 0.5) {
-          this.clawHeightPercentage = 1 - (percent - 0.5) * 2
-        } else {
-          this.clawHeightPercentage = percent * 2
-        }
+        if (percent > 0.5) { this.clawHeightPercentage = 1 - (percent - 0.5) * 2 }
+        else { this.clawHeightPercentage = percent * 2 }
       }
-    }
+    },
   },
 
   beforeMount: function() {
@@ -219,6 +210,8 @@ export default {
   }
 };
 </script>
+
+<style src="./style/common.css"></style>
 
 <style>
 /* ---------- Aside illustration ---------- */
