@@ -1,9 +1,11 @@
 <template>
-    
+
+<div>
+
 <div class="sectionContainer">
 
 
-<div class="sectionwpr">
+<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 0 }" :style="{ position: finished ? 'absolute' : 'static' }">
   <div class="centerwpr">
 
     <p>好奇心的起源，是夾娃娃機店用著驚人的速度取代我熟悉的街景。本來以為又是一個「蛋塔風潮」，直到身邊開始出現了沉迷的朋友，我才發現這次好像有點不一樣。這個產業似乎自成了一個神秘的地下社會，每個人各有自己的角色分工，讓我決定一探究竟。</p>
@@ -32,7 +34,7 @@
   </div><!-- centerwpr -->
 </div><!-- sectionwpr -->
 
-<div class="sectionwpr"> 
+<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 1 }" :style="{ position: finished ? 'absolute' : 'static' }"> 
 
   <div class="centerwpr wide">
     <!-- chart 01 -->
@@ -106,7 +108,7 @@
   </div><!-- centerwpr -->
 </div><!-- sectionwpr -->
 
-<div class="sectionwpr">
+<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 2 }" :style="{ position: finished ? 'absolute' : 'static' }">
 
   <div class="centerwpr">
     <!-- chart 02 -->
@@ -293,7 +295,7 @@
 
         </ul>
 
-        <div class="expandableChart--trigger">
+        <div class="expandableChart--trigger" @click="handleToggleChart($event, 2)">
           <div class="exp">展開全部</div>
           <div class="col">收合內容</div>
           <div class="dotted">.....</div>
@@ -324,7 +326,7 @@
   </div><!-- centerwpr --> 
 </div><!-- sectionwpr -->
 
-<div class="sectionwpr">
+<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 3 }" :style="{ position: finished ? 'absolute' : 'static' }">
   <div class="centerwpr">
 
     <!-- chart 04 -->
@@ -461,7 +463,7 @@
         </div>
       </ul>
 
-      <div class="expandableChart--trigger">
+      <div class="expandableChart--trigger" @click="handleToggleChart($event, 3)">
         <div class="exp">展開全部</div>
         <div class="col">收合內容</div>
         <div class="dotted">.....</div>
@@ -494,7 +496,7 @@
   </div><!-- centerwpr -->
 </div><!-- sectionwpr -->
 
-<div class="sectionwpr">
+<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 4 }" :style="{ position: finished ? 'absolute' : 'static' }">
   <div class="centerwpr">
 
     <!-- chart 05 -->
@@ -577,7 +579,7 @@
   </div><!-- centerwpr -->
 </div><!-- sectionwpr -->
 
-<div class="sectionwpr">
+<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 5 }" :style="{ position: finished ? 'absolute' : 'static' }">
 
   <div class="centerwpr wide"> 
   <!-- chart 07 -->
@@ -704,19 +706,22 @@
 </div><!-- sectionwpr -->
 
 
+</div><!-- sectionContainer -->
+
 <div class="sectionwpr footer">  
 
   <dc-footer></dc-footer>
 
 </div><!-- sectionwpr -->
 
+</div>
+    
 
-
-</div><!-- sectionContainer -->
 
 </template>
 
 <script>
+import { currentYPosition, elmYPosition } from 'kc-scroll'
 import Highcharts from 'highcharts'
 import moment from 'moment'
 import superagent from 'superagent'
@@ -741,9 +746,6 @@ import chart07data from './js/chart07.json';
 // footer
 import dcFooter from './dcFooter.vue';
 
-// style
-import './style/article.css';
-
 export default {
 
   components: {
@@ -755,8 +757,14 @@ export default {
 
       conchFormatted: [],
       waistFormatted: [],
-      chart07data
+      chart07data,
       
+      currentSection: 0,
+      finished: false,
+      sectionContainerHeight: 0,
+      sectionsHeight: [],
+      sectionsTop: [],
+      sectionsBottom: [],
     }
   },
 
@@ -872,6 +880,83 @@ export default {
       });
 
     }, //toggleChart
+    
+    calcParallaxSetting () {
+      const sections = document.querySelectorAll('.sectionContainer .sectionwpr') || []
+      let sectionContainerHeight = 0
+      this.sectionsHeight = []
+      this.sectionsTop = []
+      this.sectionsBottom = []
+      for (let i = 0; i < sections.length; i++) {
+        const bottom = elmYPosition(`div[class*="parallax"]:nth-of-type(${i + 1})`) + sections[i].offsetHeight
+        sectionContainerHeight += sections[i].offsetHeight
+        this.sectionsHeight.push(sections[i].offsetHeight)
+        this.sectionsTop.push(sectionContainerHeight)
+        this.sectionsBottom.push(bottom)
+      }
+      if (sectionContainerHeight > 0) {
+        this.sectionContainerHeight = sectionContainerHeight
+        document.querySelector('.sectionContainer').style.height = `${sectionContainerHeight}px`
+      }
+      this.updateStyleTop()
+    },
+
+    initParallaxSetting () {
+      this.finished = false
+      this.calcParallaxSetting()
+      this.finished = true
+    },
+
+    handleScrollForParallax () {
+      for (let [index, value] of this.sectionsBottom.entries()) {
+        if (value > currentYPosition() + this.$store.state.viewport[1]) {
+          return this.currentSection = index
+        }
+      }
+    },
+
+    handleToggleChart (e, index) {
+      const target = e.target.classList.contains('expandableChart--trigger') ? e.target : e.target.parentNode
+      const collapsePart = target.parentNode.querySelector('.expandableChart--collapse')
+      if (target.classList.contains('expand')) {
+        target.classList.remove('expand')
+        target.parentNode.querySelector('.expandableChart--collapse').style.height = '0px'
+        this.updateParallaxSetting(index, collapsePart.scrollHeight, 'remove')
+      } else {
+        target.classList.add('expand')
+        collapsePart.style.height = collapsePart.scrollHeight + 'px';
+        this.updateParallaxSetting(index, collapsePart.scrollHeight, 'add')
+      }
+    },
+
+    updateParallaxSetting (index, value, action) {
+      if (action === 'add') {
+        this.sectionsHeight[index] += value
+        this.sectionContainerHeight += value
+        document.querySelector('.sectionContainer').style.height = `${this.sectionContainerHeight}px`
+        for (let i = index; i < this.sectionsTop.length; i++) {
+          this.sectionsTop[i] += value
+          this.sectionsBottom[i] += value
+        }
+        this.updateStyleTop()
+      } else {
+        this.sectionsHeight[index] -= value
+        this.sectionContainerHeight -= value
+        document.querySelector('.sectionContainer').style.height = `${this.sectionContainerHeight}px`
+        for (let i = index; i < this.sectionsTop.length; i++) {
+          this.sectionsTop[i] -= value
+          this.sectionsBottom[i] -= value
+        }
+        this.updateStyleTop()
+      }
+    },
+
+    updateStyleTop () {
+      const sections = document.querySelectorAll('.sectionContainer .sectionwpr') || []
+      for (let i = 1; i < sections.length; i++) {
+        sections[i].style.top = `${this.sectionsTop[i - 1]}px`
+      }
+    }
 
   },
   beforeMount () {
@@ -885,9 +970,11 @@ export default {
     })
   },
   mounted: function(){
-
-    this.toggleChart();
-
+    
+    window.addEventListener('load', this.initParallaxSetting)
+    window.addEventListener('resize', this.calcParallaxSetting)
+    window.addEventListener('scroll', this.handleScrollForParallax)
+    
     // chart 03
     document.querySelectorAll('.c03 li').forEach((element) => {
       this.setBarWidth(element,800);
@@ -899,9 +986,30 @@ export default {
     });
     
   },
+  beforeDestroy () {
+    window.removeEventListener('load', this.initParallaxSetting)
+    window.removeEventListener('resize', this.calcParallaxSetting)
+    window.removeEventListener('scroll', this.handleScrollForParallax)
+  }
 }
 </script>
 
+<style src="./style/article.css"></style>
 
+<style lang="stylus" scoped>
 
+.sectionwpr
+  &.parallax
+  // position absolute
+    left 0
+    right 0
+    &:nth-child(1)
+      top 0
+  &.fixed
+    position fixed !important
+    top auto !important
+    left 0
+    right 0
+    bottom 0
+</style>
 

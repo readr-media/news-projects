@@ -40,8 +40,10 @@ router.use(bodyParser.json())
 router.use('/googlesheet', require('./middle/googlesheet'))
 router.use('/googledrive', require('./middle/googledrive'))
 
-router.get('/reports', fetchFromRedis, (req, res, next) => {
+router.get('/reports', (req, res, next) => {
   req.url = req.url.replace('/reports', '/report/list')
+  next()
+}, fetchFromRedis, (req, res, next) => {
   if (res.redis) {
     console.error('fetch data from Redis.', req.url)
     const resData = JSON.parse(res.redis)
