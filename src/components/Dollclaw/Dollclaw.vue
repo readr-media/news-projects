@@ -71,10 +71,10 @@ export default {
   },  
 
   metaInfo() {
-    let ogTitle = '夾娃娃機專題';
-    let description = '夾娃娃機專題';
+    let ogTitle = '娃娃機夾什麼';
+    let description = '好奇心的起源，是夾娃娃機店用著驚人的速度取代我熟悉的街景。本來以為又是一個「蛋塔風潮」，直到身邊開始出現了沉迷的朋友，我才發現這次好像有點不一樣。這個產業似乎自成了一個神秘的地下社會，每個人各有自己的角色分工，讓我決定一探究竟⋯⋯';
     let metaUrl = 'dollclaw';
-    let ogImage = 'dollclaw/images/og.jpg';
+    let ogImage = 'dollclaw/images/og-image.jpg';
 
     return {
       title: ogTitle,
@@ -202,7 +202,7 @@ export default {
         .catch((err) => {
             console.log('get data fail');
         });
-        
+
     ga('send', 'pageview')
   },
 

@@ -38,7 +38,7 @@ z-index:1010 !important;
 #mainWrapper .share {z-index:1010 !important;}
 
 /*--- section ---*/
-.sectionwpr {padding:70px 0;
+.sectionwpr {padding:110px 0;
 background-color:#fbf9f8;
 }
 
@@ -61,6 +61,7 @@ font-size:32px;
 /* ---------- RWD ---------- */
 @media screen and (max-width: 1000px) {
 
+  .sectionwpr {padding:70px 0;}
   .centerwpr {padding:0 15px;}  
   .centerwpr.wide {padding:5px;}
   
