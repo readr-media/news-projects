@@ -7,9 +7,9 @@
 
             <ul>
                 <li>文字：李又如</li>
-                <li>網頁：v_k、Noah Tan</li>      
+                <li>網頁：v_k、HY Tan</li>      
                 <li>資料整理：李又如、陳彥宇</li>
-                <li>讀+ READr 2018/7/3</li>
+                <li>讀+ READr 2018/7/4</li>
             </ul>
 
         </div>  
