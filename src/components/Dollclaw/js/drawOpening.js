@@ -12,18 +12,18 @@ export function setCanvasSize() {
   // 扣掉捲軸的寬度
   let wwidth = w - (w - document.getElementById('mainWrapper').offsetWidth);
 
-  // Landscape
+  // Landscape (1744x1116 -> 1:0.64)
   if (wheight / wwidth > 0.75) {
     this.openingwprL.style.width = wwidth * 0.9 + 'px';
-    this.openingwprL.style.height = wwidth * 0.9 * 0.75 + 'px';
+    this.openingwprL.style.height = wwidth * 0.9 * 0.64 + 'px';
   } else {
-    this.openingwprL.style.width = (wheight * 0.9) / 0.75 + 'px';
+    this.openingwprL.style.width = (wheight * 0.9) / 0.64 + 'px';
     this.openingwprL.style.height = wheight * 0.9 + 'px';
   }
 
-  // Portrait
+  // Portrait (1020x1534 -> 1:0.665)
   this.openingwprP.style.width = wwidth * 0.95 + 'px';
-  this.openingwprP.style.height = (wwidth * 0.95) / 0.8 + 'px';
+  this.openingwprP.style.height = (wwidth * 0.95) / 0.665 + 'px';
 }
 
 /* --------------- draw Opening (Landscape) --------------- */
@@ -47,41 +47,47 @@ export function drawOpeningLandscape(that,typekitFont,data) {
 
       ctx.save();
 
+      // 今日牌價
       ctx.font =
         '700 56px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
-      ctx.fillText(data.price_conch, 320, 572);
+      ctx.fillText(data.price_conch, 580, 572);
 
       ctx.rotate((1 * Math.PI) / 180);
-      ctx.fillText(data.price_waist, 328, 724);
+      ctx.fillText(data.price_waist, 582, 718);
 
       ctx.restore();
 
       ctx.save();
 
+      // 縣市排行
       ctx.font =
         '700 50px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
-      ctx.rotate((6 * Math.PI) / 180);
-      ctx.fillText(data.popular_city[0], 1138, 454);
+      ctx.rotate((6 * Math.PI) / 180); 
+      ctx.fillText(data.popular_city[0], 1398, 424);
 
-      ctx.fillText(data.popular_city[1], 1138, 574);
+      ctx.fillText(data.popular_city[1], 1394, 544);
 
       ctx.rotate((2 * Math.PI) / 180);
-      ctx.fillText(data.popular_city[2], 1150, 650);
+      ctx.fillText(data.popular_city[2], 1407, 615);
 
       ctx.restore();
 
       ctx.save();
 
+      // 機台總數
       ctx.font =
         '700 31px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
       ctx.rotate(((5.5 * Math.PI) / 180) * -1);
-      ctx.fillText(data.date, 558, 530);
+      ctx.fillText(data.date, 810, 560);
 
       const totalLength = data.total.toString().length;
       const localeString = data.total.toLocaleString('en');   
+
+      // const totalLength = 4;
+      // const localeString = '6,478'; 
 
       switch(totalLength){   
 
@@ -89,21 +95,21 @@ export function drawOpeningLandscape(that,typekitFont,data) {
           ctx.font =
           '700 74px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
           ctx.rotate((0.1 * Math.PI) / 180);
-          ctx.fillText(localeString, 560, 620);
+          ctx.fillText(localeString, 810, 650);
           break;
           
         case 6:
           ctx.font =
           '700 66px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
           ctx.rotate((0.1 * Math.PI) / 180);
-          ctx.fillText(localeString, 555, 620);
+          ctx.fillText(localeString, 805, 650);
           break;  
 
         default:  
           ctx.font =
           '700 76px "source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif';
           ctx.rotate((0.1 * Math.PI) / 180);
-          ctx.fillText(localeString, 580, 620);
+          ctx.fillText(localeString, 835, 650);
       }          
 
       ctx.restore();
@@ -123,41 +129,47 @@ export function drawOpeningPortrait(that,typekitFont,data) {
     function addTextP() {
       ctx.save();
 
+      // 今日牌價
       ctx.font =
         '700 56px "微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
-      ctx.fillText(data.price_conch, 300, 372);
+      ctx.fillText(data.price_conch, 295, 625);
 
       ctx.rotate((1 * Math.PI) / 180);
-      ctx.fillText(data.price_waist, 298, 524);
+      ctx.fillText(data.price_waist, 298, 774);
 
       ctx.restore();
 
       ctx.save();
 
+      // 縣市排行
       ctx.font =
         '700 50px "微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
       ctx.rotate((6 * Math.PI) / 180);
-      ctx.fillText(data.popular_city[0], 528, 696);
+      ctx.fillText(data.popular_city[0], 558, 946);
 
-      ctx.fillText(data.popular_city[1], 528, 815);
+      ctx.fillText(data.popular_city[1], 554, 1065);
 
       ctx.rotate((2 * Math.PI) / 180);
-      ctx.fillText(data.popular_city[2], 550, 915);
+      ctx.fillText(data.popular_city[2], 580, 1165);
 
       ctx.restore();
 
       ctx.save();
 
+      // 機台總數
       ctx.font =
         '700 31px "微軟正黑體", "Microsoft JhengHei", sans-serif';
       ctx.fillStyle = '#62485b';
       ctx.rotate(((5.5 * Math.PI) / 180) * -1);
-      ctx.fillText(data.date, 528, 350);
+      ctx.fillText(data.date, 495, 600);
 
       const totalLength = data.total.toString().length;
       const localeString = data.total.toLocaleString('en');   
+
+      // const totalLength = 6;
+      // const localeString = '536,478'; 
 
       switch(totalLength){   
 
@@ -165,21 +177,21 @@ export function drawOpeningPortrait(that,typekitFont,data) {
           ctx.font =
           '700 74px "微軟正黑體", "Microsoft JhengHei", sans-serif';
           ctx.rotate((0.1 * Math.PI) / 180);
-          ctx.fillText(localeString, 530, 440);
+          ctx.fillText(localeString, 500, 695);
           break;
           
         case 6:
           ctx.font =
           '700 66px "微軟正黑體", "Microsoft JhengHei", sans-serif';
           ctx.rotate((0.1 * Math.PI) / 180);
-          ctx.fillText(localeString, 520, 440);
+          ctx.fillText(localeString, 490, 695);
           break;  
 
         default:  
           ctx.font =
           '700 76px "微軟正黑體", "Microsoft JhengHei", sans-serif';
           ctx.rotate((0.1 * Math.PI) / 180);
-          ctx.fillText(localeString, 550, 440);
+          ctx.fillText(localeString, 520, 695);
       }    
 
       ctx.restore();
