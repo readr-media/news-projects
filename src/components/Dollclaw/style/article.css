@@ -46,11 +46,9 @@ border-color:transparent transparent #784d62 transparent;
 
 .descbox {padding:25px 30px; margin-bottom:30px; position:relative;
 font-size:16px; line-height:1.7;
-background-color:rgba(255,255,255,1); border-radius:12px;
-border:2px solid #f1eeed;
 }
 
-.sectionwpr:nth-child(2n) .descbox {background-color:rgba(255,255,255,0.8);}
+/* .sectionwpr:nth-child(2n) .descbox {background-color:rgba(255,255,255,0.8);} */
 
 .descbox+p {margin-top:60px;}
 
