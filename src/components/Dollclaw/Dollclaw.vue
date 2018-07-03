@@ -202,7 +202,8 @@ export default {
         .catch((err) => {
             console.log('get data fail');
         });
-
+        
+    ga('send', 'pageview')
   },
 
   beforeDestroy: function() {

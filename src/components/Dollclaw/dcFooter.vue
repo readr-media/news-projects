@@ -27,6 +27,7 @@
 <script>
 
 import { READR_DOMAIN, READR_SITE_URL } from '../../constants';
+import { getFBCommentsUrl } from '../../util/comm'
 import RelatedReports from '../RelatedReports.vue';
 
 const PROJECT_NAME = 'dollclaw';
@@ -39,8 +40,12 @@ export default {
 
     data: function(){
         return {
-            commentsUrl: `https://dev.${READR_DOMAIN}/project/${PROJECT_NAME}/`,
+            commentsUrl: '',
         }
+    },
+
+    mounted () {
+        this.commentsUrl = getFBCommentsUrl()
     }
     
 }
