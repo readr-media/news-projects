@@ -2,15 +2,15 @@
 
     <div class="openingwpr">
         
-        <div id="fontPreload"></div>        
+        <div id="fontPreload"></div>  
         
         <div id="openingwprL" class="canvaswpr">
-            <canvas id="openingLandscape" width="1488" height="1116"></canvas>
+            <canvas id="openingLandscape" width="1744" height="1116"></canvas>
             <div class="btn-scrolldown"></div>
         </div>          
 
         <div id="openingwprP" class="canvaswpr">
-            <canvas id="openingPortrait" width="1032" height="1290"></canvas> 
+            <canvas id="openingPortrait" width="1020" height="1534"></canvas> 
             <div class="btn-scrolldown"></div>
         </div>            
         
