@@ -905,11 +905,15 @@ export default {
       if (target.classList.contains('expand')) {
         target.classList.remove('expand')
         target.parentNode.querySelector('.expandableChart--collapse').style.height = '0px'
-        this.updateParallaxSetting(index, collapsePart.scrollHeight, 'remove')
+        if (!this.$store.state.useragent.isMobile) {
+          this.updateParallaxSetting(index, collapsePart.scrollHeight, 'remove')
+        }
       } else {
         target.classList.add('expand')
         collapsePart.style.height = collapsePart.scrollHeight + 'px';
-        this.updateParallaxSetting(index, collapsePart.scrollHeight, 'add')
+        if (!this.$store.state.useragent.isMobile) {
+          this.updateParallaxSetting(index, collapsePart.scrollHeight, 'add')
+        }
         ga('send', 'event', 'projects', 'click', `expand ${index}`, { nonInteraction: false })
       }
     },
