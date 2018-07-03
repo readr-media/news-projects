@@ -5,7 +5,7 @@
 <div class="sectionContainer">
 
 
-<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 0 }" :style="{ position: finished ? 'absolute' : 'static' }">
+<div class="sectionwpr parallax" :class="{ 'fixed': !isMobile && currentSection > 0 }" :style="{ position: !isMobile && finished ? 'absolute' : 'static' }">
   <div class="centerwpr">
 
     <p>好奇心的起源，是夾娃娃機店用著驚人的速度取代我熟悉的街景。本來以為又是一個「蛋塔風潮」，直到身邊開始出現了沉迷的朋友，我才發現這次好像有點不一樣。這個產業似乎自成了一個神秘的地下社會，每個人各有自己的角色分工，讓我決定一探究竟。</p>
@@ -34,7 +34,7 @@
   </div><!-- centerwpr -->
 </div><!-- sectionwpr -->
 
-<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 1 }" :style="{ position: finished ? 'absolute' : 'static' }"> 
+<div class="sectionwpr parallax" :class="{ 'fixed': !isMobile && currentSection > 1 }" :style="{ position: !isMobile && finished ? 'absolute' : 'static' }"> 
 
   <div class="centerwpr wide">
     <!-- chart 01 -->
@@ -108,7 +108,7 @@
   </div><!-- centerwpr -->
 </div><!-- sectionwpr -->
 
-<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 2 }" :style="{ position: finished ? 'absolute' : 'static' }">
+<div class="sectionwpr parallax" :class="{ 'fixed': !isMobile && currentSection > 2 }" :style="{ position: !isMobile && finished ? 'absolute' : 'static' }">
 
   <div class="centerwpr">
     <!-- chart 02 -->
@@ -326,7 +326,7 @@
   </div><!-- centerwpr --> 
 </div><!-- sectionwpr -->
 
-<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 3 }" :style="{ position: finished ? 'absolute' : 'static' }">
+<div class="sectionwpr parallax" :class="{ 'fixed': !isMobile && currentSection > 3 }" :style="{ position: !isMobile && finished ? 'absolute' : 'static' }">
   <div class="centerwpr">
 
     <!-- chart 04 -->
@@ -496,7 +496,7 @@
   </div><!-- centerwpr -->
 </div><!-- sectionwpr -->
 
-<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 4 }" :style="{ position: finished ? 'absolute' : 'static' }">
+<div class="sectionwpr parallax" :class="{ 'fixed': !isMobile && currentSection > 4 }" :style="{ position: !isMobile && finished ? 'absolute' : 'static' }">
   <div class="centerwpr">
 
     <!-- chart 05 -->
@@ -579,7 +579,7 @@
   </div><!-- centerwpr -->
 </div><!-- sectionwpr -->
 
-<div class="sectionwpr parallax" :class="{ 'fixed': currentSection > 5 }" :style="{ position: finished ? 'absolute' : 'static' }">
+<div class="sectionwpr parallax" :class="{ 'fixed': !isMobile && currentSection > 5 }" :style="{ position: !isMobile && finished ? 'absolute' : 'static' }">
 
   <div class="centerwpr wide"> 
   <!-- chart 07 -->
@@ -770,6 +770,12 @@ export default {
     }
   },
 
+  computed: {
+    isMobile () {
+      return this.$store.state.useragent.isMobile
+    }
+  },
+
   methods: {
 
     // chart 03 bar chart
@@ -950,9 +956,11 @@ export default {
   },
   mounted: function(){
     
-    window.addEventListener('load', this.initParallaxSetting)
-    window.addEventListener('resize', this.calcParallaxSetting)
-    window.addEventListener('scroll', this.handleScrollForParallax)
+    if (!this.$store.state.useragent.isMobile) {
+      this.initParallaxSetting()
+      window.addEventListener('resize', this.calcParallaxSetting)
+      window.addEventListener('scroll', this.handleScrollForParallax)
+    }
     
     // chart 03
     document.querySelectorAll('.c03 li').forEach((element) => {
@@ -963,12 +971,12 @@ export default {
     document.querySelectorAll('.c05 li').forEach((element) => {
       this.setBarWidth(element,25);
     });
-    
   },
   beforeDestroy () {
-    window.removeEventListener('load', this.initParallaxSetting)
-    window.removeEventListener('resize', this.calcParallaxSetting)
-    window.removeEventListener('scroll', this.handleScrollForParallax)
+    if (!this.$store.state.useragent.isMobile) {
+      window.removeEventListener('resize', this.calcParallaxSetting)
+      window.removeEventListener('scroll', this.handleScrollForParallax)
+    }
   }
 }
 </script>
