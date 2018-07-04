@@ -125,6 +125,15 @@
       <div class="barchart">
         <ul>
           <li>
+            <span class="title">新北市</span>
+            <div class="barwpr">
+              <div class="bar"></div>
+              <span class="number">778</span>
+            </div>
+            
+          </li>
+
+          <li>
             <span class="title">臺中市</span>
             <div class="barwpr">
               <div class="bar"></div>
