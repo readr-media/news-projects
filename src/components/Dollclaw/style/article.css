@@ -275,6 +275,22 @@ background-color:transparent;
 }
 .descbox.speakerDesc:before {display:none;}
 
+/* ---------- Annotation ---------- */
+.annotation-content {padding:0 25px; margin-top:0;
+color:#8e4028; font-size:16px; line-height:26px;
+background-color:#fff; border-radius:12px;
+border:none;
+overflow:hidden; height:0;
+}
+.annotation-content.show {padding:15px 25px; margin-top:15px; height:auto;
+border:1px solid #f1eeed;
+}
+.annotation-trigger {cursor:pointer;}
+.annotation-trigger:hover {color:#8e4028; border-bottom:2px dotted #8e4028;}
+.annotation-mark {position:relative; top:-4px; margin:0 4px;
+font-size:16px; color:#8e4028;
+}
+
 /* ---------- Footer ---------- */
 .sectionwpr.footer {padding:0;}
 

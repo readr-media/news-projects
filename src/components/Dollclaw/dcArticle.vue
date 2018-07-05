@@ -559,7 +559,9 @@
 
     <p>「大家應該很直覺會認為夾娃娃機是電子遊戲機吧？電子遊戲機是遊藝機台，要擺遊藝機台需要遊藝場執照，一張平均轉手價格是四百萬，根本不會有人為了開夾娃娃機店去搞一張這個。」新進的機台商 Billy （化名）提到。</p>
 
-    <p>「所以，現在四處可見的夾娃娃機，叫做『選物販賣機』，我覺得光這就是很荒謬的事。」Billy 苦笑，「選物販賣機應該是自動販賣機那種，你投 10 元，可以拿到 10 元的飲料。但是夾娃娃機是你可能投 10 元卻得到 100 元的東西，這叫『射悻性』，是賭博機台最重要的標準。」</p>
+    <p>「所以，現在四處可見的夾娃娃機，叫做『選物販賣機』，我覺得光這就是很荒謬的事。」Billy 苦笑，「選物販賣機應該是自動販賣機那種，你投 10 元，可以拿到 10 元的飲料。但是夾娃娃機是你可能投 10 元卻得到 100 元的東西，這叫『<span class="annotation-trigger" data-note="note_aleatory">射悻性<span class="annotation-mark">(註)</span></span>』，是賭博機台最重要的標準。」</p>
+
+    <p class="annotation-content" id="note_aleatory">射悻性，《刑法》賭博罪定義，是指以「偶然事實決定財物得喪變更」，換句話說，只要遊戲機台本身設計具有「隨機不確定性」並以此給予具有一定經濟價值的獎品，誘使顧客產生「以小搏大」心理參與遊戲，便可能符合射悻定義。</p>
 
     <p>但讓 Billy 覺得不公平的還不是定義問題，而是明明同樣玩法的機台，送到經濟部審議時，有時候被評定為「益智類電子遊戲機」，有時候卻被評定為「非屬電子遊戲機」，只有後者是不需要遊藝執照就可以到處擺的種類。</p>
 
@@ -948,6 +950,26 @@ export default {
       for (let i = 1; i < sections.length; i++) {
         sections[i].style.top = `${this.sectionsTop[i - 1]}px`
       }
+    },
+
+    toggleAnnotation () {
+
+      function trigger (target){
+        const noteID = target.dataset.note;
+        const content = document.getElementById(noteID);
+
+        if(content.classList.contains('show')){
+          content.classList.remove('show');
+        } else {
+          content.classList.add('show');
+        }        
+      }
+
+      document.querySelectorAll('.annotation-trigger').forEach((element) => {
+        element.addEventListener('click',() => {
+          trigger(element);
+        }, false);
+      });
     }
 
   },
@@ -978,6 +1000,9 @@ export default {
     document.querySelectorAll('.c05 li').forEach((element) => {
       this.setBarWidth(element,25);
     });
+
+    // toggle annotation
+    this.toggleAnnotation();
   },
   beforeDestroy () {
     if (!this.$store.state.useragent.isMobile) {
