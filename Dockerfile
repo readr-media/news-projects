@@ -1,4 +1,4 @@
-FROM node:9.2.0-alpine
+FROM node:8.11.3-alpine
 
 ENV NODE_SOURCE /usr/src
 WORKDIR $NODE_SOURCE
