@@ -75,7 +75,7 @@ export default {
                 value: 1,
                 max: $('div.section').length
             });
- 
+
             $('#gallery').fullpage({
                 scrollingSpeed: 600,
                 scrollOverflow: true,
@@ -123,11 +123,9 @@ export default {
 
     },
     mounted: function(){
-
-        window.$ = require('jquery');
-        window.jQuery = require('jquery');
-        require('./util/scrolloverflow.js');
-        require('fullpage.js');
+        window.jQuery = require('jquery')
+        require('./util/scrolloverflow.js')
+        require('./util/jquery.fullpage.min.js')
 
         this.setFullpage();
 

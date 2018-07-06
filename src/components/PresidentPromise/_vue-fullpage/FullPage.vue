@@ -66,8 +66,9 @@
       window.jQuery = require('jquery');
       // window.IScroll = require('./IScroll.js');
       // require('./scrolloverflow.js');
-      require('fullpage.js/dist/jquery.fullpage.min.js');
-      require('fullpage.js/dist/jquery.fullpage.min.css');
+      require('./jquery.fullpage.min.js')
+      // require('fullpage.js/dist/jquery.fullpage.min.js');
+      // require('fullpage.js/dist/jquery.fullpage.min.css');
       this.init();
     },
 
