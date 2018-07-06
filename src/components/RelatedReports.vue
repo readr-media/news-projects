@@ -1,13 +1,13 @@
 <template>
   <section class="related-reports" :class="theme">
     <a v-for="report in highlight" :key="report.id" class="report" :href="getReportUrl(report.slug)" target="_blank">
-      <div class="report__img" :style="{ 'background-image': `url(${report.ogImage})` }"></div>
+      <div class="report__img" :style="{ 'background-image': `url(${getReportImg(report)})` }"></div>
       <h1 v-text="report.title"></h1>
       <p v-text="report.description"></p>
     </a>
     <template v-for="items in loadmoreItems" v-if="showLoadmore">
       <a v-for="report in items" v-if="items.length === 3 || (!hasMore && items.length < 3)" :key="report.id" class="report" :href="getReportUrl(report.slug)" target="_blank">
-        <div class="report__img" :style="{ 'background-image': `url(${report.ogImage})` }"></div>
+        <div class="report__img" :style="{ 'background-image': `url(${getReportImg(report)})` }"></div>
         <h1 v-text="report.title"></h1>
         <p v-text="report.description"></p>
       </a>
@@ -87,6 +87,9 @@ export default {
       this.showLoadmore = true
       this.page += 1
       fetchReports(this.$store, { page: this.page })
+    },
+    getReportImg (report) {
+      return report.ogImage || report.heroImage || ''
     },
     getReportUrl
   }
