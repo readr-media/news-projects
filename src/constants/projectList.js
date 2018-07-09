@@ -5,14 +5,16 @@ export default {
   // |----YourProject
   // |------YourProject.vue
   'chenuen': 'Chenuen',
+  'dollclaw': 'Dollclaw',
   'farmhouse': 'Farmhouse',
   'foreign-labour': 'ForeignLabour',
   'foreign-labour-ii': 'ForeignLabourII',
   'foreign-labour-iii': 'ForeignLabourIII',
   'foreign-labour-landing': 'ForeignLabourLanding',
+  'hotel-hostess': 'HotelHostess',
   'marathon': 'Marathon',
   'newtype': 'Newtype',
   'president-promise': 'PresidentPromise',
-  'dollclaw': 'Dollclaw',
+  
   //'proj1': 'Proj1',
 }
