@@ -12,6 +12,7 @@ export default {
   'foreign-labour-iii': 'ForeignLabourIII',
   'foreign-labour-landing': 'ForeignLabourLanding',
   'hotel-hostess': 'HotelHostess',
+  'hotel-hostess-series': 'HotelHostessSeries',
   'marathon': 'Marathon',
   'newtype': 'Newtype',
   'president-promise': 'PresidentPromise',

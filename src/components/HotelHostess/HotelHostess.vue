@@ -145,9 +145,6 @@
     }
   }
 </script>
-
-
-
 <style lang="stylus" scoped>
   .hotel-hostess
     color #fff
