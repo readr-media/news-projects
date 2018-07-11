@@ -1,5 +1,6 @@
 <template>
   <main class="hotel-hostess">
+    <app-logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/hotel-hostess/images/readr-logo.png"></app-logo>
     <section class="hotel-hostess__bg origin"></section>
     <section class="hotel-hostess__bg color"></section>
     <div class="heading--desktop">
@@ -56,6 +57,16 @@
             <a class="item" @touchstart="$_hotelHostess_handleTouchStart" @touchend="$_hotelHostess_handleTouchEnd">
               <span>個案分享</span>
             </a>
+            <footer class="footer">
+              <div class="share">
+                <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-fb.png" alt=""></a>
+                <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-line.png" alt=""></a>
+                <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-gplus.png" alt=""></a>
+              </div>
+              <div class="credit">
+                credit credit credit
+              </div>
+            </footer>
           </div>
         </section>
       </template>
@@ -64,6 +75,18 @@
         </section>
       </template>
     </article>
+    <template v-if="viewportX >= 900">
+      <footer class="footer">
+        <div class="share">
+          <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-fb.png" alt=""></a>
+          <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-line.png" alt=""></a>
+          <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-gplus.png" alt=""></a>
+        </div>
+        <div class="credit">
+          credit credit credit
+        </div>
+      </footer>
+    </template>
   </main>
 </template>
 <script>
@@ -110,11 +133,18 @@
         window.fullpage = p
         this.$_hotelHostess_initFullPage()
       })
+      window.addEventListener('mousemove', this.$_hotelHostess_handleMouseMove)
     },
     beforeDestroy () {
-      
+      window.removeEventListener('mousemove', this.$_hotelHostess_handleMouseMove)
     },
     methods: {
+      $_hotelHostess_handleMouseMove (e) {
+        const left = this.$store.state.viewport[0] / 2 - e.pageX
+        const top = this.$store.state.viewport[1] / 2 - e.pageY
+        document.querySelector('.hotel-hostess__bg.origin').style.transform = `translate(${-left/100}px, ${-top/100}px)`
+        document.querySelector('.hotel-hostess__bg.color').style.transform = `translate(${-left/100}px, ${-top/100}px)`
+      },
       $_hotelHostess_handleTouchStart (e) {
         if (e.target.classList.contains('item')) { e.target.classList.add('touch') }
         else { e.target.parentNode.classList.add('touch') }
@@ -174,9 +204,10 @@
       &.color
         opacity 1
         background-image url(/proj-assets/hotel-hostess/images/bg-color.jpg)
-        transition opacity 1s
+        transition opacity 1s, transform .5s
       &.origin
         background-image url(/proj-assets/hotel-hostess/images/bg-origin.jpg)
+        transition transform .5s
   .section
     position relative
     height 100vh
@@ -223,14 +254,16 @@
     span
       margin-top 20px
   .list
+    display flex
+    flex-direction column
     height 100%
-    padding 40% 10% 20%
+    padding 30% 10% 10%
     &--desktop
       display none
-    .item
+    > .item
+      flex 1
       display flex
       align-items center
-      height 25%
       color #165855
       font-weight 700
       transition background-color .5s, color .5s
@@ -243,7 +276,7 @@
             background-color #fff
       span
         position relative
-        margin-left 30%
+        margin 20px 0 0 30%
         &::before
           content ''
           position absolute
@@ -259,6 +292,21 @@
         span
           &::before
             background-color #fff
+
+  .footer
+    margin 40px 0 0
+    .share
+      display flex
+      justify-content center
+      .item
+        margin 0
+        font-size 0
+        & + .item
+          margin-left 20px
+        img
+          width 36px
+    .credit
+      margin-top 20px
 
   @keyframes arrow {
     from {
@@ -279,7 +327,10 @@
       p
         width 60%
     .list
-      padding 40% 20% 20%
+      padding 30% 20% 20%
+    .footer
+      .credit
+        margin-top 40px
 
   @media (min-width: 900px)
     .hotel-hostess
@@ -292,9 +343,12 @@
         .list--desktop
           transform translate(0, -50%)
       &__bg
+        top -10px
+        left -10px
         z-index 10
+        width calc(100% + 20px)
+        height calc(100vh + 20px)
         background-position 50% 50%
-
     .section
       &:not(:first-child)
         background-color transparent
@@ -337,7 +391,7 @@
       display none
     .list
       &--desktop
-        display block
+        display flex
         position fixed
         top 50%
         right 0
@@ -347,4 +401,16 @@
         height 360px
         padding 0
         transition transform 1s
+    .footer
+      position fixed
+      left 20px
+      bottom 20px
+      z-index 100
+      margin 0
+      .share
+        justify-content flex-start
+      .credit
+        margin-top 20px
+        color #165855
+        font-weight 700
 </style>
