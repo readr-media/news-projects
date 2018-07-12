@@ -21,7 +21,6 @@
 <script>
 import { chunk, filter, get, slice, take } from 'lodash'
 import { getReportUrl } from 'src/util/comm'
-import superagent from 'superagent'
 
 const MAXRESULT_REPORTS = 4
 const DEFAULT_PAGE = 1

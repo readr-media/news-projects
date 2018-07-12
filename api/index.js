@@ -1,36 +1,21 @@
-const { API_DEADLINE, API_HOST, API_PORT, API_PROTOCOL, API_TIMEOUT, } = require('./config')
-const { SERVER_PROTOCOL, SERVER_HOST } = require('./config')
+const { API_HOST, API_PORT, API_PROTOCOL, API_TIMEOUT, } = require('./config')
 const { fetchFromRedis, insertIntoRedis, } = require('./middle/redisHandler')
 const express = require('express')
 const router = express.Router()
 const bodyParser = require('body-parser')
-const superagent = require('superagent')
+const axios = require('axios')
 
 const apiHost = API_PROTOCOL + '://' + API_HOST + ':' + API_PORT
 
-const fetchStaticJson = (req, res, next, jsonFileName) => {
-  const url = `${SERVER_PROTOCOL}://${SERVER_HOST}/json/${jsonFileName}.json`
-  superagent
-  .get(url)
-  .end((err, response) => {
-    if (!err && response) {
-      res.json(JSON.parse(response.text))
-    } else {
-      res.send('{\'error\':' + err + '}')
-      console.error(`error during fetch data from ${jsonFileName} : ${url}`)
-      console.error(err)
-    }
-  })
+const handleError = (err, res) => {
+  if (err.response) {
+    res.status(err.response.status).json({ error: err.response.data })
+  } else if (err.request) {
+    res.status(500).json({ error: err.request })
+  } else {
+    res.status(500).json({ error: err.message })
+  }
 }
-
-router.all('/', function(req, res, next) {
-  next()
-})
-
-router.use('/grouped', function(req, res, next) {
-  console.log('got req')
-  fetchStaticJson(req, res, next, 'grouped')
-})
 
 // parse application/x-www-form-urlencoded
 router.use(bodyParser.urlencoded({ extended: false, }))
@@ -47,30 +32,20 @@ router.get('/reports', (req, res, next) => {
   if (res.redis) {
     console.error('fetch data from Redis.', req.url)
     const resData = JSON.parse(res.redis)
-    res.json(resData)
-  } else {
-    superagent
-    .get(`${apiHost}${req.url}`)
-    .timeout(
-      {
-        response: API_TIMEOUT, // Wait 5 seconds for the server to start sending,
-        deadline: API_DEADLINE || 60000 // but allow 1 minute for the file to finish loading.
-      }
-    )
-    .end((err, response) => {
-      if (!err && response) {
-        const dt = JSON.parse(response.text)
-        if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
-          res.dataString = response.text
-        }
-        res.json(dt)
-        next()
-      } else {
-        res.send('{\'error\':' + err + '}')
-        console.error(err)
-      }
-    })
+    return res.json(resData)
   }
+  axios.get(`${apiHost}${req.url}`, { timeout: API_TIMEOUT })
+    .then((response) => {
+      const dt = response.data
+      if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
+        res.dataString = JSON.stringify(response.data)
+      }
+      res.json(dt)
+      next()
+    })
+    .catch((err) => {
+      handleError(err, res)
+    })
 }, insertIntoRedis)
 
 router.get('/report/count', fetchFromRedis, (req, res, next) => {
@@ -78,30 +53,20 @@ router.get('/report/count', fetchFromRedis, (req, res, next) => {
   if (res.redis) {
     console.error('fetch data from Redis.', url)
     const resData = JSON.parse(res.redis)
-    res.json(resData)
-  } else {
-    superagent
-    .get(`${apiHost}${url}`)
-    .timeout(
-      {
-        response: API_TIMEOUT, // Wait 5 seconds for the server to start sending,
-        deadline: API_DEADLINE || 60000 // but allow 1 minute for the file to finish loading.
-      }
-    )
-    .end((err, response) => {
-      if (!err && response) {
-        const dt = JSON.parse(response.text)
-        if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
-          res.dataString = response.text
-        }
-        res.json(dt)
-        next()
-      } else {
-        res.send('{\'error\':' + err + '}')
-        console.error(err)
-      }
-    })
+    return res.json(resData)
   }
+  axios.get(`${apiHost}${url}`, { timeout: API_TIMEOUT })
+    .then((response) => {
+      const dt = response.data
+      if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
+        res.dataString = JSON.stringify(response.data)
+      }
+      res.json(dt)
+      next()
+    })
+    .catch((err) => {
+      handleError(err, res)
+    })
 }, insertIntoRedis)
 
 module.exports = router

@@ -1,8 +1,8 @@
 import { camelizeKeys, } from 'humps'
 import { getHost } from '../util/comm'
 import _ from 'lodash'
+import axios from 'axios'
 import qs from 'qs'
-import superagent from 'superagent'
 
 const host = getHost()
 
@@ -38,38 +38,15 @@ function _buildQuery (params = {}) {
 }
 
 function _doFetch (url) {
-  return new Promise((resolve, reject) => {
-    superagent
-    .get(url)
-    .end(function (err, res) {
-      if (err) {
-        reject(err)
-      } else {
-        // resolve(camelizeKeys(res.body))
-        if (res.text === 'not found' || res.status !== 200) {
-          reject(res.text)
-        } else {
-          resolve({ status: res.status, body: camelizeKeys(res.body), })
-        }
-      }
-    })
-  })
+  return axios.get(url)
+    .then(res => Promise.resolve({ status: res.status, body: camelizeKeys(res.data)}))
+    .catch(err => Promise.reject(err))
 }
 
 function _doPost (url, params) {
-  return new Promise((resolve, reject) => {
-    superagent
-      .post(url)
-      .set('Content-Type', 'application/json')
-      .send(params)
-      .end(function (err, res) {
-        if (err) {
-          reject(err)
-        } else {
-          resolve({ status: res.status, body: camelizeKeys(res.body), })
-        }
-      })
-  })
+  return axios.post(url, params, { headers: { 'Content-Type': 'application/json' }})
+    .then(res => Promise.resolve({ status: res.status, body: camelizeKeys(res.data)}))
+    .catch(err => Promise.reject(err))
 }
 
 export function getReports ({ params = {}} = {}) {
