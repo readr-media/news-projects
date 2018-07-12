@@ -12,28 +12,18 @@ export default {
     return getReports({ params })
     .then(({ status, body }) => {
       let orig
-      if (status === 200) {
-        if (params.page > 1) {
-          orig = _.values(_.get(state, 'reports', []))
-          body.items = _.concat(orig, body.items)
-        }
-        commit('SET_REPORTS', { reports: body.items })
+      if (params.page > 1) {
+        orig = _.values(_.get(state, 'reports', []))
+        body.items = _.concat(orig, body.items)
       }
+      commit('SET_REPORTS', { reports: body.items })
     })
-    .catch(err => {
-      console.error('Error while fetching sheet', err)
-    })
+    .catch(err => console.error('Error while fetching reports', err))
   },
   FETCH_REPORTS_COUNT: ({ state, commit }) => {
     return getReportsCount()
-    .then(({ status, body }) => {
-      if (status === 200) {
-        commit('SET_REPORTS_COUNT', { count: body.meta.total })
-      }
-    })
-    .catch(err => {
-      console.error('Error while fetching sheet', err)
-    })
+      .then(({ status, body }) => commit('SET_REPORTS_COUNT', { count: body.meta.total }))
+      .catch(err => console.error('Error while fetching reports count', err))
   },
   FETCH_SHEET: ({ state }, { params }) => {
     return getSheet({ params })
