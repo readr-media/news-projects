@@ -1,32 +1,49 @@
 <template>
-  <main class="hotel-hostess-series" :class="style">
-    <app-logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/hotel-hostess/images/readr-logo.png"></app-logo>
-    <aside class="menu" :class="{ open: openMenu }">
-      <button class="btn" @click="openMenu = false">&#x2715;</button>
+  <main
+    :class="style"
+    class="hotel-hostess-series">
+    <app-logo
+      class="no-sprite"
+      href="https://www.readr.tw/"
+      top="20px"
+      left="20px"
+      bg-image="/proj-assets/hotel-hostess/images/readr-logo.png" />
+    <aside
+      :class="{ open: openMenu }"
+      class="menu">
+      <button
+        class="btn"
+        @click="openMenu = false">&#x2715;</button>
       <div>
-        <a class="item"
+        <a
+          class="item"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
           <span>問卷結果</span>
         </a>
-        <a class="item"
+        <a
+          class="item"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
           <span>工作環境</span>
         </a>
-        <a class="item"
+        <a
+          class="item"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
           <span>身心健康</span>
         </a>
-        <a class="item"
+        <a
+          class="item"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
           <span>個案分享</span>
         </a>
       </div>
     </aside>
-    <section class="heading" :class="routeParams">
+    <section
+      :class="routeParams"
+      class="heading" >
       <div>
         <template v-if="routeParams === 'environment'">
           <p>工作環境</p>
@@ -37,18 +54,19 @@
           <h1>酒店小姐問卷調查結果大公開</h1>
         </template>
       </div>
-      <button class="btn" @click="openMenu = true">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button
+        class="btn"
+        @click="openMenu = true">
+        <span />
+        <span />
+        <span />
       </button>
     </section>
     <template v-if="routeParams === 'environment'">
       <article class="story">
         <h1>金萬萬大樓的前世今生</h1>
         <p class="foreword">「我是民國74年來的，那時候二樓暗暗的，電扶梯不會動，只有一條走廊有開燈。」金萬萬大樓管委會主委梁素玲說。</p>
-        <p>金萬萬名店城座落於台北中山北路，是兩棟住家大樓和辦公大樓的連通處，大樓於民國六十多年落成，當時店家以美日、歐洲舶來品為主。一層樓大約有60個店面，兩層樓便有上百家。二樓隨處可見招牌寫著菲律賓語（Tagalog），販賣菲律賓小吃、換匯、美髮店、雜貨、金飾，如今每逢星期天，聚集眾多菲律賓移工和華僑，成了人們印象中的「小馬尼拉」。
-  民國70多年時，梁素玲記得當時地下室是舞廳，日本人來玩，也帶小姐買絲襪。當時她跑單幫批發日本商品，出入顧客都是律師娘、醫師娘或董事長夫人，楊麗花、潘越雲、白冰冰等藝人明星也常來。回憶那個台灣錢淹腳目的時代，梁素玲說：「我一出國，日幣一出去都幾百萬。」每次出國帶新貨，「就貼公告在門口，等我回國，客人早在門口等，皮箱一打開，東西馬上被客人挑走。」那時客人走進舶來品店，不在意自己到底需要什麼，看順眼就下手，賣家也捉住顧客心理，「我們知道客人要的款式、尺寸跟顏色，連客人的肩寬腰圍都知道。」</p>
+        <p>金萬萬名店城座落於台北中山北路，是兩棟住家大樓和辦公大樓的連通處，大樓於民國六十多年落成，當時店家以美日、歐洲舶來品為主。一層樓大約有60個店面，兩層樓便有上百家。二樓隨處可見招牌寫著菲律賓語（Tagalog），販賣菲律賓小吃、換匯、美髮店、雜貨、金飾，如今每逢星期天，聚集眾多菲律賓移工和華僑，成了人們印象中的「小馬尼拉」。民國70多年時，梁素玲記得當時地下室是舞廳，日本人來玩，也帶小姐買絲襪。當時她跑單幫批發日本商品，出入顧客都是律師娘、醫師娘或董事長夫人，楊麗花、潘越雲、白冰冰等藝人明星也常來。回憶那個台灣錢淹腳目的時代，梁素玲說：「我一出國，日幣一出去都幾百萬。」每次出國帶新貨，「就貼公告在門口，等我回國，客人早在門口等，皮箱一打開，東西馬上被客人挑走。」那時客人走進舶來品店，不在意自己到底需要什麼，看順眼就下手，賣家也捉住顧客心理，「我們知道客人要的款式、尺寸跟顏色，連客人的肩寬腰圍都知道。」</p>
       </article>
     </template>
     <template v-else-if="routeParams === 'questionnaire'">
@@ -68,79 +86,108 @@
         <p class="indent">本問卷填答期間為 2018 年 4 月 18 日至 7 月 1 日，受訪者人數共 55人，平均年齡 24.9 歲，最低 18 歲，最高 44 歲，平均年資 25 個月， 工作範圍涵蓋便服、禮服、制服、日式酒店等。受訪者以禮服店工作者最大宗，佔 50.9 %，另外日式酒店也佔 20%、便禮店佔 23.6%。49% 受訪者擁有大專學歷，5.4% 擁有研究所學歷。54.5 % 受訪者目前是全職酒店工作者，其中約 76.3% 每週工作 3~4 天以上。</p>
         <div class="chart indent">
           <span>酒店工作容易面臨狀況</span>
-          <div></div>
+          <div
+            style="width: 400px; height: 400px;"
+            data-wordart-src="//cdn.wordart.com/json/zugqe2gztto6"
+            data-wordart-show-attribution>
+          </div>
         </div>
         <p class="indent">在性向認同上，僅有 58.1% 受訪者認為自己是異性戀，並有高達 34.5% 認為自己是雙性戀、5.4% 認為自己是戀物者、疑性戀、泛性戀；選答同性戀者僅 1.8%。</p>
       </article>
     </template>
     <footer class="share">
-      <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-fb.png" alt=""></a>
-      <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-line.png" alt=""></a>
-      <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-gplus.png" alt=""></a>
+      <a
+        class="item"
+        href="">
+        <img
+          src="/proj-assets/hotel-hostess/images/share-fb.png"
+          alt="">
+      </a>
+      <a
+        class="item"
+        href="">
+        <img
+          src="/proj-assets/hotel-hostess/images/share-line.png"
+          alt="">
+      </a>
+      <a
+        class="item"
+        href="">
+        <img
+          src="/proj-assets/hotel-hostess/images/share-gplus.png"
+          alt="">
+      </a>
     </footer>
   </main>
 </template>
 <script>
-  import Logo from '../Logo.vue'
+import Logo from '../Logo.vue';
 
-  const PROJECT_NAME = 'hotel-hostess-series'
+const PROJECT_NAME = 'hotel-hostess-series';
 
-  export default {
-    name: 'HotelHostessSeries',
-    components: {
-      'app-logo': Logo,
-    },
-    metaInfo () {
-      let metaUrl = PROJECT_NAME
-      let metaImage = `${PROJECT_NAME}/images/og.jpg`
-      let ogLocale = 'zh_TW'
-      
-      return {
-        title: '酒店小姐',
-        description: '酒店小姐',
-        locale: ogLocale,
-        metaUrl: metaUrl,
-        metaImage: metaImage
+export default {
+  name: 'HotelHostessSeries',
+  components: {
+    'app-logo': Logo,
+  },
+  metaInfo() {
+    const metaUrl = PROJECT_NAME;
+    const metaImage = `${PROJECT_NAME}/images/og.jpg`;
+    const ogLocale = 'zh_TW';
+
+    return {
+      title: '酒店小姐',
+      description: '酒店小姐',
+      locale: ogLocale,
+      metaUrl,
+      metaImage,
+      customScript: `<script src="//cdn.wordart.com/wordart.min.js" async defer><\/script>`,
+    };
+  },
+  data() {
+    return {
+      openMenu: false,
+    };
+  },
+  computed: {
+    style() {
+      if (this.$route.params.params === 'environment') {
+        return 'image';
       }
+      return 'text';
     },
-    data () {
-      return {
-        openMenu: false
-      }
+    routeParams() {
+      return this.$route.params.params;
     },
-    computed: {
-      style () {
-        if (this.$route.params.params === 'environment') {
-          return 'image'
-        }
-        return 'text' 
-      },
-      routeParams () {
-        return this.$route.params.params
-      }
-    },
-    beforeCreate () {
-      const route = this.$route.params.params
-      if (route !== 'environment' && route !== 'questionnaire') {
-        this.$router.replace({ path: '/project/hotel-hostess' })
-      }
-    },
-    mounted () {
-      // if (document.querySelector('.heading')) {
-      //   document.querySelector('.heading').classList.remove('blur')
-      // }
-    },
-    methods: {
-      $_hotelHostess_handleTouchStart (e) {
-        if (e.target.classList.contains('item')) { e.target.classList.add('touch') }
-        else { e.target.parentNode.classList.add('touch') }
-      },
-      $_hotelHostess_handleTouchEnd (e) {
-        if (e.target.classList.contains('item')) { e.target.classList.remove('touch') }
-        else { e.target.parentNode.classList.remove('touch') }
-      },
+  },
+  beforeCreate() {
+    const route = this.$route.params.params;
+    if (route !== 'environment' && route !== 'questionnaire') {
+      this.$router.replace({ path: '/project/hotel-hostess' });
     }
-  }
+  },
+  mounted() {
+    // if (document.querySelector('.heading')) {
+    //   document.querySelector('.heading').classList.remove('blur')
+    // }
+  },
+  methods: {
+    $_hotelHostess_handleTouchStart(e) {
+      if (e.target.classList.contains('item')) {
+        e.target.classList.add('touch');
+      } else {
+        e.target.parentNode.classList.add('touch');
+      }
+    },
+    $_hotelHostess_handleTouchEnd(e) {
+      if (e.target.classList.contains('item')) {
+        e.target.classList.remove('touch');
+      } else {
+        e.target.parentNode.classList.remove('touch');
+      }
+    },
+  },
+};
 </script>
 <style lang="stylus" scoped>
 .hotel-hostess-series

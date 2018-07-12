@@ -1,8 +1,13 @@
 <template>
   <main class="hotel-hostess">
-    <app-logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/hotel-hostess/images/readr-logo.png"></app-logo>
-    <section class="hotel-hostess__bg origin"></section>
-    <section class="hotel-hostess__bg color"></section>
+    <app-logo
+      class="no-sprite"
+      href="https://www.readr.tw/"
+      top="20px"
+      left="20px"
+      bg-image="/proj-assets/hotel-hostess/images/readr-logo.png" />
+    <section class="hotel-hostess__bg origin" />
+    <section class="hotel-hostess__bg color" />
     <div class="heading--desktop">
       <div>
         <h1>姐妹</h1>
@@ -11,20 +16,35 @@
       <p>26歲那年，黛西留下丈夫和二個孩子在馬尼拉，展開在苗栗、高雄、杜拜、台北漂泊的生活，和同在異鄉的女工交往，也有了愛情的依靠。</p>
       <div class="heading__arrow">
         <span>滑動以繼續閱讀</span>
-        <img src="/proj-assets/hotel-hostess/images/arrow.png" alt="" @click="$_hotelHostess_moveDown">
+        <img
+          src="/proj-assets/hotel-hostess/images/arrow.png"
+          alt=""
+          @click="$_hotelHostess_moveDown">
       </div>
     </div>
     <div class="list list--desktop">
-      <a class="item" @touchstart="$_hotelHostess_handleTouchStart" @touchend="$_hotelHostess_handleTouchEnd">
+      <a
+        class="item"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
         <span>問卷結果</span>
       </a>
-      <a class="item" @touchstart="$_hotelHostess_handleTouchStart" @touchend="$_hotelHostess_handleTouchEnd">
+      <a
+        class="item"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
         <span>工作環境</span>
       </a>
-      <a class="item" @touchstart="$_hotelHostess_handleTouchStart" @touchend="$_hotelHostess_handleTouchEnd">
+      <a
+        class="item"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
         <span>身心健康</span>
       </a>
-      <a class="item" @touchstart="$_hotelHostess_handleTouchStart" @touchend="$_hotelHostess_handleTouchEnd">
+      <a
+        class="item"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
         <span>個案分享</span>
       </a>
     </div>
@@ -34,8 +54,12 @@
           <h1>姐妹</h1>
           <h2>——酒店小姐要副標</h2>
         </div>
-        <div class="arrow" @click="$_hotelHostess_moveDown">
-          <img src="/proj-assets/hotel-hostess/images/arrow.png" alt="">
+        <div
+          class="arrow"
+          @click="$_hotelHostess_moveDown">
+          <img
+            src="/proj-assets/hotel-hostess/images/arrow.png"
+            alt="">
           <span>滑動以繼續閱讀</span>
         </div>
       </section>
@@ -45,23 +69,53 @@
         </section>
         <section class="section">
           <div class="list">
-            <a class="item" @touchstart="$_hotelHostess_handleTouchStart" @touchend="$_hotelHostess_handleTouchEnd">
+            <a
+              class="item"
+              @touchstart="$_hotelHostess_handleTouchStart"
+              @touchend="$_hotelHostess_handleTouchEnd">
               <span>問卷結果</span>
             </a>
-            <a class="item" @touchstart="$_hotelHostess_handleTouchStart" @touchend="$_hotelHostess_handleTouchEnd">
+            <a
+              class="item"
+              @touchstart="$_hotelHostess_handleTouchStart"
+              @touchend="$_hotelHostess_handleTouchEnd">
               <span>工作環境</span>
             </a>
-            <a class="item" @touchstart="$_hotelHostess_handleTouchStart" @touchend="$_hotelHostess_handleTouchEnd">
+            <a
+              class="item"
+              @touchstart="$_hotelHostess_handleTouchStart"
+              @touchend="$_hotelHostess_handleTouchEnd">
               <span>身心健康</span>
             </a>
-            <a class="item" @touchstart="$_hotelHostess_handleTouchStart" @touchend="$_hotelHostess_handleTouchEnd">
+            <a
+              class="item"
+              @touchstart="$_hotelHostess_handleTouchStart"
+              @touchend="$_hotelHostess_handleTouchEnd">
               <span>個案分享</span>
             </a>
             <footer class="footer">
               <div class="share">
-                <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-fb.png" alt=""></a>
-                <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-line.png" alt=""></a>
-                <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-gplus.png" alt=""></a>
+                <a
+                  class="item"
+                  href="">
+                  <img
+                    src="/proj-assets/hotel-hostess/images/share-fb.png"
+                    alt="">
+                </a>
+                <a
+                  class="item"
+                  href="">
+                  <img
+                    src="/proj-assets/hotel-hostess/images/share-line.png"
+                    alt="">
+                </a>
+                <a
+                  class="item"
+                  href="">
+                  <img
+                    src="/proj-assets/hotel-hostess/images/share-gplus.png"
+                    alt="">
+                </a>
               </div>
               <div class="credit">
                 credit credit credit
@@ -71,16 +125,33 @@
         </section>
       </template>
       <template v-else>
-        <section class="section">
-        </section>
+        <section class="section" />
       </template>
     </article>
     <template v-if="viewportX >= 900">
       <footer class="footer">
         <div class="share">
-          <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-fb.png" alt=""></a>
-          <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-line.png" alt=""></a>
-          <a class="item" href=""><img src="/proj-assets/hotel-hostess/images/share-gplus.png" alt=""></a>
+          <a
+            class="item"
+            href="">
+            <img
+              src="/proj-assets/hotel-hostess/images/share-fb.png"
+              alt="">
+          </a>
+          <a
+            class="item"
+            href="">
+            <img
+              src="/proj-assets/hotel-hostess/images/share-line.png"
+              alt="">
+          </a>
+          <a
+            class="item"
+            href="">
+            <img
+              src="/proj-assets/hotel-hostess/images/share-gplus.png"
+              alt="">
+          </a>
         </div>
         <div class="credit">
           credit credit credit
@@ -90,90 +161,94 @@
   </main>
 </template>
 <script>
-  import Logo from '../Logo.vue'
-  import RelatedReports from '../RelatedReports.vue'
-  import Share from '../Share.vue'
-  // import fullpage from 'fullpage.js'
-  import { getFBCommentsUrl } from '../../util/comm'
-  
-  const PROJECT_NAME = 'hotel-hostess'
- 
-  export default {
-    name: 'HotelHostess',
-    components: {
-      'app-logo': Logo,
-      'app-share': Share,
-      'related-reports': RelatedReports,
+import Logo from '../Logo.vue';
+import RelatedReports from '../RelatedReports.vue';
+import Share from '../Share.vue';
+// import { getFBCommentsUrl } from '../../util/comm';
+
+const PROJECT_NAME = 'hotel-hostess';
+
+export default {
+  name: 'HotelHostess',
+  components: {
+    'app-logo': Logo,
+    'app-share': Share,
+    'related-reports': RelatedReports,
+  },
+  metaInfo() {
+    const metaUrl = PROJECT_NAME;
+    const metaImage = `${PROJECT_NAME}/images/og.jpg`;
+    const ogLocale = 'zh_TW';
+
+    return {
+      title: '酒店小姐',
+      description: '酒店小姐',
+      locale: ogLocale,
+      metaUrl,
+      metaImage,
+    };
+  },
+  data() {
+    return {
+      fullpage: null,
+    };
+  },
+  computed: {
+    viewportX() {
+      return this.$store.state.viewport[0];
     },
-    metaInfo () {
-      let metaUrl = PROJECT_NAME
-      let metaImage = `${PROJECT_NAME}/images/og.jpg`
-      let ogLocale = 'zh_TW'
-      
-      return {
-        title: '酒店小姐',
-        description: '酒店小姐',
-        locale: ogLocale,
-        metaUrl: metaUrl,
-        metaImage: metaImage
+  },
+  mounted() {
+    import('fullpage.js/dist/fullpage.extensions.min.js').then((p) => {
+      window.fullpage = p;
+      this.$_hotelHostess_initFullPage();
+    });
+    window.addEventListener('mousemove', this.$_hotelHostess_handleMouseMove);
+  },
+  beforeDestroy() {
+    window.removeEventListener('mousemove', this.$_hotelHostess_handleMouseMove);
+  },
+  methods: {
+    $_hotelHostess_handleMouseMove(e) {
+      const left = this.$store.state.viewport[0] / 2 - e.pageX;
+      const top = this.$store.state.viewport[1] / 2 - e.pageY;
+      document.querySelector('.hotel-hostess__bg.origin').style.transform = `translate(${-left / 100}px, ${-top / 100}px)`;
+      document.querySelector('.hotel-hostess__bg.color').style.transform = `translate(${-left / 100}px, ${-top / 100}px)`;
+    },
+    $_hotelHostess_handleTouchStart(e) {
+      if (e.target.classList.contains('item')) {
+        e.target.classList.add('touch');
+      } else {
+        e.target.parentNode.classList.add('touch');
       }
     },
-    data () {
-      return {
-        fullpage: null
+    $_hotelHostess_handleTouchEnd(e) {
+      if (e.target.classList.contains('item')) {
+        e.target.classList.remove('touch');
+      } else {
+        e.target.parentNode.classList.remove('touch');
       }
     },
-    computed: {
-      viewportX () {
-        return this.$store.state.viewport[0]
-      }
-    },
-    mounted () {
-      import('fullpage.js/dist/fullpage.extensions.min.js').then((p) => {
-        window.fullpage = p
-        this.$_hotelHostess_initFullPage()
-      })
-      window.addEventListener('mousemove', this.$_hotelHostess_handleMouseMove)
-    },
-    beforeDestroy () {
-      window.removeEventListener('mousemove', this.$_hotelHostess_handleMouseMove)
-    },
-    methods: {
-      $_hotelHostess_handleMouseMove (e) {
-        const left = this.$store.state.viewport[0] / 2 - e.pageX
-        const top = this.$store.state.viewport[1] / 2 - e.pageY
-        document.querySelector('.hotel-hostess__bg.origin').style.transform = `translate(${-left/100}px, ${-top/100}px)`
-        document.querySelector('.hotel-hostess__bg.color').style.transform = `translate(${-left/100}px, ${-top/100}px)`
-      },
-      $_hotelHostess_handleTouchStart (e) {
-        if (e.target.classList.contains('item')) { e.target.classList.add('touch') }
-        else { e.target.parentNode.classList.add('touch') }
-      },
-      $_hotelHostess_handleTouchEnd (e) {
-        if (e.target.classList.contains('item')) { e.target.classList.remove('touch') }
-        else { e.target.parentNode.classList.remove('touch') }
-      },
-      
-      $_hotelHostess_initFullPage () {
-        this.fullpage = new fullpage('#fullpage', {
-          licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-          autoScrolling: true,
-          scrollHorizontally: true,
-          controlArrows: false,
-          onLeave: (origin, destination, direction) => {
-            if (destination.index > 0) {
-              document.querySelector('.hotel-hostess').classList.add('panning')
-            } else {
-              document.querySelector('.hotel-hostess').classList.remove('panning')
-            }
+    $_hotelHostess_initFullPage() {
+      this.fullpage = new fullpage('#fullpage', {
+        licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
+        autoScrolling: true,
+        scrollHorizontally: true,
+        controlArrows: false,
+        onLeave: (origin, destination, direction) => {
+          if (destination.index > 0) {
+            document.querySelector('.hotel-hostess').classList.add('panning');
+          } else {
+            document.querySelector('.hotel-hostess').classList.remove('panning');
           }
-        })
-      },
-      $_hotelHostess_moveDown () {
-        fullpage_api.moveSectionDown()
-      }
-    }
-  }
+        },
+      });
+    },
+    $_hotelHostess_moveDown() {
+      fullpage_api.moveSectionDown();
+    },
+  },
+};
 </script>
 <style lang="stylus" scoped>
   .hotel-hostess
@@ -224,7 +299,6 @@
       text-align justify
       line-height 2
       font-weight 700
-  
   .heading
     position relative
     top 10%
