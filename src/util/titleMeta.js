@@ -29,7 +29,8 @@ const serverMetaInfoMixin = {
       const fbAppId = PROJECTS_BELONGS_MM.includes(project) ? MM_FB_APP_ID : READR_FB_APP_ID
       const fbPageId = PROJECTS_BELONGS_MM.includes(project) ? MM_FB_PAGE_ID : READR_FB_PAGE_ID
       const fbPageUrl = PROJECTS_BELONGS_MM.includes(project) ? MM_FB_PAGE_URL : READR_FB_PAGE_URL
-
+      const customScript = metaInfo.customScript || ` `
+      
       this.$ssrContext.title = title
       this.$ssrContext.description = description
       this.$ssrContext.locale = locale
@@ -42,6 +43,7 @@ const serverMetaInfoMixin = {
       this.$ssrContext.fbPageUrl = fbPageUrl
       this.$ssrContext.scriptGoogleMap = PROJECTS_NEED_GOOGLE_MAP.includes(project) ? SCRIPT_GOOGLE_MAP : ` `
       this.$ssrContext.scriptGoogleReCaptcha = PROJECTS_NEED_GOOGLE_RECAPTCHA.includes(project) ? SCRIPT_GOOGLE_RECAPTCHA : ` `
+      this.$ssrContext.customScript = customScript
     }
   }
 }
