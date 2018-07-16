@@ -100,10 +100,10 @@
     <template v-if="routeParams === 'environment'">
       <article class="story">
         <h1>愛情麥當勞</h1>
-        <p class="foreword"><strong>「壓力型躁鬱症，因為要帶給客人歡樂，自己需要自控情緒，導致以前不會管理卻生病過……」－問卷編號 052</strong></p>
-        <p class="foreword"><strong>「……有時候必須卑躬屈膝、有時候說話要非常嚴謹，總之是個外表光鮮亮麗，心理上有極大壓迫的工作。而這裡正是以外表取人的地方，所以更多的憂鬱症狀從客人的數落開始……這裡的妹子應該需要心理醫生去排解那些不安、憤怒、難過。 」－問卷編號 023</strong></p>
-        <p class="foreword"><strong>「……長期累積的精神壓力使原本的躁鬱更嚴重。」－問卷編號 043</strong></p>
-        <p class="foreword"><strong>「情緒勞動過大，客人愛洗臉小姐讓自己質疑自己。」－問卷編號 050</strong></p>
+        <p class="foreword"><span class="highlight">「壓力型躁鬱症，因為要帶給客人歡樂，自己需要自控情緒，導致以前不會管理卻生病過……」－問卷編號 052</span></p>
+        <p class="foreword"><span class="highlight">「……有時候必須卑躬屈膝、有時候說話要非常嚴謹，總之是個外表光鮮亮麗，心理上有極大壓迫的工作。而這裡正是以外表取人的地方，所以更多的憂鬱症狀從客人的數落開始……這裡的妹子應該需要心理醫生去排解那些不安、憤怒、難過。 」－問卷編號 023</span></p>
+        <p class="foreword"><span class="highlight">「……長期累積的精神壓力使原本的躁鬱更嚴重。」－問卷編號 043</span></p>
+        <p class="foreword"><span class="highlight">「情緒勞動過大，客人愛洗臉小姐讓自己質疑自己。」－問卷編號 050</span></p>
         <p class="foreword">上面所列，是幾位問卷填答者在被問到「這份工作是否為您帶來負面影響？假如有的話是什麼？」時，主動給出的答案；而這僅只是一部分而已。事實上，有 36% 的受訪者在被問到這個問題時，主動給出和精神壓力、「情緒勞動」相關的答案，並有 60% 受訪者表示容易覺得情緒疲累，工作以外時間討厭和人社交。</p>
         <p class="foreword">美國社會學家 Arlie Hochschild 是最早針對服務業「情緒勞動」進行研究的學者。她認為，人們在特定時空下的情感是有規則可循的，人們往往為了遵從這些規則，而必須控制、管理自己的情緒。她將這樣的努力稱為「情緒工作」，而當這樣的工作是為了滿足勞動市場所需時，則被稱為「情緒勞動」。</p>
         <h2>無處不在的情緒勞動</h2>
@@ -491,10 +491,14 @@
           alt="">
       </a>
     </footer>
+    <section v-if="commentsUrl" class="comment">
+      <div class="fb-comments" :data-href="commentsUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
+    </section>
   </main>
 </template>
 <script>
 import Logo from '../Logo.vue';
+import { getFBCommentsUrl } from '../../util/comm'
 
 const PROJECT_NAME = 'hotel-hostess-series';
 
@@ -504,7 +508,7 @@ export default {
     'app-logo': Logo,
   },
   metaInfo() {
-    const metaUrl = PROJECT_NAME;
+    const metaUrl = `${PROJECT_NAME}/${this.$route.params.params}`;
     const metaImage = `${PROJECT_NAME}/images/og.jpg`;
     const ogLocale = 'zh_TW';
 
@@ -519,17 +523,18 @@ export default {
   },
   data() {
     return {
+      commentsUrl: '',
       openMenu: false,
     };
   },
   computed: {
     isCaseStories() {
-      const route = this.$route.params.params;
+      const route = this.$route.params.params || '';
       const regex = /^case-stories/
       return route.match(regex)
     },
     style() {
-      const route = this.$route.params.params;
+      const route = this.$route.params.params || '';
       const regex = /^(environment|emotional-labor)/
       if (route.match(regex)) {
         return 'image';
@@ -541,13 +546,14 @@ export default {
     },
   },
   beforeCreate() {
-    const route = this.$route.params.params;
+    const route = this.$route.params.params || '';
     const regex = /^(environment|questionnaire|emotional-labor|case-stories|case-stories-1|case-stories-2|case-stories-3|case-stories-4|case-stories-5|case-stories-6|)$/
-    if (!route.match(regex)) {
+    if (!route.match(regex) || !route) {
       this.$router.replace({ path: '/project/hotel-hostess' });
     }
   },
   mounted() {
+    this.commentsUrl = getFBCommentsUrl()
     // if (document.querySelector('.heading')) {
     //   document.querySelector('.heading').classList.remove('blur')
     // }
@@ -705,7 +711,7 @@ export default {
     background-color #1f1f20
     h1
       display none
-      font-weight 900
+      font-weight 700
     h2
       margin 3em 0 1.5em
       color #69d2cd
@@ -718,17 +724,19 @@ export default {
         position relative
         font-weight 100
         box-shadow 0 -8px 0 #820f50 inset
+    p + p
+      margin-top 3em
     p.foreword
+      font-weight 500
+      font-family "source-han-serif-tc", serif
+      letter-spacing 1.5px
       strong
         color #e4007f
         font-size 1.3125rem
         font-weight 700
         box-shadow none
-    p + p
-      margin-top 3em
-    p.foreword
-      font-weight 700
-      font-family "source-han-serif-tc", serif
+      .highlight
+        font-weight 700
       &:first-of-type
         position relative
         &::before
@@ -872,7 +880,7 @@ export default {
 @media (min-width: 900px)
   .hotel-hostess-series
     &.image
-      .story
+      .story, .comment
         width 50%
       .heading
         height 100vh
