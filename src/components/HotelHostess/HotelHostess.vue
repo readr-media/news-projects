@@ -24,24 +24,28 @@
     </div>
     <div class="list list--desktop">
       <a
+        href="/project/hotel-hostess-series/questionnaire"
         class="item"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>問卷結果</span>
       </a>
       <a
+        href=""
+        class="item"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
+        <span>情緒勞動</span>
+      </a>
+      <a
+        href="/project/hotel-hostess-series/environment"
         class="item"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>工作環境</span>
       </a>
       <a
-        class="item"
-        @touchstart="$_hotelHostess_handleTouchStart"
-        @touchend="$_hotelHostess_handleTouchEnd">
-        <span>身心健康</span>
-      </a>
-      <a
+        href="/project/hotel-hostess-series/case-stories"
         class="item"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
@@ -70,24 +74,28 @@
         <section class="section">
           <div class="list">
             <a
+              href="/project/hotel-hostess-series/questionnaire"
               class="item"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
               <span>問卷結果</span>
             </a>
             <a
+              href=""
+              class="item"
+              @touchstart="$_hotelHostess_handleTouchStart"
+              @touchend="$_hotelHostess_handleTouchEnd">
+              <span>情緒勞動</span>
+            </a>
+            <a
+              href="/project/hotel-hostess-series/environment"
               class="item"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
               <span>工作環境</span>
             </a>
             <a
-              class="item"
-              @touchstart="$_hotelHostess_handleTouchStart"
-              @touchend="$_hotelHostess_handleTouchEnd">
-              <span>身心健康</span>
-            </a>
-            <a
+              href="/project/hotel-hostess-series/case-stories"
               class="item"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
@@ -339,6 +347,7 @@ export default {
       display flex
       align-items center
       color #165855
+      text-decoration none
       font-weight 700
       transition background-color .5s, color .5s
       cursor pointer
