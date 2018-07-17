@@ -104,25 +104,22 @@
             <footer class="footer">
               <div class="share">
                 <a
+                  :href="`https://www.facebook.com/share.php?u=${pageUrl}`"
                   class="item"
-                  href="">
-                  <img
-                    src="/proj-assets/hotel-hostess/images/share-fb.png"
-                    alt="">
+                  target="_blank">
+                  <img src="/proj-assets/hotel-hostess/images/share-fb.png">
                 </a>
                 <a
+                  :href="`https://line.me/R/msg/text/?${pageUrl}`"
                   class="item"
-                  href="">
-                  <img
-                    src="/proj-assets/hotel-hostess/images/share-line.png"
-                    alt="">
+                  target="_blank">
+                  <img src="/proj-assets/hotel-hostess/images/share-line.png">
                 </a>
                 <a
+                  :href="`https://plus.google.com/share?url=${pageUrl}`"
                   class="item"
-                  href="">
-                  <img
-                    src="/proj-assets/hotel-hostess/images/share-gplus.png"
-                    alt="">
+                  target="_blank">
+                  <img src="/proj-assets/hotel-hostess/images/share-gplus.png">
                 </a>
               </div>
               <div class="credit">
@@ -140,25 +137,22 @@
       <footer class="footer">
         <div class="share">
           <a
+            :href="`https://www.facebook.com/share.php?u=${pageUrl}`"
             class="item"
-            href="">
-            <img
-              src="/proj-assets/hotel-hostess/images/share-fb.png"
-              alt="">
+            target="_blank">
+            <img src="/proj-assets/hotel-hostess/images/share-fb.png">
           </a>
           <a
+            :href="`https://line.me/R/msg/text/?${pageUrl}`"
             class="item"
-            href="">
-            <img
-              src="/proj-assets/hotel-hostess/images/share-line.png"
-              alt="">
+            target="_blank">
+            <img src="/proj-assets/hotel-hostess/images/share-line.png">
           </a>
           <a
+            :href="`https://plus.google.com/share?url=${pageUrl}`"
             class="item"
-            href="">
-            <img
-              src="/proj-assets/hotel-hostess/images/share-gplus.png"
-              alt="">
+            target="_blank">
+            <img src="/proj-assets/hotel-hostess/images/share-gplus.png">
           </a>
         </div>
         <div class="credit">
@@ -172,7 +166,7 @@
 import Logo from '../Logo.vue';
 import RelatedReports from '../RelatedReports.vue';
 import Share from '../Share.vue';
-// import { getFBCommentsUrl } from '../../util/comm';
+import { getFBCommentsUrl } from '../../util/comm';
 
 const PROJECT_NAME = 'hotel-hostess';
 
@@ -199,12 +193,16 @@ export default {
   data() {
     return {
       fullpage: null,
+      pageUrl: '',
     };
   },
   computed: {
     viewportX() {
       return this.$store.state.viewport[0];
     },
+  },
+  beforeMount() {
+    this.pageUrl = getFBCommentsUrl();
   },
   mounted() {
     import('fullpage.js/dist/fullpage.extensions.min.js').then((p) => {

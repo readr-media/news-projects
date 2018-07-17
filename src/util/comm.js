@@ -25,7 +25,7 @@ export function getFBCommentsUrl () {
     if (location.hostname.indexOf(READR_DOMAIN_PROD) !== -1) {
       return `${READR_SITE_URL}${projectName}`
     }
-    return `https://dev.${READR_DOMAIN}/${path}`
+    return `http://dev.${READR_DOMAIN}/${path}`
   }
   return ''
 }
