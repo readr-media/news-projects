@@ -39,7 +39,7 @@
           <span>工作環境</span>
         </a>
         <a
-          :class="{ active: routeParams === 'case-stories' }"
+          :class="{ active: isCaseStories }"
           href="/project/hotel-hostess-series/case-stories"
           class="item"
           @touchstart="$_hotelHostess_handleTouchStart"
@@ -470,29 +470,26 @@
     </nav>
     <footer class="share">
       <a
+        :href="`https://www.facebook.com/share.php?u=${pageUrl}`"
         class="item"
-        href="">
-        <img
-          src="/proj-assets/hotel-hostess/images/share-fb.png"
-          alt="">
+        target="_blank">
+        <img src="/proj-assets/hotel-hostess/images/share-fb.png">
       </a>
       <a
+        :href="`https://line.me/R/msg/text/?${pageUrl}`"
         class="item"
-        href="">
-        <img
-          src="/proj-assets/hotel-hostess/images/share-line.png"
-          alt="">
+        target="_blank">
+        <img src="/proj-assets/hotel-hostess/images/share-line.png">
       </a>
       <a
+        :href="`https://plus.google.com/share?url=${pageUrl}`"
         class="item"
-        href="">
-        <img
-          src="/proj-assets/hotel-hostess/images/share-gplus.png"
-          alt="">
+        target="_blank">
+        <img src="/proj-assets/hotel-hostess/images/share-gplus.png">
       </a>
     </footer>
-    <section v-if="commentsUrl" class="comment">
-      <div class="fb-comments" :data-href="commentsUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
+    <section v-if="pageUrl" class="comment">
+      <div class="fb-comments" :data-href="pageUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
   </main>
 </template>
@@ -523,8 +520,8 @@ export default {
   },
   data() {
     return {
-      commentsUrl: '',
       openMenu: false,
+      pageUrl: '',
     };
   },
   computed: {
@@ -552,8 +549,10 @@ export default {
       this.$router.replace({ path: '/project/hotel-hostess' });
     }
   },
+  beforeMount() {
+    this.pageUrl = getFBCommentsUrl();
+  },
   mounted() {
-    this.commentsUrl = getFBCommentsUrl()
     // if (document.querySelector('.heading')) {
     //   document.querySelector('.heading').classList.remove('blur')
     // }
@@ -849,6 +848,8 @@ export default {
         margin-left 15px
       img
         width 36px
+  .comment
+    padding 0 10% 50px 10%
 
 @media (min-width: 768px)
   .hotel-hostess-series
@@ -876,18 +877,26 @@ export default {
           display block
         > span
           display block
+    .comment
+      padding 0 20% 50px 20%
 
 @media (min-width: 900px)
   .hotel-hostess-series
     &.image
-      .story, .comment
+      .story
         width 50%
       .heading
         height 100vh
+      .comment
+        width 50%
+        padding 0 10% 50px
     &.text
       .story
         width 80%
         padding 5% 20% 5% 10%
+      .comment
+        width 80%
+        padding 0 20% 50px 10%
     .menu
       right 0
       width 20%
@@ -943,4 +952,5 @@ export default {
     .share
       justify-content flex-start
       padding 50px 0 50px 10%
+    
 </style>

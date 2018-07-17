@@ -18,6 +18,7 @@ const serverMetaInfoMixin = {
     const metaInfo = getMetaInfo(this)
     if (metaInfo) {
       const project = get(this.$route, 'params.project')
+      
       const siteName = PROJECTS_BELONGS_MM.includes(project) ? MM_SITE_NAME : READR_SITE_NAME
       const title = metaInfo.title ? `${metaInfo.title} - ${siteName}` : `${siteName}`
       const description = metaInfo.description || ` `
@@ -33,8 +34,7 @@ const serverMetaInfoMixin = {
       this.$ssrContext.title = title
       this.$ssrContext.description = description
       this.$ssrContext.locale = locale
-      // this.$ssrContext.metaUrl = PROJECTS_BELONGS_MM.includes(project) ? MM_SITE_URL + metaUrl : READR_SITE_URL + metaUrl
-      this.$ssrContext.metaUrl = PROJECTS_BELONGS_MM.includes(project) ? MM_SITE_URL + metaUrl : `http://dev.readr.tw/project/${metaUrl}`
+      this.$ssrContext.metaUrl = PROJECTS_BELONGS_MM.includes(project) ? MM_SITE_URL + metaUrl : READR_SITE_URL + metaUrl
       this.$ssrContext.metaImage = PROJECTS_BELONGS_MM.includes(project) ? MM_SITE_ASSETS_URL + metaImage : READR_SITE_ASSETS_URL + metaImage
       this.$ssrContext.siteName = siteName
       this.$ssrContext.favicon = favicon
@@ -70,8 +70,7 @@ const clientMetaInfoMixin = {
       document.head.querySelector(`meta[name=description]`).content = description
       document.head.querySelector(`meta[property='og:description']`).content = description
       document.head.querySelector(`meta[property='og:locale']`).content = locale
-      // document.head.querySelector(`meta[property='og:url']`).content = PROJECTS_BELONGS_MM.includes(project) ? MM_SITE_URL + metaUrl : READR_SITE_URL + metaUrl
-      document.head.querySelector(`meta[property='og:url']`).content = PROJECTS_BELONGS_MM.includes(project) ? MM_SITE_URL + metaUrl : `http://dev.readr.tw/project/${metaUrl}`
+      document.head.querySelector(`meta[property='og:url']`).content = PROJECTS_BELONGS_MM.includes(project) ? MM_SITE_URL + metaUrl : READR_SITE_URL + metaUrl
       document.head.querySelector(`meta[property='og:image']`).content = PROJECTS_BELONGS_MM.includes(project) ? MM_SITE_ASSETS_URL + metaImage : READR_SITE_ASSETS_URL + metaImage
       document.head.querySelector(`meta[property='og:site_name']`).content = siteName
       document.head.querySelector(`link[rel='apple-touch-icon']`).href = favicon
