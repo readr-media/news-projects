@@ -293,7 +293,7 @@ export default {
     position relative
     height 100vh
     &:not(:first-child)
-      background-color rgba(0,0,0,.8)
+      background-color rgba(0,0,0,.75)
     p
       position absolute
       top 50%
@@ -344,9 +344,10 @@ export default {
       flex 1
       display flex
       align-items center
-      color #165855
+      color #69d2cd
       text-decoration none
       font-weight 700
+      background-color #000
       transition background-color .5s, color .5s
       cursor pointer
       &:hover
@@ -365,7 +366,7 @@ export default {
           left 0
           width 66.6%
           height 4px
-          background-color #165855
+          background-color #69d2cd
       &.touch
         color #fff
         background-color rgba(228,0,127,.5)
@@ -459,6 +460,7 @@ export default {
           display inline
           margin 0
           color #69d2cd
+          text-shadow 1px 1px 2px rgba(0, 0, 0, 0.5)
         h1
           font-size 3.5rem
         h2
@@ -468,9 +470,12 @@ export default {
           margin 40px 0
           text-align left
           line-height 2
+          text-shadow 1px 1px 2px rgba(0, 0, 0, 0.5)
     .arrow
       display none
     .list
+      > .item
+        background-color transparent
       &--desktop
         display flex
         position fixed

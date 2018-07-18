@@ -630,7 +630,7 @@ export default {
       justify-content center
       align-items center
       height 90px
-      color #165855
+      color #69d2cd
       text-decoration none
       transition background-color .5s
       cursor pointer
@@ -650,7 +650,7 @@ export default {
           left 0
           width 66.6%
           height 4px
-          background-color #165855
+          background-color #69d2cd
       &.active
         color #fff
         background-color rgba(228,0,127,.5)
