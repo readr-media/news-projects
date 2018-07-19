@@ -10,19 +10,17 @@
     <section class="hotel-hostess__bg color" />
     <div class="heading--desktop">
       <div>
-        <h1>姐妹</h1>
-        <h2>——酒店小姐要副標</h2>
+        <h1>殺死那個酒店小姐</h1>
       </div>
-      <p>26歲那年，黛西留下丈夫和二個孩子在馬尼拉，展開在苗栗、高雄、杜拜、台北漂泊的生活，和同在異鄉的女工交往，也有了愛情的依靠。</p>
-      <div class="heading__arrow">
-        <span>滑動以繼續閱讀</span>
-        <img
-          src="/proj-assets/hotel-hostess/images/arrow.png"
-          alt=""
-          @click="$_hotelHostess_moveDown">
-      </div>
+      <p>47% 酒店小姐入行後變得憂鬱</p>
+      <p>51% 曾求助心理醫生</p>
+      <p>13% 至少自殺過一次</p>
+      <h3>為什麼酒店小姐會成為自殺高風險族群？</h3>
     </div>
-    <div class="list list--desktop">
+    <div
+      class="list list--desktop"
+      @mouseover="$_hotelHostess_handleMouseOver"
+      @mouseout="$_hotelHostess_handleMouseOut">
       <a
         href="/project/hotel-hostess-series/questionnaire"
         class="item"
@@ -55,8 +53,7 @@
     <article id="fullpage">
       <section class="section">
         <div class="heading">
-          <h1>姐妹</h1>
-          <h2>——酒店小姐要副標</h2>
+          <h1>殺死那個酒<br>店小姐</h1>
         </div>
         <div
           class="arrow"
@@ -69,7 +66,12 @@
       </section>
       <template v-if="viewportX < 900">
         <section class="section">
-          <p>26歲那年，黛西留下丈夫和二個孩子在馬尼拉，展開在苗栗、高雄、杜拜、台北漂泊的生活，和同在異鄉的女工交往，也有了愛情的依靠。</p>
+          <div class="heading--mobile">
+            <p>47% 酒店小姐入行後變得憂鬱</p>
+            <p>51% 曾求助心理醫生</p>
+            <p>13% 至少自殺過一次</p>
+            <h3>為什麼酒店小姐會成為自殺高風險族群？</h3>
+          </div>
         </section>
         <section class="section">
           <div class="list">
@@ -129,9 +131,6 @@
           </div>
         </section>
       </template>
-      <template v-else>
-        <section class="section" />
-      </template>
     </article>
     <template v-if="viewportX >= 900">
       <footer class="footer">
@@ -183,7 +182,7 @@ export default {
     const ogLocale = 'zh_TW';
 
     return {
-      title: '酒店小姐',
+      title: '殺死那個酒店小姐',
       description: '酒店小姐',
       locale: ogLocale,
       metaUrl,
@@ -220,6 +219,12 @@ export default {
       const top = this.$store.state.viewport[1] / 2 - e.pageY;
       document.querySelector('.hotel-hostess__bg.origin').style.transform = `translate(${-left / 100}px, ${-top / 100}px)`;
       document.querySelector('.hotel-hostess__bg.color').style.transform = `translate(${-left / 100}px, ${-top / 100}px)`;
+    },
+    $_hotelHostess_handleMouseOut() {
+      document.querySelector('.hotel-hostess').classList.remove('panning')
+    },
+    $_hotelHostess_handleMouseOver() {
+      document.querySelector('.hotel-hostess').classList.add('panning')
     },
     $_hotelHostess_handleTouchStart(e) {
       if (e.target.classList.contains('item')) {
@@ -294,25 +299,33 @@ export default {
     height 100vh
     &:not(:first-child)
       background-color rgba(0,0,0,.75)
-    p
+    .heading--mobile
       position absolute
       top 50%
       left 50%
       transform translate(-50%, -50%)
-      width 90%
+      width 80%
       margin 0
       color #fff
       text-align justify
       line-height 2
       font-weight 700
+      letter-spacing 1px
+      p
+        margin 0
+        & + p
+          margin-top .5em
+      h3
+        font-size 1.375rem
+        line-height 1.6
   .heading
     position relative
-    top 10%
+    top 50%
     color #69d2cd
     text-align center
     h1
       margin 0
-      font-size 1.8rem
+      font-size 3rem
       font-weight 700
     h2
       margin 10px 0 0
@@ -416,14 +429,6 @@ export default {
 
   @media (min-width: 900px)
     .hotel-hostess
-      &.panning
-        .heading--desktop
-          transform translate(40px,-50%)
-          text-align left
-          .heading__arrow
-            visibility hidden
-        .list--desktop
-          transform translate(0, -50%)
       &__bg
         top -10px
         left -10px
@@ -453,9 +458,9 @@ export default {
         top 60%
         left 0
         z-index 100
-        transform translate(calc(50vw - 50%), -50%)
+        transform translate(40px,-50%)
         width 50%
-        transition transform 1s
+        text-align left
         h1, h2
           display inline
           margin 0
@@ -466,11 +471,20 @@ export default {
         h2
           margin-left 15px
           font-size 2rem
+        h3
+          font-size 1.375rem
+          letter-spacing 1px
         p
-          margin 40px 0
+          margin 0
           text-align left
+          font-weight 700
           line-height 2
           text-shadow 1px 1px 2px rgba(0, 0, 0, 0.5)
+          letter-spacing 1px
+          & + p
+            margin-top .5em
+        p:first-of-type
+          margin-top 40px
     .arrow
       display none
     .list
@@ -482,11 +496,10 @@ export default {
         top 50%
         right 0
         z-index 100
-        transform translate(100%, -50%)
+        transform translate(0, -50%)
         width 260px
         height 360px
         padding 0
-        transition transform 1s
     .footer
       position fixed
       left 20px
