@@ -3,7 +3,9 @@ import projectList from './projectList'
 export const PROJECTS = projectList
 
 // GA
-export const READR_GA_ID = 'UA-118025678-1'
+export const READR_GA_ID = 'UA-122455444-1'
+
+export const READR_GA_ID_DEPRECATED = 'UA-118025678-1'
 
 export const MM_GA_ID = 'UA-83609754-1'
 
@@ -76,6 +78,18 @@ export const OLD_PROJECTS_SLUGS = [
 // include project url path name if we want project to use mirrormedia's meta and GA setting
 export const PROJECTS_BELONGS_MM = [
   'chenuen'
+]
+
+export const PROJECTS_USE_DEPRECATED_GA = [
+  'dollclaw',
+  'farmhouse',
+  'foreign-labour',
+  'foreign-labour-ii',
+  'foreign-labour-iii',
+  'foreign-labour-landing',
+  'marathon',
+  'newtype',
+  'president-promise',
 ]
 
 // include project url path name which need google map

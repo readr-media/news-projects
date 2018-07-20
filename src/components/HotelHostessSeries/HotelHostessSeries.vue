@@ -19,6 +19,7 @@
           :class="{ active: routeParams === 'foreword' }"
           href="/project/hotel-hostess-series/foreword"
           class="item"
+          @click="$_hotelHostess_handleClickGAEvent('go to foreword')"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
           <span>就像洋蔥</span>
@@ -27,6 +28,7 @@
           :class="{ active: routeParams === 'questionnaire' }"
           href="/project/hotel-hostess-series/questionnaire"
           class="item"
+          @click="$_hotelHostess_handleClickGAEvent('go to questionnaire')"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
           <span>小姐群像</span>
@@ -35,6 +37,7 @@
           :class="{ active: routeParams === 'emotional-labor' }"
           href="/project/hotel-hostess-series/emotional-labor"
           class="item"
+          @click="$_hotelHostess_handleClickGAEvent('go to emotional-labor')"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
           <span>爛牌人生</span>
@@ -43,6 +46,7 @@
           :class="{ active: routeParams === 'environment' }"
           href="/project/hotel-hostess-series/environment"
           class="item"
+          @click="$_hotelHostess_handleClickGAEvent('go to environment')"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
           <span>愛情麥當勞</span>
@@ -51,6 +55,7 @@
           :class="{ active: isCaseStories }"
           href="/project/hotel-hostess-series/case-stories"
           class="item"
+          @click="$_hotelHostess_handleClickGAEvent('go to case-stories')"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
           <span>姊妹</span>
@@ -140,17 +145,17 @@
         <h1>酒店小姐問卷調查結果大公開</h1>
         <p class="foreword">為了能更廣泛、深入地暸解酒店小姐的工作狀態與產業環境，我們在徵詢從業人員意見後，製作了一份問卷，在 2018 年 4 月至 7 月間，發放給曾經、或此刻仍現役的酒店小姐們，最後得到 55 份有效問卷，嘗試初探酒店小姐們的群象。</p>
         <p class="foreword">我們發現，酒店小姐因職業所伴隨的心理負擔出乎意料。</p>
-        <p class="foreword indent"><strong>47.2% 受訪者表示，入行後變得更容易憂鬱。</strong></p>
-        <p class="foreword indent"><strong>60% 受訪者表示容易覺得情緒疲累，工作以外時間討厭和人社交。</strong></p>
-        <p class="foreword indent"><strong>51% 受訪者曾經求助心理醫生。</strong></p>
-        <p class="foreword indent"><strong>21.7% 受訪者入行後曾動過輕生念頭。</strong></p>
-        <p class="foreword indent"><strong>12.7% 執行過至少一次自殺計畫。</strong></p>
+        <p class="foreword indent"><span class="highlight">47.2% 受訪者表示，入行後變得更容易憂鬱。</span></p>
+        <p class="foreword indent"><span class="highlight">60% 受訪者表示容易覺得情緒疲累，工作以外時間討厭和人社交。</span></p>
+        <p class="foreword indent"><span class="highlight">51% 受訪者曾經求助心理醫生。</span></p>
+        <p class="foreword indent"><span class="highlight">21.7% 受訪者入行後曾動過輕生念頭。</span></p>
+        <p class="foreword indent"><span class="highlight">12.7% 執行過至少一次自殺計畫。</span></p>
         <p class="foreword">這些數據讓我們發現，酒店工作背後可能有更多值得探究的問題。酒店小姐並不是只要陪客人喝酒唱歌，忍受一下「無傷大雅」的性騷擾，或是偶爾性交易「賺外快」，只要是女人「誰都可以做」的工作。</p>
         <p class="foreword">為了能更細緻地探究統計數據背後的深層原因，我們針對部分問卷填答者進行追蹤採訪，並訪問長期關注色情產業的學者、心理諮商師以及酒店經紀人，同時交叉比對我們的問卷統計數據，在《人生只剩一手爛牌》以及《愛情麥當勞》兩個章節中，進行更全面的討論。</p>
         <p class="foreword">在後續的章節中，我們將分別嘗試回答以下幾個問題：</p>
-        <p class="foreword indent"><strong>一、什麼樣的女性容易成為酒店小姐？進酒店工作只是為了賺錢嗎？</strong></p>
-        <p class="foreword indent"><strong>二、酒店工作中的哪些結構因素，容易導致小姐的精神壓力無法排解？</strong></p>
-        <p class="foreword indent"><strong>三、以上兩個因素，是否與酒店小姐成為高自殺風險族群有關？是否還有其他原因？</strong></p>
+        <p class="foreword indent"><span class="highlight">一、什麼樣的女性容易成為酒店小姐？進酒店工作只是為了賺錢嗎？</span></p>
+        <p class="foreword indent"><span class="highlight">二、酒店工作中的哪些結構因素，容易導致小姐的精神壓力無法排解？</span></p>
+        <p class="foreword indent"><span class="highlight">三、以上兩個因素，是否與酒店小姐成為高自殺風險族群有關？是否還有其他原因？</span></p>
         <p class="foreword">在進行下一步討論前，我們推薦各位可以先閱讀以下的完整問卷分析結果。在快速、概括地掌握酒店小姐的狀態後，也更能在後續討論中，理解她們的狀態。</p>
         <h2>基本背景資料</h2>
         <p class="indent">本問卷填答期間為 2018 年 4 月 18 日至 7 月 1 日，受訪者人數共 55人，平均年齡 24.9 歲，最低 18 歲，最高 44 歲，平均年資 25 個月， 工作範圍涵蓋便服、禮服、制服、日式酒店等。受訪者以禮服店工作者最大宗，佔 50.9 %，另外日式酒店也佔 20%、便禮店佔 23.6%。49% 受訪者擁有大專學歷，5.4% 擁有研究所學歷。54.5 % 受訪者目前是全職酒店工作者，其中 76.3% 每週工作 3~4 天以上。</p>
@@ -209,9 +214,9 @@
         <p class="foreword">「為什麼幹這行？」</p>
         <p class="foreword">這幾乎是多數人初識酒店小姐時，第一個會想問的問題。在我們得到的問卷結果中，確實多數答案都毫不意外地與「快速賺錢」、「缺錢」有關。<span class="highlight">76.3% 受訪者入行與快速賺錢、存錢有關，12.7 ％ 受訪者則主動提及因負債入行。</span>看起來，純粹就是為了錢。</p>
         <p class="foreword">然而，當我們進一步細讀受訪者的回答時，發現她們其實還傳達了錢以外的訊息。例如以下幾則：</p>
-        <p class="foreword indent"><strong>「普通工作薪水少到付完房租就得吃土了，只有這個工作能維持『剛剛好有點質量』的生活，還能存錢，不需要像那些低薪企業還要你有幾年經驗……」－問卷編號 023</strong></p>
-        <p class="foreword indent"><strong>「缺急錢又不想借錢，加上白天的工作是薪水極低的自由業。」－問卷編號編號 014</strong></p>
-        <p class="foreword indent"><strong>「都是投入勞力與時間，不如挑戰一個能夠在最短時間刷出高額報酬的工作。」－問卷編號編號 005</strong></p>
+        <p class="foreword"><strong>「普通工作薪水少到付完房租就得吃土了，只有這個工作能維持『剛剛好有點質量』的生活，還能存錢，不需要像那些低薪企業還要你有幾年經驗……」－問卷編號 023</strong></p>
+        <p class="foreword"><strong>「缺急錢又不想借錢，加上白天的工作是薪水極低的自由業。」－問卷編號編號 014</strong></p>
+        <p class="foreword"><strong>「都是投入勞力與時間，不如挑戰一個能夠在最短時間刷出高額報酬的工作。」－問卷編號編號 005</strong></p>
         <p class="foreword">此外，好幾位問卷填答者也提到，踏入酒店是因為找不到其他工作。</p>
         <p class="foreword">她們的回答其實反映了年輕族群因為缺乏人力資本，而容易面臨的失業、低薪問題。除此之外，<span class="highlight">20% 受訪者至今仍在償還學貸，而她們的年齡幾乎都只在 20 歲上下。在同齡族群普遍仰賴家庭提供教育、經濟奧援的狀態下，這代表的是她們家庭經濟狀況不佳，還是另有原因？</span></p>
         <p class="foreword">酒店陪侍工作不能跟性工作畫上等號，但長期針對性產業進行研究的中山大學社會系副教授陳美華認為，兩者有高度的相似性。。陳美華指出，未成年者進入性產業，大部分是因為得不到家庭在經濟、精神上的支持。父母威權管教，或是親子關係疏離，會讓年輕族群更傾向尋求同儕支持與經濟獨立。</p>
@@ -541,7 +546,8 @@
       <a
         v-show="routeParams !== 'case-stories-1'"
         href="/project/hotel-hostess-series/case-stories-1"
-        class="case">
+        class="case"
+        @click="$_hotelHostess_handleClickGAEvent('go to case-stories-1')">
         <h2>米兒<span>繼讀閱讀 >></span></h2>
         <h3>23 歲，禮服 / 禮制店資歷 2 年，現役中。</h3>
         <p>米兒為了幾萬塊的負債，休學踏入酒店。同學們形容她是個天生的 Bitch，所以她幹這行如魚得水，整天周旋於不同的男人間，把他們當工具人使喚。她笑著說，很喜歡和姐妹們團隊作戰，騙男人錢的感覺。米兒看來自在而快樂，信誓旦旦地說，遲早要出一本書，教姐妹們騙男人的技巧。</p>
@@ -550,7 +556,8 @@
       <a
         v-show="routeParams !== 'case-stories-2'"
         href="/project/hotel-hostess-series/case-stories-2"
-        class="case">
+        class="case"
+        @click="$_hotelHostess_handleClickGAEvent('go to case-stories-2')">
         <h2>小紫<span>繼讀閱讀 >></span></h2>
         <h3>29 歲，禮服店資歷 14 個月、按摩店 2 個月，現役中。</h3>
         <p>「一直以來我都在演戲，演好孩子和乖學生給爸媽看，但他們都不真的了解我的狀態。」<br>然而，演得了好孩子，小紫卻演不了好小姐。她說自己是個超失敗的公關按摩妹，在色情產業中犯盡錯誤，經歷被強暴、白嫖等等遭遇，卻也沒因此成為成功的小姐，還笑說自己應該出書談如何被白嫖。以前她覺得進酒店需要有其他人格，但現在她覺得努力當自己反而更好。</p>
@@ -559,7 +566,8 @@
       <a
         v-show="routeParams !== 'case-stories-3'"
         href="/project/hotel-hostess-series/case-stories-3"
-        class="case">
+        class="case"
+        @click="$_hotelHostess_handleClickGAEvent('go to case-stories-3')">
         <h2>小花<span>繼讀閱讀 >></span></h2>
         <h3>22 歲，禮服店資歷 1 年半，現役中。</h3>
         <p>小花念的是藝術大學的複合媒材處，做的是裝置藝術。她說入行一部分原因，是創作太花錢，又不希望被家裡干涉，所以進酒店賺自己的創作經費。她說：「其實藝術相關科系蠻多人進這行，因為畫畫很需要畫材，有些人家裡可以支持，但通常會希望小孩走傳統創作，假如你想走裝置藝術，家裡不一定會支持。」</p>
@@ -568,7 +576,8 @@
       <a
         v-show="routeParams !== 'case-stories-4'"
         href="/project/hotel-hostess-series/case-stories-4"
-        class="case">
+        class="case"
+        @click="$_hotelHostess_handleClickGAEvent('go to case-stories-4')">
         <h2>K<span>繼讀閱讀 >></span></h2>
         <h3>26 歲，便服 / 便禮 / 禮服 / 鋼琴酒吧資歷 4 年，現為寵物美容師。</h3>
         <p>K 在入行前就曾求助心理醫生，但她說，酒店工作使她的躁鬱症變得更加嚴重。K 曾將自己在酒店賺來的錢，都拿去資助當時的男友圓夢，而男友在她工作初期時，確實也非常體貼。然而，隨著戀情轉淡，男友變得越來越無法體諒她的工作，分手時甚至責備她說：<strong>「妳就是因為價值觀偏差，才去當酒店小姐。」</strong>分手後，K 自殺，最後幸運地活了下來。然而這並不是她在酒店生涯唯一一次自殺。</p>
@@ -577,7 +586,8 @@
       <a
         v-show="routeParams !== 'case-stories-5'"
         href="/project/hotel-hostess-series/case-stories-5"
-        class="case">
+        class="case"
+        @click="$_hotelHostess_handleClickGAEvent('go to case-stories-5')">
         <h2>拉拉<span>繼讀閱讀 >></span></h2>
         <h3>26 歲，制/禮服店資歷兩年，現役中。</h3>
         <p>拉拉經常自殺。入行前她為了生活而接受人體實驗，錢卻被只會上網打筆戰的廢物男友花光，她一氣之下上吊。剛被好友騙入行時，她在酒店包廂被客人強暴，回家後把身邊所有藥吃光，不想再活。入行後她每天熬夜喝酒，脫衣幫男人打手槍，結果錢還是被男友花光，這次她選擇跳樓。</p>
@@ -586,7 +596,8 @@
       <a
         v-show="routeParams !== 'case-stories-6'"
         href="/project/hotel-hostess-series/case-stories-6"
-        class="case">
+        class="case"
+        @click="$_hotelHostess_handleClickGAEvent('go to case-stories-6')">
         <h2>冰女王<span>繼讀閱讀 >></span></h2>
         <h3>23 歲，禮制店 / 便禮店資歷 3 年， SM 女王現役中。</h3>
         <p>「長得漂亮做什麼都可以。」<br>冰女王說自己進酒店前又胖又醜，入行後發現其他小姐都在坐檯，自己只能待在休息室浪費時間，因此發奮減肥變美，同時將自己熱情又溫暖的本性掩藏起來，化身為冰冷高傲的女王身份，走踏酒店。她發現，這一套策略在酒店中是有效的。離開酒店後的她，現在是名 SM 女王，從過去服務男人的女僕，搖身一變成為奴役男人的主人</p>
@@ -597,19 +608,22 @@
       <a
         :href="`https://www.facebook.com/share.php?u=${pageUrl}`"
         class="item"
-        target="_blank">
+        target="_blank"
+        @click="$_hotelHostess_handleClickGAEvent('share to fb')">
         <img src="/proj-assets/hotel-hostess/images/share-fb.png">
       </a>
       <a
         :href="`https://line.me/R/msg/text/?${pageUrl}`"
         class="item"
-        target="_blank">
+        target="_blank"
+        @click="$_hotelHostess_handleClickGAEvent('share to line')">
         <img src="/proj-assets/hotel-hostess/images/share-line.png">
       </a>
       <a
         :href="`https://plus.google.com/share?url=${pageUrl}`"
         class="item"
-        target="_blank">
+        target="_blank"
+        @click="$_hotelHostess_handleClickGAEvent('share to gplus')">
         <img src="/proj-assets/hotel-hostess/images/share-gplus.png">
       </a>
     </footer>
@@ -635,8 +649,8 @@ export default {
     const ogLocale = 'zh_TW';
 
     return {
-      title: '酒店小姐',
-      description: '酒店小姐',
+      title: '殺死那個酒店小姐',
+      description: '47% 酒店小姐入行後變得憂鬱、51% 曾求助心理醫生、13% 至少自殺過一次。為什麼酒店小姐會成為自殺高風險族群？',
       locale: ogLocale,
       metaUrl,
       metaImage,
@@ -681,8 +695,12 @@ export default {
     // if (document.querySelector('.heading')) {
     //   document.querySelector('.heading').classList.remove('blur')
     // }
+    ga('send', 'pageview');
   },
   methods: {
+    $_hotelHostess_handleClickGAEvent (label) {
+      ga('send', 'event', 'projects', 'click', label, { nonInteraction: false })
+    },
     $_hotelHostess_handleTouchStart(e) {
       if (e.target.classList.contains('item')) {
         e.target.classList.add('touch');
@@ -716,7 +734,7 @@ export default {
       height 90vh
   &.text
     .heading
-      height 60vh
+      height 35vh
       p
         color #fff
         &::before
@@ -753,7 +771,7 @@ export default {
       display flex
       justify-content center
       align-items center
-      height 90px
+      height 80px
       color #69d2cd
       font-weight 700
       font-family "source-han-serif-tc", serif
@@ -801,13 +819,13 @@ export default {
       background-image url(/proj-assets/hotel-hostess/images/bg-emotional-labor.jpg)
     > div
       position absolute
-      left 10%
-      right 10%
+      left 25px
+      right 25px
       bottom 30px
     > button
       position fixed
-      top 30px
-      right 20px
+      top 25px
+      right 15px
       z-index 100
       border none
       cursor pointer
@@ -831,7 +849,7 @@ export default {
   .story
     position relative
     z-index 10
-    padding 80px 10% 0
+    padding 80px 25px 0
     color #fff
     text-align justify
     background-color #1f1f20
@@ -856,13 +874,15 @@ export default {
       font-weight 500
       font-family "source-han-serif-tc", serif
       letter-spacing 1.5px
-      strong
-        color #e4007f
+      &.indent
         font-size 1.3125rem
+      strong
         font-weight 700
         box-shadow none
       .highlight
+        color #e4007f
         font-weight 700
+        box-shadow none
       &:first-of-type
         position relative
         &::before
@@ -892,20 +912,21 @@ export default {
         width 125%
         margin 20px 0 40px
     .alert
+      margin-top 20px
       p
         color #59afab 
       p + p
-        margin 1em 0 0
+        margin .5em 0 0
       .highlight
         color #fff
     
   .btn
-    padding 5px
+    padding 10px
     background-color transparent
     > span
       display block
-      width 20px
-      height 2px
+      width 30px
+      height 3px
       margin 0 auto
       background-color #165855
       & + span
@@ -917,7 +938,7 @@ export default {
       text-decoration none
     .case
       display block
-      margin-top 20px
+      margin-top 30px
       cursor pointer
       text-decoration none
       &:hover
@@ -954,6 +975,8 @@ export default {
         margin 15px 0 0
         padding 10px 20px
         color #e4007f
+        text-align justify
+        line-height 1.8
         background-color #000
       > span
         display none
@@ -976,7 +999,7 @@ export default {
       img
         width 36px
   .comment
-    padding 0 10% 50px 10%
+    padding 0 25px 50px
 
 @media (min-width: 768px)
   .hotel-hostess-series
@@ -1025,8 +1048,11 @@ export default {
         width 80%
         padding 0 20% 50px 10%
     .menu
+      display flex
+      align-items center
       right 0
       width 20%
+      padding-top 0
       transform none
     .heading
       position fixed
