@@ -1,5 +1,5 @@
-import { PROJECTS, PROJECTS_BELONGS_MM, READR_GA_ID, MM_GA_ID } from '../constants'
-import _ from 'lodash'
+import { PROJECTS, PROJECTS_BELONGS_MM, PROJECTS_USE_DEPRECATED_GA, READR_GA_ID, READR_GA_ID_DEPRECATED, MM_GA_ID } from '../constants'
+import { get } from 'lodash'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -17,14 +17,19 @@ export function createRouter () {
     routes: [
       {
         path: '/project/:project/:params?', component: Project, beforeEnter: (to, from, next) => {
-          if (!PROJECTS[ _.get(to, [ 'params', 'project' ]) ]) {
+          if (!PROJECTS[ get(to, [ 'params', 'project' ]) ]) {
             const e = new Error()
             e.massage = 'Page Not Found'
             e.code = '404'
             throw e
           } else {
             if (process.env.VUE_ENV === 'client') {
-              const GAID = PROJECTS_BELONGS_MM.includes(_.get(to, [ 'params', 'project' ])) ? MM_GA_ID : READR_GA_ID
+              let GAID = READR_GA_ID
+              if (PROJECTS_BELONGS_MM.includes(get(to, 'params.project'))) {
+                GAID = MM_GA_ID
+              } else if (PROJECTS_USE_DEPRECATED_GA.includes(get(to, 'params.project'))) {
+                GAID = READR_GA_ID_DEPRECATED
+              }
               window.ga('create', GAID, 'auto')
             }
             next()

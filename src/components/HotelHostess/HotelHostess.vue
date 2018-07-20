@@ -8,6 +8,14 @@
       bg-image="/proj-assets/hotel-hostess/images/readr-logo.png" />
     <section class="hotel-hostess__bg origin" />
     <section class="hotel-hostess__bg color" />
+    <div class="credit mobile">
+      <p>文字、攝影：鐘聖雄</p>
+      <p>Model：山貓</p>
+      <p>網頁：HY Tan</p>
+      <p>設計：許玲瑋</p>
+      <p>特別感謝：妹子與酒</p>
+      <p>、席耶娜、王世倫</p>
+    </div>
     <div class="heading--desktop">
       <div>
         <h1>殺死那個酒店小姐</h1>
@@ -24,6 +32,7 @@
       <a
         href="/project/hotel-hostess-series/foreword"
         class="item"
+        @click="$_hotelHostess_handleClickGAEvent('go to foreword')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>就像洋蔥</span>
@@ -31,6 +40,7 @@
       <a
         href="/project/hotel-hostess-series/questionnaire"
         class="item"
+        @click="$_hotelHostess_handleClickGAEvent('go to questionnaire')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>小姐群像</span>
@@ -38,6 +48,7 @@
       <a
         href="/project/hotel-hostess-series/emotional-labor"
         class="item"
+        @click="$_hotelHostess_handleClickGAEvent('go to emotional-labor')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>爛牌人生</span>
@@ -45,6 +56,7 @@
       <a
         href="/project/hotel-hostess-series/environment"
         class="item"
+        @click="$_hotelHostess_handleClickGAEvent('go to environment')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>愛情麥當勞</span>
@@ -52,6 +64,7 @@
       <a
         href="/project/hotel-hostess-series/case-stories"
         class="item"
+        @click="$_hotelHostess_handleClickGAEvent('go to case-stories')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>姊妹</span>
@@ -60,7 +73,8 @@
     <article id="fullpage">
       <section class="section">
         <div class="heading">
-          <h1>殺死那個酒<br>店小姐</h1>
+          <h2>殺死那個</h2>
+          <h1>酒店小姐</h1>
         </div>
         <div
           class="arrow"
@@ -85,6 +99,7 @@
             <a
               href="/project/hotel-hostess-series/foreword"
               class="item"
+              @click="$_hotelHostess_handleClickGAEvent('go to foreword')"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
               <span>就像洋蔥</span>
@@ -92,13 +107,15 @@
             <a
               href="/project/hotel-hostess-series/questionnaire"
               class="item"
+              @click="$_hotelHostess_handleClickGAEvent('go to questionnaire')"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
               <span>小姐群像</span>
             </a>
             <a
-              href=""
+              href="/project/hotel-hostess-series/emotional-labor"
               class="item"
+              @click="$_hotelHostess_handleClickGAEvent('go to emotional-labor')"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
               <span>爛牌人生</span>
@@ -106,6 +123,7 @@
             <a
               href="/project/hotel-hostess-series/environment"
               class="item"
+              @click="$_hotelHostess_handleClickGAEvent('go to environment')"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
               <span>愛情麥當勞</span>
@@ -113,6 +131,7 @@
             <a
               href="/project/hotel-hostess-series/case-stories"
               class="item"
+              @click="$_hotelHostess_handleClickGAEvent('go to case-stories')"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
               <span>姊妹</span>
@@ -127,19 +146,22 @@
                 <a
                   :href="`https://www.facebook.com/share.php?u=${pageUrl}`"
                   class="item"
-                  target="_blank">
+                  target="_blank"
+                  @click="$_hotelHostess_handleClickGAEvent('share to fb')">
                   <img src="/proj-assets/hotel-hostess/images/share-fb.png">
                 </a>
                 <a
                   :href="`https://line.me/R/msg/text/?${pageUrl}`"
                   class="item"
-                  target="_blank">
+                  target="_blank"
+                  @click="$_hotelHostess_handleClickGAEvent('share to line')">
                   <img src="/proj-assets/hotel-hostess/images/share-line.png">
                 </a>
                 <a
                   :href="`https://plus.google.com/share?url=${pageUrl}`"
                   class="item"
-                  target="_blank">
+                  target="_blank"
+                  @click="$_hotelHostess_handleClickGAEvent('share to gplus')">
                   <img src="/proj-assets/hotel-hostess/images/share-gplus.png">
                 </a>
               </div>
@@ -154,19 +176,22 @@
           <a
             :href="`https://www.facebook.com/share.php?u=${pageUrl}`"
             class="item"
-            target="_blank">
+            target="_blank"
+            @click="$_hotelHostess_handleClickGAEvent('share to fb')">
             <img src="/proj-assets/hotel-hostess/images/share-fb.png">
           </a>
           <a
             :href="`https://line.me/R/msg/text/?${pageUrl}`"
             class="item"
-            target="_blank">
+            target="_blank"
+            @click="$_hotelHostess_handleClickGAEvent('share to line')">
             <img src="/proj-assets/hotel-hostess/images/share-line.png">
           </a>
           <a
             :href="`https://plus.google.com/share?url=${pageUrl}`"
             class="item"
-            target="_blank">
+            target="_blank"
+            @click="$_hotelHostess_handleClickGAEvent('share to gplus')">
             <img src="/proj-assets/hotel-hostess/images/share-gplus.png">
           </a>
         </div>
@@ -225,11 +250,15 @@ export default {
       this.$_hotelHostess_initFullPage();
     });
     window.addEventListener('mousemove', this.$_hotelHostess_handleMouseMove);
+    ga('send', 'pageview');
   },
   beforeDestroy() {
     window.removeEventListener('mousemove', this.$_hotelHostess_handleMouseMove);
   },
   methods: {
+    $_hotelHostess_handleClickGAEvent (label) {
+      ga('send', 'event', 'projects', 'click', label, { nonInteraction: false })
+    },
     $_hotelHostess_handleMouseMove(e) {
       const left = this.$store.state.viewport[0] / 2 - e.pageX;
       const top = this.$store.state.viewport[1] / 2 - e.pageY;
@@ -288,6 +317,10 @@ export default {
       .hotel-hostess__bg.color
         opacity 0
         transition opacity 1s
+      .credit.mobile
+        opacity 0
+        visibility hidden
+        transition opacity .5s, visibility .5s .5s
     article
       position relative
       z-index 10
@@ -313,25 +346,27 @@ export default {
   .section
     position relative
     height 100vh
-    &:not(:first-child)
-      background-color rgba(0,0,0,.75)
     .heading--mobile
       position absolute
       top 50%
       left 50%
       transform translate(-50%, -50%)
-      width 80%
+      width 85%
       margin 0
+      padding 30px 20px
       color #fff
       text-align justify
       line-height 2
       font-weight 500
       letter-spacing 1px
+      background-color rgba(0,0,0,.75)
+      border-radius 5px
       p
         margin 0
         & + p
           margin-top .5em
       h3
+        margin 1em 0 0
         font-size 1.375rem
         font-weight 500
         line-height 1.6
@@ -340,14 +375,15 @@ export default {
     top 50%
     color #69d2cd
     text-align center
+    letter-spacing 1px
     h1
-      margin 0
-      font-size 3rem
+      margin 10px 0 0
+      font-size 3.5rem
       font-weight 700
       letter-spacing 1px
     h2
-      margin 10px 0 0
-      font-size 1.4rem
+      margin 0
+      font-size 2.25rem
     &--desktop
       display none
   .arrow
@@ -358,6 +394,7 @@ export default {
     bottom 20px
     left 50%
     transform translateX(-50%)
+    color #cdcccc
     img
       display block
       width 30px
@@ -368,7 +405,7 @@ export default {
     display flex
     flex-direction column
     height 100%
-    padding 25% 10% 10%
+    padding 90px 10% 5%
     &--desktop
       display none
     > .item
@@ -378,7 +415,7 @@ export default {
       color #69d2cd
       text-decoration none
       font-weight 700
-      background-color #000
+      background-color rgba(0, 0, 0, .75)
       transition background-color .5s, color .5s
       cursor pointer
       &:hover
@@ -405,21 +442,35 @@ export default {
         span
           &::before
             background-color #fff
-
+  .share
+    display flex
+    justify-content center
+    .item
+      margin 0
+      font-size 0
+      & + .item
+        margin-left 20px
+      img
+        width 36px
+  .credit
+    position fixed
+    top 20px
+    right 20px
+    margin-top 0
+    text-align right
+    opacity 1
+    transition opacity 1s, visibility 0s
+    p
+      margin 0
+      color #cdcccc
+      font-size .75rem
+      line-height 1.67
+      font-weight 700
+      text-shadow 1px 1px 2px rgba(0, 0, 0, 0.3)
   .footer
     margin 20px 0 0
-    .share
-      display flex
-      justify-content center
-      margin-top 20px
-      .item
-        margin 0
-        font-size 0
-        & + .item
-          margin-left 20px
-        img
-          width 36px
     .credit
+      display none
       text-align center
       p
         margin 0 auto
@@ -537,6 +588,8 @@ export default {
         width 260px
         height 400px
         padding 0
+    .credit.mobile
+      display none
     .footer
       position fixed
       left 20px
@@ -546,8 +599,9 @@ export default {
       .share
         justify-content flex-start
       .credit
+        display block
+        position static
         margin-top 20px
-        color #165855
         font-weight 700
         p
           font-size .875rem
