@@ -22,32 +22,39 @@
       @mouseover="$_hotelHostess_handleMouseOver"
       @mouseout="$_hotelHostess_handleMouseOut">
       <a
+        href="/project/hotel-hostess-series/foreword"
+        class="item"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
+        <span>就像洋蔥</span>
+      </a>
+      <a
         href="/project/hotel-hostess-series/questionnaire"
         class="item"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
-        <span>問卷結果</span>
+        <span>小姐群像</span>
       </a>
       <a
-        href=""
+        href="/project/hotel-hostess-series/emotional-labor"
         class="item"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
-        <span>情緒勞動</span>
+        <span>爛牌人生</span>
       </a>
       <a
         href="/project/hotel-hostess-series/environment"
         class="item"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
-        <span>工作環境</span>
+        <span>愛情麥當勞</span>
       </a>
       <a
         href="/project/hotel-hostess-series/case-stories"
         class="item"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
-        <span>個案分享</span>
+        <span>姊妹</span>
       </a>
     </div>
     <article id="fullpage">
@@ -76,34 +83,46 @@
         <section class="section">
           <div class="list">
             <a
+              href="/project/hotel-hostess-series/foreword"
+              class="item"
+              @touchstart="$_hotelHostess_handleTouchStart"
+              @touchend="$_hotelHostess_handleTouchEnd">
+              <span>就像洋蔥</span>
+            </a>
+            <a
               href="/project/hotel-hostess-series/questionnaire"
               class="item"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
-              <span>問卷結果</span>
+              <span>小姐群像</span>
             </a>
             <a
               href=""
               class="item"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
-              <span>情緒勞動</span>
+              <span>爛牌人生</span>
             </a>
             <a
               href="/project/hotel-hostess-series/environment"
               class="item"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
-              <span>工作環境</span>
+              <span>愛情麥當勞</span>
             </a>
             <a
               href="/project/hotel-hostess-series/case-stories"
               class="item"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
-              <span>個案分享</span>
+              <span>姊妹</span>
             </a>
             <footer class="footer">
+              <div class="credit">
+                <p>文字、攝影：鐘聖雄<span></span>Model：山貓</p>
+                <p>網頁：HY Tan<span></span>設計：許玲瑋</p>
+                <p>特別感謝：妹子與酒、席耶娜、王世倫</p>
+              </div>
               <div class="share">
                 <a
                   :href="`https://www.facebook.com/share.php?u=${pageUrl}`"
@@ -123,9 +142,6 @@
                   target="_blank">
                   <img src="/proj-assets/hotel-hostess/images/share-gplus.png">
                 </a>
-              </div>
-              <div class="credit">
-                credit credit credit
               </div>
             </footer>
           </div>
@@ -155,7 +171,7 @@
           </a>
         </div>
         <div class="credit">
-          credit credit credit
+          <p>文字、攝影：鐘聖雄<span></span>網頁：HY Tan<span></span>設計：許玲瑋<span></span>Model：山貓<span></span>特別感謝：妹子與酒、席耶娜、王世倫</p>
         </div>
       </footer>
     </template>
@@ -183,7 +199,7 @@ export default {
 
     return {
       title: '殺死那個酒店小姐',
-      description: '酒店小姐',
+      description: '47% 酒店小姐入行後變得憂鬱、51% 曾求助心理醫生、13% 至少自殺過一次。為什麼酒店小姐會成為自殺高風險族群？',
       locale: ogLocale,
       metaUrl,
       metaImage,
@@ -309,7 +325,7 @@ export default {
       color #fff
       text-align justify
       line-height 2
-      font-weight 700
+      font-weight 500
       letter-spacing 1px
       p
         margin 0
@@ -317,6 +333,7 @@ export default {
           margin-top .5em
       h3
         font-size 1.375rem
+        font-weight 500
         line-height 1.6
   .heading
     position relative
@@ -327,6 +344,7 @@ export default {
       margin 0
       font-size 3rem
       font-weight 700
+      letter-spacing 1px
     h2
       margin 10px 0 0
       font-size 1.4rem
@@ -350,7 +368,7 @@ export default {
     display flex
     flex-direction column
     height 100%
-    padding 30% 10% 10%
+    padding 25% 10% 10%
     &--desktop
       display none
     > .item
@@ -377,7 +395,7 @@ export default {
           position absolute
           top -20px
           left 0
-          width 66.6%
+          width 40px
           height 4px
           background-color #69d2cd
       &.touch
@@ -389,10 +407,11 @@ export default {
             background-color #fff
 
   .footer
-    margin 40px 0 0
+    margin 20px 0 0
     .share
       display flex
       justify-content center
+      margin-top 20px
       .item
         margin 0
         font-size 0
@@ -401,7 +420,14 @@ export default {
         img
           width 36px
     .credit
-      margin-top 20px
+      text-align center
+      p
+        margin 0 auto
+        font-size .8rem
+        span
+          margin-left 10px
+        & + p
+          margin-top .5em
 
   @keyframes arrow {
     from {
@@ -416,16 +442,26 @@ export default {
     .hotel-hostess
       &__bg
         background-position 88% 50%
+    .heading
+      width 70%
+      margin 0 auto
+      h1
+        font-size 5rem
     .arrow
       bottom 40px
     .section
       p
         width 60%
+      .heading--mobile
+        width 60%
     .list
-      padding 30% 20% 20%
+      padding 25% 20% 15%
     .footer
+      margin-top 40px
       .credit
-        margin-top 40px
+        p
+          font-size 1rem
+
 
   @media (min-width: 900px)
     .hotel-hostess
@@ -455,7 +491,7 @@ export default {
       &--desktop
         display block
         position fixed
-        top 60%
+        top 50%
         left 0
         z-index 100
         transform translate(40px,-50%)
@@ -473,11 +509,12 @@ export default {
           font-size 2rem
         h3
           font-size 1.375rem
+          font-weight 500
           letter-spacing 1px
         p
           margin 0
           text-align left
-          font-weight 700
+          font-weight 500
           line-height 2
           text-shadow 1px 1px 2px rgba(0, 0, 0, 0.5)
           letter-spacing 1px
@@ -498,7 +535,7 @@ export default {
         z-index 100
         transform translate(0, -50%)
         width 260px
-        height 360px
+        height 400px
         padding 0
     .footer
       position fixed
@@ -512,4 +549,6 @@ export default {
         margin-top 20px
         color #165855
         font-weight 700
+        p
+          font-size .875rem
 </style>
