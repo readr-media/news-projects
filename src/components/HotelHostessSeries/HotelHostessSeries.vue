@@ -22,7 +22,7 @@
           @click="$_hotelHostess_handleClickGAEvent('go to foreword')"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
-          <span>就像洋蔥</span>
+          <span>一、就像洋蔥</span>
         </a>
         <a
           :class="{ active: routeParams === 'questionnaire' }"
@@ -31,7 +31,7 @@
           @click="$_hotelHostess_handleClickGAEvent('go to questionnaire')"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
-          <span>小姐群像</span>
+          <span>二、小姐群像</span>
         </a>
         <a
           :class="{ active: routeParams === 'emotional-labor' }"
@@ -40,7 +40,7 @@
           @click="$_hotelHostess_handleClickGAEvent('go to emotional-labor')"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
-          <span>爛牌人生</span>
+          <span>三、爛牌人生</span>
         </a>
         <a
           :class="{ active: routeParams === 'environment' }"
@@ -49,7 +49,7 @@
           @click="$_hotelHostess_handleClickGAEvent('go to environment')"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
-          <span>愛情麥當勞</span>
+          <span>四、愛情麥當勞</span>
         </a>
         <a
           :class="{ active: isCaseStories }"
@@ -58,7 +58,7 @@
           @click="$_hotelHostess_handleClickGAEvent('go to case-stories')"
           @touchstart="$_hotelHostess_handleTouchStart"
           @touchend="$_hotelHostess_handleTouchEnd">
-          <span>姊妹</span>
+          <span>五、姐妹</span>
         </a>
       </div>
     </aside>
@@ -70,10 +70,10 @@
           <h1>就像洋蔥</h1>
         </template>
         <template v-else-if="routeParams === 'questionnaire'">
-          <h1>酒店小姐問卷調查結果大公開</h1>
+          <h1>小姐群像</h1>
         </template>
         <template v-else-if="routeParams === 'emotional-labor'">
-          <h1>人生只剩一手爛牌</h1>
+          <h1>爛牌人生</h1>
         </template>
         <template v-else-if="routeParams === 'environment'">
           <h1>愛情麥當勞</h1>
@@ -95,7 +95,7 @@
         </template>
         <template v-else-if="routeParams === 'case-stories-4'">
           <p>姐妹</p>
-          <h1>山貓</h1>
+          <h1>K</h1>
         </template>
         <template v-else-if="routeParams === 'case-stories-5'">
           <p>姐妹</p>
@@ -140,7 +140,7 @@
         <p class="indent">這個專題期待告訴讀者的，不是那種貼上各種不同標籤就搞定的酒店肥皂劇。我們嘗試述說一群有層次的酒店小姐的故事；關於她們如何在這個社會與產業環境下，有層次地成為小姐、有層次地滿足男人的需求；以及，她們如何有層次地成為自殺的高風險族群。</p>
       </template>
       <template v-else-if="routeParams === 'questionnaire'">
-        <h1>酒店小姐問卷調查結果大公開</h1>
+        <h1>小姐群像</h1>
         <p class="foreword">為了能更廣泛、深入地暸解酒店小姐的工作狀態與產業環境，我們在徵詢從業人員意見後，製作了一份問卷，在 2018 年 4 月至 7 月間，發放給曾經、或此刻仍現役的酒店小姐們，最後得到 55 份有效問卷，嘗試初探酒店小姐們的群象。</p>
         <p class="foreword">我們發現，酒店小姐因職業所伴隨的心理負擔出乎意料。</p>
         <p class="foreword indent"><span class="highlight">47.2% 受訪者表示，入行後變得更容易憂鬱。</span></p>
@@ -158,7 +158,7 @@
         <h2>基本背景資料</h2>
         <p class="indent">本問卷填答期間為 2018 年 4 月 18 日至 7 月 1 日，受訪者人數共 55人，平均年齡 24.9 歲，最低 18 歲，最高 44 歲，平均年資 25 個月， 工作範圍涵蓋便服、禮服、制服、日式酒店等。受訪者以禮服店工作者最大宗，佔 50.9 %，另外日式酒店也佔 20%、便禮店佔 23.6%。49% 受訪者擁有大專學歷，5.4% 擁有研究所學歷。54.5 % 受訪者目前是全職酒店工作者，其中 76.3% 每週工作 3~4 天以上。</p>
         <div class="world-cloud indent">
-          <span>工作收穫</span>
+          <span>酒店工作為小姐帶來的收穫</span>
           <div data-wordart-src="//cdn.wordart.com/json/nhxbql16xn9u"></div>
         </div>
         <p class="indent">在性向認同上，僅有 58.1% 受訪者認為自己是異性戀，並有高達 34.5% 認為自己是雙性戀、5.4% 認為自己是戀物者、疑性戀、泛性戀；選答同性戀者僅 1.8%。</p>
@@ -173,30 +173,30 @@
         <h2>小姐對職場的感想</h2>
         <p class="indent">大約有<strong>41.7% 受訪者認為她們的客人有超過一半是「奧客」。</strong>回答「奧客很少」或「沒有那種事，客人都很好」的受訪者也有 21.8%，但幾乎都是在日式酒店、日式酒吧工作的小姐。在被問及酒店業容易遇上的狀況時，40% 受訪者主動提及「性騷擾」。</p>
         <div class="world-cloud indent">
-          <span>酒店工作容易面臨狀況</span>
+          <span>小姐在酒店中容易面臨的狀況</span>
           <div data-wordart-src="//cdn.wordart.com/json/6siqcdmj6ojs"></div>
         </div>
         <p class="indent"><strong>45.4% 受訪者因為這份工作而變得比較討厭男性，34.5% 比入行前更易怒。</strong></p>
         <div class="world-cloud indent">
-          <span>工作負面影響</span>
+          <span>酒店工作為小姐帶來的負面影響</span>
           <div data-wordart-src="//cdn.wordart.com/json/3lkbqg3in3am"></div>
         </div>
         <h2>酒店工作的生理負擔</h2>
         <p class="indent">大約有 54.5% 的受訪者，「經常」或「大約一半機率」會在上班日喝醉。<br>在被問及酒店業容易遇上的狀況時， 23.6% 受訪者主動提及「喝醉失憶」、「斷片」等問題。<br>在被問及「這份工作為您帶來的負面影響是什麼？」時，約 36.3% 受訪者主動提及健康問題。<br>令，在被問及入行後健康狀況是否出現變化，67.2% 受訪者傳達了健康下滑的訊息。</p>
         <div class="world-cloud indent">
-          <span>健康負面影響</span>
+          <span>酒店工作的健康負面影響</span>
           <div data-wordart-src="//cdn.wordart.com/json/z8kv2y0wbfqy"></div>
         </div>
         <p class="indent">27.2% 受訪者在一年內沒有接受過任何健康檢查，也僅有 21.8% 受訪者在一年內接受過性篩檢。<br>受訪者身邊最常出現的保健藥品是 B 群、薑黃、胃藥、維他命 C、解酒液和止痛藥。6% 受訪者則提及精神藥物。</p>
         <h2>酒店工作的心理負擔</h2>
         <p class="indent">被問及「這份工作為您帶來的負面影響是什麼？」時，34.5% 受訪者主動提及情緒或精神壓力問題。<strong>51% 受訪者曾經求助心理醫生（32.7%入行前；18.1%入行後）。 47.2% 受訪者表示，入行後變得更容易憂鬱。60% 受訪者表示容易覺得情緒疲累，工作以外時間討厭和人社交。</strong></p>
+        <div class="world-cloud indent">
+          <span>酒店小姐抒發心情管道</span>
+          <div data-wordart-src="//cdn.wordart.com/json/zugqe2gztto6"></div>
+        </div>
         <p class="indent"><strong>更值得關注的是， 21.7% 受訪者入行後曾動過輕生念頭，更有 12.7% 執行過至少一次自殺計畫。</strong></p>
         <p class="indent">自殺原因是多元的，未必能直接與酒店工作建立輕率的因果連結，這是我們必須謹慎處理的部份，好幾位受訪者也主動在問卷中提醒我們此事。例如，問卷編號 020 就提到：<span class="highlight">「我本身長期就有精神困擾，但以我的情況而言，小姐職業對我的精神困擾可能有潛在影響，但實際上沒有太多影響。且進這行，與是否曾動過輕生念頭，並無必然關係。」</span>問卷編號 015 也提到：<span class="highlight">「輕生原因是複合的，不完全是因為酒店工作。」</span></p>
         <p class="indent">我們認為數據未必能代表真相，但終究指向了一個值得關注、討論的面相。因此，我們將在下面兩個篇章中，探討女性踏入酒店產業的深層原因，以及精神壓力、「情緒勞動」可能對酒店小姐造成的影響。</p>
-        <div class="world-cloud indent">
-          <span>抒發心情管道</span>
-          <div data-wordart-src="//cdn.wordart.com/json/zugqe2gztto6"></div>
-        </div>
         <div class="alert">
           <p>READr 關心您</p>
           <p class="highlight">自殺不能解決問題，勇敢求助不是弱者，只有活著才有機會解決問題。<br>再給自己和親人一次機會</p>
@@ -206,7 +206,7 @@
         </div>
       </template>
       <template v-else-if="routeParams === 'emotional-labor'">
-        <h1>人生只剩一手爛牌</h1>
+        <h1>爛牌人生</h1>
         <p class="foreword">「為什麼幹這行？」</p>
         <p class="foreword">這幾乎是多數人初識酒店小姐時，第一個會想問的問題。在我們得到的問卷結果中，確實多數答案都毫不意外地與「快速賺錢」、「缺錢」有關。<span class="highlight">76.3% 受訪者入行與快速賺錢、存錢有關，12.7 ％ 受訪者則主動提及因負債入行。</span>看起來，純粹就是為了錢。</p>
         <p class="foreword">然而，當我們進一步細讀受訪者的回答時，發現她們其實還傳達了錢以外的訊息。例如以下幾則：</p>
@@ -215,7 +215,7 @@
         <p class="foreword"><strong>「都是投入勞力與時間，不如挑戰一個能夠在最短時間刷出高額報酬的工作。」－問卷編號編號 005</strong></p>
         <p class="foreword">此外，好幾位問卷填答者也提到，踏入酒店是因為找不到其他工作。</p>
         <p class="foreword">她們的回答其實反映了年輕族群因為缺乏人力資本，而容易面臨的失業、低薪問題。除此之外，<span class="highlight">20% 受訪者至今仍在償還學貸，而她們的年齡幾乎都只在 20 歲上下。在同齡族群普遍仰賴家庭提供教育、經濟奧援的狀態下，這代表的是她們家庭經濟狀況不佳，還是另有原因？</span></p>
-        <p class="foreword">酒店陪侍工作不能跟性工作畫上等號，但長期針對性產業進行研究的中山大學社會系副教授陳美華認為，兩者有高度的相似性。。陳美華指出，未成年者進入性產業，大部分是因為得不到家庭在經濟、精神上的支持。父母威權管教，或是親子關係疏離，會讓年輕族群更傾向尋求同儕支持與經濟獨立。</p>
+        <p class="foreword">酒店陪侍工作不能跟性工作畫上等號，但長期針對性產業進行研究的中山大學社會系副教授陳美華認為，兩者有高度的相似性。陳美華指出，未成年者進入性產業，大部分是因為得不到家庭在經濟、精神上的支持。父母威權管教，或是親子關係疏離，會讓年輕族群更傾向尋求同儕支持與經濟獨立。</p>
         <p class="foreword">至於成年後才入行的性工作者，陳美華則認為她們多數是因為教育資本薄弱，導致經濟資本貧弱，而服務業勞動條件又太糟，加上就業市場中的性別不平等，造成女性容易進入賺錢快速、工時彈性的色情產業，此後也難以脫離。</p>
         <p class="foreword">換言之，<span class="highlight">「缺錢」、「急著賺錢」可能只是色情產業從業人員（性工作、酒店陪侍）入行的表層原因。深層的原因，可能是家庭、社會、人際網絡、出了問題，加上教育與經濟資本薄弱，以及就業市場中的就業不平等，才會讓這些條件不好的人「選擇」進入色情產業工作。</span></p>
         <h2>離家</h2>
@@ -247,7 +247,7 @@
         <p class="indent">另，透過問卷交叉分析，<strong>所有執行過自殺計畫的受訪者，全數都曾經向心理醫生求助。</strong>然而他們並非全部都是在進了酒店之後，才開始接受心理治療；大約 6 成自殺者是在入行前就有精神病史。</p>
         <h2>一切都是為了讓男人覺得需要自己</h2>
         <p class="indent">「其實我對這麼高的自殺率並不意外。」彩虹說，酒店業中有太多人精神狀況不好，她能體會許多人對未來絕望的感覺。然而她也強調，<strong>不管是精神狀態還是自殺行為，都不能簡單地將其歸咎於特定的原因，即便酒店工作確實對生理、心理的負擔都非常沈重，但考量到酒店工作者多數本來就是社會資源比較缺乏的人，必須將更多狀況考慮進去。</strong></p>
-        <p class="indent">彩虹回憶，她在酒店工作時，曾經認識一位非常漂亮的姐妹，她因為與酒店行政交往而被帶進行，後來這名行政也兼作她的經紀人。之後這名姊妹與客人交往，經紀人要求她和客人劃清界線，姐妹就改靠藥桌賺錢。不久後，這名姐妹被客人甩了，產生嚴重的被拋棄感，最終跳樓結束生命。</p>
+        <p class="indent">彩虹回憶，她在酒店工作時，曾經認識一位非常漂亮的姐妹，她因為與酒店行政交往而被帶進行，後來這名行政也兼作她的經紀人。之後這名姐妹與客人交往，經紀人要求她和客人劃清界線，姐妹就改靠藥桌賺錢。不久後，這名姐妹被客人甩了，產生嚴重的被拋棄感，最終跳樓結束生命。</p>
         <p class="indent">「她會自殺，其實和酒店沒有直接關係⋯⋯但完全沒有關係嗎？當然有，因為她所有人際資源都在這邊，但這邊是經濟利益導向，所以她的情緒會很不穩定。姐妹們雖然會提供她支持的力量，但她還是覺得需要有男人支持。」</p>
         <p class="indent">彩虹進一步說明，<strong>酒店小姐從美學勞動，到為了留住客人所發展出來的情緒勞動技巧，一切都是為了讓男人需要她。一名小姐長期處於這樣的狀態和認知時，一旦自己的男人留不住，會更容易產生「誰都不需要我」、「失去一切」的感覺。</strong></p>
         <p class="indent">彩虹在她的論文中，引述張愛玲在《傾城之戀》中的一段話，為酒店小姐的工作落下註腳。她寫道：「一個女人，倘若得不到異性的愛，就也得不到同性的尊重，女人就是這點賤。」</p>
@@ -274,10 +274,6 @@
         <p class="indent">Hochschild 的研究結論是——<strong>情緒勞動會對勞動者造成性格、精神上的改變或壓力。人要嘛因為工作而失去自我，不然就是上班時偽裝自己，下班後卻覺得自責；而這是所有服務業都要面臨的狀況。</strong></p>
         <p class="indent">那麼只要認清「工作歸工作，生活歸生活」，成功找到切換模式的「開關」不就沒問題了嗎？</p>
         <p class="indent">問題在於，不是所有人都能找到開關；有些工作甚至可能沒有開關。<strong>在酒店產業，或者我們稱之為「（性）陪侍產業」中，有太多不利的要素讓小姐的情緒沒有排解的出口。這些要素包含，她們普遍的家庭、社會資源匱乏、肉體與情緒勞動的高度連結、私人生活的消滅，還有整體社會對於女性角色的期待。</strong></p>
-        <p class="indent">第三種情況和前者類似，只是這些空姐並不會因為自己假笑而感到自責。她們很清楚地將工作時的人格，以及真實生活中的人格做出區隔，並且能隨時切換。</p>
-        <p class="indent">在前兩種情況中，<strong>情緒勞動會對勞動者造成性格、精神上的改變或壓力。妳要嘛因為工作而失去自我，不然就是上班上得不開心，並因此感到壓力。而且這是所有服務業都要面臨的狀況。</strong></p>
-        <p class="indent">或許有人會認為，那麼只要認清「工作歸工作，生活歸生活」，成功找到那個可以切換模式的「開關」，不就沒問題了嗎？</p>
-        <p class="indent">問題在於，不是每個人都有辦法找到開關；找不到的人會怎麼樣，又該怎麼辦呢？</p>
         <h2>高度性化的情緒勞動</h2>
         <p class="indent">對許多女性來說，酒店小姐每天要承受的情緒勞動，或許和她們平常要經歷的事情差別不大；無論她們是空姐、護理師、專櫃服務人員、業務，都一樣得學會這些「手腕」來應對眼前的「顧客」，也得學會如何調解情緒來化解許多性惡意和騷擾。</p>
         <p class="indent">和其他職業最大差別在於，同樣都是要透過情緒勞動討好、安撫顧客，酒店小姐必須同時滿足客人對「感情」與「女體」的期待，才能滿足工作上的要求。「靈肉分離」的傳說在酒店業中並不存在。</p>
@@ -607,6 +603,52 @@
         <img src="/proj-assets/hotel-hostess/images/share-gplus.png">
       </a>
     </footer>
+    <nav class="menu menu--mobile">
+      <a
+        href="/project/hotel-hostess-series/foreword"
+        class="item"
+        @click="$_hotelHostess_handleClickGAEvent('go to foreword')"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
+        <span>一、就像洋蔥</span>
+      </a>
+      <a
+        :class="{ next: routeParams === 'foreword' }"
+        href="/project/hotel-hostess-series/questionnaire"
+        class="item"
+        @click="$_hotelHostess_handleClickGAEvent('go to questionnaire')"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
+        <span>二、小姐群像</span>
+      </a>
+      <a
+        :class="{ next: routeParams === 'questionnaire' }"
+        href="/project/hotel-hostess-series/emotional-labor"
+        class="item"
+        @click="$_hotelHostess_handleClickGAEvent('go to emotional-labor')"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
+        <span>三、爛牌人生</span>
+      </a>
+      <a
+        :class="{ next: routeParams === 'emotional-labor' }"
+        href="/project/hotel-hostess-series/environment"
+        class="item"
+        @click="$_hotelHostess_handleClickGAEvent('go to environment')"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
+        <span>四、愛情麥當勞</span>
+      </a>
+      <a
+        :class="{ next: routeParams === 'environment', end: isCaseStories }"
+        href="/project/hotel-hostess-series/case-stories"
+        class="item"
+        @click="$_hotelHostess_handleClickGAEvent('go to case-stories')"
+        @touchstart="$_hotelHostess_handleTouchStart"
+        @touchend="$_hotelHostess_handleTouchEnd">
+        <span>五、姐妹</span>
+      </a>
+    </nav>
     <section class="comment">
       <div v-if="pageUrl" class="fb-comments" :data-href="pageUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
@@ -758,6 +800,65 @@ export default {
     transition transform .5s
     &.open
       transform translateX(0)
+    &.menu--mobile
+      display flex
+      flex-wrap wrap
+      position static
+      z-index auto
+      transform none
+      width 100%
+      height auto
+      padding 0
+      .item
+        width 50%
+        height 90px
+        &:hover
+          color #69d2cd
+          background-color #000
+          span
+            &::before
+              background-color #69d2cd
+        &.active
+          color #69d2cd
+          background-color transparent
+          span
+            &::before
+              background-color #69d2cd
+        &.next
+          order -1
+          width 100%
+          color #fff
+          font-size 1.3125rem
+          background-color rgba(228,0,127,.5)
+          &:hover
+            color #fff
+            background-color rgba(228,0,127,.3)
+            span
+              &::before
+                background-color transparent
+          span
+            width auto
+            &::before
+              content '繼續閱讀'
+              left -70px
+              width auto
+              height auto
+              font-size 1rem
+              background-color transparent
+          &.touch
+            color #fff
+            background-color rgba(228,0,127,.3)
+            span
+              &::before
+                background-color transparent
+        &.end
+          display none
+        &.touch
+          color #69d2cd
+          background-color #000
+          span
+            &::before
+              background-color #69d2cd
     > div
       display flex
       flex-direction column
@@ -791,7 +892,7 @@ export default {
             background-color #fff
       span
         position relative
-        width 100px
+        width 120px
         margin-top 20px
         &::before
           position absolute
@@ -906,11 +1007,10 @@ export default {
         > div
           margin 20px 0 0
       > span
-        padding .2em .5em
-        color #1f1f20
+        color #69d2cd
         font-size .875rem
+        font-weight 100
         line-height 1
-        background-color #c9c9c9
       > div
         position relative
         left -25px
@@ -938,7 +1038,7 @@ export default {
       & + span
         margin 5px auto 0px
   .case-list
-    padding 0 10%
+    padding 0 25px
     a
       display block
       text-decoration none
@@ -1005,6 +1105,7 @@ export default {
       img
         width 36px
   .comment
+    margin-top 20px
     padding 0 25px 50px
 
 @media (min-width: 768px)
@@ -1033,6 +1134,9 @@ export default {
           display block
         > span
           display block
+    .menu
+      &.menu--mobile
+        padding 0 20%
     .comment
       padding 0 20% 50px 20%
 
@@ -1060,6 +1164,8 @@ export default {
       width 20%
       padding-top 0
       transform none
+      &.menu--mobile
+        display none
     .heading
       position fixed
       top 0

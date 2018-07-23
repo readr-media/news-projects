@@ -35,7 +35,7 @@
         @click="$_hotelHostess_handleClickGAEvent('go to foreword')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
-        <span>就像洋蔥</span>
+        <span>一、就像洋蔥</span>
       </a>
       <a
         href="/project/hotel-hostess-series/questionnaire"
@@ -43,7 +43,7 @@
         @click="$_hotelHostess_handleClickGAEvent('go to questionnaire')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
-        <span>小姐群像</span>
+        <span>二、小姐群像</span>
       </a>
       <a
         href="/project/hotel-hostess-series/emotional-labor"
@@ -51,7 +51,7 @@
         @click="$_hotelHostess_handleClickGAEvent('go to emotional-labor')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
-        <span>爛牌人生</span>
+        <span>三、爛牌人生</span>
       </a>
       <a
         href="/project/hotel-hostess-series/environment"
@@ -59,7 +59,7 @@
         @click="$_hotelHostess_handleClickGAEvent('go to environment')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
-        <span>愛情麥當勞</span>
+        <span>四、愛情麥當勞</span>
       </a>
       <a
         href="/project/hotel-hostess-series/case-stories"
@@ -67,7 +67,7 @@
         @click="$_hotelHostess_handleClickGAEvent('go to case-stories')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
-        <span>姊妹</span>
+        <span>五、姐妹</span>
       </a>
     </div>
     <article id="fullpage">
@@ -102,7 +102,7 @@
               @click="$_hotelHostess_handleClickGAEvent('go to foreword')"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
-              <span>就像洋蔥</span>
+              <span>一、就像洋蔥</span>
             </a>
             <a
               href="/project/hotel-hostess-series/questionnaire"
@@ -110,7 +110,7 @@
               @click="$_hotelHostess_handleClickGAEvent('go to questionnaire')"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
-              <span>小姐群像</span>
+              <span>二、小姐群像</span>
             </a>
             <a
               href="/project/hotel-hostess-series/emotional-labor"
@@ -118,7 +118,7 @@
               @click="$_hotelHostess_handleClickGAEvent('go to emotional-labor')"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
-              <span>爛牌人生</span>
+              <span>三、爛牌人生</span>
             </a>
             <a
               href="/project/hotel-hostess-series/environment"
@@ -126,7 +126,7 @@
               @click="$_hotelHostess_handleClickGAEvent('go to environment')"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
-              <span>愛情麥當勞</span>
+              <span>四、愛情麥當勞</span>
             </a>
             <a
               href="/project/hotel-hostess-series/case-stories"
@@ -134,7 +134,7 @@
               @click="$_hotelHostess_handleClickGAEvent('go to case-stories')"
               @touchstart="$_hotelHostess_handleTouchStart"
               @touchend="$_hotelHostess_handleTouchEnd">
-              <span>姊妹</span>
+              <span>五、姐妹</span>
             </a>
             <footer class="footer">
               <div class="credit">
