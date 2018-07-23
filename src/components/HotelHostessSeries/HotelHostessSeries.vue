@@ -168,7 +168,15 @@
         <p class="indent"><strong>月收入超過 10 萬的受訪者中，有 50％ 受訪者認為在酒店業要能存活，最重要的條件是外貌、察言觀色與交際手腕，其他受訪者還提及情緒 / 危機管理，以及保護自己的能力。</strong>關於這部分問題，我們在《愛情麥當勞》的章節中，也會做更深入的討論。</p>
         <h2>小姐財務狀況</h2>
         <p class="indent"><strong>76.3% 受訪者入行與快速賺錢、存錢有關，僅有 12.7 ％ 受訪者主動提及因負債入行。然而，撇除房貸、車貸的話，43.8% 受訪者目前身上背負債務，其中又有 20％ 受訪者仍在償還學貸。</strong>關於小姐入行原因，我們在《人生只剩一手爛牌》的章節中，也會進一步討論背後是否有更深層的因素。</p>
-        <p class="indent">25.4% 受訪者每月收入在 10 萬元以上，32.9% 每月收入不到 5 萬元。30.9% 受訪者認為酒店工作讓他們存了不少錢，但也有 16.3% 認為自己幾乎沒存到錢，5.4% 還越做越負債。</p>
+        <p class="indent">
+          <span class="annotation" @click="$_hotelHostess_handleAnnotation">25.4% 受訪者每月收入在 10 萬元以上，32.9% 每月收入不到 5 萬元。
+            <div class="annotation-container">
+              <div class="annotation__content">
+                <p>註：41.7%受訪者薪資在5~10萬之間。</p>
+              </div>
+            </div>
+          </span>30.9% 受訪者認為酒店工作讓他們存了不少錢，但也有 16.3% 認為自己幾乎沒存到錢，5.4% 還越做越負債。
+        </p>
         <p class="indent">27.2% 受訪者沒有任何投資理財規劃，但也有 38.1% 受訪者有保險、定存規劃。</p>
         <h2>小姐對職場的感想</h2>
         <p class="indent">大約有<strong>41.7% 受訪者認為她們的客人有超過一半是「奧客」。</strong>回答「奧客很少」或「沒有那種事，客人都很好」的受訪者也有 21.8%，但幾乎都是在日式酒店、日式酒吧工作的小姐。在被問及酒店業容易遇上的狀況時，40% 受訪者主動提及「性騷擾」。</p>
@@ -225,10 +233,24 @@
         <p class="indent">米兒來自重男輕女的家庭，父母將大部分資源挹注給弟弟，卻對她在情緒、經濟上的困境袖手旁觀，而她同時也因為對大學教育失望，轉而在酒店尋求成就感和自我修煉。米兒說：<span class="highlight">「在酒店這兩年雖然沒存什麼錢，但我為了讓家人不問我的事情，就都會寄錢回家。他們以為我一邊唸書，一邊開設計工作室，因為我在他們面前演很好。」</span></p>
         <p class="indent">K 休學後身無分文，為了籌措幾千塊動物醫藥費，選擇進酒店賺錢；她不願向家裡拿，家裡也無力給。她說：<span class="highlight">「當時我已經有寵物美容師執照，但那時候寵物店老闆叫我穿低胸的衣服，說這樣客人比較多⋯⋯同樣都是要受到騷擾，但角色轉換加上隨之而來的高薪，反而覺得自己有被安撫到的感覺。」</span></p>
         <p class="indent">小紫和父母關係淡薄，從小只是表演好孩子形象給爸媽看。她為了支持並理解姊姊而投入色情產業，同時也把從酒店、按摩院賺來的錢，拿來支持自己賺不了錢的設計、藝術創作、媒體工作，以及藝術研究所學費。她說：<span class="highlight">「一直以來我都在演戲，演好孩子和乖學生給爸媽看，但他們都不真的了解我的狀態。」</span></p>
-        <p class="indent">上述幾位受訪者的入行原因，確實都與錢有關，但都和肥皂劇與小說中，會設定的「負債幾百萬」、「家人生重病急需醫藥費」、「單親媽媽慘遭渣男推入火坑」等刻板印象有很大的區隔。</p>
+        <p class="indent">上述幾位受訪者的入行原因，確實都與錢有關，但都和肥皂劇與小說中，會設定的
+          <span class="annotation" @click="$_hotelHostess_handleAnnotation">「負債幾百萬」、「家人生重病急需醫藥費」、「單親媽媽慘遭渣男推入火坑」
+            <div class="annotation-container">
+              <div class="annotation__content">
+                <p>註：當然，我們相信這些例子仍然存在。</p>
+              </div>
+            </div>
+          </span>等刻板印象有很大的區隔。</p>
         <p class="indent">幾位受訪者入行時對金錢的需求，少至幾千，多則數萬，平心而論都不是什麼天大數目。如果父母、親友、同儕能夠救急，或是為她們提供心理、經濟上的穩定支持，她們入行的動機或許就隨之煙消雲散。</p>
         <p class="indent"><strong>「我們應該停止將金錢需求視為色情產業從業人員，最深層，甚或是唯一的考量。」</strong>陳美華分析，這個社會真正該思考的問題是 － 為何這些女性在面臨人生難題時，找不到，或者不認為有可以求助的人，同時也不認為自己可以有更好的選擇？</p>
-        <p class="indent"><strong>「表面上看起來都是為了錢，要嘛有悲情的故事，要嘛就是另一個極端，被說成拜金，但其實癥結是性別化的勞動市場。就業市場中沒有提供女性好的選擇，即便現在有性平法（《性別工作平等法》），但女人能取得的工作還是不好，而且需要（比男性）相對漂亮的文憑。所以家庭能否提供好的物質基礎很關鍵，沒辦法的話，許多年輕人不想為了少少的錢被父母管教，就會選擇經濟獨立，這之後又很容易導致她人力資本薄弱，能選擇的工作又更受限。」</strong></p>
+        <p class="indent"><strong>「表面上看起來都是為了錢，要嘛有悲情的故事，要嘛就是另一個極端，被說成拜金，但其實癥結是性別化的勞動市場。就業市場中沒有提供女性好的選擇，即便現在有性平法（《性別工作平等法》），但女人能取得的工作還是不好，而且需要（比男性）相對漂亮的文憑。所以家庭能否提供好的物質基礎很關鍵，沒辦法的話，許多年輕人不想為了少少的錢被父母管教，就會選擇經濟獨立，這之後又很容易導致她
+          <span class="annotation" @click="$_hotelHostess_handleAnnotation">人力資本薄弱
+            <div class="annotation-container">
+              <div class="annotation__content">
+                <p>註：很巧的是，這次我們所採訪到的受訪者，清一色都就讀藝術、設計相關科系。幾位受訪者也不約而同表示，「這個圈子念藝術設計的很多」。</p>
+              </div>
+            </div>
+          </span>，能選擇的工作又更受限。」</strong></p>
         <h2>沒有選擇的選擇</h2>
         <p class="indent">彩虹目前的身份是一名即將執業的心理諮商師。幾年前，她為了籌措研究所學費和生活費，在朋友介紹下進入台式酒店工作三年，最後她的碩士論文主軸，也環繞在酒店工作的美學勞動、性勞動與情緒勞動上。畢業後，即便她還沒拿到諮商師證照，就已私下為許多酒店姐妹提供諮商服務。換句話說，酒店工作讓彩虹得以繳學費、拿學位，同時還是她回饋所學專長的實習田野。</p>
         <p class="indent">彩虹認為，雖然酒店小姐的入行原因看來都是錢，但錢的背後是資源問題。<strong>一個人怎麼取得錢？會不會用錢？這都是資源養出來的能力。沒有資源的人，影響到的不只是沒有錢，還包括一個人會不會有資本的概念。能把錢當作資本，才懂得投資自己，進一步改善生活，而不是生活中隨手就花掉了。</strong>「像我入行時就完全沒有資本概念，因為我缺乏好的學歷和機會，也沒有社會網絡支持，就是個一手爛牌的人生。這其實和自我價值低落有關係。」</p>
@@ -238,18 +260,39 @@
         <p class="indent">看在外界眼裡，不免認為這些是酒店小姐放縱、沈淪、拜金的表現，甚至還會暗暗在心中咒罵 —— 活該她們只能做酒店。在我們的問卷調查中，確實也有幾位受訪者主動提及，酒店工作導致她們的金錢觀扭曲。</p>
         <p class="indent">然而對經歷過這一切的彩虹來說，她明白害怕寂寞，無樂不做，或許是社會網絡貧乏的結果，也可能是情緒勞動的副作用；金錢的揮霍，或許和缺乏資本概念有關。而這些放縱，其實是為了讓自己得到自由的感覺。她說：<strong>「可以有選擇的感覺很重要。」</strong></p>
         <h2>自殺與精神壓力</h2>
-        <p class="indent">我們的問卷調查發現，21.7% 受訪者入行後曾動過輕生念頭，更有 12.7% 執行過至少一次自殺計畫。</p>
+        <p class="indent">我們的問卷調查發現，
+          <span class="annotation" @click="$_hotelHostess_handleAnnotation">21.7% 受訪者入行後曾動過輕生念頭，更有 12.7% 執行過至少一次自殺計畫。
+            <div class="annotation-container">
+              <div class="annotation__content">
+                <p>註：此處僅統計動過輕生念頭，與執行自殺計畫的比例，不可與「自殺死亡率」類比。</p>
+              </div>
+            </div>
+          </span></p>
         <p class="indent">K 在入行前就曾求助心理醫生，但她說，酒店工作使她的躁鬱症變得更加嚴重。K 曾將自己在酒店賺來的錢，都拿去資助當時的男友圓夢，而男友在她工作初期時，確實也非常體貼。然而，隨著戀情轉淡，男友變得越來越無法體諒她的工作，分手時甚至責備她說：<span class="highlight">「妳就是因為價值觀偏差，才去當酒店小姐。」</span>分手後，K 自殺，最後幸運地活了下來。然而這並不是她在酒店生涯唯一一次自殺。</p>
         <p class="indent">拉拉的狀況和 K 類似，入行前就曾因恐慌症求診。她說自己剛入行時賺的錢，全都拿去養廢物男友，根本不曉得自己賺了多少錢。後來拉拉因為對男友失望，加上在酒店內被客人強暴、情緒工作也讓她恐慌症加重，並且出現思覺失調症狀，多次嘗試自殺。</p>
         <p class="indent">小花則是在進入酒店後，才開始出現憂鬱的症狀。她說曾經有一段時間，自己和家人、男友的關係都很緊張，加上酒店工作導致她情緒不穩定、健康下滑、睡眠品質不佳，還有經濟上的壓力，都讓憂鬱症變得越來越嚴重。</p>
         <p class="indent">小花經常都有輕生的念頭，她說：<span class="highlight">「那時候看到什麼（自殺方式）就會想說要不要試試看。如果那時候真的動手了，或許也幸運，就解脫了。」</span></p>
         <p class="indent">在我們的問卷調查中，有 <strong>51% 受訪者曾經求助心理醫生；32.7%入行前、18.1%入行後。</strong>從這個比例可以看出，雖然受訪者接受精神治療的比例很高，但不能論斷他們的精神壓力完全由酒店工作造成。</p>
-        <p class="indent">另，透過問卷交叉分析，<strong>所有執行過自殺計畫的受訪者，全數都曾經向心理醫生求助。</strong>然而他們並非全部都是在進了酒店之後，才開始接受心理治療；大約 6 成自殺者是在入行前就有精神病史。</p>
+        <p class="indent">另，透過問卷交叉分析，<strong>所有執行過自殺計畫的受訪者，全數都曾經向心理醫生求助。</strong>然而他們並非全部都是在進了酒店之後，才開始接受心理治療；
+          <span class="annotation" @click="$_hotelHostess_handleAnnotation">大約 6 成自殺者是在入行前就有精神病史。
+            <div class="annotation-container">
+              <div class="annotation__content">
+                <p>註：這些受訪者們都一再提醒我們，輕生原因是複合式的，不完全與酒店和精神疾病相關。</p>
+              </div>
+            </div>
+          </span></p>
         <h2>一切都是為了讓男人覺得需要自己</h2>
         <p class="indent">「其實我對這麼高的自殺率並不意外。」彩虹說，酒店業中有太多人精神狀況不好，她能體會許多人對未來絕望的感覺。然而她也強調，<strong>不管是精神狀態還是自殺行為，都不能簡單地將其歸咎於特定的原因，即便酒店工作確實對生理、心理的負擔都非常沈重，但考量到酒店工作者多數本來就是社會資源比較缺乏的人，必須將更多狀況考慮進去。</strong></p>
         <p class="indent">彩虹回憶，她在酒店工作時，曾經認識一位非常漂亮的姐妹，她因為與酒店行政交往而被帶進行，後來這名行政也兼作她的經紀人。之後這名姐妹與客人交往，經紀人要求她和客人劃清界線，姐妹就改靠藥桌賺錢。不久後，這名姐妹被客人甩了，產生嚴重的被拋棄感，最終跳樓結束生命。</p>
         <p class="indent">「她會自殺，其實和酒店沒有直接關係⋯⋯但完全沒有關係嗎？當然有，因為她所有人際資源都在這邊，但這邊是經濟利益導向，所以她的情緒會很不穩定。姐妹們雖然會提供她支持的力量，但她還是覺得需要有男人支持。」</p>
-        <p class="indent">彩虹進一步說明，<strong>酒店小姐從美學勞動，到為了留住客人所發展出來的情緒勞動技巧，一切都是為了讓男人需要她。一名小姐長期處於這樣的狀態和認知時，一旦自己的男人留不住，會更容易產生「誰都不需要我」、「失去一切」的感覺。</strong></p>
+        <p class="indent">彩虹進一步說明，<strong>酒店小姐從
+          <span class="annotation" @click="$_hotelHostess_handleAnnotation">美學勞動
+            <div class="annotation-container">
+              <div class="annotation__content">
+                <p>註：指酒店小姐為了滿足產業對於主流審美觀的要求，平日治裝、購買首飾高跟鞋，花錢整形，還有每日上班前搞定妝髮所付出的心力。</p>
+              </div>
+            </div>
+          </span>，到為了留住客人所發展出來的情緒勞動技巧，一切都是為了讓男人需要她。一名小姐長期處於這樣的狀態和認知時，一旦自己的男人留不住，會更容易產生「誰都不需要我」、「失去一切」的感覺。</strong></p>
         <p class="indent">彩虹在她的論文中，引述張愛玲在《傾城之戀》中的一段話，為酒店小姐的工作落下註腳。她寫道：「一個女人，倘若得不到異性的愛，就也得不到同性的尊重，女人就是這點賤。」</p>
         <p class="indent">如果如彩虹所言，酒店產業對小姐的一切要求，都是為了讓男人需要自己，那麼小姐們究竟必須為了這個目標，付出什麼樣的努力？那些努力，是否又會回頭影響她們的狀態呢？下一個篇章，我們將探討什麼是酒店小姐的「情緒勞動」，以及這些勞動，是否真的「下賤」。</p>
         <div class="alert">
@@ -270,12 +313,33 @@
         <p class="foreword">什麼是情緒勞動？<span class="highlight">對服務業而言，情緒勞動是一個時時刻刻存在於工作，卻經常被忽略，或是輕視的問題。</span></p>
         <h2>無處不在的情緒勞動</h2>
         <p class="indent">美國社會學家 Arlie Hochschild 是最早針對服務業「情緒勞動」進行研究的學者。她認為，特定時空下的情感是有規則可循的，人會為了遵守規則而控制自己的情緒。她將這樣的努力稱為「情緒工作」，當這樣的工作是為了滿足職業要求時，則被稱為「情緒勞動」。</p>
-        <p class="indent">1983 年，Hochschild 針對「空姐」的情緒勞動進行研究。當時航空公司為了降低乘客搭飛機時的焦慮，會要求空姐不管面對什麼狀況，都必須「隨時保持真誠的微笑」。Hochschild 發現，許多真誠微笑的空姐，在下班後還是笑個不停，出現「情緒僵化」的狀況。只搬出「職業微笑」應付乘客，皮笑肉不笑的空姐，在上班前後則是個性截然不同的人，但她們會因為無法達到工作上的情緒要求而自責。然而還是有空姐覺得職業微笑理所當然，她們會清楚區分工作人格和真實人格，而且能隨時切換。</p>
+        <p class="indent">1983 年，Hochschild 針對「空姐」的情緒勞動進行研究。當時航空公司為了降低乘客搭飛機時的焦慮，會要求空姐不管面對什麼狀況，都必須「隨時保持真誠的微笑」。Hochschild 發現，許多真誠微笑的空姐，在下班後還是笑個不停，出現
+          <span class="annotation" @click="$_hotelHostess_handleAnnotation">「情緒僵化」
+            <div class="annotation-container">
+              <div class="annotation__content">
+                <p>Hochschild 將這種情況稱為 「消耗殆盡」（Burn Out）</p>
+              </div>
+            </div>
+          </span>的狀況。只搬出「職業微笑」應付乘客，皮笑肉不笑的空姐，在上班前後則是個性截然不同的人，但她們會因為無法達到工作上的情緒要求而自責。然而還是有空姐覺得職業微笑理所當然，她們會清楚區分工作人格和真實人格，而且能隨時切換。</p>
         <p class="indent">Hochschild 的研究結論是——<strong>情緒勞動會對勞動者造成性格、精神上的改變或壓力。人要嘛因為工作而失去自我，不然就是上班時偽裝自己，下班後卻覺得自責；而這是所有服務業都要面臨的狀況。</strong></p>
         <p class="indent">那麼只要認清「工作歸工作，生活歸生活」，成功找到切換模式的「開關」不就沒問題了嗎？</p>
-        <p class="indent">問題在於，不是所有人都能找到開關；有些工作甚至可能沒有開關。<strong>在酒店產業，或者我們稱之為「（性）陪侍產業」中，有太多不利的要素讓小姐的情緒沒有排解的出口。這些要素包含，她們普遍的家庭、社會資源匱乏、肉體與情緒勞動的高度連結、私人生活的消滅，還有整體社會對於女性角色的期待。</strong></p>
+        <p class="indent">問題在於，不是所有人都能找到開關；有些工作甚至可能沒有開關。<strong>在酒店產業，或者我們稱之為「（性）陪侍產業」中，有太多不利的要素讓小姐的情緒沒有排解的出口。這些要素包含，她們普遍的
+          <span class="annotation" @click="$_hotelHostess_handleAnnotation">家庭、社會資源匱乏
+            <div class="annotation-container">
+              <div class="annotation__content">
+                <p>註：詳見《人生只剩一手爛牌》中的討論。</p>
+              </div>
+            </div>
+          </span>、肉體與情緒勞動的高度連結、私人生活的消滅，還有整體社會對於女性角色的期待。</strong></p>
         <h2>高度性化的情緒勞動</h2>
-        <p class="indent">對許多女性來說，酒店小姐每天要承受的情緒勞動，或許和她們平常要經歷的事情差別不大；無論她們是空姐、護理師、專櫃服務人員、業務，都一樣得學會這些「手腕」來應對眼前的「顧客」，也得學會如何調解情緒來化解許多性惡意和騷擾。</p>
+        <p class="indent">對許多女性來說，酒店小姐每天要承受的情緒勞動，或許和她們平常要經歷的事情差別不大；無論她們是
+          <span class="annotation" @click="$_hotelHostess_handleAnnotation">空姐、護理師、專櫃服務人員、業務
+            <div class="annotation-container">
+              <div class="annotation__content">
+                <p>註：甚至是家庭主婦。</p>
+              </div>
+            </div>
+          </span>，都一樣得學會這些「手腕」來應對眼前的「顧客」，也得學會如何調解情緒來化解許多性惡意和騷擾。</p>
         <p class="indent">和其他職業最大差別在於，同樣都是要透過情緒勞動討好、安撫顧客，酒店小姐必須同時滿足客人對「感情」與「女體」的期待，才能滿足工作上的要求。「靈肉分離」的傳說在酒店業中並不存在。</p>
         <p class="indent">我們的問卷調查發現，在被問及「您認為要在這行存活，應該要具備哪些條件或能力？」時，雖然有 43.6% 受訪者主動提及外貌，但卻有高達 83.6% 主動提及「察言觀色」、「危機處理」、「交際手腕」、「情緒管理」等能力。這些被泛稱為「手腕」的<strong>情緒勞動技巧，被小姐們視為酒店陪侍業最核心的技能。</strong></p>
         <p class="indent">然而只靠「手腕」是無法在酒店業存活的。心理諮商師彩虹指出，衡量一個酒店小姐能否在業界存活，必須由「尺度」、「本錢」與「手腕」三個面向來看，而這三者被業界統稱為「素質」。</p>
@@ -323,7 +387,14 @@
         <h2>誰殺了那個酒店小姐</h2>
         <p class="indent">在我們的問卷調查中，不少受訪者感嘆「酒店就是這個社會的縮影」，所以許多人會正向地看待自己在酒店中的經歷，並將自己的工作，視為快速透析社會的途徑。而在我們的訪談中，將「酒店 - 社會」的連結，連結到另一個層次的，則是以下這段 K 的發言。</p>
         <p class="indent"><span class="highlight">「我在日常生活中所接收到的性惡意和騷擾，和酒店其實也只有一線之隔。但在酒店中，因為對自己的角色認知會隨著場域轉換，知道要對性騷擾做好防備，那種心情不一樣，所以反而不受傷。客人來的目的很清楚，就不像生活中的攻防那麼難猜，反而輕鬆。同樣都是要受到騷擾，但角色轉換加上隨之而來的高薪，反而覺得自己有被安撫到的感覺。」</span></p>
-        <p class="indent">K 的發言，可以直觀地詮釋成，「反正都是要被性騷擾，有錢拿還比較好」。然而進一步言，如果一個女人，認為自己在酒店內外所受到的性惡意和騷擾沒有太大差別，就代表<strong>酒店不只是社會的縮影，酒店小姐的遭遇，也是絕大多數女性的縮影。事實上，是整體社會先有了「女人就是要怎樣 / 可以被怎樣」的想像，酒店業中的女性勞動者，才會是現在的模樣。</strong></p>
+        <p class="indent">K 的發言，可以直觀地詮釋成，「反正都是要被性騷擾，有錢拿還比較好」。然而進一步言，如果一個女人，認為自己在酒店內外所受到的性惡意和騷擾沒有太大差別，就代表<strong>酒店不只是社會的縮影，酒店小姐的遭遇，也是絕大多數
+          <span class="annotation" @click="$_hotelHostess_handleAnnotation">女性
+            <div class="annotation-container">
+              <div class="annotation__content">
+                <p>註：越缺乏資源的女性，可能就會越像。</p>
+              </div>
+            </div>
+          </span>的縮影。事實上，是整體社會先有了「女人就是要怎樣 / 可以被怎樣」的想像，酒店業中的女性勞動者，才會是現在的模樣。</strong></p>
         <p class="indent">酒店小姐應該進行哪些美學勞動，必須發展出什麼樣的情緒勞動技巧來因應性惡意，並不是單是由酒店教育出來的。事實上，酒店業者對小姐的職業教育與保障都不多，能在業界存活下來，幾乎都要靠客人的「洗禮」。而這些客人不就是帶著最世俗的價值觀，以及對女性的刻板需求，到酒店尋求解放的嗎？酒店業評價小姐「質素」（尺度、本錢、手腕）的標準，和整體社會對女人指指點點的方式，又有多大的不同？</p>
         <p class="indent">陳美華指出，<strong>整個社會評價女人方式，會影響她們如何看待自己。女人被生出來，就被教養成漂亮就是有價值，女人的樣子就是要討人喜歡，這樣才受讚揚。我們當然都希望被喜歡。而想要被喜歡，勢必就牽涉到女性怎麼去發展她們的情緒勞動技巧。</strong></p>
         <p class="indent">彩虹分析，性化的情緒勞動，同時兼具了 Sexy（性感） 與 Sexual（性的、性別的）兩個面向。Sexy 會導向 Horny（性興奮），Sexual 則會導向情緒勞動的個體，應該是什麼面貌。<strong>在這社會價值觀下，女性的情緒勞動往往大過男性，而當女性被擺放在一個需要提供情感與自我的感覺，去進行情緒勞動時，不管她發展出多少看似不同的面貌，其實都還是在一個窠臼裡面。而這個窠臼，就是社會對女性的想像。</strong></p>
@@ -607,7 +678,7 @@
       <a
         href="/project/hotel-hostess-series/foreword"
         class="item"
-        @click="$_hotelHostess_handleClickGAEvent('go to foreword')"
+        @click="$_hotelHostess_handleClickGAEvent('go to foreword bottom')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>一、就像洋蔥</span>
@@ -616,7 +687,7 @@
         :class="{ next: routeParams === 'foreword' }"
         href="/project/hotel-hostess-series/questionnaire"
         class="item"
-        @click="$_hotelHostess_handleClickGAEvent('go to questionnaire')"
+        @click="$_hotelHostess_handleClickGAEvent('go to questionnaire bottom')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>二、小姐群像</span>
@@ -625,7 +696,7 @@
         :class="{ next: routeParams === 'questionnaire' }"
         href="/project/hotel-hostess-series/emotional-labor"
         class="item"
-        @click="$_hotelHostess_handleClickGAEvent('go to emotional-labor')"
+        @click="$_hotelHostess_handleClickGAEvent('go to emotional-labor bottom')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>三、爛牌人生</span>
@@ -634,7 +705,7 @@
         :class="{ next: routeParams === 'emotional-labor' }"
         href="/project/hotel-hostess-series/environment"
         class="item"
-        @click="$_hotelHostess_handleClickGAEvent('go to environment')"
+        @click="$_hotelHostess_handleClickGAEvent('go to environment bottom')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>四、愛情麥當勞</span>
@@ -643,14 +714,14 @@
         :class="{ next: routeParams === 'environment', end: isCaseStories }"
         href="/project/hotel-hostess-series/case-stories"
         class="item"
-        @click="$_hotelHostess_handleClickGAEvent('go to case-stories')"
+        @click="$_hotelHostess_handleClickGAEvent('go to case-stories bottom')"
         @touchstart="$_hotelHostess_handleTouchStart"
         @touchend="$_hotelHostess_handleTouchEnd">
         <span>五、姐妹</span>
       </a>
     </nav>
     <section class="comment">
-      <div v-if="pageUrl" class="fb-comments" :data-href="pageUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
+      <div class="fb-comments" data-href="http://www.readr.tw/project/hotel-hostess" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
   </main>
 </template>
@@ -724,6 +795,15 @@ export default {
     window.removeEventListener('scroll', this.$_hotelHostess_handleScrollGAEvent)
   },
   methods: {
+    $_hotelHostess_handleAnnotation(e) {
+      if (this.$store.state.viewport[0] < 900) {
+        if (e.target.classList.contains('annotation')) {
+          e.target.classList.add('active')
+        } else if (e.target.classList.contains('annotation-container')) {
+          e.target.parentNode.classList.remove('active')
+        }
+      }
+    },
     $_hotelHostess_handleClickGAEvent(label) {
       ga('send', 'event', 'projects', 'click', label, { nonInteraction: false })
     },
@@ -1025,7 +1105,32 @@ export default {
         margin .5em 0 0
       .highlight
         color #fff
-    
+    .annotation
+      position relative
+      border-bottom 1px solid #fff
+      &.active
+        .annotation-container
+          display flex
+      &__content
+        width calc(100% - 50px)
+        padding 20px
+        color #000
+        text-align justify
+        background-color #fff
+    .annotation-container
+      display none
+      justify-content center
+      align-items center
+      position fixed
+      top 0
+      left 0
+      right 0
+      bottom 0
+      z-index 500
+      min-width 200px
+      width 100%
+      height 100vh
+      background-color rgba(0,0,0,.6)
   .btn
     padding 10px
     background-color transparent
@@ -1124,6 +1229,8 @@ export default {
         > div
           left 0
           width 100%
+      .annotation__content
+        width 60%
     .case-list
       padding 0 20%
       .case
@@ -1194,7 +1301,21 @@ export default {
         margin-top 60px
       .indent
         padding-left 5%
-      
+      .annotation
+        &__content
+          width 100%
+          p
+            margin 0
+        &:hover
+          .annotation-container
+            display flex
+            position absolute
+            top 100%
+            right 0
+            left auto
+            bottom auto
+            width auto
+            height auto
     .btn
       display none
     .case-list

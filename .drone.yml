@@ -75,7 +75,7 @@ pipeline:
     template: >
       {{#success build.status}}
         *success* ${DRONE_REPO_NAME}:${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER} was well served.
-        Check out our new <https://dev.readr.tw/project/farmhouse|project>.
+        Check out our new <https://dev.readr.tw/project/hotel-hostess|project>.
       {{else}}
         Houston, we have a problem. Build <${DRONE_BUILD_LINK}|#{{build.number}}> failed. Fix me please, {{build.author}}
       {{/success}}
