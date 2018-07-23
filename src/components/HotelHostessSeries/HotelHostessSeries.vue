@@ -114,8 +114,8 @@
         <span />
       </button>
     </section>
-    <template v-if="routeParams === 'foreword'">
-      <article class="story">
+    <article class="story">
+      <template v-if="routeParams === 'foreword'">
         <h1>就像洋蔥</h1>
         <p class="foreword">一聽到「酒店小姐」，你心裡會浮現什麼樣的形象？</p>
         <p class="foreword">是被渣男推進火坑的無知少女，還是將男人玩弄於股掌間的婊子？<br>是家裡破產急著幫家人還債的失學少女，還是盲目拜金的瞎妹？<br>是終日以淚洗面的單親媽媽，還是夜夜笙歌縱慾過度的蕩婦？</p>
@@ -123,7 +123,7 @@
         <p class="indent">米兒為了幾萬塊的負債，休學踏入酒店。同學們形容她是個天生的 Bitch，所以她幹這行如魚得水，整天周旋於不同的男人間，把他們當工具人使喚。她笑著說，很喜歡和姐妹們團隊作戰，騙男人錢的感覺。米兒看來自在而快樂，信誓旦旦地說，遲早要出一本書，教姐妹們騙男人的技巧。</p>
         <p class="indent">然而她卻經常談起老家那重男輕女，把一切精力都澆灌在弟弟身上的爸媽。國中時米兒被同學霸凌，媽媽說肯定是她自己不好，才會被那樣對待。高中時她失戀在房裡大哭，爸爸看了一句話都沒說，母親則要她安靜一點。從此之後米兒明白，自己不可能從家人身上得到什麼。然而我們卻無法從米兒的語氣中，嗅出對家人的怨懟。</p>
         <p class="indent">在酒店兩年多，家人固定會收到米兒寄回的孝親費，卻以為她仍在唸書，半工半讀開了間設計工作室。「在他們面前，我演得很好⋯⋯（從事）酒店唯一讓我擔心的事，是失去在我爸媽面前搞笑的能力。」</p>
-        <p class="indent">唯獨談起那個家境小康，卻連兩千塊都不願借給自己救急的家人，我們才能從一派輕鬆的米兒身上，捕捉到少許的遺憾。/p>
+        <p class="indent">唯獨談起那個家境小康，卻連兩千塊都不願借給自己救急的家人，我們才能從一派輕鬆的米兒身上，捕捉到少許的遺憾。</p>
         <p class="indent">拉拉有長久的精神病史，恐懼人群又容易焦慮，進酒店工作後還曾因不堪客人騷擾，出現嚴重的幻聽幻覺症狀。</p>
         <p class="indent">她經常自殺。入行前她為了生活而接受人體實驗，錢卻被只會上網打筆戰的廢物男友花光，她一氣之下上吊。剛被好友騙入行時，她在酒店包廂被客人強暴，回家後把身邊所有藥吃光，不想再活。入行後她每天熬夜喝酒，脫衣幫男人打手槍，結果錢還是被同一個廢物男友花光，這次她選擇跳樓。</p>
         <p class="indent">最初她很不適應酒店生活，因為客人們會將生活中的所有不如意，傾倒在她身上，然後進一步利用她們發洩性慾。作為接受一切負能量的載體，拉拉只能半推半就地吞下這些垃圾。</p>
@@ -138,10 +138,8 @@
         <p class="indent">K 在酒店中攢來的錢，不是花在小動物身上，就是拿去支持前男友的夢想。她其實並不是那麼能給予的人，只是她吝於留給自己。K 有嚴重的躁鬱症，酒店的工作和愛情中受到的背叛，讓她變得不相信人類又害怕孤單。和我們採訪到的其他幾位受訪者一樣，她也經常自殺，卻一次次被命運留下。她對世界給予了過多的愛，卻在被問到愛不愛自己時，說了不知道。</p>
         <p class="indent">夢工廠動畫人物史瑞克（Shrek）說，怪物就像洋蔥，是有層次的。是的，就像那些又有異味、又會讓人掉淚的洋蔥與怪物一樣，酒店小姐也有層次。</p>
         <p class="indent">這個專題期待告訴讀者的，不是那種貼上各種不同標籤就搞定的酒店肥皂劇。我們嘗試述說一群有層次的酒店小姐的故事；關於她們如何在這個社會與產業環境下，有層次地成為小姐、有層次地滿足男人的需求；以及，她們如何有層次地成為自殺的高風險族群。</p>
-      </article>
-    </template>
-    <template v-else-if="routeParams === 'questionnaire'">
-      <article class="story">
+      </template>
+      <template v-else-if="routeParams === 'questionnaire'">
         <h1>酒店小姐問卷調查結果大公開</h1>
         <p class="foreword">為了能更廣泛、深入地暸解酒店小姐的工作狀態與產業環境，我們在徵詢從業人員意見後，製作了一份問卷，在 2018 年 4 月至 7 月間，發放給曾經、或此刻仍現役的酒店小姐們，最後得到 55 份有效問卷，嘗試初探酒店小姐們的群象。</p>
         <p class="foreword">我們發現，酒店小姐因職業所伴隨的心理負擔出乎意料。</p>
@@ -206,10 +204,8 @@
           <p>生命線協談專線：1995</p>
           <p>張老師專線：1980</p>
         </div>
-      </article>
-    </template>
-    <template v-else-if="routeParams === 'emotional-labor'">
-      <article class="story">
+      </template>
+      <template v-else-if="routeParams === 'emotional-labor'">
         <h1>人生只剩一手爛牌</h1>
         <p class="foreword">「為什麼幹這行？」</p>
         <p class="foreword">這幾乎是多數人初識酒店小姐時，第一個會想問的問題。在我們得到的問卷結果中，確實多數答案都毫不意外地與「快速賺錢」、「缺錢」有關。<span class="highlight">76.3% 受訪者入行與快速賺錢、存錢有關，12.7 ％ 受訪者則主動提及因負債入行。</span>看起來，純粹就是為了錢。</p>
@@ -263,10 +259,8 @@
           <p>生命線協談專線：1995</p>
           <p>張老師專線：1980</p>
         </div>
-      </article>
-    </template>
-    <template v-else-if="routeParams === 'environment'">
-      <article class="story">
+      </template>
+      <template v-else-if="routeParams === 'environment'">
         <h1>愛情麥當勞</h1>
         <p class="foreword"><strong>「壓力型躁鬱症，因為要帶給客人歡樂，自己需要自控情緒，導致以前不會管理卻生病過……」－問卷編號 052</strong></p>
         <p class="foreword"><strong>「……有時候必須卑躬屈膝、有時候說話要非常嚴謹，總之是個外表光鮮亮麗，心理上有極大壓迫的工作。而這裡正是以外表取人的地方，所以更多的憂鬱症狀從客人的數落開始……這裡的妹子應該需要心理醫生去排解那些不安、憤怒、難過。 」－問卷編號 023</strong></p>
@@ -349,18 +343,14 @@
           <p>生命線協談專線：1995</p>
           <p>張老師專線：1980</p>
         </div>
-      </article>
-    </template>
-    <template v-else-if="routeParams === 'case-stories'">
-      <article class="story">
+      </template>
+      <template v-else-if="routeParams === 'case-stories'">
         <h1>姐妹</h1>
         <p class="foreword">酒店人生，不只是風花雪月。每個酒店小姐，都有各自想追尋的夢想，也有各自的缺憾。</p>
         <p class="foreword">從我們的問卷調查中，雖然可看出絕大多數小姐之所以入行，原因不外乎「缺錢」、「想快速賺錢」、「負債」等原因，似乎總與經濟因素有關。然而，誠如中山大學社會系副教授陳美華老師的提醒，「錢」很可能只是小姐們入行的表面原因，深層因素與她們缺乏家庭支持、人力資本、就業性別歧視有關，才讓她們更容易選擇以酒店工作謀生。</p>
         <p class="foreword">小姐入行後的經歷、心情，面臨性騷擾與情緒勞動時的應對方式，往往也因人而異。在這個篇章中，我們將六位酒店小姐的採訪談話完整呈現。這不只是六位受訪者的生命經驗，也是姐妹們有苦有痛，有笑有淚的故事。</p>
-      </article>
-    </template>
-    <template v-else-if="routeParams === 'case-stories-1'">
-      <article class="story">
+      </template>
+      <template v-else-if="routeParams === 'case-stories-1'">
         <h1>米兒</h1>
         <p class="foreword">23 歲，禮服 / 禮制店資歷 2 年，現役中。</p>
         <p class="indent">我當初進酒店的原因，當然就是因為缺錢，剛好一個高中朋友說要練習當經紀人，我就入行了。其實也沒缺多少，進酒店後很快就還完了，但因為我很快就上手，上班第二天就被匡到底，大家也說我天生是幹這行的料，因為非常會撒嬌，舉手投足都有做作感，加上我以前就會約炮、經營工具人，也被說人說是 Bitch，所以我就一直做下去了。</p>
@@ -389,10 +379,8 @@
         <p class="indent">我不希望來這行業只有得到現金，如果這經驗可以有更多發展，是我想要達到的，這也是我還留在這行業的原因。我想要把這些在酒店得到的收穫，都寫成書，現在也都有在認真看書，而且這些東西也能被寫進論文裡。我想要做的第一個是日記形式，第二個是怎麼處理男人，第三個是教小姐如何成為紅牌、如何騙匡。也想要認真出一本講怎麼處理情緒勞動，先想清楚我自己問題，把內心掙扎寫下來，再找諮商師一起看怎麼處理。</p>
         <p class="indent">目前還沒有想脫離這行，想先建立一個規律的生活，再做一段時間。我告訴我自己， 26 歲要離開這行，明年想去香港做小姐，去另一個環境闖蕩。我期待的是另一個新視野，雖然一樣是酒店，但可以賺兩、三倍，性騷擾減少 80%，也不會喝到酒。</p>
         <p class="indent">有一種客人很假，嘴巴都說尊重小姐知道我們有苦衷，但出了事情就說，我們只不過是酒店小姐怎樣怎樣，其實心底還是看不起的。我對男人的建議，就是不要把女人想得那麼簡單，很多時候小姐懂得比客人多，尤其在酒店裡，客人不要只會自己那一套，不懂得學習，小姐會用什麼手腕，你也要知道一點。套一句脫衣舞孃的名言：<strong>「當一個老司機才能保護好你自己。」</strong></p>
-      </article>
-    </template>
-    <template v-else-if="routeParams === 'case-stories-2'">
-      <article class="story">
+      </template>
+      <template v-else-if="routeParams === 'case-stories-2'">
         <h1>小紫</h1>
         <p class="foreword">29 歲，禮服店資歷 14 個月、按摩店 2 個月，現役中。</p>
         <p class="indent"><strong>一直以來我都在演戲，演好孩子和乖學生給爸媽看，但他們都不真的了解我的狀態。</strong></p>
@@ -433,10 +421,8 @@
         <p class="indent">現在男友知道我的工作，我們有講好，他同意我去工作，但就是我不跟他講工作上的事，他也不想聽，工作的事就是我自己承擔。我覺得現在狀態蠻好的，第一是有穩定伴侶，至少接受我工作，精神上不會暈船，然後現在也很清楚知道是為了錢，不會想要實踐什麼想像或證明自己。</p>
         <p class="indent">原本我以為今年暑假就能賺完三年學費，結果因為設計案接太多，導致我按摩店每週只上兩天班，大概只能賺到第一年（學費）吧。現在花最多時間的，反而是接設計案，雖然那賺不了錢。</p>
         <p class="indent">研究所面試時，教授知道我做這行，就問我入行契機，我差點跟他講說，你不知道我在休息室認識多少藝術科系學生，為了做作品和繳學費入行嗎？光是在休息室裡，我知道和我就讀同校，而且是藝術領域的最少就三個。</p>
-      </article>
-    </template>
-    <template v-else-if="routeParams === 'case-stories-3'">
-      <article class="story">
+      </template>
+      <template v-else-if="routeParams === 'case-stories-3'">
         <h1>小花</h1>
         <p class="foreword">22 歲，禮服店資歷 1 年半，現役中。</p>
         <p class="indent">我唸藝術學校的複合媒材組，做的是裝置（藝術）。我媽以前應該也是個文青，但他們不知道當代藝術在幹嘛，叫我不要搞這些有的沒的，不要標新立異，以後去畫廊就好。<strong>當時入行一部分原因，是做作品沒錢，又不想跟家裡拿。其實藝術相關科系蠻多人進這行，因為畫畫很需要畫材，有些人家裡可以支持，但通常會希望小孩走傳統創作，假如你想走裝置藝術，家裡不一定會支持。</strong></p>
@@ -452,10 +438,8 @@
         <p class="indent">我一開始工作時，每個月收入大概 8~12 萬元，但這行基本開銷蠻大的，沒有想像中容易存錢。比方說，以前店裡妝髮每天要 350 元，但現在要 500 元，然後每天計程車 7、800 元，公司又規定耳環、項鍊這些東西都要有，治裝費要自己出，都是開銷。但我其實花最多的，就是在吃上面，我覺得是靠亂吃東西在發洩，減輕上班的壓力，所以變胖跟這個也有關。</p>
         <p class="indent">我之前存夠錢，有稍微離開一段時間，最後一晚上班時，我甚至自掏腰包買下我自己時段，招待朋友去玩。現在又要去上班，是因為我前陣子我考上研究所，得自籌學費。我考上的研究所是社會科學相關領域的，讓家人很抓狂，我只好跟他們說，明年會再考一次藝術領域相關的。</p>
         <p class="indent">2014 年參加反教育商品化、反課綱運動後，我開始和社會運動有比較多接觸，在這之前就是支持反核，還有反媒體壟斷。後來我到一個工會幫忙作美編，現在就在另一個工會工作。我想要一邊兼職作白天的運動，也要平衡自己心理狀態，不要一天到晚想自殺。再來就是想說，可以一邊做酒店來維持工會工作，然後可以再學習。我想要把工會當本業，小姐當副業，畢竟那不太能累積，就只是賺錢，但我也不可能用工會的薪水，來維持生活費和學費開支。</p>
-      </article>
-    </template>
-    <template v-else-if="routeParams === 'case-stories-4'">
-      <article class="story">
+      </template>
+      <template v-else-if="routeParams === 'case-stories-4'">
         <h1>K</h1>
         <p class="foreword">26 歲，便服 / 便禮 / 禮服 / 鋼琴酒吧資歷 3 年，現為寵物美容師。</p>
         <p class="indent">我家裡管很嚴，我媽是那種會威脅我說，如果去網咖就要打斷我腳的那種。小時候我有個好朋友家裏就是開酒店的，家人雖然有帶我去過酒店，但後來就禁止我跟那個朋友來往，但我不管，因為我對這方面沒什麼負面觀感。我那朋友後來進酒店工作，她雖然笨了點，但我感覺她過得很開心。</p>
@@ -474,10 +458,8 @@
         <p class="indent">那件事情後，我強制被送回老家跟媽媽住了一段時間，再之後偶爾都還會接到社會局電話，問我最近心情好不好。其實我自殺過好幾次，但我不會說這些都和酒店有關，因為我本來就蠻容易焦慮，然後會覺得全身感覺不到任何東西。</p>
         <p class="indent">我在酒店斷斷續續待了 3 年，但因為我一直都有在做動物救援，錢也都花在上面，所以幾乎沒把錢存下來。不過錢本來就不是我追求的東西，畢竟當初入行的原因，也是為了救動物。現在我就還養了三隻貓和一隻狗，客廳也還有兩隻中途貓，陽台兩隻鳥，這是我想做的事情，很奇怪的是牠們好像也都會主動找上我，在路上走著走著就會有鴿子從樹上掉到我面前。</p>
         <p class="indent">現在轉行當經紀了，但因為我手上小姐很少，所以那也賺不了錢，每個月才幾千元。我目前的主要收入來源還是寵物美容，每天就幫貓洗澡。自己當經紀後，反而希望小姐快點上岸，這種心情蠻矛盾的。</p>
-      </article>
-    </template>
-    <template v-else-if="routeParams === 'case-stories-5'">
-      <article class="story">
+      </template>
+      <template v-else-if="routeParams === 'case-stories-5'">
         <h1>拉拉</h1>
         <p class="foreword">26 歲，制/禮服店資歷兩年，現役中。</p>
         <p class="indent"><strong>做這行，會撒嬌和長相最重要，因為這是第一印象，沒有這東西的話誰要點妳檯？當然也有很多瞎妹只有外表，坐下之後太瞎被卡檯。</strong></p>
@@ -505,10 +487,8 @@
         <p class="indent">為什麼恐慌症的人可以去扮演那些角色，甚至去情緒勒索別人？我覺得是經紀人讓我很安心，覺得有後盾，我就敢去做這些事情。</p>
         <p class="indent">我覺得自己很需要被人家需要，因為我不需要我自己。我不喜歡我自己，可能因為從小被否定，加上自己在乎的東西都沒了，最早的夢想、約定都已經失去，預定的目標都不可能實現了，所以只能選擇次要的東西，但那不是自己最想要的。</p>
         <p class="indent">我現在最想做的，是回大學把書唸完，但同時也待在這行業，和經紀人他們一起把事情做好。現在男友互動起來也蠻有趣的，因為我不是處於一個被消耗的狀態。這男友雖然想要叫我不要做，但他還沒辦法養我，說覺得我有需要的話，可以繼續做，我覺得得到支持了，就很開心。</p>
-      </article>
-    </template>
-    <template v-else-if="routeParams === 'case-stories-6'">
-      <article class="story">
+      </template>
+      <template v-else-if="routeParams === 'case-stories-6'">
         <h1>冰女王</h1>
         <p class="foreword">23歲，禮制店 / 便禮店資歷 3 年，SM 女王現役中。</p>
         <p class="indent"><strong>可以在最年輕的時候在最短時間理解這個社會，能存到錢賺到錢又能了解這世界在幹嘛，又能偷聽到很多高級社會在運作的內幕，也有企業成功的辦法，我覺得還不錯。酒店就是社會的縮影。</strong></p>
@@ -540,8 +520,8 @@
         <p class="indent">SM 的專業，就是拿捏安全性還有玩弄人性，例如怎麼羞辱人。我打人時不會有性的愉悅，但會興奮，會有優越感。我在酒店時找到我的定位和這條路，形象塑造好之後，開始有人追求，那是我喜歡的虛榮感，覺得我有魅力有人喜歡，這是我想得到的生活快感。</p>
         <p class="indent">網路上很多女生在做八大，對性和 SM 接受度都很高，她們有些人也開始自稱女王要進 SM 市場，可是她們會覺得 SM 跟性有關，所以羞辱完就要幫男人弄出來，網路宣傳還說自己是舒壓按摩館，這等於是羞辱女王名號。這樣哪是女王？現在等於是女的都能當女王是怎樣？</p>
         <p class="indent">女王不是在提供服務的，是奴要來服務，付錢只是門檻，付了錢你就可以跟我呼吸一樣的空氣。至於你有沒有機會被我打，還要事先談過才知道。</p>
-      </article>
-    </template>
+      </template>
+    </article>
     <nav v-if="isCaseStories" class="case-list">
       <a
         v-show="routeParams !== 'case-stories-1'"
@@ -627,13 +607,14 @@
         <img src="/proj-assets/hotel-hostess/images/share-gplus.png">
       </a>
     </footer>
-    <section v-if="pageUrl" class="comment">
-      <div class="fb-comments" :data-href="pageUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
+    <section class="comment">
+      <div v-if="pageUrl" class="fb-comments" :data-href="pageUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
   </main>
 </template>
 <script>
 import Logo from '../Logo.vue';
+import { elmYPosition } from 'kc-scroll';
 import { getFBCommentsUrl } from '../../util/comm'
 
 const PROJECT_NAME = 'hotel-hostess-series';
@@ -659,6 +640,9 @@ export default {
   },
   data() {
     return {
+      gaScroll: 0,
+      gaScrollPos: [20, 40, 50, 60, 80, 100],
+      gaScrollTop: [],
       openMenu: false,
       pageUrl: '',
     };
@@ -688,18 +672,30 @@ export default {
       this.$router.replace({ path: '/project/hotel-hostess' });
     }
   },
-  beforeMount() {
-    this.pageUrl = getFBCommentsUrl();
-  },
   mounted() {
-    // if (document.querySelector('.heading')) {
-    //   document.querySelector('.heading').classList.remove('blur')
-    // }
+    this.pageUrl = getFBCommentsUrl();
+    this.$_hotelHostess_initGAScrollPos();
+    window.addEventListener('scroll', this.$_hotelHostess_handleScrollGAEvent)
     ga('send', 'pageview');
   },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.$_hotelHostess_handleScrollGAEvent)
+  },
   methods: {
-    $_hotelHostess_handleClickGAEvent (label) {
+    $_hotelHostess_handleClickGAEvent(label) {
       ga('send', 'event', 'projects', 'click', label, { nonInteraction: false })
+    },
+    $_hotelHostess_handleScrollGAEvent(e) {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      for (let [index, value] of this.gaScrollTop.entries()) {
+        if (value > scrollTop) {
+          if (index > this.gaScroll) {
+            this.gaScroll = index
+            ga('send', 'event', 'projects', 'scroll', `${this.gaScrollPos[index - 1]}%`, { nonInteraction: false })
+          }
+          return
+        }
+      }
     },
     $_hotelHostess_handleTouchStart(e) {
       if (e.target.classList.contains('item')) {
@@ -714,6 +710,15 @@ export default {
       } else {
         e.target.parentNode.classList.remove('touch');
       }
+    },
+    $_hotelHostess_initGAScrollPos() {
+      const story = document.querySelector('.story')
+      const storyHeight = story.offsetHeight || 0;
+      const gaHeight = elmYPosition('article') + storyHeight - this.$store.state.viewport[1]
+      this.gaScrollTop = [];
+      this.gaScrollPos.map((percent) => {
+        this.gaScrollTop.push(gaHeight * percent / 100);
+      })
     },
   },
 };
@@ -824,9 +829,9 @@ export default {
       bottom 30px
     > button
       position fixed
-      top 25px
+      top 15px
       right 15px
-      z-index 100
+      z-index 900
       border none
       cursor pointer
       outline none
@@ -908,9 +913,10 @@ export default {
         background-color #c9c9c9
       > div
         position relative
-        left -12.5%
-        width 125%
+        left -25px
+        width calc(100% + 50px)
         margin 20px 0 40px
+        overflow-x hidden
     .alert
       margin-top 20px
       p
