@@ -10,9 +10,9 @@
     <section class="hotel-hostess__bg color" />
     <div class="credit mobile">
       <p>文字、攝影：鐘聖雄</p>
-      <p>Model：山貓</p>
       <p>網頁：HY Tan</p>
       <p>設計：許玲瑋</p>
+      <p>Model：山貓</p>
       <p>特別感謝：妹子與酒</p>
       <p>、席耶娜、王世倫</p>
     </div>
