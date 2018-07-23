@@ -721,7 +721,7 @@
       </a>
     </nav>
     <section class="comment">
-      <div class="fb-comments" data-href="http://www.readr.tw/project/hotel-hostess" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
+      <div class="fb-comments" data-href="https://www.readr.tw/project/hotel-hostess" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
   </main>
 </template>
@@ -739,7 +739,7 @@ export default {
   },
   metaInfo() {
     const metaUrl = `${PROJECT_NAME}/${this.$route.params.params}`;
-    const metaImage = `${PROJECT_NAME}/images/og.jpg`;
+    const metaImage = `hotel-hostess/images/og.jpg`;
     const ogLocale = 'zh_TW';
 
     return {
