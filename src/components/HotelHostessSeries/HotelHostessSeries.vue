@@ -1062,6 +1062,7 @@ export default {
       letter-spacing 1.5px
       &.indent
         font-size 1.3125rem
+        line-height 1.7
       strong
         font-weight 700
         box-shadow none
