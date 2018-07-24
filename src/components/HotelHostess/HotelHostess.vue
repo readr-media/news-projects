@@ -13,7 +13,7 @@
       <p>網頁：HY Tan</p>
       <p>設計：許玲瑋</p>
       <p>Model：山貓</p>
-      <p>特別感謝：妹子與酒</p>
+      <p>特別感謝：酒與妹仔的日常</p>
       <p>、席耶娜、王世倫</p>
     </div>
     <div class="heading--desktop">
@@ -140,7 +140,7 @@
               <div class="credit">
                 <p>文字、攝影：鐘聖雄<span></span>Model：山貓</p>
                 <p>網頁：HY Tan<span></span>設計：許玲瑋</p>
-                <p>特別感謝：妹子與酒、席耶娜、王世倫</p>
+                <p>特別感謝：酒與妹仔的日常、席耶娜、王世倫</p>
               </div>
               <div class="share">
                 <a
@@ -196,7 +196,7 @@
           </a>
         </div>
         <div class="credit">
-          <p>文字、攝影：鐘聖雄<span></span>網頁：HY Tan<span></span>設計：許玲瑋<span></span>Model：山貓<span></span>特別感謝：妹子與酒、席耶娜、王世倫</p>
+          <p>文字、攝影：鐘聖雄<span></span>網頁：HY Tan<span></span>設計：許玲瑋<span></span>Model：山貓<span></span>特別感謝：酒與妹仔的日常、席耶娜、王世倫</p>
         </div>
       </footer>
     </template>
