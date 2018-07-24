@@ -1152,11 +1152,14 @@ export default {
       margin-top 30px
       cursor pointer
       text-decoration none
+      animation-fill-mode forwards
       &:hover
         h2
-          color #e4007f
+          animation rainbow 2s linear
+          animation-fill-mode forwards
         > span
-          color #e4007f
+          animation rainbow 2s linear
+          animation-fill-mode forwards
       h2
         position relative
         margin 0
@@ -1212,6 +1215,24 @@ export default {
   .comment
     margin-top 20px
     padding 0 25px 50px
+
+@keyframes rainbow {
+  20% {
+    color #f16600
+  }
+  40% {
+    color #8d27e0
+  }
+  60% {
+    color #3ac822
+  }
+  80% {
+    color #0063a8
+  }
+  100% {
+    color #e4007f
+  }
+}
 
 @media (min-width: 768px)
   .hotel-hostess-series
