@@ -720,6 +720,7 @@
         <span>五、姐妹</span>
       </a>
     </nav>
+    <related-reports class="related"></related-reports>
     <section class="comment">
       <div class="fb-comments" data-href="https://www.readr.tw/project/hotel-hostess" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
@@ -727,8 +728,10 @@
 </template>
 <script>
 import Logo from '../Logo.vue';
+import RelatedReports from '../RelatedReports.vue';
 import { elmYPosition } from 'kc-scroll';
 import { getFBCommentsUrl } from '../../util/comm'
+import { throttle } from 'lodash'
 
 const PROJECT_NAME = 'hotel-hostess-series';
 
@@ -736,6 +739,7 @@ export default {
   name: 'HotelHostessSeries',
   components: {
     'app-logo': Logo,
+    'related-reports': RelatedReports,
   },
   metaInfo() {
     const metaUrl = `${PROJECT_NAME}/${this.$route.params.params}`;
@@ -807,7 +811,7 @@ export default {
     $_hotelHostess_handleClickGAEvent(label) {
       ga('send', 'event', 'projects', 'click', label, { nonInteraction: false })
     },
-    $_hotelHostess_handleScrollGAEvent(e) {
+    $_hotelHostess_handleScrollGAEvent: throttle(function() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       for (let [index, value] of this.gaScrollTop.entries()) {
         if (value > scrollTop) {
@@ -818,7 +822,7 @@ export default {
           return
         }
       }
-    },
+    }, 1000),
     $_hotelHostess_handleTouchStart(e) {
       if (e.target.classList.contains('item')) {
         e.target.classList.add('touch');
@@ -1360,5 +1364,7 @@ export default {
     .share
       justify-content flex-start
       padding 50px 0 50px 10%
-    
+    .related
+      width 80%
+      padding 20px 20% 20px 10%
 </style>
