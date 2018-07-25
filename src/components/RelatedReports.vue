@@ -99,9 +99,9 @@ export default {
 
 .related-reports
   position relative
-  padding 20px
   > div
-    width 100%
+    width calc(100% - 40px)
+    margin 0 auto
   button
     display block
     width 100%
@@ -112,7 +112,7 @@ export default {
     outline none 
 .report
   display block
-  padding 25px 0
+  padding 25px 20px
   text-decoration none
   transition background-color .5s
   h1, p
@@ -142,7 +142,6 @@ export default {
     background-color #fff
   .report
     color #fff
-    background-color #000
     &:hover
       background-color #434343
 .related-reports.white
@@ -152,7 +151,6 @@ export default {
     background-color #000
   .report
     color #000
-    background-color #fff
     &:hover
       background-color #dbdbdb
 
@@ -161,6 +159,7 @@ export default {
     display flex
     flex-wrap wrap
     justify-content flex-start
+    padding 0 20px
     button
       width calc((100% - 60px) / 3)
       margin 0 auto
