@@ -21,7 +21,7 @@ export function setMmCookie () {
 export function getFBCommentsUrl () {
   if (process.env.VUE_ENV === 'client') {
     const path = location.pathname.slice(1)
-    const projectName = location.pathname.split('/')[2]
+    const projectName = location.pathname.replace('/project/', '')
     if (location.hostname.indexOf(READR_DOMAIN_PROD) !== -1) {
       return `${READR_SITE_URL}${projectName}`
     }
