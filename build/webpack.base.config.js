@@ -24,7 +24,10 @@ module.exports = {
     }
   },
   module: {
-    noParse: /es6-promise\.js$/, // avoid webpack shimming process
+    // noParse: /es6-promise\.js$/, // avoid webpack shimming process
+    noParse: [
+      /es6-promise\.js$/, // avoid webpack shimming process
+    ],
     rules: [
       {
         test: /\.vue$/,

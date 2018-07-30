@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import buttonToogleActive from '../../mixins/buttonToogleActive'
+import ButtonToogleActive from '../../mixins/ButtonToogleActive'
 
 export default {
   props: {
@@ -34,7 +34,7 @@ export default {
       required: true,
     },
   },
-  mixins: [ buttonToogleActive ],
+  mixins: [ ButtonToogleActive ],
   data () {
     return {
       NAVIGATE_HINT_WORDING: {

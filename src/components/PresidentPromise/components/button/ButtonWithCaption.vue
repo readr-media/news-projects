@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import buttonToogleActive from '../../mixins/buttonToogleActive'
+import ButtonToogleActive from '../../mixins/ButtonToogleActive'
 
 export default {
   // props: {
@@ -26,7 +26,7 @@ export default {
   //     type: String,
   //   },
   // },
-  mixins: [ buttonToogleActive],
+  mixins: [ ButtonToogleActive],
   methods: {
     toggleLightbox () {
       this.$emit('toggleLightbox')

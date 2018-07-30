@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import buttonToogleActive from '../../../mixins/buttonToogleActive'
+import ButtonToogleActive from '../../../mixins/ButtonToogleActive'
 
 export default {
-  mixins: [ buttonToogleActive ],
+  mixins: [ ButtonToogleActive ],
   methods: {
     fadeDimmedOut () {
       this.$emit('fadeDimmedOut')

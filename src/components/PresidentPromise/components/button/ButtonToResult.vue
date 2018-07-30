@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import buttonToogleActive from '../../mixins/buttonToogleActive'
+import ButtonToogleActive from '../../mixins/ButtonToogleActive'
 import fullPageMixin from '../../_vue-fullpage/fullPageMixin'
 
 export default {
-  mixins: [ buttonToogleActive, fullPageMixin ],
+  mixins: [ ButtonToogleActive, fullPageMixin ],
   methods: {
     clicked () {
       this.moveTo('section-result')
