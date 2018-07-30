@@ -1,9 +1,6 @@
 import { get, isEmpty, } from 'lodash'
 import { PROJECTS_BELONGS_MM, MM_SITE_NAME, READR_SITE_NAME, MM_SITE_URL, READR_SITE_URL, MM_SITE_ASSETS_URL, READR_SITE_ASSETS_URL, } from '../../../constants'
 
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters, } = createNamespacedHelpers('PoliticalContribution')
-
 const getMetaInfo = (vm) => {
   const { metaInfo } = vm.$options
   if (metaInfo) {
@@ -15,9 +12,9 @@ const getMetaInfo = (vm) => {
 
 export default {
   computed: {
-    ...mapGetters([
-      'slug',
-    ]),
+    slug () {
+      return this.$route.params.params
+    },
     isUrlQueryValid () {
       return isEmpty(this.$route.query) || (('name' in this.$route.query) && ('ordinal' in this.$route.query))
     },
