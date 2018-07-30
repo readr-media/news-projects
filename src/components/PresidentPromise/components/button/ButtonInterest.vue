@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ButtonToogleActive from '../../mixins/ButtonToogleActive'
+import ButtonToogleActive from '../../mixins/ButtonToogledActive'
 
 export default {
   props: {
