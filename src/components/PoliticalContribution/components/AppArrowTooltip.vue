@@ -21,7 +21,7 @@ export default {
   text-align center
   padding 5px 0
   // border-radius 6px
-  position relative
+  // position relative
   &:after
     content ""
     position absolute

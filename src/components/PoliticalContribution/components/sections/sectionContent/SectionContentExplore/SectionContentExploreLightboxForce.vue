@@ -101,7 +101,7 @@ export default {
 
 <style lang="stylus" scoped>
 .section-content-explore-lightbox-force
-  position relative
+  // position relative
   display flex
   flex-direction column
   &__header
