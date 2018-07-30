@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import buttonToogleActive from '../../mixins/buttonToogleActive'
+import ButtonToogleActive from '../../mixins/ButtonToogleActive'
 import { categories } from '../../constants'
 
 export default {
@@ -27,7 +27,7 @@ export default {
       required: true,
     }
   },
-  mixins: [ buttonToogleActive ],
+  mixins: [ ButtonToogleActive ],
   data () {
     return {
       categories

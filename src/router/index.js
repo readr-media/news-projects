@@ -1,4 +1,4 @@
-import { PROJECTS, PROJECTS_BELONGS_MM, PROJECTS_USE_DEPRECATED_GA, READR_GA_ID, READR_GA_ID_DEPRECATED, MM_GA_ID } from '../constants'
+import { PROJECTS, PROJECTS_BELONGS_MM, PROJECTS_USE_DEPRECATED_GA, READR_GA_ID, READR_GA_ID_DEPRECATED, MM_GA_ID, PROJECTS_PREVENT_SCROLL_BEHAVIOR } from '../constants'
 import { get } from 'lodash'
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -13,7 +13,11 @@ export function createRouter () {
   return new Router({
     mode: 'history',
     fallback: false,
-    scrollBehavior: () => ({ y: 0 }),
+    scrollBehavior: (to, from) => {
+      if (!PROJECTS_PREVENT_SCROLL_BEHAVIOR.includes(to.params.project)) {
+        return { y: 0 }
+      }
+    },
     routes: [
       {
         path: '/project/:project/:params?', component: Project, beforeEnter: (to, from, next) => {

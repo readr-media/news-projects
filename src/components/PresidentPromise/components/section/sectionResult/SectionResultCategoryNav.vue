@@ -14,7 +14,7 @@
 
 <script>
 import { get, } from 'lodash'
-import buttonToogleActive from '../../../mixins/buttonToogleActive'
+import ButtonToogleActive from '../../../mixins/ButtonToogleActive'
 import ButtonResultCategoryTab from '../../button/ButtonResultCategoryTab.vue'
 import { categories } from '../../../constants'
 import Vue from 'vue'
@@ -38,7 +38,7 @@ export default {
   components: {
     ButtonResultCategoryTab
   },
-  mixins: [ buttonToogleActive ],
+  mixins: [ ButtonToogleActive ],
   data () {
     return {
       categories,

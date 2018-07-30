@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import buttonToogleActive from '../../mixins/buttonToogleActive'
+import ButtonToogleActive from '../../mixins/ButtonToogleActive'
 
 export default {
-  mixins: [ buttonToogleActive ],
+  mixins: [ ButtonToogleActive ],
   methods: {
     clicked () {
       this.$store.commit('PresidentPromise/CLICK_LANDING_BUTTON')

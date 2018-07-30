@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import buttonToogleActive from '../../mixins/buttonToogleActive'
+import ButtonToogleActive from '../../mixins/ButtonToogleActive'
 
 export default {
   props: {
@@ -20,7 +20,7 @@ export default {
       default: false,
     }
   },
-  mixins: [ buttonToogleActive ],
+  mixins: [ ButtonToogleActive ],
 }
 </script>
 

@@ -16,6 +16,7 @@ export default {
   'marathon': 'Marathon',
   'newtype': 'Newtype',
   'president-promise': 'PresidentPromise',
+  'political-contribution': 'PoliticalContribution',
   
   //'proj1': 'Proj1',
 }
