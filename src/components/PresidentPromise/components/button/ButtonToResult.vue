@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import ButtonToogleActive from '../../mixins/ButtonToogleActive'
+import ButtonToogleActive from '../../mixins/ButtonToogledActive'
 import fullPageMixin from '../../_vue-fullpage/fullPageMixin'
 
 export default {
