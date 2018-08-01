@@ -21,7 +21,11 @@
       <!-- section below will be replace by contents -->
       <main class="section-content__main-section" :is="renderedSectionContent"></main>
     </transition>
-    <SectionContentFooter v-show="showFooter" class="section-content__footer"/>
+    <SectionContentFooter
+      v-show="showFooter"
+      class="section-content__footer"
+      :isFooterShow="showFooter"
+    />
   </section>
 </template>
 
@@ -105,7 +109,7 @@ export default {
       this.scrollerFooter = window.scrollama()
       this.scrollerFooter
         .setup({
-          step: '.section-content__footer',
+          step: '.section-content-footer__container',
           offset: 1,
         })
         .onStepEnter(this.footerHandleStepEnter)
@@ -118,8 +122,10 @@ export default {
       this.showAsideNav = false
     },
     footerHandleStepExit ({ element, index, direction }) {
-      this.isFooterAppear = false
-      this.showAsideNav = true
+      if (direction === 'up') {
+        this.isFooterAppear = false
+        this.showAsideNav = true
+      }
     },
     scrollerFooterResizeHandler () {
       this.scrollerFooter.resize()
@@ -140,7 +146,7 @@ export default {
     // Perform a auto scroll while section content component has mounted, and hasn't exist before
     // scenario like: user visit path /political-contribution/story1 directly, or
     //                user has navigate a router link on landing page while visited landing page previously, section content compoent still not rendered before
-    // this.$scrollTo('.section-content')
+    this.$scrollTo('.section-content')
   },
   destoryed () {
     window.removeEventListener('resize', this.scrollerSectionContentResizeHandler)

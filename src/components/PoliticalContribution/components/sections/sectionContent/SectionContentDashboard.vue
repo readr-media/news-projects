@@ -224,7 +224,6 @@ export default {
     top 60px
     z-index 10003
     &--sticky
-      z-index 10006
       position fixed
       top 60px
       background-color #eaeaea

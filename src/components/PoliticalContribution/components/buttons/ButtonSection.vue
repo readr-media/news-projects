@@ -5,7 +5,11 @@
     @mouseout="toggleActive"
     :style="[ isActive ? { 'width': `${buttonWidth + hintWidth}px` } : { 'width': `${buttonWidth}px` } ]"
   >
-    <div :class="[ 'button-section__icon', { 'button-section__icon--router-link-active': routerLinkActive } ]" :style="{ maskImage: `url(/proj-assets/political-contribution/${iconSrc})` }"></div>
+    <div
+      :class="[ 'button-section__icon', { 'button-section__icon--router-link-active': routerLinkActive } ]"
+      :style="{ maskImage: `url(/proj-assets/political-contribution/${iconSrc})` }"
+    >
+    </div>
     <p :class="[ 'button-section__hint', { 'button-section__hint--active': isActive } ]" v-text="hintWording"></p>
   </button>
 </template>

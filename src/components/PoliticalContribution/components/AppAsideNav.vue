@@ -139,7 +139,7 @@ export default {
         visibility visible
         opacity 1
   &__tooltip
-    position absolute
+    position absolute !important
     top 0
     left 300%
     z-index 10
@@ -147,8 +147,8 @@ export default {
     visibility hidden
     opacity 0
     transition opacity 1s
-    width max-content
-    padding 5px 10px
+    width max-content !important
+    padding 5px 10px !important
     box-sizing content-box // For fixing width max-content issue in dafari
 
 .router-link-exact-active
