@@ -1,4 +1,6 @@
 import { flatten, } from 'lodash'
+import { CORP_NAMES, } from './namesCorp'
+import { CANDIDATES_SEVENTH, CANDIDATES_EIGHTH, CANDIDATES_NINTH, } from './namesCandidate'
 
 export const SLUG_CONTENT_SECTION_EXPLORE = 'explore'
 export const SLUG_CONTENT_SECTION_DASHBOARD = 'dashboard'
@@ -24,20 +26,25 @@ export const DATA = {
     oridinalNum: 7,
     spreadsheetIdBasic: '1NsK-zleOz4nUvrkx4iAfeHTy7FU6Puh8aOyIChoCDrA',
     spreadsheetIdCompanyDonate: '1UnntluUcK7KRrkC7rUBjMiPG71YJCWtDb8NvF6ipqfI',
+    candidateNames: CANDIDATES_SEVENTH
   },
   eighth: {
     ordinal: 'eighth',
     oridinalNum: 8,
     spreadsheetIdBasic: '1qlJz3dXyA5YjugzUK2hj0bYPz8xXBjlUCIwrAoGu7A8',
     spreadsheetIdCompanyDonate: '1Rp4L-VZAGopLi2TeNbLlsz8qPYlFcKiXJcClSPdJvT0',
+    candidateNames: CANDIDATES_EIGHTH
   },
   ninth: {
     ordinal: 'ninth',
     oridinalNum: 9,
     spreadsheetIdBasic: '1ytZDez78Qbp9eTKwkbVWdFYYtYQ-0-RJQ3ZEBGzTTw0',
     spreadsheetIdCompanyDonate: '1j_4biqRjYCcnCBELsafrk6Ocm046cwqvPfwY8SHQUyk',
+    candidateNames: CANDIDATES_NINTH
   },
 }
+
+export const SEVENTH_EIGHT_NINTH_VALID_CORP_NAMES = CORP_NAMES
 
 export const COUNTY_SORT = [
   '基隆市',

@@ -1,5 +1,6 @@
 import { get, isEmpty, } from 'lodash'
 import { PROJECTS_BELONGS_MM, MM_SITE_NAME, READR_SITE_NAME, MM_SITE_URL, READR_SITE_URL, MM_SITE_ASSETS_URL, READR_SITE_ASSETS_URL, } from '../../../constants'
+import { DATA, SEVENTH_EIGHT_NINTH_VALID_CORP_NAMES } from '../constants'
 
 const getMetaInfo = (vm) => {
   const { metaInfo } = vm.$options
@@ -13,23 +14,51 @@ const getMetaInfo = (vm) => {
 export default {
   computed: {
     slug () {
-      return this.$route.params.params
+      return get(this.$route, [ 'params', 'params' ], '')
     },
     isUrlQueryValid () {
       return isEmpty(this.$route.query) || (('name' in this.$route.query) && ('ordinal' in this.$route.query))
     },
     showLightbox () {
       return !isEmpty(this.$route.query) && this.isUrlQueryValid
+    },
+    // TODO: refactor to comm logics
+    queryOrdinalNum () {
+      return get(this.$route.query, 'ordinal', -1)
+    },
+    queryOrdianlString () {
+      switch (this.queryOrdinalNum) {
+        case '7':
+          return 'seventh'
+        case '8':
+          return 'eighth'
+        case '9':
+          return 'ninth'
+        default:
+          return ''
+      }
+    },
+    isQueryOrdinalNumValid () {
+      return ['7', '8', '9'].includes(this.queryOrdinalNum)
+    },
+    queryName () {
+      return get(this.$route.query, 'name', '')
+    },
+    isQueryNameValid () {
+      const candidateNames = get(DATA, [ this.queryOrdianlString, 'candidateNames' ], [])
+      const corpNames = SEVENTH_EIGHT_NINTH_VALID_CORP_NAMES
+
+      return candidateNames.includes(this.queryName) || corpNames.includes(this.queryName)
     }
   },
   metaInfo () {
     switch (this.slug) {
       case 'explore':
-        if (this.showLightbox) {
+        if (this.showLightbox && this.isQueryOrdinalNumValid && this.isQueryNameValid) {
           return {
-            title: `查找政商關係 - ${this.$route.query.name} - 第 ${this.$route.query.ordinal} 屆`,
-            description: `查找政商關係 - ${this.$route.query.name} - 第 ${this.$route.query.ordinal} 屆`,
-            metaUrl: `political-contribution/explore?name=${this.$route.query.candidate}&ordinal=${this.$route.query.ordinal}`,
+            title: `查找政商關係 - ${this.queryName} - 第 ${this.queryOrdinalNum} 屆`,
+            description: `查找政商關係 - ${this.queryName} - 第 ${this.queryOrdinalNum} 屆`,
+            metaUrl: `political-contribution/explore?name=${this.queryName}&ordinal=${this.queryOrdinalNum}`,
             metaImage: 'political-contribution/explore/ogimage-showLightbox.jpg'
           }
         } else {

@@ -5,8 +5,8 @@
     </a>
     <h1 class="section-landing-titles__h1">政治獻金 2.0</h1>
     <h2 class="section-landing-titles__h2">副標題副標題副標題</h2>
-    <router-link to="/project/political-contribution/story1" @click.native="routerLinkClicked">to story1</router-link>
-    <router-link to="/project/political-contribution/story2" @click.native="routerLinkClicked">to story2</router-link>
+    <!-- <router-link to="/project/political-contribution/story1" @click.native="routerLinkClicked">to story1</router-link> -->
+    <!-- <router-link to="/project/political-contribution/story2" @click.native="routerLinkClicked">to story2</router-link> -->
   </div>
 </template>
 
@@ -20,21 +20,21 @@ export default {
       isSectionContentRendered: false,
     }
   },
-  methods: {
-    routerLinkClicked () {
-      if (!this.isSectionContentRendered) {
-        const sectionContent = document.querySelector('.section-content')
-        if (sectionContent) {
-          this.isSectionContentRendered = true
-        }
-      }
+  // methods: {
+  //   routerLinkClicked () {
+  //     if (!this.isSectionContentRendered) {
+  //       const sectionContent = document.querySelector('.section-content')
+  //       if (sectionContent) {
+  //         this.isSectionContentRendered = true
+  //       }
+  //     }
 
-      // Perform a auto scroll while section content component is already exist
-      if (this.isSectionContentRendered) {
-        this.$scrollTo('.section-content')
-      }
-    },
-  },
+  //     // Perform a auto scroll while section content component is already exist
+  //     if (this.isSectionContentRendered) {
+  //       this.$scrollTo('.section-content')
+  //     }
+  //   },
+  // },
 }
 </script>
 
@@ -47,7 +47,7 @@ export default {
   left 11.4%
   &__readr-link
     display inline-block
-    margin 0 0 58px 0
+    margin 0 0 38px 0
   &__readr-logo
     width 80px
     height 80px

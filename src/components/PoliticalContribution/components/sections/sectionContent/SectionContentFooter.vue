@@ -1,37 +1,57 @@
 <template>
   <footer class="section-content-footer">
-    <div class="section-content-footer__related-title">相關文章</div>
-    <ul class="section-content-footer__related-list">
-      <router-link class="section-content-footer__related-list-item-link" to="story1" v-scroll-to="'.section-content'">
-        <li class="section-content-footer__related-list-item">選一次立委，金流超過 28 億！</li>
-      </router-link>
-      <router-link class="section-content-footer__related-list-item-link" to="story2" v-scroll-to="'.section-content'">
-        <li class="section-content-footer__related-list-item">立委篇／老鳥與新秀，募款能力差了 6.6 倍</li>
-      </router-link>
-      <router-link class="section-content-footer__related-list-item-link" to="story3" v-scroll-to="'.section-content'">
-        <li class="section-content-footer__related-list-item">企業篇／金權遊戲？翻開金主的投資名冊</li>
-      </router-link>
-      <router-link class="section-content-footer__related-list-item-link" to="story4" v-scroll-to="'.section-content'">
-        <li class="section-content-footer__related-list-item">政治獻金開放了嗎？</li>
-      </router-link>
-      <router-link class="section-content-footer__related-list-item-link" to="story5" v-scroll-to="'.section-content'">
-        <li class="section-content-footer__related-list-item">2.0-1</li>
-      </router-link>
-      <router-link class="section-content-footer__related-list-item-link" to="story6" v-scroll-to="'.section-content'">
-        <li class="section-content-footer__related-list-item">2.0-2</li>
-      </router-link>
-    </ul>
+    <div class="section-content-footer__container">
+      <div class="section-content-footer__related-title">相關文章</div>
+      <ul class="section-content-footer__related-list">
+        <li class="section-content-footer__related-list-item" @click="navigateTo('story1')">選一次立委，金流超過 28 億！</li>
+        <li class="section-content-footer__related-list-item" @click="navigateTo('story2')">立委篇／老鳥與新秀，募款能力差了 6.6 倍</li>
+        <li class="section-content-footer__related-list-item" @click="navigateTo('story3')">企業篇／金權遊戲？翻開金主的投資名冊</li>
+        <li class="section-content-footer__related-list-item" @click="navigateTo('story4')">政治獻金開放了嗎？</li>
+        <li class="section-content-footer__related-list-item" @click="navigateTo('story5')">2.0-1</li>
+        <li class="section-content-footer__related-list-item" @click="navigateTo('story6')">2.0-2</li>
+      </ul>
+    </div>
+    <AppParticles class="section-content-footer__particles" id="section-content-footer-particles" :isFooterShow="isFooterShow"/>
   </footer>
 </template>
 
+<script>
+import AppParticles from '../../AppParticles.vue'
+
+export default {
+  props: {
+    isFooterShow: {
+      type: Boolean,
+      required: true,
+    }
+  },
+  components: {
+    AppParticles,
+  },
+  methods: {
+    navigateTo(route) {
+      this.$router.push(route)
+      this.$scrollTo('.section-content')
+    }
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
 .section-content-footer
-  height 271px
-  background-color #9e005d
+  height calc(271px + 271px / 2)
   display flex
-  align-items center
+  align-items flex-end
   overflow hidden
   position relative
+  &__container
+    width 100%
+    height 271px
+    display flex
+    align-items center
+    overflow hidden
+    position relative
+    background-color #9e005d
   &__related-title
     width 400px
     height 400px
@@ -53,7 +73,8 @@
     width 900px
     margin 0 auto
     padding 0 0 0 20px
-  &__related-list-item-link
+  &__related-list-item
+    cursor pointer
     text-decoration none
     font-size 19px
     font-weight normal
@@ -62,16 +83,18 @@
     line-height 1.5
     letter-spacing normal
     color #ffffff
-  &__related-list-item
     border-bottom 2px solid transparent
     transition border-bottom .25s
     margin 3px 0
     width max-content
     &:hover
       border-bottom 2px solid white
-
-.router-link-exact-active
-  display none
+  &__particles
+    position absolute
+    right calc((100vw - 900px) / 2 / 2)
+    bottom calc(271px / 2)
+    width 150px
+    height 271px
 
 @media (max-width 1650px)
   .section-content-footer

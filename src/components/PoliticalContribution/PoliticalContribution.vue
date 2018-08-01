@@ -37,6 +37,9 @@ export default {
       'showSectionContent'
     ])
   },
+  mounted () {
+    window.ga('send', 'pageview')
+  }
 }
 </script>
 

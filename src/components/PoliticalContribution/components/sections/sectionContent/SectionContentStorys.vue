@@ -564,7 +564,7 @@ export default {
 
 <style lang="stylus" scoped>
 .section-content-story
-  padding 167px 0 !important
+  padding 167px 0 32px 0 !important
   &__title
     font-size 46px
     font-weight 600
