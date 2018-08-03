@@ -328,7 +328,7 @@ export default {
         .style('fill', 'transparent')
         .remove()
       if (this.shouldVisualizeOrdinal !== 'ninth') {
-        d3.select('path.line-npp')
+        d3.select(`${this.containerSelector} path.line-npp`)
           .transition()
           .ease(d3.easeCubicOut)
           .duration(500)

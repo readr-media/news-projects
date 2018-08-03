@@ -82,6 +82,18 @@ export default {
       return get(getters.rawDataCompanyDonateCurrentOrdinalGroupByCandidate, getters.nameLightboxShown, [])
     }
   },
+  dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByParty : (state, getters) => {
+    return omit(groupBy(getters.dataCompanyDonateCurrentOrdinalNameLightboxShown, '推薦政黨'), [ 'undefined', '' ])
+  },
+  dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIndustryType: (state, getters) => {
+    return omit(groupBy(getters.dataCompanyDonateCurrentOrdinalNameLightboxShown, '母公司產業別'), [ 'undefined', '' ])
+  },
+  dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIsLocalCounty: (state, getters) => {
+    return omit(groupBy(getters.dataCompanyDonateCurrentOrdinalNameLightboxShown, '縣市狀態'), [ 'undefined', '' ])
+  },
+  dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIsLocalElectionState: (state, getters) => {
+    return omit(groupBy(getters.dataCompanyDonateCurrentOrdinalNameLightboxShown, '選區狀態'), [ 'undefined', '' ])
+  },
   dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByGroupOrCompany: (state, getters) => {
     return groupBy(getters.dataCompanyDonateCurrentOrdinalNameLightboxShown, returnGroupThenCompany)
   },
@@ -135,8 +147,11 @@ export default {
   nameLightboxShown: (state, getters) => {
     return state.currentLightboxShownName
   },
+  corpNamesList: (state, getters, rootState) => {
+    return Object.keys(state.corpNameTaxIdMappingGroupByName)
+  },
   isNameLightboxShownCorp: (state, getters) => {
-    return Object.keys(state.corpNameTaxIdMappingGroupByName).includes(getters.nameLightboxShown)
+    return getters.corpNamesList.includes(getters.nameLightboxShown)
   },
   nameLightboxShownGroupNameOrTaxId: (state, getters) => {
     if (getters.isNameLightboxShownCorp) {
@@ -151,7 +166,7 @@ export default {
     return getters.isQueryValidOrdinal && getters.dataBasicCurrentOrdinalCandidateUrlQuery !== undefined
   },
   isQueryValidGroupOrCompanyName: (state, getters) => {
-    return !getters.isQueryValidCandidateName && Object.keys(state.corpNameTaxIdMappingGroupByName).includes(getters.nameUrlQuery)
+    return !getters.isQueryValidCandidateName && getters.corpNamesList.includes(getters.nameUrlQuery)
   },
   isQueryValidGroup: (state, getters) => {
     const mappingObj = get(state.corpNameTaxIdMappingGroupByName, [ getters.nameLightboxShown, 0 ], {})

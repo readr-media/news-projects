@@ -290,7 +290,10 @@
       <div class="visualization">
         <h2 class="visualization__title">營利事業政治獻金組成</h2>
         <div class="chart-container">
-          <BarVerticalStackedOrdinalDonatesFrom class="chart-container__chart"/>
+          <BarVerticalStackedOrdinalDonatesFrom
+            class="chart-container__chart"
+            id="chart3-1"
+          />
         </div>
       </div>
       <div class="section-content-story__paragraph">
@@ -616,6 +619,7 @@ export default {
   &__title
     font-size 28px
     margin 0 0 20px 0
+    font-weight 500
     &--highlight
       color #9e005d
   &__subtitle
@@ -635,11 +639,49 @@ export default {
     &--wide
       width 100%
 
-@media (max-width 425px)
+@media (max-width 1024px)
+  .section-content-story
+    padding 85px 20px 25px 20px !important
+    &__title
+      font-size 40px
+      margin 0 0 14px 0
+    &__subtitle
+      font-size 24px
+    &__paragraph
+      font-size 22px
+      line-height 1.64
+      &--quote-by
+        font-size 18px
+    &__figure-img
+      width 100%
+
   .visualization
+    &__title
+      font-size 24px
     &__subtitle
       &--mobile
         display block
+
+  .chart-container
+    &__chart
+      width 100%
+      &--narrow
+        width 100%
+      &--wide
+        width 100%
+
+@media (max-width 375px)
+  .section-content-story
+    &__title
+      font-size 34px
+
+@media (max-width 320px)
+  .section-content-story
+    &__title
+      font-size 30px
+    &__paragraph
+      &--quote-by
+        font-size 16px
 </style>
 
 

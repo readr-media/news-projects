@@ -42,7 +42,7 @@ export default {
       return ['7', '8', '9'].includes(this.queryOrdinalNum)
     },
     queryName () {
-      return get(this.$route.query, 'name', '')
+      return decodeURI(get(this.$route.query, 'name', ''))
     },
     isQueryNameValid () {
       const candidateNames = get(DATA, [ this.queryOrdianlString, 'candidateNames' ], [])

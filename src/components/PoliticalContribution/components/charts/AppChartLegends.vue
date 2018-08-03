@@ -76,6 +76,6 @@ export default {
   // position relative
   // top 1px
   // right 1px
-  margin 1px 1px 0 0
+  margin 1px 1px 1px 3px
 </style>
 

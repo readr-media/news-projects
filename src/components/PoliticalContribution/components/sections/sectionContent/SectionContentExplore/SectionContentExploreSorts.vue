@@ -77,5 +77,22 @@ export default {
       color white
       border 1px solid #9e005d
       background-color #9e005d
+
+@media (max-width 1024px)
+  .section-content-explore-sorts
+    &__container
+      display flex
+      justify-content center
+      flex-wrap wrap
+    &__sort
+      width 45%
+      font-size 18px
+      &:nth-child(1), &:nth-child(2)
+        margin 0 5px 10px 5px
+
+@media (max-width 375px)
+  .section-content-explore-sorts
+    &__sort
+      font-size 14px
 </style>
 

@@ -4,7 +4,7 @@
       <SectionContentExploreRadios class="section-content-explore-candidates-won__radios"/>
       <SectionContentExploreSorts class="section-content-explore-candidates-won__sorts"/>
     </div>
-    <div v-show="fetchLoading" class="section-content-explore-candidates-won__loading-container">Loading...</div>
+    <div v-show="fetchLoading" class="section-content-explore-candidates-won__loading-container">正在讀取基本資料...</div>
     <SectionContentExploreCandidatesWonList v-show="!fetchLoading"/>
   </section>
 </template>
@@ -118,6 +118,12 @@ export default {
     margin 0 0 21px 0
   &__sorts
     margin 21px 0 0 0
+
+@media (max-width 1024px)
+  .section-content-explore-candidates-won
+    padding 265px 0 0 0
+    &__buttons
+      width 100%
 </style>
 
 

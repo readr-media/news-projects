@@ -62,6 +62,18 @@ export default {
     &--hide
       opacity 0
       pointer-events none
+
+@media (max-width 1024px)
+  .section-content-explore-lightbox-sidebar
+    width 100%
+    height auto
+    border-left none
+    &__toogle
+      display none
+    &__content
+      height auto
+    &__folded-hint
+      display none
 </style>
 
 

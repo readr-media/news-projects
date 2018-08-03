@@ -99,5 +99,52 @@ export default {
     font-weight 500
     white-space nowrap
     margin 5px 0
+
+@media (max-width 1024px)
+  .section-landing-nav
+    margin 5px 0
+    &--hint-left
+      flex-direction row
+    &__hints
+      &--right
+        margin 0 0 0 32px
+      &--left
+        margin 0 0 0 32px
+        align-items flex-start
+    &__hint
+      font-size 32px
+
+@media (max-width 425px)
+  .section-landing-nav
+    margin 5px 0
+    &--hint-left
+      flex-direction row
+    &__hints
+      &--right
+        margin 0 0 0 11px
+      &--left
+        margin 0 0 0 11px
+        align-items flex-start
+    &__hint
+      font-size 20px
+
+// @media (max-width 375px)
+//   .section-landing-nav
+//     margin 5px 0
+//     &--hint-left
+//       flex-direction row
+//     &__hints
+//       &--right
+//         margin 0 0 0 11px
+//       &--left
+//         margin 0 0 0 11px
+//         align-items flex-start
+//     &__hint
+//       font-size 20px
+
+@media (max-width 320px)
+  .section-landing-nav
+    &__hint
+      font-size 16px
 </style>
 

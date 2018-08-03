@@ -16,24 +16,41 @@
 import ButtonClose from './buttons/ButtonClose.vue'
 
 export default {
+  props: {
+    isLightboxShown: {
+      type: Boolean,
+      required: true,
+    },
+  },
   components: {
     ButtonClose,
   },
+  watch: {
+    isLightboxShown () {
+      // Calculate real viewport height repeatedly, due to mobile bottom nav bar will fade out sometimes
+      if (this.isLightboxShown && !this.$store.state.useragent.isDesktop) {
+        const realVH = this.getVH()
+        this.calcLightboxDimensions(realVH)
+      }
+    }
+  },
   methods: {
-    // calcLightboxDimensions () {
-    //   // Using JS to calculate the dimensions except using CSS viewport, in order to avoid browser's bottom nav bar causing vh inconsistent
-    //   this.$refs['app-lightbox-container'].style['height'] = `${this.$store.getters['PresidentPromise/heightMobile']}px`
-    //   this.$refs['app-lightbox-container__dimmed'].style['height'] = `${this.$store.getters['PresidentPromise/heightMobile']}px`
-    //   this.$refs['app-lightbox-container'].style['padding-top'] = `${this.$store.getters['PresidentPromise/heightMobile'] * 0.2 * 0.5}px`
-    //   this.$refs['app-lightbox'].style['height'] = `${this.$store.getters['PresidentPromise/heightMobile'] * 0.8}px`
-    // },
+    getVH () {
+      return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+    },
+    calcLightboxDimensions (realVH = this.$store.getters['heightMobile']) {
+      // Using JS to calculate the dimensions except using CSS viewport, in order to avoid browser's bottom nav bar causing vh inconsistent
+      this.$refs['app-lightbox-container'].style['height'] = `${realVH}px`
+      this.$refs['app-lightbox-container__dimmed'].style['height'] = `${realVH}px`
+      this.$refs['app-lightbox'].style['height'] = `${realVH}px`
+    },
     closeLightbox () {
       this.$emit('closeLightbox')
     }
   },
   mounted () {
     if (!this.$store.state.useragent.isDesktop) {
-      // this.calcLightboxDimensions()
+      this.calcLightboxDimensions()
     }
   },
 }
@@ -57,6 +74,7 @@ export default {
     position absolute
     top 0
     left 0
+
 .content
   position relative
   &__close-button
@@ -66,6 +84,7 @@ export default {
     left -30px
     // right calc(-50px / 3)
     // top calc(-50px / 3)
+
 .app-lightbox
   width 95vw
   height 95vh
@@ -81,22 +100,17 @@ export default {
   &::-webkit-scrollbar-thumb
     background-color transparent
 
-@media (max-width 425px)
-  .app-lightbox-container
-    width 100%
-    // height 100vh
-    align-items flex-start
-    // padding-top calc(20vh / 2)
-    &__dimmed
-      width 100%
-  .content
-    &__close-button
-      right calc(-48px / 3)
-      top calc(-48px / 3)
+@media (max-width 1024px)
   .app-lightbox
-    width 90vw
-    max-width 280px
-    // height 80vh
-    padding 24px 8px
+    width 100vw
+    overflow-y hidden
+    // -webkit-overflow-scrolling touch
+
+  .content
+    // overflow-y scroll
+    // -webkit-overflow-scrolling touch
+    &__close-button
+      left initial
+      right 0
 </style>
 

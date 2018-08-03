@@ -4,7 +4,7 @@
       <p class="story-credits__credit">文：李又如</p>
       <p class="story-credits__credit">設計：陳怡蒨</p>
     </div>
-    <div class="story-credits__row">
+    <div class="story-credits__row story-credits__row--mobile-break">
       <p class="story-credits__credit">網站製作：熊凱文</p>
       <p class="story-credits__credit">資料整理：李又如、熊凱文</p>
     </div>
@@ -51,5 +51,16 @@ export default {
       margin 0 0 0 8px
   &__published-date
     margin 0
+
+@media (max-width 1024px)
+  .story-credits
+    margin 25px 0
+    &__row
+      font-size 18px
+      &--mobile-break
+        margin 0
+        flex-direction column
+        .story-credits__credit
+          margin 4px 0
 </style>
 

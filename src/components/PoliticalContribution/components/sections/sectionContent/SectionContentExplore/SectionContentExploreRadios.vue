@@ -126,5 +126,16 @@ export default {
     bottom 2px
     &--active
       background-color #9e005d
+
+@media (max-width 1024px)
+  .section-content-explore-radios
+    &__container
+      font-size 20px
+
+@media (max-width 375px)
+  .section-content-explore-radios
+    &__container
+      font-size 14px
+
 </style>
 

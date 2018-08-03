@@ -26,7 +26,7 @@
         v-if="isCompanyDonateDataLoading"
         :class="[ 'loading', { 'loading--folded-single': isSidebarFoldedSingle }, { 'loading--folded-double': isSidebarFoldedDouble } ]"
       >
-        Loading...
+        正在讀取營利事業捐贈明細...
       </div>
       <SectionContentExploreLightboxForceTooltip
         class="section-content-explore-lightbox-force__tooltip"

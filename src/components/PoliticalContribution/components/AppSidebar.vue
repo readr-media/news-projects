@@ -1,7 +1,7 @@
 <template>
-  <aside class="app-sidebar">
-    <div :class="[ 'app-sidebar__dimmed', { 'app-sidebar__dimmed--toogled': isSidebarToogle } ]" @click="toogleSidebarOff"></div>
-    <div :class="[ 'app-sidebar__slot-container', { 'app-sidebar__slot-container--toogled': isSidebarToogle }, { 'app-sidebar__slot-container--padding': isSectionContentReachTop } ]">
+  <aside class="app-sidebar" ref="app-sidebar">
+    <div :class="[ 'app-sidebar__dimmed', { 'app-sidebar__dimmed--toogled': isSidebarToogle } ]" ref="app-sidebar__dimmed" @click="toogleSidebarOff"></div>
+    <div :class="[ 'app-sidebar__slot-container', { 'app-sidebar__slot-container--toogled': isSidebarToogle }, { 'app-sidebar__slot-container--padding': isSectionContentReachTop } ]" ref="app-sidebar__slot-container">
       <slot></slot>
     </div>
   </aside>
@@ -23,24 +23,41 @@ export default {
   },
   watch: {
     isSidebarToogle () {
-      this.isSidebarToogle ? disableBodyScroll(this.rootContainer) : enableBodyScroll(this.rootContainer)
+      this.isSidebarToogle ? disableBodyScroll(this.scrollableTarget) : enableBodyScroll(this.scrollableTarget)
+
+      if (this.isSidebarToogle && !this.$store.state.useragent.isDesktop) {
+        const realVH = this.getVH()
+        this.calcSidebarDimensions(realVH)
+      }
     }
   },
   data () {
     return {
-      rootContainer: undefined,
+      scrollableTarget: undefined,
     }
   },
   methods: {
+    getVH () {
+      return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+    },
+    calcSidebarDimensions (realVH = this.$store.getters['heightMobile']) {
+      // Using JS to calculate the dimensions except using CSS viewport, in order to avoid browser's bottom nav bar causing vh inconsistent
+      this.$refs['app-sidebar__dimmed'].style['height'] = `${realVH}px`
+      this.$refs['app-sidebar__slot-container'].style['height'] = `${realVH}px`
+    },
     toogleSidebarOff () {
       this.$emit('toogleSidebarOff')
     }
   },
   // When user visit a candidate directly, we should disable root container's scroll immediately
   mounted () {
-    this.rootContainer = document.querySelector('#political-contribution')
+    this.scrollableTarget = this.$el.querySelector('.app-sidebar__slot-container')
     if (this.isSidebarToogle) {
-      disableBodyScroll(this.rootContainer)
+      disableBodyScroll(this.scrollableTarget)
+    }
+
+    if (!this.$store.state.useragent.isDesktop) {
+      this.calcSidebarDimensions()
     }
   },
 }
@@ -78,5 +95,24 @@ export default {
       transform translate3d(0, 0, 0)
     &--padding
       padding 60px 0 0 0
+
+@media (max-width 1024px)
+  .app-sidebar
+    &__slot-container
+      width 80vw
+      height 100vh
+      padding 0 0 0 0
+      position fixed
+      top 0
+      right 0
+      background-color white
+      z-index 10005
+      overflow-y scroll
+      -webkit-overflow-scrolling touch
+      transform translate3d(80vw, 0, 0)
+      &--toogled
+        transform translate3d(0, 0, 0)
+      &--padding
+        padding 60px 0 0 0
 </style>
 

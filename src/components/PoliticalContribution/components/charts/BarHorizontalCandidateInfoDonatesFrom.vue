@@ -16,8 +16,20 @@ export default {
     }
   },
   watch: {
-    nameLightboxShown () {
-      if (this.isQueryValidCandidateName) {
+    // nameUrlQuery () {
+    //   if (this.isQueryValidCandidateName) {
+    //     this.updateScales()
+    //     this.visualize()
+    //   }
+    // },
+    // ordinalRadioPicked () {
+    //   if (this.isQueryValidCandidateName) {
+    //     this.updateScales()
+    //     this.visualize()
+    //   }
+    // },
+    donates () {
+      if (this.isQueryValidCandidateName || this.isQueryValidGroupOrCompanyName) {
         this.updateScales()
         this.visualize()
       }
@@ -57,8 +69,10 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'nameLightboxShown',
+      // 'nameUrlQuery',
+      // 'ordinalRadioPicked',
       'isQueryValidCandidateName',
+      'isQueryValidGroupOrCompanyName',
     ]),
     donateSum () {
       return d3.sum(this.donates, d => d.money)
@@ -69,15 +83,15 @@ export default {
   },
   methods: {
     init () {
-      this.outerWidth = d3.select('.bar-horizontal-donates-from').node().getBoundingClientRect().width
-      this.outerHeight = d3.select('.bar-horizontal-donates-from').node().getBoundingClientRect().height
+      this.outerWidth = d3.select(`#${this.$el.id}.bar-horizontal-donates-from`).node().getBoundingClientRect().width
+      this.outerHeight = d3.select(`#${this.$el.id}.bar-horizontal-donates-from`).node().getBoundingClientRect().height
 
       this.margin = { top: 0, right: 0, bottom: 0, left: 110, }
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
       this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
 
       this.svg =
-        d3.select('.bar-horizontal-donates-from')
+        d3.select(`#${this.$el.id}.bar-horizontal-donates-from`)
           .append('svg')
             .attr('width', this.outerWidth)
             .attr('height', this.outerHeight)
@@ -113,11 +127,11 @@ export default {
       // Data joins
       const bars =
         this.svg
-          .selectAll('.bar-horizontal-donates-from__bar')
+          .selectAll(`#${this.$el.id} .bar-horizontal-donates-from__bar`)
           .data(this.donates)
       const hints =
         this.svg
-          .selectAll('.bar-horizontal-donates-from__hint')
+          .selectAll(`#${this.$el.id} .bar-horizontal-donates-from__hint`)
           .data(this.donates)
 
       // Update + Enter
@@ -143,7 +157,7 @@ export default {
       hints.exit().remove()
 
       this.svg
-        .select('.bar-horizontal-donates-from__y-axis')
+        .select(`#${this.$el.id} .bar-horizontal-donates-from__y-axis`)
         .call(this.yAxis)
     },
   },

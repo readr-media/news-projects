@@ -86,7 +86,7 @@ export default {
       this.outerWidth = this.defaultWidth
       this.outerHeight = this.defaultHeight
 
-      this.margin = { top: 0, right: 0, bottom: 0, left: 100, }
+      this.margin = window.innerWidth > 1024 ? { top: 0, right: 0, bottom: 0, left: 100, } : { top: 0, right: 0, bottom: 0, left: 0, }
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
       this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
 
@@ -112,17 +112,50 @@ export default {
         d3.scaleBand()
           .domain(this.dataOrdinalFiltered.map(ordinal => ordinal.ordinalString))
           .range([ 0, this.innerHeight ])
-          .padding(isEmpty(this.ordinal) ? 0.4 : 0.6)
+          .padding(window.innerWidth > 1024 ? (isEmpty(this.ordinal) ? 0.4 : 0.6) : 0.6)
       this.colorScale =
         d3.scaleOrdinal()
           .domain([ 0, 1, 2, 3, 4, 5, ])
           .range([ '#9e005d', '#000000', '#636363', '#a8a8a8', '#c3c3c3', '#e6e5e5', ])
 
-      this.yAxis = d3.axisLeft(this.yScale)
-      this.svg
-        .append('g')
-        .attr('class', 'bar-horizontal-stacked-ordinal-donates-from-chart__yAxis')
-        .call(this.yAxis)
+      if (window.innerWidth > 1024) {
+        this.yAxis = d3.axisLeft(this.yScale)
+        this.svg
+          .append('g')
+          .attr('class', 'bar-horizontal-stacked-ordinal-donates-from-chart__yAxis')
+          .call(this.yAxis)
+      } else {
+        if (this.ordinal === 'seventh' || this.ordinal === '') {
+          this.svg
+            .append('text')
+              .attr('x', () => this.xScale(0.5))
+              .attr('y', () => this.yScale('第七屆') - 40)
+              .attr('text-anchor', 'middle')
+              .attr('alignment-baseline', 'central')
+              .style('font-size', '32px')
+              .text('第七屆')
+        }
+        if (this.ordinal === 'eighth' || this.ordinal === '') {
+          this.svg
+            .append('text')
+              .attr('x', () => this.xScale(0.5))
+              .attr('y', () => this.yScale('第八屆') - 40)
+              .attr('text-anchor', 'middle')
+              .attr('alignment-baseline', 'central')
+              .style('font-size', '32px')
+              .text('第八屆')
+        }
+        if (this.ordinal === 'ninth' || this.ordinal === '') {
+          this.svg
+            .append('text')
+              .attr('x', () => this.xScale(0.5))
+              .attr('y', () => this.yScale('第九屆') - 40)
+              .attr('text-anchor', 'middle')
+              .attr('alignment-baseline', 'central')
+              .style('font-size', '32px')
+              .text('第九屆')
+        }
+      }
     },
     visualize () {
       // Data joins
@@ -174,6 +207,11 @@ export default {
       this.currentHeight = Math.round(containerWidth / this.defaultAspect)
     },
   },
+  beforeMount () {
+    this.defaultHeight = window.innerWidth > 1024 ? 275 : 800
+    this.defaultAspect = this.defaultWidth / this.defaultHeight
+    this.currentHeight = this.defaultHeight
+  },
   mounted () {
     this.init()
     this.visualize()
@@ -197,5 +235,10 @@ export default {
         opacity 0
       text
         font-size 30px
+
+@media (max-width 1024px)
+  .bar-horizontal-stacked-ordinal-donates-from-chart
+    &__hint
+      font-size 32px
 </style>
 

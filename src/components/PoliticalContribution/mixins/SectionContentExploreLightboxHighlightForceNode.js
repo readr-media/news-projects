@@ -17,6 +17,7 @@ export default {
   },
   methods: {
     highlightForceNode (name) {
+      if (!this.$store.state.useragent.isDesktop) return
       if (this.hasDataForceGraph) {
         const forceHighlightCircle = document.querySelector(`#circle-${name}`)
         const forceHighlightImage = document.querySelector(`#image-${name}`)
@@ -28,6 +29,7 @@ export default {
       }
     },
     resumeForceNode (name) {
+      if (!this.$store.state.useragent.isDesktop) return
       if (this.hasDataForceGraph) {
         const forceHighlightCircle = document.querySelector(`#circle-${name}`)
         const forceHighlightImage = document.querySelector(`#image-${name}`)
@@ -39,6 +41,7 @@ export default {
       }
     },
     highlightForceLink (id) {
+      if (!this.$store.state.useragent.isDesktop) return
       if (this.hasDataForceGraph) {
         if (this.isNameLightboxShownCorp) {
           const group = get(this.corpNameTaxIdMappingGroupByName, this.nameLightboxShown, [])
@@ -61,6 +64,7 @@ export default {
       }
     },
     resumeForceLink (id) {
+      if (!this.$store.state.useragent.isDesktop) return
       if (this.hasDataForceGraph) {
         if (this.isNameLightboxShownCorp) {
           const group = get(this.corpNameTaxIdMappingGroupByName, this.nameLightboxShown, [])

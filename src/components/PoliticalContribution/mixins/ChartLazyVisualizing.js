@@ -21,12 +21,16 @@ export default {
         this.isInView = true
         if (!this.isDataAvailable) {
           this.isDataLoading = true
-          this.loadDataThenVisulaize()
+          this.doNotVisualizeAfterLoading ? this.loadData() : this.loadDataThenVisulaize()
         } else {
-          if (!this.isChartReady) {
+          if (this.doNotVisualizeAfterLoading) {
             this.isDataLoading = false
-            this.init()
-            this.visualize()
+          } else {
+            if (!this.isChartReady) {
+              this.isDataLoading = false
+              this.init()
+              this.visualize()
+            }
           }
         }
       })

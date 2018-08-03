@@ -5,8 +5,6 @@
     </a>
     <h1 class="section-landing-titles__h1">政治獻金 2.0</h1>
     <h2 class="section-landing-titles__h2">副標題副標題副標題</h2>
-    <!-- <router-link to="/project/political-contribution/story1" @click.native="routerLinkClicked">to story1</router-link> -->
-    <!-- <router-link to="/project/political-contribution/story2" @click.native="routerLinkClicked">to story2</router-link> -->
   </div>
 </template>
 
@@ -58,5 +56,59 @@ export default {
     font-size 50px
     font-weight 400
     margin 15px 0
+
+@media (max-width 1024px)
+  .section-landing-titles
+    max-width 100%
+    position static
+    &__readr-link
+      margin 0 0 19px 0
+    &__readr-logo
+      width 80px
+      height 80px
+    &__h1
+      font-size 100px
+    &__h2
+      font-size 50px
+
+@media (max-width 425px)
+  .section-landing-titles
+    max-width 100%
+    position static
+    &__readr-link
+      margin 0 0 19px 0
+    &__readr-logo
+      width 60px
+      height 60px
+    &__h1
+      font-size 50px
+    &__h2
+      font-size 26px
+
+// @media (max-width 375px)
+//   .section-landing-titles
+//     max-width 100%
+//     position static
+//     &__readr-link
+//       margin 0 0 19px 0
+//     &__readr-logo
+//       width 60px
+//       height 60px
+//     &__h1
+//       font-size 50px
+//     &__h2
+//       font-size 26px
+
+@media (max-width 320px)
+  .section-landing-titles
+    &__readr-link
+      margin 0
+    &__readr-logo
+      width 50px
+      height 50px
+    &__h1
+      font-size 40px
+    &__h2
+      font-size 22px
 </style>
 

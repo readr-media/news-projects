@@ -1,7 +1,7 @@
 <template>
   <a :href="href" target="_blank" class="related-topics-card">
     <h3 class="related-topics-card__title">{{ meta.title }}</h3>
-    <img class="related-topics-card__img" :src="imgsrc" alt="">
+    <img v-if="imgsrc !== ''" class="related-topics-card__img" :src="imgsrc" alt="">
     <div class="meta">
       <p class="meta__date">{{ meta.date }}</p>
       <p class="meta__source">{{ meta.source }}</p>
@@ -53,4 +53,9 @@ export default {
   &__source
     margin-top 0
     margin-bottom 0
+
+@media (max-width 1024px)
+  .related-topics-card
+    &:hover
+      filter none
 </style>

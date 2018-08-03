@@ -52,7 +52,7 @@ export default {
       'rawDataBasicCurrentOrdinal',
     ]),
     shouldShowAsideHint () {
-      return !isEmpty(this.rawDataBasicCurrentOrdinal)
+      return !isEmpty(this.rawDataBasicCurrentOrdinal) && this.$store.state.useragent.isDesktop
     },
     showFingerAnimation () {
       return this.showAsideHint && this.showCount <= 1
@@ -197,5 +197,9 @@ export default {
     bottom 2px
     &--animate
       animation bounceInLeft 1s
+
+@media (max-width 1024px)
+  .section-content-explore-aside-hint
+    display none
 </style>
 
