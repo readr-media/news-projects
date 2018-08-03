@@ -1,65 +1,67 @@
 <template>
   <section class="section-landing">
-    <SectionLandingTitles/>
     <img class="section-landing__hand" src="/proj-assets/political-contribution/hand.png" alt="">
     <div class="section-landing__donut-background"></div>
     <AppParticles class="section-landing__particles" id="section-landing-particles-first"/>
     <AppParticles class="section-landing__particles" id="section-landing-particles-second"/>
-    <nav class="section-landing__navs">
-      <SectionLandingNav
-        class="section-landing__nav section-landing__nav--delay2"
-        :iconSrc="'tool-g.png'"
-        :hints="[
-          { 
-            text: '查找政商關係',
-            type: 'router-link',
-            link: 'explore'
-          } 
-        ]"
-        :hintsOrientation="'right'"
-      />
-      <SectionLandingNav
-        class="section-landing__nav section-landing__nav--delay3"
-        :iconSrc="'chart-g.png'"
-        :hints="[
-          { 
-            text: '圖表區',
-            type: 'router-link',
-            link: 'dashboard'
-          } 
-        ]"
-        :hintsOrientation="'left'"
-      />
-      <SectionLandingNav
-        class="section-landing__nav section-landing__nav--delay4"
-        :iconSrc="'article-g.png'"
-        :hints="[
-          { 
-            text: '文章 1 我是新文章',
-            type: 'router-link',
-            link: 'story5'
-          }, 
-          { 
-            text: '文章 2 我是新文章',
-            type: 'router-link',
-            link: 'story6'
-          }, 
-        ]"
-        :hintsOrientation="'right'"
-      />
-      <SectionLandingNav
-        class="section-landing__nav section-landing__nav--delay5"
-        :iconSrc="'paper-g.png'"
-        :hints="[
-          { 
-            text: '原始資料',
-            type: 'href',
-            link: 'https://github.com/mirror-media/politicalcontribution'
-          } 
-        ]"
-        :hintsOrientation="'left'"
-      />
-    </nav>
+    <div class="section-landing__content-container">
+      <SectionLandingTitles/>
+      <nav class="section-landing__navs">
+        <SectionLandingNav
+          class="section-landing__nav section-landing__nav--delay2"
+          :iconSrc="'tool-g.png'"
+          :hints="[
+            { 
+              text: '查找政商關係',
+              type: 'router-link',
+              link: 'explore'
+            } 
+          ]"
+          :hintsOrientation="'right'"
+        />
+        <SectionLandingNav
+          class="section-landing__nav section-landing__nav--delay3"
+          :iconSrc="'chart-g.png'"
+          :hints="[
+            { 
+              text: '圖表區',
+              type: 'router-link',
+              link: 'dashboard'
+            } 
+          ]"
+          :hintsOrientation="'left'"
+        />
+        <SectionLandingNav
+          class="section-landing__nav section-landing__nav--delay4"
+          :iconSrc="'article-g.png'"
+          :hints="[
+            { 
+              text: '文章 1 我是新文章',
+              type: 'router-link',
+              link: 'story5'
+            }, 
+            { 
+              text: '文章 2 我是新文章',
+              type: 'router-link',
+              link: 'story6'
+            }, 
+          ]"
+          :hintsOrientation="'right'"
+        />
+        <SectionLandingNav
+          class="section-landing__nav section-landing__nav--delay5"
+          :iconSrc="'paper-g.png'"
+          :hints="[
+            { 
+              text: '原始資料',
+              type: 'href',
+              link: 'https://github.com/mirror-media/politicalcontribution'
+            } 
+          ]"
+          :hintsOrientation="'left'"
+        />
+      </nav>
+    </div>
   </section>
 </template>
 
@@ -73,6 +75,18 @@ export default {
     SectionLandingTitles,
     SectionLandingNav,
     AppParticles,
+  },
+  methods: {
+    applyHeightMobile () {
+      // Using JS to calculate the dimensions except using CSS viewport, in order to avoid browser's bottom nav bar causing vh inconsistent
+      this.$el.style['height'] = `${this.$store.getters['heightMobile']}px`
+      this.$el.querySelector('.section-landing__content-container').style['height'] = `${this.$store.getters['heightMobile']}px`
+    },
+  },
+  mounted () {
+    if (!this.$store.state.useragent.isDesktop) {
+      this.applyHeightMobile()
+    }
   },
 }
 </script>
@@ -182,6 +196,13 @@ export default {
     border calc(45vw / 3) solid #dee5df 
     border-radius 100vh
     background-color white
+  &__particles
+    position absolute
+    opacity 0
+    animation-name fadeIn
+    animation-duration 1s
+    animation-delay 4s
+    animation-fill-mode forwards
   &__navs
     position absolute
     top calc(105px + 40vw / 2 - (40vw / 2 / 3))
@@ -202,13 +223,6 @@ export default {
       animation-delay 3s
     &--delay5
       animation-delay 3.5s
-  &__particles
-    position absolute
-    opacity 0
-    animation-name fadeIn
-    animation-duration 1s
-    animation-delay 4s
-    animation-fill-mode forwards
 
 #section-landing-particles-first
   top 105px
@@ -220,5 +234,51 @@ export default {
   bottom 0
   width 200px
   height calc(100vh - 105px - 339px - 30px)
+
+@media (max-width 1024px)
+  .section-landing
+    // height 100vh // JS calculated height
+    display flex
+    justify-content center
+    align-items center
+    &__hand // aspect ratio 2:1
+      top initial
+      bottom 50vh
+      right 0
+      width 20vh
+      opacity 1
+      animation-name none
+      z-index -1
+    &__donut-background
+      top initial
+      bottom 0
+      right -25vh
+      width 50vh
+      height 50vh
+      border calc(25vh / 3) solid #dee5df 
+      border-radius 50vh
+      z-index -1
+    &__particles
+      animation-delay 0s
+    &__content-container
+      // height 100vh // JS calculated height
+      display flex
+      flex-direction column
+      justify-content space-around
+      align-items flex-start
+    &__navs
+      position static
+    &__nav
+      opacity 1
+      pointer-events initial
+      animation-name none
+
+  #section-landing-particles-first
+    top 0
+    left 0
+    width 10%
+    height 70vh
+  #section-landing-particles-second
+    display none
 </style>
 

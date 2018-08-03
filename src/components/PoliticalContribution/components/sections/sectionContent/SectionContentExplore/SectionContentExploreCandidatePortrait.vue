@@ -36,8 +36,10 @@ export default {
 <style lang="stylus" scoped>
 .section-content-explore-candidate-portrait
   display inline-block
-  width 90px
-  height 90px
+  // width 90px
+  // height 90px
+  width 100%
+  height 100%
   display flex
   justify-content center
   align-items center
@@ -55,11 +57,19 @@ export default {
   &--pfp
     background-color #f2c1a5
   &__portrait
-    width 100px
-    min-width 100px
-    height 100px
+    // width 100px
+    // min-width 100px
+    // height 100px
+    width calc(100% * 1.11)
+    min-width calc(100% * 1.11)
+    height calc(100% * 1.11)
     position relative
     bottom 5px
     filter grayscale(100%)
+
+@media (max-width 1024px)
+  .section-content-explore-candidate-portrait
+    &__portrait
+      bottom 3px
 </style>
 

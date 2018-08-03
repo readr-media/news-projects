@@ -25,21 +25,21 @@ export const DATA = {
     ordinal: 'seventh',
     oridinalNum: 7,
     spreadsheetIdBasic: '1NsK-zleOz4nUvrkx4iAfeHTy7FU6Puh8aOyIChoCDrA',
-    spreadsheetIdCompanyDonate: '1UnntluUcK7KRrkC7rUBjMiPG71YJCWtDb8NvF6ipqfI',
+    spreadsheetIdCompanyDonate: '1-547KppMCUfShFi75iFtfD66qTqRD09MYwCnO5FyUZo',
     candidateNames: CANDIDATES_SEVENTH
   },
   eighth: {
     ordinal: 'eighth',
     oridinalNum: 8,
     spreadsheetIdBasic: '1qlJz3dXyA5YjugzUK2hj0bYPz8xXBjlUCIwrAoGu7A8',
-    spreadsheetIdCompanyDonate: '1Rp4L-VZAGopLi2TeNbLlsz8qPYlFcKiXJcClSPdJvT0',
+    spreadsheetIdCompanyDonate: '1xEftxPtwAemFCS6tUo6jI2xQM006NPWlPjZN5DNGNak',
     candidateNames: CANDIDATES_EIGHTH
   },
   ninth: {
     ordinal: 'ninth',
     oridinalNum: 9,
     spreadsheetIdBasic: '1ytZDez78Qbp9eTKwkbVWdFYYtYQ-0-RJQ3ZEBGzTTw0',
-    spreadsheetIdCompanyDonate: '1j_4biqRjYCcnCBELsafrk6Ocm046cwqvPfwY8SHQUyk',
+    spreadsheetIdCompanyDonate: '1VWknt78U-aZsFgEqMmvcgLicgHFkS0cZbjREOt6CxT0',
     candidateNames: CANDIDATES_NINTH
   },
 }
@@ -91,7 +91,7 @@ export const RELATED_TOPICS = [
     },
     {
       href: 'https://www.facebook.com/notes/%E5%8D%9E%E4%B8%AD%E4%BD%A9/%E6%94%BF%E6%B2%BB%E7%8D%BB%E9%87%91%E8%B3%87%E6%96%99%E6%8C%96%E5%87%BA%E4%BB%80%E9%BA%BC%E8%99%B9%E8%86%9C%E7%94%9F%E7%89%A9%E8%BE%A8%E8%AD%98%E8%8D%89%E6%A1%88%E8%83%8C%E5%BE%8C%E7%9A%84%E6%94%BF%E5%95%86%E9%97%9C%E4%BF%82%E9%96%80%E9%81%93/10155438440707639/',
-      imgsrc: 'https://scontent.ftpe7-4.fna.fbcdn.net/v/t1.0-9/23519056_10155438679272639_5620726681130512789_n.jpg?oh=e8648aeae08f43dbc0e5ea29c35a3456&oe=5AABD92E',
+      imgsrc: '',
       meta: {
         title: '政治獻金資料挖出什麼〈虹膜生物辨識草案〉背後的政商關係門道 - 卞中佩',
         date: '2017-11-17',
@@ -102,7 +102,7 @@ export const RELATED_TOPICS = [
   [
     {
       href: 'https://www.facebook.com/notes/claire-tsao/%E6%94%BF%E6%B2%BB%E7%8D%BB%E9%87%91%E4%B9%8B%E9%81%B8%E5%8D%80%E6%84%9B%E4%BD%A0%E6%9C%89%E5%A4%9A%E5%B0%91/1946938758655360/',
-      imgsrc: 'https://scontent.ftpe7-4.fna.fbcdn.net/v/t31.0-0/p600x600/23669162_1947125261970043_1720772919611582672_o.jpg?oh=3c4fb520dfe5fe6be085c781e76f737d&oe=5A97001E',
+      imgsrc: '',
       meta: {
         title: '政治獻金之選區愛你有多少 - Claire Tsao',
         date: '2017-11-19',
@@ -131,7 +131,7 @@ export const RELATED_TOPICS = [
     },
     {
       href: 'https://www.facebook.com/photo.php?fbid=10207812115739143&set=a.1273921706451.32156.1782190861&type=3&theater',
-      imgsrc: 'https://scontent.ftpe7-4.fna.fbcdn.net/v/t1.0-9/23755170_10207812115739143_4812201328584751937_n.jpg?oh=ac7a24ce790f4939b3ea95068b0c4b5f&oe=5A947254',
+      imgsrc: '',
       meta: {
         title: '個人捐款比例與實際得票率散布圖 - 王銘宏',
         date: '2017-11-22',

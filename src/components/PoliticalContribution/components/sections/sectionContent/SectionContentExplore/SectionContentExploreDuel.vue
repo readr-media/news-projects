@@ -66,8 +66,6 @@ export default {
 .section-content-explore-duel
   &__stage
     width 450px
-    // position sticky
-    // top 60px
     float left
     &--sticky
       position fixed
@@ -75,5 +73,9 @@ export default {
   &__county
     width 50%
     margin 0 0 0 50%
+
+@media (max-width 1024px)
+  .section-content-explore-duel
+    display none
 </style>
 

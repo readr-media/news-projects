@@ -7,6 +7,9 @@ export const convertBody = (body) => {
     row.forEach((cellValue, cellIndex) => {
       convertRow[header[cellIndex]] = cellValue
     })
+    if ('修正後統一編號' in convertRow && convertRow['修正後統一編號'] !== '') {
+      convertRow['統一編號'] = convertRow['修正後統一編號']
+    }
     return convertRow
   })
 }

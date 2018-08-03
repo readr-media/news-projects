@@ -16,9 +16,16 @@
         <img class="navigation-figure__img" src="/proj-assets/political-contribution/comment-w.png" alt="comment-w">
         <p class="navigation-figure__figcaption">留言</p>
       </a>
-      <a class="section-content-header__nav-item navigation-figure">
+      <a class="section-content-header__nav-item navigation-figure" target="_blank" :href="shareURL">
         <img class="navigation-figure__img" src="/proj-assets/political-contribution/share-w.png" alt="share-w">
         <p class="navigation-figure__figcaption">分享</p>
+      </a>
+      <a class="section-content-header__nav-item navigation-figure" @click="toogleNavSidebar">
+        <div class="hamburger-icon">
+          <div class="hamburger-icon__line"></div>
+          <div class="hamburger-icon__line"></div>
+          <div class="hamburger-icon__line"></div>
+        </div>
       </a>
     </nav>
   </header>
@@ -33,9 +40,17 @@ export default {
       READR_DOMAIN_PROD
     }
   },
+  computed: {
+    shareURL () {
+      return `https://www.facebook.com/share.php?u=https://${READR_DOMAIN_PROD}${this.$route.fullPath}`
+    }
+  },
   methods: {
     toogleComment () {
       this.$emit('toogleComment')
+    },
+    toogleNavSidebar () {
+      this.$emit('toogleNavSidebar')
     }
   }
 }
@@ -59,6 +74,8 @@ export default {
     cursor pointer
     & + &
      border-left 2px solid white
+    &:last-child
+      display none
   &__readr-link
     display flex
     justify-content center
@@ -84,5 +101,28 @@ export default {
     font-size 22.4px
     color white
     margin 0 0 0 14px
+
+@media (max-width 1024px)
+  .section-content-header
+    &__nav-item
+      &:nth-child(2), &:nth-child(3), &:nth-child(4)
+        display none
+      &:last-child
+        display flex
+
+  .navigation-figure
+    &__figcaption
+      display none
+
+  .hamburger-icon
+    display flex
+    flex-direction column
+    justify-content space-between
+    width 32px
+    height 24px
+    &__line
+      width 100%
+      height 2px
+      background-color white
 </style>
 

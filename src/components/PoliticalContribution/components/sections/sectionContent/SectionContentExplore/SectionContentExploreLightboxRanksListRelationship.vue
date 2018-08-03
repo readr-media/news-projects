@@ -1,6 +1,7 @@
 <template>
   <div class="section-content-explore-lightbox-ranks-list-relationship">
     <h1 class="section-content-explore-lightbox-ranks-list-relationship__title">誰跟{{ nameUrlQuery }}的政商關係最接近</h1>
+    <AppFingerHint class="section-content-explore-lightbox-ranks-list-relationship__finger-hint--mobile" :hint="'點選這些候選人看獻金資訊'"/>
     <ol class="section-content-explore-lightbox-ranks-list-relationship__list">
       <li 
         v-for="(candidate, i) in rankDataRelationshipCurrentOrdinalCandidateLightboxShown" :key="getCandidateName(candidate)"
@@ -20,12 +21,16 @@
 </template>
 
 <script>
+import AppFingerHint from '../../../AppFingerHint.vue'
 import SectionContentExploreLightboxHighlightForceNode from 'src/components/PoliticalContribution/mixins/SectionContentExploreLightboxHighlightForceNode'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters, } = createNamespacedHelpers('PoliticalContribution')
 
 export default {
+  components: {
+    AppFingerHint
+  },
   mixins: [ SectionContentExploreLightboxHighlightForceNode ],
   computed: {
     ...mapGetters([
@@ -62,6 +67,9 @@ export default {
     font-weight 600
     margin 0 0 15px 0
     padding 15px 0 5px 0
+  &__finger-hint
+    &--mobile
+      display none
   &__list
     list-style none
     margin 0
@@ -95,5 +103,18 @@ export default {
       color #736357
     &--pfp
       color #eb6c1f
+
+@media (max-width 1024px)
+  .section-content-explore-lightbox-ranks-list-relationship
+    margin 20px 0
+    &__title
+      display none
+    &__finger-hint
+      &--mobile
+        display initial
+    &__list
+      &:hover
+        .section-content-explore-lightbox-ranks-list-relationship__list-item:not(:hover)
+          opacity 1
 </style>
 

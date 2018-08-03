@@ -27,7 +27,7 @@ export default {
     return {
       RELATED_TOPICS,
     }
-  }
+  },
 }
 </script>
 
@@ -51,5 +51,21 @@ export default {
     width 90%
     // padding 50px
     margin 0 5px
+
+@media (max-width 1024px)
+  .related-topics
+    width 90%
+    height 100vh
+    overflow-y scroll
+    -webkit-overflow-scrolling touch
+    padding 0 0 70px 0
+    &__title
+      margin 20px 15px
+
+  .cards
+    flex-direction column
+    align-items center
+    &__column
+      width 100%
 </style>
 

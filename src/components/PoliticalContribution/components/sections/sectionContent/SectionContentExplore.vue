@@ -1,6 +1,6 @@
 <template>
   <main class="section-content-explore">
-    <AppLightbox v-show="showLightbox" @closeLightbox="closeLightbox">
+    <AppLightbox v-show="showLightbox" :isLightboxShown="showLightbox" @closeLightbox="closeLightbox">
       <SectionContentExploreLightbox/>
     </AppLightbox>
     <SectionContentExploreArticle/>
@@ -36,12 +36,12 @@ export default {
   },
   watch: {
     showLightbox () {
-      this.showLightbox ? disableBodyScroll(this.rootContainer) : enableBodyScroll(this.rootContainer)
+      this.showLightbox ? disableBodyScroll(this.lightboxTarget) : enableBodyScroll(this.lightboxTarget)
     },
   },
   data () {
     return {
-      rootContainer: undefined
+      lightboxTarget: undefined
     }
   },
   computed: {
@@ -67,9 +67,9 @@ export default {
   },
   // When user visit a candidate directly, we should disable root container's scroll immediately
   mounted () {
-    this.rootContainer = document.querySelector('#political-contribution')
+    this.lightboxTarget = document.querySelector('.section-content-explore-lightbox')
     if (this.showLightbox) {
-      disableBodyScroll(this.rootContainer)
+      disableBodyScroll(this.lightboxTarget)
     }
   }
 }

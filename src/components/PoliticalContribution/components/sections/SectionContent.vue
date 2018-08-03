@@ -1,11 +1,26 @@
 <template>
-  <section :class="[ 'section-content', { 'section-content--background-gray': renderedSectionContent === 'dashboard' } ]">
+  <section :class="[ 'section-content', { 'section-content--background-dashboard': renderedSectionContent === 'dashboard' } ]">
     <SectionContentHeader
-      :class="[ 'section-content__header', { 'section-content__header--sticky' :isSectionContentReachTop } ]"
+      :class="[ 'section-content__header', { 'section-content__header--sticky': isSectionContentReachTop } ]"
       @toogleComment="toogleComment"
+      @toogleNavSidebar="toogleNavSidebar"
     />
-    <AppAsideNav :class="[ 'section-content__aside-nav', { 'section-content__aside-nav--hide': !showAsideNav } ]" @openLightboxRelatedTopics="openLightboxRelatedTopics"/>
-    <AppLightbox v-show="showLightboxRelatedTopics" @closeLightbox="closeLightboxRelatedTopics">
+    <AppNavAside
+      :class="[ 'section-content__nav-aside', { 'section-content__nav-aside--hide': !showNavAside } ]"
+      @openLightboxRelatedTopics="openLightboxRelatedTopics"
+    />
+    <AppSidebar
+      class="section-content__nav-sidebar"
+      :isSidebarToogle="showNavSidebar"
+      :isSectionContentReachTop="isSectionContentReachTop"
+      @toogleSidebarOff="showNavSidebar = false"
+    >
+      <AppNavSidebar
+        @closeNavSidebar="showNavSidebar = false"
+        @toogleRelatedLightbox="openLightboxRelatedTopics"
+      />
+    </AppSidebar>
+    <AppLightbox v-show="showLightboxRelatedTopics" :isLightboxShown="showLightboxRelatedTopics" @closeLightbox="closeLightboxRelatedTopics">
       <RelatedTopics/>
     </AppLightbox>
     <AppSidebar
@@ -17,6 +32,11 @@
       <!-- <iframe class="section-content__comment-iframe" src="https://www.readr.tw/comment?resource_url=https://readr.tw/series/dollclaw-machine"></iframe> -->
       <iframe class="section-content__comment-iframe" src="http://dev.readr.tw/comment?resource_url=http://dev.readr.tw/series/foreign-labour"></iframe>
     </AppSidebar>
+    <img
+      :class="[ 'section-content__explore-duel', { 'section-content__explore-duel--show': showDuelButton } ]"
+      src="/proj-assets/political-contribution/pk.png"
+      @click="navigateDuel"
+    />
     <transition name="fade" mode="out-in">
       <!-- section below will be replace by contents -->
       <main class="section-content__main-section" :is="renderedSectionContent"></main>
@@ -30,11 +50,14 @@
 </template>
 
 <script>
+import { disableBodyScroll, enableBodyScroll, } from 'body-scroll-lock'
+
 import SectionContentHeader from './sectionContent/SectionContentHeader.vue'
-import AppAsideNav from '../AppAsideNav.vue'
+import AppNavAside from '../AppNavAside.vue'
+import AppNavSidebar from '../AppNavSidebar.vue'
 import AppLightbox from '../AppLightbox.vue'
-import RelatedTopics from '../related/RelatedTopics.vue'
 import AppSidebar from '../AppSidebar.vue'
+import RelatedTopics from '../related/RelatedTopics.vue'
 import SectionContentFooter from './sectionContent/SectionContentFooter.vue' // TODO: style while wide screen
 
 import SectionContentDashboard from './sectionContent/SectionContentDashboard.vue'
@@ -46,25 +69,32 @@ const { mapGetters, } = createNamespacedHelpers('PoliticalContribution')
 
 export default {
   components: {
-    AppAsideNav,
+    AppNavAside,
+    AppNavSidebar,
     AppLightbox,
-    RelatedTopics,
     AppSidebar,
+    RelatedTopics,
     SectionContentHeader,
     'dashboard': SectionContentDashboard,
     'explore': SectionContentExplore,
     'storys': SectionContentStorys,
     SectionContentFooter,
   },
+  watch: {
+    showLightboxRelatedTopics () {
+      this.showLightboxRelatedTopics ? disableBodyScroll(this.lightboxTarget) : enableBodyScroll(this.lightboxTarget)
+    }
+  },
   data () {
     return {
       isSectionContentReachTop: false,
-      showAsideNav: false,
-      isFooterAppear: false,
+      showNavAside: false,
+      showNavSidebar: false,
       isSidebarCommentToogle: false,
       scrollerSectionContent: undefined,
       scrollerFooter: undefined,
       showLightboxRelatedTopics: false,
+      lightboxTarget: undefined,
     }
   },
   computed: {
@@ -73,12 +103,17 @@ export default {
     ]),
     showFooter () {
       return this.renderedSectionContent === 'storys'
+    },
+    showDuelButton () {
+      return this.renderedSectionContent === 'explore' && this.isSectionContentReachTop
     }
   },
   methods: {
     setScrollers () {
       this.setScrollerSectionContent()
-      this.setScrollerFooter()
+      if (this.$store.state.useragent.isDesktop) {
+        this.setScrollerFooter()
+      }
     },
     // scrollerSectionContent
     setScrollerSectionContent () {
@@ -94,11 +129,11 @@ export default {
       window.addEventListener('resize', this.scrollerSectionContentResizeHandler)
     },
     sectionContentHandleStepEnter ({ element, index, direction }) {
-      this.showAsideNav = true
+      this.showNavAside = true
       this.isSectionContentReachTop = true
     },
     sectionContentHandleStepExit ({ element, index, direction }) {
-      this.showAsideNav = false
+      this.showNavAside = false
       this.isSectionContentReachTop = false
     },
     scrollerSectionContentResizeHandler () {
@@ -118,13 +153,11 @@ export default {
       window.addEventListener('resize', this.scrollerFooterResizeHandler)
     },
     footerHandleStepEnter ({ element, index, direction }) {
-      this.isFooterAppear = true
-      this.showAsideNav = false
+      this.showNavAside = false
     },
     footerHandleStepExit ({ element, index, direction }) {
       if (direction === 'up') {
-        this.isFooterAppear = false
-        this.showAsideNav = true
+        this.showNavAside = true
       }
     },
     scrollerFooterResizeHandler () {
@@ -133,16 +166,22 @@ export default {
     toogleComment () {
       this.isSidebarCommentToogle = !this.isSidebarCommentToogle
     },
+    toogleNavSidebar () {
+      this.showNavSidebar = !this.showNavSidebar
+    },
     openLightboxRelatedTopics () {
       this.showLightboxRelatedTopics = true
     },
     closeLightboxRelatedTopics () {
       this.showLightboxRelatedTopics = false
     },
+    navigateDuel () {
+      this.$scrollTo('.section-content-explore-duel', { offset: -80 })
+    },
   },
   mounted () {
     this.setScrollers()
-
+    this.lightboxTarget = document.querySelector('.related-topics')
     // Perform a auto scroll while section content component has mounted, and hasn't exist before
     // scenario like: user visit path /political-contribution/story1 directly, or
     //                user has navigate a router link on landing page while visited landing page previously, section content compoent still not rendered before
@@ -159,7 +198,7 @@ export default {
 .section-content
   // position relative
   transition background-color .25s
-  &--background-gray
+  &--background-dashboard
     background-color #eaeaea
   &__header
     // position sticky
@@ -170,7 +209,7 @@ export default {
       z-index 10006
       position fixed
       top 0
-  &__aside-nav
+  &__nav-aside
     position fixed
     top 60px
     margin 0 0 0 40px
@@ -191,5 +230,35 @@ export default {
     max-width 900px
     margin 0 auto
     padding 167px 0 0 0
+  &__explore-duel
+    position fixed
+    bottom 10px
+    right 10px
+    width 80px
+    height 80px
+    cursor pointer
+    opacity 0
+    pointer-events none
+    transition opacity .25s
+    &:hover
+      filter brightness(80%)
+    &--show
+      opacity 1
+      pointer-events initial
+
+@media (max-width 1024px)
+  .section-content
+    &--background-dashboard
+      background-color white
+    &__nav-aside
+      display none
+    &__main-section
+      max-width 100%
+      margin 0
+      padding 85px 20px 0 20px
+    &__explore-duel
+      display none
+    &__footer
+      display none
 </style>
 

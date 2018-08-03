@@ -39,6 +39,12 @@ export default {
   watch: {
     groupNameOrCompanyTaxId () {
       this.fetchCompanyData()
+    },
+    rawDataCompanyDonateCurrentOrdinalGroupByGroupOrCompany () {
+      this.fetchCompanyData()
+    },
+    ordinalRadioPicked () {
+      this.companyResStore = {}
     }
   },
   data () {
@@ -57,6 +63,7 @@ export default {
       'dataForceDonateSum',
       'isQueryValidCompanyBelongsGroup',
       'rankDataGroupCompanyDonatesCurrentOrdinalNameLightboxShown',
+      'ordinalRadioPicked',
     ]),
     isGroup () {
       return this.corpType === 'group'
@@ -85,12 +92,15 @@ export default {
     },
     companyResData () {
       return get(this.companyResStore, [ this.groupNameOrCompanyTaxId ], {})
+    },
+    isCompanyResDataCurrentCropEmpty () {
+      return (isEmpty(this.companyResData) || get(this.companyResStore, [ this.groupNameOrCompanyTaxId, 'owner' ], '') === '')
     }
   },
   methods: {
     fetchCompanyData () {
       const currentIdentityId = this.groupNameOrCompanyTaxId
-      if (this.isCompany && this.companyResStore[currentIdentityId] === undefined) {
+      if (this.isCompany && this.isCompanyResDataCurrentCropEmpty) {
         this.$set(this.companyResStore, currentIdentityId, { owner: '查詢中', capital: '查詢中' })
         const reqUrl = `${this.companyAPIUrl}/${currentIdentityId}`
         axios.get(reqUrl)
@@ -110,7 +120,7 @@ export default {
             this.companyResStore[currentIdentityId].capital = '錯誤，請稍後再試'
             this.companyResStore[currentIdentityId].owner = '錯誤，請稍後再試'
           })
-      } else if (this.isGroup && this.companyResStore[currentIdentityId] === undefined) {
+      } else if (this.isGroup && this.isCompanyResDataCurrentCropEmpty) {
         const groupDonates = get(this.rawDataCompanyDonateCurrentOrdinalGroupByGroupOrCompany, currentIdentityId, [])
         const groupDonatesCompanyTaxIds = uniq(groupDonates.map(row => row['統一編號']))
         const companyReqs = groupDonatesCompanyTaxIds.map(taxId => {

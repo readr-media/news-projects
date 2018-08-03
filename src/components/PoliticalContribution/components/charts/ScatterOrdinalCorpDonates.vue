@@ -80,7 +80,6 @@ export default {
       currentWidth: defaultWidth,
       currentHeight: defaultHeight,
 
-      shouldLazyLoadData: true,
       isDataLoading: false,
       currentDataLoading: null,
       

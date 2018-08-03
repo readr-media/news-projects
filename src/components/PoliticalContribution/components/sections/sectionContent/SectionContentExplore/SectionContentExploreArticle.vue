@@ -54,5 +54,13 @@ export default {
     line-height 1.5
     text-align justify
     margin 27px 0
+
+  @media (max-width 1024px)
+    .section-content-explore-article
+      &__title
+        font-size 40px
+      &__paragraph
+        font-size 22px
+        line-height 1.64
 </style>
 

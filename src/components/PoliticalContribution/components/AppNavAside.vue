@@ -1,78 +1,78 @@
 <template>
-  <nav class="app-aside-nav">
+  <nav class="app-nav-aside">
     <ButtonSection
-      class="app-aside-nav__button-section"
+      class="app-nav-aside__button-section"
       :iconSrc="'chart-g.png'"
       :hintWording="'圖表區'"
       @click.native="navigateRoute('dashboard')"
       :routerLinkActive="slug === 'dashboard'"
     />
     <ButtonSection
-      class="app-aside-nav__button-section"
+      class="app-nav-aside__button-section"
       :iconSrc="'tool-g.png'"
       :hintWording="'查找政商關係'"
       @click.native="navigateRoute('explore')"
       :routerLinkActive="slug === 'explore'"
     />
     <ButtonSection
-      class="app-aside-nav__button-section"
+      class="app-nav-aside__button-section"
       :iconSrc="'article-g.png'"
       :hintWording="'現金解析文章'"
       @click.native="navigateRoute('story1')"
       :routerLinkActive="renderedSectionContent === 'storys'"
     />
-    <div class="app-aside-nav__article-container">
-      <router-link class="app-aside-nav__article-nav" to="story1" v-scroll-to="'.section-content'">
+    <div class="app-nav-aside__article-container">
+      <router-link class="app-nav-aside__article-nav" to="story1" v-scroll-to="'.section-content'">
         <AppArrowTooltip
-          class="app-aside-nav__tooltip"
+          class="app-nav-aside__tooltip"
           :hintText="'選一次立委，金流超過 28 億！'"
         />
       </router-link>
-      <router-link class="app-aside-nav__article-nav" to="story2" v-scroll-to="'.section-content'">
+      <router-link class="app-nav-aside__article-nav" to="story2" v-scroll-to="'.section-content'">
         <AppArrowTooltip
-          class="app-aside-nav__tooltip"
+          class="app-nav-aside__tooltip"
           :hintText="'立委篇／老鳥與新秀，募款能力差了 6.6 倍'"
         />
       </router-link>
-      <router-link class="app-aside-nav__article-nav" to="story3" v-scroll-to="'.section-content'">
+      <router-link class="app-nav-aside__article-nav" to="story3" v-scroll-to="'.section-content'">
         <AppArrowTooltip
-          class="app-aside-nav__tooltip"
+          class="app-nav-aside__tooltip"
           :hintText="'企業篇／金權遊戲？翻開金主的投資名冊'"
         />
       </router-link>
-      <router-link class="app-aside-nav__article-nav" to="story4" v-scroll-to="'.section-content'">
+      <router-link class="app-nav-aside__article-nav" to="story4" v-scroll-to="'.section-content'">
         <AppArrowTooltip
-          class="app-aside-nav__tooltip"
+          class="app-nav-aside__tooltip"
           :hintText="'政治獻金開放了嗎？'"
         />
       </router-link>
-      <router-link class="app-aside-nav__article-nav" to="story5" v-scroll-to="'.section-content'">
+      <router-link class="app-nav-aside__article-nav" to="story5" v-scroll-to="'.section-content'">
         <AppArrowTooltip
-          class="app-aside-nav__tooltip"
+          class="app-nav-aside__tooltip"
           :hintText="'我是新文章'"
         />
       </router-link>
-      <router-link class="app-aside-nav__article-nav" to="story6" v-scroll-to="'.section-content'">
+      <router-link class="app-nav-aside__article-nav" to="story6" v-scroll-to="'.section-content'">
         <AppArrowTooltip
-          class="app-aside-nav__tooltip"
+          class="app-nav-aside__tooltip"
           :hintText="'我是新文章'"
         />
       </router-link>
     </div>
     <ButtonSection
-      class="app-aside-nav__button-section"
+      class="app-nav-aside__button-section"
       :iconSrc="'paper-g.png'"
       :hintWording="'原始素材資料'"
       @click.native="newTab('https://github.com/mirror-media/politicalcontribution')"
     />
     <ButtonSection
-      class="app-aside-nav__button-section"
+      class="app-nav-aside__button-section"
       :iconSrc="'text-g.png'"
       :hintWording="'查看相關討論'"
       @click.native="openLightboxRelatedTopics"
     />
     <ButtonSection
-      class="app-aside-nav__button-section"
+      class="app-nav-aside__button-section"
       :iconSrc="'hand-g.png'"
       :hintWording="'鍵盤救國一起來'"
       @click.native="newTab('https://campaign-finance.g0v.ctiml.tw/')"
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.app-aside-nav
+.app-nav-aside
   width 60px
   z-index 10000
   &__button-section
@@ -135,7 +135,7 @@ export default {
     & + &
       margin 10px 0 0 0
     &:hover
-      .app-aside-nav__tooltip
+      .app-nav-aside__tooltip
         visibility visible
         opacity 1
   &__tooltip

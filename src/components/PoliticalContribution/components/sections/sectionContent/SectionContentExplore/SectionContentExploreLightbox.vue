@@ -3,7 +3,7 @@
     <div v-show="!isQueryValidOrdinal" class="section-content-explore-lightbox__error">
       invalid ordinal
     </div>
-    <div v-show="isQueryValidOrdinal" class="section-content-explore-lightbox__contnet">
+    <div v-show="isQueryValidOrdinal" class="section-content-explore-lightbox__content">
       <SectionContentExploreLightboxSidebar
         :class="[ 'section-content-explore-lightbox__info', { 'section-content-explore-lightbox__info--folded': !isSidebarToogledInfo } ]"
         :isSidebarToogled="isSidebarToogledInfo"
@@ -11,7 +11,7 @@
         @toogleSidebar="toogleSidebarInfo"
       >
         <div class="section-content-explore-lightbox__info-content">
-          <div class="loading loading--sidebar" v-if="loadingInfo">Loading...</div>
+          <div class="loading loading--sidebar" v-if="loadingInfo">正在讀取基本資料...</div>
           <SectionContentExploreLightboxInfo v-else/>
         </div>
       </SectionContentExploreLightboxSidebar>
@@ -22,11 +22,12 @@
         @toogleSidebar="toogleSidebarRanks"
       >
         <div class="section-content-explore-lightbox__ranks-content">
-          <div class="loading loading--sidebar" v-if="fetchLoadingCompanyDonate">Loading...</div>
+          <div class="loading loading--sidebar" v-if="fetchLoadingCompanyDonate">正在讀取營利事業捐贈明細...</div>
           <SectionContentExploreLightboxRanks v-else/>
         </div>
       </SectionContentExploreLightboxSidebar>
       <SectionContentExploreLightboxForce
+        v-if="$store.state.useragent.isDesktop"
         class="section-content-explore-lightbox__force"
         :isSidebarToogledInfo="isSidebarToogledInfo"
         :isSidebarToogledRanks="isSidebarToogledRanks"
@@ -70,13 +71,18 @@ export default {
           fetchSheetCorpNameTaxIdMapping(this.$store)
           .then(() => { this.fetchLoadingCorpNameTaxIdMapping = false })
         }
+
+        this.resetLightboxScrollMobile()
       }
     },
     nameUrlQuery () {
       if (this.nameUrlQuery && this.$store.state.PoliticalContribution.currentLightboxShownName !== this.nameUrlQuery) {
         this.$store.commit('PoliticalContribution/SET_CURRENT_LIGHTBOX_SHOWN_NAME', this.nameUrlQuery)
       }
-    }
+    },
+    nameLightboxShown () {
+      this.resetLightboxScrollMobile()
+    },
   },
   data () {
     return {
@@ -125,6 +131,11 @@ export default {
     toogleSidebarInfo () {
       this.isSidebarToogledInfo = !this.isSidebarToogledInfo
     },
+    resetLightboxScrollMobile () {
+      if (!this.$store.state.useragent.isDesktop) {
+        this.$scrollTo('.section-content-explore-lightbox__content', { container: '.section-content-explore-lightbox' })
+      }
+    }
   },
   created () {
     if (this.nameUrlQuery && this.nameLightboxShown !== this.nameUrlQuery) {
@@ -160,11 +171,21 @@ export default {
 
 <style lang="stylus" scoped>
 .section-content-explore-lightbox
-  display flex
-  flex-direction row-reverse
   width 100%
   height 100%
   overflow hidden
+
+  &__error
+    width 100%
+    display flex
+    justify-content center
+    align-items center
+  &__content
+    display flex
+    flex-direction row-reverse
+    width 100%
+    height 100%
+    position relative
 
   &__info
     transition transform .25s
@@ -197,18 +218,6 @@ export default {
     top 0
     left 0
     
-  &__error
-    width 100%
-    display flex
-    justify-content center
-    align-items center
-  &__contnet
-    display flex
-    flex-direction row-reverse
-    width 100%
-    height 100%
-    position relative
-
 .loading
   width 100%
   height 100%
@@ -226,6 +235,26 @@ export default {
   transform translate3d(344px, 0, 0)
 .section-content-explore-lightbox__info--folded ~ .section-content-explore-lightbox__ranks--folded
   transform translate3d(688px, 0, 0)
+
+@media (max-width 1024px)
+  .section-content-explore-lightbox
+    overflow-y scroll
+    -webkit-overflow-scrolling touch
+    &__content
+      flex-direction column
+      height auto
+      padding 30px 10px 10px 10px
+    &__info-content
+      width 100%
+    &__ranks-content
+      width 100%
+    &__force
+      display none
+
+  .loading
+    height 100vh
+    &--sidebar
+      transform translate3d(0, 0, 0)
 </style>
 
 

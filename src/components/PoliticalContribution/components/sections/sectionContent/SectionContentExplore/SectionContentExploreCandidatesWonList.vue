@@ -83,6 +83,7 @@ export default {
       return get(partyArray, [ 0, '推薦政黨' ], '')
     },
     handleTooltip (candidate, event) {
+      if (!this.$store.state.useragent.isDesktop) return
       if (event.type === 'mouseover') {
         this.tooltipCandidateName = candidate
         d3.select('.section-content-explore-candidates__tooltip')
@@ -175,5 +176,19 @@ export default {
     width 90px
     height 90px
     margin 5px
+
+@media (max-width 1024px)
+  .candidates-list
+    &__list-item
+      d = calc((100vw - 20px) / 8 - 5px * 3)
+      width d
+      height d
+
+@media (max-width 425px)
+  .candidates-list
+    &__list-item
+      d = calc((100vw - 20px) / 4 - 5px * 3)
+      width d
+      height d
 </style>
 

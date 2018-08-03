@@ -6,11 +6,16 @@
       or candidate didn't exist in data
     </template>
     <template v-else>
+      <SectionContentExploreLightboxRanksTabs
+        class="section-content-explore-lightbox-ranks__tabs--mobile"
+        :currentToogled.sync="mobileCurrentToogled"
+      />
       <SectionContentExploreLightboxRanksListDonate
+        v-show="isListDonateShown"
         :class="[ 'section-content-explore-lightbox-ranks__list-donate', { 'section-content-explore-lightbox-ranks__list-donate--long': isNameLightboxShownCorp } ]"
       />
       <SectionContentExploreLightboxRanksListRelationship
-        v-show="!isNameLightboxShownCorp"
+        v-show="isListRelationshipShown"
         class="section-content-explore-lightbox-ranks__list-relationship"
       />
     </template>
@@ -18,6 +23,7 @@
 </template>
 
 <script>
+import SectionContentExploreLightboxRanksTabs from './SectionContentExploreLightboxRanksTabs.vue'
 import SectionContentExploreLightboxRanksListDonate from './SectionContentExploreLightboxRanksListDonate.vue'
 import SectionContentExploreLightboxRanksListRelationship from './SectionContentExploreLightboxRanksListRelationship.vue'
 
@@ -26,8 +32,14 @@ const { mapGetters, } = createNamespacedHelpers('PoliticalContribution')
 
 export default {
   components: {
+    SectionContentExploreLightboxRanksTabs,
     SectionContentExploreLightboxRanksListDonate,
     SectionContentExploreLightboxRanksListRelationship,
+  },
+  data () {
+    return {
+      mobileCurrentToogled: 'donate',
+    }
   },
   computed: {
     ...mapGetters([
@@ -36,6 +48,12 @@ export default {
       'isLightBoxWorks',
       'isNameLightboxShownCorp',
     ]),
+    isListDonateShown () {
+      return this.$store.state.useragent.isDesktop || this.mobileCurrentToogled === 'donate'
+    },
+    isListRelationshipShown () {
+      return (this.$store.state.useragent.isDesktop || this.mobileCurrentToogled === 'relationship') && !this.isNameLightboxShownCorp
+    }
   }
 }
 </script>
@@ -47,6 +65,9 @@ export default {
   height calc(95vh - 40px)
   display flex
   flex-direction column
+  &__tabs
+    &--mobile
+      display none
   &__list-donate
     height calc((95vh - 40px) / 2)
     overflow-y scroll
@@ -70,5 +91,21 @@ export default {
       background-color transparent
     &::-webkit-scrollbar-thumb
       background-color transparent
+
+@media (max-width 1024px)
+  .section-content-explore-lightbox-ranks
+    padding 0
+    width 100%
+    height auto
+    &__tabs
+      &--mobile
+        display flex
+    &__list-donate
+      height auto
+      overflow-y visible
+    &__list-relationship
+      height auto
+      overflow-y visible
+      border-top none
 </style>
 

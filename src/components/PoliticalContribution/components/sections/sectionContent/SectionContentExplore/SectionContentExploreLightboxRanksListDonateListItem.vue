@@ -59,7 +59,7 @@ export default {
   mixins: [ SectionContentExploreLightboxHighlightForceNode ],
   data () {
     return {
-      isGroupCompaniesToogle: false
+      isGroupCompaniesToogle: !this.$store.state.useragent.isDesktop
     }
   },
   computed: {

@@ -6,6 +6,10 @@
       or candidate didn't exist in data
     </template>
     <template v-else>
+      <SectionContentExploreRadios
+        class="section-content-explore-lightbox-info__radios--mobile"
+        :isLightboxNavigation="true"
+      />
       <SectionContentExploreLightboxInfoProfile
         v-show="isQueryValidCandidateName"
         class="section-content-explore-lightbox-info__profile"
@@ -30,7 +34,6 @@
           :candidateDonatesCompany="candidateDonatesCompany"
           :candidateDonatesCompanyCount="candidateDonatesCompanyCount"
         />
-        <!-- TODO: add more props -->
         <SectionContentExploreLightboxInfoDonatesFrom
           class="section-content-explore-lightbox-info__donates-from"
           :candidateDonatesBasic="candidateDonatesBasic"
@@ -43,6 +46,7 @@
 <script>
 import { get, isNaN, } from 'lodash'
 
+import SectionContentExploreRadios from './SectionContentExploreRadios.vue'
 import SectionContentExploreLightboxInfoProfile from './SectionContentExploreLightboxInfoProfile.vue'
 import SectionContentExploreLightboxInfoProfileCorp from './SectionContentExploreLightboxInfoProfileCorp.vue'
 import SectionContentExploreLightboxInfoDonates from './SectionContentExploreLightboxInfoDonates.vue'
@@ -53,6 +57,7 @@ const { mapState, mapGetters, } = createNamespacedHelpers('PoliticalContribution
 
 export default {
   components: {
+    SectionContentExploreRadios,
     SectionContentExploreLightboxInfoProfile,
     SectionContentExploreLightboxInfoProfileCorp,
     SectionContentExploreLightboxInfoDonates,
@@ -139,6 +144,9 @@ export default {
   height calc(95vh - 40px)
   display flex
   flex-direction column
+  &__radios
+    &--mobile
+      display none
   &__profile
     padding 0 0 20px 0
     border-bottom 1px solid #808080
@@ -156,6 +164,19 @@ export default {
     background-color transparent
   &::-webkit-scrollbar-thumb
     background-color transparent
+
+@media (max-width 1024px)
+  .section-content-explore-lightbox-info
+    padding 0
+    width 100%
+    height auto
+    &__radios
+      &--mobile
+        display flex
+        margin 5px 0 20px 2px
+        justify-content flex-start !important
+    &__donates-from
+      border-bottom none
 </style>
 
 

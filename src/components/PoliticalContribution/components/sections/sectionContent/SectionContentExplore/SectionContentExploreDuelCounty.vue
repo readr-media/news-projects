@@ -1,6 +1,6 @@
 <template>
   <div class="section-content-explore-duel-candidates-list">
-    <h1><img class="section-content-explore-duel-candidates-list__finger-hint" v-lazy="'/proj-assets/political-contribution/finger.png'" alt="">選兩位來 PK 吧！</h1>
+    <AppFingerHint :hint="'選兩位來 PK 吧！'"/>
     <SectionContentExploreDuelCountyList
       v-for="data in rawDataBasicCurrentOrdinalGroupByCountySorted"
       :key="getCountyName(data)"
@@ -14,6 +14,7 @@
 import { get, sortBy, indexOf } from 'lodash'
 import { COUNTY_SORT } from 'src/components/PoliticalContribution/constants'
 
+import AppFingerHint from '../../../AppFingerHint.vue'
 import SectionContentExploreDuelCountyList from './SectionContentExploreDuelCountyList.vue'
 
 import { createNamespacedHelpers } from 'vuex'
@@ -21,6 +22,7 @@ const { mapGetters, } = createNamespacedHelpers('PoliticalContribution')
 
 export default {
   components: {
+    AppFingerHint,
     SectionContentExploreDuelCountyList,
   },
   computed: {
