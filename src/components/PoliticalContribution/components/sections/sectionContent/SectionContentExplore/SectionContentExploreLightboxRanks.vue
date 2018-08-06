@@ -67,7 +67,7 @@ export default {
   flex-direction column
   &__tabs
     &--mobile
-      display none
+      display none !important
   &__list-donate
     height calc((95vh - 40px) / 2)
     overflow-y scroll

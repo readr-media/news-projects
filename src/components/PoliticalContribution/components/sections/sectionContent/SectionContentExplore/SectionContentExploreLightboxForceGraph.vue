@@ -42,39 +42,51 @@ export default {
     }
   },
   watch: {
-    hasDataForceGraph () {
+    dataForceGraph () {
       if (this.hasDataForceGraph) {
+        d3.selectAll('.links').remove()
+        d3.selectAll('.nodes').remove()
         this.visualizeGraph()
       }
-    },
-    nameLightboxShown () {
-      if (this.isQueryValidCandidateName || this.isQueryValidGroupOrCompanyName) {
-        // NOTE: workaround
-        if (!this.isRepainting) {
-          this.isRepainting = true
-          d3.selectAll('.links').remove()
-          d3.selectAll('.nodes').remove()
-          d3.timeout(() => {
-            this.visualizeGraph()
-            this.isRepainting = false
-          }, 500)
-        }
-      }
-    },
-    ordinalUrlQueryString () {
-      if ((this.isQueryValidCandidateName || this.isQueryValidGroupOrCompanyName) && this.isQueryValidOrdinal) {
-        // NOTE: workaround
-        if (!this.isRepainting) {
-          this.isRepainting = true
-          d3.selectAll('.links').remove()
-          d3.selectAll('.nodes').remove()
-          d3.timeout(() => {
-            this.visualizeGraph()
-            this.isRepainting = false
-          }, 500)
-        }
-      }
     }
+  //   hasDataForceGraph () {
+  //     if (this.hasDataForceGraph) {
+  //       console.log('hasDataForceGraph')
+  //       this.isRepainting = true
+  //       this.visualizeGraph()
+  //       this.isRepainting = false
+  //     }
+  //   },
+  //   nameLightboxShown () {
+  //     if (this.isQueryValidCandidateName || this.isQueryValidGroupOrCompanyName) {
+  //       // NOTE: workaround
+  //       if (!this.isRepainting) {
+  //         this.isRepainting = true
+  //         d3.selectAll('.links').remove()
+  //         d3.selectAll('.nodes').remove()
+  //         d3.timeout(() => {
+  //           console.log('nameLightboxShown')
+  //           this.visualizeGraph()
+  //           this.isRepainting = false
+  //         }, 500)
+  //       }
+  //     }
+  //   },
+  //   ordinalUrlQueryString () {
+  //     if ((this.isQueryValidCandidateName || this.isQueryValidGroupOrCompanyName) && this.isQueryValidOrdinal) {
+  //       // NOTE: workaround
+  //       if (!this.isRepainting) {
+  //         this.isRepainting = true
+  //         d3.selectAll('.links').remove()
+  //         d3.selectAll('.nodes').remove()
+  //         d3.timeout(() => {
+  //           console.log('ordinalUrlQueryString')
+  //           this.visualizeGraph()
+  //           this.isRepainting = false
+  //         }, 500)
+  //       }
+  //     }
+  //   }
   },
   computed: {
     ...mapGetters([
@@ -543,6 +555,7 @@ export default {
       }
     },
     visualizeGraph () {
+      console.log('visulaize!');
       this.initScale()
       this.initSelection()
       this.initZoom()

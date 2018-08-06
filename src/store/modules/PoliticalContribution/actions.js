@@ -1,7 +1,11 @@
 import { isEmpty, } from 'lodash'
+import * as d3 from 'd3'
 import { convertBody, dropWontCalculateRow, } from './util'
 
 export default {
+  FETCH_DATA_ASSETS: ({ dispatch, commit }, { params }) => {
+    return d3.csv(params.filePath)
+  },
   FETCH_DATA: ({ dispatch, commit }, { params }) => {
     return dispatch('FETCH_SHEET', { params }, { root: true })
     .then(({ body }) => {

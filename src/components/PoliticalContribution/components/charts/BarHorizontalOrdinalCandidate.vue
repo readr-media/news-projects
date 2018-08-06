@@ -240,6 +240,6 @@ export default {
   transform-origin 0% 0%
   position relative
   &__components
-    position absolute
+    position absolute !important
 </style>
 
