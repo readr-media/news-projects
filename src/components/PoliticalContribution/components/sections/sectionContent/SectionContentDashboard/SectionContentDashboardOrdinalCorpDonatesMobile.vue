@@ -1,10 +1,19 @@
 <template>
-  <div :style="{height: '500px'}">
-    <SectionContentDashboardOrdinalCorpDonatesMobileListItem
-      v-for="companyData in dataProcessed"
-      :key="companyData.name"
-      :data="companyData"
-    />
+  <div class="section-content-dashboard-ordinal-corp-donates-mobile" :style="{minHeight: '2100px'}">
+    <div class="section-content-dashboard-ordinal-corp-donates-mobile__hint">
+      <p>註：</p>
+      <p>註：捐給 17 個人中，有 6 人當選，顯示為 6/17</p>
+    </div>
+    <div v-show="!isDataAvailable" class="section-content-dashboard-ordinal-corp-donates-mobile__loading">
+      正在讀取營利事業捐贈明細...
+    </div>
+    <ol v-show="isDataAvailable" class="section-content-dashboard-ordinal-corp-donates-mobile__list">
+      <SectionContentDashboardOrdinalCorpDonatesMobileListItem
+        v-for="companyData in dataProcessed"
+        :key="companyData.name"
+        :data="companyData"
+      />
+    </ol>
   </div>
 </template>
 
@@ -100,4 +109,23 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.section-content-dashboard-ordinal-corp-donates-mobile
+  &__hint
+    display flex
+    font-size 18px
+    color #808080
+    line-height 1.5
+    margin 0 0 20px 0
+  &__loading
+    display flex
+    justify-content center
+    align-items center
+  &__list
+    list-style none
+    padding 0
+    margin 0
+</style>
+
 

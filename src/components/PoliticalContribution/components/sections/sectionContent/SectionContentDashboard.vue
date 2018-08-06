@@ -84,14 +84,14 @@
           />
         </AppChartCollapse>
         <AppChartCollapse :title="'哪個集團捐最多'">
-          <ScatterOrdinalCorpDonates
-            class="chart-container__chart"
-            id="dashboard-chart-ordinal-corp-donates-mobile"
-          />
-          <!-- <SectionContentDashboardOrdinalCorpDonatesMobile
+          <!-- <ScatterOrdinalCorpDonates
             class="chart-container__chart"
             id="dashboard-chart-ordinal-corp-donates-mobile"
           /> -->
+          <SectionContentDashboardOrdinalCorpDonatesMobile
+            class="chart-container__chart"
+            id="dashboard-chart-ordinal-corp-donates-mobile"
+          />
         </AppChartCollapse>
       </div>
 

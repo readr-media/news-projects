@@ -57,36 +57,37 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.section-content-explore-lightbox-ranks-tabs
-  position relative
-  left -10px
-  width calc(100% + 20px)
-  height 60px
-  background-color #666
-  display flex
-  align-items flex-end
-  &__tab
-    width 50%
-    height 55px
-    border none
+@media (max-width 1024px)
+  .section-content-explore-lightbox-ranks-tabs
+    position relative
+    left -10px
+    width calc(100% + 20px)
+    height 60px
     background-color #666
-    color white
-    padding 0 10px
-    &:focus
-      outline none
-    &--toogled
-      background-color white
-      color #666
-
-.tab
-  display flex
-  align-items center
-  &__container
     display flex
-    flex-direction column
-  &__text
-    margin 2px 0
-    text-align left
+    align-items flex-end
+    &__tab
+      width 50%
+      height 55px
+      border none
+      background-color #666
+      color white
+      padding 0 10px
+      &:focus
+        outline none
+      &--toogled
+        background-color white
+        color #666
+
+  .tab
+    display flex
+    align-items center
+    &__container
+      display flex
+      flex-direction column
+    &__text
+      margin 2px 0
+      text-align left
 </style>
 
 
