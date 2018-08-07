@@ -555,7 +555,6 @@ export default {
       }
     },
     visualizeGraph () {
-      console.log('visulaize!');
       this.initScale()
       this.initSelection()
       this.initZoom()

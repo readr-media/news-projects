@@ -31,6 +31,7 @@ export default {
     donates () {
       if (this.isQueryValidCandidateName || this.isQueryValidGroupOrCompanyName) {
         this.updateScales()
+        this.updateHeight()
         this.visualize()
       }
     }
@@ -56,6 +57,7 @@ export default {
       //     money: 567
       //   },
       // ],
+      barBandwidthDefault: 30,
       outerWidth: undefined,
       outerHeight: undefined,
       margin: undefined,
@@ -84,7 +86,7 @@ export default {
   methods: {
     init () {
       this.outerWidth = d3.select(`#${this.$el.id}.bar-horizontal-donates-from`).node().getBoundingClientRect().width
-      this.outerHeight = d3.select(`#${this.$el.id}.bar-horizontal-donates-from`).node().getBoundingClientRect().height
+      this.outerHeight = this.barBandwidthDefault * 4
 
       this.margin = { top: 0, right: 0, bottom: 0, left: 110, }
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
@@ -114,14 +116,26 @@ export default {
           .attr('class', 'bar-horizontal-donates-from__y-axis')
           .call(this.yAxis)
     },
-    updateScales () {
-      this.xScale
-        .domain([ 0, d3.max(this.donates, d => d.money) ])
-        .range([ 0,  this.innerWidth ])
+    updateHeight () {
+      const barCount = this.donates.length
+      this.outerHeight = this.barBandwidthDefault * barCount
+      this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
+
+      d3.select(`#${this.$el.id}.bar-horizontal-donates-from svg`)
+        .attr('height', this.outerHeight)
       this.yScale
         .domain(this.donates.map(donate => donate.from))
         .range([ 0, this.innerHeight ])
       this.yAxis.scale(this.yScale)
+    },
+    updateScales () {
+      this.xScale
+        .domain([ 0, d3.max(this.donates, d => d.money) ])
+        .range([ 0,  this.innerWidth ])
+      // this.yScale
+      //   .domain(this.donates.map(donate => donate.from))
+      //   .range([ 0, this.innerHeight ])
+      // this.yAxis.scale(this.yScale)
     },
     visualize () {
       // Data joins
@@ -149,9 +163,9 @@ export default {
         .append('text')
           .attr('class', 'bar-horizontal-donates-from__hint')
         .merge(hints)
-          .attr('x', d => this.xScale(d.money) - 40)
+          .attr('x', d => this.xScale(d.money) - 42)
           .attr('y', d => this.yScale(d.from) + this.yScale.bandwidth() / 2 + 6)
-          .text((d, i) => this.xScale(d.money) - 40 >= 0 ? `${this.donateProportion[i].proportion}%` : '')
+          .text((d, i) => this.xScale(d.money) - 42 >= 0 ? `${this.donateProportion[i].proportion}%` : '')
       // Exit
       bars.exit().remove()
       hints.exit().remove()
@@ -163,6 +177,7 @@ export default {
   },
   mounted () {
     this.init()
+    this.updateHeight()
     this.visualize()
   }
 }
@@ -171,7 +186,7 @@ export default {
 <style lang="stylus">
 .bar-horizontal-donates-from
   width 100%
-  height 120px
+  height auto
   &__hint
     fill white
   &__y-axis
