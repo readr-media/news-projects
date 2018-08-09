@@ -1,7 +1,7 @@
 <template>
   <div class="main-aside">
     <MainContentAsideGear v-for="(g, k) in GEARS" :options="get(g, 'OPTIONS', {})" :name="k" :key="k" :isMulti="get(g, 'isMulti', false)"></MainContentAsideGear>
-    <MainContentAsideExplanation v-for="(p, k) in PROGRAM" :data="p" :key="k" :id="`program-${p.id}`"></MainContentAsideExplanation>
+    <MainContentAsideExplanation :class="{ 'first-explanation': k === 0 }" v-for="(p, k) in PROGRAM" :data="p" :key="k" :id="`program-${p.id}`"></MainContentAsideExplanation>
   </div>
 </template>
 <script>
@@ -66,4 +66,8 @@
     },
   }
 </script>
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+  @media screen and (min-width: 0px) and (max-width: 767px)
+    .first-explanation
+      margin-top 256px
+</style>

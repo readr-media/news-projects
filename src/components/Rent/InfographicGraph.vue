@@ -8,6 +8,9 @@
   export default {
     name: 'InfographicGraph',
     computed: {
+      isDesktop () {
+        return get(this.$store, 'state.useragent.isDesktop')
+      },
       style () {
         const _style = {}
         !this.isActive && (_style[ 'display' ] = 'none')
@@ -31,15 +34,13 @@
           this.loadedGraph = graph.src
           this.isLoaded = true
         }
-        graph.src = get(this.program, 'graph')
+        graph.src = this.isDesktop ? get(this.program, 'graph') : get(this.program, 'graphMB')
       },
     },
     mounted () {
-      //p.p_top_y < (current_top_y + device_height / 2)
       window.addEventListener('scroll', () => {
         const current_top_y = currentYPosition()
         const device_height = get(this.$store, 'state.viewport.1', 0)
-        // if (this.refDomTopY < (current_top_y + device_height / 2)) {
         if (current_top_y > (this.refDomTopY - device_height) && current_top_y < (this.refDomTopY + device_height)) {
           if (!this.isLoaded) { this.loadGraph()}
           if (current_top_y > (this.refDomTopY - device_height / 2) && current_top_y < (this.refDomTopY + device_height / 2)) {
@@ -47,7 +48,7 @@
           } else {
             this.isActive = false
           }
-        }
+        }            
       })
     },
     props: {

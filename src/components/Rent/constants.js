@@ -110,6 +110,7 @@ export const PROGRAM = [
       OTHER: null,
     },
     graph: '/proj-assets/rent/program-1.png',
+    graphMB: '/proj-assets/rent/program-mobile-1.png',
     subinfo: [
       { city: 'TAIPEI', feature: '1500' },
       { city: 'NEWTAIPEI', feature: '1000' },
@@ -130,6 +131,7 @@ export const PROGRAM = [
       OTHER: null,
     },
     graph: '/proj-assets/rent/program-2.png',
+    graphMB: '/proj-assets/rent/program-mobile-2.png',
     subinfo: [
       { city: 'NEWTAIPEI', feature: '12000' },
       { city: 'TAOYUAN', feature: '10000' },
@@ -150,6 +152,7 @@ export const PROGRAM = [
       OTHER: null,
     },
     graph: '/proj-assets/rent/program-2.png',
+    graphMB: '/proj-assets/rent/program-mobile-2.png',
     subinfo: [
       { city: 'NEWTAIPEI', feature: '24%' },
       { city: 'TAOYUAN', feature: '18%' },
@@ -171,6 +174,7 @@ export const PROGRAM = [
       OTHER: null,
     },
     graph: '/proj-assets/rent/program-4.png',
+    graphMB: '/proj-assets/rent/program-mobile-4.png',
     subinfo: [
       { city: 'NEWTAIPEI', feature: '14%' },
       { city: 'TAOYUAN', feature: '29%' },
@@ -192,6 +196,7 @@ export const PROGRAM = [
       OTHER: null,
     },
     graph: '/proj-assets/rent/program-5.png',
+    graphMB: '/proj-assets/rent/program-mobile-5.png',
     subinfo: [
       { city: 'NEWTAIPEI', feature: '37%' },
       { city: 'TAOYUAN', feature: '65%' },
@@ -220,6 +225,7 @@ export const PROGRAM = [
       OTHER: [ 'is_pettable' ],
     },
     graph: '/proj-assets/rent/program-6.png',
+    graphMB: '/proj-assets/rent/program-mobile-6.png',
     subinfo: [
       { city: 'TAIPEI', feature: '10%' },
       { city: 'TAOYUAN', feature: '11%' },
@@ -241,6 +247,7 @@ export const PROGRAM = [
       OTHER: null,      
     },  
     graph: '/proj-assets/rent/program-7.png',
+    graphMB: '/proj-assets/rent/program-mobile-7.png',
     subinfo: [
       { city: 'NEWTAIPEI', feature: '17%' },
       { city: 'KAOHSIUNG', feature: '16%' },
@@ -262,6 +269,7 @@ export const PROGRAM = [
       OTHER: null,       
     },    
     graph: '/proj-assets/rent/program-8.png',
+    graphMB: '/proj-assets/rent/program-mobile-8.png',
     subinfo: [
       { city: 'NEWTAIPEI', feature: '6%' },
       { city: 'TAICHUNG', feature: '0.6%' },
@@ -283,6 +291,7 @@ export const PROGRAM = [
       OTHER: null,       
     },   
     graph: '/proj-assets/rent/program-9.png',
+    graphMB: '/proj-assets/rent/program-mobile-9.png',
     subinfo: [
       { city: 'NEWTAIPEI', feature: '36%' },
       { city: 'TAINAN', feature: '28％' },

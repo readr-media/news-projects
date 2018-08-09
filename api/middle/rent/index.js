@@ -7,7 +7,7 @@ const { CITIES, VIEW_SIZE, AXIS, RENT_LOCALE, } = require('./constants')
 const { concat, filter, find, findIndex, each, get, map, slice, uniqWith, } = require('lodash')
 const { fetchCityData, getBounds, updateScales, renderChart, } = require('./common')
 const { fetchFromRedis, insertIntoRedis, redisWriting, redisFetching, } = require('../redisHandler')
-const { RENT_PREPARE_AUTH } = require('../../config')
+const { RENT_PREPARE_AUTH, SERVER_HOST, SERVER_PROTOCOL } = require('../../config')
 
 
 router.get('/infographic/bounds', fetchFromRedis, (req, res) => {
@@ -120,9 +120,9 @@ router.get('/infographic/calc', fetchFromRedis, (req, res, next) => {
     // }
 
     const dataFetching = () => (req.query.POSITION && req.query.POSITION !== 'ENTIRE'
-    ? fetchCityData(`http://localhost:8080/proj-assets/rent/${req.query.POSITION}.json`).then(raw => ([ raw ]))
+    ? fetchCityData(`${SERVER_PROTOCOL}://${SERVER_HOST}/proj-assets/rent/${req.query.POSITION}.json`).then(raw => ([ raw ]))
     : Promise.all([
-      ...map(CITIES, city => fetchCityData(`http://localhost:8080/proj-assets/rent/${city}.json`))
+      ...map(CITIES, city => fetchCityData(`${SERVER_PROTOCOL}://${SERVER_HOST}/proj-assets/rent/${city}.json`))
     ]))
     dataFetching().then(raw_data => {
       raw_grouped = raw_data
@@ -204,14 +204,15 @@ const checkMem = () => {
 
 router.post('/infographic/prepare/EMPTY', (req, res) => {
   const pass_auth = get(req, 'body.pass_auth')
+  const size = get(req, 'body.size')
   debug('Got a call preparing EMPTY')
   if (pass_auth && pass_auth === RENT_PREPARE_AUTH) {
     res.send('Going to prepare it in several minutes.')
     redisFetching('/infographic/bounds', ({ error: e, data: dt, }) => {
       if (!e) {
         const _b = JSON.parse(dt)
-        renderChart([], _b, 'L')
-        .then(d3String => redisWriting(`/infographic/EMPTY?size=L`, d3String, () => {
+        renderChart([], _b, size)
+        .then(d3String => redisWriting(`/infographic/EMPTY?size=${size}`, d3String, () => {
           checkMem()
           debug('svg rendering completely!')
         }, 3 * 365 * 24 * 60 * 60))
@@ -227,12 +228,13 @@ router.post('/infographic/prepare/EMPTY', (req, res) => {
 router.post('/infographic/prepare/:city', (req, res) => {
   const pass_auth = get(req, 'body.pass_auth')
   const city = get(req, 'params.city')
+  const size = get(req, 'body.size')
   debug('Got a call preparing city', city)
   if (pass_auth && pass_auth === RENT_PREPARE_AUTH && city) {
     res.send('Going to prepare it in several minutes.')
 
     const prepare_start_timestamp = Date.now()
-    fetchCityData(`http://localhost:8080/proj-assets/rent/${city}.json`)
+    fetchCityData(`${SERVER_PROTOCOL}://${SERVER_HOST}/proj-assets/rent/${city}.json`)
     .then(raw => {
       redisFetching('/infographic/bounds', ({ error: e, data: dt, }) => {
         if (!e) {
@@ -241,8 +243,8 @@ router.post('/infographic/prepare/:city', (req, res) => {
           debug('Uniq data completely.', data.length, `${Date.now() - prepare_start_timestamp}ms`)
           checkMem()
     
-          renderChart(data, _b, 'L')
-          .then(d3String => redisWriting(`/infographic/${city}?size=L`, d3String, () => {
+          renderChart(data, _b, size)
+          .then(d3String => redisWriting(`/infographic/${city}?size=${size}`, d3String, () => {
             checkMem()
             debug('svg rendering completely!')
           }, 3 * 365 * 24 * 60 * 60))
@@ -261,13 +263,13 @@ router.post('/infographic/prepare/:city', (req, res) => {
 router.post('/infographic/prepare', (req, res) => {
   debug('Got a call to prepare infographic')
   const pass_auth = get(req, 'body.pass_auth')
-  const rentRange = get(req, 'body.rent')
+  const size = get(req, 'body.size')
   if (pass_auth && pass_auth === RENT_PREPARE_AUTH) {
     res.send('Going to prepare it in several minutes.')
     const prepare_start_timestamp = Date.now()
     debug('Start to fetch data.')
     Promise.all([
-      ...map(CITIES, city => fetchCityData(`http://localhost:8080/proj-assets/rent/${city}.json`))
+      ...map(CITIES, city => fetchCityData(`${SERVER_PROTOCOL}://${SERVER_HOST}/proj-assets/rent/${city}.json`))
     ]).then(raw_data => {
       debug('Fetching data completely.', `${Date.now() - prepare_start_timestamp}ms`)
       let bounds = {}
@@ -300,14 +302,14 @@ router.post('/infographic/prepare', (req, res) => {
       checkMem()
 
       setTimeout(() => {
-        renderChart(data, bounds, 'L').then(d3SvgString => {
+        renderChart(data, bounds, size).then(d3SvgString => {
           setTimeout(() => {
             debug('Going to save to redis')
-            redisWriting('/infographic/ENTIRE?size=L', d3SvgString, () => {}, 3 * 365 * 24 * 60 * 60)
+            redisWriting(`/infographic/ENTIRE?size=${size}`, d3SvgString, () => {}, 3 * 365 * 24 * 60 * 60)
             checkMem()
-          }, 10 * 1000)          
+          }, 1 * 1000)          
         })
-      }, 10 * 1000)
+      }, 1 * 1000)
 
       // return renderChart(data, bounds, 'L')
     // }).then(d3SvgString => {

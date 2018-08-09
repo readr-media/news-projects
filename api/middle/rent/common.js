@@ -34,10 +34,10 @@ function getBounds (data, paddingFactor = 1) {
 
 function updateScales (d3, bounds = {}, size = 'S') {
   debug('bounds:', bounds[ AXIS.X ], bounds[ AXIS.Y ])
-
+  const bias = size === 'S' ? 15 : 0
   const xScale = d3.scaleLinear()
   .domain([ get(bounds, `${AXIS.X}.min`, 0), get(bounds, `${AXIS.X}.max`, 0) ])
-  .range([ 50, VIEW_SIZE[ size ].WIDTH - 20 ])
+  .range([ 50 - bias, VIEW_SIZE[ size ].WIDTH - bias ])
 
   const yScale = d3.scaleLinear()
   .domain([ get(bounds, `${AXIS.Y}.min`, 0), get(bounds, `${AXIS.Y}.max`, 0) ])
@@ -51,6 +51,7 @@ function renderChart (data, bounds, size) {
     global.gc()
     let d3n = new D3Node()
     let d3 = d3n.d3
+    const bias = size === 'S' ? 15 : 0
   
     const svg = d3n.createSVG(VIEW_SIZE[ size ].WIDTH, VIEW_SIZE[ size ].HEIGHT - 50)
     .attr('width', VIEW_SIZE[ size ].WIDTH)
@@ -72,14 +73,14 @@ function renderChart (data, bounds, size) {
   
     chart.append('text')
     .attr('id', 'yLabel')
-    .attr('transform', `translate(65, 20) rotate(-90)`)
+    .attr('transform', `translate(${ 65 - bias }, 20) rotate(-90)`)
     .attr('text-anchor', 'middle')
     .text(get(RENT_LOCALE, AXIS.Y.toUpperCase(), AXIS.Y )) 
   
     let { xScale, yScale, } = updateScales(d3, bounds, size)
   
     const makeXAxis = s => {
-      s.call(d3.axisBottom(xScale))
+      s.call(d3.axisBottom(xScale).tickFormat(d => ((d / 1000) + 'k')))
     }
     const makeYAxis = s => {
       s.call(d3.axisLeft(yScale))
@@ -98,7 +99,7 @@ function renderChart (data, bounds, size) {
     const axisYGrid = d3.axisLeft(yScale)
     // .ticks(10)
     .tickFormat('')
-    .tickSize(0 -  VIEW_SIZE[ size ].WIDTH + 65)
+    .tickSize(0 -  VIEW_SIZE[ size ].WIDTH + 65 - bias)
   
     chart.append('g')
     .call(axisXGrid)
@@ -110,7 +111,7 @@ function renderChart (data, bounds, size) {
     .call(axisYGrid)
     .attr('fill', 'none')
     .attr('stroke', 'rgba(0,0,0,.1)')
-    .attr('transform','translate(45, 0)')
+    .attr('transform', `translate(${ 45 - bias }, 0)`)
   
     /**
      * setup line
@@ -121,7 +122,7 @@ function renderChart (data, bounds, size) {
       .attr('transform', `translate(0, ${VIEW_SIZE[ size ].HEIGHT - 70})`)
       .call(makeXAxis)
     chart.append('g')
-      .attr('transform', `translate(45, 0)`)
+      .attr('transform', `translate(${ 45 - bias }, 0)`)
       .attr('id', 'yAxis')
       .call(makeYAxis)
   
@@ -154,6 +155,9 @@ function renderChart (data, bounds, size) {
     .attr('is_offer_aircon', d => d[ 'is_offer_aircon' ])
     .attr('is_offer_sofa', d => d[ 'is_offer_sofa' ])
     .attr('is_offer_frige', d => d[ 'is_offer_frige' ])
+    .attr('hidden', d => {
+      return d[ AXIS.X ] > DATA_LIMIT.MAX[ AXIS.X.toUpperCase() ] ? true : null
+    })
     .attr('r', 1)
     .attr('class', d => {
       let spot_class = 'spot'

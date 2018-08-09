@@ -30,11 +30,17 @@
       isLoaded () {
         return get(this.$store, 'state.Rent.isLoaded')
       },
+      isDesktop () {
+        return get(this.$store, 'state.useragent.isDesktop')
+      },           
       progress () {
         // const progress = Math.round((this.assetsLen / map(CITIES, (c, k) => k).length) * 1000) / 10
         const progress = Math.round((this.count / (map(CITIES, (c, k) => k).length + 1)) * 1000) / 10
         // debug('progress', progress, (this.count / (map(CITIES, (c, k) => k).length + 1)))
         return progress
+      },
+      size () {
+        return this.isDesktop ? 'L' : 'S'
       },
     },
     data () {
@@ -55,9 +61,9 @@
       // each(CITIES, city => { this.asstsList[ city ] = false })
       
       Promise.all([
-        fetchInfographic(this.$store, 'EMPTY', 'L').then(svg => setUpSvgString(this.$store, 'EMPTY', svg).then(() => this.checkAssets('EMPTY'))),
-        fetchInfographic(this.$store, 'ENTIRE', 'L').then(svg => setUpSvgString(this.$store, 'ENTIRE', svg).then(() => this.checkAssets('ENTIRE'))),
-        ...map(CITIES, city => fetchInfographic(this.$store, city, 'L').then(svg => setUpSvgString(this.$store, city, svg).then(() => this.checkAssets(city)))),
+        fetchInfographic(this.$store, 'EMPTY', this.size).then(svg => setUpSvgString(this.$store, 'EMPTY', svg).then(() => this.checkAssets('EMPTY'))),
+        fetchInfographic(this.$store, 'ENTIRE', this.size).then(svg => setUpSvgString(this.$store, 'ENTIRE', svg).then(() => this.checkAssets('ENTIRE'))),
+        ...map(CITIES, city => fetchInfographic(this.$store, city, this.size).then(svg => setUpSvgString(this.$store, city, svg).then(() => this.checkAssets(city)))),
       ]).then(() => {
         debug('ASSETS READY!')
         debug('ASSETS READY!')
@@ -113,4 +119,24 @@
         font-weight 100
         line-height 2
         color #313131
+  @media screen and (min-width: 0px) and (max-width: 767px)
+    .bief
+      height auto
+      min-height 100vh
+      padding 90px 25px 25px
+      > div
+        width 100%
+      .title
+        font-size 2.25rem
+      .credit
+        font-size 0.875rem
+        margin-top 27px
+      .status
+        margin-top 20px
+      .content
+        margin-top 23px
+        p
+          width 100%
+          font-size 1rem
+          line-height 1.88
 </style>

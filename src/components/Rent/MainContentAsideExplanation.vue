@@ -104,4 +104,21 @@
             &.black
               background-color #dfe166
               color #fff
+  @media screen and (min-width: 0px) and (max-width: 767px)
+    .explanation
+      & + &
+        .graph
+          margin-top 50px 
+      .string
+        &.white-back
+          padding 25px
+      .graph
+        .primary
+          padding 23px
+          font-size 1.25rem
+          & >>> strong
+            font-size 2.875rem
+            margin 0 5px   
+        .subinfo
+          padding 0 10px
 </style>
