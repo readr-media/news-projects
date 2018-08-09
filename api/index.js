@@ -37,7 +37,7 @@ router.use('*', (req, res, next) => {
         console.error('MEMORY WAS RUNNING OUT')
       } 
       console.error(`KILLING PROCESS IN 1 SECOND(At ${(new Date).toString()})`)
-      process.exit(1)
+      // process.exit(1)
     }
     try {
       global.gc()

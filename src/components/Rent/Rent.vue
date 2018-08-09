@@ -107,6 +107,7 @@
 <style lang="stylus" scoped>
   .rent2
     font-family "source-han-sans-traditional", sans-serif
+    overflow-y auto
     header
       position fixed
       top 0

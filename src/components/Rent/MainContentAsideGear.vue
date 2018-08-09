@@ -80,6 +80,11 @@
       line-height normal
       color #313131
       animation fade-in 0.5s linear
+  @media screen and (min-width: 0px) and (max-width: 767px)
+    .inactive-gear
+      padding 0 25px
+      &__description
+        margin 20px auto
   @keyframes fade-in
     0%
       opacity 0

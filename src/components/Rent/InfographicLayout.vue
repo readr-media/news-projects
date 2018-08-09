@@ -181,5 +181,11 @@
               &:not(.less-than-6600)
                 fill #d3d3d3
                 opacity 0.2 
-
+  @media screen and (min-width: 0px) and (max-width: 767px)
+    .infographic
+      width 100%
+      height 220px
+      &__svg
+        &__default
+          background-image url(/proj-assets/rent/infographic-mobile-default.png)
 </style>

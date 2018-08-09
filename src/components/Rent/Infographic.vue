@@ -16,38 +16,20 @@
     <template v-for="p in PROGRAM">
       <InfographicGraph class="infographic__svg__static" v-if="get(p, 'graph')" :program="p"></InfographicGraph>
     </template>
-    <div class="infographic__tip" v-show="tip"><span v-html="tip"></span></div>
+    <div class="infographic__tip" v-show="tip" v-if="isDesktop"><span v-html="tip"></span></div>
     <div class="infographic__loading" v-show="isLoading"><Spinner show="true"></Spinner></div>    
   </InfographicLayout>
 </template>
 <script>
-  // import * as D3 from 'src/components/Rent/d3.js'
   import InfographicLayout from 'src/components/Rent/InfographicLayout.vue'
   import InfographicGraph from 'src/components/Rent/InfographicGraph.vue'
   import Spinner from 'src/components/Spinner.vue'
   import axios from 'axios'
   import { CITIES, GEARS, TIPS, INFOGRAPH_AXIS, VIEW_SIZE, PROGRAM, } from 'src/components/Rent/constants'
   import { concat, each, filter, get, map, slice, uniqWith, } from 'lodash'
-  const d3 = require('d3')
   const debug = require('debug')('CLIENT:Infographic')
-  const fetchData = url => {
-    return new Promise((resolve, reject) => {
-      axios.get(url, {})
-      .then(response => resolve(response.data))
-      .catch(error => reject(error))
-    })
-  }
-  // const fetchSvg = (url, size) => {
-  //   return new Promise((resolve, reject) => {
-  //     axios.get(url, { params: { size, }, })
-  //     .then(response => resolve(response.data))
-  //     .catch(error => reject(error))
-  //   })    
-  // }
-  // const fetchBounds = store => store.dispatch('Rent/FETCH_BOUNDS', {})
   const fetchInfographic = (store, position, size) => store.dispatch('Rent/FETCH_INFOGRAPHIC', { position, size,})
   const fetchInfographicCalc = (store, params) => store.dispatch('Rent/FETCH_INFOGRAPHIC_CALC', { params, })
-  const setupFilters = (store, filters) => store.dispatch('Rent/SETUP_FILTER', { filters, })
 
   export default {
     name: 'Infographic',
@@ -64,18 +46,9 @@
         this.isLoading = true
         return get(current_filters, 'POSITION')
       },
-      scale () {
-        const xScale = d3.scaleLinear()
-        .domain([ get(get(this.$store, 'state.Rent.bounds'), `rent.min`, 0), get(get(this.$store, 'state.Rent.bounds'), `rent.max`, 0) ])
-        .range([ 50, 665 - 20 ])
-        // debug(get(get(this.$store, 'state.Rent.bounds'), `rent.min`, 0), get(get(this.$store, 'state.Rent.bounds'), `rent.max`, 0))
-        // debug(get(get(this.$store, 'state.Rent.bounds'), `unit.min`, 0), get(get(this.$store, 'state.Rent.bounds'), `unit.max`, 0))
-        const yScale = d3.scaleLinear()
-        .domain([ get(get(this.$store, 'state.Rent.bounds'), `unit.min`, 0), get(get(this.$store, 'state.Rent.bounds'), `unit.max`, 0) ])
-        .range([ 420 - 75, 0 ])
-
-        return { xScale, yScale }
-      },   
+      isDesktop () {
+        return get(this.$store, 'state.useragent.isDesktop')
+      },       
       svgString () {
         return get(this.$store, 'state.Rent.svgStrs', {})
       }, 
@@ -110,24 +83,12 @@
       return {
         CITIES,
         PROGRAM,
-        bounds: {},
-        clientSvg: null,
         graphEmty: '',
         id: 0,
-        infographicViewWidth: 800,
-        infographicViewHeight: 600,        
         isSvgActive: false,
         isNoRequired: true,
         isLoading: false,
-        // latstSrouceRaw: null,
-        // originalData: [],
-        raw: {},
         tip: '',
-        xAxis: 'rent',
-        yAxis: 'unit',
-        xScale: () => {},
-        yScale: () => {},
-        // svgHtml: '',
       }
     },
     methods: {
@@ -136,6 +97,7 @@
       mouseoverSvg (event) {
         const target = event.target
         const isCircle = target.tagName === 'circle'
+        if (!isDesktop) { return }
         if (isCircle) {
           const isExtraExpItems = [ 'electricity_fee', 'water_fee', 'gas_fee', 'internet_fee', 'tv_fee' ]
           const isExtraExp = filter(isExtraExpItems, item => target.getAttribute(item) === 'TRUE').length > 0
@@ -181,67 +143,17 @@
             this.tip = ''
           }, 3000)
         }        
-    },
-    },
-    beforeMount () {
-      // fetchBounds(this.$store)
+      },
     },
     mounted () {
       debug('Infographic mounted!')
       this.id = Math.round(Math.random() * 10000000000)
       const stamp = Date.now()
-      // return
-      // Promise.all([
-      //   // fetchInfographicCalc(this.$store, this.current_filters),
-      //   fetchInfographic(this.$store, get(this.current_filters, 'POSITION') || 'ENTIRE', 'L').then(html => {
-      //     // this.svgHtml = html
-      //     const svgDom = this.$el.querySelector('.infographic__svg > div')
-      //     const svgDomVirtual = document.createElement('div')
-      //     svgDomVirtual.onload = () => {
-      //       debug('Loaded:', Date.now() - stamp, 'ms')
-      //     }
-      //     debug('Assign:', Date.now() - stamp, 'ms')
-      //     svgDomVirtual.innerHTML = html
-      //     svgDom ? this.$el.querySelector('.infographic__svg').replaceChild(svgDomVirtual, svgDom) : this.$el.querySelector('.infographic__svg').appendChild(svgDomVirtual)
-      //     // this.isLoading = false
-      //     debug('Rendering Done:', Date.now() - stamp, 'ms')
-      //     // this.isSvgActive = false
-      //     return
-      //   }),
-      // ])
-      // .then(outcome => {
-      // //   return Promise.all([
-      // //     ...map(CITIES, city => fetchData(`http://localhost:8080/proj-assets/rent/${city}.json`))
-      // //   ])
-      // // })
-      // // .then(raw_data => {
-      // //   this.originalData = concat(raw_data)
-      // //   debug('Raw data done.')
-      // })
-      // .catch(err => debug(err))
     },
     watch: {
       'current_filters.POSITION': function (n, o) {
         debug('Mutation detected: current_filters.POSITION', this.current_filters.POSITION)
         this.isLoading = true
-        // const filters = {}
-        // each(GEARS, (g, k) => { k!== 'POSITION' && (filters[ k ] = undefined) })
-        // Promise.all([
-        //   setupFilters(this.$store, filters),
-        //   fetchInfographic(this.$store, get(this.current_filters, 'POSITION') || 'ENTIRE', 'L').then(html => {
-        //     // this.svgHtml = html
-        //     const svgDom = this.$el.querySelector('.infographic__svg > div')
-        //     const svgDomVirtual = document.createElement('div')
-        //     svgDomVirtual.innerHTML = html
-        //     svgDom ? this.$el.querySelector('.infographic__svg').replaceChild(svgDomVirtual, svgDom) : this.$el.querySelector('.infographic__svg').appendChild(svgDomVirtual)
-        //     this.isLoading = false
-        //     return
-        //   })
-        // ])
-        // .then(outcome => {
-        // //   this.setupSvgBehavior()
-        //   // const currentSourceCount = get(document.querySelectorAll(`#id-${this.id} svg g.chart circle`), 'length', 0)
-        // })        
       },
       current_filters: function (n, o) {
         this.isSvgActive = filter(this.current_filters, f => f && f !== 'ENTIRE').length > 0

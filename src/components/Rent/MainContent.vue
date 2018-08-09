@@ -11,7 +11,7 @@
               <span v-text="targetSourceCount" class="source"></span>
               <span v-text="$t('RENT.INFOGRAPHIC_BODY.BASED_ON_YOUR_CASE_POSTFIX')"></span>
             </div>
-            <div class="filter__total">
+            <div class="filter__total" v-if="isDesktop">
               <span v-text="$t('RENT.INFOGRAPHIC_BODY.TOTAL_PREFIX')"></span>     
               <span v-text="source_count" class="source"></span>
               <span v-text="$t('RENT.INFOGRAPHIC_BODY.TOTAL_POSTFIX')"></span>     
@@ -48,6 +48,9 @@
       targetSourceCount () {
         return get(this.$store, 'state.Rent.calc.source_count', 0)
       },
+      isDesktop () {
+        return get(this.$store, 'state.useragent.isDesktop')
+      },
     },
     data () {
       return {
@@ -56,19 +59,36 @@
       }
     },
     methods: {
+      handlerForDesktop () {
+        const aside_bottom_y = elmYPosition('main .aside') + this.$refs[ 'aside' ].clientHeight
+        const current_top_y = currentYPosition()
+        const content_top_Y = elmYPosition('main .content')
+
+        const content_wrapper_height = this.$refs[ 'content' ].clientHeight
+        const device_height = verge.viewportH()
+
+        const _isContentTop = current_top_y > (content_top_Y - 70) && current_top_y < (aside_bottom_y - (content_wrapper_height + 70))
+        const _isContentBottom = !_isContentTop && current_top_y > (aside_bottom_y - (content_wrapper_height + 70))
+        _isContentTop !== this.isContentTop ? this.isContentTop = _isContentTop : null
+        _isContentBottom !== this.isContentBottom ? this.isContentBottom = _isContentBottom : null
+      },
+      handlerForMobile () {
+        const current_top_y = currentYPosition()
+        const content_top_Y = elmYPosition('main .content')
+        const device_height = verge.viewportH()
+        if (current_top_y > content_top_Y) {
+          const targHeight = this.$refs[ 'content' ].querySelector('.title').clientHeight
+            + this.$refs[ 'content' ].querySelector('.infographic-wrapper').clientHeight
+          this.$refs[ 'aside' ].setAttribute('style', `padding-top: ${targHeight}px;`)
+          this.isContentTop = true
+        } else {
+          this.$refs[ 'aside' ].removeAttribute('style')
+          this.isContentTop = false
+        }
+      },
       setupScrollHandler () {
         window.addEventListener('scroll', () => {
-          const aside_bottom_y = elmYPosition('main .aside') + this.$refs[ 'aside' ].clientHeight
-          const current_top_y = currentYPosition()
-          const content_top_Y = elmYPosition('main .content')
-
-          const content_wrapper_height = this.$refs[ 'content' ].clientHeight
-          const device_height = verge.viewportH()
-
-          const _isContentTop = current_top_y > (content_top_Y - 70) && current_top_y < (aside_bottom_y - (content_wrapper_height + 70))
-          const _isContentBottom = !_isContentTop && current_top_y > (aside_bottom_y - (content_wrapper_height + 70))
-          _isContentTop !== this.isContentTop ? this.isContentTop = _isContentTop : null
-          _isContentBottom !== this.isContentBottom ? this.isContentBottom = _isContentBottom : null
+          this.isDesktop ? this.handlerForDesktop() : this.handlerForMobile()
         })
       },
     },
@@ -96,6 +116,7 @@
     position relative
     .aside
       width 322px
+      position relative
     .content
       width 674px
       margin-left 42px
@@ -114,6 +135,10 @@
         font-weight normal
         line-height normal
         color #313131
+        background-color #fff
+      .infographic-body
+        background-color #fff
+        box-shadow 1px 0 10px rgba(1, 1, 1, 0.25)
       .infographic-wrapper
         .filter
           height 90px
@@ -142,5 +167,35 @@
         font-weight 100
         color #313131
         line-height 3
-
+  @media screen and (min-width: 0px) and (max-width: 767px)
+    main
+      flex-direction column-reverse
+      .aside
+        width 100%
+        margin-top 45px
+      .content
+        width 100%
+        margin-left 0
+        &--wrapper
+          &.fixed
+            width 100%
+            top 0
+            z-index 9
+            .updated-time
+              opacity 0
+          &.bottom
+            width 100%
+        .title
+          font-size 1.625rem
+          padding 20px 15px
+          text-align center
+        .infographic-wrapper
+          .filter
+            padding 12px 20px
+            height auto
+            &__result
+              font-size 1rem
+        .updated-time
+          opacity 1
+          transition opacity 0.5s 
 </style>

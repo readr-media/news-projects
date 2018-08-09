@@ -9,8 +9,8 @@ const CITIES = {
 
 const VIEW_SIZE = {
   S: {
-    WIDTH: 400,
-    HEIGHT: 300,
+    WIDTH: 320,
+    HEIGHT: 250,
   },
   L: {
     WIDTH: 665,
@@ -38,9 +38,9 @@ const DATA_LIMIT = {
   MAX: {
     // RENT: 210000,
     // UNIT: 105,  
-    RENT: 110000,
-    UNIT: 85,  
-    RENT: 55500,
+    // RENT: 110000,
+    // UNIT: 85,  
+    RENT: 55000,
     UNIT: 75,  
   },
 }
