@@ -7,6 +7,8 @@ const LRU = require('lru-cache')
 const express = require('express')
 const favicon = require('serve-favicon')
 const compression = require('compression')
+const maxMemUsageLimit = 1200 * 1024 * 1024
+const memwatch = require('memwatch-next')
 const microcache = require('route-cache')
 const requestIp = require('request-ip')
 const resolve = file => path.resolve(__dirname, file)
@@ -23,6 +25,9 @@ const serverInfo =
   `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
 
 const app = express()
+const formatMem = (bytes) => {
+  return (bytes / 1024 / 1024).toFixed(2) + ' Mb'
+}
 
 function createRenderer (bundle, options) {
   // https://github.com/vuejs/vue/blob/dev/packages/vue-server-renderer/README.md#why-use-bundlerenderer
@@ -164,6 +169,43 @@ app.get('*', isProd ? render : (req, res, next) => {
 app.use('/project-api', require('./api/index'))
 
 const port = process.env.PORT || 8080
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`server started at localhost:${port}`)
+})
+
+memwatch.on('leak', function(info) {
+  const growth = formatMem(info.growth)
+  const mem = process.memoryUsage()
+  console.error('GETING MEMORY LEAK:', [ 'growth ' + growth, 'reason ' + info.reason ].join(', '))
+  console.error('MEMORY STAT(heapUsed):', formatMem(mem.heapUsed))
+})
+memwatch.on('stats', function(stats) {
+  const estBase = formatMem(stats.estimated_base)
+  const currBase = formatMem(stats.current_base)
+  const min = formatMem(stats.min)
+  const max = formatMem(stats.max)
+  console.error('GC STATs:', [
+    'num_full_gc ' + stats.num_full_gc,
+    'num_inc_gc ' + stats.num_inc_gc,
+    'heap_compactions ' + stats.heap_compactions,
+    'usage_trend ' + stats.usage_trend,
+    'estimated_base ' + estBase,
+    'current_base ' + currBase,
+    'min ' + min,
+    'max ' + max
+  ].join(', '))
+  if (stats.current_base > maxMemUsageLimit) {
+    for (let i = 0; i < 10; i += 1) {
+      console.error('MEMORY WAS RUNNING OUT')
+    } 
+    /**
+     * kill this process gracefully
+     */
+    const killTimer = setTimeout(() => {
+      process.exit(1)
+    }, 1000)
+    killTimer.unref()
+    server.close()
+    console.error(`GOING TO KILL PROCESS IN 1 SECOND(At ${(new Date).toString()})`)
+  }
 })

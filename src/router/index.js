@@ -6,8 +6,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 // route-level code splitting
-const Project = () => import('../views/Project.vue')
-const ProjectList = () => import('../views/ProjectList.vue')
+const Project = () => import('src/views/Project.vue')
+const ProjectList = () => import('src/views/ProjectList.vue')
 
 export function createRouter () {
   return new Router({
