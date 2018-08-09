@@ -17,6 +17,7 @@ export default {
   'newtype': 'Newtype',
   'president-promise': 'PresidentPromise',
   'political-contribution': 'PoliticalContribution',
+  'rent': 'Rent',
   
   //'proj1': 'Proj1',
 }

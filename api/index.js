@@ -6,6 +6,12 @@ const bodyParser = require('body-parser')
 const axios = require('axios')
 
 const apiHost = API_PROTOCOL + '://' + API_HOST + ':' + API_PORT
+const debug = require('debug')('READR-PROJECT:api')
+
+const maxMemUsageLimit = 1000 * 1024 * 1024
+const formatMem = (bytes) => {
+  return (bytes / 1024 / 1024).toFixed(2) + ' Mb'
+}
 
 const handleError = (err, res) => {
   if (err.response) {
@@ -22,8 +28,29 @@ router.use(bodyParser.urlencoded({ extended: false, }))
 // parse application/json
 router.use(bodyParser.json())
 
+router.use('*', (req, res, next) => {
+  res.on('finish', function () {
+    const mem = process.memoryUsage()
+    console.log('MEMORY STAT(heapUsed):', formatMem(mem.heapUsed))
+    if (mem.heapUsed > maxMemUsageLimit) {
+      for (let i = 0; i < 10; i += 1) {
+        console.error('MEMORY WAS RUNNING OUT')
+      } 
+      console.error(`KILLING PROCESS IN 1 SECOND(At ${(new Date).toString()})`)
+      process.exit(1)
+    }
+    try {
+      global.gc()
+    } catch (e) {
+      // process.exit(1)
+    }
+  })  
+  next()
+})
+
 router.use('/googlesheet', require('./middle/googlesheet'))
 router.use('/googledrive', require('./middle/googledrive'))
+router.use('/rent', require('./middle/rent'))
 
 router.get('/reports', (req, res, next) => {
   req.url = req.url.replace('/reports', '/report/list')
@@ -31,6 +58,7 @@ router.get('/reports', (req, res, next) => {
 }, fetchFromRedis, (req, res, next) => {
   if (res.redis) {
     console.error('fetch data from Redis.', req.url)
+    debug('fetch data from Redis.', req.url)
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }

@@ -1,4 +1,5 @@
-export default {
+import * as rent from './rent'
+export default Object.assign({
   'FOREIGN_LABOUR': {
     'I18N': 'Việt',
     'TITLE_1': '窮得',
@@ -105,4 +106,4 @@ export default {
       '親民黨': 'pfp',
     }
   }
-}
+}, rent)

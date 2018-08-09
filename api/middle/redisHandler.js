@@ -12,7 +12,7 @@ const {
   REDIS_WRITE_PORT,
   REDIS_TIMEOUT, } = require('../config')
 
-const debug = require('debug')('READR:api:middle:redisHandler')
+const debug = require('debug')('READR-PROJECT:api:middle:redisHandler')
 
 const redisPoolRead = RedisConnectionPool('myRedisPoolRead', {
   host: REDIS_READ_HOST,
@@ -70,11 +70,16 @@ class TimeoutHandler {
 const redisFetching = (key, callback) => {
   debug('Fetching data from redis.')
   debug(decodeURIComponent(key))
-  const timeoutHandler = new TimeoutHandler(callback)
+  let timeoutHandler = new TimeoutHandler(callback)
+  
   const onFinished = (error, data) => {
     timeoutHandler.isResponded = true
     timeoutHandler.destroy()
-    if (timeoutHandler.timeout <= 0) { return }
+    if (timeoutHandler.timeout <= 0) {
+      timeoutHandler = null
+      return
+    }
+    timeoutHandler = null
     callback && callback({ error, data, })
   }
   redisPoolRead.get(decodeURIComponent(key), (error, data) => {
@@ -107,7 +112,7 @@ const redisFetching = (key, callback) => {
 const redisWriting = (key, data, callback, timeout) => {
   debug('Setting key/data to redis. Timeout:', timeout || REDIS_TIMEOUT)
   debug(decodeURIComponent(key))
-  const timeoutHandler = new TimeoutHandler(callback)
+  let timeoutHandler = new TimeoutHandler(callback)
   redisPoolWrite.set(decodeURIComponent(key), data, (err) => {
     if(err) {
       console.error('redis writing in fail. ', decodeURIComponent(key), err)
@@ -119,6 +124,7 @@ const redisWriting = (key, data, callback, timeout) => {
           debug('Wrote redis successfully.')
           timeoutHandler.isResponded = true
           timeoutHandler.destroy()
+          timeoutHandler = null
           callback && callback()
         }
       })
@@ -145,4 +151,6 @@ const fetchFromRedis = (req, res, next) => {
 module.exports = {
   fetchFromRedis,
   insertIntoRedis,
+  redisFetching,
+  redisWriting,
 }
