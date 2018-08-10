@@ -9,7 +9,7 @@ export default {
     calc: {},
     count: 0,
     filters: {
-      POSITION: 'ENTIRE',
+      POSITION: 'EMPTY',
     },
     assetsCheck: {},
     isLoaded: false,

@@ -18,6 +18,8 @@ export default {
     return fetchInfographic(position, size)
   },
   FETCH_INFOGRAPHIC_CALC: ({ dispatch, commit, }, { params }) => {
+    debug('params', params)
+    params.POSITION === 'EMPTY' && (params.POSITION = 'ENTIRE')
     return fetchInfographicCalc(params).then(calc => commit('SET_INFOGRAPHIC_CALC', calc))
   },
   FETCH_BOUNDS: ({ dispatch, commit, }, {}) => {

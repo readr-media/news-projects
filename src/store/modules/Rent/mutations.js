@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { filter, } from 'lodash'
 const debug = require('debug')('CLIENT:mutation:Rent')
 export default {
   RESET_FILTER: (state) => {
@@ -7,7 +8,17 @@ export default {
   SET_FILTER: (state, filters) => {
     debug('filters', filters)
     const new_filters = Object.assign({}, state.filters, filters)
-    new_filters.POSITION = new_filters.POSITION === '' ? 'ENTIRE' : new_filters.POSITION
+    const isAnyFilter = filter(new_filters, (f, k) => k !== 'POSITION' && ((f && f.length !== 0) || f === 0)).length > 0
+    debug('isAnyFilter', isAnyFilter)
+    // new_filters.POSITION = isAnyFilter || (new_filters.POSITION !== '' && new_filters.POSITION !== 'ENTIRE') ? new_filters.POSITION : 'EMPTY'
+    if (new_filters.POSITION === '' || new_filters.POSITION === 'ENTIRE') {
+      if (isAnyFilter) {
+        new_filters.POSITION = 'ENTIRE'
+      } else {
+        new_filters.POSITION = 'EMPTY'
+      }
+    }
+    debug('NEWIEST POSITION:', new_filters.POSITION)
     state.filters = Object.assign({}, state.filters, new_filters)
   },
   SET_SVG: (state, { city, svg }) => {
