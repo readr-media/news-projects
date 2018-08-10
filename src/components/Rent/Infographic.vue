@@ -1,21 +1,23 @@
 <template>
   <InfographicLayout class="infographic" :id="`id-${id}`">
-    <div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
+    <!--div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
       v-html="get(svgString, 'ENTIRE')"
-      v-show="get(current_filters, 'POSITION') === 'ENTIRE' && !isNoRequired"></div>
-    <div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
+      v-show="get(current_filters, 'POSITION') === 'ENTIRE' && !isNoRequired"></div-->
+    <!--div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
       v-html="graphEmty"
-      v-show="(get(current_filters, 'POSITION') === 'ENTIRE' || get(current_filters, 'POSITION') === '') && isNoRequired"></div>
+      v-show="(get(current_filters, 'POSITION') === 'ENTIRE' || get(current_filters, 'POSITION') === '') && isNoRequired"></div-->
     <!--template v-for="city in CITIES">
       <div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
         v-html="get(svgString, city)"
         v-show="get(current_filters, 'POSITION') === city"></div>      
     </template-->
+    <!--div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
+        v-html="graphCurrent"
+        v-show="get(current_filters, 'POSITION') !== 'ENTIRE'"></div--> 
     <div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
-        v-html="get(svgString, get(current_filters, 'POSITION'))"
-        v-show="get(current_filters, 'POSITION') !== 'ENTIRE'"></div> 
+        v-html="graphCurrent"></div>
     <div class="infographic__svg__default"
-      v-show="(get(current_filters, 'POSITION') === 'ENTIRE' || get(current_filters, 'POSITION') === '') && isNoRequired"></div>
+      v-show="(get(current_filters, 'POSITION') === 'ENTIRE' || get(current_filters, 'POSITION') === '' || get(current_filters, 'POSITION') === 'EMPTY') && isNoRequired"></div>
     <template v-for="p in PROGRAM">
       <InfographicGraph class="infographic__svg__static" v-if="get(p, 'graph')" :program="p"></InfographicGraph>
     </template>
@@ -91,6 +93,7 @@
         CITIES,
         PROGRAM,
         graphEmty: '',
+        graphCurrent: '',
         id: 0,
         isSvgActive: false,
         isNoRequired: true,
@@ -162,29 +165,40 @@
         debug('Mutation detected: current_filters.POSITION', this.current_filters.POSITION)
         this.isLoading = true
 
-        !get(this.svgString, this.current_filters.POSITION)
-          && fetchInfographic(this.$store, this.current_filters.POSITION, this.size)
-              .then(svg => setUpSvgString(this.$store, this.current_filters.POSITION, svg))
+        const position = get(this.current_filters, 'POSITION')
+        debug('position', position)
+        debug('position', position)
+        debug('position', position)
+        // const filters = {} 
+        // each(GEARS, (g, k) => { k!== 'POSITION' && (filters[ k ] = undefined) }) 
+        // Promise.all([ 
+        //   setupFilters(this.$store, filters),         
+        if (!get(this.svgString, position)) {
+          fetchInfographic(this.$store, position, this.size)
+          .then(svg => {
+            setUpSvgString(this.$store, position, svg)            
+            this.graphCurrent = svg
+            this.isLoading = false
+          })
+        } else {
+          this.graphCurrent = get(this.svgString, position)
+          this.isLoading = false
+        }
       },
       current_filters: function (n, o) {
         this.isSvgActive = filter(this.current_filters, f => f && f !== 'ENTIRE').length > 0
         this.isNoRequired = filter(this.current_filters, (f, k) => k !== 'POSITION' && ((f && f.length !== 0) || f === 0)).length === 0
-        // this.isLoading = true
+        debug('n.POSITION === o.POSITION', n.POSITION === o.POSITION)
+        // if (n.POSITION === o.POSITION) { this.isLoading = true }
         fetchInfographicCalc(this.$store, this.current_filters).then(() => {
-          this.isLoading = false
+          debug('Got calcs.')
+          // if (n.POSITION === o.POSITION) { this.isLoading = false }
         })
       }, 
-      '$store.state.Rent.svgStrs': {
-        handler: function () {
-          debug('Got EMPTY!')
-          this.$forceUpdate()
-        },
-        deep: true
-      },
       '$store.state.Rent.isLoaded': function () {
         debug('READY!')
         this.graphEmty = get(this.$store, 'state.Rent.svgStrs.EMPTY')
-      }
+      },
     },
   }
 </script>

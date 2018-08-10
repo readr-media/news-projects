@@ -5,7 +5,7 @@
       <span class="info__total" v-text="`TOTAL: ${total}`"></span-->
     </div>
     <header>
-      <Logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/logo_readr_black.png"></Logo>
+      <Logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/rent/READr.png"></Logo>
       <Share :shareUrl="shareLink" top="20px" right="20px" bgColor="#544356" direction="down"></Share>
     </header>
     <Brief></Brief>
