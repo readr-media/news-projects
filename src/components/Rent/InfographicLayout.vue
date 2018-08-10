@@ -45,27 +45,22 @@
       // display none
       // &.active
       //   display inline
-      &__default
+      &__wrapper
         position absolute
         top 0
         left 0
         z-index 10
         width 100%
         height 100%
+      &__default
         background-image url(/proj-assets/rent/infographic-default.png)
+      &__default, &__static
         background-position center center
         background-repeat no-repeat
         background-size contain
-      &__static
-        position absolute
-        top 0
-        left 0
-        z-index 11
         width 100%
         height 100%
-        background-position center center
-        background-repeat no-repeat
-        background-size contain        
+
       &.no-required
         & >>> .spot
           display inline
@@ -186,6 +181,13 @@
       width 100%
       height 220px
       &__svg
+        &__wrapper
+          display flex
+          justify-content center
+          align-items center
         &__default
           background-image url(/proj-assets/rent/infographic-mobile-default.png)
+        &__default, &__static
+          width 320px
+          height 200px
 </style>

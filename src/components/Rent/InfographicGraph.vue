@@ -1,5 +1,5 @@
 <template>
-  <div :style="style"></div>
+  <div class="demo-graph" :class="{ hide: !isActive, }"></div>
 </template>
 <script>
   import { currentYPosition, elmYPosition, } from 'kc-scroll'
@@ -11,27 +11,19 @@
       isDesktop () {
         return get(this.$store, 'state.useragent.isDesktop')
       },
-      style () {
-        const _style = {}
-        !this.isActive && (_style[ 'display' ] = 'none')
-        this.loadedGraph && (_style[ 'backgroundImage' ] = `url(${this.loadedGraph})`)
-        return _style
-      }
     },
     data () {
       return {
         isLoaded: false,
         isActive: false,
         refDomTopY: 0,
-        loadedGraph: {},
       }
     },
     methods: {
       loadGraph () {
         const graph = new Image()
         graph.onload = () => {
-          // this.$el.setAttribute('style', `background-image: url(${graph.src});`)
-          this.loadedGraph = graph.src
+          this.$el.setAttribute('style', `background-image: url(${graph.src});`)
           this.isLoaded = true
         }
         graph.src = this.isDesktop ? get(this.program, 'graph') : get(this.program, 'graphMB')
@@ -48,7 +40,9 @@
           } else {
             this.isActive = false
           }
-        }            
+        } else {
+          this.isActive = false
+        }          
       })
     },
     props: {
@@ -65,4 +59,8 @@
     },
   }
 </script>
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+  .demo-graph
+    &.hide
+      display none
+</style>

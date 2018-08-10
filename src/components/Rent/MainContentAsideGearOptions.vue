@@ -20,6 +20,7 @@
     },
     methods: {
       check (key, opt) {
+        window.ga('send', 'event', 'projects', 'click', `filter: ${key}`, { nonInteraction: false })
         return this.isMulti ? this.checkItemMulti(key, opt) : this.checkItem(key, opt)
       },
       checkItem (item, opt) {

@@ -16,10 +16,13 @@
         v-show="get(current_filters, 'POSITION') !== 'ENTIRE'"></div--> 
     <div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
         v-html="graphCurrent"></div>
-    <div class="infographic__svg__default"
-      v-show="(get(current_filters, 'POSITION') === 'ENTIRE' || get(current_filters, 'POSITION') === '' || get(current_filters, 'POSITION') === 'EMPTY') && isNoRequired"></div>
+    <div class="infographic__svg__wrapper"
+        v-show="(get(current_filters, 'POSITION') === 'ENTIRE'
+          || get(current_filters, 'POSITION') === '' || get(current_filters, 'POSITION') === 'EMPTY') && isNoRequired">
+      <div class="infographic__svg__default"></div>
+    </div>
     <template v-for="p in PROGRAM">
-      <InfographicGraph class="infographic__svg__static" v-if="get(p, 'graph')" :program="p"></InfographicGraph>
+      <div class="infographic__svg__wrapper"><InfographicGraph class="infographic__svg__static" v-if="get(p, 'graph')" :program="p"></InfographicGraph></div>
     </template>
     <div class="infographic__tip" v-show="tip" v-if="isDesktop"><span v-html="tip"></span></div>
     <div class="infographic__loading" v-show="isLoading"><Spinner show="true"></Spinner></div>    
@@ -165,7 +168,8 @@
         debug('Mutation detected: current_filters.POSITION', this.current_filters.POSITION)
         this.isLoading = true
 
-        const position = get(this.current_filters, 'POSITION')
+        const position = this.isNoRequired && get(this.current_filters, 'POSITION') === 'ENTIRE'
+          ? 'EMPTY' : get(this.current_filters, 'POSITION')
         debug('position', position)
         debug('position', position)
         debug('position', position)
@@ -190,9 +194,10 @@
         this.isNoRequired = filter(this.current_filters, (f, k) => k !== 'POSITION' && ((f && f.length !== 0) || f === 0)).length === 0
         debug('n.POSITION === o.POSITION', n.POSITION === o.POSITION)
         // if (n.POSITION === o.POSITION) { this.isLoading = true }
+        // if (n.POSITION === 'ENTIRE') { this.isLoading = true }
         fetchInfographicCalc(this.$store, this.current_filters).then(() => {
           debug('Got calcs.')
-          // if (n.POSITION === o.POSITION) { this.isLoading = false }
+          // if (n.POSITION === 'ENTIRE') { this.isLoading = false }
         })
       }, 
       '$store.state.Rent.isLoaded': function () {
