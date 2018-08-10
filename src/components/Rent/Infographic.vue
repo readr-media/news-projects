@@ -193,8 +193,10 @@
         this.isSvgActive = filter(this.current_filters, f => f && f !== 'ENTIRE').length > 0
         this.isNoRequired = filter(this.current_filters, (f, k) => k !== 'POSITION' && ((f && f.length !== 0) || f === 0)).length === 0
         debug('n.POSITION === o.POSITION', n.POSITION === o.POSITION)
-        // if (n.POSITION === o.POSITION) { this.isLoading = true }
         // if (n.POSITION === 'ENTIRE') { this.isLoading = true }
+        if (!this.isNoRequired && n.POSITION === 'ENTIRE' && o.POSITION === 'ENTIRE') {
+          this.graphCurrent = get(this.svgString, 'ENTIRE')
+        }
         fetchInfographicCalc(this.$store, this.current_filters).then(() => {
           debug('Got calcs.')
           // if (n.POSITION === 'ENTIRE') { this.isLoading = false }
