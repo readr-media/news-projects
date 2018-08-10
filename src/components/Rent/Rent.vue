@@ -43,8 +43,8 @@
     name: 'Rent',
     metaInfo () {
       return {
-        title: 'rent',
-        description: 'rent',
+        title: this.$t('RENT.TITLE'),
+        description: this.$t('RENT.DESCRIPTION'),
         metaUrl: 'rent',
         metaImage: '',
       }

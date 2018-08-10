@@ -5,13 +5,13 @@
       <div class="content--wrapper" :class="{ fixed: isContentTop, bottom: isContentBottom }" ref="content">
         <div class="title"><span v-text="$t('RENT.INFOGRAPHIC_BODY.TITLE')"></span></div>
         <div class="infographic-wrapper">
-          <div class="filter">
-            <div class="filter__result">
+          <div class="filter" :class="{ hide: !isFilterBarActive }">
+            <div class="filter__result" v-show="isFilterBarActive">
               <span v-text="$t('RENT.INFOGRAPHIC_BODY.BASED_ON_YOUR_CASE_PREFIX')"></span>
               <span v-text="targetSourceCount" class="source"></span>
               <span v-text="$t('RENT.INFOGRAPHIC_BODY.BASED_ON_YOUR_CASE_POSTFIX')"></span>
             </div>
-            <div class="filter__total" v-if="isDesktop">
+            <div class="filter__total" v-if="isDesktop" v-show="isFilterBarActive">
               <span v-text="$t('RENT.INFOGRAPHIC_BODY.TOTAL_PREFIX')"></span>     
               <span v-text="source_count" class="source"></span>
               <span v-text="$t('RENT.INFOGRAPHIC_BODY.TOTAL_POSTFIX')"></span>     
@@ -51,11 +51,15 @@
       isDesktop () {
         return get(this.$store, 'state.useragent.isDesktop')
       },
+      isLoaded () {
+        return get(this.$store, 'state.Rent.isLoaded')
+      },
     },
     data () {
       return {
         isContentTop: false,
         isContentBottom: false,
+        isFilterBarActive: true,
       }
     },
     methods: {
@@ -63,6 +67,7 @@
         const aside_bottom_y = elmYPosition('main .aside') + this.$refs[ 'aside' ].clientHeight
         const current_top_y = currentYPosition()
         const content_top_Y = elmYPosition('main .content')
+        const program_1_top_Y = elmYPosition('#program-1')
 
         const content_wrapper_height = this.$refs[ 'content' ].clientHeight
         const device_height = verge.viewportH()
@@ -71,11 +76,13 @@
         const _isContentBottom = !_isContentTop && current_top_y > (aside_bottom_y - (content_wrapper_height + 70))
         _isContentTop !== this.isContentTop ? this.isContentTop = _isContentTop : null
         _isContentBottom !== this.isContentBottom ? this.isContentBottom = _isContentBottom : null
+        this.isFilterBarActive = current_top_y < program_1_top_Y
       },
       handlerForMobile () {
         const current_top_y = currentYPosition()
         const content_top_Y = elmYPosition('main .content')
         const device_height = verge.viewportH()
+        const program_1_top_Y = elmYPosition('#program-1')
         if (current_top_y > content_top_Y) {
           const targHeight = this.$refs[ 'content' ].querySelector('.title').clientHeight
             + this.$refs[ 'content' ].querySelector('.infographic-wrapper').clientHeight
@@ -85,9 +92,11 @@
           this.$refs[ 'aside' ].removeAttribute('style')
           this.isContentTop = false
         }
+        this.isFilterBarActive = current_top_y < program_1_top_Y
       },
       setupScrollHandler () {
         window.addEventListener('scroll', () => {
+          if (!this.isLoaded) { return }
           this.isDesktop ? this.handlerForDesktop() : this.handlerForMobile()
         })
       },
@@ -138,7 +147,6 @@
         background-color #fff
       .infographic-body
         background-color #fff
-        box-shadow 1px 0 10px rgba(1, 1, 1, 0.25)
       .infographic-wrapper
         .filter
           height 90px
@@ -189,12 +197,19 @@
           font-size 1.625rem
           padding 20px 15px
           text-align center
+        .infographic-body
+          box-shadow 1px 0 10px rgba(1, 1, 1, 0.25)          
         .infographic-wrapper
           .filter
             padding 12px 20px
-            height auto
+            height 0
+            min-height 50px
+            transition height 0.5s, min-height 0.5s
             &__result
               font-size 1rem
+            &.hide
+              padding 0 20px
+              min-height 0
         .updated-time
           opacity 1
           transition opacity 0.5s 

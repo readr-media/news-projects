@@ -41,8 +41,11 @@ export const RENT = {
     'SOFA': '沙發',
     'FRIGE': '冰箱'
   },
-  'TITLE': '租屋 2.0',
-  'CREDIT': '文／李又如    研究員／洪敬舒   資料／Ddio   設計／許玲瑋    工程／江鎧至',
+  'TITLE': '入不敷租——六都租屋市場大解密',
+  'TITLE_RAW': '入不敷租<br/><sub>六都租屋市場大解密</sub>',
+  'DESCRIPTION': '蔡總統說要讓年輕人住得安心，如何實現？READr 與台灣勞工陣線、g0v 參與者合作，以台灣最大的租屋平台 591 租屋網的資料體檢六都的租房狀況，來看看台灣的租屋族有什麼樣的選擇。',
+  'CREDIT': '文／李又如&emsp;研究員／洪敬舒&emsp;資料／Ddio&emsp;設計／許玲瑋&emsp;工程／KC-HardToGet1',
+  'CREDIT_RAW': '文／李又如&emsp;研究員／洪敬舒&emsp;<br/>資料／Ddio&emsp;設計／許玲瑋&emsp;<br/>工程／KC-HardToGet1',
   'SHARE_TAO': '分租套房',
   'INDEPANDENT_TAO': '獨立套房',
   'BRIEF': {
