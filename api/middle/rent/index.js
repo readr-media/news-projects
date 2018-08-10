@@ -19,7 +19,7 @@ router.get('/infographic/bounds', fetchFromRedis, (req, res) => {
 })
 
 
-router.get('/infographic/calc', fetchFromRedis, (req, res, next) => {
+router.get('/infographic/calc', fetchFromRedis, (req, res) => {
   if (res.redis) {
     return res.json(JSON.parse(res.redis))
   } else {
@@ -86,11 +86,11 @@ router.get('/infographic/calc', fetchFromRedis, (req, res, next) => {
         source_count: data.length,
         // raw: uniqData,
       })
-      res.dataString = JSON.stringify({
-        source_count: data.length,
-        // raw: uniqData,
-      })
-      next()
+      debug('req.url', req.url)
+      debug('req.url', req.url)
+      debug('req.url', req.url)
+      debug('req.url', req.url)
+      redisWriting(req.url, JSON.stringify({ source_count: data.length, }), () => {}, 182 * 24 * 60 * 60)
     }
 
     // let source = 'rent.raw_grouped'
@@ -118,7 +118,7 @@ router.get('/infographic/calc', fetchFromRedis, (req, res, next) => {
     // } else {
     //   calc()
     // }
-
+    debug('source', `${SERVER_PROTOCOL}://${SERVER_HOST}/proj-assets/rent/${req.query.POSITION}.json`)
     const dataFetching = () => (req.query.POSITION && req.query.POSITION !== 'ENTIRE'
     ? fetchCityData(`${SERVER_PROTOCOL}://${SERVER_HOST}/proj-assets/rent/${req.query.POSITION}.json`).then(raw => ([ raw ]))
     : Promise.all([
@@ -132,7 +132,7 @@ router.get('/infographic/calc', fetchFromRedis, (req, res, next) => {
       res.status(503).send('Data is not ready yet.') 
     })
   }  
-}, insertIntoRedis)
+})
 
 router.get('/infographic/:target', fetchFromRedis, (req, res) => {
   const target = get(req, 'params.target')

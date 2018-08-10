@@ -138,6 +138,10 @@ const insertIntoRedis = (req, res) => {
   })
 }
 const fetchFromRedis = (req, res, next) => {
+  debug('req.url', req.url)
+  debug('req.url', req.url)
+  debug('req.url', req.url)
+  debug('req.url', req.url)
   redisFetching(req.url, ({ error, data, }) => {
     if (!error) {
       res.redis = data

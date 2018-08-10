@@ -6,11 +6,14 @@
     <div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
       v-html="graphEmty"
       v-show="(get(current_filters, 'POSITION') === 'ENTIRE' || get(current_filters, 'POSITION') === '') && isNoRequired"></div>
-    <template v-for="city in CITIES">
+    <!--template v-for="city in CITIES">
       <div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
         v-html="get(svgString, city)"
         v-show="get(current_filters, 'POSITION') === city"></div>      
-    </template>
+    </template-->
+    <div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
+        v-html="get(svgString, get(current_filters, 'POSITION'))"
+        v-show="get(current_filters, 'POSITION') !== 'ENTIRE'"></div> 
     <div class="infographic__svg__default"
       v-show="(get(current_filters, 'POSITION') === 'ENTIRE' || get(current_filters, 'POSITION') === '') && isNoRequired"></div>
     <template v-for="p in PROGRAM">
@@ -30,6 +33,7 @@
   const debug = require('debug')('CLIENT:Infographic')
   const fetchInfographic = (store, position, size) => store.dispatch('Rent/FETCH_INFOGRAPHIC', { position, size,})
   const fetchInfographicCalc = (store, params) => store.dispatch('Rent/FETCH_INFOGRAPHIC_CALC', { params, })
+  const setUpSvgString = (store, city, svg) => store.dispatch('Rent/SETUP_SVG', { city, svg })
 
   export default {
     name: 'Infographic',
@@ -48,7 +52,10 @@
       },
       isDesktop () {
         return get(this.$store, 'state.useragent.isDesktop')
-      },       
+      },   
+      size () {
+        return this.isDesktop ? 'L' : 'S'
+      },          
       svgString () {
         return get(this.$store, 'state.Rent.svgStrs', {})
       }, 
@@ -97,7 +104,7 @@
       mouseoverSvg (event) {
         const target = event.target
         const isCircle = target.tagName === 'circle'
-        if (!isDesktop) { return }
+        if (!this.isDesktop) { return }
         if (isCircle) {
           const isExtraExpItems = [ 'electricity_fee', 'water_fee', 'gas_fee', 'internet_fee', 'tv_fee' ]
           const isExtraExp = filter(isExtraExpItems, item => target.getAttribute(item) === 'TRUE').length > 0
@@ -154,6 +161,10 @@
       'current_filters.POSITION': function (n, o) {
         debug('Mutation detected: current_filters.POSITION', this.current_filters.POSITION)
         this.isLoading = true
+
+        !get(this.svgString, this.current_filters.POSITION)
+          && fetchInfographic(this.$store, this.current_filters.POSITION, this.size)
+              .then(svg => setUpSvgString(this.$store, this.current_filters.POSITION, svg))
       },
       current_filters: function (n, o) {
         this.isSvgActive = filter(this.current_filters, f => f && f !== 'ENTIRE').length > 0
