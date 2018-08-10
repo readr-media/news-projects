@@ -33,14 +33,17 @@
       window.addEventListener('scroll', () => {
         const current_top_y = currentYPosition()
         const device_height = get(this.$store, 'state.viewport.1', 0)
+        const bias = this.isDesktop ? 1 / 2 : 2 / 3
         if (current_top_y > (this.refDomTopY - device_height) && current_top_y < (this.refDomTopY + device_height)) {
           if (!this.isLoaded) { this.loadGraph()}
-          if (current_top_y > (this.refDomTopY - device_height / 2) && current_top_y < (this.refDomTopY + device_height / 2)) {
+          if (current_top_y > (this.refDomTopY - device_height * bias) && current_top_y < (this.refDomTopY + device_height * (1 - bias))) {
             this.isActive = true
           } else {
+            if (current_top_y > (this.refDomTopY - device_height * bias) && get(this.program, 'last')) { return }
             this.isActive = false
           }
         } else {
+          if (current_top_y > (this.refDomTopY - device_height * bias) && get(this.program, 'last')) { return }
           this.isActive = false
         }          
       })

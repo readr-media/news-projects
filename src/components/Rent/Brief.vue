@@ -1,7 +1,7 @@
 <template>
   <div class="bief">
-    <div class="title"><span v-text="$t('RENT.TITLE')"></span></div>
-    <div class="credit"><span v-text="$t('RENT.CREDIT')"></span></div>
+    <div class="title"><span v-html="$t('RENT.TITLE_RAW')"></span></div>
+    <div class="credit"><span v-html="isDesktop ? $t('RENT.CREDIT') : $t('RENT.CREDIT_RAW')"></span></div>
     <div class="content">
       <p v-text="$t('RENT.BRIEF.1')"></p>
       <p v-text="$t('RENT.BRIEF.2')"></p>
@@ -98,6 +98,7 @@
       font-size 4.125rem
       font-weight normal
       text-align center
+      line-height 1
     .credit
       font-size 0.875rem
       font-weight 100
