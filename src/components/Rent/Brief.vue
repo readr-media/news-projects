@@ -63,7 +63,7 @@
       Promise.all([
         fetchInfographic(this.$store, 'EMPTY', this.size).then(svg => setUpSvgString(this.$store, 'EMPTY', svg).then(() => this.checkAssets('EMPTY'))),
         fetchInfographic(this.$store, 'ENTIRE', this.size).then(svg => setUpSvgString(this.$store, 'ENTIRE', svg).then(() => this.checkAssets('ENTIRE'))),
-        ...map(CITIES, city => fetchInfographic(this.$store, city, this.size).then(svg => setUpSvgString(this.$store, city, svg).then(() => this.checkAssets(city)))),
+        // ...map(CITIES, city => fetchInfographic(this.$store, city, this.size).then(svg => setUpSvgString(this.$store, city, svg).then(() => this.checkAssets(city)))),
       ]).then(() => {
         debug('ASSETS READY!')
         debug('ASSETS READY!')
