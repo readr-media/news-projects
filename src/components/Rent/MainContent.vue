@@ -18,7 +18,7 @@
             </div>
           </div>
           <div class="infographic-body">
-            <Infographic></Infographic>
+            <Infographic :isDefaultBlock="!isFilterBarActive"></Infographic>
           </div>
           <div class="updated-time"><span v-text="$t('RENT.UPDATED_TIME')"></span><span>06/18/2018</span></div>
         </div>
@@ -79,10 +79,14 @@
         this.isFilterBarActive = current_top_y < program_1_top_Y
       },
       handlerForMobile () {
+        const aside_bottom_y = elmYPosition('main .aside') + this.$refs[ 'aside' ].clientHeight
         const current_top_y = currentYPosition()
         const content_top_Y = elmYPosition('main .content')
+
+        const content_wrapper_height = this.$refs[ 'content' ].clientHeight
         const device_height = verge.viewportH()
         const program_1_top_Y = elmYPosition('#program-1')
+
         if (current_top_y > content_top_Y) {
           const targHeight = this.$refs[ 'content' ].querySelector('.title').clientHeight
             + this.$refs[ 'content' ].querySelector('.infographic-wrapper').clientHeight
@@ -92,6 +96,12 @@
           this.$refs[ 'aside' ].removeAttribute('style')
           this.isContentTop = false
         }
+        if (current_top_y > (aside_bottom_y - (content_wrapper_height))) {
+          this.isContentBottom = true
+        } else {
+          this.isContentBottom = false
+        }
+
         this.isFilterBarActive = current_top_y < program_1_top_Y
       },
       setupScrollHandler () {
@@ -193,6 +203,8 @@
               opacity 0
           &.bottom
             width 100%
+            bottom 0
+            top auto
         .title
           font-size 1.625rem
           padding 20px 15px

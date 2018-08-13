@@ -11,12 +11,15 @@
     <Brief></Brief>
     <MainContent v-show="isLoaded"></MainContent>
     <footer v-show="isLoaded">
+      <Extends></Extends>
+      <div class="other-reports"><span v-text="$t('RENT.OTHER_REPORTS')"></span></div>
       <RelatedReports theme="white"></RelatedReports>    
     </footer>
   </div>
 </template>
 <script>
   import Brief from 'src/components/Rent/Brief.vue'
+  import Extends from 'src/components/Rent/Extends.vue'
   import Logo from 'src/components/Logo.vue'
   import MainContent from 'src/components/Rent/MainContent.vue'
   import RelatedReports from 'src/components/RelatedReports.vue'
@@ -46,7 +49,7 @@
         title: this.$t('RENT.TITLE'),
         description: this.$t('RENT.DESCRIPTION'),
         metaUrl: 'rent',
-        metaImage: '',
+        metaImage: 'rent/og-image-rent.jpg',
       }
     },
     computed: {
@@ -58,6 +61,7 @@
     },
     components: {
       Brief,
+      Extends,
       Logo,
       MainContent,
       RelatedReports,
@@ -119,4 +123,11 @@
       z-index 999
     footer
       margin 75px 0
+      .other-reports
+        width 100%
+        text-align center
+        font-size 2.125rem
+        font-weight normal
+        line-height 1.06
+        color #313131
 </style>

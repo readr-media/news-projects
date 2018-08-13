@@ -1,28 +1,19 @@
 <template>
   <InfographicLayout class="infographic" :id="`id-${id}`">
-    <!--div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
-      v-html="get(svgString, 'ENTIRE')"
-      v-show="get(current_filters, 'POSITION') === 'ENTIRE' && !isNoRequired"></div-->
-    <!--div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
-      v-html="graphEmty"
-      v-show="(get(current_filters, 'POSITION') === 'ENTIRE' || get(current_filters, 'POSITION') === '') && isNoRequired"></div-->
-    <!--template v-for="city in CITIES">
-      <div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
-        v-html="get(svgString, city)"
-        v-show="get(current_filters, 'POSITION') === city"></div>      
-    </template-->
-    <!--div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
-        v-html="graphCurrent"
-        v-show="get(current_filters, 'POSITION') !== 'ENTIRE'"></div--> 
     <div class="infographic__svg" :class="svgClass" @mouseover="mouseoverSvg"
         v-html="graphCurrent"></div>
-    <div class="infographic__svg__wrapper"
+    <!--div class="infographic__svg no-required" @mouseover="mouseoverSvg"
+        v-html="entire"></div-->
+    <div class="infographic__svg__wrapper" :class="{ top: !this.isDefaultBlock, }"
         v-show="(get(current_filters, 'POSITION') === 'ENTIRE'
-          || get(current_filters, 'POSITION') === '' || get(current_filters, 'POSITION') === 'EMPTY') && isNoRequired">
+          || get(current_filters, 'POSITION') === '' || get(current_filters, 'POSITION') === 'EMPTY') && isNoRequired && !isDefaultBlock">
       <div class="infographic__svg__default"></div>
     </div>
     <template v-for="p in PROGRAM">
-      <div class="infographic__svg__wrapper"><InfographicGraph class="infographic__svg__static" v-if="get(p, 'graph')" :program="p"></InfographicGraph></div>
+      <div class="infographic__svg__wrapper">
+        <InfographicGraph class="infographic__svg__static" v-if="get(p, 'graph')"
+          :program="p"></InfographicGraph>
+      </div>
     </template>
     <div class="infographic__tip" v-show="tip" v-if="isDesktop"><span v-html="tip"></span></div>
     <div class="infographic__loading" v-show="isLoading"><Spinner show="true"></Spinner></div>    
@@ -70,6 +61,7 @@
         return {
           // 'active': this.isSvgActive,
           // 'active': true,
+          'top': !this.isDefaultBlock,
           'no-required': this.isNoRequired,
           'ya-only': get(this.current_filters, 'TYPE') === 3,
           'share-tao-only': get(this.current_filters, 'TYPE') === 2,
@@ -95,6 +87,7 @@
       return {
         CITIES,
         PROGRAM,
+        entire: '',
         graphEmty: '',
         graphCurrent: '',
         id: 0,
@@ -163,6 +156,12 @@
       this.id = Math.round(Math.random() * 10000000000)
       const stamp = Date.now()
     },
+    props: {
+      isDefaultBlock: {
+        typs: Boolean,
+        default: false
+      },
+    },
     watch: {
       'current_filters.POSITION': function (n, o) {
         debug('Mutation detected: current_filters.POSITION', this.current_filters.POSITION)
@@ -205,6 +204,7 @@
       '$store.state.Rent.isLoaded': function () {
         debug('READY!')
         this.graphEmty = get(this.$store, 'state.Rent.svgStrs.EMPTY')
+        // this.entire = get(this.$store, 'state.Rent.svgStrs.ENTIRE')
       },
     },
   }

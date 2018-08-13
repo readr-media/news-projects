@@ -36,12 +36,12 @@ const RENT_LOCALE = {
 
 const DATA_LIMIT = {
   MAX: {
-    // RENT: 210000,
-    // UNIT: 105,  
+    RENT: 210000,
+    UNIT: 105,  
     // RENT: 110000,
     // UNIT: 85,  
-    RENT: 55000,
-    UNIT: 75,  
+    // RENT: 55000,
+    // UNIT: 75,  
   },
 }
 
