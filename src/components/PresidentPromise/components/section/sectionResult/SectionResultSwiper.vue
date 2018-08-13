@@ -108,9 +108,11 @@ export default {
     isCurrentSectionActive () {
       // all
       this.categoriesFetchStat['全部'].fetchStat = 'loading'
+      this.categoriesFetchStat['已完成'].fetchStat = 'loading'
       getCategoryAllRequest()
       .then(({ body } = data) => {
         this.handleFetchStatAndResult(body.result, '全部')
+        this.handleFetchStatAndResult(body.result, '已完成')
       })
       // interest
       this.handleFetchStatAndResult(this.$store.getters['PresidentPromise/promiseDataGroupByCategory']['我關心'], '我關心')
@@ -119,7 +121,11 @@ export default {
       // slide
       this.mySwiper.slideTo(this.activeIndex)
       // fetch
-      if (this.activeCategory !== '全部' && this.activeCategory !== '我關心' && this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetched' && this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetchedEmpty') {
+      if (this.activeCategory !== '全部' &&
+          this.activeCategory !== '我關心' &&
+          this.activeCategory !== '已完成' &&
+          this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetched' &&
+          this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetchedEmpty') {
         this.categoriesFetchStat[this.activeCategory].fetchStat = 'loading'
         getCategoryInterestRequest(this.activeCategory)
         .then(({ body } = data) => {
@@ -240,7 +246,7 @@ export default {
     })
     .then(({ modifiedTime })=> {
       const date = new Date(modifiedTime)
-      this.modifiedTime = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${date.getDate()}`
+      this.modifiedTime = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`
     })
   },
   mounted () {
