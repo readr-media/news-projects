@@ -1,14 +1,12 @@
 const path = require('path')
 const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
-const NODE_ENV = process.env.NODE_ENV || 'development'
-const isProd = NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
-  mode: NODE_ENV,
   devtool: isProd
     ? false
     : '#cheap-module-source-map',
@@ -57,29 +55,33 @@ module.exports = {
       {
         test: /\.css$/,
         use: isProd
-          ? [
-              MiniCssExtractPlugin.loader,
-              {
-                loader: 'css-loader',
-                options: { minimize: true }
-              },
-              'postcss-loader'
-            ]
+          ? ExtractTextPlugin.extract({
+              use: [
+                {
+                  loader: 'css-loader',
+                  options: { minimize: true }
+                },
+                'postcss-loader'
+              ],
+              fallback: 'vue-style-loader'
+            })
           : ['vue-style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.styl(us)?$/,
         use: isProd
-          ? [
-              MiniCssExtractPlugin.loader,
+          ? ExtractTextPlugin.extract({
+            use: [
               {
                 loader: 'css-loader',
                 options: { minimize: true }
               },
               'postcss-loader',
               'stylus-loader'
-            ]
-          : ['vue-style-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
+            ],
+            fallback: 'vue-style-loader'
+          })
+        : ['vue-style-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
       },
     ]
   },
@@ -90,7 +92,11 @@ module.exports = {
   plugins: isProd
     ? [
         new VueLoaderPlugin(),
-        new MiniCssExtractPlugin({
+        new webpack.optimize.UglifyJsPlugin({
+          compress: { warnings: false }
+        }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new ExtractTextPlugin({
           filename: 'common.[chunkhash].css'
         })
       ]
