@@ -1,4 +1,4 @@
-import { isEmpty, shuffle, uniq, flattenDeep, map, every, sample, get } from 'lodash'
+import { isEmpty, shuffle, uniq, flattenDeep, map, every, sample, get, groupBy, } from 'lodash'
 
 function getVH () {
   return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
@@ -74,6 +74,7 @@ export default {
 
     result['全部'] = state.promiseData
     result['我關心'] = getters.surveyVeryInterestPromises
+    result['已完成'] = getters.promiseDataDone
     state.promiseData.forEach(promise => {
       const categories = promise.category
       categories.forEach(category => {
@@ -83,6 +84,12 @@ export default {
     })
     
     return result
+  },
+  promiseDataGroupByDone: (state, getters) => {
+    return groupBy(state.promiseData, 'promiseDone')
+  },
+  promiseDataDone: (state, getters) => {
+    return getters.promiseDataGroupByDone['true']
   },
   hadSurveyTaken: (state) => {
     return state.surveyGroupByInterest.round1['not-interest'].length !== 0 ||

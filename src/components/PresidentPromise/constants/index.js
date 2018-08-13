@@ -4,6 +4,7 @@ export const DEFAULT_DRIVE_FILE_FIELDS = 'modifiedTime'
 export const categories = {
   '全部': 'all',
   '我關心': 'interest',
+  '已完成': 'promise-done',
   '內政': 'interior',
   '兩岸': 'china',
   '動保': 'animal',
