@@ -62,13 +62,13 @@ router.get('/infographic/calc', fetchFromRedis, (req, res) => {
       if (req.query.ROLE) {
         switch (req.query.ROLE) {
           case 'student':
-            data = filter(data, { is_limit_student: 'TRUE', })
+            data = filter(data, d => ((d.is_limit_student === 'TRUE') || (d.is_limit_daily_woker === 'FALSE' && d.is_limit_family === 'FALSE')))
             break
           case 'daily_worker':
-            data = filter(data, { is_limit_daily_woker: 'TRUE', })
+            data = filter(data, d => ((d.is_limit_daily_woker === 'TRUE') || (d.is_limit_student === 'FALSE' && d.is_limit_family === 'FALSE')))
             break
           case 'family':
-            data = filter(data, { is_limit_family: 'TRUE', })
+            data = filter(data, d => ((d.is_limit_family === 'TRUE') || (d.is_limit_student === 'FALSE' && d.is_limit_daily_woker === 'FALSE')))
             break
         }
       }

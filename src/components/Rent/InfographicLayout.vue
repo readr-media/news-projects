@@ -45,6 +45,9 @@
       // display none
       // &.active
       //   display inline
+      &.top
+        z-index 12
+        background-color #fff
       &__wrapper
         position absolute
         top 0
@@ -52,6 +55,9 @@
         z-index 10
         width 100%
         height 100%
+        &.top
+          z-index 12
+          background-color #fff        
       &__default
         background-image url(/proj-assets/rent/infographic-default.png)
       &__default, &__static
@@ -115,17 +121,17 @@
               display none
         &.student-only
           & >>> .spot
-            &:not(.student)
+            &.family, &.daily-worker
               display none
         &.family-only
           & >>> .spot
-            &:not(.family)
-              display none
+            &.student, &.daily-worker
+              display none            
 
         &.daily-worker-only
           & >>> .spot
-            &:not(.daily-worker)
-              display none
+            &.student, &.family
+              display none                 
 
         &.pettable-needed
           & >>> .spot
@@ -190,4 +196,6 @@
         &__default, &__static
           width 320px
           height 200px
+        & >>> text
+          font-size 10px
 </style>

@@ -35,9 +35,10 @@ function getBounds (data, paddingFactor = 1) {
 function updateScales (d3, bounds = {}, size = 'S') {
   debug('bounds:', bounds[ AXIS.X ], bounds[ AXIS.Y ])
   const bias = size === 'S' ? 15 : 0
+  const biasForEndX = size === 'S' ? 5 : 20
   const xScale = d3.scaleLinear()
   .domain([ get(bounds, `${AXIS.X}.min`, 0), get(bounds, `${AXIS.X}.max`, 0) ])
-  .range([ 50 - bias, VIEW_SIZE[ size ].WIDTH - bias ])
+  .range([ 50 - bias, VIEW_SIZE[ size ].WIDTH - bias - biasForEndX ])
 
   const yScale = d3.scaleLinear()
   .domain([ get(bounds, `${AXIS.Y}.min`, 0), get(bounds, `${AXIS.Y}.max`, 0) ])
@@ -52,6 +53,7 @@ function renderChart (data, bounds, size) {
     let d3n = new D3Node()
     let d3 = d3n.d3
     const bias = size === 'S' ? 15 : 0
+    const biasForGrid = 20
   
     const svg = d3n.createSVG(VIEW_SIZE[ size ].WIDTH, VIEW_SIZE[ size ].HEIGHT - 50)
     .attr('width', VIEW_SIZE[ size ].WIDTH)
@@ -80,7 +82,9 @@ function renderChart (data, bounds, size) {
     let { xScale, yScale, } = updateScales(d3, bounds, size)
   
     const makeXAxis = s => {
-      s.call(d3.axisBottom(xScale).tickFormat(d => ((d / 1000) + 'k')))
+      size === 'S'
+        ? s.call(d3.axisBottom(xScale).tickFormat(d => ((d / 1000) + 'k')))
+        : s.call(d3.axisBottom(xScale))
     }
     const makeYAxis = s => {
       s.call(d3.axisLeft(yScale))
@@ -100,6 +104,7 @@ function renderChart (data, bounds, size) {
     // .ticks(10)
     .tickFormat('')
     .tickSize(0 -  VIEW_SIZE[ size ].WIDTH + 65 - bias)
+    // .tickSize(0 -  VIEW_SIZE[ size ].WIDTH + 65 - biasForGrid)
   
     chart.append('g')
     .call(axisXGrid)
