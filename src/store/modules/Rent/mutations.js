@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import { filter, } from 'lodash'
+import sanitizeHtml from 'sanitize-html'
+
 const debug = require('debug')('CLIENT:mutation:Rent')
 export default {
   RESET_FILTER: (state) => {
@@ -23,7 +25,9 @@ export default {
   },
   SET_SVG: (state, { city, svg }) => {
     debug({ city, svg })
-    state.svgStrs[ city ] = svg
+    state.svgStrs[ city ] = sanitizeHtml(svg, {
+      allowedTags: [ 'svg', 'text', 'circle', 'path', 'g', 'line' ]
+    })
   },
   SET_ASSETS_LOADED: (state) => {
     state.isLoaded = true
