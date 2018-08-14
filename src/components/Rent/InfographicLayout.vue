@@ -40,6 +40,7 @@
       width 256px
       // height 180px
       padding 23px 26px
+      z-index 13
 
     &__svg
       // display none
