@@ -26,7 +26,8 @@ export default {
   SET_SVG: (state, { city, svg }) => {
     debug({ city, svg })
     state.svgStrs[ city ] = sanitizeHtml(svg, {
-      allowedTags: [ 'svg', 'text', 'circle', 'path', 'g', 'line' ]
+      allowedTags: [ 'svg', 'text', 'circle', 'path', 'g', 'line' ],
+      allowedAttributes: false,
     })
   },
   SET_ASSETS_LOADED: (state) => {
