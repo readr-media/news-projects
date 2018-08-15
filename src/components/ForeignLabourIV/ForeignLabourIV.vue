@@ -113,20 +113,27 @@
         </div>
       </div>
     </section>
-    <section class="scene scene--text" :class="{ 'scene--active': currentScene === 14 }">
+    <section class="scene scene--text scene--path" :class="{ 'scene--active': currentScene === 14 }">
       <video ref="video" class="video" muted loop playsinline>
         <source src="" type="video/mp4">
       </video>
-      <p>「我們那時候從河內出發，一個晚上就到諒山市邊境。</p>
-      <p>之後走路翻山一個小時，進中國後又坐了一天一夜的車，就到一個海邊。</p>
-      <p>休息幾小時後，我們搭大船，大概三、四天可以開到台灣外海。</p>
-      <p>之後我們在海上等了好幾天，要找到適當的時機才能進來。</p>
-      <p>當時我們總共有 47 人，全部擠在一個小小的船底，每個人都在吐，你吐在我身上，我也吐在你身上，那個味道很恐怖，所以每個人也都吃不下。在船上 9 天，我大概只上過 3 次廁所。</p>
-      <p>第 9 天半夜，我們 12 點半就在附近海域，一直停在那邊等人來接。3 點半有人來，我們就換小船。</p>
-      <p>當時我們 47 個人，從大船直接換到一個長度大概只有 3 公尺的橡皮艇，全部人都上去，都疊在一起，我差點死掉，因為有人亂動就會掉到海裡，我可能死第一個。讓我再來一次，我一定不要，生跟死就是一分鐘的事情而已。</p>
-      <p>上岸地點是高雄，那時候很冷，上岸的時候鞋子掉在海裡，我是打赤腳上岸。之後有 3 台車來接我們，帶我們到一個小旅館，讓我們在那邊洗澡換衣服。</p>
-      <p>那時候我們 9 天沒洗澡，也沒吃飯，看起來就像難民，也嚴重暈船，所以不可能搭高鐵。後來我們每個人又花了 4,000 塊錢搭計程車來台北。當時我們三個人一起，等於花了 12,000。</p>
-      <p>到台北後，暈船暈一個月沒去工作，都在休息。後來有朋友介紹去林森北路做按摩，沒想到還沒接到客人就被抓。警察要我承認有做一個，說我這樣比較好結案，那時候很傻被騙，就說我有接，現在很後悔。」</p>
+      <div class="path">
+        <div id="animation_container" class="path-container">
+          <canvas id="canvas"></canvas>
+        </div>
+      </div>
+      <div class="content">
+        <p>「我們那時候從河內出發，一個晚上就到諒山市邊境。</p>
+        <p>之後走路翻山一個小時，進中國後又坐了一天一夜的車，就到一個海邊。</p>
+        <p>休息幾小時後，我們搭大船，大概三、四天可以開到台灣外海。</p>
+        <p>之後我們在海上等了好幾天，要找到適當的時機才能進來。</p>
+        <p>當時我們總共有 47 人，全部擠在一個小小的船底，每個人都在吐，你吐在我身上，我也吐在你身上，那個味道很恐怖，所以每個人也都吃不下。在船上 9 天，我大概只上過 3 次廁所。</p>
+        <p>第 9 天半夜，我們 12 點半就在附近海域，一直停在那邊等人來接。3 點半有人來，我們就換小船。</p>
+        <p>當時我們 47 個人，從大船直接換到一個長度大概只有 3 公尺的橡皮艇，全部人都上去，都疊在一起，我差點死掉，因為有人亂動就會掉到海裡，我可能死第一個。讓我再來一次，我一定不要，生跟死就是一分鐘的事情而已。</p>
+        <p>上岸地點是高雄，那時候很冷，上岸的時候鞋子掉在海裡，我是打赤腳上岸。之後有 3 台車來接我們，帶我們到一個小旅館，讓我們在那邊洗澡換衣服。</p>
+        <p>那時候我們 9 天沒洗澡，也沒吃飯，看起來就像難民，也嚴重暈船，所以不可能搭高鐵。後來我們每個人又花了 4,000 塊錢搭計程車來台北。當時我們三個人一起，等於花了 12,000。</p>
+        <p>到台北後，暈船暈一個月沒去工作，都在休息。後來有朋友介紹去林森北路做按摩，沒想到還沒接到客人就被抓。警察要我承認有做一個，說我這樣比較好結案，那時候很傻被騙，就說我有接，現在很後悔。」</p>
+      </div>
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 15 }">
       <figure class="media lazy">
@@ -155,6 +162,71 @@ import { throttle } from 'lodash'
 
 const PROJECT_NAME = 'foreign-labour-iv'
 
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function initCanvas() {
+	canvas = document.getElementById("canvas");
+	// anim_container = document.getElementById("animation_container");
+	// dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("45E65D2607CD4173BB33E9726983077D");
+	var lib=comp.getLibrary();
+	handleComplete({},comp);
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	// var preloaderDiv = document.getElementById("_preload_div_");
+	// preloaderDiv.style.display = 'none';
+	canvas.style.display = 'block';
+	exportRoot = new lib.path();
+	stage = new lib.Stage(canvas);	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.setFPS(lib.properties.fps);
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	function makeResponsive(isResp, respDim, isScale, scaleType) {		
+		var lastW, lastH, lastS=1;		
+		window.addEventListener('resize', resizeCanvas);		
+		resizeCanvas();		
+		function resizeCanvas() {			
+			var w = lib.properties.width, h = lib.properties.height;			
+			var iw = window.innerWidth, ih=window.innerHeight;			
+			var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;			
+			if(isResp) {                
+				if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {                    
+					sRatio = lastS;                
+				}				
+				else if(!isScale) {					
+					if(iw<w || ih<h)						
+						sRatio = Math.min(xRatio, yRatio);				
+				}				
+				else if(scaleType==1) {					
+					sRatio = Math.min(xRatio, yRatio);				
+				}				
+				else if(scaleType==2) {					
+					sRatio = Math.max(xRatio, yRatio);				
+				}			
+			}			
+			canvas.width = w*pRatio*sRatio;			
+			canvas.height = h*pRatio*sRatio;
+			// canvas.style.width = anim_container.style.width = dom_overlay_container.style.width = preloaderDiv.style.width = w*sRatio+'px';				
+			// canvas.style.height = anim_container.style.height = dom_overlay_container.style.height = preloaderDiv.style.height = h*sRatio+'px';
+			stage.scaleX = pRatio*sRatio;			
+			stage.scaleY = pRatio*sRatio;			
+			lastW = iw; lastH = ih; lastS = sRatio;            
+			stage.tickOnUpdate = false;            
+			stage.update();            
+			stage.tickOnUpdate = true;		
+		}
+	}
+	makeResponsive(true,'both',false,1);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+
 export default {
   name: 'ForeignLabourIV',
   components: {
@@ -169,10 +241,14 @@ export default {
     
     return {
       title: '流離尋岸',
-      description: '從彼岸的家人身旁 輾轉流轉到此岸的工廠 再到病院和按摩間',
+      description: '在家鄉，她們孩子的媽，一肩扛起家庭經濟重擔。在台灣，她們靠著偷渡、偷跑、偷情，在黑暗的角落苦苦求生，從工廠女工、老人看護到男人攝護腺排毒，她們一手包辦。從彼岸到此岸，她們似乎永遠無法靠岸⋯⋯',
       locale: ogLocale,
       metaUrl: metaUrl,
-      metaImage: metaImage
+      metaImage: metaImage,
+      customScript: `
+        <script src="//code.createjs.com/createjs-2015.11.26.min.js"><\/script>
+        <script src="//www.readr.tw/proj-assets/foreign-labour/scripts/animate-path.js"><\/script>
+      `,
     }
   },
   data () {
@@ -189,11 +265,13 @@ export default {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual'
     }
+    initCanvas()
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('scroll', this.handleScrollForCaption)
     window.addEventListener('resize', this.calcSectionsTop)
     this.$refs.video.children[0].src = '/proj-assets/foreign-labour/videos/iv/14.mp4'
     this.$refs.video.load()
+    stage.setAutoPlay(false)
     // ga('send', 'pageview')
   },
   beforeDestroy () {
@@ -227,6 +305,12 @@ export default {
       const lastCaptionTop = lastCaptionRect.top - bodyRect.top
       this.captionsTop.push(lastCaptionTop + lastCaption.clientHeight)
     },
+    handleCanvas (index) {
+      const canvas = document.querySelector(`section:nth-of-type(${index}) canvas`)
+      if (canvas) {
+        stage.setAutoPlay(true)
+      }
+    },
     handleScroll: throttle(function() {
       const offset = 2 / 3
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -235,6 +319,7 @@ export default {
         if (value > transitionPoint ) {
           this.lazyloadImg(index)
           this.handleVideoPlay(index)
+          this.handleCanvas(index)
           return this.currentScene = index - 1
         }
       }
@@ -325,12 +410,12 @@ theme-color = hsl(354.3,58%,64.5%)
       & + p
         margin-top 1em
     &.scene--active
-      .media, .video
+      .media, .video, .path
         opacity 1
         visibility visible
         transition opacity 2.5s, visibility 1s 0s
     &.scene--text
-      padding-top 50vh
+      padding 50vh 0
     &__descr
       position relative
       z-index 10
@@ -400,6 +485,40 @@ theme-color = hsl(354.3,58%,64.5%)
     opacity 0
     visibility hidden
     transition opacity 2.5s, visibility 1s 2.5s
+  .scene--path
+    .path
+      position fixed
+      top 0
+      left 0
+      z-index 500
+      width 100%
+      height 33vh
+      background-color #000
+      opacity 0
+      visibility hidden
+      transition opacity 2.5s, visibility 1s 2.5s
+      overflow hidden
+      .path-container
+        position absolute
+        top -55%
+        left 0
+        width 100%
+        padding-top 112%
+        canvas
+          position absolute
+          top 0
+          left 0
+          right 0
+          bottom 0
+          width 100%
+          height 100%
+    .content
+      position relative
+      width calc(100% - 40px)
+      margin 0 auto
+      text-align justify
+      > p + p
+        margin-top 1em
   .text-border
     position absolute
     top 50%
@@ -490,6 +609,14 @@ theme-color = hsl(354.3,58%,64.5%)
       &__descr
         max-width 50%
         min-width 550px
+    .scene--path
+      .path
+        height 40vh
+        .path-container
+          top -70%
+      .content
+        max-width 50%
+        min-width 550px
     .text-border
       max-width 50%
       line-height 1.67
@@ -517,6 +644,22 @@ theme-color = hsl(354.3,58%,64.5%)
       &__descr
         max-width 40%
         transform translateX(30%)
+    .scene--path
+      .path
+        top 50%
+        left 0
+        right auto
+        transform translateY(-50%)
+        width 50%
+        height 100%
+        background-color transparent
+        .path-container
+          top 50%
+          transform translateY(-50%)
+      .content
+        width 50%
+        margin 0 0 0 auto
+        padding 0 60px
     .text-border
       span
         font-size 1.125rem
