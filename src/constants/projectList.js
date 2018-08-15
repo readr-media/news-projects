@@ -10,6 +10,7 @@ export default {
   'foreign-labour': 'ForeignLabour',
   'foreign-labour-ii': 'ForeignLabourII',
   'foreign-labour-iii': 'ForeignLabourIII',
+  'foreign-labour-iv': 'ForeignLabourIV',
   'foreign-labour-landing': 'ForeignLabourLanding',
   'hotel-hostess': 'HotelHostess',
   'hotel-hostess-series': 'HotelHostessSeries',
