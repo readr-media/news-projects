@@ -500,7 +500,7 @@ theme-color = hsl(354.3,58%,64.5%)
       overflow hidden
       .path-container
         position absolute
-        top -55%
+        top -65%
         left 0
         width 100%
         padding-top 112%
