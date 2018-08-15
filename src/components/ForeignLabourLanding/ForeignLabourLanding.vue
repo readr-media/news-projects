@@ -23,6 +23,10 @@
           <h3>農地上的 Andy Lau</h3>
           <p>當他們合法工作時，往往只能得到非法的對待。無奈之下，他們只好非法進入農業，耕種餵飽台灣人⋯⋯⋯</p>
         </a>
+        <!-- <a href="/project/foreign-labour-iv" class="item" target="_blank" @click="$_foreignLabour_ga('iv')" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
+          <h3>流離尋岸</h3>
+          <p></p>
+        </a> -->
       </div>
     </section>
   </main>
@@ -157,6 +161,8 @@ theme-color-ii = hsl(123.6,24.8%,73.9%)
 theme-color-ii-dark = hsl(123.6,24.8%,63.9%)
 theme-color-iii = hsl(37.2,41.8%,62.9%)
 theme-color-iii-dark = hsl(37.2,41.8%,52.9%)
+theme-color-iv = hsl(354.3,58%,64.5%)
+theme-color-iv-dark = hsl(354.3,58%,54.5%)
 
 .foreign-labour
   color #fff
@@ -235,6 +241,13 @@ theme-color-iii-dark = hsl(37.2,41.8%,52.9%)
         color theme-color-iii-dark
     p
       border-color theme-color-iii
+  &:nth-of-type(4)
+    h3
+      color theme-color-iv
+      &:hover
+        color theme-color-iv-dark
+    p
+      border-color theme-color-iv
   &.touch
     background-color #000
   h3
@@ -288,7 +301,7 @@ theme-color-iii-dark = hsl(37.2,41.8%,52.9%)
       display none
     &__items
       display flex
-      width 125%
+      width 165%
       
   .item
     display block
@@ -298,7 +311,7 @@ theme-color-iii-dark = hsl(37.2,41.8%,52.9%)
     &:first-of-type
       margin-left 5%
 
-@media (min-width: 900px)
+@media (min-width: 1100px)
   .foreign-labour
     position relative
     height 100vh
@@ -317,7 +330,7 @@ theme-color-iii-dark = hsl(37.2,41.8%,52.9%)
     bottom 0
     z-index 10
     min-width 878px
-    width 878px
+    width 1080px
     padding 30px 35px 60px 0
     background-color rgba(0, 0, 0, .7)
   .item
