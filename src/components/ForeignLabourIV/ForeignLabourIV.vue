@@ -20,15 +20,15 @@
     <section class="scene scene--full" :class="{ 'scene--active': currentScene === 1 }">
       <div class="text-border">
         <div class="text-border__text text-fix">
-          <p>來台灣沒幾個月，小翠就逃離了窄小悶熱的電子廠女工宿舍，由「外勞」身份搖身一變，成為月入十多萬的林森北路性工作者。遠在北越的老家，終於得以翻修改建。</p>
+          <p>來台灣沒幾個月，珍珍就逃離了窄小悶熱的電子廠女工宿舍，由「外勞」身份搖身一變，成為月入十多萬的林森北路性工作者。遠在北越的老家，終於得以翻修改建。</p>
         </div>
       </div>
     </section>
     <section class="scene scene--text" :class="{ 'scene--active': currentScene === 2 }">
-      <p>工作沒多久，小翠和她的客人老孟，就從消費關係轉男女朋友。老孟說，自己在歡場打滾多年，一心告誡自己出來玩開心就好，也自認沒有「暈船」的可能；未想，這一栽竟在小翠的溫柔懷抱裡。</p>
+      <p>工作沒多久，珍珍和她的客人老孟，就從消費關係轉男女朋友。老孟說，自己在歡場打滾多年，一心告誡自己出來玩開心就好，也自認沒有「暈船」的可能；未想，這一栽竟在珍珍的溫柔懷抱裡。</p>
       <p>「其實也不知道自己能和她走到什麼地步，我是她的小三，知道她在老家已經結婚有了家庭和兩個小孩，我又因為是在那樣的狀況下認識她，沒辦法開口叫她不要做了，畢竟來台灣就是賺錢，所以也就維持……這種走一步算一步的狀態。」</p>
-      <p>說這些話時，老孟和我剛在台北女子看守所前點上第二根菸。他說，其實交往沒多久，他就知道兩人最後的結局，很可能就像正在他眼前上演的情節一樣——小翠被條子逮住然後強制遣返，兩人不了了之。</p>
-      <p>「不是沒有設想過現在的情況……應該說是早就知道了。」老孟一手將菸往嘴裡送，一手提著幾袋稍後要在會面時拿給小翠的水果和食物。那一大袋食物提起來很沉，裝的全是老孟對小翠的愛。當時他語氣說得淡然，但正如宋冬野所唱，嘴上一句帶過，男人終究還是個複雜的動物。</p>
+      <p>說這些話時，老孟和我剛在台北女子看守所前點上第二根菸。他說，其實交往沒多久，他就知道兩人最後的結局，很可能就像正在他眼前上演的情節一樣——珍珍被條子逮住然後強制遣返，兩人不了了之。</p>
+      <p>「不是沒有設想過現在的情況……應該說是早就知道了。」老孟一手將菸往嘴裡送，一手提著幾袋稍後要在會面時拿給珍珍的水果和食物。那一大袋食物提起來很沉，裝的全是老孟對珍珍的愛。當時他語氣說得淡然，但正如宋冬野所唱，嘴上一句帶過，男人終究還是個複雜的動物。</p>
       <p>（註：本文所有人名皆為化名。）</p>
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 3 }">
@@ -41,12 +41,12 @@
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 4 }">
       <figure class="media lazy">
-        <img src="" alt="因檢察官決定以仲介賣淫、偽證、妨礙風化等罪名起訴小翠、小花，以及老闆娘阿寶">
+        <img src="" alt="因檢察官決定以仲介賣淫、偽證、妨礙風化等罪名起訴珍珍、小花，以及老闆娘阿寶">
       </figure>
       <div class="scene__descr">
-        <p><span>因檢察官決定以仲介賣淫、偽證、妨礙風化等罪名起訴小翠、小花，以及老闆娘阿寶，所以她們被移往台北女子看守所收押。這一押，就是兩個月。</span></p>
-        <p><span>為了和小翠長久交往，老孟很努力地自學越南文。3 月 14 日是他們闊別半個月後，第一次可以會客見面的日子，老孟準備一張小抄，謄上比較生澀的越南語，讓他可以把之後小翠要面對的司法審查狀況解釋清楚。</span></p>
-        <p><span>往後的兩個月，老孟在每個可以會客的日子，都花上幾小時去土城女監見小翠。</span></p>
+        <p><span>因檢察官決定以仲介賣淫、偽證、妨礙風化等罪名起訴珍珍、小花，以及老闆娘阿寶，所以她們被移往台北女子看守所收押。這一押，就是兩個月。</span></p>
+        <p><span>為了和珍珍長久交往，老孟很努力地自學越南文。3 月 14 日是他們闊別半個月後，第一次可以會客見面的日子，老孟準備一張小抄，謄上比較生澀的越南語，讓他可以把之後珍珍要面對的司法審查狀況解釋清楚。</span></p>
+        <p><span>往後的兩個月，老孟在每個可以會客的日子，都花上幾小時去土城女監見珍珍。</span></p>
       </div>
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 5 }">
@@ -54,44 +54,44 @@
         <img src="" alt="監所的會客規則，明訂探視者能帶進去的食物種類、尺寸有一定的限制">
       </figure>
       <div class="scene__descr">
-        <p><span>監所的會客規則，明訂探視者能帶進去的食物種類、尺寸有一定的限制。小翠愛吃水果，老孟不願便宜行事在監所外買現成切好的商品，不管他工作多忙累，仍會在探望的前夜花時間將水果切得細碎又乾淨，只為送進監所後，能博得愛人的歡心。</span></p>
+        <p><span>監所的會客規則，明訂探視者能帶進去的食物種類、尺寸有一定的限制。珍珍愛吃水果，老孟不願便宜行事在監所外買現成切好的商品，不管他工作多忙累，仍會在探望的前夜花時間將水果切得細碎又乾淨，只為送進監所後，能博得愛人的歡心。</span></p>
       </div>
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 6 }">
       <figure class="media lazy">
-        <img src="" alt="3 月 20 日，小翠生日，老孟依舊一早出門前往女監，想為小翠送上蛋糕">
+        <img src="" alt="3 月 20 日，珍珍生日，老孟依舊一早出門前往女監，想為珍珍送上蛋糕">
       </figure>
       <div class="scene__descr">
-        <p><span>3 月 20 日，小翠生日，老孟依舊一早出門前往女監，想為小翠送上蛋糕。待在會客室時，老孟的手機傳來訊息，提醒他小翠的生日到了。</span></p>
+        <p><span>3 月 20 日，珍珍生日，老孟依舊一早出門前往女監，想為珍珍送上蛋糕。待在會客室時，老孟的手機傳來訊息，提醒他珍珍的生日到了。</span></p>
       </div>
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 7 }">
       <figure class="media lazy">
-        <img src="" alt="5 月 2 日，檢察官結束偵查階段羈押，小翠等人終於可以交保外出">
+        <img src="" alt="5 月 2 日，檢察官結束偵查階段羈押，珍珍等人終於可以交保外出">
       </figure>
       <div class="scene__descr">
-        <p><span>5 月 2 日，檢察官結束偵查階段羈押，小翠等人終於可以交保外出。那一夜，老孟開心地帶小翠逛夜市，不顧忌天氣的炎熱，硬是要她吃碗熱騰騰的麵線去晦氣。</span></p>
+        <p><span>5 月 2 日，檢察官結束偵查階段羈押，珍珍等人終於可以交保外出。那一夜，老孟開心地帶珍珍逛夜市，不顧忌天氣的炎熱，硬是要她吃碗熱騰騰的麵線去晦氣。</span></p>
       </div>
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 8 }">
       <figure class="media lazy">
-        <img src="" alt="老孟和小翠到賣場採購生活用品，小翠腳上仍踩著監所的制式拖鞋">
+        <img src="" alt="老孟和珍珍到賣場採購生活用品，珍珍腳上仍踩著監所的制式拖鞋">
       </figure>
       <div class="scene__descr">
-        <p><span>老孟和小翠到賣場採購生活用品，小翠腳上仍踩著監所的制式拖鞋。</span></p>
+        <p><span>老孟和珍珍到賣場採購生活用品，珍珍腳上仍踩著監所的制式拖鞋。</span></p>
         <p><span>當時他們都以為，判決結束前他們能過上短暫的幸福同居生活。</span></p>
       </div>
     </section>
     <section class="scene scene--text" :class="{ 'scene--active': currentScene === 9 }">
-      <p>離開監所兩個月後，小翠為了能寄更多錢回老家給丈夫和小孩，決定每週花幾天「陪乾爹」，因為老孟能提供給她的經濟資源有限。老孟覺得自己對小翠的一片真心付諸流水，難過地提了分手。</p>
-      <p>小翠的判決仍未宣判，但人已不知去向。沒有人知道現在的她，在台灣的哪個角落流離。</p>
+      <p>離開監所兩個月後，珍珍為了能寄更多錢回老家給丈夫和小孩，決定每週花幾天「陪乾爹」，因為老孟能提供給她的經濟資源有限。老孟覺得自己對珍珍的一片真心付諸流水，難過地提了分手。</p>
+      <p>珍珍的判決仍未宣判，但人已不知去向。沒有人知道現在的她，在台灣的哪個角落流離。</p>
     </section>
     <section class="scene scene--photo" :class="{ 'scene--active': currentScene === 10 }">
       <figure class="media lazy">
-        <img src="" alt="和小翠同時間被捕的，還有來自河內的小花">
+        <img src="" alt="和珍珍同時間被捕的，還有來自河內的小花">
       </figure>
       <div class="scene__descr">
-        <p><span>和小翠同時間被捕的，還有來自河內的小花。她說，去年底時她從越南搭船偷渡來台，驚險上岸後休養個把月，盼想到林森北路的按摩店能快速還完偷渡的 6,500 美元開，沒想到一個客人都沒接，就被警察給捉了。</span></p>
+        <p><span>和珍珍同時間被捕的，還有來自河內的小花。她說，去年底時她從越南搭船偷渡來台，驚險上岸後休養個把月，盼想到林森北路的按摩店能快速還完偷渡的 6,500 美元開，沒想到一個客人都沒接，就被警察給捉了。</span></p>
       </div>
     </section>
     <section class="scene scene--full" :class="{ 'scene--active': currentScene === 11 }">
@@ -151,6 +151,7 @@
     </section>
     <section class="credit">
       <p>文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋</p>
+      <p>Mirrormedia</p>
     </section>
     <RelatedReports />
     <section v-if="pageUrl" class="comment">
@@ -316,6 +317,16 @@ export default {
     handleCanvas (index) {
       const canvas = document.querySelector(`section:nth-of-type(${index}) canvas`)
       if (canvas) {
+        const pathRect = document.querySelector('.scene--path .path').getBoundingClientRect()
+        const contents = [ ...document.querySelectorAll('.scene--path .content p') ]
+        contents.map((content) => {
+          const contentRect = content.getBoundingClientRect()
+          if (contentRect.top + (contentRect.height / 2) < pathRect.bottom) {
+            content.classList.add('content-hide')
+          } else {
+            content.classList.remove('content-hide')
+          }
+        })
         stage.setAutoPlay(true)
       }
     },
@@ -507,15 +518,14 @@ theme-color = hsl(354.3,58%,64.5%)
       left 0
       z-index 500
       width 100%
-      height 33vh
-      background-color #000
+      height 38vh
       opacity 0
       visibility hidden
       transition opacity 2.5s, visibility 1s 2.5s
       overflow hidden
       .path-container
         position absolute
-        top -65%
+        top -50%
         left 0
         width 100%
         padding-top 112%
@@ -534,6 +544,7 @@ theme-color = hsl(354.3,58%,64.5%)
       text-align justify
       > p + p
         margin-top 1em
+      
   .text-border
     position absolute
     top 50%
@@ -628,9 +639,9 @@ theme-color = hsl(354.3,58%,64.5%)
         min-width 550px
     .scene--path
       .path
-        height 40vh
+        height 50vh
         .path-container
-          top -70%
+          top -60%
       .content
         max-width 50%
         min-width 550px
@@ -638,6 +649,18 @@ theme-color = hsl(354.3,58%,64.5%)
       max-width 50%
       line-height 1.67
 
+@media (max-width: 899px)
+  .foreign-labour
+    .scene--path
+      .content
+        > p
+          opacity 1
+          visibility visible
+          transition opacity 1s, visibility 1s 0s
+        > p.content-hide
+          opacity 0
+          visibility hidden
+          transition opacity .5s, visibility 1s .5s
 @media (min-width: 900px)
   .foreign-labour
     .heading
@@ -655,6 +678,7 @@ theme-color = hsl(354.3,58%,64.5%)
       h2
         width 90%
         font-size 1.125rem
+        white-space nowrap
         &:first-of-type
           margin-top 0
     .scene
@@ -675,6 +699,7 @@ theme-color = hsl(354.3,58%,64.5%)
           transform translateY(-50%)
       .content
         width 50%
+        min-width 0
         margin 0 0 0 auto
         padding 0 60px
     .text-border
