@@ -10,11 +10,15 @@
     <a class="share__item toggle" :style="[{ backgroundColor: `${bgColor}`, border: `${border}` } ]"></a>
     <a class="share__item fb"
       :href="`https://www.facebook.com/share.php?u=${shareUrl}`"
+      target="_blank"
       @click="$_share_ga('fb')"></a>
     <a class="share__item line"
       :href="`https://line.me/R/msg/text/?${shareUrl}`"
+      target="_blank"
       @click="$_share_ga('line')"></a>
-    <a class="share__item gplus" :href="`https://plus.google.com/share?url=${shareUrl}`"
+    <a class="share__item gplus"
+      :href="`https://plus.google.com/share?url=${shareUrl}`"
+      target="_blank"
       @click="$_share_ga('gplus')"></a>
   </div>
 </template>

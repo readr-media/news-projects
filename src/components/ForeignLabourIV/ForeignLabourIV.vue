@@ -1,6 +1,7 @@
 <template>
   <main class="foreign-labour">
     <Logo class="no-sprite" href="https://www.readr.tw/" top="10px" left="10px" bgImage="/proj-assets/logo_readr.png" />
+    <Share :shareUrl="pageUrl" top="10px" right="10px" bgColor="#000" direction="down" />
     <section class="scene scene--full" :class="{ 'scene--active': currentScene === 0 }">
       <figure class="media media--cover">
         <img src="/proj-assets/foreign-labour/images/iv/0.jpg" alt="">
@@ -152,12 +153,16 @@
       <p>文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋</p>
     </section>
     <RelatedReports />
+    <section v-if="pageUrl" class="comment">
+      <div class="fb-comments" :data-href="pageUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
+    </section>
   </main>
 </template>
 <script>
 import Logo from '../Logo.vue'
 import RelatedReports from '../RelatedReports.vue'
 import Share from '../Share.vue'
+import { getFBCommentsUrl } from '../../util/comm'
 import { throttle } from 'lodash'
 
 const PROJECT_NAME = 'foreign-labour-iv'
@@ -255,6 +260,8 @@ export default {
     return {
       captionsTop: [],
       currentScene: 0,
+      gaScroll: 0,
+      pageUrl: '',
       sectionsTop: [],
     }
   },
@@ -265,6 +272,7 @@ export default {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual'
     }
+    this.pageUrl = getFBCommentsUrl();
     initCanvas()
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('scroll', this.handleScrollForCaption)
@@ -272,7 +280,7 @@ export default {
     this.$refs.video.children[0].src = '/proj-assets/foreign-labour/videos/iv/14.mp4'
     this.$refs.video.load()
     stage.setAutoPlay(false)
-    // ga('send', 'pageview')
+    ga('send', 'pageview')
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)
@@ -311,6 +319,12 @@ export default {
         stage.setAutoPlay(true)
       }
     },
+    handleGAScroll (index) {
+      if (this.gaScroll < index) {
+        this.gaScroll = index
+        ga('send', 'event', 'projects', 'scroll', `scroll to ${index}`, { nonInteraction: false })
+      }
+    },
     handleScroll: throttle(function() {
       const offset = 2 / 3
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -320,6 +334,7 @@ export default {
           this.lazyloadImg(index)
           this.handleVideoPlay(index)
           this.handleCanvas(index)
+          this.handleGAScroll(index - 1)
           return this.currentScene = index - 1
         }
       }
@@ -592,6 +607,8 @@ theme-color = hsl(354.3,58%,64.5%)
       line-height 1.7
     span
       margin-right 10px
+  .comment
+    padding 5vh 10px
 
 @media (min-width: 768px)
   .foreign-labour
@@ -667,4 +684,6 @@ theme-color = hsl(354.3,58%,64.5%)
       font-size 1rem
       br
         display none
+    .comment
+      padding 5vh 20%
 </style>
