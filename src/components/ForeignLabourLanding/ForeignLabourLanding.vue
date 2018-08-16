@@ -21,12 +21,12 @@
         </a>
         <a href="/project/foreign-labour-iii" class="item" target="_blank" @click="$_foreignLabour_ga('iii')" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
           <h3>農地上的 Andy Lau</h3>
-          <p>當他們合法工作時，往往只能得到非法的對待。無奈之下，他們只好非法進入農業，耕種餵飽台灣人⋯⋯⋯</p>
+          <p>當他們合法工作時，往往只能得到非法的對待。無奈之下，他們只好非法進入農業，耕種餵飽台灣人⋯⋯</p>
         </a>
-        <!-- <a href="/project/foreign-labour-iv" class="item" target="_blank" @click="$_foreignLabour_ga('iv')" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
+        <a href="/project/foreign-labour-iv" class="item" target="_blank" @click="$_foreignLabour_ga('iv')" @touchstart="$_foreignLabour_handleTouchStart" @touchend="$_foreignLabour_handleTouchEnd">
           <h3>流離尋岸</h3>
-          <p></p>
-        </a> -->
+          <p>在家鄉，她們孩子的媽，一肩扛起家庭經濟重擔。在台灣，她們靠著偷渡、偷跑、偷情，在黑暗的角落苦苦求生⋯⋯</p>
+        </a>
       </div>
     </section>
   </main>
@@ -329,20 +329,23 @@ theme-color-iv-dark = hsl(354.3,58%,54.5%)
     left 0
     bottom 0
     z-index 10
-    min-width 878px
-    width 1080px
+    width auto
     padding 30px 35px 60px 0
     background-color rgba(0, 0, 0, .7)
+    &__items
+      width 1200px
   .item
+    flex 1
     display block
-    max-width calc(78% / 3)
+    width auto
     padding 0
     background-color transparent
     &:first-of-type
       margin-left 10%
     & + .item
-      margin-left 6%
+      margin-left 50px
     h3
       font-size 1.5rem
+      white-space nowrap
     
 </style>
