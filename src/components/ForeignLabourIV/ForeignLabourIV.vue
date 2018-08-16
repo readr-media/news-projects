@@ -253,7 +253,7 @@ export default {
       metaImage: metaImage,
       customScript: `
         <script src="//code.createjs.com/createjs-2015.11.26.min.js"><\/script>
-        <script src="//www.readr.tw/proj-assets/foreign-labour/scripts/animate-path.js"><\/script>
+        <script src="//www.readr.tw/proj-assets/foreign-labour/scripts/animate-path-v2.js"><\/script>
       `,
     }
   },
@@ -321,7 +321,7 @@ export default {
         const contents = [ ...document.querySelectorAll('.scene--path .content p') ]
         contents.map((content) => {
           const contentRect = content.getBoundingClientRect()
-          if (contentRect.top + (contentRect.height / 2) < pathRect.bottom) {
+          if (contentRect.top + (contentRect.height / 2) + (pathRect.height / 5) < pathRect.bottom) {
             content.classList.add('content-hide')
           } else {
             content.classList.remove('content-hide')
@@ -518,17 +518,17 @@ theme-color = hsl(354.3,58%,64.5%)
       left 0
       z-index 500
       width 100%
-      height 38vh
+      height 65vh
       opacity 0
       visibility hidden
       transition opacity 2.5s, visibility 1s 2.5s
       overflow hidden
       .path-container
         position absolute
-        top -50%
         left 0
+        bottom 0
         width 100%
-        padding-top 112%
+        padding-top 131%
         canvas
           position absolute
           top 0
@@ -544,6 +544,9 @@ theme-color = hsl(354.3,58%,64.5%)
       width calc(100% - 40px)
       margin 0 auto
       text-align justify
+      > p
+        position relative
+        z-index 510
       > p + p
         margin-top 1em
       
@@ -641,11 +644,11 @@ theme-color = hsl(354.3,58%,64.5%)
         min-width 550px
     .scene--path
       .path
-        height 50vh
+        height 75vh
         .path-container
-          top 0
           right 0
           bottom 0
+          height 100%
           padding 0
       .content
         max-width 50%
@@ -702,6 +705,9 @@ theme-color = hsl(354.3,58%,64.5%)
         .path-container
           top 50%
           transform translateY(-50%)
+          canvas
+            object-position 0% 50%
+            object-fit contain
       .content
         width 50%
         min-width 0
