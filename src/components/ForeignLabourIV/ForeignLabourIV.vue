@@ -537,6 +537,8 @@ theme-color = hsl(354.3,58%,64.5%)
           bottom 0
           width 100%
           height 100%
+          object-fit cover
+          object-position 50% 55%
     .content
       position relative
       width calc(100% - 40px)
@@ -641,7 +643,10 @@ theme-color = hsl(354.3,58%,64.5%)
       .path
         height 50vh
         .path-container
-          top -60%
+          top 0
+          right 0
+          bottom 0
+          padding 0
       .content
         max-width 50%
         min-width 550px
