@@ -91,7 +91,7 @@
         <img src="" alt="和珍珍同時間被捕的，還有來自河內的小花">
       </figure>
       <div class="scene__descr">
-        <p><span>和珍珍同時間被捕的，還有來自河內的小花。她說，去年底時她從越南搭船偷渡來台，驚險上岸後休養個把月，盼想到林森北路的按摩店能快速還完偷渡的 6,500 美元開，沒想到一個客人都沒接，就被警察給捉了。</span></p>
+        <p><span>和珍珍同時間被捕的，還有來自河內的小花。她說，去年底時她從越南搭船偷渡來台，驚險上岸後休養個把月，盼想到林森北路的按摩店能快速還完偷渡的 6,500 美元開銷，沒想到一個客人都沒接，就被警察給捉了。</span></p>
       </div>
     </section>
     <section class="scene scene--full" :class="{ 'scene--active': currentScene === 11 }">
@@ -105,7 +105,7 @@
       <p>小花第一次來台是 2011 年，最初在高雄某醫院看護老人。第一年，小花每個月薪水扣完仲介費後，實際入手的不過兩、三千元，仲介又常恐嚇她，說不好好做就送她回家，讓小花很擔心來台反而負債。</p>
       <p>在醫院待了 16 個月，小花總算還完所有仲介費，正準備進入能掙錢的階段。然而，那時她卻因為同鄉的排擠，選擇了逃跑。</p>
       <p>逃跑後，小花做過家庭看護，也待過工地、餐廳，但因為自己的逃跑身份常被檢舉，有時風頭一避就是幾個月無法工作。2017 年 11 月，她因為同鄉檢舉而遭逮，回越南一個多月，就選擇再度來台賺錢。</p>
-      <p>「雖然我在台灣 6 年存的錢，可以在河內賣地蓋房子，但花完這些後就沒剩，以後還想有做生意的錢，讓小朋友讀書⋯⋯後來有人介紹可以搭船來，騙我說 3、4 天就會到，所以就答應了。後來坐了 9 天，真的是快死在海上！ 」</p>
+      <p>「雖然我在台灣 6 年存的錢，可以在河內買地蓋房子，但花完這些後就沒剩，以後還想有做生意的錢，讓小朋友讀書⋯⋯後來有人介紹可以搭船來，騙我說 3、4 天就會到，所以就答應了。後來坐了 9 天，真的是快死在海上！ 」</p>
     </section>
     <section class="scene scene--full" :class="{ 'scene--active': currentScene === 13 }">
       <div class="text-border">
@@ -146,7 +146,7 @@
         <p><span>她花了大筆鈔票，從遙遠的彼岸冒死偷渡來台，如今卻被困在此岸，回不了家。</span></p>
       </div>
     </section>
-    <section class="scene scene--text" :class="{ 'scene--active': currentScene === 16 }">
+    <section class="scene scene--text scene--text-final" :class="{ 'scene--active': currentScene === 16 }">
       <p class="text--center">此刻，不曉得還有多少人像這群人一樣，尋不著岸。</p>
     </section>
     <section class="credit">
@@ -310,6 +310,7 @@ export default {
         this.sectionsTop.push(sceneTop)
       })
       this.sectionsTop.push(creditTop)
+      this.sectionsTop.push(creditTop + creditRect.height)
       const lastCaptionRect = lastCaption.getBoundingClientRect()
       const lastCaptionTop = lastCaptionRect.top - bodyRect.top
       this.captionsTop.push(lastCaptionTop + lastCaption.clientHeight)
@@ -419,8 +420,11 @@ theme-color = hsl(354.3,58%,64.5%)
   h2
     font-size .875rem
     text-align justify
+    letter-spacing 1px
   p, figure
     margin 0
+  p
+    letter-spacing 1px
   .scene
     position relative
     padding 80px 0
@@ -442,6 +446,20 @@ theme-color = hsl(354.3,58%,64.5%)
         transition opacity 2.5s, visibility 1s 0s
     &.scene--text
       padding 50vh 0
+    &.scene--text-final
+      > p
+        position fixed
+        top 50%
+        left 50%
+        transform translate(-50%,-50%)
+        opacity 0
+        visibility hidden
+        transition opacity 1s, visibility 1s 1s
+      &.scene--active
+        > p
+          opacity 1
+          visibility visible
+          transition opacity 2.5s .5s, visibility 1s 0s
     &__descr
       position relative
       z-index 10
