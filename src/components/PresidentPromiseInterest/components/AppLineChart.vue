@@ -25,7 +25,7 @@ import * as d3 from 'd3'
 
 export default {
   data () {
-    const margin = { top: 10, right: 20, bottom: 70, left: 60, }
+    const margin = { top: 10, right: 30, bottom: 70, left: 60, }
     const padding = { top: 0, right: 0, bottom: 0, left: 0, }
     const outerWidth = 704
     const outerHeight = 455
@@ -196,7 +196,7 @@ export default {
   },
   mounted () {
     if (window.innerWidth <= 768) {
-      this.margin = { top: 10, right: 25, bottom: 70, left: 45, }
+      this.margin = { top: 10, right: 35, bottom: 70, left: 45, }
       this.outerWidth = window.innerWidth - 20 - 20
       this.outerHeight = this.outerWidth
       this.innerWidth = this.outerWidth - this.margin.left - this.margin.right
@@ -265,32 +265,56 @@ export default {
       .data([ this.data ])
         .attr('class', 'line-4g')
         .attr('d', line4G)
-    svg
-      .selectAll('.circle-4g')
-      .data(this.data)
-      .enter()
-      .append('circle')
-        .attr('class', 'circle-4g')
-        .attr('cx', d => xScale(d.date))
-        .attr('cy', d => yScale(d.percentage4G))
-        .attr('r', 5)
-        .style('fill', '#fa8d62')
+    if (window.innerWidth > 425) {
+      svg
+        .selectAll('.circle-4g')
+        .data(this.data)
+        .enter()
+        .append('circle')
+          .attr('class', 'circle-4g')
+          .attr('cx', d => xScale(d.date))
+          .attr('cy', d => yScale(d.percentage4G))
+          .attr('r', 5)
+          .style('fill', '#fa8d62')
+    }
 
     svg
       .append('path')
       .data([ this.data ])
         .attr('class', 'line-fttx')
         .attr('d', lineFTTX)
+    if (window.innerWidth > 425) {
+      svg
+        .selectAll('.circle-fttx')
+        .data(this.data)
+        .enter()
+        .append('circle')
+          .attr('class', 'circle-fttx')
+          .attr('cx', d => xScale(d.date))
+          .attr('cy', d => yScale(d.percentageFTTX))
+          .attr('r', 5)
+          .style('fill', '#b2dbd5')
+    }
+
     svg
-      .selectAll('.circle-fttx')
+      .selectAll('.hint-latest-4g')
       .data(this.data)
       .enter()
-      .append('circle')
-        .attr('class', 'circle-fttx')
-        .attr('cx', d => xScale(d.date))
-        .attr('cy', d => yScale(d.percentageFTTX))
-        .attr('r', 5)
-        .style('fill', '#b2dbd5')
+      .append('text')
+        .attr('class', 'hint-latest hint-latest-4g')
+        .attr('x', d => xScale(d.date) - 20)
+        .attr('y', d => yScale(d.percentage4G) - 15)
+        .text((d, i) => i === this.data.length - 1 ? `${d.percentage4G * 100}%` : '')
+    svg
+      .selectAll('.hint-latest-fttx')
+      .data(this.data)
+      .enter()
+      .append('text')
+        .attr('class', 'hint-latest hint-latest-fttx')
+        .attr('x', d => xScale(d.date) - 20)
+        .attr('y', d => yScale(d.percentageFTTX) - 15)
+        .text((d, i) => i === this.data.length - 1 ? `${d.percentageFTTX * 100}%` : '')
+
   }
 }
 </script>
@@ -326,6 +350,9 @@ export default {
     text
       fill white
       font-size 14px
+  & >>> .hint-latest
+    fill white
+    font-size 14px
 
 .x-legend
   position absolute
@@ -379,6 +406,8 @@ export default {
     & >>> .y-axis
       text
         font-size 9px
+    & >>> .hint-latest
+      font-size 12px
 
   .x-legend
     &__hint

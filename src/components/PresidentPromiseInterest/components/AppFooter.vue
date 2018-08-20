@@ -4,7 +4,7 @@
     <AppFooterCredits class="footer__credits"/>
     <section class="footer__relateds relateds">
       <h1 class="relateds__title">其他議題</h1>
-      <RelatedReports/>
+      <RelatedReports class="relateds__reports"/>
     </section>
   </footer>
 </template>
@@ -40,6 +40,10 @@ export default {
     text-align center
     color #ffffff
     margin 0
+  &__reports
+    & >>> .report
+      &:hover
+        background-color #2b616d
 
 @media (max-width 425px)
   .footer
