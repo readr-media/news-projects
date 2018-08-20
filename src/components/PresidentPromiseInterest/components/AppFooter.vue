@@ -43,7 +43,7 @@ export default {
   &__reports
     & >>> .report
       &:hover
-        background-color #2b616d
+        background-color #2b616d !important
 
 @media (max-width 425px)
   .footer
