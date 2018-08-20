@@ -2,8 +2,15 @@ const express = require('express')
 const router = express.Router()
 const { google, } = require('googleapis')
 const { authGoogleAPI, } = require('../service/google/auth')
+const { fetchFromRedis, insertIntoRedis, } = require('./redisHandler')
 
-router.get('/', authGoogleAPI, (req, res) => {
+router.get('/', authGoogleAPI, fetchFromRedis, (req, res, next) => {
+  if (res.redis) {
+    console.error('fetch data from Redis.', req.url)
+    const resData = JSON.parse(res.redis)
+    return res.json(resData)
+  }
+
   const auth = req.auth
   const sheets = google.sheets({version: 'v4', auth})
   sheets.spreadsheets.values.get({
@@ -14,11 +21,13 @@ router.get('/', authGoogleAPI, (req, res) => {
     const rows = data.values
     if (rows.length) {
       res.status(200).json(rows)
+      res.dataString = JSON.stringify(rows)
+      next()
     } else {
       res.status(200).send('No data found in Google Sheet.')
     }
   })
-})
+}, insertIntoRedis)
 
 router.post('/', authGoogleAPI, (req, res) => {
   const auth = req.auth

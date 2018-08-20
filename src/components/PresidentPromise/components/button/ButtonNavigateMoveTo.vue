@@ -25,7 +25,11 @@
 </template>
 
 <script>
+import { get, } from 'lodash'
 import ButtonToogleActive from '../../mixins/ButtonToogledActive'
+
+// import { createNamespacedHelpers } from 'vuex'
+// const { mapGetters, } = createNamespacedHelpers('PresidentPromise')
 
 export default {
   props: {
@@ -35,13 +39,18 @@ export default {
     },
   },
   mixins: [ ButtonToogleActive ],
-  data () {
-    return {
-      NAVIGATE_HINT_WORDING: {
+  computed: {
+    // ...mapGetters([
+    //   'promiseDataDone',
+    // ]),
+    NAVIGATE_HINT_WORDING () {
+      return {
         'more': [ '再來十題', ],
-        'see-statistic': [ '哪些政策', '大家最關心', ],
         'take-survey' : [ '篩選政策', '（10 題）' ],
-      },
+        'see-statistic': [ '看總統還', '承諾了什麼', ],
+        // 'see-promise-done': [ '完成的是', `哪 ${get(this.promiseDataDone, 'length', '幾')} 項政見` ],
+        'see-promise-done': [ '成果追蹤', ],
+      }
     }
   },
   methods: {
@@ -78,10 +87,13 @@ export default {
     -webkit-mask-repeat no-repeat
     background-color white
     transition background-color .25s
-    &--more, &--take-survey
+    &--more, &--take-survey, &--see-promise-done
       width 35px
     &--see-statistic
       width 42px
+      margin 0 5px 0 0 
+    &--see-promise-done
+      margin 0
     ~/--active &
       background-color #b2dbd5
       transition background-color .25s
@@ -119,9 +131,11 @@ export default {
       &--see-statistic
         width 36px
         margin 0 auto 8px auto
-      &--take-survey
+      &--take-survey, &--see-promise-done
         width 30px
         margin 0 auto 8px auto
+      &--see-promise-done
+        margin 0 auto 16px auto
     &__hint-container
       align-items center
     &__hint

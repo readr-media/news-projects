@@ -7,7 +7,12 @@
       <AppShareIcon v-show="$store.state.PresidentPromise.showHeader" :key="'president-promise__share-icon'" class="president-promise__share-icon" :shareUrl="shareLink" top="0px" right="0px" direction="down"/>
       <ButtonToResult v-show="$store.state.PresidentPromise.showHeader && showToResultButton" :key="'president-promise__move-to-result'" class="president-promise__move-to-result"/>
     </transition-group>
-    <full-page :options="options" ref="fullpage" @after-load="afterLoad" @after-slide-load="afterSlideLoad">
+    <full-page
+      :options="options"
+      ref="fullpage"
+      @after-load="afterLoad"
+      @after-slide-load="afterSlideLoad"
+    >
       <SectionLanding ref="t0"/>
       <SectionPromiseSurvey ref="t1"/>
       <SectionYourInterest ref="t2"/>
@@ -78,24 +83,14 @@ export default {
   computed: {
     showToResultButton () {
       return this.$store.state.PresidentPromise.currentSection === 'section-landing' || this.$store.state.PresidentPromise.currentSection === 'section-promise-survey'
-    }
+    },
+    shouldNavToCategoryPromiseDone () {
+      return 'promise-done' in this.$route.query
+    },
   },
   methods: {
     afterLoad (anchorLink, index) {
       this.$store.commit('PresidentPromise/SET_CURRENT_SECTION', anchorLink)
-      // scrolling handler
-      // anchorLink !== 'section-landing' ? ( anchorLink === 'section-promise-survey' ? this.setAllowScrolling(false, 'down, right, left') : this.setAllowScrolling(false) ) : this.setAllowScrolling(true)
-      if (anchorLink !== 'section-landing') {
-        if (anchorLink === 'section-promise-survey') {
-          this.setAllowScrolling(true)
-          this.setAllowScrolling(false, 'down, right, left')
-        } else {
-          this.setAllowScrolling(false)
-        }
-      } else {
-       this.setAllowScrolling(true)
-      }
-      // this.setAllowScrolling(false)
 
       // landing to survey GA handle
       if (anchorLink === 'section-promise-survey') {
@@ -128,6 +123,8 @@ export default {
     })
   },
   mounted () {
+    this.setAllowScrolling(false)
+    if (this.shouldNavToCategoryPromiseDone) this.moveTo('section-result')
     window.ga('send', 'pageview')
   }
 }
