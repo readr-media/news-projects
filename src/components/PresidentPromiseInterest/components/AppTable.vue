@@ -11,16 +11,16 @@
         <td v-text="i + 1"></td>
         <td v-for="(value, j) in item" :key="value">
           <p>{{ value }}</p>
-          <AppTagPromise
+          <!-- <AppTagPromise
             v-if="isPromiseDoneIndexs.includes(i) && isLastColumn(j, item)"
             class="table__tag"
-          />
-          <p
+          /> -->
+          <!-- <p
             v-if="isPromiseStuckIndexs.includes(i) && isLastColumn(j, item)"
             class="table__stuck"
           >
             未提出具體方案
-          </p>
+          </p> -->
         </td>
       </tr>
     </tbody>
