@@ -58,7 +58,7 @@
 
 <script>
 import Vue from 'vue'
-import { sortBy, isEmpty, mapValues, map, debounce } from 'lodash'
+import { sortBy, isEmpty, mapValues, map, debounce, get, } from 'lodash'
 import fullPageMixin from '../../../_vue-fullpage/fullPageMixin'
 import SectionResultCategoryNav from './SectionResultCategoryNav.vue'
 import SectionResultPromise from './SectionResultPromise.vue'
@@ -113,6 +113,7 @@ export default {
       .then(({ body } = data) => {
         this.handleFetchStatAndResult(body.result, '全部')
         this.handleFetchStatAndResult(body.result, '已完成')
+        // if (this.shouldNavToCategoryPromiseDone) this.activeIndex = 2
       })
       // interest
       this.handleFetchStatAndResult(this.$store.getters['PresidentPromise/promiseDataGroupByCategory']['我關心'], '我關心')
@@ -159,7 +160,7 @@ export default {
       showTooltip: false,
       activeIndex: 0,
       swiperOption: {
-        shortSwipes: false,
+        shortSwipes: true,
         // direction: 'vertical',
         // slidesPerView: 'auto',
         // freeMode: true,
@@ -174,6 +175,9 @@ export default {
     }
   },
   computed: {
+    shouldNavToCategoryPromiseDone () {
+      return 'promise-done' in this.$route.query
+    },
     activeCategory () {
       return Object.keys(this.categoriesPollPidData)[this.activeIndex]
     },
@@ -182,7 +186,7 @@ export default {
         if (this.activeCategory !== category) return []
         if (category === '我關心') return promises
         const categoryPidsInPoll = Object.keys(this.categoriesPollPidData[category])
-        const filterOutNotInPollPromises = promises.filter(promise => categoryPidsInPoll.includes(promise.pid))
+        const filterOutNotInPollPromises = (promises || []).filter(promise => categoryPidsInPoll.includes(promise.pid))
         return sortBy(filterOutNotInPollPromises, promise => -this.categoriesPollPidData[category][promise.pid])
       })
     },
@@ -248,6 +252,12 @@ export default {
       const date = new Date(modifiedTime)
       this.modifiedTime = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`
     })
+
+    // this.categoriesFetchStat[this.activeCategory].fetchStat = 'loading'
+    // getCategoryInterestRequest(this.activeCategory)
+    // .then(({ body } = data) => {
+    //   this.handleFetchStatAndResult(body.result, this.activeCategory)
+    // })
   },
   mounted () {
     window.addEventListener('resize', debounce(() => {

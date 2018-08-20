@@ -2,9 +2,9 @@ export const PROMISES_SHEET_ID = '18LjwTRLQM9TqVHt5dfY3Dlk-nmb7okxaZ4gjiLr5PZc'
 export const DEFAULT_SHEET_RANGE = 'sheet1'
 export const DEFAULT_DRIVE_FILE_FIELDS = 'modifiedTime'
 export const categories = {
+  '已完成': 'promise-done',
   '全部': 'all',
   '我關心': 'interest',
-  '已完成': 'promise-done',
   '內政': 'interior',
   '兩岸': 'china',
   '動保': 'animal',

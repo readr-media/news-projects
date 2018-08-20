@@ -6,7 +6,9 @@
         <h1 class="result__title">政策追蹤排行榜</h1>
         <h2 class="result__subtitle">排行榜會隨著大家關心的程度變化！READr 的記者也會針對這些政策作追蹤報導，敬請期待！</h2>
         <SectionResultSwiper :scrollContainerRef="$refs['scroll-container']"/>
+        <p class="result__survey-hint">覺得表格太冗長嗎？<span class="result__survey-hint result__survey-hint--orange" @click="moveToSurvey">點此進入</span>政策隨機篩，用遊戲的方式帶您輕鬆認識十個政策。</p>
       </div>
+      <AppFooterPromiseDone/>
       <EmailKeepTracking class="footer"/>
       <Credit/>
       <AppFooter/>
@@ -34,6 +36,8 @@ import EmailKeepTracking from '../EmailKeepTracking.vue'
 import Credit from '../Credit.vue'
 import AppFooter from '../AppFooter.vue'
 import { isElementReachEnd, } from '../../util/comm'
+import fullPageMixin from '../../_vue-fullpage/fullPageMixin'
+import AppFooterPromiseDone from '../AppFooterPromiseDone.vue'
 
 export default {
   components: {
@@ -44,7 +48,9 @@ export default {
     EmailKeepTracking,
     Credit,
     AppFooter,
+    AppFooterPromiseDone,
   },
+  mixins: [ fullPageMixin ],
   watch: {
     isCurrentSectionActive () {
       if (this.isCurrentSectionActive && !this.$store.state.PresidentPromise.resultSectionBeenNavigated) {
@@ -75,6 +81,9 @@ export default {
     }
   },
   methods: {
+    moveToSurvey () {
+      this.moveTo('section-promise-survey')
+    },
     toogleLightbox () {
       this.showLightbox = !this.showLightbox
     },
@@ -134,6 +143,17 @@ export default {
     text-align center
     color #ffffff
     margin 0 0 19px 0
+  &__survey-hint
+    width 760px
+    margin 34px auto 0 auto
+    padding 0 15px
+    font-size 18px
+    color white
+    &--orange
+      color #fa8d62
+      padding 0
+      text-decoration underline
+      cursor pointer
 .section
   position relative
   &__toogle-lightbox
@@ -141,7 +161,7 @@ export default {
     right 20px
     bottom 20px
 .footer
-  margin 143px 0 0 0
+  margin 79px 0 0 0
 
 @media (max-width 425px)
   .result
@@ -157,6 +177,9 @@ export default {
       text-align justify
       padding 0px 20px
       // margin 0
+    &__survey-hint
+      width 100%
+      line-height 1.5
   .section
     &__toogle-lightbox
       right 10px
