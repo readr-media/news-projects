@@ -85,7 +85,7 @@ export default {
       title: '小英，說好的承諾呢？三個月追蹤',
       description: '兩年了，你還記得總統曾經對人民許下的承諾嗎？ READr 針對三個月來讀者們最關心的政策做了後續追蹤！',
       metaUrl: 'president-promise-interest',
-      metaImage: 'president-promise-interest/ogimage.jpg'
+      metaImage: 'president-promise-interest/ogimage-new.jpg'
     }
   },
   components: {
