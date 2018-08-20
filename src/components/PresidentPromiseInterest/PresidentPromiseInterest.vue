@@ -82,8 +82,8 @@ import store from '../../store/modules/PresidentPromiseInterest'
 export default {
   metaInfo () {
     return {
-      title: '小英，說好的承諾呢 2.0',
-      description: '兩年了，你還記得總統曾經對人民許下的承諾嗎？來看看你關心的事情有沒有被兌現！',
+      title: '小英，說好的承諾呢？三個月追蹤',
+      description: '兩年了，你還記得總統曾經對人民許下的承諾嗎？ READr 針對三個月來讀者們最關心的政策做了後續追蹤！',
       metaUrl: 'president-promise-interest',
       metaImage: 'president-promise-interest/ogimage.jpg'
     }
