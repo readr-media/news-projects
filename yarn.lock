@@ -1689,6 +1689,10 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
     parse-json "^2.2.0"
     require-from-string "^1.1.0"
 
+countup.js@^1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-1.9.3.tgz#ce3e50cd7160441e478f07da31895edcc0f1c9dd"
+
 create-ecdh@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.0.tgz#888c723596cdf7612f6498233eebd7a35301737d"
@@ -4323,7 +4327,7 @@ lodash@^4.14.0, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
-lodash@^4.17.10, lodash@^4.17.4, lodash@^4.2.0:
+lodash@^4.17.10, lodash@^4.17.4, lodash@^4.2.0, lodash@latest:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -7060,6 +7064,12 @@ vue-cookie@^1.1.4:
   resolved "https://registry.yarnpkg.com/vue-cookie/-/vue-cookie-1.1.4.tgz#b8b46d112bda9f93a2f47017c2ed5282d2064fda"
   dependencies:
     tiny-cookie "^1.0"
+
+vue-countup-v2@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/vue-countup-v2/-/vue-countup-v2-1.0.3.tgz#8e64d9be34dbe16e2dafe694a6973005251de362"
+  dependencies:
+    lodash latest
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"

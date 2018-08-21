@@ -13,8 +13,7 @@
 </template>
 
 <script>
-
-import superagent from "superagent";
+import axios from 'axios'
 
 //所有農舍 GeoJSON polygon
 // import mapData_all from './data/yilan-geo-min.json';
@@ -109,54 +108,44 @@ export default {
 
         map = new google.maps.Map(document.getElementById('mapAll'), mapOptions);
 
-        superagent
-            .get("/proj-assets/farmhouse/data/yilan-geo-min.json")
-            .then(res => {
-                const data = JSON.parse(res.text);
+        axios.get('/proj-assets/farmhouse/data/yilan-geo-min.json')
+        .then(res => {
+          const data = res.data;
+          // 所有農舍
+          dataLayer_all = new google.maps.Data({map: map});
+          dataLayer_all.addGeoJson(data);
+          dataLayer_all.setStyle(polyStyle);
+        })
+        .catch(err => {
+          console.log(err);
+        })
 
-                // 所有農舍
-                dataLayer_all = new google.maps.Data({map: map});
-                dataLayer_all.addGeoJson(data);
-                dataLayer_all.setStyle(polyStyle);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        axios.get('/proj-assets/farmhouse/data/yilan-transaction-min.json')
+        .then(res => {
+          const data = res.data;
+          const dataLength = data.results.length;
+          // 實價交易資料
+          for (let i = 0; i < dataLength; i++) {
+            let lat = Number(data.results[i].geometry.location.lat);
+            let lng = Number(data.results[i].geometry.location.lng);
 
-        superagent
-            .get("/proj-assets/farmhouse/data/yilan-transaction-min.json")
-            .then(res => {
-                const data = JSON.parse(res.text);
-
-                const dataLength = data.results.length;
-
-                // 實價交易資料                
-                for(let i =0; i < dataLength; i++){
-
-                    let lat = Number(data.results[i].geometry.location.lat);
-                    let lng = Number(data.results[i].geometry.location.lng);
-
-                    let latLng = new google.maps.LatLng(lat, lng);
-
-                    let pushData = {
-                        location: latLng
-                    };
-
-                    heatmapData.push(pushData);                    
-                }
-
-                heatmap = new google.maps.visualization.HeatmapLayer({
-                    data: heatmapData,
-                    radius: 10,
-                    maxIntensity: 2,
-                    opacity: 0.7
-                });
-                heatmap.setMap(map);
-
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            let latLng = new google.maps.LatLng(lat, lng);
+            let pushData = {
+              location: latLng
+            };
+            heatmapData.push(pushData);
+          }
+          heatmap = new google.maps.visualization.HeatmapLayer({
+            data: heatmapData,
+            radius: 10,
+            maxIntensity: 2,
+            opacity: 0.7
+          });
+          heatmap.setMap(map);
+        })
+        .catch(err => {
+          console.log(err);
+        })
 
         window.addEventListener('resize', function(event){
             google.maps.event.trigger(map, 'resize');

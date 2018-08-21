@@ -43,7 +43,7 @@ import Logo from '../Logo.vue';
 import Share from '../Share.vue';
 
 import { throttle } from 'lodash'
-import superagent from "superagent";
+import axios from 'axios'
 
 // section
 import dcOpening from './dcOpening.vue';
@@ -167,41 +167,30 @@ export default {
 
     }, false);
 
-    superagent.get('/proj-assets/dollclaw/data/data.json')
-        .then((res) => {
-            // data for opening
-            const source = JSON.parse(res.text);         
-
-            const openingData = {
-                'price_conch': source.price_conch,
-                'price_waist': source.price_waist,
-                'date': `截至 ${source.date[0]} 年 ${source.date[1]} 月`,
-                'total': source.total,
-                'popular_city': source.popular_city
-            }    
-
-            const preLoadString = 
-            `${openingData.date} ${openingData.total} 
-            ${openingData.popular_city[0]} ${openingData.popular_city[1]} ${openingData.popular_city[2]}`;
-
-            document.getElementById('fontPreload').textContent = preLoadString;
-
-            // 文章中的價格
-            // document.getElementById('price_conch').textContent = openingData.price_conch;
-            // document.getElementById('price_waist').textContent = openingData.price_waist;
-
-            setTimeout(() => {
-
-              // canvas 中的文字內容
-              drawOpeningLandscape(this,typekitFont,openingData);
-              drawOpeningPortrait(this,typekitFont,openingData);
-
-            },0);                     
-
-        })
-        .catch((err) => {
-            console.log('get data fail');
-        });
+    axios.get('/proj-assets/dollclaw/data/data.json')
+    .then((res) => {
+      const source = res.data
+      const openingData = {
+        'price_conch': source.price_conch,
+        'price_waist': source.price_waist,
+        'date': `截至 ${source.date[0]} 年 ${source.date[1]} 月`,
+        'total': source.total,
+        'popular_city': source.popular_city
+      } 
+      const preLoadString = `${openingData.date} ${openingData.total}${openingData.popular_city[0]} ${openingData.popular_city[1]} ${openingData.popular_city[2]}`
+      document.getElementById('fontPreload').textContent = preLoadString
+      // 文章中的價格
+      // document.getElementById('price_conch').textContent = openingData.price_conch;
+      // document.getElementById('price_waist').textContent = openingData.price_waist;
+      setTimeout(() => {
+        // canvas 中的文字內容
+        drawOpeningLandscape(this,typekitFont,openingData)
+        drawOpeningPortrait(this,typekitFont,openingData)
+      }, 0)
+    })
+    .catch(() => {
+      console.log('get data fail')
+    })
 
     ga('send', 'pageview')
   },

@@ -728,21 +728,11 @@
 <script>
 import { currentYPosition, elmYPosition } from 'kc-scroll'
 import Highcharts from 'highcharts'
+import axios from 'axios'
 import moment from 'moment'
-import superagent from 'superagent'
 
 function fetchData(url) {
-  return new Promise((resolve, reject) => {
-    superagent
-    .get(url)
-    .end((err, res) => {
-      if (!err && res) {
-        return resolve(JSON.parse(res.text))
-      } else {
-        return reject(err)
-      }
-    })
-  })
+  return axios.get(url).then(response => response.data)
 }
 
 // chart 07 data

@@ -92,7 +92,6 @@
 
 <script>
 //plugins
-// import superagent from "superagent";
 import Swiper from "swiper/dist/js/swiper.js";
 import imagesLoaded from "imagesloaded";
 import PerfectScrollbar from "perfect-scrollbar";
