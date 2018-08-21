@@ -1,4 +1,4 @@
-import superagent from 'superagent'
+import axios from 'axios'
 import { isIP, } from 'validator' // check for mobile when developing
 
 const getUrl = 'https://www.mirrormedia.mg/gorest/poll_get'
@@ -10,10 +10,9 @@ function getENV () {
 
 export function sendPromiseInterestRequest (promise, interest) {
   const ENV = getENV()
-  superagent
-  .get(increaseUrl)
-  .query({ qid: `${promise.pid}-${ENV}`, field: interest })
-  .end((err, res) => {
+  axios
+  .get(increaseUrl, { params: { qid: `${promise.pid}-${ENV}`, field: interest  } })
+  .catch(err => {
     if (err) console.error(err)
   })
 }
@@ -21,10 +20,9 @@ export function sendPromiseInterestRequest (promise, interest) {
 export function sendCategoryInterestRequest (promise) {
   const ENV = getENV()
   promise.category.forEach(category => {    
-    superagent
-    .get(increaseUrl)
-    .query({ qid: `${category}-${ENV}`, field: promise.pid })
-    .end((err, res) => {
+    axios
+    .get(increaseUrl, { params: { qid: `${category}-${ENV}`, field: promise.pid } })
+    .catch(err => {
       if (err) console.error(err)
     })
   })
@@ -32,19 +30,17 @@ export function sendCategoryInterestRequest (promise) {
 
 export function sendCategoryAllRequest (promise) {
   const ENV = getENV()
-  superagent
-  .get(increaseUrl)
-  .query({ qid: `president-promise-${ENV}`, field: promise.pid })
-  .end((err, res) => {
+  axios
+  .get(increaseUrl, { params: { qid: `president-promise-${ENV}`, field: promise.pid } })
+  .catch(err => {
     if (err) console.error(err)
   })
 }
 
 export function getCategoryInterestRequest (category) {
   const ENV = getENV()
-  return superagent
-  .get(getUrl)
-  .query({ qid: `${category}-${ENV}` })
+  return axios
+  .get(getUrl, { params: { qid: `${category}-${ENV}` } })
   .then(res => {
     return res
   })
@@ -55,9 +51,8 @@ export function getCategoryInterestRequest (category) {
 
 export function getCategoryAllRequest (promise) {
   const ENV = getENV()
-  return superagent
-  .get(getUrl)
-  .query({ qid: `president-promise-${ENV}` })
+  return axios
+  .get(getUrl, { params: { qid: `president-promise-${ENV}` } })
   .then(res => {
     return res
   })
