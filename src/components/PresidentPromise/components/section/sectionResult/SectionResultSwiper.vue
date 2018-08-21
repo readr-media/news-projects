@@ -110,9 +110,9 @@ export default {
       this.categoriesFetchStat['全部'].fetchStat = 'loading'
       this.categoriesFetchStat['已完成'].fetchStat = 'loading'
       getCategoryAllRequest()
-      .then(({ body } = data) => {
-        this.handleFetchStatAndResult(body.result, '全部')
-        this.handleFetchStatAndResult(body.result, '已完成')
+      .then(({ data }) => {
+        this.handleFetchStatAndResult(data.result, '全部')
+        this.handleFetchStatAndResult(data.result, '已完成')
         // if (this.shouldNavToCategoryPromiseDone) this.activeIndex = 2
       })
       // interest
@@ -129,8 +129,8 @@ export default {
           this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetchedEmpty') {
         this.categoriesFetchStat[this.activeCategory].fetchStat = 'loading'
         getCategoryInterestRequest(this.activeCategory)
-        .then(({ body } = data) => {
-          this.handleFetchStatAndResult(body.result, this.activeCategory)
+        .then(({ data }) => {
+          this.handleFetchStatAndResult(data.result, this.activeCategory)
         })
       }
       // close tooltip
