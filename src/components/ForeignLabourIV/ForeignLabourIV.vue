@@ -150,8 +150,8 @@
       <p class="text--center">此刻，不曉得還有多少人像她們一樣，尋不著岸。</p>
     </section>
     <section class="credit">
+      <a href="https://www.mirrormedia.mg/" target="_blank"><img src="/proj-assets/foreign-labour/images/iv/logo.png"></a>
       <p>文字、攝影：鐘聖雄<span></span><br>網頁：HY Tan<span></span>設計：許玲瑋</p>
-      <p>Mirrormedia</p>
     </section>
     <RelatedReports />
     <section v-if="pageUrl" class="comment">
@@ -635,12 +635,19 @@ theme-color = hsl(354.3,58%,64.5%)
   .credit
     padding 25vh 0
     text-align center
+    a
+      display inline-block
+      width 40px
+      height 40px
     p
-      margin 0
+      margin 20px 0 0
       font-size .875rem
       line-height 1.7
     span
       margin-right 10px
+    img
+      width 40px
+      height auto
   .comment
     padding 5vh 10px
 
