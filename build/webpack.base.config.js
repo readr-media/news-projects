@@ -9,6 +9,7 @@ const isProd = NODE_ENV === 'production'
 
 module.exports = {
   mode: NODE_ENV,
+  cache: !isProd,
   devtool: isProd
     ? false
     : '#cheap-module-source-map',
