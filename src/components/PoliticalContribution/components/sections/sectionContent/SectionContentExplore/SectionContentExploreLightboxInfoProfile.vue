@@ -91,7 +91,7 @@ export default {
   &__name
     margin 0
     font-size 36px
-    font-weight 600
+    font-weight 400
     line-height 1
   &__age
     margin 0

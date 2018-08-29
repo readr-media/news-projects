@@ -112,7 +112,7 @@ export default {
     padding 0 0 0 5px
   &__title
     font-size 36px
-    font-weight 600
+    font-weight 400
     margin 10px 0
 
   &__graph-container

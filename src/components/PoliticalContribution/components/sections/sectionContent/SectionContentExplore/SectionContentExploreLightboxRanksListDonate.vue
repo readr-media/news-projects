@@ -47,7 +47,7 @@ export default {
     top 0
     background-color white
     font-size 20px
-    font-weight 600
+    font-weight 400
     margin 0 0 15px 0
     padding 0 0 5px 0
   &__finger-hint

@@ -4,9 +4,9 @@
       <SectionContentExploreLightbox/>
     </AppLightbox>
     <SectionContentExploreArticle/>
-    <SectionContentExploreAsideHint/>
     <SectionContentExploreCandidatesWon/>
     <SectionContentExploreDuel/>
+    <SectionContentExploreAsideHint/>
   </main>
 </template>
 
