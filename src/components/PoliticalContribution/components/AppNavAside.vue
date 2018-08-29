@@ -47,12 +47,14 @@
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story5" v-scroll-to="'.section-content'">
+        NEW
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
           :hintText="'我是新文章'"
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story6" v-scroll-to="'.section-content'">
+        NEW
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
           :hintText="'我是新文章'"
@@ -124,7 +126,9 @@ export default {
     width 30px
     margin 10px auto  0 auto
   &__article-nav
-    display block
+    display flex
+    justify-content center
+    align-items center
     r = 30px
     width r
     height r
@@ -132,6 +136,9 @@ export default {
     background-color #808080
     transition background-color .25s
     position relative
+    font-size 10px
+    text-decoration none
+    color white
     & + &
       margin 10px 0 0 0
     &:hover
@@ -150,6 +157,7 @@ export default {
     width max-content !important
     padding 5px 10px !important
     box-sizing content-box // For fixing width max-content issue in dafari
+    font-size 16px
 
 .router-link-exact-active
   background-color #9e005d
