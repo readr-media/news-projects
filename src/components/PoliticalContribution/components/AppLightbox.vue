@@ -81,7 +81,7 @@ export default {
     z-index 10002
     position absolute
     top 0
-    left -30px
+    right -30px
     // right calc(-50px / 3)
     // top calc(-50px / 3)
 

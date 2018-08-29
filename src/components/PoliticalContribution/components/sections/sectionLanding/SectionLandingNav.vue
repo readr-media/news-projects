@@ -88,14 +88,14 @@ export default {
     flex-direction column
     justify-content center
     &--right
-      margin 0 0 0 32px
+      margin 0 0 0 20px
       align-items flex-start
     &--left
-      margin 0 32px 0 0
+      margin 0 20px 0 0
       align-items flex-end
   &__hint
     cursor pointer
-    font-size 32px
+    font-size 24px
     font-weight 500
     white-space nowrap
     margin 5px 0
@@ -107,12 +107,12 @@ export default {
       flex-direction row
     &__hints
       &--right
-        margin 0 0 0 32px
+        margin 0 0 0 20px
       &--left
-        margin 0 0 0 32px
+        margin 0 0 0 20px
         align-items flex-start
     &__hint
-      font-size 32px
+      font-size 24px
 
 @media (max-width 425px)
   .section-landing-nav

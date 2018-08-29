@@ -37,10 +37,10 @@
       src="/proj-assets/political-contribution/pk.png"
       @click="navigateDuel"
     />
-    <transition name="fade" mode="out-in">
+    <!-- <transition name="fade" mode="out-in"> -->
       <!-- section below will be replace by contents -->
       <main class="section-content__main-section" :is="renderedSectionContent"></main>
-    </transition>
+    <!-- </transition> -->
     <SectionContentFooter
       v-show="showFooter"
       class="section-content__footer"

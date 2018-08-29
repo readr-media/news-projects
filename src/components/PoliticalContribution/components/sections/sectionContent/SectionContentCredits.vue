@@ -1,5 +1,10 @@
 <template>
   <div class="story-credits">
+    <div class="story-credits__row story-credits__row--more-margin-bottom">
+      <a href="https://www.mirrormedia.mg" target="_blank">
+        <img class="story-credits__mm-logo" src="/proj-assets/political-contribution/mm.png" alt="">
+      </a>
+    </div>
     <div class="story-credits__row">
       <p class="story-credits__credit">文：李又如</p>
       <p class="story-credits__credit">設計：陳怡蒨</p>
@@ -45,6 +50,11 @@ export default {
     text-align center
     color #808080
     margin 4px 0
+    &--more-margin-bottom
+      margin 4px 0 8px 0
+  &__mm-logo
+    width 40px
+    height auto
   &__credit
     margin 0
     & + &
