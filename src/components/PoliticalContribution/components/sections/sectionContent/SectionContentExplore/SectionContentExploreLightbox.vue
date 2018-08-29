@@ -143,6 +143,8 @@ export default {
     }
   },
   mounted () {
+    if (window.innerWidth <= 1280) this.isSidebarToogledInfo = false
+
     if (this.isQueryValidOrdinal) {
       if (isEmpty(this.rawDataBasicCurrentOrdinal)) {
         this.fetchLoadingBasic = true
