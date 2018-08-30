@@ -78,6 +78,12 @@ export default {
         this.updateScales()
         this.visualize()
       }
+    },
+    data () {
+      if (this.isChartReady) {
+        this.updateScales()
+        this.visualize()
+      }
     }
   },
   data () {
