@@ -94,22 +94,26 @@
       <div class="section-content-dashboard__charts section-content-dashboard__charts--desktop">
         <div class="row">
           <div class="buttons-container">
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-1' } ]"
               @click="currentChartShown = '1-1'"
             >
               總政治獻金的<br>收入組成
             </button>
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-2' } ]"
               @click="currentChartShown = '1-2'"
             >
               年資和收入的關係
             </button>
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-3' } ]"
               @click="currentChartShown = '1-3'"
             >
               候選人政黨政治獻金<br>收入組成
             </button>
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-4' } ]"
               @click="currentChartShown = '1-4'"
             >
               誰收到最多捐獻<br>但沒選上
@@ -178,22 +182,26 @@
         </div>
         <div class="row">
           <div class="buttons-container">
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-1' } ]"
               @click="currentChartShown = '2-1'"
             >
               誰收到最多政治獻金捐贈？（總收入）
             </button>
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-2' } ]"
               @click="currentChartShown = '2-2'"
             >
               誰收到最多營利事業<br>政治獻金捐贈？
             </button>
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-3' } ]"
               @click="currentChartShown = '2-3'"
             >
               誰收到最多家<br>企業捐獻？
             </button>
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-4' } ]"
               @click="currentChartShown = '2-4'"
             >
               捐贈公司數占全台<br>同產業別比例前十名
@@ -263,22 +271,26 @@
         </div>
         <div class="row">
           <div class="buttons-container">
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-1' } ]"
               @click="currentChartShown = '3-1'"
             >
               現任立委佔優勢（與非現任立委比較）
             </button>
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-2' } ]"
               @click="currentChartShown = '3-2'"
             >
               
             現任立委佔優勢（與第一次參選公職者比較）</button>
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-3' } ]"
               @click="currentChartShown = '3-3'"
             >
               佛心產業前十名
             </button>
-            <button class="buttons-container__button"
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-4' } ]"
               @click="currentChartShown = '3-4'"
             >
               哪個集團捐最多
@@ -500,14 +512,21 @@ export default {
     height 100px
     display flex
     justify-content center
-    background-color transparent
     cursor pointer
     border 2px solid #808080
     font-size 20px
+    background-color #eaeaea
     color #808080
+    transition background-color .25s ease-out, color .25s ease-out
     line-height 1.25
+    &--active
+      background-color #808080
+      color white
     &:focus
       outline none
+    &:hover
+      background-color #808080
+      color white
     & + &
       margin 0 0 0 26px
 
