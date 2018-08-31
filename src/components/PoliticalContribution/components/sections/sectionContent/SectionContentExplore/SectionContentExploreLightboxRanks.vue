@@ -99,7 +99,7 @@ export default {
     height auto
     &__tabs
       &--mobile
-        display flex
+        display flex !important
     &__list-donate
       height auto
       overflow-y visible

@@ -13,7 +13,11 @@ export default {
     donates: {
       type: Array,
       required: true,
-    }
+    },
+    isDataPercentage: {
+      type: Boolean,
+      default: false,
+    },
   },
   watch: {
     // nameUrlQuery () {
@@ -88,7 +92,7 @@ export default {
       this.outerWidth = d3.select(`#${this.$el.id}.bar-horizontal-donates-from`).node().getBoundingClientRect().width
       this.outerHeight = this.barBandwidthDefault * 4
 
-      this.margin = { top: 0, right: 0, bottom: 0, left: 110, }
+      this.margin = { top: 0, right: 0, bottom: 0, left: 150, }
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
       this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
 
@@ -102,7 +106,7 @@ export default {
 
       this.xScale =
         d3.scaleLinear()
-          .domain([ 0, d3.max(this.donates, d => d.money) ])
+          .domain([ 0, d3.max(this.donates, d => +d.money) ])
           .range([ 0,  this.innerWidth ])
       this.yScale =
         d3.scaleBand()
@@ -110,7 +114,9 @@ export default {
           .range([ 0, this.innerHeight ])
           .padding(0.3)
 
-      this.yAxis = d3.axisLeft(this.yScale)
+      this.yAxis =
+        d3.axisLeft(this.yScale)
+          .tickFormat(d => d.length > 7 ? `${d.substring(0, 8)}...` : d)
       this.svg
         .append('g')
           .attr('class', 'bar-horizontal-donates-from__y-axis')
@@ -130,7 +136,7 @@ export default {
     },
     updateScales () {
       this.xScale
-        .domain([ 0, d3.max(this.donates, d => d.money) ])
+        .domain([ 0, d3.max(this.donates, d => +d.money) ])
         .range([ 0,  this.innerWidth ])
       // this.yScale
       //   .domain(this.donates.map(donate => donate.from))
@@ -163,9 +169,9 @@ export default {
         .append('text')
           .attr('class', 'bar-horizontal-donates-from__hint')
         .merge(hints)
-          .attr('x', d => this.xScale(d.money) - 42)
+          .attr('x', d => this.xScale(d.money) - (this.isDataPercentage ? 55 : 42))
           .attr('y', d => this.yScale(d.from) + this.yScale.bandwidth() / 2 + 6)
-          .text((d, i) => this.xScale(d.money) - 42 >= 0 ? `${this.donateProportion[i].proportion}%` : '')
+          .text((d, i) => this.xScale(d.money) - (this.isDataPercentage ? 55 : 42) >= 0 ? `${this.isDataPercentage ? d.money : this.donateProportion[i].proportion}%` : '')
       // Exit
       bars.exit().remove()
       hints.exit().remove()

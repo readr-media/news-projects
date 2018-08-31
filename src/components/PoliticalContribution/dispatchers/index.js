@@ -14,10 +14,11 @@ export const fetchSheetBasic = (store, ordinal) => {
   })
   .catch(err => { console.log(err) })
 }
+
 export const fetchSheetCompanyDonate = (store, ordinal) => {
   return store.dispatch('PoliticalContribution/FETCH_DATA_ASSETS', {
     params: {
-      filePath: `/proj-assets/political-contribution/data/companyDonate/${ordinal}.csv`
+      filePath: `/proj-assets/political-contribution/data/companyDonate/${ordinal}-dropped.csv`
     }
   })
   .then(data => {
@@ -27,6 +28,7 @@ export const fetchSheetCompanyDonate = (store, ordinal) => {
   })
   .catch(err => { console.log(err) })
 }
+
 export const fetchSheetCorpNameTaxIdMapping = store => {
   return store.dispatch('PoliticalContribution/FETCH_DATA_ASSETS', {
     params: {
@@ -39,38 +41,16 @@ export const fetchSheetCorpNameTaxIdMapping = store => {
   .catch(err => { console.log(err) })
 }
 
-// export const fetchSheetBasic = (store, ordinal) => {
-//   const spreadsheetId = get(DATA, [ ordinal, 'spreadsheetIdBasic' ], '')
-//   const dataKey = 'rawDataBasic'
-//   return store.dispatch('PoliticalContribution/FETCH_DATA', {
-//     params: {
-//       ordinal,
-//       spreadsheetId,
-//       range: DEFAULT_SHEET_RANGE,
-//       dataKey
-//     }
-//   })
-// }
-// export const fetchSheetCompanyDonate = (store, ordinal) => {
-//   const spreadsheetId = get(DATA, [ ordinal, 'spreadsheetIdCompanyDonate' ], '')
-//   const dataKey = 'rawDataCompanyDonate'
-//   return store.dispatch('PoliticalContribution/FETCH_DATA', {
-//     params: {
-//       ordinal,
-//       spreadsheetId,
-//       range: DEFAULT_SHEET_RANGE,
-//       dataKey
-//     }
-//   })
-// }
-// export const fetchSheetCorpNameTaxIdMapping = store => {
-//   const spreadsheetId = CORP_NAME_TAXID_MAPPING_SHEETID
-//   const dataKey = 'corpNameTaxIdMapping'
-//   return store.dispatch('PoliticalContribution/FETCH_DATA', {
-//     params: {
-//       spreadsheetId,
-//       range: DEFAULT_SHEET_RANGE,
-//       dataKey
-//     }
-//   })
-// }
+export const fetchSheetIndustryPercentageMOF = (store, ordinal) => {
+  return store.dispatch('PoliticalContribution/FETCH_DATA_ASSETS', {
+    params: {
+      filePath: `/proj-assets/political-contribution/data/industryPercentage/${ordinal}-industry-percentage-MOF.csv`
+    }
+  })
+  .then(data => {
+    if (!isEmpty(data)) {
+      store.commit('PoliticalContribution/SET_DATA', { ordinal: ordinal, body: data, field: 'industryPercentageMOF' })
+    }
+  })
+  .catch(err => { console.log(err) })
+}
