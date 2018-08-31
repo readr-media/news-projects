@@ -38,12 +38,14 @@
             { 
               text: '文章 1 我是新文章',
               type: 'router-link',
-              link: 'story5'
+              link: 'story5',
+              isNewContent: true,
             }, 
             { 
               text: '文章 2 我是新文章',
               type: 'router-link',
-              link: 'story6'
+              link: 'story6',
+              isNewContent: true,
             }, 
           ]"
           :hintsOrientation="'right'"

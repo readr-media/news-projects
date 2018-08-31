@@ -16,10 +16,18 @@
       </div>
     </div>
     <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart">
-      <h1 class="section-content-explore-lightbox-info-donates-from__title">營利事業產業組成</h1>
+      <div class="title-container">
+        <h1 class="section-content-explore-lightbox-info-donates-from__title">營利事業產業組成</h1>
+        <button 
+          :class="[ 'title-container__caution-button', { 'title-container__caution-button--active': showCaution } ]"
+          @click="showCaution = !showCaution"
+        >
+          註
+        </button>
+      </div>
       <div class="bar-chart-container">
         <div
-          v-show="isRawDataCompanyDonateCurrentOrdinalEmpty"
+          v-show="isIndustryPercentageMOFEmpty"
           class="bar-chart-container__loading"
         >
           正在讀取營利事業捐贈明細...
@@ -27,7 +35,11 @@
         <BarHorizontalCandidateInfoDonatesFrom
           id="section-content-explore-lightbox-info-donates-from-industry"
           :donates="candidateDonatesIndustryTypeFrom"
+          :isDataPercentage="true"
         />
+      </div>
+      <div v-show="showCaution" class="caution-container">
+        由於公司登記的類別資料為該公司的所有營業項目，無法單從資料辨識出主要產業，此區資料只計算「有母公司的公司」，其餘為無法辨識
       </div>
     </div>
     <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart">
@@ -37,7 +49,7 @@
           v-show="isRawDataCompanyDonateCurrentOrdinalEmpty"
           class="bar-chart-container__loading"
         >
-          正在讀取營利事業捐贈明細...
+          正在讀取營利事業行業別明細...
         </div>
         <BarHorizontalCandidateInfoDonatesFrom
           id="section-content-explore-lightbox-info-donates-from-local-election-state"
@@ -81,6 +93,11 @@ export default {
   components: {
     BarHorizontalCandidateInfoDonatesFrom,
   },
+  data () {
+    return {
+      showCaution: false,
+    }
+  },
   computed: {
     candidateDonatesBasicDonatesFrom () {
       const sorted = sortBy(this.candidateDonatesBasic, [ d => -Number(d.value.split(',').join('')) ]).map(category => mapKeys(category, (value, key) => { 
@@ -108,13 +125,18 @@ export default {
       'dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIsLocalCounty',
       'dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIsLocalElectionState',
       'dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByParty',
+      'dataIndustryPercentageMOFCurrentOrdinalNameLightboxShown',
     ]),
     isRawDataCompanyDonateCurrentOrdinalEmpty () {
       return isEmpty(this.rawDataCompanyDonateCurrentOrdinal)
     },
+    isIndustryPercentageMOFEmpty () {
+      return isEmpty(this.dataIndustryPercentageMOFCurrentOrdinalNameLightboxShown)
+    },
     candidateDonatesIndustryTypeFrom () {
-      const mapValuesToDonatesSum = mapValues(this.dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIndustryType, rows => sumBy(rows, row => +(row['收入金額'].split(',').join(''))))
-      return take(sortBy(Object.entries(mapValuesToDonatesSum), ele => -ele[1]).map(ele => ({ from: ele[0], money: +ele[1]})), 4)
+      // const mapValuesToDonatesSum = mapValues(this.dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIndustryType, rows => sumBy(rows, row => +(row['收入金額'].split(',').join(''))))
+      // return take(sortBy(Object.entries(mapValuesToDonatesSum), ele => -ele[1]).map(ele => ({ from: ele[0], money: +ele[1]})), 4)
+      return take(this.dataIndustryPercentageMOFCurrentOrdinalNameLightboxShown.map(ele => ({ from: ele['行業別'], money: ele['行業別金額比例'] })), 4)
     },
     candidateDonatesCountyFrom () {
       const mapValuesToDonatesSum = mapValues(this.dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIsLocalCounty, rows => sumBy(rows, row => +(row['收入金額'].split(',').join(''))))
@@ -135,8 +157,9 @@ export default {
 <style lang="stylus" scoped>
 .section-content-explore-lightbox-info-donates-from
   &__chart
-   & + &
-    margin 30px 0 0 0
+    position relative
+    & + &
+      margin 30px 0 0 0
   &__title
     font-size 20px
     font-weight 600
@@ -153,6 +176,43 @@ export default {
     display flex
     justify-content flex-start
     align-items center
+
+.title-container
+  display flex
+  align-items center
+  &__caution-button
+    d = 23px
+    width d
+    height d
+    border-radius d
+    border solid 1px #9e005d
+    color #9e005d
+    padding 0
+    margin 0 0 0 11px
+    display flex
+    justify-content center
+    align-items center
+    cursor pointer
+    font-size 16px
+    background-color white
+    &:focus
+      outline none
+    &--active
+      background-color #9e005d
+      color white
+
+.caution-container
+  width 100%
+  height calc(100% - 30px)
+  position absolute
+  top 30px
+  left 0
+  border solid 1px #9e005d
+  background-color white
+  padding 16px
+  font-size 16px
+  line-height 1.3
+  text-align justify
 </style>
 
 

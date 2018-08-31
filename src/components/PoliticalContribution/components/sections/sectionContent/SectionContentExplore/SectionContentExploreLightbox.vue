@@ -44,7 +44,12 @@ import SectionContentExploreLightboxSidebar from './SectionContentExploreLightbo
 import SectionContentExploreLightboxRanks from './SectionContentExploreLightboxRanks.vue'
 import SectionContentExploreLightboxInfo from './SectionContentExploreLightboxInfo.vue'
 
-import { fetchSheetBasic, fetchSheetCompanyDonate, fetchSheetCorpNameTaxIdMapping, } from 'src/components/PoliticalContribution/dispatchers'
+import {
+  fetchSheetBasic,
+  fetchSheetCompanyDonate,
+  fetchSheetCorpNameTaxIdMapping,
+  fetchSheetIndustryPercentageMOF,
+} from 'src/components/PoliticalContribution/dispatchers'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapGetters, } = createNamespacedHelpers('PoliticalContribution')
@@ -71,6 +76,11 @@ export default {
           fetchSheetCorpNameTaxIdMapping(this.$store)
           .then(() => { this.fetchLoadingCorpNameTaxIdMapping = false })
         }
+        if (isEmpty(this.rawDataIndustryPercentageMOF)) {
+          this.fetchLoadingIndustryPercentageMOF = true
+          fetchSheetIndustryPercentageMOF(this.$store, this.ordinalRadioPicked)
+          .then(() => { this.fetchLoadingIndustryPercentageMOF = false })
+        }
 
         this.resetLightboxScrollMobile()
       }
@@ -91,6 +101,7 @@ export default {
       fetchLoadingBasic: false,
       fetchLoadingCompanyDonate: false,
       fetchLoadingCorpNameTaxIdMapping: false,
+      fetchLoadingIndustryPercentageMOF: false,
     }
   },
   computed: {
@@ -112,6 +123,7 @@ export default {
       'isQueryValidGroupOrCompanyName',
       'rawDataBasicCurrentOrdinal',
       'rawDataCompanyDonateCurrentOrdinal',
+      'rawDataIndustryPercentageMOF',
       'isNameLightboxShownCorp',
     ]),
     loadingInfo () {
@@ -143,7 +155,7 @@ export default {
     }
   },
   mounted () {
-    if (window.innerWidth <= 1280) this.isSidebarToogledInfo = false
+    if (window.innerWidth <= 1280 && !this.$store.state.useragent.isMobile) this.isSidebarToogledInfo = false
 
     if (this.isQueryValidOrdinal) {
       if (isEmpty(this.rawDataBasicCurrentOrdinal)) {
@@ -165,6 +177,11 @@ export default {
         this.fetchLoadingCorpNameTaxIdMapping = true
         fetchSheetCorpNameTaxIdMapping(this.$store)
         .then(() => { this.fetchLoadingCorpNameTaxIdMapping = false })
+      }
+      if (isEmpty(this.rawDataIndustryPercentageMOF)) {
+        this.fetchLoadingIndustryPercentageMOF = true
+        fetchSheetIndustryPercentageMOF(this.$store, this.ordinalRadioPicked)
+        .then(() => { this.fetchLoadingIndustryPercentageMOF = false })
       }
     }
   }

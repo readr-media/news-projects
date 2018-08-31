@@ -16,14 +16,19 @@
         { 'section-landing-nav__hints--left': hintsOrientation === 'left' }
       ]"
     >
-      <a
-        class="section-landing-nav__hint"
+      <div
+        class="section-landing-nav__hint-container hint-container"
         v-for="hint in hints"
         :key="hint.text"
-        v-text="hint.text"
-        @click="navigate(hint)"
       >
-      </a>
+        <div v-if="hint.isNewContent || false" class="hint-container__new-notification">NEW</div>
+        <a
+          class="hint-container__hint"
+          v-text="hint.text"
+          @click="navigate(hint)"
+        >
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -93,12 +98,23 @@ export default {
     &--left
       margin 0 20px 0 0
       align-items flex-end
+  &__hint-container
+    margin 5px 0
+    display flex
+    align-items center
+
+.hint-container
   &__hint
     cursor pointer
     font-size 24px
     font-weight 500
     white-space nowrap
-    margin 5px 0
+  &__new-notification
+    margin 0 11px 0 0
+    background-color #9e005d
+    color white
+    border-radius 50%
+    padding 10px 5px
 
 @media (max-width 1024px)
   .section-landing-nav
@@ -111,8 +127,10 @@ export default {
       &--left
         margin 0 0 0 20px
         align-items flex-start
-    &__hint
-      font-size 24px
+
+  .hint-container
+    &__new-notification
+      display none
 
 @media (max-width 425px)
   .section-landing-nav
@@ -125,8 +143,12 @@ export default {
       &--left
         margin 0 0 0 11px
         align-items flex-start
+
+  .hint-container
     &__hint
       font-size 20px
+    &__new-notification
+      display none
 
 // @media (max-width 375px)
 //   .section-landing-nav
@@ -143,8 +165,10 @@ export default {
 //       font-size 20px
 
 @media (max-width 320px)
-  .section-landing-nav
+  .hint-container
     &__hint
       font-size 16px
+    &__new-notification
+      display none
 </style>
 

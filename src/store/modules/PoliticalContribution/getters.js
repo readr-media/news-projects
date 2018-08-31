@@ -131,6 +131,15 @@ export default {
   dataCompanyDonateCurrentOrdinalNameLightboxShownRelatedWonGroupByPartyNameList: (state, getters) => {
     return Object.keys(getters.dataCompanyDonateCurrentOrdinalNameLightboxShownRelatedWonGroupByParty)
   },
+  rawDataIndustryPercentageMOF: (state, getters) => { // NOTE: get calculated data
+    return get(state.data, [ getters.ordinalRadioPicked, 'industryPercentageMOF' ], [])
+  },
+  rawDataIndustryPercentageMOFGroupByCandidate: (state, getters) => { // NOTE: get calculated data
+    return get(state.data, [ getters.ordinalRadioPicked, 'industryPercentageMOFGroupByCandidate' ], [])
+  },
+  dataIndustryPercentageMOFCurrentOrdinalNameLightboxShown: (state, getters) => {
+    return get(getters.rawDataIndustryPercentageMOFGroupByCandidate, getters.nameLightboxShown, [])
+  },
   // Compute ordinal and candidate values
   ordinalRadioPicked: (state) => {
     return state.section.explore.navs.radioPicked
