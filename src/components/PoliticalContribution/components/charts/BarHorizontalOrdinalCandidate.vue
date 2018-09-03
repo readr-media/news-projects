@@ -204,13 +204,13 @@ export default {
       bars.exit().remove()
       hints.exit().remove()
 
-      if (this.dataHintUnit === '家') {
-        // Data joins
-        const hintsDonatesMoney =
-          this.svg
-            .selectAll('text.hint-below-bar')
-            .data(this.dataCurrentOrdinal)
+      // Data joins
+      const hintsDonatesMoney =
+        this.svg
+          .selectAll('text.hint-below-bar')
+          .data(this.dataCurrentOrdinal, d => d.donatesMoney)
 
+      if (this.dataHintUnit === '家') {
         // Update + Enter
         hintsDonatesMoney
           .enter()
@@ -222,10 +222,10 @@ export default {
             .text(d => `金額：${((d.donatesMoney / 10000).toFixed(0)).toLocaleString()} 萬元`)
             .style('font-size', '27px')
             .style('fill', '#808080')
-
-        // Exit
-        hintsDonatesMoney.exit().remove()
       }
+
+      // Exit
+      hintsDonatesMoney.exit().remove()
     },
     calculateCurrentDimensions () {
       const containerWidth = this.$el.getBoundingClientRect().width

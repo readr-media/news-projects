@@ -495,7 +495,7 @@ export default {
     padding 127px 0
     position relative
   &__radios
-    display none
+    display none !important
     width 900px
     padding 20px 0
     position absolute
@@ -644,7 +644,7 @@ export default {
 @media (max-width 1024px)
   .section-content-dashboard
     &__radios
-      display flex
+      display flex !important
       width 100%
       &--sticky
         background-color white
