@@ -15,7 +15,7 @@
         />
       </div>
     </div>
-    <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart">
+    <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart section-content-explore-lightbox-info-donates-from__chart--fix-height">
       <div class="title-container">
         <h1 class="section-content-explore-lightbox-info-donates-from__title">營利事業產業組成</h1>
         <button 
@@ -160,6 +160,8 @@ export default {
     position relative
     & + &
       margin 30px 0 0 0
+    &--fix-height
+      height 143px
   &__title
     font-size 20px
     font-weight 600
