@@ -1,7 +1,7 @@
 <template>
   <div class="section-content-explore-radios">
     <div 
-      v-if="!isLightboxNavigation || showRadioInLightbox['seventh']"
+      v-if="(!isLightboxNavigation || showRadioInLightbox['seventh']) && !showNinthOnly"
       class="section-content-explore-radios__container"
       @click="navigateRoute(7)"
     >
@@ -14,7 +14,7 @@
       <label for="seventh-radio-icon" @click="selectPicked('seventh')">第七屆</label>
     </div>
     <div 
-      v-if="!isLightboxNavigation || showRadioInLightbox['eighth']"
+      v-if="(!isLightboxNavigation || showRadioInLightbox['eighth']) && !showNinthOnly"
       class="section-content-explore-radios__container"
       @click="navigateRoute(8)"
     >
@@ -33,7 +33,7 @@
     >
       <div 
         id="ninth-radio-icon"
-        :class="[ 'section-content-explore-radios__custom-radio', { 'section-content-explore-radios__custom-radio--active': ordinalRadioPicked === 'ninth' } ]"
+        :class="[ 'section-content-explore-radios__custom-radio', { 'section-content-explore-radios__custom-radio--active': ordinalRadioPicked === 'ninth' || showNinthOnly } ]"
         @click="selectPicked('ninth')"
       >
       </div>
@@ -51,6 +51,10 @@ const { mapState, mapGetters, } = createNamespacedHelpers('PoliticalContribution
 export default {
   props: {
     isLightboxNavigation: {
+      type: Boolean,
+      default: false,
+    },
+    showNinthOnly: {
       type: Boolean,
       default: false,
     },
