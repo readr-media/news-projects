@@ -365,13 +365,40 @@
             </div>
           </AppChartExpand>
         </div>
+        <div class="row">
+          <div class="buttons-container">
+            <button
+              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '4-1' } ]"
+              @click="currentChartShown = '4-1'"
+            >
+              營利事業收入前十名<br>受哪些集團捐贈
+            </button>
+          </div>
+          <AppChartExpand
+            v-show="currentChartShownRow === '4'"
+            class="row__chart"
+            :showColumn="currentChartShownColumn"
+            @closeExpand="currentChartShown = '0-0'"
+          >
+            <SectionContentExploreRadios
+              v-show="showRadio"
+              :showNinthOnly="showNinthOnly"
+              slot="radios"
+            />
+            <div
+              class="chart-container"
+              id="dashboard-chart-ordinal-corp-donates-to-candidate-chart-container"
+              v-if="currentChartShownRow === '4' && currentChartShownColumn === '1'"
+              slot="chart"
+            >
+              <SankeyOrdinalCorpDonatesToCandidate
+                class="chart-container__chart"
+                id="dashboard-chart-ordinal-corp-donates-to-candidate"
+              />
+            </div>
+          </AppChartExpand>
+        </div>
       </div>
-      <!-- <div class="chart-container chart-container--fill">
-        <SankeyOrdinalCorpDonatesToCandidate
-          class="chart-container__chart"
-          id="dashboard-chart-ordinal-corp-donates-to-candidate"
-        />
-      </div> -->
     </div>
   </main>
 </template>
@@ -605,6 +632,11 @@ export default {
   padding 0px 80px
 
 #dashboard-chart-table-duel-newbie-elected-or-not-chart-container
+  width 100%
+  // height 360px
+  padding 0px 80px
+
+#dashboard-chart-ordinal-corp-donates-to-candidate-chart-container
   width 100%
   // height 360px
   padding 0px 80px

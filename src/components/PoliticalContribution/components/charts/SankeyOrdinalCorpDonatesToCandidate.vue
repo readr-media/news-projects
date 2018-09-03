@@ -48,6 +48,7 @@ export default {
         }
       } else {
         this.isDataLoading = false
+        this.processSankeyData()
         this.visualize()
       }
     }
@@ -114,13 +115,14 @@ export default {
       let resultGraph = { 'nodes': [], 'links': [] }
       let linkIndexHash = {}
 
-      dataSliced.forEach(corp => {
-        corp.forEach(donate => {
+      dataSliced.forEach(candidate => {
+        candidate.forEach(donate => {
           const isExistCandidate = some(resultGraph.nodes, [ 'name', donate['候選人'] ])
           const isExistCorp = some(resultGraph.nodes, [ 'name', donate['集團碼'] ])
 
           const linkKey = `${donate['集團碼']}donatesTo${donate['候選人']}`
-          const isExistLink = linkKey in resultGraph.links
+          // const isExistLink = linkKey in resultGraph.links
+          const isExistLink = linkKey in linkIndexHash
 
           // Processing nodes
           if (!isExistCandidate) {
@@ -177,6 +179,7 @@ export default {
             this.init()
           }
           if (this.currentDataLoading = this.shouldVisualizeOrdinal) {
+            this.processSankeyData()
             this.visualize()
           }
         })
@@ -190,7 +193,7 @@ export default {
       this.outerWidth = this.defaultWidth
       this.outerHeight = this.defaultHeight
 
-      this.margin = { top: 0, right: 0, bottom: 0, left: 0, }
+      this.margin = { top: 0, right: 0, bottom: 0, left: 150, }
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
       this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
 
@@ -202,13 +205,13 @@ export default {
           .append('g')
             .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
 
-      const sankey =
-        d3Sankey()
-          .nodeId(d => d.name)
-          .nodeWidth(15)
-          .nodePadding(10)
-          .extent([[ 1, 1 ], [ this.innerWidth - 1, this.innerHeight - 6 ]])
-      sankey(this.dataProcessed)
+      // const sankey =
+      //   d3Sankey()
+      //     .nodeId(d => d.name)
+      //     .nodeWidth(15)
+      //     .nodePadding(10)
+      //     .extent([[ 1, 1 ], [ this.innerWidth - 1, this.innerHeight - 6 ]])
+      // sankey(this.dataProcessed)
       // // init scales
       // this.xScale =
       //   d3.scaleLinear()
@@ -219,36 +222,69 @@ export default {
       //     .domain([ 0, 60000000 ])
       //     .range([ this.innerHeight, 0 ])
     },
+    processSankeyData () {
+      const sankey =
+        d3Sankey()
+          .nodeId(d => d.name)
+          .nodeWidth(15)
+          .nodePadding(10)
+          .extent([[ 1, 1 ], [ this.innerWidth - 1, this.innerHeight - 6 ]])
+      sankey(this.dataProcessed)
+    },
     visualize () {
       const nodes = 
         this.svg
           .selectAll('rect')
           .data(this.dataProcessed.nodes)
+      const texts = 
+        this.svg
+          .selectAll('text')
+          .data(this.dataProcessed.nodes)
       const links =
         this.svg
-          .append("g")
-            .attr("class", "links")
-            .attr("fill", "none")
-            .attr("stroke", "#000")
-            .attr("stroke-opacity", 0.2)
+          // .append("g")
+          //   .attr("class", "links")
+          //   .attr("fill", "none")
+          //   .attr("stroke", "#000")
+          //   .attr("stroke-opacity", 0.2)
           .selectAll('path')
           .data(this.dataProcessed.links)
 
       nodes
         .enter()
         .append('rect')
+        .merge(nodes)
           .attr("x", function(d) { return d.x0; })
           .attr("y", function(d) { return d.y0; })
           .attr("height", function(d) { return d.y1 - d.y0; })
           .attr("width", function(d) { return d.x1 - d.x0; })
           // .attr("fill", function(d) { return color(d.name.replace(/ .*/, "")); })
           .attr("stroke", "#000")
-          .attr('title', d => d.name)
+      texts
+        .enter()
+        .append('text')
+        .merge(texts)
+          .attr('x', d => d.x0)
+          .attr('y', d => d.y0 + ((d.y1 - d.y0) / 2))
+          // .attr('dy', '.35em')
+          .attr("text-anchor", "end")
+          .attr("transform", null)
+          .text(d => d.name)
+          .style('fill', 'black')
       links
         .enter()
         .append('path')
+        .merge(links)
           .attr("d", sankeyLinkHorizontal())
-          .attr("stroke-width", function(d) { return Math.max(1, d.width); });
+          .attr("stroke-width", function(d) { return Math.max(1, d.width); })
+          .attr("class", "links")
+          .attr("fill", "none")
+          .attr("stroke", "#000")
+          .attr("stroke-opacity", 0.2)
+
+      nodes.exit().remove()
+      texts.exit().remove()
+      links.exit().remove()
     },
     calculateCurrentDimensions () {
       const containerWidth = this.$el.getBoundingClientRect().width
