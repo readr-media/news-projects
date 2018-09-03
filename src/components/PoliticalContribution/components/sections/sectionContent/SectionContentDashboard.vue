@@ -125,7 +125,11 @@
             :showColumn="currentChartShownColumn"
             @closeExpand="currentChartShown = '0-0'"
           >
-            <SectionContentExploreRadios v-show="showRadio" slot="radios"/>
+            <SectionContentExploreRadios
+              v-show="showRadio"
+              :showNinthOnly="showNinthOnly"
+              slot="radios"
+            />
             <div
               class="chart-container"
               id="dashboard-chart-ordinal-donates-from-chart-container"
@@ -213,7 +217,11 @@
             :showColumn="currentChartShownColumn"
             @closeExpand="currentChartShown = '0-0'"
           >
-            <SectionContentExploreRadios v-show="showRadio" slot="radios"/>
+            <SectionContentExploreRadios
+              v-show="showRadio"
+              :showNinthOnly="showNinthOnly"
+              slot="radios"
+            />
             <div
               class="chart-container"
               id="dashboard-chart-ordinal-top-five-donates-total-chart-container"
@@ -302,7 +310,11 @@
             :showColumn="currentChartShownColumn"
             @closeExpand="currentChartShown = '0-0'"
           >
-            <SectionContentExploreRadios v-show="showRadio" slot="radios"/>
+            <SectionContentExploreRadios
+              v-show="showRadio"
+              :showNinthOnly="showNinthOnly"
+              slot="radios"
+            />
             <div
               class="chart-container"
               id="dashboard-chart-table-duel-re-elected-or-not-chart-container"
@@ -415,9 +427,10 @@ export default {
       return this.currentChartShown.split('-')[1]
     },
     showRadio () {
-      return this.currentChartShown !== '1-1' &&
-             this.currentChartShown !== '1-2' &&
-             this.currentChartShown !== '3-2'
+      return this.currentChartShown !== '1-1'
+    },
+    showNinthOnly () {
+      return this.currentChartShown === '1-2' || this.currentChartShown === '3-2'
     }
   },
   methods: {
