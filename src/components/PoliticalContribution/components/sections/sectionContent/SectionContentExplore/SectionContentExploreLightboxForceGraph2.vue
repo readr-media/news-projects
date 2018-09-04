@@ -24,7 +24,6 @@ export default {
   },
   data () {
     return {
-      // isRepainting: false,
       scale: undefined,
       svg: undefined,
       svgWidth: undefined,
@@ -49,44 +48,6 @@ export default {
         this.visualizeGraph()
       }
     }
-  //   hasDataForceGraph () {
-  //     if (this.hasDataForceGraph) {
-  //       console.log('hasDataForceGraph')
-  //       this.isRepainting = true
-  //       this.visualizeGraph()
-  //       this.isRepainting = false
-  //     }
-  //   },
-  //   nameLightboxShown () {
-  //     if (this.isQueryValidCandidateName || this.isQueryValidGroupOrCompanyName) {
-  //       // NOTE: workaround
-  //       if (!this.isRepainting) {
-  //         this.isRepainting = true
-  //         d3.selectAll('.links').remove()
-  //         d3.selectAll('.nodes').remove()
-  //         d3.timeout(() => {
-  //           console.log('nameLightboxShown')
-  //           this.visualizeGraph()
-  //           this.isRepainting = false
-  //         }, 500)
-  //       }
-  //     }
-  //   },
-  //   ordinalUrlQueryString () {
-  //     if ((this.isQueryValidCandidateName || this.isQueryValidGroupOrCompanyName) && this.isQueryValidOrdinal) {
-  //       // NOTE: workaround
-  //       if (!this.isRepainting) {
-  //         this.isRepainting = true
-  //         d3.selectAll('.links').remove()
-  //         d3.selectAll('.nodes').remove()
-  //         d3.timeout(() => {
-  //           console.log('ordinalUrlQueryString')
-  //           this.visualizeGraph()
-  //           this.isRepainting = false
-  //         }, 500)
-  //       }
-  //     }
-  //   }
   },
   computed: {
     ...mapGetters([
@@ -96,12 +57,6 @@ export default {
       'dataForceGraph',
       'hasDataForceGraph',
       'ordinalUrlQuery',
-      'nameUrlQuery',
-      'nameLightboxShown',
-      'isQueryValidCandidateName',
-      'isQueryValidGroupOrCompanyName',
-      'ordinalUrlQueryString',
-      'isQueryValidOrdinal',
     ]),
     isSidebarFoldedSingle () {
       // bitwise xor
@@ -112,21 +67,14 @@ export default {
     },
     // For calculating scale's domain
     maxMoney () {
-      return Math.max(d3.max(this.dataForceDonateSum.candidate, d => d.value.total), d3.max(this.dataForceDonateSum.company, d => d.value.total))
+      return Math.max(d3.max(Object.values(this.dataForceDonateSum.candidate)), d3.max(Object.values(this.dataForceDonateSum.company)))
     },
     minMoney () {
-      return Math.min(d3.min(this.dataForceDonateSum.candidate, d => d.value.total), d3.min(this.dataForceDonateSum.company, d => d.value.total))
+      return Math.min(d3.min(Object.values(this.dataForceDonateSum.candidate)), d3.min(Object.values(this.dataForceDonateSum.company)))
     },
     minMaxFlow () {
       return d3.extent(this.dataForceGraph.links, d => d.value)
     },
-    // linkedByIndex () {
-    //   let linkedByIndex = {}
-    //   this.dataForceGraph.links.forEach(d => {
-    //     linkedByIndex[d.source.index + ',' + d.target.index] = 1
-    //   })
-    //   return linkedByIndex
-    // }
   },
   methods: {
     initScale () {
@@ -180,9 +128,9 @@ export default {
         .force('center', d3.forceCenter(this.svgWidth / 2, this.svgHeight / 2))
         .force('collide', d3.forceCollide().radius((d) => {
           if (d.party === '公司') {
-            return Math.sqrt(this.scale.r(find(this.dataForceDonateSum.company, [ 'key', d.id ]).value.total) * 20) + 0.5
+            return Math.sqrt(this.scale.r(get(this.dataForceDonateSum.company, d.id, 0) * 20) + 0.5)
           } else {
-            return Math.sqrt(this.scale.r(find(this.dataForceDonateSum.candidate, [ 'key', d.id ]).value.total) * 20) + 0.5
+            return Math.sqrt(this.scale.r(get(this.dataForceDonateSum.candidate, d.id, 0) * 20) + 0.5)
           }
         }).iterations(2))
     },
@@ -275,9 +223,9 @@ export default {
         })
         .attr('r', d => {
           if (d.type === 'candidate') {
-            return Math.sqrt(this.scale.r(find(this.dataForceDonateSum.candidate, ['key', d.id]).value.total) * 20)
+            return Math.sqrt(this.scale.r(get(this.dataForceDonateSum.candidate, d.id, 0) * 20))
           } else {
-            return Math.sqrt(this.scale.r(find(this.dataForceDonateSum.company, ['key', d.id]).value.total) * 20)
+            return Math.sqrt(this.scale.r(get(this.dataForceDonateSum.company, d.id, 0) * 20))
           }
         })
         .attr('fill', d => {
@@ -416,17 +364,17 @@ export default {
       if (type === 'position') {
         return  (d) => {
           if (d.type === 'candidate') {
-            return -(Math.sqrt(this.scale.r(find(this.dataForceDonateSum.candidate, ['key', d.id]).value.total) * 23))
+            return -(Math.sqrt(this.scale.r(get(this.dataForceDonateSum.candidate, d.id, 0)) * 23))
           } else {
-            return -(Math.sqrt(this.scale.r(find(this.dataForceDonateSum.company, ['key', d.id]).value.total) * 23))
+            return -(Math.sqrt(this.scale.r(get(this.dataForceDonateSum.company, d.id, 0)) * 23))
           }
         }
       } else if (type === 'size') {
         return  (d) => {
           if (d.type === 'candidate') {
-            return (Math.sqrt(this.scale.r(find(this.dataForceDonateSum.candidate, ['key', d.id]).value.total) * 23)) * 2
+            return (Math.sqrt(this.scale.r(get(this.dataForceDonateSum.candidate, d.id, 0)) * 23)) * 2
           } else {
-            return (Math.sqrt(this.scale.r(find(this.dataForceDonateSum.company, ['key', d.id]).value.total) * 23)) * 2
+            return (Math.sqrt(this.scale.r(get(this.dataForceDonateSum.company, d.id, 0)) * 23)) * 2
           }
         }
       }
@@ -563,7 +511,7 @@ export default {
       this.initNodeLink()
       this.applySimulation()
       this.setLinkedByIndex()
-      // this.execZoomFit(200, 250)
+      this.execZoomFit(200, 250)
 
       this.$root.$on('toogleZoom', type => {
         if (type === 'zoomIn') {

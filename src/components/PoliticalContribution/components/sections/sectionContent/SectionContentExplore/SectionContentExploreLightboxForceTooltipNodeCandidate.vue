@@ -40,7 +40,7 @@ export default {
       return this.rawDataBasicCurrentOrdinalGroupByCandidate[this.dataForceTooltipCurrentIdentityId]
     },
     dataForceTooltipDonateSum () {
-      return (get(find(this.dataForceDonateSum[this.dataForceTooltipCurrentIdentityType], [ 'key', this.dataForceTooltipCurrentIdentityId ]), [ 'value', 'total' ], 0) / 10000).toFixed(2)
+      return (get(this.dataForceDonateSum, [this.dataForceTooltipCurrentIdentityType, this.dataForceTooltipCurrentIdentityId], 0) / 10000).toFixed(2)
     },
     isCandidateWon () {
       return get(this.dataForceTooltipDataBasic, [ 0, '當選註記' ], '') === '*'
