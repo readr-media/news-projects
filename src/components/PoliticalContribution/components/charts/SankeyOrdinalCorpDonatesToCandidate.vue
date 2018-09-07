@@ -19,7 +19,7 @@
 <script>
 import { get, isEmpty, sortBy, sumBy, groupBy, uniqBy, some } from 'lodash'
 import * as d3 from 'd3'
-import { sankey as d3Sankey, sankeyLinkHorizontal } from 'd3-sankey'
+import { sankey as d3Sankey, sankeyLinkHorizontal } from './d3-sankey'
 
 import ChartLazyVisualizing from '../../mixins/ChartLazyVisualizing'
 

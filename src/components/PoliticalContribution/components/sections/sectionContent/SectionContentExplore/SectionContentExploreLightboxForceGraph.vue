@@ -24,7 +24,7 @@ export default {
   },
   data () {
     return {
-      isRepainting: false,
+      // isRepainting: false,
       scale: undefined,
       svg: undefined,
       svgWidth: undefined,
@@ -563,7 +563,7 @@ export default {
       this.initNodeLink()
       this.applySimulation()
       this.setLinkedByIndex()
-      this.execZoomFit(200, 250)
+      // this.execZoomFit(200, 250)
 
       this.$root.$on('toogleZoom', type => {
         if (type === 'zoomIn') {

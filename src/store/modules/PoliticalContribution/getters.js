@@ -295,14 +295,8 @@ export default {
   dataForceDonateSum: (state, getters) => {
     const relatedData = getters.dataCompanyDonateCurrentOrdinalNameLightboxShownRelated
     return {
-      'candidate': d3.nest()
-        .key(d => d['候選人'])
-        .rollup(leaves => { return {'total': d3.sum(leaves, d => +d['收入金額'] * 100000) / 100000} })
-        .entries(relatedData),
-      'company': d3.nest()
-        .key(returnGroupThenCompany)
-        .rollup(leaves => { return {'total': d3.sum(leaves, d => +d['收入金額'] * 100000) / 100000} })
-        .entries(relatedData)
+      'candidate': mapValues(groupBy(relatedData, '候選人'), donates => donates.reduce((acc, curr) => acc + +(curr['收入金額'].split(',').join()), 0)),
+      'company': mapValues(groupBy(relatedData, returnGroupThenCompany), donates => donates.reduce((acc, curr) => acc + +(curr['收入金額'].split(',').join()), 0)),
     }
   },
   dataForceGraph: (state, getters) => {
@@ -351,6 +345,14 @@ export default {
       })
     })
     return resultGraph
+  },
+  dataForceLinkedByIndex: (state, getters) => {
+    if (isEmpty(getters.dataForceGraph.links)) return {}
+    let linkedByIndex = {}
+    getters.dataForceGraph.links.forEach(d => {
+      linkedByIndex[d.source + ',' + d.target] = true
+    })
+    return linkedByIndex
   },
   hasDataForceGraph: (state, getters) => {
     return !isEmpty(getters.dataForceGraph.nodes) && !isEmpty(getters.dataForceGraph.links)

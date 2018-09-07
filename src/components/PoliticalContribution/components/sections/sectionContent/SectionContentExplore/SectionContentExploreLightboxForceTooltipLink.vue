@@ -24,7 +24,6 @@ export default {
     ...mapGetters([
       'rawDataCompanyDonateCurrentOrdinalGroupByGroupOrCompany',
       'dataForceNested',
-      'dataForceDonateSum',
       'dataForceTooltipCurrentIdentityType',
       'dataForceTooltipCurrentIdentityId',
     ]),

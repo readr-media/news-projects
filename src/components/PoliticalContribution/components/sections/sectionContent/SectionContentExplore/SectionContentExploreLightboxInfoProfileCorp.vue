@@ -87,7 +87,7 @@ export default {
       if (this.isQueryValidCompanyBelongsGroup) {
         return (sumBy(this.rankDataGroupCompanyDonatesCurrentOrdinalNameLightboxShown, 'value') / 10000).toFixed(2)
       } else {
-        return (get(find(this.dataForceDonateSum['company'], [ 'key', this.groupNameOrCompanyTaxId ]), [ 'value', 'total' ], 0) / 10000).toFixed(2)
+        return (get(this.dataForceDonateSum['company'], this.groupNameOrCompanyTaxId, 0) / 10000).toFixed(2)
       }
     },
     companyResData () {
