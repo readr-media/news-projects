@@ -13,14 +13,14 @@ const defaultLinkOpacity = .7
 function isConnected (a, b, linkedByIndex) {
   return linkedByIndex[a.id + ',' + b.id] || linkedByIndex[b.id + ',' + a.id] || a.id === b.id
 }
-export function mouseoverHandlerNode (vm) {
+export function mouseoverHandlerNode (vm, linkedByIndex) {
   return (d) => {
     d3.selectAll('.circles')
-      .style('stroke-opacity', o => isConnected(d, o, vm.dataForceLinkedByIndex) ? 1 : fadeOpacity)
-      .style('fill-opacity', o => isConnected(d, o, vm.dataForceLinkedByIndex) ? 1 : fadeOpacity)
+      .style('stroke-opacity', o => isConnected(d, o, linkedByIndex) ? 1 : fadeOpacity)
+      .style('fill-opacity', o => isConnected(d, o, linkedByIndex) ? 1 : fadeOpacity)
 
     d3.selectAll('.images')
-      .style('opacity', o => isConnected(d, o, vm.dataForceLinkedByIndex) ? 1 : fadeOpacity)
+      .style('opacity', o => isConnected(d, o, linkedByIndex) ? 1 : fadeOpacity)
 
     d3.selectAll('.links line')
       .style('stroke-opacity', o => o.source === d || o.target === d ? 0.7 : fadeOpacity)

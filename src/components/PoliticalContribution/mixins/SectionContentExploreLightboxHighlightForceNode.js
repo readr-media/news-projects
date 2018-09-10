@@ -19,7 +19,7 @@ export default {
     highlightForceNode (name) {
       if (!this.$store.state.useragent.isDesktop) return
       if (this.hasDataForceGraph) {
-        const forceHighlightCircle = document.querySelector(`#circle-${name}`)
+        const forceHighlightCircle = document.querySelector(`#node-${name}`)
         const forceHighlightImage = document.querySelector(`#image-${name}`)
         if (forceHighlightCircle && forceHighlightImage) {
           let event = new MouseEvent('mouseover', {})
@@ -31,7 +31,7 @@ export default {
     resumeForceNode (name) {
       if (!this.$store.state.useragent.isDesktop) return
       if (this.hasDataForceGraph) {
-        const forceHighlightCircle = document.querySelector(`#circle-${name}`)
+        const forceHighlightCircle = document.querySelector(`#node-${name}`)
         const forceHighlightImage = document.querySelector(`#image-${name}`)
         if (forceHighlightCircle && forceHighlightImage) {
           let event = new MouseEvent('mouseout', {})

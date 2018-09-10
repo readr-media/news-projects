@@ -56,7 +56,7 @@ import SectionContentExploreRadios from './SectionContentExploreRadios.vue'
 import SectionContentExploreLightboxSearch from './SectionContentExploreLightboxSearch.vue'
 import SectionContentExploreLightboxForceZoom from './SectionContentExploreLightboxForceZoom.vue'
 import SectionContentExploreLightboxForceTooltip from './SectionContentExploreLightboxForceTooltip.vue'
-import SectionContentExploreLightboxForceGraph from './SectionContentExploreLightboxForceGraph2.vue'
+import SectionContentExploreLightboxForceGraph from './SectionContentExploreLightboxForceGraph.vue'
 import SectionContentExploreLightboxForceLegend from './SectionContentExploreLightboxForceLegend.vue'
 
 import { createNamespacedHelpers } from 'vuex'
