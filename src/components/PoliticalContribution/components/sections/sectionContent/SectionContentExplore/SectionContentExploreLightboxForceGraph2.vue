@@ -58,61 +58,19 @@ export default {
     }
   },
   watch: {
-    // dataForceGraph (newv, oldv) {
-    //   console.log(oldv)
-    //   if (this.hasDataForceGraph) {
-    //     if (this.svg === undefined) {
-    //       console.log('initGraph')
-    //       this.visualizeGraph()
-    //     } else {
-    //       console.log('updateGraph')
-    //       this.updateScales()
-    //       this.joinNodeLink()
-    //       this.applySimulation()
-    //     }
-    //   }
-    // },
     dataForceGraph () {
       if (this.hasDataForceGraph) {
         if (this.svg === undefined) {
           this.visualizeGraph()
         } else {
-          // this.updateScales()
-          // this.joinNodeLink()
-          // this.applySimulation()
+          this.updateScales()
+          this.joinNodeLink()
+          this.applySimulation()
         }
       }
     },
-    // hasDataForceGraph () {
-    //   if (this.hasDataForceGraph) {
-    //     if (this.svg === undefined) {
-    //       this.visualizeGraph()
-    //     } else {
-    //       this.updateScales()
-    //       this.joinNodeLink()
-    //       this.applySimulation()
-    //     }
-    //   }
-    // }
-    nameLightboxShown () {
-      if (this.svg !== undefined ) {
-        this.updateScales()
-        this.joinNodeLink()
-        this.applySimulation()
-      }
-    },
-    ordinalUrlQuery () {
-      if (this.svg !== undefined ) {
-        this.updateScales()
-        this.joinNodeLink()
-        this.applySimulation()
-      }
-    }
   },
   computed: {
-    shouldInit () {
-      return this.svg === undefined
-    },
     ...mapGetters([
       'dataCompanyDonateCurrentOrdinalNameLightboxShownRelated',
       'dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByGroupOrCompany',
