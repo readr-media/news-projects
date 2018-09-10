@@ -202,18 +202,21 @@ export default {
           .data(this.dataForceGraph.nodes, d => d.id)
 
       this.node.exit().remove()
-        
+      
+      this.node
+        .on('mouseover', mouseoverHandlerNode(this, this.dataForceLinkedByIndex))
+        .on('mouseout', mouseoutHandlerNode(this))
       this.node
         .selectAll('.circles')
-        .attr('r', d => this.getNodeRadius(d))
+          .attr('r', d => this.getNodeRadius(d))
       this.node
         .selectAll('.images')
-        .attr('x', setNodeImage(this, 'position'))
-        .attr('y', setNodeImage(this, 'position'))
-        .attr('width', setNodeImage(this, 'size'))
-        .attr('height', setNodeImage(this, 'size'))
-        .style('clip-path', d => d.party !== '公司' ? `circle(50% at ${this.getNodeRadius(d)}px ${this.getNodeRadius(d)}px)` : '')
-        .style('-webkit-clip-path', d => d.party !== '公司' ? `circle(50% at ${this.getNodeRadius(d)}px ${this.getNodeRadius(d)}px)` : '')
+          .attr('x', setNodeImage(this, 'position'))
+          .attr('y', setNodeImage(this, 'position'))
+          .attr('width', setNodeImage(this, 'size'))
+          .attr('height', setNodeImage(this, 'size'))
+          .style('clip-path', d => d.party !== '公司' ? `circle(50% at ${this.getNodeRadius(d)}px ${this.getNodeRadius(d)}px)` : '')
+          .style('-webkit-clip-path', d => d.party !== '公司' ? `circle(50% at ${this.getNodeRadius(d)}px ${this.getNodeRadius(d)}px)` : '')
 
       this.node =
         this.node
@@ -226,7 +229,7 @@ export default {
                 .on('drag', dragged(this))
                 .on('end', dragended(this))
             )
-            .on('mouseover', mouseoverHandlerNode(this))
+            .on('mouseover', mouseoverHandlerNode(this, this.dataForceLinkedByIndex))
             .on('mouseout', mouseoutHandlerNode(this))
             .on('click', d => {
               if (d.type === 'company') {

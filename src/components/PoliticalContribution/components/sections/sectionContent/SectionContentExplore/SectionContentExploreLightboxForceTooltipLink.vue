@@ -56,6 +56,7 @@ export default {
   h1
     font-size 28px
     margin 10px 0
+    font-weight 400
   p
     font-size 16px
     margin 10px 0
