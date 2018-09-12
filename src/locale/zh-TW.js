@@ -105,5 +105,9 @@ export default Object.assign({
       '無黨團結聯盟': 'npsu',
       '親民黨': 'pfp',
     }
-  }
+  },
+  'MORE': '看更多',
+  'RELATED_REPORT': '其他議題',
+  'DONATE_PREFIX': '贊助',
+  'DONATE_POSTFIX': '報導',
 }, rent)

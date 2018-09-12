@@ -189,6 +189,7 @@
       <p><a href="https://www.mirrormedia.mg/story/20180125pol025/" target="_blank">異鄉安魂曲　越南移工阮國非之死</a></p>
     </section>
     <related-reports></related-reports>
+    <DonateHint></DonateHint>
     <section class="foreign-labour__comment">
       <div class="fb-comments" :data-href="commentsUrl" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
     </section>
@@ -199,6 +200,7 @@
   import { currEnv } from '../../util/comm'
   import { currentYPosition, elmYPosition, smoothScroll } from 'kc-scroll'
   import { get, map } from 'lodash'
+  import DonateHint from 'src/components/DonateHint.vue'
   import Logo from '../Logo.vue'
   import RelatedReports from '../RelatedReports.vue'
   import Share from '../Share.vue'
@@ -210,7 +212,8 @@
     components: {
       'app-logo': Logo,
       'app-share': Share,
-      'related-reports': RelatedReports
+      'related-reports': RelatedReports,
+      DonateHint,
     },
     metaInfo () {
       let metaUrl = PROJECT_NAME

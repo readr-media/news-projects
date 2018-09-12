@@ -12,13 +12,14 @@
     <MainContent v-show="isLoaded"></MainContent>
     <footer v-show="isLoaded">
       <Extends></Extends>
-      <div class="other-reports"><span v-text="$t('RENT.OTHER_REPORTS')"></span></div>
-      <RelatedReports theme="white"></RelatedReports>    
+      <RelatedReports theme="light" :displayTitle="true"></RelatedReports>    
     </footer>
+    <DonateHint theme="light"></DonateHint>
   </div>
 </template>
 <script>
   import Brief from 'src/components/Rent/Brief.vue'
+  import DonateHint from 'src/components/DonateHint.vue'
   import Extends from 'src/components/Rent/Extends.vue'
   import Logo from 'src/components/Logo.vue'
   import MainContent from 'src/components/Rent/MainContent.vue'
@@ -61,6 +62,7 @@
     },
     components: {
       Brief,
+      DonateHint,
       Extends,
       Logo,
       MainContent,

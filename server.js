@@ -146,7 +146,8 @@ function render (req, res, next) {
     url: req.url,
     useragent: req.useragent,
     setting: {
-      GOOGLE_RECAPTCHA_SITE_KEY: config.GOOGLE_RECAPTCHA_SITE_KEY
+      GOOGLE_RECAPTCHA_SITE_KEY: config.GOOGLE_RECAPTCHA_SITE_KEY,
+      DONATION_ACTIVE: config.DONATION_ACTIVE,
     },
     favicon: 'https://www.readr.tw/public/favicon.png',
     siteName: '讀＋READr'

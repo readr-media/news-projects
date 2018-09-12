@@ -3,8 +3,7 @@
     <AppFooterPromiseDone/>
     <AppFooterCredits class="footer__credits"/>
     <section class="footer__relateds relateds">
-      <h1 class="relateds__title">其他議題</h1>
-      <RelatedReports class="relateds__reports"/>
+      <RelatedReports class="relateds__reports" :displayTitle="true" />
     </section>
   </footer>
 </template>

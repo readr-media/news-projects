@@ -1,25 +1,33 @@
 <template>
-  <section class="related-reports" :class="theme">
-    <a v-for="report in highlight" :key="report.id" class="report" :href="getReportUrl(report.slug)" target="_blank">
-      <div class="report__img" :style="{ 'background-image': `url(${getReportImg(report)})` }"></div>
-      <h1 v-text="report.title"></h1>
-      <p v-text="report.description"></p>
+  <div class="related-reports--wrapper">
+    <a :href="`/series/${currentProjectSlug}/donate`" class="related-reports--donate" :class="theme" v-if="currentProjectSlug && donationActive" target="_blank">
+      <span v-text="$t('DONATE_PREFIX')"></span>
+      <span class="donate-icon"></span>
+      <span v-text="$t('DONATE_POSTFIX')"></span>
     </a>
-    <template v-for="items in loadmoreItems" v-if="showLoadmore">
-      <a v-for="report in items" v-if="items.length === 3 || (!hasMore && items.length < 3)" :key="report.id" class="report" :href="getReportUrl(report.slug)" target="_blank">
+    <div class="related-reports--title" :class="{ active: displayTitle, }"><span v-text="$t('RELATED_REPORT')"></span></div>
+    <section class="related-reports" :class="theme">
+      <a v-for="report in highlight" :key="report.id" class="report" :href="getReportUrl(report.slug)" target="_blank">
         <div class="report__img" :style="{ 'background-image': `url(${getReportImg(report)})` }"></div>
         <h1 v-text="report.title"></h1>
         <p v-text="report.description"></p>
       </a>
-    </template>
-    <div>
-      <button v-if="hasMore" @click="loadmore">看更多</button>
-    </div>
-  </section>
+      <template v-for="items in loadmoreItems" v-if="showLoadmore">
+        <a v-for="report in items" v-if="items.length === 3 || (!hasMore && items.length < 3)" :key="report.id" class="report" :href="getReportUrl(report.slug)" target="_blank">
+          <div class="report__img" :style="{ 'background-image': `url(${getReportImg(report)})` }"></div>
+          <h1 v-text="report.title"></h1>
+          <p v-text="report.description"></p>
+        </a>
+      </template>
+      <div>
+        <button v-if="hasMore" @click="loadmore" v-text="$t('MORE')"></button>
+      </div>
+    </section>  
+  </div>
 </template>
 
 <script>
-import { chunk, filter, get, slice, take } from 'lodash'
+import { chunk, find, filter, get, slice, take } from 'lodash'
 import { getReportUrl } from 'src/util/comm'
 
 const MAXRESULT_REPORTS = 4
@@ -53,7 +61,11 @@ export default {
     theme: { // value: dark, white
       type: String,
       default: 'dark',
-    }
+    },
+    displayTitle: {
+      type: Boolean,
+      default: false,
+    },
   },
   data () {
     return {
@@ -64,6 +76,12 @@ export default {
   computed: {
     currentSlug () {
       return get(this.$route, 'params.project', '')
+    },
+    currentProjectSlug () {
+      return get(find(get(this.$store, 'state.reports'), { slug: this.currentSlug }), 'project.slug')
+    },
+    donationActive () {
+      return get(this.$store, 'state.setting.DONATION_ACTIVE', false)
     },
     highlight () {
       return take(this.reports, 3)
@@ -98,6 +116,47 @@ export default {
 <style lang="stylus">
 
 .related-reports
+  &--donate
+    width calc(100% - 40px)
+    display flex
+    justify-content center
+    align-items center
+    background-color #ddcf21
+    font-size 1.75rem
+    text-shadow none
+    padding 10px
+    margin 50px auto
+    &, &:hover, &:link, &:visited
+      color #000
+      text-decoration none
+    &:hover
+      box-shadow 0 0 15px rgba(0, 0, 0, 0.2)
+    &.dark
+      background-color #fff
+      .donate-icon
+        background-image url(/proj-assets/donate.png)
+      &:hover
+        box-shadow 0 0 15px rgba(255, 255, 255, 0.9)    
+    .donate-icon
+      height 34px
+      width 34px
+      display inline-block
+      margin 0 10px
+      background-image url(/proj-assets/donate-black.png)
+      background-repeat no-repeat
+      background-size contain
+      background-position center center
+  &--title
+    display none
+    width 100%
+    font-size 2.125rem
+    font-weight normal
+    line-height 1.06
+    color #313131    
+    justify-content center
+    align-items center
+    &.active
+      display flex
   position relative
   > div
     width calc(100% - 40px)
@@ -144,7 +203,7 @@ export default {
     color #fff
     &:hover
       background-color #434343
-.related-reports.white
+.related-reports.light
   color #000
   button
     color #fff
@@ -163,6 +222,8 @@ export default {
     button
       width calc((100% - 60px) / 3)
       margin 0 auto
+    &--donate
+      width calc(60% - 50px)
   .report
     width calc((100% - 60px) / 3)
     margin 10px 10px
