@@ -14,16 +14,28 @@ pipeline:
     when:
       event: [push]
   
-  get_config:
+  get_dev_config:
     image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
     secrets: [google_credentials]
     commands:
-    - gcloud source repos clone default default
-    - cp default/news-projects/config.js api/
+    - gcloud source repos clone default ../default
+    - cp ../default/news-projects/dev/config.js api/config.js
+    - cp ../default/readr-site/gcskeyfile.json ./gcskeyfile.json
     when:
       event: [push]
-      branch: [master, dev]
-
+      branch: dev
+  
+  get_production_config:
+    image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
+    secrets: [google_credentials]
+    commands:
+    - gcloud source repos clone default ../default
+    - cp ../default/news-projects/production/config.js api/config.js
+    - cp ../default/readr-site/gcskeyfile.json ./gcskeyfile.json
+    when:
+      event: [push]
+      branch: master
+  
   builds:
     image: node:8.11.3-alpine
     commands:
