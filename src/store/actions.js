@@ -5,6 +5,7 @@ import {
   getSheet,
   appendSheet,
   getDriveFile,
+  uploadImage,
 } from '../api'
 
 export default {
@@ -54,5 +55,8 @@ export default {
   },
   UPDATE_VIEWPORT: ({ state, commit }, viewport) => {
     commit('SET_VIEWPORT', viewport)
+  },
+  UPLOAD_IMAGE_TO_GCS: ({}, { file, folderName }) => {
+    return uploadImage({ file, folderName, })
   }
 }

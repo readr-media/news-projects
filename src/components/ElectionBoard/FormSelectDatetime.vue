@@ -1,0 +1,78 @@
+<template>
+  <div class="select-datetime">
+    <select v-model.number="year">
+      <option value="2018">2018 年</option>
+    </select>
+    <select v-model.number="month">
+      <template v-for="n in monthCurrent">
+        <option :key="`month-${n}`" :value="n" v-text="`${n} 月`"></option>
+      </template>
+    </select>
+    <select v-model.number="day">
+      <template v-for="n in daysInMonth">
+        <option :key="`day-${n}`" :value="n" v-text="`${n} 日`"></option>
+      </template>
+    </select>
+  </div>
+</template>
+<script>
+import moment from 'moment'
+
+export default {
+  name: 'FormSelectDatetime',
+  props: {
+    datetime: {
+      type: Number,
+    }
+  },
+  data () {
+    return {
+      year: moment(this.datetime * 1000).year(),
+      month: moment(this.datetime * 1000).month() + 1,
+      monthCurrent: moment().month() + 1,
+      day: moment(this.datetime * 1000).date(),
+      dayCurrent: moment().date()
+    }
+  },
+  computed: {
+    daysInMonth () {
+      if (this.month === this.monthCurrent) {
+        return this.dayCurrent
+      }
+      return moment(`${this.year}-${this.month}`, 'YYYY-M').daysInMonth()
+    },
+    datetimeSelected () {
+      return moment(`${this.year}-${this.month}-${this.day}`, 'YYYY-M-D').unix() 
+    }
+  },
+  watch: {
+    month () {
+      this.day = 1
+    },
+    datetime (value) {
+      this.year = moment(value * 1000).year()
+      this.month = moment(value * 1000).month() + 1
+      this.day = moment(value * 1000).date()
+    },
+    datetimeSelected (value) {
+      this.$emit('updateDatetime', value)
+    }
+  }
+}
+</script>
+<style lang="stylus" scoped>
+.select-datetime
+  display flex
+  justify-content space-between
+  margin-top .5em
+  > select
+    width calc(33% - 5px)
+    height 30px
+    text-indent .5em
+    background-color #a0a0a0
+    border none
+    border-radius 2px
+    -webkit-appearance none
+    -moz-appearance none
+    appearance none
+</style>

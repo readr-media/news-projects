@@ -6,6 +6,7 @@ export default {
   // |------YourProject.vue
   'chenuen': 'Chenuen',
   'dollclaw': 'Dollclaw',
+  'election-board': 'ElectionBoard',
   'farmhouse': 'Farmhouse',
   'foreign-labour': 'ForeignLabour',
   'foreign-labour-ii': 'ForeignLabourII',
