@@ -94,12 +94,14 @@ export const PROJECTS_USE_DEPRECATED_GA = [
 
 // include project url path name which need google map
 export const PROJECTS_NEED_GOOGLE_MAP = [
+  'election-board',
   'farmhouse'
 ]
 
 // include project url path name which need google reCAPTCHA
 export const PROJECTS_NEED_GOOGLE_RECAPTCHA = [
-  'president-promise'
+  'election-board',
+  'president-promise',
 ]
 
 export const PROJECTS_NOT_NEED_TYPEKIT = [

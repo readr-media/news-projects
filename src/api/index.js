@@ -89,3 +89,13 @@ export function getDriveFile ({ params = {} } = {}) {
   }
   return _doFetch(url)
 }
+
+export function uploadImage({ file, folderName, }) {
+  const url = `/project-api/upload/image`
+  return axios.post(url, file, {
+    headers: {
+      'content-type': 'multipart/form-data',
+      'folder-name': folderName
+    },
+  })
+}

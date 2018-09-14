@@ -1,9 +1,15 @@
 const { API_HOST, API_PORT, API_PROTOCOL, API_TIMEOUT, } = require('./config')
 const { fetchFromRedis, insertIntoRedis, } = require('./middle/redisHandler')
+const { initBucket, makeFilePublic, uploadFileToBucket } = require('./service/google/storage')
+const { generateToken } = require('./service/jwt')
 const express = require('express')
+const fs = require('fs')
 const router = express.Router()
 const bodyParser = require('body-parser')
 const axios = require('axios')
+const moment = require('moment')
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const apiHost = API_PROTOCOL + '://' + API_HOST + ':' + API_PORT
 const debug = require('debug')('READR-PROJECT:api')
@@ -48,9 +54,15 @@ router.use('*', (req, res, next) => {
   next()
 })
 
+router.use('/election-board', require('./middle/election-board'))
 router.use('/googlesheet', require('./middle/googlesheet'))
 router.use('/googledrive', require('./middle/googledrive'))
 router.use('/rent', require('./middle/rent'))
+
+router.get('/token', (req, res) => {
+  const token = generateToken()
+  res.json({ token: token })
+})
 
 router.get('/reports', (req, res, next) => {
   req.url = req.url.replace('/reports', '/report/list')
@@ -96,5 +108,39 @@ router.get('/report/count', fetchFromRedis, (req, res, next) => {
       handleError(err, res)
     })
 }, insertIntoRedis)
+
+// auth issue
+router.post('/upload/image', upload.single('image'), (req, res) => {
+  const file = req.file
+  const fileFormat = file.originalname.split('.')[1].toLowerCase()
+  const fileName = `${moment().unix()}-${file.filename}.${fileFormat}`
+  const path = file.path
+  const folderName = req.headers['folder-name']
+  
+  if (!folderName) {
+    res.status(400).send('folder name is missing.')
+  } else {
+    const bucket = initBucket()
+    const destination = `${folderName}/uploads/images/${fileName}`
+    uploadFileToBucket(bucket, path, {
+      destination: destination,
+      metadata: {
+        contentType: file.mimetype,
+      },
+    }).then(bucketFile => {
+      makeFilePublic(bucketFile)
+      fs.unlink(path, (err) => {
+        if (err) { console.error(`Error: delete ${path} fail`) }
+      })
+      console.info(`file ${fileName}(${path}) completed uploading to bucket `)
+      res.status(200).send({ url: `/proj-assets/${destination}` })
+    })
+    .catch(err => {
+      res.status(500).send(err)
+      console.error(`error during fetch data from : ${url}`)
+      console.error(err)
+    })
+  }
+})
 
 module.exports = router
