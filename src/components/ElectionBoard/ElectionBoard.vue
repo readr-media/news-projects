@@ -31,7 +31,7 @@ export default {
   },
   metaInfo() {
     const metaUrl = this.$route.fullPath.split('/project/')[1];
-    const metaImage = ``;
+    const metaImage = `election-board/images/og.jpg`;
     const ogLocale = 'zh_TW';
 
     return {
@@ -95,8 +95,8 @@ export default {
   &__share
     &.share
       .toggle
-        background-image url(/proj-assets/election-board/images/share.png)
-        background-size 34px auto
-        background-position center center
+        background-image url(/proj-assets/election-board/images/share.png) !important
+        background-size 34px auto !important
+        background-position center center !important
 </style>
 

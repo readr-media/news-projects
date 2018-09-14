@@ -137,8 +137,7 @@ export default {
   },
   computed: {
     canSubmit () {
-      return this.current === 2 && this.userId && this.imgURL && this.coordinate.length === 2 && !this.showCheckPosition
-      // return this.current === 2 && this.userId && this.imgURL && this.coordinate.length === 2 && !this.showCheckPosition && this.recaptchaVerified
+      return this.current === 2 && this.userId && this.imgURL && this.coordinate.length === 2 && !this.showCheckPosition && this.recaptchaVerified
     },
     councilorCandidates () {
       if (this.county && this.district) {
@@ -237,7 +236,6 @@ export default {
       this.candidateAmount -= 1
     },
     recaptchaVerify (res) {
-      console.log('recaptchaVerify !!')
       this.recaptchaVerified = true
     },
     setCookie () {

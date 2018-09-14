@@ -34,7 +34,6 @@ export default {
   },
   watch: {
     coordinate (value) {
-      console.log('coordinate change', value)
       if (this.inited) {
         const latlng = new google.maps.LatLng(value[0], value[1])
         this.map.setCenter(latlng)

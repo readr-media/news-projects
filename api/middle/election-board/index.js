@@ -65,7 +65,6 @@ router.post('/boards', verifyToken, (req, res) => {
   const body = mapKeys(req.body, (value, key) => snakeCase(key))
   const url = `${apiHost}/api${req.url}/`
   redisWriting(token, 'used', null, 48 * 60 * 60 * 1000)
-  console.log('--- body', body)
   axios.post(url, body, { headers: { Authorization: token }, timeout: API_TIMEOUT })
   .then(response => {
     res.json(response.data)

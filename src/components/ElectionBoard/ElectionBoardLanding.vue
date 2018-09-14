@@ -225,9 +225,11 @@ color-data-hidden = #184b78
               margin-top 1em
 @media (min-width: 768px)
   .eb-landing
+    padding 60px 10%
     main
+      display block
       max-width 700px
-      flex-direction column
+      width 100%
       > *
         max-width none
     .image
@@ -236,6 +238,7 @@ color-data-hidden = #184b78
       > img
         position static
         width 100px
+        height auto
     .menu
       flex-direction row
       margin 55px 0 0 0
@@ -251,4 +254,6 @@ color-data-hidden = #184b78
       .intro-container
         max-width 500px
         margin 0 auto
+    .credit
+      width 100%
 </style>
