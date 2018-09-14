@@ -190,7 +190,6 @@ export default {
     getPhotoEXIF () {
       EXIF.getData(this.imgFile, () => {
         this.imgEXIF = EXIF.getAllTags(this.imgFile)
-        console.log('getPhotoEXIF', this.imgEXIF)
         if (!this.coordinateFromEXIF && navigator.geolocation) {
           navigator.geolocation.getCurrentPosition((position) => {
             const latitude = position.coords.latitude || DEFAULT_GPS_DMS[0]
