@@ -39,7 +39,7 @@
         />
       </div>
       <div v-show="showCaution" class="caution-container">
-        由於公司登記的類別資料為該公司的所有營業項目，無法單從資料辨識出主要產業，此區資料只計算「有母公司的公司」，其餘為無法辨識
+        此分類使用財政部稅籍資料，但一間公司並不一定只有一個營業類別。若該公司捐贈 2 萬元，登記類別為 A、B，則金額計算方式是 A 與 B 各 2 萬元。 (edited)
       </div>
     </div>
     <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart">
