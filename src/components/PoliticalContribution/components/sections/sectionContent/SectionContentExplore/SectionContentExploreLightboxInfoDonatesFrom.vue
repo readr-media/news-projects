@@ -136,7 +136,7 @@ export default {
     candidateDonatesIndustryTypeFrom () {
       // const mapValuesToDonatesSum = mapValues(this.dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIndustryType, rows => sumBy(rows, row => +(row['收入金額'].split(',').join(''))))
       // return take(sortBy(Object.entries(mapValuesToDonatesSum), ele => -ele[1]).map(ele => ({ from: ele[0], money: +ele[1]})), 4)
-      return take(this.dataIndustryPercentageMOFCurrentOrdinalNameLightboxShown.map(ele => ({ from: ele['行業別'], money: ele['行業別金額比例'] })), 4)
+      return take(this.dataIndustryPercentageMOFCurrentOrdinalNameLightboxShown.map(ele => ({ from: ele['大業別'], money: ele['大業別金額比例'] })), 4)
     },
     candidateDonatesCountyFrom () {
       const mapValuesToDonatesSum = mapValues(this.dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIsLocalCounty, rows => sumBy(rows, row => +(row['收入金額'].split(',').join(''))))
