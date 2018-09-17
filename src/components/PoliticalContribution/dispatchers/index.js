@@ -44,7 +44,7 @@ export const fetchSheetCorpNameTaxIdMapping = store => {
 export const fetchSheetIndustryPercentageMOF = (store, ordinal) => {
   return store.dispatch('PoliticalContribution/FETCH_DATA_ASSETS', {
     params: {
-      filePath: `/proj-assets/political-contribution/data/industryPercentage/${ordinal}-industry-percentage-MOF.csv`
+      filePath: `/proj-assets/political-contribution/data/industryPercentage/${ordinal}-industry-percentage-MOF-main.csv`
     }
   })
   .then(data => {
