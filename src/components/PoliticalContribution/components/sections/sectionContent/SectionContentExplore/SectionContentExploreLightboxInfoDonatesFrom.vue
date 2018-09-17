@@ -39,7 +39,7 @@
         />
       </div>
       <div v-show="showCaution" class="caution-container">
-        此分類使用財政部稅籍資料，但一間公司並不一定只有一個營業類別。若該公司捐贈 2 萬元，登記類別為 A、B，則金額計算方式是 A 與 B 各 2 萬元。 (edited)
+        此分類使用財政部稅籍資料，但一間公司並不一定只有一個營業類別。若該公司捐贈 2 萬元，登記類別為 A、B，則金額計算方式是 A 與 B 各 2 萬元。
       </div>
     </div>
     <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart">
