@@ -31,6 +31,7 @@ export default {
   padding 15px 0
   &__title
     font-size 22px
+    font-weight 400
     margin 5px 0
   &__subtitle
     font-size 18px

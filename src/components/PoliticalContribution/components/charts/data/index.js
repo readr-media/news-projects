@@ -2344,3 +2344,16 @@ export const DATA_ORDINAL_PARTY_DONATES_FROM = {
     ],
   }
 }
+
+export const GROUPS_TOP_TEN_DONATES_SEVENTH_EIGHTH_NINTH = [
+  '遠東集團',
+  '裕隆集團',
+  '味丹',
+  '仰德集團',
+  '台灣基礎集團',
+  '潤泰集團',
+  '威京集團',
+  '大慶集團',
+  '金鼎證券集團',
+  '燁聯鋼鐵集團',
+]

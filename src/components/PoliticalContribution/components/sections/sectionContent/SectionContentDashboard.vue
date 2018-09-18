@@ -4,7 +4,7 @@
       <SectionContentExploreRadios :class="[ 'section-content-dashboard__radios', { 'section-content-dashboard__radios--sticky': radiosFixed } ]"/>
 
       <div class="section-content-dashboard__charts section-content-dashboard__charts--mobile">
-        <AppChartCollapse :title="'總政治獻金的收入組成'">
+        <AppChartCollapse :title="'立委們總共收了<br>多少政治獻金？'">
           <BarHorizontalStackedOrdinalDonatesFrom
             class="chart-container__chart"
             id="dashboard-chart-ordinal-donates-from-mobile"
@@ -12,15 +12,7 @@
             :data="CHART_DATA.DATA_ALL_ORDINAL_DONATES_FROM"
           />
         </AppChartCollapse>
-        <AppChartCollapse :title="'年資和收入的關係'">
-          <ScatterNinthCandidateDonatesExp
-            class="chart-container__chart"
-            id="dashboard-chart-ninth-candidate-donates-exp-mobile"
-            :legends="CHART_DATA.DATA_NINTH_CANDIDATE_DONATES_EXP_LEGENDS"
-            :data="CHART_DATA.DATA_NINTH_CANDIDATE_DONATES_EXP"
-          />
-        </AppChartCollapse>
-        <AppChartCollapse :title="'候選人政黨政治獻金<br>收入組成'">
+        <AppChartCollapse :title="'各政黨立委都收哪種類型的政治獻金？'">
           <ParallelOrdinalPartyDonatesFrom
             class="chart-container__chart"
             id="dashboard-chart-ordinal-parallel-mobile"
@@ -28,15 +20,7 @@
             :data="CHART_DATA.DATA_ORDINAL_PARTY_DONATES_FROM"
           />
         </AppChartCollapse>
-        <AppChartCollapse :title="'誰收到最多捐獻<br>但沒選上'">
-          <BarHorizontalOrdinalCandidate
-            class="chart-container__chart"
-            id="dashboard-chart-ordinal-top-five-donates-but-lost-mobile"
-            :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
-            :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_BUT_LOST"
-          />
-        </AppChartCollapse>
-        <AppChartCollapse :title="'誰收到最多政治獻金捐贈？<br>（總收入）'">
+        <AppChartCollapse :title="'誰收到<br>最多政治獻金？'">
           <BarHorizontalOrdinalCandidate
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-five-donates-total-mobile"
@@ -44,7 +28,15 @@
             :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_TOTAL"
           />
         </AppChartCollapse>
-        <AppChartCollapse :title="'誰收到最多家企業捐獻<br>（營利事業捐贈數/候選人）'">
+        <AppChartCollapse :title="'誰在公司捐贈<br>收到最多錢？'">
+          <BarHorizontalOrdinalCandidate
+            class="chart-container__chart"
+            id="dashboard-chart-ordinal-top-five-donates-company-mobile"
+            :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
+            :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_COMPANY"
+          />
+        </AppChartCollapse>
+        <AppChartCollapse :title="'誰收到<br>最多家企業捐贈？'">
           <BarHorizontalOrdinalCandidate
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-five-donates-company-count-mobile"
@@ -53,7 +45,22 @@
             :dataHintUnit="'家'"
           />
         </AppChartCollapse>
-        <AppChartCollapse :title="'捐贈公司數<br>占全台同產業別比例前十名'">
+        <AppChartCollapse :title="'落選人中，誰收到<br>最多政治獻金？'">
+          <BarHorizontalOrdinalCandidate
+            class="chart-container__chart"
+            id="dashboard-chart-ordinal-top-five-donates-but-lost-mobile"
+            :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
+            :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_BUT_LOST"
+          />
+        </AppChartCollapse>
+        <AppChartCollapse :title="'哪些產業<br>捐最多錢給立委？'">
+          <BarHorizontalOrdinalIndustryDonates
+            class="chart-container__chart"
+            id="dashboard-chart-ordinal-top-ten-donates-industry-mobile"
+            :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY"
+          />
+        </AppChartCollapse>
+        <AppChartCollapse :title="'哪些產業<br>最積極捐錢給立委？'">
           <BarHorizontalOrdinalIndustryParticipate
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-ten-participate-industry-mobile"
@@ -61,32 +68,32 @@
             :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY"
           />
         </AppChartCollapse>
-        <AppChartCollapse :title="'現任立委佔優勢<br>（與非現任立委比較）'">
+        <AppChartCollapse :title="'哪些集團捐最多錢？<br>捐藍還捐綠？'">
+          <SectionContentDashboardOrdinalCorpDonatesMobile
+            class="chart-container__chart"
+            id="dashboard-chart-ordinal-corp-donates-mobile"
+          />
+        </AppChartCollapse>
+        <AppChartCollapse :title="'哪些集團三屆立委選舉都捐錢？政黨傾向變化？'">
+          <SectionContentDashboardOrdinalCorpDonatesMobile
+            class="chart-container__chart"
+            id="dashboard-chart-ordinal-corp-donates-mobile"
+            :filterCorp="CHART_DATA.GROUPS_TOP_TEN_DONATES_SEVENTH_EIGHTH_NINTH"
+          />
+        </AppChartCollapse>
+        <AppChartCollapse :title="'現任立委<br>比較容易選上'">
           <TableDuel
             class="chart-container__chart"
             id="dashboard-chart-table-duel-re-elected-or-not-mobile"
             :data="CHART_DATA.DATA_ORDINAL_DUEL_RE_ELECTED_OR_NOT"
           />
         </AppChartCollapse>
-        <AppChartCollapse :title="'現任立委佔優勢<br>（與第一次參選公職者比較）'">
+        <AppChartCollapse :title="'第一次參選公職者<br>當選率只有 9%'">
           <TableDuel
             class="chart-container__chart"
             id="dashboard-chart-table-duel-newbie-elected-or-not-mobile"
             :ordinal="'ninth'"
             :data="CHART_DATA.DATA_ORDINAL_DUEL_NEWBIE_ELECTED_OR_NOT"
-          />
-        </AppChartCollapse>
-        <AppChartCollapse :title="'佛心產業前十名'">
-          <BarHorizontalOrdinalIndustryDonates
-            class="chart-container__chart"
-            id="dashboard-chart-ordinal-top-ten-donates-industry-mobile"
-            :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY"
-          />
-        </AppChartCollapse>
-        <AppChartCollapse :title="'哪個集團捐最多'">
-          <SectionContentDashboardOrdinalCorpDonatesMobile
-            class="chart-container__chart"
-            id="dashboard-chart-ordinal-corp-donates-mobile"
           />
         </AppChartCollapse>
       </div>
@@ -98,25 +105,25 @@
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-1' } ]"
               @click="currentChartShown = '1-1'"
             >
-              總政治獻金的<br>收入組成
+              立委們總共收了<br>多少政治獻金？
             </button>
             <button
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-2' } ]"
               @click="currentChartShown = '1-2'"
             >
-              年資和收入的關係
+              各政黨立委都收哪種類型的政治獻金？
             </button>
             <button
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-3' } ]"
               @click="currentChartShown = '1-3'"
             >
-              候選人政黨政治獻金<br>收入組成
+              誰收到<br>最多政治獻金？
             </button>
             <button
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-4' } ]"
               @click="currentChartShown = '1-4'"
             >
-              誰收到最多捐獻<br>但沒選上
+              誰在公司捐贈<br>收到最多錢？
             </button>
           </div>
           <AppChartExpand
@@ -145,21 +152,8 @@
             </div>
             <div
               class="chart-container"
-              id="dashboard-chart-ninth-candidate-donates-exp-chart-container"
-              v-if="currentChartShownRow === '1' && currentChartShownColumn === '2'"
-              slot="chart"
-            >
-              <ScatterNinthCandidateDonatesExp
-                class="chart-container__chart"
-                id="dashboard-chart-ninth-candidate-donates-exp"
-                :legends="CHART_DATA.DATA_NINTH_CANDIDATE_DONATES_EXP_LEGENDS"
-                :data="CHART_DATA.DATA_NINTH_CANDIDATE_DONATES_EXP"
-              />
-            </div>
-            <div
-              class="chart-container"
               id="dashboard-chart-ordinal-parallel-chart-container"
-              v-if="currentChartShownRow === '1' && currentChartShownColumn === '3'"
+              v-if="currentChartShownRow === '1' && currentChartShownColumn === '2'"
               slot="chart"
             >
               <ParallelOrdinalPartyDonatesFrom
@@ -171,15 +165,28 @@
             </div>
             <div
               class="chart-container"
-              id="dashboard-chart-ordinal-top-five-donates-but-lost-chart-container"
+              id="dashboard-chart-ordinal-top-five-donates-total-chart-container"
+              v-if="currentChartShownRow === '1' && currentChartShownColumn === '3'"
+              slot="chart"
+            >
+              <BarHorizontalOrdinalCandidate
+                class="chart-container__chart"
+                id="dashboard-chart-ordinal-top-five-donates-total"
+                :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
+                :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_TOTAL"
+              />
+            </div>
+            <div
+              class="chart-container"
+              id="dashboard-chart-ordinal-top-five-donates-company-chart-container"
               v-if="currentChartShownRow === '1' && currentChartShownColumn === '4'"
               slot="chart"
             >
               <BarHorizontalOrdinalCandidate
                 class="chart-container__chart"
-                id="dashboard-chart-ordinal-top-five-donates-but-lost"
+                id="dashboard-chart-ordinal-top-five-donates-company"
                 :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
-                :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_BUT_LOST"
+                :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_COMPANY"
               />
             </div>
           </AppChartExpand>
@@ -190,25 +197,25 @@
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-1' } ]"
               @click="currentChartShown = '2-1'"
             >
-              誰收到最多政治獻金捐贈？（總收入）
+              誰收到<br>最多家企業捐贈？
             </button>
             <button
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-2' } ]"
               @click="currentChartShown = '2-2'"
             >
-              誰收到最多營利事業<br>政治獻金捐贈？
+              落選人中，誰收到<br>最多政治獻金？
             </button>
             <button
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-3' } ]"
               @click="currentChartShown = '2-3'"
             >
-              誰收到最多家<br>企業捐獻？
+              哪些產業<br>捐最多錢給立委？
             </button>
             <button
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-4' } ]"
               @click="currentChartShown = '2-4'"
             >
-              捐贈公司數占全台<br>同產業別比例前十名
+              哪些產業<br>最積極捐錢給立委？
             </button>
           </div>
           <AppChartExpand
@@ -224,34 +231,8 @@
             />
             <div
               class="chart-container"
-              id="dashboard-chart-ordinal-top-five-donates-total-chart-container"
-              v-if="currentChartShownRow === '2' && currentChartShownColumn === '1'"
-              slot="chart"
-            >
-              <BarHorizontalOrdinalCandidate
-                class="chart-container__chart"
-                id="dashboard-chart-ordinal-top-five-donates-total"
-                :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
-                :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_TOTAL"
-              />
-            </div>
-            <div
-              class="chart-container"
-              id="dashboard-chart-ordinal-top-five-donates-company-chart-container"
-              v-if="currentChartShownRow === '2' && currentChartShownColumn === '2'"
-              slot="chart"
-            >
-              <BarHorizontalOrdinalCandidate
-                class="chart-container__chart"
-                id="dashboard-chart-ordinal-top-five-donates-company"
-                :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
-                :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_COMPANY"
-              />
-            </div>
-            <div
-              class="chart-container"
               id="dashboard-chart-ordinal-top-five-donates-company-count-chart-container"
-              v-if="currentChartShownRow === '2' && currentChartShownColumn === '3'"
+              v-if="currentChartShownRow === '2' && currentChartShownColumn === '1'"
               slot="chart"
             >
               <BarHorizontalOrdinalCandidate
@@ -260,6 +241,31 @@
                 :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
                 :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_COMPANY_COUNT"
                 :dataHintUnit="'家'"
+              />
+            </div>
+            <div
+              class="chart-container"
+              id="dashboard-chart-ordinal-top-five-donates-but-lost-chart-container"
+              v-if="currentChartShownRow === '2' && currentChartShownColumn === '2'"
+              slot="chart"
+            >
+              <BarHorizontalOrdinalCandidate
+                class="chart-container__chart"
+                id="dashboard-chart-ordinal-top-five-donates-but-lost"
+                :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
+                :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_BUT_LOST"
+              />
+            </div>
+            <div
+              class="chart-container"
+              id="dashboard-chart-ordinal-top-ten-donates-industry-chart-container"
+              v-if="currentChartShownRow === '2' && currentChartShownColumn === '3'"
+              slot="chart"
+            >
+              <BarHorizontalOrdinalIndustryDonates
+                class="chart-container__chart"
+                id="dashboard-chart-ordinal-top-ten-donates-industry"
+                :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY"
               />
             </div>
             <div
@@ -283,25 +289,25 @@
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-1' } ]"
               @click="currentChartShown = '3-1'"
             >
-              現任立委佔優勢（與非現任立委比較）
+              哪些集團捐最多錢？<br>捐藍還捐綠？
             </button>
             <button
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-2' } ]"
               @click="currentChartShown = '3-2'"
             >
-              
-            現任立委佔優勢（與第一次參選公職者比較）</button>
+              哪些集團三屆立委選舉都捐錢？政黨傾向變化？
+            </button>
             <button
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-3' } ]"
               @click="currentChartShown = '3-3'"
             >
-              佛心產業前十名
+              現任立委<br>比較容易選上
             </button>
             <button
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-4' } ]"
               @click="currentChartShown = '3-4'"
             >
-              哪個集團捐最多
+              第一次參選公職者<br>當選率只有 9%
             </button>
           </div>
           <AppChartExpand
@@ -317,8 +323,31 @@
             />
             <div
               class="chart-container"
-              id="dashboard-chart-table-duel-re-elected-or-not-chart-container"
+              id="dashboard-chart-ordinal-corp-donates-chart-container"
               v-if="currentChartShownRow === '3' && currentChartShownColumn === '1'"
+              slot="chart"
+            >
+              <ScatterOrdinalCorpDonates
+                class="chart-container__chart"
+                id="dashboard-chart-ordinal-corp-donates"
+              />
+            </div>
+            <div
+              class="chart-container"
+              id="dashboard-chart-ordinal-corp-donates-top10-evolved-chart-container"
+              v-if="currentChartShownRow === '3' && currentChartShownColumn === '2'"
+              slot="chart"
+            >
+              <ScatterOrdinalCorpDonates
+                class="chart-container__chart"
+                id="dashboard-chart-ordinal-corp-donates-top10-evolved"
+                :filterCorp="CHART_DATA.GROUPS_TOP_TEN_DONATES_SEVENTH_EIGHTH_NINTH"
+              />
+            </div>
+            <div
+              class="chart-container"
+              id="dashboard-chart-table-duel-re-elected-or-not-chart-container"
+              v-if="currentChartShownRow === '3' && currentChartShownColumn === '3'"
               slot="chart"
             >
               <TableDuel
@@ -330,7 +359,7 @@
             <div
               class="chart-container"
               id="dashboard-chart-table-duel-newbie-elected-or-not-chart-container"
-              v-if="currentChartShownRow === '3' && currentChartShownColumn === '2'"
+              v-if="currentChartShownRow === '3' && currentChartShownColumn === '4'"
               slot="chart"
             >
               <TableDuel
@@ -338,29 +367,6 @@
                 id="dashboard-chart-table-duel-newbie-elected-or-not"
                 :ordinal="'ninth'"
                 :data="CHART_DATA.DATA_ORDINAL_DUEL_NEWBIE_ELECTED_OR_NOT"
-              />
-            </div>
-            <div
-              class="chart-container"
-              id="dashboard-chart-ordinal-top-ten-donates-industry-chart-container"
-              v-if="currentChartShownRow === '3' && currentChartShownColumn === '3'"
-              slot="chart"
-            >
-              <BarHorizontalOrdinalIndustryDonates
-                class="chart-container__chart"
-                id="dashboard-chart-ordinal-top-ten-donates-industry"
-                :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY"
-              />
-            </div>
-            <div
-              class="chart-container"
-              id="dashboard-chart-ordinal-corp-donates-chart-container"
-              v-if="currentChartShownRow === '3' && currentChartShownColumn === '4'"
-              slot="chart"
-            >
-              <ScatterOrdinalCorpDonates
-                class="chart-container__chart"
-                id="dashboard-chart-ordinal-corp-donates"
               />
             </div>
           </AppChartExpand>
@@ -371,7 +377,7 @@
               :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '4-1' } ]"
               @click="currentChartShown = '4-1'"
             >
-              營利事業收入前十名<br>受哪些集團捐贈
+              高政治獻金收入的立委與集團的關係
             </button>
           </div>
           <AppChartExpand
@@ -457,7 +463,7 @@ export default {
       return this.currentChartShown !== '1-1'
     },
     showNinthOnly () {
-      return this.currentChartShown === '1-2' || this.currentChartShown === '3-2'
+      return this.currentChartShown === '3-4'
     }
   },
   methods: {
@@ -622,6 +628,11 @@ export default {
   padding 0px 80px
 
 #dashboard-chart-ordinal-corp-donates-chart-container
+  width 100%
+  // height 360px
+  padding 0px 120px
+
+#dashboard-chart-ordinal-corp-donates-top10-evolved-chart-container
   width 100%
   // height 360px
   padding 0px 120px
