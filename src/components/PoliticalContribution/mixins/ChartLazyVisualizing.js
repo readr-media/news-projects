@@ -11,6 +11,9 @@ export default {
     },
   },
   mounted () {
+    if (this.containerSelector === undefined) {
+      this.containerSelector = `#${this.$el.id}`
+    }
     this.scroller = window.scrollama()
     this.scroller
       .setup({

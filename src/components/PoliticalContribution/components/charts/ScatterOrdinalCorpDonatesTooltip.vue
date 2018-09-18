@@ -69,7 +69,7 @@ export default {
   border-bottom 2px solid #d3d3d3
   &__name-bosses
     font-size 24px
-    font-weight 600
+    font-weight 400
     margin 10px 0
   &__main-companies
     font-size 18px

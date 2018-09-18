@@ -46,11 +46,17 @@ export default {
       return this.donatesKMT + this.donatesDPP
     },
     percentageKMT () {
-      return Math.round(this.donatesKMT / this.donatesKMTDPP * 100)
+      return this.toFixedWithRounded(this.donatesKMT / this.donatesKMTDPP * 100, 1)
     },
     percentageDPP () {
-      return Math.round(this.donatesDPP / this.donatesKMTDPP * 100)
+      return this.toFixedWithRounded(this.donatesDPP / this.donatesKMTDPP * 100, 1)
     },
+  },
+  methods: {
+    toFixedWithRounded (num, fixed) {
+      const re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?')
+      return num.toString().match(re)[0]
+    }
   }  
 }
 </script>

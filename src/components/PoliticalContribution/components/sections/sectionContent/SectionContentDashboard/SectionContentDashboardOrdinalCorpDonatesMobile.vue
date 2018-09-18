@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { get, sortBy, sumBy, isEmpty, groupBy } from 'lodash'
+import { get, sortBy, sumBy, isEmpty, groupBy, filter } from 'lodash'
 
 import ChartLazyVisualizing from '../../../../mixins/ChartLazyVisualizing'
 
@@ -38,6 +38,12 @@ export default {
     howManyNodes: {
       type: Number,
       default: 10,
+    },
+    filterCorp: {
+      type: Array,
+      default () {
+        []
+      }
     }
   },
   components: {
@@ -77,7 +83,8 @@ export default {
       return !isEmpty(this.data)
     },
     data () {
-      return get(this.$store.state.PoliticalContribution.data, [ this.shouldVisualizeOrdinal, 'rawDataCompanyDonateGroupByGroupOrCompany' ], {})
+      const data = get(this.$store.state.PoliticalContribution.data, [ this.shouldVisualizeOrdinal, 'rawDataCompanyDonateGroupByGroupOrCompany' ], {})
+      return filter(data, (value, key) => isEmpty(this.filterCorp) || this.filterCorp.includes(key))
     },
     dataSorted () {
       return sortBy(this.data, array => {

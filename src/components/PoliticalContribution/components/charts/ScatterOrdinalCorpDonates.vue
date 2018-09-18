@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { get, isEmpty, sortBy, sumBy, groupBy, uniqBy, } from 'lodash'
+import { get, isEmpty, sortBy, sumBy, groupBy, uniqBy, filter, } from 'lodash'
 import * as d3 from 'd3'
 
 import ChartLazyVisualizing from '../../mixins/ChartLazyVisualizing'
@@ -47,7 +47,13 @@ export default {
     howManyNodes: {
       type: Number,
       default: 10,
-    } 
+    },
+    filterCorp: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
   },
   components: {
     ScatterOrdinalCorpDonatesXAxis,
@@ -65,12 +71,24 @@ export default {
         this.isDataLoading = false
         this.visualize()
       }
+    },
+    filterCorp () {
+      this.containerSelector = `#${this.$el.id}`
+      if (!this.isDataAvailable) {
+        if (this.isInView) {
+          this.isDataLoading = true
+          this.loadDataThenVisulaize()
+        }
+      } else {
+        this.isDataLoading = false
+        this.visualize()
+      }
     }
   },
   mixins: [ ChartLazyVisualizing ],
   data () {
     const defaultWidth = 900
-    const defaultHeight = 1200
+    const defaultHeight = 900
     const defaultAspect = defaultWidth / defaultHeight
 
     return {
@@ -95,12 +113,13 @@ export default {
       yGridLine: undefined,
 
       tooltipData: {},
+      containerSelector: undefined,
     }
   },
   computed: {
-    containerSelector () {
-      return `#${this.$el.id}`
-    },
+    // containerSelector () {
+    //   return `#${this.$el.id}`
+    // },
     chartSelector () {
       return `${this.containerSelector} .chart`
     },
@@ -117,7 +136,8 @@ export default {
       return !isEmpty(this.data)
     },
     data () {
-      return get(this.$store.state.PoliticalContribution.data, [ this.shouldVisualizeOrdinal, 'rawDataCompanyDonateGroupByGroupOrCompany' ], {})
+      const data = get(this.$store.state.PoliticalContribution.data, [ this.shouldVisualizeOrdinal, 'rawDataCompanyDonateGroupByGroupOrCompany' ], {})
+      return filter(data, (value, key) => isEmpty(this.filterCorp) || this.filterCorp.includes(key))
     },
     dataSorted () {
       return sortBy(this.data, array => {
@@ -196,7 +216,7 @@ export default {
           .call(this.xGridLine)
       this.yGridLine = 
         d3.axisLeft(this.yScale)
-          .ticks(10)
+          .tickValues(Array.apply(null, { length: 7 }).map(Number.call, Number).map(d => d * 10000000))
           .tickSize(-this.innerWidth)
           .tickFormat('')
       this.svg
@@ -375,6 +395,9 @@ export default {
       this.currentHeight = Math.round(containerWidth / this.defaultAspect)
     },
   },
+  // beforeMount () {
+  //   this.containerSelector = this.$el.id
+  // },
   mounted () {
     this.calculateCurrentDimensions()
   }
