@@ -615,7 +615,7 @@ export default {
 #dashboard-chart-ordinal-top-ten-participate-industry-chart-container
   width 100%
   // height 360px
-  padding 0px 120px
+  padding 0px 60px
 
 #dashboard-chart-duels-chart-container
   width 100%

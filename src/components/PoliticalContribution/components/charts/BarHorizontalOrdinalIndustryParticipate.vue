@@ -19,7 +19,7 @@
           class="bar-horizontal-ordinal-industry-participate-chart__industry-y-tick"
           :industryName="industry.name"
           :isCrony="industry.isCrony"
-          :style="{ transform: `translate3d(10px, ${yScale(industry.name) + yScale.bandwidth() / 2 - 10}px, 0)`}"
+          :style="{ transform: `translate3d(-380px, ${yScale(industry.name) + yScale.bandwidth() / 2 + 5}px, 0)` }"
         />
       </template>
     </div>
@@ -51,6 +51,10 @@ export default {
       type: Object,
       required: true,
     },
+    // isDataNew: {
+    //   type: Boolean,
+    //   default: false,
+    // },
   },
   components: {
     AppChartLegends,
@@ -65,8 +69,9 @@ export default {
     }
   },
   data () {
-    const defaultWidth = 568
-    const defaultHeight = 675
+    const defaultWidth = 500
+    // const defaultHeight = 675
+    const defaultHeight = 400
     const defaultAspect = defaultWidth / defaultHeight
 
     return {
@@ -112,7 +117,7 @@ export default {
       this.outerWidth = this.defaultWidth
       this.outerHeight = this.defaultHeight
 
-      this.margin = { top: 0, right: 0, bottom: 0, left: 160, }
+      this.margin = { top: 10, right: 0, bottom: 0, left: 130, }
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
       this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
 
@@ -172,8 +177,8 @@ export default {
         .append('text')
            .attr('class', 'bar-horizontal-ordinal-industry-participate-chart__hint')
         .merge(hints)
-           .attr('x', 10)
-           .attr('y', d => this.yScale(d.name) + this.yScale.bandwidth() / 2 + 10)
+           .attr('x', 2)
+           .attr('y', d => this.yScale(d.name) + this.yScale.bandwidth() / 2 + 4)
            .text(d => `${d.percentage}%`)
       /*
       ** NOTE: Might have a better pattern to deal with the case below
@@ -185,23 +190,23 @@ export default {
           .append('text')
             .attr('class', 'bar-horizontal-ordinal-industry-participate-chart__hint-donates-money')
             .attr('x', 0)
-            .attr('y', d => this.yScale(d.name) + this.yScale.bandwidth() / 2 + 32)
+            .attr('y', d => this.yScale(d.name) + this.yScale.bandwidth() / 2 + 20)
       hintsDonatesMoneyText
         .append('tspan')
           .text(d => '捐贈金額：')
       hintsDonatesMoneyText
         .append('tspan')
           .attr('class', 'bar-horizontal-ordinal-industry-participate-chart__hint-donates-money--highlight')
-          .text(d => `${((d.donatesMoney / 10000).toFixed(0)).toLocaleString()}`)
+          .text(d => `${((d.donatesMoney >= 100000000 ? d.donatesMoney / 100000000 : d.donatesMoney / 10000).toFixed(d.donatesMoney >= 100000000 ? 2 : 0)).toLocaleString()}`)
       hintsDonatesMoneyText
         .append('tspan')
-          .text(' 萬元')
+          .text(d => d.donatesMoney >= 100000000 ? ' 億元' : ' 萬元')
       // Update of hintsDonatesMoney
       hintsDonatesMoney
         .attr('x', 0)
-        .attr('y', d => this.yScale(d.name) + this.yScale.bandwidth() / 2 + 32)
+        .attr('y', d => this.yScale(d.name) + this.yScale.bandwidth() / 2 + 20)
         .select('.bar-horizontal-ordinal-industry-participate-chart__hint-donates-money--highlight')
-          .text(d => `${((d.donatesMoney / 10000).toFixed(0)).toLocaleString()}`)
+          .text(d => `${((d.donatesMoney >= 100000000 ? d.donatesMoney / 100000000 : d.donatesMoney / 10000).toFixed(d.donatesMoney >= 100000000 ? 2 : 0)).toLocaleString()}`)
 
       // Exit
       bars.exit().remove()
@@ -233,10 +238,10 @@ export default {
   position relative
   transform-origin 0% 0%
   &__hint
-    font-size 26px
+    font-size 10px
     fill white
   &__hint-donates-money
-    font-size 13px
+    font-size 10px
     font-weight 400
     fill #808080
     &--highlight
@@ -244,5 +249,6 @@ export default {
       font-weight 500
   &__industry-y-tick
     position absolute
+    right 0
 </style>
 

@@ -3,6 +3,8 @@ import { PROJECTS_BELONGS_MM, MM_SITE_NAME, READR_SITE_NAME, MM_SITE_URL, READR_
 import { DATA, SEVENTH_EIGHT_NINTH_VALID_CORP_NAMES } from '../constants'
 import { structuredDataScript, } from '../constants/structuredData'
 
+const titleHeadings = '數讀政治獻金 2.0'
+
 const getMetaInfo = (vm) => {
   const { metaInfo } = vm.$options
   if (metaInfo) {
@@ -74,7 +76,7 @@ export default {
         }
       case 'story1':
         return {
-          title: '選一次立委，金流超過 28 億！',
+          title: `${titleHeadings}：選一次立委，金流超過 28 億！`,
           description: '選一次立委，金流超過 28 億！',
           metaUrl: 'political-contribution/story1',
           metaImage: 'political-contribution/story1/ogimage.jpg',
@@ -82,7 +84,7 @@ export default {
         }
       case 'story2':
         return {
-          title: '立委篇／老鳥與新秀，募款能力差了 6.6 倍',
+          title: `${titleHeadings}：立委篇／老鳥與新秀，募款能力差了 6.6 倍`,
           description: '立委篇／老鳥與新秀，募款能力差了 6.6 倍',
           metaUrl: 'political-contribution/story2',
           metaImage: 'political-contribution/story2/ogimage.jpg',
@@ -90,7 +92,7 @@ export default {
         }
       case 'story3':
         return {
-          title: '企業篇／金權遊戲？翻開金主的投資名冊',
+          title: `${titleHeadings}：企業篇／金權遊戲？翻開金主的投資名冊`,
           description: '企業篇／金權遊戲？翻開金主的投資名冊',
           metaUrl: 'political-contribution/story3',
           metaImage: 'political-contribution/story3/ogimage.jpg',
@@ -98,7 +100,7 @@ export default {
         }
       case 'story4':
         return {
-          title: '政治獻金開放了嗎？',
+          title: `${titleHeadings}：政治獻金開放了嗎？`,
           description: '政治獻金開放了嗎？',
           metaUrl: 'political-contribution/story4',
           metaImage: 'political-contribution/story4/ogimage.jpg',
@@ -106,24 +108,24 @@ export default {
         }
       case 'story5':
         return {
-          title: 'story5',
-          description: 'story5',
+          title: `${titleHeadings}：資料怎麼看？立委政治獻金的五個發現`,
+          description: '誰一直是立委的大金主？原來企業對特定政黨的捐獻行為也不是鐵板一塊？我們找出 2008 年至 2016 年 3 次立委選舉中從資料發現的有趣現象。',
           metaUrl: 'political-contribution/story5',
           metaImage: 'political-contribution/story5/ogimage.jpg',
           customScript: structuredDataScript
         }
       case 'story6':
         return {
-          title: 'story6',
-          description: 'story6',
+          title: `${titleHeadings}：政治獻金資料到底解密了什麼？`,
+          description: '延續 2014 年鄉民解密未酬的壯志，我們在 2017 年將政治獻金數位化專案復活，《政治獻金法》修法也終於通過。',
           metaUrl: 'political-contribution/story6',
           metaImage: 'political-contribution/story6/ogimage.jpg',
           customScript: structuredDataScript
         }
       default:
         return {
-          title: '政治獻金 2.0',
-          description: '政治獻金 2.0',
+          title: `${titleHeadings}：（缺副標）`,
+          description: '誰一直是立委的大金主？原來企業捐獻的政治獻金也會藍綠兩邊押寶？READr 藉由鄉民的幫助擴大了立委政治獻金資料庫，來看看 2008 年至 2016 年 3 次立委選舉中候選人與企業之間的金錢流動。',
           metaUrl: 'political-contribution',
           metaImage: 'political-contribution/ogimage.jpg',
           customScript: structuredDataScript

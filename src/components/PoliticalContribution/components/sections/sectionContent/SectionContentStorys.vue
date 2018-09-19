@@ -1,6 +1,6 @@
 <template>
   <main class="section-content-story">
-    <article class="section-content-story__article" v-if="slug === 'story1'">
+    <article v-if="slug === 'story1'">
       <h1 class="section-content-story__title">選一次立委，金流超過 28 億！</h1>
       <SectionContentCredits :publishedDate="'2017/11/9'"/>
       <div class="section-content-story__paragraph">
@@ -388,7 +388,7 @@
         <h2 class="visualization__title">哪些產業與政治人物互動性較高？</h2>
         <div class="chart-container">
           <BarHorizontalOrdinalIndustryParticipate
-            class="chart-container__chart chart-container__chart--narrow"
+            class="chart-container__chart"
             id="chart3-4"
             :ordinal="'ninth'"
             :legends="CHART_DATA.DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY_LEGENDS"
@@ -516,6 +516,143 @@
         在政府的眼中，能夠在監察院查閱這些被典藏的資料，就已經是資料的開放了。《鏡傳媒》這次透過實際行動印證了限制所在，也希望藉由資料應用、協作的過程凸顯開放資料的價值。但這只是第一步，不管是政商關係的透明、政治獻金的管制、到選舉活動的管理，都需要更多的關注。
       </div>
     </article>
+    <article v-if="slug === 'story5'">
+      <h1 class="section-content-story__title">資料怎麼看？<br>政治獻金的五個發現</h1>
+      <SectionContentCredits :publishedDate="'2018/xx/xx'"/>
+      <div class="section-content-story__paragraph">
+        去年做完第九屆立委政治獻金數位化之後，我們發現還有很多問題無法解答，浮現「要是有歷史資料能夠對照就好了」的念頭。我們藉由鄉民的幫助，完成了第七屆、第八屆立委營利事業捐贈的數位化。
+      </div>
+      <div class="section-content-story__paragraph">
+        當然，這份資料還是無法百分之百呈現選舉期間的金流樣貌（但這牽涉到候選人自主申報與監察院是否主動調查），卻是這個議題重要的起點。我們發現了一些有趣的現象：
+      </div>
+      <h2 class="section-content-story__subtitle">大多數的集團捐贈的政黨傾向並非鐵板一塊</h2>
+      <div class="visualization">
+        <!-- <h2 class="visualization__title">哪些集團捐最多錢？捐藍還捐綠？</h2> -->
+        <SectionContentExploreRadios class="visualization__radios"/>
+        <div class="chart-container">
+          <ScatterOrdinalCorpDonates
+            class="chart-container__chart"
+            id="chart5-1"
+          />
+        </div>
+      </div>
+      <div class="visualization">
+        <!-- <h2 class="visualization__title">哪些集團三屆立委選舉都捐錢？政黨傾向變化？</h2> -->
+        <SectionContentExploreRadios class="visualization__radios"/>
+        <div class="chart-container">
+          <ScatterOrdinalCorpDonates
+            class="chart-container__chart"
+            id="chart5-2"
+            :filterCorp="CHART_DATA.GROUPS_TOP_TEN_DONATES_SEVENTH_EIGHTH_NINTH"
+          />
+        </div>
+      </div>
+      <div class="section-content-story__paragraph">
+        從三屆都有捐的前十名的政黨傾向變化，發現只有少數企業是鐵板一塊，捐贈的候選人政黨光譜都大致從藍慢慢走向綠，有些企業在 2016 年的立委選舉時甚至藍綠翻盤。
+      </div>
+      <div class="section-content-story__paragraph">
+        2008年時，捐獻金額在前十名的集團捐獻傾向幾乎都偏藍，只有態度變動很大的台灣基礎集團 38％偏綠（第八屆變成偏藍 72%）、以及潤泰集團80%偏綠跟其他集團有不同的答案。
+      </div>
+      <div class="section-content-story__paragraph">
+        值得一提的是，潤泰集團在大多數集團慢慢往綠走的光譜中，做出了相反的決定。第八屆捐獻是 100% 捐綠的潤泰，第九屆只剩下 20%，有高達 68% 的捐款捐給國民黨候選人。
+      </div>
+      <div class="section-content-story__paragraph">
+        2012 年，大慶集團（100%）、金鼎證券集團（100%）、燁聯鋼鐵集團（100%）與裕隆集團（97%）仍保持對國民黨候選人的高支持度，但到了2016 年，只剩大慶集團是 100% 捐獻給國民黨，裕隆的「忠誠度」掉到 70%，燁聯鋼鐵集團甚至只剩 38%，首度出現綠大於藍的捐獻傾向。而捐獻金額始終最高的遠東集團，則從偏藍（72%）變成兩邊押寶的偏綠。
+      </div>
+      <h2 class="section-content-story__subtitle">捐最多政治獻金的產業為批發零售業、製造業與不動產業</h2>
+      <div class="visualization">
+        <!-- <h2 class="visualization__title">佛心產業前十名</h2> -->
+        <SectionContentExploreRadios class="visualization__radios"/>
+        <div class="chart-container">
+          <BarHorizontalOrdinalIndustryDonates
+            class="chart-container__chart"
+            id="chart5-3"
+            :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY_NEW"
+            :isNewData="true"
+          />
+        </div>
+      </div>
+      <div class="section-content-story__paragraph">
+        我們改變了統計產業類別的方式，以財政部稅籍資料為主，<a class="section-content-story__link" href="http://www.mof.gov.tw/public/Attachment/34811505540.pdf" target="_blank">由行業代碼對應到稅務行業分類的十九大分類</a>。由於一間公司可能會登記多個業別
+        <SectionContentStorysInfoboxHint :hint="'（註）'">
+          <div>
+            假設 A 公司登記為「製造業」與「批發零售業」，捐贈 2 萬元，則計算方式為「製造業 2 萬元」、「批發零售業 2 萬元」，故加總金額會大於總金額
+          </div>
+        </SectionContentStorysInfoboxHint>
+        ，而只要有販賣行為皆得登記批發零售業，我們猜測是因為母體數量造成它連續拿下第一名的結果。三屆的排名並沒有太大的差異。
+      </div>
+      <h2 class="section-content-story__subtitle">最積極捐獻政治獻金的產業為礦業、電力燃氣業、不動產業</h2>
+      <div class="visualization">
+        <!-- <h2 class="visualization__title">哪些產業最積極捐錢給立委？</h2> -->
+        <SectionContentExploreRadios class="visualization__radios"/>
+        <div class="chart-container">
+          <BarHorizontalOrdinalIndustryParticipate
+            class="chart-container__chart"
+            id="chart5-4"
+            :legends="CHART_DATA.DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY_LEGENDS"
+            :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY_NEW"
+          />
+        </div>
+      </div>
+      <div class="section-content-story__paragraph">
+        若考慮母體數，更進一步分析捐獻的「積極度」（捐獻公司數占為該年度該分類總公司數），第一名為礦石與土石採取（2016年、2012年）及電力及燃氣供應（2008年），三屆的排名也沒有太大差異。
+      </div>
+      <div class="section-content-story__paragraph">
+        這些高積極度的產業大多符合《經濟學人》所列「靠關係賺錢」的裙帶關係產業
+        <SectionContentStorysInfoboxHint :hint="'（註）'">
+          <div>
+            2016 年《經濟學人》（The Economist）發布「裙帶資本主義指數」（Crony Capitalism） <a class="section-content-story__link" href="https://www.economist.com/international/2016/05/07/the-party-winds-down" target="_blank">報告</a> ，統計各國的億萬富豪在與政府往來密切的行業中，所獲取的財富佔 GDP 的比例。在 22 個國家中，台灣以 3.2% 排名第 10 名，高於亞洲的日本、韓國、甚至中國。指數愈高，就代表在這個國家裡有愈多的企業，商業的成功與否取決於政商關係的密切度，而這些優惠與偏袒都是合法的。他們通常會以壟斷或遊說等手段，讓政府運用行政權力，提供較好的生存環境與利益。簡單來說，就是「靠關係」賺錢。這些產業有賭場、國防、信貸投資銀行、基礎設施、管線、油、瓦斯等能源業、房地產、建設業、鋼鐵、金屬、礦石等等。
+          </div>
+        </SectionContentStorysInfoboxHint>
+        。
+      </div>
+      <h2 class="section-content-story__subtitle">民進黨在第九屆吸金氣勢大增，追上國民黨，但捐贈組成差很多</h2>
+      <div class="visualization">
+        <!-- <h2 class="visualization__title">不同政黨立委的政治獻金收入組成</h2> -->
+        <SectionContentExploreRadios class="visualization__radios"/>
+        <div class="chart-container">
+          <ParallelOrdinalPartyDonatesFrom
+            class="chart-container__chart"
+            id="chart5-5"
+            :legends="CHART_DATA.DATA_ORDINAL_PARTY_DONATES_FROM_LEGENDS"
+            :data="CHART_DATA.DATA_ORDINAL_PARTY_DONATES_FROM"
+          />
+        </div>
+      </div>
+      <div class="section-content-story__paragraph">
+        民進黨在2008年、2012年的收入金額變化不大，2016年比以往增加了 37％的政治獻金，到達 12 億，首度高過國民黨。
+      </div>
+      <div class="section-content-story__paragraph">
+        而國民黨收到的政治獻金除了在 2012 年飆到 14 億的高峰外，其餘兩次都維持在 12 億左右。但收入組成卻有了變化。營利事業捐贈比例在 2016 年調到歷史新低，只佔了總收入的三成。政黨收入比例卻提高到 36% （氣勢最旺的 2012 年只佔 20%），國民黨候選人在 2016 年的選舉主要是靠政黨捐贈來選舉。
+      </div>
+      <div class="section-content-story__paragraph">
+        而民進黨的營利事業捐贈比例雖比起 2008 年掉了 10 個百分點，推估是總營利事業捐獻比例減少的關係（見下點）。值得一提的是，2012 年的選舉民進黨的營利事業捐款不到三成，卻有超過六成的個人捐款；到了 2016 年，營利事業捐款卻成長至 37%，個人捐款比例往下降。
+      </div>
+      <h2 class="section-content-story__subtitle">總體收入是增加的，但營利事業影響變小？</h2>
+      <div class="visualization">
+        <!-- <h2 class="visualization__title">本次政治獻金的組成</h2> -->
+        <div class="chart-container">
+          <BarHorizontalStackedOrdinalDonatesFrom
+            class="chart-container__chart"
+            id="chart5-6"
+            :legends="CHART_DATA.DATA_ALL_ORDINAL_DONATES_FROM_LEGENDS"
+            :data="CHART_DATA.DATA_ALL_ORDINAL_DONATES_FROM"
+          />
+        </div>
+      </div>
+      <div class="section-content-story__paragraph">
+        立委政治獻金總收入從 2008 年的 22 億提升到 2016 年的 28 億，但參選人數（以有開政治獻金專戶並登記的候選人為主）也從 191 個提升到 261 個。
+      </div>
+      <div class="section-content-story__paragraph">
+        雖然總金額提高，但營利事業的捐獻比例卻次次下降，相對提高的則是個人捐贈。推測是非傳統藍綠的參選人變多（從 2008 年的 52 人提高到 2016年的 122 人），這樣背景的選舉人雖收到的捐款普遍較少，大多仰賴個人捐款支持，較無營利事業吸金能力。
+      </div>
+      <div class="section-content-story__paragraph">
+        有愈來愈多新人投入政治中，「錢」是一個重要的門檻嗎？隨著政府修法，未來政治獻金明細將公開，但這只是第一步，我們會跟您一起繼續監督下去！
+      </div>
+      <div class="section-content-story__paragraph">
+        你也有什麼好奇的問題嗎？歡迎從<router-link class="section-content-story__link" to="dashboard">圖表區</router-link>或是<a class="section-content-story__link" href="https://github.com/mirror-media/politicalcontribution" target="_blank">原始資料區</a>挖掘出更多與我們分享！
+      </div>
+    </article>
   </main>
 </template>
 
@@ -525,6 +662,7 @@ import * as CHART_DATA from '../../charts/data'
 import SectionContentCredits from './SectionContentCredits.vue'
 import SectionContentStorysInfoboxHint from './SectionContentStorys/SectionContentStorysInfoboxHint.vue'
 
+import SectionContentExploreRadios from '../sectionContent/SectionContentExplore/SectionContentExploreRadios.vue'
 import BarHorizontalOrdinalCandidate from '../../charts/BarHorizontalOrdinalCandidate.vue'
 import BarHorizontalOrdinalIndustryDonates from '../../charts/BarHorizontalOrdinalIndustryDonates.vue'
 import BarHorizontalOrdinalIndustryParticipate from '../../charts/BarHorizontalOrdinalIndustryParticipate.vue'
@@ -542,6 +680,7 @@ export default {
   components: {
     SectionContentCredits,
     SectionContentStorysInfoboxHint,
+    SectionContentExploreRadios,
     BarHorizontalOrdinalCandidate,
     BarHorizontalOrdinalIndustryDonates,
     BarHorizontalOrdinalIndustryParticipate,
@@ -627,6 +766,8 @@ export default {
     margin 10px 0
     &--mobile
       display none
+  &__radios
+    margin 0 0 20px 0
 
 .chart-container
   width 100%
