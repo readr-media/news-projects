@@ -810,6 +810,134 @@ export const DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY = {
     }
   ]
 }
+export const DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY_NEW = {
+  seventh: [
+    {
+      name: '批發及零售業',
+      money: 336205637
+    },
+    {
+      name: '製造業',
+      money: 331416680
+    },
+    {
+      name: '不動產業',
+      money: 162462104
+    },
+    {
+      name: '營建工程業',
+      money: 105223434
+    },
+    {
+      name: '金融及保險業',
+      money: 94453890
+    },
+    {
+      name: '專業、科學及技術服務業',
+      money: 64853880
+    },
+    {
+      name: '無法辨識（沒有財政部登記資料）',
+      money: 62350245
+    },
+    {
+      name: '運輸及倉儲業',
+      money: 42665396
+    },
+    {
+      name: '住宿及餐飲業',
+      money: 24400750
+    },
+    {
+      name: '出版、影音製作、傳播及資通訊服務業',
+      money: 24396250
+    }
+  ],
+  eighth: [
+    {
+      name: '製造業',
+      money: 334577609
+    },
+    {
+      name: '批發及零售業',
+      money: 334454824
+    },
+    {
+      name: '不動產業',
+      money: 157771200
+    },
+    {
+      name: '營建工程業',
+      money: 105464400
+    },
+    {
+      name: '金融及保險業',
+      money: 82333000
+    },
+    {
+      name: '專業、科學及技術服務業',
+      money: 58222600
+    },
+    {
+      name: '運輸及倉儲業',
+      money: 34796500
+    },
+    {
+      name: '支援服務業',
+      money: 31355848
+    },
+    {
+      name: '無法辨識（沒有財政部登記資料）',
+      money: 26481940
+    },
+    {
+      name: '出版、影音製作、傳播及資通訊服務業',
+      money: 26153938
+    }
+  ],
+  ninth: [
+    {
+      name: '批發及零售業',
+      money: 370972393
+    },
+    {
+      name: '製造業',
+      money: 326942117
+    },
+    {
+      name: '不動產業',
+      money: 178249300
+    },
+    {
+      name: '金融及保險業',
+      money: 124262688
+    },
+    {
+      name: '營建工程業',
+      money: 111931581
+    },
+    {
+      name: '專業、科學及技術服務業',
+      money: 82225919
+    },
+    {
+      name: '運輸及倉儲業',
+      money: 53452000
+    },
+    {
+      name: '支援服務業',
+      money: 32375500
+    },
+    {
+      name: '用水供應及污染整治業',
+      money: 30956985
+    },
+    {
+      name: '出版、影音製作、傳播及資通訊服務業',
+      money: 29357400
+    }
+  ]
+}
 
 export const DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY_LEGENDS = [
   {
@@ -1002,6 +1130,194 @@ export const DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY = {
       percentage: 2.4,
       donatesMoney: 3600000,
       isCrony: false,
+    },
+  ]
+}
+export const DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY_NEW = {
+  seventh: [
+    {
+      name: '電力及燃氣供應業',
+      percentage: 12.7,
+      donatesMoney: 7976000,
+      isCrony: true,
+    },
+    {
+      name: '礦業及土石採取業',
+      percentage: 3.78,
+      donatesMoney: 6542000,
+      isCrony: true,
+    },
+    {
+      name: '不動產業',
+      percentage: 3.17,
+      donatesMoney: 162462104,
+      isCrony: true,
+    },
+    {
+      name: '用水供應及污染整治業',
+      percentage: 2.28,
+      donatesMoney: 20283800,
+      isCrony: true,
+    },
+    {
+      name: '教育業',
+      percentage: 1.93,
+      donatesMoney: 272000,
+      isCrony: false,
+    },
+    {
+      name: '醫療保健及社會工作服務業',
+      percentage: 1.78,
+      donatesMoney: 130000,
+      isCrony: false,
+    },
+    {
+      name: '製造業',
+      percentage: 1.33,
+      donatesMoney: 331416680,
+      isCrony: false,
+    },
+    {
+      name: '金融及保險業',
+      percentage: 1.02,
+      donatesMoney: 94453890,
+      isCrony: true,
+    },
+    {
+      name: '專業、科學及技術服務業',
+      percentage: 1.02,
+      donatesMoney: 64853880,
+      isCrony: false,
+    },
+    {
+      name: '支援服務業',
+      percentage: 0.8,
+      donatesMoney: 21676892,
+      isCrony: false,
+    },
+  ],
+  eighth: [
+    {
+      name: '礦業及土石採取業',
+      percentage: 3.65,
+      donatesMoney: 5117785,
+      isCrony: true,
+    },
+    {
+      name: '電力及燃氣供應業',
+      percentage: 2.71,
+      donatesMoney: 3776000,
+      isCrony: true,
+    },
+    {
+      name: '不動產業',
+      percentage: 1.95,
+      donatesMoney: 157771200,
+      isCrony: true,
+    },
+    {
+      name: '用水供應及污染整治業',
+      percentage: 1.51,
+      donatesMoney: 15228600,
+      isCrony: true,
+    },
+    {
+      name: '製造業',
+      percentage: 1.02,
+      donatesMoney: 334577609,
+      isCrony: false,
+    },
+    {
+      name: '教育業',
+      percentage: 0.98,
+      donatesMoney: 791000,
+      isCrony: false,
+    },
+    {
+      name: '金融及保險業',
+      percentage: 0.86,
+      donatesMoney: 82333000,
+      isCrony: true,
+    },
+    {
+      name: '專業、科學及技術服務業',
+      percentage: 0.85,
+      donatesMoney: 58222600,
+      isCrony: false,
+    },
+    {
+      name: '出版、影音製作、傳播及資通訊服務業',
+      percentage: 0.68,
+      donatesMoney: 26153938,
+      isCrony: false,
+    },
+    {
+      name: '支援服務業',
+      percentage: 0.64,
+      donatesMoney: 31355848,
+      isCrony: false,
+    },
+  ],
+  ninth: [
+    {
+      name: '礦業及土石採取業',
+      percentage: 2.88,
+      donatesMoney: 5966000,
+      isCrony: true,
+    },
+    {
+      name: '電力及燃氣供應業',
+      percentage: 2.34,
+      donatesMoney: 5276800,
+      isCrony: true,
+    },
+    {
+      name: '用水供應及污染整治業',
+      percentage: 1.68,
+      donatesMoney: 30956985,
+      isCrony: true,
+    },
+    {
+      name: '不動產業',
+      percentage: 1.65,
+      donatesMoney: 178249300,
+      isCrony: true,
+    },
+    {
+      name: '製造業',
+      percentage: 1.01,
+      donatesMoney: 326942117,
+      isCrony: false,
+    },
+    {
+      name: '金融及保險業',
+      percentage: 0.78,
+      donatesMoney: 124262688,
+      isCrony: true,
+    },
+    {
+      name: '支援服務業',
+      percentage: 0.69,
+      donatesMoney: 32375500,
+      isCrony: false,
+    },
+    {
+      name: '專業、科學及技術服務業',
+      percentage: 0.68,
+      donatesMoney: 82225919,
+      isCrony: false,
+    },
+    {
+      name: '出版、影音製作、傳播及資通訊服務業',
+      percentage: 0.52,
+      donatesMoney: 29357400,
+      isCrony: false,
+    },
+    {
+      name: '營建工程業',
+      percentage: 0.51,
+      donatesMoney: 111931581,
+      isCrony: true,
     },
   ]
 }

@@ -7,8 +7,8 @@
         <li class="section-content-footer__related-list-item" @click="navigateTo('story2')">立委篇／老鳥與新秀，募款能力差了 6.6 倍</li>
         <li class="section-content-footer__related-list-item" @click="navigateTo('story3')">企業篇／金權遊戲？翻開金主的投資名冊</li>
         <li class="section-content-footer__related-list-item" @click="navigateTo('story4')">政治獻金開放了嗎？</li>
-        <li class="section-content-footer__related-list-item" @click="navigateTo('story5')">2.0-1</li>
-        <li class="section-content-footer__related-list-item" @click="navigateTo('story6')">2.0-2</li>
+        <li class="section-content-footer__related-list-item" @click="navigateTo('story5')">資料怎麼看？政治獻金的五個發現</li>
+        <li class="section-content-footer__related-list-item" @click="navigateTo('story6')">政治獻金資料到底解密了什麼？</li>
       </ul>
     </div>
     <AppParticles class="section-content-footer__particles" id="section-content-footer-particles" :isFooterShow="isFooterShow"/>

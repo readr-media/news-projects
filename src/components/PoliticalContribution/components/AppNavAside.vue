@@ -47,17 +47,17 @@
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story5" v-scroll-to="'.section-content'">
-        NEW
+        <span class="new-content-wording">NEW</span>
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
-          :hintText="'我是新文章'"
+          :hintText="'資料怎麼看？政治獻金的五個發現'"
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story6" v-scroll-to="'.section-content'">
-        NEW
+        <span class="new-content-wording">NEW</span>
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
-          :hintText="'我是新文章'"
+          :hintText="'政治獻金資料到底解密了什麼？'"
         />
       </router-link>
     </div>
@@ -158,6 +158,10 @@ export default {
     padding 5px 10px !important
     box-sizing content-box // For fixing width max-content issue in dafari
     font-size 16px
+
+.new-content-wording
+  position relative
+  top 2px
 
 .router-link-exact-active
   background-color #9e005d

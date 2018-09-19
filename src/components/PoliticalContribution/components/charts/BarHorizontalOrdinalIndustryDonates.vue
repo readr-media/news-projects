@@ -34,6 +34,10 @@ export default {
       type: Object,
       required: true,
     },
+    isNewData: {
+      type: Boolean,
+      default: false,
+    },
   },
   watch: {
     shouldVisualizeOrdinal () {
@@ -96,7 +100,7 @@ export default {
       this.outerWidth = this.defaultWidth
       this.outerHeight = this.defaultHeight
 
-      this.margin = { top: 0, right: 80, bottom: 30, left: 80, }
+      this.margin = this.isNewData ? { top: 0, right: 100, bottom: 30, left: 250, } : { top: 0, right: 80, bottom: 30, left: 80, }
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
       this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
 
@@ -201,9 +205,9 @@ export default {
         .append('text')
           .attr('class', 'bar-horizontal-ordinal-industry-chart__hint')
         .merge(hints)
-          .attr('x', d => this.xScale(d.money) - 80)
+          .attr('x', d => this.xScale(d.money) + 10)
           .attr('y', d => this.yScale(d.name) + this.yScale.bandwidth() / 2 + 5)
-          .text(d => `${(d.money / 10000).toFixed(0)} 萬元`)
+          .text(d => d.money >= 100000000 ? `${(d.money / 100000000).toFixed(2)} 億元` : `${(d.money / 10000).toFixed(0)} 萬元`)
 
       // Exit
       bars.exit().remove()
@@ -237,7 +241,7 @@ export default {
 .bar-horizontal-ordinal-industry-chart
   &__hint
     font-weight 400
-    fill white
+    fill black
   &__axis
     path, line
       stroke lightgray

@@ -30,11 +30,11 @@
     </a>
     <a class="app-nav-sidebar__nav-item app-nav-sidebar__nav-item--dimmed-border nav-item" @click="navigateRoute('story5')">
       <div class="nav-item__icon-circle"></div>
-      <p class="nav-item__hint">新文章優</p>
+      <p class="nav-item__hint">資料怎麼看？政治獻金的五個發現</p>
     </a>
     <a class="app-nav-sidebar__nav-item nav-item" @click="navigateRoute('story6')">
       <div class="nav-item__icon-circle"></div>
-      <p class="nav-item__hint">新文章優</p>
+      <p class="nav-item__hint">政治獻金資料到底解密了什麼？</p>
     </a>
     <a class="app-nav-sidebar__nav-item nav-item" @click="newTab('http://www.readr.tw/series/political-contribution')">
       <div class="nav-item__icon" :style="{ maskImage: `url(/proj-assets/political-contribution/star.png)` }"></div>

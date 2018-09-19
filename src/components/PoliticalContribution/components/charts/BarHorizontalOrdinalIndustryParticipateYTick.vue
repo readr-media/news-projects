@@ -27,25 +27,25 @@ export default {
   display flex
   &__industry-name
     margin 0
-    font-size 20px
+    font-size 10px
 
 .checked
-  r = 20px
+  r = 10px
   width r
   height r
   border-radius r
   border 1px solid #9e005d
-  margin 0 10px 0 0
+  margin 0 5px 0 0
   &--hide
     opacity 0
   &__icon
-    width 10px
-    height 10px
+    width 5px
+    height 5px
     background-color #9e005d
     transform rotate(45deg)
     clip-path polygon(85% 0, 100% 0, 100% 100%, 43% 100%, 43% 85%, 85% 85%)
     position relative
-    top 1px
+    top 0px
     right 1px
     margin auto
 </style>
