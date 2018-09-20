@@ -1,14 +1,14 @@
 <template>
   <div :class="[ 'section-content-explore-aside-hint', { 'section-content-explore-aside-hint--show': showAsideHint } ]">
     <div class="section-content-explore-aside-hint__container">
-      <div class="section-content-explore-aside-hint__text">
-        <p>點擊頭像</p>
-        <p>看政商關係圖</p>
-      </div>
       <img
         :class="[ 'section-content-explore-aside-hint__finger-hint', { 'section-content-explore-aside-hint__finger-hint--animate': showFingerAnimation }]"
         src="/proj-assets/political-contribution/finger.png" alt=""
       >
+      <div class="section-content-explore-aside-hint__text">
+        <p>點擊頭像</p>
+        <p>看政商關係圖</p>
+      </div>
     </div>
   </div>
 </template>
@@ -185,16 +185,20 @@ export default {
     pointer-events initial
   &__container
     display flex
-    align-items center
+    flex-direction column
+    justify-content center
   &__text
+    display flex
     p
       margin 3px
-      text-align right
       color gray
+      writing-mode vertical-rl
+      text-orientation upright
   &__finger-hint
     width 60px
-    position relative
-    bottom 2px
+    // position relative
+    // bottom 2px
+    margin 0 0 10px 0
     &--animate
       animation bounceInLeft 1s
 
