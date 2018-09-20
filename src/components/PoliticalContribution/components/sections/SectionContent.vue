@@ -5,10 +5,12 @@
       @toogleComment="toogleComment"
       @toogleNavSidebar="toogleNavSidebar"
     />
-    <AppNavAside
-      :class="[ 'section-content__nav-aside', { 'section-content__nav-aside--hide': !showNavAside } ]"
-      @openLightboxRelatedTopics="openLightboxRelatedTopics"
-    />
+    <div class="section-content__nav-aside-container">
+      <AppNavAside
+        :class="[ 'section-content__nav-aside', { 'section-content__nav-aside--hide': !showNavAside } ]"
+        @openLightboxRelatedTopics="openLightboxRelatedTopics"
+      />
+    </div>
     <AppSidebar
       class="section-content__nav-sidebar"
       :isSidebarToogle="showNavSidebar"
@@ -210,11 +212,15 @@ export default {
       z-index 10006
       position fixed
       top 0
-  &__nav-aside
+  &__nav-aside-container
     position fixed
     top 60px
-    margin 0 0 0 40px
     height calc(100vh - 60px)
+    display flex
+    align-items center
+    z-index 10000
+  &__nav-aside
+    margin 0 0 0 40px
     display flex
     flex-direction column
     justify-content center

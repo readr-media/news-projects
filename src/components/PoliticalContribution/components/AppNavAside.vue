@@ -1,5 +1,5 @@
 <template>
-  <nav class="app-nav-aside">
+  <nav class="app-nav-aside" :style="{ height: `${defaultHeight}px`, transform: `scale(${scaling})` }">
     <ButtonSection
       class="app-nav-aside__button-section"
       :iconSrc="'chart-g.png'"
@@ -94,11 +94,20 @@ export default {
     ButtonSection,
     AppArrowTooltip,
   },
+  data () {
+    return {
+      defaultHeight: 739,
+      availableHeight: 739,
+    }
+  },
   computed: {
     ...mapGetters([
       'slug',
       'renderedSectionContent',
-    ])
+    ]),
+    scaling () {
+      return Math.min(this.availableHeight / this.defaultHeight, 1)
+    },
   },
   methods: {
     navigateRoute (path) {
@@ -110,15 +119,24 @@ export default {
     },
     newTab (url) {
       window.open(url)
+    },
+    calcAvailableHeight () {
+      this.availableHeight = window.innerHeight - 60
     }
   },
+  mounted () {
+    this.calcAvailableHeight()
+    window.addEventListener('resize', this.calcAvailableHeight)
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.calcAvailableHeight)
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
 .app-nav-aside
   width 60px
-  z-index 10000
   &__button-section
     &:not(:nth-child(1))
       margin 20px 0 0 0
