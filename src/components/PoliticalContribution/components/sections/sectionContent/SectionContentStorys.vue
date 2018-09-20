@@ -653,6 +653,14 @@
         你也有什麼好奇的問題嗎？歡迎從<router-link class="section-content-story__link" to="dashboard">圖表區</router-link>或是<a class="section-content-story__link" href="https://github.com/mirror-media/politicalcontribution" target="_blank">原始資料區</a>挖掘出更多與我們分享！
       </div>
     </article>
+    <article v-if="slug === 'story6'">
+      <h1 class="section-content-story__title">政治獻金資料到底解密了什麼？</h1>
+      <SectionContentCredits :publishedDate="'2018/xx/xx'"/>
+      <div class="section-content-story__paragraph">
+        READr 政治獻金數位化專案是延續 2014 年 g0v 零時政府透過鄉民的力量數位化資料的靈感，最後成功促使政府修法。目前監察院的查詢平台標案已經決標，政治獻金資料未來是否真的能邁向公開透明，我們會與您一起繼續監督！
+      </div>
+      <SectionContentStorysTimelines/>
+    </article>
   </main>
 </template>
 
@@ -661,6 +669,7 @@ import * as CHART_DATA from '../../charts/data'
 
 import SectionContentCredits from './SectionContentCredits.vue'
 import SectionContentStorysInfoboxHint from './SectionContentStorys/SectionContentStorysInfoboxHint.vue'
+import SectionContentStorysTimelines from './SectionContentStorys/SectionContentStorysTimelines.vue'
 
 import SectionContentExploreRadios from '../sectionContent/SectionContentExplore/SectionContentExploreRadios.vue'
 import BarHorizontalOrdinalCandidate from '../../charts/BarHorizontalOrdinalCandidate.vue'
@@ -680,6 +689,7 @@ export default {
   components: {
     SectionContentCredits,
     SectionContentStorysInfoboxHint,
+    SectionContentStorysTimelines,
     SectionContentExploreRadios,
     BarHorizontalOrdinalCandidate,
     BarHorizontalOrdinalIndustryDonates,
@@ -693,7 +703,7 @@ export default {
   },
   data () {
     return {
-      CHART_DATA
+      CHART_DATA,
     }
   },
   computed: {

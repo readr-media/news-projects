@@ -65,7 +65,7 @@ import SectionContentExplore from './sectionContent/SectionContentExplore.vue'
 import SectionContentStorys from './sectionContent/SectionContentStorys.vue'
 
 import { createNamespacedHelpers } from 'vuex'
-const { mapGetters, } = createNamespacedHelpers('PoliticalContribution')
+const { mapGetters, mapState, mapMutations, } = createNamespacedHelpers('PoliticalContribution')
 
 export default {
   components: {
@@ -93,11 +93,14 @@ export default {
       isSidebarCommentToogle: false,
       scrollerSectionContent: undefined,
       scrollerFooter: undefined,
-      showLightboxRelatedTopics: false,
+      // showLightboxRelatedTopics: false,
       lightboxTarget: undefined,
     }
   },
   computed: {
+    ...mapState({
+      showLightboxRelatedTopics: state => state.showLightboxRelatedTopics
+    }),
     ...mapGetters([
       'renderedSectionContent'
     ]),
@@ -169,12 +172,10 @@ export default {
     toogleNavSidebar () {
       this.showNavSidebar = !this.showNavSidebar
     },
-    openLightboxRelatedTopics () {
-      this.showLightboxRelatedTopics = true
-    },
-    closeLightboxRelatedTopics () {
-      this.showLightboxRelatedTopics = false
-    },
+    ...mapMutations({
+      openLightboxRelatedTopics: 'OPEN_LIGHTBOX_RELATEDTOPICS',
+      closeLightboxRelatedTopics: 'CLOSE_LIGHTBOX_RELATEDTOPICS'
+    }),
     navigateDuel () {
       this.$scrollTo('.section-content-explore-duel', { offset: -80 })
     },
