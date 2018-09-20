@@ -29,6 +29,7 @@ export default {
       }
     },
     currentLightboxShownName: '',
+    showLightboxRelatedTopics: false,
   }),
   actions,
   mutations,

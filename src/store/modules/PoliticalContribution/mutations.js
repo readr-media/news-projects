@@ -88,5 +88,11 @@ export default {
         stage.push(candidateName)
       }
     }
-  }
+  },
+  OPEN_LIGHTBOX_RELATEDTOPICS: (state) => {
+    state.showLightboxRelatedTopics = true
+  },
+  CLOSE_LIGHTBOX_RELATEDTOPICS: (state) => {
+    state.showLightboxRelatedTopics = false
+  },
 }
