@@ -11,8 +11,8 @@
         transform: `scale(${currentWidth / defaultWidth})`
       }"
     >
-
     </div>
+    <SankeyOrdinalCorpDonatesToCandidateTooltip class="scatter-ordinal-corp-donates__tooltip" :tooltipData="tooltipData"/>
   </div>
 </template>
 
@@ -22,6 +22,7 @@ import * as d3 from 'd3'
 import { sankey as d3Sankey, sankeyLinkHorizontal } from './d3-sankey'
 
 import ChartLazyVisualizing from '../../mixins/ChartLazyVisualizing'
+import SankeyOrdinalCorpDonatesToCandidateTooltip from './SankeyOrdinalCorpDonatesToCandidateTooltip.vue'
 
 import { fetchSheetCompanyDonate, } from 'src/components/PoliticalContribution/dispatchers'
 
@@ -38,6 +39,9 @@ export default {
       type: Number,
       default: 10,
     } 
+  },
+  components: {
+    SankeyOrdinalCorpDonatesToCandidateTooltip,
   },
   watch: {
     shouldVisualizeOrdinal () {
@@ -56,7 +60,7 @@ export default {
   mixins: [ ChartLazyVisualizing ],
   data () {
     const defaultWidth = 900
-    const defaultHeight = 5000
+    const defaultHeight = 3000
     const defaultAspect = defaultWidth / defaultHeight
 
     return {
@@ -70,6 +74,7 @@ export default {
       isDataLoading: false,
       currentDataLoading: null,
       
+      colorScale: undefined,
       outerWidth: undefined,
       outerHeight: undefined,
       margin: undefined,
@@ -80,7 +85,7 @@ export default {
       // xScale: undefined,
       // yScale: undefined,
 
-      // tooltipData: {},
+      tooltipData: {},
     }
   },
   computed: {
@@ -95,6 +100,7 @@ export default {
     },
     ...mapGetters([
       'ordinalRadioPicked',
+      'ordinalRadioPickedNum'
     ]),
     shouldVisualizeOrdinal () {
       return this.ordinal === '' ? this.ordinalRadioPicked : this.ordinal
@@ -151,9 +157,9 @@ export default {
           } else {
             if (!isEmpty(donate['集團碼'])) {
               resultGraph.links.push({
-                'target': donate['候選人'],
+                'target': donate['集團碼'],
                 'targetParty': donate['當選註記'] !== '*' || donate['推薦政黨'],
-                'source': donate['集團碼'],
+                'source': donate['候選人'],
                 'type': 'group',
                 'value': +(donate['收入金額'].split(',').join(''))
               })
@@ -193,9 +199,14 @@ export default {
       this.outerWidth = this.defaultWidth
       this.outerHeight = this.defaultHeight
 
-      this.margin = { top: 0, right: 0, bottom: 0, left: 150, }
+      this.margin = { top: 0, right: 150, bottom: 0, left: 100, }
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
       this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
+
+      this.colorScale =
+        d3.scaleOrdinal()
+          .domain(['中國國民黨', '民主進步黨', '時代力量', '無黨團結聯盟', '無黨籍', '親民黨', '公司', '未當選'])
+          .range(['#0071bc', '#53a66f', '#fcc037', '#c7195c', '#736357', '#eb6c1f', 'transparent', '#000'])
 
       this.svg =
         d3.select(this.chartSelector)
@@ -205,29 +216,14 @@ export default {
           .append('g')
             .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
 
-      // const sankey =
-      //   d3Sankey()
-      //     .nodeId(d => d.name)
-      //     .nodeWidth(15)
-      //     .nodePadding(10)
-      //     .extent([[ 1, 1 ], [ this.innerWidth - 1, this.innerHeight - 6 ]])
-      // sankey(this.dataProcessed)
-      // // init scales
-      // this.xScale =
-      //   d3.scaleLinear()
-      //     .domain([ 0, 1 ])
-      //     .range([ 0, this.innerWidth ])
-      // this.yScale =
-      //   d3.scaleLinear()
-      //     .domain([ 0, 60000000 ])
-      //     .range([ this.innerHeight, 0 ])
+      this.processSankeyData()
     },
     processSankeyData () {
       const sankey =
         d3Sankey()
           .nodeId(d => d.name)
           .nodeWidth(15)
-          .nodePadding(10)
+          .nodePadding(20)
           .extent([[ 1, 1 ], [ this.innerWidth - 1, this.innerHeight - 6 ]])
       sankey(this.dataProcessed)
     },
@@ -242,11 +238,11 @@ export default {
           .data(this.dataProcessed.nodes)
       const links =
         this.svg
-          // .append("g")
-          //   .attr("class", "links")
-          //   .attr("fill", "none")
-          //   .attr("stroke", "#000")
-          //   .attr("stroke-opacity", 0.2)
+          // .append('g')
+          //   .attr('class', 'links')
+          //   .attr('fill', 'none')
+          //   .attr('stroke', '#000')
+          //   .attr('stroke-opacity', 0.2)
           .selectAll('path')
           .data(this.dataProcessed.links)
 
@@ -254,33 +250,57 @@ export default {
         .enter()
         .append('rect')
         .merge(nodes)
-          .attr("x", function(d) { return d.x0; })
-          .attr("y", function(d) { return d.y0; })
-          .attr("height", function(d) { return d.y1 - d.y0; })
-          .attr("width", function(d) { return d.x1 - d.x0; })
-          // .attr("fill", function(d) { return color(d.name.replace(/ .*/, "")); })
-          .attr("stroke", "#000")
+          .attr('x', function(d) { return d.x0 })
+          .attr('y', function(d) { return d.y0 })
+          .attr('height', function(d) { return d.y1 - d.y0 })
+          .attr('width', function(d) { return d.x1 - d.x0 })
+          // .attr('fill', function(d) { return color(d.name.replace(/ .*/, '')) })
+          .attr('fill', d => {
+            if (d.type === 'group') {
+              return '#9e005d'
+            } else {
+              return this.colorScale(d.party)
+            }
+          })
+          // .on('click', d => {
+          //   this.$router.push(`explore?name=${d.name}&ordinal=${this.ordinalRadioPickedNum}`)
+          // })
       texts
         .enter()
         .append('text')
         .merge(texts)
-          .attr('x', d => d.x0)
+          .attr('x', d => d.x0 + 20 * (d.type === 'group' ? 1 : -1))
+          // .attr('x', d => d.x0)
           .attr('y', d => d.y0 + ((d.y1 - d.y0) / 2))
           // .attr('dy', '.35em')
-          .attr("text-anchor", "end")
-          .attr("transform", null)
+          .attr('text-anchor', d => d.type === 'group' ? 'start' : 'end')
+          .attr('transform', null)
           .text(d => d.name)
           .style('fill', 'black')
       links
         .enter()
         .append('path')
         .merge(links)
-          .attr("d", sankeyLinkHorizontal())
-          .attr("stroke-width", function(d) { return Math.max(1, d.width); })
-          .attr("class", "links")
-          .attr("fill", "none")
-          .attr("stroke", "#000")
-          .attr("stroke-opacity", 0.2)
+          .attr('d', sankeyLinkHorizontal())
+          .attr('stroke-width', d => Math.max(1, d.width))
+          // .attr('stroke-width', d => this.logScale(Math.max(1, d.width)))
+          .attr('class', 'links')
+          .attr('fill', 'none')
+          .attr('stroke', '#000')
+          .attr('stroke-opacity', 0.2)
+          .on('mouseover', d => {
+            d3.selectAll('.links')
+              .attr('stroke-opacity', 0.1)
+
+            this.handleTooltip(d, 'mouseover')
+          })
+          .on('mousemove', d => this.handleTooltip(d, 'mousemove'))
+          .on('mouseout', d => {
+            d3.selectAll('.links')
+              .attr('stroke-opacity', 0.2)
+
+            this.handleTooltip(d, 'mouseout')
+          })
 
       nodes.exit().remove()
       texts.exit().remove()
@@ -291,6 +311,74 @@ export default {
       this.currentWidth = containerWidth
       this.currentHeight = Math.round(containerWidth / this.defaultAspect)
     },
+    handleTooltip (data, event) {
+      const handleTooltipPosition = (type) => {
+        if (type === 'top') {
+          return (d) => {
+            // let tooltipHeight = parseInt(d3.select(this.tooltipSelector).style('height'), 10)
+            let tooltipHeight = d3.select(this.tooltipSelector).node().getBoundingClientRect().height
+            if (!isCollide('bottom')) {
+              return (d3.event.clientY + 20) + 'px'
+            } else {
+              return (d3.event.clientY - 10 - tooltipHeight) + 'px'
+            }
+          }
+        } else if (type === 'left') {
+          return (d) => {
+            let tooltipWidth = parseInt(d3.select(this.tooltipSelector).style('width'), 10)
+            if (!isCollide('right')) {
+              return (d3.event.clientX) + 'px'
+            } else {
+              return (d3.event.clientX - tooltipWidth) + 'px'
+            }
+          }
+        }
+      }
+
+      const isCollide = (tooltipBorder) => {
+        // let tooltipWidth = parseInt(d3.select(this.tooltipSelector).style('width'), 10)
+        // let tooltipHeight = parseInt(d3.select(this.tooltipSelector).style('height'), 10)
+        let tooltipWidth = d3.select(this.tooltipSelector).node().getBoundingClientRect().width
+        let tooltipHeight = d3.select(this.tooltipSelector).node().getBoundingClientRect().height
+        let w = window
+        let d = document
+        let e = d.documentElement
+        let g = d.getElementsByTagName('body')[0]
+        let windowWidth = w.innerWidth || e.clientWidth || g.clientWidth
+        let windowHeight = w.innerHeight || e.clientHeight || g.clientHeight
+
+        if (tooltipBorder === 'right') {
+          if (d3.event.clientX + tooltipWidth >= windowWidth) {
+            return true
+          } else {
+            return false
+          }
+        } else if (tooltipBorder === 'bottom') {
+          if (d3.event.clientY + 20 + tooltipHeight >= windowHeight) {
+            return true
+          } else {
+            return false
+          }
+        }
+      }
+
+      if (event === 'mouseover') {
+        this.tooltipData = data
+        d3.select(this.tooltipSelector)
+          .style('display', 'initial')
+          .style('opacity', 1)
+          .style('top', handleTooltipPosition('top'))
+          .style('left', handleTooltipPosition('left'))
+      } else if (event === 'mousemove') {
+        d3.select(this.tooltipSelector)
+          .style('top', handleTooltipPosition('top'))
+          .style('left', handleTooltipPosition('left'))
+      } else if (event === 'mouseout') {
+        d3.select(this.tooltipSelector)
+          .style('display', 'none')
+          .style('opacity', 0)
+      }
+    },
   },
   mounted () {
     this.calculateCurrentDimensions()
@@ -298,7 +386,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .sankey-ordinal-corp-donates-to-candidate
   position relative
   &__loading
@@ -326,6 +414,9 @@ export default {
     background white
     box-shadow 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
     z-index 10000
+  & >>> .links
+    &:hover
+      stroke-opacity 0.5
 </style>
 
 

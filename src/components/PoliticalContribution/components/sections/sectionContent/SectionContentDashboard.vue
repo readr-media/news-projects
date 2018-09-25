@@ -674,7 +674,7 @@ export default {
 #dashboard-chart-ordinal-corp-donates-to-candidate-chart-container
   width 100%
   // height 360px
-  padding 0px 80px
+  // padding 0px 80px
 
 @media (max-width 1024px)
   .section-content-dashboard
