@@ -144,6 +144,18 @@ export default {
   ordinalRadioPicked: (state) => {
     return state.section.explore.navs.radioPicked
   },
+  ordinalRadioPickedNum: (state, getters) => {
+    switch (getters.ordinalRadioPicked) {
+      case 'seventh':
+        return 7
+      case 'eighth':
+        return 8
+      case 'ninth':
+        return 9
+      default:
+        return 9
+    }
+  },
   ordinalUrlQuery: (state, getters, rootState) => {
     return +get(rootState.route.query, 'ordinal', -1)
   },

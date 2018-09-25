@@ -15,7 +15,7 @@
         />
       </div>
     </div>
-    <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart section-content-explore-lightbox-info-donates-from__chart--fix-height">
+    <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart">
       <div class="title-container">
         <h1 class="section-content-explore-lightbox-info-donates-from__title">營利事業產業組成</h1>
         <button 
@@ -24,6 +24,9 @@
         >
           註
         </button>
+      </div>
+      <div v-show="showCaution" class="caution-container">
+        此分類使用財政部稅籍資料，由行業代碼對應到稅務行業分類的十九大分類。由於一間公司可能會登記多個業別，加總金額會大於總金額。假設 A 公司登記為「製造業」與「批發零售業」，捐贈 2 萬元，則計算方式為「製造業 2 萬元」、「批發零售業 2 萬元」。
       </div>
       <div class="bar-chart-container">
         <div
@@ -37,9 +40,6 @@
           :donates="candidateDonatesIndustryTypeFrom"
           :isDataPercentage="true"
         />
-      </div>
-      <div v-show="showCaution" class="caution-container">
-        此分類使用財政部稅籍資料，但一間公司並不一定只有一個營業類別。若該公司捐贈 2 萬元，登記類別為 A、B，則金額計算方式是 A 與 B 各 2 萬元。
       </div>
     </div>
     <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart">
@@ -205,12 +205,13 @@ export default {
 
 .caution-container
   width 100%
-  height calc(100% - 30px)
-  position absolute
-  top 30px
-  left 0
+  // height calc(100% - 30px)
+  // position absolute
+  // top 30px
+  // left 0
   border solid 1px #9e005d
   background-color white
+  margin 5px 0
   padding 16px
   font-size 16px
   line-height 1.3

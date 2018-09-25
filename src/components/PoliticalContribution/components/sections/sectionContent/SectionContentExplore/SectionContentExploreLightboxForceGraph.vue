@@ -188,7 +188,7 @@ export default {
       this.link
         .enter()
         .append('line')
-          .attr('class', d => typeof d.targetParty !== Boolean ? `links-party-${this.$t(`POLITICAL_CONTRIBUTION.PARTY['${d.targetParty}']`)}` : '')
+          .attr('class', d => typeof d.targetParty !== 'boolean' ? `links-party-${this.$t(`POLITICAL_CONTRIBUTION.PARTY['${d.targetParty}']`)}` : '')
           .attr('id', d => `link-${d.source}-${d.target}`)
           .on('mouseover', mouseoverHandlerLink(this))
           .on('mouseout', mouseoutHandlerLink(this))

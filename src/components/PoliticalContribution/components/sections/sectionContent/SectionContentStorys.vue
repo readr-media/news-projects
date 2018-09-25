@@ -105,7 +105,7 @@
         </div>
       </blockquote>
       <div class="section-content-story__paragraph">
-        接下來幾天，我們還會就立委、企業、政黨等面向作更進一步的分析（歡迎點此訂閱通知追蹤後續報導）！如果你也對這份資料有什麼好奇，歡迎你留言告訴我們，<router-link class="section-content-story__link" to="/project/political-contribution/explore">或是透過我們製作的工具來挖掘看看吧！</router-link>
+        接下來幾天，我們還會就立委、企業、政黨等面向作更進一步的分析（歡迎點此訂閱通知追蹤後續報導）！如果你也對這份資料有什麼好奇，歡迎你留言告訴我們，<router-link class="section-content-story__link" to="explore" v-scroll-to="'.section-content'">或是透過我們製作的工具來挖掘看看吧！</router-link>
       </div>
     </article>
     <article v-if="slug === 'story2'">
@@ -498,7 +498,7 @@
       </div>
       <h2 class="section-content-story__subtitle">選舉更公平，才有新人參政的可能</h2>
       <div class="section-content-story__paragraph">
-        從立委的政治獻金<router-link class="section-content-story__link" to="/project/political-contribution/story2" v-scroll-to="'.section-content'">分析</router-link>可以看見，不但資源過度集中在現任立委上，現任立委與新科挑戰者的勝選率也相當懸殊。陳尚志以自己的選舉經驗為例，「錢真的太重要了」。
+        從立委的政治獻金<router-link class="section-content-story__link" to="story2" v-scroll-to="'.section-content'">分析</router-link>可以看見，不但資源過度集中在現任立委上，現任立委與新科挑戰者的勝選率也相當懸殊。陳尚志以自己的選舉經驗為例，「錢真的太重要了」。
       </div>
       <div class="section-content-story__paragraph">
         「選舉一開始有沒有資金打知名度，是關鍵。」陳尚志指出，依照規定，參選人在投票前十個月才能開始申請專戶，「等到申請下來，網路金流做好，兩個月過去了；等到錢真的進來，還要再等兩個月。前面半年全部透支，這些透支的錢哪裡來？就是一大問題，更別提民進黨、國民黨是有初選的政黨。」
@@ -659,7 +659,7 @@
         有愈來愈多新人投入政治中，「錢」是一個重要的門檻嗎？隨著政府修法，未來政治獻金明細將公開，但這只是第一步，我們會跟您一起繼續監督下去！
       </div>
       <div class="section-content-story__paragraph">
-        你也有什麼好奇的問題嗎？歡迎從<router-link class="section-content-story__link" to="dashboard">圖表區</router-link>或是<a class="section-content-story__link" href="https://github.com/mirror-media/politicalcontribution" target="_blank">原始資料區</a>挖掘出更多與我們分享！
+        你也有什麼好奇的問題嗎？歡迎從<router-link class="section-content-story__link" to="dashboard" v-scroll-to="'.section-content'">圖表區</router-link>或是<a class="section-content-story__link" href="https://github.com/mirror-media/politicalcontribution" target="_blank">原始資料區</a>挖掘出更多與我們分享！
       </div>
     </article>
     <article v-if="slug === 'story6'">
