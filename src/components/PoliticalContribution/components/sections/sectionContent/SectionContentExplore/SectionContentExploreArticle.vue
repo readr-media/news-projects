@@ -1,7 +1,7 @@
 <template>
   <article class="section-content-explore-article">
     <h1 class="section-content-explore-article__title">查找政商關係</h1>
-    <SectionContentCredits :publishedDate="'2018/xx/x'" :showSpecialThanks="true"/>
+    <SectionContentCredits :isNewCredit="true" :showSpecialThanks="true" :publishedDate="'2018/xx/x'"/>
     <div class="section-content-explore-article__caution">
       <p class="section-content-explore-article__caution-placeholder">註：</p>
       <div class="section-content-explore-article__caution-container">
@@ -31,7 +31,7 @@ export default {
 <style lang="stylus">
 .section-content-explore-article
   &__title
-    font-size 58px
+    font-size 46px
     font-weight 600
     text-align center
     margin 0 0 40px 0

@@ -67,55 +67,49 @@ export default {
           }
         } else {
           return {
-            title: `${titleHeadings}：查找政商關係`,
-            // TODO: pending
-            description: '',
+            title: `${titleHeadings}：立委的金主投資名冊`,
+            description: '在 2012 年至 2016 年中 3 次立委選舉的政治獻金公開資料中，立委們分別收到哪些集團的捐贈？又集中在哪些產業？選區內與選區外的捐獻有差異嗎？來看看 READr 為你整理的資料。',
             metaUrl: 'political-contribution/explore',
             metaImage: 'political-contribution/ogimgs/ogimage-explore.jpg',
             customScript: structuredDataScript
           }
         }
-      // TODO: pending 
       case 'dashboard':
         return {
-          title: `${titleHeadings}：圖表區`,
-          description: '',
+          title: `${titleHeadings}：八年立委政商關係視覺化一次看！`,
+          description: '2008 年至 2016 年 3 次立委選舉中，哪個集團捐最多錢？捐藍還捐綠？政黨傾向是否有變化？哪些產業最喜歡捐贈政治獻金？我們將問題的答案透過視覺化通通放在圖表區，快來找答案！',
           metaUrl: 'political-contribution/dashboard',
-          metaImage: 'political-contribution/ogimgs/ogimage.jpg',
+          metaImage: 'political-contribution/ogimgs/ogimage-dashboard.jpg',
           customScript: structuredDataScript
         }
       case 'story1':
         return {
-          title: `${titleHeadings}：選一次立委，金流超過 28 億！`,
-          // TODO: pending
-          description: '',
+          title: '選一次立委，金流超過 28 億！',
+          description: '選一個立委要花多少錢？是誰在資助我們的民意代表？依照台灣的法律，候選人必須申報選舉時政治獻金的來源，但這些資料與其說是公開，不如說是被放在監察院「典藏」，需要親赴政府機關才看得到，還只能印出一張張無法應用的 A4 紙，我們決定透過實際行動來回答這些問題⋯⋯',
           metaUrl: 'political-contribution/story1',
           metaImage: 'political-contribution/ogimgs/ogimage-story1.jpg',
           customScript: structuredDataScript
         }
       case 'story2':
         return {
-          title: `${titleHeadings}：立委篇／老鳥與新秀，募款能力差了 6.6 倍`,
-          // TODO: pending
-          description: '',
+          title: '立委篇／老鳥與新秀，募款能力差了 6.6 倍',
+          description: '台灣人的捐款行為就像宗教信仰？菜鳥想要挑戰立委席次要跨越多大的門檻？我們從立法委員個人的角度分析第九屆選舉的政治獻金資料，也探討現行制度中是否誠實申報的問題。',
           metaUrl: 'political-contribution/story2',
           metaImage: 'political-contribution/ogimgs/ogimage-story2.jpg',
           customScript: structuredDataScript
         }
       case 'story3':
         return {
-          title: `${titleHeadings}：企業篇／金權遊戲？翻開金主的投資名冊`,
-          // TODO: pending
-          description: '',
+          title: '企業篇／金權遊戲？翻開金主的投資名冊',
+          description: '誰是立委的大金主？哪種類型的公司最喜歡跟政治人物打交道？公司捐錢給立委通常會有哪些目的，又有哪些限制？從企業的角度來看看第九屆選舉的政治獻金資料吧！',
           metaUrl: 'political-contribution/story3',
           metaImage: 'political-contribution/ogimgs/ogimage-story3.jpg',
           customScript: structuredDataScript
         }
       case 'story4':
         return {
-          title: `${titleHeadings}：政治獻金開放了嗎？`,
-          // TODO: pending
-          description: '',
+          title: '政治獻金開放了嗎？',
+          description: '為什麼原本就「開放」的政治獻金資料需要這麼費力才能取得？台灣的選舉管制除了政治獻金以外還有哪些問題？政治獻金資料透明化只是第一步，還有更多層面需要大家的關心。',
           metaUrl: 'political-contribution/story4',
           metaImage: 'political-contribution/ogimgs/ogimage-story4.jpg',
           customScript: structuredDataScript

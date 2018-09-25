@@ -179,7 +179,7 @@ export default {
       closeLightboxRelatedTopics: 'CLOSE_LIGHTBOX_RELATEDTOPICS'
     }),
     navigateDuel () {
-      this.$scrollTo('.section-content-explore-duel', { offset: -80 })
+      this.$scrollTo('.section-content-explore-duel', { duration: 500, offset: -80 })
     },
   },
   mounted () {

@@ -518,7 +518,7 @@
     </article>
     <article v-if="slug === 'story5'">
       <h1 class="section-content-story__title">資料怎麼看？<br>政治獻金的五個發現</h1>
-      <SectionContentCredits :publishedDate="'2018/xx/xx'"/>
+      <SectionContentCredits :isNewCredit="true" :showConsultant="true" :publishedDate="'2018/xx/xx'"/>
       <div class="section-content-story__paragraph">
         去年做完第九屆立委政治獻金數位化之後，我們發現還有很多問題無法解答，浮現「要是有歷史資料能夠對照就好了」的念頭。我們藉由鄉民的幫助，完成了第七屆、第八屆立委營利事業捐贈的數位化。
       </div>
@@ -527,22 +527,31 @@
       </div>
       <h2 class="section-content-story__subtitle">大多數的集團捐贈的政黨傾向並非鐵板一塊</h2>
       <div class="visualization">
-        <!-- <h2 class="visualization__title">哪些集團捐最多錢？捐藍還捐綠？</h2> -->
+        <h3 class="visualization__subtitle">哪些集團捐最多錢？捐藍還捐綠？</h3>
         <SectionContentExploreRadios class="visualization__radios"/>
         <div class="chart-container">
           <ScatterOrdinalCorpDonates
             class="chart-container__chart"
             id="chart5-1"
           />
+          <SectionContentDashboardOrdinalCorpDonatesMobile
+            class="chart-container__chart"
+            id="chart5-1-mobile"
+          />
         </div>
       </div>
       <div class="visualization">
-        <!-- <h2 class="visualization__title">哪些集團三屆立委選舉都捐錢？政黨傾向變化？</h2> -->
+        <h3 class="visualization__subtitle">哪些集團三屆立委選舉都捐錢？政黨傾向變化？</h3>
         <SectionContentExploreRadios class="visualization__radios"/>
         <div class="chart-container">
           <ScatterOrdinalCorpDonates
             class="chart-container__chart"
             id="chart5-2"
+            :filterCorp="CHART_DATA.GROUPS_TOP_TEN_DONATES_SEVENTH_EIGHTH_NINTH"
+          />
+          <SectionContentDashboardOrdinalCorpDonatesMobile
+            class="chart-container__chart"
+            id="chart5-2-mobile"
             :filterCorp="CHART_DATA.GROUPS_TOP_TEN_DONATES_SEVENTH_EIGHTH_NINTH"
           />
         </div>
@@ -655,12 +664,16 @@
     </article>
     <article v-if="slug === 'story6'">
       <h1 class="section-content-story__title">政治獻金資料到底解密了什麼？</h1>
-      <SectionContentCredits :publishedDate="'2018/xx/xx'"/>
+      <SectionContentCredits :isNewCredit="true" :showConsultant="true" :publishedDate="'2018/xx/xx'"/>
       <div class="section-content-story__paragraph">
         READr 政治獻金數位化專案是延續 2014 年 g0v 零時政府透過鄉民的力量數位化資料的靈感，最後成功促使政府修法。目前監察院的查詢平台標案已經決標，政治獻金資料未來是否真的能邁向公開透明，我們會與您一起繼續監督！
       </div>
       <SectionContentStorysTimelines/>
     </article>
+    <div class="related-storys">
+      <h2 class="section-content-story__subtitle section-content-story__subtitle--align-left">相關文章</h2>
+      <SectionContentFooterStorysList/>
+    </div>
   </main>
 </template>
 
@@ -678,9 +691,12 @@ import BarHorizontalOrdinalIndustryParticipate from '../../charts/BarHorizontalO
 import BarVerticalStackedOrdinalDonatesFrom from '../../charts/BarVerticalStackedOrdinalDonatesFrom.vue'
 import BarHorizontalStackedOrdinalDonatesFrom from '../../charts/BarHorizontalStackedOrdinalDonatesFrom.vue'
 import ScatterOrdinalCorpDonates from '../../charts/ScatterOrdinalCorpDonates.vue'
+import SectionContentDashboardOrdinalCorpDonatesMobile from './SectionContentDashboard/SectionContentDashboardOrdinalCorpDonatesMobile.vue'
 import TableDuel from '../../charts/TableDuel.vue'
 import TableTopTen from '../../charts/TableTopTen.vue'
 import ParallelOrdinalPartyDonatesFrom from '../../charts/ParallelOrdinalPartyDonatesFrom.vue'
+
+import SectionContentFooterStorysList from './SectionContentFooterStorysList.vue'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters, } = createNamespacedHelpers('PoliticalContribution')
@@ -697,9 +713,11 @@ export default {
     BarVerticalStackedOrdinalDonatesFrom,
     BarHorizontalStackedOrdinalDonatesFrom,
     ScatterOrdinalCorpDonates,
+    SectionContentDashboardOrdinalCorpDonatesMobile,
     TableDuel,
     TableTopTen,
     ParallelOrdinalPartyDonatesFrom,
+    SectionContentFooterStorysList,
   },
   data () {
     return {
@@ -729,6 +747,8 @@ export default {
     text-align center
     margin 40px 0 0 0
     line-height 1.25
+    &--align-left
+      text-align left
   &__paragraph
     font-size 19px
     line-height 1.5
@@ -773,7 +793,7 @@ export default {
       color #9e005d
   &__subtitle
     font-size 20px
-    margin 10px 0
+    margin 10px 0 20px 0
     &--mobile
       display none
   &__radios
@@ -789,6 +809,14 @@ export default {
       width 60%
     &--wide
       width 100%
+
+.related-storys
+  display none
+
+#chart5-1-mobile
+  display none
+#chart5-2-mobile
+  display none
 
 @media (max-width 1024px)
   .section-content-story
@@ -820,6 +848,32 @@ export default {
         width 100%
       &--wide
         width 100%
+
+  .related-storys
+    display initial
+    & >>> ul
+      width 100% !important
+      padding 0 0 0 25px !important
+    & >>> li
+      width 100% !important
+      color #9e005d !important
+      text-align justify
+      text-decoration underline
+      font-size 22px !important
+      margin 10px 0 !important
+      font-weight 700 !important
+    & >>> .new-notification
+      color white !important
+      background-color #9e005d !important
+
+  #chart5-1
+    display none
+  #chart5-1-mobile
+    display initial
+  #chart5-2
+    display none
+  #chart5-2-mobile
+    display initial
 
 @media (max-width 375px)
   .section-content-story
