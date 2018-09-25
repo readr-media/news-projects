@@ -5,20 +5,41 @@
         <img class="story-credits__mm-logo" src="/proj-assets/political-contribution/mm.png" alt="">
       </a>
     </div>
-    <div class="story-credits__row">
-      <p class="story-credits__credit">文：李又如</p>
-      <p class="story-credits__credit">設計：陳怡蒨</p>
-    </div>
-    <div class="story-credits__row story-credits__row--mobile-break">
-      <p class="story-credits__credit">網站製作：熊凱文</p>
-      <p class="story-credits__credit">資料整理：李又如、熊凱文</p>
-    </div>
-    <div v-if="showSpecialThanks" class="story-credits__row">
-      <p class="story-credits__credit">資料分析：李宗榮</p>
-    </div>
-    <div class="story-credits__row">
-      <p class="story-credits__published-date">發布日期：{{ publishedDate }}</p>
-    </div>
+    <template v-if="!isNewCredit">
+      <div class="story-credits__row story-credits__row--mobile-break">
+        <p class="story-credits__credit">文字：李又如</p>
+        <p class="story-credits__credit">設計：陳怡蒨</p>
+        <p class="story-credits__credit">工程：熊凱文</p>
+      </div>
+      <div class="story-credits__row">
+        <p class="story-credits__credit">資料整理：李又如、熊凱文</p>
+      </div>
+      <div v-if="showSpecialThanks" class="story-credits__row">
+        <p class="story-credits__credit">資料分析：李宗榮</p>
+      </div>
+      <div class="story-credits__row">
+        <p class="story-credits__published-date">發布日期：{{ publishedDate }}</p>
+      </div>
+    </template>
+    <template v-else>
+      <div class="story-credits__row story-credits__row--mobile-break">
+        <p class="story-credits__credit">文字：李又如</p>
+        <p class="story-credits__credit">設計：陳怡蒨</p>
+        <p class="story-credits__credit">工程：熊凱文</p>
+      </div>
+      <div class="story-credits__row">
+        <p class="story-credits__credit story-credits__credit--line-break">資料協力：<br><a href="https://ronny.tw/" target="_blank">Ronny Wang</a>、<br>Timothy Lee、<br><a href="https://campaign-finance.g0v.ctiml.tw/" target="_blank">參與「鍵盤救國」的鄉民們</a></p>
+      </div>
+      <div v-if="showSpecialThanks" class="story-credits__row">
+        <p class="story-credits__credit">資料分析：李宗榮</p>
+      </div>
+      <div v-if="showConsultant" class="story-credits__row">
+        <p class="story-credits__credit">資料顧問：卞中珮</p>
+      </div>
+      <div class="story-credits__row">
+        <p class="story-credits__published-date">發布日期：{{ publishedDate }}</p>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -32,6 +53,14 @@ export default {
     publishedDate: {
       type: String,
       required: true,
+    },
+    isNewCredit: {
+      type: Boolean,
+      default: false,
+    },
+    showConsultant: {
+      type: Boolean,
+      default: false,
     },
   }
 }
@@ -59,6 +88,11 @@ export default {
     margin 0
     & + &
       margin 0 0 0 8px
+    & > a
+      color #808080
+    &--line-break
+      br
+        display none
   &__published-date
     margin 0
 
@@ -72,5 +106,10 @@ export default {
         flex-direction column
         .story-credits__credit
           margin 4px 0
+    &__credit
+      &--line-break
+        line-height 1.3
+        br
+          display initial
 </style>
 

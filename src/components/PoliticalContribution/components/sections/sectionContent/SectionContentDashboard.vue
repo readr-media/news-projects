@@ -27,6 +27,7 @@
             :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
             :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_TOTAL"
           />
+          <p class="chart-container__hint">＊政治獻金總收入</p>
         </AppChartCollapse>
         <AppChartCollapse :title="'誰在公司捐贈<br>收到最多錢？'">
           <BarHorizontalOrdinalCandidate
@@ -35,6 +36,7 @@
             :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
             :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_COMPANY"
           />
+          <p class="chart-container__hint">＊營利事業政治獻金</p>
         </AppChartCollapse>
         <AppChartCollapse :title="'誰收到<br>最多家企業捐贈？'">
           <BarHorizontalOrdinalCandidate
@@ -44,6 +46,7 @@
             :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_COMPANY_COUNT"
             :dataHintUnit="'家'"
           />
+          <p class="chart-container__hint">＊營利事業捐贈家數</p>
         </AppChartCollapse>
         <AppChartCollapse :title="'落選人中，誰收到<br>最多政治獻金？'">
           <BarHorizontalOrdinalCandidate
@@ -52,27 +55,32 @@
             :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
             :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_BUT_LOST"
           />
+          <p class="chart-container__hint">＊政治獻金總收入</p>
         </AppChartCollapse>
         <AppChartCollapse :title="'哪些產業<br>捐最多錢給立委？'">
           <BarHorizontalOrdinalIndustryDonates
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-ten-donates-industry-mobile"
-            :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY"
+            :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY_NEW"
+            :isNewData="true"
           />
+          <p class="chart-container__hint">＊分類資料：財務部稅籍登記</p>
         </AppChartCollapse>
         <AppChartCollapse :title="'哪些產業<br>最積極捐錢給立委？'">
           <BarHorizontalOrdinalIndustryParticipate
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-ten-participate-industry-mobile"
             :legends="CHART_DATA.DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY_LEGENDS"
-            :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY"
+            :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY_NEW"
           />
+          <p class="chart-container__hint">＊有捐贈的公司數佔該年度同類型公司總數比例</p>
         </AppChartCollapse>
         <AppChartCollapse :title="'哪些集團捐最多錢？<br>捐藍還捐綠？'">
           <SectionContentDashboardOrdinalCorpDonatesMobile
             class="chart-container__chart"
             id="dashboard-chart-ordinal-corp-donates-mobile"
           />
+          <p class="chart-container__hint">＊集團捐贈金額前十名</p>
         </AppChartCollapse>
         <AppChartCollapse :title="'哪些集團三屆立委選舉都捐錢？政黨傾向變化？'">
           <SectionContentDashboardOrdinalCorpDonatesMobile
@@ -80,6 +88,7 @@
             id="dashboard-chart-ordinal-corp-donates-mobile"
             :filterCorp="CHART_DATA.GROUPS_TOP_TEN_DONATES_SEVENTH_EIGHTH_NINTH"
           />
+          <p class="chart-container__hint">＊連續三屆選舉都有捐贈的公司，金額統計前十名</p>
         </AppChartCollapse>
         <AppChartCollapse :title="'現任立委<br>比較容易選上'">
           <TableDuel
@@ -175,6 +184,7 @@
                 :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
                 :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_TOTAL"
               />
+              <p class="chart-container__hint">＊政治獻金總收入</p>
             </div>
             <div
               class="chart-container"
@@ -188,6 +198,7 @@
                 :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
                 :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_COMPANY"
               />
+              <p class="chart-container__hint">＊營利事業政治獻金</p>
             </div>
           </AppChartExpand>
         </div>
@@ -242,6 +253,7 @@
                 :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_COMPANY_COUNT"
                 :dataHintUnit="'家'"
               />
+              <p class="chart-container__hint">＊營利事業捐贈家數</p>
             </div>
             <div
               class="chart-container"
@@ -255,6 +267,7 @@
                 :legends="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_LEGENDS"
                 :data="CHART_DATA.DATA_ORDINAL_TOP_FIVE_DONATES_BUT_LOST"
               />
+              <p class="chart-container__hint">＊政治獻金總收入</p>
             </div>
             <div
               class="chart-container"
@@ -265,8 +278,10 @@
               <BarHorizontalOrdinalIndustryDonates
                 class="chart-container__chart"
                 id="dashboard-chart-ordinal-top-ten-donates-industry"
-                :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY"
+                :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_DONATES_INDUSTRY_NEW"
+                :isNewData="true"
               />
+              <p class="chart-container__hint">＊分類資料：財務部稅籍登記</p>
             </div>
             <div
               class="chart-container"
@@ -278,8 +293,9 @@
                 class="chart-container__chart"
                 id="dashboard-chart-ordinal-top-ten-participate-industry"
                 :legends="CHART_DATA.DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY_LEGENDS"
-                :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY"
+                :data="CHART_DATA.DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY_NEW"
               />
+              <p class="chart-container__hint">＊有捐贈的公司數佔該年度同類型公司總數比例</p>
             </div>
           </AppChartExpand>
         </div>
@@ -331,6 +347,7 @@
                 class="chart-container__chart"
                 id="dashboard-chart-ordinal-corp-donates"
               />
+              <p class="chart-container__hint">＊集團捐贈金額前十名</p>
             </div>
             <div
               class="chart-container"
@@ -343,6 +360,7 @@
                 id="dashboard-chart-ordinal-corp-donates-top10-evolved"
                 :filterCorp="CHART_DATA.GROUPS_TOP_TEN_DONATES_SEVENTH_EIGHTH_NINTH"
               />
+              <p class="chart-container__hint">＊連續三屆選舉都有捐贈的公司，金額統計前十名</p>
             </div>
             <div
               class="chart-container"
@@ -401,6 +419,7 @@
                 class="chart-container__chart"
                 id="dashboard-chart-ordinal-corp-donates-to-candidate"
               />
+              <p class="chart-container__hint">＊各屆營利事業收入前十名</p>
             </div>
           </AppChartExpand>
         </div>
@@ -543,6 +562,11 @@ export default {
   &__chart
     width 100%
     // border 1px solid red
+  &__hint
+    font-size 18px
+    text-align center
+    color #808080
+    margin 14px 0 0 0
 .row
   width 100%
   & + &
@@ -625,7 +649,7 @@ export default {
 #dashboard-chart-ordinal-top-ten-donates-industry-chart-container
   width 100%
   // height 360px
-  padding 0px 80px
+  padding 0px 0px
 
 #dashboard-chart-ordinal-corp-donates-chart-container
   width 100%
@@ -664,6 +688,10 @@ export default {
         display none
       &--mobile
         display flex
+  .chart-container
+    &__hint
+      margin 44px 0
+      line-height 1.25
 </style>
 
 

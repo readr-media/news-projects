@@ -69,20 +69,7 @@ export default {
       height d
       background-color white
 
-// @media (max-width 375px)
-//   .button-section-landing
-//     r = 70px
-//     min-width r
-//     max-width r
-//     min-height r
-//     max-height r
-//     border-radius r
-//     &__icon
-//       d = calc(70px * 0.6)
-//       width d
-//       height d
-
-@media (max-width 320px)
+@media (max-width 375px)
   .button-section-landing
     r = 60px
     min-width r
@@ -90,8 +77,23 @@ export default {
     min-height r
     max-height r
     border-radius r
+    background-color #9e005d
     &__icon
       d = calc(60px * 0.6)
+      width d
+      height d
+      background-color white
+
+@media (max-width 320px)
+  .button-section-landing
+    r = 55px
+    min-width r
+    max-width r
+    min-height r
+    max-height r
+    border-radius r
+    &__icon
+      d = calc(55px * 0.6)
       width d
       height d
 </style>

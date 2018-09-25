@@ -19,7 +19,7 @@
           class="bar-horizontal-ordinal-industry-participate-chart__industry-y-tick"
           :industryName="industry.name"
           :isCrony="industry.isCrony"
-          :style="{ transform: `translate3d(-380px, ${yScale(industry.name) + yScale.bandwidth() / 2 + 5}px, 0)` }"
+          :style="{ transform: `translate3d(-340px, ${yScale(industry.name) + yScale.bandwidth() / 2 + 5}px, 0)` }"
         />
       </template>
     </div>
@@ -117,7 +117,7 @@ export default {
       this.outerWidth = this.defaultWidth
       this.outerHeight = this.defaultHeight
 
-      this.margin = { top: 10, right: 0, bottom: 0, left: 130, }
+      this.margin = { top: 10, right: 0, bottom: 0, left: 170, }
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
       this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
 
