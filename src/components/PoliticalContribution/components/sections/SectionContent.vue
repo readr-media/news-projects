@@ -266,6 +266,6 @@ export default {
     &__explore-duel
       display none
     &__footer
-      display none
+      display none !important
 </style>
 
