@@ -32,7 +32,7 @@
       @toogleSidebarOff="isSidebarCommentToogle = false"
     >
       <!-- <iframe class="section-content__comment-iframe" src="https://www.readr.tw/comment?resource_url=https://readr.tw/series/dollclaw-machine"></iframe> -->
-      <iframe class="section-content__comment-iframe" src="http://dev.readr.tw/comment?resource_url=http://www.readr.tw/series/political-contribution"></iframe>
+      <iframe class="section-content__comment-iframe" src="https://www.readr.tw/comment?resource_url=http://www.readr.tw/series/political-contribution"></iframe>
     </AppSidebar>
     <img
       :class="[ 'section-content__explore-duel', { 'section-content__explore-duel--show': showDuelButton } ]"
@@ -266,6 +266,6 @@ export default {
     &__explore-duel
       display none
     &__footer
-      display none
+      display none !important
 </style>
 

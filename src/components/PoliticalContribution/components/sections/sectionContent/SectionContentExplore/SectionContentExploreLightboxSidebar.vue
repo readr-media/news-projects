@@ -69,11 +69,11 @@ export default {
     height auto
     border-left none
     &__toogle
-      display none
+      display none !important
     &__content
       height auto
     &__folded-hint
-      display none
+      display none !important
 </style>
 
 
