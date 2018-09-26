@@ -604,6 +604,7 @@ export default {
   width 100%
   // height 360px
   padding 0px 80px
+  margin 0 0 40px 0
 
 #dashboard-chart-ninth-candidate-donates-exp-chart-container
   width 100%

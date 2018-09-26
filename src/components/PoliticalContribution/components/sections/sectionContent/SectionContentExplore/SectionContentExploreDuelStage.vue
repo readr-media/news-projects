@@ -135,7 +135,7 @@ export default {
       return get(data, [ 0, '捐贈企業數' ], '')
     },
     getCompanyDonates (data) {
-      return (+(get(data, [ 0, '營利事業捐贈收入' ], '').split(',').join('')) / 10000).toFixed(2)
+      return Number((+(get(data, [ 0, '營利事業捐贈收入' ], '').split(',').join('')) / 10000).toFixed(2)).toLocaleString()
     },
     getParty (data) {
       return get(data, [ 0, '推薦政黨' ], '')
@@ -148,7 +148,7 @@ export default {
       return get(data, [ 0, '當選註記' ], '') === '*'
     },
     getTotalDonates (data) {
-      return (+(get(data, [ 0, '總收入' ], '').split(',').join('')) / 10000).toFixed(2)
+      return Number((+(get(data, [ 0, '總收入' ], '').split(',').join('')) / 10000).toFixed(2)).toLocaleString()
     }
   },
 }

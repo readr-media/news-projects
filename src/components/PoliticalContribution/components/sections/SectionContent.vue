@@ -32,7 +32,7 @@
       @toogleSidebarOff="isSidebarCommentToogle = false"
     >
       <!-- <iframe class="section-content__comment-iframe" src="https://www.readr.tw/comment?resource_url=https://readr.tw/series/dollclaw-machine"></iframe> -->
-      <iframe class="section-content__comment-iframe" src="http://dev.readr.tw/comment?resource_url=http://dev.readr.tw/series/foreign-labour"></iframe>
+      <iframe class="section-content__comment-iframe" src="http://dev.readr.tw/comment?resource_url=http://www.readr.tw/series/political-contribution"></iframe>
     </AppSidebar>
     <img
       :class="[ 'section-content__explore-duel', { 'section-content__explore-duel--show': showDuelButton } ]"

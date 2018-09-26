@@ -100,7 +100,7 @@ export default {
       this.outerWidth = this.defaultWidth
       this.outerHeight = this.defaultHeight
 
-      this.margin = this.isNewData ? { top: 0, right: 100, bottom: 30, left: 250, } : { top: 0, right: 80, bottom: 30, left: 80, }
+      this.margin = this.isNewData ? { top: 0, right: 100, bottom: 30, left: 250, } : { top: 0, right: 90, bottom: 30, left: 80, }
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
       this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
 
@@ -134,7 +134,7 @@ export default {
       this.xAxis = 
         d3.axisBottom(this.xScale)
           .ticks(5)
-          .tickFormat((d, i) => i === this.xScale.ticks(5).length - 1 ? `${d / 10000}萬元` : d / 10000)
+          .tickFormat((d, i) => i === this.xScale.ticks(5).length - 1 ? `${(d / 10000).toLocaleString()}萬元` : (d / 10000).toLocaleString())
           .tickSize([ -this.innerHeight ])
           .tickPadding(20)
       this.svg
@@ -207,7 +207,7 @@ export default {
         .merge(hints)
           .attr('x', d => this.xScale(d.money) + 10)
           .attr('y', d => this.yScale(d.name) + this.yScale.bandwidth() / 2 + 5)
-          .text(d => d.money >= 100000000 ? `${(d.money / 100000000).toFixed(2)} 億元` : `${(d.money / 10000).toFixed(0)} 萬元`)
+          .text(d => d.money >= 100000000 ? `${(d.money / 100000000).toFixed(2)} 億元` : `${Number((d.money / 10000).toFixed(0)).toLocaleString()} 萬元`)
 
       // Exit
       bars.exit().remove()

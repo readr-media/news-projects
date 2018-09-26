@@ -192,7 +192,7 @@ export default {
         .merge(hints)
            .attr('x', 80)
            .attr('y', d => this.yScale(d.candidate) + this.yScale.bandwidth() / 2 + 20)
-           .text(d => this.dataHintUnit === '家' ? d.amount : ((d.amount / 10000).toFixed(0)).toLocaleString())
+           .text(d => this.dataHintUnit === '家' ? d.amount : Number((d.amount / 10000).toFixed(0)).toLocaleString())
            .style('font-size', '54px')
            .style('fill', 'white')
         .append('tspan')
@@ -219,7 +219,7 @@ export default {
           .merge(hintsDonatesMoney)
             .attr('x', 80)
             .attr('y', d => this.yScale(d.candidate) + this.yScale.bandwidth() / 2 + 60)
-            .text(d => `金額：${((d.donatesMoney / 10000).toFixed(0)).toLocaleString()} 萬元`)
+            .text(d => `金額：${Number((d.donatesMoney / 10000).toFixed(0)).toLocaleString()} 萬元`)
             .style('font-size', '27px')
             .style('fill', '#808080')
       }

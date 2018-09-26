@@ -1,5 +1,6 @@
 <template>
   <div :style="{ height: `${currentHeight}px` }">
+    <BarHorizontalStackedOrdinalDonatesFromTypeRadios class="radios" :chartTypePicked.sync="chartTypePicked"/>
     <div
       class="chart bar-horizontal-stacked-ordinal-donates-from-chart"
       :style="{
@@ -20,6 +21,7 @@ import { isNaN, isEmpty } from 'lodash'
 import * as d3 from 'd3'
 
 import AppChartLegends from './AppChartLegends.vue'
+import BarHorizontalStackedOrdinalDonatesFromTypeRadios from './BarHorizontalStackedOrdinalDonatesFromTypeRadios.vue'
 
 export default {
   props: {
@@ -39,7 +41,18 @@ export default {
     },
   },
   components: {
-    AppChartLegends
+    AppChartLegends,
+    BarHorizontalStackedOrdinalDonatesFromTypeRadios
+  },
+  watch: {
+    chartTypePicked () {
+      this.updateScale()
+      if (window.innerWidth <= 1024) {
+        this.updateWidthMobile()
+      }
+      this.updateStackData()
+      this.visualize()
+    }
   },
   data () {
     const defaultWidth = 900
@@ -47,6 +60,8 @@ export default {
     const defaultAspect = defaultWidth / defaultHeight
 
     return {
+      chartTypePicked: 'percentage', // percentage or total
+
       defaultWidth,
       defaultHeight,
       defaultAspect,
@@ -86,7 +101,9 @@ export default {
       this.outerWidth = this.defaultWidth
       this.outerHeight = this.defaultHeight
 
-      this.margin = window.innerWidth > 1024 ? { top: 0, right: 0, bottom: 0, left: 100, } : { top: 0, right: 0, bottom: 0, left: 0, }
+      this.margin = window.innerWidth > 1024 ?
+                    { top: 0, right: 80, bottom: 0, left: 100, } :
+                    (this.chartTypePicked === 'percentage' ? { top: 0, right: 0, bottom: 0, left: 0, } : { top: 0, right: 120, bottom: 0, left: 0, })
       this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
       this.innerHeight = this.outerHeight - this.margin.top - this.margin.bottom
 
@@ -157,6 +174,21 @@ export default {
         }
       }
     },
+    updateScale () {
+      this.xScale.domain([ 0, this.chartTypePicked === 'percentage' ? 1 : d3.max(this.data, d => d['總收入']) ])
+    },
+    updateWidthMobile () {
+      this.margin = this.chartTypePicked === 'percentage' ? { top: 0, right: 0, bottom: 0, left: 0, } : { top: 0, right: 120, bottom: 0, left: 0, }
+      this.innerWidth = this.outerWidth - this.margin.right - this.margin.left
+      this.xScale.range([ 0,  this.innerWidth ])
+    },
+    updateStackData () {
+      const stack = 
+        d3.stack()
+          .keys([ '營利事業', '個人', '政黨', '人民團體', '匿名', '其他' ])
+          .offset(this.chartTypePicked === 'percentage' ? d3.stackOffsetExpand : d3.stackOffsetNone)
+      this.layers = stack(this.dataOrdinalFiltered)
+    },
     visualize () {
       // Data joins
       const layers =
@@ -164,13 +196,14 @@ export default {
           .selectAll('.bar-horizontal-stacked-ordinal-donates-from-chart__layer')
           .data(this.layers)
 
-      // Update + Enter
       const layer =
         layers
           .enter()
           .append('g')
             .attr('class', 'bar-horizontal-stacked-ordinal-donates-from-chart__layer')
             .style('fill', (d, i) => this.colorScale(i))
+
+      // Enter
       layer
         .selectAll('.bar-horizontal-stacked-ordinal-donates-from-chart__bar')
         .data(d => d)
@@ -200,6 +233,44 @@ export default {
             }
           })
           .style('fill', 'white')
+
+      layers
+        .selectAll('.bar-horizontal-stacked-ordinal-donates-from-chart__layer')
+        .style('fill', (d, i) => this.colorScale(i))
+
+      layers
+        .selectAll('.bar-horizontal-stacked-ordinal-donates-from-chart__bar')
+        .data(d => d)
+        .attr('x', d => this.xScale(d[0]))
+        .attr('width', d => !isNaN(d[1]) ? this.xScale(d[1]) - this.xScale(d[0]) : 0)
+
+      layers
+        .selectAll('.bar-horizontal-stacked-ordinal-donates-from-chart__hint')
+        .data(d => d)
+        .attr('x', d => !isNaN(d[1]) ? this.xScale(d[0]) + (this.xScale(d[1]) - this.xScale(d[0])) / 2 : this.xScale(d.data['總收入']) + 10)
+        .style('fill', d => !isNaN(d[1]) ? 'white' : 'black')
+        .attr('text-anchor', d => !isNaN(d[1]) ? 'middle' : 'start')
+        .text((d, i) => {
+          if (isNaN(d[1]) ) {
+            return `${(d.data['總收入'] / 100000000).toFixed(0)} 億元`
+          }
+
+          if (this.chartTypePicked === 'percentage') {
+            const percentage = d[1] - d[0]
+            const showPercentage = d[1] - d[0] > 0.10
+            if (!isNaN(percentage) && showPercentage) {
+              return `${(percentage * 100).toFixed(0)}%`
+            }
+          } else {
+            console.log(d[1])
+            console.log(d)
+            const donate = d[1] - d[0]
+            const showDonate = d[1] - d[0] > 300000000
+            if (!isNaN(donate) && showDonate) {
+              return `${(donate / 100000000).toFixed(2)} 億元`
+            }
+          }
+        })
     },
     calculateCurrentDimensions () {
       const containerWidth = this.$el.getBoundingClientRect().width
@@ -224,9 +295,12 @@ export default {
 .chart
   transform-origin 0% 0%
 
+.radios
+  margin 0 0 10px 0
+
 .bar-horizontal-stacked-ordinal-donates-from-chart
   &__hint
-    font-size 24px
+    font-size 19px
   &__yAxis
     .domain
       opacity 0
