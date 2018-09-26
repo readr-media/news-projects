@@ -144,11 +144,14 @@ export default {
   &__search, &__zoom
     position absolute
     right calc(384px * 2 + 20px)
-    transition transform .25s
+    // transition transform .25s
+    transition right .25s
     &--folded-single
-      transform translate3d(344px, 0, 0)
+      // transform translate3d(344px, 0, 0)
+      right calc(384px * 2 + 20px - 344px)
     &--folded-double
-      transform translate3d(688px, 0, 0)
+      // transform translate3d(688px, 0, 0)
+      right calc(384px * 2 + 20px - 688px)
   &__search
     top 52px
   &__zoom
