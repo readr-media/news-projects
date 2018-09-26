@@ -4,12 +4,12 @@
       <div class="section-content-footer__related-title">相關文章</div>
       <SectionContentFooterStorysList/>
     </div>
-    <AppParticles class="section-content-footer__particles" id="section-content-footer-particles" :isFooterShow="isFooterShow"/>
+    <!-- <AppParticles class="section-content-footer__particles" id="section-content-footer-particles" :isFooterShow="isFooterShow"/> -->
   </footer>
 </template>
 
 <script>
-import AppParticles from '../../AppParticles.vue'
+// import AppParticles from '../../AppParticles.vue'
 import SectionContentFooterStorysList from './SectionContentFooterStorysList.vue'
 
 export default {
@@ -20,7 +20,7 @@ export default {
     }
   },
   components: {
-    AppParticles,
+    // AppParticles,
     SectionContentFooterStorysList
   },
 }
@@ -58,10 +58,10 @@ export default {
     letter-spacing 10px
     text-indent 10px
     text-align center
-  &__particles
-    position absolute
-    right calc((100vw - 900px) / 2 / 2)
-    bottom calc(271px / 2)
-    width 150px
-    height 271px
+  // &__particles
+  //   position absolute
+  //   right calc((100vw - 900px) / 2 / 2)
+  //   bottom calc(271px / 2)
+  //   width 150px
+  //   height 271px
 </style>

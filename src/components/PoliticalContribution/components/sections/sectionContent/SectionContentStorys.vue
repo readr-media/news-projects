@@ -518,20 +518,20 @@
     </article>
     <article v-if="slug === 'story5'">
       <h1 class="section-content-story__title">資料怎麼看？<br>政治獻金的五個發現</h1>
-      <SectionContentCredits :isNewCredit="true" :showConsultant="true" :publishedDate="'2018/xx/xx'"/>
+      <SectionContentCredits :isNewCredit="true" :showConsultant="true" :publishedDate="'2018/09/27'"/>
       <div class="section-content-story__paragraph">
         去年做完第九屆立委政治獻金數位化之後，我們發現還有很多問題無法解答，浮現「要是有歷史資料能夠對照就好了」的念頭。我們藉由鄉民的幫助，完成了第七屆、第八屆立委營利事業捐贈的數位化。
       </div>
       <div class="section-content-story__paragraph">
         當然，這份資料還是無法百分之百呈現選舉期間的金流樣貌（但這牽涉到候選人自主申報與監察院是否主動調查），卻是這個議題重要的起點。我們發現了一些有趣的現象：
       </div>
-      <h2 class="section-content-story__subtitle">大多數的集團捐贈的政黨傾向並非鐵板一塊</h2>
+      <h2 class="section-content-story__subtitle">變心了！大多數的集團捐贈的政黨傾向不是鐵板一塊</h2>
       <div class="visualization">
         <h3 class="visualization__subtitle">哪些集團捐最多錢？捐藍還捐綠？</h3>
         <SectionContentExploreRadios class="visualization__radios"/>
         <div class="chart-container">
           <ScatterOrdinalCorpDonates
-            class="chart-container__chart"
+            class="chart-container__chart chart-container__chart--narrow"
             id="chart5-1"
           />
           <SectionContentDashboardOrdinalCorpDonatesMobile
@@ -540,12 +540,21 @@
           />
         </div>
       </div>
+      <div class="section-content-story__paragraph">
+        2008 年捐獻金額在第 10 名（共捐了 530 萬元）的台塑集團，在之後的捐獻金額都不若以往，2012 年共捐了 135 萬、2016 年只捐了 110 萬，但皆有藍綠都押寶的狀況。
+      </div>
+      <div class="section-content-story__paragraph">
+        知名集團如 2008 年排第 18 名（共捐獻 370 萬）的元大集團，只在 2016 年重出江湖捐獻了 100 萬給兩位民進黨的候選人；而 2008 年排第 14 名的統一集團，則完全消失在之後兩個年度的政治獻金金流中。
+      </div>
+      <div class="section-content-story__paragraph">
+        另外 2008 年不在前 10 名內（總共捐了 408 萬排第 15 名）味丹企業，在之後兩屆用加倍的捐獻金額爬上了第五名。
+      </div>
       <div class="visualization">
         <h3 class="visualization__subtitle">哪些集團三屆立委選舉都捐錢？政黨傾向變化？</h3>
         <SectionContentExploreRadios class="visualization__radios"/>
         <div class="chart-container">
           <ScatterOrdinalCorpDonates
-            class="chart-container__chart"
+            class="chart-container__chart chart-container__chart--narrow"
             id="chart5-2"
             :filterCorp="CHART_DATA.GROUPS_TOP_TEN_DONATES_SEVENTH_EIGHTH_NINTH"
           />
@@ -557,13 +566,13 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        從三屆都有捐的前十名的政黨傾向變化，發現只有少數企業是鐵板一塊，捐贈的候選人政黨光譜都大致從藍慢慢走向綠，有些企業在 2016 年的立委選舉時甚至藍綠翻盤。
+        更進一步，我們整理出三屆立委選舉都有捐錢的集團，並觀察它們捐錢時的政黨傾向，發現只有少數集團是鐵板一塊。大多數集團捐贈的候選人政黨光譜都大致從藍慢慢走向綠，有些企業在 2016 年的立委選舉時甚至藍綠翻盤。
       </div>
       <div class="section-content-story__paragraph">
-        2008年時，捐獻金額在前十名的集團捐獻傾向幾乎都偏藍，只有態度變動很大的台灣基礎集團 38％偏綠（第八屆變成偏藍 72%）、以及潤泰集團80%偏綠跟其他集團有不同的答案。
+        2008 年時，捐獻金額在前十名的集團捐獻傾向幾乎都偏藍，只有態度變動很大的台灣基礎集團 38％偏綠（2012 年變成偏藍 72%）、以及潤泰集團80%偏綠跟其他集團有不同的答案。
       </div>
       <div class="section-content-story__paragraph">
-        值得一提的是，潤泰集團在大多數集團慢慢往綠走的光譜中，做出了相反的決定。第八屆捐獻是 100% 捐綠的潤泰，第九屆只剩下 20%，有高達 68% 的捐款捐給國民黨候選人。
+        值得一提的是，潤泰集團在大多數集團慢慢往綠走的光譜中，做出了相反的決定。2012 年捐獻是 100% 捐綠的潤泰，2016 年只剩下 20%，有高達 68% 的捐款捐給國民黨候選人。  
       </div>
       <div class="section-content-story__paragraph">
         2012 年，大慶集團（100%）、金鼎證券集團（100%）、燁聯鋼鐵集團（100%）與裕隆集團（97%）仍保持對國民黨候選人的高支持度，但到了2016 年，只剩大慶集團是 100% 捐獻給國民黨，裕隆的「忠誠度」掉到 70%，燁聯鋼鐵集團甚至只剩 38%，首度出現綠大於藍的捐獻傾向。而捐獻金額始終最高的遠東集團，則從偏藍（72%）變成兩邊押寶的偏綠。
@@ -646,6 +655,7 @@
             id="chart5-6"
             :legends="CHART_DATA.DATA_ALL_ORDINAL_DONATES_FROM_LEGENDS"
             :data="CHART_DATA.DATA_ALL_ORDINAL_DONATES_FROM"
+            style="margin: 0 0 40px 0"
           />
         </div>
       </div>
@@ -664,7 +674,7 @@
     </article>
     <article v-if="slug === 'story6'">
       <h1 class="section-content-story__title">政治獻金資料到底解密了什麼？</h1>
-      <SectionContentCredits :isNewCredit="true" :showConsultant="true" :publishedDate="'2018/xx/xx'"/>
+      <SectionContentCredits :isNewCredit="true" :publishedDate="'2018/09/27'"/>
       <div class="section-content-story__paragraph">
         READr 政治獻金數位化專案是延續 2014 年 g0v 零時政府透過鄉民的力量數位化資料的靈感，最後成功促使政府修法。目前監察院的查詢平台標案已經決標，政治獻金資料未來是否真的能邁向公開透明，我們會與您一起繼續監督！
       </div>
@@ -806,7 +816,7 @@ export default {
   &__chart
     width 80%
     &--narrow
-      width 60%
+      width 70%
     &--wide
       width 100%
 

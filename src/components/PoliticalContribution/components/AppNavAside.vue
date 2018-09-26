@@ -180,6 +180,9 @@ export default {
 .new-content-wording
   position relative
   top 2px
+  color #9e005d
+  font-weight 600
+  transform translateX(-35px)
 
 .router-link-exact-active
   background-color #9e005d

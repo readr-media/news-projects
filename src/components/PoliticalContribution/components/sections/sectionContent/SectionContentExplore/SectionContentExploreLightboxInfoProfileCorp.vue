@@ -85,9 +85,9 @@ export default {
     },
     donateSum () {
       if (this.isQueryValidCompanyBelongsGroup) {
-        return (sumBy(this.rankDataGroupCompanyDonatesCurrentOrdinalNameLightboxShown, 'value') / 10000).toFixed(2)
+        return Number((sumBy(this.rankDataGroupCompanyDonatesCurrentOrdinalNameLightboxShown, 'value') / 10000).toFixed(2)).toLocaleString()
       } else {
-        return (get(this.dataForceDonateSum['company'], this.groupNameOrCompanyTaxId, 0) / 10000).toFixed(2)
+        return Number((get(this.dataForceDonateSum['company'], this.groupNameOrCompanyTaxId, 0) / 10000).toFixed(2)).toLocaleString()
       }
     },
     companyResData () {
@@ -109,7 +109,7 @@ export default {
             const isCompanyExist = !isEmpty(get(companyData, '財政部', {}))
             if (isCompanyExist) {
               const companyResCapital = get(companyData, [ '資本總額(元)' ], get(companyData, [ '資本額(元)' ]))
-              this.companyResStore[currentIdentityId].capital = (+(companyResCapital.split(',').join('')) / 100000000).toFixed(2)
+              this.companyResStore[currentIdentityId].capital = Number((+(companyResCapital.split(',').join('')) / 100000000).toFixed(2)).toLocaleString()
               this.companyResStore[currentIdentityId].owner = get(companyData, [ '代表人姓名' ], get(companyData, [ '負責人姓名' ]))
             } else {
               this.companyResStore[currentIdentityId].capital = '查無資料'
@@ -131,11 +131,11 @@ export default {
         this.$set(this.companyResStore, currentIdentityId, { owner: get(groupDonates, [ 0, '董事長' ], ''), capital: '查詢中' })
         Promise.all(companyReqs)
           .then(res => {
-            this.companyResStore[currentIdentityId].capital = (sumBy(res, ({ data } = company) => {
+            this.companyResStore[currentIdentityId].capital = Number((sumBy(res, ({ data } = company) => {
               const companyData = get(data, 'data', {})
               const companyResCapital = get(companyData, [ '資本總額(元)' ], get(companyData, [ '資本額(元)' ], 0))
               return +(companyResCapital.split(',').join(''))
-            }) / 100000000).toFixed(2)
+            }) / 100000000).toFixed(2)).toLocaleString()
           })
       }
     },

@@ -11,7 +11,7 @@ export const originEvents = [
   {
     isByGovernment: true,
     date: '2014 年 4 月 23 日',
-    title: '監察院針對 g0v 專案回應：「希望開啟這項專案的g0v更審慎思考，等政府來處理會比較好」',
+    title: '監察院針對 g0v 專案回應：「希望開啟這項專案的 g0v 更審慎思考，等政府來處理會比較好」',
     listItems: [
       '<a href="https://tw.news.yahoo.com/%E7%9B%A3%E5%AF%9F%E9%99%A2%EF%BC%9A%E7%AD%89%E6%94%BF%E5%BA%9C%E4%BE%86%E5%81%9A%E6%9C%83%E6%AF%94%E8%BC%83%E5%A5%BD-101829199.html" target="_blank">當時媒體報導</a>',
     ]
@@ -52,7 +52,7 @@ export const actionEvents = [
     title: '發布數位化完畢的原始資料',
     listItems: [
       {
-        content: '<a href="https://github.com/mirror-media/politicalcontribution" target="_blank">第九屆立委原始資料</a>',
+        content: '<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2016/A12_scanallpublic.pdf" target="_blank">第九屆立委原始資料</a>',
         linkType: 'data'
       },
       {
@@ -73,8 +73,7 @@ export const actionEvents = [
     listItems: [
       '開啟第二季（第七屆、第八屆立委政治獻金資料數位化）準備工作',
       {
-        // TODO: Check the link
-        content: '人工數位化會計報告書，製作成第七屆、第八屆立委基本資料',
+        content: '人工數位化會計報告書，製作成<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2008/A16_basicall_7.csv" target="_blank">第七屆</a>、<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2012/A15_basicall_8.csv" target="_blank">第八屆</a>立委基本資料',
         linkType: 'data'
       }
     ]
@@ -93,8 +92,7 @@ export const actionEvents = [
     title: '至監察院查閱政治獻金資料',
     listItems: [
       {
-        // TODO: Check the link
-        content: '?',
+        content: '<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2008/A14_scanall_7.pdf" target="_blank">第七屆</a>、<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/A18_scanall_pub.pdf" target="_blank">第八屆</a>立委政治獻金原始資料',
         linkType: 'data'
       }
     ]
@@ -180,7 +178,7 @@ export const actionEvents = [
   },
   {
     isByGovernment: false,
-    date: '2018 年 9 月 xx 日',
+    date: '2018 年 9 月 27 日',
     title: '政治獻金第二季上線',
     listItems: [
       '將查詢工具及視覺化圖表更新第七屆、第八屆立委營利事業資料',

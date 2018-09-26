@@ -197,7 +197,7 @@ export default {
       hintsDonatesMoneyText
         .append('tspan')
           .attr('class', 'bar-horizontal-ordinal-industry-participate-chart__hint-donates-money--highlight')
-          .text(d => `${((d.donatesMoney >= 100000000 ? d.donatesMoney / 100000000 : d.donatesMoney / 10000).toFixed(d.donatesMoney >= 100000000 ? 2 : 0)).toLocaleString()}`)
+          .text(d => `${Number((d.donatesMoney >= 100000000 ? d.donatesMoney / 100000000 : d.donatesMoney / 10000).toFixed(d.donatesMoney >= 100000000 ? 2 : 0)).toLocaleString()}`)
       hintsDonatesMoneyText
         .append('tspan')
           .text(d => d.donatesMoney >= 100000000 ? ' 億元' : ' 萬元')
@@ -206,7 +206,7 @@ export default {
         .attr('x', 0)
         .attr('y', d => this.yScale(d.name) + this.yScale.bandwidth() / 2 + 20)
         .select('.bar-horizontal-ordinal-industry-participate-chart__hint-donates-money--highlight')
-          .text(d => `${((d.donatesMoney >= 100000000 ? d.donatesMoney / 100000000 : d.donatesMoney / 10000).toFixed(d.donatesMoney >= 100000000 ? 2 : 0)).toLocaleString()}`)
+          .text(d => `${Number((d.donatesMoney >= 100000000 ? d.donatesMoney / 100000000 : d.donatesMoney / 10000).toFixed(d.donatesMoney >= 100000000 ? 2 : 0)).toLocaleString()}`)
 
       // Exit
       bars.exit().remove()

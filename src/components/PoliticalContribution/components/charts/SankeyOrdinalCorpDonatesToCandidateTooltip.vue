@@ -1,6 +1,6 @@
 <template>
   <div class="tooltip">
-    {{ targetName }} 共捐獻 <span>{{ donatesValue }}</span>元<br>
+    {{ targetName }} 共捐獻 <span>{{ donatesValue }}</span> 元<br>
     給 {{ sourceName }}
   </div>
 </template>

@@ -14,6 +14,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isParticlesBig: {
+      type: Boolean,
+      default: false,
+    },
   },
   watch: {
     isFooterShow () {
@@ -37,10 +41,10 @@ export default {
   },
   methods: {
     loadParticles () {
-      particlesJS.load(this.idGray, '/proj-assets/political-contribution/particles-config/gray.json')
-      particlesJS.load(this.idGreen, '/proj-assets/political-contribution/particles-config/green.json')
-      particlesJS.load(this.idYellow, '/proj-assets/political-contribution/particles-config/yellow.json')
-      particlesJS.load(this.idRing, '/proj-assets/political-contribution/particles-config/ring.json')
+      particlesJS.load(this.idGray, `/proj-assets/political-contribution/particles-config/gray${this.isParticlesBig ? 'Big' : ''}.json`)
+      particlesJS.load(this.idGreen, `/proj-assets/political-contribution/particles-config/green${this.isParticlesBig ? 'Big' : ''}.json`)
+      particlesJS.load(this.idYellow, `/proj-assets/political-contribution/particles-config/yellow${this.isParticlesBig ? 'Big' : ''}.json`)
+      particlesJS.load(this.idRing, `/proj-assets/political-contribution/particles-config/ring${this.isParticlesBig ? 'Big' : ''}.json`)
     }
   },
   mounted () {

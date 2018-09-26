@@ -1,7 +1,7 @@
 <template>
   <article class="section-content-explore-article">
     <h1 class="section-content-explore-article__title">查找政商關係</h1>
-    <SectionContentCredits :isNewCredit="true" :showSpecialThanks="true" :publishedDate="'2018/xx/x'"/>
+    <SectionContentCredits :isNewCredit="true" :showSpecialThanks="true" :publishedDate="'2018/09/27'"/>
     <div class="section-content-explore-article__caution">
       <p class="section-content-explore-article__caution-placeholder">註：</p>
       <div class="section-content-explore-article__caution-container">

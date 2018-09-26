@@ -4,7 +4,7 @@
       <span>政府相關回應或作為</span>
       <img class="government-legend__icon" src="/proj-assets/political-contribution/government.png" alt="">
     </div>
-    <transition name="fade" mode="out-in">
+    <transition name="slide-fade">
       <SectionContentStorysTimeline
         v-show="showOrigin"
         :events="originEvents"
@@ -87,6 +87,20 @@ export default {
     position relative
     bottom 7px
     margin 0 0 0 10px
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all .3s ease-out;
+}
+.slide-fade-leave-active {
+  transition: all .3s ease-out;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(20px);
+  opacity: 0;
+}
 
 @media (max-width 1024px)
   .timelines

@@ -3,7 +3,7 @@
     <img class="section-landing__hand" src="/proj-assets/political-contribution/hand.png" alt="">
     <div class="section-landing__donut-background"></div>
     <AppParticles class="section-landing__particles" id="section-landing-particles-first"/>
-    <AppParticles class="section-landing__particles" id="section-landing-particles-second"/>
+    <AppParticles :isParticlesBig="true" class="section-landing__particles" id="section-landing-particles-second"/>
     <div class="section-landing__content-container">
       <SectionLandingTitles/>
       <nav class="section-landing__navs">
@@ -257,15 +257,15 @@ export default {
       transform translateY(-157px)
 
 #section-landing-particles-first
-  top 105px
-  left 0
-  width 10%
-  height 400px
+  top 0
+  left 30%
+  width 400px
+  height 150px
 #section-landing-particles-second
-  left 30vw
-  bottom 0
-  width 200px
-  height calc(100vh - 105px - 339px - 30px)
+  top 45%
+  left 50px
+  width 40vw
+  height 30vh
 
 @media (max-width 1440px)
   .section-landing
@@ -326,7 +326,7 @@ export default {
   #section-landing-particles-first
     top 0
     left 0
-    width 10%
+    width 5%
     height 70vh
   #section-landing-particles-second
     display none

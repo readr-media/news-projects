@@ -24,10 +24,10 @@ export default {
   },
   computed: {
     candidateDonatesTotalComputed () {
-      return (Number(this.candidateDonatesTotal.split(',').join('')) / 10000).toFixed(1)
+      return Number((Number(this.candidateDonatesTotal.split(',').join('')) / 10000).toFixed(1)).toLocaleString()
     },
     candidateDonatesCompanyComputed () {
-      return (Number(this.candidateDonatesCompany.split(',').join('')) / 10000).toFixed(1)
+      return Number((Number(this.candidateDonatesCompany.split(',').join('')) / 10000).toFixed(1)).toLocaleString()
     },
   }
 }
