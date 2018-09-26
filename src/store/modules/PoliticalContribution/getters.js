@@ -85,9 +85,9 @@ export default {
   dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByParty : (state, getters) => {
     return omit(groupBy(getters.dataCompanyDonateCurrentOrdinalNameLightboxShown, '推薦政黨'), [ 'undefined', '' ])
   },
-  dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIndustryType: (state, getters) => {
-    return omit(groupBy(getters.dataCompanyDonateCurrentOrdinalNameLightboxShown, '母公司產業別'), [ 'undefined', '' ])
-  },
+  // dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIndustryType: (state, getters) => {
+  //   return omit(groupBy(getters.dataCompanyDonateCurrentOrdinalNameLightboxShown, '母公司產業別'), [ 'undefined', '' ])
+  // },
   dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIsLocalCounty: (state, getters) => {
     return omit(groupBy(getters.dataCompanyDonateCurrentOrdinalNameLightboxShown, '縣市狀態'), [ 'undefined', '' ])
   },

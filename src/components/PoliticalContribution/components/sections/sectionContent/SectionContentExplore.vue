@@ -15,7 +15,7 @@ import { disableBodyScroll, enableBodyScroll, } from 'body-scroll-lock'
 import { get, isEmpty, find, } from 'lodash'
 import { DATA, } from 'src/components/PoliticalContribution/constants'
 
-import AppLightbox from '../../AppLightbox.vue' // TODO: mobile version
+import AppLightbox from '../../AppLightbox.vue'
 import SectionContentExploreLightbox from './SectionContentExplore/SectionContentExploreLightbox.vue'
 import SectionContentExploreArticle from './SectionContentExplore/SectionContentExploreArticle.vue'
 import SectionContentExploreAsideHint from './SectionContentExplore/SectionContentExploreAsideHint.vue'
