@@ -328,8 +328,14 @@
         <h2 class="visualization__title">哪些集團／公司最支持立委？</h2>
         <div class="chart-container">
           <ScatterOrdinalCorpDonates
-            class="chart-container__chart"
+            class="chart-container__chart chart-container__chart--narrow"
             id="chart3-2"
+            :ordinal="'ninth'"
+            :howManyNodes="20"
+          />
+          <SectionContentDashboardOrdinalCorpDonatesMobile
+            class="chart-container__chart"
+            id="chart3-2-mobile"
             :ordinal="'ninth'"
             :howManyNodes="20"
           />
@@ -827,6 +833,8 @@ export default {
   display none
 #chart5-2-mobile
   display none
+#chart3-2-mobile
+  display none
 
 @media (max-width 1024px)
   .section-content-story
@@ -876,6 +884,10 @@ export default {
       color white !important
       background-color #9e005d !important
 
+  #chart3-2
+    display none
+  #chart3-2-mobile
+    display initial
   #chart5-1
     display none
   #chart5-1-mobile
