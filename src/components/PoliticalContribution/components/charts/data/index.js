@@ -999,7 +999,7 @@ export const DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY = {
       name: '電器電纜業',
       percentage: 6.0,
       donatesMoney: 5600000,
-      isCrony: false, // TODO: Check
+      isCrony: true,
     },
     {
       name: '証券業',
@@ -1043,7 +1043,7 @@ export const DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY = {
       name: '汽車工業',
       percentage: 6.8,
       donatesMoney: 30856720,
-      isCrony: false, // TODO: Check
+      isCrony: false,
     },
     {
       name: '建材營造業',
@@ -1067,7 +1067,7 @@ export const DATA_ORDINAL_TOP_TEN_PARTICIPATE_INDUSTRY = {
       name: '電器電纜業',
       percentage: 3.3,
       donatesMoney: 2500000,
-      isCrony: false, // TODO: Check
+      isCrony: true,
     },
   ],
   ninth: [

@@ -60,7 +60,7 @@ import AppNavSidebar from '../AppNavSidebar.vue'
 import AppLightbox from '../AppLightbox.vue'
 import AppSidebar from '../AppSidebar.vue'
 import RelatedTopics from '../related/RelatedTopics.vue'
-import SectionContentFooter from './sectionContent/SectionContentFooter.vue' // TODO: style while wide screen
+import SectionContentFooter from './sectionContent/SectionContentFooter.vue'
 
 import SectionContentDashboard from './sectionContent/SectionContentDashboard.vue'
 import SectionContentExplore from './sectionContent/SectionContentExplore.vue'

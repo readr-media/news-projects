@@ -121,7 +121,7 @@ export default {
     ...mapGetters([
       'isNameLightboxShownCorp',
       'rawDataCompanyDonateCurrentOrdinal',
-      'dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIndustryType',
+      // 'dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIndustryType',
       'dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIsLocalCounty',
       'dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIsLocalElectionState',
       'dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByParty',
