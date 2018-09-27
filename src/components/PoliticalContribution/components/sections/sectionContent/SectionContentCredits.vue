@@ -34,7 +34,7 @@
         <p class="story-credits__credit">資料分析：李宗榮</p>
       </div>
       <div v-if="showConsultant" class="story-credits__row">
-        <p class="story-credits__credit">資料顧問：卞中珮</p>
+        <p class="story-credits__credit">資料顧問：卞中佩</p>
       </div>
       <div class="story-credits__row">
         <p class="story-credits__published-date">發布日期：{{ publishedDate }}</p>
