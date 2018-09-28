@@ -12,6 +12,7 @@
       <template v-for="n in candidateAmount">
         <VerifyInputCandidate
           :key="n"
+          :board="board"
           :candidate="n <= candidateAmountOrigin ? candidatesOrigin[n - 1] : undefined "
           :candidates="candidates"
           :index="n"
@@ -97,7 +98,7 @@ export default {
       errors: [],
       hasError: false,
       selectedCandidates: [],
-      showVerifyBoards: false, // false
+      showVerifyBoards: false,
       slogan: '',
       loading: false
     }
@@ -129,12 +130,17 @@ export default {
     },
   },
   watch: {
+    board () {
+      this.errors = [],
+      this.selectedCandidates = [],
+      this.showVerifyBoards = false, 
+      this.slogan = ''
+    },
     candidateAmountOrigin (value) {
       if (this.candidateAmount < value) {
         this.candidateAmount = value
       }
     },
-    
   },
   beforeMount () {
     Promise.all([
@@ -275,6 +281,9 @@ theme-color-hidden = #6d5810
       background-color #a0a0a0
       border none
       border-radius 2px
+      &::-webkit-input-placeholder
+        font-size 1rem
+        color #4c4c4c
     > p
       margin-top 5px
       color #fff

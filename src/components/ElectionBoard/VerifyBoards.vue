@@ -13,7 +13,7 @@
     </div>
     <div class="action">
       <div class="action-text">這是同一個使用者上傳的資料，哪些<span>是</span>競選看板的照片？</div>
-      <button @click="submit">這些是競選看板照片</button>
+      <button @click="submit">送出</button>
     </div>
   </div>
 </template>
