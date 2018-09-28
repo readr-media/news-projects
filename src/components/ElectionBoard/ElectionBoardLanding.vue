@@ -11,9 +11,8 @@
             <span>我要上傳</span>
           </router-link>
         </div>
-        <div class="item item--verify item--hidden">
-          <!-- <router-link to="/project/election-board/verify" > -->
-          <router-link to="/project/election-board/">
+        <div class="item item--verify">
+          <router-link to="/project/election-board/verify" >
             <img src="/proj-assets/election-board/images/check.png" alt="幫忙驗證">
             <span>幫忙驗證</span>
           </router-link>
@@ -33,6 +32,8 @@
       <p>工程：HY Tan、mich</p>
       <p>資料協力：<a href="https://councils.g0v.tw" target="_blank">投票指南</a></p>
     </div>
+    <h1>其他議題</h1>
+    <RelatedReports />
     <div v-show="showIntro" class="intro">
       <div class="intro-container">
         <div class="intro__close" @click="showIntro = false">
@@ -51,8 +52,13 @@
   </section>
 </template>
 <script>
+import RelatedReports from '../RelatedReports.vue'
+
 export default {
   name: 'ElectionBoardLanding',
+  components: {
+    RelatedReports
+  },
   data () {
     return {
       showIntro: true
@@ -76,6 +82,10 @@ color-data-hidden = #184b78
   min-height 100vh
   padding 80px 0 20px
   background-color rgba(0,0,0,1)
+  h1
+    margin .5em 0 0
+    color #fff
+    font-weight 300
   main
     display flex
     justify-content center

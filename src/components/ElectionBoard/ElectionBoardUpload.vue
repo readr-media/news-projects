@@ -43,6 +43,7 @@
           class="form"
           @cancelUpload="current = 0"
           @getPosAddress="getPosAddress"
+          @hideBackBtn="showBackBtn = false"
           @showMapHint="showMapHint = true"
           @updateCoordinate="updateCoordinate"
           @uploaded="current = 3" />
@@ -246,6 +247,7 @@ export default {
       this.imgFile = undefined
       this.imgSizeVerified = false
       this.imgURL = ''
+      this.showBackBtn = true
       this.showMapHint = false
       this.timeout = 3
       document.getElementById('camera').value = ''
