@@ -2,7 +2,7 @@
   <div class="input-candidate">
     <div class="input-candidate-container">
       <div class="input-container">
-        <input v-model.trim="selectedName" type="text" @blur="openList = false" @focus="openList = true">
+        <input v-model.trim="selectedName" type="text" placeholder="候選人名字" @blur="openList = false" @focus="openList = true">
         <div class="list" :class="{ open: openList }">
           <p
             v-for="item in candidatesForList"
@@ -14,13 +14,16 @@
       </div>
       <p v-if="candidate">目前資訊：{{ candidate.name }}</p>
     </div>
-    <p v-show="hasError" class="error">請輸入正確的候選人名字</p>
+    <p v-show="hasError" class="error">目前沒有這位候選人的資料</p>
   </div>
 </template>
 <script>
 export default {
   name: 'VerifyInputCandidate',
   props: {
+    board: {
+      type: Object
+    },
     candidate: {
       default: undefined
     },
@@ -54,6 +57,12 @@ export default {
     },
   },
   watch: {
+    board () {
+      this.candidatesForList = []
+      this.openList = false
+      this.selectedId = undefined
+      this.selectedName = ''
+    },
     hasError (value) {
       this.$emit('updateInputError', this.index, value)
     },
@@ -99,6 +108,10 @@ export default {
     -webkit-appearance none
     -moz-appearance none
     appearance none
+    &::-webkit-input-placeholder
+      font-size 1rem
+      color #4c4c4c
+  
   &-container
     display flex
     > *

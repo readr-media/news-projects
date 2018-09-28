@@ -3,7 +3,7 @@
     <main :style="[ mounted ? { display: 'flex' } : { display: 'none' }, { width: `${sectionAmount * viewportWidth}px`, transform: `translateX(-${current * viewportWidth}px)` }]">
       <section class="eb-upload__step-1">
         <div>
-          <h3>請記得開啟相機的定位服務</h3>
+          <h3>若使用手機，請記得開啟相機的定位服務</h3>
           <p>iOS：設定 > 隱私權 > 定位服務</p>
           <img src="/proj-assets/election-board/images/ios-gps.png" alt="">
           <p>Android：相機 > 一般設定 > 儲存地點</p>
@@ -51,7 +51,6 @@
       <section class="eb-upload__step-5">
         <img src="/proj-assets/election-board/images/done.png" alt="">
         <span>感謝您提供資料，{{ timeout }} 秒後將自動跳轉回上傳頁面</span>
-        <!-- <span>感謝您提供資料，3秒後將自動跳轉至資料頁面</span> -->
       </section>
     </main>
     <ElectionBoardBackBtn v-show="showBackBtn"/>
