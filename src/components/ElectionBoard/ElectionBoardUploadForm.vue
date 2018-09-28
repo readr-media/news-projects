@@ -47,7 +47,7 @@
       <button :disabled="!canSubmit" class="btn btn--submit" @click="submit">送出資料</button>
       <span v-if="hasError" class="error">系統目前維護中，請稍後再試...</span>
     </div>
-    <!-- <FormCheckUpload
+    <FormCheckUpload
       v-if="showCheckBoards"
       :address="address"
       :councilorCandidates="councilorCandidates"
@@ -55,23 +55,36 @@
       :mayorCandidates="mayorCandidates"
       :selectedCandidates="selectedCandidates"
       @cancelUpload="$emit('cancelUpload')"
-      @confirmUpload="uploadBoard" /> -->
+      @confirmUpload="uploadBoard" />
   </div>
 </template>
 <script>
-import axios from 'axios'
-import Cookie from 'vue-cookie'
 import FormCheckUpload from './FormCheckUpload.vue' 
 import FormSelectCandidate from './FormSelectCandidate.vue' 
 import FormSelectDatetime from './FormSelectDatetime.vue' 
 import FormSelectPosition from './FormSelectPosition.vue'
 import VueRecaptcha from 'vue-recaptcha'
-import uuidv4 from 'uuid/v4'
+import axios from 'axios'
 import { GOOGLE_RECAPTCHA_SITE_KEY, } from 'api/config'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
 
 const DEFAULT_PAGE = 1
+
+const fetchBoards = (store, {
+  coordinates,
+  page = DEFAULT_PAGE,
+  maxResults = 10,
+} = {}) => {
+  return store.dispatch('ElectionBoard/FETCH_BOARDS', {
+    coordinates,
+    page: page,
+    maxResults: maxResults,
+    radius: 100,
+    verifiedAmount: 3,
+    notBoardAmount: 2,
+  })
+}
 
 const fetchCandidates = (store, {
   county = '台北市',
@@ -132,12 +145,11 @@ export default {
       selectedCandidates: [],
       showCheckBoards: false,
       showCheckPosition: true,
-      userId: null,
     }
   },
   computed: {
     canSubmit () {
-      return this.current === 2 && this.userId && this.imgURL && this.coordinate.length === 2 && !this.showCheckPosition && this.recaptchaVerified
+      return this.current === 2 && this.userID && this.imgURL && this.coordinate.length === 2 && !this.showCheckPosition && this.recaptchaVerified
     },
     councilorCandidates () {
       if (this.county && this.district) {
@@ -170,6 +182,9 @@ export default {
     },
     road () {
       return this.address.split('區')[1]
+    },
+    userID () {
+      return this.$store.state.ElectionBoard.userID
     }
   },
   watch: {
@@ -193,11 +208,6 @@ export default {
   },
   mounted () {
     this.hasGeolocation = this.detectGeolocationFeature()
-    this.userId = this.getCookie()
-    if (!this.userId) {
-      this.setCookie()
-      this.userId = this.getCookie()
-    }
   },
   methods: {
     confirmPosition () {
@@ -223,9 +233,6 @@ export default {
         this.hasGeolocation = false
       })
     },
-    getCookie () {
-      return Cookie.get('eb-user')
-    },
     minusSelectCandidate (id) {
       if (id) {
         const index = this.selectedCandidates.findIndex((value, index, arr) => value === id)
@@ -238,14 +245,21 @@ export default {
     recaptchaVerify (res) {
       this.recaptchaVerified = true
     },
-    setCookie () {
-      const uuid = uuidv4()
-      Cookie.set('eb-user', uuid, { expires: '6M' })
-    },
     submit () {
       // need get boards by coordinate
-      // this.showCheckBoards = true
-      this.uploadBoard()
+
+      fetchBoards(this.$store, { coordinates: `(${this.coordinate[0]} ${this.coordinate[1]})` })
+      .then(res => {
+        if (res.count > 0) {
+          this.$emit('hideBackBtn')
+          this.showCheckBoards = true
+        } else {
+          this.uploadBoard()
+        }
+      })
+      .catch(err => {
+        this.uploadBoard()
+      })
     },
     updateAddress (address) {
       this.address = address
@@ -276,7 +290,7 @@ export default {
         district: this.district,
         road: this.road,
         tookAt: this.datetime,
-        uploadedBy: this.userId
+        uploadedBy: this.userID
       }
       axios.get('/project-api/token')
       .then(response => {

@@ -1,20 +1,36 @@
 <template>
   <div class="check-upload">
     <div class="check-upload__info">
-      <div class="board">
-        <figure class="board__img">
-          <img src="" alt="">
-        </figure>
-        <div class="board__info">
-          <h2>已存在之照片</h2>
-          <p>候選人：</p>
-          <p>地點：</p>
+      <div class="action-conteiner">
+        <div class="boards">
+          <div class="boards-container" :style="{ width: `${boards.length * 100}%`, transform: `translateX(${-(100 / boards.length) * current}%)` }">
+            <div v-for="(item, index) in boards" :key="`board-${item.id}`" class="board">
+              <div class="board__img">
+                <figure>
+                  <img :src="`http://www.readr.tw${item.image}`" alt="">
+                </figure>
+              </div>
+              <div class="board__info">
+                <h2>已存在之照片 {{ index + 1 }}</h2>
+                <p>候選人： {{ getCandidatesName(item.candidates) }}</p>
+                <p>地點：{{ `${item.county}市${item.district}區${item.road}` }}</p>
+              </div>
+            </div>
+          </div>
         </div>
+        <button v-show="current > 0" class="boards__btn previous" @click="goPrevious">
+          <img src="/proj-assets/election-board/images/next.png" alt="前一張">
+        </button>
+        <button v-show="current < boards.length - 1" class="boards__btn next" @click="goNext">
+          <img src="/proj-assets/election-board/images/next.png" alt="下一張">
+        </button>
       </div>
       <div class="board">
-        <figure class="board__img">
-          <img :src="imgURL" alt="">
-        </figure>
+        <div class="board__img">
+          <figure >
+            <img :src="`http://www.readr.tw${imgURL}`" alt="">
+          </figure>
+        </div>
         <div class="board__info">
           <h2>您欲上傳之照片</h2>
           <p>候選人：{{ selectedCandidatesName }}</p>
@@ -51,15 +67,38 @@ export default {
       type: Array,
     }
   },
+  data () {
+    return {
+      current: 0
+    }
+  },
   computed: {
+    boards () {
+      return this.$store.state.ElectionBoard.boards
+    },
     candidates () {
       return this.mayorCandidates.concat(this.councilorCandidates)
     },
     selectedCandidatesName () {
       return this.candidates
-        .filter(candidate => this.selectedCandidates.includes(candidate.uid))
+        .filter(candidate => this.selectedCandidates.includes(candidate.id))
         .map(candidate => candidate.name)
         .join('、')
+    }
+  },
+  methods: {
+    getCandidatesName (candidates) {
+      return candidates.map(candidate => candidate.name).join('、')
+    },
+    goNext () {
+      if (this.current < this.boards.length - 1) {
+        this.current += 1
+      }
+    },
+    goPrevious () {
+      if (this.current > 0) {
+        this.current -= 1
+      }
     }
   }
 }
@@ -79,10 +118,17 @@ theme-color = #fa6e59
   background-color theme-color
   &__info
     flex 6
+    position relative
     display flex
     flex-direction column
-    padding 25px
+    padding 25px 0
     background-color #000
+    > .board
+      width calc(100% - 50px)
+      margin 0 auto
+    .action-conteiner
+      flex 1
+      position relative
     .board
       flex 1
       display flex
@@ -91,25 +137,22 @@ theme-color = #fa6e59
       > *
         flex 1
       &__img
-        position relative
-        margin 0
-        &::after
-          content ''
-          position absolute
-          top 0
+        figure
+          position relative
           width 100%
+          margin 0
           padding-top 100%
-        img
-          display block
-          position absolute
-          top 0
-          left 0
-          right 0
-          bottom 0
-          width 100%
-          padding-top 100%
-          object-fit cover
-          object-position center center
+          img
+            display block
+            position absolute
+            top 0
+            left 0
+            right 0
+            bottom 0
+            width 100%
+            height 100%
+            object-fit cover
+            object-position center center
       &__info
         margin-left 20px
         h2
@@ -119,6 +162,30 @@ theme-color = #fa6e59
           font-weight 500
         p
           font-size .875rem
+    .boards
+      position relative
+      width calc(100% - 50px)
+      height 100%
+      margin 0 auto
+      overflow hidden
+      &-container
+        display flex
+        height 100%
+      &__btn
+        position absolute
+        top 50%
+        transform translateY(-50%)
+        background-color transparent
+        border none
+        outline none
+        img
+          width 20px
+        &.previous
+          left 0
+          img
+            transform rotate(-180deg)
+        &.next
+          right 0
   &__action
     flex 4
     display flex
@@ -160,12 +227,24 @@ theme-color = #fa6e59
   .check-upload
     &__info
       justify-content center
+      .action-conteiner
+        flex none
+        width 550px
+        margin 0 auto 40px auto
       .board
         flex none
+        align-items center
         width 450px
         margin 0 auto
-        & + .board
-          margin-top 40px
+        &__info
+          margin-left 40px
+          h2
+            margin-bottom 15px
+            font-size 1.25rem
+          p
+            font-size 1rem
+      .boards
+        width 450px
     &__action
       justify-content center
       padding 0

@@ -6,6 +6,7 @@
   </div>
 </template>
 <script>
+
 import ElectionBoardData from './ElectionBoardData.vue'
 import ElectionBoardLanding from './ElectionBoardLanding.vue'
 import ElectionBoardUpload from './ElectionBoardUpload.vue'
@@ -17,6 +18,10 @@ import ElectionBoardStoreModule from '../../store/modules/ElectionBoard'
 
 const fetchElections = (store, year = 2018) => {
   return store.dispatch('ElectionBoard/FETCH_ELECTIONS', year)
+}
+
+const fetchUserID = (store) => {
+  return store.dispatch('ElectionBoard/FETCH_USER_ID')
 }
 
 export default {
@@ -31,12 +36,26 @@ export default {
   },
   metaInfo() {
     const metaUrl = this.$route.fullPath.split('/project/')[1];
-    const metaImage = `election-board/images/og.jpg`;
     const ogLocale = 'zh_TW';
 
+    let title = `看板追追追——2018選舉看板紀錄`
+    let metaImage = `election-board/images/og.jpg`;
+    let description = '每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤。我們邀請你拍下身邊的看板，一起為這次的選舉留下紀錄！'
+
+    switch (this.$route.params.params) {
+      case 'upload':
+        metaImage = `election-board/images/og-upload.jpg`
+        break
+      case 'verify':
+        title = '看板追追追——鍵盤辨識徵求中！'
+        metaImage = `election-board/images/og-verify.jpg`
+        description = '看板追追追計畫進到下一步資料分析前，需要你協助確認資料的正確性。這裡有一堆選舉看板照片需要鍵盤協力，一起為這次的選舉留下紀錄吧！'
+        break
+    }
+
     return {
-      title: '看板追追追',
-      description: '每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤。我們邀請你拍下身邊的看板，一起為這次的選舉留下紀錄！',
+      title: title,
+      description: description,
       locale: ogLocale,
       metaUrl,
       metaImage,
@@ -59,7 +78,7 @@ export default {
   },
   beforeCreate () {
     const route = this.$route.params.params || '';
-    const regex = /^(upload)$/
+    const regex = /^(upload|verify)$/
     // const regex = /^(upload|verify|data)$/
     if (!route.match(regex)) {
       this.$router.replace({ path: '/project/election-board' });
@@ -70,6 +89,7 @@ export default {
   },
   beforeMount () {
     fetchElections(this.$store)
+    fetchUserID(this.$store)
   },
   mounted () {
     window.ga('send', 'pageview')

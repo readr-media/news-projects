@@ -9,9 +9,25 @@ const county = {
 }
 
 function buildURL (url, params) {
-  params.county = params.county.replace(/台北|台中|台南/gi, (matched) => county[matched])
+  if (params.county) {
+    if (Array.isArray(params.county)) {
+      params.county = JSON.stringify(params.county)
+    } else {
+      params.county = params.county.replace(/台北|台中|台南/gi, (matched) => county[matched])
+    }
+  }
   const snakeCaseParams = mapKeys(params, (value, key) => snakeCase(key))
   return `${url}?${qs.stringify(snakeCaseParams)}`
+}
+
+export function fetchBoardForVerif (params) {
+  const url = buildURL('/project-api/election-board/verify/board', params)
+  return axios.get(url)
+}
+
+export function fetchBoards (params) {
+  const url = buildURL('/project-api/election-board/boards', params)
+  return axios.get(url)
 }
 
 export function fetchCandidates (params) {

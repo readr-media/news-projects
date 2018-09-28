@@ -1,75 +1,246 @@
 <template>
   <section class="eb-verify">
     <div class="image">
-      <img src="" alt="">
+      <img :src="boardImage" alt="">
     </div>
     <div class="form">
       <div class="form__heading">
         <h2>看板資訊</h2>
-        <p>此資料已被驗證 3 次</p>
+        <p>此資料已被驗證 {{ board.verifiedAmount || 0 }} 次</p>
       </div>
-      <FormSelectPosition />
-      <!-- <template v-for="n in candidateAmount">
-        <FormSelectCandidate :key="n"
-          :class="{ 'has-minus': n > 1 }"
-          :councilorCandidates="councilorCandidates"
+      <p v-show="errors.includes('empty')" class="error">請填寫候選人資訊</p>
+      <template v-for="n in candidateAmount">
+        <VerifyInputCandidate
+          :key="n"
+          :candidate="n <= candidateAmountOrigin ? candidatesOrigin[n - 1] : undefined "
+          :candidates="candidates"
           :index="n"
-          :mayorCandidates="mayorCandidates"
-          :selectedIds="selectedCandidates"
-          @minusCandidateAmount="minusSelectCandidate"
-          @updateSelectedId="updateSelectedId" />
-      </template> -->
+          :selectedCandidates="selectedCandidates"
+          class="form__candidate"
+          @updateInputError="updateInputError"
+          @updateSelectedId="updateSelectedCandidates" />
+      </template>
       <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p>
-      <input type="text" placeholder="請填寫看板標語">
+      <input v-model="slogan" type="text" placeholder="請填寫看板標語">
+      <!-- <p>目前資訊：</p> -->
+      <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後...</p>
+      <p v-if="hasError" class="error error--board">系統發生錯誤，請重新整理或稍後再試...</p>
+      <button :disabled="!boardID && loading" class="btn--yellow" @click="validation">沒問題送出</button>
       <div class="action">
-        <button class="btn--deny">這不是競選<br>看板照片</button>
-        <button class="btn--submit">沒問題<br>送出</button>
+        <button :disabled="!boardID && loading" class="btn--grey" @click="uploadBoardVerified(false)">這不是競選<br>看板照片</button>
+        <button :disabled="loading" class="btn--grey" @click="skipBoard">跳過</button>
       </div>
     </div>
-    <VerifyBoards v-if="showVerifyBoards"/>
+    <VerifyBoards v-if="showVerifyBoards" @closeVerifyBoards="showVerifyBoards = false"/>
+    <ElectionBoardBackBtn />
   </section>
 </template>
 <script>
+import ElectionBoardBackBtn from './ElectionBoardBackBtn.vue'
 import FormSelectCandidate from './FormSelectCandidate.vue'
 import FormSelectPosition from './FormSelectPosition.vue'
 import VerifyBoards from './VerifyBoards.vue'
+import VerifyInputCandidate from './VerifyInputCandidate.vue'
+import axios from 'axios'
+import { get, } from 'lodash'
+
+const DEFAULT_PAGE = 1
+
+const fetchBoard = (store, {
+  skipBoard,
+  uploadedBy
+} = {}) => store.dispatch('ElectionBoard/FETCH_BOARD_FOR_VERIF', {
+  skipBoard,
+  uploadedBy
+})
+
+const fetchBoards = (store, {
+  uploadedBy,
+  page = DEFAULT_PAGE,
+} = {}) => {
+  return store.dispatch('ElectionBoard/FETCH_BOARDS', {
+    uploadedBy,
+    page: page,
+    maxResults: 6,
+  })
+}
+
+const fetchCandidates = (store, {
+  page = DEFAULT_PAGE,
+  type = 'mayors'
+} = {}) => {
+  store.dispatch('ElectionBoard/FETCH_CANDIDATES_FOR_VERIF', {
+    county: [ "臺北市", "新北市", "桃園市", "臺中市", "臺南市", "高雄市" ],
+    electionYear: 2018,
+    page: page,
+    type: type
+  }).then(res => {
+    if (res.next) {
+      fetchCandidates(store, { type, page: page + 1 })
+    }
+    return res
+  }).catch(err => err)
+}
 
 export default {
   name: 'ElectionBoardVerify',
-  data () {
-    return {
-      showVerifyBoards: false, // false
-    }
-  },
   components: {
+    ElectionBoardBackBtn,
     FormSelectCandidate,
     FormSelectPosition,
-    VerifyBoards
+    VerifyBoards,
+    VerifyInputCandidate
+  },
+  data () {
+    return {
+      candidateAmount: 1,
+      errors: [],
+      hasError: false,
+      selectedCandidates: [],
+      showVerifyBoards: false, // false
+      slogan: '',
+      loading: false
+    }
   },
   computed: {
     board () {
-      return
+      return this.$store.state.ElectionBoard.boardForVerif
+    },
+    boardID () {
+      return get(this.board, 'id')
     },
     boardImage () {
-      return 
+      return this.board.image
+    },
+    candidateAmountOrigin () {
+      return get(this.board, 'candidates.length', 0) || 0
     },
     candidates () {
-      return 
+      return this.mayorCandidates.concat(this.councilorCandidates)
     },
-    candidateAmount () {
-      return 1
+    candidatesOrigin () {
+      return get(this.board, 'candidates', []) || []
     },
-    county () {
-      return 
+    councilorCandidates () {
+      return this.$store.state.ElectionBoard.candidatesForVerif.councilors || []
     },
-    district () {
+    mayorCandidates () {
+      return this.$store.state.ElectionBoard.candidatesForVerif.mayors || []
+    },
+  },
+  watch: {
+    candidateAmountOrigin (value) {
+      if (this.candidateAmount < value) {
+        this.candidateAmount = value
+      }
+    },
+    
+  },
+  beforeMount () {
+    Promise.all([
+      fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID }),
+      fetchCandidates(this.$store),
+      fetchCandidates(this.$store, { type: 'councilors' })
+    ])
+    .catch(err => {
+      this.hasError = true
+    })
+  },
+  methods: {
+    buildRequestBody (isBoard) {
+      const body = {
+        board: this.boardID,
+        createdBy: this.$store.state.ElectionBoard.userID,
+        isBoard: isBoard
+      }
+
+      if (isBoard) {
+        body.candidates = this.selectedCandidates
+        if (this.slogan) {
+          body.slogan = this.slogan
+        }
+      }
+      return body
+    },
+    skipBoard () {
+      this.loading = true
+      fetchBoard(this.$store, { skipBoard: this.boardID, uploadedBy: this.$store.state.ElectionBoard.userID })
+      .then(res => {
+        this.loading = false
+      })
+      .catch(err => {
+        this.hasError = true
+      })
+    },
+    updateInputError (index, value) {
+      if (value) {
+        this.errors.push(`input-${index}`)
+      } else {
+        const errorsIndex = this.errors.findIndex((value, index, arr) => value === `input-${index}`)
+        if (index > -1) {
+          this.errors.splice(errorsIndex, 1)
+        }
+      }
+    },
+    updateSelectedCandidates (newValue, oldValue) {
+      if (oldValue) {
+        const index = this.selectedCandidates.findIndex((value, index, arr) => value === oldValue)
+        if (index > -1) {
+          this.selectedCandidates.splice(index, 1)
+        }
+      }
+      if (newValue) {
+        this.selectedCandidates.push(newValue)
+      }
+    },
+    uploadBoardVerified (isBoard) {
+      const body = this.buildRequestBody(isBoard)
       
+      axios.get('/project-api/token')
+      .then(response => {
+        const token = response.data.token
+        if (isBoard) {
+          return axios.post('/project-api/election-board/verify/board', body, { headers: { Authorization: token }})
+        } else {
+          return Promise.all([
+            axios.post('/project-api/election-board/verify/board', body, { headers: { Authorization: token }}),
+            fetchBoards(this.$store, { uploadedBy: this.board.uploadedBy })
+          ])
+        }
+      })
+      .then(res => {
+        this.hasError = false
+        this.loading = true
+        if (!isBoard && res.length === 2 && res[1].count > 0) {
+          this.showVerifyBoards = true
+        }
+        setTimeout(() => fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID }), 1000)
+      })
+      .then(res => {
+        this.loading = false
+      })
+      .catch(err => {
+        this.hasError = true
+      })
+    },
+    validation () {
+      const index = this.errors.findIndex((value, index, arr) => value === 'empty')
+      if (index > -1) {
+        this.errors.splice(index, 1)
+      }
+      if (this.selectedCandidates.length < 1) {
+        this.errors.push('empty')
+      }
+      if (this.errors.length < 1) {
+        this.uploadBoardVerified(true)
+      }
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
 theme-color = #ffdb5c
+theme-color-hidden = #6d5810
 
 .eb-verify
   position relative
@@ -87,8 +258,10 @@ theme-color = #ffdb5c
       right 0
       bottom 0
       width 100%
+      height 100%
       object-fit cover
       object-position center center
+      image-orientation from-image
   .form
     max-height 60vh
     padding 25px
@@ -97,12 +270,31 @@ theme-color = #ffdb5c
       display block
       width 100%
       height 30px
-      margin-top .5em
+      margin-top 10px
       padding-left .5em
       background-color #a0a0a0
       border none
       border-radius 2px
-
+    > p
+      margin-top 5px
+      color #fff
+      &.error
+        margin-top 10px
+        color #fa6e59
+        font-size .875rem
+        text-align right
+        &.error--board
+          font-size .75rem
+          text-align left
+    > button
+      width 100%
+      height 50px
+      margin-top 15px
+      font-size 1.25rem
+      font-weight 700
+      line-height 1.4
+      border none
+      border-radius 2px
     &__heading
       display flex
       justify-content space-between
@@ -115,6 +307,10 @@ theme-color = #ffdb5c
         margin 0
         color #a0a0a0
         font-size .875rem
+    &__candidate
+      margin-top 10px
+      & + .form__candidate
+        margin-top 5px
     .add-candidate
       display inline
       margin-top 10px
@@ -132,27 +328,35 @@ theme-color = #ffdb5c
     .action
       display flex
       justify-content space-between
-      margin-top 30px
+      margin-top 10px
       > button
         width calc(50% - 5px)
-        height 100px
+        height 75px
         font-size 1.25rem
-        font-weight 500
+        font-weight 700
         line-height 1.4
         border none
         border-radius 2px
-      .btn
-        &--deny
-          background-color #a0a0a0
-        &--submit
-          background-color #ffdb5c
+    .btn
+      &--grey
+        background-color #a0a0a0
+        &:disabled
+          color #000
+          background-color #626262
+      &--yellow
+        background-color theme-color
+        &:disabled
+          color #000
+          background-color theme-color-hidden
 
 @media (min-width: 768px)
   .eb-verify
     justify-content center
     padding 55px 0
     .image
+      flex none
       width 450px
+      height 300px
       margin 0 auto
       img
         position static
@@ -160,6 +364,6 @@ theme-color = #ffdb5c
         object-fit contain
     .form
       width 450px
-      padding 25px 0
-      margin 0 auto
+      padding 0
+      margin 25px auto 0
 </style>
