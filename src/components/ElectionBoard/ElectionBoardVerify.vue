@@ -18,7 +18,6 @@
           :index="n"
           :selectedCandidates="selectedCandidates"
           class="form__candidate"
-          @updateInputError="updateInputError"
           @updateSelectedId="updateSelectedCandidates" />
       </template>
       <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p>
@@ -26,7 +25,7 @@
       <p>目前資訊： {{ board.slogan || ' ' }}</p>
       <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後...</p>
       <p v-if="hasError" class="error error--board">系統發生錯誤，請重新整理或稍後再試...</p>
-      <button :disabled="!boardID && loading" class="btn--yellow" @click="validation">沒問題送出</button>
+      <button :disabled="!boardID && loading" class="btn--yellow" @click="uploadBoardVerified(true)">沒問題送出</button>
       <div class="action">
         <button :disabled="!boardID && loading" class="btn--grey" @click="uploadBoardVerified(false)">這不是競選<br>看板照片</button>
         <button :disabled="loading" class="btn--grey" @click="skipBoard">跳過</button>
@@ -177,16 +176,16 @@ export default {
         this.hasError = true
       })
     },
-    updateInputError (index, value) {
-      if (value) {
-        this.errors.push(`input-${index}`)
-      } else {
-        const errorsIndex = this.errors.findIndex((value, index, arr) => value === `input-${index}`)
-        if (index > -1) {
-          this.errors.splice(errorsIndex, 1)
-        }
-      }
-    },
+    // updateInputError (index, value) {
+    //   if (value) {
+    //     this.errors.push(`input-${index}`)
+    //   } else {
+    //     const errorsIndex = this.errors.findIndex((value, index, arr) => value === `input-${index}`)
+    //     if (index > -1) {
+    //       this.errors.splice(errorsIndex, 1)
+    //     }
+    //   }
+    // },
     updateSelectedCandidates (newValue, oldValue) {
       if (oldValue) {
         const index = this.selectedCandidates.findIndex((value, index, arr) => value === oldValue)
@@ -228,7 +227,7 @@ export default {
         this.hasError = true
       })
     },
-    validation () {
+    validation () { // not use
       const index = this.errors.findIndex((value, index, arr) => value === 'empty')
       if (index > -1) {
         this.errors.splice(index, 1)
