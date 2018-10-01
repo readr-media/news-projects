@@ -114,10 +114,10 @@ theme-color = #fa6e59
   right 0
   z-index 1000
   width 100%
-  height 100vh
+  height 100%
   background-color theme-color
   &__info
-    flex 6
+    flex 1
     position relative
     display flex
     flex-direction column
@@ -129,13 +129,17 @@ theme-color = #fa6e59
     .action-conteiner
       flex 1
       position relative
+      margin-bottom 5px
     .board
       flex 1
       display flex
       justify-content space-between
       align-items flex-start
+      margin-top 5px
       > *
-        flex 1
+        width 50%
+        max-height 100%
+        overflow hidden
       &__img
         figure
           position relative
@@ -187,7 +191,6 @@ theme-color = #fa6e59
         &.next
           right 0
   &__action
-    flex 4
     display flex
     flex-direction column
     padding 25px 0
@@ -209,6 +212,7 @@ theme-color = #fa6e59
       margin 10px auto 0
       button
         width calc(50% - 5px)
+        height 100px
         font-size 1.25rem
         font-weight 500
         line-height 1.4
