@@ -23,7 +23,7 @@
       </template>
       <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p>
       <input v-model="slogan" type="text" placeholder="請填寫看板標語">
-      <!-- <p>目前資訊：</p> -->
+      <p>目前資訊： {{ board.slogan || ' ' }}</p>
       <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後...</p>
       <p v-if="hasError" class="error error--board">系統發生錯誤，請重新整理或稍後再試...</p>
       <button :disabled="!boardID && loading" class="btn--yellow" @click="validation">沒問題送出</button>
@@ -131,9 +131,8 @@ export default {
   },
   watch: {
     board () {
-      this.errors = [],
-      this.selectedCandidates = [],
-      this.showVerifyBoards = false, 
+      this.errors = []
+      this.selectedCandidates = []
       this.slogan = ''
     },
     candidateAmountOrigin (value) {
