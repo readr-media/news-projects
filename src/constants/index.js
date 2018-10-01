@@ -116,7 +116,7 @@ export const PROJECTS_PREVENT_SCROLL_BEHAVIOR = [
 
 export const SCRIPT_GOOGLE_MAP = `<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgwPtUjWMKGKdp62Hnank6TTl3lhXwa3o&libraries=visualization" async defer></script>`
 
-export const SCRIPT_GOOGLE_RECAPTCHA = `<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=en" async defer></script>`
+export const SCRIPT_GOOGLE_RECAPTCHA = `<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=zh-TW" async defer></script>`
 
 export const SCRIPT_TYPEKIT = `<script src="https://use.typekit.net/mwt8dya.js"></script>
                                <script>try{Typekit.load({ async: true });}catch(e){}</script>`

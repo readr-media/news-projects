@@ -15,7 +15,7 @@
         <div class="preview">
           <img ref="preview" src="" alt="">
           <div v-show="!imgSizeVerified" class="preview__alert">
-            <span>檔案大小超過限制（10 MB）</span>
+            <span>檔案大小超過限制（5 MB）</span>
           </div>
         </div>
         <div class="action">
@@ -65,7 +65,7 @@ import moment from 'moment'
 import { get, } from 'lodash'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
-const MAX_IMG_SIZE = 10 * 1024 * 1024 // 10 MB
+const MAX_IMG_SIZE = 5 * 1024 * 1024 // 10 MB
 const MIN_TIMESTAMP = 1514736000 // 2018.01.01
 
 const uploadImage = (store, { file, folderName }) => {
