@@ -7,14 +7,15 @@
           <p
             v-for="item in candidatesForList"
             :key="item.uid"
-            @click="selectedName = item.name"
-            v-text="item.name">
+            @click="selectedName = item.name">
+            {{ item.name }}
+            <span v-text="item.county"></span>
           </p>
         </div>
       </div>
       <p v-if="candidate">目前資訊：{{ candidate.name }}</p>
     </div>
-    <p v-show="hasError" class="error">目前沒有這位候選人的資料</p>
+    <!-- <p v-show="hasError" class="error">目前沒有這位候選人的資料</p> -->
   </div>
 </template>
 <script>
@@ -49,9 +50,9 @@ export default {
     candidatesFiltered () {
       return this.candidates.filter(item => !this.selectedCandidatesWithoutSelf.includes(item.id))
     },
-    hasError () {
-      return this.selectedName && !this.selectedId
-    },
+    // hasError () {
+    //   return this.selectedName && !this.selectedId
+    // },
     selectedCandidatesWithoutSelf () {
       return this.selectedCandidates.filter(id => id !== this.selectedId)
     },
@@ -63,9 +64,9 @@ export default {
       this.selectedId = undefined
       this.selectedName = ''
     },
-    hasError (value) {
-      this.$emit('updateInputError', this.index, value)
-    },
+    // hasError (value) {
+    //   this.$emit('updateInputError', this.index, value)
+    // },
     selectedId (newValue, oldValue) {
       this.$emit('updateSelectedId', newValue, oldValue)
     },
@@ -141,6 +142,9 @@ export default {
         line-height 30px
         user-select none
         cursor pointer
+        > span
+          margin-left .5em
+          font-size .75rem
   .error
     color #fa6e59
     font-size .75rem
