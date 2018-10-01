@@ -52,6 +52,7 @@
   </section>
 </template>
 <script>
+import Cookie from 'vue-cookie'
 import RelatedReports from '../RelatedReports.vue'
 
 export default {
@@ -61,7 +62,19 @@ export default {
   },
   data () {
     return {
-      showIntro: true
+      showIntro: false
+    }
+  },
+  beforeMount () {
+    this.getIntroCookie()
+  },
+  methods: {
+    getIntroCookie () {
+      const hasCookie = Cookie.get('eb-intro')
+      if (!hasCookie) {
+        this.showIntro = true
+        Cookie.set('eb-intro', true, { expires: '6M' })
+      }
     }
   }
 }
