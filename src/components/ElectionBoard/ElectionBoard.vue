@@ -16,6 +16,25 @@ import Share from '../Share.vue'
 
 import ElectionBoardStoreModule from '../../store/modules/ElectionBoard'
 
+const DEFAULT_PAGE = 1
+
+const fetchCandidates = (store, {
+  page = DEFAULT_PAGE,
+  type = 'mayors'
+} = {}) => {
+  store.dispatch('ElectionBoard/FETCH_CANDIDATES_FOR_VERIF', {
+    electionYear: 2018,
+    page: page,
+    type: type,
+    maxResults: 100
+  }).then(res => {
+    if (res.next) {
+      fetchCandidates(store, { type, page: page + 1 })
+    }
+    return res
+  }).catch(err => err)
+}
+
 const fetchElections = (store, year = 2018) => {
   return store.dispatch('ElectionBoard/FETCH_ELECTIONS', year)
 }
@@ -90,6 +109,8 @@ export default {
   beforeMount () {
     fetchElections(this.$store)
     fetchUserID(this.$store)
+    fetchCandidates(this.$store),
+    fetchCandidates(this.$store, { type: 'councilors' })
   },
   mounted () {
     window.ga('send', 'pageview')

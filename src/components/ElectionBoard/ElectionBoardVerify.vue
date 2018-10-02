@@ -65,23 +65,6 @@ const fetchBoards = (store, {
   })
 }
 
-const fetchCandidates = (store, {
-  page = DEFAULT_PAGE,
-  type = 'mayors'
-} = {}) => {
-  store.dispatch('ElectionBoard/FETCH_CANDIDATES_FOR_VERIF', {
-    county: [ "臺北市", "新北市", "桃園市", "臺中市", "臺南市", "高雄市" ],
-    electionYear: 2018,
-    page: page,
-    type: type
-  }).then(res => {
-    if (res.next) {
-      fetchCandidates(store, { type, page: page + 1 })
-    }
-    return res
-  }).catch(err => err)
-}
-
 export default {
   name: 'ElectionBoardVerify',
   components: {
@@ -144,8 +127,6 @@ export default {
   beforeMount () {
     Promise.all([
       fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID }),
-      fetchCandidates(this.$store),
-      fetchCandidates(this.$store, { type: 'councilors' })
     ])
     .catch(err => {
       this.hasError = true
