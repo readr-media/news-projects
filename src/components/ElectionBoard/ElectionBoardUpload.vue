@@ -15,7 +15,7 @@
         <div class="preview">
           <img ref="preview" src="" alt="">
           <div v-show="!imgSizeVerified" class="preview__alert">
-            <span>檔案大小超過限制（5 MB）</span>
+            <span>檔案大小超過限制（8 MB）</span>
           </div>
         </div>
         <div class="action">
@@ -65,7 +65,7 @@ import moment from 'moment'
 import { get, } from 'lodash'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
-const MAX_IMG_SIZE = 5 * 1024 * 1024 // 10 MB
+const MAX_IMG_SIZE = 8 * 1024 * 1024 // 8 MB
 const MIN_TIMESTAMP = 1514736000 // 2018.01.01
 
 const uploadImage = (store, { file, folderName }) => {
@@ -163,8 +163,8 @@ export default {
   },
   methods: {
     filterAddress (addressList) {
-      // 過濾 Goolgle 轉換的中文地址 (篩選有市區路字元且依照此順序的地址)
-      const regex = new RegExp('市(?:(?!路|市).)*區(?:(?!區|路).)*路')
+      // 過濾 Goolgle 轉換的中文地址
+      const regex = /台灣(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
       const filtered = addressList.filter(address => address.formatted_address.match(regex)) || []
       if (filtered.length > 0) {
         this.address = this.formatAddress(filtered[0].formatted_address)

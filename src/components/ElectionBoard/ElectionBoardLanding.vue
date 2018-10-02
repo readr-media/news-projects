@@ -23,9 +23,11 @@
             <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
             <span>我要看資料</span>
           </router-link>
+          <div class="hidden-text">coming<br>soon</div>
         </div>
       </div>
     </main>
+    <a href="http://www.readr.tw/post/1089" target="_blank">看完整計畫緣起</a>
     <div class="credit">
       <img src="/proj-assets/election-board/images/logo-mm.png" alt="mirrormedia">
       <p>文字：李又如 設計：Weiwei Hsu </p>
@@ -85,6 +87,7 @@ color-verify = #ffdb5c
 color-verify-hidden = #6d5810
 color-data = #4897db
 color-data-hidden = #184b78
+color-hidden = #313131
 
 .eb-landing
   position relative
@@ -107,6 +110,18 @@ color-data-hidden = #184b78
     > *
       flex 1
       max-width 200px
+  > a
+    max-width 425px
+    width 90%
+    height 50px
+    margin-top 25px
+    font-size 1.25rem
+    font-weight 500
+    line-height 50px
+    letter-spacing 1px
+    text-align center
+    background-color #a0a0a0
+    border-radius 2px
   .image
     position relative
     > img
@@ -141,10 +156,27 @@ color-data-hidden = #184b78
       &--data
         background-color color-data
         &.item--hidden
-          background-color color-data-hidden
+          background-color color-hidden
       &--hidden
         > a
           cursor default
+        .hidden-text
+          display flex
+          justify-content center
+          align-items center
+          position absolute
+          top 0
+          left 0
+          right 0
+          bottom 0
+          width 100%
+          height 100%
+          color #a0a0a0
+          font-size 1.75rem
+          font-weight 500
+          line-height 1
+          text-align center
+          transform rotate(-15deg)
       > a
         display flex
         flex-direction column
@@ -255,6 +287,9 @@ color-data-hidden = #184b78
       width 100%
       > *
         max-width none
+    > a
+      max-width 700px
+      width 100%
     .image
       width 100%
       text-align center
