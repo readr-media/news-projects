@@ -7,7 +7,7 @@
           @blur="handleSelectBlur"
           @change="handleSelectChange"
           @focus="handleSelectFocus">
-          <option v-for="county in counties" :key="county" :value="county" v-text="`${county}市`"></option>
+          <option v-for="county in counties" :key="county" :value="county" v-text="`${county}`"></option>
         </select>
       </div>
       <div class="select-container">
@@ -16,7 +16,7 @@
           @blur="handleSelectBlur"
           @change="handleSelectChange"
           @focus="handleSelectFocus">
-          <option v-for="district in districts" :key="district" :value="district" v-text="`${district}區`"></option>
+          <option v-for="district in districts" :key="district" :value="district" v-text="`${district}`"></option>
         </select>
       </div>
     </div>
@@ -29,6 +29,8 @@
 </template>
 <script>
 import { ADMINISTRATIVE_DISTRICT, } from './constants'
+
+const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
 
 export default {
   name: 'FormSelectPosition',
@@ -51,7 +53,7 @@ export default {
   },
   computed: {
     addressSelected () {
-      return `${this.countySelected}市${this.districtSelected}區${this.road}`
+      return `${this.countySelected}${this.districtSelected}${this.road}`
     },
     counties () {
       const list = ADMINISTRATIVE_DISTRICT || []
@@ -67,7 +69,7 @@ export default {
       this.showBtn = false
       this.countySelected = this.getCounty(value)
       this.districtSelected = this.getDistrict(value)
-      this.road = value.split('區')[1]
+      this.road = this.getRoad(value)
     },
     countySelected (value) {
       this.districtSelected = this.districts[0]
@@ -75,7 +77,7 @@ export default {
     },
     districtSelected (value) {
       this.$emit('updateDistrict', value)
-    }, 
+    },
   },
   methods: {
     formatAddress (address) {
@@ -87,21 +89,22 @@ export default {
       return output
     },
     getCounty (address) {
-      const regexCounty = /(..)市/
-      if (address.match(regexCounty)) {
-        return address.match(regexCounty)[1]
+      if (address.match(REGEX_ADDRESS) && address.match(REGEX_ADDRESS).length > 4) {
+        return address.match(REGEX_ADDRESS)[1]
       }
-      return '台北'
+      return '台北市'
     },
     getDistrict (address) {
-      const regexDistrict = /市(.*?)區/
-      if (address.match(regexDistrict)) {
-        return address.match(regexDistrict)[1]
+      if (address.match(REGEX_ADDRESS) && address.match(REGEX_ADDRESS).length > 4) {
+        return address.match(REGEX_ADDRESS)[2]
       }
-      return '信義'
+      return '信義區'
     },
     getRoad (address) {
-      return address.split('區')[1]
+      if (address.match(REGEX_ADDRESS) && address.match(REGEX_ADDRESS).length > 4) {
+        return address.match(REGEX_ADDRESS)[4]
+      }
+      return ''
     },
     handleSelectBlur (e) {
       e.target.parentNode.classList.remove('open')
@@ -122,7 +125,6 @@ export default {
         this.errors.push('district')
       }
       if (this.errors.length === 0) {
-        const regex = new RegExp('(?=.*市)(?=.*區)(?=.*路)')
         const geocoder = new google.maps.Geocoder()
         geocoder.geocode({ address: this.addressSelected }, (results, status) => {
           if (status === 'OK' && results.length > 0) {

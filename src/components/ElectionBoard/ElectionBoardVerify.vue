@@ -129,10 +129,11 @@ export default {
     },
   },
   watch: {
-    board () {
+    board (value) {
       this.errors = []
       this.selectedCandidates = []
       this.slogan = ''
+      this.candidateAmount = get(value, 'candidates.length', 1) || 1
     },
     candidateAmountOrigin (value) {
       if (this.candidateAmount < value) {

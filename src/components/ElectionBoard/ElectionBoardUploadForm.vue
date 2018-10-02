@@ -71,6 +71,8 @@ const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
 
 const DEFAULT_PAGE = 1
 
+const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
+
 const fetchBoards = (store, {
   coordinates,
   page = DEFAULT_PAGE,
@@ -153,9 +155,10 @@ export default {
     },
     councilorCandidates () {
       if (this.county && this.district) {
-        const county = `${this.county.replace('台', '臺')}市`
+        const county = `${this.county.replace('台', '臺')}`
         const regions = this.$store.state.ElectionBoard.elections[county].regions || []
-        const regex = new RegExp(`(${this.district}|原住民)`)
+        const district = this.district.substring(0, this.district.length - 1)
+        const regex = new RegExp(`(${district}|原住民)`)
         const constituency = regions.filter(region => region.district.match(regex)).map(region => region.constituency) || []
         const councilors = this.$store.state.ElectionBoard.candidates.councilors || []
         const candidates = councilors.filter(councilor => constituency.includes(councilor.constituency))
@@ -164,16 +167,14 @@ export default {
       return []
     },
     county () {
-      const regex = /(..)市/
-      if (this.address.match(regex)) {
-        return this.address.match(regex)[1]
+      if (this.address.match(REGEX_ADDRESS) && this.address.match(REGEX_ADDRESS).length > 4) {
+        return this.address.match(REGEX_ADDRESS)[1]
       }
       return ''
     },
     district () {
-      const regex = /市(.*?)區/
-      if (this.address.match(regex)) {
-        return this.address.match(regex)[1]
+      if (this.address.match(REGEX_ADDRESS) && this.address.match(REGEX_ADDRESS).length > 4) {
+        return this.address.match(REGEX_ADDRESS)[2]
       }
       return ''
     },
@@ -181,7 +182,10 @@ export default {
       return this.$store.state.ElectionBoard.candidates.mayors || []
     },
     road () {
-      return this.address.split('區')[1]
+      if (this.address.match(REGEX_ADDRESS) && this.address.match(REGEX_ADDRESS).length > 4) {
+        return this.address.match(REGEX_ADDRESS)[4]
+      }
+      return ''
     },
     userID () {
       return this.$store.state.ElectionBoard.userID
@@ -192,8 +196,8 @@ export default {
       this.showCheckPosition = true
     },
     county (value) {
-      fetchCandidates(this.$store, { county: `${value}市` })
-      fetchCandidates(this.$store, { county: `${value}市`, type: 'councilors' })
+      fetchCandidates(this.$store, { county: `${value}` })
+      fetchCandidates(this.$store, { county: `${value}`, type: 'councilors' })
     },
     initAddress (value) {
       this.address = value

@@ -46,8 +46,12 @@ export default {
     }
   },
   watch: {
-    month () {
-      this.day = 1
+    month (value) {
+      if (value === this.monthCurrent && this.day > this.dayCurrent) {
+        this.day = 1
+      } else if (this.day > this.daysInMonth) {
+        this.day = this.daysInMonth
+      }
     },
     datetime (value) {
       this.year = moment(value * 1000).year()
