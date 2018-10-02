@@ -208,7 +208,7 @@ export default {
     getPosAddress () {
       const geocoder = new google.maps.Geocoder()
       const coordinate = new google.maps.LatLng(this.coordinate[0], this.coordinate[1])
-      geocoder.geocode({ latLng: coordinate }, (results, status) => {
+      geocoder.geocode({ latLng: coordinate, language: 'zh-TW' }, (results, status) => {
         if (status === 'OK' && results.length > 0) {
           this.filterAddress(results)
         } else {

@@ -251,7 +251,6 @@ theme-color = #fa6e59
         width 450px
     &__action
       justify-content center
-      padding 0
       > *
         flex none
       .action-text
