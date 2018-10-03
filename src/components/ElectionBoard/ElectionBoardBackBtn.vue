@@ -20,6 +20,7 @@ export default {
   height 70px
   background-color #a0a0a0
   border-radius 0 0 0 70px
+  cursor pointer
   > img
     position absolute
     top 15px

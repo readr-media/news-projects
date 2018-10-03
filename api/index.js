@@ -127,6 +127,7 @@ router.post('/upload/image', upload.single('image'), (req, res) => {
       metadata: {
         contentType: file.mimetype,
       },
+      resumable: false
     }).then(bucketFile => {
       makeFilePublic(bucketFile)
       fs.unlink(path, (err) => {
