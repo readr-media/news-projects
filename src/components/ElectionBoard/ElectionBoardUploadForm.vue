@@ -20,6 +20,16 @@
           @updateAddress="updateAddress"
           @updateCoordinate="updateCoordinate" />
       </div>
+      <div v-if="imgURL" class="item image-preview">
+        <div class="item__heading">
+          <p>照片縮圖</p>
+          <button :class="{ open: showPreview }" @click="showPreview = !showPreview"><img src="/proj-assets/election-board/images/arrow-orange.png" alt=""></button>
+          <span v-text="showPreview ? '收合' : '展開'"></span>
+        </div>
+        <div v-show="showPreview" class="image-preview__img">
+          <img :src="imgURL" alt="">
+        </div>
+      </div>
       <div class="item">
         <p>候選人</p>
         <template v-for="n in candidateAmount">
@@ -155,6 +165,7 @@ export default {
       selectedCandidates: [],
       showCheckBoards: false,
       showCheckPosition: true,
+      showPreview: false
     }
   },
   computed: {
@@ -345,6 +356,14 @@ export default {
         background-color #a0a0a0
         border-radius 2px
         border none
+      &.image-preview
+        .item__heading
+          button
+            &.open
+              img
+                transform rotate(0)
+            img
+              transform rotate(-180deg)
       &__heading
         > p, > button
           display inline
@@ -368,6 +387,14 @@ export default {
         &.col--two
           > *
             width calc(50% - 5px)
+      .image-preview__img
+        margin-top 15px
+        height 200px
+        > img
+          width 100%
+          height 100%
+          object-fit contain
+          object-position center center
       .select-candidate
         position relative
         margin-top .5em
