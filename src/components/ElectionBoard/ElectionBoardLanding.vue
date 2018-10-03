@@ -122,6 +122,7 @@ color-hidden = #313131
     text-align center
     background-color #a0a0a0
     border-radius 2px
+    cursor pointer
   .image
     position relative
     > img
@@ -188,6 +189,7 @@ color-hidden = #313131
         right 0
         bottom 0
         width 100%
+        cursor pointer
         img
           width 35%
         span

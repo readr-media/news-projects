@@ -45,7 +45,9 @@
         </VueRecaptcha>
       </div>
       <button :disabled="!canSubmit" class="btn btn--submit" @click="submit">送出資料</button>
+      <span v-if="errors.includes('coordinate')" class="error">地理位置不正確，請重新選擇</span>
       <span v-if="hasError" class="error">系統目前維護中，請稍後再試...</span>
+      <slot name="img-upload-error"></slot>
     </div>
     <FormCheckUpload
       v-if="showCheckBoards"
@@ -66,10 +68,15 @@ import FormSelectPosition from './FormSelectPosition.vue'
 import VueRecaptcha from 'vue-recaptcha'
 import axios from 'axios'
 import { GOOGLE_RECAPTCHA_SITE_KEY, } from 'api/config'
+import { get, } from 'lodash'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
-
+const DEFAULT_ADDRESS = '高雄市前鎮區成功二路39號'
 const DEFAULT_PAGE = 1
+const MAX_LATITUDE = 26
+const MIN_LATITUDE = 21
+const MAX_LONGITUDE = 122
+const MIN_LONGITUDE = 117
 
 const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
 
@@ -137,9 +144,10 @@ export default {
   data () {
     return {
       GOOGLE_RECAPTCHA_SITE_KEY,
-      address: this.initAddress,
+      address: '',
       candidateAmount: 1,
       datetime: this.initDatetime,
+      errors: [],
       hasError: false,
       hasGeolocation: false,
       loadingPosition: false,
@@ -156,7 +164,7 @@ export default {
     councilorCandidates () {
       if (this.county && this.district) {
         const county = `${this.county.replace('台', '臺')}`
-        const regions = this.$store.state.ElectionBoard.elections[county].regions || []
+        const regions = get(this.$store, [ 'state', 'ElectionBoard', 'elections', county, 'regions' ], []) || []
         const district = this.district.substring(0, this.district.length - 1)
         const regex = new RegExp(`(${district}|原住民)`)
         const constituency = regions.filter(region => region.district.match(regex)).map(region => region.constituency) || []
@@ -170,13 +178,13 @@ export default {
       if (this.address.match(REGEX_ADDRESS) && this.address.match(REGEX_ADDRESS).length > 4) {
         return this.address.match(REGEX_ADDRESS)[1]
       }
-      return ''
+      return '台北市'
     },
     district () {
       if (this.address.match(REGEX_ADDRESS) && this.address.match(REGEX_ADDRESS).length > 4) {
         return this.address.match(REGEX_ADDRESS)[2]
       }
-      return ''
+      return '信義區'
     },
     mayorCandidates () {
       return this.$store.state.ElectionBoard.candidates.mayors || []
@@ -200,7 +208,11 @@ export default {
       fetchCandidates(this.$store, { county: `${value}`, type: 'councilors' })
     },
     initAddress (value) {
-      this.address = value
+      if (value.match(REGEX_ADDRESS)) {
+        this.address = value
+      } else {
+        this.address = DEFAULT_ADDRESS
+      }
     },
     initDatetime (value) {
       this.datetime = value
@@ -250,20 +262,24 @@ export default {
       this.recaptchaVerified = true
     },
     submit () {
-      // need get boards by coordinate
-
-      fetchBoards(this.$store, { coordinates: `(${this.coordinate[0]} ${this.coordinate[1]})` })
-      .then(res => {
-        if (res.count > 0) {
-          this.$emit('hideBackBtn')
-          this.showCheckBoards = true
-        } else {
+      this.errors = []
+      if (this.coordinate[0] > MIN_LATITUDE && this.coordinate[0] < MAX_LATITUDE &&
+      this.coordinate[1] > MIN_LONGITUDE && this.coordinate[1] < MAX_LONGITUDE) {
+        fetchBoards(this.$store, { coordinates: `(${this.coordinate[0]} ${this.coordinate[1]})` })
+        .then(res => {
+          if (res.count > 0) {
+            this.$emit('hideBackBtn')
+            this.showCheckBoards = true
+          } else {
+            this.uploadBoard()
+          }
+        })
+        .catch(err => {
           this.uploadBoard()
-        }
-      })
-      .catch(err => {
-        this.uploadBoard()
-      })
+        })
+      } else {
+        this.errors.push('coordinate')
+      }
     },
     updateAddress (address) {
       this.address = address
@@ -318,6 +334,8 @@ export default {
   .eb-upload-form
     padding 25px
     overflow-y auto
+    button
+      cursor pointer
     .item
       margin-bottom 25px
       p
@@ -378,6 +396,7 @@ export default {
         color theme-color
         font-size .875rem
         line-height 20px
+        cursor pointer
         &::before
           content '\2795'
           position relative

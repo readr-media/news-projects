@@ -234,6 +234,8 @@ theme-color-hidden = #6d5810
   flex-direction column
   height 100vh
   background-color #000
+  button
+    cursor pointer
   .image
     flex 1
     position relative
@@ -306,6 +308,7 @@ theme-color-hidden = #6d5810
       color theme-color
       font-size .875rem
       line-height 20px
+      cursor pointer
       &::before
         content '\2795'
         position relative

@@ -46,7 +46,9 @@
           @hideBackBtn="showBackBtn = false"
           @showMapHint="showMapHint = true"
           @updateCoordinate="updateCoordinate"
-          @uploaded="current = 3" />
+          @uploaded="current = 3">
+          <p v-if="showImgError" slot="img-upload-error" class="error">圖片上傳發生錯誤...</p>
+        </ElectionBoardUploadForm>
       </section>
       <section class="eb-upload__step-5">
         <img src="/proj-assets/election-board/images/done.png" alt="">
@@ -65,6 +67,11 @@ import moment from 'moment'
 import { get, } from 'lodash'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
+const MAX_LATITUDE = 26
+const MIN_LATITUDE = 21
+const MAX_LONGITUDE = 122
+const MIN_LONGITUDE = 117
+
 const MAX_IMG_SIZE = 8 * 1024 * 1024 // 8 MB
 const MIN_TIMESTAMP = 1514736000 // 2018.01.01
 
@@ -92,6 +99,7 @@ export default {
       mounted: false,
       sectionAmount: 1,
       showBackBtn: true,
+      showImgError: false,
       showMapHint: false,
       timeout: 3,
       timer: undefined,
@@ -206,15 +214,18 @@ export default {
       })
     },
     getPosAddress () {
-      const geocoder = new google.maps.Geocoder()
-      const coordinate = new google.maps.LatLng(this.coordinate[0], this.coordinate[1])
-      geocoder.geocode({ latLng: coordinate, language: 'zh-TW' }, (results, status) => {
-        if (status === 'OK' && results.length > 0) {
-          this.filterAddress(results)
-        } else {
-          console.log('err', status)
-        }
-      })
+      if (this.coordinate[0] > MIN_LATITUDE && this.coordinate[0] < MAX_LATITUDE &&
+      this.coordinate[1] > MIN_LONGITUDE && this.coordinate[1] < MAX_LONGITUDE) {
+        const geocoder = new google.maps.Geocoder()
+        const coordinate = new google.maps.LatLng(this.coordinate[0], this.coordinate[1])
+        geocoder.geocode({ latLng: coordinate, language: 'zh-TW' }, (results, status) => {
+          if (status === 'OK' && results.length > 0) {
+            this.filterAddress(results)
+          } else {
+            console.log('err', status)
+          }
+        })
+      }
     },
     goToUploadForm () {
       const fd = new FormData()
@@ -222,6 +233,9 @@ export default {
       uploadImage(this.$store, { file: fd, folderName: 'election-board' })
       .then(res => {
         this.imgURL = res.data.url
+      })
+      .catch(() => {
+        this.showImgError = true
       })
       this.current = 2
     },
@@ -247,6 +261,7 @@ export default {
       this.imgSizeVerified = false
       this.imgURL = ''
       this.showBackBtn = true
+      this.showImgError = false
       this.showMapHint = false
       this.timeout = 3
       document.getElementById('camera').value = ''
@@ -310,12 +325,16 @@ theme-color = #fa6e59
       background-color theme-color
       border none
       border-radius 2px
+      cursor pointer
   &__step-3
     display flex
     flex-direction column
     .preview
       position relative
       flex 4
+      > canvas
+        width 100%
+        height 100%
       > img
         position absolute
         top 0
@@ -357,6 +376,7 @@ theme-color = #fa6e59
         font-size 1.25rem
         text-align center
         border-radius 2px
+        cursor pointer
         > span
           font-weight 500
           line-height 1
