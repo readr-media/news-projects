@@ -149,6 +149,8 @@ export default {
       return body
     },
     skipBoard () {
+      window.ga('send', 'event', 'projects', 'click', 'verified pass', { nonInteraction: false })
+
       this.loading = true
       fetchBoard(this.$store, { skipBoard: this.boardID, uploadedBy: this.$store.state.ElectionBoard.userID })
       .then(res => {
@@ -182,6 +184,12 @@ export default {
     uploadBoardVerified (isBoard) {
       const body = this.buildRequestBody(isBoard)
       
+      if (isBoard) {
+        window.ga('send', 'event', 'projects', 'click', 'verified data confirmed', { nonInteraction: false })
+      } else {
+        window.ga('send', 'event', 'projects', 'click', 'verified data false', { nonInteraction: false })
+      }
+
       axios.get('/project-api/token')
       .then(response => {
         const token = response.data.token

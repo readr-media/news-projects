@@ -132,10 +132,6 @@ export default {
       return this.$store.state.viewport[0]
     }
   },
-  mounted () {
-    this.getSectionAmount()
-    this.mounted = true
-  },
   watch: {
     coordinate () {
       this.showMapHint = false
@@ -170,6 +166,10 @@ export default {
       }
     }
   },
+  mounted () {
+    this.getSectionAmount()
+    this.mounted = true
+  },
   methods: {
     filterAddress (addressList) {
       // 過濾 Goolgle 轉換的中文地址
@@ -197,6 +197,7 @@ export default {
       this.$refs.camera.click()
     },
     getPhotoEXIF () {
+      window.ga('send', 'event', 'projects', 'click', 'upload photo confirmed', { nonInteraction: false })
       EXIF.getData(this.imgFile, () => {
         this.imgEXIF = EXIF.getAllTags(this.imgFile)
         if (!this.coordinateFromEXIF && navigator.geolocation) {

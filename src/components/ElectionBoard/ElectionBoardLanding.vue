@@ -5,21 +5,21 @@
         <img src="/proj-assets/election-board/images/title.png" alt="看板追追追">
       </div>
       <div class="menu">
-        <div class="item item--upload">
-          <router-link to="/project/election-board/upload">
+        <div class="item item--upload" @click="sendGA('upload')">
+          <router-link to="/project/election-board/upload" >
             <img src="/proj-assets/election-board/images/upload.png" alt="我要上傳">
             <span>我要上傳</span>
           </router-link>
         </div>
-        <div class="item item--verify">
+        <div class="item item--verify" @click="sendGA('verified')">
           <router-link to="/project/election-board/verify" >
             <img src="/proj-assets/election-board/images/check.png" alt="幫忙驗證">
             <span>幫忙驗證</span>
           </router-link>
         </div>
-        <div class="item item--data item--hidden">
+        <div class="item item--data item--hidden" @click="sendGA('seedata')">
           <!-- <router-link to="/project/election-board/data"> -->
-          <router-link to="/project/election-board/">
+          <router-link to="/project/election-board/" >
             <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
             <span>我要看資料</span>
           </router-link>
@@ -77,6 +77,9 @@ export default {
         this.showIntro = true
         Cookie.set('eb-intro', true, { expires: '6M' })
       }
+    },
+    sendGA (value) {
+      window.ga('send', 'event', 'projects', 'click', value, { nonInteraction: false })
     }
   }
 }
