@@ -63,6 +63,7 @@
 import ElectionBoardBackBtn from './ElectionBoardBackBtn.vue'
 import ElectionBoardUploadForm from './ElectionBoardUploadForm.vue'
 import ElectionBoardUploadMap from './ElectionBoardUploadMap.vue'
+import axios from 'axios'
 import moment from 'moment'
 import { get, } from 'lodash'
 
@@ -218,13 +219,15 @@ export default {
       this.coordinate[1] > MIN_LONGITUDE && this.coordinate[1] < MAX_LONGITUDE) {
         const geocoder = new google.maps.Geocoder()
         const coordinate = new google.maps.LatLng(this.coordinate[0], this.coordinate[1])
-        geocoder.geocode({ latLng: coordinate, language: 'zh-TW' }, (results, status) => {
-          if (status === 'OK' && results.length > 0) {
-            this.filterAddress(results)
-          } else {
-            console.log('err', status)
-          }
-        })
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.coordinate[0]},${this.coordinate[1]}&key=AIzaSyCgwPtUjWMKGKdp62Hnank6TTl3lhXwa3o&language=zh-TW`)
+          .then(res => {
+            if (res.data.status === 'OK' && res.data.results.length > 0) {
+              this.filterAddress(res.data.results)
+            }
+          })
+          .catch(err => {
+            console.log('err', err)
+          })
       }
     },
     goToUploadForm () {
