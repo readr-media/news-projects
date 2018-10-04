@@ -28,6 +28,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 import { ADMINISTRATIVE_DISTRICT, } from './constants'
 
 const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
@@ -126,16 +127,21 @@ export default {
       }
       if (this.errors.length === 0) {
         const geocoder = new google.maps.Geocoder()
-        geocoder.geocode({ address: this.addressSelected }, (results, status) => {
-          if (status === 'OK' && results.length > 0) {
-            const addressFormatted = this.formatAddress(results[0].formatted_address)
-            const coordinate = [ results[0].geometry.location.lat(), results[0].geometry.location.lng() ]
-            this.$emit('updateAddress', addressFormatted)
-            this.$emit('updateCoordinate', coordinate)
-          } else {
+
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.addressSelected}&key=AIzaSyCgwPtUjWMKGKdp62Hnank6TTl3lhXwa3o&language=zh-TW`)
+          .then(res => {
+            if (res.data.status === 'OK' && res.data.results.length > 0) {
+              const addressFormatted = this.formatAddress(res.data.results[0].formatted_address)
+              const coordinate = [ res.data.results[0].geometry.location.lat, res.data.results[0].geometry.location.lng ]
+              this.$emit('updateAddress', addressFormatted)
+              this.$emit('updateCoordinate', coordinate)
+            } else {
+              this.errors.push('district')
+            }
+          })
+          .catch(err => {
             this.errors.push('district')
-          }
-        })
+          })
       }
     }
   }
