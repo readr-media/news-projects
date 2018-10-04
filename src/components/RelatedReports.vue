@@ -1,6 +1,6 @@
 <template>
   <div class="related-reports--wrapper">
-    <a :href="`/series/${currentProjectSlug}/donate`" class="related-reports--donate" :class="theme" v-if="currentProjectSlug && donationActive" target="_blank">
+    <a :href="`/series/${currentProjectSlug}/donate`" class="related-reports--donate" :class="theme" v-if="currentProjectSlug && donationActive" target="_blank" @click="sendGA">
       <span v-text="$t('DONATE_PREFIX')"></span>
       <span class="donate-icon"></span>
       <span v-text="$t('DONATE_POSTFIX')"></span>
@@ -108,7 +108,10 @@ export default {
     getReportImg (report) {
       return report.ogImage || report.heroImage || ''
     },
-    getReportUrl
+    getReportUrl,
+    sendGA () {
+      window.ga('send', 'event', 'projects', 'click', `donate`, { nonInteraction: false })
+    }
   }
 }
 </script>

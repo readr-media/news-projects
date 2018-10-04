@@ -95,6 +95,17 @@ export default {
       return this.$route.fullPath
     }
   },
+  watch: {
+    '$route' (to, from) {
+      let title = `看板追追追——2018選舉看板紀錄`
+      switch (to.params.params) {
+        case 'verify':
+          title = '看板追追追——鍵盤辨識徵求中！'
+          break
+      }
+      window.ga('send', 'pageview', { title: `${title} - 讀＋READr`, location: to.fullPath })
+    }
+  },
   beforeCreate () {
     const route = this.$route.params.params || '';
     const regex = /^(upload|verify)$/

@@ -49,6 +49,8 @@ export default {
       e.target.classList.toggle('selected')
     },
     submit () {
+      window.ga('send', 'event', 'projects', 'click', 'verified data false done', { nonInteraction: false })
+
       const body = {
         isBoard: this.isBoardIds,
         notBoard: this.notBoardIds,

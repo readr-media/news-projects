@@ -41,8 +41,8 @@
     <div class="check-upload__action">
       <div class="action-text">我們在同一個地點發現其他人上傳過的照片，請問這是同一張嗎？</div>
       <div class="action-btns">
-        <button class="btn--cancel" @click="$emit('cancelUpload')">是同一張<span>，</span><br>取消上傳</button>
-        <button class="btn--upload" @click="$emit('confirmUpload')">我不確定<span>，</span><br>還是上傳</button>
+        <button class="btn--cancel" @click="cancel">是同一張<span>，</span><br>取消上傳</button>
+        <button class="btn--upload" @click="confirm">我不確定<span>，</span><br>還是上傳</button>
       </div>
     </div>
   </div>
@@ -87,6 +87,14 @@ export default {
     }
   },
   methods: {
+    cancel () {
+      window.ga('send', 'event', 'projects', 'click', 'upload photo repeat cancelled', { nonInteraction: false })
+      this.$emit('cancelUpload')
+    },
+    confirm () {
+      window.ga('send', 'event', 'projects', 'click', 'upload photo repeat confirmed', { nonInteraction: false })
+      this.$emit('confirmUpload')
+    },
     getCandidatesName (candidates) {
       return candidates.map(candidate => candidate.name).join('、')
     },
