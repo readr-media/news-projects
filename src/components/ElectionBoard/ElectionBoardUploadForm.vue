@@ -212,6 +212,7 @@ export default {
   },
   watch: {
     coordinate () {
+      this.showCheckBoards = false
       this.showCheckPosition = true
     },
     county (value) {
