@@ -22,7 +22,7 @@
           <div class="action--retake" @click="getPhoto">
             <span>重新選擇</span>
           </div>
-          <div v-if="imgSizeVerified" class="action--verified" @click="getPhotoEXIF">
+          <div v-if="imgSizeVerified" class="action--verified" @click="checkCoordinate">
             <span>使用此照片</span>
           </div>
         </div>
@@ -57,6 +57,7 @@
     </main>
     <ElectionBoardBackBtn v-show="showBackBtn"/>
     <input id="camera" ref="camera" type="file" accept="image/*" @change="handleInputChange">
+    <canvas ref="canvas"></canvas>
   </section>
 </template>
 <script>
@@ -171,6 +172,30 @@ export default {
     this.mounted = true
   },
   methods: {
+    checkCoordinate () {
+      window.ga('send', 'event', 'projects', 'click', 'upload photo confirmed', { nonInteraction: false })
+      if (!this.coordinateFromEXIF && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const latitude = position.coords.latitude || DEFAULT_GPS_DMS[0]
+          const longitude = position.coords.longitude || DEFAULT_GPS_DMS[1]
+          this.coordinate = [ latitude, longitude ]
+          this.goToUploadForm()
+        }, (err) => {
+          this.coordinate = DEFAULT_GPS_DMS
+          this.goToUploadForm()
+        })
+      } else {
+        this.goToUploadForm()
+      }
+    },
+    dataURLtoBlob (dataURL) {
+      const binary = atob(dataURL.split(',')[1])
+      const array = []
+      for(let i = 0; i < binary.length; i++) {
+          array.push(binary.charCodeAt(i))
+      }
+      return new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
+    },
     filterAddress (addressList) {
       // 過濾 Goolgle 轉換的中文地址
       const regex = /台灣(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
@@ -195,25 +220,6 @@ export default {
     },
     getPhoto () {
       this.$refs.camera.click()
-    },
-    getPhotoEXIF () {
-      window.ga('send', 'event', 'projects', 'click', 'upload photo confirmed', { nonInteraction: false })
-      EXIF.getData(this.imgFile, () => {
-        this.imgEXIF = EXIF.getAllTags(this.imgFile)
-        if (!this.coordinateFromEXIF && navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            const latitude = position.coords.latitude || DEFAULT_GPS_DMS[0]
-            const longitude = position.coords.longitude || DEFAULT_GPS_DMS[1]
-            this.coordinate = [ latitude, longitude ]
-            this.goToUploadForm()
-          }, (err) => {
-            this.coordinate = DEFAULT_GPS_DMS
-            this.goToUploadForm()
-          })
-        } else {
-          this.goToUploadForm()
-        }
-      })
     },
     getPosAddress () {
       if (this.coordinate[0] > MIN_LATITUDE && this.coordinate[0] < MAX_LATITUDE &&
@@ -244,17 +250,65 @@ export default {
       this.current = 2
     },
     handleInputChange (e) {
-      this.imgFile = e.target.files[0]
-      if (this.imgFile) {
-        const url = URL.createObjectURL(this.imgFile)
-        const imgSize = this.imgFile.size
-        if (imgSize < MAX_IMG_SIZE) {
-          this.imgSizeVerified = true
+      const file = e.target.files[0]
+      if (file) {
+        EXIF.getData(file, () => {
+          this.imgEXIF = EXIF.getAllTags(file)
+          this.processImage(file)
+        })
+      }
+    },
+    processImage (file) {
+      if (window.File && window.FileReader && window.Blob) {
+        this.imgSizeVerified = true
+        const reader = new FileReader()
+        const image = new Image()
+        const context = this.$refs.canvas.getContext('2d')
+        const orientation = this.imgEXIF.Orientation
+        reader.readAsDataURL(file)
+        reader.onload = (img) => {
+          image.src = img.target.result
+          image.onload = () => {
+            const { width, height } = this.resizeImage(image, orientation)
+            
+            if ([ 5, 6, 7, 8 ].includes(orientation)) {
+              this.$refs.canvas.width = height
+              this.$refs.canvas.height = width
+            } else {
+              this.$refs.canvas.width = width
+              this.$refs.canvas.height = height
+            }
+            
+            switch (orientation) {
+              case 2: context.transform(-1, 0, 0, 1, width, 0); break;
+              case 3: context.transform(-1, 0, 0, -1, width, height ); break;
+              case 4: context.transform(1, 0, 0, -1, 0, height ); break;
+              case 5: context.transform(0, 1, 1, 0, 0, 0); break;
+              case 6: context.transform(0, 1, -1, 0, height, 0); break;
+              case 7: context.transform(0, -1, -1, 0, height, width); break;
+              case 8: context.transform(0, -1, 1, 0, 0, width); break;
+              default: context.transform(1, 0, 0, 1, 0, 0);
+            }
+            context.drawImage(image, 0, 0, width, height)
+            const dataUrl = this.$refs.canvas.toDataURL('image/jpeg', .75)
+            this.imgFile = this.dataURLtoBlob(dataUrl)
+            this.$refs.preview.src = dataUrl
+            this.current = 1
+          }
         }
-        this.$refs.preview.src = url
-        this.current = 1
       } else {
-        this.current = 0
+        this.imgFile = file
+        if (this.imgFile) {
+          const url = URL.createObjectURL(this.imgFile)
+          const imgSize = this.imgFile.size
+          if (imgSize < MAX_IMG_SIZE) {
+            this.imgSizeVerified = true
+          }
+          this.$refs.preview.src = url
+          this.current = 1
+        } else {
+          this.current = 0
+        }
       }
     },
     resetData () {
@@ -269,6 +323,23 @@ export default {
       this.showMapHint = false
       this.timeout = 3
       document.getElementById('camera').value = ''
+    },
+    resizeImage (image, orientation) {
+      const MAX = 2000
+      const widthOrigin = image.width
+      const heightOrigin = image.height
+      let widthResized = image.width
+      let heightResized = image.height
+      
+      if (widthOrigin > 2000) {
+        widthResized = MAX
+        heightResized =  Math.ceil(MAX * heightOrigin / widthOrigin)
+      }
+
+      return {
+        width: widthResized,
+        height: heightResized
+      }
     },
     setTimer () {
       this.timer = setInterval(() => {
@@ -296,6 +367,8 @@ theme-color = #fa6e59
   > main
     display flex
     height 100%
+    > canvas
+      display none
     > section
       flex 1
       height 100%
@@ -335,10 +408,7 @@ theme-color = #fa6e59
     flex-direction column
     .preview
       position relative
-      flex 4
-      > canvas
-        width 100%
-        height 100%
+      flex 1
       > img
         position absolute
         top 0
@@ -347,7 +417,7 @@ theme-color = #fa6e59
         bottom 0
         width 100%
         height 100%
-        object-fit cover
+        object-fit contain
         object-position center center
       &__alert
         display flex
