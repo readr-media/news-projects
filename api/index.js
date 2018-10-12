@@ -112,7 +112,7 @@ router.get('/report/count', fetchFromRedis, (req, res, next) => {
 // auth issue
 router.post('/upload/image', upload.single('image'), (req, res) => {
   const file = req.file
-  const fileFormat = file.originalname.split('.')[1].toLowerCase()
+  const fileFormat = file.mimetype.split('/')[1].replace('jpeg', 'jpg')
   const fileName = `${moment().unix()}-${file.filename}.${fileFormat}`
   const path = file.path
   const folderName = req.headers['folder-name']
