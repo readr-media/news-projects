@@ -8,20 +8,45 @@
         <h2>看板資訊</h2>
         <p>此資料已被驗證 {{ board.verifiedAmount || 0 }} 次</p>
       </div>
+      <div class="form__amount">
+        <p>照片裡有幾位縣市長 / 議員候選人？</p>
+        <input v-model.number="candidateAmount" type="number" >
+      </div>
+      <p>他 / 她是誰？</p>
       <p v-show="errors.includes('empty')" class="error">請填寫候選人資訊</p>
-      <template v-for="n in candidateAmount">
-        <VerifyInputCandidate
-          :key="n"
-          :board="board"
-          :candidate="n <= candidateAmountOrigin ? candidatesOrigin[n - 1] : undefined "
-          :candidates="candidates"
-          :index="n"
-          :selectedCandidates="selectedCandidates"
-          class="form__candidate"
-          @updateSelectedId="updateSelectedCandidates" />
-      </template>
-      <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p>
-      <input v-model="slogan" type="text" placeholder="請填寫看板標語（多句請用／分隔）">
+      <VerifyInputCandidate
+        v-for="n in candidateAmountOrigin"
+        v-if="candidateAmount === '' && candidateAmountOrigin > 0"
+        :key="n"
+        :board="board"
+        :candidate="candidatesOrigin[n - 1]"
+        :candidates="candidates"
+        :index="n"
+        :selectedCandidates="selectedCandidates"
+        class="form__candidate"
+        @updateSelectedId="updateSelectedCandidates" />
+      <VerifyInputCandidate
+        v-else-if="candidateAmount !== '' && candidateAmount < 2"
+        :board="board"
+        :candidate="candidatesOrigin[0]"
+        :candidates="candidates"
+        :index="1"
+        :selectedCandidates="selectedCandidates"
+        class="form__candidate"
+        @updateSelectedId="updateSelectedCandidates" />
+      <VerifyInputCandidate
+        v-for="n in candidateAmount"
+        v-else
+        :key="n"
+        :board="board"
+        :candidate="candidatesOrigin[n - 1]"
+        :candidates="candidates"
+        :index="n"
+        :selectedCandidates="selectedCandidates"
+        class="form__candidate"
+        @updateSelectedId="updateSelectedCandidates" />
+      <!-- <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p> -->
+      <input v-model="slogan" type="text" placeholder="請填寫看板標語">
       <p>目前資訊： {{ board.slogan || ' ' }}</p>
       <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後...</p>
       <p v-if="hasError" class="error error--board">系統發生錯誤，請重新整理或稍後再試...</p>
@@ -76,7 +101,7 @@ export default {
   },
   data () {
     return {
-      candidateAmount: 1,
+      candidateAmount: '',
       errors: [],
       hasError: false,
       selectedCandidates: [],
@@ -96,7 +121,7 @@ export default {
       return this.board.image
     },
     candidateAmountOrigin () {
-      return get(this.board, 'candidates.length', 0) || 0
+      return get(this.board, 'candidates.length')
     },
     candidates () {
       return this.mayorCandidates.concat(this.councilorCandidates)
@@ -116,12 +141,7 @@ export default {
       this.errors = []
       this.selectedCandidates = []
       this.slogan = ''
-      this.candidateAmount = get(value, 'candidates.length', 1) || 1
-    },
-    candidateAmountOrigin (value) {
-      if (this.candidateAmount < value) {
-        this.candidateAmount = value
-      }
+      this.candidateAmount = ''
     },
   },
   beforeMount () {
@@ -138,6 +158,10 @@ export default {
         board: this.boardID,
         createdBy: this.$store.state.ElectionBoard.userID,
         isBoard: isBoard
+      }
+
+      if (typeof this.candidateAmount !== 'string') {
+        body.headcount = this.candidateAmount
       }
 
       if (isBoard) {
@@ -203,7 +227,7 @@ export default {
         }
         setTimeout(() => fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID }), 1000)
       })
-      .then(res => {
+      .then(() => {
         this.loading = false
       })
       .catch(err => {
@@ -267,6 +291,7 @@ theme-color-hidden = #6d5810
       height 30px
       margin-top 10px
       padding-left .5em
+      line-height 30px
       background-color #a0a0a0
       border none
       border-radius 2px
@@ -305,6 +330,23 @@ theme-color-hidden = #6d5810
         margin 0
         color #a0a0a0
         font-size .875rem
+    &__amount
+      display flex
+      margin-top .5em
+      > p
+        margin-right 20px
+        color #fff
+        line-height 1.4
+      > input
+        width 60px
+        height 30px
+        margin-top .2em
+        padding-left .5em
+        line-height 30px
+        background-color #a0a0a0
+        border none
+        border-radius 2px
+
     &__candidate
       margin-top 10px
       & + .form__candidate

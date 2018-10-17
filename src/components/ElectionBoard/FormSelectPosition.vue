@@ -156,6 +156,7 @@ export default {
     height 30px
     margin-top .5em
     padding-left .5em
+    line-height 30px
     background-color #a0a0a0
     border none
     border-radius 2px
@@ -198,6 +199,7 @@ export default {
       height 30px
       padding 0
       text-indent .5em
+      line-height 30px
       background-color transparent
       border none
       -webkit-appearance none
