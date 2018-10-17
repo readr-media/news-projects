@@ -3,10 +3,10 @@
     <div class="select-container">
       <select v-model="selectedName">
         <option disabled value="">請選擇候選人</option>
-        <optgroup label="市長">
+        <optgroup label="縣 / 市長">
           <option v-for="item in mayorCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
         </optgroup>
-        <optgroup label="議員">
+        <optgroup label="縣 / 市議員">
           <option v-for="item in councilorCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
         </optgroup>
       </select>
