@@ -88,12 +88,12 @@ export default {
   },
   methods: {
     cancel () {
-      window.ga('send', 'event', 'projects', 'click', 'upload photo repeat cancelled', { nonInteraction: false })
       this.$emit('cancelUpload')
+      window.ga('send', 'event', 'projects', 'click', 'upload photo repeat cancelled', { nonInteraction: false })
     },
     confirm () {
-      window.ga('send', 'event', 'projects', 'click', 'upload photo repeat confirmed', { nonInteraction: false })
       this.$emit('confirmUpload')
+      window.ga('send', 'event', 'projects', 'click', 'upload photo repeat confirmed', { nonInteraction: false })
     },
     getCandidatesName (candidates) {
       return candidates.map(candidate => candidate.name).join('、')

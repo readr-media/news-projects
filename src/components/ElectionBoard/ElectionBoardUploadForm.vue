@@ -274,7 +274,6 @@ export default {
       this.recaptchaVerified = true
     },
     submit () {
-      window.ga('send', 'event', 'projects', 'click', 'upload data done', { nonInteraction: false })
       this.errors = []
       if (this.coordinate[0] > MIN_LATITUDE && this.coordinate[0] < MAX_LATITUDE &&
       this.coordinate[1] > MIN_LONGITUDE && this.coordinate[1] < MAX_LONGITUDE) {
@@ -293,6 +292,7 @@ export default {
       } else {
         this.errors.push('coordinate')
       }
+      window.ga('send', 'event', 'projects', 'click', 'upload data done', { nonInteraction: false })
     },
     updateAddress (address) {
       this.address = address

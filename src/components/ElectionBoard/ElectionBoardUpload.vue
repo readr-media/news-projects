@@ -173,7 +173,6 @@ export default {
   },
   methods: {
     checkCoordinate () {
-      window.ga('send', 'event', 'projects', 'click', 'upload photo confirmed', { nonInteraction: false })
       if (!this.coordinateFromEXIF && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           const latitude = position.coords.latitude || DEFAULT_GPS_DMS[0]
@@ -187,6 +186,7 @@ export default {
       } else {
         this.goToUploadForm()
       }
+      window.ga('send', 'event', 'projects', 'click', 'upload photo confirmed', { nonInteraction: false })
     },
     dataURLtoBlob (dataURL) {
       const binary = atob(dataURL.split(',')[1])
