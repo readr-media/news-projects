@@ -21,7 +21,7 @@
           @updateSelectedId="updateSelectedCandidates" />
       </template>
       <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p>
-      <input v-model="slogan" type="text" placeholder="請填寫看板標語">
+      <input v-model="slogan" type="text" placeholder="請填寫看板標語（多句請用／分隔）">
       <p>目前資訊： {{ board.slogan || ' ' }}</p>
       <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後...</p>
       <p v-if="hasError" class="error error--board">系統發生錯誤，請重新整理或稍後再試...</p>
@@ -149,8 +149,6 @@ export default {
       return body
     },
     skipBoard () {
-      window.ga('send', 'event', 'projects', 'click', 'verified pass', { nonInteraction: false })
-
       this.loading = true
       fetchBoard(this.$store, { skipBoard: this.boardID, uploadedBy: this.$store.state.ElectionBoard.userID })
       .then(res => {
@@ -159,6 +157,7 @@ export default {
       .catch(err => {
         this.hasError = true
       })
+      window.ga('send', 'event', 'projects', 'click', 'verified pass', { nonInteraction: false })
     },
     // updateInputError (index, value) {
     //   if (value) {
@@ -183,12 +182,6 @@ export default {
     },
     uploadBoardVerified (isBoard) {
       const body = this.buildRequestBody(isBoard)
-      
-      if (isBoard) {
-        window.ga('send', 'event', 'projects', 'click', 'verified data confirmed', { nonInteraction: false })
-      } else {
-        window.ga('send', 'event', 'projects', 'click', 'verified data false', { nonInteraction: false })
-      }
 
       axios.get('/project-api/token')
       .then(response => {
@@ -216,6 +209,12 @@ export default {
       .catch(err => {
         this.hasError = true
       })
+
+      if (isBoard) {
+        window.ga('send', 'event', 'projects', 'click', 'verified data confirmed', { nonInteraction: false })
+      } else {
+        window.ga('send', 'event', 'projects', 'click', 'verified data false', { nonInteraction: false })
+      }
     },
     validation () { // not use
       const index = this.errors.findIndex((value, index, arr) => value === 'empty')
