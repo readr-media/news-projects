@@ -5,6 +5,9 @@ export default {
   SET_BOARDS: (state, data) => {
     state.boards = data
   },
+  SET_BOARDS_BY_COORDINATE: (state, data) => {
+    state.boardsByCoordinate = data
+  },
   SET_CANDIDATES_COUNCILORS: (state, data) => {
     state.candidates.councilors = data
   },

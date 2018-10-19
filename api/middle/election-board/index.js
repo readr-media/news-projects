@@ -92,6 +92,17 @@ router.get('/verify/board', (req, res) => {
     })
 })
 
+router.get('/verify/board/:id', (req, res) => {
+  const url = `${apiHost}/api${req.url}`
+  axios.get(url, { timeout: API_TIMEOUT })
+    .then(response => {
+      res.json(response.data)
+    })
+    .catch(err => {
+      handleError(err, res)
+    })
+})
+
 router.post('/boards', verifyToken, (req, res) => {
   const token = req.headers.authorization
   const body = mapKeys(req.body, (value, key) => snakeCase(key))

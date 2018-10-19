@@ -1,8 +1,8 @@
 <template>
   <div class="data-boards">
-    <h3>{{ candidate.name }}<span>{{ candidate.party }}</span></h3>
-    <p>{{ county }}{{ type }}候選人</p>
-    <div v-show="loaded" class="boards-container">
+    <h3>{{ address }}</h3>
+    <p>附近的看板</p>
+    <div class="boards-container">
       <div class="boards" @scroll="handleLoadMore">
         <div v-for="board in boards" :key="`b-${board.id}`" class="boards__item" @click="openDataBoard(board.id)">
           <div class="img-container">
@@ -14,25 +14,24 @@
       </div>
     </div>
     <div class="action">
-      <button class="btn btn--back" @click="$router.push(`/project/election-board/data`)"><img src="/proj-assets/election-board/images/arrow.png"></button>
+      <button class="btn btn--back" @click="$emit('close')"><img src="/proj-assets/election-board/images/arrow.png"></button>
       <button class="btn btn--upload" @click="goUpload">我也要上傳</button>
     </div>
-    <DataBoard v-show="showDataBoard && board" :board="board" @closeDataBoard="closeDataBoard"/>
+    <slot></slot>
   </div>
 </template>
 <script>
-import DataBoard from './DataBoard.vue'
 import moment from 'moment'
 
 const DEFAULT_PAGE = 1
 
 const fetchBoards = (store, {
-  candidates,
+  coordinates,
   page = DEFAULT_PAGE,
   maxResults = 12,
 } = {}) => {
-  return store.dispatch('ElectionBoard/FETCH_BOARDS', {
-    candidates,
+  return store.dispatch('ElectionBoard/FETCH_BOARDS_BY_COORDINATE', {
+    coordinates,
     page,
     maxResults,
     verifiedAmount: 3,
@@ -41,56 +40,38 @@ const fetchBoards = (store, {
 }
 
 export default {
-  name: 'DataBoards',
-  components: {
-    DataBoard,
-  },
+  name: 'DataBoardsByCoordinate',
   props: {
-    candidate: {
+    address: {
+    },
+    boardID: {
+      required: true
+    },
+    coordinates: {
       required: true
     }
   },
   data () {
     return {
-      board: undefined,
       count: 0,
-      loaded: false,
       page: DEFAULT_PAGE,
-      showDataBoard: false,
     }
   },
   computed: {
     boards () {
-      return this.$store.state.ElectionBoard.boards
+      return this.$store.state.ElectionBoard.boardsByCoordinate.filter(board => board.id !== this.boardID)
     },
-    county () {
-      return this.candidate.county.replace('臺', '台')
-    },
-    type () {
-      if (this.candidate.type === 'mayors') {
-        return '市長'
-      }
-      return '議員'
-    }
   },
   beforeMount () {
-    fetchBoards(this.$store, { candidates: this.candidate.id })
+    fetchBoards(this.$store, { coordinates: this.coordinates })
     .then(res => {
-      this.loaded = true
       this.count = res.count
-    })
-    .catch(() => {
-      this.loaded = true
     })
   },
   methods: {
-    closeDataBoard () {
-      this.board = undefined
-      this.showDataBoard = false
-    },
-    goUpload() {
+    goUpload () {
       this.$router.push(`/project/election-board/upload`)
-      window.ga('send', 'event', 'projects', 'click', `go upload from candidate`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', `go upload from coordinate`, { nonInteraction: false })
     },
     handleLoadMore () {
       if (this.boards.length < this.count) {
@@ -98,7 +79,7 @@ export default {
         const boards = document.querySelectorAll('.boards__item')
         const board = boards[boards.length - 3]
         if (board.getBoundingClientRect().top < boardsContainer.getBoundingClientRect().bottom) {
-          fetchBoards(this.$store, { candidates: this.candidate.id, page: this.page + 1 })
+          fetchBoards(this.$store, { coordinates: this.coordinates, page: this.page + 1 })
           .then(res => {
             this.page = this.page + 1
           })
@@ -107,9 +88,8 @@ export default {
     },
     moment,
     openDataBoard (id) {
-      this.board = this.boards.find(board => board.id === id)
-      this.showDataBoard = true
-      window.ga('send', 'event', 'projects', 'click', `go board ${id} from candidate`, { nonInteraction: false })
+      this.$emit('openDataBoard', this.boards.find(board => board.id === id))
+      window.ga('send', 'event', 'projects', 'click', `go board ${id} from coordinate`, { nonInteraction: false })
     }
   }
 }

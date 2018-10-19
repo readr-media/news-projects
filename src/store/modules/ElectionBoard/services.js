@@ -25,6 +25,11 @@ export function fetchBoardForVerif (params) {
   return axios.get(url)
 }
 
+export function fetchBoardForVerifByID ({ id, params }) {
+  const url = buildURL(`/project-api/election-board/verify/board/${id}`, params)
+  return axios.get(url)
+}
+
 export function fetchBoards (params) {
   const url = buildURL('/project-api/election-board/boards', params)
   return axios.get(url)

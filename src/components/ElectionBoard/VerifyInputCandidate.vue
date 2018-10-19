@@ -19,6 +19,8 @@
   </div>
 </template>
 <script>
+import { get, } from 'lodash'
+
 export default {
   name: 'VerifyInputCandidate',
   props: {
@@ -62,7 +64,7 @@ export default {
       this.candidatesForList = []
       this.openList = false
       this.selectedId = undefined
-      this.selectedName = ''
+      this.selectedName = get(this.board, [ 'candidates', this.index - 1, 'name' ], '') || ''
     },
     // hasError (value) {
     //   this.$emit('updateInputError', this.index, value)
@@ -90,6 +92,12 @@ export default {
       }
     }
   },
+  mounted () {
+    this.selectedName = get(this.board, [ 'candidates', this.index - 1, 'name' ], '') || ''
+    // if (this.selectedName) {
+    //   this.selectedId =
+    // }
+  },
   methods: {
   }
 }
@@ -103,6 +111,7 @@ export default {
     height 30px
     padding 0
     text-indent .5em
+    line-height 30px
     background-color #a0a0a0
     border none
     border-radius 2px
