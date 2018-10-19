@@ -2,7 +2,7 @@ import Cookie from 'vue-cookie'
 import uuidv4 from 'uuid/v4'
 import { camelizeKeys, } from 'humps'
 import { concat, get, uniqBy, values } from 'lodash'
-import { fetchCandidates, fetchElections, fetchBoardForVerif, fetchBoards } from './services'
+import { fetchBoardForVerif, fetchBoardForVerifByID, fetchCandidates, fetchElections, fetchBoards } from './services'
 
 export default {
   FETCH_BOARD_FOR_VERIF: ({ commit }, params) => {
@@ -10,12 +10,37 @@ export default {
       .then(res => {
         commit(`SET_BOARD_FOR_VERIF`, camelizeKeys(get(res, 'data')))
       })
-      .catch(err => err)
+  },
+  FETCH_BOARD_FOR_VERIF_BY_ID: ({ commit }, { id, params }) => {
+    return fetchBoardForVerifByID({ id, params})
+      .then(res => {
+        commit(`SET_BOARD_FOR_VERIF`, camelizeKeys(get(res, 'data')))
+      })
   },
   FETCH_BOARDS: ({ commit }, params) => {
     return fetchBoards(params)
       .then(res => {
-        commit(`SET_BOARDS`, res.data.results)
+        if (params.page > 1) {
+          const orig = values(get(state, 'boards', []))
+          const concatedData = concat(orig, res.data.results)
+          commit(`SET_BOARDS`, concatedData)
+        } else {
+          commit(`SET_BOARDS`, res.data.results)
+        }
+        return res.data
+      })
+      .catch(err => err)
+  },
+  FETCH_BOARDS_BY_COORDINATE: ({ commit }, params) => {
+    return fetchBoards(params)
+      .then(res => {
+        if (params.page > 1) {
+          const orig = values(get(state, 'boards', []))
+          const concatedData = concat(orig, res.data.results)
+          commit(`SET_BOARDS_BY_COORDINATE`, concatedData)
+        } else {
+          commit(`SET_BOARDS_BY_COORDINATE`, res.data.results)
+        }
         return res.data
       })
       .catch(err => err)

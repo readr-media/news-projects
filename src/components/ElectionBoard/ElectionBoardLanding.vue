@@ -17,17 +17,15 @@
             <span>幫忙驗證</span>
           </router-link>
         </div>
-        <div class="item item--data item--hidden" @click="sendGA('seedata')">
-          <!-- <router-link to="/project/election-board/data"> -->
-          <router-link to="/project/election-board/" >
+        <div class="item item--data" @click="sendGA('seedata')">
+          <router-link to="/project/election-board/data">
             <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
             <span>我要看資料</span>
           </router-link>
-          <div class="hidden-text">coming<br>soon</div>
         </div>
       </div>
     </main>
-    <a href="http://www.readr.tw/post/1089" target="_blank">看完整計畫緣起</a>
+    <a href="http://www.readr.tw/post/1089" target="_blank" @click="sendGA('memo')">看完整計畫緣起</a>
     <div class="credit">
       <img src="/proj-assets/election-board/images/logo-mm.png" alt="mirrormedia">
       <p>文字：李又如 設計：Weiwei Hsu </p>
@@ -48,7 +46,7 @@
             <p>我們也會在近期解鎖公開資料頁面，顯示每位候選人即時的看板資料。</p>
           </div>
         </div>
-        <a href="http://www.readr.tw/post/1089" target="_blank">看完整計畫緣起</a>
+        <a href="http://www.readr.tw/post/1089" target="_blank" @click="sendGA('memo')">看完整計畫緣起</a>
       </div>
     </div>
   </section>
@@ -87,10 +85,7 @@ export default {
 <style lang="stylus" scoped>
 color-upload = #fa6e59
 color-verify = #ffdb5c
-color-verify-hidden = #6d5810
 color-data = #4897db
-color-data-hidden = #184b78
-color-hidden = #313131
 
 .eb-landing
   position relative
@@ -155,32 +150,8 @@ color-hidden = #313131
         background-color color-upload
       &--verify
         background-color color-verify
-        &.item--hidden
-          background-color color-verify-hidden
       &--data
         background-color color-data
-        &.item--hidden
-          background-color color-hidden
-      &--hidden
-        > a
-          cursor default
-        .hidden-text
-          display flex
-          justify-content center
-          align-items center
-          position absolute
-          top 0
-          left 0
-          right 0
-          bottom 0
-          width 100%
-          height 100%
-          color #a0a0a0
-          font-size 1.75rem
-          font-weight 500
-          line-height 1
-          text-align center
-          transform rotate(-15deg)
       > a
         display flex
         flex-direction column

@@ -70,6 +70,15 @@ export default {
         metaImage = `election-board/images/og-verify.jpg`
         description = '看板追追追計畫進到下一步資料分析前，需要你協助確認資料的正確性。這裡有一堆選舉看板照片需要鍵盤協力，一起為這次的選舉留下紀錄吧！'
         break
+      case 'data':
+        title = '看板追追追——2018選舉看板紀錄'
+        metaImage = `election-board/images/og-data.jpg`
+        description = '誰掛了最多看板？每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤。一起為這次的選舉留下紀錄吧！'
+        if (this.$route.query.candidate) {
+          title = `看板追追追——${this.$route.query.candidate}選舉看板紀錄`
+          description = `目前參選人${this.$route.query.candidate}掛了多少看板？你還有在哪裡看到${this.$route.query.candidate}的看板嗎？一起為這次的選舉留下紀錄吧！`
+        }
+        break
     }
 
     return {
@@ -102,14 +111,19 @@ export default {
         case 'verify':
           title = '看板追追追——鍵盤辨識徵求中！'
           break
+        case 'data':
+          title = '看板追追追——2018選舉看板紀錄'
+          if (to.query.candidate) {
+            title = `看板追追追——${to.query.candidate}選舉看板紀錄`
+          }
+          break
       }
       window.ga('send', 'pageview', { title: `${title} - 讀＋READr`, location: to.fullPath })
     }
   },
   beforeCreate () {
     const route = this.$route.params.params || '';
-    const regex = /^(upload|verify)$/
-    // const regex = /^(upload|verify|data)$/
+    const regex = /^(upload|verify|data)$/
     if (!route.match(regex)) {
       this.$router.replace({ path: '/project/election-board' });
     }

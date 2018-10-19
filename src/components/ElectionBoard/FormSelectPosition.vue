@@ -32,6 +32,7 @@ import axios from 'axios'
 import { ADMINISTRATIVE_DISTRICT, } from './constants'
 
 const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
+const REGEX_ADDRESS_FOR_DATA = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))/
 
 export default {
   name: 'FormSelectPosition',
@@ -72,13 +73,12 @@ export default {
       this.districtSelected = this.getDistrict(value)
       this.road = this.getRoad(value)
     },
+    addressSelected (value) {
+      this.$emit('updateAddressForData', value)
+    },
     countySelected (value) {
       this.districtSelected = this.districts[0]
-      this.$emit('updateCounty', value)
-    },
-    districtSelected (value) {
-      this.$emit('updateDistrict', value)
-    },
+    }
   },
   methods: {
     formatAddress (address) {
@@ -90,19 +90,23 @@ export default {
       return output
     },
     getCounty (address) {
-      if (address.match(REGEX_ADDRESS) && address.match(REGEX_ADDRESS).length > 4) {
+      if (this.showAdvanced && address.match(REGEX_ADDRESS) && address.match(REGEX_ADDRESS).length > 4) {
         return address.match(REGEX_ADDRESS)[1]
+      } else if (address.match(REGEX_ADDRESS_FOR_DATA) && address.match(REGEX_ADDRESS_FOR_DATA).length > 3) {
+        return address.match(REGEX_ADDRESS_FOR_DATA)[1]
       }
       return '台北市'
     },
     getDistrict (address) {
-      if (address.match(REGEX_ADDRESS) && address.match(REGEX_ADDRESS).length > 4) {
+      if (this.showAdvanced && address.match(REGEX_ADDRESS) && address.match(REGEX_ADDRESS).length > 4) {
         return address.match(REGEX_ADDRESS)[2]
+      } else if (address.match(REGEX_ADDRESS_FOR_DATA) && address.match(REGEX_ADDRESS_FOR_DATA).length > 3) {
+        return address.match(REGEX_ADDRESS_FOR_DATA)[2]
       }
       return '信義區'
     },
     getRoad (address) {
-      if (address.match(REGEX_ADDRESS) && address.match(REGEX_ADDRESS).length > 4) {
+      if (this.showAdvanced && address.match(REGEX_ADDRESS) && address.match(REGEX_ADDRESS).length > 4) {
         return address.match(REGEX_ADDRESS)[4]
       }
       return ''

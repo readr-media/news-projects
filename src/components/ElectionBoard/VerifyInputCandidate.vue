@@ -94,6 +94,9 @@ export default {
   },
   mounted () {
     this.selectedName = get(this.board, [ 'candidates', this.index - 1, 'name' ], '') || ''
+    // if (this.selectedName) {
+    //   this.selectedId =
+    // }
   },
   methods: {
   }

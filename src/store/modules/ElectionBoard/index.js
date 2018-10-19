@@ -6,6 +6,7 @@ export default {
   state: () => ({
     boardForVerif: {},
     boards: [],
+    boardsByCoordinate: [],
     candidates: {
       councilors: [],
       mayors: [],

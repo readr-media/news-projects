@@ -10,7 +10,7 @@
       </div>
       <div class="form__amount">
         <p>照片裡有幾位縣市長 / 議員候選人？</p>
-        <input v-model.number="candidateAmount" type="number" >
+        <input v-model.number="candidateAmount" type="number" pattern="[0-9]*">
       </div>
       <p>他 / 她是誰？</p>
       <p v-show="errors.includes('empty')" class="error">請填寫候選人資訊</p>
@@ -46,14 +46,14 @@
         class="form__candidate"
         @updateSelectedId="updateSelectedCandidates" />
       <!-- <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p> -->
-      <input v-model="slogan" type="text" placeholder="請填寫看板標語">
+      <input v-model="slogan" type="text" placeholder="請填寫看板標語（多句請用／分隔）">
       <p>目前資訊： {{ board.slogan || ' ' }}</p>
       <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後...</p>
       <p v-if="hasError" class="error error--board">系統發生錯誤，請重新整理或稍後再試...</p>
-      <button :disabled="!boardID && loading" class="btn--yellow" @click="uploadBoardVerified(true)">沒問題送出</button>
+      <button :disabled="(!boardID && loading) || hasError" class="btn--yellow" @click="uploadBoardVerified(true)">沒問題送出</button>
       <div class="action">
-        <button :disabled="!boardID && loading" class="btn--grey" @click="uploadBoardVerified(false)">這不是競選<br>看板照片</button>
-        <button :disabled="loading" class="btn--grey" @click="skipBoard">跳過</button>
+        <button :disabled="(!boardID && loading) || hasError" class="btn--grey" @click="uploadBoardVerified(false)">這不是競選<br>看板照片</button>
+        <button :disabled="loading || hasError" class="btn--grey" @click="skipBoard">跳過</button>
       </div>
     </div>
     <VerifyBoards v-if="showVerifyBoards" @closeVerifyBoards="showVerifyBoards = false"/>
@@ -77,6 +77,16 @@ const fetchBoard = (store, {
 } = {}) => store.dispatch('ElectionBoard/FETCH_BOARD_FOR_VERIF', {
   skipBoard,
   uploadedBy
+})
+
+const fetchBoardByID = (store, {
+  id,
+  uploadedBy
+} = {}) => store.dispatch('ElectionBoard/FETCH_BOARD_FOR_VERIF_BY_ID', {
+  id,
+  params: {
+    uploadedBy
+  }
 })
 
 const fetchBoards = (store, {
@@ -145,12 +155,18 @@ export default {
     },
   },
   beforeMount () {
-    Promise.all([
-      fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID }),
-    ])
-    .catch(err => {
-      this.hasError = true
-    })
+    if (this.$route.query.board) {
+      fetchBoardByID(this.$store, { id: this.$route.query.board, uploadedBy: this.$store.state.ElectionBoard.userID })
+      .catch(err => {
+        fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })
+        this.$router.replace(`/project/election-board/verify`)
+      })
+    } else {
+      fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })
+      .catch(err => {
+        this.hasError = true
+      })
+    }
   },
   methods: {
     buildRequestBody (isBoard) {
