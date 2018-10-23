@@ -3,7 +3,7 @@
     <template v-if="board">
       <div class="data-board__image">
         <img :src="`https://www.readr.tw${board.image}`" alt="">
-        <div class="data-board__correction" @click="$router.push(`/project/election-board/verify?board=${board.id}`)">這不是{{ $route.query.candidate }}，我要校正</div>
+        <div class="data-board__correction" @click="$router.push(`/project/election-board/verify?board=${board.id}`)">這不是{{ mode === 'coordinate' ? '看板' : $route.query.candidate }}，我要校正</div>
       </div>
       <div class="data-board__info">
         <div class="content">
