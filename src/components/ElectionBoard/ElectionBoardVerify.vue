@@ -14,37 +14,52 @@
       </div>
       <p>他 / 她是誰？</p>
       <p v-show="errors.includes('empty')" class="error">請填寫候選人資訊</p>
-      <VerifyInputCandidate
-        v-for="n in candidateAmountOrigin"
-        v-if="candidateAmount === '' && candidateAmountOrigin > 0"
-        :key="n"
-        :board="board"
-        :candidate="candidatesOrigin[n - 1]"
-        :candidates="candidates"
-        :index="n"
-        :selectedCandidates="selectedCandidates"
-        class="form__candidate"
-        @updateSelectedId="updateSelectedCandidates" />
-      <VerifyInputCandidate
-        v-else-if="candidateAmount !== '' && candidateAmount < 2"
-        :board="board"
-        :candidate="candidatesOrigin[0]"
-        :candidates="candidates"
-        :index="1"
-        :selectedCandidates="selectedCandidates"
-        class="form__candidate"
-        @updateSelectedId="updateSelectedCandidates" />
-      <VerifyInputCandidate
-        v-for="n in candidateAmount"
-        v-else
-        :key="n"
-        :board="board"
-        :candidate="candidatesOrigin[n - 1]"
-        :candidates="candidates"
-        :index="n"
-        :selectedCandidates="selectedCandidates"
-        class="form__candidate"
-        @updateSelectedId="updateSelectedCandidates" />
+
+      <template v-if="typeof candidateAmount === 'string' && candidateAmountOrigin > 0">
+        <VerifyInputCandidate
+          v-for="n in candidateAmountOrigin"
+          :key="n"
+          :board="board"
+          :candidate="candidatesOrigin[n - 1]"
+          :candidates="candidates"
+          :index="n"
+          :selectedCandidates="selectedCandidates"
+          class="form__candidate"
+          @updateSelectedId="updateSelectedCandidates" />
+      </template>
+      <template v-else-if="typeof candidateAmount === 'string' && candidateAmountOrigin < 1">
+        <VerifyInputCandidate
+          :board="board"
+          :candidate="candidatesOrigin[0]"
+          :candidates="candidates"
+          :index="1"
+          :selectedCandidates="selectedCandidates"
+          class="form__candidate"
+          @updateSelectedId="updateSelectedCandidates" />
+      </template>
+      <template v-else-if="typeof candidateAmount === 'number' && candidateAmount < 2">
+        <VerifyInputCandidate
+          :board="board"
+          :candidate="candidatesOrigin[0]"
+          :candidates="candidates"
+          :index="1"
+          :selectedCandidates="selectedCandidates"
+          class="form__candidate"
+          @updateSelectedId="updateSelectedCandidates" />
+      </template>
+      <template v-else>
+        <VerifyInputCandidate
+          v-for="n in candidateAmount"
+          :key="n"
+          :board="board"
+          :candidate="candidatesOrigin[n - 1]"
+          :candidates="candidates"
+          :index="n"
+          :selectedCandidates="selectedCandidates"
+          class="form__candidate"
+          @updateSelectedId="updateSelectedCandidates" />
+      </template>
+      
       <!-- <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p> -->
       <input v-model="slogan" type="text" placeholder="請填寫看板標語（多句請用／分隔）">
       <p>目前資訊： {{ board.slogan || ' ' }}</p>

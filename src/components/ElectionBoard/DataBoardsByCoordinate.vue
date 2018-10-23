@@ -12,6 +12,7 @@
           <p class="date" v-text="moment(board.uploaded_at).format('M 月 D 日上傳')"></p>
         </div>
       </div>
+      <p v-if="boards.length < 1">該位置目前尚無其他看板</p>
     </div>
     <div class="action">
       <button class="btn btn--back" @click="$emit('close')"><img src="/proj-assets/election-board/images/arrow.png"></button>
@@ -126,6 +127,9 @@ theme-color = #4897db
     flex 1
     position relative
     margin-top 25px
+    > p
+      color #a0a0a0
+      font-size 1.25rem
     .boards
       display flex
       justify-content space-between
