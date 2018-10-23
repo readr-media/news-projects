@@ -39,9 +39,6 @@ pipeline:
   builds:
     image: node:8.11.3-alpine
     commands:
-    - apk update
-    - apk add vips-dev fftw-dev --update-cache --repository https://dl-3.alpinelinux.org/alpine/edge/testing/
-    - apk add --no-cache python build-base make      
     - yarn install
     - yarn run build
     when:
