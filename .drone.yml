@@ -39,6 +39,8 @@ pipeline:
   builds:
     image: node:8.11.3-alpine
     commands:
+    - apk update
+    - apk add --no-cache python
     - yarn install
     - yarn run build
     when:
