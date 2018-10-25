@@ -59,7 +59,7 @@ export const TIMELINE =  [
       },
       {
         character: 'scheduler',
-        message: '6432請問你車子怎麼樣？'
+        message: '6432 請問你車子怎麼樣？'
       },
       {
         character: 'driver',
@@ -600,7 +600,7 @@ export const TIMELINE =  [
       },
       {
         character: 'driver',
-        message: '6432你好。'
+        message: '6432 你好。'
       },
       {
         character: 'checker',
