@@ -21,6 +21,7 @@ export default {
   'president-promise-interest': 'PresidentPromiseInterest',
   'political-contribution': 'PoliticalContribution',
   'rent': 'Rent',
+  'puyuma': 'Puyuma',
   
   //'proj1': 'Proj1',
 }
