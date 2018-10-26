@@ -404,7 +404,7 @@ export const TIMELINE =  [
     stationPrev: '大溪',
     stationNext: '龜山',
     time: '16:22:17',
-    status: 'MR曾恢復MRPS及PBPS動作，建立動力，隨後MR下降MRPS切開動力抑制。',
+    status: 'MR 曾恢復 MRPS 及 PBPS 動作，建立動力，隨後 MR 下降 MRPS 切開動力抑制。',
     conversations: [
       {
         character: 'driver',
@@ -444,7 +444,7 @@ export const TIMELINE =  [
     stationPrev: '大溪',
     stationNext: '龜山',
     time: '16:22:17',
-    status: 'MR過低使MRPS及PBPS切開，動力抑制。',
+    status: 'MR 過低使 MRPS 及 PBPS 切開，動力抑制。',
     conversations: [
       {
         character: 'driver',
@@ -724,7 +724,7 @@ export const TIMELINE =  [
     stationPrev: '龜山',
     stationNext: '頭城',
     time: '16:26:54',
-    status: 'MR 回升，但隨後下降後MRPS切開動力抑制。',
+    status: 'MR 回升，但隨後下降後 MRPS 切開動力抑制。',
     conversations: [
       {
         character: 'checker',
@@ -864,7 +864,7 @@ export const TIMELINE =  [
       },
       {
         character: 'checker',
-        message: '8 車，那你壓 8 車的，手壓5秒看會不會復原。'
+        message: '8 車，那你壓 8 車的，手壓 5 秒看會不會復原。'
       },
       {
         character: 'checker',
@@ -912,7 +912,7 @@ export const TIMELINE =  [
     stationPrev: '頭城',
     stationNext: '宜蘭',
     time: '16:35:51',
-    status: '礁溪通過後滑行MR過低MRPS、BPPS切開，動力抑制。停車後，MR恢復解除抑制。',
+    status: '礁溪通過後滑行 MR 過低 MRPS、BPPS 切開，動力抑制。停車後，MR 恢復解除抑制。',
     conversations: [
       {
         character: 'driver',
@@ -1032,7 +1032,7 @@ export const TIMELINE =  [
       },
       {
         character: 'scheduler',
-        message: '現在又有，那你看看你現在MR是多少？'
+        message: '現在又有，那你看看你現在 MR 是多少？'
       },
       {
         character: 'driver',

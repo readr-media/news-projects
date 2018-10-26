@@ -1,9 +1,6 @@
 <template>
   <section class="conversations">
     <div class="conversations__list-container list-container">
-      <!-- steps here -->
-      <!-- <ConversationsList class="list-container__list"/> -->
-      <!-- <ConversationsList class="list-container__list"/> -->
       <ConversationsList
         v-for="(time, i) in timeline"
         :key="i"
@@ -11,24 +8,64 @@
         :time="time"
       />
     </div>
-    <!-- <AppConversationsLegends class="conversations__legends"/> -->
   </section>
 </template>
 
 <script>
-// import AppConversationsLegends from './AppConversationsLegends.vue'
 import ConversationsList from './ConversationsList.vue'
 
 export default {
+  watch: {
+    footerHeight () {
+      if (this.footerHeight !== 0) {
+        this.createScroller()
+      }
+    }
+  },
   props: {
     timeline: {
       type: Array,
       required: true
+    },
+    footerHeight: {
+      type: Number,
+      required: true,
     }
   },
   components: {
     ConversationsList,
-    // AppConversationsLegends
+  },
+  computed: {
+  },
+  methods: {
+    createScroller () {
+      require('intersection-observer')
+      const scrollama = require('scrollama')
+      const scroller = scrollama()
+
+      const windowHeight = window.innerHeight
+      const offsetFooter = this.footerHeight / windowHeight
+      const offsetLegends = 38 / windowHeight
+      const offset = 1 - offsetFooter - offsetLegends
+
+      scroller
+        .setup({
+          step: '.list-container__list', // required - class name of trigger steps
+          offset: offset,
+          // once: true,
+          // debug: true,
+        })
+        .onStepEnter(({element, index, direction}, stepsRef) => {
+          this.$emit('stepsRefChange', stepsRef)
+        })
+        // .onStepExit(({element, index, direction}) => {
+        //   // console.log('exit:' + index);
+        // })
+
+      window.addEventListener('resize', scroller.resize)
+    }
+  },
+  mounted () {
   },
 }
 </script>

@@ -2,24 +2,32 @@
   <section id="puyuma" class="puyuma">
     <AppHeader
       class="puyuma__header"
-      :stationPrev="'台北'"
-      :time="'01:01:01'"
-      :stationNext="'台北'"
+      :stationPrev="currentTimeInTimeline.stationPrev"
+      :time="currentTimeInTimeline.time"
+      :stationNext="currentTimeInTimeline.stationNext"
     />
     <AppConversations
       class="puyuma__conversations"
       :style="{ paddingBottom: `${footerHeight + 10}px` }"
       :timeline="TIMELINE"
+      :footerHeight="footerHeight"
+      @stepsRefChange="handleTimeline"
     />
     <AppConversationsLegends
       class="puyuma__legends"
       :style="{ bottom: `${footerHeight}px` }"
     />
-    <AppFooter class="puyuma__footer"/>
+    <AppFooter
+      class="puyuma__footer"
+      :status="currentTimeInTimeline.status"
+      :mapIndex="mapIndex"
+    />
   </section>
 </template>
 
 <script>
+import { get, findIndex, } from 'lodash'
+
 import AppHeader from './components/AppHeader.vue'
 import AppConversations from './components/AppConversations.vue'
 import AppConversationsLegends from './components/AppConversationsLegends.vue'
@@ -45,12 +53,25 @@ export default {
   data () {
     return {
       TIMELINE,
-      footerHeight: 0
+      footerHeight: 0,
+      stepsRef: [],
+      currentIndex: 0,
     }
   },
-  beforeMount () {
-    require('intersection-observer')
-    const scrollama = require('scrollama')
+  computed: {
+    currentTimeInTimeline () {
+      return get(TIMELINE, this.currentIndex, [])
+    },
+    mapIndex () {
+      return get(this.currentTimeInTimeline, 'stationNext')
+    }
+  },
+  methods: {
+    handleTimeline (stepsRef) {
+      this.$set(this, 'stepsRef', stepsRef)
+      const currentIndex = findIndex(this.stepsRef, [ 'state', 'enter' ])
+      this.currentIndex = currentIndex === -1 ? this.currentIndex : currentIndex
+    }
   },
   mounted () {
     window.ga('send', 'pageview')
