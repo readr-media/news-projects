@@ -1011,7 +1011,7 @@ export const TIMELINE =  [
     status: '宜蘭開車後。',
     conversations: [
       {
-        character: 'scheduler',
+        character: 'checker',
         message: '喂…'
       },
       {
@@ -1019,11 +1019,11 @@ export const TIMELINE =  [
         message: '6432 你好'
       },
       {
-        character: 'scheduler',
+        character: 'checker',
         message: '6432 你好。'
       },
       {
-        character: 'scheduler',
+        character: 'checker',
         message: '6432 嗎？你現車子還有動力嗎？'
       },
       {
@@ -1031,7 +1031,7 @@ export const TIMELINE =  [
         message: '現在有啊。'
       },
       {
-        character: 'scheduler',
+        character: 'checker',
         message: '現在又有，那你看看你現在 MR 是多少？'
       },
       {
@@ -1039,7 +1039,7 @@ export const TIMELINE =  [
         message: '現在 MR 7 點多。'
       },
       {
-        character: 'scheduler',
+        character: 'checker',
         message: '7 點多，那他會不會上來？'
       },
       {
@@ -1047,7 +1047,7 @@ export const TIMELINE =  [
         message: '會呀，會上來很慢。'
       },
       {
-        character: 'scheduler',
+        character: 'checker',
         message: '很慢喔…那你看空壓機有沒有亮起來？有沒有顯示故障？第幾車知道嗎？'
       },
     ]
