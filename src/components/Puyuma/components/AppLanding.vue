@@ -1,8 +1,24 @@
 <template>
   <section class="landing">
     <div class="landing__readr-logo-container readr-logo-container">
-      <img class="readr-logo-container__logo-img" src="/proj-assets/logo_readr_with_text.png" alt="" @click.stop="linkTo(`https://${READR_DOMAIN_PROD}`)">
-      <img class="readr-logo-container__share-img" src="/proj-assets/puyuma/share-desktop.png" alt="" @click="share">
+      <img
+        class="readr-logo-container__logo-img"
+        src="/proj-assets/logo_readr_with_text.png"
+        alt=""
+        @click.stop="linkTo(`https://${READR_DOMAIN_PROD}`)"
+        ga-on="click"
+        ga-event-category="Logo"
+        ga-event-action="clickReadrLogoLanding"
+      >
+      <img
+        class="readr-logo-container__share-img"
+        src="/proj-assets/puyuma/share-desktop.png"
+        alt=""
+        @click="share"
+        ga-on="click"
+        ga-event-category="share"
+        ga-event-action="shareToFBLanding"
+      >
     </div>
     <div class="landing__title">
       <p>關鍵<span>43</span>分鐘</p>
@@ -10,7 +26,14 @@
       <p class="more">&lt; 繼續閱讀 &gt;</p>
     </div>
     <div class="landing__credits">
-      <img src="/proj-assets/logo_mm_white.png" alt="" @click.stop="linkTo(`https://${MM_DOMAIN}`)">
+      <img
+        src="/proj-assets/logo_mm_white.png"
+        alt=""
+        @click.stop="linkTo(`https://${MM_DOMAIN}`)"
+        ga-on="click"
+        ga-event-category="Logo"
+        ga-event-action="clickMMLogoLanding"
+      >
       <p>網頁：熊凱文</p>
       <p>設計：陳怡蒨、許玲瑋</p>
       <p>2018/10/26</p>
