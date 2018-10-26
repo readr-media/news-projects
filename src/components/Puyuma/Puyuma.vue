@@ -56,6 +56,11 @@
       :status="currentTimeInTimeline.status"
       :mapIndex="mapIndex"
     />
+    <transition name="fade" mode="out-in">
+      <div v-show="showRelatedReports" class="puyuma__relateds relateds">
+        <RelatedReports class="relateds__block"/>
+      </div>
+    </transition>
   </section>
 </template>
 
@@ -67,8 +72,10 @@ import AppHeader from './components/AppHeader.vue'
 import AppConversations from './components/AppConversations.vue'
 import AppConversationsLegends from './components/AppConversationsLegends.vue'
 import AppFooter from './components/AppFooter.vue'
+import RelatedReports from 'src/components/RelatedReports.vue'
 
 import { READR_DOMAIN_PROD, } from 'src/constants'
+import { isScrollBarReachBottom } from './util'
 import { TIMELINE, } from './PuyumaTimeline.js'
 
 export default {
@@ -85,7 +92,8 @@ export default {
     AppHeader,
     AppConversations,
     AppConversationsLegends,
-    AppFooter
+    AppFooter,
+    RelatedReports
   },
   data () {
     return {
@@ -96,6 +104,7 @@ export default {
       // currentIndex: 0,
       currentIndexCache: undefined,
       showLanding: true,
+      showRelatedReports: false
     }
   },
   computed: {
@@ -113,7 +122,7 @@ export default {
     },
     mapIndex () {
       return get(this.currentTimeInTimeline, 'stationNext')
-    }
+    },
   },
   methods: {
     handleTimeline (stepsRef) {
@@ -146,6 +155,12 @@ export default {
     window.onscroll = () => {
       if (this.showLanding) {
         this.closeLanding()
+      }
+
+      if (isScrollBarReachBottom()) {
+        this.showRelatedReports = true
+      } else {
+        this.showRelatedReports = false
       }
     }
   }
@@ -183,6 +198,23 @@ export default {
     bottom 0
     left 0
     z-index 2
+
+.relateds
+  width 100vw
+  height 100vh
+  background-color rgba(0, 0, 0, 0.85)
+  position fixed
+  top 0
+  left 0
+  z-index 3
+  display flex
+  justify-content center
+  align-items flex-start
+  overflow scroll
+  &__block
+    width 100%
+    button
+      display none
 
 .fade-enter-active, .fade-leave-active
   transition opacity .5s
@@ -245,5 +277,10 @@ export default {
     &__share-img
       height 40px
       cursor pointer
+
+  .relateds
+    align-items center
+    &__block
+      width 100%
 </style>
 

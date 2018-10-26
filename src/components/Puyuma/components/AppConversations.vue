@@ -33,7 +33,7 @@ export default {
     }
   },
   components: {
-    ConversationsList,
+    ConversationsList
   },
   computed: {
   },
@@ -77,7 +77,7 @@ export default {
   &__list-container
     height 100%
     overflow-y scroll
-    padding 0 0 38px 0 !important
+    padding 0 0 258px 0 !important
   &__legends
     width calc(100% - 20px)
     position absolute
