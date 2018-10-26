@@ -15,6 +15,9 @@
       src="/proj-assets/puyuma/share.png"
       alt=""
       @click="share"
+      ga-on="click"
+      ga-event-category="share"
+      ga-event-action="shareToFBFooter"
     >
   </footer>
 </template>

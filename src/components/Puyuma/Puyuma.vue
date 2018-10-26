@@ -15,12 +15,18 @@
           src="/proj-assets/logo_readr_with_text.png"
           alt=""
           @click.stop="linkTo(`https://${READR_DOMAIN_PROD}`)"
+          ga-on="click"
+          ga-event-category="Logo"
+          ga-event-action="clickReadrLogoDimmed"
         >
         <img
           class="dimmed-buttons__share-img"
           src="/proj-assets/puyuma/share-desktop.png"
           alt=""
           @click="share"
+          ga-on="click"
+          ga-event-category="share"
+          ga-event-action="shareToFBDimmed"
         >
       </div>
       <div class="puyuma__dimmed-captions">
@@ -30,9 +36,9 @@
     </div>
     <AppHeader
       class="puyuma__header"
-      :stationPrev="currentTimeInTimeline.stationPrev"
-      :time="currentTimeInTimeline.time"
-      :stationNext="currentTimeInTimeline.stationNext"
+      :stationPrev="currentTimeInTimeline.stationPrev || ''"
+      :time="currentTimeInTimeline.time || ''"
+      :stationNext="currentTimeInTimeline.stationNext || ''"
     />
     <AppConversations
       class="puyuma__conversations"
@@ -124,7 +130,13 @@ export default {
     }
   },
   mounted () {
-    window.ga('send', 'pageview')
+    // window.ga('send', 'pageview')
+    require('autotrack')
+    ga('require', 'cleanUrlTracker')
+    ga('require', 'maxScrollTracker')
+    ga('require', 'eventTracker')
+    ga('require', 'pageVisibilityTracker')
+    ga('send', 'pageview')
 
     this.footerHeight = document.querySelector('.puyuma__footer').offsetHeight
     window.onresize = () => {
