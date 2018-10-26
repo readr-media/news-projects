@@ -10,10 +10,18 @@
       </div>
       <p v-text="status"></p>
     </div>
+    <img
+      class="footer__share"
+      src="/proj-assets/puyuma/share.png"
+      alt=""
+      @click="share"
+    >
   </footer>
 </template>
 
 <script>
+import { READR_DOMAIN_PROD, } from 'src/constants'
+
 export default {
   props: {
     status: {
@@ -23,6 +31,11 @@ export default {
     mapIndex: {
       type: String,
       default: '福隆'
+    }
+  },
+  methods: {
+    share () {
+      window.open(`https://www.facebook.com/share.php?u=https://${READR_DOMAIN_PROD}${this.$route.fullPath}`)
     }
   }
 }
@@ -38,6 +51,15 @@ export default {
   &__block
     width 50%
     height 100%
+  &__share
+    position absolute
+    bottom 10px
+    right 10px
+    d = 30px
+    width d
+    height d
+    z-index 2
+    cursor pointer
 
 .map
   &__img
@@ -71,5 +93,11 @@ export default {
   .map
     p
       font-size 14px
+
+@media (min-width 1023px)
+  .map
+    &__img
+      width 100%
+      min-height calc((414px / 2 - 18px) * 0.9375)
 </style>
 
