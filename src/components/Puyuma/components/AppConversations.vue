@@ -65,8 +65,6 @@ export default {
       window.addEventListener('resize', scroller.resize)
     }
   },
-  mounted () {
-  },
 }
 </script>
 
