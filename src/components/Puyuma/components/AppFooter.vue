@@ -1,17 +1,32 @@
 <template>
   <footer class="footer">
     <div class="footer__block map">
-      <img class="map__img" src="/proj-assets/puyuma/map/map1.png" alt="">
+      <img class="map__img" :src="`/proj-assets/puyuma/map/${mapIndex}.png`" alt="">
       <p>6432 次普悠瑪行駛路線</p>
     </div>
     <div class="footer__block status">
       <div class="status__title">
         <h1>車況</h1>
       </div>
-      <p>MR曾恢復MRPS及PBPS動作，建立動力，隨後MR下降MRPS切開動力抑制。</p>
+      <p v-text="status"></p>
     </div>
   </footer>
 </template>
+
+<script>
+export default {
+  props: {
+    status: {
+      type: String,
+      default: ''
+    },
+    mapIndex: {
+      type: String,
+      default: '福隆'
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 .footer
@@ -19,6 +34,7 @@
   padding 13px 18px
   display flex
   background-color white
+  width 100%
   &__block
     width 50%
     height 100%
@@ -26,10 +42,11 @@
 .map
   &__img
     width 100%
+    min-height calc((50vw - 18px) * 0.9375)
     border 1px solid #979797
   p
-    font-size 14px
-    text-align justify
+    font-size 12px
+    text-align center
 
 .status
   padding 0 0 0 10px
@@ -46,8 +63,13 @@
       font-size 16px
       letter-spacing 10px
   p
-    font-size 16px
+    font-size 14px
     line-height 1.5
     text-align justify
+
+@media (min-width 321px)
+  .map
+    p
+      font-size 14px
 </style>
 
