@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const isProd = NODE_ENV === 'production'
@@ -25,6 +26,20 @@ module.exports = {
       'components': path.resolve(__dirname, '../src/components'),
       'api': path.resolve(__dirname, '../api')
     }
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          // resolve "SyntaxError: Cannot declare a let variable twice: 'e'." in ios 10 safari
+          mangle: {
+            safari10: true,
+          }
+        },
+        // Parallelization can speedup your build significantly and is therefore highly recommended.
+        parallel: true
+      })
+    ]
   },
   module: {
     // noParse: /es6-promise\.js$/, // avoid webpack shimming process
