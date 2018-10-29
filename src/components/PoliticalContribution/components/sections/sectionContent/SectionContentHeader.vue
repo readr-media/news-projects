@@ -20,6 +20,10 @@
         <img class="navigation-figure__img" src="/proj-assets/political-contribution/share-w.png" alt="share-w">
         <p class="navigation-figure__figcaption">分享</p>
       </a>
+      <a class="section-content-header__nav-item navigation-figure" target="_blank" href="https://www.readr.tw/series/political-contribution/donate">
+        <img class="navigation-figure__img" src="/proj-assets/political-contribution/donate-white.png" alt="share-w">
+        <p class="navigation-figure__figcaption">贊助</p>
+      </a>
       <a class="section-content-header__nav-item navigation-figure" @click="toogleNavSidebar">
         <div class="hamburger-icon">
           <div class="hamburger-icon__line"></div>
@@ -105,7 +109,7 @@ export default {
 @media (max-width 1024px)
   .section-content-header
     &__nav-item
-      &:nth-child(2), &:nth-child(3), &:nth-child(4)
+      &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(6)
         display none
       &:last-child
         display flex

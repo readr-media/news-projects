@@ -44,9 +44,13 @@
       <div class="nav-item__icon" :style="{ maskImage: `url(/proj-assets/political-contribution/paper-g.png)` }"></div>
       <p class="nav-item__hint">原始素材資料</p>
     </a>
-    <a class="app-nav-sidebar__nav-item app-nav-sidebar__nav-item--disable-border nav-item" @click="toogleRelatedLightbox">
+    <a class="app-nav-sidebar__nav-item nav-item" @click="toogleRelatedLightbox">
       <div class="nav-item__icon" :style="{ maskImage: `url(/proj-assets/political-contribution/text-g.png)` }"></div>
       <p class="nav-item__hint">查看相關討論</p>
+    </a>
+    <a class="app-nav-sidebar__nav-item app-nav-sidebar__nav-item--disable-border nav-item" @click="newTab('https://www.readr.tw/series/political-contribution/donate')">
+      <div class="nav-item__icon nav-item__icon--donate" :style="{ maskImage: `url(/proj-assets/political-contribution/donate-white.png)` }"></div>
+      <p class="nav-item__hint">贊助專題</p>
     </a>
   </nav>
 </template>
@@ -101,6 +105,8 @@ export default {
     mask-repeat no-repeat
     background-color white
     margin 0 10px 0 0
+    &--donate
+      mask-size auto 100%
   &__icon-circle
     min-width 30px
     width 30px
