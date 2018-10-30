@@ -1,8 +1,8 @@
 <template>
   <div class="input-candidate">
     <div class="input-candidate-container">
-      <div class="input-container">
-        <input v-model.trim="selectedName" type="text" placeholder="候選人名字" @blur="openList = false" @focus="openList = true">
+      <div class="input-container" v-click-outside="closeList">
+        <input v-model.trim="selectedName" type="text" placeholder="候選人名字" @focus="openList = true">
         <div class="list" :class="{ open: openList }">
           <p
             v-for="item in candidatesForList"
@@ -23,6 +23,21 @@ import { get, } from 'lodash'
 
 export default {
   name: 'VerifyInputCandidate',
+  directives: {
+    'click-outside': {
+      bind (el, binding, vnode) {
+        el.clickOutsideEvent = function (event) {
+          if (!(el == event.target || el.contains(event.target))) {
+            vnode.context[binding.expression](event)
+          }
+        }
+        document.body.addEventListener('click', el.clickOutsideEvent)
+      },
+      unbind (el) {
+        document.body.removeEventListener('click', el.clickOutsideEvent)
+      }
+    }
+  },
   props: {
     board: {
       type: Object
@@ -94,11 +109,11 @@ export default {
   },
   mounted () {
     this.selectedName = get(this.board, [ 'candidates', this.index - 1, 'name' ], '') || ''
-    // if (this.selectedName) {
-    //   this.selectedId =
-    // }
   },
   methods: {
+    closeList () {
+      this.openList = false
+    }
   }
 }
 </script>
