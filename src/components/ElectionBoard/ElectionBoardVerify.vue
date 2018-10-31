@@ -15,52 +15,18 @@
       <p>他 / 她是誰？</p>
       <p v-show="errors.includes('empty')" class="error">請填寫候選人資訊</p>
 
-      <template v-if="typeof candidateAmount === 'string' && candidateAmountOrigin > 0">
-        <VerifyInputCandidate
-          v-for="n in candidateAmountOrigin"
-          :key="n"
-          :board="board"
-          :candidate="candidatesOrigin[n - 1]"
-          :candidates="candidates"
-          :index="n"
-          :selectedCandidates="selectedCandidates"
-          class="form__candidate"
-          @updateSelectedId="updateSelectedCandidates" />
-      </template>
-      <template v-else-if="typeof candidateAmount === 'string' && candidateAmountOrigin < 1">
-        <VerifyInputCandidate
-          :board="board"
-          :candidate="candidatesOrigin[0]"
-          :candidates="candidates"
-          :index="1"
-          :selectedCandidates="selectedCandidates"
-          class="form__candidate"
-          @updateSelectedId="updateSelectedCandidates" />
-      </template>
-      <template v-else-if="typeof candidateAmount === 'number' && candidateAmount < 2">
-        <VerifyInputCandidate
-          :board="board"
-          :candidate="candidatesOrigin[0]"
-          :candidates="candidates"
-          :index="1"
-          :selectedCandidates="selectedCandidates"
-          class="form__candidate"
-          @updateSelectedId="updateSelectedCandidates" />
-      </template>
-      <template v-else>
-        <VerifyInputCandidate
-          v-for="n in candidateAmount"
-          :key="n"
-          :board="board"
-          :candidate="candidatesOrigin[n - 1]"
-          :candidates="candidates"
-          :index="n"
-          :selectedCandidates="selectedCandidates"
-          class="form__candidate"
-          @updateSelectedId="updateSelectedCandidates" />
-      </template>
+      <VerifyInputCandidate
+        v-for="n in candidateAmountForInput"
+        :key="n"
+        :board="board"
+        :candidate="candidatesOrigin[n - 1]"
+        :candidateAmount="candidateAmount"
+        :candidates="candidates"
+        :index="n"
+        :selectedCandidates="selectedCandidates"
+        class="form__candidate"
+        @updateSelectedId="updateSelectedCandidates" />
       
-      <!-- <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p> -->
       <input v-model="slogan" type="text" placeholder="請填寫看板標語（多句請用／分隔）">
       <p>目前資訊： {{ board.slogan || ' ' }}</p>
       <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後...</p>
@@ -82,7 +48,7 @@ import FormSelectPosition from './FormSelectPosition.vue'
 import VerifyBoards from './VerifyBoards.vue'
 import VerifyInputCandidate from './VerifyInputCandidate.vue'
 import axios from 'axios'
-import { get, } from 'lodash'
+import { get, take } from 'lodash'
 
 const DEFAULT_PAGE = 1
 
@@ -145,6 +111,15 @@ export default {
     boardImage () {
       return this.board.image
     },
+    candidateAmountForInput () {
+      if ((typeof this.candidateAmount === 'string' && this.candidateAmountOrigin < 1) || (typeof this.candidateAmount === 'number' && this.candidateAmount < 2)) {
+        return 1
+      } else if (typeof this.candidateAmount === 'string' && this.candidateAmountOrigin > 0) {
+        return this.candidateAmountOrigin
+      } else {
+        return this.candidateAmount
+      }
+    },
     candidateAmountOrigin () {
       return get(this.board, 'candidates.length')
     },
@@ -165,9 +140,18 @@ export default {
     board (value) {
       this.errors = []
       this.selectedCandidates = []
+      this.selectedCandidates = value.candidates.map(candidate => candidate.id)
       this.slogan = ''
       this.candidateAmount = ''
     },
+    candidateAmountForInput (value) {
+      const candidatesOriginIds = this.candidatesOrigin.map(candidate => candidate.id)
+      if (value <= this.candidateAmountOrigin) {
+        this.selectedCandidates = take(candidatesOriginIds, value)
+      } else {
+        this.selectedCandidates = candidatesOriginIds
+      }
+    }
   },
   beforeMount () {
     if (this.$route.query.board) {
@@ -232,7 +216,10 @@ export default {
         }
       }
       if (newValue) {
-        this.selectedCandidates.push(newValue)
+        const index = this.selectedCandidates.findIndex((value, index, arr) => value === newValue) 
+        if (index < 0) {
+          this.selectedCandidates.push(newValue)
+        }
       }
     },
     uploadBoardVerified (isBoard) {

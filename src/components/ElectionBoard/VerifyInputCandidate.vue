@@ -45,6 +45,8 @@ export default {
     candidate: {
       default: undefined
     },
+    candidateAmount: {
+    },
     candidates: {
       type: Array,
     },
@@ -59,8 +61,8 @@ export default {
     return {
       candidatesForList: [],
       openList: false,
-      selectedId: undefined,
-      selectedName: ''
+      selectedId: get(this.selectedCandidates, [ this.index - 1 ], undefined) || undefined,
+      selectedName: get(this.board, [ 'candidates', this.index - 1, 'name' ], '') || ''
     }
   },
   computed: {
@@ -78,7 +80,11 @@ export default {
     board () {
       this.candidatesForList = []
       this.openList = false
-      this.selectedId = undefined
+      this.selectedId = get(this.selectedCandidates, [ this.index - 1 ], undefined) || undefined
+      this.selectedName = get(this.board, [ 'candidates', this.index - 1, 'name' ], '') || ''
+    },
+    candidateAmount () {
+      this.selectedId = get(this.selectedCandidates, [ this.index - 1 ], undefined) || undefined
       this.selectedName = get(this.board, [ 'candidates', this.index - 1, 'name' ], '') || ''
     },
     // hasError (value) {
@@ -107,8 +113,16 @@ export default {
       }
     }
   },
-  mounted () {
-    this.selectedName = get(this.board, [ 'candidates', this.index - 1, 'name' ], '') || ''
+  beforeMount () {
+    const defaultId = get(this.selectedCandidates, [ this.index - 1 ], undefined) || undefined
+    if (defaultId) {
+      this.$emit('updateSelectedId', defaultId, undefined)
+    }
+  },
+  beforeDestroy () {
+    if (this.selectedId) {
+      this.$emit('updateSelectedId', undefined, this.selectedId)
+    }
   },
   methods: {
     closeList () {
