@@ -31,6 +31,7 @@
       <p>文字：李又如 設計：Weiwei Hsu </p>
       <p>工程：HY Tan、mich</p>
       <p>資料協力：<a href="https://councils.g0v.tw" target="_blank">投票指南</a></p>
+      <p>CC BY-SA 3.0</p>
     </div>
     <h1>其他議題</h1>
     <RelatedReports />
