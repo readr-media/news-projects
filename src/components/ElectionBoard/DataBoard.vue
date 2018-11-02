@@ -3,7 +3,7 @@
     <template v-if="board">
       <div class="data-board__image">
         <img :src="`https://www.readr.tw${board.image}`" alt="">
-        <div class="data-board__correction" @click="$router.push(`/project/election-board/verify?board=${board.id}`)">這不是{{ mode === 'coordinate' ? '看板' : $route.query.candidate }}，我要校正</div>
+        <a :href="`/project/election-board/verify?board=${board.id}`" class="data-board__correction" target="_blank">這不是{{ mode === 'coordinate' ? '看板' : $route.query.candidate }}，我要校正</a>
       </div>
       <div class="data-board__info">
         <div class="content">
@@ -12,7 +12,7 @@
           <ul>
             <li>此資料已被驗證 {{ board.verified_amount }} 次</li>
             <template>
-              <li v-if="board.price !== null">候選人共花了 <strong>{{ board.price || 0 | currency }}</strong> 元購買此塊看板</li>
+              <li v-if="board.price !== null" class="content__price">候選人共花了 <strong>{{ board.price || 0 | currency }}</strong> 元購買此塊看板 <span v-if="board.note" v-text="board.note"></span></li>
               <li v-else>此廣告還未有價位資料</li>
             </template>
             <template>
@@ -171,6 +171,13 @@ theme-color = #4897db
           font-size 0.875rem
           background-color #4897db
           border-radius 2px
+        &.content__price
+          > span
+            padding 0
+            color #4897db
+            font-size 0.875rem
+            background-color transparent
+            border-radius none
         &.has-receipt
           cursor pointer
     > h3
