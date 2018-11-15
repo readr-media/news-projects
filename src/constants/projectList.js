@@ -22,6 +22,6 @@ export default {
   'political-contribution': 'PoliticalContribution',
   'rent': 'Rent',
   'puyuma': 'Puyuma',
-  
+  'vote2018': 'Vote',
   //'proj1': 'Proj1',
 }
