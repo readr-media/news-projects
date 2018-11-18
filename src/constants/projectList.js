@@ -21,6 +21,7 @@ export default {
   'president-promise-interest': 'PresidentPromiseInterest',
   'political-contribution': 'PoliticalContribution',
   'rent': 'Rent',
+  'taiwan-2018-referendum': 'Referendum',
   'puyuma': 'Puyuma',
   'vote2018': 'Vote',
   //'proj1': 'Proj1',

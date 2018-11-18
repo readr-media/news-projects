@@ -8,7 +8,7 @@ const express = require('express')
 const favicon = require('serve-favicon')
 const compression = require('compression')
 const maxMemUsageLimit = 1200 * 1024 * 1024
-const memwatch = require('memwatch-next')
+const memwatch = require('node-memwatch')
 const microcache = require('route-cache')
 const requestIp = require('request-ip')
 const resolve = file => path.resolve(__dirname, file)
