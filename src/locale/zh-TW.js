@@ -1,4 +1,5 @@
 import * as rent from './rent'
+import * as referendum from './referendum'
 export default Object.assign({
   'FOREIGN_LABOUR': {
     'I18N': 'Việt',
@@ -110,4 +111,4 @@ export default Object.assign({
   'RELATED_REPORT': '其他議題',
   'DONATE_PREFIX': '贊助',
   'DONATE_POSTFIX': '報導',
-}, rent)
+}, rent, referendum)
