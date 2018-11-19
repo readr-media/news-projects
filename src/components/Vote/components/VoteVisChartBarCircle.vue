@@ -5,7 +5,7 @@
     @mouseover="handleMouse"
     @mouseout="handleMouse"
   >
-    {{ text }}
+    <p>{{ text }}</p>
     <transition name="fade" mode="out-in">
       <VoteVisChartTooltip
         v-if="hasTooltip"
@@ -53,7 +53,7 @@ export default {
     handleMouse (e) {
       const { type } = e
       this.showTooltip = type === 'mouseover'
-      this.$emit('handleMouse', e)
+      this.$emit('handleMouse', type)
     }
   },
 }
@@ -66,10 +66,11 @@ export default {
   height d
   border-radius d
   display flex
+  flex-direction column
   justify-content center
   align-items center
   font-size 20px
-  font-weight 600
+  font-weight 400
   position relative
   &__tooltip
     position absolute

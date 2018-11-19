@@ -34,7 +34,7 @@ export default {
     margin 60px 0 0 0
 
 .content
-  font-size 30px
+  font-size 24px
   line-height 1.67
   p + p
     margin 60px 0 0 0

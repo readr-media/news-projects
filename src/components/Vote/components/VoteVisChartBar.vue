@@ -20,7 +20,7 @@
       <div
         v-for="(candidate, i) in yellow"
         :key="candidate['姓名']"
-        class="yellow__candidate candidate"
+        :class="['yellow__candidate', 'candidate', { 'candidate--border-white-circle': hovering === `yellow-${i}` }]"
       >
         <VoteVisChartBarCircle
           v-for="count in candidate['當選次數']"
@@ -28,7 +28,7 @@
           :backgroundColor="'#fda134'"
           :text="count === candidate['當選次數'] && i === yellow.length - 1 ? yellowTotal : ''"
           :data="candidate"
-          @handleMouse="handleCandidate"
+          @handleMouse="handleCandidate($event, `yellow-${i}`)"
         />
       </div>
     </div>
@@ -36,7 +36,7 @@
       <div
         v-for="(candidate, i) in orange"
         :key="candidate['姓名']"
-        class="orange__candidate candidate"
+        :class="['orange__candidate', 'candidate', { 'candidate--border-white-circle': hovering === `orange-${i}` }]"
       >
         <VoteVisChartBarCircle
           v-for="count in candidate['當選次數']"
@@ -44,7 +44,7 @@
           :backgroundColor="'#ef5233'"
           :text="count === candidate['當選次數'] && i === orange.length - 1 ? orangeTotal : ''"
           :data="candidate"
-          @handleMouse="handleCandidate"
+          @handleMouse="handleCandidate($event, `orange-${i}`)"
         />
       </div>
     </div>
@@ -68,6 +68,11 @@ export default {
   components: {
     VoteVisChartBarCircle,
   },
+  data () {
+    return {
+      hovering: null
+    }
+  },
   computed: {
     blueTotal () {
       return sum(get(this.data, [ 'values', '0', 'values' ], []), item => sum(item.values, d => d['當選次數']))
@@ -89,14 +94,8 @@ export default {
     },
   },
   methods: {
-    handleCandidate (e) {
-      const { type, path } = e
-      const candidateElement = path[1]
-      if (type === 'mouseover') {
-        candidateElement.classList.add('hover')
-      } else {
-        candidateElement.classList.remove('hover')
-      }
+    handleCandidate (type, on) {
+      this.hovering = type === 'mouseover' ? on : null
     },
   }
 }
@@ -114,9 +113,8 @@ export default {
 
 .candidate
   display flex
-
-.hover
-  & >>> .circle
-    border 2px solid white
+  &--border-white-circle
+    & >>> .circle
+      border 2px solid white
 </style>
 

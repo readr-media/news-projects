@@ -52,16 +52,16 @@ export default {
   color white
   padding 150px 0 0 0
   &__logo-readr
-    width 97px
+    width 77px
     position fixed
-    top 50px
-    left 50px
+    top 40px
+    left 40px
     cursor pointer
   &__share
-    width 60px
+    width 48px
     position fixed
-    top 50px
-    right 50px
+    top 40px
+    right 40px
     cursor pointer
   &__content-wrapper
     display flex
@@ -72,6 +72,7 @@ export default {
   &__relateds
     margin 126px 0 0 0
     background-color white
+    width 100vw
     h1
       margin 15px 0 0 0 !important
     p
