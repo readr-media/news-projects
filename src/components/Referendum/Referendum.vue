@@ -82,9 +82,7 @@
 <style lang="stylus" scoped>
 .referendum
   &__credit
-    margin-top 100px
-    position relative
-    z-index 10    
+    margin-top 100px   
     .mirrormedia
       height 28px
       text-align center
