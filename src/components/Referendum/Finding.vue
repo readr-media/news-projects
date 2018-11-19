@@ -7,14 +7,16 @@
         <div class="title"><h3><span v-text="$t(`REFERENDUM.FINDING.ITEMS.${n - 1}.TITLE`)"></span></h3></div>
         <template v-for="(sub, index) in get($t(`REFERENDUM.FINDING.ITEMS.${n - 1}`), 'SUB')">
           <div class="content">
-            <FindingShow v-if="isDesktop"
+            <!--FindingShow v-if="isDesktop"
               :id="`finding-show-${n}-${index}`">
               <div class="infographic finding-show-comp" slot="infographic"><img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}-web@2x-100.jpg`"></div>
               <div class="explanation finding-show-comp" slot="explanation" v-html="get(sub, 'CONTENT')"></div>
-            </FindingShow>
-            <FindingShowMobile v-else
+            </FindingShow-->
+            <FindingShowMobile
               :id="`finding-show-${n}-${index}`">
-              <div class="infographic" slot="infographic"><img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}-phone@2x-100.jpg`"></div>
+              <div class="infographic" slot="infographic">
+                <img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}-${ isDesktop ? 'web' : 'phone' }@2x-100.jpg`">
+              </div>
               <div class="explanation" slot="explanation" v-html="get(sub, 'CONTENT')"></div>
             </FindingShowMobile>
           </div>
@@ -121,25 +123,30 @@
             font-size 1.5rem
             line-height 1.5
         .content
-          display flex
-          align-items center
-          justify-content center
-          margin 50px 0
-          &:last-child
-            margin-bottom 30vh
+          // display flex
+          // align-items center
+          // justify-content center
+          // margin 50px 0
+          // &:last-child
+          //   margin-bottom 30vh
           .explanation
-            max-width 500px
-            margin-left 40px
-            width 50%
-            &.finding-show-comp
-              width 100%
+            max-width 600px
+            // margin-left 40px
+          //   width 50%
+          //   &.finding-show-comp
+          //     width 100%
           .infographic
-            flex 1
+          //   flex 1
+          //   img
+          //     width 100%
+          //     max-width 650px
+          //     object-fit contain
+          //     object-position center center
             img
-              width 100%
-              max-width 650px
-              object-fit contain
-              object-position center center
+              max-width 600px
+              // width auto
+              // height 100%
+              
 
   @media screen and (min-width: 700px) 
     .finding

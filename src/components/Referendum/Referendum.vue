@@ -56,10 +56,10 @@
     },
     metaInfo () {
       return {
-        // title: this.$t('RENT.TITLE'),
-        // description: this.$t('RENT.DESCRIPTION'),
-        metaUrl: 'rent',
-        metaImage: 'rent/og-image-rent.jpg',
+        title: this.$t('REFERENDUM.TITLE'),
+        description: this.$t('REFERENDUM.DESCRIPTION'),
+        metaUrl: 'taiwan-2018-referendum',
+        metaImage: 'referendum/ogimage-referendum.jpg',
       }
     },
     methods: {

@@ -78,5 +78,12 @@
       padding 80vh 0 
       .explanation
         padding 25px
-        background-color rgba(255,255,255,0.85)     
+        background-color rgba(255,255,255,0.85)   
+  // @media screen and (min-width: 600px) 
+  //   .finding-show
+  //     &__infographic
+  //       .infographic
+  //         img
+  //           width auto
+  //           height 100%
 </style>
