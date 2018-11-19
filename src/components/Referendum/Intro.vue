@@ -7,7 +7,7 @@
         <span v-text="$t('REFERENDUM.INTRO.TITLE')"></span>
       </div>
     </div>
-    <div class="intro__brief brief"><span v-text="$t('REFERENDUM.INTRO.BRIEF')"></span></div>
+    <div class="intro__brief brief"><span v-html="$t('REFERENDUM.INTRO.BRIEF')"></span></div>
   </div>
 </template>
 <script>
@@ -46,6 +46,9 @@
     &__brief
       padding 25px
       text-align justify
+      >>> a
+        &:hover, &:link, &:visited
+          color #000
       span
         font-size 1rem
         line-height 1.88
