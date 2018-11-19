@@ -16,7 +16,8 @@
     name: 'FindingShowMobile',
     data () {
       return {
-        isActive: false
+        isActive: false,
+        isGaSent: false,
       }
     },
     methods: {
@@ -36,6 +37,11 @@
           } else {
             this.isActive = false
           }
+
+          if (!this.isGaSent && (content_top_y + (content_height * 2) / 3 < current_top_y + device_height)) {
+            window.ga('send', 'event', 'projects', 'click', `scroll to 1`, { nonInteraction: false })
+            this.isGaSent = true
+          }
         })
       }
     },
@@ -46,7 +52,10 @@
       id: {
         type: String,
         default: `finding-show-${Date.now().toString()}`
-      }
+      },
+      index: {
+        type: Number,
+      },
     },    
   }
 </script>

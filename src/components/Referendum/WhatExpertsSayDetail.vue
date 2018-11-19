@@ -26,6 +26,7 @@
     methods: {
       switchSaying () {
         this.isActive = !this.isActive
+        window.ga('send', 'event', 'projects', 'click', `expert ${this.avatar}`, { nonInteraction: false })
       },
     },
     mounted () {

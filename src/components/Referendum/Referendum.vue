@@ -26,7 +26,8 @@
   import ReferendumStoreModule from 'src/store/modules/Referendum'
   import WhatExpertsSay from './WhatExpertsSay.vue'
   import WhatPeopleSay from './WhatPeopleSay.vue'
-  import axios from 'axios'
+  import verge from 'verge'
+  import { currentYPosition, elmYPosition, } from 'kc-scroll'  
   import { get, map } from 'lodash' 
 
   const debug = require('debug')('CLIENT:Referendum')
@@ -52,6 +53,7 @@
       return {
         isClientSide: false,
         isDataDone: false,
+        isGaSent: false,
       }
     },
     metaInfo () {
@@ -68,14 +70,23 @@
     mounted () {
       this.isClientSide = process.browser
       this.$store.registerModule('Referendum', ReferendumStoreModule)
+      window.ga('send', 'pageview')
       if (this.isDesktop) {
         Promise.all(map(new Array(10), (o, i) => fetchRefAppDetail(this.$store, `no${i + 7}`))).then(() => {
           debug('GOT ALL DATA')
-          // this.raw = get(this.$store, `state.Referendum.applicationDetail`)
-          // this.$forceUpdate()
           this.isDataDone = true
         })
       }
+      window.addEventListener('scroll', () => {
+        const current_top_y = currentYPosition()
+        const content_top_y = elmYPosition(`footer`)
+        const content_height = this.$el.clientHeight
+        const device_height = verge.viewportH()
+        if (!this.isGaSent && (content_top_y < current_top_y + device_height)) {
+          window.ga('send', 'event', 'projects', 'scroll', `end`, { nonInteraction: false })
+          this.isGaSent = true
+        }
+      })      
     },
   }
 </script>
