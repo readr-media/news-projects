@@ -9,6 +9,12 @@
       <div class="info__detail__value" :style="{ color, }">
         <span v-text="$t(`REFERENDUM.PK.INFO.${selectedItem.toUpperCase()}`)"></span>
         <span v-text="val" class="value"></span>
+        <span v-text="unit(selectedItem)" class="unit"></span>
+      </div>
+      <div class="info__detail__support" v-for="s in support">
+        <span v-text="$t(`REFERENDUM.PK.INFO.${s.name.toUpperCase()}`)"></span>
+        <span v-text="s.value" class="value"></span>
+        <span v-text="unit(s.name)" class="unit"></span>
       </div>
     </div>
   </div>
@@ -26,8 +32,65 @@
       ref () {
         return get(this.raw, this.selectedRef)
       },
+      support () {
+        const targetCity = find(this.ref, c => c.city === this.activeCity)
+        switch (this.selectedItem) {
+          case 'rate_death': {
+            return [
+              { name: 'age_qulified', value: get(targetCity, 'issue_death')},
+              { name: 'participant', value: get(targetCity, 'participant')},
+            ]            
+          }
+          case 'rate_failure': {
+            return [
+              { name: 'sub_total', value: get(targetCity, 'sub_total')},
+              { name: 'participant', value: get(targetCity, 'participant')},
+            ]               
+          }
+          case 'rate_fake': {
+            return [
+              { name: 'issue_fake', value: get(targetCity, 'issue_fake')},
+              { name: 'participant', value: get(targetCity, 'participant')},
+            ]               
+          }          
+          case 'rate_participation': {
+            return [
+              { name: 'participant', value: get(targetCity, 'participant')},
+              { name: 'age_qulified', value: get(targetCity, 'age_qulified')},
+            ]              
+          }
+          default: {
+            return []
+          }
+        }
+      },
       val () {
-        return get(find(this.ref, c => c.city === this.activeCity), this.selectedItem)
+        const targetCity = find(this.ref, c => c.city === this.activeCity)
+        switch (this.selectedItem) {
+          case 'rate_participation': {
+            const participant = Number(get(targetCity, 'participant') || '1')
+            const ageQualified = Number(get(targetCity, 'age_qulified') || '1')
+            return Math.round((participant * 10000) / ageQualified) / 100
+          }
+          case 'rate_death': {
+            const participant = Number(get(targetCity, 'participant') || '1') || 1
+            const issueDeath = Number(get(targetCity, 'issue_death') || '0')
+            return Math.round((issueDeath * 10000) / participant) / 100            
+          }
+          case 'rate_failure': {
+            const participant = Number(get(targetCity, 'participant') || '1') || 1
+            const subTotal = Number(get(targetCity, 'sub_total') || '0')
+            return Math.round((subTotal * 10000) / participant) / 100
+          }    
+          case 'rate_fake': {
+            const participant = Number(get(targetCity, 'participant') || '1') || 1
+            const issueFake = Number(get(targetCity, 'issue_fake') || '0')
+            return Math.round((issueFake * 10000) / participant) / 100   
+          }      
+          default: {
+            return get(targetCity, this.selectedItem)
+          }
+        }         
       },
     },
     data () {
@@ -35,7 +98,21 @@
         selectedRef: 'no7'
       }
     },
-    methods: {},
+    methods: {
+      unit (type) {
+        switch (type) {
+          case 'rate_death': {}
+          case 'rate_failure': {}
+          case 'rate_fake': {}          
+          case 'rate_participation': {
+            return this.$t('REFERENDUM.UNIT.PERCENTAGE')
+          }
+          default: {
+            return this.$t('REFERENDUM.UNIT.PERSON')
+          }
+        }
+      },      
+    },
     mounted () {
       // this.$forceUpdate()
       // debug('mounted', [ this.type, this.activeCity, this.selectedItem, this.selectedRef, this.raw, this.ref, this.val ])
@@ -71,11 +148,21 @@
       margin-top 55px
       text-align center
       &__value
-        font-size 16px
+        font-size 1rem
         line-height 2.77
         color #996c33
-        .value
-          margin-left 10px
+        .value, .unit
           font-size 1.875rem
           font-weight 600
+        .value
+          margin-left 10px
+      &__support
+        font-size 1rem
+        font-weight normal
+        line-height 1.88
+        letter-spacing normal
+        text-align center
+        color #313131 
+        .value
+          margin 0 10px   
 </style>

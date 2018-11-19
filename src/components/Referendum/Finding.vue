@@ -9,13 +9,13 @@
           <div class="content">
             <FindingShow v-if="isDesktop"
               :id="`finding-show-${n}-${index}`">
-              <div class="infographic finding-show-comp" slot="infographic"><img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}.png`"></div>
+              <div class="infographic finding-show-comp" slot="infographic"><img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}-web@2x-100.jpg`"></div>
               <div class="explanation finding-show-comp" slot="explanation" v-html="get(sub, 'CONTENT')"></div>
             </FindingShow>
-            <template v-else>
-              <div class="infographic"><img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}.png`"></div>
+            <!--template v-else>
+              <div class="infographic"><img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}-phone@2x-100.jpg`"></div>
               <div class="explanation" v-html="get(sub, 'CONTENT')"></div>
-            </template>
+            </template-->
           </div>
         </template>
       </div>
