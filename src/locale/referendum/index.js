@@ -241,7 +241,6 @@ export const REFERENDUM = {
       'ISSUE_FAKE': '有偽造情事人數',
       'SUB_TOTAL': '不合格人數',
       'AGE_QUALIFIED': '滿18歲人數',
-      'AGE_QULIFIED': '滿18歲人數',
       'RATE_PARTICIPATION': '參與連署比例',
       'RATE_DEATH': '死亡率',
       'RATE_FAILURE': '連署不合格率',

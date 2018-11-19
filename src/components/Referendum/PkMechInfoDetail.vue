@@ -37,7 +37,7 @@
         switch (this.selectedItem) {
           case 'rate_death': {
             return [
-              { name: 'age_qulified', value: get(targetCity, 'issue_death')},
+              { name: 'age_qualified', value: get(targetCity, 'issue_death')},
               { name: 'participant', value: get(targetCity, 'participant')},
             ]            
           }
@@ -56,7 +56,7 @@
           case 'rate_participation': {
             return [
               { name: 'participant', value: get(targetCity, 'participant')},
-              { name: 'age_qulified', value: get(targetCity, 'age_qulified')},
+              { name: 'age_qualified', value: get(targetCity, 'age_qualified')},
             ]              
           }
           default: {
@@ -69,7 +69,7 @@
         switch (this.selectedItem) {
           case 'rate_participation': {
             const participant = Number(get(targetCity, 'participant') || '1')
-            const ageQualified = Number(get(targetCity, 'age_qulified') || '1')
+            const ageQualified = Number(get(targetCity, 'age_qualified') || '1')
             return Math.round((participant * 10000) / ageQualified) / 100
           }
           case 'rate_death': {
