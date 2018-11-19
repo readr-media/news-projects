@@ -18,6 +18,8 @@
 <style lang="stylus" scoped>
   .pk
     padding 150px 0 150px
+    position relative
+    z-index 10
     &__title
       h2
         margin 0
