@@ -88,7 +88,7 @@
         switch (this.item) {
           case 'rate_participation': {
             const participant = Number(get(rawObj, 'participant') || '0')
-            const ageQualified = Number(get(rawObj, 'age_qulified') || '1') || 1
+            const ageQualified = Number(get(rawObj, 'age_qualified') || '1') || 1
             return participant / ageQualified
           }
           case 'rate_death': {
