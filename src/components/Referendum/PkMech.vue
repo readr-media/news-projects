@@ -15,7 +15,30 @@
   import PkMechMap from './PkMechMap.vue'
   import verge from 'verge'
   import { currentYPosition, elmYPosition, } from 'kc-scroll'
-  import { filter, get, map, maxBy, } from 'lodash'
+  import { filter, get, map, max as lmax, } from 'lodash'
+
+  const debug = require('debug')('CLIENT:PkMech')
+  // const TARGET_ITEM = {
+  //   PARTICIPANT: 'participant',
+  //   QUALIFIED: 'qualified',
+  //   ISSUE_AGE: 'issue_age',
+  //   ISSUE_RESIDENT: 'issue_resident',
+  //   ISSUE_ADOPT: 'issue_adopt',
+  //   ISSUE_DEATH: 'issue_death',
+  //   ISSUE_DUPLICATION: 'issue_duplication',
+  //   ISSUE_INCORRECT_NAME: 'issue_incorrect_name',
+  //   ISSUE_INCORRECT_ID: 'issue_incorrect_id',
+  //   ISSUE_INCORRECT_ADDRESS: 'issue_incorrect_address',
+  //   ISSUE_MISSING_SIGNATURE: 'issue_missing_signature',
+  //   ISSUE_FAKE: 'issue_fake',
+  //   SUB_TOTAL: 'sub_total',
+  //   AGE_QUALIFIED: 'age_qualified',
+  //   RATE_PARTICIPATION: 'rate_participation',
+  //   RATE_DEATH: 'rate_death',
+  //   RATE_FAILURE: 'rate_failure',
+  //   RATE_FAKE: 'rate_fake'
+  // }
+
   export default {
     name: 'PkMech',
     components: {
@@ -36,56 +59,78 @@
         return get(this.$store, `state.Referendum.targets.item`)
       },
       pkData () {
-        const baseData = filter(get(this.raw, this.base), (o, k) => k !== this.$t('REFERENDUM.TAIWAN'))
-        const comparisonData = filter(get(this.raw, this.comparison), (o, k) => k !== this.$t('REFERENDUM.TAIWAN'))
+        const baseData = get(this.raw, this.base)
+        const comparisonData = get(this.raw, this.comparison)
         const data = {}
-        const maxBase = maxBy(data, c => Number(get(c, this.item), '0'))
-        const maxComparison = maxBy(comparisonData, c => Number(get(c, this.item), '0'))
-        const max = get(maxBy([ maxBase, maxComparison ], c => Number(get(c, this.item), '0')), this.item)
-        map(baseData, c => {
-          data[ c.city ] = { base: (Number(get(c, this.item)) * 300) / Number(max) }
+
+        map(baseData, c => { data[ c.city ] = { base: this.constructRawItem(c) } })
+        map(comparisonData, c => { data[ c.city ].comparison = this.constructRawItem(c) })
+
+        const max = lmax([
+          get(data, `${this.$t('REFERENDUM.TAIWAN')}.base`, 1),
+          get(data, `${this.$t('REFERENDUM.TAIWAN')}.comparison`, 1),
+        ]) || 1
+        debug('max', max)
+        map(data, (c, name) => {
+          data[ name ].base = (data[ name ].base * this.scaler) / max
+          data[ name ].comparison = (data[ name ].comparison * this.scaler) / max
         })
-        map(comparisonData, c => {
-          data[ c.city ].comparison = (Number(get(c, this.item)) * 300) / Number(max)
-        })
+
+        debug('new data', data)
         return data
       },
       isDesktop () {
         return get(this.$store, 'state.useragent.isDesktop')
-      },      
+      },   
+      scaler () {
+        switch (this.item) {
+          case 'rate_death': {}
+          case 'rate_fake': {}
+          case 'rate_failure': {}
+          case 'rate_participation': {
+            return 25
+          }
+          default: {
+            return 300
+          }
+        }        
+      },   
     },
     data () {
       return {
         activeCity: '臺灣',
         activeAll: false,
-        data: {
-          '基隆市': { base: 20, comparison: 50 },
-          '臺北市': { base: 40, comparison: 50 },
-          '新北市': { base: 78, comparison: 50 },
-          '桃園市': { base: 23, comparison: 50 },
-          '新竹縣': { base: 34, comparison: 50 },
-          '新竹市': { base: 12, comparison: 50 },
-          '苗栗縣': { base: 33, comparison: 50 },
-          '臺中市': { base: 12, comparison: 50 },
-          '南投縣': { base: 32, comparison: 50 },
-          '彰化縣': { base: 12, comparison: 50 },
-          '雲林縣': { base: 34, comparison: 50 },
-          '嘉義縣': { base: 12, comparison: 50 },
-          '嘉義市': { base: 41, comparison: 50 },
-          '臺南市': { base: 53, comparison: 50 },
-          '高雄市': { base: 29, comparison: 50 },
-          '屏東縣': { base: 13, comparison: 50 },
-          '宜蘭縣': { base: 43, comparison: 50 },
-          '花蓮縣': { base: 23, comparison: 50 },
-          '臺東縣': { base: 45, comparison: 50 },
-          '澎湖縣': { base: 23, comparison: 50 },
-          '金門縣': { base: 45, comparison: 50 },
-          '連江縣': { base: 23, comparison: 50 },
-        },
         isActive: false,
       }
     },
     methods: {
+      constructRawItem (rawObj) {
+        switch (this.item) {
+          case 'rate_participation': {
+            const participant = Number(get(rawObj, 'participant') || '0')
+            const ageQualified = Number(get(rawObj, 'age_qulified') || '1') || 1
+            return participant / ageQualified
+          }
+          case 'rate_death': {
+            const participant = Number(get(rawObj, 'participant') || '1') || 1
+            const issueDeath = Number(get(rawObj, 'issue_death') || '0')
+            return issueDeath / participant
+          }
+          case 'rate_failure': {
+            const participant = Number(get(rawObj, 'participant') || '1') || 1
+            const subTotal = Number(get(rawObj, 'sub_total') || '0')
+            return subTotal / participant
+          }
+          case 'rate_fake': {
+            const participant = Number(get(rawObj, 'participant') || '1') || 1
+            const issueFake = Number(get(rawObj, 'issue_fake') || '0')
+            return issueFake / participant
+          }          
+          default: {
+            return Number(get(rawObj, this.item) || '0')
+          }
+        }        
+      },
       setUpHandler () {
         this.isDesktop && window.addEventListener('scroll', () => {
           if (this.isActive) { return }
