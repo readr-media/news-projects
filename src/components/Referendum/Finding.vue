@@ -12,10 +12,11 @@
               <div class="infographic finding-show-comp" slot="infographic"><img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}-web@2x-100.jpg`"></div>
               <div class="explanation finding-show-comp" slot="explanation" v-html="get(sub, 'CONTENT')"></div>
             </FindingShow>
-            <!--template v-else>
-              <div class="infographic"><img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}-phone@2x-100.jpg`"></div>
-              <div class="explanation" v-html="get(sub, 'CONTENT')"></div>
-            </template-->
+            <FindingShowMobile v-else
+              :id="`finding-show-${n}-${index}`">
+              <div class="infographic" slot="infographic"><img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}-phone@2x-100.jpg`"></div>
+              <div class="explanation" slot="explanation" v-html="get(sub, 'CONTENT')"></div>
+            </FindingShowMobile>
           </div>
         </template>
       </div>
@@ -24,6 +25,7 @@
 </template>
 <script>
   import FindingShow from './FindingShow.vue'
+  import FindingShowMobile from './FindingShowMobile.vue'
   import { get, } from 'lodash'
   export default {
     name: 'Finding',
@@ -34,6 +36,7 @@
     },
     components: {
       FindingShow,
+      FindingShowMobile,
     },
     methods: {
       get,
@@ -58,6 +61,8 @@
       line-height 1.88
       color #313131
       padding 0 25px
+      position relative
+      z-index 10
     &__wrapper
       margin 50px 0
       display flex
@@ -70,6 +75,8 @@
         border 2px solid #a40035
         padding 15px 25px
         background-color #fff
+        position relative
+        z-index 10     
         h3
           margin 0
           font-size 1.25rem
@@ -79,13 +86,18 @@
           text-align justify
           color #a40035
       .content
-        padding 20px 25px
+        padding 20px 0
         font-size 1rem
         font-weight normal
         line-height 1.88
         color #1a1a1a
         text-align justify
         letter-spacing normal
+        position relative
+        z-index 9
+        .infographic
+          img
+            width 100%
   @media screen and (min-width: 600px) 
     .finding
       &__title
@@ -104,9 +116,7 @@
         .title
           padding 35px
           margin-bottom 50vh
-          width 500px
-          position relative
-          z-index 10          
+          width 500px     
           h3
             font-size 1.5rem
             line-height 1.5
