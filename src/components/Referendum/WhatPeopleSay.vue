@@ -1,7 +1,13 @@
 <template>
   <div class="what-pp-say">
     <div class="what-pp-say__title"><h2><span v-text="$t('REFERENDUM.WHAT_PEOPLE_SAY.TITLE')"></span></h2></div>
-    <div class="what-pp-say__vid vid"></div>
+    <div class="what-pp-say__vid vid">
+      <video width="100%" height="100%" controls controlsList="nodownload" preload="metadata" playsinline 
+        poster="/proj-assets/referendum/referendum-good-or-not-poster.png" :style="{ backgroundColor: '#000' }">
+        <source src="/proj-assets/referendum/referendum-good-or-not.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
     <div class="what-pp-say__desc desc"><span v-text="$t('REFERENDUM.WHAT_PEOPLE_SAY.DESC')"></span></div>
   </div>
 </template>
@@ -16,6 +22,8 @@
   .what-pp-say
     padding 50px 0
     background-color #f9f9f7
+    position relative
+    z-index 10    
     & > div
       &:not(.vid)
         padding 0 25px
@@ -31,7 +39,8 @@
         text-align justify
         color #a40035      
     &__vid
-      height 180px
+      width 100%
+      max-width 600px
       background-color #000
     &__desc
       font-size 0.875rem

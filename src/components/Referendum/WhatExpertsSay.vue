@@ -27,6 +27,8 @@
 <style lang="stylus" scoped>
   .what-experts-say
     padding 50px 0
+    position relative
+    z-index 10
     &__title
       h2
         font-size 1.5rem

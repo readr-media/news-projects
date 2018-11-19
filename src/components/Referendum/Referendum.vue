@@ -83,6 +83,8 @@
 .referendum
   &__credit
     margin-top 100px
+    position relative
+    z-index 10    
     .mirrormedia
       height 28px
       text-align center
@@ -102,6 +104,8 @@
       color #313131
 footer
   margin 60px 0
+  position relative
+  z-index 10
 
 @media screen and (min-width: 415px)
   footer

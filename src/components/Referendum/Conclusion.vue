@@ -14,6 +14,8 @@
 <style lang="stylus" scoped>
 .conclusion
   margin-top 100px
+  position relative
+  z-index 10  
   &__title
     h2
       font-size 1.5rem
