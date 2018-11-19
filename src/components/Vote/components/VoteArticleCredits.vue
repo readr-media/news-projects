@@ -23,7 +23,7 @@
   flex-direction column
   align-items center
   &__mm-logo
-    d = 60px
+    d = 48px
     width d
     height d
     cursor pointer
@@ -36,7 +36,7 @@
     margin 5px 0
   &__item
     display inline-block
-    font-size 22px
+    font-size 18px
     & + &
       margin 0 0 0 10px
 </style>

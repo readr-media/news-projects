@@ -26,13 +26,14 @@ export default {
   color white
   border 2px solid white
   font-size 30px
-  font-weight 600
+  font-weight 300
   cursor pointer
-  transition background-color .15s ease-out, color .15s ease-out
+  transition background-color .15s ease-out, color .15s ease-out, font-weight .15s ease-out
   &:focus
     outline none
   &:hover, &--active
     background-color white
     color #061c37
+    font-weight 400
 </style>
 

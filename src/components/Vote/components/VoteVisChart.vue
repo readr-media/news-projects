@@ -15,11 +15,11 @@
           <div class="left">
             <p class="left__county" v-text="getCountyName(item)"></p>
             <p class="left__leader" v-text="getLeaderName(item)"></p>
-            <div class="left__row-bar" :style="{ marginLeft: `${15 + 30 * diffMaxLength(getLeaderName(item))}px` }">
+            <div class="left__row-bar" :style="{ marginLeft: `${15 + 24 * diffMaxLength(getLeaderName(item))}px` }">
               <VoteVisChartBar :data="item"/>
             </div>
           </div>
-          <p class="bold" v-text="getCount(item)"></p>
+          <p v-text="getCount(item)"></p>
         </div>
       </transition-group>
     </div>
@@ -94,8 +94,11 @@ export default {
 
 .left
   display flex
+  font-size 24px
+  &__county
+    font-weight 300
   &__leader
-    font-weight 600
+    font-weight 400
     // min-width 90px
     margin 0 0 0 15px
   &__row-bar
@@ -103,9 +106,6 @@ export default {
     display flex
     align-items center
     margin 0 15px
-
-.bold
-  font-weight bold
 
 // .flip-list-move
 //   // transition transform .5s
