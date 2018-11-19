@@ -82,6 +82,7 @@
     },
     watch: {
       selectedItem () {
+        window.ga('send', 'event', 'projects', 'click', `index ${this.selectedItem}`, { nonInteraction: false })
         setUpSelecteditem(this.$store, this.selectedItem)
       },
     },

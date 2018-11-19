@@ -137,6 +137,7 @@
     },
     watch: {
       selectedRef () {
+        window.ga('send', 'event', 'projects', 'click', `referendum ${this.selectedRef}`, { nonInteraction: false })
         setUpSelecteditem(this.$store, this.type, this.selectedRef)
       },
     },

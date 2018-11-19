@@ -277,4 +277,6 @@ export const REFERENDUM = {
     'PERSON': '人',
     'PERCENTAGE': '%',
   },
+  'TITLE': '「公投元年」超級比一比',
+  'DESCRIPTION': '《公投法》修法後，成案門檻大幅降低，這次一共有十項公投成案。民眾和專家怎麼看公投？我們在政府公開資料中發現了什麼？',
 }

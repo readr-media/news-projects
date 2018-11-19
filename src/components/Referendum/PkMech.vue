@@ -18,26 +18,6 @@
   import { filter, get, map, max as lmax, } from 'lodash'
 
   const debug = require('debug')('CLIENT:PkMech')
-  // const TARGET_ITEM = {
-  //   PARTICIPANT: 'participant',
-  //   QUALIFIED: 'qualified',
-  //   ISSUE_AGE: 'issue_age',
-  //   ISSUE_RESIDENT: 'issue_resident',
-  //   ISSUE_ADOPT: 'issue_adopt',
-  //   ISSUE_DEATH: 'issue_death',
-  //   ISSUE_DUPLICATION: 'issue_duplication',
-  //   ISSUE_INCORRECT_NAME: 'issue_incorrect_name',
-  //   ISSUE_INCORRECT_ID: 'issue_incorrect_id',
-  //   ISSUE_INCORRECT_ADDRESS: 'issue_incorrect_address',
-  //   ISSUE_MISSING_SIGNATURE: 'issue_missing_signature',
-  //   ISSUE_FAKE: 'issue_fake',
-  //   SUB_TOTAL: 'sub_total',
-  //   AGE_QUALIFIED: 'age_qualified',
-  //   RATE_PARTICIPATION: 'rate_participation',
-  //   RATE_DEATH: 'rate_death',
-  //   RATE_FAILURE: 'rate_failure',
-  //   RATE_FAKE: 'rate_fake'
-  // }
 
   export default {
     name: 'PkMech',
@@ -147,6 +127,11 @@
     mounted () {
       this.setUpHandler()
     },
+    watch: {
+      activeCity () {
+        window.ga('send', 'event', 'projects', 'click', `county ${this.activeCity}`, { nonInteraction: false })
+      },
+    }
   }
 </script>
 <style lang="stylus" scoped>

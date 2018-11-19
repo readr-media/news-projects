@@ -28,13 +28,31 @@
 </template>
 <script>
   import WhatExpertsSayDetail from './WhatExpertsSayDetail.vue'
+  import verge from 'verge'
+  import { currentYPosition, elmYPosition, } from 'kc-scroll'  
   export default {
     name: 'WhatExpertsSay',
     components: {
       WhatExpertsSayDetail,
     },
+    data () {
+      return {
+        isGaSent: false,
+      }
+    },
     methods: {},
-    mounted () {},
+    mounted () {
+      window.addEventListener('scroll', () => {
+        const current_top_y = currentYPosition()
+        const content_top_y = elmYPosition(`.what-experts-say`)
+        const content_height = this.$el.clientHeight
+        const device_height = verge.viewportH()
+        if (!this.isGaSent && (content_top_y < current_top_y + device_height / 3)) {
+          window.ga('send', 'event', 'projects', 'scroll', `scroll to 9`, { nonInteraction: false })
+          this.isGaSent = true
+        }
+      })      
+    },
   }
 </script>
 <style lang="stylus" scoped>

@@ -6,13 +6,31 @@
 </template>
 <script>
   import PkMech from './PkMech.vue'
+  import verge from 'verge'
+  import { currentYPosition, elmYPosition, } from 'kc-scroll'  
   export default {
     name: 'Pk',
     components: {
       PkMech,
     },
+    data () {
+      return {
+        isGaSent: false,
+      }
+    },
     methods: {},
-    mounted () {},
+    mounted () {
+      window.addEventListener('scroll', () => {
+        const current_top_y = currentYPosition()
+        const content_top_y = elmYPosition(`.pk`)
+        const content_height = this.$el.clientHeight
+        const device_height = verge.viewportH()
+        if (!this.isGaSent && (content_top_y + (content_height * 2) / 3 < current_top_y + device_height)) {
+          window.ga('send', 'event', 'projects', 'scroll', `scroll to 7`, { nonInteraction: false })
+          this.isGaSent = true
+        }
+      })
+    },
   }
 </script>
 <style lang="stylus" scoped>
