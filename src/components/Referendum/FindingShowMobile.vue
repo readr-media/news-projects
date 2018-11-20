@@ -30,6 +30,7 @@
 
           if (content_top_y < current_top_y + device_height / 2) {
             if (content_top_y + content_height < current_top_y + device_height / 2) {
+            // if (content_top_y + content_height / 2 < current_top_y + device_height / 2) {
               this.isActive = false
             } else {
               this.isActive = true
@@ -84,10 +85,12 @@
     &__explanation
       position relative
       z-index 9    
-      padding 80vh 0 
+      padding 80vh 0
+      // padding 80vh 0 10vh
       .explanation
         padding 25px
-        background-color rgba(255,255,255,0.85)   
+        // background-color #fff
+        background-color rgba(255,255,255,0.95)   
   // @media screen and (min-width: 600px) 
   //   .finding-show
   //     &__infographic

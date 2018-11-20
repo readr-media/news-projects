@@ -32,6 +32,7 @@
     mounted () {
       this.$el.ondragstart = function () { return false }
       this.$el.onselectstart = function () { return false }
+      this.isActive = this.defaultActive
     },
     props: {
       title: {
@@ -45,6 +46,10 @@
       },
       saying: {
         type: String,
+      },
+      defaultActive: {
+        type: Boolean,
+        default: false,
       },
     },
   }
@@ -109,7 +114,7 @@
     letter-spacing normal
     text-align justify
     display none
-    max-height 999px
+    max-height 999999px
     margin 23px 0
     &.active
       display block

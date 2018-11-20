@@ -92,6 +92,15 @@
 </script>
 <style lang="stylus" scoped>
 .referendum
+  >>> .mark
+    font-size 0.875rem
+    font-weight normal
+    font-style normal
+    font-stretch normal
+    line-height 1.71
+    letter-spacing normal
+    text-align justify
+    color #a0a0a0
   &__credit
     margin-top 100px   
     .mirrormedia

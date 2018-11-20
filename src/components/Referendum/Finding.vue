@@ -3,17 +3,17 @@
     <div class="finding__title"><h2><span v-text="$t('REFERENDUM.FINDING.TITLE')"></span></h2></div>
     <div class="finding__brief"><div v-html="$t('REFERENDUM.FINDING.BRIEF')"></div></div>
     <template v-for="n in 6">    
-      <div class="finding__wrapper">
+      <div class="finding__wrapper" :style="{ zIndex: 9 - n }">
         <div class="title"><h3><span v-text="$t(`REFERENDUM.FINDING.ITEMS.${n - 1}.TITLE`)"></span></h3></div>
         <template v-for="(sub, index) in get($t(`REFERENDUM.FINDING.ITEMS.${n - 1}`), 'SUB')">
-          <div class="content">
+          <div class="content" :style="{ zIndex: 9 - index }">
             <!--FindingShow v-if="isDesktop"
               :id="`finding-show-${n}-${index}`">
               <div class="infographic finding-show-comp" slot="infographic"><img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}-web@2x-100.jpg`"></div>
               <div class="explanation finding-show-comp" slot="explanation" v-html="get(sub, 'CONTENT')"></div>
             </FindingShow-->
             <FindingShowMobile
-              :id="`finding-show-${n}-${index}`">
+              :id="`finding-show-${n}-${index}`" :index="index">
               <div class="infographic" slot="infographic">
                 <img :src="`/proj-assets/referendum/findings/${get(sub, 'NAME')}-${ isDesktop ? 'web' : 'phone' }@2x-100.jpg`">
               </div>
