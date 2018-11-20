@@ -1,5 +1,5 @@
 <template>
-  <div class="what-experts-say-detail" @click="switchSaying" >
+  <div class="what-experts-say-detail" :id="id" :class="{ active: this.isActive }" @click="switchSaying" >
     <div class="top">
       <div class="left">
         <div class="avatar"><img :src="avatar"></div>
@@ -7,20 +7,24 @@
       <div class="right">
         <div class="title"><h4><span v-text="title"></span></h4></div>
         <div class="name"><span v-text="name"></span></div>
-        <div class="switcher" :class="{ active: this.isActive }" ref="switcher"></div>
+        <div class="switcher" ref="switcher"></div>
       </div>
     </div>
-    <div class="bottom">
-      <div class="saying" :class="{ active: this.isActive }"><div v-html="saying"></div></div>
+    <div class="bottom" ref="bottom">
+      <div class="starter"><div v-html="starter"></div></div>
+      <div class="saying"><div v-html="saying"></div></div>
     </div>
   </div>
 </template>
 <script>
+  import verge from 'verge'
+  import { currentYPosition, elmYPosition, } from 'kc-scroll'
   export default {
     name: 'WhatExpertsSayDetail',
     data () {
       return {
         isActive: false,
+        interval: undefined,
       }
     },
     methods: {
@@ -28,11 +32,36 @@
         this.isActive = !this.isActive
         window.ga('send', 'event', 'projects', 'click', `expert ${this.avatar}`, { nonInteraction: false })
       },
+      setUpTimer () {
+        window.addEventListener('scroll', () => {
+          if (this.isActive) { return }
+          const current_top_y = currentYPosition()
+          const content_top_y = elmYPosition(`#${this.id} > .bottom`)
+          const content_height = this.$refs.bottom.clientHeight
+          const device_height = verge.viewportH()
+          if (!this.interval && content_top_y < current_top_y + device_height / 2) {
+            if (content_top_y + content_height < current_top_y + device_height / 3) {
+              clearInterval(this.interval)
+              this.interval = undefined
+            } else {
+              this.interval = setInterval(() => {
+                this.isActive = true
+                clearInterval(this.interval)
+                this.interval = undefined
+              }, 5000)
+            }
+          } else {
+            clearInterval(this.interval)
+            this.interval = undefined
+          }
+        })
+      },
     },
     mounted () {
       this.$el.ondragstart = function () { return false }
       this.$el.onselectstart = function () { return false }
       this.isActive = this.defaultActive
+      this.setUpTimer()
     },
     props: {
       title: {
@@ -47,15 +76,27 @@
       saying: {
         type: String,
       },
+      starter: {
+        typs: String,
+      },
       defaultActive: {
         type: Boolean,
         default: false,
       },
+      id: {
+        type: String,
+      }
     },
   }
 </script>
 <style lang="stylus" scoped>
 .what-experts-say-detail
+  margin 24px 12px
+  padding 25px 25px 0
+  border-radius 24px
+  border solid 2px #a40035   
+  transition background-color 1s, color 1s 
+  
   .switcher
     position absolute
     bottom 5px
@@ -65,10 +106,13 @@
     background-position center center
     background-repeat no-repeat
     background-size contain
+    background-image url(/proj-assets/referendum/icons/icon-arrowdown.png)
     cursor pointer
+      
   .top, .bottom
-    display flex
     overflow hidden
+  .top
+    display flex
     .right
       position relative
       flex 1
@@ -89,6 +133,7 @@
       letter-spacing normal
       text-align justify
       color #a40035
+      transition color 1s
   .avatar
     width 40px
     height 40px
@@ -105,7 +150,8 @@
     letter-spacing normal
     text-align left
     color #313131  
-  .saying
+    transition color 1s
+  .saying, .starter
     font-size 0.875rem
     font-weight normal
     font-style normal
@@ -113,47 +159,36 @@
     line-height 1.71
     letter-spacing normal
     text-align justify
-    display none
+    // margin 23px 0
+    color #313131
+    transition color 1s  
+  .saying
     max-height 999999px
-    margin 23px 0
-    &.active
-      display block
-      animation saying-on 1s
-  &:nth-child(even), &:nth-child(odd)
-    margin 24px 12px
-    padding 25px
-    border-radius 24px
-    border solid 2px #a40035
-  &:nth-child(even)
-    .switcher
-      background-image url(/proj-assets/referendum/icons/icon-arrowdown.png)
-      &.active
-        transform rotate(180deg)
-    .saying
-      color #313131
-  &:nth-child(odd)
+    animation saying-on 1s
+    display none
+
+  &.active
     background-color #a40035
     .switcher
       background-image url(/proj-assets/referendum/icons/icon-arrowup.png)
-      transform rotate(180deg)
-      &.active
-        transform rotate(0deg)
     .title
       h4
         color #fff
     .name
       color #fff
+    .saying, .starter
+      color #fff      
     .saying
-      color #fff
+      display block
+
 @media screen and (min-width: 600px) 
   .what-experts-say-detail
     max-width 600px
+    margin 24px auto
+    padding 40px 40px 20px
     .top, .bottom
       .right
         margin-left 42px    
-    &:nth-child(even), &:nth-child(odd)
-      margin 24px auto
-      padding 40px
     .avatar
       width 70px
       height 70px
@@ -165,7 +200,7 @@
       .name
         font-size 1rem
         line-height 1.88
-      .saying
+      .saying, .starter
         font-size 1rem
         line-height 1.88
 

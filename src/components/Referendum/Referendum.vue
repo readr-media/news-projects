@@ -61,7 +61,7 @@
         title: this.$t('REFERENDUM.TITLE'),
         description: this.$t('REFERENDUM.DESCRIPTION'),
         metaUrl: 'taiwan-2018-referendum',
-        metaImage: 'referendum/ogimage-referendum.jpg',
+        metaImage: 'referendum/referendum-ogimage.jpg',
       }
     },
     methods: {
