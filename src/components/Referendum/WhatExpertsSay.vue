@@ -19,10 +19,11 @@
     <div class="what-experts-say__brief last"><span v-text="$t('REFERENDUM.WHAT_EXPERTS_SAY.BRIEF.1')"></span></div>
     <template v-for="n in 3">    
       <WhatExpertsSayDetail
-        :defaultActive="n === 1"
+        :id="$t(`REFERENDUM.WHAT_EXPERTS_SAY.ITEMS.${n - 1}.AVATAR`)"
         :avatar="`/proj-assets/referendum/icons/${$t(`REFERENDUM.WHAT_EXPERTS_SAY.ITEMS.${n - 1}.AVATAR`)}.png`"
         :name="$t(`REFERENDUM.WHAT_EXPERTS_SAY.ITEMS.${n - 1}.NAME`)"
         :saying="$t(`REFERENDUM.WHAT_EXPERTS_SAY.ITEMS.${n - 1}.SAYING`)"
+        :starter="$t(`REFERENDUM.WHAT_EXPERTS_SAY.ITEMS.${n - 1}.STARTER`)"
         :title="$t(`REFERENDUM.WHAT_EXPERTS_SAY.ITEMS.${n - 1}.TITLE`)"></WhatExpertsSayDetail>
     </template>
   </div>
