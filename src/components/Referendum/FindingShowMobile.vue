@@ -29,6 +29,12 @@
           const content_height = this.$el.clientHeight
           const device_height = verge.viewportH()
 
+          if (content_top_y > current_top_y + device_height * 2
+            || content_top_y + content_height < current_top_y - device_height * 2) {
+            this.isFixed = false
+          } else {
+            this.isFixed = true
+          }
           if (content_top_y < current_top_y + device_height / 2) {
             if (content_top_y + content_height < current_top_y + device_height / 2) {
             // if (content_top_y + content_height / 2 < current_top_y + device_height / 2) {
@@ -36,12 +42,8 @@
             } else {
               this.isActive = true
             }
-            // this.isFixed = true
           } else {
             this.isActive = false
-            // setTimeout(() => {
-            //   this.isFixed = false
-            // }, 1000)
           }
 
           if (!this.isGaSent && (content_top_y + (content_height * 2) / 3 < current_top_y + device_height)) {
@@ -71,8 +73,7 @@
       .infographic
         opacity 0
         transition opacity 0.75s
-        position fixed
-        // top 100%
+        position absolute
         top 0
         left 0
         width 100vw
@@ -80,40 +81,28 @@
         display flex
         justify-content center
         align-items center
-        z-index 0!important
         img
           width 100%
           object-fit contain
           object-position center center
       &.fixed
         .infographic
-          top 0
-          position fixed  
-          z-index 1!important      
+          position fixed
       &.active
         .infographic
           opacity 1
-          z-index 1!important    
+          // z-index 1!important    
     &__explanation
       position relative
       z-index 9    
       padding 80vh 0
-      // padding 80vh 0 10vh
       .explanation
         padding 25px
-        // background-color #fff
-        background-color rgba(255,255,255,0.95)   
+        background-color rgba(255,255,255,0.95)
         // position absolute
-        // z-index 10
-        // top 50%
+        // top 0
         // left 0
+        // z-index 10
         // width 100%
         // height 100%
-  // @media screen and (min-width: 600px) 
-  //   .finding-show
-  //     &__infographic
-  //       .infographic
-  //         img
-  //           width auto
-  //           height 100%
 </style>
