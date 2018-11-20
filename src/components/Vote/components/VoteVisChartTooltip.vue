@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     viewStatus () {
-      if ([ 1, 2, 3, 4 ].includes(this.view)) {
+      if ([ 1, 2, 3, 4, 6 ].includes(this.view)) {
         return 'relationship'
       } else if ([ 5 ].includes(this.view)) {
         return 'legislator'
