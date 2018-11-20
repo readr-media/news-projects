@@ -91,6 +91,12 @@
         padding 25px
         // background-color #fff
         background-color rgba(255,255,255,0.95)   
+        // position absolute
+        // z-index 10
+        // top 50%
+        // left 0
+        // width 100%
+        // height 100%
   // @media screen and (min-width: 600px) 
   //   .finding-show
   //     &__infographic
