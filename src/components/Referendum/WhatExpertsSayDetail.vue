@@ -165,7 +165,7 @@
     transition color 1s  
   .saying
     max-height 999999px
-    animation saying-on 1s
+    animation saying-on 1.25s
     display none
 
   &.active
