@@ -46,7 +46,7 @@
     z-index 9999
 
     & >>> .toggle
-      background-image url(/proj-assets/referendum/icons/icon-share.png)
-      background-size contain
-      background-position center center
+      background-image url(/proj-assets/referendum/icons/icon-share.png)!important
+      background-size contain!important
+      background-position center center!important
 </style>
