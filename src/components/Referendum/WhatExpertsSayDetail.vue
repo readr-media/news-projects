@@ -19,12 +19,13 @@
 <script>
   import verge from 'verge'
   import { currentYPosition, elmYPosition, } from 'kc-scroll'
+  const debug = require('debug')('CLIENT:WhatExpertsSayDetail')
   export default {
     name: 'WhatExpertsSayDetail',
     data () {
       return {
         isActive: false,
-        interval: undefined,
+        inSight: false,
       }
     },
     methods: {
@@ -40,19 +41,19 @@
           const content_height = this.$refs.bottom.clientHeight
           const device_height = verge.viewportH()
           if (!this.interval && content_top_y < current_top_y + device_height / 2) {
+            let i = 3
             if (content_top_y + content_height < current_top_y + device_height / 3) {
-              clearInterval(this.interval)
-              this.interval = undefined
+              this.inSight = false
             } else {
-              this.interval = setInterval(() => {
-                this.isActive = true
-                clearInterval(this.interval)
-                this.interval = undefined
-              }, 5000)
+              this.inSight = true
+              setTimeout(() => {
+                if (this.inSight) {
+                  this.isActive = true
+                }
+              }, 3000)
             }
           } else {
-            clearInterval(this.interval)
-            this.interval = undefined
+            this.inSight = false
           }
         })
       },
