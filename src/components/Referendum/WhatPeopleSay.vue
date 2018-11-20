@@ -3,7 +3,7 @@
     <div class="what-pp-say__title"><h2><span v-text="$t('REFERENDUM.WHAT_PEOPLE_SAY.TITLE')"></span></h2></div>
     <div class="what-pp-say__vid vid">
       <video width="100%" height="100%" controls controlsList="nodownload" preload="metadata" playsinline 
-        poster="/proj-assets/referendum/referendum-good-or-not-poster.png" :style="{ backgroundColor: '#000' }">
+        poster="/proj-assets/referendum/ogimage-referendum.jpg" :style="{ backgroundColor: '#000' }">
         <source src="/proj-assets/referendum/referendum-good-or-not.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
