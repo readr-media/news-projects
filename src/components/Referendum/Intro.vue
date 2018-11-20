@@ -23,7 +23,8 @@
     background-color #f9f9f7
     padding 65px 0 45px
     min-height 100vh
-    
+    position relative
+    z-index 10      
     & > div
       &:not(.brief)
         text-align center
