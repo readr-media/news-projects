@@ -1,6 +1,6 @@
 <template>
   <div class="bar-wrapper">
-    <div class="bar" v-show="viewStatus === 'relationship'">
+    <div class="bar" v-if="viewStatus === 'relationship'">
       <div class="bar__blue blue">
         <div
           v-for="(candidate, i) in blue"
@@ -53,8 +53,8 @@
         </div>
       </div>
     </div>
-    <div class="bar" v-show="viewStatus === 'county'">
-      <div class="bar__blue blue">
+    <div class="bar" v-if="viewStatus === 'county'">
+      <!-- <div class="bar__blue blue">
         <div
           v-for="(candidate, i) in (get(blue, 'resultFloor', 0) || (get(blue, 'resultDecimal', 0) !== 0 ? 1 : 0))"
           :key="candidate['姓名']"
@@ -116,9 +116,30 @@
             :nonVisibleColor="nonVisibleColor"
           />
         </div>
+      </div> -->
+      <div class="bar__blue blue">
+        <VoteVisChartBarRect
+          :backgroundColor="'#1aa6de'"
+          :amount="blue"
+          :amountMax="maxCount"
+        />
+      </div>
+      <div class="bar__yellow yellow">
+        <VoteVisChartBarRect
+          :backgroundColor="'#fda134'"
+          :amount="yellow"
+          :amountMax="maxCount"
+        />
+      </div>
+      <div class="bar__orange orange">
+        <VoteVisChartBarRect
+          :backgroundColor="'#ef5233'"
+          :amount="orange"
+          :amountMax="maxCount"
+        />
       </div>
     </div>
-    <div class="bar" v-show="viewStatus === 'legislator'">
+    <div class="bar" v-if="viewStatus === 'legislator'">
       <div class="bar__blue blue">
         <div
           v-for="item in timeline"
@@ -140,9 +161,10 @@
 
 <script>
 import { sum, } from 'd3-array'
-import { get, isNaN } from 'lodash'
+import { get, isNaN, find } from 'lodash'
 import VoteVisChartBarCircle from './VoteVisChartBarCircle.vue'
 import VoteVisChartBarCirclePortion from './VoteVisChartBarCirclePortion.vue'
+import VoteVisChartBarRect from './VoteVisChartBarRect.vue'
 
 export default {
   props: {
@@ -159,11 +181,20 @@ export default {
     nonVisibleColor: {
       type: String,
       required: true
+    },
+    countFilter: {
+      type: Array,
+      required: true
+    },
+    maxCount: {
+      type: Number,
+      required: true
     }
   },
   components: {
     VoteVisChartBarCircle,
     VoteVisChartBarCirclePortion,
+    VoteVisChartBarRect
   },
   data () {
     return {
@@ -172,7 +203,7 @@ export default {
   },
   computed: {
     viewStatus () {
-      if ([ 1, 2, 3 ].includes(this.view)) {
+      if ([ 1, 2, 3, 6 ].includes(this.view)) {
         return 'relationship'
       } else if ([ 4 ].includes(this.view)) {
         return 'county'
@@ -181,45 +212,39 @@ export default {
       }
     },
     blueTotal () {
-      return sum(get(this.data, [ 'values', '0', 'values' ], []), item => sum(item.values, d => d['當選次數']))
+      return sum(get(find(get(this.data, 'values', []), o => o.key === '本人'), 'values', []), item => sum(item.values, d => d['當選次數']))
     },
     yellowTotal () {
-      return sum(get(this.data, [ 'values', '1', 'values' ], []), item => sum(item.values, d => d['當選次數']))
+      return sum(get(find(get(this.data, 'values', []), o => o.key === '直系'), 'values', []), item => sum(item.values, d => d['當選次數']))
     },
     orangeTotal () {
-      return sum(get(this.data, [ 'values', '2', 'values' ], []), item => sum(item.values, d => d['當選次數']))
+      return sum(get(find(get(this.data, 'values', []), o => o.key === '旁系'), 'values', []), item => sum(item.values, d => d['當選次數']))
     },
     blue () {
       if (this.viewStatus === 'relationship') {
-        return get(this.data, [ 'values', '0', 'values' ], []).map(item => item.values[0])
+        // return get(this.data, [ 'values', '0', 'values' ], []).map(item => item.values[0])
+        return get(find(get(this.data, 'values', []), o => o.key === '本人'), 'values', []).map(item => item.values[0])
       } else if (this.viewStatus === 'county') {
         const result = sum(get(this.data, [ 'values', '0', 'values' ], []).map(item => item['當選次數'])) / sum(get(this.data, [ 'values' ], []), d => d.values.length)
-        const resultFloor = Math.floor(result)
-        const resultDecimal = result - resultFloor
-        // return typeof result === 'number' && !isNaN(result) ? { resultFloor, resultDecimal } : 0
-        return { resultFloor, resultDecimal }
+        return typeof result === 'number' && !isNaN(result) ? result : 0
       }
     },
     yellow () {
       if (this.viewStatus === 'relationship') {
-        return get(this.data, [ 'values', '1', 'values' ], []).map(item => item.values[0])
+        // return get(this.data, [ 'values', '1', 'values' ], []).map(item => item.values[0])
+        return get(find(get(this.data, 'values', []), o => o.key === '直系'), 'values', []).map(item => item.values[0])
       } else if (this.viewStatus === 'county') {
         const result = sum(get(this.data, [ 'values', '1', 'values' ], []).map(item => item['當選次數'])) / sum(get(this.data, [ 'values' ], []), d => d.values.length)
-        const resultFloor = Math.floor(result)
-        const resultDecimal = result - resultFloor
-        // return typeof result === 'number' && !isNaN(result) ? { resultFloor, resultDecimal } : 0
-        return { resultFloor, resultDecimal }
+        return typeof result === 'number' && !isNaN(result) ? result : 0
       }
     },
     orange () {
       if (this.viewStatus === 'relationship') {
-        return get(this.data, [ 'values', '2', 'values' ], []).map(item => item.values[0])
+        // return get(this.data, [ 'values', '2', 'values' ], []).map(item => item.values[0])
+        return get(find(get(this.data, 'values', []), o => o.key === '旁系'), 'values', []).map(item => item.values[0])
       } else if (this.viewStatus === 'county') {
         const result = sum(get(this.data, [ 'values', '2', 'values' ], []).map(item => item['當選次數'])) / sum(get(this.data, [ 'values' ], []), d => d.values.length)
-        const resultFloor = Math.floor(result)
-        const resultDecimal = result - resultFloor
-        // return typeof result === 'number' && !isNaN(result) ? { resultFloor, resultDecimal } : 0
-        return { resultFloor, resultDecimal }
+        return typeof result === 'number' && !isNaN(result) ? result : 0
       }
     },
     timeline () {
