@@ -132,7 +132,7 @@ export const REFERENDUM = {
     'LAW_COMPARING': [
       {
         'NAME': '提案門檻',
-        'BEFORE': '最近一次總統副總統選舉人數（=1/200）',
+        'BEFORE': '最近一次總統副總統選舉人數 1/200',
         'AFTER': '最近一次總統副總統選舉人數萬分之一',
       },
       {
@@ -151,7 +151,7 @@ export const REFERENDUM = {
         'AFTER': '中華民國國民年滿 18 歲',
       },
       {
-        'NAME': '审議機關',
+        'NAME': '審議機關',
         'BEFORE': '公投審議委員會',
         'AFTER': '全國性公投：中央選舉委員會；地方性公投：直轄市政府、縣（市）政府',
       },
