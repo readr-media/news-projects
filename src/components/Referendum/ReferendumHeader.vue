@@ -28,7 +28,7 @@
     },
     data () {
       return {
-        shareLink: `${READR_SITE_URL}rent`,
+        shareLink: `${READR_SITE_URL}taiwan-2018-referendum`,
       }
     },
     methods: {},
