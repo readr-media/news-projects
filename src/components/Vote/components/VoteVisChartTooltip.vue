@@ -2,8 +2,13 @@
   <div class="tooltip-wrapper">
     <div class="tooltip-wrapper__line"></div>
     <div class="tooltip-wrapper__tooltip">
-      {{ data['姓名'] }}，{{ data['所屬議員'] }}的{{ data['親屬關係'] }}。<br>
-      曾任{{ data['親屬任職議會縣市'] }}議會 <span class="highlight">{{ data['當選次數'] }}</span> 屆議員 
+      <template v-if="viewStatus === 'relationship'">
+        {{ data['姓名'] }}，{{ data['所屬議員'] }}的{{ data['親屬關係'] }}。<br>
+        曾任{{ data['親屬任職議會縣市'] }}議會 <span class="highlight">{{ data['當選次數'] }}</span> 屆議員 
+      </template>
+      <template v-else-if="viewStatus === 'legislator'">
+        {{ data['key'] }}
+      </template>
     </div>
   </div>
 </template>
@@ -15,6 +20,19 @@ export default {
       type: Object,
       default () {
         return {}
+      }
+    },
+    view: {
+      type: Number,
+      required: true
+    },
+  },
+  computed: {
+    viewStatus () {
+      if ([ 1, 2, 3, 4 ].includes(this.view)) {
+        return 'relationship'
+      } else if ([ 5 ].includes(this.view)) {
+        return 'legislator'
       }
     },
   }  

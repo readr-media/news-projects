@@ -12,6 +12,7 @@
         class="circle__tooltip"
         v-show="showTooltip"
         :data="data"
+        :view="view"
       />
     </transition>
   </div>
@@ -35,6 +36,10 @@ export default {
       default () {
         return {}
       }
+    },
+    view: {
+      type: Number,
+      required: true
     },
     hasTooltip: {
       type: Boolean,

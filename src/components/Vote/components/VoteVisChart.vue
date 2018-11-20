@@ -1,9 +1,9 @@
 <template>
   <div class="chart-wrapper">
-    <VoteVisChartLegend class="chart-wrapper__legend"/>
+    <VoteVisChartLegend class="chart-wrapper__legend" :view="view" />
     <div class="chart-wrapper__chart chart">
       <div class="chart__row chart__row--dark chart__row--head">
-        <p>縣市</p>
+        <p>{{ viewStatus === 'relationship' || viewStatus === 'county' ? '縣市' : '姓名' }}</p>
         <p>總計</p>
       </div>
       <transition-group name="flip-list">
@@ -14,14 +14,20 @@
         >
           <div class="left">
             <p class="left__county" v-text="getCountyName(item)"></p>
-            <p class="left__leader" v-text="getLeaderName(item)"></p>
+            <p :class="[ 'left__leader', { 'left__leader--marginless': viewStatus === 'legislator' || viewStatus === 'county' } ]" v-text="getLeaderName(item)"></p>
             <div class="left__row-bar" :style="{ marginLeft: `${15 + 24 * diffMaxLength(getLeaderName(item))}px` }">
-              <VoteVisChartBar :data="item"/>
+              <VoteVisChartBar :data="item" :view="view" :nonVisibleColor="i % 2 !== 0 ? '#061c37' : '#1c2d47'"/>
             </div>
           </div>
           <p v-text="getCount(item)"></p>
         </div>
       </transition-group>
+      <VoteVisButtonWhite class="chart__button" :text="'資料來源'" @click.native="toggleMethodology"/>
+      <transition name="fade" mode="out-in">
+        <div v-show="showMethodology" class="chart__methodology">
+          反成古簡在河當學度做在持親利那定座主，營的化無方兒或座華後除展金房紙子還多？此二似不源現外文友一無至物到。父是請美道。一不專麗獨，克動是數公，規現提老出主學主美那醫童利中！
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -31,6 +37,7 @@ import { get, } from 'lodash'
 import { sum, } from 'd3-array'
 import VoteVisChartLegend from './VoteVisChartLegend.vue'
 import VoteVisChartBar from './VoteVisChartBar.vue'
+import VoteVisButtonWhite from './VoteVisButtonWhite.vue'
 
 export default {
   props: {
@@ -39,15 +46,39 @@ export default {
       default () {
         return []
       }
+    },
+    view: {
+      type: Number,
+      required: true
     }
   },
   components: {
     VoteVisChartLegend,
     VoteVisChartBar,
+    VoteVisButtonWhite
+  },
+  watch: {
+    view () {
+      this.showMethodology = false
+    }
+  },
+  data () {
+    return {
+      showMethodology: false
+    }
   },
   computed: {
     keyMaxLength () {
       return Math.max(...this.data.map(d => d.key.length))
+    },
+    viewStatus () {
+      if ([ 1, 2, 3 ].includes(this.view)) {
+        return 'relationship'
+      } else if ([ 4 ].includes(this.view)) {
+        return 'county'
+      } else if ([ 5 ].includes(this.view)) {
+        return 'legislator'
+      }
     }
   },
   methods: {
@@ -58,11 +89,20 @@ export default {
       return get(item, 'key', '')
     },
     getCount (item) {
-      return sum(get(item, [ 'values' ], []), d => sum(d.values, _d => _d.values[0]['當選次數']))
+      if (this.viewStatus === 'relationship') {
+        return sum(get(item, [ 'values' ], []), d => sum(d.values, _d => _d.values[0]['當選次數']))
+      } else if (this.viewStatus === 'county') {
+        return (sum(get(item, [ 'values' ], []), d => sum(d.values, _d => _d['當選次數'])) / sum(get(item, [ 'values' ], []), d => d.values.length)).toFixed(1)
+      } else if (this.viewStatus === 'legislator') {
+        return get(item, 'timeline', []).map(d => d.value).filter(d => d !== '').length
+      }
     },
     diffMaxLength (leaderName) {
       return this.keyMaxLength - leaderName.length
     },
+    toggleMethodology () {
+      this.showMethodology = !this.showMethodology
+    }
   },  
 }
 </script>
@@ -76,7 +116,11 @@ export default {
 .chart
   min-width 1000px
   margin 50px 0 0 0
+  display flex
+  flex-direction column
+  align-items center
   &__row
+    width 1000px
     height 60px
     display flex
     justify-content space-between
@@ -91,6 +135,13 @@ export default {
       background-color #061c37
     &--light
       background-color #1c2d47
+  &__button
+    margin 75px 0 0 0
+  &__methodology
+    width 1000px
+    font-size 16px
+    line-height 1.5
+    margin 18px 0 0 0
 
 .left
   display flex
@@ -101,6 +152,8 @@ export default {
     font-weight 400
     // min-width 90px
     margin 0 0 0 15px
+    &--marginless
+      margin 0
   &__row-bar
     min-width 600px
     display flex
@@ -114,6 +167,11 @@ export default {
   // transition transform .5s
   opacity 0
   transform translateY(30px)
+
+.fade-enter-active, .fade-leave-active
+  transition opacity .1s
+.fade-enter, .fade-leave-to
+  opacity 0
 </style>
 
 
