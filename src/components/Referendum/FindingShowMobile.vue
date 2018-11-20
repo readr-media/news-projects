@@ -1,7 +1,7 @@
 <template>
   <div class="finding-show" :id="id">
     <div class="finding-show__infographic" ref="infographic"
-      :class="{ active: isActive }">
+      :class="{ active: isActive, fixed: isFixed }">
       <slot name="infographic"></slot>
     </div>
     <div class="finding-show__explanation">
@@ -18,6 +18,7 @@
       return {
         isActive: false,
         isGaSent: false,
+        isFixed: false,
       }
     },
     methods: {
@@ -35,8 +36,12 @@
             } else {
               this.isActive = true
             }
+            // this.isFixed = true
           } else {
             this.isActive = false
+            // setTimeout(() => {
+            //   this.isFixed = false
+            // }, 1000)
           }
 
           if (!this.isGaSent && (content_top_y + (content_height * 2) / 3 < current_top_y + device_height)) {
@@ -67,6 +72,7 @@
         opacity 0
         transition opacity 0.75s
         position fixed
+        // top 100%
         top 0
         left 0
         width 100vw
@@ -74,14 +80,20 @@
         display flex
         justify-content center
         align-items center
-        z-index 1!important
+        z-index 0!important
         img
           width 100%
           object-fit contain
           object-position center center
+      &.fixed
+        .infographic
+          top 0
+          position fixed  
+          z-index 1!important      
       &.active
         .infographic
           opacity 1
+          z-index 1!important    
     &__explanation
       position relative
       z-index 9    
