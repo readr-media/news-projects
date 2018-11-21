@@ -40,12 +40,12 @@ export default {
     }
   },
   mounted () {
-    // require('autotrack')
-    // ga('require', 'cleanUrlTracker')
-    // ga('require', 'maxScrollTracker')
-    // ga('require', 'eventTracker')
-    // ga('require', 'pageVisibilityTracker')
-    // ga('send', 'pageview')
+    require('autotrack')
+    ga('require', 'cleanUrlTracker')
+    ga('require', 'maxScrollTracker')
+    ga('require', 'eventTracker')
+    ga('require', 'pageVisibilityTracker')
+    ga('send', 'pageview')
   },
 }
 </script>
