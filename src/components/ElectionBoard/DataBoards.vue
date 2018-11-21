@@ -54,6 +54,8 @@ export default {
     return {
       board: undefined,
       count: 0,
+      fetching: false,
+      hasError: false,
       loaded: false,
       page: DEFAULT_PAGE,
       showDataBoard: false,
@@ -74,13 +76,17 @@ export default {
     }
   },
   beforeMount () {
+    this.fetching = true
     fetchBoards(this.$store, { candidates: this.candidate.id })
     .then(res => {
       this.loaded = true
+      this.fetching = false
       this.count = res.count
     })
     .catch(() => {
       this.loaded = true
+      this.fetching = false
+      this.hasError = true
     })
   },
   methods: {
@@ -97,10 +103,16 @@ export default {
         const boardsContainer = document.querySelector('.boards')
         const boards = document.querySelectorAll('.boards__item')
         const board = boards[boards.length - 3]
-        if (board.getBoundingClientRect().top < boardsContainer.getBoundingClientRect().bottom) {
+        if (!this.hasError && !this.fetching && board.getBoundingClientRect().top < boardsContainer.getBoundingClientRect().bottom) {
+          this.fetching = true
           fetchBoards(this.$store, { candidates: this.candidate.id, page: this.page + 1 })
           .then(res => {
+            this.fetching = false
             this.page = this.page + 1
+          })
+          .catch(err => {
+            this.fetching = false
+            this.hasError = true
           })
         }
       }

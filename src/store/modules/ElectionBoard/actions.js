@@ -17,7 +17,7 @@ export default {
         commit(`SET_BOARD_FOR_VERIF`, camelizeKeys(get(res, 'data')))
       })
   },
-  FETCH_BOARDS: ({ commit }, params) => {
+  FETCH_BOARDS: ({ state, commit }, params) => {
     return fetchBoards(params)
       .then(res => {
         if (params.page > 1) {
@@ -31,7 +31,7 @@ export default {
       })
       .catch(err => err)
   },
-  FETCH_BOARDS_BY_COORDINATE: ({ commit }, params) => {
+  FETCH_BOARDS_BY_COORDINATE: ({ state, commit }, params) => {
     return fetchBoards(params)
       .then(res => {
         if (params.page > 1) {
