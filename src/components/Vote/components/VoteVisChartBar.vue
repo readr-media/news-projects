@@ -54,69 +54,6 @@
       </div>
     </div>
     <div class="bar" v-if="viewStatus === 'county'">
-      <!-- <div class="bar__blue blue">
-        <div
-          v-for="(candidate, i) in (get(blue, 'resultFloor', 0) || (get(blue, 'resultDecimal', 0) !== 0 ? 1 : 0))"
-          :key="candidate['姓名']"
-          class="blue__candidate candidate"
-        >
-          <VoteVisChartBarCircle
-            v-if="get(blue, 'resultFloor', 0) !== 0"
-            :backgroundColor="'#1aa6de'"
-            :text="''"
-            :view="view"
-            :hasTooltip="false"
-          />
-          <VoteVisChartBarCirclePortion
-            v-if="(candidate === get(blue, 'resultFloor', 0) && get(blue, 'resultDecimal', 0) !== 0) || (get(blue, 'resultFloor', 0) === 0 && get(blue, 'resultDecimal', 0) !== 0)"
-            :portion="blue.resultDecimal"
-            :backgroundColor="'#1aa6de'"
-            :nonVisibleColor="nonVisibleColor"
-          />
-        </div>
-      </div>
-      <div class="bar__yellow yellow">
-        <div
-          v-for="(candidate, i) in (get(yellow, 'resultFloor', 0) || (get(yellow, 'resultDecimal', 0) !== 0 ? 1 : 0))"
-          :key="candidate['姓名']"
-          :class="['yellow__candidate', 'candidate', { 'candidate--border-white-circle': hovering === `yellow-${i}` }]"
-        >
-          <VoteVisChartBarCircle
-            v-if="get(yellow, 'resultFloor', 0) !== 0"
-            :backgroundColor="'#fda134'"
-            :text="''"
-            :view="view"
-            :hasTooltip="false"
-          />
-          <VoteVisChartBarCirclePortion
-            v-if="(candidate === get(yellow, 'resultFloor', 0) && get(yellow, 'resultDecimal', 0) !== 0) || (get(yellow, 'resultFloor', 0) === 0 && get(yellow, 'resultDecimal', 0) !== 0)"
-            :portion="yellow.resultDecimal"
-            :backgroundColor="'#fda134'"
-            :nonVisibleColor="nonVisibleColor"
-          />
-        </div>
-      </div>
-      <div class="bar__orange orange">
-        <div
-          v-for="(candidate, i) in (get(orange, 'resultFloor', 0) || (get(orange, 'resultDecimal', 0) !== 0 ? 1 : 0))"
-          :key="candidate['姓名']"
-          :class="['orange__candidate', 'candidate', { 'candidate--border-white-circle': hovering === `orange-${i}` }]"
-        >
-          <VoteVisChartBarCircle
-            v-if="get(orange, 'resultFloor', 0) !== 0"
-            :backgroundColor="'#ef5233'"
-            :text="''"
-            :view="view"
-            :hasTooltip="false"
-          />
-          <VoteVisChartBarCirclePortion
-            v-if="(candidate === get(orange, 'resultFloor', 0) && get(orange, 'resultDecimal', 0) !== 0) || (get(orange, 'resultFloor', 0) === 0 && get(orange, 'resultDecimal', 0) !== 0)"
-            :portion="orange.resultDecimal"
-            :backgroundColor="'#ef5233'"
-            :nonVisibleColor="nonVisibleColor"
-          />
-        </div>
-      </div> -->
       <div class="bar__blue blue">
         <VoteVisChartBarRect
           :backgroundColor="'#1aa6de'"
@@ -161,7 +98,7 @@
 
 <script>
 import { sum, } from 'd3-array'
-import { get, isNaN, find } from 'lodash'
+import { get, isNaN, find, uniq } from 'lodash'
 import VoteVisChartBarCircle from './VoteVisChartBarCircle.vue'
 import VoteVisChartBarCirclePortion from './VoteVisChartBarCirclePortion.vue'
 import VoteVisChartBarRect from './VoteVisChartBarRect.vue'
@@ -215,35 +152,44 @@ export default {
       return sum(get(find(get(this.data, 'values', []), o => o.key === '本人'), 'values', []), item => sum(item.values, d => d['當選次數']))
     },
     yellowTotal () {
-      return sum(get(find(get(this.data, 'values', []), o => o.key === '直系'), 'values', []), item => sum(item.values, d => d['當選次數']))
+      return sum(get(find(get(this.data, 'values', []), o => o.key === '二親等'), 'values', []), item => sum(item.values, d => d['當選次數']))
     },
     orangeTotal () {
-      return sum(get(find(get(this.data, 'values', []), o => o.key === '旁系'), 'values', []), item => sum(item.values, d => d['當選次數']))
+      return sum(get(find(get(this.data, 'values', []), o => o.key === '二親等以外'), 'values', []), item => sum(item.values, d => d['當選次數']))
     },
     blue () {
       if (this.viewStatus === 'relationship') {
         // return get(this.data, [ 'values', '0', 'values' ], []).map(item => item.values[0])
         return get(find(get(this.data, 'values', []), o => o.key === '本人'), 'values', []).map(item => item.values[0])
       } else if (this.viewStatus === 'county') {
-        const result = sum(get(this.data, [ 'values', '0', 'values' ], []).map(item => item['當選次數'])) / sum(get(this.data, [ 'values' ], []), d => d.values.length)
+        const result = sum(get(this.data, [ 'values', '0', 'values' ], []).map(item => item['當選次數'])) / sum(get(this.data, [ 'values' ], []), d => {
+          const relArray = d.values
+          return uniq(relArray.map(o => `${o['所屬議員']}-${o['所屬議員縣市']}`)).length
+        })
         return typeof result === 'number' && !isNaN(result) ? result : 0
       }
     },
     yellow () {
       if (this.viewStatus === 'relationship') {
         // return get(this.data, [ 'values', '1', 'values' ], []).map(item => item.values[0])
-        return get(find(get(this.data, 'values', []), o => o.key === '直系'), 'values', []).map(item => item.values[0])
+        return get(find(get(this.data, 'values', []), o => o.key === '二親等'), 'values', []).map(item => item.values[0])
       } else if (this.viewStatus === 'county') {
-        const result = sum(get(this.data, [ 'values', '1', 'values' ], []).map(item => item['當選次數'])) / sum(get(this.data, [ 'values' ], []), d => d.values.length)
+        const result = sum(get(this.data, [ 'values', '1', 'values' ], []).map(item => item['當選次數'])) / sum(get(this.data, [ 'values' ], []), d => {
+          const relArray = d.values
+          return uniq(relArray.map(o => `${o['所屬議員']}-${o['所屬議員縣市']}`)).length
+        })
         return typeof result === 'number' && !isNaN(result) ? result : 0
       }
     },
     orange () {
       if (this.viewStatus === 'relationship') {
         // return get(this.data, [ 'values', '2', 'values' ], []).map(item => item.values[0])
-        return get(find(get(this.data, 'values', []), o => o.key === '旁系'), 'values', []).map(item => item.values[0])
+        return get(find(get(this.data, 'values', []), o => o.key === '二親等以外'), 'values', []).map(item => item.values[0])
       } else if (this.viewStatus === 'county') {
-        const result = sum(get(this.data, [ 'values', '2', 'values' ], []).map(item => item['當選次數'])) / sum(get(this.data, [ 'values' ], []), d => d.values.length)
+        const result = sum(get(this.data, [ 'values', '2', 'values' ], []).map(item => item['當選次數'])) / sum(get(this.data, [ 'values' ], []), d => {
+          const relArray = d.values
+          return uniq(relArray.map(o => `${o['所屬議員']}-${o['所屬議員縣市']}`)).length
+        })
         return typeof result === 'number' && !isNaN(result) ? result : 0
       }
     },
@@ -275,5 +221,28 @@ export default {
   &--border-white-circle
     & >>> .circle
       border 2px solid white
+
+@media (max-width 768px)
+  .bar-wrapper
+    width 100%
+
+  .bar
+    flex-direction column
+    width 100%
+    &__blue
+      display flex
+      flex-wrap wrap
+      margin 10px 0 0 0
+      position relative
+    &__yellow
+      display flex
+      flex-wrap wrap
+      margin 10px 0 0 0
+      position relative
+    &__orange
+      display flex
+      flex-wrap wrap
+      margin 10px 0 0 0
+      position relative
 </style>
 

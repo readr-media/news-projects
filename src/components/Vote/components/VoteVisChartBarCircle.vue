@@ -86,5 +86,12 @@ export default {
   transition opacity .1s
 .fade-enter, .fade-leave-to
   opacity 0
+
+@media (max-width 768px)
+  .circle
+    position static
+    &__tooltip
+      top 40px
+      left 0
 </style>
 

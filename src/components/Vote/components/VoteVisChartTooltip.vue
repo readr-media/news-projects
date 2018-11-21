@@ -60,5 +60,13 @@ export default {
 .highlight
   font-weight 600
   color #ef5233
+
+@media (max-width 768px)
+  .tooltip-wrapper
+    &__line
+      display none
+    &__tooltip
+      width calc(100vw - 40px)
+      text-align center
 </style>
 

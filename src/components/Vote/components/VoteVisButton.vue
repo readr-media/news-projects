@@ -35,5 +35,11 @@ export default {
     background-color white
     color #061c37
     font-weight 400
+
+@media (max-width 768px)
+  .button
+    width 100%
+    height 40px
+    font-size 20px
 </style>
 

@@ -4,36 +4,38 @@
       <img class="hint__finger" src="/proj-assets/vote2018/finger.png" alt="">
       <p class="hint__text">點選可切換</p>
     </div>
-    <div
-      v-show="(showLegends || showLegendsLegislator) && view !== 6"
-      :class="[ 'legend__item',  'item', { 'item--pointer': view === 1 || view === 2 || view === 3 || view === 6 }, { 'item--dimmed': !countFilter.includes('本人') } ]"
-      @click="changeView(1, '本人')"
-    >
-      <div class="item__icon item__icon--blue"></div>
-      <p class="item__text">議員當選次數</p>
-    </div>
-    <div
-      v-show="showLegends"
-      :class="[ 'legend__item',  'item', { 'item--pointer': view === 1 || view === 2 || view === 3 || view === 6 }, { 'item--dimmed': !countFilter.includes('直系') } ]"
-      @click="changeView(2, '直系')"
-    >
-      <div class="item__icon item__icon--yellow"></div>
-      <p class="item__text">二親等當選次數</p>
-    </div>
-    <div
-      v-show="showLegends"
-      :class="[ 'legend__item',  'item', { 'item--pointer': view === 1 || view === 2 || view === 3 || view === 6 }, { 'item--dimmed': !countFilter.includes('旁系') } ]"
-      @click="changeView(3, '旁系')"
-    >
-      <div class="item__icon item__icon--orange"></div>
-      <p class="item__text">二親等以外當選次數</p>
-    </div>
-    <div
-      v-show="showLegendsLegislator"
-      class="legend__item item"
-    >
-      <div class="item__icon item__icon--green"></div>
-      <p class="item__text">立委當選次數</p>
+    <div class="legend__wrapper">
+      <div
+        v-show="(showLegends || showLegendsLegislator)"
+        :class="[ 'legend__item',  'item', { 'item--pointer': view === 1 || view === 2 || view === 3 || view === 6 }, { 'item--dimmed': !countFilter.includes('本人') } ]"
+        @click="changeView(1, '本人')"
+      >
+        <div class="item__icon item__icon--blue"></div>
+        <p class="item__text">議員當選次數</p>
+      </div>
+      <div
+        v-show="showLegends"
+        :class="[ 'legend__item',  'item', { 'item--pointer': view === 1 || view === 2 || view === 3 || view === 6 }, { 'item--dimmed': !countFilter.includes('二親等') } ]"
+        @click="changeView(2, '二親等')"
+      >
+        <div class="item__icon item__icon--yellow"></div>
+        <p class="item__text">二親等當選次數</p>
+      </div>
+      <div
+        v-show="showLegends"
+        :class="[ 'legend__item',  'item', { 'item--pointer': view === 1 || view === 2 || view === 3 || view === 6 }, { 'item--dimmed': !countFilter.includes('二親等以外') } ]"
+        @click="changeView(3, '二親等以外')"
+      >
+        <div class="item__icon item__icon--orange"></div>
+        <p class="item__text">二親等以外當選次數</p>
+      </div>
+      <div
+        v-show="showLegendsLegislator"
+        class="legend__item item"
+      >
+        <div class="item__icon item__icon--green"></div>
+        <p class="item__text">立委當選次數</p>
+      </div>
     </div>
   </div>
 </template>
@@ -75,10 +77,11 @@ export default {
 
 <style lang="stylus" scoped>
 .legend
-  display flex
-  justify-content center
-  align-items center
   position relative
+  &__wrapper
+    display flex
+    justify-content center
+    align-items center
   &__item
     & + &
       margin 0 0 0 25px
@@ -117,7 +120,36 @@ export default {
     margin 0 0 0 10px
   &--pointer
     cursor pointer
+    user-select none
    &--dimmed
     filter brightness(.7) 
+
+@media (max-width 768px)
+  .legend
+    display flex
+    flex-direction column-reverse
+    &__wrapper
+      flex-direction column
+      align-items flex-start
+    &__item
+      & + &
+        margin 10px 0 0 0
+    &__hint
+      position static
+      margin 20px 0 0 0
+
+  .hint
+    &__finger
+      height 40px
+      transform rotate(180deg)
+
+  .item
+    &__icon
+      d = 12px
+      width d
+      height d
+      border-radius d
+    &__text
+      font-size 20px
 </style>
 

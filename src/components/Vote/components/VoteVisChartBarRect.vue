@@ -1,6 +1,6 @@
 <template>
   <div v-show="amount !== 0" class="rect" :style="{ backgroundColor, width }">
-    {{ amount !== 0 ? amount.toFixed(1) : '' }}
+    {{ amount >= 0.2 ? amount.toFixed(1) : '' }}
   </div>
 </template>
 
@@ -29,6 +29,27 @@ export default {
     width () {
       return `${this.amount / this.amountMax * this.maxWidth}px`
     },
+  },
+  methods: {
+    resizeHandler () {
+      if (window.innerWidth <= 768) {
+        this.maxWidth = window.innerWidth
+      } else {
+        if (this.maxWidth !== 720) {
+          this.maxWidth = 720
+        }
+      }
+    }
+  },
+  mounted () {
+    if (window.innerWidth <= 768) {
+      this.maxWidth = window.innerWidth
+    }
+
+    window.addEventListener('resize', this.resizeHandler)
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.resizeHandler)
   }
 }
 </script>
