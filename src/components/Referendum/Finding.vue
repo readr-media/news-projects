@@ -49,6 +49,9 @@
 <style lang="stylus" scoped>
   .finding
     padding 55px 0
+    >>> a
+      &:hover, &:link, &:visited
+        color #111
     &__title
       h2
         font-size 1.5rem
