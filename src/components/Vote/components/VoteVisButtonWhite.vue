@@ -29,5 +29,13 @@ export default {
     outline none
   &:hover
     filter brightness(.8)
+
+@media (max-width 768px)
+  .button
+    width 100%
+    height 40px
+    font-size 20px
+    &:hover
+      filter none
 </style>
 
