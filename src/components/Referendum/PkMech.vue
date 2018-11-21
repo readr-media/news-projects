@@ -18,7 +18,7 @@
   import { filter, get, map, max as lmax, } from 'lodash'
 
   const debug = require('debug')('CLIENT:PkMech')
-
+  const numeral = require('numeral')
   export default {
     name: 'PkMech',
     components: {
@@ -87,27 +87,27 @@
       constructRawItem (rawObj) {
         switch (this.item) {
           case 'rate_participation': {
-            const participant = Number(get(rawObj, 'participant') || '0')
-            const ageQualified = Number(get(rawObj, 'age_qualified') || '1') || 1
+            const participant = numeral(get(rawObj, 'participant') || '0').value()
+            const ageQualified = numeral(get(rawObj, 'age_qualified') || '1').value() || 1
             return participant / ageQualified
           }
           case 'rate_death': {
-            const participant = Number(get(rawObj, 'participant') || '1') || 1
-            const issueDeath = Number(get(rawObj, 'issue_death') || '0')
+            const participant = numeral(get(rawObj, 'participant') || '1').value() || 1
+            const issueDeath = numeral(get(rawObj, 'issue_death') || '0').value()
             return issueDeath / participant
           }
           case 'rate_failure': {
-            const participant = Number(get(rawObj, 'participant') || '1') || 1
-            const subTotal = Number(get(rawObj, 'sub_total') || '0')
+            const participant = numeral(get(rawObj, 'participant') || '1').value() || 1
+            const subTotal = numeral(get(rawObj, 'sub_total') || '0').value()
             return subTotal / participant
           }
           case 'rate_fake': {
-            const participant = Number(get(rawObj, 'participant') || '1') || 1
-            const issueFake = Number(get(rawObj, 'issue_fake') || '0')
+            const participant = numeral(get(rawObj, 'participant') || '1').value() || 1
+            const issueFake = numeral(get(rawObj, 'issue_fake') || '0').value()
             return issueFake / participant
           }          
           default: {
-            return Number(get(rawObj, this.item) || '0')
+            return numeral(get(rawObj, this.item) || '0').value()
           }
         }        
       },

@@ -8,12 +8,14 @@
     <div class="info__detail">
       <div class="info__detail__value" :style="{ color, }">
         <span v-text="$t(`REFERENDUM.PK.INFO.${selectedItem.toUpperCase()}`)"></span>
-        <span v-text="val" class="value"></span>
-        <span v-text="unit(selectedItem)" class="unit"></span>
+        <div style="display: inline-block; line-height: normal">
+          <span v-text="numFormaterize(val)" class="value"></span>
+          <span v-text="unit(selectedItem)" class="unit"></span>
+        </div>
       </div>
       <div class="info__detail__support" v-for="s in support">
         <span v-text="$t(`REFERENDUM.PK.INFO.${s.name.toUpperCase()}`)"></span>
-        <span v-text="s.value" class="value"></span>
+        <span v-text="numFormaterize(s.value, '0,0')" class="value"></span>
         <span v-text="unit(s.name)" class="unit"></span>
       </div>
     </div>
@@ -22,6 +24,7 @@
 <script>
   import { find, get, } from 'lodash'
   const debug = require('debug')('CLIENT:PkMechInfoDetail')
+  const numeral = require('numeral')
   const setUpSelecteditem = (store, key, value) => store.dispatch('Referendum/SET_TARGETS', { key, value })
   export default {
     name: 'PkMechInfoDetail',
@@ -68,23 +71,27 @@
         const targetCity = find(this.ref, c => c.city === this.activeCity)
         switch (this.selectedItem) {
           case 'rate_participation': {
-            const participant = Number(get(targetCity, 'participant') || '1')
-            const ageQualified = Number(get(targetCity, 'age_qualified') || '1')
+            const participant = numeral(get(targetCity, 'participant') || '1').value()
+            const ageQualified = numeral(get(targetCity, 'age_qualified') || '1').value()
             return Math.round((participant * 10000) / ageQualified) / 100
           }
           case 'rate_death': {
-            const participant = Number(get(targetCity, 'participant') || '1') || 1
-            const issueDeath = Number(get(targetCity, 'issue_death') || '0')
+            const participant = numeral(get(targetCity, 'participant') || '1').value() || 1
+            const issueDeath = numeral(get(targetCity, 'issue_death') || '0').value()
             return Math.round((issueDeath * 10000) / participant) / 100            
           }
           case 'rate_failure': {
-            const participant = Number(get(targetCity, 'participant') || '1') || 1
-            const subTotal = Number(get(targetCity, 'sub_total') || '0')
+            debug(`get(targetCity, 'participant')`, get(targetCity, 'participant'))
+            debug(`get(targetCity, 'sub_total')`, get(targetCity, 'sub_total'))
+            debug(`numeral(get(targetCity, 'participant') || '1')`, numeral(get(targetCity, 'participant') || '1'))
+            debug(`numeral(get(targetCity, 'sub_total') || '0')`, numeral(get(targetCity, 'sub_total') || '0'))
+            const participant = numeral(get(targetCity, 'participant') || '1').value() || 1
+            const subTotal = numeral(get(targetCity, 'sub_total') || '0').value()
             return Math.round((subTotal * 10000) / participant) / 100
           }    
           case 'rate_fake': {
-            const participant = Number(get(targetCity, 'participant') || '1') || 1
-            const issueFake = Number(get(targetCity, 'issue_fake') || '0')
+            const participant = numeral(get(targetCity, 'participant') || '1').value() || 1
+            const issueFake = numeral(get(targetCity, 'issue_fake') || '0').value()
             return Math.round((issueFake * 10000) / participant) / 100   
           }      
           default: {
@@ -99,6 +106,19 @@
       }
     },
     methods: {
+      numFormaterize (num, format) {
+        switch (this.selectedItem) {
+          case 'rate_death': {}
+          case 'rate_failure': {}
+          case 'rate_fake': {}
+          case 'rate_participation': {
+            return numeral(num).format(format || '0,0.00')
+          }
+          default: {
+            return numeral(num).format(format || '0,0')
+          }
+        }        
+      },
       unit (type) {
         switch (type) {
           case 'rate_death': {}
@@ -153,10 +173,10 @@
         line-height 2.77
         color #996c33
         .value, .unit
-          font-size 1.875rem
+          font-size 1.5rem
           font-weight 600
         .value
-          margin-left 10px
+          margin 0 10px
       &__support
         font-size 1rem
         font-weight normal

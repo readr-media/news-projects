@@ -9,6 +9,10 @@
     </div>
     <div class="intro__subtitle"><span v-text="$t('REFERENDUM.INTRO.TITLE')"></span></div>
     <div class="intro__brief brief"><span v-html="$t('REFERENDUM.INTRO.BRIEF')"></span></div>
+    <div class="intro__original-ref">
+      <div class="book"><img src="/proj-assets/referendum/icons/icon-more.png"></div>
+      <div class="original-ref"><a href="https://github.com/readr-media/readr-data/blob/master/referendum2018/items.md" target="_blank"><span v-text="$t('REFERENDUM.INTRO.ORIGINAL')"></span></a></div>
+    </div>
   </div>
 </template>
 <script>
@@ -67,10 +71,36 @@
       text-align justify
       >>> a
         &:hover, &:link, &:visited
-          color #000
+          color #111
       span
         font-size 1rem
         line-height 1.88
+    &__original-ref
+      position absolute
+      bottom -14px
+      width 100%
+      height 28px
+      display flex
+      justify-content center
+      align-items center
+      >>> a
+        text-decoration none
+        &:hover, &:link, &:visited
+          color #111
+      .book
+        margin-right 13px
+        img
+          width 34px
+      .original-ref
+        font-size 1rem
+        line-height 2.77
+        letter-spacing normal
+        text-align left
+        color #1a1a1a
+        span
+          border-bottom 1px solid #1a1a1a
+          padding 1px
+
   @media screen and (min-width: 415px)
     .intro
       padding 120px 25px 45px
