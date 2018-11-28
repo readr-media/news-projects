@@ -24,5 +24,6 @@ export default {
   'taiwan-2018-referendum': 'Referendum',
   'puyuma': 'Puyuma',
   'vote2018': 'Vote',
+  'vote2018-result': 'VoteResult',
   //'proj1': 'Proj1',
 }
