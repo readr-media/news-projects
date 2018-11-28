@@ -98,12 +98,14 @@
     background-repeat no-repeat
     border-radius 50%
     transition-duration .19s
+    visibility hidden
   .toggle
     z-index 910
     background-image url(/proj-assets/navbtn.png)
     background-size 100px auto
     background-repeat no-repeat
     background-position -58px 0
+    visibility visible
   .fb
     background-color #3b5998
     background-image url(/proj-assets/facebook.png)
@@ -116,6 +118,8 @@
     background-image url(/proj-assets/gplus.png)
     background-size 47px
 .share.open
+  .fb, .line, .gplus
+    visibility visible
   &.up
     .fb
       transform translate3d(0,-49px,0)
