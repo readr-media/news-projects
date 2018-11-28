@@ -45,14 +45,6 @@ module.exports = {
     // noParse: /es6-promise\.js$/, // avoid webpack shimming process
     noParse: [
       /es6-promise\.js$/, // avoid webpack shimming process
-      /Chenuen/,
-      /Dollclaw/,
-      /Farmhouse/,
-      /ForeignLabour/,
-      /Marathon/,
-      /Newtype/,
-      /PresidentPromise/,
-      /Rent/,
     ],
     rules: [
       {
