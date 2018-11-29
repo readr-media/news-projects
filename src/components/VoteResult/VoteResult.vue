@@ -1,7 +1,7 @@
 <template>
   <section class="vote-result">
     <Logo class="no-sprite" href="https://www.readr.tw/" top="15px" left="15px" bgImage="/proj-assets/vote2018-result/readr-logo.png" />
-    <Share :shareUrl="url" class="vote-result__share" top="15px" right="15px" direction="down" />
+    <Share :shareUrl="`${READR_SITE_URL}vote2018-result`" class="vote-result__share" top="15px" right="15px" direction="down" />
     <Map/>
     <VoteArticle />
     <RelatedReports :theme="'light'"/>
@@ -18,6 +18,7 @@ import RelatedReports from 'src/components/RelatedReports.vue'
 import Share from '../Share.vue'
 import VoteArticle from './components/VoteArticle.vue'
 import module from 'src/store/modules/VoteResult'
+import { READR_SITE_URL } from '../../constants'
 
 export default {
   name: 'VoteResult',
@@ -36,9 +37,9 @@ export default {
       metaImage: 'vote2018-result/ogimage.jpg'
     }
   },
-  computed: {
-    url () {
-      return this.$route.fullPath
+  data () {
+    return {
+      READR_SITE_URL
     }
   },
   created () {

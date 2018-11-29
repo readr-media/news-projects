@@ -13,6 +13,7 @@ import ElectionBoardUpload from './ElectionBoardUpload.vue'
 import ElectionBoardVerify from './ElectionBoardVerify.vue'
 import Logo from '../Logo.vue'
 import Share from '../Share.vue'
+import { READR_SITE_URL } from '../../constants'
 
 import ElectionBoardStoreModule from '../../store/modules/ElectionBoard'
 
@@ -101,7 +102,7 @@ export default {
       return 'ElectionBoardLanding'
     },
     shareLink () {
-      return this.$route.fullPath
+      return `${READR_SITE_URL}election-board`
     }
   },
   watch: {
