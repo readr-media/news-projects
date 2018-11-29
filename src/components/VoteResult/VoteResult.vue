@@ -31,8 +31,8 @@ export default {
   },
   metaInfo () {
     return {
-      title: '你全家都議員——議員家族勢力全解析',
-      description: '選舉要到了，你熟悉選舉公報上的人嗎？READr 蒐集了從 1940 年代以來超過 9 千位地方議員資料，並追查他們的親屬關係，看看誰家的政治香火傳承最久。',
+      title: '我住在「同溫層里」嗎？-- 全台村里公投、候選人開票結果解析',
+      description: '地方選舉結果和公投結束後，你是否對於投票結果感到驚訝？這篇報導讓你看看，你隔壁鄰居的選擇是否和你一樣？',
       metaUrl: 'vote2018-result',
       metaImage: 'vote2018-result/ogimage.jpg'
     }
