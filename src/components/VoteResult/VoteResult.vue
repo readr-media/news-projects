@@ -1,12 +1,12 @@
 <template>
   <section class="vote-result">
-    <div v-if="!$store.state.useragent.isDesktop" class="vote-result__to-desktop-hint" v-show="showHint">
+    <div class="vote-result__to-desktop-hint" v-show="!$store.state.useragent.isDesktop && showHint">
       <p>建議使用電腦瀏覽器進行地圖互動</p>
       <p style="margin: 30px 0 0 0;color: #9e005d" @click="showHint = false">確定</p>
     </div>
     <Logo class="no-sprite" href="https://www.readr.tw/" top="15px" left="15px" bgImage="/proj-assets/vote2018-result/readr-logo.png" />
     <Share :shareUrl="`${READR_SITE_URL}vote2018-result`" class="vote-result__share" top="15px" right="15px" direction="down" />
-    <Dashboard v-if="$store.state.useragent.isDesktop"/>
+    <Dashboard v-show="$store.state.useragent.isDesktop"/>
     <VoteArticle />
     <RelatedReports :theme="'light'"/>
     <div class="vote-result__comment">
