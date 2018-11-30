@@ -2,7 +2,7 @@
   <section class="vote-result">
     <Logo class="no-sprite" href="https://www.readr.tw/" top="15px" left="15px" bgImage="/proj-assets/vote2018-result/readr-logo.png" />
     <Share :shareUrl="`${READR_SITE_URL}vote2018-result`" class="vote-result__share" top="15px" right="15px" direction="down" />
-    <Map/>
+    <Dashboard v-if="$store.state.useragent.isDesktop"/>
     <VoteArticle />
     <RelatedReports :theme="'light'"/>
   </section>
@@ -10,7 +10,7 @@
 
 <script>
 import Logo from '../Logo.vue'
-import Map from './components/Map.vue'
+import Dashboard from './components/Dashboard.vue'
 import RelatedReports from 'src/components/RelatedReports.vue'
 import Share from '../Share.vue'
 import VoteArticle from './components/VoteArticle.vue'
@@ -21,7 +21,7 @@ export default {
   name: 'VoteResult',
   components: {
     Logo,
-    Map,
+    Dashboard,
     RelatedReports,
     Share,
     VoteArticle,
