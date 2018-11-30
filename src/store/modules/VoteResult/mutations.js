@@ -1,4 +1,4 @@
-import Vue from 'Vue'
+import Vue from 'vue'
 
 export default {
   SET_MAP_CURRENT_LOCATION (state, { level = '', id = '' }) {
