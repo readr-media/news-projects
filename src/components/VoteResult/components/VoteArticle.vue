@@ -4,8 +4,8 @@
     <h2>全台村里公投、<br>候選人開票結果解析</h2>
     <div class="credit">
       <img src="/proj-assets/logo_mm_grey_line.png" alt="">
-      <p>文字：劉子維  資料：陳彥宇</p>
-      <p>網頁：熊凱文  設計：陳怡蒨</p>
+      <p><span>文字：劉子維</span><span>資料：陳彥宇</span></p>
+      <p><span>網頁：熊凱文</span><span>設計：陳怡蒨</span></p>
       <p>2018/11/30</p>
     </div>
     <p>2018 年台灣九合一選舉開票的一夜激情從選舉活動剛開跑時不被看好的韓國瑜最終以 15 萬餘票大勝陳其邁，「綠地變藍天」的勢頭一路北上至嘉義市、雲林縣、彰化縣、台中市，到台北市長候選人柯文哲和丁守中開票拉鋸至隔天凌晨三點多、相差三千多票，最終無黨籍柯文哲險勝國民黨籍丁守中，成功連任後，這「好長的一夜」才落幕。</p>
@@ -24,10 +24,6 @@
     <p>簡稱東奧正名的公投第 13 案由前體育國手紀政領銜提出，公投主文是：「你是否同意，以『台灣』（Taiwan）為全名申請參加所有國際運動賽事及 2020 年東京奧運？」根據投票結果，該案被否決。全台灣投票權人有 44.1 % 未投票，2.6 ％ 投廢票。贊成正名的票數為 476 萬 3086 票，佔全部投票權人的 24.1 ％，否定票  577 萬 4556 票，佔 29.2 %。</p>
     <p>台灣選舉結果出爐後，中國國務院台灣事務辦公室（簡稱國台辦）發言人馬曉光在例行記者會上說：「所謂『奧運正名公投案』遭到挫敗，說明拿台灣運動員的利益作賭注不得人心，搞『台獨』註定失敗。」雖然提案領銜人紀政早在七月就表示東奧正名不等於台獨，但該案仍被部分民眾認為是對台灣認同的檢視。</p>
     <p>高雄市選情在這次縣市長選舉中備受關注，國民黨籍市長候選人韓國瑜在選舉初期不被看好，外界普遍認為民進黨籍候選人陳其邁篤定當選。但韓國瑜的聲勢「越選越高漲」，最後韓國瑜大勝陳其邁，扭轉民進黨執政高雄 20 年的局面。韓國瑜在選前就明確表態支持「九二共識」，意即「一個中國、各自表述」，這是國民黨在馬英九政府執政時期，中國大陸與台灣維持正向交流的基礎。</p>
-    <figure>
-      <img src="https://www.readr.tw/assets/images/posts/1542711483-53bd2e1b37e0583fa21e9aebee14cb13.jpg" alt="">
-      <figcaption>圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說</figcaption>
-    </figure>
   </main>
 </template>
 <script>
@@ -92,25 +88,33 @@ template-color = #9e005d
     margin-top .5em
   > p:first-of-type
     margin-top 1em
+  > p
+    span
+      & + span
+        margin-left 1.5em
 
 @media (min-width: 768px)
   .vote-article
     padding 100px 10% 60px
 
-@media (min-width: 1000px)
+@media (min-width: 900px)
   .vote-article
-    width 900px
+    width 800px
     padding 130px 0 120px
     margin 0 auto
     > h1
       font-size 4.375rem
+    > h2
+      font-size 2.5rem
+      br
+        display none
     > h3
       margin 60px 0 .5em
       color #000
       font-size 2.25rem
       background-color transparent
     > p
-      font-size 1.5rem
+      font-size 1.375rem
     > p:first-of-type
       margin-top 80px
     > figure
@@ -122,9 +126,9 @@ template-color = #9e005d
   .credit
     padding 0
     margin-top 50px
-    font-size 1.25rem
+    font-size 1.125rem
     border none
     > img
-      width 50px
-      height 50px
+      width 40px
+      height 40px
 </style>

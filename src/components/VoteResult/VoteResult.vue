@@ -5,9 +5,6 @@
     <Map/>
     <VoteArticle />
     <RelatedReports :theme="'light'"/>
-    <section class="vote-result__comment">
-      <div class="fb-comments" data-href="https://dev.readr.tw/project/vote2018-result" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time" data-width="100%"></div>
-    </section>
   </section>
 </template>
 
@@ -64,18 +61,6 @@ export default {
         background-image url(/proj-assets/vote2018-result/share.png) !important
         background-size 34px auto !important
         background-position center center !important
-  &__comment
-    width 90%
-    margin 20px auto 0
-
-@media (min-width: 768px)
-  .vote-result
-    &__comment
-      width 80%
-
-@media (min-width: 1000px)
-  .vote-result
-    &__comment
-      width 900px
+  
 </style>
 
