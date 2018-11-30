@@ -39,12 +39,13 @@ export default {
         '90 歲以上'
       ] :
       [
-        '高中職以下',
-        '高中',
-        '專科',
-        '大學',
-        '碩士',
-        '博士',
+        '國小畢以下',
+        '國中畢',
+        '高中畢',
+        '專畢',
+        '大畢',
+        '碩畢',
+        '博畢'
       ]
     }
   },
@@ -57,9 +58,9 @@ export default {
         // return mapKeys(chunkedSum, (v, k) => this.bands[k])
         return chunkedSum
       } else {
-        const dropOthers = dropRight(this.data)
-        const invertSort = dropOthers.reverse()
-        return invertSort
+        // const dropOthers = dropRight(this.data)
+        // const invertSort = dropOthers.reverse()
+        return this.data
       }
     }
   },
@@ -142,7 +143,7 @@ export default {
 
       this._x = 
         d3.scaleBand()
-          .domain([ 0, 1, 2, 3, 4, 5 ])
+          .domain(this.dataType === 'age' ? [ 0, 1, 2, 3, 4, 5 ] : [ 0, 1, 2, 3, 4, 5, 6])
           .range([ 0, innerWidth ])
           .padding(0.4)
           .paddingOuter(.5)
