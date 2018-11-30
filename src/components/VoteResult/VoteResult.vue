@@ -1,5 +1,9 @@
 <template>
   <section class="vote-result">
+    <div v-if="!$store.state.useragent.isDesktop" class="vote-result__to-desktop-hint" v-show="showHint">
+      <p>建議使用電腦瀏覽器進行地圖互動</p>
+      <p style="margin: 30px 0 0 0;color: #9e005d" @click="showHint = false">確定</p>
+    </div>
     <Logo class="no-sprite" href="https://www.readr.tw/" top="15px" left="15px" bgImage="/proj-assets/vote2018-result/readr-logo.png" />
     <Share :shareUrl="`${READR_SITE_URL}vote2018-result`" class="vote-result__share" top="15px" right="15px" direction="down" />
     <Dashboard v-if="$store.state.useragent.isDesktop"/>
@@ -39,7 +43,8 @@ export default {
   },
   data () {
     return {
-      READR_SITE_URL
+      READR_SITE_URL,
+      showHint: true
     }
   },
   created () {
@@ -54,10 +59,33 @@ export default {
 }
 </script>
 <style lang="stylus">
+@keyframes fadeIn {
+  0% {
+    opacity 0
+  }
+
+  100% {
+    opacity 1
+  }
+}
+
 .vote-result
   padding-bottom 20px
   background-color #f4f4f2
   overflow hidden
+  &__to-desktop-hint
+    position fixed
+    top 30px
+    left 0
+    background-color white
+    padding 30px
+    width 100vw
+    z-index 100000
+    text-align center
+    animation fadeIn
+    animation-delay 1s
+    animation-duration 1s
+    animation-fill-mode forwards
   &__share
     &.share
       .toggle
