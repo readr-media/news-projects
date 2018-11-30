@@ -32,10 +32,10 @@ export default {
       return sum(this.data)
     },
     percentageMale () {
-      return Number((get(this.data, '1', 0) / this.total).toFixed(3))
+      return Number((get(this.data, '0', 0) / this.total).toFixed(3))
     },
     percentageFemale () {
-      return Number((get(this.data, '0', 0) / this.total).toFixed(3))
+      return Number((get(this.data, '1', 0) / this.total).toFixed(3))
     }
   }
 }
