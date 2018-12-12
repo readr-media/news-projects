@@ -8,6 +8,20 @@ const TerserPlugin = require('terser-webpack-plugin')
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const isProd = NODE_ENV === 'production'
 
+const projects = require('../src/constants/projectList.json')
+// 'cross-env PROJ_DEVING=Example node server' to exclude src/components/Example/* from noParse
+// e.g. 'cross-env PROJ_DEVING=Vote node server' when you are developing within the path src/components/Vote/*
+const createNoParse = () => {
+  const noParseDefault = /es6-promise\.js$/ // avoid webpack shimming process
+  if (isProd || !process.env.PROJ_DEVING) {
+    return [ noParseDefault ]
+  } else {
+    const projNames = Object.values(projects).filter(proj => proj !== process.env.PROJ_DEVING).map(proj => new RegExp(`${proj}/`))
+    projNames.push(noParseDefault)
+    return projNames
+  }
+}
+
 module.exports = {
   mode: NODE_ENV,
   cache: !isProd,
@@ -42,10 +56,7 @@ module.exports = {
     ]
   },
   module: {
-    // noParse: /es6-promise\.js$/, // avoid webpack shimming process
-    noParse: [
-      /es6-promise\.js$/, // avoid webpack shimming process
-    ],
+    noParse: createNoParse(),
     rules: [
       {
         test: /\.vue$/,

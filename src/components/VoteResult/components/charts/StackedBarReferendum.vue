@@ -63,20 +63,20 @@ export default {
   align-items center
   &__agree-text
     min-width calc(30px + 14px)
-    font-size 20px
+    font-size 18px
     margin 0 5px 0 0
   &__graph
     width 100%
-    height 40px
+    height 28px
   &__disagree-text
     min-width 65px
-    font-size 20px
+    font-size 18px
     margin 0 0 0 5px
 
 .graph
   display flex
   &__agree
-    font-size 20px
+    font-size 18px
     font-weight 600
     height 100%
     display flex
@@ -86,7 +86,7 @@ export default {
     justify-content flex-start
     background-color #9e005d
   &__disagree
-    font-size 20px
+    font-size 18px
     font-weight 600
     height 100%
     display flex

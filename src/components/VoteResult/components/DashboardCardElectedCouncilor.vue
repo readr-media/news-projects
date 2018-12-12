@@ -52,13 +52,13 @@ export default {
 .content
   // height 336px
   &__paragraph
-    font-size 20px
+    font-size 18px
     margin 10px 0
   &__methodology
     margin 18px 0 0 0
     border-top 1px solid #979797
     p
-      font-size 14px
+      font-size 12px
       color #979797
       margin 9px 0 0 0
 </style>

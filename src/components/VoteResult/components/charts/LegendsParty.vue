@@ -68,10 +68,10 @@ export default {
   display flex
   align-items center
   &__icon
-    width 16px
-    height 16px
+    width 14px
+    height 14px
   &__text
-    margin 0 0 0 10px
-    font-size 14px
+    margin 0 0 0 8px
+    font-size 12px
 </style>
 

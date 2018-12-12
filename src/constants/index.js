@@ -1,4 +1,4 @@
-import projectList from './projectList'
+import projectList from './projectList.json'
 
 export const PROJECTS = projectList
 

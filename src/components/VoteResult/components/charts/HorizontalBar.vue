@@ -9,7 +9,7 @@
         :candidatesElected="filterElectedCandidates(party)"
       />
     </div>
-    <SquareBarLegends
+    <LegendsParty
       class="chart__legends"
       :parties="Object.keys(candidatesGroupByParty)"
     />
@@ -18,7 +18,7 @@
 
 <script>
 import HorizontalBarParty from './HorizontalBarParty.vue'
-import SquareBarLegends from  './SquareBarLegends.vue'
+import LegendsParty from  './LegendsParty.vue'
 
 import { get, groupBy, sortBy, sumBy } from 'lodash'
 import { getPartyAbbr } from '../../util/index.js'
@@ -34,7 +34,7 @@ export default {
   },
   components: {
     HorizontalBarParty,
-    SquareBarLegends
+    LegendsParty
   },
   computed: {
     candidates () {
