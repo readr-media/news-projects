@@ -31,15 +31,15 @@ export default {
       bands: 
       this.dataType === 'age' ?
       [
-        '15~29 歲',
-        '30~44 歲',
-        '45~59 歲',
-        '60~74 歲',
-        '75~89 歲',
-        '90 歲以上'
+        '15~29',
+        '30~44',
+        '45~59',
+        '60~74',
+        '75~89',
+        '90以上'
       ] :
       [
-        '國小畢以下',
+        '國小畢 以下',
         '國中畢',
         '高中畢',
         '專畢',
@@ -72,7 +72,7 @@ export default {
       const margin = {
         top: 30,
         right: 0,
-        bottom: 30,
+        bottom: this.dataType === 'age' ? 30 : 40,
         left: -5
       }
 
@@ -123,7 +123,7 @@ export default {
           .attr('x', (d, i) => this._x(i) + this._x.bandwidth() / 2)
           .attr('y', d => y(d) - 10)
           .style('text-anchor', 'middle')
-          .style('font-size', '16px')
+          .style('font-size', '12px')
           .text(d => d.toLocaleString())
     }
   },
@@ -134,7 +134,7 @@ export default {
       const margin = {
         top: 30,
         right: 0,
-        bottom: 30,
+        bottom: this.dataType === 'age' ? 30 : 40,
         left: -5
       }
 
@@ -160,11 +160,51 @@ export default {
         d3.axisBottom(this._x)
           .tickFormat(tick => this.bands[tick])
 
-      this._svg
-        .append('g')
-          .attr('class', 'axis')
-          .attr('transform', `translate(0, ${innerHeight})`)
-          .call(axis)
+      const axisElement =
+        this._svg
+          .append('g')
+            .attr('class', 'axis')
+            .attr('transform', `translate(0, ${innerHeight})`)
+            .call(axis)
+
+      axisElement
+        .selectAll(`#bar-${this.dataType} .tick text`)
+          .call(wrap, this._x.bandwidth() + 10)
+          
+      if (this.dataType === 'age') {
+        axisElement
+          .append('text')
+            .attr('x', this._x(5) + 50)
+            .attr('y', 18)
+            .text('(歲)')
+            .style('fill', 'black')
+            .style('font-size', '12px')
+      }
+
+      function wrap(text, width) {
+        text.each(function() {
+          const text = d3.select(this)
+          const words = text.text().split(/\s+/).reverse()
+          let word
+          let line = []
+          let lineNumber = 0
+          const lineHeight = 1.3 // ems
+          const y = text.attr("y")
+          const dy = parseFloat(text.attr("dy"))
+          let tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em")
+
+          while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+              line.pop();
+              tspan.text(line.join(""));
+              line = [word];
+              tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            }
+          }
+        });
+      }
   }
 }
 </script>

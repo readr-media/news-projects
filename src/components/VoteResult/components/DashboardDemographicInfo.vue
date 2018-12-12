@@ -96,7 +96,7 @@ export default {
 <style lang="stylus" scoped>
 .content
   &__stacked
-    width 460px
+    width 400px
     margin 15px 0 0 0
 
 .locations

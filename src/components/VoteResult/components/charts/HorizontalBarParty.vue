@@ -103,12 +103,12 @@ export default {
   display flex
   align-items center
   &__bar
-    height 30px
+    height 24px
     background-color black
   &__tooltip
     position fixed
   &__percentage
-    font-size 24px
+    font-size 18px
     font-weight 600
     margin 0 0 0 10px
 
