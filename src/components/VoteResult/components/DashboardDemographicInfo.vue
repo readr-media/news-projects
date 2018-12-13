@@ -48,6 +48,7 @@ export default {
   computed: {
     ...mapState({
       currentLocation: state => state.map.currentLocation,
+      previousLocationId: state => state.map.previousLocationId,
       codeMapping: state => state.locationCodeMapping
     }),
     salaryMiddle () {
@@ -57,26 +58,33 @@ export default {
     locations () {
       let locations = []
       const { id, level } = this.currentLocation
+      const isHsinchuCity = id.slice(0, 5) === '10018'
 
       if (level === 'county') {
         const countyId = id
         locations.push(get(this.codeMapping, [ countyId, 'name' ], ''))
       } else if (level === 'town') {
-        const countyId = id.slice(0, id.length - 3)
+        const countyId = id.slice(0, id.length - (isHsinchuCity ? 2 : 3))
         locations.push(get(this.codeMapping, [ countyId, 'name' ], ''))
 
-        const townId = id.slice(id.length - 3, id.length)
+        const townId = id.slice(id.length - (isHsinchuCity ? 2 : 3), id.length)
         const townObj = get(this.codeMapping, [ countyId, townId ], {})
         const villageObjFirstItem = get(townObj, Object.keys(townObj)[0], {})
 
         locations.push(get(villageObjFirstItem, 'AreaName', ''))
+        // locations.push(townId)
       } else if (level === 'village') {
         const countyId = id.slice(0, id.length - 6)
         locations.push(get(this.codeMapping, [ countyId, 'name' ], ''))
 
         const townId = id.slice(id.length - 6, id.length - 3)
         const villageId = id.slice(id.length - 3, id.length)
-        locations.push(get(this.codeMapping, [ countyId, townId, villageId, 'AreaName' ], ''))
+        if (this.previousLocationId.slice(0, 5) === '10018') {
+          const voteDivisionId = `${this.previousLocationId.slice(this.previousLocationId.length - 2, this.previousLocationId.length)}`
+          locations.push(get(this.codeMapping, [ countyId, voteDivisionId, villageId, 'AreaName' ], ''))
+        } else {
+          locations.push(get(this.codeMapping, [ countyId, townId, villageId, 'AreaName' ], ''))
+        }
         locations.push(get(this.codeMapping, [ countyId, townId, villageId, 'VillageName' ], ''))
       }
       return locations

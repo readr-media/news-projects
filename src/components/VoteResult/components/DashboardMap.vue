@@ -190,7 +190,7 @@ export default {
         debug('---')
         vm.SET_MAP_PREVIOUS_LOCATION_ID('background')
 
-        d3.json(`/proj-assets/vote2018-result/${countyId}.topo.json`)
+        d3.json(`/proj-assets/vote2018-result/${countyId}.topo${countyId === '10018' ? '.new' : ''}.json`)
           .then(town => {
             g
               .append('g')
@@ -199,7 +199,7 @@ export default {
               .data(topojson.feature(town, town.objects[countyId]).features)
               .enter()
               .append('path')
-              .attr('id', d => `id-${d['properties']['TOWNCODE']}`)
+              .attr('id', d => `id-${countyId === '10018' ? `${countyId}0${d['properties']['VOTEDIVISIONID']}` : d['properties']['TOWNCODE']}`)
               .attr('data-county-code', d => d['properties']['COUNTYCODE'])
               .attr('data-town-code', d => {
                 const code = d['properties']['TOWNCODE']
@@ -211,8 +211,8 @@ export default {
               .on('mouseover', d => {
                 const countyId = d['properties']['COUNTYCODE']
 
-                let townId = d['properties']['TOWNCODE']
-                townId = townId.slice(townId.length - 3, townId.length)
+                let townId = countyId === '10018' ? `${countyId}0${d['properties']['VOTEDIVISIONID']}` : d['properties']['TOWNCODE']
+                townId = townId.slice(townId.length - (countyId === '10018' ? 2 : 3), townId.length)
 
                 const townObj = get(vm.codeMapping, [ countyId, townId ], {})
                 const villageObjFirstItem = get(townObj, Object.keys(townObj)[0], {})
@@ -251,7 +251,8 @@ export default {
         var xyz = get_xyz(d)
         town = d
 
-        const townId = d['properties']['TOWNCODE']
+        const countyId = d['properties']['COUNTYCODE']
+        const townId = countyId === '10018' ? `${countyId}0${d['properties']['VOTEDIVISIONID']}` : d['properties']['TOWNCODE']
         vm.SET_MAP_CURRENT_LOCATION({ level: 'town', id: townId })
         vm.FETCH_DATA_VOTE(`${townId}.json`)
 
@@ -260,10 +261,10 @@ export default {
         debug('path id is:', `#id-${townId}`)
         debug('d is:', d)
         debug('---')
-        const countyId = d['properties']['COUNTYCODE']
+
         vm.SET_MAP_PREVIOUS_LOCATION_ID(countyId)
 
-        d3.json(`/proj-assets/vote2018-result/${townId}.topo.json`)
+        d3.json(`/proj-assets/vote2018-result/${townId}.topo${countyId === '10018' ? '.new' : ''}.json`)
           .then(tw => {
             g
               .append('g')
@@ -289,10 +290,10 @@ export default {
                 g.selectAll('.active').classed('active', false)
                 d3.select(`#id-${d['properties']['VILLCODE']}`)
                   .attr('class', 'active')
-
+      
                 const villageId = d['properties']['VILLCODE']
                 vm.SET_MAP_CURRENT_LOCATION({ level: 'village', id: villageId })
-                vm.FETCH_DATA_VOTE(`${townId}_detail.json`)
+                vm.FETCH_DATA_VOTE(`${d['properties']['TOWNCODE']}_detail.json`)
 
                 debug('---')
                 debug('village_clicked:')
@@ -304,8 +305,8 @@ export default {
               .on('mouseover', d => {
                 const countyId = d['properties']['COUNTYCODE']
 
-                let townId = d['properties']['TOWNCODE']
-                townId = townId.slice(townId.length - 3, townId.length)
+                let townId = countyId === '10018' ? `0${d['properties']['VOTEDIVISIONID']}` : d['properties']['TOWNCODE']
+                // townId = townId.slice(townId.length - (countyId === '10018' ? 2 : 3), townId.length)
 
                 const townObj = get(vm.codeMapping, [ countyId, townId ], {})
                 const villageObjFirstItem = get(townObj, Object.keys(townObj)[0], {})
@@ -314,7 +315,10 @@ export default {
                 const townName = get(villageObjFirstItem, 'AreaName', '')
 
                 let villageId = d['properties']['VILLCODE']
-                villageId = villageId.slice(villageId.length - 3, villageId.length)
+                villageId = villageId.slice(villageId.length - (countyId === '10018' ? 2 : 3), villageId.length)
+                if (countyId === '10018') {
+                  villageId = `0${villageId}`
+                }
 
                 const villageName = get(vm.codeMapping, [ countyId, townId, villageId, 'VillageName' ], '')
 
