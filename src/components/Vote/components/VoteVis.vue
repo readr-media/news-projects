@@ -4,7 +4,7 @@
       <VoteVisButton class="buttons__button" :isActive="view === 1 || view === 2 || view === 3" :text="'看誰全家都議員'" @click.native="clickFilter(1)"/>
       <!-- <VoteVisButton class="buttons__button" :isActive="view === 4" :text="'議員政治世家縣市比一比'" @click.native="clickFilter(4)"/> -->
       <VoteVisButton class="buttons__button" :isActive="view === 5" :text="'想當立委先當議員'" @click.native="clickFilter(5)"/>
-      <VoteVisButton class="buttons__button" :isActive="view === 6" :text="'2018 參戰議員'" @click.native="clickFilter(6)"/>
+      <!-- <VoteVisButton class="buttons__button" :isActive="view === 6" :text="'2018 參戰議員'" @click.native="clickFilter(6)"/> -->
       <div class="search">
         <img v-show="showSearchIcon" class="search__icon" src="/proj-assets/vote2018/search.svg" alt="">
         <input :class="[ 'search__input', { 'search__input--active': searchActive } ]" type="text" v-model="searchInput" @focus="focusInput" @blur="blurInput">
