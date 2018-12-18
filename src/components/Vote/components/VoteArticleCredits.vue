@@ -13,6 +13,9 @@
       <div class="credits__row">
         <p class="credits__item">2018/11/22</p>
       </div>
+      <div class="credits__row">
+        <p class="credits__item">最後更新：2018/12/18</p>
+      </div>
     </div>
   </div>
 </template>

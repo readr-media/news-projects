@@ -5,10 +5,11 @@
       <!-- <VoteVisButton class="buttons__button" :isActive="view === 4" :text="'議員政治世家縣市比一比'" @click.native="clickFilter(4)"/> -->
       <VoteVisButton class="buttons__button" :isActive="view === 5" :text="'想當立委先當議員'" @click.native="clickFilter(5)"/>
       <!-- <VoteVisButton class="buttons__button" :isActive="view === 6" :text="'2018 參戰議員'" @click.native="clickFilter(6)"/> -->
-      <div class="search">
+      <div v-show="view !== 5" class="search">
         <img v-show="showSearchIcon" class="search__icon" src="/proj-assets/vote2018/search.svg" alt="">
         <input :class="[ 'search__input', { 'search__input--active': searchActive } ]" type="text" v-model="searchInput" @focus="focusInput" @blur="blurInput">
       </div>
+      <VoteVisDropdown v-show="view !== 5" class="dropdown" :countyFilter.sync="countyFilter"/>
     </div>
     <VoteVisChart
       class="vis__chart"
@@ -33,11 +34,13 @@ import { nest, } from 'd3-collection'
 import { sum, } from 'd3-array'
 import { get, groupBy, mapValues, findKey, sortBy, take, isEmpty, remove, debounce, uniq } from 'lodash'
 import VoteVisButton from './VoteVisButton.vue'
+import VoteVisDropdown from './VoteVisDropdown.vue'
 import VoteVisChart from './VoteVisChart.vue'
 
 export default {
   components: {
     VoteVisButton,
+    VoteVisDropdown,
     VoteVisChart,
   },
   watch: {
@@ -47,7 +50,7 @@ export default {
         .then((data) => {
           this.dataRawLegislator = data
         })
-      }else if (this.view === 4 && isEmpty(this.dataProcessedCountyRaw)) {
+      } else if (this.view === 4 && isEmpty(this.dataProcessedCountyRaw)) {
         json('/proj-assets/vote2018/voteCounty.json')
         .then(data => {
           this.dataProcessedCountyRaw = data
@@ -327,6 +330,9 @@ export default {
     &--active
       outline none
       background-color white
+
+.dropdown
+  margin 20px 0 0 0
 
 @media (max-width 768px)
   .vis
