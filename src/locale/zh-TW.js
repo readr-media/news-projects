@@ -1,3 +1,4 @@
+import * as peng23 from './peng23'
 import * as rent from './rent'
 import * as referendum from './referendum'
 export default Object.assign({
@@ -111,4 +112,4 @@ export default Object.assign({
   'RELATED_REPORT': '其他議題',
   'DONATE_PREFIX': '贊助',
   'DONATE_POSTFIX': '報導',
-}, rent, referendum)
+}, rent, referendum, peng23)

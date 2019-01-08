@@ -5,6 +5,10 @@
   "plugins": [
     "syntax-dynamic-import",
     "transform-object-rest-spread",
-    "transform-vue-jsx"
+    "transform-vue-jsx",
+    ["transform-runtime", {
+      "polyfill": false,
+      "regenerator": true
+    }]
   ]
 }
