@@ -27,10 +27,10 @@
     name: 'Peng23',
     metaInfo () {
       return {
-        title: this.$t('REFERENDUM.TITLE'),
-        description: this.$t('REFERENDUM.DESCRIPTION'),
-        metaUrl: 'taiwan-2018-referendum',
-        metaImage: 'referendum/referendum-ogimage.jpg',
+        title: this.$t('PENG23.TITLE'),
+        description: this.$t('PENG23.DESCRIPTION'),
+        metaUrl: 'peng23',
+        metaImage: '',
       }
     },
     components: {
