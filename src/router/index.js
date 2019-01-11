@@ -20,7 +20,7 @@ export function createRouter () {
     },
     routes: [
       {
-        path: '/project/:project/:params?', component: Project, beforeEnter: (to, from, next) => {
+        path: '/project/:project/:params?/:subparams?', component: Project, beforeEnter: (to, from, next) => {
           if (!PROJECTS[ get(to, [ 'params', 'project' ]) ]) {
             const e = new Error()
             e.massage = 'Page Not Found'

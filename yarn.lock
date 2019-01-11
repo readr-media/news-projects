@@ -6107,9 +6107,9 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
-scrollama@^1.4.1:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/scrollama/-/scrollama-1.4.3.tgz#d28fda297717b578d69c05bceb5fed0ac78feb08"
+scrollama@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/scrollama/-/scrollama-1.4.4.tgz#e0fd474e04c0be4c95d08280bdc2d636f619db59"
 
 scrollmagic@^2.0.5:
   version "2.0.5"
