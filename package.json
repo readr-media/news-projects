@@ -61,7 +61,7 @@
     "request-ip": "^2.0.2",
     "route-cache": "0.4.4",
     "sanitize-html": "^1.18.4",
-    "scrollama": "^1.4.1",
+    "scrollama": "^1.4.4",
     "serve-favicon": "^2.4.4",
     "swiper": "^4.1.6",
     "topojson": "^3.0.2",

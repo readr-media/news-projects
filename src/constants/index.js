@@ -111,7 +111,8 @@ export const PROJECTS_NOT_NEED_TYPEKIT = [
 
 // include project url path which NOT need to reset scroll position in vue router
 export const PROJECTS_PREVENT_SCROLL_BEHAVIOR = [
-  'political-contribution'
+  'political-contribution',
+  'election-news'
 ]
 
 
