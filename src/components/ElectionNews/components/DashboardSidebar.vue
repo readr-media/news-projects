@@ -97,7 +97,6 @@ export default {
   background-color #eae9eb
   height 100vh
   box-shadow -1px 0 4px 0 rgba(0, 0, 0, 0.5)
-  position relative
   &__handle
     position absolute
     top 0px
