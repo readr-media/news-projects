@@ -31,6 +31,10 @@ export default {
 </script>
 <style lang="stylus">
 
+.stop-scrolling
+  height 100%
+  overflow hidden
+
 // noUi
 .noUi-base
   position relative
