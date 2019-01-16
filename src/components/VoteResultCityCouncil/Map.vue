@@ -21,13 +21,6 @@
         @minusYear="currentYear = yearList[currentYearIndex - 1]"
         @changeCounty="changeCounty"
         @closeLightbox="openContent = false" />
-      <!-- <div class="content-container">
-        <h2 v-text="countyName"></h2>
-        <button @click="openContent = false"><img src="/proj-assets/vote2018-result-city-council/close.png" alt=""></button>
-        <div class="content">
-          
-        </div>
-      </div> -->
     </div>
 
   </section>
@@ -104,6 +97,7 @@ export default {
     return {
       currentYear: 2018,
       countyName: '臺北市',
+      maxElectedCount: 24,
       // loading: true,
       // geoJson: undefined,
       // geoJsonMerge: undefined,
@@ -148,7 +142,7 @@ export default {
         const family = speaker ? speaker['家族'] : undefined
         if (speaker && family) {
           count = this.councilCsv.filter(council => council['家族'] === family && Number(council['年份']) <= this.currentYear).length
-        } else {
+        } else if (speaker) {
           count = this.councilCsv.filter(council => council['姓名'] === speaker['姓名'] && Number(council['年份']) <= this.currentYear).length
         }
         
@@ -193,6 +187,10 @@ export default {
       this.drawMap('lienchiang', value)
       this.fillColor('lienchiang')
     },
+    // councilCsv (value) {
+    //   let familyList = uniq(value.filter(councilor => councilor['家族']).map(councilor => councilor['家族']))
+    //   this.maxElectedCount = Math.max(...familyList.map(family => value.filter(councilor => councilor['家族'] === family).length))
+    // },
     openContent (value) {
       if (value) {
         document.querySelector('body').classList.add('stop-scrolling')
@@ -206,7 +204,15 @@ export default {
       this.fillColor('lienchiang')
     },
     countyName (value) {
+      // const yearListConverted = getYearList(this.currentYear, value, this.yearCsv)
+      // let year
+      // for (let i = 0; i < yearListConverted.length; i += 1) {
+      //   if (yearListConverted[i] <= currentYear) {
+      //     year = yearListConverted[i]
+      //   }
+      // }
       this.currentYear = this.yearList[this.yearList.length - 1]
+      // this.currentYear = year
     } 
   },
   methods: {
@@ -233,15 +239,15 @@ export default {
         .enter()
         .append('path')
         .attr('d', path)
-        .style('stroke-opacity', .1)
-        .style('stroke', '#8d8d8d')
+        .style('stroke-opacity', .3)
+        .style('stroke', '#000')
         .on('click', this.handleClick)
       this[`finished${section}`] = true
     },
     fillColor (section) {
       this[`${section}Map`]
         .selectAll('path')
-        .style('opacity', (d) => {
+        .style('fill', (d) => {
           const councilSpeaker = this.speakerList.find(speaker =>{
             let county = d.properties.COUNTYNAME
             if (county.match(/桃園/) && this.currentYear < 2014) {
@@ -250,18 +256,16 @@ export default {
             return speaker.county === county
           })
           const count = councilSpeaker.count
-          const max = Math.max(...this.speakerList.map(speaker => speaker.count))
-          return count / max + 0.2
-        })
-        .style('fill', (d) => {
-          const councilSpeaker = getCouncilSpeaker(this.currentYear, d.properties.COUNTYNAME, this.yearCsv, this.councilCsv)
-          if (councilSpeaker && councilSpeaker['黨籍'] === '中國國民黨') {
-            return '#364d77'
-          } else if (councilSpeaker && councilSpeaker['黨籍'] === '民主進步黨') {
-            return '#147266'
-          } else {
-            return '#666666'
+          if (councilSpeaker.speaker && councilSpeaker.speaker['黨籍'] === '中國國民黨') {
+            return `rgba(54, 77, 119, ${count / this.maxElectedCount + 0.2})`
+          } else if (councilSpeaker.speaker && councilSpeaker.speaker['黨籍'] === '民主進步黨') {
+            return `rgba(20, 114, 102, ${count / this.maxElectedCount + 0.2})`
+          } else if (councilSpeaker.speaker && councilSpeaker.speaker['黨籍'] === '無黨籍') {
+            return `rgba(125, 125, 125, ${count / this.maxElectedCount + 0.2})`
+          } else if (councilSpeaker.speaker) {
+            return `rgba(199, 89, 17, ${count / this.maxElectedCount + 0.2})`
           }
+          return '#fff'
         })
     },
     handleClick (d) {
