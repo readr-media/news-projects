@@ -18,27 +18,41 @@
       </div>
       <div class="speaker-history">
         <div>
-          <p v-for="item in councilSpeaker" :key="`${item.name}-speaker`"><span v-text="item.name"></span>議長</p>
+          <p v-for="(item, index) in councilSpeaker" :key="`${item['姓名']}-speaker`">
+            <span v-text="item['姓名']"></span>
+          議長{{ index > 0 ? '（遞補）' : '' }}</p>
         </div>
         <div>
-          <p v-for="item in councilSpeaker" :key="`${item.name}-deputy-speaker`"><span v-text="item.name"></span>副議長</p>
+          <p v-for="(item, index) in deputySpeaker" :key="`${item['姓名']}-deputy-speaker`">
+            <span v-text="item['姓名']"></span>
+          副議長{{ index > 0 ? '（遞補）' : '' }}</p>
         </div>
       </div>
       <div class="gantt">
-        <div v-for="(item, index) in councilSpeaker" :key="`${item.name}-gantt`">
+        <GanttChart
+          v-for="(item, index) in ganttList"
+          :key="`${item['年份']}-${item['姓名']}-gantt`"
+          :councilCsv="councilCsv"
+          :councilor="item"
+          :currentYear="currentYear"
+          :index="index"
+          :yearList="yearList" />
+        <!-- <div v-for="(item, index) in councilSpeaker" :key="`${item.name}-gantt`">
           <h3 v-text="item.name"></h3>
           <p v-if="item['家族'] && item['家族'] !== '無'">在{{ countyName }}議會屬於{{ item['家族'] }}家族</p>
           <p><span>個人當選議員次數 {{ item['當選次數'] }} 次</span><span v-if="item['家族'] && item['家族'] !== '無'">；含親屬當選議員次數共 次</span></p>
           <div :id="`chart-test`" class="chart"></div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 <script>
 
+import GanttChart from './GanttChart.vue'
 import Highcharts from 'highcharts'
 import Xrange from 'highcharts/modules/xrange'
+import { uniq } from 'lodash'
 
 export default {
   name: 'ProjectHistory',
@@ -56,10 +70,19 @@ export default {
       type: Array
     }
   },
-  
+  components: {
+    GanttChart
+  },
   computed: {
     councilSpeaker () {
-      return this.councilCsv.filter(councilor => (Number(councilor.year) === this.currentYear) && councilor.county === this.countyName  && councilor['議長'] )
+      return this.councilCsv.filter(councilor => (Number(councilor['年份']) === this.currentYear)
+        && councilor['地區'] === this.countyName 
+        && councilor['議長']).sort((a, b) => Number(a['議長順序']) - Number(b['議長順序']))
+    },
+    deputySpeaker () {
+      return this.councilCsv.filter(councilor => (Number(councilor['年份']) === this.currentYear)
+        && councilor['地區'] === this.countyName 
+        && councilor['副議長']).sort((a, b) => Number(a['副議長順序']) - Number(b['副議長順序']))
     },
     countyNav () {
       const isNewTaipei = /臺北縣|新北/
@@ -72,6 +95,9 @@ export default {
       } 
       return [ this.countyName ]
     },
+    ganttList () {
+      return uniq(this.councilSpeaker.concat(this.deputySpeaker))
+    }
   },
   watch: {
     councilSpeaker () {
@@ -170,6 +196,7 @@ export default {
   text-align center
   background-color rgba(103, 94, 86, .95)
   button
+    outline none
     cursor pointer
   &__nav
     display flex
@@ -192,6 +219,7 @@ export default {
         color #fff
         background-color transparent
         opacity 1
+        cursor default
       img
         width 25px
         height 25px
@@ -241,6 +269,8 @@ export default {
       > p
         margin 0
         color #dcdcdc
+        & + p
+          margin-top .5em
         > span
           margin-right 1em
   .gantt
@@ -268,5 +298,6 @@ export default {
       > button
         &:last-child
           display none
-    
+    &__info
+      width auto
 </style>

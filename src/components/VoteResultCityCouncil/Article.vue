@@ -45,4 +45,5 @@ export default {
       width 60%
       max-width 750px
       margin 0 auto
+      text-align center
 </style>
