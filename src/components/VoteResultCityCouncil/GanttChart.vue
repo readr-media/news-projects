@@ -9,7 +9,7 @@
 <script>
 import Highcharts from 'highcharts'
 import Xrange from 'highcharts/modules/xrange'
-import { uniq } from 'lodash'
+import { union, uniq } from 'lodash'
 
 const convertCountyNameToLatest = (countyName) => {
   if (countyName.match(/桃園/)) {
@@ -46,31 +46,46 @@ export default {
     }
   },
   computed: {
+    yearListFixed () {
+      return [ ...this.yearList, 2022 ]
+    },
     councilorsName () {
       return uniq(this.family.map(councilor => councilor['姓名']))
     },
     councilorsSeries () {
-      return this.councilorsName.map((councilor, index) => {
+      const rrr = []
+      const ttt = this.councilorsName.map((councilor, index) => {
         const personal = this.family.filter(item => item['姓名'] === councilor)
         const record = personal.map(item => {
           const startYearIndex = this.yearList.findIndex(year => year === Number(item['年份']))
-          const endYear = Number(item['年份']) === 2018 ? 2019 : this.yearList[startYearIndex + 1]
-          return { x: Number(item['年份']), x2: endYear, y: index }
+          const endYear = Number(item['年份']) === 2018 ? 2022 : this.yearList[startYearIndex + 1]
+          return { x: Number(item['年份']), x2: endYear, y: index, name: item['姓名'] }
         })
-        // const mergeYear = []
-        // const origin = record[0]
-        // for(let i = 1; i < record.length; i += 1) {
-        //   if (record[i].x === origin.x2 && i === record.length - 1) {
-        //     origin.x2 = record[i].x2
-        //     mergeYear.push(origin)
-        //   } else if (record[i].x === origin.x2) {
-        //     origin.x2 = record[i].x2
-        //   } else {
-        //     mergeYear.push(origin)
-        //   }
-        // }
-        return record
+        const mergeYear = []
+        if (record.length > 1) {
+          let origin = record[0]
+          for (let i = 1; i < record.length; i += 1) {
+            if (record[i].x === origin.x2 && i === record.length - 1) {
+              origin.x2 = record[i].x2
+              mergeYear.push(origin)
+            } else if (record[i].x === origin.x2) {
+              origin.x2 = record[i].x2
+            } else {
+              mergeYear.push(origin)
+              origin = record[i]
+            }
+          }
+        } else {
+          mergeYear.push(record[0])
+        }
+        return mergeYear
       })
+      for (let i = 0; i < ttt.length; i += 1) {
+        for (let j = 0; j < ttt[i].length; j += 1) {
+          rrr.push(ttt[i][j])
+        }
+      }
+      return rrr
     },
     family () {
       if (this.councilor['家族']) {
@@ -116,6 +131,16 @@ export default {
           series: {
             color: '#8d8d8d',
             colorByPoint: false,
+            dataLabels: {
+              enabled: true,
+              format: "{key}", 
+              style: {
+                color: '#fff',
+                fontSize: '12px',
+                fontWeight: 200,
+                textOutline: 0
+              },
+            }
           }
         },
         xAxis: {
@@ -128,7 +153,7 @@ export default {
             rotation: -45,
             y: -20,
           },
-          tickPositions: this.yearList,
+          tickPositions: this.yearListFixed,
           tickLength: 0,
           tickColor: '#a9a6a3',
           gridLineColor: '#a9a6a3',
@@ -144,38 +169,21 @@ export default {
             enabled: false
           },
           gridLineWidth: 0,
-          categories: ['議員1', '議員2', '議員3'],
+          categories: this.councilorsName,
           reversed: true
         },
         tooltip: { enabled: false },
         series: [{
           borderColor: 'rgba(103, 94, 86, .95)',
           pointWidth: 15,
-          data: [{
-            x: 1994,
-            x2: 2002,
-            y: 0,
-          }, {
-            x: 2002,
-            x2: 2010,
-            y: 1
-          }, {
-            x: 2010,
-            x2: 2018,
-            y: 2
-          }],
-          dataLabels: {
-            enabled: true,
-            // style: {
-            //   color: '#fff',
-            //   fontSize: '12px',
-            //   fontWeight: 200,
-            //   textOutline: 0
-            // },
-            // formatter: function () {
-            //   return this.key
-            // },
-          },
+          data: this.councilorsSeries,
+          // dataLabels: {
+            
+          //   formatter: function () {
+          //     console.log('formatter', this)
+          //     return this.name
+          //   },
+          // },
         }],
         exporting: { enabled: false },
         credits: { enabled: false },
@@ -191,7 +199,7 @@ export default {
     margin-top 40px
   > h3
     position relative
-    width calc(100% - 70px)
+    width 100%
     margin 0 auto
     padding .5em 0
     letter-spacing 1px
@@ -249,4 +257,10 @@ export default {
       background-color #48423c
       &::before, &::after
         background-image url(/proj-assets/vote2018-result-city-council/party-unknow.png)
+
+@media (min-width: 1200px)
+  .gantt-chart
+    > h3
+      width calc(100% - 70px)
+
 </style>

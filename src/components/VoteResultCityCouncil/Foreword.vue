@@ -2,7 +2,7 @@
   <section class="foreword">
     <h1>你全家都議長</h1>
     <h2>議長 / 縣市勢力篇</h2>
-    <p>12月25日，隨著2018年選舉新任縣市長就職，各縣市議員也上任了。議會開議之前，最重要的是要決定議會的「老大」。議長選舉出爐，READr 帶你來看看這些議長的家庭背景，以及各地方議會都是由哪些家族在把持。</p>
+    <p>2018 年底的大事，隨著選舉新任縣市長就職，各縣市議會也蓄勢待發。議會開議之前，最重要的是要決定議會的「老大」。議長選舉出爐，READr 帶你來看看這些議長的家庭背景，以及各地方議會有哪些家族勢力。</p>
     <div class="credit">
       <img src="/proj-assets/vote2018-result-city-council/logo-mm.png" alt="mirrormedia">
       <p><span>文／李又如</span><span>設計／許玲瑋</span><span>工程／譚學勇</span></p>
