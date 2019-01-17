@@ -37,21 +37,16 @@
           :currentYear="currentYear"
           :index="index"
           :yearList="yearList" />
-        <!-- <div v-for="(item, index) in councilSpeaker" :key="`${item.name}-gantt`">
-          <h3 v-text="item.name"></h3>
-          <p v-if="item['家族'] && item['家族'] !== '無'">在{{ countyName }}議會屬於{{ item['家族'] }}家族</p>
-          <p><span>個人當選議員次數 {{ item['當選次數'] }} 次</span><span v-if="item['家族'] && item['家族'] !== '無'">；含親屬當選議員次數共 次</span></p>
-          <div :id="`chart-test`" class="chart"></div>
-        </div> -->
       </div>
+      <p>※ 此處當選次數與「你全家都議員」專題當選次數略有不同，為呈現縣市特色，這裡拿來計算的資料不包含臺灣省議會。</p>
+      <p>※ 此處的「家族」成員是指不分親等的所有親屬，且在同縣市擔任過議員的人。</p>
+      <p>※ 家族命名方式是以家族成員中最新一次當選議員者。</p>
     </div>
   </div>
 </template>
 <script>
 
 import GanttChart from './GanttChart.vue'
-import Highcharts from 'highcharts'
-import Xrange from 'highcharts/modules/xrange'
 import { uniq } from 'lodash'
 
 export default {
@@ -99,92 +94,6 @@ export default {
       return uniq(this.councilSpeaker.concat(this.deputySpeaker))
     }
   },
-  watch: {
-    councilSpeaker () {
-      console.log('watch councilSpeaker', document.querySelector('#chart-test'))
-    }
-  },
-  mounted () {
-    Xrange(Highcharts)
-    console.log('dasdas', this.councilSpeaker, document.querySelector('#chart-test'))
-    // this.drawHighChart()
-  },
-  methods: {
-    drawHighChart () {
-      Highcharts.chart('chart-test', {
-        chart: { type: 'xrange', backgroundColor: 'rgba(0,0,0, .1)',  width: 1200, height: 200, marginRight: 50 },
-        title: { text: '' },
-        legend: { enabled: false },
-        plotOptions: {
-          series: {
-            color: '#8d8d8d',
-            colorByPoint: false,
-          }
-        },
-        xAxis: {
-          type: 'linear',
-          labels: {
-            style: {
-              color: '#fff',
-              fontSize: '12px'
-            },
-            rotation: -45,
-            y: -20,
-          },
-          tickPositions: [1955, 1953, 1955, 1958, 1961, 1964, 1968, 1973, 1977, 1982, 1986, 1990, 1994, 1998, 2002, 2006, 2010, 2014, 2018],
-          tickLength: 0,
-          tickColor: '#a9a6a3',
-          gridLineColor: '#a9a6a3',
-          gridLineWidth: 1,
-          startOnTick: true,
-          endOnTick: true,
-          lineWidth: 0,
-          opposite: true
-        },
-        yAxis: {
-          title: { text: '' },
-          labels: {
-            enabled: false
-          },
-          gridLineWidth: 0,
-          categories: ['議員1', '議員2', '議員3'],
-          reversed: true
-        },
-        tooltip: { enabled: false },
-        series: [{
-          borderColor: 'rgba(103, 94, 86, .95)',
-          pointWidth: 15,
-          data: [{
-            x: 1994,
-            x2: 2002,
-            y: 0,
-          }, {
-            x: 2002,
-            x2: 2010,
-            y: 1
-          }, {
-            x: 2010,
-            x2: 2018,
-            y: 2
-          }],
-          dataLabels: {
-            enabled: true,
-            // style: {
-            //   color: '#fff',
-            //   fontSize: '12px',
-            //   fontWeight: 200,
-            //   textOutline: 0
-            // },
-            // formatter: function () {
-            //   return this.key
-            // },
-          },
-        }],
-        exporting: { enabled: false },
-        credits: { enabled: false },
-      })
-    }
-  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -229,7 +138,14 @@ export default {
     height calc(100% - 55px)
     padding 0 15px
     overflow-y auto
-  
+    > p
+      margin 45px auto 0
+      color #dcdcdc
+      font-size .875rem
+      text-align left
+      line-height 1.7
+      & + p
+        margin-top 1em
   .yaer-controller
     position relative
     display inline-flex
@@ -300,4 +216,7 @@ export default {
           display none
     &__info
       width auto
+      > p
+        width 60%
+        text-align justify
 </style>

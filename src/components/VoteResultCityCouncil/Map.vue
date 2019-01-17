@@ -1,8 +1,8 @@
 <template>
   <section class="interactive-map-container">
     <div class="hint">請點選地圖，切換不同縣市議長資料</div>
-    <h3>議長當選次數</h3>
-    <p>若有家族成員也擔任同縣市議員，則加上親屬當選次數</p>
+    <h3>議長「資深」程度地圖</h3>
+    <p>議長至該年度當選次數，若有家族成員擔任同縣市議員，則加上親屬當選次數</p>
     <div class="interactive-map">
       <div class="interactive-map__map">
         <div v-show="finishedtw && currentYear >= 2010" id="map-twmerge"></div>
@@ -72,6 +72,7 @@ import * as d3 from 'd3'
 import * as topojson from 'topojson'
 import History from './History.vue'
 import axios from 'axios'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { get, find, uniq } from 'lodash'
 
 const getSVGWidth = (section, viewportWidth) => {
@@ -253,10 +254,13 @@ export default {
     //   this.maxElectedCount = Math.max(...familyList.map(family => value.filter(councilor => councilor['家族'] === family).length))
     // },
     openContent (value) {
+      const targetElement = document.querySelector('.map-history__info') 
       if (value) {
-        document.querySelector('body').classList.add('stop-scrolling')
+        disableBodyScroll(targetElement)
+        // document.querySelector('body').classList.add('stop-scrolling')
       } else {
-        document.querySelector('body').classList.remove('stop-scrolling')
+        enableBodyScroll(targetElement)
+        // document.querySelector('body').classList.remove('stop-scrolling')
       }
     },
     currentYear (value) {
@@ -265,15 +269,9 @@ export default {
       this.fillColor('lienchiang')
     },
     countyName (value) {
-      // const yearListConverted = getYearList(this.currentYear, value, this.yearCsv)
-      // let year
-      // for (let i = 0; i < yearListConverted.length; i += 1) {
-      //   if (yearListConverted[i] <= currentYear) {
-      //     year = yearListConverted[i]
-      //   }
-      // }
-      this.currentYear = this.yearList[this.yearList.length - 1]
-      // this.currentYear = year
+      const yearListConverted = getYearList(this.currentYear, value, this.yearCsv)
+      const year = getCountyElectionYear(this.currentYear, yearListConverted)
+      this.currentYear = year ? year : yearListConverted[0]
     } 
   },
   methods: {
