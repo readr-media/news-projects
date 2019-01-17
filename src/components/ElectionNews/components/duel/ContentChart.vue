@@ -1,12 +1,16 @@
 <template>
-  <div id="single" class="chart-wrapper">
+  <div id="duel" class="chart-wrapper">
     <ContentChartProgressTracker
       v-show="showProgressTracker"
       class="chart-wrapper__tracker"
       :yTickTransforms="yTickTransforms"
     />
     <svg class="chart" :height="chartHeight">
-      <g class="chart__lines">
+      <g class="chart__left">
+        <g class="chart__x-axis"></g>
+        <g class="chart__y-axis"></g>
+      </g>
+      <g class="chart__right">
         <g class="chart__x-axis"></g>
         <g class="chart__y-axis"></g>
       </g>
@@ -15,9 +19,9 @@
 </template>
 
 <script>
-import { debounce } from 'lodash'
+import { debounce, isEmpty } from 'lodash'
 import * as d3 from 'd3'
-import { single } from '../../charts/single.js'
+import { duel } from '../../charts/duel.js'
 
 import ContentChartProgressTracker from './ContentChartProgressTracker.vue'
 
@@ -31,7 +35,7 @@ export default {
     ContentChartProgressTracker
   },
   watch: {
-    graphDataKeywordFirstFiltered () {
+    data () {
       this.visualize()
     },
     vw () {
@@ -56,27 +60,34 @@ export default {
     }),
     ...mapGetters([
       'graphDataKeywordFirstFiltered',
+      'graphDataKeywordSecondFiltered',
     ]),
+    isDataExist () {
+      return !isEmpty(this.graphDataKeywordFirstFiltered) && !isEmpty(this.graphDataKeywordSecondFiltered)
+    },
+    data () {
+      return [ this.graphDataKeywordFirstFiltered, this.graphDataKeywordSecondFiltered ]
+    },
   },
   methods: {
     resize () {
       d3.select('.chart')
-        .datum(this.graphDataKeywordFirstFiltered)
+        .datum(this.data)
         .call(this.chart)
     },
     visualize () {
-      if (this.graphDataKeywordFirstFiltered !== undefined) {
+      if (this.isDataExist) {
         this.chart =
-          single()
+          duel()
           .dateRange(Object.values(this.dateRange))
           .colorState(this.colors)
 
         d3.select('.chart')
-          .datum(this.graphDataKeywordFirstFiltered)
+          .datum(this.data)
           .call(this.chart)
       }
 
-      this.yTickTransforms = d3.selectAll('.chart__y-axis .tick').nodes().map(e => e.attributes.transform.value)
+      this.yTickTransforms = d3.selectAll('.chart__right .chart__y-axis .tick').nodes().map(e => e.attributes.transform.value)
       this.showProgressTracker = true
     }
   },
@@ -92,11 +103,9 @@ export default {
 <style lang="stylus" scoped>
 .chart-wrapper
   position relative
-
+  
 .chart
   width 100%
-  // height 2000px
-  // border 1px solid black
   &__x-axis
     & >>> .domain
       display none
@@ -113,4 +122,8 @@ export default {
     & >>> .tick text
       font-size 12px
       fill #999999
+
+.chart__left
+  .chart__y-axis
+    display none
 </style>

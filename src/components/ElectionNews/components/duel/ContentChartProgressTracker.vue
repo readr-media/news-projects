@@ -21,14 +21,16 @@
         class="tracker__line line"
         :style="{ top: `calc(50vh - ${trackerLineOffset}px)` }"
       >
-        <div class="line__triangle"></div>
-        <div class="line__line"></div>
-        <img
+        <div class="line__triangle line__triangle--left"></div>
+        <div class="line__line line__line--left"></div>
+        <div class="line__triangle line__triangle--right"></div>
+        <div class="line__line line__line--right"></div>
+        <!-- <img
           :class="[ 'line__hamburger', { 'line__hamburger--sidebar-toggled': showSidebar } ]"
           src="/proj-assets/election-news/img/hamburger.svg"
           alt=""
           @click="TOGGLE_LIGHTBOX"
-        >
+        > -->
       </div>
       <Tooltip
         :class="[ 'tracker__tooltip', { 'tracker__tooltip--show': showTooltip } ]"
@@ -67,7 +69,8 @@ export default {
   },
   data () {
     return {
-      offset: 14 + 16.66 / 2,
+      // offset: 14 + 16.66 / 2,
+      offset: 10 + 16.66 / 2,
       showTracker: false,
       showTooltip: false,
       trackerLineOffset: 0,
@@ -97,7 +100,7 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'TOGGLE_LIGHTBOX',
+      // 'TOGGLE_LIGHTBOX',
       'SET_STEP_INDEX'
     ]),
     get,
@@ -189,7 +192,7 @@ export default {
   &__tooltip
     position fixed
     // top calc(50vh - 26px)
-    left calc((100vw - 150px + 50px) / 2)
+    left calc((100vw - 200px) / 2)
     opacity 0
     transition opacity .25s ease-out
     &--show
@@ -198,25 +201,36 @@ export default {
 .line
   position fixed
   // top calc(50vh - 46px)
-  left 60px
-  width calc(100vw - 60px)
+  left 0
+  width calc(100vw - 10px)
   height 20px
   &__triangle
     position absolute
     top calc((20px - 10px) / 2)
-    left 0
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 5px 0 5px 8.7px;
-    border-color: transparent transparent transparent #4a90e2;
+    &--left
+      left calc(50vw - 34px - 5px)
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 5px 8.7px 5px 0;
+      border-color: transparent #4a90e2 transparent transparent;
+    &--right
+      left calc(50vw - 34px + 34px + 37.41px * 0.5)
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 5px 0 5px 8.7px;
+      border-color: transparent transparent transparent #4a90e2;
   &__line
     position absolute
-    left 10px
     top 50%
-    width 100%
     height 1px
     background-color #eae9eb
+    width calc(50vw - 34px - 6px)
+    &--left
+      left 0
+    &--right
+      right 0
   &__hamburger
     position absolute
     right calc(10px + 10px)

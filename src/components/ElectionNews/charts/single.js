@@ -9,10 +9,12 @@ import {
   marginSingle,
   translateOffsetSingle
 } from '../costants'
+import {
+  calcDateRangeDays
+} from '../util'
 
 export function single () {
   let dateRange = []
-  let dateRangeDays = 0
   let colorState = '#fad187'
 
   const colorDefault = '#fad187'
@@ -45,19 +47,18 @@ export function single () {
 
     selection.each(function (data) {
       // data preprocessing
+      // console.log(data);
       data = graphDataToArray(data, dateRange)
+      // console.log(data);
 
       // set domain of scales
       x.domain([ 0 , getNewsCountMax(data) ])
       y.domain(getDateExtent(dateRange))
-      // console.log(x.domain())
-      // console.log(y.domain())
 
       xAxis
         .tickSize(height + xAxisTickSizeOffset)
       yAxis
-        // .ticks(totalData[0].values.length)
-        .ticks(dateRangeDays)
+        .ticks(calcDateRangeDays(dateRange[0], dateRange[1]))
 
       const svg =
         d3.select(this)
@@ -100,12 +101,6 @@ export function single () {
   chart.dateRange = function (_) {
     if (!arguments.length) return dateRange
     dateRange = _
-    return chart
-  }
-
-  chart.dateRangeDays = function (_) {
-    if (!arguments.length) return dateRangeDays
-    dateRangeDays = _
     return chart
   }
 
