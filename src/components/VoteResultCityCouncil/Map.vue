@@ -22,7 +22,48 @@
         @changeCounty="changeCounty"
         @closeLightbox="openContent = false" />
     </div>
-
+    <div class="legend">
+      <div class="legend__party kmt">
+        <span>國民黨</span>
+        <dir class="legend__color">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </dir>
+      </div>
+      <div class="legend__party dpp">
+        <span>民進黨</span>
+        <dir class="legend__color">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </dir>
+      </div>
+      <div class="legend__party none">
+        <span>無黨籍</span>
+        <dir class="legend__color">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </dir>
+      </div>
+      <div class="legend__party unknown">
+        <span>無資料</span>
+        <dir class="legend__color">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </dir>
+      </div>
+    </div>
   </section>
 </template>
 <script>
@@ -61,14 +102,34 @@ const getYearList = (currentYear, countyName, yearCsv) => {
   return Object.entries(yearList).filter(data => data[1] === '1').map(data => Number(data[0]))
 }
 
-const getCouncilSpeaker = (currentYear, countyName, yearCsv, councilCsv) => {
-  const yearListConverted = getYearList(currentYear, countyName, yearCsv)
+const getCountyElectionYear = (currentYear, yearList) => {
   let year
-  for (let i = 0; i < yearListConverted.length; i += 1) {
-    if (yearListConverted[i] <= currentYear) {
-      year = yearListConverted[i]
+  for (let i = 0; i < yearList.length; i += 1) {
+    if (yearList[i] <= currentYear) {
+      year = yearList[i]
     }
   }
+  return year
+}
+
+const convertCountyNameToLatest = (countyName) => {
+  if (countyName.match(/桃園/)) {
+    return '桃園市'
+  } else if (countyName.match(/臺中/)) {
+    return '臺中市'
+  } else if (countyName.match(/台南/)) {
+    return '台南市'
+  } else if (countyName.match(/高雄/)) {
+    return '高雄市'
+  } else if (countyName === '臺北縣') {
+    return '新北市'
+  }
+  return countyName
+}
+
+const getCouncilSpeaker = (currentYear, countyName, yearCsv, councilCsv) => {
+  const yearListConverted = getYearList(currentYear, countyName, yearCsv)
+  const year = getCountyElectionYear(currentYear, yearListConverted)
   return councilCsv.filter(council => council['地區'] === countyName.replace('台', '臺')
     && Number(council['年份']) === year
     && council['議長']).sort((a, b) => b['議長順序'] - a['議長順序'])[0]
@@ -141,7 +202,7 @@ export default {
         const speaker = getCouncilSpeaker(this.currentYear, county, this.yearCsv, this.councilCsv)
         const family = speaker ? speaker['家族'] : undefined
         if (speaker && family) {
-          count = this.councilCsv.filter(council => council['家族'] === family && Number(council['年份']) <= this.currentYear).length
+          count = this.councilCsv.filter(council => council['家族'] === family && convertCountyNameToLatest(speaker['地區']) === convertCountyNameToLatest(council['地區']) && Number(council['年份']) <= this.currentYear).length
         } else if (speaker) {
           count = this.councilCsv.filter(council => council['姓名'] === speaker['姓名'] && Number(council['年份']) <= this.currentYear).length
         }
@@ -304,6 +365,64 @@ export default {
       align-items center
       &.open
         display flex
+    .legend
+      display flex
+      flex-wrap wrap
+      width calc(100% - 40px)
+      margin 0 auto
+      padding-bottom 25px
+      &__party
+        display flex
+        width 50%
+        // &:nth-of-type(odd)
+        //   .legend__color
+        //     margin-right 20px
+        &:nth-of-type(3), &:nth-of-type(4)
+          margin-top 20px
+        &.kmt
+          .legend__color
+            > div
+              background-color rgb(54, 77, 119)
+        &.dpp
+          .legend__color
+            > div
+              background-color rgb(20, 114, 102)
+        &.none
+          .legend__color
+            > div
+              background-color rgb(125, 125, 125)
+        &.unknown
+          .legend__color
+            > div
+              background-color rgb(199, 89, 17)
+      &__color
+        flex 1
+        position relative
+        display flex
+        padding 0
+        margin 0 20px 0 10px
+        &::before
+          content '20'
+          position absolute
+          bottom -1.2em
+          left -0.5em
+          font-size .75rem
+        &::after
+          content '0 次'
+          position absolute
+          bottom -1.2em
+          right -1.5em
+          font-size .75rem
+        > div
+          flex 1
+          &:nth-of-type(2)
+            opacity .8
+          &:nth-of-type(3)
+            opacity .6
+          &:nth-of-type(4)
+            opacity .4
+          &:nth-of-type(5)
+            opacity .2
     
   .interactive-map
     position relative
@@ -389,6 +508,9 @@ export default {
       padding 0
       font-size 1.3125rem
       line-height 40px
+    .legend
+      width 60%
+      max-width 750px
 
 @media (min-width: 1200px)
   .interactive-map-container
@@ -405,6 +527,13 @@ export default {
       top 40px
       width 50%
       height calc(100% - 40px)
+    .legend
+      position absolute
+      bottom 0
+      right calc((50% - 400px) / 2)
+      width 400px
+      &__color
+        margin 0 40px 0 10px
   .interactive-map
     width 50%
     min-height calc(100vh - 134px)
