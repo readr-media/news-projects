@@ -1,8 +1,8 @@
 <template>
   <div :class="[ party, 'gantt-chart' ]">
     <h3 v-text="councilor['姓名']"></h3>
-    <p v-if="councilor['家族'] && councilor['家族'] !== '無'">在{{ councilor['地區'] }}議會屬於{{ councilor['家族'] }}家族</p>
-    <p><span>個人當選議員次數 {{ personalCount }} 次</span><span v-if="councilor['家族'] && councilor['家族'] !== '無'">；含親屬當選議員次數共 {{ familyCount }} 次</span></p>
+    <p>在{{ councilor['地區'] }}議會{{ councilor['家族'] && councilor['家族'] !== '無' ? `屬於${councilor['家族']}家族` : `無家族成員擔任議員` }}</p>
+    <p><span>至 2018 年總共當選 {{ personalCount }} 次</span><span v-if="councilor['家族'] && councilor['家族'] !== '無'">，含議員親屬當選次數 {{ familyCount }} 次</span></p>
     <div :id="`chart-${currentYear}-${index}`" class="chart"></div>
   </div>
 </template>
@@ -10,6 +10,21 @@
 import Highcharts from 'highcharts'
 import Xrange from 'highcharts/modules/xrange'
 import { uniq } from 'lodash'
+
+const convertCountyNameToLatest = (countyName) => {
+  if (countyName.match(/桃園/)) {
+    return '桃園市'
+  } else if (countyName.match(/臺中/)) {
+    return '臺中市'
+  } else if (countyName.match(/台南/)) {
+    return '台南市'
+  } else if (countyName.match(/高雄/)) {
+    return '高雄市'
+  } else if (countyName === '臺北縣') {
+    return '新北市'
+  }
+  return countyName
+}
 
 export default {
   name: 'GanttChart',
@@ -59,13 +74,13 @@ export default {
     },
     family () {
       if (this.councilor['家族']) {
-        return this.councilCsv.filter(councilor => (councilor['家族'] === this.councilor['家族']) && (councilor['年份'] <= this.councilor['年份']))
+        return this.councilCsv.filter(councilor => (councilor['家族'] === this.councilor['家族']) && (convertCountyNameToLatest(councilor['地區']) === convertCountyNameToLatest(this.councilor['地區'])))
       }
-      return this.councilCsv.filter(councilor => (councilor['姓名'] === this.councilor['姓名']) && (councilor['年份'] <= this.councilor['年份']))
+      return this.councilCsv.filter(councilor => (councilor['姓名'] === this.councilor['姓名']))
     },
     familyCount () {
       if (this.councilor['家族']) {
-        return this.councilCsv.filter(councilor => (councilor['家族'] === this.councilor['家族']) && (councilor['年份'] <= this.councilor['年份'])).length
+        return this.councilCsv.filter(councilor => (councilor['家族'] === this.councilor['家族']) && (convertCountyNameToLatest(councilor['地區']) === convertCountyNameToLatest(this.councilor['地區']))).length
       }
       return 0
     },
