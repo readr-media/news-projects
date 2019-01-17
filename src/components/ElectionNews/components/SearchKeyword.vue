@@ -62,7 +62,7 @@ export default {
 
 <style lang="stylus">
 .search
-  height 20px
+  height 30px
 
 #autosuggest
   height 100%
@@ -71,7 +71,7 @@ export default {
   outline: none;
   position: relative;
   display: block;
-  font-size: 10px;
+  font-size: 16px;
   border: 1px solid #999999;
   padding: 10px;
   width: 100%;

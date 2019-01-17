@@ -33,3 +33,7 @@ export function sentimentScoreString (scaledScore) {
     return 'good'
   }
 }
+
+export function calcDateRangeDays (start, until) {
+  return moment(until, 'YYYY/MM/DD').diff(moment(start, 'YYYY/MM/DD'), 'days') + 1
+}

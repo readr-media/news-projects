@@ -69,6 +69,7 @@ export default {
       viewport: state => state.viewport
     }),
     ...mapState({
+      graphData: state => state.data.graph,
       keywords: state => state.mapping.keywords,
       showSidebar: state => state.showSidebar,
       showLightbox: state => state.showLightbox
@@ -91,10 +92,10 @@ export default {
       'HIDE_SIDEBAR'
     ]),
     fetchDataGraph () {
-      if (this.keywordIdFirst !== undefined) {
+      if (this.keywordIdFirst !== undefined && !(this.keywordIdFirst in this.graphData)) {
         this.FETCH_DATA_GRAPH(this.keywordIdFirst)
       }
-      if (this.keywordIdSecond !== undefined) {
+      if (this.keywordIdSecond !== undefined && !(this.keywordIdSecond in this.graphData)) {
         this.FETCH_DATA_GRAPH(this.keywordIdSecond)
       }
     },

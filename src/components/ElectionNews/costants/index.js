@@ -17,6 +17,16 @@ export const translateOffsetSingle = {
   x: 0,
   y: 10
 }
+export const marginDuel = {
+  top: 20,
+  right: 0,
+  bottom: 20,
+  left: 0
+}
+export const translateOffsetDuel = {
+  x: 0,
+  y: 5
+}
 
 export const sentimentRange = {
   bad: {

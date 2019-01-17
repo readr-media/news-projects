@@ -12,7 +12,12 @@ import {
 } from 'lodash'
 import moment from 'moment'
 
-import { formatDate, sentimentScoreString, scaleSentimentScore } from 'src/components/ElectionNews/util'
+import {
+  formatDate,
+  sentimentScoreString,
+  scaleSentimentScore,
+  calcDateRangeDays
+} from 'src/components/ElectionNews/util'
 
 export default {
   keywordsMappingFetchStatus (state) {
@@ -83,7 +88,7 @@ export default {
 
   dateRangeDays (state) {
     const { start, until } = state.data.date
-    return moment(until, 'YYYY/MM/DD').diff(moment(start, 'YYYY/MM/DD'), 'days') + 1
+    return calcDateRangeDays(start, until)
   },
 
   graphTrackingLineDate (state) {
