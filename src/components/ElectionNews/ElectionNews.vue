@@ -1,8 +1,8 @@
 <template>
   <div class="election-news">
-    <Landing/>
-    <Dashboard v-if="showDashboard" class="election-news__dashboard"/>
-    <Footer v-if="showDashboard" class="election-news__footer"/>
+    <Landing class="election-news__landing"/>
+    <Dashboard v-show="showDashboard" class="election-news__dashboard"/>
+    <Footer v-show="showDashboard" class="election-news__footer"/>
   </div>
 </template>
 
@@ -45,9 +45,36 @@ export default {
       }
 
       this.CLEAR_SOURCES_FILTER()
+    },
+    isDataFetched () {
+      if (this.isDataFetched) {
+        this.$scrollTo('.content')
+      }
+    }
+  },
+  data () {
+    return {
+      isStoreModuleLoaded: false
     }
   },
   computed: {
+    ...mapState({
+      data: state => state.data.graph
+    }),
+    ...mapGetters([
+      'keywordIdFirst',
+      'keywordIdSecond'
+    ]),
+    isDataFetched () {
+      if (!this.isStoreModuleLoaded) { return false }
+
+      const isDuel = this.$route.params.subparams !== undefined
+      if (isDuel) {
+        return (this.keywordIdFirst && this.keywordIdFirst in this.data) && (this.keywordIdSecond && this.keywordIdSecond in this.data)
+      } else {
+        return (this.keywordIdFirst && this.keywordIdFirst in this.data)
+      }
+    },
     showDashboard () {
       const { params } = this.$route.params
       return params !== undefined
@@ -71,7 +98,8 @@ export default {
   },
   created () {
     this.$store.registerModule('ElectionNews', module)
-
+    this.isStoreModuleLoaded = true
+    
     // init custom navigate function
     this.$router.navigate = function ({ param = '', subparam = '' }) {
       debug('Navigation performed')

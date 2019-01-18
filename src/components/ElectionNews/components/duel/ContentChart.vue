@@ -52,7 +52,8 @@ export default {
   },
   computed: {
     ...mapStateRoot({
-      vw: state => state.viewport[0]
+      vw: state => state.viewport[0],
+      isDesktop: state => state.useragent.isDesktop
     }),
     ...mapState({
       colors: state => state.colors,
@@ -81,6 +82,7 @@ export default {
           duel()
           .dateRange(Object.values(this.dateRange))
           .colorState(this.colors)
+          .isDesktop(this.isDesktop)
 
         d3.select('.chart')
           .datum(this.data)
@@ -126,4 +128,13 @@ export default {
 .chart__left
   .chart__y-axis
     display none
+
+@media (min-width 1024px)
+  .chart
+    &__x-axis
+      & >>> .tick text
+        font-size 14px
+    &__y-axis
+      & >>> .tick text
+        font-size 14px
 </style>

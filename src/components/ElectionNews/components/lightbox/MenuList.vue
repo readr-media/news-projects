@@ -70,6 +70,7 @@ export default {
   position sticky
   top 170px
   left 0
+  cursor pointer
   &--show-list
     background-color white
     border-bottom none
@@ -102,4 +103,17 @@ export default {
   padding 0 16px
   &__item
     margin 20px 0
+
+@media (min-width 1024px)
+  .header
+    height 60px
+    top 200px
+    &__icon
+      right 44px
+      top calc((60px - 20px) / 2 - 2px)
+
+  .list
+    padding 0 44px
+    &__item
+      margin 30px 0
 </style>

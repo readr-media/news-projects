@@ -24,4 +24,9 @@ export default {
 .header
   &__search
     margin 10px 0 0 0
+
+@media (min-width 1024px)
+  .header
+    &__search
+      margin 20px 0 0 0
 </style>

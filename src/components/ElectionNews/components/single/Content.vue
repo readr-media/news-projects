@@ -35,7 +35,7 @@ export default {
     }
   },
   mounted () {
-    this.$scrollTo('.content')
+    // this.$scrollTo('.content')
   }
 }
 </script>
@@ -47,4 +47,10 @@ export default {
     p
       font-size 10px
       text-align center
+
+@media (min-width 1024px)
+  .content
+    &__data-fetched
+      p
+        font-size 14px
 </style>

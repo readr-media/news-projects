@@ -87,4 +87,22 @@ export default {
     height 80px
     text-align center
     line-height 1.3
+
+@media (min-width 1024px)
+  .footer
+    &__title
+      font-size 20px
+      margin 14px 0
+
+  .navs
+    &__right
+      margin 0 0 0 40px
+
+  .button
+    height 30px
+    font-size 14px
+    & + &
+      margin 14px 0 0 0
+    &--large
+      height 118px
 </style>

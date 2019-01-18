@@ -113,4 +113,13 @@ export default {
     & >>> .tick text
       font-size 12px
       fill #999999
+
+@media (min-width 1024px)
+  .chart
+    &__x-axis
+      & >>> .tick text
+        font-size 14px
+    &__y-axis
+      & >>> .tick text
+        font-size 14px
 </style>

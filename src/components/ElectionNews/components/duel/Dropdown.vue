@@ -9,7 +9,7 @@
     />
     <div
       v-show="showDropdown"
-      :class="[ 'dropdown__select', 'select', { 'select--dropup': atFooter } ]"
+      :class="[ 'dropdown__select', 'select', { 'select--at-footer': atFooter } ]"
     >
       <div 
         v-for="(keyword, id) in keywords"
@@ -115,4 +115,11 @@ export default {
     font-size 14px
     line-height 1.25
     text-align justify
+    cursor pointer
+
+@media (min-width 1024px)
+  .select
+    top 50px
+    &--at-footer
+      top 25px
 </style>

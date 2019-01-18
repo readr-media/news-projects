@@ -44,6 +44,7 @@ export default {
 .check-item
   display flex
   align-items center
+  cursor pointer
   &__checkbox
     d = 10px
     width d
@@ -63,4 +64,15 @@ export default {
     white-space nowrap
     overflow hidden
     text-overflow ellipsis
+
+@media (min-width 1024px)
+  .check-item
+    &__checkbox
+      d = 14px
+      width d
+      min-width d
+      height d
+    &__text
+      font-size 14px
+      margin 0 0 0 10px
 </style>

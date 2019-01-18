@@ -65,6 +65,7 @@ export default {
   display flex
   justify-content center
   align-items center
+  z-index 10000
   &__dimmed
     width 100%
     height 100%
@@ -72,11 +73,12 @@ export default {
     position absolute
     top 0
     left 0
+    z-index 9998
   &__lightbox
     width 100% // mutate when needed
     height 100% // mutate when needed
     background-color #fff
-    z-index 2
+    z-index 9999
 
 .lightbox
   &__close-button
@@ -85,10 +87,29 @@ export default {
     right 0
     cursor pointer
     -webkit-tap-highlight-color transparent
-    z-index 1000
+    z-index 10000
     width 40px
   &__content
     height 100%
     overflow-y scroll
     -webkit-overflow-scrolling touch
+
+@media (min-width 1024px)
+  .lightbox-wrapper
+    &__lightbox
+      width 41% // mutate when needed
+      height 88% // mutate when needed
+
+  .lightbox
+    &__close-button
+      top calc((100% - 88%) / 2 - 40px / 2)
+      right calc((100% - 41%) / 2 - 40px / 2)
+    &__content
+      &::-webkit-scrollbar
+        display none
+        background-color transparent
+      &::-webkit-scrollbar-track
+        background-color transparent
+      &::-webkit-scrollbar-thumb
+        background-color transparent
 </style>
