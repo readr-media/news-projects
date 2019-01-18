@@ -159,8 +159,8 @@ export default {
     this.createScrollerSteps()
     this.debounceResize = debounce(this.scrollerResize, 500)
 
-    this.trackerLineOffset = this.isDesktop ? 8 : 46
-    this.tooltipOffset = this.trackerLineOffset - 20
+    this.trackerLineOffset = this.isDesktop ? 18 : 46
+    this.tooltipOffset = this.trackerLineOffset - 30
   }
 }
 </script>
@@ -225,4 +225,22 @@ export default {
     transition right .25s ease-out
     &--sidebar-toggled
       right calc(100px + 10px)
+
+@media (min-width 1024px)
+  .tracker
+    &__tooltip
+      position fixed
+      left calc((100vw - 150px) / 2)
+
+  .line
+    left calc((100vw - 500px) / 2 + 43px)
+    width 450px
+    height 40px
+    &__triangle
+      top calc((40px - 20px) / 2)
+      border-width: 10px 0 10px 17.3px;
+    &__line
+      left 18px
+    &__hamburger
+      right -20px
 </style>

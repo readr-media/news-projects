@@ -63,4 +63,12 @@ export default {
   align-items center
   cursor pointer
   -webkit-tap-highlight-color transparent
+
+@media (min-width 1024px)
+  .footer
+    &__to-single
+      margin 30px 0 0 0
+  .button
+    height 30px
+    font-size 14px
 </style>

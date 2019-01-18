@@ -34,4 +34,13 @@ export default {
     margin 16px 0 0 0
   &__footer
     margin 32px 0 0 0
+
+@media (min-width 1024px)
+  .section
+    &__legends
+      margin 30px 0 0 0
+    &__content
+      margin 42px 0 0 0
+    &__footer
+      margin 32px 0 0 0
 </style>

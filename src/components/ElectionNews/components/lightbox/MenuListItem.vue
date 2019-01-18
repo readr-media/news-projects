@@ -92,4 +92,19 @@ export default {
     margin 0
     font-size 12px
     color #999999
+
+@media (min-width 1024px)
+  .list-item
+    &__right
+      margin 0 0 0 24px
+
+  .left
+    &__score
+      font-size 12px
+
+  .right
+    &__news-title
+      font-size 16px
+    &__news-source
+      font-size 16px
 </style>

@@ -94,4 +94,9 @@ export default {
       height 30px
   &__right
     margin 0 0 0 10px
+
+@media (min-width 1024px)
+  .head
+    &__right
+      font-size 20px
 </style>

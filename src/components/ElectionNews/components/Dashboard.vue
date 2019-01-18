@@ -1,10 +1,11 @@
 <template>
   <section class="dashboard">
-    <DashboardMain/>
+    <DashboardMain class="dashboard__main"/>
     <DashboardSidebar
       :class="[
         'dashboard__sidebar',
         { 'dashboard__sidebar--sidebar-shown': showAsideItems },
+        { 'dashboard__sidebar--bottom': asideShouldBottom },
         { 'dashboard__sidebar--sidebar-toggled': showAsideItems && showSidebar }
       ]"
       @toggleHandle="TOGGLE_SIDEBAR"
@@ -61,12 +62,15 @@ export default {
     return {
       showAsideItems: false,
       hasFirstShown: false,
+      asideShouldBottom: false,
       delay: 2000
     }
   },
   computed: {
     ...mapStateRoot({
-      viewport: state => state.viewport
+      viewport: state => state.viewport,
+      isMobile: state => state.useragent.isMobile,
+      isDesktop: state => state.useragent.isDesktop,
     }),
     ...mapState({
       graphData: state => state.data.graph,
@@ -107,6 +111,7 @@ export default {
       this.scroller
         .setup({
           step: '.dashboard',
+          offset: this.isMobile ? 0.5 : 0,
         })
         .onStepEnter(({element, index, direction}) => {
           this.showAsideItems = true
@@ -115,8 +120,35 @@ export default {
           this.showAsideItems = false
         })
     },
+    createScrollerDesktop () {
+      require('intersection-observer')
+      const scrollama = require('scrollama')
+      this.scrollerDesktop = scrollama()
+
+      this.scrollerDesktop
+        .setup({
+          step: '.dashboard',
+          offset: 1,
+        })
+        .onStepEnter(({element, index, direction}) => {
+          if (direction === 'up') {
+            this.showAsideItems = true
+          }
+          this.asideShouldBottom = false
+        })
+        .onStepExit(({element, index, direction}) => {
+          this.showAsideItems = false
+
+          if (direction === 'down') {
+            this.asideShouldBottom = true
+          }
+        })
+    },
     scrollerResize () {
       this.scroller.resize()
+      if (this.isDesktop) {
+        this.scrollerDesktop.resize()
+      }
     },
     setTimer () {
       this.SHOW_SIDEBAR()
@@ -138,6 +170,9 @@ export default {
   },
   mounted () {
     this.createScroller()
+    if (this.isDesktop) {
+      this.createScrollerDesktop()
+    }
     this.debounceResize = debounce(this.scrollerResize, 500)
   }
 }
@@ -163,8 +198,35 @@ export default {
     bottom 10px
     width 27px
     transition right .25s ease-out
+    cursor pointer
     &--sidebar-shown
       right calc(10px + 10px)
     &--sidebar-toggled
       right calc(100px + 10px)
+
+@media (min-width 1024px)
+  .dashboard
+    position relative
+    &__main
+      max-width 500px
+      margin 0 auto
+    &__sidebar
+      width 300px !important
+      position absolute
+      top 0
+      right 0
+      &--sidebar-shown
+        position fixed
+        top 0
+        right 0
+      &--bottom
+        top initial
+        bottom 0
+    &__to-top
+      display none
+      transition none
+      width 49px
+      &--sidebar-shown
+        display initial
+        right 324px
 </style>

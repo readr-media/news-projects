@@ -62,4 +62,8 @@ export default {
 <style lang="stylus" scoped>
 .main
   padding 20px 20px 20px 10px
+
+@media (min-width 1024px)
+  .main
+    padding 50px 0
 </style>

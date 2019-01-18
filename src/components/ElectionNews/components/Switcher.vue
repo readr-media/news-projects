@@ -64,4 +64,9 @@ export default {
   &__option
     z-index 2
     font-size 16px
+
+@media (min-width 1024px)
+  .switcher
+    &__option
+      font-size 20px
 </style>

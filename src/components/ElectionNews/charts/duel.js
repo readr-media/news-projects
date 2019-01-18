@@ -13,6 +13,7 @@ import { duelArea } from './duelArea'
 export function duel () {
   let dateRange = []
   let colorState = '#fad187'
+  let isDesktop = false
 
   const xLeft = d3.scaleLinear()
   const xRight = d3.scaleLinear()
@@ -81,6 +82,12 @@ export function duel () {
   chart.colorState = function (_) {
     if (!arguments.length) return colorState
     colorState = _
+    return chart
+  }
+
+  chart.isDesktop = function (_) {
+    if (!arguments.length) return isDesktop
+    isDesktop = _
     return chart
   }
   

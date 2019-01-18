@@ -239,4 +239,18 @@ export default {
     transition right .25s ease-out
     &--sidebar-toggled
       right calc(100px + 10px)
+
+@media (min-width 1024px)
+  .line
+    &__triangle
+      &--left
+        left calc(50vw - 34px)
+      &--right
+        left calc(50vw - 34px + 34px + 25px)
+    &__line
+      width calc(500px / 2 - 30px)
+      &--left
+        left calc((100vw - 500px) / 2 - 3px)
+      &--right
+        right calc((100vw - 500px) / 2 - 13px)
 </style>

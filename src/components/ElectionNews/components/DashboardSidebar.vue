@@ -145,4 +145,19 @@ export default {
   &__list-item
     & + &
       margin 15px 0 0 0
+
+@media (min-width 1024px)
+  .sidebar-wrapper
+    &__handle
+      display none
+    &__arrow
+      display none
+
+  .sidebar
+    padding 60px 20px
+    &__title
+      font-size 20px
+
+  .list
+    margin 26px 0 0 0
 </style>

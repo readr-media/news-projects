@@ -91,4 +91,16 @@ export default {
   transform: translateY(20px);
   opacity: 0;
 }
+
+@media (min-width 1024px)
+  .top
+    p
+      font-size 14px
+
+  .sentiment
+    p
+      margin 3px 0 0 0
+      font-size 14px
+    & + &
+      margin 0 0 0 20px
 </style>

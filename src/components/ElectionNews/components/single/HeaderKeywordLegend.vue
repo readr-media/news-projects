@@ -22,4 +22,13 @@ export default {
   &__keyword
     margin 0 0 0 10px
     font-size 14px
+
+@media (min-width 1024px)
+  .legend
+    &__line
+      width 30px
+      height 4px
+    &__keyword
+      margin 0 0 0 20px
+      font-size 30px
 </style>

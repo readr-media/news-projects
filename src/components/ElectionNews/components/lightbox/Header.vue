@@ -51,4 +51,8 @@ export default {
     font-weight 400
   &__date-switcher
     margin 0 0 20px 0
+
+@media (min-width 1024px)
+  .header
+    padding 33px 0
 </style>

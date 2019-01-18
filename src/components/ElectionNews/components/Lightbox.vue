@@ -91,4 +91,23 @@ export default {
     height 100%
     overflow-y scroll
     -webkit-overflow-scrolling touch
+
+@media (min-width 1024px)
+  .lightbox-wrapper
+    &__lightbox
+      width 41% // mutate when needed
+      height 88% // mutate when needed
+
+  .lightbox
+    &__close-button
+      top calc((100% - 88%) / 2 - 40px / 2)
+      right calc((100% - 41%) / 2 - 40px / 2)
+    &__content
+      &::-webkit-scrollbar
+        display none
+        background-color transparent
+      &::-webkit-scrollbar-track
+        background-color transparent
+      &::-webkit-scrollbar-thumb
+        background-color transparent
 </style>

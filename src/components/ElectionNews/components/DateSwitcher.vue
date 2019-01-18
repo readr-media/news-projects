@@ -109,4 +109,10 @@ export default {
       border-style solid
       border-width 15px 0 15px 26.0px
       border-color transparent transparent transparent #007bff
+
+@media (min-width 1024px)
+  .date-switcher
+    &__date
+      margin 0 30px
+      font-size 30px
 </style>
