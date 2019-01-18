@@ -59,27 +59,6 @@ router.use('/googlesheet', require('./middle/googlesheet'))
 router.use('/googledrive', require('./middle/googledrive'))
 router.use('/rent', require('./middle/rent'))
 
-router.get('/data', fetchFromRedis, async (req, res, next) => {
-  if (res.redis) {
-    console.error('fetch data from Redis.', req.url)
-    debug('fetch data from Redis.', req.url)
-    const resData = JSON.parse(res.redis)
-    return res.json(resData)
-  } else {
-    try {
-      const response = await axios.get(`https://www.readr.tw${req.query.url}`, { timeout: API_TIMEOUT })
-      const dt = response.data
-      res.json(dt)
-      if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
-        res.dataString = JSON.stringify(response.data)
-        next()
-      }
-    } catch (error) {
-      handleError(error, res)
-    }
-  }
-}, insertIntoRedis)
-
 router.get('/token', (req, res) => {
   const token = generateToken()
   res.json({ token: token })

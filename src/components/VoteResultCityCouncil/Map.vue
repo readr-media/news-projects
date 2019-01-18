@@ -278,15 +278,20 @@ export default {
     changeCounty (county) {
       this.countyName = county
     },
-    drawMap(section, geoJson, offsetFix = 0) {
-      const width = getSVGWidth(section, this.$store.state.viewport[0])
-      const height = getSVGHeight(section, this.$store.state.viewport[0], this.$store.state.viewport[1])
-      const center = d3.geoCentroid(geoJson)
-      const offset = [(width / 2) + offsetFix, height / 2]
+    drawMap(section, geoJson, offsetWidthFix = 0) {
       let scale = 6500
+      let offsetHeightFix = 0
       if (this.$store.state.viewport[0] === 768 && section !== 'kinmen' && section !== 'lienchiang') {
         scale = 9500
       }
+      if (this.$store.state.viewport[1] <= 800 && section !== 'kinmen' && section !== 'lienchiang') {
+        scale = 5500
+        offsetHeightFix = 30
+      }
+      const width = getSVGWidth(section, this.$store.state.viewport[0])
+      const height = getSVGHeight(section, this.$store.state.viewport[0], this.$store.state.viewport[1])
+      const center = d3.geoCentroid(geoJson)
+      const offset = [(width / 2) + offsetWidthFix, (height / 2) - offsetHeightFix]
       const projection = d3.geoMercator().center(center).scale(scale).translate(offset)
       const path = d3.geoPath().projection(projection)
       this[`${section}Map`] = d3.select(`#map-${section}`)
@@ -300,6 +305,8 @@ export default {
         .attr('d', path)
         .style('stroke-opacity', .3)
         .style('stroke', '#000')
+        .on('mouseover', function (d) { d3.select(this).style('cursor', 'pointer') })
+        .on('mouseout', function (d) { d3.select(this).style('cursor', 'default') })
         .on('click', this.handleClick)
       this[`finished${section}`] = true
     },
@@ -359,7 +366,7 @@ export default {
       left 0
       right 0
       bottom 0
-      z-index 100
+      z-index 1000
       align-items center
       &.open
         display flex

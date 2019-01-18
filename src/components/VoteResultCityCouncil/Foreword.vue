@@ -20,7 +20,7 @@ export default {
 .foreword
   display flex
   flex-direction column
-  padding 60px 1em 20px
+  padding 80px 1em 20px
   text-align center
   > h1, > h2, > p
     margin 0

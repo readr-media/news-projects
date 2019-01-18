@@ -9,7 +9,7 @@
 <script>
 import Highcharts from 'highcharts'
 import Xrange from 'highcharts/modules/xrange'
-import { union, uniq } from 'lodash'
+import { max, union, uniq } from 'lodash'
 
 const convertCountyNameToLatest = (countyName) => {
   if (countyName.match(/桃園/)) {
@@ -115,11 +115,17 @@ export default {
     },
     personalCount () {
       return this.councilCsv.filter(councilor => (councilor['姓名'] === this.councilor['姓名']) && (councilor['年份'] <= this.councilor['年份'])).length
+    },
+    scrollLeft () {
+      const latest = max(this.councilorsSeries.map(item => item.x2))
+      const percentage = (latest - this.yearListFixed[0] + 1) / (this.yearListFixed[this.yearListFixed.length - 1] - this.yearListFixed[0] + 1)
+      return 1200 * percentage
     }
   },
   mounted () {
     Xrange(Highcharts)
     this.drawHighChart()
+    document.querySelector(`#chart-${this.currentYear}-${this.index}`).scrollLeft = this.scrollLeft
   },
   methods: {
     drawHighChart () {
@@ -224,6 +230,7 @@ export default {
     margin 1em 0 0
 
   .chart
+    min-height 200px
     margin-top 20px
     overflow-x auto !important
   
