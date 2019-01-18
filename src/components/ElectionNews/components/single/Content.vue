@@ -35,7 +35,7 @@ export default {
     }
   },
   mounted () {
-    this.$scrollTo('.content')
+    // this.$scrollTo('.content')
   }
 }
 </script>

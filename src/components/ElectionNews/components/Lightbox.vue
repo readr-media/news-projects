@@ -65,6 +65,7 @@ export default {
   display flex
   justify-content center
   align-items center
+  z-index 10000
   &__dimmed
     width 100%
     height 100%
@@ -72,11 +73,12 @@ export default {
     position absolute
     top 0
     left 0
+    z-index 9998
   &__lightbox
     width 100% // mutate when needed
     height 100% // mutate when needed
     background-color #fff
-    z-index 2
+    z-index 9999
 
 .lightbox
   &__close-button
@@ -85,7 +87,7 @@ export default {
     right 0
     cursor pointer
     -webkit-tap-highlight-color transparent
-    z-index 1000
+    z-index 10000
     width 40px
   &__content
     height 100%
