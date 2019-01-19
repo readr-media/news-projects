@@ -16,6 +16,7 @@
         :councilCsv="councilCsv"
         :countyName="countyName"
         :currentYear="currentYear"
+        :yearCsv="yearCsv"
         :yearList="yearList"
         @addYear="currentYear = yearList[currentYearIndex + 1]"
         @minusYear="currentYear = yearList[currentYearIndex - 1]"
@@ -73,7 +74,7 @@ import * as topojson from 'topojson'
 import History from './History.vue'
 import axios from 'axios'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
-import { get, find, uniq } from 'lodash'
+import { get, find, union, uniq } from 'lodash'
 
 const getSVGWidth = (section, viewportWidth) => {
   if (section === 'kinmen' || section === 'lienchiang') {
@@ -94,13 +95,19 @@ const getSVGHeight = (section, viewportWidth, viewportHeight) => {
 }
 
 const getYearList = (currentYear, countyName, yearCsv) => {
-  let yearList
-  if (currentYear >= 2014 && countyName.match(/桃園/)) {
-    yearList = yearCsv.find(data => data['地區'].match(/桃園/)) || {}
+  let data
+  const county = countyName.replace('台', '臺')
+  if (county.match(/桃園/)) {
+    data = yearCsv.filter(data => data['地區'].match(/桃園/))
+  } else if (county.match(/臺北縣|新北市/)) {
+    data = yearCsv.filter(data => data['地區'].match(/臺北縣|新北市/))
   } else {
-    yearList = yearCsv.find(data => data['地區'] === countyName.replace('台', '臺')) || {}
+    data = yearCsv.filter(data => data['地區'] === county)
   }
-  return Object.entries(yearList).filter(data => data[1] === '1').map(data => Number(data[0]))
+  data = data.map(item => Object.entries(item).filter(year => year[1] === '1').map(year => Number(year[0])))
+  data = (county.match(/桃園|臺北縣|新北市/) ? [ ...data[0], ...data[1] ] : data[0]) || []
+  data = data.sort((a, b) => a - b)
+  return data
 }
 
 const getCountyElectionYear = (currentYear, yearList) => {
@@ -150,6 +157,19 @@ const filterGeoJson = (geoJson, county = undefined) => {
   return { type: 'FeatureCollection', features: features } 
 }
 
+const convertCountyName = (countyName, currentYear) => {
+  if (countyName.match(/桃園/) && currentYear < 2014) {
+    return '桃園縣'
+  } else if (countyName.match(/桃園/) && currentYear >= 2014) {
+    return '桃園市'
+  } else if (countyName === '臺北縣' && currentYear >= 2010) {
+    return '新北市'
+  } else if (countyName === '新北市' && currentYear < 2010) {
+    return '臺北縣'
+  }
+  return countyName
+}
+
 export default {
   name: 'ProjectMap',
   components: {
@@ -159,7 +179,7 @@ export default {
     return {
       currentYear: 2018,
       countyName: '臺北市',
-      maxElectedCount: 24,
+      maxElectedCount: 20,
       // loading: true,
       // geoJson: undefined,
       // geoJsonMerge: undefined,
@@ -257,13 +277,13 @@ export default {
       const targetElement = document.querySelector('.map-history__info') 
       if (value) {
         disableBodyScroll(targetElement)
-        // document.querySelector('body').classList.add('stop-scrolling')
       } else {
+        document.querySelector('.map-history__info').scrollTop = 0
         enableBodyScroll(targetElement)
-        // document.querySelector('body').classList.remove('stop-scrolling')
       }
     },
     currentYear (value) {
+      this.countyName = convertCountyName(this.countyName, value)
       value < 2010 ? this.fillColor('tw') : this.fillColor('twmerge')
       this.fillColor('kinmen')
       this.fillColor('lienchiang')
@@ -335,7 +355,7 @@ export default {
         })
     },
     handleClick (d) {
-      this.countyName = d.properties.COUNTYNAME
+      this.countyName = convertCountyName(d.properties.COUNTYNAME, this.currentYear)
       this.$store.state.viewport[0] < 1200 ? this.openContent = true : ''
       // this.$store.state.useragent.isMobile ? this.openContent = true : ''
     }

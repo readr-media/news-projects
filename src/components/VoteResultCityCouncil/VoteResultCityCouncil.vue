@@ -35,8 +35,8 @@ export default {
   },
   metaInfo() {
     return {
-      title: '你全家都議長',
-      description: '2018 年底的大事，隨著選舉新任縣市長就職，各縣市議會也蓄勢待發。議會開議之前，最重要的是要決定議會的「老大」。議長選舉出爐，READr 帶你來看看這些議長的家庭背景，以及各地方議會有哪些家族勢力。',
+      title: '你全家都議長——誰在議會當老大？',
+      description: '新任議會開議，民進黨又經歷一次選舉的慘敗，在全台灣 22 個議會中只贏得 1 席議長。READr 盤點歷史資料，把議會權力爭奪戰拉回到 70 年前，帶你一次看！',
       metaUrl: 'vote2018-result-city-council',
       metaImage: 'vote2018-result-city-council/og.jpg',
     };

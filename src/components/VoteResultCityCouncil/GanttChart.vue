@@ -3,7 +3,7 @@
     <h3 v-text="councilor['姓名']"></h3>
     <p>在{{ councilor['地區'] }}議會{{ councilor['家族'] && councilor['家族'] !== '無' ? `屬於${councilor['家族']}家族` : `無家族成員擔任議員` }}</p>
     <p><span>至 2018 年總共當選 {{ personalCount }} 次</span><span v-if="councilor['家族'] && councilor['家族'] !== '無'">，含議員親屬當選次數 {{ familyCount }} 次</span></p>
-    <div :id="`chart-${currentYear}-${index}`" class="chart"></div>
+    <div :id="`chart-${currentYear}-${index}`" :class="[ yearListFixed.length < 10 ? '' : 'expand', 'chart' ]"></div>
   </div>
 </template>
 <script>
@@ -26,6 +26,31 @@ const convertCountyNameToLatest = (countyName) => {
   return countyName
 }
 
+const getLastYear = (countyName) => {
+  if (countyName.match(/臺北縣|臺中縣|臺南縣|高雄縣/)) {
+    return 2010
+  } else if (countyName.match(/桃園縣/)) {
+    return 2014
+  }
+  return 2022
+}
+
+const getYearList = (countyName, yearCsv) => {
+  let data
+  const county = countyName.replace('台', '臺')
+  if (county.match(/桃園/)) {
+    data = yearCsv.filter(data => data['地區'].match(/桃園/))
+  } else if (county.match(/臺北縣|新北市/)) {
+    data = yearCsv.filter(data => data['地區'].match(/臺北縣|新北市/))
+  } else {
+    data = yearCsv.filter(data => data['地區'] === county)
+  }
+  data = data.map(item => Object.entries(item).filter(year => year[1] === '1').map(year => Number(year[0])))
+  data = (county.match(/桃園|臺北縣|新北市/) ? [ ...data[0], ...data[1] ] : data[0]) || []
+  data = data.sort((a, b) => a - b)
+  return data
+}
+
 export default {
   name: 'GanttChart',
   props: {
@@ -38,8 +63,14 @@ export default {
     currentYear: {
       type: Number
     },
+    countyName: {
+      type: String
+    },
     index: {
       type: Number
+    },
+    yearCsv: {
+      type: Array
     },
     yearList: {
       type: Array
@@ -47,45 +78,49 @@ export default {
   },
   computed: {
     yearListFixed () {
-      return [ ...this.yearList, 2022 ]
+      const lastYear = getLastYear(this.councilor['地區'])
+      return [ ...this.yearList, lastYear ]
     },
     councilorsName () {
       return uniq(this.family.map(councilor => councilor['姓名']))
     },
     councilorsSeries () {
-      const rrr = []
-      const ttt = this.councilorsName.map((councilor, index) => {
-        const personal = this.family.filter(item => item['姓名'] === councilor)
-        const record = personal.map(item => {
-          const startYearIndex = this.yearList.findIndex(year => year === Number(item['年份']))
-          const endYear = Number(item['年份']) === 2018 ? 2022 : this.yearList[startYearIndex + 1]
+      const convertToSeriesFormat = []
+      const familyData = this.councilorsName.map((councilor, index) => {
+        const personal = this.family.filter(member => member['姓名'] === councilor)
+        const data = personal.map(item => {
+          const lastYear = getLastYear(item['地區'])
+          const yearList = [ ...getYearList(item['地區'], this.yearCsv), lastYear ] 
+          const startYearIndex = yearList.findIndex(year => year === Number(item['年份']))
+          const endYear = Number(item['年份']) === 2018 ? 2022 : yearList[startYearIndex + 1]
           return { x: Number(item['年份']), x2: endYear, y: index, name: item['姓名'] }
         })
-        const mergeYear = []
-        if (record.length > 1) {
-          let origin = record[0]
-          for (let i = 1; i < record.length; i += 1) {
-            if (record[i].x === origin.x2 && i === record.length - 1) {
-              origin.x2 = record[i].x2
-              mergeYear.push(origin)
-            } else if (record[i].x === origin.x2) {
-              origin.x2 = record[i].x2
+        const mergedSeries = []
+        if (data.length > 1) {
+          let origin = data[0]
+          for (let i = 1; i < data.length; i += 1) {
+            if (data[i].x === origin.x2 && i === data.length - 1) {
+              origin.x2 = data[i].x2
+              mergedSeries.push(origin)
+            } else if (data[i].x === origin.x2) {
+              origin.x2 = data[i].x2
             } else {
-              mergeYear.push(origin)
-              origin = record[i]
+              mergedSeries.push(origin)
+              origin = data[i]
             }
           }
         } else {
-          mergeYear.push(record[0])
+          mergedSeries.push(data[0])
         }
-        return mergeYear
-      })
-      for (let i = 0; i < ttt.length; i += 1) {
-        for (let j = 0; j < ttt[i].length; j += 1) {
-          rrr.push(ttt[i][j])
+        return mergedSeries
+      }).filter(item => item.length > 0)
+      
+      for (let i = 0; i < familyData.length; i += 1) {
+        for (let j = 0; j < familyData[i].length; j += 1) {
+          convertToSeriesFormat.push(familyData[i][j])
         }
       }
-      return rrr
+      return convertToSeriesFormat
     },
     family () {
       if (this.councilor['家族']) {
@@ -94,10 +129,7 @@ export default {
       return this.councilCsv.filter(councilor => (councilor['姓名'] === this.councilor['姓名']))
     },
     familyCount () {
-      if (this.councilor['家族']) {
-        return this.councilCsv.filter(councilor => (councilor['家族'] === this.councilor['家族']) && (convertCountyNameToLatest(councilor['地區']) === convertCountyNameToLatest(this.councilor['地區']))).length
-      }
-      return 0
+      return this.councilor['家族'] ? this.family.length : 0
     },
     party () {
       if (this.councilor['黨籍'] === '中國國民黨') {
@@ -129,8 +161,9 @@ export default {
   },
   methods: {
     drawHighChart () {
+      const width = this.yearListFixed.length < 10 ? null : 1200
       Highcharts.chart(`chart-${this.currentYear}-${this.index}`, {
-        chart: { type: 'xrange', backgroundColor: 'rgba(0,0,0, .1)',  width: 1200, height: 200, marginRight: 50 },
+        chart: { type: 'xrange', backgroundColor: 'rgba(0,0,0, .1)', width: width, height: 230, marginRight: 50, spacingBottom: 10 },
         title: { text: '' },
         legend: { enabled: false },
         plotOptions: {
@@ -139,7 +172,8 @@ export default {
             colorByPoint: false,
             dataLabels: {
               enabled: true,
-              format: "{key}", 
+              format: "{key}",
+              y: 15,
               style: {
                 color: '#fff',
                 fontSize: '12px',
@@ -183,13 +217,6 @@ export default {
           borderColor: 'rgba(103, 94, 86, .95)',
           pointWidth: 15,
           data: this.councilorsSeries,
-          // dataLabels: {
-            
-          //   formatter: function () {
-          //     console.log('formatter', this)
-          //     return this.name
-          //   },
-          // },
         }],
         exporting: { enabled: false },
         credits: { enabled: false },
@@ -230,9 +257,10 @@ export default {
     margin 1em 0 0
 
   .chart
-    min-height 200px
+    min-height 230px
     margin-top 20px
-    overflow-x auto !important
+    &.expand
+      overflow-x auto !important
   
   &.kmt
     > h3
