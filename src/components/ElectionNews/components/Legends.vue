@@ -4,7 +4,7 @@
       <p>情緒計算方式說明</p>
       <p>我們蒐集了 2018 年10月19日至 12 月 19 日的新聞，以 Google's Cloud Natural Language API 計算新聞文本的情緒分數，並將分數轉換成 0 - 10 分，再區分為三個情緒區間。</p>
       <p class="top__more">
-        <span @click="toggleMore">（看詳細）</span>
+        <span @click="toggleMore">（<span class="underline">看詳細</span>）</span>
       </p>
       <transition name="slide-fade">
         <div v-show="showMore">
@@ -48,7 +48,7 @@ export default {
 <style lang="stylus" scoped>
 .legends
   &__bottom
-    margin 10px 0 0 0
+    margin 42px 0 0 0
 
 .top
   p
@@ -57,10 +57,12 @@ export default {
     font-size 12px
     text-align justify
   &__more
+    color #4a90e2
     span
-      border-bottom 1px solid black
       cursor pointer
       user-select none
+    span.underline
+      border-bottom 1px solid #4a90e2
 
 .bottom
   display flex
