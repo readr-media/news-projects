@@ -1,7 +1,7 @@
 import { json } from 'd3-fetch'
 import { findKey } from 'lodash'
 
-const path = '/proj-assets/election-news/data'
+const path = '/proj-assets/election-news'
 
 export default {
   FETCH_MAPPING_SOURCES ({ commit }) {
