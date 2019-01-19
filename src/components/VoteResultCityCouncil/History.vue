@@ -4,9 +4,9 @@
       <button
         v-for="item in countyNav"
         :key="item"
-        :class="{ active: item === countyName }"
-        @click="$emit('changeCounty', item)"
-        v-text="item">
+        :class="{ active: isActive(item) }"
+        @click="$emit('changeCounty', getCountyName(item))"
+        v-html="item">
       </button>
       <button @click="$emit('closeLightbox')"><img src="/proj-assets/vote2018-result-city-council/close.png" alt=""></button>
     </nav>
@@ -34,12 +34,14 @@
           :key="`${item['年份']}-${item['姓名']}-gantt`"
           :councilCsv="councilCsv"
           :councilor="item"
+          :countyName="countyName"
           :currentYear="currentYear"
           :index="index"
+          :yearCsv="yearCsv"
           :yearList="yearList" />
       </div>
       <p>※ 此處當選次數與「你全家都議員」專題當選次數略有不同，為呈現縣市特色，這裡拿來計算的資料不包含臺灣省議會。</p>
-      <p>※ 此處的「家族」成員是指不分親等的所有親屬，且在同縣市擔任過議員的人。</p>
+      <p>※ 此處的「家族」成員是指不分親等的所有親屬，且在同縣市（若為縣市升格，算同一縣市，如高雄縣、高雄市親屬為同一家族）擔任過議員的人。</p>
       <p>※ 家族命名方式是以家族成員中最新一次當選議員者。</p>
     </div>
   </div>
@@ -61,6 +63,9 @@ export default {
     currentYear: {
       type: Number
     },
+    yearCsv: {
+      type: Array
+    },
     yearList: {
       type: Array
     }
@@ -80,11 +85,11 @@ export default {
         && councilor['副議長']).sort((a, b) => Number(a['副議長順序']) - Number(b['副議長順序']))
     },
     countyNav () {
-      const isNewTaipei = /臺北縣|新北/
-      const regex = /桃園|臺中|臺南|高雄/
-      if (this.countyName.match(isNewTaipei)) {
-        return [ '新北市', '臺北縣' ]
-      } else if (this.countyName.match(regex)) {
+      if (this.countyName.match(/臺北縣|新北市/)) {
+        return [ '<span>新北市</span><span>（2010 年前為臺北縣）</span>' ]
+      } else if (this.countyName.match(/桃園/)) {
+        return [ '<span>桃園市</span><span>（2014 年前為桃園縣）</span>' ]
+      } else if (this.countyName.match(/臺中|臺南|高雄/)) {
         const county = this.countyName.substring(0, 2)
         return [ `${county}市`, `${county}縣` ]
       } 
@@ -94,6 +99,20 @@ export default {
       return uniq(this.councilSpeaker.concat(this.deputySpeaker))
     }
   },
+  methods: {
+    isActive (nav) {
+      const regex = new RegExp(`${this.countyName}`)
+      return nav.match(regex)
+    },
+    getCountyName (nav) {
+      if (nav.match(/臺北縣|新北市/)) {
+        return this.currentYear < 2010 ? '臺北縣' : '新北市'
+      } else if (nav.match(/桃園/)) {
+        return this.currentYear < 2014 ? '桃園縣' : '桃園市'
+      }
+      return nav
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -129,6 +148,12 @@ export default {
         background-color transparent
         opacity 1
         cursor default
+      >>> span
+        display block
+        & + span
+          margin-top 5px
+          font-size .875rem
+
       img
         width 25px
         height 25px
