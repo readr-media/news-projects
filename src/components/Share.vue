@@ -16,10 +16,6 @@
       :href="`https://line.me/R/msg/text/?${shareUrl}`"
       target="_blank"
       @click="$_share_ga('line')"></a>
-    <a class="share__item gplus"
-      :href="`https://plus.google.com/share?url=${shareUrl}`"
-      target="_blank"
-      @click="$_share_ga('gplus')"></a>
   </div>
 </template>
 <script>
@@ -114,9 +110,6 @@
     background-color #00b900
     background-image url(/proj-assets/line.png)
     background-size 30px auto
-  .gplus
-    background-image url(/proj-assets/gplus.png)
-    background-size 47px
 .share.open
   .fb, .line, .gplus
     visibility visible
@@ -125,27 +118,19 @@
       transform translate3d(0,-49px,0)
     .line
       transform translate3d(0,-98px,0)
-    .gplus
-      transform translate3d(0,-147px,0)
   &.down
     .fb
       transform translate3d(0,49px,0)
     .line
       transform translate3d(0,98px,0)
-    .gplus
-      transform translate3d(0,147px,0)
   &.left
     .fb
       transform translate3d(-49px,0,0)
     .line
       transform translate3d(-98px,0,0)
-    .gplus
-      transform translate3d(-147px,0,0)
   &.right
     .fb
       transform translate3d(49px,0,0)
     .line
       transform translate3d(98px,0,0)
-    .gplus
-      transform translate3d(147px,0,0)
 </style>

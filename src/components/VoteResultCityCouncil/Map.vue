@@ -355,8 +355,10 @@ export default {
         })
     },
     handleClick (d) {
-      this.countyName = convertCountyName(d.properties.COUNTYNAME, this.currentYear)
+      const county = convertCountyName(d.properties.COUNTYNAME, this.currentYear)
+      this.countyName = county
       this.$store.state.viewport[0] < 1200 ? this.openContent = true : ''
+      ga('send', 'event', 'projects', 'click', `county ${county}`, { nonInteraction: false })
       // this.$store.state.useragent.isMobile ? this.openContent = true : ''
     }
   }

@@ -18,9 +18,25 @@ import RelatedReports from 'src/components/RelatedReports.vue'
 import Share from '../Share.vue'
 import module from 'src/store/modules/VoteResultCityCouncil'
 import { READR_SITE_URL } from '../../constants'
+import { throttle } from 'lodash'
 
 const fetchTWJSON = (store) => {
   return store.dispatch('VoteResultCityCouncil/FETCH_TAIWAN_JSON')
+}
+
+const getElementTop = (el) => {
+  const rect = el.getBoundingClientRect()
+  return rect.top
+}
+
+const setScrollPos = () => {
+  const pos = []
+  const articles = [ ...document.querySelectorAll('article > h3') ]
+  pos.push({ label: 'map', pos: getElementTop(document.querySelector('.interactive-map-container')) })
+  articles.map((article, index) => {
+    pos.push({ label: `article${index + 1}`, pos: getElementTop(article) })
+  })
+  return pos
 }
 
 export default {
@@ -44,20 +60,33 @@ export default {
   data () {
     return {
       READR_SITE_URL,
+      maxScrollTop: 0,
+      scrollPos: []
     }
   },
-  beforeCreate () {
-    this.$store.registerModule('VoteResultCityCouncil', module)
-  },
-  created () {
-    // fetchTWJSON(this.$store)
-  },
+  // beforeCreate () {
+  //   this.$store.registerModule('VoteResultCityCouncil', module)
+  // },
   mounted () {
-    // ga('send', 'pageview')
+    ga('send', 'pageview')
+    this.scrollPos = setScrollPos()
+    window.addEventListener('scroll', this.handleScroll)
   },
   destroyed () {
-    this.$store.unregisterModule('VoteResultCityCouncil')
+    // this.$store.unregisterModule('VoteResultCityCouncil')
+    window.removeEventListener('scroll', this.handleScroll)
   },
+  methods: {
+    handleScroll: throttle(function () {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      for (let [index, value] of this.scrollPos.entries()) {
+        if (scrollTop > value.pos && value.pos > this.maxScrollTop) {
+          this.maxScrollTop = value.pos
+          return ga('send', 'event', 'projects', 'scroll', `scroll to ${value.label}`, { nonInteraction: false })
+        }
+      }
+    }, 500)
+  }
 }
 </script>
 <style lang="stylus">
