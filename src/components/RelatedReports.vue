@@ -104,6 +104,7 @@ export default {
       this.showLoadmore = true
       this.page += 1
       fetchReports(this.$store, { page: this.page })
+      window.ga('send', 'event', 'projects', 'click', `more project`, { nonInteraction: false })
     },
     getReportImg (report) {
       return report.ogImage || report.heroImage || ''
