@@ -106,7 +106,8 @@ export const PROJECTS_NEED_GOOGLE_RECAPTCHA = [
 
 export const PROJECTS_NOT_NEED_TYPEKIT = [
   'political-contribution',
-  'vote2018-result'
+  'vote2018-result',
+  'vote2018-result-city-council'
 ]
 
 // include project url path which NOT need to reset scroll position in vue router
