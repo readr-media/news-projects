@@ -31,11 +31,13 @@ const getElementTop = (el) => {
 
 const setScrollPos = () => {
   const pos = []
+  const h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
   const articles = [ ...document.querySelectorAll('article > h3') ]
-  pos.push({ label: 'map', pos: getElementTop(document.querySelector('.interactive-map-container')) })
+  pos.push({ label: 'map', pos: (getElementTop(document.querySelector('.interactive-map-container')) - h * 2 / 3) })
   articles.map((article, index) => {
-    pos.push({ label: `article${index + 1}`, pos: getElementTop(article) })
+    pos.push({ label: `article${index + 1}`, pos: (getElementTop(article) - h * 2 / 3) })
   })
+  pos.push({ label: 'end', pos: (getElementTop(document.querySelector('.related-reports--wrapper')) - h * 2 / 3) })
   return pos
 }
 
