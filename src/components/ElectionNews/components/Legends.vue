@@ -54,7 +54,7 @@ export default {
   p
     margin 12px 0
     line-height 1.5
-    font-size 12px
+    font-size 14px
     text-align justify
   &__more
     color #4a90e2
@@ -76,7 +76,7 @@ export default {
     width 34px
   p
     margin 3px 0 0 0
-    font-size 10px
+    font-size 14px
   & + &
     margin 0 0 0 12px
 

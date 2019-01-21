@@ -8,7 +8,7 @@
   import { PROJECTS } from '../constants'
   const projectComps = _.map(PROJECTS, (proj, k) => {
     const obj = new Object()
-    obj[ k ] = process.env.NODE_ENV !== 'production'
+    obj[ k ] = process.env.NODE_ENV === 'production'
       ? () => import(`../components/${proj}/${proj}.vue`)
       : () => Promise.resolve(require(`../components/${proj}/${proj}.vue`) )
     return obj

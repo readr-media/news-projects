@@ -61,9 +61,9 @@ export default {
     white-space nowrap
     overflow hidden
     text-overflow ellipsis
-    &--smaller
-      color #4a4a4a
-      font-size 10px
+    // &--smaller
+    //   color #4a4a4a
+    //   font-size 10px
   &__triangle
     width 0
     height 0

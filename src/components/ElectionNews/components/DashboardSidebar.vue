@@ -150,7 +150,7 @@ export default {
 .list
   &__list-item
     & + &
-      margin 15px 0 0 0
+      margin 17px 0 0 0
 
 @media (min-width 1024px)
   .sidebar-wrapper

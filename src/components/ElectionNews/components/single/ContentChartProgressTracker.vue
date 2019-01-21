@@ -290,10 +290,11 @@ export default {
     transition opacity .25s ease-out
     p
       margin 0
+      font-size 14px
     &--shown
       opacity 1
   &__icon
-    height 100%
+    height 200%
     &--animating
       animation-name heartBeat
       animation-duration 1.3s
@@ -316,4 +317,8 @@ export default {
       left 18px
     &__hamburger
       right -20px
+
+.hamburger
+  &__icon
+    height 100%
 </style>

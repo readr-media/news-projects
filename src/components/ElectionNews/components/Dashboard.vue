@@ -202,9 +202,9 @@ export default {
         left -13px
   &__to-top
     position fixed
-    right -30px
+    right -36px
     bottom 10px
-    width 27px
+    width 34px
     transition right .25s ease-out
     cursor pointer
     &--sidebar-shown
