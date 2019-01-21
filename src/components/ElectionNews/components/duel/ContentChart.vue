@@ -25,7 +25,8 @@ import { duel } from '../../charts/duel.js'
 
 import ContentChartProgressTracker from './ContentChartProgressTracker.vue'
 
-import { chartHeight } from '../../costants'
+import { chartHeight, defaultDate } from '../../costants'
+import { calcDateRangeDays } from '../../util'
 
 import { mapState as mapStateRoot, createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('ElectionNews')
@@ -44,7 +45,6 @@ export default {
   },
   data () {
     return {
-      chartHeight,
       yTickTransforms: [],
       showProgressTracker: false,
       chart: undefined,
@@ -69,6 +69,14 @@ export default {
     data () {
       return [ this.graphDataKeywordFirstFiltered, this.graphDataKeywordSecondFiltered ]
     },
+    chartHeight () {
+      const { start: startDefault, until: untilDefault } = defaultDate
+      const daysDefault = calcDateRangeDays(startDefault, untilDefault)
+      const heightPerDayDefault = chartHeight / daysDefault
+      const { start, until } = this.dateRange
+      const days = calcDateRangeDays(start, until)
+      return chartHeight + ((days - daysDefault) * heightPerDayDefault)
+    }
   },
   methods: {
     resize () {
