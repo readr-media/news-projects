@@ -54,6 +54,11 @@ export default {
         this.setTimer()
       }
     },
+    hasFirstShown (newValue, oldValue) {
+      if (!oldValue && newValue) {
+        this.SET_HAS_FIRST_SHOWN_SIDEBAR(true)
+      }
+    },
     viewport () {
       this.debounceResize()
     }
@@ -94,7 +99,8 @@ export default {
     ...mapMutations([
       'TOGGLE_SIDEBAR',
       'SHOW_SIDEBAR',
-      'HIDE_SIDEBAR'
+      'HIDE_SIDEBAR',
+      'SET_HAS_FIRST_SHOWN_SIDEBAR'
     ]),
     fetchDataGraph () {
       if (this.keywordIdFirst !== undefined && !(this.keywordIdFirst in this.graphData)) {
