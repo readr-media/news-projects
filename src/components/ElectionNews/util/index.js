@@ -37,3 +37,8 @@ export function sentimentScoreString (scaledScore) {
 export function calcDateRangeDays (start, until) {
   return moment(until, 'YYYY/MM/DD').diff(moment(start, 'YYYY/MM/DD'), 'days') + 1
 }
+
+export function getSourceAbbr (store, source) {
+  const { abbr } = store.state.ElectionNews.mapping
+  return source in abbr ? abbr[source] : source
+}

@@ -11,7 +11,8 @@ export default {
     showLightbox: false,
     mapping: {
       sources: {},
-      keywords: {}
+      keywords: {},
+      abbr: {}
     },
     filter: {
       sources: []

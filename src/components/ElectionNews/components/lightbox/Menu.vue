@@ -29,7 +29,7 @@
       >
         <div class="head" slot="header">
           <div class="head__left">
-            {{ getSourceName(list[0]) }}
+            {{ getSourceAbbr(getSourceName(list[0])) }}
           </div>
           <div class="head__right">
             {{ list[1].length }} 則
@@ -44,6 +44,8 @@
 import { sortBy, toPairs } from 'lodash'
 
 import MenuList from './MenuList.vue'
+
+import { getSourceAbbr } from '../../util'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('ElectionNews')
@@ -78,6 +80,9 @@ export default {
   methods: {
     getSourceName (sourceId) {
       return this.mapping[sourceId]
+    },
+    getSourceAbbr (source) {
+      return getSourceAbbr(this.$store, source)
     }
   }
 }

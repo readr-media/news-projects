@@ -88,7 +88,8 @@ export default {
       'FETCH_MAPPING_SOURCES',
       'FETCH_MAPPING_KEYWORDS',
       'FETCH_DATA_GRAPH',
-      'FETCH_DATE_RANGE'
+      'FETCH_DATE_RANGE',
+      'FETCH_DATA_ABBR'
     ]),
     ...mapMutations([
       'TOGGLE_SIDEBAR',
@@ -167,6 +168,7 @@ export default {
     .then(() => {
       this.fetchDataGraph()
     })
+    this.FETCH_DATA_ABBR()
   },
   mounted () {
     this.createScroller()
