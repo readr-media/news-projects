@@ -56,7 +56,7 @@ export default {
       title: '你全家都議長——誰在議會當老大？',
       description: '新任議會開議，民進黨又經歷一次選舉的慘敗，在全台灣 22 個議會中只贏得 1 席議長。READr 盤點歷史資料，把議會權力爭奪戰拉回到 70 年前，帶你一次看！',
       metaUrl: 'vote2018-result-city-council',
-      metaImage: 'vote2018-result-city-council/og.jpg',
+      metaImage: 'vote2018-result-city-council/ogimage.jpg',
     };
   },
   data () {
