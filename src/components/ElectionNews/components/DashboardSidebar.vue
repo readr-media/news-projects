@@ -21,7 +21,7 @@
           :checkboxColor="getCheckboxColor(id)"
           @click.native="toggle(id)"
         >
-          {{ sourcesMapping[id] }}
+          {{ getSourceAbbr(sourcesMapping[id]) }}
         </CheckItem>
       </ul>
     </div>
@@ -32,6 +32,8 @@
 import { findKey } from 'lodash'
 
 import CheckItem from './CheckItem.vue'
+
+import { getSourceAbbr } from '../util'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('ElectionNews')
@@ -86,6 +88,9 @@ export default {
     },
     getCheckboxColor (id) {
       return findKey(this.colors, o => o === id)
+    },
+    getSourceAbbr (source) {
+      return getSourceAbbr(this.$store, source)
     }
   }
 }
@@ -145,7 +150,7 @@ export default {
 .list
   &__list-item
     & + &
-      margin 15px 0 0 0
+      margin 17px 0 0 0
 
 @media (min-width 1024px)
   .sidebar-wrapper

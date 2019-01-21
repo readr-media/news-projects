@@ -54,6 +54,11 @@ export default {
         this.setTimer()
       }
     },
+    hasFirstShown (newValue, oldValue) {
+      if (!oldValue && newValue) {
+        this.SET_HAS_FIRST_SHOWN_SIDEBAR(true)
+      }
+    },
     viewport () {
       this.debounceResize()
     }
@@ -88,12 +93,14 @@ export default {
       'FETCH_MAPPING_SOURCES',
       'FETCH_MAPPING_KEYWORDS',
       'FETCH_DATA_GRAPH',
-      'FETCH_DATE_RANGE'
+      'FETCH_DATE_RANGE',
+      'FETCH_DATA_ABBR'
     ]),
     ...mapMutations([
       'TOGGLE_SIDEBAR',
       'SHOW_SIDEBAR',
-      'HIDE_SIDEBAR'
+      'HIDE_SIDEBAR',
+      'SET_HAS_FIRST_SHOWN_SIDEBAR'
     ]),
     fetchDataGraph () {
       if (this.keywordIdFirst !== undefined && !(this.keywordIdFirst in this.graphData)) {
@@ -167,6 +174,7 @@ export default {
     .then(() => {
       this.fetchDataGraph()
     })
+    this.FETCH_DATA_ABBR()
   },
   mounted () {
     this.createScroller()
@@ -194,9 +202,9 @@ export default {
         left -13px
   &__to-top
     position fixed
-    right -30px
+    right -36px
     bottom 10px
-    width 27px
+    width 34px
     transition right .25s ease-out
     cursor pointer
     &--sidebar-shown

@@ -8,10 +8,12 @@ export default {
   namespaced: true,
   state: () => ({
     showSidebar: false,
+    hasFirstShownSidebar: false,
     showLightbox: false,
     mapping: {
       sources: {},
-      keywords: {}
+      keywords: {},
+      abbr: {}
     },
     filter: {
       sources: []

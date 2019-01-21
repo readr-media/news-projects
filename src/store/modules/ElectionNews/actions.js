@@ -32,6 +32,11 @@ export default {
       commit('SET', { targetPath: 'data.date', key: 'until', value: until })
     })
   },
+  FETCH_DATA_ABBR ({ commit }) {
+    return json(`${path}/abbr.json`).then(res => {
+      commit('SET', { targetPath: 'mapping', key: 'abbr', value: res })
+    })
+  },
 
   TOGGLE_COLOR_PICKER ({ state, commit }, sourceId) {
     const filter = state.filter.sources

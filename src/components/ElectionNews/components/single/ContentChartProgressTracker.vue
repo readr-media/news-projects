@@ -23,12 +23,18 @@
       >
         <div class="line__triangle"></div>
         <div class="line__line"></div>
-        <img
-          :class="[ 'line__hamburger', { 'line__hamburger--sidebar-toggled': showSidebar } ]"
-          src="/proj-assets/election-news/img/hamburger.svg"
-          alt=""
-          @click="TOGGLE_LIGHTBOX"
-        >
+        <div :class="[ 'line__hamburger', { 'line__hamburger--sidebar-toggled': showSidebar }, 'hamburger' ]">
+          <div :class="[ 'hamburger__hint', { 'hamburger__hint--shown': showHint } ]">
+            <p>點我看</p>
+            <p>當天的新聞標題</p>
+          </div>
+          <img
+            :class="[ 'hamburger__icon', { 'hamburger__icon--animating': showHint } ]"
+            src="/proj-assets/election-news/img/hamburger.svg"
+            alt=""
+            @click="TOGGLE_LIGHTBOX"
+          >
+        </div>
       </div>
       <Tooltip
         :class="[ 'tracker__tooltip', { 'tracker__tooltip--show': showTooltip } ]"
@@ -63,6 +69,12 @@ export default {
   watch: {
     viewport () {
       this.debounceResize()
+    },
+    shouldSetHintTimer () {
+      if (this.shouldSetHintTimer) {
+        this.hasFirstShownTooltip = true
+        setTimeout(this.setHintTimer, 1000)
+      }
     }
   },
   data () {
@@ -72,6 +84,8 @@ export default {
       showTooltip: false,
       trackerLineOffset: 0,
       tooltipOffset: 0,
+      hasFirstShownHint: false,
+      showHint: false,
     }
   },
   computed: {
@@ -82,6 +96,8 @@ export default {
     ...mapState({
       showSidebar: state => state.showSidebar,
       dateRange: state => state.data.date,
+      showSidebar: state => state.showSidebar,
+      hasFirstShownSidebar: state => state.hasFirstShownSidebar
     }),
     ...mapGetters([
       'dateRangeDays',
@@ -93,6 +109,9 @@ export default {
         const y = split[1].replace(')', '')
         return [x, y]
       })
+    },
+    shouldSetHintTimer () {
+      return (this.hasFirstShownSidebar && !this.showSidebar) && this.showTracker && !this.hasFirstShownTooltip
     }
   },
   methods: {
@@ -151,6 +170,16 @@ export default {
       }
       this._timer = setTimeout(() => {
         this.showTooltip = false
+      }, 3000)
+    },
+
+    setHintTimer () {
+      this.showHint = true
+      if (this._timerHint) {
+        clearTimeout(this._timerHint)
+      }
+      this._timerHint = setTimeout(() => {
+        this.showHint = false
       }, 3000)
     },
   },
@@ -226,6 +255,51 @@ export default {
     &--sidebar-toggled
       right calc(100px + 10px)
 
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+
+  14% {
+    transform: scale(1.3);
+  }
+
+  28% {
+    transform: scale(1);
+  }
+
+  42% {
+    transform: scale(1.3);
+  }
+
+  70% {
+    transform: scale(1);
+  }
+}
+.hamburger
+  display flex
+  align-items center
+  &__hint
+    margin 0 10px 0 0
+    display flex
+    flex-direction column
+    align-items flex-end
+    user-select none
+    opacity 0
+    transition opacity .25s ease-out
+    p
+      margin 0
+      font-size 14px
+    &--shown
+      opacity 1
+  &__icon
+    height 200%
+    &--animating
+      animation-name heartBeat
+      animation-duration 1.3s
+      animation-timing-function ease-in-out
+
 @media (min-width 1024px)
   .tracker
     &__tooltip
@@ -243,4 +317,8 @@ export default {
       left 18px
     &__hamburger
       right -20px
+
+.hamburger
+  &__icon
+    height 100%
 </style>

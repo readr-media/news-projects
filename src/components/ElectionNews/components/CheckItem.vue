@@ -46,20 +46,20 @@ export default {
   align-items center
   cursor pointer
   &__checkbox
-    d = 10px
+    d = 12px
     width d
     min-width d
     height d
     border 1px solid #999999
     transition height .1s ease-out
     &--checked
-      width 10px
+      width 12px
       height 5px
       border none
     &--checked-black
       border none
   &__text
-    font-size 10px
+    font-size 12px
     margin 0 0 0 6px
     white-space nowrap
     overflow hidden

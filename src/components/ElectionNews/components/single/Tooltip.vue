@@ -8,6 +8,7 @@
       <p class="sentiment__score" v-text="sentimentScore"></p>
     </div>
     <div class="tooltip__info info">
+      <p class="info__keyword" v-text="keyword"></p>
       <p class="info__sourcescount">媒體數量：{{ sourcesCount }}</p>
       <p class="info__newscount">新聞則數：{{ newsCount }}</p>
     </div>
@@ -56,6 +57,10 @@ export default {
     newsCount () {
       const sum = reduce(this.graphTrackingLineData, (sum, value) => sum + get(value, 'newsCount', 0), 0)
       return sum
+    },
+    keyword () {
+      const { params = '' } = this.$route.params
+      return params
     }
   }
 }
@@ -72,7 +77,7 @@ export default {
   align-items center
   padding 10px
   &__sentiment
-    margin 0 0 20px 0
+    margin 0 0 10px 0
 
 .sentiment
   display flex
@@ -85,8 +90,11 @@ export default {
     font-size 10px
 
 .info
-  &__sourcescount
+  &__keyword
     margin 0
+    font-size 12px
+  &__sourcescount
+    margin 5px 0 0 0
     font-size 12px
   &__newscount
     margin 5px 0 0 0

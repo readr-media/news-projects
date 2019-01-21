@@ -67,5 +67,9 @@ export default {
 
   SET_LIGHTBOX_SWITCHER (state, position) {
     state.lightboxSwitcher = position
+  },
+
+  SET_HAS_FIRST_SHOWN_SIDEBAR (state, value) {
+    state.hasFirstShownSidebar = value
   }
 }
