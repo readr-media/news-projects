@@ -7,6 +7,10 @@ export const colorsSource = [
 ]
 
 export const chartHeight = 2000
+export const defaultDate = {
+  "start": "2018/10/19",
+  "until": "2018/12/25"
+}
 export const marginSingle = {
   top: 20,
   right: 20,
