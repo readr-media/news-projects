@@ -54,25 +54,25 @@ if (process.env.NODE_ENV === 'production') {
       filename: 'service-worker.js',
       minify: true,
       dontCacheBustUrlsMatching: /./,
-      staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/, /\.mp4$/],
-      runtimeCaching: [
-        {
-          urlPattern: '/',
-          handler: 'networkFirst'
-        },
-        {
-          urlPattern: /\/(top|new|show|ask|jobs)/,
-          handler: 'networkFirst'
-        },
-        {
-          urlPattern: '/item/:id',
-          handler: 'networkFirst'
-        },
-        {
-          urlPattern: '/user/:id',
-          handler: 'networkFirst'
-        }
-      ]
+      staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
+      // runtimeCaching: [
+      //   {
+      //     urlPattern: '/',
+      //     handler: 'networkFirst'
+      //   },
+      //   {
+      //     urlPattern: /\/(top|new|show|ask|jobs)/,
+      //     handler: 'networkFirst'
+      //   },
+      //   {
+      //     urlPattern: '/item/:id',
+      //     handler: 'networkFirst'
+      //   },
+      //   {
+      //     urlPattern: '/user/:id',
+      //     handler: 'networkFirst'
+      //   }
+      // ]
     })
   )
 }
