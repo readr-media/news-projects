@@ -54,7 +54,7 @@ if (process.env.NODE_ENV === 'production') {
       filename: 'service-worker.js',
       minify: true,
       dontCacheBustUrlsMatching: /./,
-      staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
+      staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/, /\.mp4$/],
       runtimeCaching: [
         {
           urlPattern: '/',
