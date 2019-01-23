@@ -93,6 +93,18 @@ export default {
     }
   },
   mounted () {
+    require('autotrack')
+    ga('require', 'cleanUrlTracker')
+    // ga('require', 'maxScrollTracker')
+    ga('require', 'eventTracker', {
+      fieldsObj: {
+        nonInteraction: false
+      }
+    })
+    ga('require', 'pageVisibilityTracker')
+    ga('require', 'urlChangeTracker')
+    ga('send', 'pageview')
+
     this.setVueScrollOptions()
     window.addEventListener('resize', this.setVueScrollOptions)
   },

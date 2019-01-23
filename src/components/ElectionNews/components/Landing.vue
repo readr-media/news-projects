@@ -6,14 +6,23 @@
       src="/proj-assets/logo_readr_with_text.png"
       alt=""
       @click="newTab('https://www.readr.tw')"
+      ga-on="click"
+      ga-event-category="projects"
+      ga-event-action="click"
+      ga-event-label="back to home"
     >
-    <img
+    <!-- <img
       v-show="showAside"
       class="landing__share"
       src="/proj-assets/election-news/img/share.png"
       alt=""
       @click="newTab('https://www.facebook.com/share.php?u=https://www.readr.tw/project/election-news')"
-    >
+    > -->
+    <Share
+      class="landing__share"
+      :shareUrl="'https://www.readr.tw/project/election-news'"
+      direction="down"
+    />
     <LandingTitles/>
     <Credits class="landing__credits"/>
     <div class="landing__arrow-wrapper">
@@ -27,12 +36,20 @@
       <Button
         class="navs__nav"
         @click.native="navigate({ param: defaultParams })"
+        ga-on="click"
+        ga-event-category="projects"
+        ga-event-action="click"
+        ga-event-label="sigle keyword button"
       >
         單一關鍵字
       </Button>
       <Button
         class="navs__nav"
         @click.native="navigate({ param: defaultParams, subparam: defaultSubparams})"
+        ga-on="click"
+        ga-event-category="projects"
+        ga-event-action="click"
+        ga-event-label="PK button"
       >
         我要看 PK
       </Button>
@@ -46,6 +63,7 @@ import { debounce } from 'lodash'
 import LandingTitles from './LandingTitles.vue'
 import Credits from './Credits.vue'
 import Button from './Button.vue'
+import Share from 'src/components/Share.vue'
 
 import { mapState as mapStateRoot } from 'vuex'
 
@@ -55,7 +73,8 @@ export default {
   components: {
     LandingTitles,
     Credits,
-    Button
+    Button,
+    Share
   },
   watch: {
     viewport () {
@@ -156,10 +175,14 @@ export default {
     cursor pointer
   &__share
     position fixed
-    top 29px
-    right 20px
-    width 30px
+    top 20px !important
+    right 20px !important
+    // width 30px
     cursor pointer
+    & >>> .toggle
+      background-image url(/proj-assets/election-news/img/share.png) !important
+      background-size 30px auto !important
+      background-position center center !important
   &__credits
     margin 24px 0 0 0
   &__arrow-wrapper
@@ -197,9 +220,9 @@ export default {
       cursor pointer
     &__share
       position fixed
-      top 40px
-      right 40px
-      width 40px
+      top 40px !important
+      right 40px !important
+      // width 40px
       cursor pointer
     &__credits
       margin 63px 0 0 0
