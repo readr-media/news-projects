@@ -9,6 +9,10 @@
           class="button"
           @click="navigate({ param: getSourceName(id) })"
           v-text="getSourceName(id)"
+          ga-on="click"
+          ga-event-category="projects"
+          ga-event-action="click"
+          :ga-event-label="`single keyword + ${getSourceName(id)}`"
         >
         </div>
       </div>
@@ -16,6 +20,10 @@
         <div
           class="button button--large"
           @click="navigate({ param: '韓國瑜', subparam: '陳其邁' })"
+          ga-on="click"
+          ga-event-category="projects"
+          ga-event-action="click"
+          ga-event-label="PK button"
         >
           我要看<br>PK
         </div>

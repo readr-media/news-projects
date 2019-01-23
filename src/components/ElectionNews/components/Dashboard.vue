@@ -19,6 +19,10 @@
       src="/proj-assets/election-news/img/to-top.svg"
       alt=""
       @click="$scrollTo('.content')"
+      ga-on="click"
+      ga-event-category="projects"
+      ga-event-action="click"
+      ga-event-label="Top"
     >
     <Lightbox v-show="showLightbox">
       <Wrapper/>

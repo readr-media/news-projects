@@ -20,6 +20,10 @@
           :isChecked="filter.includes(id)"
           :checkboxColor="getCheckboxColor(id)"
           @click.native="toggle(id)"
+          ga-on="click"
+          ga-event-category="projects"
+          ga-event-action="click"
+          :ga-event-label="`media + ${getSourceAbbr(sourcesMapping[id])}`"
         >
           {{ getSourceAbbr(sourcesMapping[id]) }}
         </CheckItem>

@@ -67,6 +67,8 @@ export default {
     navigate (keyword) {
       const { params = '', subparams = '' } = this.$route.params
       const option = this.position === 'left' ? { param: keyword, subparam: subparams } : { param: params, subparam: keyword }
+
+      ga('send', 'event', 'projects', 'click', `PK keywords + ${option.param}/${option.subparam}`, { nonInteraction: false })
       this.$router.navigate(option)
     }
   },

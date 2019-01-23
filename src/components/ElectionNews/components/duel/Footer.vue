@@ -16,6 +16,10 @@
       <div
         class="button"
         @click="navigate({ param: '韓國瑜', subparam: '' })"
+        ga-on="click"
+        ga-event-category="projects"
+        ga-event-action="click"
+        ga-event-label="sigle keyword button"
       >
         看單一關鍵字
       </div>

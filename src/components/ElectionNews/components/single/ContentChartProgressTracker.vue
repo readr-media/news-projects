@@ -75,6 +75,14 @@ export default {
         this.hasFirstShownTooltip = true
         setTimeout(this.setHintTimer, 1000)
       }
+    },
+    scrollPercentage () {
+      this.debounceScrollEvent()
+    },
+    '$route' () {
+      setTimeout(() => {
+        this.scrollPercentage = 0
+      }, 500);
     }
   },
   data () {
@@ -86,6 +94,7 @@ export default {
       tooltipOffset: 0,
       hasFirstShownHint: false,
       showHint: false,
+      scrollPercentage: 0
     }
   },
   computed: {
@@ -128,7 +137,7 @@ export default {
       this.scrollerAxis
         .setup({
           step: '.tracker-wrapper',
-          // debug: true
+          // debug: true,
         })
         .onStepEnter(({element, index, direction}) => {
           this.showTracker = true
@@ -145,11 +154,16 @@ export default {
       this.scrollerSteps
         .setup({
           step: '.scroll-steps__step',
-          // debug: true
+          // debug: true,
         })
         .onStepEnter(({element, index, direction}) => {
           this.SET_STEP_INDEX(index)
           this.setTooltipTimer()
+
+          const percentage = ((index + 1) / this.dateRangeDays * 100)
+          if (percentage > this.scrollPercentage) {
+            this.scrollPercentage = ((index + 1) / this.dateRangeDays * 100)
+          }
         })
         .onStepExit(({element, index, direction}) => {
 
@@ -182,11 +196,17 @@ export default {
         this.showHint = false
       }, 3000)
     },
+
+    sendScrollEvent () {
+      const percentageString = this.scrollPercentage.toFixed(2) + '%'
+      ga('send', 'event', 'projects', 'scroll', `single-scroll + ${this.$route.params.params} + ${percentageString}`)
+    }
   },
   mounted () {
     this.createScrollerAxis()
     this.createScrollerSteps()
     this.debounceResize = debounce(this.scrollerResize, 500)
+    this.debounceScrollEvent = debounce(this.sendScrollEvent, 500)
 
     this.trackerLineOffset = this.isDesktop ? 18 : 46
     this.tooltipOffset = this.trackerLineOffset - 30
