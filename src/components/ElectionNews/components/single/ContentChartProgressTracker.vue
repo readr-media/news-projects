@@ -26,7 +26,7 @@
         <div :class="[ 'line__hamburger', { 'line__hamburger--sidebar-toggled': showSidebar }, 'hamburger' ]">
           <div :class="[ 'hamburger__hint', { 'hamburger__hint--shown': showHint } ]">
             <p>點我看</p>
-            <p>當天的新聞標題</p>
+            <p>當天新聞標題</p>
           </div>
           <img
             :class="[ 'hamburger__icon', { 'hamburger__icon--animating': showHint } ]"

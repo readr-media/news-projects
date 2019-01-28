@@ -29,8 +29,7 @@
       <div class="landing__arrow" @click="scroll"></div>
     </div>
     <div class="landing__intro">
-      <p>前言同王北鄉：一言的時創好演；助查有樣印化上了不在思要天；理沒星早們；委士紀北風起不少滿或很變基教足老興說洲南不創公河有臺以著年這要學們不。</p>
-      <p>一力口水地道該起黃的喜老查中路物死學呢民外，病心師站力而受媽；所發夫，才則聲電在醫間各以教全小今精人而不視。</p>
+      <p>媒體在報導不同的政治人物時會有情緒差異嗎？針對同一位候選人，媒體報導的情緒在選舉前後會不會有所轉變？我們借助 Google 人工智慧來嘗試解答這些問題，並將持續追蹤至 2020 年。</p>
     </div>
     <div class="landing__navs navs">
       <Button
@@ -41,7 +40,7 @@
         ga-event-action="click"
         ga-event-label="sigle keyword button"
       >
-        單一關鍵字
+        看關鍵字風向
       </Button>
       <Button
         class="navs__nav"
@@ -51,7 +50,7 @@
         ga-event-action="click"
         ga-event-label="PK button"
       >
-        我要看 PK
+        多關鍵字 PK
       </Button>
     </div>
   </section>
