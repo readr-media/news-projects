@@ -16,13 +16,8 @@ import Logo from '../Logo.vue'
 import Map from './Map.vue'
 import RelatedReports from 'src/components/RelatedReports.vue'
 import Share from '../Share.vue'
-import module from 'src/store/modules/VoteResultCityCouncil'
 import { READR_SITE_URL } from '../../constants'
 import { throttle } from 'lodash'
-
-const fetchTWJSON = (store) => {
-  return store.dispatch('VoteResultCityCouncil/FETCH_TAIWAN_JSON')
-}
 
 const getElementTop = (el) => {
   const rect = el.getBoundingClientRect()
@@ -66,16 +61,12 @@ export default {
       scrollPos: []
     }
   },
-  // beforeCreate () {
-  //   this.$store.registerModule('VoteResultCityCouncil', module)
-  // },
   mounted () {
     ga('send', 'pageview')
     this.scrollPos = setScrollPos()
     window.addEventListener('scroll', this.handleScroll)
   },
   destroyed () {
-    // this.$store.unregisterModule('VoteResultCityCouncil')
     window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
@@ -93,10 +84,11 @@ export default {
 </script>
 <style lang="stylus">
   .city-council
-    padding-bottom 60px
+    padding-bottom 40px
     &__share
       .toggle
         background-image url(/proj-assets/vote2018-result-city-council/share.png) !important
         background-size 34px auto !important
         background-position center center !important
+
 </style>
