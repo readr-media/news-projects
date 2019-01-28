@@ -9,6 +9,10 @@
     <div v-else-if="mainViewStatusFetched === 'success'">
       <DashboardMainSingle v-if="mainViewStatus === 'single'"/>
       <DashboardMainDuel v-else-if="mainViewStatus === 'duel'"/>
+      <div class="navs-insight">
+        <div class="navs-insight__nav" @click="newTab('https://www.readr.tw')">使用說明書</div>
+        <div class="navs-insight__nav" @click="newTab('https://www.readr.tw')">我們發現了什麼</div>
+      </div>
     </div>
   </main>
 </template>
@@ -56,6 +60,11 @@ export default {
       }
     }
   },
+  methods: {
+    newTab (url) {
+      window.open(url)
+    }
+  }
 }
 </script>
 
@@ -63,7 +72,29 @@ export default {
 .main
   padding 20px 20px 20px 10px
 
+.navs-insight
+  width 100%
+  margin 20px 0 0 0
+  &__nav
+    width 100%
+    height 20px
+    display flex
+    justify-content center
+    align-items center
+    border 1px solid #999999
+    font-size 10px
+    font-weight 400
+    cursor pointer
+    color #4a4a4a
+    & + &
+      margin 10px 0 0 0
+
 @media (min-width 1024px)
   .main
     padding 50px 0
+
+  .navs-insight
+    &__nav
+      height 30px
+      font-size 14px
 </style>

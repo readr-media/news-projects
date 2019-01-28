@@ -53,6 +53,10 @@
         多關鍵字 PK
       </Button>
     </div>
+    <div class="landing__navs-insight navs-insight">
+      <div class="navs-insight__nav" @click="newTab('https://www.readr.tw')">使用說明書</div>
+      <div class="navs-insight__nav" @click="newTab('https://www.readr.tw')">我們發現了什麼</div>
+    </div>
   </section>
 </template>
 
@@ -208,6 +212,22 @@ export default {
     justify-content space-between
     width 100%
 
+.navs-insight
+  width 100%
+  margin 30px 0 0 0
+  &__nav
+    width 100%
+    height 30px
+    display flex
+    justify-content center
+    align-items center
+    background-color #eae9eb
+    font-size 14px
+    font-weight 800
+    cursor pointer
+    & + &
+      margin 10px 0 0 0
+
 @media (min-width 1024px)
   .landing
     padding 161px 14px 88px 14px
@@ -233,6 +253,9 @@ export default {
       p
         font-size 20px
     &__navs
-      max-width 450px
+      max-width 560px
       margin 60px 0 0 0
+
+  .navs-insight
+    width 560px
 </style>
