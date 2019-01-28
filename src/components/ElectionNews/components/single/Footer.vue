@@ -25,7 +25,7 @@
           ga-event-action="click"
           ga-event-label="PK button"
         >
-          我要看<br>PK
+          多關鍵字<br>PK
         </div>
       </div>
     </nav>

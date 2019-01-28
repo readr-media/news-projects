@@ -86,7 +86,7 @@ export function single () {
           .attr('class', 'line')
           .attr('fill', 'none')
           .attr('stroke', d => getColor(colorState, d.source) || colorDefault)
-          .attr('stroke-width', 1.5)
+          .attr('stroke-width', 3.0)
           .attr('stroke-linejoin', 'round')
           .attr('stroke-linecap', 'round')
           .attr('transform', `translate(0, ${paddingTop})`)

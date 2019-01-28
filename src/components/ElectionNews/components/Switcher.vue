@@ -47,6 +47,7 @@ export default {
   display flex
   justify-content space-around
   align-items center
+  user-select none
   &__toggle
     z-index 1
     position absolute

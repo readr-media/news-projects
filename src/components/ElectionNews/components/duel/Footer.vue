@@ -21,7 +21,7 @@
         ga-event-action="click"
         ga-event-label="sigle keyword button"
       >
-        看單一關鍵字
+        看其它關鍵字風向
       </div>
     </div>
   </footer>
