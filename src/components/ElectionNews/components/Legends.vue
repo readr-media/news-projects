@@ -2,7 +2,7 @@
   <div class="legends">
     <div class="legends__top top">
       <p>情緒計算方式說明</p>
-      <p>我們蒐集了 2018 年 10 月 19 日至 12 月 19 日的新聞，以 Google's Cloud Natural Language API 計算新聞文本的情緒分數，並將分數轉換成 0 - 10 分，再區分為三個情緒區間。</p>
+      <p>我們蒐集的新聞從 2018 年 10 月 19 日開始（並將持續至 2020年），以 Google's Cloud Natural Language API 計算新聞文本的情緒分數，並將分數轉換成 0 - 10 分，再區分為三個情緒區間。</p>
       <p class="top__more">
         <span @click="newTab('https://www.readr.tw/post/1668')" ga-on="click" ga-event-category="projects" ga-event-action="click" ga-event-label="manual legend">（<span class="underline">看詳細</span>）</span>
       </p>
