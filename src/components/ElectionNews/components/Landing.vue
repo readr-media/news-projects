@@ -54,8 +54,26 @@
       </Button>
     </div>
     <div class="landing__navs-insight navs-insight">
-      <div class="navs-insight__nav" @click="newTab('https://www.readr.tw')">使用說明書</div>
-      <div class="navs-insight__nav" @click="newTab('https://www.readr.tw')">我們發現了什麼</div>
+      <div
+        class="navs-insight__nav"
+        @click="newTab('https://www.readr.tw/post/1668')"
+        ga-on="click"
+        ga-event-category="projects"
+        ga-event-action="click"
+        ga-event-label="manual landing"
+      >
+        使用說明書
+      </div>
+      <div
+        class="navs-insight__nav"
+        @click="newTab('https://www.readr.tw')"
+        ga-on="click"
+        ga-event-category="projects"
+        ga-event-action="click"
+        ga-event-label="insight landing"
+      >
+        我們發現了什麼
+      </div>
     </div>
   </section>
 </template>

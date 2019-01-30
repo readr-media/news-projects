@@ -11,7 +11,7 @@
     </div>
     <div class="titles__content">
       <h1>選舉新聞風向球</h1>
-      <h2>副標副標副標副標副標副標副標副標副標副標副標副標副標</h2>
+      <h2>媒體報導看風向？<br>Google 人工智慧來解答</h2>
     </div>
     <div class="titles__balls balls">
       <div

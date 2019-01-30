@@ -10,8 +10,26 @@
       <DashboardMainSingle v-if="mainViewStatus === 'single'"/>
       <DashboardMainDuel v-else-if="mainViewStatus === 'duel'"/>
       <div class="navs-insight">
-        <div class="navs-insight__nav" @click="newTab('https://www.readr.tw')">使用說明書</div>
-        <div class="navs-insight__nav" @click="newTab('https://www.readr.tw')">我們發現了什麼</div>
+        <div
+          class="navs-insight__nav"
+          @click="newTab('https://www.readr.tw/post/1668')"
+          ga-on="click"
+          ga-event-category="projects"
+          ga-event-action="click"
+          ga-event-label="manual bottom"
+        >
+          使用說明書
+        </div>
+        <div
+          class="navs-insight__nav"
+          @click="newTab('https://www.readr.tw')"
+          ga-on="click"
+          ga-event-category="projects"
+          ga-event-action="click"
+          ga-event-label="insight bottom"
+        >
+          我們發現了什麼
+        </div>
       </div>
     </div>
   </main>
