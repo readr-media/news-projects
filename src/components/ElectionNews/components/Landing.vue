@@ -66,7 +66,7 @@
       </div>
       <div
         class="navs-insight__nav"
-        @click="newTab('https://www.readr.tw')"
+        @click="newTab('https://www.readr.tw/post/1669')"
         ga-on="click"
         ga-event-category="projects"
         ga-event-action="click"
