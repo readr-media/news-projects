@@ -38,21 +38,21 @@ export default {
     switch (this.mainViewStatus) {
       case 'single':
         return {
-          title: '選舉新聞風向球 - 看關鍵字風向',
+          title: '選舉新聞風向球：看關鍵字風向',
           description: '媒體在報導不同的政治人物時會有情緒差異嗎？針對同一位候選人，媒體報導的情緒在選舉前後會不會有所轉變？我們借助 Google 人工智慧來嘗試解答這些問題，並將持續追蹤至 2020 年。',
           metaUrl: 'election-news',
           metaImage: 'election-news/img/og-single.jpg'
         }
       case 'duel':
         return {
-          title: '選舉新聞風向球 - 多關鍵字 PK',
+          title: '選舉新聞風向球：多關鍵字 PK',
           description: '媒體在報導不同的政治人物時會有情緒差異嗎？針對同一位候選人，媒體報導的情緒在選舉前後會不會有所轉變？我們借助 Google 人工智慧來嘗試解答這些問題，並將持續追蹤至 2020 年。',
           metaUrl: 'election-news',
           metaImage: 'election-news/img/og-duel.jpg'
         }
       default:
         return {
-          title: '選舉新聞風向球',
+          title: '選舉新聞風向球：媒體報導看風向？Google 人工智慧來解答',
           description: '媒體在報導不同的政治人物時會有情緒差異嗎？針對同一位候選人，媒體報導的情緒在選舉前後會不會有所轉變？我們借助 Google 人工智慧來嘗試解答這些問題，並將持續追蹤至 2020 年。',
           metaUrl: 'election-news',
           metaImage: 'election-news/img/og.jpg'
