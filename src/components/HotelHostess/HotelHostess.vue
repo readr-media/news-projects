@@ -242,13 +242,14 @@ export default {
     },
   },
   beforeMount() {
+    import('fullpage.js/dist/fullpage.extensions.min.js').then(fullpageModule => {
+      window.fullpage = fullpageModule.default;
+      this.$_hotelHostess_initFullPage();
+    });
     this.pageUrl = getFBCommentsUrl();
   },
   mounted() {
-    import('fullpage.js/dist/fullpage.extensions.min.js').then((p) => {
-      window.fullpage = p;
-      this.$_hotelHostess_initFullPage();
-    });
+    
     window.addEventListener('mousemove', this.$_hotelHostess_handleMouseMove);
     ga('send', 'pageview');
   },
