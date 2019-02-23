@@ -1,5 +1,5 @@
 import { MM_FAVICON_URL, MM_FB_APP_ID, MM_FB_PAGE_ID, MM_FB_PAGE_URL, MM_SITE_ASSETS_URL, MM_SITE_NAME, MM_SITE_URL } from '../constants'
-import { PROJECTS_BELONGS_MM, PROJECTS_NEED_GOOGLE_MAP, PROJECTS_NEED_GOOGLE_RECAPTCHA, PROJECTS_NOT_NEED_TYPEKIT, SCRIPT_GOOGLE_MAP, SCRIPT_GOOGLE_RECAPTCHA, SCRIPT_TYPEKIT } from '../constants'
+import { PROJECTS_BELONGS_MM, PROJECTS_NEED_GOOGLE_MAP, PROJECTS_NEED_GOOGLE_RECAPTCHA, PROJECTS_NEED_TYPEKIT, SCRIPT_GOOGLE_MAP, SCRIPT_GOOGLE_RECAPTCHA, SCRIPT_TYPEKIT } from '../constants'
 import { READR_FAVICON_URL, READR_FB_APP_ID, READR_FB_PAGE_ID, READR_FB_PAGE_URL, READR_SITE_ASSETS_URL, READR_SITE_NAME, READR_SITE_URL } from '../constants'
 
 import { get } from 'lodash'
@@ -43,7 +43,7 @@ const serverMetaInfoMixin = {
       this.$ssrContext.fbPageUrl = fbPageUrl
       this.$ssrContext.scriptGoogleMap = PROJECTS_NEED_GOOGLE_MAP.includes(project) ? SCRIPT_GOOGLE_MAP : ` `
       this.$ssrContext.scriptGoogleReCaptcha = PROJECTS_NEED_GOOGLE_RECAPTCHA.includes(project) ? SCRIPT_GOOGLE_RECAPTCHA : ` `
-      this.$ssrContext.scriptTypeKit = PROJECTS_NOT_NEED_TYPEKIT.includes(project) ? ` ` : SCRIPT_TYPEKIT
+      this.$ssrContext.scriptTypeKit = PROJECTS_NEED_TYPEKIT.includes(project) ? SCRIPT_TYPEKIT : ` `
       this.$ssrContext.customScript = customScript
     }
   }
