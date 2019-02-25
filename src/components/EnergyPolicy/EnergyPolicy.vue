@@ -1,6 +1,6 @@
 <template>
-  <div id="fullpage" class="energy-policy">
-    <!-- <div id="fullpage"> -->
+  <div class="energy-policy">
+    <div id="fullpage" ref="fullpage">
       <section class="section">
         <div class="landing container">
           <div class="landing__block"></div>
@@ -28,13 +28,26 @@
           <h2>區塊標</h2>
           <p>區塊內文區塊內文區塊內文區塊內文區塊內文區塊內文區塊內文區塊內文區塊內文區塊內文區塊內文區塊內文區塊內文</p>
           <button class="btn-readmore" @click="openReadMore = true">OP</button>
-          <!-- <div :class="{ active: openReadMore }" class="read-more">
-            <button @click="openReadMore = false">CL</button>
-          </div> -->
         </div>
-        
       </section>
-    <!-- </div> -->
+    </div>
+    <div ref="readMore" class="read-more">
+      <div>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+        <p>補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文補充內文</p>
+      </div>
+      <button @click="openReadMore = false">CL</button>
+    </div>
   </div>
 </template>
 <script>
@@ -62,7 +75,15 @@ export default {
   },
   watch: {
     openReadMore (value) {
-      value ? window.fullpage_api.setAllowScrolling(false) : window.fullpage_api.setAllowScrolling(true)
+      if (value) {
+        window.fullpage_api.setAllowScrolling(false)
+        this.$refs.readMore.classList.add('active')
+        this.$refs.fullpage.classList.add('hasReadMore')
+      } else {
+        window.fullpage_api.setAllowScrolling(true)
+        this.$refs.readMore.classList.remove('active')
+        this.$refs.fullpage.classList.remove('hasReadMore')
+      }
     }
   },
   beforeMount () {
@@ -79,7 +100,6 @@ export default {
       this.fullpage = new window.fullpage('#fullpage', {
         licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
         autoScrolling: true,
-        // fixedElements: '.read-more',
         normalScrollElements: '.read-more'
       })
     },
@@ -91,6 +111,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
   .energy-policy
+    position relative
     h1, h2, h3, p
       margin 0
     h1
@@ -111,6 +132,9 @@ export default {
       border none
       cursor pointer
       // user-select none
+    #fullpage
+      &.hasReadMore
+        background-color rgba(0, 0, 0, .6)
     .section
       height 100vh
       // min-height 100vh
@@ -167,14 +191,20 @@ export default {
       top 0
       left 0
       right 0
-      bottom 0
       transform translateX(-100%)
       z-index 10
+      width 80%
+      height 100vh
+      padding 10px
       background-color #fff
       visibility hidden
+      transition transform .25s ease-out, visibility .1s ease-out
       &.active
-        transform translateX(-20%)
+        transform translateX(0)
         visibility visible
+      > div
+        height 100%
+        overflow auto
       button
         position absolute
         right -20px
@@ -239,4 +269,6 @@ export default {
           display none
       .landing
         flex-direction row
+      .read-more
+        width 50%
 </style>
