@@ -1,3 +1,8 @@
+<!--
+  * fullPage
+  * https://github.com/alvarotrigo/fullPage.js
+  * Copyright (C) 2018 http://alvarotrigo.com/fullPage - A project by Alvaro Trigo
+!-->
 <template>
   <main class="hotel-hostess">
     <app-logo
@@ -245,7 +250,7 @@ export default {
     import('fullpage.js/dist/fullpage.extensions.min.js').then(fullpageModule => {
       window.fullpage = fullpageModule.default;
       this.$_hotelHostess_initFullPage();
-    });
+    })
     this.pageUrl = getFBCommentsUrl();
   },
   mounted() {
