@@ -9,39 +9,37 @@ export const QUIZ_QUESTIONS = [
     ]
   },
   {
-    question: '國際社會因應全球暖化、極端氣候威脅，從 20 世紀末開始制定公約減少碳排放，臺灣不屬於聯合國會員國，沒有強制減排的壓力，那你會如何面對全球暖化議題？',
+    question: '因應全球暖化，各國從 20 世紀末開始制定公約減少碳排放，臺灣不屬於聯合國會員國，沒有強制減排壓力，你會怎麼做？',
     options: [
-      { text: '主動立法響應全球減碳', order: 1, president: 'Lee' },
-      { text: '制定《環境基本法》，讓臺灣永續發展和環保意識更進一步', order: 4, president: 'Chen' },
-      { text: '大家一起節能減碳！核能的碳排放比火力發電低，也應該多多發展', order: 2, president: 'Ma' },
-      { text: '推動能源轉型，降低對核能和火力發電的依賴，讓再生能源成為新時代的重要能源', order: 3, president: 'Tsai' }
+      { text: '主動響應全球減碳，提出減碳目標', order: 1, president: 'Lee' },
+      { text: '核能的碳排放比火力發電低，應該多多發展', order: 2, president: 'Ma' },
+      { text: '降低對核能和火力發電的依賴，推動再生能源', order: 3, president: 'Tsai' }
     ]
   },
   {
     question: '世界許多國家積極開發再生能源，你的再生能源政策是？',
     options: [
-      { text: '拚經濟最重要，但還是響應世界潮流，小幅提升再生能源佔比規劃好了', order: 3, president: 'Lee' },
-      { text: '再生能源佔比可以調高，但要怎麼達成，可能還要再研究看看', order: 4, president: 'Chen' },
-      { text: '我支持制定政策發展再生能源，但開發成本好像有點高，實際推行就……再看看吧', order: 2, president: 'Ma' },
-      { text: '再生能源很棒！要積極推行，讓臺灣再生能源佔比大幅提升', order: 1, president: 'Tsai' }
+      { text: '拚經濟最重要，為回應國際潮流，小幅提升再生能源佔比就好', order: 3, president: 'Lee' },
+      { text: '我支持制定政策，但開發成本好像有點高，怎麼執行就再看看吧', order: 2, president: 'Ma' },
+      { text: '再生能源很棒！要積極推行', order: 1, president: 'Tsai' }
     ]
   },
   {
     question: '火力發電被認為是造成空污的原因之一，你的火力發電政策是？',
     options: [
-      { text: '火力發電是臺灣最主要電力來源，火力發電不能停！核能也要有！', order: 1, president: 'Lee' },
-      { text: '廢核更重要，發電量缺口只能先靠提高火力發電來補足', order: 2, president: 'Chen' },
-      { text: '核能與火力發電並行，改善電廠發電技術來降低碳排放，這樣就可以兼顧減緩空污與穩定供電', order: 4, president: 'Ma' },
-      { text: '我主張廢核，因此火力佔比不能調太低，但會加強發展比燃煤更低污染的燃氣電廠', order: 3, president: 'Tsai' }
+      { text: '火力發電不能停！核能也要有！', order: 1, president: 'Lee' },
+      { text: '廢核優先，發電缺口由燃煤燃氣來補', order: 2, president: 'Chen' },
+      { text: '核能與火力併行，改善電廠發電技術，就能減緩空污同時穩定供電', order: 4, president: 'Ma' },
+      { text: '我主張廢核，調高燃氣佔比來穩定發電', order: 3, president: 'Tsai' }
     ]
   },
   {
     question: '台電長期壟斷臺灣供電市場，你會怎麼處理？',
     options: [
-      { text: '為了公平而且自由化，應該要回歸市場機制，先立法鼓勵民間蓋電廠賣電給台電', order: 2, president: 'Lee' },
-      { text: '台電勢力龐大，還是先靜觀其變吧（扁）', order: 1, president: 'Chen' },
-      { text: '成立專案小組再《電業法》推一把', order: 4, president: 'Ma' },
-      { text: '把《電業法》列為修法重點，讓台電進一步轉型，打造更自由的電業市場', order: 3, president: 'Tsai' }
+      { text: '應回歸市場機制，立法鼓勵民間蓋電廠賣電給台電', order: 2, president: 'Lee' },
+      { text: '台電勢力龐大，還是先靜觀其變吧', order: 1, president: 'Chen' },
+      { text: '成立專案小組進一步研究《電業法》修法', order: 4, president: 'Ma' },
+      { text: '將《電業法》修法列為優先法案，一定要過！', order: 3, president: 'Tsai' }
     ]
   }
 ]
