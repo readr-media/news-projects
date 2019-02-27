@@ -104,6 +104,7 @@ export default {
       background-color transparent
       border none
       cursor pointer
+      
     .question
       button
         width 100%
@@ -113,6 +114,7 @@ export default {
         text-align justify
         line-height 1.3
         background-color #fff
+        
     .progress
       display flex
       position absolute
@@ -143,7 +145,10 @@ export default {
         margin-top 10px
       p
         width 100%
-        font-size 1.0625rem
+        font-size 1rem
+        &:before
+          content '•'
+          padding-right 10px
       &__image
         width 90px
         height 90px
@@ -190,9 +195,7 @@ export default {
         font-size .875rem
       .result
         p
-          font-size .875rem
-          & + p
-            margin-top 5px
+          font-size .8125rem
         &__btns
           margin-top 10px
   
@@ -232,6 +235,11 @@ export default {
         font-size 1.25rem
       p, button
         font-size 1.125rem
+      .question
+        button
+          &:hover
+            padding 4px 5px
+            border 5px solid #f8e71c
       .result
         p
           font-size 1rem

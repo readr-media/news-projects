@@ -64,7 +64,7 @@ export default {
       title: '小英能源政策體檢報告',
       description: 'xxxxxxxxxxxxxxxxxxxx',
       metaUrl: 'energy-policy',
-      metaImage: 'energy-policy/ogimage.jpg',
+      metaImage: 'energy-policy/og.jpg',
     };
   },
   data () {
@@ -155,12 +155,21 @@ export default {
       position relative
       &__block
         flex 1
+        background-repeat no-repeat
+        background-size 80% auto
+        background-position-y bottom
         &:nth-child(1)
           background-color #257069
+          background-image url(/proj-assets/energy-policy/landing-mobile-1.png)
+          background-position-x 120%
         &:nth-child(2)
           background-color #fffb08
+          background-image url(/proj-assets/energy-policy/landing-mobile-2.png)
+          background-position-x 0
         &:nth-child(3)
           background-color #e10583
+          background-image url(/proj-assets/energy-policy/landing-mobile-3.png)
+          background-position-x 200%
     .foreword
       p
         color #fff
@@ -258,6 +267,27 @@ export default {
           position static
           margin-top 70px
 
+  @media (min-width: 769px)
+    .energy-policy
+      h1
+        left 10%
+      .landing
+        &__block
+          background-size contain
+          &:nth-child(1)
+            background-position-x 100%
+          &:nth-child(2)
+            background-position-x 40%
+          &:nth-child(3)
+            background-position-x 120%
+
+  @media (min-width: 900px)
+    .energy-policy
+      h1
+        bottom 10%
+        br
+          display none
+
   @media (min-width: 1200px)
     .energy-policy
       h1
@@ -265,10 +295,20 @@ export default {
         left 50%
         bottom auto
         transform translateX(-50%)
-        br
-          display none
+        
       .landing
         flex-direction row
+        &__block
+          background-size 150% auto
+          &:nth-child(1)
+            background-image url(/proj-assets/energy-policy/landing-desktop-1.png)
+            background-position-x 30%
+          &:nth-child(2)
+            background-image url(/proj-assets/energy-policy/landing-desktop-2.png)
+            background-position-x 50%
+          &:nth-child(3)
+            background-image url(/proj-assets/energy-policy/landing-desktop-3.png)
+            background-position-x 30%
       .read-more
         width 50%
 </style>
