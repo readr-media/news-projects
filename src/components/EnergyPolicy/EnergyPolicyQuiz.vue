@@ -144,11 +144,16 @@ export default {
       h3, p
         margin-top 10px
       p
+        position relative
         width 100%
+        padding-left 10px
         font-size 1rem
         &:before
           content '•'
-          padding-right 10px
+          position absolute
+          top 0
+          left 0
+          
       &__image
         width 90px
         height 90px
