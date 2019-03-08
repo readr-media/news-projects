@@ -3,9 +3,9 @@
     <template v-if="type === 'open'">
       <div class="bar"></div>
     </template>
-    <!-- <template v-if="type === 'close'">
-
-    </template> -->
+    <template v-if="type === 'close'">
+      <img src="/proj-assets/energy-policy/close.png" alt="關閉">
+    </template>
     <slot name="moreText"></slot>
   </button>
 </template>
@@ -21,31 +21,30 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  button
-    &.read-more-btn
-      position relative
-      // display flex
-      width 40px
-      height 40px
-      padding 0
-      color #fff
-      font-size 1.25rem
-      background-color #f8e71c
-      border none
-      border-radius 50%
-      cursor pointer
-      // &.open
-      //   flex-direction column
-      //   justify-content center
-      //   align-items center
+  .read-more-btn
+    position relative
+    width 40px
+    height 40px
+    padding 0
+    color #fff
+    font-size 1.25rem
+    text-align center
+    background-color #f8e71c
+    border none
+    border-radius 50%
+    cursor pointer
     > span
       position absolute
       top 50%
       left 45px
       transform translateY(-50%)
       color #f8e71c
-      font-size .625rem
+      font-size .75rem
       white-space nowrap
+    > img
+      width 20px
+      height 20px
+      margin 10px auto
   .bar
     position absolute
     top 50%
@@ -65,18 +64,24 @@ export default {
       top -6px
     &::after
       bottom -6px
-    // & + .bar
-    //   margin-top 3px
 
-@media (max-width: 374px)
-  button
-    &.read-more-btn
-      font-size 1.125rem
+@media (max-width: 374px) // iPhone SE
+  .read-more-btn
+    width 30px
+    height 30px
+    font-size 1.125rem
+    > span
+      left 40px
+    > img
+      width 15px
+      height 15px
+      margin 7.5px auto
+    .bar
+      width 15px
 
 @media (min-width: 768px)
-  button
-    &.read-more-btn
-      font-size 1.5rem
+  .read-more-btn
+    font-size 1.5rem
     > span
       left 50px
       font-size 1rem
