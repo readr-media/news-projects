@@ -1,12 +1,14 @@
 <template>
   <div class="energy-policy">
+    <Logo class="energy-policy__logo no-sprite" href="https://www.readr.tw/" top="10px" left="10px" bgImage="/proj-assets/logo_readr.png" />
+    <Share :shareUrl="`${READR_SITE_URL}energy-policy`" class="energy-policy__share" top="10px" right="10px" direction="down" />
     <div id="fullpage" ref="fullpage">
       <section class="section">
         <div class="landing container">
           <div class="landing__block"></div>
           <div class="landing__block"></div>
           <div class="landing__block"></div>
-          <h1>小英<br>能源政策<br>體檢報告</h1>
+          <div class="landing__heading"></div>
         </div>
       </section>
       <section class="section">
@@ -183,7 +185,9 @@
           <h2>政策推動太陽光電成長</h2>
           <p>預計 2025 年，太陽光電會取代水力，成為臺灣最主要的再生能源。</p>
           <p>臺灣自 2000 年開始補助政府單位及民間設置太陽光電設施，2009 年《再生能源發展條例》確立台電以 20 年為期，以固定優惠價格收購綠電的「躉購制度」後，裝置容量才開始明顯快速上升，蔡英文上台後，推動「太陽光電 2 年推動計畫」，2016 年至 2017 年的裝置容量成長率達 42%。</p>
-          <img src="/proj-assets/energy-policy/chart-6.png" alt="太陽光電裝置容量自 2010 年開始大幅成長">
+          <img
+            src="/proj-assets/energy-policy/chart-6.png"
+            alt="太陽光電裝置容量自 2010 年開始大幅成長">
         </div>
       </section>
       <section class="section">
@@ -268,14 +272,19 @@
 <script>
 
 import EnergyPolicyQuiz from './EnergyPolicyQuiz.vue'
+import Logo from '../Logo.vue'
 import ReadMoreButton from './ReadMoreButton.vue'
+import Share from '../Share.vue'
 import { READ_MORE_CONTENT, } from './constant'
+import { READR_SITE_URL } from '../../constants'
 
 export default {
   name: 'EnergyPolicy',
   components: {
     EnergyPolicyQuiz,
-    ReadMoreButton
+    Logo,
+    ReadMoreButton,
+    Share
   },
   metaInfo() {
     return {
@@ -288,6 +297,7 @@ export default {
   data () {
     return {
       READ_MORE_CONTENT,
+      READR_SITE_URL,
       fullpage: undefined,
       openReadMore: false,
       readMoreIndex: 1,
@@ -318,7 +328,7 @@ export default {
     })
   },
   mounted () {
-    
+    ga('send', 'pageview')
   },
   methods: {
     initFullPage () {
@@ -326,6 +336,7 @@ export default {
         licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
         autoScrolling: true,
         normalScrollElements: '.read-more',
+        fixedElements: '.energy-policy__logo, .energy-policy__share'
       })
     },
     moveTo (section) {
@@ -336,24 +347,14 @@ export default {
       readMoreContent.innerHTML = READ_MORE_CONTENT[index - 1].contents
       readMoreContent.scrollTop = 0
       this.openReadMore = true
-      // this.readMoreIndex = index
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
 
-  h1, >>> h2, >>> h3, >>> p, >>> ul, >>> img
+  >>> h2, >>> h3, >>> p, >>> ul, >>> img
     margin 0 auto
-  h1
-    position absolute
-    left 15px
-    bottom 30px
-    font-size 2.1875rem
-    font-weight 400
-    line-height 1.3
-    letter-spacing 2px
-    text-shadow 0 1px 20px rgba(0, 0, 0, 0.5)
   >>> h2
     font-size 1.25rem
     & + p, & + ul
@@ -368,6 +369,7 @@ export default {
     line-height 1.67
     & + h3, & + p, & + ul, & + img
       margin-top .5em
+    
   >>> ul
     padding-left 20px
     font-size 1rem
@@ -390,14 +392,17 @@ export default {
     background-color transparent
     border none
     cursor pointer
-    // user-select none
     > span
       font-size .75rem
   >>> img
     display block
   >>> figure
     margin .5em 0
+    img
+      width 100%
     figcaption
+      color #9b9b9b
+      margin-top .2em 
       font-size .875rem
       text-align center
   .energy-policy
@@ -410,10 +415,15 @@ export default {
     bottom 0
     #fullpage
       &.hasReadMore
-        background-color rgba(0, 0, 0, .6)
+        .container
+          background-color rgba(0, 0, 0, .6)
+    &__logo
+      width 40px !important
+      height 40px !important
+      background-size 40px auto !important
+
     .section
       height 100vh
-      // min-height 100vh
       background-color #9b9b9b
       background-position center center
       background-size cover
@@ -483,10 +493,19 @@ export default {
           background-color #e10583
           background-image url(/proj-assets/energy-policy/landing-mobile-3.png)
           background-position-x 200%
+      &__heading
+        position absolute
+        left 15px
+        bottom 15px
+        width 50%
+        height calc(33% - 30px)
+        background-image url(/proj-assets/energy-policy/title-mobile.png)
+        background-position center center
+        background-repeat no-repeat
+        background-size contain
     .foreword
       p
         color #fff
-        // line-height 2
         text-align justify
         font-weight 300
       > div
@@ -563,6 +582,10 @@ export default {
       &.active
         transform translateX(0)
         visibility visible
+      >>> h2,  >>> h3, >>> p, >>> ul
+        & + h3, & + p, & + ul, & + img
+          margin-top .8em
+      
       > div
         height 100%
         padding-right 10px
@@ -579,10 +602,7 @@ export default {
         bottom 15px
 
   @media (max-width: 374px) // iPhone SE
-    h1
-      left 10px
-      bottom 10px
-      font-size 1.875rem
+    
     >>> h2
       font-size 1rem
       
@@ -597,13 +617,25 @@ export default {
         &:not(:first-child):not(:nth-child(3))
           .container
             padding 50px 0 30px
-
+      
+      .landing__heading
+        left 10px
+      
+      &__logo
+        top 5px !important
+      &__share
+        top 5px !important
+        
   @media (min-width: 768px)
     h1
       left 30px
       font-size 3.4375rem
-    >>> p
+    >>> h2
       font-size 1.5rem
+    >>> h3
+      font-size 1.375rem
+    >>> p
+      font-size 1.25rem
     >>> button
       font-size 1.5rem
 
@@ -643,13 +675,14 @@ export default {
           & + .event
             margin-top 10px
 
+      .read-more
+        padding 30px 20px 30px 30px
+
       .btn-readmore
         left 20%
         bottom 30px
 
   @media (min-width: 769px)
-    h1
-      left 10%
 
     .energy-policy
       .container > img
@@ -663,6 +696,7 @@ export default {
             background-position-x 40%
           &:nth-child(3)
             background-position-x 120%
+
       .timeline
         display flex
         flex-direction column
@@ -694,19 +728,7 @@ export default {
               text-align left
               line-height 1.3
 
-  @media (min-width: 900px)
-    h1
-      bottom 10%
-      br
-        display none
-
   @media (min-width: 1200px)
-    h1
-      top 1.5em
-      left 50%
-      bottom auto
-      transform translateX(-50%)
-
     .energy-policy
       .container > img
         width 50%
@@ -724,6 +746,13 @@ export default {
           &:nth-child(3)
             background-image url(/proj-assets/energy-policy/landing-desktop-3.png)
             background-position-x 30%
+        &__heading
+          top 1.5em
+          left 50%
+          bottom auto
+          transform translateX(-50%)
+          max-width 1000px
+          background-image url(/proj-assets/energy-policy/title-desktop.png)
       .read-more
         width 50%
 </style>
