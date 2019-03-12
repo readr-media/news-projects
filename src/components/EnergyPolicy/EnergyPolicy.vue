@@ -471,7 +471,7 @@ export default {
       background-repeat no-repeat
       &:not(:first-child):not(:nth-child(3))
         .container
-          padding 60px 0 30px
+          padding 30px 0
       &:nth-of-type(5), &:nth-of-type(6), &:nth-of-type(7), &:nth-of-type(12)
         .container
           > h2, > p, > ul
@@ -620,7 +620,7 @@ export default {
       z-index 10
       width 80%
       // height 100vh
-      padding 15px 5px 15px 15px
+      padding 60px 5px 15px 15px
       color #000
       background-color #fff
       visibility hidden
@@ -667,7 +667,7 @@ export default {
       &-readmore
         position absolute
         left 15px
-        bottom 15px
+        bottom 0px
 
   @media (max-width: 374px) // iPhone SE
     
@@ -684,7 +684,7 @@ export default {
       .section
         &:not(:first-child):not(:nth-child(3))
           .container
-            padding 50px 0 30px
+            padding 30px 0
       
       .landing__heading
         left 10px
@@ -746,7 +746,7 @@ export default {
         > iframe
           width calc(100% - 100px)
       .read-more
-        padding 30px 20px 30px 30px
+        padding 60px 20px 30px 30px
 
       .btn-readmore
         left 20%
