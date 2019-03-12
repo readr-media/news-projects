@@ -3,7 +3,7 @@
     <Logo class="energy-policy__logo no-sprite" href="https://www.readr.tw/" top="10px" left="10px" bgImage="/proj-assets/logo_readr.png" />
     <Share :shareUrl="`${READR_SITE_URL}energy-policy`" class="energy-policy__share" top="10px" right="10px" direction="down" />
     <div id="fullpage" ref="fullpage">
-      <section class="section">
+      <section class="section fp-noscroll">
         <div class="landing container">
           <div class="landing__block"></div>
           <div class="landing__block"></div>
@@ -11,7 +11,7 @@
           <div class="landing__heading"></div>
         </div>
       </section>
-      <section class="section">
+      <section class="section fp-noscroll">
         <div class="foreword container">
           <div>
             <p>你是否曾經思考過：電價會不會漲、火力和核能真的不好嗎⋯⋯等問題？</p>
@@ -24,11 +24,11 @@
           </div>
         </div>
       </section>
-      <section class="section">
+      <section class="section fp-noscroll">
         <EnergyPolicyQuiz class="container"/>
       </section>
-      <section class="section">
-        <div class="article container">
+      <section class="section fp-noscroll">
+        <div class="article photo container">
           <h2>臺灣能源為什麼要轉型？</h2>
           <ul>
             <li>臺灣的能源 98% 仰賴進口，應提高自主程度，實現能源安全</li>
@@ -45,7 +45,7 @@
           </ReadMoreButton>
         </div>
       </section>
-      <section class="section">
+      <section class="section fp-noscroll">
         <div class="article container">
           <h2>承諾能源轉型，卻頻頻遇上危機？</h2>
           <p class="highlight">總統蔡英文上任後發生的能源大事</p>
@@ -98,14 +98,16 @@
           </div>
         </div>
       </section>
-      <section class="section">
+      <section class="section fp-noscroll">
         <div class="article container">
           <h2>與現況大不同的能源轉型目標</h2>
           <p>蔡政府在 2017 宣佈能源轉型目標，2019 年初經過修正，但不管是原版還是修正版，與發電現況相比都有很大不同：</p>
-          <img src="/proj-assets/energy-policy/chart-3.png" alt="臺灣發電結構的現況與未來">
+          <figure>
+            <img src="/proj-assets/energy-policy/chart-3.png" alt="臺灣發電結構的現況與未來">
+          </figure>
         </div>
       </section>
-      <section class="section">
+      <section class="section fp-noscroll">
         <div class="article container">
           <h2>能源轉型目標：20、50、30 → ?</h2>
           <p>蔡政府原先規劃的 2025 年能源配比為：再生能源發電量 20%、天然氣 50%、燃煤 30%，因應去年底的公投民意，經濟部在 2019 年 3 月微調成核能、燃油、抽蓄水力各 1%，燃煤 27%。</p>
@@ -117,8 +119,8 @@
           </ReadMoreButton>
         </div>
       </section>
-      <section class="section">
-        <div class="article container">
+      <section class="section fp-noscroll">
+        <div class="article photo container">
           <h2>為了達標，政府怎麼做？</h2>
           <p class="highlight">處理過去能源轉型的阻礙：</p>
           <ul>
@@ -135,8 +137,8 @@
           </ul>
         </div>
       </section>
-      <section class="section">
-        <div class="article container">
+      <section class="section fp-noscroll">
+        <div class="article photo container">
           <h2>但同時也引發這些擔憂：</h2>
           <ul>
             <li>再生能源成本高，加上分攤擴建燃氣、封存核四的成本，未來電價會漲 20% 至 30%</li>
@@ -153,8 +155,8 @@
           </ReadMoreButton>
         </div>
       </section>
-      <section class="section">
-        <div class="article container">
+      <section class="section fp-noscroll">
+        <div class="article photo container">
           <h2>提升再生能源面臨什麼挑戰？</h2>
           <p>按照蔡政府的規劃，發電量的缺口將由再生能源來填補。但綠能的發展卻引發一些批評：</p>
           <p class="highlight">綠能不穩定</p>
@@ -173,25 +175,32 @@
           </ul>
         </div>
       </section>
-      <section class="section">
-        <div class="article container">
+      <section class="section fp-noscroll">
+        <div class="article photo container">
           <h2>再生能源：從 5% 提升到 20%</h2>
           <p>目前再生能源以水力發電為最大宗，生質能（垃圾沼氣發電）排第二，但這兩者已近飽和，想大幅提升再生能源，要從太陽光電和風力發電著手。</p>
-          <img src="/proj-assets/energy-policy/chart-5.png" alt="臺灣再生能源裝置容量現況與目標">
+          <figure>
+            <img src="/proj-assets/energy-policy/chart-5.png" alt="臺灣再生能源裝置容量現況與目標">
+          </figure>
         </div>
       </section>
-      <section class="section">
+      <section class="section fp-noscroll">
         <div class="article container">
           <h2>政策推動太陽光電成長</h2>
           <p>預計 2025 年，太陽光電會取代水力，成為臺灣最主要的再生能源。</p>
           <p>臺灣自 2000 年開始補助政府單位及民間設置太陽光電設施，2009 年《再生能源發展條例》確立台電以 20 年為期，以固定優惠價格收購綠電的「躉購制度」後，裝置容量才開始明顯快速上升，蔡英文上台後，推動「太陽光電 2 年推動計畫」，2016 年至 2017 年的裝置容量成長率達 42%。</p>
-          <img
-            src="/proj-assets/energy-policy/chart-6.png"
-            alt="太陽光電裝置容量自 2010 年開始大幅成長">
+          <figure>
+            <img v-if="viewportWidth > 768"
+              src="/proj-assets/energy-policy/chart-6-desktop.png"
+              alt="太陽光電裝置容量自 2010 年開始大幅成長">
+            <img v-else
+              src="/proj-assets/energy-policy/chart-6.png"
+              alt="太陽光電裝置容量自 2010 年開始大幅成長">
+          </figure>
         </div>
       </section>
-      <section class="section">
-        <div class="article container">
+      <section class="section fp-noscroll">
+        <div class="article photo container">
           <h2>太陽光電要如何「破關」？</h2>
           <p>雖然過去在政策鼓勵達成高成長率，但要達成目標還需要高倍數的成長。且要順利設置太陽光電還有重重關卡：</p>
           <ul>
@@ -199,7 +208,9 @@
             <li>投資綠電有利，農漁業用地被拿去「種電」</li>
             <li>申請裝設手續繁瑣、小規模發電利潤低，影響民眾參與意願</li>
           </ul>
-          <img src="/proj-assets/energy-policy/chart-7.png" alt="太陽光電裝置容量現況與目標">
+          <figure>
+            <img src="/proj-assets/energy-policy/chart-7.png" alt="太陽光電裝置容量現況與目標">
+          </figure>
           <ReadMoreButton class="btn-readmore" type="open" @click="openReadMoreHandler(4)">
             <template v-slot:moreText>
               <span>政策如何幫助太陽光電「破關」？</span>
@@ -207,8 +218,8 @@
           </ReadMoreButton>
         </div>
       </section>
-      <section class="section">
-        <div class="article container">
+      <section class="section fp-noscroll">
+        <div class="article photo container">
           <h2>風力發電欠什麼「東風」？</h2>
           <p>臺灣風電發展比太陽光電早，但仍有問題未解：</p>
           <ul>
@@ -217,7 +228,9 @@
             <li>風電躉購價格的高低代表全民要花多少錢買電，引起民眾疑慮</li>
             <li>臺灣缺乏離岸風機技術，需引進外商，若政策有變動（如收購價格）容易影響廠商投資意願</li>
           </ul>
-          <img src="/proj-assets/energy-policy/chart-8.png" alt="2014 年以來風力發電裝置容量與目標容量">
+          <figure>
+            <img src="/proj-assets/energy-policy/chart-8.png" alt="2014 年以來風力發電裝置容量與目標容量">
+          </figure>
           <ReadMoreButton class="btn-readmore" type="open" @click="openReadMoreHandler(5)">
             <template v-slot:moreText>
               <span>離岸風電如何突破瓶頸？</span>
@@ -225,8 +238,8 @@
           </ReadMoreButton>
         </div>
       </section>
-      <section class="section">
-        <div class="article container">
+      <section class="section fp-noscroll">
+        <div class="article photo container">
           <h2>火力發電廠如何轉型？</h2>
           <p>從燃煤為主轉成燃氣為主，遇到這些挑戰：</p>
           <ul>
@@ -235,16 +248,18 @@
             <li>天然氣需進口，且儲存期較短，若遇到天災讓運輸船無法靠岸，將有「斷氣」危機</li>
             <li>地方要求減煤的進度太快，影響政府規劃</li>
           </ul>
-          <img src="/proj-assets/energy-policy/chart-9.png" alt="燃氣配比要在 2025 年前大幅提升">
+          <figure>
+            <img src="/proj-assets/energy-policy/chart-9.png" alt="燃氣配比要在 2025 年前大幅提升">
+          </figure>
           <ReadMoreButton class="btn-readmore" type="open" @click="openReadMoreHandler(6)">
             <template v-slot:moreText>
-              <span>燃氣「大躍進」遇到什麼問題 ？</span>
+              <span>燃氣「大躍進」遇到什麼問題？</span>
             </template>
           </ReadMoreButton>
         </div>
       </section>
-      <section class="section">
-        <div class="article container">
+      <section class="section fp-noscroll">
+        <div class="article photo container">
           <h2>臺灣的零核之路還有多遠？</h2>
           <p>要從發電量近 10% 降到 0，遇到這些挑戰：</p>
           <ul>
@@ -253,12 +268,23 @@
             <li>朝野一直以來都有擁核勢力</li>
             <li>主張現有核電廠延役和重啟核四的呼聲不斷</li>
           </ul>
-          <img src="" alt="">
           <ReadMoreButton class="btn-readmore" type="open" @click="openReadMoreHandler(7)">
             <template v-slot:moreText>
               <span>四十年仍未解的核電爭議 </span>
             </template>
           </ReadMoreButton>
+        </div>
+      </section>
+      <section class="section normal-scroll">
+        <div class="other container">
+          <div class="credit">
+            <img src="/proj-assets/logo_mm_white.png" alt="鏡傳媒">
+            <p><span>文字：劉子維</span><span>設計：陳怡蒨</span><span>工程：譚學勇</span></p>
+            <p>照片來源：台灣電力公司、中華民國外交部、姜永年、楊彩成</p>
+            <p>2019/03</p>
+          </div>
+          <iframe src="https://www.readr.tw/comment?resource_url=https://www.readr.tw/series/energy-policy" frameborder="0"></iframe>
+          <RelatedReports :theme="'light'"/>
         </div>
       </section>
     </div>
@@ -274,6 +300,7 @@
 import EnergyPolicyQuiz from './EnergyPolicyQuiz.vue'
 import Logo from '../Logo.vue'
 import ReadMoreButton from './ReadMoreButton.vue'
+import RelatedReports from 'src/components/RelatedReports.vue'
 import Share from '../Share.vue'
 import { READ_MORE_CONTENT, } from './constant'
 import { READR_SITE_URL } from '../../constants'
@@ -284,6 +311,7 @@ export default {
     EnergyPolicyQuiz,
     Logo,
     ReadMoreButton,
+    RelatedReports,
     Share
   },
   metaInfo() {
@@ -292,6 +320,12 @@ export default {
       description: '蔡英文政府力拚 2025 年能源轉型——要實現非核、提升燃氣與綠能，小英能源政策的理想遇到哪些現實阻礙？',
       metaUrl: 'energy-policy',
       metaImage: 'energy-policy/og.jpg',
+      customScript: `
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" />
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"><\/script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js"><\/script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.extensions.min.js"><\/script>
+      `
     };
   },
   data () {
@@ -306,54 +340,61 @@ export default {
   computed: {
     readMoreContent () {
       return READ_MORE_CONTENT[this.readMoreIndex - 1].contents
+    },
+    viewportWidth () {
+      return this.$store.state.viewport[0]
     }
   },
   watch: {
     openReadMore (value) {
       if (value) {
-        window.fullpage_api.setAllowScrolling(false)
+        $.fn.fullpage.setAllowScrolling(false)
         this.$refs.readMore.classList.add('active')
         this.$refs.fullpage.classList.add('hasReadMore')
       } else {
-        window.fullpage_api.setAllowScrolling(true)
+        $.fn.fullpage.setAllowScrolling(true)
         this.$refs.readMore.classList.remove('active')
         this.$refs.fullpage.classList.remove('hasReadMore')
       }
     }
   },
-  beforeMount () {
-    import('fullpage.js').then(fullpageModule => {
-      window.fullpage = fullpageModule.default
-      this.initFullPage()
-    })
-  },
   mounted () {
+    this.initFullPage()
     ga('send', 'pageview')
   },
   methods: {
     initFullPage () {
-      this.fullpage = new window.fullpage('#fullpage', {
-        licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-        autoScrolling: true,
-        normalScrollElements: '.read-more',
-        fixedElements: '.energy-policy__logo, .energy-policy__share'
+      $(document).ready(() => {
+        let max = 1
+        $('#fullpage').fullpage({
+          scrollOverflow: true,
+          scrollOverflowReset: true,
+          onLeave (index, nextIndex, direction) {
+            if (nextIndex > max) {
+              max += 1
+              ga('send', 'event', 'projects', 'scroll', `move to ${max}`, { nonInteraction: false })
+            }
+          }
+        })
       })
     },
-    moveTo (section) {
-      window.fullpage_api.moveTo(section)
+    moveTo (sectionIndex) {
+      $.fn.fullpage.moveTo(sectionIndex)
+      ga('send', 'event', 'projects', 'click', `move to ${sectionIndex}`, { nonInteraction: false })
     },
     openReadMoreHandler (index) {
       const readMoreContent = document.querySelector('.read-more > div')
       readMoreContent.innerHTML = READ_MORE_CONTENT[index - 1].contents
       readMoreContent.scrollTop = 0
       this.openReadMore = true
+      ga('send', 'event', 'projects', 'click', `read more ${index}`, { nonInteraction: false })
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
 
-  >>> h2, >>> h3, >>> p, >>> ul, >>> img
+  >>> h2, >>> h3, >>> p, >>> ul, >>> figure, >>> img
     margin 0 auto
   >>> h2
     font-size 1.25rem
@@ -367,7 +408,7 @@ export default {
     font-size 1rem
     text-align justify
     line-height 1.67
-    & + h3, & + p, & + ul, & + img
+    & + h3, & + p, & + ul, & + figure, & + img
       margin-top .5em
     
   >>> ul
@@ -375,7 +416,7 @@ export default {
     font-size 1rem
     text-align justify
     line-height 1.4
-    & + h3, & + p, & + img
+    & + h3, & + p, & + figure, & + img
       margin-top .5em
     li
       &.no-style
@@ -457,12 +498,17 @@ export default {
     .container
       position relative
       height 100%
-      > h2, > p, > ul, > img
+      &.other
+        height auto
+        > h2, > p, > ul
+          text-shadow none
+      > h2, > p, > ul, > figure
         width 90%
-      
       > h2, > p, > ul
         text-shadow 1px 1px 0 rgba(0, 0, 0, .7)
-
+      > figure
+        margin-left auto
+        margin-right auto
       p.highlight
         color #eede28
         font-weight 500
@@ -585,15 +631,37 @@ export default {
       >>> h2,  >>> h3, >>> p, >>> ul
         & + h3, & + p, & + ul, & + img
           margin-top .8em
-      
       > div
         height 100%
         padding-right 10px
         overflow auto
+      >>> a
+        color #4A90E2
       button
         position absolute
         right -20px
         bottom 15px
+    .other
+      > iframe
+        display block
+        width 80%
+        margin 10px auto 0
+    .credit
+      width 80%
+      margin 0 auto
+      img
+        width 40px
+        height 40px
+        & + p
+          margin-top .5em
+      p
+        margin-top .2em
+        font-size .75rem
+        text-align center
+        line-height 1.3
+        span
+          & + span
+            margin-left 1em
 
     .btn
       &-readmore
@@ -647,7 +715,7 @@ export default {
           font-size 1.5rem
         > p, > ul
           font-size 1.25rem
-        > img
+        > figure
           width 80%
       .foreword
         display flex
@@ -674,7 +742,9 @@ export default {
             height 100%
           & + .event
             margin-top 10px
-
+      .other
+        > iframe
+          width calc(100% - 100px)
       .read-more
         padding 30px 20px 30px 30px
 
@@ -683,10 +753,35 @@ export default {
         bottom 30px
 
   @media (min-width: 769px)
-
     .energy-policy
-      .container > img
-        width 500px
+      .section
+        &:not(:first-child):not(:nth-child(2)):not(:nth-child(3))
+          .container
+            padding-bottom 80px
+        &:nth-child(5)
+          .container
+            > h2, > p
+              margin-left 10%
+      .container
+        &.photo
+          > h2, > ul, > p, > figure
+            max-width 620px
+            margin-left 5%
+            margin-right auto
+        > figure
+          position relative
+          flex 1
+          > img
+            position absolute
+            top 0
+            left 0
+            right 0
+            bottom 0
+            width 100%
+            height 100%
+            object-fit contain
+            object-position center center
+          
       .landing
         &__block
           background-size contain
@@ -728,11 +823,23 @@ export default {
               text-align left
               line-height 1.3
 
+      .btn-readmore
+        left 5%
+      .other
+        > iframe
+          width 60%
+      .credit
+        p
+          font-size 1.125rem
+
   @media (min-width: 1200px)
     .energy-policy
-      .container > img
-        width 50%
-        max-width 800px
+      .container
+        > h2, > p, > ul
+          max-width 900px
+        > figure
+          width 50%
+          max-width 800px
       .landing
         flex-direction row
         &__block
@@ -753,6 +860,8 @@ export default {
           transform translateX(-50%)
           max-width 1000px
           background-image url(/proj-assets/energy-policy/title-desktop.png)
+      .timeline
+        margin-top 1em
       .read-more
         width 50%
 </style>

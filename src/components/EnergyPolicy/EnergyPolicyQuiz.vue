@@ -62,6 +62,13 @@ export default {
       return this.$store.state.viewport[0]
     }
   },
+  watch: {
+    currentQuestion (value) {
+      if (value === QUIZ_QUESTIONS.length) {
+        ga('send', 'event', 'projects', 'click', `result ${this.result}`, { nonInteraction: false })
+      }
+    }
+  },
   methods: {
     reset () {
       this.currentQuestion = 0
@@ -73,6 +80,7 @@ export default {
     select (president) {
       this.score[president] += 1
       this.currentQuestion += 1
+      ga('send', 'event', 'projects', 'click', `Q${this.currentQuestion} ${president}`, { nonInteraction: false })
     }
   }
 }
