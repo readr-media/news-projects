@@ -25,7 +25,7 @@
         </div>
       </section>
       <section class="section fp-noscroll">
-        <EnergyPolicyQuiz class="container"/>
+        <EnergyPolicyQuiz class="container" @moveToArticle="moveTo(4)"/>
       </section>
       <section class="section fp-noscroll">
         <div class="article photo container">
@@ -58,7 +58,7 @@
             <div class="event">
               <p>2017-07 ~ 2018-12</p>
               <p>彰化漁民抗議離岸風電開發案</p>
-              <p>彰化漁民抗議離岸風電設廠破壞當地生態、影響漁貨，環保團體也參與抗議</p>
+              <p>彰化漁民抗議離岸風電設廠破壞當地生態、影響漁獲，環保團體也參與抗議</p>
             </div>
             <div class="event">
               <p>2018-04-01</p>
@@ -103,7 +103,7 @@
           <h2>與現況大不同的能源轉型目標</h2>
           <p>蔡政府在 2017 宣佈能源轉型目標，2019 年初經過修正，但不管是原版還是修正版，與發電現況相比都有很大不同：</p>
           <figure>
-            <img src="/proj-assets/energy-policy/chart-3.png" alt="臺灣發電結構的現況與未來">
+            <img class="lazy" data-img="/proj-assets/energy-policy/chart-3.png" src="" alt="臺灣發電結構的現況與未來">
           </figure>
         </div>
       </section>
@@ -180,7 +180,7 @@
           <h2>再生能源：從 5% 提升到 20%</h2>
           <p>目前再生能源以水力發電為最大宗，生質能（垃圾沼氣發電）排第二，但這兩者已近飽和，想大幅提升再生能源，要從太陽光電和風力發電著手。</p>
           <figure>
-            <img src="/proj-assets/energy-policy/chart-5.png" alt="臺灣再生能源裝置容量現況與目標">
+            <img class="lazy" data-img="/proj-assets/energy-policy/chart-5.png" src="" alt="臺灣再生能源裝置容量現況與目標">
           </figure>
         </div>
       </section>
@@ -190,11 +190,15 @@
           <p>預計 2025 年，太陽光電會取代水力，成為臺灣最主要的再生能源。</p>
           <p>臺灣自 2000 年開始補助政府單位及民間設置太陽光電設施，2009 年《再生能源發展條例》確立台電以 20 年為期，以固定優惠價格收購綠電的「躉購制度」後，裝置容量才開始明顯快速上升，蔡英文上台後，推動「太陽光電 2 年推動計畫」，2016 年至 2017 年的裝置容量成長率達 42%。</p>
           <figure>
-            <img v-if="viewportWidth > 768"
-              src="/proj-assets/energy-policy/chart-6-desktop.png"
+            <img v-if="$store.state.viewport[0] > 768"
+              class="lazy"
+              data-img="/proj-assets/energy-policy/chart-6-desktop.png"
+              src=""
               alt="太陽光電裝置容量自 2010 年開始大幅成長">
             <img v-else
-              src="/proj-assets/energy-policy/chart-6.png"
+              class="lazy"
+              data-img="/proj-assets/energy-policy/chart-6.png"
+              src=""
               alt="太陽光電裝置容量自 2010 年開始大幅成長">
           </figure>
         </div>
@@ -209,7 +213,7 @@
             <li>申請裝設手續繁瑣、小規模發電利潤低，影響民眾參與意願</li>
           </ul>
           <figure>
-            <img src="/proj-assets/energy-policy/chart-7.png" alt="太陽光電裝置容量現況與目標">
+            <img class="lazy" data-img="/proj-assets/energy-policy/chart-7.png" src="" alt="太陽光電裝置容量現況與目標">
           </figure>
           <ReadMoreButton class="btn-readmore" type="open" @click="openReadMoreHandler(4)">
             <template v-slot:moreText>
@@ -229,7 +233,7 @@
             <li>臺灣缺乏離岸風機技術，需引進外商，若政策有變動（如收購價格）容易影響廠商投資意願</li>
           </ul>
           <figure>
-            <img src="/proj-assets/energy-policy/chart-8.png" alt="2014 年以來風力發電裝置容量與目標容量">
+            <img class="lazy" data-img="/proj-assets/energy-policy/chart-8.png" src="" alt="2014 年以來風力發電裝置容量與目標容量">
           </figure>
           <ReadMoreButton class="btn-readmore" type="open" @click="openReadMoreHandler(5)">
             <template v-slot:moreText>
@@ -249,7 +253,7 @@
             <li>地方要求減煤的進度太快，影響政府規劃</li>
           </ul>
           <figure>
-            <img src="/proj-assets/energy-policy/chart-9.png" alt="燃氣配比要在 2025 年前大幅提升">
+            <img class="lazy" data-img="/proj-assets/energy-policy/chart-9.png" src="" alt="燃氣配比要在 2025 年前大幅提升">
           </figure>
           <ReadMoreButton class="btn-readmore" type="open" @click="openReadMoreHandler(6)">
             <template v-slot:moreText>
@@ -261,7 +265,7 @@
       <section class="section fp-noscroll">
         <div class="article photo container">
           <h2>臺灣的零核之路還有多遠？</h2>
-          <p>要從發電量近 10% 降到 0，遇到這些挑戰：</p>
+          <p>要從發電量近 10% 降到 0%，遇到這些挑戰：</p>
           <ul>
             <li>少了核電會不會缺電？供電不穩？</li>
             <li>核電議題成為選舉籌碼</li>
@@ -278,17 +282,16 @@
       <section class="section normal-scroll">
         <div class="other container">
           <div class="credit">
-            <img src="/proj-assets/logo_mm_white.png" alt="鏡傳媒">
+            <img class="lazy" data-img="/proj-assets/logo_mm_white.png" src="" alt="鏡傳媒">
             <p><span>文字：劉子維</span><span>設計：陳怡蒨</span><span>工程：譚學勇</span></p>
             <p>照片來源：台灣電力公司、中華民國外交部、姜永年、楊彩成</p>
             <p>2019/03</p>
           </div>
-          <iframe src="https://www.readr.tw/comment?resource_url=https://www.readr.tw/series/energy-policy" frameborder="0"></iframe>
-          <RelatedReports :theme="'light'"/>
+          <iframe v-if="mounted" src="https://www.readr.tw/comment?resource_url=https://www.readr.tw/series/energy-policy" frameborder="0"></iframe>
+          <RelatedReports v-if="mounted" :theme="'light'"/>
         </div>
       </section>
     </div>
-    
     <div ref="readMore" class="read-more">
       <div></div>
       <ReadMoreButton type="close" @click="openReadMore = false"></ReadMoreButton>
@@ -304,6 +307,14 @@ import RelatedReports from 'src/components/RelatedReports.vue'
 import Share from '../Share.vue'
 import { READ_MORE_CONTENT, } from './constant'
 import { READR_SITE_URL } from '../../constants'
+
+const loadImage = (index) => {
+  const lazyImage = document.querySelector(`.section:nth-child(${index}) img.lazy`)
+  if (lazyImage) {
+    lazyImage.src = lazyImage.getAttribute('data-img')
+    lazyImage.classList.remove('lazy')
+  }
+}
 
 export default {
   name: 'EnergyPolicy',
@@ -321,7 +332,6 @@ export default {
       metaUrl: 'energy-policy',
       metaImage: 'energy-policy/og.jpg',
       customScript: `
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" />
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"><\/script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js"><\/script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.extensions.min.js"><\/script>
@@ -333,6 +343,7 @@ export default {
       READ_MORE_CONTENT,
       READR_SITE_URL,
       fullpage: undefined,
+      mounted: false,
       openReadMore: false,
       readMoreIndex: 1,
     }
@@ -341,9 +352,9 @@ export default {
     readMoreContent () {
       return READ_MORE_CONTENT[this.readMoreIndex - 1].contents
     },
-    viewportWidth () {
-      return this.$store.state.viewport[0]
-    }
+    // viewportWidth () {
+    //   return this.$store.state.viewport[0]
+    // }
   },
   watch: {
     openReadMore (value) {
@@ -359,6 +370,7 @@ export default {
     }
   },
   mounted () {
+    this.mounted = true
     this.initFullPage()
     ga('send', 'pageview')
   },
@@ -370,6 +382,7 @@ export default {
           scrollOverflow: true,
           scrollOverflowReset: true,
           onLeave (index, nextIndex, direction) {
+            loadImage(nextIndex)
             if (nextIndex > max) {
               max += 1
               ga('send', 'event', 'projects', 'scroll', `move to ${max}`, { nonInteraction: false })
@@ -471,7 +484,7 @@ export default {
       background-repeat no-repeat
       &:not(:first-child):not(:nth-child(3))
         .container
-          padding 30px 0
+          padding 60px 0 30px
       &:nth-of-type(5), &:nth-of-type(6), &:nth-of-type(7), &:nth-of-type(12)
         .container
           > h2, > p, > ul
@@ -617,10 +630,10 @@ export default {
       right 0
       bottom 0
       transform translateX(-100%)
-      z-index 10
+      z-index 1000
       width 80%
       // height 100vh
-      padding 60px 5px 15px 15px
+      padding 15px 5px 15px 15px
       color #000
       background-color #fff
       visibility hidden
@@ -667,7 +680,7 @@ export default {
       &-readmore
         position absolute
         left 15px
-        bottom 0px
+        bottom 15px
 
   @media (max-width: 374px) // iPhone SE
     
@@ -684,7 +697,7 @@ export default {
       .section
         &:not(:first-child):not(:nth-child(3))
           .container
-            padding 30px 0
+            padding 50px 0 30px
       
       .landing__heading
         left 10px
@@ -746,7 +759,7 @@ export default {
         > iframe
           width calc(100% - 100px)
       .read-more
-        padding 60px 20px 30px 30px
+        padding 30px 20px 30px 30px
 
       .btn-readmore
         left 20%
