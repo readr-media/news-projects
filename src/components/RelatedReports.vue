@@ -96,8 +96,11 @@ export default {
       return filter(get(this.$store, 'state.reports'), i => i.slug !== this.currentSlug) || []
     }
   },
-  serverPrefetch () {
-    return Promise.all([fetchReports(this.$store), fetchReportsCount(this.$store)])
+  // serverPrefetch () {
+  //   return Promise.all([fetchReports(this.$store), fetchReportsCount(this.$store)])
+  // },
+  beforeMount () {
+    Promise.all([fetchReports(this.$store), fetchReportsCount(this.$store)])
   },
   methods: {
     loadmore () {
