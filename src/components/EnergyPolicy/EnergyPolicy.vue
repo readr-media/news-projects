@@ -288,7 +288,7 @@
             <p>2019/03</p>
           </div>
           <iframe v-if="mounted" src="https://www.readr.tw/comment?resource_url=https://www.readr.tw/series/energy-policy" frameborder="0"></iframe>
-          <RelatedReports v-if="mounted" :theme="'light'"/>
+          <RelatedReports :theme="'light'" class="related"/>
         </div>
       </section>
     </div>
@@ -309,7 +309,7 @@ import { READ_MORE_CONTENT, } from './constant'
 import { READR_SITE_URL } from '../../constants'
 
 const loadImage = (index) => {
-  const lazyImage = document.querySelector(`.section:nth-child(${index}) img.lazy`)
+  const lazyImage = document.querySelector(`.section:nth-child(${index + 1}) img.lazy`)
   if (lazyImage) {
     lazyImage.src = lazyImage.getAttribute('data-img')
     lazyImage.classList.remove('lazy')
@@ -331,11 +331,6 @@ export default {
       description: '蔡英文政府力拚 2025 年能源轉型——要實現非核、提升燃氣與綠能，小英能源政策的理想遇到哪些現實阻礙？',
       metaUrl: 'energy-policy',
       metaImage: 'energy-policy/og.jpg',
-      customScript: `
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"><\/script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js"><\/script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.extensions.min.js"><\/script>
-      `
     };
   },
   data () {
@@ -352,47 +347,51 @@ export default {
     readMoreContent () {
       return READ_MORE_CONTENT[this.readMoreIndex - 1].contents
     },
-    // viewportWidth () {
-    //   return this.$store.state.viewport[0]
-    // }
   },
   watch: {
     openReadMore (value) {
       if (value) {
-        $.fn.fullpage.setAllowScrolling(false)
+        window.fullpage_api.setAllowScrolling(false)
         this.$refs.readMore.classList.add('active')
         this.$refs.fullpage.classList.add('hasReadMore')
       } else {
-        $.fn.fullpage.setAllowScrolling(true)
+        window.fullpage_api.setAllowScrolling(true)
         this.$refs.readMore.classList.remove('active')
         this.$refs.fullpage.classList.remove('hasReadMore')
       }
     }
   },
+  beforeMount () {
+    import('fullpage.js/vendors/scrolloverflow.min.js')
+    import('fullpage.js/dist/fullpage.extensions.min.js').then(fullpageModule => {
+      window.fullpage = fullpageModule.default
+      this.initFullPage()
+    })
+  },
   mounted () {
     this.mounted = true
-    this.initFullPage()
     ga('send', 'pageview')
   },
   methods: {
     initFullPage () {
-      $(document).ready(() => {
-        let max = 1
-        $('#fullpage').fullpage({
-          scrollOverflow: true,
-          scrollOverflowReset: true,
-          onLeave (index, nextIndex, direction) {
-            loadImage(nextIndex)
-            if (nextIndex > max) {
-              max += 1
-              ga('send', 'event', 'projects', 'scroll', `move to ${max}`, { nonInteraction: false })
-            }
+      let max = 1
+      this.fullpage = new window.fullpage('#fullpage', {
+        licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
+        autoScrolling: true,
+        normalScrollElements: '.read-more',
+        scrollOverflow: true,
+        scrollOverflowReset: true,
+        onLeave (origin, destination, direction) {
+          loadImage(destination.index + 1)
+          if (destination.index + 1 > max) {
+            max += 1
+            ga('send', 'event', 'projects', 'scroll', `move to ${max}`, { nonInteraction: false })
           }
-        })
+        }
       })
     },
     moveTo (sectionIndex) {
-      $.fn.fullpage.moveTo(sectionIndex)
+      window.fullpage_api.moveTo(sectionIndex)
       ga('send', 'event', 'projects', 'click', `move to ${sectionIndex}`, { nonInteraction: false })
     },
     openReadMoreHandler (index) {
@@ -489,6 +488,9 @@ export default {
         .container
           > h2, > p, > ul
             text-shadow none
+      &.normal-scroll
+        position relative
+      
       &:nth-of-type(4)
         background-image linear-gradient(to right, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, .5) 60%, rgba(0, 0, 0, 0) 100%), url(/proj-assets/energy-policy/bg-1.jpg)
       &:nth-of-type(8)
@@ -675,7 +677,8 @@ export default {
         span
           & + span
             margin-left 1em
-
+    .related
+      margin-top 1em
     .btn
       &-readmore
         position absolute
@@ -841,6 +844,7 @@ export default {
       .other
         > iframe
           width 60%
+          height 180px
       .credit
         p
           font-size 1.125rem
