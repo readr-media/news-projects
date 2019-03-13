@@ -368,10 +368,10 @@ export default {
       window.fullpage = fullpageModule.default
       this.initFullPage()
     })
-    if (this.$store.state.useragent.source.match(/FBAV/)) {
-      document.addEventListener('DOMContentLoaded', () => {
-        window.fullpage_api.reBuild()
+    if (this.$store.state.useragent.source.match(/FBAV|FBAN/)) {
+      window.addEventListener('load', () => {
         document.querySelector('.test').innerHTML = 'facebook'
+        window.fullpage_api.reBuild()
       })
     }
   },
