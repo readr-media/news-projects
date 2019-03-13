@@ -366,6 +366,7 @@ export default {
     import('fullpage.js/dist/fullpage.extensions.min.js').then(fullpageModule => {
       window.fullpage = fullpageModule.default
       this.initFullPage()
+      window.fullpage_api.reBuild()
     })
   },
   mounted () {
