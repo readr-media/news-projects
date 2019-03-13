@@ -44,7 +44,7 @@ export const QUIZ_QUESTIONS = [
   }
 ]
 
-export const QUIZ_ANSWERS ={ 
+export const QUIZ_ANSWERS = { 
   Lee: {
     order: 4,
     name: '李登輝',
