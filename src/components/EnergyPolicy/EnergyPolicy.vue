@@ -286,6 +286,7 @@
             <p><span>文字：劉子維</span><span>設計：陳怡蒨</span><span>工程：譚學勇</span></p>
             <p>照片來源：台灣電力公司、中華民國外交部、姜永年、楊彩成</p>
             <p>2019/03</p>
+            <p class="test"></p>
           </div>
           <iframe v-if="mounted" src="https://www.readr.tw/comment?resource_url=https://www.readr.tw/series/energy-policy" frameborder="0"></iframe>
           <RelatedReports :theme="'light'" class="related"/>
@@ -366,8 +367,13 @@ export default {
     import('fullpage.js/dist/fullpage.extensions.min.js').then(fullpageModule => {
       window.fullpage = fullpageModule.default
       this.initFullPage()
-      window.fullpage_api.reBuild()
     })
+    if (this.$store.state.useragent.source.match(/FBAV/)) {
+      document.addEventListener('DOMContentLoaded', () => {
+        window.fullpage_api.reBuild()
+        document.querySelector('.test').innerHTML = 'facebook'
+      })
+    }
   },
   mounted () {
     this.mounted = true
