@@ -331,6 +331,11 @@ export default {
       description: '蔡英文政府力拚 2025 年能源轉型——要實現非核、提升燃氣與綠能，小英能源政策的理想遇到哪些現實阻礙？',
       metaUrl: 'energy-policy',
       metaImage: 'energy-policy/og.jpg',
+      customScript: `
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"><\/script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js"><\/script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.extensions.min.js"><\/script>
+      `
     };
   },
   data () {
@@ -341,7 +346,7 @@ export default {
       mounted: false,
       openReadMore: false,
       readMoreIndex: 1,
-      timer: undefined
+      // timer: undefined
     }
   },
   computed: {
@@ -352,48 +357,65 @@ export default {
   watch: {
     openReadMore (value) {
       if (value) {
-        window.fullpage_api.setAllowScrolling(false)
+        $.fn.fullpage.setAllowScrolling(false)
         this.$refs.readMore.classList.add('active')
         this.$refs.fullpage.classList.add('hasReadMore')
       } else {
-        window.fullpage_api.setAllowScrolling(true)
+        $.fn.fullpage.setAllowScrolling(true)
         this.$refs.readMore.classList.remove('active')
         this.$refs.fullpage.classList.remove('hasReadMore')
       }
     }
   },
-  beforeMount () {
-    import('fullpage.js/vendors/scrolloverflow.min.js')
-    import('fullpage.js/dist/fullpage.extensions.min.js').then(fullpageModule => {
-      window.fullpage = fullpageModule.default
-      this.initFullPage()
-      this.setTimer()
-    })
-  },
+  // beforeMount () {
+  //   import('fullpage.js/vendors/scrolloverflow.min.js')
+  //   import('fullpage.js/dist/fullpage.extensions.min.js').then(fullpageModule => {
+  //     window.fullpage = fullpageModule.default
+  //     this.initFullPage()
+  //     this.setTimer()
+  //   })
+  // },
   mounted () {
     this.mounted = true
+    this.initFullPage()
     ga('send', 'pageview')
   },
   methods: {
+    // initFullPage () {
+    //   let max = 1
+    //   this.fullpage = new window.fullpage('#fullpage', {
+    //     licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
+    //     autoScrolling: true,
+    //     normalScrollElements: '.read-more',
+    //     scrollOverflow: true,
+    //     scrollOverflowReset: true,
+    //     onLeave (origin, destination, direction) {
+    //       loadImage(destination.index + 1)
+    //       if (destination.index + 1 > max) {
+    //         max += 1
+    //         ga('send', 'event', 'projects', 'scroll', `move to ${max}`, { nonInteraction: false })
+    //       }
+    //     }
+    //   })
+    // },
     initFullPage () {
-      let max = 1
-      this.fullpage = new window.fullpage('#fullpage', {
-        licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-        autoScrolling: true,
-        normalScrollElements: '.read-more',
-        scrollOverflow: true,
-        scrollOverflowReset: true,
-        onLeave (origin, destination, direction) {
-          loadImage(destination.index + 1)
-          if (destination.index + 1 > max) {
-            max += 1
-            ga('send', 'event', 'projects', 'scroll', `move to ${max}`, { nonInteraction: false })
+      $(document).ready(() => {
+        let max = 1
+        $('#fullpage').fullpage({
+          scrollOverflow: true,
+          scrollOverflowReset: true,
+          onLeave (index, nextIndex, direction) {
+            loadImage(nextIndex)
+            if (nextIndex > max) {
+              max += 1
+              ga('send', 'event', 'projects', 'scroll', `move to ${max}`, { nonInteraction: false })
+            }
           }
-        }
+        })
       })
     },
     moveTo (sectionIndex) {
-      window.fullpage_api.moveTo(sectionIndex)
+      $.fn.fullpage.moveTo(sectionIndex)
       ga('send', 'event', 'projects', 'click', `move to ${sectionIndex}`, { nonInteraction: false })
     },
     openReadMoreHandler (index) {
@@ -403,16 +425,16 @@ export default {
       this.openReadMore = true
       ga('send', 'event', 'projects', 'click', `read more ${index}`, { nonInteraction: false })
     },
-    setTimer () {
-      this.timer = setInterval(() => {
-        const section = document.querySelector('.section')
-        if (section && section.clientHeight >= this.$store.state.viewport[1] * 2 / 3 ) {
-          clearInterval(this.timer)
-        } else if (window.fullpage_api) {
-          window.fullpage_api.reBuild()
-        }
-      }, 500)
-    },
+    // setTimer () {
+    //   this.timer = setInterval(() => {
+    //     const section = document.querySelector('.section')
+    //     if (section && section.clientHeight >= this.$store.state.viewport[1] * 2 / 3 ) {
+    //       clearInterval(this.timer)
+    //     } else if (window.fullpage_api) {
+    //       window.fullpage_api.reBuild()
+    //     }
+    //   }, 500)
+    // },
   }
 }
 </script>
