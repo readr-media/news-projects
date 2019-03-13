@@ -17,7 +17,7 @@
     <template v-else>
       <div class="result">
         <div :class="result.toLowerCase()" class="result__image"></div>
-        <h3>你的能源政策主張和 <span v-text="QUIZ_ANSWERS[result].name"></span><br>（任期{{ QUIZ_ANSWERS[result].termOfOffice }} 年）相近！</h3>
+        <h3>你的能源政策主張和 <span v-text="QUIZ_ANSWERS[result].name"></span><br>（任期 {{ QUIZ_ANSWERS[result].termOfOffice }} 年）相近！</h3>
         <p v-for="(p, index) in QUIZ_ANSWERS[result].text" :key="`answer-${index}`" v-text="p"></p>
         <div class="result__btns">
           <button @click="reset()">再玩一次</button>
