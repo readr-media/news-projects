@@ -283,7 +283,7 @@
         <div class="other container">
           <div class="credit">
             <img class="lazy" data-img="/proj-assets/logo_mm_white.png" src="" alt="鏡傳媒">
-            <p><span>文字：劉子維</span><span>設計：陳怡蒨</span><span>工程：譚學勇</span></p>
+            <p><span>文字：劉子維</span><span>設計：陳怡蒨</span><span>工程：HY Tan</span></p>
             <p>照片來源：台灣電力公司、中華民國外交部、姜永年、楊彩成</p>
             <p>2019/03</p>
           </div>
@@ -341,6 +341,7 @@ export default {
       mounted: false,
       openReadMore: false,
       readMoreIndex: 1,
+      timer: undefined
     }
   },
   computed: {
@@ -366,7 +367,7 @@ export default {
     import('fullpage.js/dist/fullpage.extensions.min.js').then(fullpageModule => {
       window.fullpage = fullpageModule.default
       this.initFullPage()
-      window.fullpage_api.reBuild()
+      this.setTimer()
     })
   },
   mounted () {
@@ -401,7 +402,17 @@ export default {
       readMoreContent.scrollTop = 0
       this.openReadMore = true
       ga('send', 'event', 'projects', 'click', `read more ${index}`, { nonInteraction: false })
-    }
+    },
+    setTimer () {
+      this.timer = setInterval(() => {
+        const section = document.querySelector('.section')
+        if (section && section.clientHeight >= this.$store.state.viewport[1] * 2 / 3 ) {
+          clearInterval(this.timer)
+        } else if (window.fullpage_api) {
+          window.fullpage_api.reBuild()
+        }
+      }, 500)
+    },
   }
 }
 </script>
