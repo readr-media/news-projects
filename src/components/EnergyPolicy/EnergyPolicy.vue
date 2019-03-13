@@ -346,7 +346,6 @@ export default {
       mounted: false,
       openReadMore: false,
       readMoreIndex: 1,
-      // timer: undefined
     }
   },
   computed: {
@@ -367,14 +366,6 @@ export default {
       }
     }
   },
-  // beforeMount () {
-  //   import('fullpage.js/vendors/scrolloverflow.min.js')
-  //   import('fullpage.js/dist/fullpage.extensions.min.js').then(fullpageModule => {
-  //     window.fullpage = fullpageModule.default
-  //     this.initFullPage()
-  //     this.setTimer()
-  //   })
-  // },
   mounted () {
     this.mounted = true
     this.initFullPage()
@@ -384,23 +375,6 @@ export default {
     ga('send', 'pageview')
   },
   methods: {
-    // initFullPage () {
-    //   let max = 1
-    //   this.fullpage = new window.fullpage('#fullpage', {
-    //     licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-    //     autoScrolling: true,
-    //     normalScrollElements: '.read-more',
-    //     scrollOverflow: true,
-    //     scrollOverflowReset: true,
-    //     onLeave (origin, destination, direction) {
-    //       loadImage(destination.index + 1)
-    //       if (destination.index + 1 > max) {
-    //         max += 1
-    //         ga('send', 'event', 'projects', 'scroll', `move to ${max}`, { nonInteraction: false })
-    //       }
-    //     }
-    //   })
-    // },
     initFullPage () {
       $(document).ready(() => {
         let max = 1
@@ -428,16 +402,6 @@ export default {
       this.openReadMore = true
       ga('send', 'event', 'projects', 'click', `read more ${index}`, { nonInteraction: false })
     },
-    // setTimer () {
-    //   this.timer = setInterval(() => {
-    //     const section = document.querySelector('.section')
-    //     if (section && section.clientHeight >= this.$store.state.viewport[1] * 2 / 3 ) {
-    //       clearInterval(this.timer)
-    //     } else if (window.fullpage_api) {
-    //       window.fullpage_api.reBuild()
-    //     }
-    //   }, 500)
-    // },
   }
 }
 </script>
