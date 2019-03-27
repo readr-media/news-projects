@@ -11,9 +11,9 @@
       </div>
     </div>
     <div :class="[ { open: openShare }, 'share' ]">
-      <button class="fb">Facebook</button>
-      <button class="line">LINE</button>
-      <button class="url" @click="copyUrlToClipboard">拷貝連結</button>
+      <button class="fb" @click="shareToFacebook">Facebook</button>
+      <button class="line" @click="shareToLine">LINE</button>
+      <button class="url" @click="copyUrlToClipboard">拷貝連結<span>複製成功</span></button>
     </div>
   </div>
 </template>
@@ -26,8 +26,21 @@ export default {
     }
   },
   methods: {
-    copyUrlToClipboard () {
-      
+    copyUrlToClipboard (e) {
+      const textArea = document.createElement('textarea');
+      textArea.value = window.location.href
+      document.body.appendChild(textArea);
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+      e.target.classList.add('show')
+      setTimeout(() => { e.target.classList.remove('show') }, 2000)
+    },
+    shareToFacebook () {
+      window.open(`https://www.facebook.com/share.php?u=${window.location.href}`)
+    },
+    shareToLine () {
+      window.open(`https://line.me/R/msg/text/?${window.location.href}`)
     }
   }
 }
@@ -42,18 +55,15 @@ export default {
     border-right none
     > div
       padding .5em
-  h2
+  >>> h2
     color #032669
-    & + p
-      margin-top 1em
-  a
+  >>> a
     color #4868a5
     text-decoration none
-  p
-    & + p
-      margin-top 1em
   &__content
     padding 1em 1em .5em !important
+    div + div
+      margin-top 1em
   &__action
     display flex
     width calc(100% - 2em)
@@ -102,7 +112,28 @@ export default {
       &.line
         color #fff
         background-color #2c9042
-      
+      &.url
+        position relative
+        > span
+          position absolute
+          top 50%
+          right -25px
+          transform translateY(-50%)
+          width 70px
+          padding .2em 0
+          background-color #fff
+          border-radius 4px
+          visibility hidden
+        &.show
+          > span
+            visibility visible
+            animation popup 2s forwards
+
+@keyframes popup {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
 
 @media (min-width: 1024px)
   .post

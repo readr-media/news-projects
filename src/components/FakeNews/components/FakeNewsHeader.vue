@@ -3,18 +3,23 @@
     <div>
       <h1>謠言與牠們的產地</h1>
       <nav>
-        <a class="home"><img src="/proj-assets/fake-news/nav_home.png" alt=""></a>
+        <a :class="[ { active: current === 'feed' }, 'home' ]" @click="$emit('clickHeader', 'feed')"><img src="/proj-assets/fake-news/nav_home.png" alt=""></a>
         <a href=""><img src="/proj-assets/fake-news/nav_READr.png" alt=""></a>
         <a href=""><img src="/proj-assets/fake-news/nav_help.png" alt=""></a>
         <a href=""><img src="/proj-assets/fake-news/nav_share.png" alt=""></a>
-        <a href="" class="menu"><img src="/proj-assets/fake-news/nav_hamburger.png" alt=""></a>
+        <a :class="[ { active: current === 'menu' }, 'menu' ]" @click="$emit('clickHeader', 'menu')"><img src="/proj-assets/fake-news/nav_hamburger.png" alt=""></a>
       </nav>
     </div>
   </header>
 </template>
 <script>
 export default {
-  name: 'FakeNewsHeader'
+  name: 'FakeNewsHeader',
+  props: {
+    current: {
+      type: String
+    },
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -43,7 +48,7 @@ export default {
 
 @media (max-width: 1023px)
   .fake-news-header
-    nav
+    a
       &.active
           background-color #032669
 
