@@ -1,12 +1,12 @@
 <template>
-  <div class="post">
+  <div :class="[ { 'open-comment': openComment }, 'post' ]">
     <div class="post-container">
       <div class="post__content">
         <slot></slot>
       </div>
       <div class="post__action">
         <button><img src="/proj-assets/fake-news/like.png" alt="讚"><span>讚</span></button>
-        <button><img src="/proj-assets/fake-news/comment.png" alt="回應"><span>回應</span></button>
+        <button @click="openComment = !openComment"><img src="/proj-assets/fake-news/comment.png" alt="回應"><span>回應</span></button>
         <button :class="{ active: openShare }" @click="openShare = !openShare"><img src="/proj-assets/fake-news/share.png" alt="分享"><span>分享</span></button>
       </div>
     </div>
@@ -15,6 +15,9 @@
       <button class="line" @click="shareToLine">LINE</button>
       <button class="url" @click="copyUrlToClipboard">拷貝連結<span>複製成功</span></button>
     </div>
+    <div v-if="mounted" v-show="openComment" class="comment">
+      <div class="fb-comments" data-href="https://www.readr.tw/project/energy-policy" data-numposts="5" data-width="100%"></div>
+    </div>
   </div>
 </template>
 <script>
@@ -22,8 +25,13 @@ export default {
   name: 'FakeNewsPost',
   data () {
     return {
+      mounted: false,
+      openComment: false,
       openShare: false
     }
+  },
+  mounted () {
+    this.mounted = true
   },
   methods: {
     copyUrlToClipboard (e) {
@@ -128,6 +136,12 @@ export default {
           > span
             visibility visible
             animation popup 2s forwards
+  .comment
+    width 100%
+    background-color #fff
+    border 1px solid #dddfe2
+    border-top none
+    
 
 @keyframes popup {
   0% { opacity: 0; }
@@ -137,6 +151,9 @@ export default {
 
 @media (min-width: 1024px)
   .post
+    &.open-comment
+      .post-container
+        border-radius 4px 4px 0 0
     &-container
       border-left 1px solid #dddfe2
       border-right 1px solid #dddfe2

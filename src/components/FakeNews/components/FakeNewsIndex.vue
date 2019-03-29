@@ -1,8 +1,14 @@
 <template>
   <div class="index">
     <a class="title">謠言與牠們的產地</a>
-    <a v-for="(chapter, index) in article" :key="`index-${index}`" class="chapter" v-text="chapter.title"></a>
-    <FakeNewsCredit v-if="$store.state.viewport[0] < 1024" class="index__credit" />
+    <a v-for="(chapter, index) in article"
+      :key="`index-${index}`"
+      :href="`#article-${index + 1}-1`"
+      :class="[ { active: getStatus(index) }, 'chapter' ]"
+      @click="goTo(`#article-${index + 1}-1`)"
+      v-text="chapter.title">
+    </a>
+    <FakeNewsCredit v-if="mounted && $store.state.viewport[0] < 1024" class="index__credit" />
   </div>
 </template>
 <script>
@@ -13,11 +19,36 @@ export default {
   props: {
     article: {
       type: Array
+    },
+    currentChapter: {
+      type: Number
+    },
+    currentChapterMobile: {
+      type: Number
+    }
+  },
+  data () {
+    return {
+      mounted: false
     }
   },
   components: {
     FakeNewsCredit
   },
+  mounted () {
+    this.mounted = true
+  },
+  methods: {
+    getStatus (index) {
+      if (this.$store.state.viewport[0] < 1024) {
+        return index + 1 === this.currentChapterMobile
+      }
+      return index + 1 === this.currentChapter
+    },
+    goTo (anchor) {
+      this.$store.state.viewport[0] < 1024 ? this.$emit('goTo', anchor) : ''
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -51,6 +82,8 @@ export default {
         margin-right 10px
         background-color #4868a5
         border-radius 50%
+      &.active
+        background-color #ccd0d5
   &__credit
     position absolute
     left 0
@@ -59,8 +92,9 @@ export default {
 
 @media (min-width: 1024px)
   .index
-    position fixed
-    top 94px
+    // position fixed
+    // top 94px
+    top 10px
     left calc((100% - 1020px) / 2 )
     width 186px
     a
@@ -74,5 +108,12 @@ export default {
           background-color #fff
           outline 1px solid #ccd0d5
           outline-radius 4px
-        
+        &.active
+          color #032669
+          font-weight 600
+          background-color #fff
+          outline 1px solid #ccd0d5
+          &:before
+            background-color #032669
+            
 </style>

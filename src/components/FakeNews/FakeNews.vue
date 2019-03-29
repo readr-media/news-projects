@@ -1,14 +1,25 @@
 <template>
-  <div class="fake-news">
-    <FakeNewsHeader :current="current" class="fake-news__header" @clickHeader="handleHeader"/>
+  <div :class="[ { 'fixed-header': pageYOffset > 84 }, 'fake-news' ]">
+    <FakeNewsHeader
+      :current="current"
+      class="fake-news__header"
+      @clickHeader="handleHeader"/>
     <main>
-      <FakeNewsIndex :article="ARTICLE" :class="[ { active: current === 'menu' }, 'fake-news__index' ]" />
+      <FakeNewsIndex
+        :article="ARTICLE"
+        :class="[ { active: current === 'menu' }, 'fake-news__index' ]"
+        :currentChapter="currentChapter"
+        :currentChapterMobile="currentChapterMobile"
+        @goTo="goTo" />
       <div :class="[ { hidden: $store.state.viewport[0] < 1024 && current !== 'feed'  }, 'feed' ]">
         <div class="feed__main-block">
           <FakeNewsForeword />
-          <template v-for="chapter in ARTICLE">
-            <FakeNewsPost v-for="(post, index) in chapter.subIndex" :key="`article-${index}`">
-              <div v-for="(paragraph, i) in post.content" :key="`article-${index}-${i}`" v-html="paragraph"></div>
+          <template v-for="(chapter, chapterIndex) in ARTICLE">
+            <FakeNewsPost v-for="(post, postIndex) in chapter.subIndex" :id="`article-${chapterIndex + 1}-${postIndex + 1}`" :key="`article-${chapterIndex}-${postIndex}`">
+              <div
+                v-for="(paragraph, paragraphIndex) in post.content"
+                :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`"
+                v-html="paragraph"></div>
             </FakeNewsPost>
           </template>
           <FakeNewsRelated
@@ -49,6 +60,8 @@ const fetchReports = (store) => {
   })
 }
 
+const chapterIds = ARTICLE.map(chapter => `#article-${chapter.chapter}-1`)
+
 export default {
   name: 'FakeNews',
   components: {
@@ -73,24 +86,58 @@ export default {
     return {
       ARTICLE,
       current: 'feed',
+      chapterScrollTop: [],
+      currentChapter: 1,
+      currentChapterMobile: 1,
+      pageYOffset: 0,
+      
     }
   },
   beforeMount () {
     fetchReports(this.$store)
+    this.pageYOffset = window.pageYOffset
+    window.addEventListener('resize', this.calcChapterScrollTop)
     window.addEventListener('scroll', this.handleScroll)
   },
+  mounted() {
+    this.calcChapterScrollTop()
+    this.trackIndexByScroll(this.$store.state.viewport[1])
+  },
   beforeDestroy () {
+    window.removeEventListener('resize', this.calcChapterScrollTop)
     window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
+    calcChapterScrollTop () {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      const lastChapter = document.querySelector(chapterIds[chapterIds.length - 1])
+      const chapterScrollTop = chapterIds.map(id => {
+        return document.querySelector(id) ? document.querySelector(id).getBoundingClientRect().top + scrollTop - this.$store.state.viewport[1] : 0
+      })
+      chapterScrollTop.push(lastChapter.getBoundingClientRect().top + lastChapter.clientHeight  + scrollTop - this.$store.state.viewport[1])
+      this.chapterScrollTop = chapterScrollTop
+    },
+    goTo (anchor) {
+      this.current = 'feed'
+    },
     handleHeader (value) {
+      this.currentChapterMobile = this.currentChapter
       this.current = value
     },
     handleScroll: throttle(function () {
-      window.pageYOffset > 84
-      ? document.querySelector('.fake-news').classList.add('fixed-header')
-      : document.querySelector('.fake-news').classList.remove('fixed-header')
-    }, 100)
+      this.pageYOffset = window.pageYOffset
+      this.trackIndexByScroll(this.$store.state.viewport[1])
+    }, 100),
+    trackIndexByScroll (viewportH) {
+      // const navHeight = document.querySelector('.fake-news-header nav').clientHeight
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      for (let [index, value] of this.chapterScrollTop.entries()) {
+        if (value > scrollTop) {
+          return this.currentChapter = index
+        }
+      }
+      
+    }
   }
 }
 </script>
@@ -157,6 +204,7 @@ export default {
           font-size .875rem
           line-height 42px
       .fake-news__index
+        position fixed
         top 52px
     main
       width 1020px
