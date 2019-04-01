@@ -53,12 +53,6 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .index
-  position absolute
-  top 0
-  left 100%
-  z-index 500
-  width 100%
-  height calc(100vh - 126px)
   background-color #f5f6f7
   a
     display flex
@@ -92,10 +86,6 @@ export default {
 
 @media (min-width: 1024px)
   .index
-    // position fixed
-    // top 94px
-    top 10px
-    left calc((100% - 1020px) / 2 )
     width 186px
     a
       padding .5em
