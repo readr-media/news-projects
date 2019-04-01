@@ -47,6 +47,12 @@ import FakeNewsRelated from './components/FakeNewsRelated.vue'
 import { ARTICLE } from './constant'
 import { throttle } from 'lodash'
 
+import FakeNewsStoreModule from '../../store/modules/FakeNews'
+
+const fetchCommentsAmount = (store, ids) => {
+  return store.dispatch('FakeNews/FETCH_COMMENTS_AMOUNT', ids)
+}
+
 const fetchReports = (store) => {
   return store.dispatch('FETCH_REPORTS', {
     params: {
@@ -58,6 +64,14 @@ const fetchReports = (store) => {
       sort: '-published_at',
     },
   })
+}
+
+const getPostIds = () => {
+  const postIds = []
+  ARTICLE
+    .map(chapter => chapter.subIndex
+      .map((post, index) => postIds.push(`article-${chapter.chapter}-${index + 1}`)))
+  return postIds
 }
 
 const chapterIds = ARTICLE.map(chapter => `#article-${chapter.chapter}-1`)
@@ -90,14 +104,20 @@ export default {
       currentChapter: 1,
       currentChapterMobile: 1,
       pageYOffset: 0,
-      
+      postIds: []
     }
+  },
+  created () {
+    this.$store.registerModule('FakeNews', FakeNewsStoreModule)
   },
   beforeMount () {
     fetchReports(this.$store)
     this.pageYOffset = window.pageYOffset
+    this.postIds = getPostIds()
+    fetchCommentsAmount(this.$store, this.postIds)
     window.addEventListener('resize', this.calcChapterScrollTop)
     window.addEventListener('scroll', this.handleScroll)
+    
   },
   mounted() {
     this.calcChapterScrollTop()
@@ -106,6 +126,9 @@ export default {
   beforeDestroy () {
     window.removeEventListener('resize', this.calcChapterScrollTop)
     window.removeEventListener('scroll', this.handleScroll)
+  },
+  destroyed () {
+    this.$store.unregisterModule('FakeNews')
   },
   methods: {
     calcChapterScrollTop () {
@@ -165,7 +188,13 @@ export default {
   main
     position relative
   
-  
+  &__index
+    position absolute
+    top 0
+    left 100%
+    z-index 500
+    width 100%
+    height calc(100vh - 126px)
   .feed
     &__main-block
       > div + div
@@ -185,7 +214,9 @@ export default {
       .index
         top 42px
     &__index
+      display none
       &.active
+        display block
         left 0
     .feed.hidden
       display none
@@ -210,6 +241,13 @@ export default {
       width 1020px
       margin 0 auto
       padding 10px 0 20px
+    
+    &__index
+      top 10px
+      left calc((100% - 1020px) / 2)
+      width 186px
+      height auto
+    
     .feed
       display flex
       width 816px
