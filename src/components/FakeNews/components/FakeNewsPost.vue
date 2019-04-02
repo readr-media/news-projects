@@ -1,13 +1,17 @@
 <template>
-  <div :class="[ { 'open-comment': openComment }, 'post' ]">
+  <div :id="id" :class="[ { 'open-comment': openComment }, 'post' ]">
     <div class="post-container">
       <div class="post__content">
         <slot></slot>
+        <div v-show="commentAmount > 0" class="comment-amount">
+          <img src="/proj-assets/fake-news/like_round.png">
+          <span v-text="commentAmount"></span>
+        </div>
       </div>
       <div class="post__action">
-        <button><img src="/proj-assets/fake-news/like.png" alt="讚"><span>讚</span></button>
-        <button @click="openComment = !openComment"><img src="/proj-assets/fake-news/comment.png" alt="回應"><span>回應</span></button>
-        <button :class="{ active: openShare }" @click="openShare = !openShare"><img src="/proj-assets/fake-news/share.png" alt="分享"><span>分享</span></button>
+        <button :class="{ active: hasReacted }" @click="$emit('reaction', id)"><img src="/proj-assets/fake-news/like.png" alt="讚"><span>讚</span></button>
+        <button @click="handleOpenComment"><img src="/proj-assets/fake-news/comment.png" alt="回應"><span>回應</span></button>
+        <button :class="{ active: openShare }" @click="handleOpenShare"><img src="/proj-assets/fake-news/share.png" alt="分享"><span>分享</span></button>
       </div>
     </div>
     <div :class="[ { open: openShare }, 'share' ]">
@@ -23,11 +27,28 @@
 <script>
 export default {
   name: 'FakeNewsPost',
+  props: {
+    id: {
+      type: String
+    },
+    commentsReacted: {
+      type: Array
+    }
+  },
   data () {
     return {
       mounted: false,
       openComment: false,
       openShare: false
+    }
+  },
+  computed: {
+    commentAmount () {
+      return this.$store.state.FakeNews.comments[this.id] || 0
+    },
+    hasReacted () {
+      const item = this.commentsReacted.find(id => id === this.id) || []
+      return item.length > 0
     }
   },
   mounted () {
@@ -43,6 +64,14 @@ export default {
       document.body.removeChild(textArea)
       e.target.classList.add('show')
       setTimeout(() => { e.target.classList.remove('show') }, 2000)
+    },
+    handleOpenComment () {
+      this.openShare = false
+      this.openComment = !this.openComment
+    },
+    handleOpenShare () {
+      this.openComment = false
+      this.openShare = !this.openShare
     },
     shareToFacebook () {
       window.open(`https://www.facebook.com/share.php?u=${window.location.href}`)
@@ -141,7 +170,16 @@ export default {
     background-color #fff
     border 1px solid #dddfe2
     border-top none
-    
+    &-amount
+      display flex
+      align-items center
+      img
+        width 20px
+        height 20px
+      span
+        margin-left .2em
+        color #4a4a4a
+        font-size .8125rem
 
 @keyframes popup {
   0% { opacity: 0; }

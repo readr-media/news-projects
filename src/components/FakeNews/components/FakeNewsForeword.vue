@@ -76,6 +76,8 @@ export default {
       color #9b9b9b
       background-color #f5f6f7
       border-radius 18px
+      cursor default
+      outline none
       & + button
         margin-left 10px
 

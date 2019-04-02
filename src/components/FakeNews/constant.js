@@ -15,8 +15,14 @@ export const ARTICLE = [
           `<p>「一開始只是想說試試看，結果一試發現完了，不繼續做下去怎麼行⋯⋯」Melody 苦笑，娓娓道來他們的「第一次」。</p>`,
           `<p>那天清晨 6 點，張書懷和簡艾薇還在返鄉的火車上，Melody 跟 Mark 已經站在台中的路口，市場、登山口、公園的交界處。他們利用簡單的遊戲，舉例一些常見的謠言，如「麵粉可以治燙傷」、「被驗出非洲豬瘟的豬肉用消毒水就可以清除」、「地瓜葉跟牛奶一起喝很養生」等，讓民眾辨識這是真的還是假的。</p>`,
           `<p>「結果大多數的人都說這些訊息是真的！」Melody 睜大眼睛，「我們攤位對面就是一個賣豬肉的，但他完全不知道非洲豬瘟的事。」</p>`,
-          `<iframe src='https://public.flourish.studio/visualisation/260496/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe>`,
-          `<iframe src='https://public.flourish.studio/visualisation/260920/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe>`,
+          `<h3>在 LINE 上流傳的謠言都跟什麼有關</h3>`,
+          `<iframe src='https://public.flourish.studio/visualisation/260496/embed' frameborder='0' scrolling='no' style='width:100%;height:300px;'></iframe>`,
+          `<p class="resource">資料來源：cofact 真的假的</p>`,
+          `<p class="description">針對 cofact 真的假的資料庫中被標示為「謠言」的文章做關鍵字萃取，留下出現次數超過 50 次的詞</p>`,
+          `<h3>最多人來查證的謠言都跟什麼有關</h3>`,
+          `<iframe src='https://public.flourish.studio/visualisation/260920/embed' frameborder='0' scrolling='no' style='width:100%;height:400px;'></iframe>`,
+          `<p class="resource">資料來源：cofact 真的假的</p>`,
+          `<p class="description">針對 cofact 真的假的資料庫中被標示為「謠言」的文章，做關鍵字萃取，乘以使用者轉貼查證的次數，留下前 300 名。</p>`,
           `<p>他們也直接與假新聞的受害者相遇。張書懷提到，有條在 LINE 流傳的假訊息說：山過貓（一種有毒的草藥）100% 致癌。有個賣「過貓」（一種菜）的攤販跟他抱怨，大家都以為「山過貓」跟「過貓」是同一種東西，生意突然就變差了。很多餐廳原本會跟他訂菜，後來也不訂了，讓他原本耕作的五分地被迫減成三分。</p>`,
           `<p>Mark 在旁補充，「這條假訊息，我們每次辦活動，10 個裡頭有 9 個人都說有聽過，而且幾乎都相信。」</p>`,
           `<p>這些假訊息，甚至直接來到他們的生活裡。某天 Melody 的女兒被熱水燙傷，剛好碰到長輩朋友來訪，對方著急著大叫：「快拿麵粉！」讓他們夫妻倆當下都愣住了。Mark 趕緊拿出手機，立刻查到這是一則謠言，安撫長輩；Melody 也趕緊用「沖脫泡蓋送」幫女兒做簡單的處理後送醫。要不是夫妻倆腦袋裡對假訊息的警鈴有響，孩子恐怕會傷得更重。</p>`,
@@ -29,7 +35,7 @@ export const ARTICLE = [
           `<p>Melody 拿出手機，打開一個 LINE 上超過 90 萬人的群組，「這個群組，一小時推播一次內容農場的文章。就算比現在再多 10 個闢謠的機構都不夠⋯⋯」</p>`,
           `<p>「妳說，怎麼來得及？」她的憂慮寫在臉上。</p>`,
           `<p>身為「中間世代」要應付的，不只是上一代，還有下一代。國發會在 2018 年針對各世代網路族群是否會查證網路訊息的真實性，結果顯示，年紀愈小與年紀愈老的，是最不會查證的族群。</p>`,
-          `<iframe src='https://public.flourish.studio/visualisation/267752/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe>`
+          `<iframe src='https://public.flourish.studio/visualisation/267752/embed' frameborder='0' scrolling='no' style='width:100%;height:400px;'></iframe>`
         ]
       }
     ]
