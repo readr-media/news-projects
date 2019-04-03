@@ -20,7 +20,7 @@
       <button class="url" @click="copyUrlToClipboard">拷貝連結<span>複製成功</span></button>
     </div>
     <div v-if="mounted" v-show="openComment" class="comment">
-      <div class="fb-comments" data-href="https://www.readr.tw/project/energy-policy" data-numposts="5" data-width="100%"></div>
+      <div class="fb-comments" data-href="https://www.readr.tw/project/fake-news" data-numposts="5" data-width="100%"></div>
     </div>
   </div>
 </template>
