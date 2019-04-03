@@ -95,12 +95,13 @@ export default {
   },
   metaInfo() {
     return {
-      title: '謠言與牠們的產地',
-      description: 'Fake News',
+      title: 'fakebook：假訊息與它們的產地',
+      description: '假訊息問題嚴重，但解決方案很容易牴觸言論自由，人權與自由之間該如何權衡？READr 想和你一起從各個面向探索假訊息與它們的產地。',
       metaUrl: 'fake-news',
       metaImage: 'fake-news/og.jpg',
       customScript: `
         <script src="//cdn.jsdelivr.net/npm/typeit@6.0.2/dist/typeit.min.js"><\/script>
+        <script src="https://public.flourish.studio/resources/embed.js"><\/script>
       `
     }
   },
@@ -109,7 +110,7 @@ export default {
       ARTICLE,
       chapterScrollTop: [],
       current: 'feed',
-      currentChapter: 1,
+      currentPost: 'article-1-1',
       currentChapterMobile: 1,
       openAlert: false,
       pageYOffset: 0,
@@ -119,9 +120,23 @@ export default {
   },
   computed: {
     commentsReacted () {
-      return this.reactions.split(',').filter(id => id)
+      return this.reactions.split(',').filter(id => id) 
+    },
+    currentChapter () {
+      return Number(this.currentPost.split('-')[1])
     }
   },
+  // watch: {
+  //   currentPost (id) {
+  //     const lazyitems = [ ...document.querySelectorAll(`#${id} .lazy`) ]
+  //     lazyitems.map(item => {
+  //       if (item.getAttribute('lazy-flourish')) {
+  //         item.setAttribute('data-src', item.getAttribute('lazy-flourish'))
+  //         item.classList.add('flourish-embed')
+  //       }
+  //     })
+  //   }
+  // },
   created () {
     this.$store.registerModule('FakeNews', FakeNewsStoreModule)
   },
@@ -131,32 +146,34 @@ export default {
     this.postIds = getPostIds()
     fetchCommentsAmount(this.$store, this.postIds)
     this.getReactions()
-    window.addEventListener('resize', this.calcChapterScrollTop)
+    // window.addEventListener('resize', this.calcChapterScrollTop)
     window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('scroll', this.handleScrollForIndex)
   },
   mounted() {
-    this.calcChapterScrollTop()
-    this.trackIndexByScroll(this.$store.state.viewport[1])
+    // this.calcChapterScrollTop()
+    // this.trackIndexByScroll(this.$store.state.viewport[1])
   },
   beforeDestroy () {
-    window.removeEventListener('resize', this.calcChapterScrollTop)
+    // window.removeEventListener('resize', this.calcChapterScrollTop)
     window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('scroll', this.handleScrollForIndex)
   },
   destroyed () {
     this.$store.unregisterModule('FakeNews')
   },
   methods: {
-    calcChapterScrollTop () {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      const lastChapter = document.querySelector(chapterIds[chapterIds.length - 1])
-      const chapterScrollTop = chapterIds.map(id => {
-        return document.querySelector(id) ? document.querySelector(id).getBoundingClientRect().top + scrollTop - this.$store.state.viewport[1] : 0
-      })
-      chapterScrollTop.push(lastChapter.getBoundingClientRect().top + lastChapter.clientHeight  + scrollTop - this.$store.state.viewport[1])
-      this.chapterScrollTop = chapterScrollTop
-    },
+    // calcChapterScrollTop () {
+    //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    //   const lastChapter = document.querySelector(chapterIds[chapterIds.length - 1])
+    //   const chapterScrollTop = chapterIds.map(id => {
+    //     return document.querySelector(id) ? document.querySelector(id).getBoundingClientRect().top + scrollTop - this.$store.state.viewport[1] : 0
+    //   })
+    //   chapterScrollTop.push(lastChapter.getBoundingClientRect().top + lastChapter.clientHeight  + scrollTop - this.$store.state.viewport[1])
+    //   this.chapterScrollTop = chapterScrollTop
+    // },
     getReactions () {
-      this.reactions = Cookie.get('fn-reactions')
+      this.reactions = Cookie.get('fn-reactions') || ''
     },
     goTo (anchor) {
       this.current = 'feed'
@@ -187,18 +204,29 @@ export default {
     },
     handleScroll: throttle(function () {
       this.pageYOffset = window.pageYOffset
-      this.trackIndexByScroll(this.$store.state.viewport[1])
+      // this.trackIndexByScroll(this.$store.state.viewport[1])
     }, 100),
-    trackIndexByScroll (viewportH) {
-      // const navHeight = document.querySelector('.fake-news-header nav').clientHeight
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      for (let [index, value] of this.chapterScrollTop.entries()) {
-        if (value > scrollTop) {
-          return this.currentChapter = index
+    handleScrollForIndex: throttle(function () {
+      const lastPost = document.querySelector(`#${this.postIds[this.postIds.length - 1]}`)
+      for (let [index, value] of this.postIds.entries()) {
+        const ele = document.querySelector(`#${value}`)
+        const eleTop = ele ? ele.getBoundingClientRect().top : ''
+        if (eleTop > this.$store.state.viewport[1]) {
+          return this.currentPost = this.postIds[index - 1]
         }
       }
-      
-    }
+      if (lastPost && lastPost.getBoundingClientRect().top < this.$store.state.viewport[1]) {
+        this.currentPost = this.postIds[this.postIds.length - 1]
+      }
+    }, 500),
+    // trackIndexByScroll (viewportH) {
+    //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    //   for (let [index, value] of this.chapterScrollTop.entries()) {
+    //     if (value > scrollTop) {
+    //       return this.currentChapter = index
+    //     }
+    //   }
+    // }
   }
 }
 </script>
@@ -208,9 +236,9 @@ export default {
   h1, h2, h3, p , a
     margin 0
   h1
-    font-size 1.375rem
+    font-size 1.25rem
   h2
-    font-size 1.375rem
+    font-size 1.25rem
   h3
     font-size 1.125rem
   p

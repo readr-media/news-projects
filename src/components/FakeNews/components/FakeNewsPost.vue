@@ -25,6 +25,8 @@
   </div>
 </template>
 <script>
+import { READR_SITE_URL } from '../../../constants'
+
 export default {
   name: 'FakeNewsPost',
   props: {
@@ -74,10 +76,12 @@ export default {
       this.openShare = !this.openShare
     },
     shareToFacebook () {
-      window.open(`https://www.facebook.com/share.php?u=${window.location.href}`)
+      window.open(`https://www.facebook.com/share.php?u=${READR_SITE_URL}fake-news`)
+      // window.ga && window.ga('send', 'event', 'projects', 'click', `share to fb`, { nonInteraction: false })
     },
     shareToLine () {
-      window.open(`https://line.me/R/msg/text/?${window.location.href}`)
+      window.open(`https://line.me/R/msg/text/?${READR_SITE_URL}fake-news`)
+      // window.ga && window.ga('send', 'event', 'projects', 'click', `share to line`, { nonInteraction: false })
     }
   }
 }
@@ -101,6 +105,9 @@ export default {
     padding 1em 1em .5em !important
     div + div
       margin-top 1em
+    >>> img, >>> video
+      width 100%
+    
   &__action
     display flex
     width calc(100% - 2em)
@@ -196,6 +203,14 @@ export default {
       border-left 1px solid #dddfe2
       border-right 1px solid #dddfe2
       border-radius 4px
+    &__content
+      >>> .chart-9
+        display flex
+        align-items flex-start
+        img
+          width 50%
+          & + img
+            margin-left 5px
     .share
       flex-direction row
       margin-top 10px
