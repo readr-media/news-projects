@@ -1,11 +1,6 @@
 <template>
   <div class="credit">
     <p>
-      <span>文字／李又如</span>
-      <span>資料整理／李又如、李昭妟、簡信昌、陳彥宇、陳姿廷</span>
-      <span>設計／許玲瑋</span>
-    </p>
-    <p>
       <img src="/proj-assets/fake-news/credit_mm.png" alt="Readr">
       <span>© 2019 READr</span>
     </p>

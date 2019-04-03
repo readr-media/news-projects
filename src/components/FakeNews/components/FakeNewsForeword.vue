@@ -34,12 +34,12 @@ export default {
   methods: {
     type () {
       this.instance = new TypeIt('.foreword__text > p', {
-        strings: '假訊息問題嚴重，但解決方案很容易牴觸言論自由，人權與自由之間該如何權衡？其中牽涉的角色'
+        strings: '假訊息問題嚴重，但解決方案很容易牴觸言論自由，人權與自由之間該如何權衡？READr 想和你一起從各個面向探索假訊息與它們的產地。'
       }).go()
     },
     showAll () {
       this.instance.pause()
-      document.querySelector('.foreword__text > p').innerHTML = '假訊息問題嚴重，但解決方案很容易牴觸言論自由，人權與自由之間該如何權衡？其中牽涉的角色'
+      document.querySelector('.foreword__text > p').innerHTML = '假訊息問題嚴重，但解決方案很容易牴觸言論自由，人權與自由之間該如何權衡？READr 想和你一起從各個面向探索假訊息與它們的產地。'
     }
   }
 }
@@ -76,6 +76,8 @@ export default {
       color #9b9b9b
       background-color #f5f6f7
       border-radius 18px
+      cursor default
+      outline none
       & + button
         margin-left 10px
 

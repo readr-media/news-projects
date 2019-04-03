@@ -1,9 +1,11 @@
 <template>
-  <div :class="[ { 'fixed-header': pageYOffset > 84 }, 'fake-news' ]">
+  <div :class="[ { 'fixed-header': pageYOffset > 84, 'open-alert': openAlert }, 'fake-news' ]">
     <FakeNewsHeader
       :current="current"
+      :openAlert="openAlert"
       class="fake-news__header"
-      @clickHeader="handleHeader"/>
+      @clickHeader="handleHeader"
+      @openAlert="handleAlert" />
     <main>
       <FakeNewsIndex
         :article="ARTICLE"
@@ -15,7 +17,12 @@
         <div class="feed__main-block">
           <FakeNewsForeword />
           <template v-for="(chapter, chapterIndex) in ARTICLE">
-            <FakeNewsPost v-for="(post, postIndex) in chapter.subIndex" :id="`article-${chapterIndex + 1}-${postIndex + 1}`" :key="`article-${chapterIndex}-${postIndex}`">
+            <FakeNewsPost
+              v-for="(post, postIndex) in chapter.subIndex"
+              :id="`article-${chapterIndex + 1}-${postIndex + 1}`"
+              :key="`article-${chapterIndex}-${postIndex}`"
+              :commentsReacted="commentsReacted"
+              @reaction="handleReaction">
               <div
                 v-for="(paragraph, paragraphIndex) in post.content"
                 :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`"
@@ -39,6 +46,7 @@
 </template>
 <script>
 
+import Cookie from 'vue-cookie'
 import FakeNewsForeword from './components/FakeNewsForeword.vue'
 import FakeNewsHeader from './components/FakeNewsHeader.vue'
 import FakeNewsIndex from './components/FakeNewsIndex.vue'
@@ -49,22 +57,22 @@ import { throttle } from 'lodash'
 
 import FakeNewsStoreModule from '../../store/modules/FakeNews'
 
-const fetchCommentsAmount = (store, ids) => {
-  return store.dispatch('FakeNews/FETCH_COMMENTS_AMOUNT', ids)
-}
+const chapterIds = ARTICLE.map(chapter => `#article-${chapter.chapter}-1`)
 
-const fetchReports = (store) => {
-  return store.dispatch('FETCH_REPORTS', {
-    params: {
-      maxResult: 4,
-      where: {
-        reportPublishStatus: 2,
-      },
-      page: 1,
-      sort: '-published_at',
+const fetchCommentAmount = (store, id) => store.dispatch('FakeNews/FETCH_COMMENT_AMOUNT', id)
+
+const fetchCommentsAmount = (store, ids) => store.dispatch('FakeNews/FETCH_COMMENTS_AMOUNT', ids)
+
+const fetchReports = (store) => store.dispatch('FETCH_REPORTS', {
+  params: {
+    maxResult: 4,
+    where: {
+      reportPublishStatus: 2,
     },
-  })
-}
+    page: 1,
+    sort: '-published_at',
+  },
+})
 
 const getPostIds = () => {
   const postIds = []
@@ -74,7 +82,7 @@ const getPostIds = () => {
   return postIds
 }
 
-const chapterIds = ARTICLE.map(chapter => `#article-${chapter.chapter}-1`)
+const updateCommentAmount = (store, { id, amount }) => store.dispatch('FakeNews/UPDATE_COMMENT_AMOUNT', { id, amount })
 
 export default {
   name: 'FakeNews',
@@ -87,26 +95,48 @@ export default {
   },
   metaInfo() {
     return {
-      title: '謠言與牠們的產地',
-      description: 'Fake News',
+      title: 'fakebook：假訊息與它們的產地',
+      description: '假訊息問題嚴重，但解決方案很容易牴觸言論自由，人權與自由之間該如何權衡？READr 想和你一起從各個面向探索假訊息與它們的產地。',
       metaUrl: 'fake-news',
       metaImage: 'fake-news/og.jpg',
       customScript: `
         <script src="//cdn.jsdelivr.net/npm/typeit@6.0.2/dist/typeit.min.js"><\/script>
+        <script src="https://public.flourish.studio/resources/embed.js"><\/script>
       `
     }
   },
   data () {
     return {
       ARTICLE,
-      current: 'feed',
       chapterScrollTop: [],
-      currentChapter: 1,
+      current: 'feed',
+      currentPost: 'article-1-1',
       currentChapterMobile: 1,
+      openAlert: false,
       pageYOffset: 0,
-      postIds: []
+      postIds: [],
+      reactions: ''
     }
   },
+  computed: {
+    commentsReacted () {
+      return this.reactions.split(',').filter(id => id) 
+    },
+    currentChapter () {
+      return Number(this.currentPost.split('-')[1])
+    }
+  },
+  // watch: {
+  //   currentPost (id) {
+  //     const lazyitems = [ ...document.querySelectorAll(`#${id} .lazy`) ]
+  //     lazyitems.map(item => {
+  //       if (item.getAttribute('lazy-flourish')) {
+  //         item.setAttribute('data-src', item.getAttribute('lazy-flourish'))
+  //         item.classList.add('flourish-embed')
+  //       }
+  //     })
+  //   }
+  // },
   created () {
     this.$store.registerModule('FakeNews', FakeNewsStoreModule)
   },
@@ -115,30 +145,35 @@ export default {
     this.pageYOffset = window.pageYOffset
     this.postIds = getPostIds()
     fetchCommentsAmount(this.$store, this.postIds)
-    window.addEventListener('resize', this.calcChapterScrollTop)
+    this.getReactions()
+    // window.addEventListener('resize', this.calcChapterScrollTop)
     window.addEventListener('scroll', this.handleScroll)
-    
+    window.addEventListener('scroll', this.handleScrollForIndex)
   },
   mounted() {
-    this.calcChapterScrollTop()
-    this.trackIndexByScroll(this.$store.state.viewport[1])
+    // this.calcChapterScrollTop()
+    // this.trackIndexByScroll(this.$store.state.viewport[1])
   },
   beforeDestroy () {
-    window.removeEventListener('resize', this.calcChapterScrollTop)
+    // window.removeEventListener('resize', this.calcChapterScrollTop)
     window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('scroll', this.handleScrollForIndex)
   },
   destroyed () {
     this.$store.unregisterModule('FakeNews')
   },
   methods: {
-    calcChapterScrollTop () {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      const lastChapter = document.querySelector(chapterIds[chapterIds.length - 1])
-      const chapterScrollTop = chapterIds.map(id => {
-        return document.querySelector(id) ? document.querySelector(id).getBoundingClientRect().top + scrollTop - this.$store.state.viewport[1] : 0
-      })
-      chapterScrollTop.push(lastChapter.getBoundingClientRect().top + lastChapter.clientHeight  + scrollTop - this.$store.state.viewport[1])
-      this.chapterScrollTop = chapterScrollTop
+    // calcChapterScrollTop () {
+    //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    //   const lastChapter = document.querySelector(chapterIds[chapterIds.length - 1])
+    //   const chapterScrollTop = chapterIds.map(id => {
+    //     return document.querySelector(id) ? document.querySelector(id).getBoundingClientRect().top + scrollTop - this.$store.state.viewport[1] : 0
+    //   })
+    //   chapterScrollTop.push(lastChapter.getBoundingClientRect().top + lastChapter.clientHeight  + scrollTop - this.$store.state.viewport[1])
+    //   this.chapterScrollTop = chapterScrollTop
+    // },
+    getReactions () {
+      this.reactions = Cookie.get('fn-reactions') || ''
     },
     goTo (anchor) {
       this.current = 'feed'
@@ -147,36 +182,76 @@ export default {
       this.currentChapterMobile = this.currentChapter
       this.current = value
     },
+    handleAlert () {
+      this.openAlert = !this.openAlert
+    },
+    handleReaction (id) {
+      const regex = new RegExp(`${id}`)
+      const origin = this.reactions || ''
+      let ids = origin.split(',').filter(originId => originId)
+      let commentAmount = this.$store.state.FakeNews.comments[id] || 0
+      if (origin.match(regex)) { // minus
+        commentAmount -= 1
+        ids = ids.filter(originId => originId !== id)
+      } else { // add
+        commentAmount += 1
+        ids.push(id)
+      }
+      updateCommentAmount(this.$store, { id , amount: commentAmount })
+      const cookieValue = ids.join(',')
+      Cookie.set('fn-reactions', cookieValue, { expires: '3M' })
+      this.getReactions()
+    },
     handleScroll: throttle(function () {
       this.pageYOffset = window.pageYOffset
-      this.trackIndexByScroll(this.$store.state.viewport[1])
+      // this.trackIndexByScroll(this.$store.state.viewport[1])
     }, 100),
-    trackIndexByScroll (viewportH) {
-      // const navHeight = document.querySelector('.fake-news-header nav').clientHeight
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      for (let [index, value] of this.chapterScrollTop.entries()) {
-        if (value > scrollTop) {
-          return this.currentChapter = index
+    handleScrollForIndex: throttle(function () {
+      const lastPost = document.querySelector(`#${this.postIds[this.postIds.length - 1]}`)
+      for (let [index, value] of this.postIds.entries()) {
+        const ele = document.querySelector(`#${value}`)
+        const eleTop = ele ? ele.getBoundingClientRect().top : ''
+        if (eleTop > this.$store.state.viewport[1]) {
+          return this.currentPost = this.postIds[index - 1]
         }
       }
-      
-    }
+      if (lastPost && lastPost.getBoundingClientRect().top < this.$store.state.viewport[1]) {
+        this.currentPost = this.postIds[this.postIds.length - 1]
+      }
+    }, 500),
+    // trackIndexByScroll (viewportH) {
+    //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    //   for (let [index, value] of this.chapterScrollTop.entries()) {
+    //     if (value > scrollTop) {
+    //       return this.currentChapter = index
+    //     }
+    //   }
+    // }
   }
 }
 </script>
 <style lang="stylus">
 .fake-news
   background-color #f5f6f7
-  h1, h2, p , a
+  h1, h2, h3, p , a
     margin 0
   h1
-    font-size 1.375rem
+    font-size 1.25rem
   h2
-    font-size 1.375rem
+    font-size 1.25rem
+  h3
+    font-size 1.125rem
   p
     font-size .9375rem
     text-align justify
     line-height 1.53
+    &.resource
+      color #616770
+      font-size .8125rem
+      text-align right
+    &.description
+      color #616770
+      font-size .8125rem
   a
     text-decoration none
     cursor pointer
@@ -187,7 +262,12 @@ export default {
     cursor pointer
   main
     position relative
-  
+
+  &.open-alert
+    .fake-news-header
+      .popup
+        display block
+
   &__index
     position absolute
     top 0
@@ -195,11 +275,14 @@ export default {
     z-index 500
     width 100%
     height calc(100vh - 126px)
+  .fake-news-header
+    .popup
+      display none
   .feed
     &__main-block
       > div + div
         margin-top 10px
-
+  
 @media (max-width: 1023px)
   .fake-news
     &.fixed-header
@@ -213,6 +296,7 @@ export default {
           z-index 999
       .index
         top 42px
+    
     &__index
       display none
       &.active
@@ -220,6 +304,7 @@ export default {
         left 0
     .feed.hidden
       display none
+    
 
 @media (min-width: 1024px)
   .fake-news

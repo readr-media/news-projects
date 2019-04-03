@@ -25,7 +25,7 @@ export default {
     },
     currentChapterMobile: {
       type: Number
-    }
+    },
   },
   data () {
     return {
@@ -68,6 +68,7 @@ export default {
       font-weight 600
       cursor default
     &.chapter
+      cursor pointer
       &:before
         content ''
         display inline-block
@@ -78,6 +79,7 @@ export default {
         border-radius 50%
       &.active
         background-color #ccd0d5
+      
   &__credit
     position absolute
     left 0
@@ -105,5 +107,7 @@ export default {
           outline 1px solid #ccd0d5
           &:before
             background-color #032669
+        & + .chapter
+          margin-top .2em  
             
 </style>
