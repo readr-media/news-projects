@@ -2,7 +2,28 @@
   <div :id="id" :class="[ { 'open-comment': openComment }, 'post' ]">
     <div class="post-container">
       <div class="post__content">
-        <slot></slot>
+        <template v-for="(paragraph, paragraphIndex) in post.content">
+          <template v-if="paragraph.html && paragraph.html === 'h2'">
+            <h2 :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" v-html="paragraph.content"></h2>
+          </template>
+          <template v-else-if="paragraph.html && paragraph.html === 'h3'">
+            <h3 :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" v-html="paragraph.content"></h3>
+          </template>
+          <template v-else-if="paragraph.html && paragraph.html === 'p'">
+            <p :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" :class="[ paragraph.class ? paragraph.class : '' ]" v-html="paragraph.content"></p>
+          </template>
+          <template v-else-if="paragraph.html && paragraph.html === 'img'">
+            <img :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" :src="paragraph.src" :alt="paragraph.alt">
+          </template>
+          <template v-else-if="paragraph.html && paragraph.html === 'video'">
+            <video :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" playsinline controls preload="metadata">
+              <source :src="paragraph.src" type="video/mp4">
+            </video>
+          </template>
+          <template v-else>
+            <div :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" v-html="paragraph"></div>
+          </template>
+        </template>
         <div v-show="commentAmount > 0" class="comment-amount">
           <img src="/proj-assets/fake-news/like_round.png">
           <span v-text="commentAmount"></span>
@@ -33,8 +54,17 @@ export default {
     id: {
       type: String
     },
+    chapterIndex: {
+      type: Number
+    },
     commentsReacted: {
       type: Array
+    },
+    post: {
+      type: Object
+    },
+    postIndex: {
+      type: Number
     }
   },
   data () {
@@ -88,6 +118,15 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .post
+  h2, h3, p
+    & + *
+      margin-top 1em
+  h2
+    color #032669
+  a
+    color #4868a5
+    text-decoration none
+
   &-container
     position relative
     background-color #fff
@@ -96,11 +135,7 @@ export default {
     border-right none
     > div
       padding .5em
-  >>> h2
-    color #032669
-  >>> a
-    color #4868a5
-    text-decoration none
+  
   &__content
     padding 1em 1em .5em !important
     div + div
