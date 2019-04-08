@@ -3,7 +3,6 @@
     <a class="title">謠言與牠們的產地</a>
     <a v-for="(chapter, index) in article"
       :key="`index-${index}`"
-      :href="`#article-${index + 1}-1`"
       :class="[ { active: getStatus(index) }, 'chapter' ]"
       @click="goTo(`#article-${index + 1}-1`)"
       v-text="chapter.title">
@@ -46,7 +45,8 @@ export default {
       return index + 1 === this.currentChapter
     },
     goTo (anchor) {
-      this.$store.state.viewport[0] < 1024 ? this.$emit('goTo', anchor) : ''
+      // this.$store.state.viewport[0] < 1024 ? this.$emit('goTo', anchor) : ''
+      this.$emit('goTo', anchor)
     }
   }
 }

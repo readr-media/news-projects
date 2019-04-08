@@ -21,12 +21,11 @@
               v-for="(post, postIndex) in chapter.subIndex"
               :id="`article-${chapterIndex + 1}-${postIndex + 1}`"
               :key="`article-${chapterIndex}-${postIndex}`"
+              :chapterIndex="chapterIndex"
               :commentsReacted="commentsReacted"
+              :post="post"
+              :postIndex="postIndex"
               @reaction="handleReaction">
-              <div
-                v-for="(paragraph, paragraphIndex) in post.content"
-                :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`"
-                v-html="paragraph"></div>
             </FakeNewsPost>
           </template>
           <FakeNewsRelated
@@ -53,6 +52,7 @@ import FakeNewsIndex from './components/FakeNewsIndex.vue'
 import FakeNewsPost from './components/FakeNewsPost.vue'
 import FakeNewsRelated from './components/FakeNewsRelated.vue'
 import { ARTICLE } from './constant'
+import { smoothScroll } from 'kc-scroll'
 import { throttle } from 'lodash'
 
 import FakeNewsStoreModule from '../../store/modules/FakeNews'
@@ -177,6 +177,9 @@ export default {
     },
     goTo (anchor) {
       this.current = 'feed'
+      setTimeout(() => {
+        smoothScroll(anchor)
+      }, 0)
     },
     handleHeader (value) {
       this.currentChapterMobile = this.currentChapter
