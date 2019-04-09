@@ -7,7 +7,6 @@
       @click="goTo(`#article-${index + 1}-1`)"
       v-text="chapter.title">
     </a>
-    <FakeNewsCredit v-if="mounted && $store.state.viewport[0] < 1024" class="index__credit" />
   </div>
 </template>
 <script>
@@ -26,17 +25,17 @@ export default {
       type: Number
     },
   },
-  data () {
-    return {
-      mounted: false
-    }
-  },
+  // data () {
+  //   return {
+  //     mounted: false
+  //   }
+  // },
   components: {
     FakeNewsCredit
   },
-  mounted () {
-    this.mounted = true
-  },
+  // mounted () {
+  //   this.mounted = true
+  // },
   methods: {
     getStatus (index) {
       if (this.$store.state.viewport[0] < 1024) {
@@ -80,11 +79,11 @@ export default {
       &.active
         background-color #ccd0d5
       
-  &__credit
-    position absolute
-    left 0
-    right 0
-    bottom 0
+  // &__credit
+  //   position absolute
+  //   left 0
+  //   right 0
+  //   bottom 0
 
 @media (min-width: 1024px)
   .index

@@ -28,7 +28,7 @@ export const ARTICLE = [
           `<div class="flourish-embed" data-src="visualisation/260496" data-height="300px"></div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：cofact 真的假的'
           },
           {
@@ -59,7 +59,7 @@ export const ARTICLE = [
           `<div class="flourish-embed" data-src="visualisation/260920" data-height="300px"></div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：cofact 真的假的'
           },
           {
@@ -83,10 +83,6 @@ export const ARTICLE = [
             html: 'p',
             content: '「一開始只是想說試試看，結果一試發現：完了。不繼續做下去怎麼行⋯⋯」Melody 苦笑。'
           },
-        ]
-      },
-      {
-        content: [
           {
             html: 'p',
             content: '「選舉完之後，我們都很焦慮，覺得應該要出來做點事⋯⋯」談起行動的起源，Melody 笑著說：「我們形容自己得了九合一大選創傷症候群。」'
@@ -114,7 +110,7 @@ export const ARTICLE = [
           `<div class="flourish-embed flourish-chart lazy" data-src="visualisation/267752"></div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：國發會／2018 年個人家戶數位機會調查／各世代網路族網路訊息真實性查證情形'
           },
           {
@@ -137,10 +133,6 @@ export const ARTICLE = [
             html: 'p',
             content: '「妳說，怎麼來得及？」她的憂慮寫在臉上。'
           },
-        ]
-      },
-      {
-        content: [
           {
             html: 'p',
             content: '美國麻省理工大學媒體實驗室針對超過 300 萬人的 Twitter 資料進行<a href="http://science.sciencemag.org/content/359/6380/1146" target="_blank">研究</a>，發現不實訊息的傳播速度是一般訊息的 6 倍。如去年 9 月的關西機場事件（註：燕子颱風襲擊關西機場，有人在 PTT 上指稱中國派車來接駁受難旅客，臺灣政府卻毫無作為。此貼文在網路上快速傳播，引起各大媒體報導，讓駐日大使館飽受批評。），大使蘇啟誠選擇了結生命，雖然家屬認為不是爆料人的錯，但行政院認為假訊息是造成外交官輕生的原因之一。'
@@ -152,7 +144,7 @@ export const ARTICLE = [
           `<div class="flourish-embed flourish-chart" data-src="visualisation/256422"></div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：行政院'
           },
           {
@@ -171,7 +163,7 @@ export const ARTICLE = [
           `<div class="flourish-embed flourish-chart" data-src="visualisation/275192"></div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：行政院即時新聞澄清中心，資料從 2019 年 1 月截至 3 月 20 日'
           },
           {
@@ -183,6 +175,21 @@ export const ARTICLE = [
             content: '走了一個外交官，歷經兩任院長，臺灣準備迎接下一次大選。在管制與言論自由之間，臺灣到底應該如何面對棘手的假訊息？'
           },
         ]
+      },
+      {
+        content: [
+          {
+            html: 'quiz',
+            title: '你分辨真假的能力有多強？（1/6）',
+            question: '普拿疼不會殘留體內',
+            answer: true,
+            annotation: '普拿疼的主要成分為乙醯胺酚，是有經過衛福部核准的藥品，健康的成人吃下去一顆，一般來說服藥後8~10小時就可以完全排出體外。',
+            source: '謠言破解網站蘭姆酒吐司',
+            sourceLink: 'http://bit.ly/2EW2EBl'
+          }
+        ],
+        type: 'quiz',
+        action: false
       }
     ]
   },
@@ -215,7 +222,7 @@ export const ARTICLE = [
           `<div class="flourish-embed" data-src="visualisation/269607"></div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：法務部檢察機關公開書類查詢系統'
           },
           {
@@ -238,7 +245,7 @@ export const ARTICLE = [
           },
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：法務部檢察機關公開書類查詢系統'
           },
           {
@@ -270,10 +277,6 @@ export const ARTICLE = [
             html: 'p',
             content: '那麼，假設關西機場謠言事件重演，這個由「法院判決」的機制能夠即時阻止假訊息在網路上流竄嗎？'
           },
-        ]
-      },
-      {
-        content: [
           {
             html: 'p',
             content: '很遺憾地，答案是不能。'
@@ -300,7 +303,7 @@ export const ARTICLE = [
           </div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：法務部檢察機關公開書類查詢系統'
           },
           {
@@ -324,45 +327,27 @@ export const ARTICLE = [
             content: '怎麼樣散布謠言才會被罰？'
           },
           {
-            html: 'img',
-            src: '/proj-assets/fake-news/chart-8-1.jpg',
-          },
-          {
-            html: 'p',
-            class: 'description',
-            content: '73 個案例裡，有 54 件被認定為假訊息。非假訊息的都沒有被罰。'
-          },
-          {
-            html: 'img',
-            src: '/proj-assets/fake-news/chart-8-2.jpg',
-          },
-          {
-            html: 'p',
-            class: 'description',
-            content: '54 件假訊息中，有 39 件被認定有影響社會安定，但有 4 件沒有被罰。這 4 件的被告是在網路上捏造隨機殺人、擄人、暴力事件等，但法官認為，雖然有可能是虛構的，但這類事情也的確存在，警察局很常接到這樣的報案，也不乏媒體報導。且被告本意都是提醒周邊的人要小心，所以不罰。'
-          },
-          {
-            html: 'img',
-            src: '/proj-assets/fake-news/chart-8-3.jpg',
-          },
-          {
-            html: 'p',
-            class: 'description',
-            content: '這 39 件假訊息、且影響社會安定的案件中，最後被罰了 35 件。有 31 件是故意的，有 4 件的法官認為被告雖然不是故意散播假訊息，可以減輕刑責，但是還是要罰。這 4 件的共通性是謠言內容都跟擄人有關。'
-          },
-          {
-            html: 'p',
-            class: 'resource',
-            content: '資料來源：法務部檢察機關公開書類查詢系統，以《社會秩序維護法》以網路為途徑散播謠言的案子為例。為統計需求（因判罰結果有可能不同），若案件結果為判罰，被告有 2 位，則拆成 2 件。此類狀況有 5 件，因此有效計算樣本為 73 件'
+            html: 'slideshow',
+            content: [
+              {
+                src: '/proj-assets/fake-news/chart-8-1.jpg',
+                figcaption: '73 個案例裡，有 54 件被認定為假訊息。非假訊息的都沒有被罰。'
+              },
+              {
+                src: '/proj-assets/fake-news/chart-8-2.jpg',
+                figcaption: '54 件假訊息中，有 39 件被認定有影響社會安定，但有 4 件沒有被罰。這 4 件的被告是在網路上捏造隨機殺人、擄人、暴力事件等，但法官認為，雖然有可能是虛構的，但這類事情也的確存在，警察局很常接到這樣的報案，也不乏媒體報導。且被告本意都是提醒周邊的人要小心，所以不罰。'
+              },
+              {
+                src: '/proj-assets/fake-news/chart-8-3.jpg',
+                figcaption: '這 39 件假訊息、且影響社會安定的案件中，最後被罰了 35 件。有 31 件是故意的，有 4 件的法官認為被告雖然不是故意散播假訊息，可以減輕刑責，但是還是要罰。這 4 件的共通性是謠言內容都跟擄人有關。'
+              }
+            ],
+            source: '資料來源：法務部檢察機關公開書類查詢系統，以《社會秩序維護法》以網路為途徑散播謠言的案子為例。為統計需求（因判罰結果有可能不同），若案件結果為判罰，被告有 2 位，則拆成 2 件。此類狀況有 5 件，因此有效計算樣本為 73 件'
           },
           {
             html: 'p',
             content: '但這三個標準依據個案遇到的法官不同，仍有歧異。尤其就算沒有故意傳播謠言，只是好心看到訊息想要轉傳提醒親朋好友，還是有可能被罰。'
           },
-        ]
-      },
-      {
-        content: [
           {
             html: 'p',
             content: '去年 12 月10 日，政委唐鳳舉辦協調會，邀請 LINE、Google、Facebook 三大網路平台與會，請教他們對行政院版《數位通訊傳播法》的意見。三家業者在會議上都抱持著保守態度，認為移除使用者言論需要有足夠的法律依據。'
@@ -390,7 +375,7 @@ export const ARTICLE = [
           },
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：法務部檢察機關公開書類查詢系統'
           },
           {
@@ -410,10 +395,6 @@ export const ARTICLE = [
             html: 'p',
             content: '侯怡秀舉例，就算不直接針對不實訊息，政府也還有別的事情可以做。例如，平台業者的資訊不透明，他們到底花了多少資源在臺灣？又，英國國會也有要求平台業者公布演算法，這些都是相對緩和的手段，而不是碰到言論自由就什麼都不做。'
           },
-        ]
-      },
-      {
-        content: [
           {
             html: 'p',
             content: '羅秉成解釋行政院最後採取低度管制的的原因，「我們評估過後，發現各國都還在發展，不能太貿進。這件事不能單靠法律、也不能單靠科技解決，思考的面向要打開。」'
@@ -456,6 +437,21 @@ export const ARTICLE = [
             content: '但德國經驗提醒了我們另一件事情。《網路執行法》管制的是德國社會長期具有共識有害的內容，但臺灣社會已經準備好要對什麼樣的內容進行管制了嗎？'
           },
         ]
+      },
+      {
+        content: [
+          {
+            html: 'quiz',
+            title: '你分辨真假的能力有多強？（2/6）',
+            question: '「認同請分享」 年長者散播假新聞比年輕人數量還多',
+            answer: true,
+            annotation: '超過65歲的老年人散播假新聞數量比未滿30歲成年人多6倍。',
+            source: '紐約大學和普林斯頓大學共同研究發表於《先端科學》期刊',
+            sourceLink: 'http://advances.sciencemag.org/content/5/1/eaau4586'
+          }
+        ],
+        type: 'quiz',
+        action: false
       }
     ]
   },
@@ -480,7 +476,7 @@ export const ARTICLE = [
           `<div class="flourish-embed" data-src="visualisation/260847"></div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：NCC'
           },
           {
@@ -494,7 +490,7 @@ export const ARTICLE = [
           `<div class="flourish-embed flourish-chart" data-src="visualisation/255932"></div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：NCC'
           },
           {
@@ -508,7 +504,7 @@ export const ARTICLE = [
           `<div class="flourish-embed" data-src="visualisation/274700"></div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：臺灣事實查核中心'
           },
           {
@@ -535,17 +531,13 @@ export const ARTICLE = [
           `<div class="flourish-embed" data-src="visualisation/275293"></div>`,
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：NCC'
           },
           {
             html: 'p',
             content: '媒體出了什麼問題？新聞業是如何從報導真實的第四權變成人人喊打的過街老鼠？'
           },
-        ]
-      },
-      {
-        content: [
           {
             html: 'p',
             content: '「我們有自動修稿系統，今天傳稿子進去，明天會變成另一篇完全認不出來的新聞。」在某報任職的地方記者陳綺雲（化名）自嘲地說。'
@@ -606,10 +598,6 @@ export const ARTICLE = [
             html: 'p',
             content: '「我實在搞不懂為什麼會有這麼無聊的人！」想起當時的狀況，陳綺雲還是很氣。但除了這個說謊的貼文者，她也不理解，為什麼公司的網路編輯不求證之後再發新聞。'
           },
-        ]
-      },
-      {
-        content: [
           {
             html: 'p',
             content: '過去曾在某媒體擔任網路新聞編輯的的何曉香（化名）就是她口中的「鍵盤記者」。'
@@ -662,10 +650,6 @@ export const ARTICLE = [
             html: 'p',
             content: '只是，這則新聞沒有進到觀眾的眼裡。'
           },
-        ]
-      },
-      {
-        content: [
           {
             html: 'p',
             content: '先不論媒體是否有惡意，為了追求流量和點閱率，就已經有無法立即查證而出現的假新聞，我們完全拿它沒辦法嗎？'
@@ -697,7 +681,7 @@ export const ARTICLE = [
           },
           {
             html: 'p',
-            class: 'resource',
+            class: 'source',
             content: '資料來源：NCC'
           },
           {
@@ -721,10 +705,6 @@ export const ARTICLE = [
             html: 'p',
             content: '「只有結果的時候，就很容易讓人質疑 NCC 的程序是否完備，應該主動對外說明，並針對裁罰做出客觀性的標準及理論基礎，例如，查證要經過什麼樣的歷程才算符合？要有什麼樣的條件才算客觀？比較讓人心服口服。」他提到。'
           },
-        ]
-      },
-      {
-        content: [
           {
             html: 'p',
             content: '查證很難嗎？「關西機場事件中，媒體沸沸揚揚報了一個禮拜，沒有人可以把真相找出來，事實查核中心就做到了。」臺灣事實查核中心記者莊子豪表示。'
@@ -758,6 +738,21 @@ export const ARTICLE = [
             content: '但時至 2018 年，狀況就截然不同了。'
           },
         ]
+      },
+      {
+        content: [
+          {
+            html: 'quiz',
+            title: '你分辨真假的能力有多強？（3/6）',
+            question: '房間發現一隻蟑螂說明有一萬隻在潛伏',
+            answer: false,
+            annotation: '蟑螂繁殖力強，一隻母蟑螂在大約一年半的壽命中，平均下來，可以產下超過四百隻的小蟑螂。只是一萬隻有點誇大。',
+            source: '日本氣象資訊網「WEATHER NEWS」報導',
+            sourceLink: 'https://reurl.cc/rEADO'
+          }
+        ],
+        type: 'quiz',
+        action: false
       }
     ]
   },
@@ -791,10 +786,6 @@ export const ARTICLE = [
             html: 'p',
             content: '事實查核中心努力用實績證明自己的公信力，於此同時，公民社會也正在蓬勃發展。'
           },
-        ]
-      },
-      {
-        content: [
           {
             html: 'p',
             content: '3 月底，LINE 舉辦年度記者會，宣布「對抗假訊息」是今年重要的任務之一。除了事實查核中心以外，其他 3 個合作對象，都是從網路社群長出來的計畫。'
@@ -817,6 +808,21 @@ export const ARTICLE = [
             content: '胡元輝表示，政府如果覺得這件事情重要，可以仿照歐盟模式，創造事實查核機制可以成長的土壤。例如，讓網路平台業者能夠協助傳播事實查核的結果協助查核結果能被看見。'
           },
         ]
+      },
+      {
+        content: [
+          {
+            html: 'quiz',
+            title: '你分辨真假的能力有多強？（4/6）',
+            question: '世界上最長壽的女人是新疆的阿麗米罕色依提，已經132歲了。',
+            answer: false,
+            annotation: '目前世界上最長壽的女人是法國的珍妮·卡爾門，122歲。',
+            source: '維基百科-最長壽者',
+            sourceLink: 'https://zh.wikipedia.org/wiki/最長壽者'
+          }
+        ],
+        type: 'quiz',
+        action: false
       }
     ]
   },
@@ -944,6 +950,21 @@ export const ARTICLE = [
             content: '政府現階段的立法、網路平台業者的被動合作、再多的公民媒體識讀行動仍然觸及不到的，就是像這位阿姨一樣的人。她們自願被騙，且享受著假訊息帶來的娛樂，這才是臺灣正在面臨的棘手問題。'
           },
         ]
+      },
+      {
+        content: [
+          {
+            html: 'quiz',
+            title: '你分辨真假的能力有多強？（5/6）',
+            question: '原來糖果是葷食！　軟糖原料取自牛骨豬皮',
+            answer: true,
+            annotation: '軟糖原料當中形成Q彈口感的原料「吉利丁」，又稱明膠，主要來自於動物的骨骼或是皮。',
+            source: '善待動物組織 PETA',
+            sourceLink: 'https://www.peta.org/living/food/gelatin-alternatives/'
+          }
+        ],
+        type: 'quiz',
+        action: false
       }
     ]
   }

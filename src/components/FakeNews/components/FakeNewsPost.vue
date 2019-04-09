@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" :class="[ { 'open-comment': openComment }, 'post' ]">
+  <div :id="id" :class="[ { 'open-comment': openComment }, 'post', get(post, 'type') ]">
     <div class="post-container">
       <div class="post__content">
         <template v-for="(paragraph, paragraphIndex) in post.content">
@@ -20,36 +20,53 @@
               <source :src="paragraph.src" type="video/mp4">
             </video>
           </template>
+          <template v-else-if="paragraph.html && paragraph.html === 'slideshow'">
+            <FakeNewsSlideshow
+              :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`"
+              :slideshow="paragraph" />
+          </template>
+          <template v-else-if="paragraph.html && paragraph.html === 'quiz'">
+            <FakeNewsQuiz
+              :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`"
+              :quiz="paragraph" />
+          </template>
           <template v-else>
             <div :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" v-html="paragraph"></div>
           </template>
         </template>
-        <div v-show="commentAmount > 0" class="comment-amount">
+        <div v-if="get(post, 'action', true)" v-show="commentAmount > 0" class="comment-amount">
           <img src="/proj-assets/fake-news/like_round.png">
           <span v-text="commentAmount"></span>
         </div>
       </div>
-      <div class="post__action">
+      <div v-if="get(post, 'action', true)" class="post__action">
         <button :class="{ active: hasReacted }" @click="$emit('reaction', id)"><img src="/proj-assets/fake-news/like.png" alt="讚"><span>讚</span></button>
         <button @click="handleOpenComment"><img src="/proj-assets/fake-news/comment.png" alt="回應"><span>回應</span></button>
         <button :class="{ active: openShare }" @click="handleOpenShare"><img src="/proj-assets/fake-news/share.png" alt="分享"><span>分享</span></button>
       </div>
     </div>
-    <div :class="[ { open: openShare }, 'share' ]">
+    <div v-if="get(post, 'action', true)" :class="[ { open: openShare }, 'share' ]">
       <button class="fb" @click="shareToFacebook">Facebook</button>
       <button class="line" @click="shareToLine">LINE</button>
       <button class="url" @click="copyUrlToClipboard">拷貝連結<span>複製成功</span></button>
     </div>
-    <div v-if="mounted" v-show="openComment" class="comment">
+    <div v-if="mounted && get(post, 'action', true)" v-show="openComment" class="comment">
       <div class="fb-comments" data-href="https://www.readr.tw/project/fake-news" data-numposts="5" data-width="100%"></div>
     </div>
   </div>
 </template>
 <script>
+import FakeNewsQuiz from './FakeNewsQuiz.vue'
+import FakeNewsSlideshow from './FakeNewsSlideshow.vue'
 import { READR_SITE_URL } from '../../../constants'
+import { get } from 'lodash'
 
 export default {
   name: 'FakeNewsPost',
+  components: {
+    FakeNewsQuiz,
+    FakeNewsSlideshow
+  },
   props: {
     id: {
       type: String
@@ -71,7 +88,7 @@ export default {
     return {
       mounted: false,
       openComment: false,
-      openShare: false
+      openShare: false,
     }
   },
   computed: {
@@ -97,6 +114,7 @@ export default {
       e.target.classList.add('show')
       setTimeout(() => { e.target.classList.remove('show') }, 2000)
     },
+    get,
     handleOpenComment () {
       this.openShare = false
       this.openComment = !this.openComment
@@ -123,10 +141,12 @@ export default {
       margin-top 1em
   h2
     color #032669
-  a
+  >>> a
     color #4868a5
     text-decoration none
-
+  &.quiz
+    .post__content
+      padding 0 !important
   &-container
     position relative
     background-color #fff
