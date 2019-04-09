@@ -15,7 +15,7 @@
         @goTo="goTo" />
       <div :class="[ { hidden: $store.state.viewport[0] < 1024 && current !== 'feed'  }, 'feed' ]">
         <div class="feed__main-block">
-          <FakeNewsForeword />
+          <!-- <FakeNewsForeword /> -->
           <template v-for="(chapter, chapterIndex) in ARTICLE">
             <FakeNewsPost
               v-for="(post, postIndex) in chapter.subIndex"
@@ -28,6 +28,7 @@
               @reaction="handleReaction">
             </FakeNewsPost>
           </template>
+          <FakeNewsVote :voted="voted" @updateVoteCookie="updateVoteCookie"/>
           <FakeNewsRelated
             v-if="$store.state.reports.length > 0 && $store.state.viewport[0] < 1024"
             :reports="$store.state.reports"
@@ -51,6 +52,7 @@ import FakeNewsHeader from './components/FakeNewsHeader.vue'
 import FakeNewsIndex from './components/FakeNewsIndex.vue'
 import FakeNewsPost from './components/FakeNewsPost.vue'
 import FakeNewsRelated from './components/FakeNewsRelated.vue'
+import FakeNewsVote from './components/FakeNewsVote.vue'
 import { ARTICLE } from './constant'
 import { smoothScroll } from 'kc-scroll'
 import { throttle } from 'lodash'
@@ -91,7 +93,8 @@ export default {
     FakeNewsHeader,
     FakeNewsIndex,
     FakeNewsPost,
-    FakeNewsRelated
+    FakeNewsRelated,
+    FakeNewsVote
   },
   metaInfo() {
     return {
@@ -100,7 +103,6 @@ export default {
       metaUrl: 'fake-news',
       metaImage: 'fake-news/og.jpg',
       customScript: `
-        <script src="//cdn.jsdelivr.net/npm/typeit@6.0.2/dist/typeit.min.js"><\/script>
         <script src="https://public.flourish.studio/resources/embed.js"><\/script>
       `
     }
@@ -115,7 +117,8 @@ export default {
       openAlert: false,
       pageYOffset: 0,
       postIds: [],
-      reactions: ''
+      reactions: '',
+      voted: ''
     }
   },
   computed: {
@@ -124,19 +127,8 @@ export default {
     },
     currentChapter () {
       return Number(this.currentPost.split('-')[1])
-    }
+    },
   },
-  // watch: {
-  //   currentPost (id) {
-  //     const lazyitems = [ ...document.querySelectorAll(`#${id} .lazy`) ]
-  //     lazyitems.map(item => {
-  //       if (item.getAttribute('lazy-flourish')) {
-  //         item.setAttribute('data-src', item.getAttribute('lazy-flourish'))
-  //         item.classList.add('flourish-embed')
-  //       }
-  //     })
-  //   }
-  // },
   created () {
     this.$store.registerModule('FakeNews', FakeNewsStoreModule)
   },
@@ -146,16 +138,11 @@ export default {
     this.postIds = getPostIds()
     fetchCommentsAmount(this.$store, this.postIds)
     this.getReactions()
-    // window.addEventListener('resize', this.calcChapterScrollTop)
+    this.getVoteRecord()
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('scroll', this.handleScrollForIndex)
   },
-  mounted() {
-    // this.calcChapterScrollTop()
-    // this.trackIndexByScroll(this.$store.state.viewport[1])
-  },
   beforeDestroy () {
-    // window.removeEventListener('resize', this.calcChapterScrollTop)
     window.removeEventListener('scroll', this.handleScroll)
     window.removeEventListener('scroll', this.handleScrollForIndex)
   },
@@ -163,17 +150,11 @@ export default {
     this.$store.unregisterModule('FakeNews')
   },
   methods: {
-    // calcChapterScrollTop () {
-    //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-    //   const lastChapter = document.querySelector(chapterIds[chapterIds.length - 1])
-    //   const chapterScrollTop = chapterIds.map(id => {
-    //     return document.querySelector(id) ? document.querySelector(id).getBoundingClientRect().top + scrollTop - this.$store.state.viewport[1] : 0
-    //   })
-    //   chapterScrollTop.push(lastChapter.getBoundingClientRect().top + lastChapter.clientHeight  + scrollTop - this.$store.state.viewport[1])
-    //   this.chapterScrollTop = chapterScrollTop
-    // },
     getReactions () {
       this.reactions = Cookie.get('fn-reactions') || ''
+    },
+    getVoteRecord () {
+      this.voted = Cookie.get('fn-voted') || ''
     },
     goTo (anchor) {
       this.current = 'feed'
@@ -207,7 +188,6 @@ export default {
     },
     handleScroll: throttle(function () {
       this.pageYOffset = window.pageYOffset
-      // this.trackIndexByScroll(this.$store.state.viewport[1])
     }, 100),
     handleScrollForIndex: throttle(function () {
       const lastPost = document.querySelector(`#${this.postIds[this.postIds.length - 1]}`)
@@ -222,14 +202,10 @@ export default {
         this.currentPost = this.postIds[this.postIds.length - 1]
       }
     }, 500),
-    // trackIndexByScroll (viewportH) {
-    //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-    //   for (let [index, value] of this.chapterScrollTop.entries()) {
-    //     if (value > scrollTop) {
-    //       return this.currentChapter = index
-    //     }
-    //   }
-    // }
+    updateVoteCookie (id) {
+      Cookie.set('fn-voted', id, { expires: '3M' })
+      this.getVoteRecord()
+    }
   }
 }
 </script>
@@ -248,7 +224,7 @@ export default {
     font-size .9375rem
     text-align justify
     line-height 1.53
-    &.resource
+    &.source
       color #616770
       font-size .8125rem
       text-align right

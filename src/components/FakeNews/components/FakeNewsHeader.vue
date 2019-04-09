@@ -9,10 +9,6 @@
           <img src="/proj-assets/fake-news/nav_help.png" alt="">
           <div class="popup">
             <p>警示：這不是 Facebook！但是歡迎按讚、留言、分享。</p>
-            <p>文字／李又如</p>
-            <p>資料整理／李又如、李昭妟、簡信昌、陳彥宇、Tin Tin Chen</p>
-            <p>設計／Weiwei Hsu</p>
-            <p>工程／HY Tan</p>
           </div>
         </a>
         <a :class="[{ active: openShare }, 'share']" @click="openShare = !openShare">
