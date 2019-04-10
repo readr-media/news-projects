@@ -35,14 +35,14 @@
           </template>
         </template>
         <div v-if="get(post, 'action', true)" v-show="commentAmount > 0" class="comment-amount">
-          <img src="/proj-assets/fake-news/like_round.png">
+          <img src="/proj-assets/disinformation/like_round.png">
           <span v-text="commentAmount"></span>
         </div>
       </div>
       <div v-if="get(post, 'action', true)" class="post__action">
-        <button :class="{ active: hasReacted }" @click="$emit('reaction', id)"><img src="/proj-assets/fake-news/like.png" alt="讚"><span>讚</span></button>
-        <button @click="handleOpenComment"><img src="/proj-assets/fake-news/comment.png" alt="回應"><span>回應</span></button>
-        <button :class="{ active: openShare }" @click="handleOpenShare"><img src="/proj-assets/fake-news/share.png" alt="分享"><span>分享</span></button>
+        <button :class="{ active: hasReacted }" @click="$emit('reaction', id)"><img src="/proj-assets/disinformation/like.png" alt="讚"><span>讚</span></button>
+        <button @click="handleOpenComment"><img src="/proj-assets/disinformation/comment.png" alt="回應"><span>回應</span></button>
+        <button :class="{ active: openShare }" @click="handleOpenShare"><img src="/proj-assets/disinformation/share.png" alt="分享"><span>分享</span></button>
       </div>
     </div>
     <div v-if="get(post, 'action', true)" :class="[ { open: openShare }, 'share' ]">

@@ -7,10 +7,11 @@
       @click="goTo(`#article-${index + 1}-1`)"
       v-text="chapter.title">
     </a>
+    <FakeNewsSubscribe class="index__subscribe" />
   </div>
 </template>
 <script>
-import FakeNewsCredit from './FakeNewsCredit.vue'
+import FakeNewsSubscribe from './FakeNewsSubscribe.vue'
 
 export default {
   name: 'FakeNewsIndex',
@@ -25,17 +26,17 @@ export default {
       type: Number
     },
   },
-  // data () {
-  //   return {
-  //     mounted: false
-  //   }
-  // },
-  components: {
-    FakeNewsCredit
+  data () {
+    return {
+      mounted: false
+    }
   },
-  // mounted () {
-  //   this.mounted = true
-  // },
+  components: {
+    FakeNewsSubscribe
+  },
+  mounted () {
+    this.mounted = true
+  },
   methods: {
     getStatus (index) {
       if (this.$store.state.viewport[0] < 1024) {
@@ -44,7 +45,6 @@ export default {
       return index + 1 === this.currentChapter
     },
     goTo (anchor) {
-      // this.$store.state.viewport[0] < 1024 ? this.$emit('goTo', anchor) : ''
       this.$emit('goTo', anchor)
     }
   }
@@ -89,9 +89,14 @@ export default {
   .index
     width 186px
     a
-      padding .5em
+      padding .5em .7em
       background-color transparent
       border none
+      & + a
+        margin-top .5em
+      &.title
+        padding 0
+        font-size .9375rem
       &.chapter
         &:before
           background-color #ccd0d5
@@ -108,5 +113,6 @@ export default {
             background-color #032669
         & + .chapter
           margin-top .2em  
-            
+    &__subscribe
+      margin-top 1em
 </style>

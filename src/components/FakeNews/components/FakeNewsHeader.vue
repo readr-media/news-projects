@@ -1,22 +1,22 @@
 <template>
-  <header class="fake-news-header">
+  <header class="disinformation-header">
     <div>
       <h1>fakebook：假訊息與它們的產地</h1>
       <nav>
-        <a :class="[ { active: current === 'feed' }, 'home' ]" @click="$emit('clickHeader', 'feed')"><img src="/proj-assets/fake-news/nav_home.png" alt=""></a>
-        <a href=""><img src="/proj-assets/fake-news/nav_READr.png" alt=""></a>
+        <a :class="[ { active: current === 'feed' }, 'home' ]" @click="$emit('clickHeader', 'feed')"><img src="/proj-assets/disinformation/nav_home.png" alt=""></a>
+        <a href=""><img src="/proj-assets/disinformation/nav_READr.png" alt=""></a>
         <a :class="{ active: openAlert }" @click="$emit('openAlert')">
-          <img src="/proj-assets/fake-news/nav_help.png" alt="">
+          <img src="/proj-assets/disinformation/nav_help.png" alt="">
           <div class="popup">
             <p>警示：這不是 Facebook！但是歡迎按讚、留言、分享。</p>
           </div>
         </a>
         <a :class="[{ active: openShare }, 'share']" @click="openShare = !openShare">
-          <img src="/proj-assets/fake-news/nav_share.png" alt="">
+          <img src="/proj-assets/disinformation/nav_share.png" alt="">
           <button class="fb" @click="shareToFacebook"></button>
           <button class="line" @click="shareToLine"></button>
         </a>
-        <a :class="[ { active: current === 'menu' }, 'menu' ]" @click="$emit('clickHeader', 'menu')"><img src="/proj-assets/fake-news/nav_hamburger.png" alt=""></a>
+        <a :class="[ { active: current === 'menu' }, 'menu' ]" @click="$emit('clickHeader', 'menu')"><img src="/proj-assets/disinformation/nav_hamburger.png" alt=""></a>
       </nav>
     </div>
   </header>
@@ -52,7 +52,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.fake-news-header
+.disinformation-header
   background-color #4868a5
   // background-image linear-gradient(to right, #032669, #4868a5)
   
@@ -132,13 +132,13 @@ export default {
           transform translate3d(-50%,90px,0)
 
 @media (max-width: 1023px)
-  .fake-news-header
+  .disinformation-header
     a
       &.active
         background-color #032669
 
 @media (min-width: 1024px)
-  .fake-news-header
+  .disinformation-header
     > div
       display flex
       width 1020px

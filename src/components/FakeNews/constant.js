@@ -11,15 +11,31 @@ export const ARTICLE = [
           },
           {
             html: 'p',
-            content: '那天清晨 6 點，「假新聞清潔劑」的張書懷和簡艾薇還在返鄉的火車上，Melody 跟 Mark 已經站在臺中豐原的中正公園。那裡是登山口，附近還有些攤販，一大早就有許多人潮。他們準備利用簡單的遊戲，舉例常見的謠言引起民眾的興趣，再藉機推薦 LINE 的查證工具。'
+            content: '我在長輩群組裡頭得到了各種偏方、妙藥、養生訣竅，甚至是企業家郭台銘和女星江蕙的緋聞。'
           },
           {
             html: 'p',
-            content: '「你相信麵粉可以治燙傷嗎？」<br>「收到有感染非洲豬瘟疑慮的香腸，只要煮熟或丟掉就好嗎？」<br>「你有聽過地瓜葉跟牛奶一起喝很養生嗎？」'
+            content: '得以踏進這個世界，是從我認識了「假新聞清潔劑」開始。'
           },
           {
             html: 'p',
-            content: '「啊？難道不是嗎？」大多數人的回答讓他們大吃一驚。原以為假訊息只是個引子，沒想到被問到的民眾都聽過、甚至相信，Melody 瞪大眼睛對我說：「我們攤位對面就是賣豬肉的，但他完全不知道非洲豬瘟的事。」'
+            content: '那天清晨 6 點，「假新聞清潔劑」的張書懷和簡艾薇還在前往的火車上，Melody 跟 Mark 已經站在台中豐原的中正公園，佈置好攤位。那裡是登山口，附近還有些攤販，已經出現許多人潮。'
+          },
+          {
+            html: 'p',
+            content: '他們打算利用簡單的遊戲，舉例常見的謠言讓民眾猜一猜是真的還是假的，再藉機推薦 LINE 的查證工具。'
+          },
+          {
+            html: 'p',
+            content: '「麵粉可以治燙傷嗎？」<br>「收到有感染非洲豬瘟疑慮的香腸，只要煮熟或丟掉就好嗎？」<br>「你有聽過地瓜葉跟牛奶一起喝很養生嗎？」'
+          },
+          {
+            html: 'p',
+            content: '「啊？難道不是嗎？」大多數人的回答讓他們大吃一驚。'
+          },
+          {
+            html: 'p',
+            content: '原來只把假訊息當作開場的引言，沒想到被問到的民眾都聽過、甚至深信不疑。接受訪問時Melody 瞪大眼睛對我說：「我們攤位對面就是個賣豬肉的，但他完全不知道非洲豬瘟的事。」'
           },
           {
             html: 'h3',
@@ -38,11 +54,16 @@ export const ARTICLE = [
           },
           {
             html: 'p',
-            content: '一群在臺中的年輕人，組成團體「假新聞清潔劑」，選擇直接用行動應對謠言。他們在路上宣講，帶大家破解常見的假訊息，並介紹幾個可以在 LINE 上使用的闢謠工具，親身實踐政府與學者口中的「媒體識讀」。'
+            content: '參與者張書懷也舉例，網路上盛傳「過貓」（註）（註：一種蕨類蔬菜）會致癌，但其實國外研究真正會致癌的植物是「山過貓」（且是否對人類有害仍待證明）。他們在某次活動遇到一位種植過貓的攤販，正被這條不實訊息困擾，生意變差，原本會跟他訂菜的餐廳也都不訂了，讓他耕作的五分地只剩三分。'
           },
           {
             html: 'p',
-            content: '這些假訊息，聽起來無傷大雅，就像 Melody 在活動中遇到某位菜販，對正在宣傳非洲豬瘟危險的她說：「真的假的很重要嗎？小心一點不要吃就好啦！」她有點氣餒，「怎麼會不吃就好？這對農漁民的影響會有多大！」'
+            class: 'annotation',
+            content: '註：一種蕨類蔬菜'
+          },
+          {
+            html: 'p',
+            content: '網路上流傳的謠言都跟什麼有關？我們藉著謠言協作澄清組織「<a href="https://cofacts.g0v.tw/" target="_blank">cofact 真的假的</a>」的資料來探索。將流量（使用者轉傳這則謠言給機器人查證的次數）加乘後，除了「政府」、「Weixin」（註）（註：中國網站）等詞外，跟民眾生活息息相關的香蕉、柿子、病毒、致癌、牛奶也很常出現。'
           },
           {
             html: 'p',
@@ -51,6 +72,14 @@ export const ARTICLE = [
           {
             html: 'p',
             content: '網路上流傳的謠言都跟什麼有關？我們藉著謠言協作澄清組織「cofact 真的假的」的資料來探索。將流量（使用者轉傳這則謠言給機器人查證的次數）加乘後，除了「政府」、「Weixin」（註：中國社交網站）等詞外，跟民眾生活息息相關的香蕉、柿子、病毒、致癌、牛奶也很常出現。'
+          },
+          {
+            html: 'p',
+            content: '謠言和我們的距離並不遠。某天，Melody 的女兒被熱水燙傷，來訪的長輩朋友著急得大叫：「快拿麵粉！」夫妻倆當下都愣住了。'
+          },
+          {
+            html: 'p',
+            content: 'Mark 趕緊拿出手機，立刻查到這是一則謠言，安撫長輩，Melody 也趕緊用「沖脫泡蓋送」幫女兒做簡單的處理後送醫。要不是夫妻倆腦袋裡對假訊息的警鈴有響，孩子恐怕會傷得更重。'
           },
           {
             html: 'h3',
@@ -240,7 +269,7 @@ export const ARTICLE = [
           },
           {
             html: 'img',
-            src: '/proj-assets/fake-news/chart-7.jpg',
+            src: '/proj-assets/disinformation/chart-7.jpg',
             alt: '被以「謠言罪」起訴的謠言都跟什麼有關？'
           },
           {
@@ -298,8 +327,8 @@ export const ARTICLE = [
             content: '謠言發生多久，法院才能做出決定？'
           },
           `<div class="chart-9">
-            <img src="/proj-assets/fake-news/chart-9-1.jpg">
-            <img src="/proj-assets/fake-news/chart-9-2.jpg">
+            <img src="/proj-assets/disinformation/chart-9-1.jpg">
+            <img src="/proj-assets/disinformation/chart-9-2.jpg">
           </div>`,
           {
             html: 'p',
@@ -330,15 +359,15 @@ export const ARTICLE = [
             html: 'slideshow',
             content: [
               {
-                src: '/proj-assets/fake-news/chart-8-1.jpg',
+                src: '/proj-assets/disinformation/chart-8-1.jpg',
                 figcaption: '73 個案例裡，有 54 件被認定為假訊息。非假訊息的都沒有被罰。'
               },
               {
-                src: '/proj-assets/fake-news/chart-8-2.jpg',
+                src: '/proj-assets/disinformation/chart-8-2.jpg',
                 figcaption: '54 件假訊息中，有 39 件被認定有影響社會安定，但有 4 件沒有被罰。這 4 件的被告是在網路上捏造隨機殺人、擄人、暴力事件等，但法官認為，雖然有可能是虛構的，但這類事情也的確存在，警察局很常接到這樣的報案，也不乏媒體報導。且被告本意都是提醒周邊的人要小心，所以不罰。'
               },
               {
-                src: '/proj-assets/fake-news/chart-8-3.jpg',
+                src: '/proj-assets/disinformation/chart-8-3.jpg',
                 figcaption: '這 39 件假訊息、且影響社會安定的案件中，最後被罰了 35 件。有 31 件是故意的，有 4 件的法官認為被告雖然不是故意散播假訊息，可以減輕刑責，但是還是要罰。這 4 件的共通性是謠言內容都跟擄人有關。'
               }
             ],
@@ -370,7 +399,7 @@ export const ARTICLE = [
           },
           {
             html: 'img',
-            src: '/proj-assets/fake-news/chart-10.jpg',
+            src: '/proj-assets/disinformation/chart-10.jpg',
             alt: '被判謠言罪的網路謠言是用什麼平台被散佈？'
           },
           {
@@ -676,7 +705,7 @@ export const ARTICLE = [
           },
           {
             html: 'img',
-            src: '/proj-assets/fake-news/chart-16.jpg',
+            src: '/proj-assets/disinformation/chart-16.jpg',
             alt: 'NCC 要花多久時間處理？'
           },
           {
@@ -800,7 +829,7 @@ export const ARTICLE = [
           },
           {
             html: 'img',
-            src: '/proj-assets/fake-news/chart-18.jpg',
+            src: '/proj-assets/disinformation/chart-18.jpg',
             alt: '假訊息停看聽'
           },
           {
@@ -894,7 +923,7 @@ export const ARTICLE = [
           },
           {
             html: 'video',
-            src: '/proj-assets/fake-news/video-1.mp4'
+            src: '/proj-assets/disinformation/video-1.mp4'
           }, 
           {
             html: 'p',
