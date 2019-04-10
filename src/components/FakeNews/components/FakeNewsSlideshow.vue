@@ -19,13 +19,13 @@
             v-if="current !== 0"
             class="left"
             @click="current -= 1">
-            <img src="/proj-assets/fake-news/arrow_toleft.png" alt="上一個">
+            <img src="/proj-assets/disinformation/arrow_toleft.png" alt="上一個">
           </button>
           <button
             v-if="current !== slideshowImages.length - 1"
             class="right"
             @click="current += 1">
-            <img src="/proj-assets/fake-news/arrow_toright.png" alt="下一個">
+            <img src="/proj-assets/disinformation/arrow_toright.png" alt="下一個">
           </button>
         </div>
         <div class="lightbox__caption">
@@ -123,7 +123,7 @@ export default {
       left 0
       height 100%
       width 42px
-      background-image url(/proj-assets/fake-news/back.png)
+      background-image url(/proj-assets/disinformation/back.png)
       background-repeat no-repeat
       background-position center center
       background-size 10px auto
@@ -178,7 +178,7 @@ export default {
         right 0
         width 35px
         height 35px
-        background-image url(/proj-assets/fake-news/close.png)
+        background-image url(/proj-assets/disinformation/close.png)
         background-size 15px auto
     &__img
       width 75%

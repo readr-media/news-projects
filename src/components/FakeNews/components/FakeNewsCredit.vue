@@ -7,7 +7,7 @@
       <span>工程／HY Tan</span>
     </p>
     <p>
-      <img src="/proj-assets/fake-news/credit_mm.png" alt="Readr">
+      <img src="/proj-assets/disinformation/credit_mm.png" alt="Readr">
       <span>© 2019 READr</span>
     </p>
   </div>

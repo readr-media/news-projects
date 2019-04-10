@@ -1,21 +1,21 @@
 <template>
-  <div :class="[ { 'fixed-header': pageYOffset > 84, 'open-alert': openAlert }, 'fake-news' ]">
+  <div :class="[ { 'fixed-header': pageYOffset > 84, 'open-alert': openAlert }, 'disinformation' ]">
     <FakeNewsHeader
       :current="current"
       :openAlert="openAlert"
-      class="fake-news__header"
+      class="disinformation__header"
       @clickHeader="handleHeader"
       @openAlert="handleAlert" />
     <main>
       <FakeNewsIndex
         :article="ARTICLE"
-        :class="[ { active: current === 'menu' }, 'fake-news__index' ]"
+        :class="[ { active: current === 'menu' }, 'disinformation__index' ]"
         :currentChapter="currentChapter"
         :currentChapterMobile="currentChapterMobile"
         @goTo="goTo" />
       <div :class="[ { hidden: $store.state.viewport[0] < 1024 && current !== 'feed'  }, 'feed' ]">
         <div class="feed__main-block">
-          <!-- <FakeNewsForeword /> -->
+          <FakeNewsStory v-if="mounted && $store.state.viewport[0] < 1024" />
           <template v-for="(chapter, chapterIndex) in ARTICLE">
             <FakeNewsPost
               v-for="(post, postIndex) in chapter.subIndex"
@@ -35,6 +35,7 @@
             :reportsCount="$store.state.reportsCount" />
         </div>
         <div class="feed__secondary-block">
+          <FakeNewsStory v-if="mounted && $store.state.viewport[0] >= 1024" />
           <FakeNewsRelated
             v-if="$store.state.reports.length > 0 && $store.state.viewport[0] >= 1024"
             :reports="$store.state.reports"
@@ -47,11 +48,11 @@
 <script>
 
 import Cookie from 'vue-cookie'
-import FakeNewsForeword from './components/FakeNewsForeword.vue'
 import FakeNewsHeader from './components/FakeNewsHeader.vue'
 import FakeNewsIndex from './components/FakeNewsIndex.vue'
 import FakeNewsPost from './components/FakeNewsPost.vue'
 import FakeNewsRelated from './components/FakeNewsRelated.vue'
+import FakeNewsStory from './components/FakeNewsStory.vue'
 import FakeNewsVote from './components/FakeNewsVote.vue'
 import { ARTICLE } from './constant'
 import { smoothScroll } from 'kc-scroll'
@@ -89,19 +90,19 @@ const updateCommentAmount = (store, { id, amount }) => store.dispatch('FakeNews/
 export default {
   name: 'FakeNews',
   components: {
-    FakeNewsForeword,
     FakeNewsHeader,
     FakeNewsIndex,
     FakeNewsPost,
     FakeNewsRelated,
+    FakeNewsStory,
     FakeNewsVote
   },
   metaInfo() {
     return {
       title: 'fakebook：假訊息與它們的產地',
       description: '假訊息問題嚴重，但解決方案很容易牴觸言論自由，人權與自由之間該如何權衡？READr 想和你一起從各個面向探索假訊息與它們的產地。',
-      metaUrl: 'fake-news',
-      metaImage: 'fake-news/og.jpg',
+      metaUrl: 'disinformation',
+      metaImage: 'disinformation/og.jpg',
       customScript: `
         <script src="https://public.flourish.studio/resources/embed.js"><\/script>
       `
@@ -114,6 +115,7 @@ export default {
       current: 'feed',
       currentPost: 'article-1-1',
       currentChapterMobile: 1,
+      mounted: false,
       openAlert: false,
       pageYOffset: 0,
       postIds: [],
@@ -141,6 +143,9 @@ export default {
     this.getVoteRecord()
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('scroll', this.handleScrollForIndex)
+  },
+  mounted () {
+    this.mounted = true
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)
@@ -210,7 +215,7 @@ export default {
 }
 </script>
 <style lang="stylus">
-.fake-news
+.disinformation
   background-color #f5f6f7
   h1, h2, h3, p , a
     margin 0
@@ -243,7 +248,7 @@ export default {
     position relative
 
   &.open-alert
-    .fake-news-header
+    .disinformation-header
       .popup
         display block
 
@@ -254,7 +259,7 @@ export default {
     z-index 500
     width 100%
     height calc(100vh - 126px)
-  .fake-news-header
+  .disinformation-header
     .popup
       display none
   .feed
@@ -263,9 +268,9 @@ export default {
         margin-top 10px
   
 @media (max-width: 1023px)
-  .fake-news
+  .disinformation
     &.fixed-header
-      .fake-news-header
+      .disinformation-header
         padding-bottom 42px
         nav
           position fixed
@@ -286,10 +291,10 @@ export default {
     
 
 @media (min-width: 1024px)
-  .fake-news
+  .disinformation
     &.fixed-header
       padding-top 84px
-      .fake-news-header
+      .disinformation-header
         position fixed
         top 0
         left 0
@@ -298,7 +303,7 @@ export default {
         h1
           font-size .875rem
           line-height 42px
-      .fake-news__index
+      .disinformation__index
         position fixed
         top 52px
     main
@@ -322,4 +327,6 @@ export default {
         margin-right 20px
       &__secondary-block
         flex 1
+        > div + div
+          margin-top 1em
 </style>
