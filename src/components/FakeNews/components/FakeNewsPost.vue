@@ -51,7 +51,7 @@
       <button class="url" @click="copyUrlToClipboard">拷貝連結<span>複製成功</span></button>
     </div>
     <div v-if="mounted && get(post, 'action', true)" v-show="openComment" class="comment">
-      <div class="fb-comments" data-href="https://www.readr.tw/project/fake-news" data-numposts="5" data-width="100%"></div>
+      <div class="fb-comments" data-href="https://www.readr.tw/project/disinformation" data-numposts="5" data-width="100%"></div>
     </div>
   </div>
 </template>
@@ -124,11 +124,11 @@ export default {
       this.openShare = !this.openShare
     },
     shareToFacebook () {
-      window.open(`https://www.facebook.com/share.php?u=${READR_SITE_URL}fake-news`)
+      window.open(`https://www.facebook.com/share.php?u=${READR_SITE_URL}disinformation`)
       // window.ga && window.ga('send', 'event', 'projects', 'click', `share to fb`, { nonInteraction: false })
     },
     shareToLine () {
-      window.open(`https://line.me/R/msg/text/?${READR_SITE_URL}fake-news`)
+      window.open(`https://line.me/R/msg/text/?${READR_SITE_URL}disinformation`)
       // window.ga && window.ga('send', 'event', 'projects', 'click', `share to line`, { nonInteraction: false })
     }
   }

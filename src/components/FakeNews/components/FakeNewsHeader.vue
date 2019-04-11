@@ -4,7 +4,7 @@
       <h1>fakebook：假訊息與它們的產地</h1>
       <nav>
         <a :class="[ { active: current === 'feed' }, 'home' ]" @click="$emit('clickHeader', 'feed')"><img src="/proj-assets/disinformation/nav_home.png" alt=""></a>
-        <a href=""><img src="/proj-assets/disinformation/nav_READr.png" alt=""></a>
+        <a href="https://www.readr.tw/" target="_blank"><img src="/proj-assets/disinformation/nav_READr.png" alt=""></a>
         <a :class="{ active: openAlert }" @click="$emit('openAlert')">
           <img src="/proj-assets/disinformation/nav_help.png" alt="">
           <div class="popup">
@@ -41,11 +41,11 @@ export default {
   },
   methods: {
     shareToFacebook () {
-      window.open(`https://www.facebook.com/share.php?u=${READR_SITE_URL}fake-news`)
+      window.open(`https://www.facebook.com/share.php?u=${READR_SITE_URL}disinformation`)
       // window.ga && window.ga('send', 'event', 'projects', 'click', `share to fb`, { nonInteraction: false })
     },
     shareToLine () {
-      window.open(`https://line.me/R/msg/text/?${READR_SITE_URL}fake-news`)
+      window.open(`https://line.me/R/msg/text/?${READR_SITE_URL}disinformation`)
       // window.ga && window.ga('send', 'event', 'projects', 'click', `share to line`, { nonInteraction: false })
     }
   }

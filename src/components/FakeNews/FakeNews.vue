@@ -28,7 +28,7 @@
               @reaction="handleReaction">
             </FakeNewsPost>
           </template>
-          <FakeNewsVote :voted="voted" @updateVoteCookie="updateVoteCookie"/>
+          <!-- <FakeNewsVote :voted="voted" @updateVoteCookie="updateVoteCookie"/> -->
           <FakeNewsRelated
             v-if="$store.state.reports.length > 0 && $store.state.viewport[0] < 1024"
             :reports="$store.state.reports"
