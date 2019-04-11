@@ -16,7 +16,7 @@
             <img :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" :src="paragraph.src" :alt="paragraph.alt">
           </template>
           <template v-else-if="paragraph.html && paragraph.html === 'video'">
-            <video :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" playsinline controls preload="metadata">
+            <video :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" :poster="paragraph.poster" playsinline controls preload="metadata">
               <source :src="paragraph.src" type="video/mp4">
             </video>
           </template>
@@ -136,7 +136,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .post
-  h2, h3, p
+  h2, h3, p, img
     & + *
       margin-top 1em
   h2

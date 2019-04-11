@@ -1,20 +1,23 @@
 <template>
   <div class="quiz">
-    <div :class="{ real: announced && quiz.answer, fake: announced && !quiz.answer }" class="quiz__question">
-      <p v-text="quiz.title"></p>
+    <div v-if="announced" class="quiz__result">
+      <p><strong>你答{{ userAnswer === quiz.answer ? '對' : '錯' }}了！</strong></p>
+      <p>根據投票結果，有 <strong>{{ percent }}%</strong> 的讀者認為是假的。</p>
+    </div>
+    <div class="quiz__question">
+      <p v-if="!announced" v-text="quiz.title"></p>
       <h3 v-text="quiz.question"></h3>
       <div v-if="!announced" class="quiz__action">
         <button @click="answer(true)">真</button>
         <button @click="answer(false)">假</button>
       </div>
-      <div v-if="announced" class="quiz__result">
-        <h3>這則訊息是{{ quiz.answer ? '真' : '假' }}的。</h3>
-        <p>根據投票結果，有 <strong>{{ percent }}%</strong> 的讀者認為是假的。</p>
-      </div>
-    </div>
-    <div v-if="announced" class="quiz__annotation">
-      <p v-text="quiz.annotation"></p>
-      <a :href="quiz.sourceLink" class="source" target="_blank">來源：{{ quiz.source }}</a>
+      <template v-if="announced">
+        <p v-if="announced" :class="{ real: quiz.answer, fake: !quiz.answer }"><strong>這則訊息是{{ quiz.answer ? '真' : '假' }}的。</strong></p>
+        <p class="quiz__annotation" v-text="quiz.annotation"></p>
+        <div class="quiz__source">
+          <a :href="quiz.sourceLink" target="_blank">來源：{{ quiz.source }}</a>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -29,12 +32,14 @@ export default {
   data () {
     return {
       announced: false,
+      userAnswer: undefined,
       percent: 0,
     }
   },
   methods: {
     answer (choice) {
       this.announced = true
+      this.userAnswer = choice
     }
   }
 }
@@ -44,14 +49,15 @@ export default {
   p + h3
     margin-top .5em
   &__question
-    padding 1em 1em .5em
+    padding 1em
     transition color 0.5s, background-color 0.5s
-    &.real
-      color #fff
-      background-color #395384
-    &.fake
-      color #fff
-      background-color #b60537
+    h3, p
+      & + *
+        margin-top .5em
+    .real
+      color #395384
+    .fake
+      color #b60537
   &__action
     display flex
     justify-content space-between
@@ -67,19 +73,21 @@ export default {
       &:last-of-type
         background-color #b60537
   &__result
-    margin-top 2em
+    padding 1em
+    background-color #616770
     p
+      color #fff
       font-size .8125rem
       strong
         font-size 1.125rem
   &__annotation
-    padding .5em 1em 1em
+    margin-top 1.5em !important
+  
+  .quiz__source
     text-align right
-    p
-      text-align justify
-    .source
+    a
       color #616770
       font-size .8125rem
-      text-align right
       border-bottom 1px solid #616770
+ 
 </style>
