@@ -28,7 +28,10 @@
               @reaction="handleReaction">
             </FakeNewsPost>
           </template>
+          <Donate v-if="mounted && $store.state.viewport[0] < 1024" :projectSlug="'disinformation'" class="feed__donate" />
           <!-- <FakeNewsVote :voted="voted" @updateVoteCookie="updateVoteCookie"/> -->
+          <FakeNewsSubscribe v-if="mounted && $store.state.viewport[0] < 1024" />
+          <FakeNewsCredit v-if="mounted && $store.state.viewport[0] < 1024" class="feed__credit"  />
           <FakeNewsRelated
             v-if="$store.state.reports.length > 0 && $store.state.viewport[0] < 1024"
             :reports="$store.state.reports"
@@ -36,6 +39,7 @@
         </div>
         <div class="feed__secondary-block">
           <FakeNewsStory v-if="mounted && $store.state.viewport[0] >= 1024" />
+          <Donate v-if="mounted && $store.state.viewport[0] >= 1024" :projectSlug="'disinformation'" />
           <FakeNewsRelated
             v-if="$store.state.reports.length > 0 && $store.state.viewport[0] >= 1024"
             :reports="$store.state.reports"
@@ -48,10 +52,13 @@
 <script>
 
 import Cookie from 'vue-cookie'
+import Donate from '../Donate.vue'
+import FakeNewsCredit from './components/FakeNewsCredit.vue'
 import FakeNewsHeader from './components/FakeNewsHeader.vue'
 import FakeNewsIndex from './components/FakeNewsIndex.vue'
 import FakeNewsPost from './components/FakeNewsPost.vue'
 import FakeNewsRelated from './components/FakeNewsRelated.vue'
+import FakeNewsSubscribe from './components/FakeNewsSubscribe.vue'
 import FakeNewsStory from './components/FakeNewsStory.vue'
 import FakeNewsVote from './components/FakeNewsVote.vue'
 import { ARTICLE } from './constant'
@@ -90,10 +97,13 @@ const updateCommentAmount = (store, { id, amount }) => store.dispatch('FakeNews/
 export default {
   name: 'FakeNews',
   components: {
+    Donate,
+    FakeNewsCredit,
     FakeNewsHeader,
     FakeNewsIndex,
     FakeNewsPost,
     FakeNewsRelated,
+    FakeNewsSubscribe,
     FakeNewsStory,
     FakeNewsVote
   },
@@ -266,6 +276,8 @@ export default {
     &__main-block
       > div + div
         margin-top 10px
+    &__donate, &__credit
+      padding 0 1em
   
 @media (max-width: 1023px)
   .disinformation
