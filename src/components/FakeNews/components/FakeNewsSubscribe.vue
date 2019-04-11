@@ -1,6 +1,6 @@
 <template>
   <div :class="{ typed: onKeyPress, success: status === 'success', format: errors === 'format' }" class="subscribe">
-    <p><strong>免費訂閱 READr 讀＋ 專題報</strong></p>
+    <p><strong>免費訂閱 讀＋ 專題報</strong></p>
     <p>留下你的 E-mail，第一手獲得專題精彩內容！</p>
     <div>
       <input type="email" v-model="email" placeholder="請輸入 E-mail" @keypress="onKeyPress = true">

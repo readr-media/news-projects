@@ -998,3 +998,42 @@ export const ARTICLE = [
     ]
   }
 ]
+
+export const STORY = [
+  {
+    img: '/proj-assets/disinformation/story-01.jpg',
+    title: '網路帶來方便的社會，卻也成為有心人利用的工具。'
+  },
+  {
+    img: '/proj-assets/disinformation/story-02.jpg',
+    title: '前行政院長賴清德去年 10 月指出，臺灣受到嚴重的假訊息威脅。'
+  },
+  {
+    img: '/proj-assets/disinformation/story-03.jpg',
+    title: '去年底，行政院提出一套「打假方案」。'
+  },
+  {
+    img: '/proj-assets/disinformation/story-04.jpg',
+    title: '但這個舉動立刻引發爭議：政府的介入會不會影響言論自由？'
+  },
+  {
+    img: '/proj-assets/disinformation/story-05.jpg',
+    title: '爭議之後，行政院決定先退一步，希望網路平台業者能先自律。'
+  },
+  {
+    img: '/proj-assets/disinformation/story-06.jpg',
+    title: '但經過我們的調查，發現「業者先自律」的呼籲早在 3 年前就已經開始。'
+  },
+  {
+    img: '/proj-assets/disinformation/story-07.jpg',
+    title: '假訊息的解方，全世界都在找。'
+  },
+  {
+    img: '/proj-assets/disinformation/story-08.jpg',
+    title: '你覺得什麼是假訊息？什麼程度的假訊息應該被管制？'
+  },
+  {
+    img: '/proj-assets/disinformation/story-09.jpg',
+    title: '假訊息的管制真的無解嗎？'
+  },
+]

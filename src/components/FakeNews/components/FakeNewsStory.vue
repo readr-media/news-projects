@@ -1,74 +1,107 @@
 <template>
   <div class="story">
-    <p>解說式圖文標題</p>
     <div class="story-container">
-      <figure @click="handleSlideshow(1)">
-        <img src="/proj-assets/disinformation/story-01.jpg" alt="">
-        <figcaption>網路帶來方便的社會，卻也成為有心人利用的工具。</figcaption>
-      </figure>
-      <figure @click="handleSlideshow(2)">
-        <img src="/proj-assets/disinformation/story-02.jpg" alt="">
-        <figcaption>前行政院長賴清德去年 10 月指出，臺灣受到嚴重的假訊息威脅。</figcaption>
-      </figure>
-      <figure @click="handleSlideshow(3)">
-        <img src="/proj-assets/disinformation/story-03.jpg" alt="">
-        <figcaption>去年底，行政院提出一套「打假方案」。</figcaption>
-      </figure>
-      <figure @click="handleSlideshow(4)">
-        <img src="/proj-assets/disinformation/story-04.jpg" alt="">
-        <figcaption>但這個舉動立刻引發爭議：政府的介入會不會影響言論自由？</figcaption>
-      </figure>
-      <figure @click="handleSlideshow(5)">
-        <img src="/proj-assets/disinformation/story-05.jpg" alt="">
-        <figcaption>爭議之後，行政院決定先退一步，希望網路平台業者能先自律。</figcaption>
-      </figure>
-      <figure @click="handleSlideshow(6)">
-        <img src="/proj-assets/disinformation/story-06.jpg" alt="">
-        <figcaption>但經過我們的調查，發現「業者先自律」的呼籲早在 3 年前就已經開始。</figcaption>
-      </figure>
-      <figure @click="handleSlideshow(7)">
-        <img src="/proj-assets/disinformation/story-07.jpg" alt="">
-        <figcaption>假訊息的解方，全世界都在找。</figcaption>
-      </figure>
-      <figure @click="handleSlideshow(8)">
-        <img src="/proj-assets/disinformation/story-08.jpg" alt="">
-        <figcaption>你覺得什麼是假訊息？什麼程度的假訊息應該被管制？</figcaption>
-      </figure>
-      <figure @click="handleSlideshow(9)">
-        <img src="/proj-assets/disinformation/story-09.jpg" alt="">
-        <figcaption>假訊息的管制真的無解嗎？</figcaption>
-      </figure>
+      <template v-for="(item, index) in STORY">
+        <figure :key="`story-${index}`" @click="handleSlideshow(index + 1)">
+          <img :src="item.img" :alt="item.title">
+          <figcaption v-text="truncateTitle(item.title)"></figcaption>
+        </figure>
+      </template>
     </div>
     <div v-show="openSlideshow" class="story-slideshow">
       <div class="story-slideshow-container">
         <div class="story-slideshow__header">
           <nav>
-            <div v-for="item in 9" :key="`story-${item}`" @click="current = item"></div>
+            <div v-for="(item, index) in STORY" :key="`story-nav-${index}`" @click="current = index + 1">
+              <div :style="{ width: getProcessWidth(index + 1) }" class="process"></div>
+            </div>
           </nav>
           <div class="story-slideshow__header-title">
-            <p>解說式圖文標題</p>
-            <button @click="openSlideshow = false"><img src="/proj-assets/disinformation/close.png" alt=""></button>
+            <button @click="openSlideshow = false"><img src="/proj-assets/disinformation/close.png"></button>
           </div>
         </div>
-        <img v-for="item in 9" v-show="current === item" :key="`story-img-${item}`" :src="`/proj-assets/disinformation/story-0${item}.jpg`" alt="">
+        <img
+          v-for="(item, index) in STORY"
+          v-show="current === index + 1"
+          :key="`story-img-${index}`"
+          :src="item.img"
+          :alt="item.title"
+          @click="nextStory(index + 1)">
       </div>
+      <div class="story-slideshow__curtain"></div>
     </div>
   </div>
 </template>
 <script>
+import { STORY } from '../constant'
+import { truncate } from 'lodash'
+
 export default {
   name: 'FakeNewsStory',
   data () {
     return {
+      STORY,
       current: 1,
-      openSlideshow: false
+      openSlideshow: true,
+      time: 0,
+      timer: undefined,
+      timerForNav: undefined
     }
   },
+  watch: {
+    current () {
+      this.removeInterval()
+      this.time = 0
+      this.setTimer()
+    },
+    openSlideshow (value) {
+      value ? '' : this.removeInterval()
+    }
+  },
+  mounted () {
+    this.setTimer()
+  },
   methods: {
+    getProcessWidth (index) {
+      if (index < this.current) {
+        return '100%'
+      } else if (index > this.current) {
+        return '0%'
+      } else {
+        return `${this.time / 50 * 100}%`
+      }
+    },
     handleSlideshow (index) {
       this.current = index
       this.openSlideshow = true
-    }
+    },
+    nextStory (current) {
+      if (current + 1 > STORY.length) {
+        this.openSlideshow = false
+      } else {
+        this.current = current + 1
+      }
+    },
+    removeInterval () {
+      clearInterval(this.timer)
+      clearInterval(this.timerForNav)
+      this.time = 0
+    },
+    setTimer () {
+      this.timer = setInterval(() => {
+        this.nextStory(this.current)
+        this.time = 0
+      }, 5000)
+      this.timerForNav = setInterval(() => {
+        this.time += 1
+      }, 100)
+    },
+    truncateTitle (text) {
+      if (this.$store.state.viewport[0] < 1024) {
+        return truncate(text, { length: 16 })
+      }
+      return truncate(text, { length: 27 })
+    },
   }
 }
 </script>
@@ -101,7 +134,7 @@ export default {
       bottom 0
       width 100%
       height 100%
-      background-image linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .6) 100%)
+      background-image linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .8) 100%)
     img
       width 100%
       height 100%
@@ -121,7 +154,6 @@ export default {
       white-space normal
   &-container
     width 100%
-    margin-top .5em
     overflow-x auto
     white-space nowrap
   &-slideshow
@@ -132,11 +164,13 @@ export default {
     bottom 0
     z-index 999
     width 100%
+    background-color rgba(0,0,0,.8)
     img
       width 100%
       height 100%
-      object-fit cover
+      object-fit contain
       object-position center center
+      cursor pointer
     &-container
       position relative
       width 100%
@@ -153,11 +187,18 @@ export default {
         justify-content space-around
         > div
           flex 1
-          height 2px
+          position relative
+          height 3px
           background-color #ccd0d5
           cursor pointer
           & + div
             margin-left 5px
+        .process
+          position absolute
+          top 0
+          left 0
+          height 100%
+          background-color #fff
       &-title
         display flex
         margin-top .5em
@@ -170,7 +211,8 @@ export default {
           img
             width 15px
             height 15px
-
+    &__curtain
+      display none
 @media (min-width: 1024px)
   .story
     padding 1em
@@ -209,8 +251,11 @@ export default {
       display flex
       justify-content center
       align-items center
-      background-color rgba(0,0,0,.8)
+      
+      img
+        object-fit cover
       &-container
+        z-index 10
         width 375px
         height 700px
       &__header-title
@@ -218,5 +263,13 @@ export default {
           position fixed
           top 15px
           right 15px
+      &__curtain
+        position absolute
+        top 0
+        left 0
+        right 0
+        bottom 0
+        width 100%
+        display block
 
 </style>
