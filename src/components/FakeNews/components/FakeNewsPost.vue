@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" :class="[ { 'open-comment': openComment }, 'post', get(post, 'type') ]">
+  <div :id="id" :class="[ { 'open-comment': openComment, 'show-content': showContent }, 'post', get(post, 'type') ]">
     <div class="post-container">
       <div class="post__content">
         <template v-for="(paragraph, paragraphIndex) in post.content">
@@ -10,7 +10,12 @@
             <h3 :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" v-html="paragraph.content"></h3>
           </template>
           <template v-else-if="paragraph.html && paragraph.html === 'p'">
-            <p :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" :class="[ paragraph.class ? paragraph.class : '' ]" v-html="paragraph.content"></p>
+            <p
+              :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`"
+              :class="[ paragraph.class ? paragraph.class : '' ]"
+              v-html="isReadMore && paragraphIndex === 1 && !showContent ? truncate(paragraph.content, { length: 40 }) : paragraph.content">
+            </p>
+            <span v-if="isReadMore && paragraphIndex === 1 && !showContent" :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}-more`" @click="showContent = true">繼續閱讀</span>
           </template>
           <template v-else-if="paragraph.html && paragraph.html === 'img'">
             <img :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" :src="paragraph.src" :alt="paragraph.alt">
@@ -59,7 +64,7 @@
 import FakeNewsQuiz from './FakeNewsQuiz.vue'
 import FakeNewsSlideshow from './FakeNewsSlideshow.vue'
 import { READR_SITE_URL } from '../../../constants'
-import { get } from 'lodash'
+import { get, truncate } from 'lodash'
 
 export default {
   name: 'FakeNewsPost',
@@ -70,6 +75,10 @@ export default {
   props: {
     id: {
       type: String
+    },
+    isReadMore: {
+      type: Boolean,
+      default: false
     },
     chapterIndex: {
       type: Number
@@ -89,6 +98,7 @@ export default {
       mounted: false,
       openComment: false,
       openShare: false,
+      showContent: false
     }
   },
   computed: {
@@ -130,7 +140,8 @@ export default {
     shareToLine () {
       window.open(`https://line.me/R/msg/text/?${READR_SITE_URL}disinformation`)
       // window.ga && window.ga('send', 'event', 'projects', 'click', `share to line`, { nonInteraction: false })
-    }
+    },
+    truncate
   }
 }
 </script>
@@ -145,8 +156,26 @@ export default {
     color #4868a5
     text-decoration none
   &.quiz
+    .post-container
+      background-color #dddfe2
     .post__content
       padding 0 !important
+  &.read-more
+    .post__content
+      > h3, > p, > div, > img
+        display none
+      > h2
+        margin-bottom 15px
+      > p:first-of-type
+        display inline
+      span
+        color #4868A5
+        font-size .9375rem
+        cursor pointer
+  &.show-content
+    .post__content
+      > h3, > p, > div, > img
+        display block !important
   &-container
     position relative
     background-color #fff
@@ -162,6 +191,8 @@ export default {
       margin-top 1em
     >>> img, >>> video
       width 100%
+    >>> .flourish-credit
+      display none !important
     
   &__action
     display flex
