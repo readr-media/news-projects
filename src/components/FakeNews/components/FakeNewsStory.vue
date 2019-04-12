@@ -198,7 +198,7 @@ export default {
           top 0
           left 0
           height 100%
-          background-color #fff
+          background-color #e19e3d
       &-title
         display flex
         margin-top .5em

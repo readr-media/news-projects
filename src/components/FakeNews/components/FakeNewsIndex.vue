@@ -1,10 +1,16 @@
 <template>
   <div class="index">
     <a class="title">謠言與牠們的產地</a>
-    <a v-for="(chapter, index) in article"
+    <a v-for="(chapter, index) in ARTICLE"
       :key="`index-${index}`"
       :class="[ { active: getStatus(index) }, 'chapter' ]"
       @click="goTo(`#article-${index + 1}-1`)"
+      v-text="chapter.title">
+    </a>
+    <a v-for="(chapter, index) in ARTICLE_MORE"
+      :key="`index-more${index}`"
+      :class="[ { active: getStatus(index + ARTICLE.length) }, 'chapter', 'more' ]"
+      @click="goTo(`#article-${index + 1 + ARTICLE.length}-1`)"
       v-text="chapter.title">
     </a>
     <FakeNewsSubscribe class="index__subscribe" />
@@ -12,13 +18,11 @@
 </template>
 <script>
 import FakeNewsSubscribe from './FakeNewsSubscribe.vue'
+import { ARTICLE, ARTICLE_MORE } from '../constant'
 
 export default {
   name: 'FakeNewsIndex',
   props: {
-    article: {
-      type: Array
-    },
     currentChapter: {
       type: Number
     },
@@ -28,6 +32,8 @@ export default {
   },
   data () {
     return {
+      ARTICLE,
+      ARTICLE_MORE,
       mounted: false
     }
   },
@@ -78,7 +84,10 @@ export default {
         border-radius 50%
       &.active
         background-color #ccd0d5
-      
+    &.more
+      font-size .75rem
+    & + div
+      margin-top 1em
   // &__credit
   //   position absolute
   //   left 0

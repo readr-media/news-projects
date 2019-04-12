@@ -29,8 +29,23 @@
             </FakeNewsPost>
           </template>
           <Donate v-if="mounted && $store.state.viewport[0] < 1024" :projectSlug="'disinformation'" class="feed__donate" />
-          <!-- <FakeNewsVote :voted="voted" @updateVoteCookie="updateVoteCookie"/> -->
           <FakeNewsSubscribe v-if="mounted && $store.state.viewport[0] < 1024" />
+          <template v-for="(chapter, chapterIndex) in ARTICLE_MORE">
+            <FakeNewsPost
+              v-for="(post, postIndex) in chapter.subIndex"
+              :id="`article-${chapterIndex + 1 + ARTICLE.length}-${postIndex + 1}`"
+              :key="`article-${chapterIndex + ARTICLE.length}-${postIndex}`"
+              :chapterIndex="chapterIndex"
+              :commentsReacted="commentsReacted"
+              :isReadMore="true"
+              :post="post"
+              :postIndex="postIndex"
+              class="read-more"
+              @reaction="handleReaction">
+            </FakeNewsPost>
+          </template>
+          <div class='polis' data-conversation_id='7rshkafphu'></div>
+          <!-- <FakeNewsVote :voted="voted" @updateVoteCookie="updateVoteCookie"/> -->
           <FakeNewsCredit v-if="mounted && $store.state.viewport[0] < 1024" class="feed__credit"  />
           <FakeNewsRelated
             v-if="$store.state.reports.length > 0 && $store.state.viewport[0] < 1024"
@@ -61,7 +76,7 @@ import FakeNewsRelated from './components/FakeNewsRelated.vue'
 import FakeNewsSubscribe from './components/FakeNewsSubscribe.vue'
 import FakeNewsStory from './components/FakeNewsStory.vue'
 import FakeNewsVote from './components/FakeNewsVote.vue'
-import { ARTICLE } from './constant'
+import { ARTICLE, ARTICLE_MORE } from './constant'
 import { smoothScroll } from 'kc-scroll'
 import { throttle } from 'lodash'
 
@@ -89,6 +104,9 @@ const getPostIds = () => {
   ARTICLE
     .map(chapter => chapter.subIndex
       .map((post, index) => postIds.push(`article-${chapter.chapter}-${index + 1}`)))
+  ARTICLE_MORE
+    .map(chapter => chapter.subIndex
+      .map((post, index) => postIds.push(`article-${chapter.chapter}-${index + 1}`)))    
   return postIds
 }
 
@@ -115,16 +133,19 @@ export default {
       metaImage: 'disinformation/og.jpg',
       customScript: `
         <script src="https://public.flourish.studio/resources/embed.js"><\/script>
+        <script async src='https://polis.pdis.nat.gov.tw/embed.js'><\/script>
       `
     }
   },
   data () {
     return {
       ARTICLE,
+      ARTICLE_MORE,
       chapterScrollTop: [],
       current: 'feed',
       currentPost: 'article-1-1',
       currentChapterMobile: 1,
+      currentChapterYOffset: 0,
       mounted: false,
       openAlert: false,
       pageYOffset: 0,
@@ -178,8 +199,16 @@ export default {
       }, 0)
     },
     handleHeader (value) {
+      if (value === 'menu') {
+        this.currentChapterYOffset = this.pageYOffset
+      } else if (value === 'feed') {
+        setTimeout(() => {
+          window.scrollTo(0, this.currentChapterYOffset)
+        }, 0)
+      }
       this.currentChapterMobile = this.currentChapter
       this.current = value
+      
     },
     handleAlert () {
       this.openAlert = !this.openAlert
@@ -295,6 +324,8 @@ export default {
     
     &__index
       display none
+      padding-bottom 1em
+      overflow auto
       &.active
         display block
         left 0

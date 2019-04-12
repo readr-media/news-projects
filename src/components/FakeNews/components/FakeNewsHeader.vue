@@ -81,7 +81,7 @@ export default {
         width 90vw
         max-width 310px
         padding .5em
-        background-color #ccd0d5
+        background-color #03070f
         border-radius 4px
         &::before
           content ''
@@ -95,7 +95,7 @@ export default {
           border-width 0 5px 8.7px 5px
           border-color transparent transparent #ccd0d5
         p
-          color #616770
+          color #fff
           font-size .8125rem
           text-align justify
           line-height 1.38

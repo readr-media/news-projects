@@ -70,7 +70,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .subscribe
-  padding 15px
+  padding 0 1em
   > div
     display flex
     flex-wrap wrap
