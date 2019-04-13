@@ -17,6 +17,9 @@
           <button class="line" @click="shareToLine"></button>
         </a>
         <a :class="[ { active: current === 'menu' }, 'menu' ]" @click="$emit('clickHeader', 'menu')"><img src="/proj-assets/disinformation/nav_hamburger.png" alt=""></a>
+        <div v-show="current === 'feed'" class="progress">
+          <div :style="{ width: `${progress}%` }"></div>
+        </div>
       </nav>
     </div>
   </header>
@@ -27,11 +30,17 @@ import { READR_SITE_URL } from '../../../constants'
 export default {
   name: 'FakeNewsHeader',
   props: {
+    bodyHeight: {
+      type: Number
+    },
     current: {
       type: String
     },
     openAlert: {
       type: Boolean
+    },
+    pageYOffset: {
+      type: Number
     }
   },
   data () {
@@ -39,14 +48,19 @@ export default {
       openShare: false
     }
   },
+  computed: {
+    progress () {
+      return this.pageYOffset / (this.bodyHeight - this.$store.state.viewport[1]) * 100
+    }
+  },
   methods: {
     shareToFacebook () {
       window.open(`https://www.facebook.com/share.php?u=${READR_SITE_URL}disinformation`)
-      // window.ga && window.ga('send', 'event', 'projects', 'click', `share to fb`, { nonInteraction: false })
+      window.ga && window.ga('send', 'event', 'projects', 'click', `share to fb`, { nonInteraction: false })
     },
     shareToLine () {
       window.open(`https://line.me/R/msg/text/?${READR_SITE_URL}disinformation`)
-      // window.ga && window.ga('send', 'event', 'projects', 'click', `share to line`, { nonInteraction: false })
+      window.ga && window.ga('send', 'event', 'projects', 'click', `share to line`, { nonInteraction: false })
     }
   }
 }
@@ -63,13 +77,14 @@ export default {
     line-height 84px
   nav
     display flex
+    flex-wrap wrap
     background-color #4868a5
     a
-      flex 1
       position relative
       display flex
       justify-content center
       align-items center
+      width 20%
       height 42px
       img
         width 20px
@@ -101,6 +116,14 @@ export default {
           line-height 1.38
           & + p
             margin-top .5em
+    .progress
+      width 100%
+      height 6px
+      background-color #ccd0d5
+      > div
+        max-width 100%
+        height 100%
+        background-color #e19e3d
   .share
     button
       position absolute
@@ -140,12 +163,13 @@ export default {
 @media (min-width: 1024px)
   .disinformation-header
     > div
+      position relative
       display flex
-      width 1020px
-      margin auto
+      padding 0 calc((100% - 1024px) / 2)
     h1
       padding 0
     nav
+      flex-wrap nowrap
       align-items center
       margin 0 0 0 auto
       a
@@ -158,4 +182,8 @@ export default {
           &::before
             left auto
             right 30px
+      .progress
+        position absolute
+        left 0
+        bottom -6px
 </style>

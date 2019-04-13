@@ -40,6 +40,7 @@ export default {
     answer (choice) {
       this.announced = true
       this.userAnswer = choice
+      window.ga && window.ga('send', 'event', 'projects', 'click', `test ${this.quiz.index} ${choice}`, { nonInteraction: false })
     }
   }
 }

@@ -83,6 +83,7 @@ export const ARTICLE = [
         content: [
           {
             html: 'quiz',
+            index: 1,
             title: '你分辨真假的能力有多強？',
             question: '普拿疼不會殘留體內',
             answer: true,
@@ -166,6 +167,7 @@ export const ARTICLE = [
         content: [
           {
             html: 'quiz',
+            index: 2,
             title: '你分辨真假的能力有多強？',
             question: '「認同請分享」 年長者散播假新聞比年輕人數量還多',
             answer: true,
@@ -344,6 +346,7 @@ export const ARTICLE = [
         content: [
           {
             html: 'quiz',
+            index: 3,
             title: '你分辨真假的能力有多強？',
             question: '房間發現一隻蟑螂說明有一萬隻在潛伏',
             answer: false,
@@ -481,6 +484,7 @@ export const ARTICLE = [
         content: [
           {
             html: 'quiz',
+            index: 4,
             title: '你分辨真假的能力有多強？',
             question: '世界上最長壽的女人是新疆的阿麗米罕色依提，已經132歲了。',
             answer: false,
@@ -643,6 +647,7 @@ export const ARTICLE = [
         content: [
           {
             html: 'quiz',
+            index: 5,
             title: '你分辨真假的能力有多強？',
             question: '原來糖果是葷食！　軟糖原料取自牛骨豬皮',
             answer: true,
@@ -718,6 +723,7 @@ export const ARTICLE = [
         content: [
           {
             html: 'quiz',
+            index: 6,
             title: '你分辨真假的能力有多強？',
             question: '中國以軍事威逼台灣，今天更派出4架戰鬥機越過海峽中線，對台採取直接挑釁行動，我軍方緊急派出多架軍機升空攔截。',
             answer: false,

@@ -1,8 +1,10 @@
 <template>
   <div :class="[ { 'fixed-header': pageYOffset > 84, 'open-alert': openAlert }, 'disinformation' ]">
     <FakeNewsHeader
+      :bodyHeight="bodyHeight"
       :current="current"
       :openAlert="openAlert"
+      :pageYOffset="pageYOffset"
       class="disinformation__header"
       @clickHeader="handleHeader"
       @openAlert="handleAlert" />
@@ -75,7 +77,6 @@ import FakeNewsPost from './components/FakeNewsPost.vue'
 import FakeNewsRelated from './components/FakeNewsRelated.vue'
 import FakeNewsSubscribe from './components/FakeNewsSubscribe.vue'
 import FakeNewsStory from './components/FakeNewsStory.vue'
-import FakeNewsVote from './components/FakeNewsVote.vue'
 import { ARTICLE, ARTICLE_MORE } from './constant'
 import { smoothScroll } from 'kc-scroll'
 import { throttle } from 'lodash'
@@ -123,7 +124,6 @@ export default {
     FakeNewsRelated,
     FakeNewsSubscribe,
     FakeNewsStory,
-    FakeNewsVote
   },
   metaInfo() {
     return {
@@ -141,11 +141,13 @@ export default {
     return {
       ARTICLE,
       ARTICLE_MORE,
+      bodyHeight: 0,
       chapterScrollTop: [],
       current: 'feed',
       currentPost: 'article-1-1',
       currentChapterMobile: 1,
       currentChapterYOffset: 0,
+      maxChapter: 1,
       mounted: false,
       openAlert: false,
       pageYOffset: 0,
@@ -158,15 +160,27 @@ export default {
     commentsReacted () {
       return this.reactions.split(',').filter(id => id) 
     },
+    chapter () {
+      return Number(this.currentPost.split('-')[1])
+    },
     currentChapter () {
       return Number(this.currentPost.split('-')[1])
     },
+  },
+  watch: {
+    chapter (value) {
+      if (value > this.maxChapter) {
+        this.maxChapter = value
+        window.ga && window.ga('send', 'event', 'projects', 'scroll', `scroll to ${value}`, { nonInteraction: false })
+      }
+    }
   },
   created () {
     this.$store.registerModule('FakeNews', FakeNewsStoreModule)
   },
   beforeMount () {
     fetchReports(this.$store)
+    this.bodyHeight = document.body.clientHeight
     this.pageYOffset = window.pageYOffset
     this.postIds = getPostIds()
     fetchCommentsAmount(this.$store, this.postIds)
@@ -177,6 +191,7 @@ export default {
   },
   mounted () {
     this.mounted = true
+    window.ga && window.ga('send', 'pageview')
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)
@@ -231,6 +246,7 @@ export default {
       this.getReactions()
     },
     handleScroll: throttle(function () {
+      this.bodyHeight = document.body.clientHeight
       this.pageYOffset = window.pageYOffset
     }, 100),
     handleScrollForIndex: throttle(function () {
@@ -348,14 +364,14 @@ export default {
           line-height 42px
       .disinformation__index
         position fixed
-        top 52px
+        top 58px
     main
       width 1020px
       margin 0 auto
-      padding 10px 0 20px
+      padding 16px 0 20px
     
     &__index
-      top 10px
+      top 16px
       left calc((100% - 1020px) / 2)
       width 186px
       height auto
