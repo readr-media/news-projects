@@ -45,16 +45,7 @@ export default {
           email_address: this.email,
           status: 'subscribed'
         }
-        axios({
-          method: 'post',
-          url: MAILCHIMP_URL,
-          data: data,
-          headers: { 'Content-Type': 'application/json' },
-          auth: {
-            username: 'readr',
-            password: MAILCHIMP_API_KEY
-          }
-        })
+        axios.post('/project-api/fake-news/subscribe', data)
         .then(res => {
           this.status = 'success'
         })

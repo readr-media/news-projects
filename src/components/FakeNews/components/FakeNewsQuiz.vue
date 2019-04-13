@@ -2,7 +2,7 @@
   <div class="quiz">
     <div v-if="announced" class="quiz__result">
       <p><strong>你答{{ userAnswer === quiz.answer ? '對' : '錯' }}了！</strong></p>
-      <p>根據投票結果，有 <strong>{{ percent }}%</strong> 的讀者認為是假的。</p>
+      <p>根據投票結果，有 <strong>{{ percent * 100 }}%</strong> 的讀者認為是{{ quiz.answer ? '真' : '假' }}的。</p>
     </div>
     <div class="quiz__question">
       <p v-if="!announced" v-text="quiz.title"></p>
@@ -22,6 +22,13 @@
   </div>
 </template>
 <script>
+
+const fetchQuizAmount = (store, id) => store.dispatch('FakeNews/FETCH_QUIZ_AMOUNT', id)
+const fetchQuizTotalAmount = (store, id) => store.dispatch('FakeNews/FETCH_QUIZ_TOTAL_AMOUNT', id)
+
+const updateQuizAmount = (store, { id, amount }) => store.dispatch('FakeNews/UPDATE_QUIZ_AMOUNT', { id, amount })
+const updateQuizTotalAmount = (store, { id, amount }) => store.dispatch('FakeNews/UPDATE_QUIZ_TOTAL_AMOUNT', { id, amount })
+
 export default {
   name: 'FakeNewsQuiz',
   props: {
@@ -33,13 +40,35 @@ export default {
     return {
       announced: false,
       userAnswer: undefined,
-      percent: 0,
+    }
+  },
+  computed: {
+    percent () {
+      const value = (this.quiz.answer ? this.answerTrueAmount / this.answerTotalAmount : this.answerFalseAmount / this.answerTotalAmount)
+      return value ? value.toFixed(2) : 0
+    },
+    answerTrueAmount () {
+      return this.$store.state.FakeNews.quiz[`quiz-${this.quiz.index}`].isTrue || 0
+    },
+    answerFalseAmount () {
+      return this.answerTotalAmount - this.answerTrueAmount
+    },
+    answerTotalAmount () {
+      return this.$store.state.FakeNews.quiz[`quiz-${this.quiz.index}`].total || 0
     }
   },
   methods: {
     answer (choice) {
       this.announced = true
       this.userAnswer = choice
+      const id = `quiz-${this.quiz.index}`
+      Promise.all([ fetchQuizAmount(this.$store, id), fetchQuizTotalAmount(this.$store, `quiz-${this.quiz.index}`) ])
+      .then(res => {
+        const quizAmount = (res[0] || 0) + 1
+        const quizTotalAmount = (res[1] || 0) + 1
+        choice ? updateQuizAmount(this.$store, { id , amount: quizAmount }) : ''
+        updateQuizTotalAmount(this.$store, { id , amount: quizTotalAmount })
+      })
       window.ga && window.ga('send', 'event', 'projects', 'click', `test ${this.quiz.index} ${choice}`, { nonInteraction: false })
     }
   }

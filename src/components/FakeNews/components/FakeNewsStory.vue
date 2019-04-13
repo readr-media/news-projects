@@ -252,13 +252,19 @@ export default {
       display flex
       justify-content center
       align-items center
-      
       img
-        object-fit cover
+        position relative
+        left 0
+        bottom 0
+        height calc(100% - 30px)
+        object-fit contain
       &-container
         z-index 10
-        width 375px
-        height 700px
+        max-width 375px
+        width 25%
+        max-height 700px
+        height 80%
+        padding-top 20px
       &__header-title
         button
           position fixed

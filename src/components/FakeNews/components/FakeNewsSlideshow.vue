@@ -84,6 +84,8 @@ export default {
     &:first-child
       width 100%
       padding-top 66.66%
+      img
+        object-fit contain
     img
       position absolute
       top 0
