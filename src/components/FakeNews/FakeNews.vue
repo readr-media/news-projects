@@ -47,7 +47,6 @@
             </FakeNewsPost>
           </template>
           <div class='polis' data-conversation_id='7rshkafphu'></div>
-          <!-- <FakeNewsVote :voted="voted" @updateVoteCookie="updateVoteCookie"/> -->
           <FakeNewsCredit v-if="mounted && $store.state.viewport[0] < 1024" class="feed__credit"  />
           <FakeNewsRelated
             v-if="$store.state.reports.length > 0 && $store.state.viewport[0] < 1024"
@@ -77,6 +76,7 @@ import FakeNewsPost from './components/FakeNewsPost.vue'
 import FakeNewsRelated from './components/FakeNewsRelated.vue'
 import FakeNewsSubscribe from './components/FakeNewsSubscribe.vue'
 import FakeNewsStory from './components/FakeNewsStory.vue'
+import axios from 'axios'
 import { ARTICLE, ARTICLE_MORE } from './constant'
 import { smoothScroll } from 'kc-scroll'
 import { throttle } from 'lodash'
@@ -153,7 +153,6 @@ export default {
       pageYOffset: 0,
       postIds: [],
       reactions: '',
-      voted: ''
     }
   },
   computed: {
@@ -185,27 +184,21 @@ export default {
     this.postIds = getPostIds()
     fetchCommentsAmount(this.$store, this.postIds)
     this.getReactions()
-    this.getVoteRecord()
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('scroll', this.handleScrollForIndex)
   },
   mounted () {
     this.mounted = true
-    window.ga && window.ga('send', 'pageview')
+    // window.ga && window.ga('send', 'pageview')
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)
     window.removeEventListener('scroll', this.handleScrollForIndex)
-  },
-  destroyed () {
     this.$store.unregisterModule('FakeNews')
   },
   methods: {
     getReactions () {
       this.reactions = Cookie.get('fn-reactions') || ''
-    },
-    getVoteRecord () {
-      this.voted = Cookie.get('fn-voted') || ''
     },
     goTo (anchor) {
       this.current = 'feed'
@@ -233,14 +226,12 @@ export default {
       const origin = this.reactions || ''
       let ids = origin.split(',').filter(originId => originId)
       let commentAmount = this.$store.state.FakeNews.comments[id] || 0
-      if (origin.match(regex)) { // minus
-        commentAmount -= 1
-        ids = ids.filter(originId => originId !== id)
-      } else { // add
-        commentAmount += 1
-        ids.push(id)
-      }
-      updateCommentAmount(this.$store, { id , amount: commentAmount })
+      origin.match(regex) ? '' : ids.push(id)
+      axios.get(`/project-api/fake-news/comment/${id}`)
+      .then(res => {
+        const amount = res.data.amount + 1
+        updateCommentAmount(this.$store, { id , amount })
+      })
       const cookieValue = ids.join(',')
       Cookie.set('fn-reactions', cookieValue, { expires: '3M' })
       this.getReactions()
@@ -262,10 +253,6 @@ export default {
         this.currentPost = this.postIds[this.postIds.length - 1]
       }
     }, 500),
-    updateVoteCookie (id) {
-      Cookie.set('fn-voted', id, { expires: '3M' })
-      this.getVoteRecord()
-    }
   }
 }
 </script>
