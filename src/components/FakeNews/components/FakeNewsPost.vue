@@ -45,7 +45,7 @@
         </div>
       </div>
       <div v-if="get(post, 'action', true)" class="post__action">
-        <button :class="{ active: hasReacted }" @click="$emit('reaction', id)"><img src="/proj-assets/disinformation/like.png" alt="讚"><span>讚</span></button>
+        <button :class="{ active: hasReacted }" @click="reaction(id)"><img src="/proj-assets/disinformation/like.png" alt="讚"><span>讚</span></button>
         <button @click="handleOpenComment"><img src="/proj-assets/disinformation/comment.png" alt="回應"><span>回應</span></button>
         <button :class="{ active: openShare }" @click="handleOpenShare"><img src="/proj-assets/disinformation/share.png" alt="分享"><span>分享</span></button>
       </div>
@@ -133,13 +133,17 @@ export default {
       this.openComment = false
       this.openShare = !this.openShare
     },
+    reaction (id) {
+      this.$emit('reaction', id)
+      window.ga && window.ga('send', 'event', 'projects', 'click', `reaction ${id}`, { nonInteraction: false })
+    },
     shareToFacebook () {
       window.open(`https://www.facebook.com/share.php?u=${READR_SITE_URL}disinformation`)
-      // window.ga && window.ga('send', 'event', 'projects', 'click', `share to fb`, { nonInteraction: false })
+      window.ga && window.ga('send', 'event', 'projects', 'click', `share to fb`, { nonInteraction: false })
     },
     shareToLine () {
       window.open(`https://line.me/R/msg/text/?${READR_SITE_URL}disinformation`)
-      // window.ga && window.ga('send', 'event', 'projects', 'click', `share to line`, { nonInteraction: false })
+      window.ga && window.ga('send', 'event', 'projects', 'click', `share to line`, { nonInteraction: false })
     },
     truncate
   }

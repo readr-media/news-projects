@@ -74,6 +74,7 @@ export default {
     handleSlideshow (index) {
       this.current = index
       this.openSlideshow = true
+      window.ga && window.ga('send', 'event', 'projects', 'click', `story ${index}`, { nonInteraction: false })
     },
     nextStory (current) {
       if (current + 1 > STORY.length) {
