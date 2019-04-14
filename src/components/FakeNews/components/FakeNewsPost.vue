@@ -211,6 +211,7 @@ export default {
       justify-content center
       align-items center
       padding .4em 0
+      margin 0 .4em
       &:hover, &.active
         background-color rgba(204, 208, 213, .3)
         border-radius 6px
@@ -218,7 +219,9 @@ export default {
         width 20px
         height 20px
       span
-        margin-left .2em
+        margin 0 0 0 .2em
+        line-height 20px
+        vertical-align super
   .share
     position relative
     display none
