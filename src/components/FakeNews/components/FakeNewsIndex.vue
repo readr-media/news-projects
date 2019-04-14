@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <a class="title">謠言與牠們的產地</a>
+    <a class="title">假訊息與它們的產地</a>
     <a v-for="(chapter, index) in ARTICLE"
       :key="`index-${index}`"
       :class="[ { active: getStatus(index) }, 'chapter' ]"
