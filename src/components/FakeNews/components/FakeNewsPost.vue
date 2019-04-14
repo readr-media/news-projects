@@ -35,6 +35,11 @@
               :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`"
               :quiz="paragraph" />
           </template>
+          <template v-else-if="paragraph.html && paragraph.html === 'annotation'">
+            <FakeNewsAnnotation 
+            :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`"
+            :content="paragraph" />
+          </template>
           <template v-else>
             <div :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" v-html="paragraph"></div>
           </template>
@@ -61,6 +66,7 @@
   </div>
 </template>
 <script>
+import FakeNewsAnnotation from './FakeNewsAnnotation.vue'
 import FakeNewsQuiz from './FakeNewsQuiz.vue'
 import FakeNewsSlideshow from './FakeNewsSlideshow.vue'
 import { READR_SITE_URL } from '../../../constants'
@@ -69,6 +75,7 @@ import { get, truncate } from 'lodash'
 export default {
   name: 'FakeNewsPost',
   components: {
+    FakeNewsAnnotation,
     FakeNewsQuiz,
     FakeNewsSlideshow
   },
@@ -151,7 +158,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .post
-  h2, h3, p, img
+  h2, h3, p, img, .annotation
     & + *
       margin-top 1em
   h2
