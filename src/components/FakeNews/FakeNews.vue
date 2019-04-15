@@ -203,7 +203,7 @@ export default {
     goTo (anchor) {
       this.current = 'feed'
       setTimeout(() => {
-        smoothScroll(anchor)
+        smoothScroll(`${anchor}-anchor`)
       }, 0)
     },
     handleHeader (value) {

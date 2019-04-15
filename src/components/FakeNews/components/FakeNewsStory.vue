@@ -36,13 +36,20 @@
 import { STORY } from '../constant'
 import { truncate } from 'lodash'
 
+const checkImage = (ele) => {
+  new Promise((resolve, reject) => {
+    ele.onload = () => resolve()
+    ele.onerror = () => reject()
+  })
+}
+
 export default {
   name: 'FakeNewsStory',
   data () {
     return {
       STORY,
       current: 1,
-      openSlideshow: true,
+      openSlideshow: false,
       time: 0,
       timer: undefined,
       timerForNav: undefined
@@ -58,8 +65,13 @@ export default {
       value ? '' : this.removeInterval()
     }
   },
-  mounted () {
-    this.setTimer()
+  beforeMount () {
+    const images = [ ...document.querySelectorAll('.story img') ]
+    Promise.all(images.map(item => checkImage(item)))
+    .then(() => {
+      this.openSlideshow = true
+      this.setTimer()
+    })
   },
   methods: {
     getProcessWidth (index) {
