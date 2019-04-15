@@ -193,6 +193,7 @@ export default {
       top 0
       left 0
       right 0
+      z-index 10
       width 100%
       padding 1em 1em 0
       nav
@@ -226,6 +227,18 @@ export default {
             height 15px
     &__curtain
       display none
+@media (min-width: 768px)
+  .story
+    &-slideshow
+      display flex
+      justify-content center
+      align-items center
+      &-container
+        z-index 10
+        width 50%
+        height 80%
+        margin 0 auto
+
 @media (min-width: 1024px)
   .story
     padding 1em
