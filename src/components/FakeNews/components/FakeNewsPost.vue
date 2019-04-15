@@ -1,5 +1,6 @@
 <template>
   <div :id="id" :class="[ { 'open-comment': openComment, 'show-content': showContent }, 'post', get(post, 'type') ]">
+    <div :id="`${id}-anchor`" class="anchor"></div>
     <div class="post-container">
       <div class="post__content">
         <template v-for="(paragraph, paragraphIndex) in post.content">
@@ -158,6 +159,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .post
+  position relative
   h2, h3, p, img, .annotation
     & + *
       margin-top 1em
@@ -287,7 +289,11 @@ export default {
         margin-left .2em
         color #4a4a4a
         font-size .8125rem
-
+  .anchor
+    position absolute
+    top -40px
+    left 0
+    visibility hidden
 @keyframes popup {
   0% { opacity: 0; }
   50% { opacity: 1; }
