@@ -25,7 +25,8 @@ export default {
       errors: '',
       errorInfo: {
         format: '請輸入正確的 E-mail',
-        mailchimp: '系統異常，請稍後再試'
+        mailchimp: '系統異常，請稍後再試',
+        exist: '該 E-mail 已訂閱'
       },
       onKeyPress: false,
       status: ''
@@ -50,7 +51,11 @@ export default {
           this.status = 'success'
         })
         .catch(err => {
-          this.errors = 'mailchimp'
+          if (err.response.data.error === 'Member Exists') {
+            this.errors = 'exist'
+          } else {
+            this.errors = 'mailchimp'
+          }
         })
       } else {
         this.errors = 'format'

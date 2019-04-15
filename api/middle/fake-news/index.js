@@ -72,7 +72,7 @@ router.post('/subscribe', (req, res) => {
     res.json(response.data)
   })
   .catch(err => {
-    handleError(err, res)
+    res.status(err.response.status).json({ error: err.response.data.title })
   })
 })
 
