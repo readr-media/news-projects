@@ -286,7 +286,7 @@ export default {
         width 20px
         height 20px
       span
-        margin-left .2em
+        margin 0 0 0 .2em
         color #4a4a4a
         font-size .8125rem
   .anchor
