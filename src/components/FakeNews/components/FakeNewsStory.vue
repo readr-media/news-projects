@@ -238,7 +238,9 @@ export default {
         width 50%
         height 80%
         margin 0 auto
-
+      &__header-title
+        button
+          padding .8em
 @media (min-width: 1024px)
   .story
     padding 1em
