@@ -2,7 +2,7 @@
   <div class="quiz">
     <div v-if="announced" class="quiz__result">
       <p><strong>你答{{ userAnswer === quiz.answer ? '對' : '錯' }}了！</strong></p>
-      <p>根據投票結果，有 <strong>{{ percent * 100 }}%</strong> 的讀者跟你一樣。</p>
+      <p v-if="percent > 0">根據投票結果，有 <strong>{{ percent * 100 }}%</strong> 的讀者跟你一樣。</p>
     </div>
     <div class="quiz__question">
       <p v-if="!announced" v-text="quiz.title"></p>
@@ -44,8 +44,8 @@ export default {
   },
   computed: {
     percent () {
-      const value = (this.userAnswer ? this.answerTrueAmount / this.answerTotalAmount : this.answerFalseAmount / this.answerTotalAmount)
-      return value ? value.toFixed(2) : 0
+      const value = this.userAnswer ? (this.answerTrueAmount / this.answerTotalAmount).toFixed(2) : (this.answerFalseAmount / this.answerTotalAmount).toFixed(2)
+      return value ? value : 0
     },
     answerTrueAmount () {
       return this.$store.state.FakeNews.quiz[`quiz-${this.quiz.index}`].isTrue || 0
