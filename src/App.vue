@@ -6,6 +6,8 @@
   </div>
 </template>
 <script>
+import postMessageScroll from './mixins/postMessageScroll'
+
 const updateViewport = (store) => {
   const w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
   const h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
@@ -13,6 +15,7 @@ const updateViewport = (store) => {
   return store.dispatch('UPDATE_VIEWPORT', viewport)
 }
 export default {
+  mixins: [ postMessageScroll ],
   beforeMount () {
     updateViewport(this.$store)
   },
@@ -25,7 +28,7 @@ export default {
   methods: {
     $_app_updateViewport () {
       updateViewport(this.$store)
-    }
+    },
   }
 }
 </script>
