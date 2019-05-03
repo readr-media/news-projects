@@ -45,7 +45,7 @@
             <div :key="`article-${chapterIndex}-${postIndex}-${paragraphIndex}`" v-html="paragraph"></div>
           </template>
         </template>
-        <div v-if="get(post, 'action', true)" v-show="commentAmount > 0" class="comment-amount">
+        <div v-if="get(post, 'action', true) && commentAmount > 0" class="comment-amount">
           <img src="/proj-assets/disinformation/like_round.png">
           <span v-text="commentAmount"></span>
         </div>
@@ -287,8 +287,8 @@ export default {
         height 20px
       span
         margin 0 0 0 .2em
-        color #4a4a4a
-        font-size .8125rem
+        color #4a4a4a !important
+        font-size .8125rem !important
   .anchor
     position absolute
     top -40px
