@@ -22,13 +22,13 @@ export default {
     commit('SET_NEXTROUND_SURVEY')
     commit('UPDATE_SURVEYBASIS', getters.surveysPerRoundPids)
   },
-  UPDATE_INTEREST: ({ dispatch, commit }, { isUptatedAtResult, interest, promise }) => {
+  UPDATE_INTEREST: ({ dispatch, commit, rootState }, { isUptatedAtResult, interest, promise }) => {
     commit('UPDATE_INTEREST', { isUptatedAtResult, interest, promise })
     // send data to redis
-    sendPromiseInterestRequest(promise, interest)
+    sendPromiseInterestRequest(promise, interest, rootState.useragent.isMobile)
     if (interest === 'very-interest') {
-      sendCategoryAllRequest(promise)
-      sendCategoryInterestRequest(promise)
+      sendCategoryAllRequest(promise, rootState.useragent.isMobile)
+      sendCategoryInterestRequest(promise, rootState.useragent.isMobile)
     }
   },
   // UPDATE_SURVEYBASIS: ({ commit, getters }) => {
