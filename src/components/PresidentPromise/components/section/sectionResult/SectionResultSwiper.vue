@@ -109,7 +109,7 @@ export default {
       // all
       this.categoriesFetchStat['全部'].fetchStat = 'loading'
       this.categoriesFetchStat['已完成'].fetchStat = 'loading'
-      getCategoryAllRequest()
+      getCategoryAllRequest(this.$store.state.useragent.isMobile)
       .then(({ data }) => {
         this.handleFetchStatAndResult(data.result, '全部')
         this.handleFetchStatAndResult(data.result, '已完成')
@@ -128,7 +128,7 @@ export default {
           this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetched' &&
           this.categoriesFetchStat[this.activeCategory].fetchStat !== 'fetchedEmpty') {
         this.categoriesFetchStat[this.activeCategory].fetchStat = 'loading'
-        getCategoryInterestRequest(this.activeCategory)
+        getCategoryInterestRequest(this.activeCategory, this.$store.state.useragent.isMobile)
         .then(({ data }) => {
           this.handleFetchStatAndResult(data.result, this.activeCategory)
         })
