@@ -45,7 +45,10 @@
     <p class="section-result-swiper__modified-time--mobile">政策內容最後更新時間：{{ modifiedTime }}</p>
     <div class="tooltip-desktop" v-if="VW > 425" v-show="showTooltip" ref="tooltip-desktop">
       <div class="content">
-        <TagPromise v-show="currTooltipPromise.promiseDone || currTooltipPromise.isStuck" :tagType="currTooltipPromise.isStuck ? 'stuck' : 'success'"/>
+        <TagPromise
+          v-show="currTooltipPromise.status !== null"
+          :tagType="currTooltipPromise.status"
+        />
         <blockquote class="tooltip-desktop__stuck-reason" v-show="currTooltipPromise.isStuck"><span>“</span><span>{{ currTooltipPromise.stuckReason }}</span></blockquote>
         <p class="tooltip-desktop__description" v-html="currTooltipPromise.description"></p>
         <a class="tooltip-desktop__source" :href="currTooltipPromise.sourceLink" target="_blank" v-text="currTooltipPromise.source"></a>

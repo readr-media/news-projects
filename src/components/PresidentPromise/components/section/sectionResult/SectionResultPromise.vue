@@ -9,7 +9,10 @@
       <ButtonCheckBox class="section-result-promise__checkbox section-result-promise__checkbox--desktop" :checked="interested" :interested.sync="interested"/>
     </div>
     <div class="tooltip-mobile" v-if="VW <= 425" v-show="showTooltip">
-      <TagPromise v-show="promise.promiseDone || promise.isStuck" :tagType="promise.isStuck ? 'stuck' : 'success'"/>
+      <TagPromise
+        v-show="currTooltipPromise.status !== null"
+        :tagType="currTooltipPromise.status"
+      />
       <blockquote class="tooltip-mobile__stuck-reason" v-show="promise.isStuck"><span>“</span><span>{{ promise.stuckReason }}</span></blockquote>
       <p class="tooltip-mobile__description" v-html="promise.description"></p>
       <a class="tooltip-mobile__source" :href="promise.sourceLink" target="_blank" v-text="promise.source"></a>
