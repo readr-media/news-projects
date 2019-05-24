@@ -6,7 +6,10 @@
     </div>
     <div class="section-your-interest-promise__container">
       <h1 class="section-your-interest-promise__title" v-text="interest.title"></h1>
-      <TagPromise v-show="interest.promiseDone || interest.isStuck" :tagType="interest.isStuck ? 'stuck' : 'success'"/>
+      <TagPromise
+        v-show="currTooltipPromise.status !== null"
+        :tagType="currTooltipPromise.status"
+      />
       <blockquote class="section-your-interest-promise__stuck-reason" v-show="interest.isStuck"><span>“</span><span>{{ interest.stuckReason }}</span></blockquote>
       <p class="section-your-interest-promise__description" v-html="interest.description"></p>
       <a class="section-your-interest-promise__source" :href="interest.sourceLink" target="_blank" v-text="interest.source"></a>

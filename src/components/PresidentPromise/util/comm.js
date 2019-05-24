@@ -14,6 +14,18 @@ function promiseDataPreprocess (data) {
   })
 }
 
+function getStatus (d) {
+  if (d['有做到'] === 'v') {
+    return 'done'
+  } else if (d['進行中'] === 'v') {
+    return 'wip'
+  } else if (d['卡在哪裡'] && d['卡在哪裡'] !== '') {
+    return 'stuck'
+  } else {
+    return undefined
+  }
+}
+
 export function promiseDataInit (data) {
   const preprocessed = promiseDataPreprocess(data)
   return preprocessed.map((d, i) => ({
@@ -26,6 +38,7 @@ export function promiseDataInit (data) {
     categoryEN: d['標籤'].split(',').map(chineseName => categories[chineseName]),
     promiseDone: d['有做到'] === 'v',
     isStuck: d['卡在哪裡'] && d['卡在哪裡'] !== '',
+    status: getStatus(d),
     stuckReason: d['卡在哪裡'],
     surveyResult: 'no-ans'
   }))

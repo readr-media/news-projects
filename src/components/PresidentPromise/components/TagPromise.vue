@@ -1,5 +1,9 @@
 <template>
-  <div :class="[ 'tag-promise-done', `tag-promise-done--${tagType}` ]" v-text="wording"></div>
+  <div
+    :class="[ 'tag-promise-done', `tag-promise-done--${tagType}` ]"
+    v-text="wording"
+  >
+  </div>
 </template>
 
 <script>
@@ -7,14 +11,23 @@ export default {
   props: {
     tagType: {
       type: String,
-      default: 'success'
+      default: ''
     }
   },
   computed: {
     wording () {
-      return this.tagType === 'success' ? '已完成' : '卡關中'
+      switch (this.tagType) {
+        case 'done':
+          return '已完成'
+        case 'wip':
+          return '進行中'
+        case 'stuck':
+          return '卡關中'
+        default:
+          return ''
+      }
     }
-  }  
+  }
 }
 </script>
 
@@ -31,10 +44,10 @@ export default {
   display flex
   justify-content center
   align-items center
-  &--stuck
+  &--stuck, &--wip
     color #b2dbd5
     background-color #1f464f
-  &--success
+  &--done
     color #1f464f
     background-color #b2dbd5
   
