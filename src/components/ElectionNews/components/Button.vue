@@ -1,5 +1,10 @@
 <template>
-  <div class="button">
+  <div
+    :class="[
+      'button',
+      { 'button--en': $i18n.locale === 'en' }
+    ]"
+  >
     <slot></slot>
   </div>
 </template>
@@ -22,10 +27,14 @@ export default {
   align-items center
   font-size 18px
   cursor pointer
+  &--en
+    font-size 10px
 
 @media (min-width 1024px)
   .button
     width 200px
     height 60px
     font-size 30px
+    &--en
+      font-size 16px
 </style>

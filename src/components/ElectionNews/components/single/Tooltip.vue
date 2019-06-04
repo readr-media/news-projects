@@ -71,7 +71,7 @@ export default {
 
 <style lang="stylus" scoped>
 .tooltip
-  width 150px
+  width 170px
   // height 100px
   box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.5)
   background-color #ffffff
