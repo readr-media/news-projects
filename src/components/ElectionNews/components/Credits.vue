@@ -1,10 +1,10 @@
 <template>
   <div class="credit">
     <img class="credit__mm" src="/proj-assets/logo_mm_white.png" alt="" @click="toMM">
-    <p>資料整理：陳彥宇、李又如、李昭妟</p>
-    <p>文字：李又如</p>
-    <p>網頁：熊凱文</p>
-    <p>設計：陳怡蒨</p>
+    <p>{{ $t('ELECTION_NEWS.LANDING.CREDITS.DATA.WORDING') }}：{{ $t('ELECTION_NEWS.LANDING.CREDITS.DATA.MEMBER[0]') }}、{{ $t('ELECTION_NEWS.LANDING.CREDITS.DATA.MEMBER[1]') }}、{{ $t('ELECTION_NEWS.LANDING.CREDITS.DATA.MEMBER[2]') }}</p>
+    <p>{{ $t('ELECTION_NEWS.LANDING.CREDITS.WRITER.WORDING') }}：{{ $t('ELECTION_NEWS.LANDING.CREDITS.WRITER.MEMBER') }}</p>
+    <p>{{ $t('ELECTION_NEWS.LANDING.CREDITS.FE.WORDING') }}：{{ $t('ELECTION_NEWS.LANDING.CREDITS.FE.MEMBER') }}</p>
+    <p>{{ $t('ELECTION_NEWS.LANDING.CREDITS.DESIGN.WORDING') }}：{{ $t('ELECTION_NEWS.LANDING.CREDITS.DESIGN.MEMBER') }}</p>
     <p>2019/01/30</p>
   </div>
 </template>

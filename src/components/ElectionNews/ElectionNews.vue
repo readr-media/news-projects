@@ -1,5 +1,7 @@
 <template>
   <div class="election-news">
+    <!-- <button @click="$i18n.locale = 'en'"></button>
+    {{ $t('ELECTION_NEWS.TEST') }} -->
     <Landing class="election-news__landing"/>
     <Dashboard v-show="showDashboard" class="election-news__dashboard"/>
     <Footer v-show="showDashboard" class="election-news__footer"/>
