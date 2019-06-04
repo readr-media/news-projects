@@ -31,7 +31,7 @@ export default {
       inputProps: {
         id: "autosuggest__input",
         onInputChange: this.onInputChange,
-        placeholder: "或輸入其他關鍵字"
+        placeholder: this.$i18n.locale === 'en' ? 'Key in other keywords' : "或輸入其他關鍵字"
       },
       limit: 10
     };

@@ -21,7 +21,7 @@
         ga-event-action="click"
         ga-event-label="sigle keyword button"
       >
-        看其它關鍵字風向
+        {{ $t('ELECTION_NEWS.DASHBOARD.NAVS.SINGLE') }}
       </div>
     </div>
   </footer>

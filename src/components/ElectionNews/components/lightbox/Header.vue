@@ -11,7 +11,7 @@
     />
     <Switcher
       class="header__category-switcher"
-      :options="[ '情緒分數', '媒體來源' ]"
+      :options="[ $t('ELECTION_NEWS.LIGHTBOX.SEN_SCORE'), $t('ELECTION_NEWS.LIGHTBOX.MEDIA_SOURCE') ]"
       v-on="$listeners"
     />
   </header>

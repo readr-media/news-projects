@@ -21,7 +21,7 @@
       <p
         v-show="lightboxSwitcher === 'left'"
         class="right__news-source"
-        v-text="getSourceName(listItem.source)"
+        v-text="getMediaSourceLocale(getSourceName(listItem.source))"
       >
       </p>
     </div>
@@ -35,6 +35,8 @@ import { sentimentRange } from '../../costants'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('ElectionNews')
 
+import getMediaSourceLocale from 'src/components/ElectionNews/mixins/getMediaSourceLocale'
+
 export default {
   props: {
     listItem: {
@@ -44,6 +46,7 @@ export default {
       }
     }
   },
+  mixins: [ getMediaSourceLocale ],
   computed: {
     ...mapState({
       mapping: state => state.mapping.sources,
