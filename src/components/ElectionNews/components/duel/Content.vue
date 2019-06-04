@@ -7,7 +7,7 @@
       v-show="isGraphDataFetched"
       class="content__data-fetched"
     >
-      <p>所有媒體總新聞數量</p>
+      <p>{{ $t('ELECTION_NEWS.DASHBOARD.CHART_TITLE') }}</p>
       <ContentChart/>
     </div>
   </section>
