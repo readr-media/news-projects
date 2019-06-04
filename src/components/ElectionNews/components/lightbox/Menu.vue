@@ -15,7 +15,7 @@
             >
           </div>
           <div class="head__right">
-            {{ list[1].length }} 則
+            {{ list[1].length }} {{ $t('ELECTION_NEWS.LIGHTBOX.COUNT') }}
           </div>
         </div>
       </MenuList>
@@ -32,7 +32,7 @@
             {{ getSourceAbbr(getMediaSourceLocale(getSourceName(list[0]))) }}
           </div>
           <div class="head__right">
-            {{ list[1].length }} 則
+            {{ list[1].length }} {{ $t('ELECTION_NEWS.LIGHTBOX.COUNT') }}
           </div>
         </div>
       </MenuList>

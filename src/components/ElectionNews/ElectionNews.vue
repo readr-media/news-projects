@@ -38,6 +38,7 @@ const getMetaInfo = (vm) => {
 export default {
   metaInfo () {
     const { params, subparams } = this.$route.params
+    const isEN = this.$route.query && this.$route.query.locale === 'en'
     switch (this.mainViewStatus) {
       case 'single':
         return {
@@ -53,13 +54,17 @@ export default {
           metaUrl: `election-news/${params}/${subparams}`,
           metaImage: 'election-news/img/og-duel.jpg'
         }
-      default:
+      default: {
+        const title = isEN ? '選舉新聞風向球：媒體報導看風向？Google 人工智慧來解答' : 'Is there specific political inclination on media toward elections? Here is Google artificial intelligence’s answer'
+        const description = isEN ? '媒體在報導不同的政治人物時會有情緒差異嗎？針對同一位候選人，媒體報導的情緒在選舉前後會不會有所轉變？我們借助 Google 人工智慧來嘗試解答這些問題，並將持續追蹤至 2020 年。' : 'Does media have different sentiment when reported on different political figures? For the same candidate, the media reported sentiment before and after the elections will be changed? We use Google artificial intelligence to try to answer these questions and will continue to track until 2020.'
+
         return {
-          title: '選舉新聞風向球：媒體報導看風向？Google 人工智慧來解答',
-          description: '媒體在報導不同的政治人物時會有情緒差異嗎？針對同一位候選人，媒體報導的情緒在選舉前後會不會有所轉變？我們借助 Google 人工智慧來嘗試解答這些問題，並將持續追蹤至 2020 年。',
+          title,
+          description,
           metaUrl: 'election-news',
           metaImage: 'election-news/img/og.jpg'
         }
+      }
     }
   },
   components: {

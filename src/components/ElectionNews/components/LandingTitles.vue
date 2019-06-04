@@ -11,7 +11,7 @@
     </div>
     <div class="titles__content">
       <h1>{{ $t('ELECTION_NEWS.LANDING.TITLE') }}</h1>
-      <h2>{{ $t('ELECTION_NEWS.LANDING.SUBTITLES[0]') }}<br>{{ $t('ELECTION_NEWS.LANDING.SUBTITLES[1]') }}</h2>
+      <h2 v-html="$t('ELECTION_NEWS.LANDING.SUBTITLES')"></h2>
     </div>
     <div class="titles__balls balls">
       <div
@@ -61,6 +61,7 @@ export default {
       font-weight 400
       color white
       margin 20px 0
+      text-align center
     h2
       text-align center
       font-size 20px
@@ -86,7 +87,7 @@ export default {
     max-width 500px
     &__content
       h1
-        font-size 70px
+        font-size 60px
         margin 40px 0
       h2
         font-size 40px

@@ -1,10 +1,7 @@
 export const ELECTION_NEWS = {
   'LANDING': {
     'TITLE': '選舉新聞風向球',
-    'SUBTITLES': [
-      '媒體報導看風向？',
-      'Google 人工智慧來解答'
-    ],
+    'SUBTITLES': '媒體報導看風向？<br>Google 人工智慧來解答',
     'CREDITS': {
       'DATA': {
         'WORDING': '資料整理：',
@@ -39,7 +36,8 @@ export const ELECTION_NEWS = {
   },
   'LEGENDS': {
     'TITLE': '情緒計算方式說明',
-    'SUBTITLE': "我們蒐集的新聞從 2018 年 10 月 19 日開始（並將持續至 2020年），以 Google's Cloud Natural Language API 計算新聞文本的情緒分數，並將分數轉換成 0 - 10 分，再區分為三個情緒區間。"
+    'SUBTITLE': "我們蒐集的新聞從 2018 年 10 月 19 日開始（並將持續至 2020年），以 Google's Cloud Natural Language API 計算新聞文本的情緒分數，並將分數轉換成 0 - 10 分，再區分為三個情緒區間。",
+    'MORE': '看詳細'
   },
   'DASHBOARD': {
     'FETCH_FAIL': '發生錯誤，請檢查網址是否給錯關鍵字',
@@ -50,6 +48,7 @@ export const ELECTION_NEWS = {
     'CHART_TITLE': '所有媒體總新聞數量',
     'RELATED_KEYWORDS': '相關關鍵字',
     'NAVS': {
+      'SINGLE': '看其他關鍵字風向',
       'DUEL': '多關鍵字<br>PK'
     }
   },
@@ -60,5 +59,14 @@ export const ELECTION_NEWS = {
   'DASHBOARD_TOOLTIP': {
     'NUM_MEDIA': '媒體數量：',
     'NUM_NEWS': '新聞則數：'
+  },
+  'DASHBOARD_CHART_PROGRESS_TRACKER': {
+    'PREFIX': '點我看',
+    'POSTFIX': '當天新聞標題'
+  },
+  'LIGHTBOX': {
+    'SEN_SCORE': '情緒分數',
+    'MEDIA_SOURCE': '媒體來源',
+    'COUNT': '則'
   }
 }
