@@ -122,7 +122,7 @@ export default {
         this.$scrollTo('.content')
       }
 
-      this.$router.navigate({ param, subparam })
+      this.$router.navigate({ param, subparam, query: this.$i18n.locale === 'en' ? '?locale=en' : '' })
     },
     scroll () {
       this.$scrollTo(

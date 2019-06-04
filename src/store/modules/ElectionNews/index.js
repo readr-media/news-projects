@@ -2,6 +2,9 @@ import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
 
+import keywordsEN from './keywordsEN'
+import mediaSourcesEN from './mediaSourcesEN'
+
 import { initColorCandidates } from 'src/components/ElectionNews/util'
 
 export default {
@@ -31,7 +34,9 @@ export default {
       stepIndex: 0
     },
     lightboxDate: null,
-    lightboxSwitcher: 'left'
+    lightboxSwitcher: 'left',
+    keywordsEN,
+    mediaSourcesEN
   }),
   actions,
   mutations,

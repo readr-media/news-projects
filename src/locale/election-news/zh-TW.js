@@ -7,7 +7,7 @@ export const ELECTION_NEWS = {
     ],
     'CREDITS': {
       'DATA': {
-        'WORDING': '資料整理',
+        'WORDING': '資料整理：',
         'MEMBER': [
           '陳彥宇',
           '李又如',
@@ -15,15 +15,15 @@ export const ELECTION_NEWS = {
         ]
       },
       'WRITER': {
-        'WORDING': '文字',
+        'WORDING': '文字：',
         'MEMBER': '李又如'
       },
       'FE': {
-        'WORDING': '網頁',
+        'WORDING': '網頁：',
         'MEMBER': '熊凱文'
       },
       'DESIGN': {
-        'WORDING': '設計',
+        'WORDING': '設計：',
         'MEMBER': '陳怡蒨'
       }
     },
@@ -47,6 +47,18 @@ export const ELECTION_NEWS = {
       'MANUAL': '使用說明書',
       'INSIGHT': '我們發現了什麼'
     },
-    'CHART_TITLE': '所有媒體總新聞數量'
+    'CHART_TITLE': '所有媒體總新聞數量',
+    'RELATED_KEYWORDS': '相關關鍵字',
+    'NAVS': {
+      'DUEL': '多關鍵字<br>PK'
+    }
+  },
+  'DASHBOARD_SIDEBAR': {
+    'TITLE': '媒體來源',
+    'ALL': '全選'
+  },
+  'DASHBOARD_TOOLTIP': {
+    'NUM_MEDIA': '媒體數量：',
+    'NUM_NEWS': '新聞則數：'
   }
 }

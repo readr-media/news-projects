@@ -15,7 +15,7 @@
         v-for="(keyword, id) in keywords"
         :key="id"
         class="select__option"
-        v-text="keyword"
+        v-text="getKeywordLocale(keyword)"
         @click="navigate(keyword)"
       >
       </div>
@@ -28,6 +28,8 @@ import DropdownMask from './DropdownMask.vue'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('ElectionNews')
+
+import getKeywordLocale from 'src/components/ElectionNews/mixins/getKeywordLocale'
 
 export default {
   props: {
@@ -44,6 +46,7 @@ export default {
       default: ''
     }
   },
+  mixins: [ getKeywordLocale ],
   components: {
     DropdownMask
   },
@@ -66,7 +69,10 @@ export default {
     },
     navigate (keyword) {
       const { params = '', subparams = '' } = this.$route.params
-      const option = this.position === 'left' ? { param: keyword, subparam: subparams } : { param: params, subparam: keyword }
+      const option =
+        this.position === 'left' ?
+        { param: keyword, subparam: subparams, query: this.$i18n.locale === 'en' ? '?locale=en' : '' } :
+        { param: params, subparam: keyword, query: this.$i18n.locale === 'en' ? '?locale=en' : '' }
 
       ga('send', 'event', 'projects', 'click', `PK keywords + ${option.param}/${option.subparam}`, { nonInteraction: false })
       this.$router.navigate(option)

@@ -5,14 +5,16 @@
       <p class="sentiment__score" v-text="sentimentScore"></p>
     </div>
     <div class="tooltip-item__info info">
-      <p class="info__keyword" v-text="keyword"></p>
-      <p class="info__sourcescount">媒體數量：{{ sourcesCount }}</p>
-      <p class="info__newscount">新聞則數：{{ newsCount }}</p>
+      <p class="info__keyword" v-text="getKeywordLocale(keyword)"></p>
+      <p class="info__sourcescount">{{ $t('ELECTION_NEWS.DASHBOARD_TOOLTIP.NUM_MEDIA') }}{{ sourcesCount }}</p>
+      <p class="info__newscount">{{ $t('ELECTION_NEWS.DASHBOARD_TOOLTIP.NUM_NEWS') }}{{ newsCount }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import getKeywordLocale from 'src/components/ElectionNews/mixins/getKeywordLocale'
+
 export default {
   props: {
     newsCount: {
@@ -36,6 +38,7 @@ export default {
       default: ''
     },
   },
+  mixins: [ getKeywordLocale ]
 }
 </script>
 

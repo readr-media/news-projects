@@ -3,7 +3,7 @@
     <div class="sidebar-wrapper__handle handle" @click="toggleHandle"></div>
     <div class="sidebar-wrapper__arrow" @click="toggleHandle"></div>
     <div class="sidebar-wrapper__sidebar sidebar">
-      <h1 class="sidebar__title">媒體來源</h1>
+      <h1 class="sidebar__title">{{ $t('ELECTION_NEWS.DASHBOARD_SIDEBAR.TITLE') }}</h1>
       <ul class="sidebar__list list">
         <CheckItem
           class="list__list-item"
@@ -11,7 +11,7 @@
           :checkboxColor="'black'"
           @click.native="toggleAllItem"
         >
-          全選
+          {{ $t('ELECTION_NEWS.DASHBOARD_SIDEBAR.ALL') }}
         </CheckItem>
         <CheckItem
           v-for="id in graphDataKeywordSourceIds"
@@ -25,7 +25,7 @@
           ga-event-action="click"
           :ga-event-label="`media + ${getSourceAbbr(sourcesMapping[id])}`"
         >
-          {{ getSourceAbbr(sourcesMapping[id]) }}
+          {{ getSourceAbbr(getMediaSourceLocale(sourcesMapping[id])) }}
         </CheckItem>
       </ul>
     </div>
@@ -42,10 +42,13 @@ import { getSourceAbbr } from '../util'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('ElectionNews')
 
+import getMediaSourceLocale from 'src/components/ElectionNews/mixins/getMediaSourceLocale'
+
 export default {
   components: {
     CheckItem,
   },
+  mixins: [ getMediaSourceLocale ],
   watch: {
     filter () {
       if (this.filter.length === 0) {
@@ -95,7 +98,11 @@ export default {
     },
     getSourceAbbr (source) {
       return getSourceAbbr(this.$store, source)
-    }
+    },
+
+    // getKeywordLocale (keyword) {
+    //   return this.i18n.locale === 'en' ? this.graphDataKeywordSourceIds[keyword] : keyword
+    // }
   }
 }
 </script>

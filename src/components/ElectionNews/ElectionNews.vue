@@ -172,10 +172,14 @@ export default {
     this.$store.registerModule('ElectionNews', module)
     this.isStoreModuleLoaded = true
     
+    if (this.$route.query && this.$route.query.locale === 'en') {
+      this.$i18n.locale = 'en'
+    }
+
     // init custom navigate function
-    this.$router.navigate = function ({ param = '', subparam = '' }) {
+    this.$router.navigate = function ({ param = '', subparam = '', query = '' }) {
       debug('Navigation performed')
-      this.push(`/project/election-news/${param}/${subparam}`)
+      this.push(`/project/election-news/${param}/${subparam}${query}`)
     }
   },
   destroyed () {

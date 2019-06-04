@@ -29,7 +29,7 @@
       >
         <div class="head" slot="header">
           <div class="head__left">
-            {{ getSourceAbbr(getSourceName(list[0])) }}
+            {{ getSourceAbbr(getMediaSourceLocale(getSourceName(list[0]))) }}
           </div>
           <div class="head__right">
             {{ list[1].length }} 則
@@ -50,10 +50,13 @@ import { getSourceAbbr } from '../../util'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('ElectionNews')
 
+import getMediaSourceLocale from 'src/components/ElectionNews/mixins/getMediaSourceLocale'
+
 export default {
   components: {
     MenuList
   },
+  mixins: [ getMediaSourceLocale ],
   computed: {
     ...mapState({
       mapping: state => state.mapping.sources,

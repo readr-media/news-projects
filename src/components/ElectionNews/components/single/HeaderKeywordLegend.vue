@@ -1,13 +1,15 @@
 <template>
   <div class="legend">
     <div class="legend__line"></div>
-    <p class="legend__keyword" v-text="$route.params.params"></p>
+    <p class="legend__keyword" v-text="getKeywordLocale($route.params.params)"></p>
   </div>
 </template>
 
 <script>
+import getKeywordLocale from 'src/components/ElectionNews/mixins/getKeywordLocale'
+
 export default {
-  
+  mixins: [ getKeywordLocale ]
 }
 </script>
 
