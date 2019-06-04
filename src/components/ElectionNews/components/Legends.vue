@@ -4,7 +4,7 @@
       <p>{{ $t('ELECTION_NEWS.LEGENDS.TITLE') }}</p>
       <p>{{ $t('ELECTION_NEWS.LEGENDS.SUBTITLE') }}</p>
       <p class="top__more">
-        <span @click="newTab('https://www.readr.tw/post/1668')" ga-on="click" ga-event-category="projects" ga-event-action="click" ga-event-label="manual legend">（<span class="underline">{{ $t('ELECTION_NEWS.LEGENDS.MORE') }}</span>）</span>
+        <span @click="newTab($i18n.locale === 'en' ? 'https://www.readr.tw/post/1832' : 'https://www.readr.tw/post/1668')" ga-on="click" ga-event-category="projects" ga-event-action="click" ga-event-label="manual legend">（<span class="underline">{{ $t('ELECTION_NEWS.LEGENDS.MORE') }}</span>）</span>
       </p>
       <transition name="slide-fade">
         <div v-show="showMore">

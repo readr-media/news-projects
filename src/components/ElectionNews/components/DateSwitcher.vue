@@ -66,7 +66,8 @@ export default {
   },
   methods: {
     formatDate (date) {
-      return moment(date, 'YYYY/MM/DD').format('MM 月 DD 日')
+      const format = this.$i18n.locale === 'en' ? 'MM / DD' : 'MM 月 DD 日'
+      return moment(date, 'YYYY/MM/DD').format(format)
     },
     subtract () {
       const date = moment(this.date, 'YYYY/MM/DD').subtract(1, 'days').format('YYYY/MM/DD')
