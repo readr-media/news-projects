@@ -1,6 +1,7 @@
 import * as peng23 from './peng23'
 import * as rent from './rent'
 import * as referendum from './referendum'
+import * as electionNews from './election-news/zh-TW'
 export default Object.assign({
   'FOREIGN_LABOUR': {
     'I18N': 'Việt',
@@ -112,4 +113,4 @@ export default Object.assign({
   'RELATED_REPORT': '其他議題',
   'DONATE_PREFIX': '贊助',
   'DONATE_POSTFIX': '報導',
-}, rent, referendum, peng23)
+}, rent, referendum, peng23, electionNews)
