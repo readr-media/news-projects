@@ -4,7 +4,7 @@
       <p>loading...</p>
     </div>
     <div v-else-if="mainViewStatusFetched === 'fail'">
-      <p>發生錯誤，請檢查網址是否給錯關鍵字</p>
+      <p>{{ $t('ELECTION_NEWS.DASHBOARD.FETCH_FAIL') }}</p>
     </div>
     <div v-else-if="mainViewStatusFetched === 'success'">
       <DashboardMainSingle v-if="mainViewStatus === 'single'"/>
@@ -18,7 +18,7 @@
           ga-event-action="click"
           ga-event-label="manual bottom"
         >
-          使用說明書
+          {{ $t('ELECTION_NEWS.DASHBOARD.EXTERNAL_LINKS.MANUAL') }}
         </div>
         <div
           class="navs-insight__nav"
@@ -28,7 +28,7 @@
           ga-event-action="click"
           ga-event-label="insight bottom"
         >
-          我們發現了什麼
+          {{ $t('ELECTION_NEWS.DASHBOARD.EXTERNAL_LINKS.INSIGHT') }}
         </div>
       </div>
     </div>

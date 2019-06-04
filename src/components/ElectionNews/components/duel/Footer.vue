@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     navigate ({ param = '', subparam = '' }) {
-      this.$router.navigate({ param, subparam })
+      this.$router.navigate({ param, subparam, query: this.$i18n.locale === 'en' ? '?locale=en' : '' })
     },
   }
 }

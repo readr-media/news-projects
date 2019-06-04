@@ -11,15 +11,19 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import { VueAutosuggest } from 'vue-autosuggest'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('ElectionNews')
 
+import getKeywordLocale from 'src/components/ElectionNews/mixins/getKeywordLocale'
+
 export default {
   components: {
     VueAutosuggest
   },
+  mixins: [ getKeywordLocale ],
   data () {
     return {
       selected: '',
@@ -35,12 +39,16 @@ export default {
   computed: {
     ...mapState({
       keywords: state => Object.values(state.mapping.keywords)
-    })
+    }),
+    keywordsLocale () {
+      const result = this.$i18n.locale === 'en' ? this.keywords.map(w => this.getKeywordLocale(w)) : this.keywords
+      return result.filter(d => d !== undefined)
+    }
   },
   methods: {
     onSelected(option) {
-      this.selected = option.item;
-      this.$router.push(`/project/election-news/${option.item}`)
+      this.selected = this.$i18n.locale === 'en' ? _.findKey(this.keywordsEN, v => v === option.item) : option.item
+      this.$router.push(`/project/election-news/${this.selected}${this.$i18n.locale === 'en' ? '?locale=en': ''}`)
     },
     onInputChange(text) {
       if (text === '' || text === undefined) {
@@ -48,7 +56,7 @@ export default {
       }
       
       /* Full control over filtering. Maybe fetch from API?! Up to you!!! */
-      const filteredData = this.keywords.filter(item => {
+      const filteredData = this.keywordsLocale.filter(item => {
         return item.toLowerCase().indexOf(text.toLowerCase()) > -1;
       }).slice(0, this.limit);
       

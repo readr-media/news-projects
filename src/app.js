@@ -7,6 +7,7 @@ import { createRouter } from './router'
 import { sync } from 'vuex-router-sync'
 import i18nZHTW from 'src/locale/zh-TW'
 import i18nVI from 'src/locale/vi'
+import i18nEN from 'src/locale/en'
 import titleMeta from './util/titleMeta'
 import * as filters from './util/filters'
 
@@ -35,7 +36,8 @@ export function createApp () {
     locale: 'zh-TW',
     messages: {
       'zh-TW': i18nZHTW,
-      'vi': i18nVI
+      'vi': i18nVI,
+      'en': i18nEN
     }
   })
 

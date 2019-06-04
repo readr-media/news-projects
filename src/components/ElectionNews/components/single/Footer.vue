@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <p class="footer__title">相關關鍵字</p>
+    <p class="footer__title">{{ $t('ELECTION_NEWS.DASHBOARD.RELATED_KEYWORDS') }}</p>
     <nav class="footer__navs navs">
       <div class="navs__left">
         <div
@@ -8,7 +8,7 @@
           :key="id"
           class="button"
           @click="navigate({ param: getSourceName(id) })"
-          v-text="getSourceName(id)"
+          v-text="getKeywordLocale(getSourceName(id))"
           ga-on="click"
           ga-event-category="projects"
           ga-event-action="click"
@@ -24,8 +24,8 @@
           ga-event-category="projects"
           ga-event-action="click"
           ga-event-label="PK button"
+          v-html="$t('ELECTION_NEWS.DASHBOARD.NAVS.DUEL')"
         >
-          多關鍵字<br>PK
         </div>
       </div>
     </nav>
@@ -40,7 +40,10 @@ const debug = require('debug')('ELECTION-NEWS:CLIENT:single:Footer.vue')
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('ElectionNews')
 
+import getKeywordLocale from 'src/components/ElectionNews/mixins/getKeywordLocale'
+
 export default {
+  mixins: [ getKeywordLocale ],
   computed: {
     ...mapState({
       mapping: state => state.mapping.keywords
@@ -54,7 +57,7 @@ export default {
   },
   methods: {
     navigate ({ param = '', subparam = '' }) {
-      this.$router.navigate({ param, subparam })
+      this.$router.navigate({ param, subparam, query: this.$i18n.locale === 'en' ? '?locale=en' : '' })
     },
     getSourceName (sourceId) {
       return this.mapping[sourceId]
@@ -89,6 +92,9 @@ export default {
   color #4a4a4a
   cursor pointer
   -webkit-tap-highlight-color transparent
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
   & + &
     margin 10px 0 0 0
   &--large

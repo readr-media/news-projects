@@ -8,7 +8,7 @@
     <div :class="[ 'mask__select', { 'mask__select--smaller-desktop': atFooter }, 'select']">
       <p
         :class="[ 'select__keyword', { 'select__keyword--smaller': atFooter } ]"
-        v-text="keyword"
+        v-text="getKeywordLocale(keyword)"
       >
       </p>
       <div :class="[ 'select__triangle', { 'select__triangle--smaller-desktop': atFooter } ]"></div>
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import getKeywordLocale from 'src/components/ElectionNews/mixins/getKeywordLocale'
+
 export default {
   props: {
     position: {
@@ -31,7 +33,8 @@ export default {
       type: String,
       default: ''
     }
-  }
+  },
+  mixins: [ getKeywordLocale ]
 }
 </script>
 

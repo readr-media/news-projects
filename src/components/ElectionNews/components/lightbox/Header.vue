@@ -2,7 +2,7 @@
   <header class="header">
     <h1
       class="header__keyword"
-      v-text="keyword"
+      v-text="getKeywordLocale(keyword)"
     >
     </h1>
     <DateSwitcher
@@ -24,7 +24,10 @@ import DateSwitcher from '../DateSwitcher.vue'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('ElectionNews')
 
+import getKeywordLocale from 'src/components/ElectionNews/mixins/getKeywordLocale'
+
 export default {
+  mixins: [ getKeywordLocale ],
   components: {
     Switcher,
     DateSwitcher

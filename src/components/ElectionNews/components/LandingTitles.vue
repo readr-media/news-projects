@@ -10,8 +10,8 @@
       </div>
     </div>
     <div class="titles__content">
-      <h1>選舉新聞風向球</h1>
-      <h2>媒體報導看風向？<br>Google 人工智慧來解答</h2>
+      <h1>{{ $t('ELECTION_NEWS.LANDING.TITLE') }}</h1>
+      <h2>{{ $t('ELECTION_NEWS.LANDING.SUBTITLES[0]') }}<br>{{ $t('ELECTION_NEWS.LANDING.SUBTITLES[1]') }}</h2>
     </div>
     <div class="titles__balls balls">
       <div

@@ -29,7 +29,7 @@
       <div class="landing__arrow" @click="scroll"></div>
     </div>
     <div class="landing__intro">
-      <p>媒體在報導不同的政治人物時會有情緒差異嗎？針對同一位候選人，媒體報導的情緒在選舉前後會不會有所轉變？我們借助 Google 人工智慧來嘗試解答這些問題，並將持續追蹤至 2020 年。</p>
+      <p>{{ $t('ELECTION_NEWS.LANDING.INTRO') }}</p>
     </div>
     <div class="landing__navs navs">
       <Button
@@ -40,7 +40,7 @@
         ga-event-action="click"
         ga-event-label="sigle keyword button"
       >
-        看關鍵字風向
+        {{ $t('ELECTION_NEWS.LANDING.NAVS.SINGLE') }}
       </Button>
       <Button
         class="navs__nav"
@@ -50,7 +50,7 @@
         ga-event-action="click"
         ga-event-label="PK button"
       >
-        多關鍵字 PK
+        {{ $t('ELECTION_NEWS.LANDING.NAVS.DUEL') }}
       </Button>
     </div>
     <div class="landing__navs-insight navs-insight">
@@ -62,7 +62,7 @@
         ga-event-action="click"
         ga-event-label="manual landing"
       >
-        使用說明書
+        {{ $t('ELECTION_NEWS.LANDING.EXTERNAL_LINKS.MANUAL') }}
       </div>
       <div
         class="navs-insight__nav"
@@ -72,7 +72,7 @@
         ga-event-action="click"
         ga-event-label="insight landing"
       >
-        我們發現了什麼
+        {{ $t('ELECTION_NEWS.LANDING.EXTERNAL_LINKS.INSIGHT') }}
       </div>
     </div>
   </section>
@@ -122,7 +122,7 @@ export default {
         this.$scrollTo('.content')
       }
 
-      this.$router.navigate({ param, subparam })
+      this.$router.navigate({ param, subparam, query: this.$i18n.locale === 'en' ? '?locale=en' : '' })
     },
     scroll () {
       this.$scrollTo(

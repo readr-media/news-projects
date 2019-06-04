@@ -1,5 +1,7 @@
 <template>
   <div class="election-news">
+    <!-- <button @click="$i18n.locale = 'en'"></button>
+    {{ $t('ELECTION_NEWS.TEST') }} -->
     <Landing class="election-news__landing"/>
     <Dashboard v-show="showDashboard" class="election-news__dashboard"/>
     <Footer v-show="showDashboard" class="election-news__footer"/>
@@ -170,10 +172,14 @@ export default {
     this.$store.registerModule('ElectionNews', module)
     this.isStoreModuleLoaded = true
     
+    if (this.$route.query && this.$route.query.locale === 'en') {
+      this.$i18n.locale = 'en'
+    }
+
     // init custom navigate function
-    this.$router.navigate = function ({ param = '', subparam = '' }) {
+    this.$router.navigate = function ({ param = '', subparam = '', query = '' }) {
       debug('Navigation performed')
-      this.push(`/project/election-news/${param}/${subparam}`)
+      this.push(`/project/election-news/${param}/${subparam}${query}`)
     }
   },
   destroyed () {
