@@ -3,7 +3,7 @@
     <span class="section-content-story-infobox-hint__hint" v-text="hint" @click="toogleInfobox"></span>
     <transition name="fade" mode="out-in">
       <blockquote class="section-content-story-infobox-hint__infobox" v-show="showInfobox">
-        <p class="section-content-story-infobox-hint__infobox-placeholder">註：</p>
+        <p class="section-content-story-infobox-hint__infobox-placeholder">{{ $t('POLITICAL_CONTRIBUTION.STORY_HINT') }}：</p>
         <slot></slot>
       </blockquote>
     </transition>
