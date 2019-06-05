@@ -12,7 +12,7 @@
       <div class="navs-insight">
         <div
           class="navs-insight__nav"
-          @click="newTab('https://www.readr.tw/post/1668')"
+          @click="newTab($i18n.locale === 'en' ? 'https://www.readr.tw/post/1832' : 'https://www.readr.tw/post/1668')"
           ga-on="click"
           ga-event-category="projects"
           ga-event-action="click"
@@ -22,7 +22,7 @@
         </div>
         <div
           class="navs-insight__nav"
-          @click="newTab('https://www.readr.tw/post/1669')"
+          @click="newTab($i18n.locale === 'en' ? 'https://www.readr.tw/post/1968' : 'https://www.readr.tw/post/1669')"
           ga-on="click"
           ga-event-category="projects"
           ga-event-action="click"

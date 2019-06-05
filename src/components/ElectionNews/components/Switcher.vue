@@ -64,10 +64,10 @@ export default {
       transform translate(141px, 0)
   &__option
     z-index 2
-    font-size 16px
+    font-size 14px
 
 @media (min-width 1024px)
   .switcher
     &__option
-      font-size 20px
+      font-size 14px
 </style>
