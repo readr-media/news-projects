@@ -12,5 +12,12 @@ export const POLITICAL_CONTRIBUTION = {
       'ANALYSIS': '獻金解析文章',
       'DATA': '原始資料'
     }
+  },
+  'CONTENT_HEADER': {
+    'FOLLOW': '追蹤',
+    'NOTES': '筆記',
+    'COMMENT': '留言',
+    'SHARE': '分享',
+    'DONATE': '贊助'
   }
 }

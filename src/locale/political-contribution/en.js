@@ -12,5 +12,12 @@ export const POLITICAL_CONTRIBUTION = {
       'ANALYSIS': 'Analysis',
       'DATA': 'Data'
     }
+  },
+  'CONTENT_HEADER': {
+    'FOLLOW': 'Follow',
+    'NOTES': 'Notes',
+    'COMMENT': 'Comment',
+    'SHARE': 'Share',
+    'DONATE': 'Donate'
   }
 }

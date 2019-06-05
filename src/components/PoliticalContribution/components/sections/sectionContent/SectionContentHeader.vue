@@ -6,23 +6,33 @@
       </a>
       <a class="section-content-header__nav-item navigation-figure" href="http://www.readr.tw/series/political-contribution" target="_blank">
         <img class="navigation-figure__img navigation-figure__img--star" src="/proj-assets/political-contribution/star.png" alt="bell-w">
-        <p class="navigation-figure__figcaption">追蹤</p>
+        <p class="navigation-figure__figcaption">
+          {{ $t('POLITICAL_CONTRIBUTION.CONTENT_HEADER.FOLLOW') }}
+        </p>
       </a>
       <a class="section-content-header__nav-item navigation-figure" href="http://www.readr.tw/series/political-contribution/15" target="_blank">
         <img class="navigation-figure__img" src="/proj-assets/political-contribution/memo.png" alt="bell-w">
-        <p class="navigation-figure__figcaption">筆記</p>
+        <p class="navigation-figure__figcaption">
+          {{ $t('POLITICAL_CONTRIBUTION.CONTENT_HEADER.NOTES') }}
+        </p>
       </a>
       <a class="section-content-header__nav-item navigation-figure" @click="toogleComment">
         <img class="navigation-figure__img" src="/proj-assets/political-contribution/comment-w.png" alt="comment-w">
-        <p class="navigation-figure__figcaption">留言</p>
+        <p class="navigation-figure__figcaption">
+          {{ $t('POLITICAL_CONTRIBUTION.CONTENT_HEADER.COMMENT') }}
+        </p>
       </a>
       <a class="section-content-header__nav-item navigation-figure" target="_blank" :href="shareURL">
         <img class="navigation-figure__img" src="/proj-assets/political-contribution/share-w.png" alt="share-w">
-        <p class="navigation-figure__figcaption">分享</p>
+        <p class="navigation-figure__figcaption">
+          {{ $t('POLITICAL_CONTRIBUTION.CONTENT_HEADER.SHARE') }}
+        </p>
       </a>
       <a class="section-content-header__nav-item navigation-figure" target="_blank" href="https://www.readr.tw/series/political-contribution/donate">
         <img class="navigation-figure__img" src="/proj-assets/political-contribution/donate-white.png" alt="share-w">
-        <p class="navigation-figure__figcaption">贊助</p>
+        <p class="navigation-figure__figcaption">
+          {{ $t('POLITICAL_CONTRIBUTION.CONTENT_HEADER.DONATE') }}
+        </p>
       </a>
       <a class="section-content-header__nav-item navigation-figure" @click="toogleNavSidebar">
         <div class="hamburger-icon">
