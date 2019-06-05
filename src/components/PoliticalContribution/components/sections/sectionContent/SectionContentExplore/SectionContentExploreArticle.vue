@@ -1,7 +1,13 @@
 <template>
   <article class="section-content-explore-article">
-    <h1 class="section-content-explore-article__title">查找政商關係</h1>
-    <SectionContentCredits :isNewCredit="true" :showSpecialThanks="true" :publishedDate="'2018/09/27'"/>
+    <h1 class="section-content-explore-article__title">
+      {{ $t('POLITICAL_CONTRIBUTION.EXPLORE.TITLE') }}
+    </h1>
+    <SectionContentCredits
+      :isNewCredit="true"
+      :showSpecialThanks="true"
+      :publishedDate="'2018/09/27'"
+    />
     <div class="section-content-explore-article__caution">
       <p class="section-content-explore-article__caution-placeholder">註：</p>
       <div class="section-content-explore-article__caution-container">
@@ -10,10 +16,10 @@
       </div>
     </div>
     <div class="section-content-explore-article__paragraph">
-      選一個立委要花多少錢？是誰在資助我們的民意代表？要回答這些問題，要付出什麼樣的代價？依照台灣的法律，候選人必須申報選舉時政治獻金的來源，也應在選舉後公開讓人民檢視。但這些合法的政治金流與其說是公開，不如說是被放在監察院「典藏」，需要親赴政府機關才看得到，還只能印出一張張無法應用的 A4 紙。
+      {{ $t('POLITICAL_CONTRIBUTION.EXPLORE.P[0]') }}
     </div>
     <div class="section-content-explore-article__paragraph">
-      我們費了九牛二虎之力，把這些資料通通帶出來了！來看看 2016 年選舉時，區域立委候選人跟企業有什麼關係吧！
+      {{ $t('POLITICAL_CONTRIBUTION.EXPLORE.P[1]') }}
     </div>
   </article>
 </template>

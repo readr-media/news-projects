@@ -50,5 +50,12 @@ export const POLITICAL_CONTRIBUTION = {
     [
       'The relationship between the legislators with high political contributions and the industries',
     ]
-  ]
+  ],
+  'EXPLORE': {
+    'TITLE': 'Search for politics-business relations',
+    'P': [
+      `How much does it cost to run for legislator election? Who donate the candidates? How much does it cost to answer the question? According to Taiwan's law, the candidates are forced to declare the sources of donations and make it public to be reviewed by the people after election. However, those data are much less public than "collected" in the Control Yuan. We need to go to the Control Yuan in person to review the data, and get permission to copy all the data on paper, which can't be used for further analysis.`,
+      `We put in tremendous efforts to obtain all the data. Let's take a look at the connections between district legislative candidates and business groups.`
+    ]
+  }
 }
