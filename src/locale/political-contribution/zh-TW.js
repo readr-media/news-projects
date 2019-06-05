@@ -1,4 +1,12 @@
 export const POLITICAL_CONTRIBUTION = {
+  'PARTY': {
+    '民主進步黨': 'dpp',
+    '中國國民黨': 'kmt',
+    '時代力量': 'npp',
+    '無黨籍': 'indie',
+    '無黨團結聯盟': 'npsu',
+    '親民黨': 'pfp',
+  },
   'LANDING': {
     'TITLE': '數讀政治獻金',
     'SUBTITLES': [
