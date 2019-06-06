@@ -20,6 +20,7 @@ export const POLITICAL_CONTRIBUTION = {
     'DATA': 'Data',
     'RELATED': 'Relateds',
     'COOP': 'Cooperate',
+    'FOOTER_TITLE': 'Analysis'
   },
   'NAVS_SIDEBAR': {
     'CHARTS': 'Charts',

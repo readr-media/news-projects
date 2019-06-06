@@ -1,11 +1,11 @@
 <template>
   <ul class="section-content-footer__related-list">
-    <li class="section-content-footer__related-list-item" @click="navigateTo('story1')">選一次立委，金流超過 28 億！</li>
-    <li class="section-content-footer__related-list-item" @click="navigateTo('story2')">立委篇／老鳥與新秀，募款能力差了 6.6 倍</li>
-    <li class="section-content-footer__related-list-item" @click="navigateTo('story3')">企業篇／金權遊戲？翻開金主的投資名冊</li>
-    <li class="section-content-footer__related-list-item" @click="navigateTo('story4')">政治獻金開放了嗎？</li>
-    <li class="section-content-footer__related-list-item" @click="navigateTo('story5')"><div class="new-notification">NEW</div>資料怎麼看？政治獻金的五個發現</li>
-    <li class="section-content-footer__related-list-item" @click="navigateTo('story6')"><div class="new-notification">NEW</div>政治獻金資料到底解密了什麼？</li>
+    <li class="section-content-footer__related-list-item" @click="navigateTo('story1')">{{ $t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY1') }}</li>
+    <li class="section-content-footer__related-list-item" @click="navigateTo('story2')">{{ $t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY2') }}</li>
+    <li class="section-content-footer__related-list-item" @click="navigateTo('story3')">{{ $t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY3') }}</li>
+    <li class="section-content-footer__related-list-item" @click="navigateTo('story4')">{{ $t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY4') }}</li>
+    <li class="section-content-footer__related-list-item" @click="navigateTo('story5')"><div class="new-notification">NEW</div>{{ $t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY5') }}</li>
+    <li class="section-content-footer__related-list-item" @click="navigateTo('story6')"><div class="new-notification">NEW</div>{{ $t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY6') }}</li>
   </ul>
 </template>
 

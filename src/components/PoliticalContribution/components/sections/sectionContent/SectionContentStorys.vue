@@ -864,7 +864,9 @@
       <SectionContentStorysTimelines/>
     </article>
     <div class="related-storys">
-      <h2 class="section-content-story__subtitle section-content-story__subtitle--align-left">相關文章</h2>
+      <h2 class="section-content-story__subtitle section-content-story__subtitle--align-left">
+        {{ $t('POLITICAL_CONTRIBUTION.NAVS.FOOTER_TITLE') }}
+      </h2>
       <SectionContentFooterStorysList/>
     </div>
   </main>

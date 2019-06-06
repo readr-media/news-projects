@@ -20,6 +20,7 @@ export const POLITICAL_CONTRIBUTION = {
     'DATA': '原始資料',
     'RELATED': '查看相關討論',
     'COOP': '鍵盤救國一起來',
+    'FOOTER_TITLE': '相關文章'
   },
   'NAVS_SIDEBAR': {
     'CHARTS': '圖表區',
