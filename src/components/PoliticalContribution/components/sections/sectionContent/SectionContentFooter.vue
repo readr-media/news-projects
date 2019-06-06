@@ -1,7 +1,9 @@
 <template>
   <footer class="section-content-footer">
     <div class="section-content-footer__container">
-      <div class="section-content-footer__related-title">相關文章</div>
+      <div class="section-content-footer__related-title">
+        {{ $t('POLITICAL_CONTRIBUTION.NAVS.FOOTER_TITLE') }}
+      </div>
       <SectionContentFooterStorysList/>
     </div>
     <!-- <AppParticles class="section-content-footer__particles" id="section-content-footer-particles" :isFooterShow="isFooterShow"/> -->

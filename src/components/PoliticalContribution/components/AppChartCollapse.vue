@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[ 'app-chart-collapse', { 'app-chart-collapse--collapsed': isCollapse } ]"
-    :style="{ height: !isCollapse ? `${135 + chartContainerHeight + 40}px` : '135px' }"
+    :style="{ height: !isCollapse ? `${195 + chartContainerHeight + 40}px` : '195px' }"
     @click="toogleCollapse"
   >
     <h1 class="app-chart-collapse__title" v-html="title"></h1>
@@ -58,7 +58,7 @@ export default {
   &:nth-child(1)
     border-top 1px solid #d3d3d3
   &--collapsed
-    height 135px
+    height 195px
   &__title
     font-size 26px
     text-align center
@@ -66,7 +66,7 @@ export default {
     font-weight 400
     margin 0
     display inline-block
-    min-height 135px
+    min-height 195px
     display flex
     align-items center
   &__arrow

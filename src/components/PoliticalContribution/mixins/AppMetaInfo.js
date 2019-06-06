@@ -55,6 +55,8 @@ export default {
     }
   },
   metaInfo () {
+    const isEN = this.$route.query && this.$route.query.locale === 'en'
+
     switch (this.slug) {
       case 'explore':
         if (this.showLightbox && this.isQueryOrdinalNumValid && this.isQueryNameValid) {
@@ -130,14 +132,25 @@ export default {
           metaImage: 'political-contribution/ogimgs/ogimage-story6.jpg',
           customScript: structuredDataScript
         }
-      default:
-        return {
-          title: `${titleHeadings}：翻開立委（八年份）的金主投資名冊`,
-          description: '誰一直是立委的大金主？原來企業捐獻的政治獻金也會藍綠兩邊押寶？READr 藉由鄉民的幫助擴大了立委政治獻金資料庫，來看看 2008 年至 2016 年 3 次立委選舉中候選人與企業之間的金錢流動。',
-          metaUrl: 'political-contribution',
-          metaImage: 'political-contribution/ogimgs/ogimage.jpg',
-          customScript: structuredDataScript
+      default: {
+        if (isEN) {
+          return {
+            title: `Political Donations in the Statistics 2.0: Legislator's eight-year investor list`,
+            description: '誰一直是立委的大金主？原來企業捐獻的政治獻金也會藍綠兩邊押寶？READr 藉由鄉民的幫助擴大了立委政治獻金資料庫，來看看 2008 年至 2016 年 3 次立委選舉中候選人與企業之間的金錢流動。',
+            metaUrl: 'political-contribution',
+            metaImage: 'political-contribution/ogimgs/ogimage.jpg',
+            customScript: structuredDataScript
+          }
+        } else {
+          return {
+            title: `${titleHeadings}：翻開立委（八年份）的金主投資名冊`,
+            description: '誰一直是立委的大金主？原來企業捐獻的政治獻金也會藍綠兩邊押寶？READr 藉由鄉民的幫助擴大了立委政治獻金資料庫，來看看 2008 年至 2016 年 3 次立委選舉中候選人與企業之間的金錢流動。',
+            metaUrl: 'political-contribution',
+            metaImage: 'political-contribution/ogimgs/ogimage.jpg',
+            customScript: structuredDataScript
+          }
         }
+      }
     }
   },
 

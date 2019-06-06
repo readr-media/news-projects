@@ -2,6 +2,7 @@ import * as peng23 from './peng23'
 import * as rent from './rent'
 import * as referendum from './referendum'
 import * as electionNews from './election-news/zh-TW'
+import * as politicalContribution from './political-contribution/zh-TW'
 export default Object.assign({
   'FOREIGN_LABOUR': {
     'I18N': 'Việt',
@@ -99,18 +100,8 @@ export default Object.assign({
     'SECTION_13_5': '「所以……他是被前女友帶壞的？」<br>「對！」',
     'SECTION_14': '農場不只包住也包吃，冰箱裡隨時塞滿雇主準備的雞鴨魚肉和新鮮蔬果。唯一需要他們另外掏錢買的，是料理家鄉菜需要用到的石缽與辛香料。晚上八點，工人們才剛從田裡回到宿舍不久，早已過了吃飯時間的台灣農村，才正要飄起異國的家鄉味。'
   },
-  'POLITICAL_CONTRIBUTION': {
-    'PARTY': {
-      '民主進步黨': 'dpp',
-      '中國國民黨': 'kmt',
-      '時代力量': 'npp',
-      '無黨籍': 'indie',
-      '無黨團結聯盟': 'npsu',
-      '親民黨': 'pfp',
-    }
-  },
   'MORE': '看更多',
   'RELATED_REPORT': '其他議題',
   'DONATE_PREFIX': '贊助',
   'DONATE_POSTFIX': '報導',
-}, rent, referendum, peng23, electionNews)
+}, rent, referendum, peng23, electionNews, politicalContribution)

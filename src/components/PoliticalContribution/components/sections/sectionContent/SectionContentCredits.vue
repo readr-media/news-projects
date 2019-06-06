@@ -7,37 +7,63 @@
     </div>
     <template v-if="!isNewCredit">
       <div class="story-credits__row story-credits__row--mobile-break">
-        <p class="story-credits__credit">文字：李又如</p>
-        <p class="story-credits__credit">設計：陳怡蒨</p>
-        <p class="story-credits__credit">工程：熊凱文</p>
+        <p class="story-credits__credit">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.WRITER.WORDING') }}{{ $t('POLITICAL_CONTRIBUTION.CREDITS.WRITER.MEMBER') }}
+        </p>
+        <p class="story-credits__credit">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.DESIGN.WORDING') }}{{ $t('POLITICAL_CONTRIBUTION.CREDITS.DESIGN.MEMBER') }}
+        </p>
+        <p class="story-credits__credit">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.FE.WORDING') }}{{ $t('POLITICAL_CONTRIBUTION.CREDITS.FE.MEMBER') }}
+        </p>
       </div>
       <div class="story-credits__row">
-        <p class="story-credits__credit">資料整理：李又如、熊凱文</p>
+        <p class="story-credits__credit">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.DATA.WORDING') }}{{ $t('POLITICAL_CONTRIBUTION.CREDITS.DATA.MEMBER[0]') }}、{{ $t('POLITICAL_CONTRIBUTION.CREDITS.DATA.MEMBER[1]') }}
+        </p>
       </div>
       <div v-if="showSpecialThanks" class="story-credits__row">
-        <p class="story-credits__credit">資料分析：李宗榮</p>
+        <p class="story-credits__credit">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.ANALYSIS.WORDING') }}{{ $t('POLITICAL_CONTRIBUTION.CREDITS.ANALYSIS.MEMBER') }}
+        </p>
       </div>
       <div class="story-credits__row">
-        <p class="story-credits__published-date">發布日期：{{ publishedDate }}</p>
+        <p class="story-credits__published-date">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.RELEASE_DATE') }}{{ publishedDate }}
+        </p>
       </div>
     </template>
     <template v-else>
       <div class="story-credits__row story-credits__row--mobile-break">
-        <p class="story-credits__credit">文字：李又如</p>
-        <p class="story-credits__credit">設計：陳怡蒨</p>
-        <p class="story-credits__credit">工程：熊凱文</p>
+        <p class="story-credits__credit">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.WRITER.WORDING') }}{{ $t('POLITICAL_CONTRIBUTION.CREDITS.WRITER.MEMBER') }}
+        </p>
+        <p class="story-credits__credit">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.DESIGN.WORDING') }}{{ $t('POLITICAL_CONTRIBUTION.CREDITS.DESIGN.MEMBER') }}
+        </p>
+        <p class="story-credits__credit">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.FE.WORDING') }}{{ $t('POLITICAL_CONTRIBUTION.CREDITS.FE.MEMBER') }}
+        </p>
       </div>
       <div class="story-credits__row">
-        <p class="story-credits__credit story-credits__credit--line-break">資料協力：<br><a href="https://ronny.tw/" target="_blank">Ronny Wang</a>、<br>Timothy Lee、<br><a href="https://campaign-finance.g0v.ctiml.tw/" target="_blank">參與「鍵盤救國」的鄉民們</a></p>
+        <p class="story-credits__credit story-credits__credit--line-break">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.COOP.WORDING') }}<br><a href="https://ronny.tw/" target="_blank">{{ $t('POLITICAL_CONTRIBUTION.CREDITS.COOP.MEMBER[0]') }}</a>、<br>{{ $t('POLITICAL_CONTRIBUTION.CREDITS.COOP.MEMBER[1]') }}、<br><a href="https://campaign-finance.g0v.ctiml.tw/" target="_blank">{{ $t('POLITICAL_CONTRIBUTION.CREDITS.COOP.MEMBER[2]') }}</a>
+        </p>
       </div>
       <div v-if="showSpecialThanks" class="story-credits__row">
-        <p class="story-credits__credit">資料分析：李宗榮</p>
+        <p class="story-credits__credit">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.ANALYSIS.WORDING') }}{{ $t('POLITICAL_CONTRIBUTION.CREDITS.ANALYSIS.MEMBER') }}
+        </p>
       </div>
       <div v-if="showConsultant" class="story-credits__row">
-        <p class="story-credits__credit">資料顧問：卞中佩</p>
+        <p class="story-credits__credit">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.ANALYSIS.WORDING') }}{{ $t('POLITICAL_CONTRIBUTION.CREDITS.ANALYSIS.MEMBER') }}
+        </p>
       </div>
       <div class="story-credits__row">
-        <p class="story-credits__published-date">發布日期：{{ publishedDate }}</p>
+        <p class="story-credits__published-date">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.RELEASE_DATE') }}{{ publishedDate }}
+        </p>
       </div>
     </template>
   </div>

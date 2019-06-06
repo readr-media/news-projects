@@ -3,8 +3,23 @@
     <a class="section-landing-titles__readr-link" :href="`https://${READR_DOMAIN_PROD}`" target="_blank">
       <img class="section-landing-titles__readr-logo" src="/proj-assets/political-contribution/logo.png" alt="section-landing-titles__readr-logo">
     </a>
-    <h1 class="section-landing-titles__h1">數讀政治獻金<div class="v2">2.0</div></h1>
-    <h2 class="section-landing-titles__h2"><div class="quote-container">翻開立委<div class="quote">八年份</div>的</div><div>金主投資名冊</div></h2>
+    <h1 class="section-landing-titles__h1">
+      {{ $t('POLITICAL_CONTRIBUTION.LANDING.TITLE') }}
+      <div class="v2">
+        2.0
+      </div>
+    </h1>
+    <h2 class="section-landing-titles__h2">
+      <div class="quote-container">
+        {{ $t('POLITICAL_CONTRIBUTION.LANDING.SUBTITLES[0]') }}
+        <div class="quote">
+          {{ $t('POLITICAL_CONTRIBUTION.LANDING.SUBTITLES[1]') }}
+        </div>
+      </div>
+      <div>
+        {{ $t('POLITICAL_CONTRIBUTION.LANDING.SUBTITLES[2]') }}
+      </div>
+    </h2>
   </div>
 </template>
 
@@ -64,7 +79,9 @@ export default {
 .v2
   d = 100px
   width d
+  min-width d
   height d
+  min-height d
   border-radius 100%
   background-color #9e005d
   color white
@@ -94,7 +111,9 @@ export default {
   .v2
     d = 80px
     width d
+    min-width d
     height d
+    min-height d
     font-size 41px
 
   .quote
@@ -119,7 +138,9 @@ export default {
   .v2
     d = 50px
     width d
+    min-width d
     height d
+    min-height d
     font-size 22px
 
   .quote
@@ -142,7 +163,9 @@ export default {
   .v2
     d = 50px
     width d
+    min-width d
     height d
+    min-height d
     font-size 22px
 
   .quote
@@ -177,7 +200,9 @@ export default {
   .v2
     d = 40px
     width d
+    min-width d
     height d
+    min-height d
     font-size 18px
 
   .quote

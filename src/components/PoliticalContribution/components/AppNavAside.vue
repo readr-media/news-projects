@@ -3,21 +3,21 @@
     <ButtonSection
       class="app-nav-aside__button-section"
       :iconSrc="'chart-g.png'"
-      :hintWording="'圖表區'"
+      :hintWording="$t('POLITICAL_CONTRIBUTION.NAVS.CHARTS')"
       @click.native="navigateRoute('dashboard')"
       :routerLinkActive="slug === 'dashboard'"
     />
     <ButtonSection
       class="app-nav-aside__button-section"
       :iconSrc="'tool-g.png'"
-      :hintWording="'查找政商關係'"
+      :hintWording="$t('POLITICAL_CONTRIBUTION.NAVS.EXPLORE')"
       @click.native="navigateRoute('explore')"
       :routerLinkActive="slug === 'explore'"
     />
     <ButtonSection
       class="app-nav-aside__button-section"
       :iconSrc="'article-g.png'"
-      :hintWording="'現金解析文章'"
+      :hintWording="$t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS')"
       @click.native="navigateRoute('story1')"
       :routerLinkActive="renderedSectionContent === 'storys'"
     />
@@ -25,58 +25,58 @@
       <router-link class="app-nav-aside__article-nav" to="story1" v-scroll-to="'.section-content'">
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
-          :hintText="'選一次立委，金流超過 28 億！'"
+          :hintText="$t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY1')"
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story2" v-scroll-to="'.section-content'">
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
-          :hintText="'立委篇／老鳥與新秀，募款能力差了 6.6 倍'"
+          :hintText="$t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY2')"
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story3" v-scroll-to="'.section-content'">
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
-          :hintText="'企業篇／金權遊戲？翻開金主的投資名冊'"
+          :hintText="$t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY3')"
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story4" v-scroll-to="'.section-content'">
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
-          :hintText="'政治獻金開放了嗎？'"
+          :hintText="$t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY4')"
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story5" v-scroll-to="'.section-content'">
         <span class="new-content-wording">NEW</span>
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
-          :hintText="'資料怎麼看？政治獻金的五個發現'"
+          :hintText="$t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY5')"
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story6" v-scroll-to="'.section-content'">
         <span class="new-content-wording">NEW</span>
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
-          :hintText="'政治獻金資料到底解密了什麼？'"
+          :hintText="$t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY6')"
         />
       </router-link>
     </div>
     <ButtonSection
       class="app-nav-aside__button-section"
       :iconSrc="'paper-g.png'"
-      :hintWording="'原始素材資料'"
+      :hintWording="$t('POLITICAL_CONTRIBUTION.NAVS.DATA')"
       @click.native="newTab('https://github.com/mirror-media/politicalcontribution')"
     />
     <ButtonSection
       class="app-nav-aside__button-section"
       :iconSrc="'text-g.png'"
-      :hintWording="'查看相關討論'"
+      :hintWording="$t('POLITICAL_CONTRIBUTION.NAVS.RELATED')"
       @click.native="openLightboxRelatedTopics"
     />
     <ButtonSection
       class="app-nav-aside__button-section"
       :iconSrc="'hand-g.png'"
-      :hintWording="'鍵盤救國一起來'"
+      :hintWording="$t('POLITICAL_CONTRIBUTION.NAVS.COOP')"
       @click.native="newTab('https://campaign-finance.g0v.ctiml.tw/')"
     />
   </nav>

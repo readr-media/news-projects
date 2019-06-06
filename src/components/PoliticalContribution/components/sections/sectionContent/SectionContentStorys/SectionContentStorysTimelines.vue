@@ -1,7 +1,7 @@
 <template>
   <div class="timelines">
     <div v-show="showOrigin" class="timelines__government-legend government-legend">
-      <span>政府相關回應或作為</span>
+      <span>{{ $t('POLITICAL_CONTRIBUTION.STORY6.LEGEND') }}</span>
       <img class="government-legend__icon" src="/proj-assets/political-contribution/government.png" alt="">
     </div>
     <transition name="slide-fade">
@@ -10,9 +10,9 @@
         :events="originEvents"
       />
     </transition>
-    <button class="timelines__toggle-g0v" @click="toggleOrigin">{{ originHint }} g0v 零時政府專案起源</button>
+    <button class="timelines__toggle-g0v" @click="toggleOrigin">{{ originHint }} {{ origin }}</button>
     <div v-show="!showOrigin" class="timelines__government-legend government-legend">
-      <span>政府相關回應或作為</span>
+      <span>{{ $t('POLITICAL_CONTRIBUTION.STORY6.LEGEND') }}</span>
       <img class="government-legend__icon" src="/proj-assets/political-contribution/government.png" alt="">
     </div>
     <SectionContentStorysTimeline
@@ -25,6 +25,7 @@
 <script>
 import SectionContentStorysTimeline from './SectionContentStorysTimeline.vue'
 import { originEvents, actionEvents, } from '../../../../constants/chronicle'
+import { originEvents as originEventsEN, actionEvents as actionEventsEN, } from '../../../../constants/chronicleEN'
 
 export default {
   components: {
@@ -32,14 +33,23 @@ export default {
   },
   data () {
     return {
-      originEvents,
-      actionEvents,
       showOrigin: false
     }
   },
   computed: {
+    originEvents () {
+      return this.$i18n.locale === 'en' ? originEventsEN : originEvents
+    },
+    actionEvents () {
+      return this.$i18n.locale === 'en' ? actionEventsEN : actionEvents
+    },
     originHint () {
-      return this.showOrigin ? '關閉' : '看'
+      return this.showOrigin ?
+        (this.$i18n.locale === 'en' ? 'Close' : '關閉') :
+        (this.$i18n.locale === 'en' ? 'See' : '看')
+    },
+    origin () {
+      return this.$i18n.locale === 'en' ? 'how the project "g0v government" started' : 'g0v 零時政府專案起源'
     }
   },
   methods: {

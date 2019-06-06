@@ -4,7 +4,7 @@
       <SectionContentExploreRadios :class="[ 'section-content-dashboard__radios', { 'section-content-dashboard__radios--sticky': radiosFixed } ]"/>
 
       <div class="section-content-dashboard__charts section-content-dashboard__charts--mobile">
-        <AppChartCollapse :title="'立委們總共收了<br>多少政治獻金？'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[0][0]')">
           <BarHorizontalStackedOrdinalDonatesFrom
             class="chart-container__chart"
             id="dashboard-chart-ordinal-donates-from-mobile"
@@ -12,7 +12,7 @@
             :data="CHART_DATA.DATA_ALL_ORDINAL_DONATES_FROM"
           />
         </AppChartCollapse>
-        <AppChartCollapse :title="'各政黨立委都收哪種類型的政治獻金？'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[0][1]')">
           <ParallelOrdinalPartyDonatesFrom
             class="chart-container__chart"
             id="dashboard-chart-ordinal-parallel-mobile"
@@ -20,7 +20,7 @@
             :data="CHART_DATA.DATA_ORDINAL_PARTY_DONATES_FROM"
           />
         </AppChartCollapse>
-        <AppChartCollapse :title="'誰收到<br>最多政治獻金？'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[0][2]')">
           <BarHorizontalOrdinalCandidate
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-five-donates-total-mobile"
@@ -29,7 +29,7 @@
           />
           <p class="chart-container__hint">＊政治獻金總收入</p>
         </AppChartCollapse>
-        <AppChartCollapse :title="'誰在公司捐贈<br>收到最多錢？'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[0][3]')">
           <BarHorizontalOrdinalCandidate
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-five-donates-company-mobile"
@@ -38,7 +38,7 @@
           />
           <p class="chart-container__hint">＊營利事業政治獻金</p>
         </AppChartCollapse>
-        <AppChartCollapse :title="'誰收到<br>最多家企業捐贈？'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[1][0]')">
           <BarHorizontalOrdinalCandidate
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-five-donates-company-count-mobile"
@@ -48,7 +48,7 @@
           />
           <p class="chart-container__hint">＊營利事業捐贈家數</p>
         </AppChartCollapse>
-        <AppChartCollapse :title="'落選人中，誰收到<br>最多政治獻金？'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[1][1]')">
           <BarHorizontalOrdinalCandidate
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-five-donates-but-lost-mobile"
@@ -57,7 +57,7 @@
           />
           <p class="chart-container__hint">＊政治獻金總收入</p>
         </AppChartCollapse>
-        <AppChartCollapse :title="'哪些產業<br>捐最多錢給立委？'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[1][2]')">
           <BarHorizontalOrdinalIndustryDonates
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-ten-donates-industry-mobile"
@@ -66,7 +66,7 @@
           />
           <p class="chart-container__hint">＊分類資料：財務部稅籍登記</p>
         </AppChartCollapse>
-        <AppChartCollapse :title="'哪些產業<br>最積極捐錢給立委？'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[1][3]')">
           <BarHorizontalOrdinalIndustryParticipate
             class="chart-container__chart"
             id="dashboard-chart-ordinal-top-ten-participate-industry-mobile"
@@ -75,14 +75,14 @@
           />
           <p class="chart-container__hint">＊有捐贈的公司數佔該年度同類型公司總數比例</p>
         </AppChartCollapse>
-        <AppChartCollapse :title="'哪些集團捐最多錢？<br>捐藍還捐綠？'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[2][0]')">
           <SectionContentDashboardOrdinalCorpDonatesMobile
             class="chart-container__chart"
             id="dashboard-chart-ordinal-corp-donates-mobile"
           />
           <p class="chart-container__hint">＊集團捐贈金額前十名</p>
         </AppChartCollapse>
-        <AppChartCollapse :title="'哪些集團三屆立委選舉都捐錢？政黨傾向變化？'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[2][1]')">
           <SectionContentDashboardOrdinalCorpDonatesMobile
             class="chart-container__chart"
             id="dashboard-chart-ordinal-corp-donates-mobile"
@@ -90,14 +90,14 @@
           />
           <p class="chart-container__hint">＊連續三屆選舉都有捐贈的公司，金額統計前十名</p>
         </AppChartCollapse>
-        <AppChartCollapse :title="'現任立委<br>比較容易選上'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[2][2]')">
           <TableDuel
             class="chart-container__chart"
             id="dashboard-chart-table-duel-re-elected-or-not-mobile"
             :data="CHART_DATA.DATA_ORDINAL_DUEL_RE_ELECTED_OR_NOT"
           />
         </AppChartCollapse>
-        <AppChartCollapse :title="'第一次參選公職者<br>當選率只有 9%'">
+        <AppChartCollapse :title="$t('POLITICAL_CONTRIBUTION.CHARTS[2][3]')">
           <TableDuel
             class="chart-container__chart"
             id="dashboard-chart-table-duel-newbie-elected-or-not-mobile"
@@ -111,28 +111,44 @@
         <div class="row">
           <div class="buttons-container">
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-1' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '1-1' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '1-1'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[0][0]')"
             >
-              立委們總共收了<br>多少政治獻金？
             </button>
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-2' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '1-2' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '1-2'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[0][1]')"
             >
-              各政黨立委都收哪種類型的政治獻金？
             </button>
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-3' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '1-3' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '1-3'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[0][2]')"
             >
-              誰收到<br>最多政治獻金？
             </button>
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '1-4' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '1-4' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '1-4'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[0][3]')"
             >
-              誰在公司捐贈<br>收到最多錢？
             </button>
           </div>
           <AppChartExpand
@@ -205,28 +221,44 @@
         <div class="row">
           <div class="buttons-container">
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-1' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '2-1' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '2-1'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[1][0]')"
             >
-              誰收到<br>最多家企業捐贈？
             </button>
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-2' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '2-2' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '2-2'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[1][1]')"
             >
-              落選人中，誰收到<br>最多政治獻金？
             </button>
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-3' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '2-3' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '2-3'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[1][2]')"
             >
-              哪些產業<br>捐最多錢給立委？
             </button>
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '2-4' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '2-4' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '2-4'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[1][3]')"
             >
-              哪些產業<br>最積極捐錢給立委？
             </button>
           </div>
           <AppChartExpand
@@ -302,28 +334,44 @@
         <div class="row">
           <div class="buttons-container">
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-1' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '3-1' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '3-1'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[2][0]')"
             >
-              哪些集團捐最多錢？<br>捐藍還捐綠？
             </button>
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-2' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '3-2' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '3-2'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[2][1]')"
             >
-              哪些集團三屆立委選舉都捐錢？政黨傾向變化？
             </button>
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-3' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '3-3' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '3-3'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[2][2]')"
             >
-              現任立委<br>比較容易選上
             </button>
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '3-4' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '3-4' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '3-4'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[2][3]')"
             >
-              第一次參選公職者<br>當選率只有 9%
             </button>
           </div>
           <AppChartExpand
@@ -392,10 +440,14 @@
         <div class="row">
           <div class="buttons-container">
             <button
-              :class="[ 'buttons-container__button', { 'buttons-container__button--active': currentChartShown === '4-1' } ]"
+              :class="[
+                'buttons-container__button',
+                { 'buttons-container__button--active': currentChartShown === '4-1' },
+                { 'buttons-container__button--en': $i18n.locale === 'en' }
+              ]"
               @click="currentChartShown = '4-1'"
+              v-html="$t('POLITICAL_CONTRIBUTION.CHARTS[3][0]')"
             >
-              高政治獻金收入的立委與集團的關係
             </button>
           </div>
           <AppChartExpand
@@ -592,6 +644,8 @@ export default {
     &--active
       background-color #808080
       color white
+    &--en
+      height 200px
     &:focus
       outline none
     &:hover
