@@ -120,14 +120,14 @@
       </div>
     </article>
     <article v-if="slug === 'story2'">
-      <h1 class="section-content-story__title">立委篇／<br>老鳥與新秀，募款能力差了 6.6 倍</h1>
+      <h1 class="section-content-story__title" v-html="$t('POLITICAL_CONTRIBUTION.STORY2.TITLE')"></h1>
       <SectionContentCredits :publishedDate="'2017/11/13'"/>
       <div class="section-content-story__paragraph">
-        以候選人自主申報的政治獻金資料來看，第九屆區域立委的政治獻金流還是集中在少數人身上，共計 261 位候選人中，收入前 48 位掌握了五成的政治獻金，數據也顯示，「現任」立委有較好的募款優勢。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[0]') }}
       </div>
       <!-- chart2-1 here -->
       <div class="visualization">
-        <h2 class="visualization__title"><span class="visualization__title--highlight">48 名候選人（20%）</span>掌握了 50% 的政治獻金</h2>
+        <h2 class="visualization__title"><span class="visualization__title--highlight">{{ $t('POLITICAL_CONTRIBUTION.STORY2.CHART_TITLES[0][0]') }}</span>{{ $t('POLITICAL_CONTRIBUTION.STORY2.CHART_TITLES[0][1]') }}</h2>
         <h3 class="visualization__subtitle visualization__subtitle--mobile">點擊方塊看獻金資訊</h3>
         <iframe
           src="https://plotdb.io/v/chart/14734"
@@ -139,11 +139,13 @@
         </iframe>
       </div>
       <div class="section-content-story__paragraph">
-        從總收入、營利事業收入的排行中，前五名都是現任的立委。值得注意的是，營利事業收入排行榜中，位居第一、第二名的立委柯建銘與邱志偉，營利事業收入佔總收入的比例都超過五成。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[1]') }}
       </div>
       <!-- chart2-2 here -->
       <div class="visualization">
-        <h2 class="visualization__title">誰收到最多政治獻金捐贈？（總收入）</h2>
+        <h2 class="visualization__title">
+          {{ $t('POLITICAL_CONTRIBUTION.STORY2.CHART_TITLES[1]') }}
+        </h2>
         <div class="chart-container">
           <BarHorizontalOrdinalCandidate
             class="chart-container__chart"
@@ -156,7 +158,9 @@
       </div>
       <!-- chart2-3 here -->
       <div class="visualization">
-        <h2 class="visualization__title">誰收到最多營利事業政治獻金捐贈？</h2>
+        <h2 class="visualization__title">
+          {{ $t('POLITICAL_CONTRIBUTION.STORY2.CHART_TITLES[2]') }}
+        </h2>
         <div class="chart-container">
           <BarHorizontalOrdinalCandidate
             class="chart-container__chart"
@@ -167,22 +171,33 @@
           />
         </div>
       </div>
-      <h2 class="section-content-story__subtitle">台灣人捐款就像宗教信仰</h2>
+      <h2 class="section-content-story__subtitle">
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.SUBTITLES[0]') }}
+      </h2>
       <div class="section-content-story__paragraph">
-        現任立委有較高的募款能力，國內外皆然。如美國 2002 年的聯邦眾議員選舉，現任者的募款金額平均是挑戰者的 7 倍，獲勝率超過 90%；台灣政治學者王鼎銘針對第六屆立委做的政治獻金研究，連任者募款的平均金額超過新秀的 2 倍。而我們從第九屆的資料中看到，差距已經來到了 3.6 倍。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[2]') }}
       </div>
       <div class="section-content-story__paragraph">
-        從捐款者的角度而言，如美國的選舉資料顯示，利益團體的有八成的捐款會流向現任民代
-        <SectionContentStorysInfoboxHint :hint="'（註）'">
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[3]') }}
+        <SectionContentStorysInfoboxHint :hint="`（${$t('POLITICAL_CONTRIBUTION.STORY_HINT')}）`">
           <div>
-            2012 年內政部委託之<a class="section-content-story__link" href="http://ir.lib.pccu.edu.tw/retrieve/46392/RRPG10105-0231-2751535.pdf" target="_blank">《我國政治獻金制度改革之研究》</a>
+            {{ $t('POLITICAL_CONTRIBUTION.STORY2.HINTS[0][0]') }}
+            <a
+              class="section-content-story__link"
+              href="http://ir.lib.pccu.edu.tw/retrieve/46392/RRPG10105-0231-2751535.pdf"
+              target="_blank"
+            >
+              {{ $t('POLITICAL_CONTRIBUTION.STORY2.HINTS[0][1]') }}
+            </a>
           </div>
         </SectionContentStorysInfoboxHint>
-        ；時代力量黨團秘書長陳惠敏也以「宗教性」來形容台灣政治支持者的捐款動向，「台灣人傾向把錢投在他覺得會當選的人身上。選不上的他不投資，因為他（參選人）不會帶著你的政治理念往前走。」
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[4]') }}
       </div>
       <!-- chart2-4 here -->
       <div class="visualization">
-        <h2 class="visualization__title">現任立委佔優勢（與非現任立委比較）</h2>
+        <h2 class="visualization__title">
+          {{ $t('POLITICAL_CONTRIBUTION.STORY2.CHART_TITLES[3]') }}
+        </h2>
         <div class="chart-container">
           <TableDuel
             class="chart-container__chart"
@@ -193,14 +208,16 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        若以四分位數來拆解政治獻金分布的狀況，可以看到資源過度集中在少數候選人身上，尤其在非現任立委身上更明顯。就像我們將非現任的 189 位參選人收到的政治獻金由小至大排行，並分成四組，金額分佈在前 1/4 位的新竹市立委參選人邱顯智 收入 9,475,771 元，但分佈在 3/4 位的新北市立委參選人董建一只有 260,110 元，兩人相差了 36 倍。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[5]') }}
       </div>
       <div class="section-content-story__paragraph">
-        細看資料，發現獻金收入愈高的非現任立委參選人，幾乎都不是政治新手，大多由現任議員挑戰，如收入前十名的排行榜中，只有時代力量的兩位候選人是第一次參選。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[6]') }}
       </div>
       <!-- chart2-5 here -->
       <div class="visualization">
-        <h2 class="visualization__title">非現任立委獻金收入前十名</h2>
+        <h2 class="visualization__title">
+          {{ $t('POLITICAL_CONTRIBUTION.STORY2.CHART_TITLES[4]') }}
+        </h2>
         <div class="chart-container">
           <TableTopTen
             class="chart-container__chart chart-container__chart--wide"
@@ -211,11 +228,13 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        我們更進一步調查「第一次參選民選公職」的名單，發現不只募款能力與現任立委相差了 6.6 倍，連當選率都只有 9%。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[7]') }}
       </div>
       <!-- chart2-6 here -->
       <div class="visualization">
-        <h2 class="visualization__title">現任立委佔優勢（與第一次參選公職者比較）</h2>
+        <h2 class="visualization__title">
+          {{ $t('POLITICAL_CONTRIBUTION.STORY2.CHART_TITLES[5]') }}
+        </h2>
         <div class="chart-container">
           <TableDuel
             class="chart-container__chart"
@@ -226,17 +245,27 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        但從四分位數拆解，同樣出現了資源集中在少數人的現象。細看名單，在收入前十名的排行榜中，有一半的人屬於政治世家
-        <SectionContentStorysInfoboxHint :hint="'（註）'">
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[8]') }}
+        <SectionContentStorysInfoboxHint :hint="`（${$t('POLITICAL_CONTRIBUTION.STORY_HINT')}）`">
           <div>
-            此處引用《天下雜誌》<a class="section-content-story__link" href="http://topic.cw.com.tw/2015politicaldynasty/" target="_blank">「立委二代接班， 64 位政治世家全解析」</a>資料，定義為至少一位長輩、平輩或晚輩親屬從政。
+            {{ $t('POLITICAL_CONTRIBUTION.STORY2.HINTS[1][0]') }}
+            <a
+              class="section-content-story__link"
+              href="http://topic.cw.com.tw/2015politicaldynasty/"
+              target="_blank"
+            >
+              {{ $t('POLITICAL_CONTRIBUTION.STORY2.HINTS[1][1]') }}
+            </a>
+            {{ $t('POLITICAL_CONTRIBUTION.STORY2.HINTS[1][2]') }}
           </div>
         </SectionContentStorysInfoboxHint>
-        。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[9]') }}
       </div>
       <!-- chart2-7 here -->
       <div class="visualization">
-        <h2 class="visualization__title">第一次參選公職者獻金收入前十名</h2>
+        <h2 class="visualization__title">
+          {{ $t('POLITICAL_CONTRIBUTION.STORY2.CHART_TITLES[6]') }}
+        </h2>
         <div class="chart-container">
           <TableTopTen
             class="chart-container__chart chart-container__chart--wide"
@@ -247,11 +276,13 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        不過，2016 年的選舉，因為特殊的政治氛圍、以及新興政黨的出現，還是讓當選名單出現了新的氣象。位在收入前五名的丁守中、吳育昇連任挑戰失敗，代表砸錢並不一定就是選票的證明。我們也找出落選名單中捐獻收入最高的前五名：
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[10]') }}
       </div>
       <!-- chart2-8 here -->
       <div class="visualization">
-        <h2 class="visualization__title">誰收到最多捐獻最後卻沒選上？</h2>
+        <h2 class="visualization__title">
+          {{ $t('POLITICAL_CONTRIBUTION.STORY2.CHART_TITLES[7]') }}
+        </h2>
         <div class="chart-container">
           <BarHorizontalOrdinalCandidate
             class="chart-container__chart"
@@ -263,14 +294,16 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        其中，丁守中敗給該區深耕多年的議員吳思瑤，吳育昇則敗給該選區曾連任八屆的議員之女呂孫綾。第三、第四名的對手，則是這次的新興勢力時代力量，分別是林昶佐、洪慈庸，第五名的楊麗環則僅以 160 票之差輸給民進黨的鄭寶清。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[11]') }}
       </div>
       <div class="section-content-story__paragraph">
-        若以政黨來看，從資料中可以發現，國、民兩大黨的營利事業收入差異不大，但國民黨有偏高的政黨補助，民進黨個人捐贈則突破五成。而時代力量主要的捐獻來源是個人捐贈，營利事業捐贈相較於兩大黨的比例也較少。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[12]') }}
       </div>
       <!-- chart2-9 here -->
       <div class="visualization">
-        <h2 class="visualization__title">不同政黨立委的政治獻金收入組成</h2>
+        <h2 class="visualization__title">
+          {{ $t('POLITICAL_CONTRIBUTION.STORY2.CHART_TITLES[8]') }}
+        </h2>
         <div class="chart-container">
           <ParallelOrdinalPartyDonatesFrom
             class="chart-container__chart"
@@ -282,16 +315,16 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        另一個值得關注的角度是，這些由候選人自行申報的獻金資料，揭露了多少政治現實？我們的制度是否鼓勵政治人物誠實申報政治獻金？
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[13]') }}
       </div>
       <div class="section-content-story__paragraph">
-        台灣目前的制度，主要分為捐款人的年度捐獻總額與資格限制。在資格限制上，如營利事業「政府投資 20％」、「與政府有鉅額採購或建設契約」、「虧損中的企業」不得捐贈。限制看來合理，但執行查證資金來源的責任是由候選人承擔，中正大學政治系副教授陳尚志就指出，「誠實申報的人必須負擔很高的成本，不打算誠實申報的人，就可以輕易逃避懲罰。」
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[14]') }}
       </div>
       <div class="section-content-story__paragraph">
-        這些「不打算誠實申報的人」可以如何規避？像是《政治獻金法》第 21 條規定，收受捐款總額超過一千萬，才須委託會計師查核簽證。而 2016 年的區域立委選舉，就有 155 個候選人申報的政治獻金小於一千萬元，占全部候選人的 59%。陳尚志也提到，參選人申報的會計報告書缺少對候選人自有資金的揭露，許多政治人物透過基金會募款，皆不受《政治獻金法》管轄，監察院也不曾主動追查。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[15]') }}
       </div>
       <div class="section-content-story__paragraph">
-        至於現行的政治獻金制度還有什麼問題，又要如何讓它變得更好呢？請期待我們的追蹤報導喔！
+        {{ $t('POLITICAL_CONTRIBUTION.STORY2.P[16]') }}
       </div>
     </article>
     <article v-if="slug === 'story3'">

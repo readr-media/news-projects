@@ -120,5 +120,55 @@ export const POLITICAL_CONTRIBUTION = {
         ]
       }
     ]
+  },
+  'STORY2': {
+    'TITLE': "Legislators - <br>The veterans' capacity for fundraising is 6.6 times more than newcomers",
+    'SUBTITLES': [
+      'Donations behaviors in Taiwan look more like religious belief'
+    ],
+    'P': [
+      `According to the data of candidates' self-declaration, donations to the 9th district legislative candidates were concentrated on a very few of them. Among 261 candidates, the top 48 raisers controlled 50% of all the donations. The data shows that "incumbent" legislators gained greater advantage on fundraising.`,
+      "From the rankings of total incomes and incomes of donations from profit-seeking businesses, all the top 5 raisers are incumbent legislators. It's remarkable that legislators Chien-Ming Ker and Chih-Wei Chiu respectively ranked first and second in terms of donations from profit-seeking businesses, which constituted over 50% of total incomes in both cases.",
+      "Incumbent legislators gain more advantage on fundraising, and it happens in Taiwan and other countries. Take 2002 US congressional election for example, incumbents outraised challengers by seven times and won more than 90% of the time. According to political science professor Ding-Ming Wang's research on political donations to the 6th legislators, returning candidates outraised newcomers by two times, and the gap grew to 3.6 times in the 9th legislator election.",
+      "In terms of donors, eighty percent of interested groups' donations go to incumbents based on America's elections results",
+      `Hui-Min Chen, the secretary general of New Power Party, described that behavior pattern of political donors in Taiwan manifest religious quality, "Taiwan's people tend to donate to candidates with higher winning rates. The donors won't invest in candidates without possibility of winning because they have no chance to fulfill donors' political ideas."`,
+      'If we used quartiles to analyze the distribution of political donations, we found that financial resources were too concentrated on a very few of candidates, especially for non-incumbents. We ranked political donations to 189 non-incumbents in order of the sum and then divide them into four groups. Legislator Hsien-Chih Chiu, candidate for Hsinshu City legislator, appeared in the first quartile and received NT$9,475,771. Legislator Chien-Yi Tung appeared in the third quartile and received NT$260,110, 36 times less than Hsien-Chih Chiu.',
+      'We found that almost all the non-incumbents among the top raisers are not political newcomers, and most of them are current councilors. Among top ten raisers, two candidates of New Power Party are first-time challenger.',
+      'We analyzed the list of first-time candidates in the election for public office and the data showed that their capacity for fundraising were 6.6 times less than incumbents, and had win rate of 9%.',
+      'In terms of quartiles, we found again that financial resources were too concentrated on a very few of candidates. candidates. Half of the top ten raisers came from political families',
+      '.',
+      "However, due to bizarre political situation and the rising of new parties, the list of elected legislators appeared different from previous elections. Shou-Chung Ting and Yu-Sheng Wu who were among the top five fund-raisers failed to be re-elected, which showed that money alone can't guarantee success. We also identified the top five fund-raisers among losers as follows:",
+      'Shou-Chung Ting was defeated by municipal councilor Su-Yao Wu who had devoted time and effort for many years; Yu-Sheng Wu got lost to Sun-ling Lu, daughter of a municipal councilor. The third and fourth fund-raisers were defeated respectively by Freddy Lim and Tzu-Yung Hung of New Power Party. Li-Huan Yang, the fifth fun-raiser, was beaten by Pao-Ching Cheng of DDP by a margin of 160 votes.',
+      'In terms of political party, there were little differences between KMT and DPP. KMT candidates received more subsidies from the party. Personal donations to DPP candidates accounted for more than half of the total donations. NNP candidates received more donations from individual donors than from profit-seeking businesses, compared with other two parties.',
+      "It's also worth noting that whether those donations data declared directly by candidates really reveal political reality. Does our system encourage politicians truthfully declare political donations?",
+      `According to official regulations in Taiwan, there are limitations on the amount of donations and qualifications of donors. As for the qualification of donors, public enterprises or the civil enterprises in which the government holds not less than 20% of the capital, "manufacturers that have signed government procurement contract of a large amount or an investment contract of important public construction", and "profit-seeking businesses in accumulative deficit" are not allowed to contribute to political donations. Those regulations seem reasonable, but candidates have responsibility to verify the sources of donations. Shang-Chih Chen, associate professor of political science of National Chung Cheng University said, "those who declare truthfully need to bear higher cost while those who don't can get away with punishment easily.`,
+      "How do those who don't declare truthfully avoid penalty? Based on Article 12 of Political Donations Act, if the amount of donation reaches ten million NT dollars, it should be audited and attested by the accountant entrusted. In 2016 legislator election, there were 155 candidates, 59% of all candidates, whose individual incomes from political donations were less than ten million NT dollars. Shang-Chih Chen also noted that accounting report doesn't include information of private capital. Many candidates raise funds by way of establishing foundations to circumvent the law, and the Control Yuen won't take the initiative to investigate it.",
+      'What are other problems with our current political donations system? How can we make it better? Please follow our reporting.',
+    ],
+    'CHART_TITLES': [
+      [
+        '48 candidates (20%) ',
+        'controlled 50% of all the donations'
+      ],
+      'Who received most political donations? (Total incomes)',
+      'Who received most political donations from profit-seeking businesses?',
+      'Incumbents gain greater advantage (compared with non-incumbents)',
+      'Top ten raisers among non-incumbents',
+      'Incumbents gain more advantage (compared with first-time candidates in the election to public office)',
+      'Top ten raisers among first-time candidates in election for public office',
+      'Who received most donations but failed to win?',
+      "The compositions of donations to each party's candidates",
+    ],
+    'HINTS': [
+      [
+        'Minister of the Interior in 2012 - ',
+        "Research on Taiwan's Political Donations System"
+      ],
+      [
+        '此處引用《天下雜誌》',
+        '「立委二代接班， 64 位政治世家全解析」',
+        '資料，定義為至少一位長輩、平輩或晚輩親屬從政。'
+      ]
+    ]
   }
 }
