@@ -51,6 +51,44 @@ export const POLITICAL_CONTRIBUTION = {
       '高政治獻金收入的立委與集團的關係'
     ]
   ],
+  'CREDITS': {
+    'DATA': {
+      'WORDING': '資料整理：',
+      'MEMBER': [
+        '李又如',
+        '熊凱文'
+      ]
+    },
+    'WRITER': {
+      'WORDING': '文字：',
+      'MEMBER': '李又如'
+    },
+    'FE': {
+      'WORDING': '工程：',
+      'MEMBER': '熊凱文'
+    },
+    'DESIGN': {
+      'WORDING': '設計：',
+      'MEMBER': '陳怡蒨'
+    },
+    'COOP': {
+      'WORDING': '資料協力：',
+      'MEMBER': [
+        'Ronny Wang',
+        'Timothy Lee',
+        '參與「鍵盤救國」的鄉民們'
+      ]
+    },
+    'ANALYSIS': {
+      'WORDING': '資料分析：',
+      'MEMBER': '李宗榮'
+    },
+    'CONSULT': {
+      'WORDING': '資料顧問：',
+      'MEMBER': '卞中佩'
+    },
+    'RELEASE_DATE': '發布日期：'
+  },
   'EXPLORE': {
     'TITLE': '查找政商關係',
     'P': [
@@ -121,21 +159,6 @@ export const POLITICAL_CONTRIBUTION = {
       }
     ]
   },
-  // 'STORY': {
-  //   'TITLE': '',
-  //   'SUBTITLES': [
-  //     ''
-  //   ],
-  //   'P': [
-  //     ''
-  //   ],
-  //   'CHART_TITLES': [
-  //     ''
-  //   ],
-  //   'HINTS': [
-  //     ''
-  //   ]
-  // }
   'STORY2': {
     'TITLE': '立委篇／<br>老鳥與新秀，募款能力差了 6.6 倍',
     'SUBTITLES': [

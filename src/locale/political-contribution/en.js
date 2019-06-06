@@ -51,6 +51,44 @@ export const POLITICAL_CONTRIBUTION = {
       'The relationship between the legislators with high political contributions and the industries',
     ]
   ],
+  'CREDITS': {
+    'DATA': {
+      'WORDING': 'Data Compilation by ',
+      'MEMBER': [
+        'Yu-Ju Lee',
+        'Kai-Wen Hsiung'
+      ]
+    },
+    'WRITER': {
+      'WORDING': 'Written by ',
+      'MEMBER': 'Yu-Ju Lee'
+    },
+    'FE': {
+      'WORDING': 'Web production by ',
+      'MEMBER': 'Kai-Wen Hsiung'
+    },
+    'DESIGN': {
+      'WORDING': 'Design by ',
+      'MEMBER': 'Yi-Chian Chen'
+    },
+    'COOP': {
+      'WORDING': 'Data cooperation by ',
+      'MEMBER': [
+        'Ronny Wang',
+        'Timothy Lee',
+        'netizens'
+      ]
+    },
+    'ANALYSIS': {
+      'WORDING': 'Data analysis by ',
+      'MEMBER': 'Zong-Rong Lee'
+    },
+    'CONSULT': {
+      'WORDING': 'Data consultant by ',
+      'MEMBER': 'Chung-pei Pien'
+    },
+    'RELEASE_DATE': 'Release date: '
+  },
   'EXPLORE': {
     'TITLE': 'Search for politics-business relations',
     'P': [
