@@ -856,10 +856,10 @@
       </div>
     </article>
     <article v-if="slug === 'story6'">
-      <h1 class="section-content-story__title">政治獻金資料到底解密了什麼？</h1>
+      <h1 class="section-content-story__title" v-text="$t('POLITICAL_CONTRIBUTION.STORY6.TITLE')"></h1>
       <SectionContentCredits :isNewCredit="true" :publishedDate="'2018/09/27'"/>
       <div class="section-content-story__paragraph">
-        READr 政治獻金數位化專案是延續 2014 年 g0v 零時政府透過鄉民的力量數位化資料的靈感，最後成功促使政府修法。目前監察院的查詢平台標案已經決標，政治獻金資料未來是否真的能邁向公開透明，我們會與您一起繼續監督！
+        {{ $t('POLITICAL_CONTRIBUTION.STORY6.P[0]') }}
       </div>
       <SectionContentStorysTimelines/>
     </article>
