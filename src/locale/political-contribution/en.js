@@ -330,5 +330,6 @@ export const POLITICAL_CONTRIBUTION = {
     'P': [
       `"The political donation digitalization project" is inspired by the 2014 g0v government to digitize data through the power of the citizens, and finally succeeded in urging the government to change the law. At present, the inspection platform of the Inspectorate has been finalized. Whether the political contribution information can be completely transparent in the future, let us keep our eyes on.`
     ],
+    'LEGEND': 'Government related response or act'
   }
 }
