@@ -7,6 +7,36 @@ export const POLITICAL_CONTRIBUTION = {
     '無黨團結聯盟': 'npsu',
     '親民黨': 'pfp',
   },
+  'NAVS': {
+    'CHARTS': 'Charts',
+    'EXPLORE': 'Explore',
+    'ANALYSIS': 'Analysis',
+    'ANALYSIS_STORY1': 'More than 2.8 billion donations to legislative candidates in a single election',
+    'ANALYSIS_STORY2': `Legislators - The veterans' capacity for fundraising is 6.6 times more than newcomers`,
+    'ANALYSIS_STORY3': `Business - Money-Power Game? Reveal Donors' Investment Register`,
+    'ANALYSIS_STORY4': `Are the details of political donations completely open?`,
+    'ANALYSIS_STORY5': `What the data tells us? Five crutical findings of political donations.`,
+    'ANALYSIS_STORY6': `What does the data of political donations reveal?`,
+    'DATA': 'Data',
+    'RELATED': 'Relateds',
+    'COOP': 'Cooperate',
+  },
+  'NAVS_SIDEBAR': {
+    'CHARTS': 'Charts',
+    'EXPLORE': 'Explore',
+    'ANALYSIS': 'Analysis',
+    'ANALYSIS_STORY1': 'More than 2.8 billion donations to legislative candidates in a single election',
+    'ANALYSIS_STORY2': `Legislators - <br>The veterans' capacity for fundraising is 6.6 times more than newcomers`,
+    'ANALYSIS_STORY3': `Business - <br>Money-Power Game? Reveal Donors' Investment Register`,
+    'ANALYSIS_STORY4': `Are the details of political donations completely open?`,
+    'ANALYSIS_STORY5': `What the data tells us? Five crutical findings of political donations.`,
+    'ANALYSIS_STORY6': `What does the data of political donations reveal?`,
+    'DATA': 'Data',
+    'RELATED': 'Relateds',
+    'COOP': 'Cooperate',
+    'FOLLOW': 'Follow',
+    'DONATE': 'Donate'
+  },
   'LANDING': {
     'TITLE': 'Political Donations in the Statistics',
     'SUBTITLES': [
@@ -14,12 +44,6 @@ export const POLITICAL_CONTRIBUTION = {
       'eight-year',
       'investor list'
     ],
-    'NAVS': {
-      'CHARTS': 'Charts',
-      'EXPLORE': 'Explore',
-      'ANALYSIS': 'Analysis',
-      'DATA': 'Data'
-    }
   },
   'CONTENT_HEADER': {
     'FOLLOW': 'Follow',

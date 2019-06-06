@@ -11,7 +11,7 @@
           class="section-landing__nav section-landing__nav--delay2"
           :iconSrc="'chart-g.png'"
           :hint="{ 
-            text: $t('POLITICAL_CONTRIBUTION.LANDING.NAVS.CHARTS'),
+            text: $t('POLITICAL_CONTRIBUTION.NAVS.CHARTS'),
             type: 'router-link',
             link: 'dashboard'
           }"
@@ -20,7 +20,7 @@
           class="section-landing__nav section-landing__nav--delay3"
           :iconSrc="'tool-g.png'"
           :hint="{ 
-            text: $t('POLITICAL_CONTRIBUTION.LANDING.NAVS.EXPLORE'),
+            text: $t('POLITICAL_CONTRIBUTION.NAVS.EXPLORE'),
             type: 'router-link',
             link: 'explore'
           }"
@@ -29,7 +29,7 @@
           class="section-landing__nav section-landing__nav--delay4"
           :iconSrc="'article-g.png'"
           :hint="{ 
-            text: $t('POLITICAL_CONTRIBUTION.LANDING.NAVS.ANALYSIS'),
+            text: $t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS'),
             type: 'router-link',
             link: 'story1'
           }"
@@ -38,7 +38,7 @@
           class="section-landing__nav section-landing__nav--delay5"
           :iconSrc="'paper-g.png'"
           :hint="{ 
-            text: $t('POLITICAL_CONTRIBUTION.LANDING.NAVS.DATA'),
+            text: $t('POLITICAL_CONTRIBUTION.NAVS.DATA'),
             type: 'href',
             link: 'https://github.com/mirror-media/politicalcontribution'
           }"

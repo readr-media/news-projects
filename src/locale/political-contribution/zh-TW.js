@@ -7,19 +7,43 @@ export const POLITICAL_CONTRIBUTION = {
     '無黨團結聯盟': 'npsu',
     '親民黨': 'pfp',
   },
+  'NAVS': {
+    'CHARTS': '圖表區',
+    'EXPLORE': '查找政商關係',
+    'ANALYSIS': '獻金解析文章',
+    'ANALYSIS_STORY1': '選一次立委，金流超過 28 億！',
+    'ANALYSIS_STORY2': '立委篇／老鳥與新秀，募款能力差了 6.6 倍',
+    'ANALYSIS_STORY3': '企業篇／金權遊戲？翻開金主的投資名冊',
+    'ANALYSIS_STORY4': '政治獻金開放了嗎？',
+    'ANALYSIS_STORY5': '資料怎麼看？政治獻金的五個發現',
+    'ANALYSIS_STORY6': '政治獻金資料到底解密了什麼？',
+    'DATA': '原始資料',
+    'RELATED': '查看相關討論',
+    'COOP': '鍵盤救國一起來',
+  },
+  'NAVS_SIDEBAR': {
+    'CHARTS': '圖表區',
+    'EXPLORE': '查找政商關係',
+    'ANALYSIS': '獻金解析文章',
+    'ANALYSIS_STORY1': '選一次立委，金流超過 28 億！',
+    'ANALYSIS_STORY2': '立委篇／<br>老鳥與新秀，募款能力差了 6.6 倍',
+    'ANALYSIS_STORY3': '企業篇／<br>金權遊戲？翻開金主的投資名冊',
+    'ANALYSIS_STORY4': '政治獻金開放了嗎？',
+    'ANALYSIS_STORY5': '資料怎麼看？政治獻金的五個發現',
+    'ANALYSIS_STORY6': '政治獻金資料到底解密了什麼？',
+    'DATA': '原始資料',
+    'RELATED': '查看相關討論',
+    'COOP': '鍵盤救國一起來',
+    'FOLLOW': '追蹤最新進度',
+    'DONATE': '贊助專題'
+  },
   'LANDING': {
     'TITLE': '數讀政治獻金',
     'SUBTITLES': [
       '翻開立委',
       '八年份',
       '的金主投資名冊'
-    ],
-    'NAVS': {
-      'CHARTS': '圖表區',
-      'EXPLORE': '查找政商關係',
-      'ANALYSIS': '獻金解析文章',
-      'DATA': '原始資料'
-    }
+    ]
   },
   'CONTENT_HEADER': {
     'FOLLOW': '追蹤',
