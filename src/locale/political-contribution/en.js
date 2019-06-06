@@ -317,7 +317,7 @@ export const POLITICAL_CONTRIBUTION = {
       `Which groups donated in all 3 legislative elections? preference of party changed? `,
     ],
     'HINTS': [
-      '假設 A 公司登記為「製造業」與「批發零售業」，捐贈 2 萬元，則計算方式為「製造業 2 萬元」、「批發零售業 2 萬元」，故加總金額會大於總金額',
+      `If company A who donated 20000 registered both "manufacturing" and "wholesale and retail trade", then we calculated as "manufacturing 20000" and "wholesale and retail trade 20000", therefore the amount would be more than the actual sum.`,
       [
         'In May of 2016, The Economist released ',
         'Crony Capitalism',
