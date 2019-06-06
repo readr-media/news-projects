@@ -170,5 +170,56 @@ export const POLITICAL_CONTRIBUTION = {
         '資料，定義為至少一位長輩、平輩或晚輩親屬從政。'
       ]
     ]
+  },
+  'STORY3': {
+    'TITLE': "Business - <br>Money-Power Game? Reveal Donors' Investment Register",
+    'P': [
+      "Who can be the sponsors of legislators? There are five sources of political donations: individuals, profit-seeking businesses, political parties, civil associations, and anonymous donations. In 2016 legislator election, donations from profit-seeking businesses accounted for 32% of total donations. Among 216 candidates, there were only eight candidates who didn't receive any donations from profit-seeking businesses.",
+      `"Money isn't the only source of political influence, but it's the most important one in a capitalist society." Zong-Rong Lee, the research fellow at Academia Sinica's Institute of Sociology wrote in the essay`,
+      "Corporate Power and Democracy: An Analysis of Business Groups' Campaign Contribution in the 2008 Legislator Election",
+      'that American political scientist C. Wright Mills claimed that those who control economic power can transform political donations into political operation.',
+      'Before exploring the idea of power operation, we should understand the limitations of political donations in Taiwan to distinguish the various meanings of those donations.',
+      'Political donations are tax deductible, but the amount of deduction may not exceed 10% of the total income, and may not exceed NT$500,000. From this point of view, we can say that most of companies contribute donations for the purpose of tax deduction. Of 4,126 companies, there were 3,769 companies whose single donation was less than NT$500,000; there were only 393 companies whose single donation was more than NT$500,000.',
+      `The amount of each company's donation to single candidate may not exceed NT$1,000,000, and amount of donations to multiple candidates may not exceed NT$1,000,000. Shang-Chih Chen, associate professor of political science of National Chung Cheng University pointed out that "if a company want to donate to multiple candidates for the purpose of public relation and the amount of its donation to each candidate may reach NT$200,000 at the most. If the amount of donation to individual candidate exceeds NT$500,000 or reach NT$1,000,000, we should pay more attention to those cases."`,
+      'The candidates are allowed to receive political donations only ten months before the polling day. The amount of donations is calculated by year. For example, since 2016 legislator election was held in January, a company can make donations once in the end of 2015 and do again in the beginning of 2016, so that its donations to the same candidate can reach NT$2,000,000. Both Chien-Ming Ker and Yu-Sheng Wu had received cross-year donations.',
+      'We worked with Zong-Rong Lee and compared 5,797 details of donations with the data of business groups',
+      'We found that 432 companies affiliated to 254 business groups accounted for 40% of donations from profit-seeking businesses. The Far Eastern Group owned by Douglas Hsu ranked first with donations of 54 million NT dollars, 1.6 times more than the second one The Yulon Group',
+      'From the list of top twenty donations from business groups, we found that there were 15 (Far Eastern, Yulon, Taiwan Cement, Ruentex, Vedan, Yeangder, Lealea, Taiwan International Securities, ASE, Ta Ching Securities, Solomon, Goldsun, Hontai, Kindom, MFC) out of 21 business groups are family business groups',
+      ', with the percentage of 71%',
+      `Zong-Rong Lee said "family business groups will actively build and maintain relationships with official sectors to sustain their businesses. They make political donations to broaden business network, consolidate family's ownership and provide resources to the outer world. The establishment of a strong relationship can take a great amount of time. Family business group's connections to the society and government can be inherited by next generations.`,
+      "Compared with Lee's ",
+      'research',
+      ' on 2008 legislator election, the data showed that donations from business groups in 2016 election had risen, such as donations from Far Eastern Group increased 14 millions and the ones from Yulon Group increased 16.54 millions. Some other business groups withdrew from the ranking. Donations from some of business groups which were among top thirty donors in 2008 election had declined, including Farglory, Chinatrust, Formosa Plastics, Core Pacific, Nice, Polaris, Prince Motors, and Uni-President.',
+      `We haven't figured out the reasons why business groups increase or decrease their donations, but Lee suggested that "maybe times have changed."`,
+      `With a high degree of economic liberalization, Taiwan's government had offered benefits to conglomerates as much as possible. The influence of political power on economic benefits had declined significantly. For most of the conglomerates, political donation is not so important as before, and they are less enthusiastic about it.`,
+      `Which industries need to deal with governments? Lee implied that "people who desire to influence politicians are those whose businesses are regulated strictly by government. Take US for example, economic benefits of some industries are controlled by government, such as national defense, water and electric power, telecommunications network, gas, and petrochemical industry. Business groups in those industries have stronger incentives to exert political influence.`,
+      `"In Taiwan, financial holding companies made higher political donations in the early days since financial industry had been subject to extensive government regulations; the concession of cement industry will be possible affected by legal regulations for many years. If an industry is influenced with the changes of national policies, business groups in this industry will be more enthusiastic about political donations," said Lee.`,
+      `He also indicated that "electronics industry is less willing to making political donations compared with other industries, since its competitive situation is mainly determined by global market rather than government support." To analyze the distribution of industries of business donors, we decided that a subsidiary company is assigned to the industry in which its parent company operates. The result is as follows.`,
+      `There were many of the industries which are easily affected by official policies on the list. However, "others" ranked first, follow by electronics industry, which was less enthusiastic about political donations as Lee mentioned before. We speculated that the total number of companies might be an important impact factor; that's to say, there might be more companies in "others" and electronics industry in Taiwan.`,
+      `We made further analysis on the share of companies which were more enthusiastic about political donations in their industries. The result is as follows.`,
+      'In May of 2016, The Economist released ',
+      'Crony Capitalism',
+      ' index that ranks countries on the wealth of billionaires as a percentage of GDP. Taiwan ranked 10th among 22 countries with crony sector wealth accounting for 3.2 percent of GDP, higher than Japan, South Korea, and China.',
+      'The higher the ratio, the more likely it is that success of businesses in the country depends on close relationships between business and government officials, and all the preferential and favorable benefits offered to businesses are legitimate. They will urge governments through monopoly or lobby to exert administrative power to provide them better environment conditions and greater benefits. In short, they leverage their political connections to make money.',
+      'The rent-seeking ',
+      'sectors',
+      ` covered in The Economist's crony capitalism index included casino, defense, deposit-taking banking and investment banking, infrastructure and pipelines, oil/gas/chemicals/ other energy, real estate, construction, steel/other metals/mining/commodities, and so on. From the data of our project, we found that six out of top ten generous industries belonged to rent-seeking sectors.`,
+      'The issue of political connections is highly sensitive. Regulations for political donations from profit-seeking businesses vary from countries. According to ',
+      "Research on Taiwan's Political Donations System",
+      ` commissioned by Minister of the Interior, businesses in America, South Korea, Canada, and France aren't allowed to make political donations, and businesses in Japan are limited to make donations to political parties (rather than individual politicians).`,
+      `The project leader Tai-shun Yang wrote in the research paper, "more and more democratic nations ban corporate and union donations and Taiwan's government should refer to other countries' best practices, especially donations from profit-seeking businesses are limited to ten times more than donations from the individual. The research team suggests that government should examine corporate and union donations with more severe standards."`,
+      `"But it's hard to stop the trend of businesses' intention to dominate politics through political donations. Even though we can ban all the donations, collusion between government and business sectors will be gone completely? I don't think so. The corporate will find new way to make donations," said Zong-Rong Lee. "The key point is that to what extent we want to make political donations transparent."`,
+      `Taiwan's Political Donations Act was enacted in 2014. Though political candidates are requested to declare the details of political donations, does the government-business relationships become more transparent? Are there some places that receive no sunlight? Please subscribe to our news stories to get new updates about political donations.`
+    ],
+    'CHART_TITLES': [
+      'The compositions of donations from profit-seeking businesses',
+      'Which business groups/companies made biggest donations to candidates?',
+      'The top ten generous industries',
+      'What industries have more interactions with politicians?'
+    ],
+    'HINTS': [
+      `The data of business groups were collected with the help of Zong-Rong Lee through comparison with several business databases and human verification. Please email us or leave your message to us if anything is missed. What's more, we covered only the subsidies affiliated to business groups at the time of making donations. Those subsidies that entered or withdrew from business groups after 2016 weren't included.`,
+      'Family business groups refer to those in which family members are involved as directors or as major owners of listed companies',
+    ]
   }
 }
