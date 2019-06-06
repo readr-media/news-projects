@@ -10,7 +10,7 @@
         :events="originEvents"
       />
     </transition>
-    <button class="timelines__toggle-g0v" @click="toggleOrigin">{{ originHint }} g0v 零時政府專案起源</button>
+    <button class="timelines__toggle-g0v" @click="toggleOrigin">{{ originHint }} {{ origin }}</button>
     <div v-show="!showOrigin" class="timelines__government-legend government-legend">
       <span>{{ $t('POLITICAL_CONTRIBUTION.STORY6.LEGEND') }}</span>
       <img class="government-legend__icon" src="/proj-assets/political-contribution/government.png" alt="">
@@ -44,7 +44,12 @@ export default {
       return this.$i18n.locale === 'en' ? actionEventsEN : actionEvents
     },
     originHint () {
-      return this.showOrigin ? '關閉' : '看'
+      return this.showOrigin ?
+        (this.$i18n.locale === 'en' ? 'Close' : '關閉') :
+        (this.$i18n.locale === 'en' ? 'See' : '看')
+    },
+    origin () {
+      return this.$i18n.locale === 'en' ? 'how the project "g0v government" started' : 'g0v 零時政府專案起源'
     }
   },
   methods: {
