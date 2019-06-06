@@ -654,17 +654,21 @@
       </div>
     </article>
     <article v-if="slug === 'story5'">
-      <h1 class="section-content-story__title">資料怎麼看？<br>政治獻金的五個發現</h1>
+      <h1 class="section-content-story__title" v-html="$t('POLITICAL_CONTRIBUTION.STORY5.TITLE')"></h1>
       <SectionContentCredits :isNewCredit="true" :showConsultant="true" :publishedDate="'2018/09/27'"/>
       <div class="section-content-story__paragraph">
-        去年做完第九屆立委政治獻金數位化之後，我們發現還有很多問題無法解答，浮現「要是有歷史資料能夠對照就好了」的念頭。我們藉由鄉民的幫助，完成了第七屆、第八屆立委營利事業捐贈的數位化。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[0]') }}
       </div>
       <div class="section-content-story__paragraph">
-        當然，這份資料還是無法百分之百呈現選舉期間的金流樣貌（但這牽涉到候選人自主申報與監察院是否主動調查），卻是這個議題重要的起點。我們發現了一些有趣的現象：
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[1]') }}
       </div>
-      <h2 class="section-content-story__subtitle">變心了！大多數的集團捐贈的政黨傾向不是鐵板一塊</h2>
+      <h2 class="section-content-story__subtitle">
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.SUBTITLES[0]') }}
+      </h2>
       <div class="visualization">
-        <h3 class="visualization__subtitle">哪些集團捐最多錢？捐藍還捐綠？</h3>
+        <h3 class="visualization__subtitle">
+          {{ $t('POLITICAL_CONTRIBUTION.STORY5.CHART_TITLES[0]') }}
+        </h3>
         <SectionContentExploreRadios class="visualization__radios"/>
         <div class="chart-container">
           <ScatterOrdinalCorpDonates
@@ -678,16 +682,18 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        2008 年捐獻金額在第 10 名（共捐了 530 萬元）的台塑集團，在之後的捐獻金額都不若以往，2012 年共捐了 135 萬、2016 年只捐了 110 萬，但皆有藍綠都押寶的狀況。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[2]') }}
       </div>
       <div class="section-content-story__paragraph">
-        知名集團如 2008 年排第 18 名（共捐獻 370 萬）的元大集團，只在 2016 年重出江湖捐獻了 100 萬給兩位民進黨的候選人；而 2008 年排第 14 名的統一集團，則完全消失在之後兩個年度的政治獻金金流中。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[3]') }}
       </div>
       <div class="section-content-story__paragraph">
-        另外 2008 年不在前 10 名內（總共捐了 408 萬排第 15 名）味丹企業，在之後兩屆用加倍的捐獻金額爬上了第五名。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[4]') }}
       </div>
       <div class="visualization">
-        <h3 class="visualization__subtitle">哪些集團三屆立委選舉都捐錢？政黨傾向變化？</h3>
+        <h3 class="visualization__subtitle">
+          {{ $t('POLITICAL_CONTRIBUTION.STORY5.CHART_TITLES[1]') }}
+        </h3>
         <SectionContentExploreRadios class="visualization__radios"/>
         <div class="chart-container">
           <ScatterOrdinalCorpDonates
@@ -703,18 +709,20 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        更進一步，我們整理出三屆立委選舉都有捐錢的集團，並觀察它們捐錢時的政黨傾向，發現只有少數集團是鐵板一塊。大多數集團捐贈的候選人政黨光譜都大致從藍慢慢走向綠，有些企業在 2016 年的立委選舉時甚至藍綠翻盤。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[5]') }}
       </div>
       <div class="section-content-story__paragraph">
-        2008 年時，捐獻金額在前十名的集團捐獻傾向幾乎都偏藍，只有態度變動很大的台灣基礎集團 38％偏綠（2012 年變成偏藍 72%）、以及潤泰集團80%偏綠跟其他集團有不同的答案。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[6]') }}
       </div>
       <div class="section-content-story__paragraph">
-        值得一提的是，潤泰集團在大多數集團慢慢往綠走的光譜中，做出了相反的決定。2012 年捐獻是 100% 捐綠的潤泰，2016 年只剩下 20%，有高達 68% 的捐款捐給國民黨候選人。  
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[7]') }}
       </div>
       <div class="section-content-story__paragraph">
-        2012 年，大慶集團（100%）、金鼎證券集團（100%）、燁聯鋼鐵集團（100%）與裕隆集團（97%）仍保持對國民黨候選人的高支持度，但到了2016 年，只剩大慶集團是 100% 捐獻給國民黨，裕隆的「忠誠度」掉到 70%，燁聯鋼鐵集團甚至只剩 38%，首度出現綠大於藍的捐獻傾向。而捐獻金額始終最高的遠東集團，則從偏藍（72%）變成兩邊押寶的偏綠。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[8]') }}
       </div>
-      <h2 class="section-content-story__subtitle">捐最多政治獻金的產業為批發零售業、製造業與不動產業</h2>
+      <h2 class="section-content-story__subtitle">
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.SUBTITLES[1]') }}
+      </h2>
       <div class="visualization">
         <!-- <h2 class="visualization__title">佛心產業前十名</h2> -->
         <SectionContentExploreRadios class="visualization__radios"/>
@@ -728,15 +736,25 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        我們改變了統計產業類別的方式，以財政部稅籍資料為主，<a class="section-content-story__link" href="http://www.mof.gov.tw/public/Attachment/34811505540.pdf" target="_blank">由行業代碼對應到稅務行業分類的十九大分類</a>。由於一間公司可能會登記多個業別
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[9]') }}
+        <a
+          class="section-content-story__link"
+          href="http://www.mof.gov.tw/public/Attachment/34811505540.pdf"
+          target="_blank"
+        >
+          {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[10]') }}
+        </a>
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[11]') }}
         <SectionContentStorysInfoboxHint :hint="`（${$t('POLITICAL_CONTRIBUTION.STORY_HINT')}）`">
           <div>
-            假設 A 公司登記為「製造業」與「批發零售業」，捐贈 2 萬元，則計算方式為「製造業 2 萬元」、「批發零售業 2 萬元」，故加總金額會大於總金額
+            {{ $t('POLITICAL_CONTRIBUTION.STORY5.HINTS[0]') }}
           </div>
         </SectionContentStorysInfoboxHint>
-        ，而只要有販賣行為皆得登記批發零售業，我們猜測是因為母體數量造成它連續拿下第一名的結果。三屆的排名並沒有太大的差異。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[12]') }}
       </div>
-      <h2 class="section-content-story__subtitle">最積極捐獻政治獻金的產業為礦業、電力燃氣業、不動產業</h2>
+      <h2 class="section-content-story__subtitle">
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.SUBTITLES[2]') }}
+      </h2>
       <div class="visualization">
         <!-- <h2 class="visualization__title">哪些產業最積極捐錢給立委？</h2> -->
         <SectionContentExploreRadios class="visualization__radios"/>
@@ -750,18 +768,28 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        若考慮母體數，更進一步分析捐獻的「積極度」（捐獻公司數占為該年度該分類總公司數），第一名為礦石與土石採取（2016年、2012年）及電力及燃氣供應（2008年），三屆的排名也沒有太大差異。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[13]') }}
       </div>
       <div class="section-content-story__paragraph">
-        這些高積極度的產業大多符合《經濟學人》所列「靠關係賺錢」的裙帶關係產業
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[14]') }}
         <SectionContentStorysInfoboxHint :hint="`（${$t('POLITICAL_CONTRIBUTION.STORY_HINT')}）`">
           <div>
-            2016 年《經濟學人》（The Economist）發布「裙帶資本主義指數」（Crony Capitalism） <a class="section-content-story__link" href="https://www.economist.com/international/2016/05/07/the-party-winds-down" target="_blank">報告</a> ，統計各國的億萬富豪在與政府往來密切的行業中，所獲取的財富佔 GDP 的比例。在 22 個國家中，台灣以 3.2% 排名第 10 名，高於亞洲的日本、韓國、甚至中國。指數愈高，就代表在這個國家裡有愈多的企業，商業的成功與否取決於政商關係的密切度，而這些優惠與偏袒都是合法的。他們通常會以壟斷或遊說等手段，讓政府運用行政權力，提供較好的生存環境與利益。簡單來說，就是「靠關係」賺錢。這些產業有賭場、國防、信貸投資銀行、基礎設施、管線、油、瓦斯等能源業、房地產、建設業、鋼鐵、金屬、礦石等等。
+            {{ $t('POLITICAL_CONTRIBUTION.STORY5.HINTS[1][0]') }}
+            <a
+              class="section-content-story__link"
+              href="https://www.economist.com/international/2016/05/07/the-party-winds-down"
+              target="_blank"
+            >
+              {{ $t('POLITICAL_CONTRIBUTION.STORY5.HINTS[1][1]') }}
+            </a> 
+            {{ $t('POLITICAL_CONTRIBUTION.STORY5.HINTS[1][2]') }}
           </div>
         </SectionContentStorysInfoboxHint>
         。
       </div>
-      <h2 class="section-content-story__subtitle">民進黨在第九屆吸金氣勢大增，追上國民黨，但捐贈組成差很多</h2>
+      <h2 class="section-content-story__subtitle">
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.SUBTITLES[3]') }}
+      </h2>
       <div class="visualization">
         <!-- <h2 class="visualization__title">不同政黨立委的政治獻金收入組成</h2> -->
         <SectionContentExploreRadios class="visualization__radios"/>
@@ -775,15 +803,17 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        民進黨在2008年、2012年的收入金額變化不大，2016年比以往增加了 37％的政治獻金，到達 12 億，首度高過國民黨。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[15]') }}
       </div>
       <div class="section-content-story__paragraph">
-        而國民黨收到的政治獻金除了在 2012 年飆到 14 億的高峰外，其餘兩次都維持在 12 億左右。但收入組成卻有了變化。營利事業捐贈比例在 2016 年調到歷史新低，只佔了總收入的三成。政黨收入比例卻提高到 36% （氣勢最旺的 2012 年只佔 20%），國民黨候選人在 2016 年的選舉主要是靠政黨捐贈來選舉。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[16]') }}
       </div>
       <div class="section-content-story__paragraph">
-        而民進黨的營利事業捐贈比例雖比起 2008 年掉了 10 個百分點，推估是總營利事業捐獻比例減少的關係（見下點）。值得一提的是，2012 年的選舉民進黨的營利事業捐款不到三成，卻有超過六成的個人捐款；到了 2016 年，營利事業捐款卻成長至 37%，個人捐款比例往下降。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[17]') }}
       </div>
-      <h2 class="section-content-story__subtitle">總體收入是增加的，但營利事業影響變小？</h2>
+      <h2 class="section-content-story__subtitle">
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.SUBTITLES[4]') }}
+      </h2>
       <div class="visualization">
         <!-- <h2 class="visualization__title">本次政治獻金的組成</h2> -->
         <div class="chart-container">
@@ -797,16 +827,32 @@
         </div>
       </div>
       <div class="section-content-story__paragraph">
-        立委政治獻金總收入從 2008 年的 22 億提升到 2016 年的 28 億，但參選人數（以有開政治獻金專戶並登記的候選人為主）也從 191 個提升到 261 個。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[18]') }}
       </div>
       <div class="section-content-story__paragraph">
-        雖然總金額提高，但營利事業的捐獻比例卻次次下降，相對提高的則是個人捐贈。推測是非傳統藍綠的參選人變多（從 2008 年的 52 人提高到 2016年的 122 人），這樣背景的選舉人雖收到的捐款普遍較少，大多仰賴個人捐款支持，較無營利事業吸金能力。
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[19]') }}
       </div>
       <div class="section-content-story__paragraph">
-        有愈來愈多新人投入政治中，「錢」是一個重要的門檻嗎？隨著政府修法，未來政治獻金明細將公開，但這只是第一步，我們會跟您一起繼續監督下去！
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[20]') }}
       </div>
       <div class="section-content-story__paragraph">
-        你也有什麼好奇的問題嗎？歡迎從<router-link class="section-content-story__link" to="dashboard" v-scroll-to="'.section-content'">圖表區</router-link>或是<a class="section-content-story__link" href="https://github.com/mirror-media/politicalcontribution" target="_blank">原始資料區</a>挖掘出更多與我們分享！
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[21]') }}
+        <router-link
+          class="section-content-story__link"
+          to="dashboard"
+          v-scroll-to="'.section-content'"
+        >
+          {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[22]') }}
+        </router-link>
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[23]') }}
+        <a
+          class="section-content-story__link"
+          href="https://github.com/mirror-media/politicalcontribution"
+          target="_blank"
+        >
+          {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[24]') }}
+        </a>
+        {{ $t('POLITICAL_CONTRIBUTION.STORY5.P[25]') }}
       </div>
     </article>
     <article v-if="slug === 'story6'">

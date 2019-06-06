@@ -274,5 +274,55 @@ export const POLITICAL_CONTRIBUTION = {
       ],
       `How did they recognize the word images? It looks like Captcha we see on websites every day. Most of websites require visitors to enter a series of letters or numbers in a distorted image to verify whether a visitor is human or not. Based on Captcha, reCAPTCHA project aims to translate ancient documents which are not easily distinguishable into recognizable images. As users enter letters precisely shown in the images to prove they are not robots, they accomplish successfully manual recognition. reCAPTCHA was acquired by Google in September 2009. It's reported that the system can complete 200 million recognitions each day. It's doubtless that reCAPTCHA project can assist in digitization of documents and images.`
     ]
-  }
+  },
+  'STORY5': {
+    'TITLE': 'What the data tells us?<br>Five crutical findings of political donations.',
+    'SUBTITLES': [
+      `A change of mind! Most groups' tendencies of donations are not fixed.`,
+      `Wholesale and retail trade, manufacturing and real estate activities were industries that donated much money`,
+      'The top active industies of donattion were mining and quarrying, electricity and gas and real estate activities.',
+      `DPP in the ninth attract significant increase of donations, catching up with KMT, but the composition of donations was different.`,
+      `The overall revenue increased, but the impact of profit-seeking businesses decreased?`,
+    ],
+    'P': [
+      `Last year we finished the digitization political donations of the ninth legislators, we found there were still questions that could not be answered. Therefore, an idea had emerged: "it would be good to have enough historical data for cross-checking". With the help from netizens, we digitized donation from profit-seeking businesses of the seventh and eighth legislators.`,
+      `Of course, this data cannot 100% present the money flow during election periods because it has to do with whether the candidates declared him or herself or Control Yuan's investigation. But it is still an important starting point of the issue. Here we found something interesting:`,
+      `In 2008, the amount of donations of the Formosa Plastics Group ranked tenth. But the amount had decreased by years. In 2012 it donated a total of 1.35 million and in 2016 only donated 1.1 million. The donations went to both KMT and DPP.`,
+      `Other famous groups such as Yuanta group ranked eighteenth in 2008 (donated a total of 3.7 million) was only resurfaced in 2016, donating one million to two DPP candidates. As for the United Group which ranked fourteenth in 2008, it had completely vanished from the money flows of the following two sessions.`,
+      `On the other hand, Vedan Enterprise was not in the top ten list in 2008 but made its comeback to the fifth with a doubling of the amount of donations in following two sessions.`,
+      `Furthermore, we sorted out the groups that had donated in all three legislative elections then observed their tendencies of political parties when donating. We discovered that only a few groups held fixed tendencies. The spectrum of candidates that groups had donated shifted gradually from KMT to DPP. Some groups even donated to the opposite side in the 2016 election.`,
+      `In 2008, groups on the top ten donation list were largely in favor of KMT. The only two different groups were Taiwan Optical Platform 38% in favor of DPP (and in 2012 changed attitude to 72% support KMT) and Ruentex Group 80% in favor of DPP.`,
+      `What is more, in the trend of shifting from KMT to DPP, Ruentex Group made an opposite decision. In 2012 it donated 100% to DPP candidates while in 2016 only 20% left with 68% donations went to KMT candidates.`,
+      `In 2012, Ta Ching group (100%) , Gold Capital group (100%), Yieh United Steel Group (100%) and Yulon Group (97%) were highly loyal to KMT candidates. But when it came to 2016, Ta Ching group was the only one that still 100% donated to KMT. The “loyal level ”of Yulon Group dropped to 70% . Yieh United Steel Group was even down to 38%, making its first time to provide more support to DPP candidates. Far Eastern Group always had the highest amount of donation, it shifted from highly support KMT to both sides.`,
+      'We changed the way to calculate industrial categories based on the taxation registration from Ministry of Finanace,',
+      'corresponding to the code by the industries to nineteen large category classified by the tax department',
+      'Since a company may register multiple industries',
+      ', and as long as there is trade or sale activities that can register as wholesale and retail trade, we assumed that it was because the number of Population made wholesale and retail trade made it the number one industry. Three sessions were pretty much the same.',
+      `Considering the number of population to further analyze how active the industry was in donation, we found Ores and quarrying ranked number one (2012, 2016) and Electricity and gas supply industry (2008). Three sessions showed little difference.`,
+      `These highly active industries were mostly in line with industries "make money through relations" listed in "The Economist".`,
+      'In 2008 and 2012 there was not much change of donation income of DPP. In 2016 political donations had increased 37% to 1.2 billion, higher than KMT for the first time.',
+      `As for KMT, its political donations reached 1.4 billion peak in 2012, other two years remained at around 1.2 billion. But there was a change in the composition of income. Donation from profit-seeking businesses dropped to a record low in 2016, accounting for only 3% of total revenue. Donation from party soared to 36% (the most popular momentum in 2012 only accounted for 20%). KMT candidates in 2016 elections mainly relied on party donations for campaigns.`,
+      `Donation from profit-seeking businesses of DPP dropped 10% compared to 2008, we assume it was because the donations of total profit-seeking businesses decreased. What more, in 2012, DPP’s donation from profit-seeking businesses accounted for less than 30% while 60% from individuals. When it came to 2016, donation from profit-seeking businesses reached 37% but individuals donations decreased. `,
+      `Total income of political donations for legislators reached 2.2 billion to 2.8 billions from 2008 to 2016, but the number of candidates (those who set up accounts for political donations and registered ) also increased from 191 to 261 .`,
+      `Although the total amount increased, but the proportion of donations from profit-seeking business decreased year by year. Meanwhile, individual donations went up relatively. We assumed it was because there were more independent candidates that not from KMT nor DPP (52 in 2008 to 122 in 2016). Independent candidates attracted less attention from big companies, relying more on individual donations.`,
+      `With more and more rookies going into politics, will “money ”be an important threshold? With the government to amend the law , more details of political donations will be revealed in the future, but this is only the first step, we will continue to monitor it with you!`,
+      `What are you curious about? Welcome to dig out more to share with us from the `,
+      'chart',
+      ' or ',
+      'raw data',
+      '',
+    ],
+    'CHART_TITLES': [
+      `Which groups donated the most money? to the Blue (KMT) or to the Green (DPP)?`,
+      `Which groups donated in all 3 legislative elections? preference of party changed? `,
+    ],
+    'HINTS': [
+      '假設 A 公司登記為「製造業」與「批發零售業」，捐贈 2 萬元，則計算方式為「製造業 2 萬元」、「批發零售業 2 萬元」，故加總金額會大於總金額',
+      [
+        'In May of 2016, The Economist released ',
+        'Crony Capitalism',
+        `index that ranks countries on the wealth of billionaires as a percentage of GDP. Taiwan ranked 10th among 22 countries with crony sector wealth accounting for 3.2 percent of GDP, higher than Japan, South Korea, and China. The higher the ratio, the more likely it is that success of businesses in the country depends on close relationships between business and government officials, and all the preferential and favorable benefits offered to businesses are legitimate. They will urge governments through monopoly or lobby to exert administrative power to provide them better environment conditions and greater benefits. In short, they leverage their political connections to make money. The rent-seeking sectors covered in The Economist's crony capitalism index included casino, defense, deposit-taking banking and investment banking, infrastructure and pipelines, oil/gas/chemicals/ other energy, real estate, construction, steel/other metals/mining/commodities, and so on.`
+      ]
+    ]
+  },
 }
