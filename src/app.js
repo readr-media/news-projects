@@ -14,7 +14,8 @@ import * as filters from './util/filters'
 Vue.use(VueI18n)
 Vue.use(VueLazyload, {
   preLoad: 1.5,
-  attempt: 1
+  attempt: 1,
+  lazyComponent: true
 })
 
 // mixin for handling title
