@@ -29,6 +29,7 @@
               <source media="(min-width: 768px)" srcset="/proj-assets/eastern-district/chart-01.jpg" />
               <img src="/proj-assets/eastern-district/chart-01-mobile.jpg" alt="近 3 年臺北商圈店面待租量變化">
             </picture>
+            <p class="small">資料來源：屋比房屋比價平台</p>
             <div class="annotation">
               <p class="small">資料係以近 3 年 4 月底網路待租店面作為統計基礎</p>
             </div>
@@ -63,6 +64,7 @@
                 <td>48%</td>
               </tr>
             </table>
+            <p class="small">資料來源：屋比房屋比價平台</p>
           </lazy-component>
           <p>而東區店面「找到主人」的時間也愈來愈長，「以前一個禮拜沒租掉就不得了，現在要半年，這是多麽惡劣、危險的狀況。」擁有 20 多年房仲經驗的屋比房屋創辦人葉國華表示。</p>
           <p>「2004 到 2013 這幾年，東區是一位難求的，租客都要排隊。為了要搶，還半夜去看房。」葉國華憶起，當時一間 10 坪出頭的店面，一個月租金從 20 萬台幣漲到 50 萬台幣都還是炙手可熱。</p>
@@ -84,6 +86,7 @@
               <source media="(min-width: 768px)" srcset="/proj-assets/eastern-district/chart-03.jpg" />
               <img src="/proj-assets/eastern-district/chart-03-mobile.jpg" alt="近 3 年臺北商圈店面租金開價變化">
             </picture>
+            <p class="small">資料來源：屋比房屋比價平台</p>
             <div class="annotation">
               <p class="small">我們嘗試用內政部公佈的「不動產實價登錄」來檢視東區與臺北市主要商圈的歷年租金變化，但實價登錄只有透過仲介出租的才需要登錄，臺北市的店面租金資料自 2012 年至 2019 年初僅載有 4000 多筆，在物件不夠完整的情況下，會有極端值的產生，且登錄是以「區段門牌」而非實際地址為單位，無法呈現店面在實際地址上的租金。因此沒有使用此份資料。</p>
             </div>
@@ -123,6 +126,8 @@
               <source media="(min-width: 768px)" srcset="/proj-assets/eastern-district/chart-04.jpg" />
               <img src="/proj-assets/eastern-district/chart-04-mobile.jpg" alt="臺北市主要商圈捷運站旅運量">
             </picture>
+            <p class="small">單位：每年進出站人數</p>
+            <p class="small">資料來源：臺北大眾捷運股份有限公司</p>
           </lazy-component>
           <p>根據臺北捷運公司統計，2014 至 2018 年間，捷運流量增加 2465 萬人，成長近一成。若以商圈劃分，在信義區商圈、西門町商圈、中山站南西商圈旅運量持續增長的壓縮下，東區商圈所在的忠孝復興站、忠孝敦化站人潮減少， 5 年來共減少 465 萬人。</p>
         </div>
@@ -249,6 +254,9 @@ export default {
   .chart
     img
       width 100%
+    p
+      & + p, & + .annotation
+        margin-top .5em
 
   .image
     width 100%
@@ -329,19 +337,29 @@ export default {
       width 100%
       height 100%
     .content
+      width 67%
+      margin 0
+      padding 70px 5% 70px 15%
+      > *
+        max-width 600px
+        margin-left auto
+        margin-right auto
       &-image
         position relative
         top 0
         left 0
         z-index 1
-        width 67%
-        margin 0
-        padding 0
         background-color rgba(26, 26, 26, 0.9)
-        > *
-          width 600px
-          margin 0 60px 0 auto
-      &-chart
-        width 35%
-        margin 0 auto 0 20%
+      // &-chart
+      //   width 35%
+      //   margin 0 auto 0 20%
+    .chart
+      position relative
+    .annotation
+      position: absolute;
+      left calc(100% + 5vw)
+      bottom 0
+      width 260px
+      p.small
+        color #fff
 </style>
