@@ -1,13 +1,16 @@
 import projectList from './projectList.json'
+import { GOOGLE_API_KEY } from '../../api/config'
 
 export const PROJECTS = projectList
 
 // GA
 export const READR_GA_ID = 'UA-122455444-1'
 
-export const READR_GA_ID_DEPRECATED = 'UA-118025678-1'
+export const READR_GA_TEST_ID = 'UA-122455444-3'
 
 export const MM_GA_ID = 'UA-83609754-1'
+
+export const MM_GA_TEST_ID = 'UA-83609754-2'
 
 // FB
 export const READR_FB_APP_ID = '2138298816406811'
@@ -80,18 +83,6 @@ export const PROJECTS_BELONGS_MM = [
   'chenuen'
 ]
 
-export const PROJECTS_USE_DEPRECATED_GA = [
-  'dollclaw',
-  'farmhouse',
-  'foreign-labour',
-  'foreign-labour-ii',
-  'foreign-labour-iii',
-  'foreign-labour-landing',
-  'marathon',
-  'newtype',
-  'president-promise',
-]
-
 // include project url path name which need google map
 export const PROJECTS_NEED_GOOGLE_MAP = [
   'election-board',
@@ -116,7 +107,7 @@ export const PROJECTS_PREVENT_SCROLL_BEHAVIOR = [
 ]
 
 
-export const SCRIPT_GOOGLE_MAP = `<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgwPtUjWMKGKdp62Hnank6TTl3lhXwa3o&libraries=visualization" async defer></script>`
+export const SCRIPT_GOOGLE_MAP = `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=drawing,visualization" async defer></script>`
 
 export const SCRIPT_GOOGLE_RECAPTCHA = `<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=zh-TW" async defer></script>`
 
