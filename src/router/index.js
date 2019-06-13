@@ -1,4 +1,12 @@
-import { PROJECTS, PROJECTS_BELONGS_MM, PROJECTS_USE_DEPRECATED_GA, READR_GA_ID, READR_GA_ID_DEPRECATED, MM_GA_ID, PROJECTS_PREVENT_SCROLL_BEHAVIOR } from '../constants'
+import {
+  PROJECTS,
+  PROJECTS_BELONGS_MM,
+  READR_GA_ID,
+  READR_GA_TEST_ID,
+  MM_GA_ID,
+  MM_GA_TEST_ID,
+  PROJECTS_PREVENT_SCROLL_BEHAVIOR
+} from '../constants'
 import { get } from 'lodash'
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -28,19 +36,19 @@ export function createRouter () {
             throw e
           } else {
             if (process.env.VUE_ENV === 'client') {
-              let GAID = READR_GA_ID
+              let gaId
               if (PROJECTS_BELONGS_MM.includes(get(to, 'params.project'))) {
-                GAID = MM_GA_ID
-              } else if (PROJECTS_USE_DEPRECATED_GA.includes(get(to, 'params.project'))) {
-                GAID = READR_GA_ID_DEPRECATED
+                gaId = location.hostname.match(/(www|m).readr.tw/) ? MM_GA_ID : MM_GA_TEST_ID
+              } else {
+                gaId = location.hostname.match(/(www|m).readr.tw/) ? READR_GA_ID : READR_GA_TEST_ID
               }
-              window.ga('create', GAID, 'auto')
+              window.ga && !window.gaData && window.ga('create', gaId, 'auto')
             }
             next()
           }
         } 
       },
-      { path: '/', component: ProjectList  }
+      { path: '/', component: ProjectList }
     ]
   })
 }
