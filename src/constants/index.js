@@ -85,6 +85,7 @@ export const PROJECTS_BELONGS_MM = [
 
 // include project url path name which need google map
 export const PROJECTS_NEED_GOOGLE_MAP = [
+  'eastern-district-of-taipei',
   'election-board',
   'farmhouse'
 ]
