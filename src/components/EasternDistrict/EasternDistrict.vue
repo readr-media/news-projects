@@ -1,9 +1,12 @@
 <template>
   <div class="eastern-district">
-    <EasternDistrictLanding />
+    <EasternDistrictLanding class="eastern-district__landing"/>
     <article>
       <section class="section-image">
-        <lazy-component class="image image-1" />
+        <lazy-component
+          :class="{ active: current === 1 || current === 2 }"
+          class="image-fixed image-1"
+        />
         <div class="content">
           <div>
             <h2>店主：「整條街越來越暗」</h2>
@@ -21,89 +24,96 @@
       </section>
       <section class="section">
         <div class="content">
-          <h2>租金降，店還是租不出去</h2>
-          <p>東區的店舖租賃變化資料，印證了店主們的感受。比起其他商圈，東區的待租店面數量不但持續上漲，待租時間也變長了。</p>
-          <lazy-component class="chart">
-            <h3>近 3 年臺北商圈店面待租量變化</h3>
-            <picture>
-              <source media="(min-width: 768px)" srcset="/proj-assets/eastern-district/chart-01.jpg" />
-              <img src="/proj-assets/eastern-district/chart-01-mobile.jpg" alt="近 3 年臺北商圈店面待租量變化">
-            </picture>
-            <p class="small">資料來源：屋比房屋比價平台</p>
-            <div class="annotation">
-              <p class="small">資料係以近 3 年 4 月底網路待租店面作為統計基礎</p>
-            </div>
-          </lazy-component>
-          <p>根據綜合各家房屋出租業者物件的線上比價網站「屋比房屋比價平台」提供的資料，近 3 年來，東區有上百間待租店面，數量還在持續上升中，且這 3 年的待租店數就增加了 53%，是臺北市所有商圈中增幅最大的。</p>
-          <lazy-component class="chart">
-            <h3>東區商圈網路待租店面刊登時間變化</h3>
-            <table class="chart-2">
-              <tr>
-                <td colspan="2"></td>
-                <td>截至 <br>2017 年 <br class="br-mobile">4 月底</td>
-                <td>截至 <br>2018 年 <br class="br-mobile">4 月底</td>
-                <td>截止 <br>2019 年 <br class="br-mobile">4 月底</td>
-              </tr>
-              <tr>
-                <td rowspan="3">店面出租廣告上架累積時間</td>
-                <td>1 年以上</td>
-                <td>16%</td>
-                <td>26%</td>
-                <td>39%</td>
-              </tr>
-              <tr>
-                <td>半年至<br>1 年</td>
-                <td>18%</td>
-                <td>17%</td>
-                <td>13%</td>
-              </tr>
-              <tr>
-                <td>半年內</td>
-                <td>66%</td>
-                <td>57%</td>
-                <td>48%</td>
-              </tr>
-            </table>
-            <p class="small">資料來源：屋比房屋比價平台</p>
-          </lazy-component>
-          <p>而東區店面「找到主人」的時間也愈來愈長，「以前一個禮拜沒租掉就不得了，現在要半年，這是多麽惡劣、危險的狀況。」擁有 20 多年房仲經驗的屋比房屋創辦人葉國華表示。</p>
-          <p>「2004 到 2013 這幾年，東區是一位難求的，租客都要排隊。為了要搶，還半夜去看房。」葉國華憶起，當時一間 10 坪出頭的店面，一個月租金從 20 萬台幣漲到 50 萬台幣都還是炙手可熱。</p>
-          <p>戴政源在東區商圈長大，家族兩代在大安路夜市賣鹹酥雞，目睹東區 20 年來的發展，他感嘆：「以前這裡的店面一空，馬上有人排隊進來，你（生意）做不做得起來，三個月見真章，我們叫『武場』。」</p>
-          <p>「現在生意是一年比一年差。」實際感受到東區沒落的他提到，去年到今年是最慘的，營業額掉了五成。</p>
+          <div>
+            <h2>租金降，店還是租不出去</h2>
+            <p>東區的店舖租賃變化資料，印證了店主們的感受。比起其他商圈，東區的待租店面數量不但持續上漲，待租時間也變長了。</p>
+            <lazy-component class="chart">
+              <h3>近 3 年臺北商圈店面待租量變化</h3>
+              <picture>
+                <source media="(min-width: 768px)" srcset="/proj-assets/eastern-district/chart-01.jpg" />
+                <img src="/proj-assets/eastern-district/chart-01-mobile.jpg" alt="近 3 年臺北商圈店面待租量變化">
+              </picture>
+              <p class="small">資料來源：屋比房屋比價平台</p>
+              <div class="annotation">
+                <p class="small">資料係以近 3 年 4 月底網路待租店面作為統計基礎</p>
+              </div>
+            </lazy-component>
+            <p>根據綜合各家房屋出租業者物件的線上比價網站「屋比房屋比價平台」提供的資料，近 3 年來，東區有上百間待租店面，數量還在持續上升中，且這 3 年的待租店數就增加了 53%，是臺北市所有商圈中增幅最大的。</p>
+            <lazy-component class="chart">
+              <h3>東區商圈網路待租店面刊登時間變化</h3>
+              <table class="chart-2">
+                <tr>
+                  <td colspan="2"></td>
+                  <td>截至 <br>2017 年 <br class="br-mobile">4 月底</td>
+                  <td>截至 <br>2018 年 <br class="br-mobile">4 月底</td>
+                  <td>截止 <br>2019 年 <br class="br-mobile">4 月底</td>
+                </tr>
+                <tr>
+                  <td rowspan="3">店面出租廣告上架累積時間</td>
+                  <td>1 年以上</td>
+                  <td>16%</td>
+                  <td>26%</td>
+                  <td>39%</td>
+                </tr>
+                <tr>
+                  <td>半年至<br>1 年</td>
+                  <td>18%</td>
+                  <td>17%</td>
+                  <td>13%</td>
+                </tr>
+                <tr>
+                  <td>半年內</td>
+                  <td>66%</td>
+                  <td>57%</td>
+                  <td>48%</td>
+                </tr>
+              </table>
+              <p class="small">資料來源：屋比房屋比價平台</p>
+            </lazy-component>
+            <p>而東區店面「找到主人」的時間也愈來愈長，「以前一個禮拜沒租掉就不得了，現在要半年，這是多麽惡劣、危險的狀況。」擁有 20 多年房仲經驗的屋比房屋創辦人葉國華表示。</p>
+            <p>「2004 到 2013 這幾年，東區是一位難求的，租客都要排隊。為了要搶，還半夜去看房。」葉國華憶起，當時一間 10 坪出頭的店面，一個月租金從 20 萬台幣漲到 50 萬台幣都還是炙手可熱。</p>
+            <p>戴政源在東區商圈長大，家族兩代在大安路夜市賣鹹酥雞，目睹東區 20 年來的發展，他感嘆：「以前這裡的店面一空，馬上有人排隊進來，你（生意）做不做得起來，三個月見真章，我們叫『武場』。」</p>
+            <p>「現在生意是一年比一年差。」實際感受到東區沒落的他提到，去年到今年是最慘的，營業額掉了五成。</p>
+          </div>
         </div>
       </section>
       <section class="section">
         <div class="content">
-          <h2>租金壓力逼走店主？</h2>
-          <p>究竟是什麼原因導致東區沒落？「租金太高」幾乎已經成為既定輿論，除了老牌江浙菜館永福樓，火鍋店「大初 SHABU SHABU」也在 Facebook 上預告因為租金問題要結束營業。</p>
-          <p>曾經在大安路夜市經營複合式餐飲店的老闆阿興，在接受採訪時直言：「房租真的太貴了！」</p>
-          <p>阿興的店在 2017 年開業，2018 年初就決定結束營業。他的店大約 5 坪，一個月店租 7 萬 5 千元，他和其他兩名家庭成員共同經營，一整個月都沒有休假、沒發薪水給自己，「拚命賣，也只是剛好打平而已。」</p>
-          <p>而賣鹹酥雞的戴政源也提到，他的攤位大約 5 坪，一個月店租要 6 萬台幣，每月要至少賣 30 萬才能賺錢，在人潮不如以往的情況下，租金對戴政源造成的壓力越來越大。</p>
-          <p>只是，從數據來看，東區商圈的租金在過去 3 年間正在下跌，去年到今年更是降了 9.3%。比起臺北市其他熱門的商圈，降幅是最大的。</p>
-          <lazy-component class="chart">
-            <h3>近 3 年臺北商圈店面租金開價變化</h3>
-            <picture>
-              <source media="(min-width: 768px)" srcset="/proj-assets/eastern-district/chart-03.jpg" />
-              <img src="/proj-assets/eastern-district/chart-03-mobile.jpg" alt="近 3 年臺北商圈店面租金開價變化">
-            </picture>
-            <p class="small">資料來源：屋比房屋比價平台</p>
-            <div class="annotation">
-              <p class="small">我們嘗試用內政部公佈的「不動產實價登錄」來檢視東區與臺北市主要商圈的歷年租金變化，但實價登錄只有透過仲介出租的才需要登錄，臺北市的店面租金資料自 2012 年至 2019 年初僅載有 4000 多筆，在物件不夠完整的情況下，會有極端值的產生，且登錄是以「區段門牌」而非實際地址為單位，無法呈現店面在實際地址上的租金。因此沒有使用此份資料。</p>
-            </div>
-          </lazy-component>
-          <p>里長韓修和指出，租金下調可能與「二房東退場、大房東回流」有關。在東區景氣正旺時，有一些「集團化」的二房東循著商機進入東區，大規模地向大房東租下店面再轉租。但隨著東區的景氣變化，租金也不再那麼「硬」了，韓修和舉光武里為例，「有一排店面去年收掉後，6 個月租不出去，後來二房東受不了撤場，大房東又回來降價租。」</p>
-          <p>經營服飾店的 C 女士就是和大房東簽的約，租金漲幅一直維持在合理水平，「我覺得（東區的）房東不可能再漲價，尤其是這 3 年。能夠租出去，他（房東）就要偷笑了。」C 女士說。</p>
-          <p>「我們這邊很多大房東都回流了。」韓修和補充。他也強調目前東區的生存危機不是房東樂見，里長就在房東、店主之間扮演溝通橋樑，畢竟，店面能租得出去最重要。</p>
-          <p>雖然從屋比房屋比價平台提供的數據看出，東區的租金是全臺北市商圈近 3 年來降幅最大的，但實地採訪，仍能看見不同店家因個別因素而活在「高租金」的壓力之下。</p>
-          <p>「房東很壞，租金都任人喊。看到你生意好，就漲價！」戴政源直言，這一帶的房子多是一年簽一次約，附近一間搬走的飲料店就是因為不堪漲租而搬走。</p>
-          <p>離開東區的阿興提到，當初就是試圖跟二房東談價，看能不能降低租金，阿興知道二房東向大房東承租的價格大概是 3 萬 5，因此他認為應該有降價空間。他希望以 4、5 萬元的價格承租，遭到二房東以「划不來」為由拒絕。</p>
-          <p>臺北市政府的「商圈振興計畫」提到，東區的房租近年雖然略為調降，但由於店面坪數面積較大，租金總價仍偏高，是一般業者較難踏入的高門檻。已經入場的東區店主，仍感受到原本起租價就高的租金所帶來的壓力，阿興收掉東區的攤位後，在木柵另覓新址，40 幾坪的店，月租只要 2 萬多，他說：「沒來東區開店不知道房租這麼硬，一開之後嚇一跳，打死不會再來了！」。</p>
-          <p>除了轉租問題，資深房仲葉國華提到，許多東區房地產由少數大家族持有，第二代、第三代大房東可能已經移居海外，房東人不在當地，對於市場的敏感度不高，加上家族產權錯綜複雜，因此租金要漲要降，都需要很長的溝通時程。</p>
-          <p>葉國華認為，影響租金的因素眾說紛紜，這是商圈頹敗的必經過程，不管是大房東還是二房東，市場一但沒落，無利可圖的人就走了，「有錢大家賺的時候都沒有問題，市場不好的時候大家才互相抱怨、交相指責。」他認為東區的房東和商家應該共同合作，才能解決問題。</p>
+          <div>
+            <h2>租金壓力逼走店主？</h2>
+            <p>究竟是什麼原因導致東區沒落？「租金太高」幾乎已經成為既定輿論，除了老牌江浙菜館永福樓，火鍋店「大初 SHABU SHABU」也在 Facebook 上預告因為租金問題要結束營業。</p>
+            <p>曾經在大安路夜市經營複合式餐飲店的老闆阿興，在接受採訪時直言：「房租真的太貴了！」</p>
+            <p>阿興的店在 2017 年開業，2018 年初就決定結束營業。他的店大約 5 坪，一個月店租 7 萬 5 千元，他和其他兩名家庭成員共同經營，一整個月都沒有休假、沒發薪水給自己，「拚命賣，也只是剛好打平而已。」</p>
+            <p>而賣鹹酥雞的戴政源也提到，他的攤位大約 5 坪，一個月店租要 6 萬台幣，每月要至少賣 30 萬才能賺錢，在人潮不如以往的情況下，租金對戴政源造成的壓力越來越大。</p>
+            <p>只是，從數據來看，東區商圈的租金在過去 3 年間正在下跌，去年到今年更是降了 9.3%。比起臺北市其他熱門的商圈，降幅是最大的。</p>
+            <lazy-component class="chart">
+              <h3>近 3 年臺北商圈店面租金開價變化</h3>
+              <picture>
+                <source media="(min-width: 768px)" srcset="/proj-assets/eastern-district/chart-03.jpg" />
+                <img src="/proj-assets/eastern-district/chart-03-mobile.jpg" alt="近 3 年臺北商圈店面租金開價變化">
+              </picture>
+              <p class="small">資料來源：屋比房屋比價平台</p>
+              <div class="annotation">
+                <p class="small">我們嘗試用內政部公佈的「不動產實價登錄」來檢視東區與臺北市主要商圈的歷年租金變化，但實價登錄只有透過仲介出租的才需要登錄，臺北市的店面租金資料自 2012 年至 2019 年初僅載有 4000 多筆，在物件不夠完整的情況下，會有極端值的產生，且登錄是以「區段門牌」而非實際地址為單位，無法呈現店面在實際地址上的租金。因此沒有使用此份資料。</p>
+              </div>
+            </lazy-component>
+            <p>里長韓修和指出，租金下調可能與「二房東退場、大房東回流」有關。在東區景氣正旺時，有一些「集團化」的二房東循著商機進入東區，大規模地向大房東租下店面再轉租。但隨著東區的景氣變化，租金也不再那麼「硬」了，韓修和舉光武里為例，「有一排店面去年收掉後，6 個月租不出去，後來二房東受不了撤場，大房東又回來降價租。」</p>
+            <p>經營服飾店的 C 女士就是和大房東簽的約，租金漲幅一直維持在合理水平，「我覺得（東區的）房東不可能再漲價，尤其是這 3 年。能夠租出去，他（房東）就要偷笑了。」C 女士說。</p>
+            <p>「我們這邊很多大房東都回流了。」韓修和補充。他也強調目前東區的生存危機不是房東樂見，里長就在房東、店主之間扮演溝通橋樑，畢竟，店面能租得出去最重要。</p>
+            <p>雖然從屋比房屋比價平台提供的數據看出，東區的租金是全臺北市商圈近 3 年來降幅最大的，但實地採訪，仍能看見不同店家因個別因素而活在「高租金」的壓力之下。</p>
+            <p>「房東很壞，租金都任人喊。看到你生意好，就漲價！」戴政源直言，這一帶的房子多是一年簽一次約，附近一間搬走的飲料店就是因為不堪漲租而搬走。</p>
+            <p>離開東區的阿興提到，當初就是試圖跟二房東談價，看能不能降低租金，阿興知道二房東向大房東承租的價格大概是 3 萬 5，因此他認為應該有降價空間。他希望以 4、5 萬元的價格承租，遭到二房東以「划不來」為由拒絕。</p>
+            <p>臺北市政府的「商圈振興計畫」提到，東區的房租近年雖然略為調降，但由於店面坪數面積較大，租金總價仍偏高，是一般業者較難踏入的高門檻。已經入場的東區店主，仍感受到原本起租價就高的租金所帶來的壓力，阿興收掉東區的攤位後，在木柵另覓新址，40 幾坪的店，月租只要 2 萬多，他說：「沒來東區開店不知道房租這麼硬，一開之後嚇一跳，打死不會再來了！」。</p>
+            <p>除了轉租問題，資深房仲葉國華提到，許多東區房地產由少數大家族持有，第二代、第三代大房東可能已經移居海外，房東人不在當地，對於市場的敏感度不高，加上家族產權錯綜複雜，因此租金要漲要降，都需要很長的溝通時程。</p>
+            <p>葉國華認為，影響租金的因素眾說紛紜，這是商圈頹敗的必經過程，不管是大房東還是二房東，市場一但沒落，無利可圖的人就走了，「有錢大家賺的時候都沒有問題，市場不好的時候大家才互相抱怨、交相指責。」他認為東區的房東和商家應該共同合作，才能解決問題。</p>
+          </div>
         </div>
       </section>
       <section class="section-image">
-        <lazy-component class="image image-2" />
+        <lazy-component
+          :class="{ active: current === 4 || current === 5 }"
+          class="image-fixed image-2"
+        />
         <div class="content">
           <div>
             <h2>「人潮減少」比租金更有殺傷力</h2>
@@ -120,22 +130,27 @@
       </section>
       <section class="section">
         <div class="content">
-          <h2>人潮錢潮都還在，但流向何方？</h2>
-          <p>另一個影響人潮的因素，則是商圈轉移。臺北市的「商圈振興計畫」中以捷運出站人數來分析人潮的流動，2013 年後，忠孝復興、忠孝敦化出站人數呈下降趨勢；而西區的臺北車站、西門、中山站，東邊的信義商圈周邊市政府站、臺北 101 站等站點穩定上升，顯見人潮向西區及信義計畫區移動的趨勢。</p>
-          <lazy-component class="chart">
-            <h3>臺北市主要商圈捷運站旅運量</h3>
-            <picture>
-              <source media="(min-width: 768px)" srcset="/proj-assets/eastern-district/chart-04.jpg" />
-              <img src="/proj-assets/eastern-district/chart-04-mobile.jpg" alt="臺北市主要商圈捷運站旅運量">
-            </picture>
-            <p class="small">單位：每年進出站人數</p>
-            <p class="small">資料來源：臺北大眾捷運股份有限公司</p>
-          </lazy-component>
-          <p>根據臺北捷運公司統計，2014 至 2018 年間，捷運流量增加 2465 萬人，成長近一成。若以商圈劃分，在信義區商圈、西門町商圈、中山站南西商圈旅運量持續增長的壓縮下，東區商圈所在的忠孝復興站、忠孝敦化站人潮減少， 5 年來共減少 465 萬人。</p>
+          <dir>
+            <h2>人潮錢潮都還在，但流向何方？</h2>
+            <p>另一個影響人潮的因素，則是商圈轉移。臺北市的「商圈振興計畫」中以捷運出站人數來分析人潮的流動，2013 年後，忠孝復興、忠孝敦化出站人數呈下降趨勢；而西區的臺北車站、西門、中山站，東邊的信義商圈周邊市政府站、臺北 101 站等站點穩定上升，顯見人潮向西區及信義計畫區移動的趨勢。</p>
+            <lazy-component class="chart">
+              <h3>臺北市主要商圈捷運站旅運量</h3>
+              <picture>
+                <source media="(min-width: 768px)" srcset="/proj-assets/eastern-district/chart-04.jpg" />
+                <img src="/proj-assets/eastern-district/chart-04-mobile.jpg" alt="臺北市主要商圈捷運站旅運量">
+              </picture>
+              <p class="small">單位：每年進出站人數</p>
+              <p class="small">資料來源：臺北大眾捷運股份有限公司</p>
+            </lazy-component>
+            <p>根據臺北捷運公司統計，2014 至 2018 年間，捷運流量增加 2465 萬人，成長近一成。若以商圈劃分，在信義區商圈、西門町商圈、中山站南西商圈旅運量持續增長的壓縮下，東區商圈所在的忠孝復興站、忠孝敦化站人潮減少， 5 年來共減少 465 萬人。</p>
+          </dir>
         </div>
       </section>
       <div>
-        <div class="image-box">
+        <div
+          :class="{ active: current >= 6, middle: current === 7, right: current >= 8 }"
+          class="image-box"
+        >
           <div class="image-box-container">
             <div class="image image-3"></div>
             <div class="image image-4"></div>
@@ -143,7 +158,10 @@
           </div>
         </div>
         <section class="section-image">
-          <lazy-component class="image image-3 image-mobile" />
+          <lazy-component
+            :class="{ active: current === 6 }"
+            class="image-fixed image-3 image-mobile"
+          />
           <div class="content">
             <div>
               <h2>不是第一次：東西區風水輪流轉</h2>
@@ -162,7 +180,10 @@
           </div>
         </section>
         <section class="section-image">
-          <lazy-component class="image image-4 image-mobile" />
+          <lazy-component
+            :class="{ active: current === 7 }"
+            class="image-fixed image-4 image-mobile"
+          />
           <div class="content content-spec">
             <div>
               <h2>西門町成功翻轉，東區可能嗎？</h2>
@@ -176,7 +197,10 @@
           </div>
         </section>
         <section class="section-image">
-          <lazy-component class="image image-5 image-mobile" />
+          <lazy-component
+            :class="{ active: current === 8 }"
+            class="image-fixed image-5 image-mobile"
+          />
           <div class="content content-spec">
             <div>
               <h2>東區店主的求生之道</h2>
@@ -203,7 +227,7 @@
       </section>
       <section class="section credit">
         <p class="small">2019. 06 READr</p>
-        <p class="small">文字／劉子維</p>
+        <p class="small"><span>文字／劉子維</span><span>攝影／李昭妟</span></p>
         <p class="small">資料整理／劉子維、簡信昌</p>
         <p class="small"><span>設計／Weiwei Hsu</span><span>工程／HY Tan</span></p>
       </section>
@@ -227,40 +251,34 @@ export default {
       metaImage: 'eastern-district/og.jpg',
     }
   },
-  mounted () {
-    if (this.$store.state.viewport[0] >= 1200) {
-      window.addEventListener('scroll', this.detectSpecContent)
+  data () {
+    return {
+      current: 0
     }
-    window.addEventListener('resize', this.handleResize)
+  },
+  mounted () {
+    this.detectCurrent()
+    window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('resize', this.detectCurrent)
   },
   beforeDestroy () {
-    window.removeEventListener('scroll', this.detectSpecContent)
-    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.detectCurrent)
   },
   methods: {
-    detectSpecContent: throttle(function () {
-      const items = [ ...document.querySelectorAll('.content-spec') ]
-      const container = document.querySelector('.image-box-container')
-      if (items[items.length - 1].getBoundingClientRect().top < 0) {
-        container.style.transform = `translateX(-66.66%)`
-      } else if (items[0].getBoundingClientRect().top > window.innerHeight) {
-        container.style.transform = `translateX(0)`
-      } else {
-        items.forEach((item, i) => {
-          const rect = item.getBoundingClientRect()
-          if (rect.top > 0 && rect.top <= window.innerHeight) {
-            container.style.transform = `translateX(-${(i + 1) * 33.33}%)`
-          }
-        })
-      }
-    }, 300),
-    handleResize () {
-      if (this.$store.state.viewport[0] >= 1200) {
-        window.addEventListener('scroll', this.detectSpecContent)
-      } else {
-        window.removeEventListener('scroll', this.detectSpecContent)
-      }
-    }
+    detectCurrent () {
+      const sections = [ ...document.querySelectorAll('section') ]
+      sections.forEach((item, index) => {
+        const rect = item.getBoundingClientRect()
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+        if (rect.top <= viewportHeight && rect.bottom >= viewportHeight) {
+          return this.current = index
+        }
+      })
+    },
+    handleScroll: throttle(function () {
+      this.detectCurrent()
+    }, 300)
   }
 }
 </script>
@@ -268,7 +286,7 @@ export default {
 .eastern-district
   color #fff
   font-size 1rem
-  background-color #000
+  // background-color #000
   div
     & + p
       margin-top 1.5em
@@ -299,9 +317,13 @@ export default {
   picture
     display block
   .content
-    width 90%
     padding 1.5em 0
-    margin 0 auto
+    background-color #000
+    > *
+      width 90%
+      margin-left auto
+      margin-right auto
+      padding 0
   .chart
     img
       width 100%
@@ -312,6 +334,7 @@ export default {
     display none
   .credit
     padding 100px 0
+    background-color #000
     p
       color #fff
       text-align center
@@ -321,22 +344,40 @@ export default {
       & + span
         margin-left 1em
   .image
-    width 100%
-    height 100vh
-    background-position center center
-    background-size cover
-    background-repeat no-repeat
-    background-attachment fixed
-  .image-1
-    background-image url(/proj-assets/eastern-district/img-01.jpg)
-  .image-2
-    background-image url(/proj-assets/eastern-district/img-02.jpg)
-  .image-3
-    background-image url(/proj-assets/eastern-district/img-03.jpg)
-  .image-4
-    background-image url(/proj-assets/eastern-district/img-04.jpg)
-  .image-5
-    background-image url(/proj-assets/eastern-district/img-05.jpg)
+    &-fixed
+      position relative
+      width 100%
+      height 100vh
+      &::before
+        content ''
+        position fixed
+        top 0
+        left 0
+        z-index -1
+        width 100%
+        height 100%
+        background-position center center
+        background-size cover
+        background-repeat no-repeat
+        visibility hidden
+      &.active
+        &::before
+          visibility visible
+      &.image-1
+        &::before
+          background-image url(/proj-assets/eastern-district/img-01.jpg)
+      &.image-2
+        &::before
+          background-image url(/proj-assets/eastern-district/img-02.jpg)
+      &.image-3
+        &::before
+          background-image url(/proj-assets/eastern-district/img-03.jpg)
+      &.image-4
+        &::before
+          background-image url(/proj-assets/eastern-district/img-04.jpg)
+      &.image-5
+        &::before
+          background-image url(/proj-assets/eastern-district/img-05.jpg)
 
   table
     width 100%
@@ -378,19 +419,23 @@ export default {
 @media (min-width: 768px)
   .eastern-district
     .content
-      width 60%
       padding 3em 0
+      > *
+        width 60%
 
 @media (min-width: 1200px)
   .eastern-district
-    section
-      position relative
-      z-index 10
     article
       section
+        position relative
+        z-index 10
         & + section
           margin-top 0
+    &__landing
+      position relative
+      z-index 11
     .section
+      z-index 11
       background-color #000
       &-image
         background-color transparent
@@ -400,7 +445,7 @@ export default {
           left 0
           z-index 1
           width auto
-          padding 100vh 0 0
+          padding 0
           background-color transparent
           > div
             width 67%
@@ -414,20 +459,13 @@ export default {
               margin-right auto
           &-spec
             padding-top 0
-    
-    .image
-      position absolute
-      top 0
-      left 0
-      right 0
-      bottom 0
-      width 100%
-      height 100%
     .content
       width 67%
       margin 0
       padding 70px 5% 70px 15%
       background-color #000
+      > *
+        width auto
       > div
         max-width 600px
         margin-left auto
@@ -445,10 +483,17 @@ export default {
       position fixed
       top 0
       left 0
-      display block
       width 100%
       height 100vh
       overflow hidden
+      &.active
+        display block
+      &.middle
+        .image-box-container
+          transform translateX(-33.33%)
+      &.right
+        .image-box-container
+          transform translateX(-66.66%)
       &-container
         display flex
         width 300%
@@ -460,7 +505,12 @@ export default {
           position static
           width auto
           height auto
-          background-attachment scroll
+          &.image-3
+            background-image url(/proj-assets/eastern-district/img-03.jpg)
+          &.image-4
+            background-image url(/proj-assets/eastern-district/img-04.jpg)
+          &.image-5
+            background-image url(/proj-assets/eastern-district/img-05.jpg)
     .image-mobile
       display none
     .br-mobile
