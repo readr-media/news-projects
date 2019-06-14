@@ -146,7 +146,7 @@
           </dir>
         </div>
       </section>
-      <div>
+      <div class="eastern-district__box">
         <div
           :class="{ active: current >= 6, middle: current === 7, right: current >= 8 }"
           class="image-box"
@@ -356,7 +356,7 @@ export default {
         z-index -1
         width 100%
         height 100%
-        background-position center center
+        background-position center right
         background-size cover
         background-repeat no-repeat
         visibility hidden
@@ -434,6 +434,8 @@ export default {
     &__landing
       position relative
       z-index 11
+    &__box
+      padding-top 100vh
     .section
       z-index 11
       background-color #000
@@ -499,12 +501,15 @@ export default {
         width 300%
         height 100%
         transform translateX(0)
-        transition transform .5s
+        transition transform 1s ease-in
         .image
           flex 1
           position static
           width auto
           height auto
+          background-position center center
+          background-size cover
+          background-repeat no-repeat
           &.image-3
             background-image url(/proj-assets/eastern-district/img-03.jpg)
           &.image-4
