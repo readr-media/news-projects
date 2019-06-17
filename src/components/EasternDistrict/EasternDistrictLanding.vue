@@ -27,8 +27,10 @@ export default {
   name: 'EasternDistrictLanding',
   data () {
     return {
+      currentYear: 101,
       data: [],
-      currentYear: 101
+      inited: false,
+      timer: undefined
     }
   },
   computed: {
@@ -40,10 +42,22 @@ export default {
     }
   },
   mounted () {
-    this.initMap()
+    if (window.google) {
+      this.initMap()
+    } else {
+      this.timer = setInterval(this.handleInterval, 1000)
+    }
   },
   methods: {
+    handleInterval () {
+      if (!this.inited && window.google) {
+        this.initMap()
+      } else if (this.inited) {
+        clearInterval(this.timer)
+      }
+    },
     initMap () {
+      this.inited = true
       const lat = this.$store.state.viewport[0] >= 1200 ? 25.0412406 : 25.0435151
       const lng = this.$store.state.viewport[0] >= 1200 ? 121.5492358 : 121.5491499
       const map = new google.maps.Map(document.getElementById('map'), {
