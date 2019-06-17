@@ -1,5 +1,19 @@
 <template>
   <div class="eastern-district">
+    <Logo
+      class="eastern-district__logo no-sprite"
+      href="https://www.readr.tw/"
+      top="10px"
+      left="10px"
+      bgImage="/proj-assets/logo_readr.png"
+    />
+    <Share
+      :shareUrl="`${READR_SITE_URL}eastern-district-of-taipei`"
+      class="eastern-district__share"
+      top="10px"
+      right="10px"
+      direction="down"
+    />
     <EasternDistrictLanding class="eastern-district__landing"/>
     <article>
       <section class="section-image">
@@ -236,12 +250,17 @@
 </template>
 <script>
 import EasternDistrictLanding from './EasternDistrictLanding.vue'
+import Logo from '../Logo.vue'
+import Share from '../Share.vue'
+import { READR_SITE_URL } from '../../constants'
 import { throttle } from 'lodash'
 
 export default {
   name: 'EasternDistrict',
   components: {
-    EasternDistrictLanding
+    EasternDistrictLanding,
+    Logo,
+    Share
   },
   metaInfo() {
     return {
@@ -253,13 +272,16 @@ export default {
   },
   data () {
     return {
-      current: 0
+      READR_SITE_URL,
+      current: 0,
+      gaScrollIndex: 0
     }
   },
   mounted () {
     this.detectCurrent()
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('resize', this.detectCurrent)
+    ga('send', 'pageview')
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)
@@ -272,7 +294,12 @@ export default {
         const rect = item.getBoundingClientRect()
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight
         if (rect.top <= viewportHeight && rect.bottom >= viewportHeight) {
-          return this.current = index
+          this.current = index
+          if (index > this.gaScrollIndex) {
+            this.gaScrollIndex = index
+            ga('send', 'event', 'projects', 'scroll', `move to ${index}`, { nonInteraction: false })
+          }
+          return 
         }
       })
     },
