@@ -37,7 +37,7 @@ pipeline:
       branch: master
   
   builds:
-    image: node:8.11.3-alpine
+    image: node:10-alpine
     commands:
     - apk update
     - apk add --no-cache python build-base make
