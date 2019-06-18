@@ -5,7 +5,7 @@
         <div id="map" class="map"></div>
         <h1><span>東區沒落</span><br>不只是租金問題</h1>
         <div class="legend">
-          <p class="legend__year">{{ currentYear }} 年</p>
+          <p class="legend__year">{{ currentYear + 1911 }} 年</p>
           <div class="legend__info">
             <p class="open"><span>開店</span><span>{{ openAmount }} 家</span></p>
             <p class="close"><span>關店</span><span>{{ closeAmount }} 家</span></p>
