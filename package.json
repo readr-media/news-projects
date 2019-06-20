@@ -4,7 +4,7 @@
   "author": "MirrorMedia <master@mirrormedia.mg>",
   "private": true,
   "scripts": {
-    "dev": "forever -e err.log serverCluster.js",
+    "dev": "node server",
     "start": "cross-env NODE_ENV=production PORT=80 forever -e err.log -c 'node --expose-gc' serverCluster.js",
     "build": "rimraf dist && yarn run build:client && yarn run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.config.js --progress --hide-modules",
