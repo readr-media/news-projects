@@ -84,4 +84,31 @@ export default {
     color white
     line-height 1.5
     margin 35px 0 0 0
+
+@media (max-width 1400px)
+  .story
+    height 283vw
+    &--normal, &--reverse
+      flex-direction column
+    &__wrapper
+      width auto
+
+  .img-wrapper
+    &__img
+      min-height 140vw
+
+  .intro-wrapper
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center !important
+    padding 33px
+    text-align left !important
+    &__title
+      font-size 60px
+    &__description
+      font-size 20px
+      margin 35px 0 0 0
+      & >>> br
+        display none
 </style>
