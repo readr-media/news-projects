@@ -81,6 +81,11 @@
         <span>近年來所獲取的中國補助款為台企之最。除了被輿論關心的這 2 個企業以外，頂新集團旗下的康師傅獲得的補助款總額也排進第三名。</span>
       </p>
       <!-- （畫）領取補助前 10 名 -->
+      <Chart
+        class="chart"
+      >
+        <iframe src='https://public.flourish.studio/visualisation/322004/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/322004/?utm_source=embed&utm_campaign=visualisation/322004' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+      </Chart>
       <p>
         <span>光從補助總額來看，旺旺、鴻海及康師傅從中國政府獲得的補助遠超過其他臺灣企業。當然，這也與他們在中國設廠的規模有關，截至 2018 年 3 月為止，旺旺在中國共有 1 萬個經銷商、35 個生產基地、90 間工廠；康師傅的規模更是比旺旺多上 3 倍，雖然近幾年在中國的規模銳降，2018 年仍有破百個生產基地。而富士康在中國則有超過 50 個廠區，雇用了 120 萬人，不只中國依賴它，鴻海集團也是全球 3C 領域的代工王者。</span>
       </p>
@@ -224,6 +229,11 @@
         <span>收到深圳市政府給予的 34 億人民幣補助。</span>
       </p>
       <!-- （畫）臺灣企業拿的補助款有特別多嗎？ -->
+      <Chart
+        class="chart"
+      >
+        <iframe src='https://public.flourish.studio/visualisation/427989/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/427989/?utm_source=embed&utm_campaign=visualisation/427989' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+      </Chart>
       <p>
         <span>至於跟旺旺同樣是知名食品業的中國企業，像是伊利與蒙牛，也獲取不少政府補助款。伊利獲得最多，其次是旺旺，接著是蒙牛。但進一步觀察會發現，2016 年開始旺旺的補助款佔整體營收的佔比開始大為提升，從 0.51 % 提升至 2.51%。</span>
       </p>
@@ -493,11 +503,13 @@
 <script>
 import Credits from '../../../components/Credits.vue'
 import Hint from '../../../components/Hint.vue'
+import Chart from '../../../components/Chart.vue'
 
 export default {
   components: {
     Credits,
-    Hint
+    Hint,
+    Chart
   }
 }
 </script>
@@ -531,6 +543,9 @@ article
 
 .content
   margin 42px 0 0 0
+
+.chart
+  margin 50px 0
 
 @media (max-width 1400px)
   article
