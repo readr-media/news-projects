@@ -5,9 +5,12 @@
       @click="toggleQuote"
       v-text="title"
     />
-    <blockquote
+    <span
       v-show="isQuoteToggled"
-      class="hint__quote"
+      :class="[
+        'hint__quote',
+        { 'hint__quote--toggled': isQuoteToggled }
+      ]"
       v-text="quote"
     />
   </span>
@@ -58,4 +61,6 @@ export default {
     padding 7px 13px
     background-color white
     color #4a4a4a
+    &--toggled
+      display block
 </style>
