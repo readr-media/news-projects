@@ -42,4 +42,15 @@ export default {
     max-width 1400px
     margin 0 auto
     padding 70px 0
+
+@media (max-width 1400px)
+  .article-section
+    padding 0
+    &__rich-badge
+      height 50px
+
+  .article
+    &__inner-wrapper
+      max-width auto
+      padding 30px 0
 </style>

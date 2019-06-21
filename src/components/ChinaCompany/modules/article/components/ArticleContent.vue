@@ -531,4 +531,18 @@ article
 
 .content
   margin 42px 0 0 0
+
+@media (max-width 1400px)
+  article
+    max-width auto
+    padding 0 30px
+    h1
+      font-size 28px
+    h2
+      font-size 18px
+      margin 25px 0
+    p
+      font-size 14px
+    p + p
+      margin 25px 0 0 0
 </style>

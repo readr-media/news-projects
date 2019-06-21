@@ -63,4 +63,17 @@ export default {
     color #4a4a4a
     &--toggled
       display block
+
+@media (max-width 1400px)
+  .hint
+    &__title
+      &:after
+        content ''
+        display inline-block
+        margin 0
+        width 0
+        height 0
+        border-style solid
+        border-width 14px 9px 0 9px
+        border-color #dc3d2d transparent transparent transparent
 </style>
