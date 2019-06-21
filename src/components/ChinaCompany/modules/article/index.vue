@@ -1,6 +1,8 @@
 <template>
   <section class="article-section">
-    <div class="article-section__rich-badge" />
+    <div class="article-section__rich-badge">
+      be rich
+    </div>
     <div class="article-section__article article">
       <div class="article__inner-wrapper">
         <ArticleContent />
@@ -28,7 +30,11 @@ export default {
     background-color #000537
     position sticky
     top 0
-    border 1px solid red
+    // border 1px solid red
+    display flex
+    justify-content center
+    align-items center
+    color white
 
 .article
   background-color #e9dbb6
