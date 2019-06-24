@@ -1,8 +1,6 @@
 <template>
   <section class="article-section">
-    <div class="article-section__rich-badge">
-      be rich
-    </div>
+    <RichBadge class="article-section__rich-badge"/>
     <div class="article-section__article article">
       <div class="article__inner-wrapper">
         <ArticleContent />
@@ -12,10 +10,12 @@
 </template>
 
 <script>
+import RichBadge from './components/RichBadge.vue'
 import ArticleContent from './components/ArticleContent.vue'
 
 export default {
   components: {
+    RichBadge,
     ArticleContent
   }
 }
@@ -26,15 +26,8 @@ export default {
   background-color #000537
   padding 0 54px 54px 54px
   &__rich-badge
-    height 343px
-    background-color #000537
     position sticky
     top 0
-    // border 1px solid red
-    display flex
-    justify-content center
-    align-items center
-    color white
 
 .article
   background-color #e9dbb6
@@ -46,8 +39,6 @@ export default {
 @media (max-width 1400px)
   .article-section
     padding 0
-    &__rich-badge
-      height 50px
 
   .article
     &__inner-wrapper
