@@ -1,10 +1,21 @@
 <template>
   <span class="hint">
     <span
-      class="hint__title"
-      @click="toggleQuote"
-      v-text="title"
-    />
+      class="hint__title title"
+    >
+      <template v-if="href === ''">
+        {{ title }}<span class="title__icon" @click="toggleQuote" />
+      </template>
+      <template v-else>
+        <a
+          :href="href"
+          target="_blank"
+          rel="noopener"
+          v-text="title"
+        />
+        <span class="title__icon" @click="toggleQuote" />
+      </template>
+    </span>
     <span
       v-show="isQuoteToggled"
       :class="[
@@ -26,6 +37,10 @@ export default {
     quote: {
       type: String,
       required: true
+    },
+    href: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -45,17 +60,7 @@ export default {
 .hint
   &__title
     font-weight 500
-    color #de3b24
-    cursor pointer
-    &:after
-      content ''
-      display inline-block
-      margin 0 5px
-      width 0
-      height 0
-      border-style solid
-      border-width 18px 12px 0 12px
-      border-color #dc3d2d transparent transparent transparent
+    color #4a4a4a
   &__quote
     margin 20px 0
     padding 7px 13px
@@ -63,17 +68,26 @@ export default {
     color #4a4a4a
     &--toggled
       display block
+  a
+    text-decoration none
+    color #4a4a4a
+    border-bottom 2px solid #de3b24
+
+.title
+  &__icon
+    cursor pointer
+    content ''
+    display inline-block
+    margin 0 5px
+    width 0
+    height 0
+    border-style solid
+    border-width 18px 12px 0 12px
+    border-color #4a4a4a transparent transparent transparent
 
 @media (max-width 1400px)
-  .hint
-    &__title
-      &:after
-        content ''
-        display inline-block
-        margin 0
-        width 0
-        height 0
-        border-style solid
-        border-width 14px 9px 0 9px
-        border-color #dc3d2d transparent transparent transparent
+  .title
+    &__icon
+      margin 0
+      border-width 14px 9px 0 9px
 </style>
