@@ -7,6 +7,7 @@
         <span>中國向華資招手，</span><br>
         <span>台商變成中國經濟起飛的重要因素</span>
       `"
+      :img="'poster1'"
     />
     <PageStory
       class="page__story page__current-story"
@@ -19,6 +20,7 @@
         <span>（尤其青年）招手，</span><br>
         <span>而中國的強大也成為對台人的一股吸引力</span>
       `"
+      :img="'poster2'"
     />
   </section>
 </template>

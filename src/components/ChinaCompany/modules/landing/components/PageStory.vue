@@ -6,11 +6,17 @@
     ]"
   >
     <main class="story__wrapper story__img-wrapper img-wrapper">
-      <img
-        class="img-wrapper__img"
-        src=""
-        alt=""
-      >
+      <picture>
+        <source
+          :srcset="`/proj-assets/china-company/${img}-mobile.png`"
+          media="(max-width: 1400px)"
+        >
+        <img
+          class="img-wrapper__img"
+          :src="`/proj-assets/china-company/${img}-web.png`"
+          alt=""
+        >
+      </picture>
     </main>
     <aside class="story__wrapper story__intro-wrapper intro-wrapper">
       <h1
@@ -42,6 +48,10 @@ export default {
     description: {
       type: String,
       required: true
+    },
+    img: {
+      type: String,
+      required: true
     }
   }
 }
@@ -64,10 +74,9 @@ export default {
 
 .img-wrapper
   &__img
-    min-width 100%
-    min-height 100%
+    width 100%
+    height 100%
     object-fit cover
-    background-color black
 
 .intro-wrapper
   display flex
@@ -92,10 +101,6 @@ export default {
       flex-direction column
     &__wrapper
       width auto
-
-  .img-wrapper
-    &__img
-      min-height 140vw
 
   .intro-wrapper
     display flex
