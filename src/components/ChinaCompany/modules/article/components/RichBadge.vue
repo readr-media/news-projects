@@ -20,22 +20,21 @@
 
 <style lang="stylus" scoped>
 .rich-badge
-  height 343px
+  height 85px
   background-color #000537
-  // border 1px solid red
   display flex
   justify-content center
   align-items center
   color white
   &__star
-    height 200px
+    height 50px
     &--left
       transform scaleX(-1)
       margin 0 85px 0 0
     &--right
       margin 0 0 0 85px
   &__rich
-    height 204px
+    height 50px
 
 @media (max-width 1400px)
   .rich-badge
