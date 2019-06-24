@@ -4,7 +4,14 @@
       class="hint__title title"
     >
       <template v-if="href === ''">
-        {{ title }}<span class="title__icon" @click="toggleQuote" />
+        <span v-text="title" />
+        <span
+          :class="[
+            'title__icon',
+            { 'title__icon--toggled': isQuoteToggled }
+          ]"
+          @click="toggleQuote"
+        />
       </template>
       <template v-else>
         <a
@@ -13,7 +20,13 @@
           rel="noopener"
           v-text="title"
         />
-        <span class="title__icon" @click="toggleQuote" />
+        <span
+          :class="[
+            'title__icon',
+            { 'title__icon--toggled': isQuoteToggled }
+          ]"
+          @click="toggleQuote"
+        />
       </template>
     </span>
     <span
@@ -75,6 +88,7 @@ export default {
 
 .title
   &__icon
+    user-select none
     cursor pointer
     content ''
     display inline-block
@@ -84,6 +98,10 @@ export default {
     border-style solid
     border-width 18px 12px 0 12px
     border-color #4a4a4a transparent transparent transparent
+    transition transform .25s
+    transform rotate(-90deg)
+    &--toggled
+      transform rotate(0)
 
 @media (max-width 1400px)
   .title
