@@ -18,7 +18,14 @@
         >
       </picture>
     </main>
-    <aside class="story__wrapper story__intro-wrapper intro-wrapper">
+    <aside
+      :class="[
+        'story__wrapper',
+        'story__intro-wrapper',
+        'intro-wrapper',
+        `intro-wrapper--${direction}`
+      ]"
+    >
       <h1
         class="intro-wrapper__title"
         v-text="title"
@@ -62,6 +69,8 @@ export default {
   height 100vh
   background-color #000537
   display flex
+  max-width 1400px
+  margin 0 auto
   &--normal
     flex-direction row
   &--reverse
@@ -76,13 +85,16 @@ export default {
   &__img
     width 100%
     height 100%
-    object-fit cover
+    object-fit contain
 
 .intro-wrapper
   display flex
   flex-direction column
   justify-content center
-  padding 98px
+  &--normal
+    padding 98px 0 98px 98px
+  &--reverse
+    padding 98px 98px 98px 0
   &__title
     font-size 120px
     font-weight 500

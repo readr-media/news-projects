@@ -36,5 +36,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
+.page
+  background-color #000537
 </style>
