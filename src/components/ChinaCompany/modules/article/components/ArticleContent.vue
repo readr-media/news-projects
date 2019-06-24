@@ -83,8 +83,13 @@
       <!-- （畫）領取補助前 10 名 -->
       <Chart
         class="chart"
+        :title="'領取補助前 10 名'"
+        :subtitle="'註：旺旺 2017 的數據統計至 2018 年 3 月；鴻海集團為富智康集團、富士康工业互联网股份有限公司、鴻騰六零八八精密科技 3 間公司總和。'"
       >
-        <iframe src='https://public.flourish.studio/visualisation/322004/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/322004/?utm_source=embed&utm_campaign=visualisation/322004' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+        <img
+          src="/proj-assets/china-company/charts/chart1.svg"
+          alt=""
+        >
       </Chart>
       <p>
         <span>光從補助總額來看，旺旺、鴻海及康師傅從中國政府獲得的補助遠超過其他臺灣企業。當然，這也與他們在中國設廠的規模有關，截至 2018 年 3 月為止，旺旺在中國共有 1 萬個經銷商、35 個生產基地、90 間工廠；康師傅的規模更是比旺旺多上 3 倍，雖然近幾年在中國的規模銳降，2018 年仍有破百個生產基地。而富士康在中國則有超過 50 個廠區，雇用了 120 萬人，不只中國依賴它，鴻海集團也是全球 3C 領域的代工王者。</span>
@@ -231,13 +236,24 @@
       <!-- （畫）臺灣企業拿的補助款有特別多嗎？ -->
       <Chart
         class="chart"
+        :title="'臺灣企業拿的補助款有特別多嗎？'"
+        :subtitle="'註：鴻海集團為富智康集團、富士康工业互联网股份有限公司、鴻騰六零八八精密科技 3 間公司總和。'"
       >
-        <iframe src='https://public.flourish.studio/visualisation/427989/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/427989/?utm_source=embed&utm_campaign=visualisation/427989' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+        <img
+          src="/proj-assets/china-company/charts/chart3.svg"
+          alt=""
+        >
       </Chart>
       <p>
         <span>至於跟旺旺同樣是知名食品業的中國企業，像是伊利與蒙牛，也獲取不少政府補助款。伊利獲得最多，其次是旺旺，接著是蒙牛。但進一步觀察會發現，2016 年開始旺旺的補助款佔整體營收的佔比開始大為提升，從 0.51 % 提升至 2.51%。</span>
       </p>
       <!-- （畫）補助款比例 -->
+      <Chart
+        class="chart"
+        :title="'補助款比例'"
+      >
+        <iframe src='https://public.flourish.studio/visualisation/375420/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/375420/?utm_source=embed&utm_campaign=visualisation/375420' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+      </Chart>
       <p>
         <span>旺旺集團補助款佔營收的比例上升的原因，根據財報顯示，是因為總體營收連三年下降，但補助款比前幾年還多而導致的。</span>
       </p>
@@ -414,6 +430,12 @@
         <span>我們進一步分析「中國台灣辦事處」與「全國臺灣同胞投資企業聯誼會」（簡稱台企聯）網站刊登與臺商有關的新聞稿，從中發現中國對台講話有了相對應的轉換。</span>
       </p>
       <!-- （畫）國台辦對台喊話變化（特別的標示顏色，資料重跑） -->
+      <Chart
+        class="chart"
+        :title="'國台辦對台喊話變化'"
+      >
+        <iframe src='https://public.flourish.studio/visualisation/369844/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/369844/?utm_source=embed&utm_campaign=visualisation/369844' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+      </Chart>
       <p>
         <span>以國台辦新聞稿為例，2012 年至 2014 年強調「中小企業」、「經濟」、「交流」等辭彙，但從 2015 年開始，「青年」、「創業」、「新創」等詞彙迅速爬升。這樣的趨勢同樣出現在台企聯的新聞稿裡。</span>
       </p>
@@ -441,6 +463,16 @@
         <span>中國的招攬對象瞄準青年，而這幾年赴中工作的臺灣人面貌也愈來愈年輕了。根據主計處公布的數據，從 2009 年開始，30 歲以下的年輕人前往中國的數量確實有了些微的爬升。同時，另一個明顯的差異在於 30 歲到 49 歲的人，開始下滑。</span>
       </p>
       <!-- （畫）青年赴中國人數占比上升 -->
+      <Chart
+        class="chart"
+        :title="'青年赴中國人數占比上升'"
+        :subtitle="'資料來源：主計處赴海外工作人數統計、主計處人口統計'"
+      >
+        <img
+          src="/proj-assets/china-company/charts/chart2.svg"
+          alt=""
+        >
+      </Chart>
       <p>
         <span>2012 年，來自高雄的連憲成，雄中畢業之後，就以學測成績申請進入上海交通大學就讀。當年跟他一樣錄取上海交大的台生，還有另外 23 名。在他入學的前兩屆，人數都沒有超過二位數，分別是 3 名與 7 名。</span>
       </p>
@@ -501,6 +533,13 @@
         <span>中國把政治意圖包進優惠措施中，來招攬它想吸引的人，已經是慣用手段。只是隨著兩岸政經環境的變化，臺灣人對「中國因素」是更敏感還是更接受？中國的招攬方式還能不能如過去一樣成功？值得繼續觀察。</span>
       </p>
       <!-- （圖）補助歷年變化（含全部資料，可搜索）-->
+      <Chart
+        class="chart"
+        :title="'補助歷年變化'"
+        :subtitle="'註：旺旺 2017 的數據統計至 2018 年 3 月；鴻海集團為富智康集團、富士康工业互联网股份有限公司、鴻騰六零八八精密科技 3 間公司總和。'"
+      >
+        <iframe src='https://public.flourish.studio/visualisation/375511/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/375511/?utm_source=embed&utm_campaign=visualisation/375511' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+      </Chart>
     </div>
   </article>
 </template>

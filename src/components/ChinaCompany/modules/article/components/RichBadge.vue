@@ -26,6 +26,7 @@
   justify-content center
   align-items center
   color white
+  z-index 10000
   &__star
     height 50px
     &--left
