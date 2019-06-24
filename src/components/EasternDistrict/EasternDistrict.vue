@@ -22,8 +22,8 @@
           class="image-fixed"
         >
           <picture>
-            <source srcset="/proj-assets/eastern-district/img-01.webp">
-            <source srcset="/proj-assets/eastern-district/img-01.jp2">
+            <source srcset="/proj-assets/eastern-district/img-01.webp" type="image/webp">
+            <source srcset="/proj-assets/eastern-district/img-01.jp2" type="image/jp2">
             <img src="/proj-assets/eastern-district/img-01.jpg">
           </picture>
         </div>
@@ -135,8 +135,8 @@
           class="image-fixed"
         >
           <picture>
-            <source srcset="/proj-assets/eastern-district/img-02.webp">
-            <source srcset="/proj-assets/eastern-district/img-02.jp2">
+            <source srcset="/proj-assets/eastern-district/img-02.webp" type="image/webp">
+            <source srcset="/proj-assets/eastern-district/img-02.jp2" type="image/jp2">
             <img src="/proj-assets/eastern-district/img-02.jpg">
           </picture>
         </div>
@@ -189,8 +189,8 @@
             class="image-fixed image-mobile"
           >
             <picture>
-              <source srcset="/proj-assets/eastern-district/img-03.webp">
-              <source srcset="/proj-assets/eastern-district/img-03.jp2">
+              <source srcset="/proj-assets/eastern-district/img-03.webp" type="image/webp">
+              <source srcset="/proj-assets/eastern-district/img-03.jp2" type="image/jp2">
               <img src="/proj-assets/eastern-district/img-03.jpg">
             </picture>
           </div>
@@ -217,8 +217,8 @@
             class="image-fixed image-mobile"
           >
             <picture>
-              <source srcset="/proj-assets/eastern-district/img-04.webp">
-              <source srcset="/proj-assets/eastern-district/img-04.jp2">
+              <source srcset="/proj-assets/eastern-district/img-04.webp" type="image/webp">
+              <source srcset="/proj-assets/eastern-district/img-04.jp2" type="image/jp2">
               <img src="/proj-assets/eastern-district/img-04.jpg">
             </picture>
           </div>
@@ -240,8 +240,8 @@
             class="image-fixed image-mobile"
           >
             <picture>
-              <source srcset="/proj-assets/eastern-district/img-05.webp">
-              <source srcset="/proj-assets/eastern-district/img-05.jp2">
+              <source srcset="/proj-assets/eastern-district/img-05.webp" type="image/webp">
+              <source srcset="/proj-assets/eastern-district/img-05.jp2" type="image/jp2">
               <img src="/proj-assets/eastern-district/img-05.jpg">
             </picture>
           </div>
