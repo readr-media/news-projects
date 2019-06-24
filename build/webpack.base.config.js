@@ -4,21 +4,33 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const TerserPlugin = require('terser-webpack-plugin')
+const debug = require('debug')('news-projects:webpack')
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const isProd = NODE_ENV === 'production'
 
 const projects = require('../src/constants/projectList.json')
-// 'cross-env PROJ_DEVING=Example node server' to exclude src/components/Example/* from noParse
-// e.g. 'cross-env PROJ_DEVING=Vote node server' when you are developing within the path src/components/Vote/*
+
+// 'npm run dev -- ExampleProject1,ExampleProject2' to exclude src/components/ExampleProject1/*, src/components/ExampleProject2/* from noParse
+// e.g. 'npm run dev -- Vote' when you are developing within the path src/components/Vote/*
 const createNoParse = () => {
+  debug('exec createNoParse')
   const noParseDefault = /es6-promise\.js$/ // avoid webpack shimming process
-  if (isProd || !process.env.PROJ_DEVING) {
+  if (isProd || !process.argv[2]) {
+    debug('return default noParse')
     return [ noParseDefault ]
   } else {
-    const projNames = Object.values(projects).filter(proj => proj !== process.env.PROJ_DEVING).map(proj => new RegExp(`${proj}/`))
-    projNames.push(noParseDefault)
-    return projNames
+    const projectsDeveloping = process.argv[2].split(',')
+    debug('argv[2] founded:', projectsDeveloping)
+
+    const projectsNoParse =
+      Object.values(projects)
+      .filter(project => !projectsDeveloping.includes(project))
+      .map(project => new RegExp(`${project}/`))
+    projectsNoParse.push(noParseDefault)
+    debug('return custom noParse:', projectsNoParse)
+
+    return projectsNoParse
   }
 }
 
