@@ -108,11 +108,15 @@ export default {
 
 @media (max-width 1400px)
   .story
-    height 283vw
+    height 200vh
     &--normal, &--reverse
       flex-direction column
     &__wrapper
       width auto
+
+  .img-wrapper
+    &__img
+      height 100vh
 
   .intro-wrapper
     display flex
@@ -121,6 +125,7 @@ export default {
     align-items center !important
     padding 33px
     text-align left !important
+    height 100vh
     &__title
       font-size 60px
     &__description
