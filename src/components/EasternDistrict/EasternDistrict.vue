@@ -17,10 +17,16 @@
     <EasternDistrictLanding class="eastern-district__landing"/>
     <article>
       <section class="section-image">
-        <lazy-component
-          :class="{ active: current === 1 || current === 2 }"
-          class="image-fixed image-1"
-        />
+        <div
+          :class="{ active: current < 4 }"
+          class="image-fixed"
+        >
+          <picture>
+            <source srcset="/proj-assets/eastern-district/img-01.webp">
+            <source srcset="/proj-assets/eastern-district/img-01.jp2">
+            <img src="/proj-assets/eastern-district/img-01.jpg">
+          </picture>
+        </div>
         <div class="content">
           <div>
             <h2>店主：「整條街越來越暗」</h2>
@@ -124,10 +130,16 @@
         </div>
       </section>
       <section class="section-image">
-        <lazy-component
+        <div
           :class="{ active: current === 4 || current === 5 }"
-          class="image-fixed image-2"
-        />
+          class="image-fixed"
+        >
+          <picture>
+            <source srcset="/proj-assets/eastern-district/img-02.webp">
+            <source srcset="/proj-assets/eastern-district/img-02.jp2">
+            <img src="/proj-assets/eastern-district/img-02.jpg">
+          </picture>
+        </div>
         <div class="content">
           <div>
             <h2>「人潮減少」比租金更有殺傷力</h2>
@@ -172,10 +184,16 @@
           </div>
         </div>
         <section class="section-image">
-          <lazy-component
+          <div
             :class="{ active: current === 6 }"
-            class="image-fixed image-3 image-mobile"
-          />
+            class="image-fixed image-mobile"
+          >
+            <picture>
+              <source srcset="/proj-assets/eastern-district/img-03.webp">
+              <source srcset="/proj-assets/eastern-district/img-03.jp2">
+              <img src="/proj-assets/eastern-district/img-03.jpg">
+            </picture>
+          </div>
           <div class="content">
             <div>
               <h2>不是第一次：東西區風水輪流轉</h2>
@@ -194,10 +212,16 @@
           </div>
         </section>
         <section class="section-image">
-          <lazy-component
+          <div
             :class="{ active: current === 7 }"
-            class="image-fixed image-4 image-mobile"
-          />
+            class="image-fixed image-mobile"
+          >
+            <picture>
+              <source srcset="/proj-assets/eastern-district/img-04.webp">
+              <source srcset="/proj-assets/eastern-district/img-04.jp2">
+              <img src="/proj-assets/eastern-district/img-04.jpg">
+            </picture>
+          </div>
           <div class="content content-spec">
             <div>
               <h2>西門町成功翻轉，東區可能嗎？</h2>
@@ -211,10 +235,16 @@
           </div>
         </section>
         <section class="section-image">
-          <lazy-component
+          <div
             :class="{ active: current === 8 }"
-            class="image-fixed image-5 image-mobile"
-          />
+            class="image-fixed image-mobile"
+          >
+            <picture>
+              <source srcset="/proj-assets/eastern-district/img-05.webp">
+              <source srcset="/proj-assets/eastern-district/img-05.jp2">
+              <img src="/proj-assets/eastern-district/img-05.jpg">
+            </picture>
+          </div>
           <div class="content content-spec">
             <div>
               <h2>東區店主的求生之道</h2>
@@ -372,39 +402,26 @@ export default {
         margin-left 1em
   .image
     &-fixed
-      position relative
       width 100%
       height 100vh
-      &::before
-        content ''
+      picture
         position fixed
         top 0
         left 0
         z-index -1
         width 100%
         height 100%
-        background-position center right
-        background-size cover
-        background-repeat no-repeat
-        visibility hidden
+        opacity 0
+        transition opacity .5s ease-in
+      img
+        width 100%
+        height 100%
+        object-fit cover
+        object-position center right
       &.active
-        &::before
-          visibility visible
-      &.image-1
-        &::before
-          background-image url(/proj-assets/eastern-district/img-01.jpg)
-      &.image-2
-        &::before
-          background-image url(/proj-assets/eastern-district/img-02.jpg)
-      &.image-3
-        &::before
-          background-image url(/proj-assets/eastern-district/img-03.jpg)
-      &.image-4
-        &::before
-          background-image url(/proj-assets/eastern-district/img-04.jpg)
-      &.image-5
-        &::before
-          background-image url(/proj-assets/eastern-district/img-05.jpg)
+        > picture
+          opacity 1
+          transition opacity .2s ease-in
 
   table
     width 100%
