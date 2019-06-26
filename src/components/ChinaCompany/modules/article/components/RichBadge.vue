@@ -39,7 +39,7 @@
 
 @media (max-width 1400px)
   .rich-badge
-    height auto
+    height 65px
     padding 10px 0
     &__star
       height 33px
