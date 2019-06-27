@@ -78,6 +78,10 @@
         />
       </template>
     </div>
+    <Footer
+      v-show="showOuterFrames"
+      class="rich-footer"
+    />
   </section>
 </template>
 
@@ -94,6 +98,7 @@ import LandingPagePoster from './modules/landing/components/PageStoryPoster.vue'
 import LandingPageIntro from './modules/landing/components/PageStoryIntro.vue'
 import RichBadge from './modules/article/components/RichBadge.vue'
 import Article from './modules/article/index.vue'
+import Footer from './modules/article/components/Footer.vue'
 
 const debug = require('debug')('china-company')
 
@@ -111,7 +116,8 @@ export default {
     LandingPagePoster,
     LandingPageIntro,
     RichBadge,
-    Article
+    Article,
+    Footer
   },
   data () {
     return {
@@ -243,6 +249,12 @@ export default {
 .rich-badge
   position fixed
   top 0
+  left 0
+  width 100vw
+
+.rich-footer
+  position fixed
+  bottom 0
   left 0
   width 100vw
 </style>

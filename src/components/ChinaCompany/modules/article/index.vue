@@ -41,7 +41,7 @@ export default {
 
 @media (max-width 1400px)
   .article-section
-    padding 65px 0 0 0
+    padding 65px 10px 0 10px
 
   .article
     &__inner-wrapper

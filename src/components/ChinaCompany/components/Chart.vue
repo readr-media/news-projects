@@ -54,9 +54,9 @@ export default {
 @media (max-width 1400px)
   .chart
     padding 16px 5px
-    width 100vw
+    width calc(100vw - 10px - 10px)
     position relative
-    left calc((100vw - 100%) / 2 * -1)
+    left calc((100vw - 10px - 10px - 100%) / 2 * -1)
     h1
       font-size 18px
 

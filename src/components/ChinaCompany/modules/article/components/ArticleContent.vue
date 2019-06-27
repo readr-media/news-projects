@@ -186,6 +186,7 @@
         </a>
         <span>，從 2015 年以來，山西太原富士康園區 3 家單位一共申請領取了近 4500 萬人民幣穩崗津貼。</span>
       </p>
+      <a class="anchor" id="test"></a>
       <h2>
         <span>「補助款」只是金錢補助，還是有政治意圖？</span>
       </h2>
@@ -580,6 +581,11 @@ article
     text-decoration none
     color black
     border-bottom 2px solid #de3b24
+    &.anchor
+      display block
+      position relative
+      top -85px
+      visibility hidden
 
 
 .credits
