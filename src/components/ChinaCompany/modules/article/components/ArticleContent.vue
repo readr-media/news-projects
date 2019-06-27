@@ -251,25 +251,21 @@
       <!-- （畫）補助款比例 -->
       <Chart
         class="chart"
-        :title="'補助款比例'"
+        :title="'臺資企業領取中國補助款佔營收比例變化'"
+        :subtitle="'資料來源：各家上市公司財報'"
       >
-        <iframe src='https://public.flourish.studio/visualisation/375420/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/375420/?utm_source=embed&utm_campaign=visualisation/375420' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+        <div class="flourish-embed" data-src="visualisation/375420"></div>
       </Chart>
       <p>
         <span>旺旺集團補助款佔營收的比例上升的原因，根據財報顯示，是因為總體營收連三年下降，但補助款比前幾年還多而導致的。</span>
       </p>
       <p>
-        <span>再來是大環境的變化。中國的經濟成長開始下行，進入</span>
+        <span>再來是大環境的變化。中國的經濟成長開始下行，為了穩定產業與就業率，地方政府會以「穩崗」的名義發放</span>
         <Hint
-          :title="'「新常態」'"
-          :quote="'2014 年 5 月，習近平考察河南時所提出的概念，意指中國已經不如以往保持高速的經濟增長，在 2012 年後，整體經濟面臨巨大的下行壓力。為此，中國官方總結新的發展模式，並具備「經濟增長速度從高速降為中高速」、「經濟結構（城鄉區域差距、經濟產業結構）優化」和「增長動力由投資轉為創新」三個特點'"
-        />
-        <span>。為了穩定產業與就業率，地方政府會以</span>
-        <Hint
-          :title="'「穩崗」'"
+          :title="'補助款'"
           :quote="'但這些少數能透過從地方政府公開資料反向追查到的補助款，只佔了該年度旺旺領取補助款總額的 0.05%'"
         />
-        <span>的名義發放補助款。就像旺旺集團在 2018 年獲得安徽省安慶市發放 19 萬（人民幣）、重慶市發放 14 萬（人民幣）；2017 年浙江省發放 1 萬（人民幣）；2016 年湖南省長沙市發放 18 萬（人民幣）</span>
+        <span>。就像旺旺集團在 2018 年獲得安徽省安慶市發放 19 萬（人民幣）、重慶市發放 14 萬（人民幣）；2017 年浙江省發放 1 萬（人民幣）；2016 年湖南省長沙市發放 18 萬（人民幣）等。</span>
       </p>
       <p>
         <span>如果觀察總體的補助款變化，2016 年其他臺商所獲取的補助款，跟旺旺一樣有所提升。對此，《日經新聞》表示這是因為臺灣再次政黨輪替，由民進黨的蔡英文獲選為臺灣總統，北京當局不停加大對台企的優惠。顯示包括外媒在內，大多數人對於中國補助款的第一個反應仍是政治因素。</span>
@@ -430,12 +426,13 @@
       <p>
         <span>我們進一步分析「中國台灣辦事處」與「全國臺灣同胞投資企業聯誼會」（簡稱台企聯）網站刊登與臺商有關的新聞稿，從中發現中國對台講話有了相對應的轉換。</span>
       </p>
-      <!-- （畫）國台辦對台喊話變化（特別的標示顏色，資料重跑） -->
+      <!-- （畫）國台辦談話歷年變化（特別的標示顏色，資料重跑） -->
       <Chart
         class="chart"
-        :title="'國台辦對台喊話變化'"
+        :title="'國台辦談話歷年變化'"
+        :subtitle="'資料來源：國台辦網站'"
       >
-        <iframe src='https://public.flourish.studio/visualisation/369844/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/369844/?utm_source=embed&utm_campaign=visualisation/369844' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+        <div class="flourish-embed" data-src="visualisation/437493"></div>
       </Chart>
       <p>
         <span>以國台辦新聞稿為例，2012 年至 2014 年強調「中小企業」、「經濟」、「交流」等辭彙，但從 2015 年開始，「青年」、「創業」、「新創」等詞彙迅速爬升。這樣的趨勢同樣出現在台企聯的新聞稿裡。</span>
@@ -466,7 +463,7 @@
       <!-- （畫）青年赴中國人數占比上升 -->
       <Chart
         class="chart"
-        :title="'青年赴中國人數占比上升'"
+        :title="'青年赴中國人數占比微幅上升'"
         :subtitle="'資料來源：主計處赴海外工作人數統計、主計處人口統計'"
       >
         <img
@@ -536,10 +533,10 @@
       <!-- （圖）補助歷年變化（含全部資料，可搜索）-->
       <Chart
         class="chart"
-        :title="'補助歷年變化'"
-        :subtitle="'註：旺旺 2017 的數據統計至 2018 年 3 月；鴻海集團為富智康集團、富士康工业互联网股份有限公司、鴻騰六零八八精密科技 3 間公司總和。'"
+        :title="'中港上市公司有 42 家臺企領取中國補助款'"
+        :subtitle="'資料來源：各家上市公司財報<br>註：旺旺 2017 的數據統計至 2018 年 3 月；鴻海集團為富智康集團、富士康工业互联网股份有限公司、鴻騰六零八八精密科技 3 間公司總和。'"
       >
-        <iframe src='https://public.flourish.studio/visualisation/375511/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/375511/?utm_source=embed&utm_campaign=visualisation/375511' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+        <div class="flourish-embed" data-src="visualisation/375511"></div>
       </Chart>
     </div>
   </article>
