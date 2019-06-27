@@ -96,16 +96,16 @@ export default {
     width 0
     height 0
     border-style solid
-    border-width 18px 12px 0 12px
+    border-width 14px 8px 0 8px
     border-color #4a4a4a transparent transparent transparent
     transition transform .25s
-    transform rotate(-90deg)
+    transform rotate(-180deg)
     &--toggled
       transform rotate(0)
 
 @media (max-width 1400px)
   .title
     &__icon
-      margin 0
-      border-width 14px 9px 0 9px
+      margin 0 5px
+      border-width 11px 7px 0 7px
 </style>
