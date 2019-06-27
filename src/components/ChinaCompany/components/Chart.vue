@@ -8,7 +8,7 @@
       v-if="subtitle !== ''"
       class="hint-wrapper"
     >
-      <p v-text="subtitle" />
+      <p v-html="subtitle" />
     </div>
   </div>
 </template>

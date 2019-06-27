@@ -108,7 +108,10 @@ export default {
       title: '中國發大財',
       description: '',
       metaUrl: '',
-      metaImage: ''
+      metaImage: '',
+      customScript: `
+        <script src="https://public.flourish.studio/resources/embed.js"><\/script>
+      `
     }
   },
   components: {
