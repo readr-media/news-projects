@@ -6,7 +6,10 @@
       alt=""
     >
     <div class="rich-footer__banner banner">
-      <div class="banner-mobile">
+      <div
+        v-show="currentCatalog !== '0'"
+        class="banner-mobile"
+      >
         <img
           class="banner-mobile__arrow banner-mobile__arrow--left"
           src="/proj-assets/china-company/arrow.png"
@@ -47,7 +50,7 @@
 export default {
   data () {
     return {
-      currentCatalog: 0,
+      currentCatalog: '0',
       currentCatalogTitle: ''
     }
   },
@@ -75,9 +78,9 @@ export default {
           //   entry.rootBounds
           //   entry.target
           //   entry.time
+          const step = entry.target.dataset.step
           if (entry.isIntersecting) {
-            // your observer logic
-            this.currentCatalog = entry.target.dataset.step
+            this.currentCatalog = step
             const h2 = entry.target.querySelector('h2')
             if (h2) {
               const title = h2.querySelector('span').innerText
@@ -85,6 +88,9 @@ export default {
             } else {
               this.currentCatalogTitle = ''
             }
+          } else if (step === '1' && this.currentCatalog === '1') {
+            this.currentCatalog === '0'
+            this.currentCatalogTitle === ''
           }
         })
       }, options)
