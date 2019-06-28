@@ -12,9 +12,10 @@
           src="/proj-assets/china-company/arrow.png"
           alt=""
         >
-        <p class="banner-mobile__current-catalog">
-          目前索引標題題題題題題題題題題題題題題題題題題題題題題題題
-        </p>
+        <p
+          class="banner-mobile__current-catalog"
+          v-text="currentCatalogTitle"
+        />
         <img
           class="banner-mobile__arrow banner-mobile__arrow--right"
           src="/proj-assets/china-company/arrow.png"
@@ -41,6 +42,59 @@
     </div>
   </footer>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      currentCatalog: 0,
+      currentCatalogTitle: ''
+    }
+  },
+  mounted () {
+    this.initIntersectionObserver()
+  },
+  methods: {
+    initIntersectionObserver () {
+      require('intersection-observer')
+
+      const options = {
+        root: document.querySelector('#china-company'),
+        rootMargin: '0px',
+        threshold: 0
+      }
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          // Each entry describes an intersection change for one observed
+          // target element:
+          //   entry.boundingClientRect
+          //   entry.intersectionRatio
+          //   entry.intersectionRect
+          //   entry.isIntersecting
+          //   entry.rootBounds
+          //   entry.target
+          //   entry.time
+          if (entry.isIntersecting) {
+            // your observer logic
+            this.currentCatalog = entry.target.dataset.step
+            const h2 = entry.target.querySelector('h2')
+            if (h2) {
+              const title = h2.querySelector('span').innerText
+              this.currentCatalogTitle = title
+            } else {
+              this.currentCatalogTitle = ''
+            }
+          }
+        })
+      }, options)
+
+      const targets = document.querySelectorAll('.article-subsection')
+      targets.forEach(target => { observer.observe(target) })
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 .rich-footer
