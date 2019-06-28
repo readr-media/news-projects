@@ -100,6 +100,7 @@
         </p>
       </section>
       <section class="article-subsection" data-step="1">
+        <a class="anchor" id="h2-1" />
         <h2>
           <span>六四導致西方經濟制裁 轉向華資招手</span>
         </h2>
@@ -133,6 +134,7 @@
         </p>
       </section>
       <section class="article-subsection" data-step="2">
+        <a class="anchor" id="h2-2" />
         <h2>
           <span>富士康曾包下河南省近七成進出口額</span>
         </h2>
@@ -193,7 +195,7 @@
         </p>
       </section>
       <section class="article-subsection" data-step="3">
-        <a class="anchor" id="test"></a>
+        <a class="anchor" id="h2-3" />
         <h2>
           <span>「補助款」只是金錢補助，還是有政治意圖？</span>
         </h2>
@@ -304,6 +306,7 @@
         </p>
       </section>
       <section class="article-subsection" data-step="4">
+        <a class="anchor" id="h2-4" />
         <h2>
           <span>學者：當你拿中國的錢，就代表可能被收買</span>
         </h2>
@@ -376,6 +379,7 @@
         </p>
       </section>
       <section class="article-subsection" data-step="5">
+        <a class="anchor" id="h2-5" />
         <h2>
           <span>「自由港」香港，是否已經受到中資影響？</span>
         </h2>
@@ -413,6 +417,7 @@
         </p>
       </section>
       <section class="article-subsection" data-step="6">
+        <a class="anchor" id="h2-6" />
         <h2>
           <span>官方讓利的對象，逐漸從「臺商」擴大到「台青」</span>
         </h2>
@@ -469,6 +474,7 @@
         </p>
       </section>
       <section class="article-subsection" data-step="7">
+        <a class="anchor" id="h2-7" />
         <h2>
           <span>向臺灣青年兜售「中國夢」，成功了嗎？</span>
         </h2>
@@ -623,4 +629,7 @@ article
       font-size 14px
     p + p
       margin 25px 0 0 0
+    a
+      &.anchor
+        top -65px
 </style>

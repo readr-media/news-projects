@@ -10,20 +10,30 @@
         v-show="currentCatalog !== '0'"
         class="banner-mobile"
       >
-        <img
-          class="banner-mobile__arrow banner-mobile__arrow--left"
-          src="/proj-assets/china-company/arrow.png"
-          alt=""
+        <a
+          v-show="currentCatalog !== '1'"
+          :href="`#h2-${Number(currentCatalog) - 1}`"
         >
+          <img
+            class="banner-mobile__arrow banner-mobile__arrow--left"
+            src="/proj-assets/china-company/arrow.png"
+            alt=""
+          >
+        </a>
         <p
           class="banner-mobile__current-catalog"
           v-text="currentCatalogTitle"
         />
-        <img
-          class="banner-mobile__arrow banner-mobile__arrow--right"
-          src="/proj-assets/china-company/arrow.png"
-          alt=""
+        <a
+          v-show="currentCatalog !== '7'"
+          :href="`#h2-${Number(currentCatalog) + 1}`"
         >
+          <img
+            class="banner-mobile__arrow banner-mobile__arrow--right"
+            src="/proj-assets/china-company/arrow.png"
+            alt=""
+          >
+        </a>
       </div>
     </div>
     <img
@@ -40,7 +50,7 @@
       <nav
         class="catalog-wrapper__catalog"
       >
-        <a href="#test">測試索引：「補助款」只是金錢補助，還是有政治意圖？</a>
+        <a href="#h2-3">測試索引：「補助款」只是金錢補助，還是有政治意圖？</a>
       </nav>
     </div>
   </footer>
@@ -55,6 +65,7 @@ export default {
     }
   },
   mounted () {
+    // This is mobile only feature
     this.initIntersectionObserver()
   },
   methods: {
@@ -63,7 +74,7 @@ export default {
 
       const options = {
         root: document.querySelector('#china-company'),
-        rootMargin: '0px',
+        rootMargin: '-65px 0px 0px 0px',
         threshold: 0
       }
 
