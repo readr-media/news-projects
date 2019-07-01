@@ -23,7 +23,7 @@
           :title="'1980 年'"
           :description="`
             <span>中國向華資招手，</span><br>
-            <span>台商變成中國經濟起飛的重要因素</span>
+            <span>臺商變成中國經濟起飛的重要因素</span>
           `"
           :img="'poster1'"
         />
@@ -33,10 +33,10 @@
           :title="'2020 年'"
           :description="`
             <span>中國成為世界第二大經濟體，</span><br>
-            <span>台商不再那麼重要，</span><br>
-            <span>因政治因素向各行各業的台灣人</span><br>
+            <span>臺商不再那麼重要，</span><br>
+            <span>因政治因素向各行各業的臺灣人</span><br>
             <span>（尤其青年）招手，</span><br>
-            <span>而中國的強大也成為對台人的一股吸引力</span>
+            <span>而中國的強大也成為對臺灣人的一股吸引力</span>
           `"
           :img="'poster2'"
         />
@@ -54,7 +54,7 @@
           :title="'1980 年'"
           :description="`
             <span>中國向華資招手，</span><br>
-            <span>台商變成中國經濟起飛的重要因素</span>
+            <span>臺商變成中國經濟起飛的重要因素</span>
           `"
         />
         <LandingPagePoster
@@ -67,10 +67,10 @@
           :title="'2020 年'"
           :description="`
             <span>中國成為世界第二大經濟體，</span><br>
-            <span>台商不再那麼重要，</span><br>
-            <span>因政治因素向各行各業的台灣人</span><br>
+            <span>臺商不再那麼重要，</span><br>
+            <span>因政治因素向各行各業的臺灣人</span><br>
             <span>（尤其青年）招手，</span><br>
-            <span>而中國的強大也成為對台人的一股吸引力</span>
+            <span>而中國的強大也成為對臺灣人的一股吸引力</span>
           `"
         />
         <Article
@@ -106,9 +106,9 @@ export default {
   metaInfo () {
     return {
       title: '中國發大財',
-      description: '',
-      metaUrl: '',
-      metaImage: '',
+      description: '在臺灣人對「中國因素」愈來愈敏感之際，臺灣企業旺旺及鴻海被爆出領取高額中國補助款。READr 針對中港上市的臺商，調查超過百份財報，揭露 42 家臺商領取中國補助金的資料。合法的補助款代表什麼意義？中國靠錢打造的中國夢近年來又發生什麼變化？',
+      metaUrl: 'china-company',
+      metaImage: 'china-company/ogimage.jpg',
       customScript: `
         <script src="https://public.flourish.studio/resources/embed.js"><\/script>
       `
