@@ -72,8 +72,8 @@ export default {
 <style lang="stylus" scoped>
 .hint
   &__title
-    font-weight 500
-    color #4a4a4a
+    font-weight 400
+    color black
   &__quote
     margin 20px 0
     padding 7px 13px
@@ -83,7 +83,7 @@ export default {
       display block
   a
     text-decoration none
-    color #4a4a4a
+    color #686868
     border-bottom 2px solid #de3b24
 
 .title
@@ -97,7 +97,7 @@ export default {
     height 0
     border-style solid
     border-width 14px 8px 0 8px
-    border-color #4a4a4a transparent transparent transparent
+    border-color #686868 transparent transparent transparent
     transition transform .25s
     transform rotate(-180deg)
     &--toggled
