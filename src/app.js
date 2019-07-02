@@ -15,7 +15,8 @@ Vue.use(VueI18n)
 Vue.use(VueLazyload, {
   preLoad: 1.5,
   attempt: 1,
-  lazyComponent: true
+  lazyComponent: true,
+  observer: true
 })
 
 // mixin for handling title

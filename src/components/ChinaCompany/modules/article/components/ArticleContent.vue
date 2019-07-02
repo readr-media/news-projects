@@ -4,10 +4,12 @@
       <span>錢出去，人進來，</span><br>
       <span>中國讓你發大財！？</span>
     </h1>
-    <Credits class="credits" />
     <div class="content">
       <section class="article-subsection" data-step="0">
-        <a class="anchor" id="h2-0" data-anchor-title="誰領中國補助款" />
+        <a class="anchor" id="h2-0" />
+        <h2 v-show="true" data-anchor-title="誰領中國補助款">
+          <span></span>
+        </h2>
         <p>
           <span>「紅色媒體滾出臺灣！」6 月 23 日，超過 10 萬名臺灣人在凱達格蘭大道參與「反紅媒大遊行」。雖然滂沱大雨讓人動彈不得，參與者並沒有退縮，撐著傘聆聽主舞臺聚焦中國滲透臺灣媒體的演講。離主舞台較遠的地方，也出現了各式各樣的短講，表達對鄰近大國的憂心：如擔心中國言論審查、一國兩制、民主制度會被摧毀等等，在在顯示臺灣人對於「中國因素」的焦慮愈來愈深。</span>
         </p>
@@ -105,8 +107,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="1">
-        <a class="anchor" id="h2-1" data-anchor-title="旺旺至中國插旗" />
-        <h2>
+        <a class="anchor" id="h2-1" />
+        <h2 data-anchor-title="旺旺至中國插旗">
           <span>六四導致西方經濟制裁 轉向華資招手</span>
         </h2>
         <p>
@@ -151,13 +153,22 @@
         </p>
       </section>
       <section class="article-subsection" data-step="2">
-        <a class="anchor" id="h2-2" data-anchor-title="富士康的重要性" />
-        <h2>
+        <a class="anchor" id="h2-2" />
+        <h2 data-anchor-title="富士康的重要性">
           <span>富士康曾包下河南省近七成進出口額</span>
         </h2>
         <p>
           <span>而郭台銘第一次踏上深圳時，那裡還沒有一個電話可以直接撥回臺灣，眼前所見的是尚未開墾的荒山野嶺。他對深圳官員說：「看得到的地，我全都要。」</span>
         </p>
+        <figure>
+          <img
+            v-lazy="'/proj-assets/china-company/pictures/guo.jpeg'"
+            alt=""
+          >
+          <figcaption>
+            在中國有大量工廠的鴻海集團董事長郭台銘日前宣布投入國民黨總統候選人初選。（攝影／王均鋒 ）
+          </figcaption>
+        </figure>
         <p>
           <span>香港中文大學經濟學副教授莊太量分析，對企業來說，拿土地的好處比拿補助款還好，「你看臺資鴻海郭台銘，他拿什麼跟深圳市政府談？他就說，我在這裡雇你 50 萬工人，你這裡深圳最多的人是我請的，所以你要給我很多土地、政策（優惠）。此外，你看大陸有些地方的工廠，有很多土地，工廠裡沒什麼生產，但拿了土地，就有機會趁土地升值之後賣掉。」</span>
         </p>
@@ -218,8 +229,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="3">
-        <a class="anchor" id="h2-3" data-anchor-title="為什麼要給補助款" />
-        <h2>
+        <a class="anchor" id="h2-3" />
+        <h2 data-anchor-title="為什麼要給補助款">
           <span>中國為什麼要給企業補助款？</span>
         </h2>
         <p>
@@ -340,8 +351,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="4">
-        <a class="anchor" id="h2-4" data-anchor-title="領中國補助的隱憂" />
-        <h2>
+        <a class="anchor" id="h2-4" />
+        <h2 data-anchor-title="領中國補助的隱憂">
           <span>學者：當你拿中國的錢，就代表可能被收買</span>
         </h2>
         <p>
@@ -353,6 +364,15 @@
         <p>
           <span>她表示，必須關注旺旺和富士康在中國的補助款的原因，「如果知道中國的錢有統戰意味，那你可以接受被統戰。不過今天郭台銘要選舉，旺旺旗下有媒體。當你拿中國的錢，就代表可能被收買，回來做臺灣媒體或選舉，我該怎麼信任？」</span>
         </p>
+        <figure>
+          <img
+            v-lazy="'/proj-assets/china-company/pictures/tsai.jpeg'"
+            alt=""
+          >
+          <figcaption>
+            旺旺集團創辦人蔡衍明，對於中國的態度向來表現得相當明白。（攝影／楊兆元）
+          </figcaption>
+        </figure>
         <p>
           <span>蔡衍明對於中國的態度，向來表現得相當明白。2008 年 3 月，當旺旺在香港上市，</span>
           <a
@@ -420,8 +440,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="5">
-        <a class="anchor" id="h2-5" data-anchor-title="香港也受中資影響" />
-        <h2>
+        <a class="anchor" id="h2-5" />
+        <h2 data-anchor-title="香港也受中資影響">
           <span>「自由港」香港，是否已經受到中資影響？</span>
         </h2>
         <p>
@@ -469,8 +489,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="6">
-        <a class="anchor" id="h2-6" data-anchor-title="官方擴大讓利對象" />
-        <h2>
+        <a class="anchor" id="h2-6" />
+        <h2 data-anchor-title="官方擴大讓利對象">
           <span>官方讓利的對象，逐漸從「臺商」擴大到「臺青」</span>
         </h2>
         <p>
@@ -525,8 +545,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="7">
-        <a class="anchor" id="h2-7" data-anchor-title="臺灣青年的中國夢" />
-        <h2>
+        <a class="anchor" id="h2-7" />
+        <h2 data-anchor-title="臺灣青年的中國夢">
           <span>向臺灣青年兜售「中國夢」，成功了嗎？</span>
         </h2>
         <p>
@@ -619,6 +639,7 @@
         </Chart>
       </section>
     </div>
+    <Credits class="credits" />
   </article>
 </template>
 
@@ -654,6 +675,19 @@ article
     line-height 1.7
   p + p
     margin 50px 0 0 0
+  figure
+    margin 50px auto
+    display flex
+    flex-direction column
+    align-items center
+    max-width 600px
+    img
+      width 100%
+    figcaption
+      width 100%
+      margin 10px 0 0 0
+      font-size 16px
+      line-height 1.7
   a
     text-decoration none
     color black
@@ -669,7 +703,7 @@ article
   margin 20px 0 0 0
 
 .content
-  margin 42px 0 0 0
+  margin 32px 0 0 0
 
 .chart
   margin 50px 0
@@ -687,6 +721,11 @@ article
       font-size 14px
     p + p
       margin 25px 0 0 0
+    figure
+      margin 25px auto
+      max-width auto
+      figcaption
+        font-size 12px
     a
       &.anchor
         top -65px
