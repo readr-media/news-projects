@@ -11,6 +11,7 @@
             { 'title__icon--toggled': isQuoteToggled }
           ]"
           @click="toggleQuote"
+          v-text="'（註）'"
         />
       </template>
       <template v-else>
@@ -78,7 +79,7 @@ export default {
     margin 20px 0
     padding 7px 13px
     background-color white
-    color #4a4a4a
+    color #686868
     &--toggled
       display block
   a
@@ -90,22 +91,11 @@ export default {
   &__icon
     user-select none
     cursor pointer
-    content ''
-    display inline-block
-    margin 0 5px
-    width 0
-    height 0
-    border-style solid
-    border-width 14px 8px 0 8px
-    border-color #686868 transparent transparent transparent
-    transition transform .25s
-    transform rotate(-180deg)
-    &--toggled
-      transform rotate(0)
+    color #686868
 
-@media (max-width 1400px)
-  .title
-    &__icon
-      margin 0 5px
-      border-width 11px 7px 0 7px
+// @media (max-width 1400px)
+//   .title
+//     &__icon
+//       margin 0 5px
+//       border-width 11px 7px 0 7px
 </style>
