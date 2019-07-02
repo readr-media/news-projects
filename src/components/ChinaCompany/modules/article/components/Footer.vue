@@ -118,20 +118,20 @@ export default {
   z-index 10000
   display flex
   align-items center
-  background linear-gradient(to bottom, transparent 50%, #e9dbb6 50%)
+  // background linear-gradient(to bottom, transparent 50%, #e9dbb6 50%)
   &__square-word
-    height 85px
+    height 54px
   &__banner
     flex 1 1 auto 
     background-color #000537
-    height 40px 
-    margin 0 5px
+    height 54px 
+    // margin 0 5px
     z-index 10000
   &__catalog-wrapper
     position absolute
     right 74px
-    bottom calc(40px + (85px - 40px) / 2 - 5px)
-    z-index 9999
+    bottom 0
+    z-index 10000
 
 .banner-mobile
   display none
@@ -152,10 +152,11 @@ export default {
 
 @media (max-width 1400px)
   .rich-footer
+    background linear-gradient(to bottom, transparent 50%, #e9dbb6 50%)
     &__square-word
       height 50px
     &__banner
-      height 30px 
+      height 30px
     &__catalog-wrapper  
       display none
   
@@ -178,4 +179,5 @@ export default {
       white-space nowrap
       overflow hidden
       text-overflow ellipsis
+      text-align center
 </style>
