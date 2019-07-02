@@ -158,6 +158,15 @@
         <p>
           <span>而郭台銘第一次踏上深圳時，那裡還沒有一個電話可以直接撥回臺灣，眼前所見的是尚未開墾的荒山野嶺。他對深圳官員說：「看得到的地，我全都要。」</span>
         </p>
+        <figure>
+          <img
+            v-lazy="'/proj-assets/china-company/pictures/guo.jpeg'"
+            alt=""
+          >
+          <figcaption>
+            在中國有大量工廠的鴻海集團董事長郭台銘日前宣布投入國民黨總統候選人初選。（攝影／王均鋒 ）
+          </figcaption>
+        </figure>
         <p>
           <span>香港中文大學經濟學副教授莊太量分析，對企業來說，拿土地的好處比拿補助款還好，「你看臺資鴻海郭台銘，他拿什麼跟深圳市政府談？他就說，我在這裡雇你 50 萬工人，你這裡深圳最多的人是我請的，所以你要給我很多土地、政策（優惠）。此外，你看大陸有些地方的工廠，有很多土地，工廠裡沒什麼生產，但拿了土地，就有機會趁土地升值之後賣掉。」</span>
         </p>
@@ -353,6 +362,15 @@
         <p>
           <span>她表示，必須關注旺旺和富士康在中國的補助款的原因，「如果知道中國的錢有統戰意味，那你可以接受被統戰。不過今天郭台銘要選舉，旺旺旗下有媒體。當你拿中國的錢，就代表可能被收買，回來做臺灣媒體或選舉，我該怎麼信任？」</span>
         </p>
+        <figure>
+          <img
+            v-lazy="'/proj-assets/china-company/pictures/tsai.jpeg'"
+            alt=""
+          >
+          <figcaption>
+            旺旺集團創辦人蔡衍明，對於中國的態度向來表現得相當明白。（攝影／楊兆元）
+          </figcaption>
+        </figure>
         <p>
           <span>蔡衍明對於中國的態度，向來表現得相當明白。2008 年 3 月，當旺旺在香港上市，</span>
           <a
@@ -654,6 +672,19 @@ article
     line-height 1.7
   p + p
     margin 50px 0 0 0
+  figure
+    margin 50px auto
+    display flex
+    flex-direction column
+    align-items center
+    max-width 600px
+    img
+      width 100%
+    figcaption
+      width 100%
+      margin 10px 0 0 0
+      font-size 16px
+      line-height 1.7
   a
     text-decoration none
     color black
@@ -687,6 +718,11 @@ article
       font-size 14px
     p + p
       margin 25px 0 0 0
+    figure
+      margin 25px auto
+      max-width auto
+      figcaption
+        font-size 12px
     a
       &.anchor
         top -65px
