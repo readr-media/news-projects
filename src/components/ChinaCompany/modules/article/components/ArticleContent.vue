@@ -6,7 +6,10 @@
     </h1>
     <div class="content">
       <section class="article-subsection" data-step="0">
-        <a class="anchor" id="h2-0" data-anchor-title="誰領中國補助款" />
+        <a class="anchor" id="h2-0" />
+        <h2 v-show="true" data-anchor-title="誰領中國補助款">
+          <span></span>
+        </h2>
         <p>
           <span>「紅色媒體滾出臺灣！」6 月 23 日，超過 10 萬名臺灣人在凱達格蘭大道參與「反紅媒大遊行」。雖然滂沱大雨讓人動彈不得，參與者並沒有退縮，撐著傘聆聽主舞臺聚焦中國滲透臺灣媒體的演講。離主舞台較遠的地方，也出現了各式各樣的短講，表達對鄰近大國的憂心：如擔心中國言論審查、一國兩制、民主制度會被摧毀等等，在在顯示臺灣人對於「中國因素」的焦慮愈來愈深。</span>
         </p>
@@ -104,8 +107,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="1">
-        <a class="anchor" id="h2-1" data-anchor-title="旺旺至中國插旗" />
-        <h2>
+        <a class="anchor" id="h2-1" />
+        <h2 data-anchor-title="旺旺至中國插旗">
           <span>六四導致西方經濟制裁 轉向華資招手</span>
         </h2>
         <p>
@@ -150,8 +153,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="2">
-        <a class="anchor" id="h2-2" data-anchor-title="富士康的重要性" />
-        <h2>
+        <a class="anchor" id="h2-2" />
+        <h2 data-anchor-title="富士康的重要性">
           <span>富士康曾包下河南省近七成進出口額</span>
         </h2>
         <p>
@@ -226,8 +229,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="3">
-        <a class="anchor" id="h2-3" data-anchor-title="為什麼要給補助款" />
-        <h2>
+        <a class="anchor" id="h2-3" />
+        <h2 data-anchor-title="為什麼要給補助款">
           <span>中國為什麼要給企業補助款？</span>
         </h2>
         <p>
@@ -348,8 +351,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="4">
-        <a class="anchor" id="h2-4" data-anchor-title="領中國補助的隱憂" />
-        <h2>
+        <a class="anchor" id="h2-4" />
+        <h2 data-anchor-title="領中國補助的隱憂">
           <span>學者：當你拿中國的錢，就代表可能被收買</span>
         </h2>
         <p>
@@ -437,8 +440,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="5">
-        <a class="anchor" id="h2-5" data-anchor-title="香港也受中資影響" />
-        <h2>
+        <a class="anchor" id="h2-5" />
+        <h2 data-anchor-title="香港也受中資影響">
           <span>「自由港」香港，是否已經受到中資影響？</span>
         </h2>
         <p>
@@ -486,8 +489,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="6">
-        <a class="anchor" id="h2-6" data-anchor-title="官方擴大讓利對象" />
-        <h2>
+        <a class="anchor" id="h2-6" />
+        <h2 data-anchor-title="官方擴大讓利對象">
           <span>官方讓利的對象，逐漸從「臺商」擴大到「臺青」</span>
         </h2>
         <p>
@@ -542,8 +545,8 @@
         </p>
       </section>
       <section class="article-subsection" data-step="7">
-        <a class="anchor" id="h2-7" data-anchor-title="臺灣青年的中國夢" />
-        <h2>
+        <a class="anchor" id="h2-7" />
+        <h2 data-anchor-title="臺灣青年的中國夢">
           <span>向臺灣青年兜售「中國夢」，成功了嗎？</span>
         </h2>
         <p>

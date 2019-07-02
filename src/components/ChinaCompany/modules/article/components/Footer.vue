@@ -7,11 +7,10 @@
     >
     <div class="rich-footer__banner banner">
       <div
-        v-show="currentCatalog !== '0'"
         class="banner-mobile"
       >
         <a
-          v-show="currentCatalog !== '1'"
+          v-show="currentCatalog !== '0'"
           :href="`#h2-${Number(currentCatalog) - 1}`"
         >
           <img
@@ -61,7 +60,17 @@ export default {
   data () {
     return {
       currentCatalog: '0',
-      currentCatalogTitle: ''
+      currentCatalogTitle: '誰領中國補助款',
+      catalogTitles: [
+        '誰領中國補助款',
+        '旺旺至中國插旗',
+        '富士康的重要性',
+        '為什麼要給補助款',
+        '領中國補助的隱憂',
+        '香港也受中資影響',
+        '官方擴大讓利對象',
+        '臺灣青年的中國夢'
+      ]
     }
   },
   mounted () {
@@ -74,7 +83,7 @@ export default {
 
       const options = {
         root: document.querySelector('#china-company'),
-        rootMargin: '-65px 0px 0px 0px',
+        rootMargin: '-75px 0px 0px 0px',
         threshold: 0
       }
 
@@ -93,16 +102,13 @@ export default {
           if (entry.isIntersecting) {
             this.currentCatalog = step
             const h2 = entry.target.querySelector('h2')
-            if (h2) {
-              const title = h2.querySelector('span').innerText
-              this.currentCatalogTitle = title
-            } else {
-              this.currentCatalogTitle = ''
-            }
-          } else if (step === '1' && this.currentCatalog === '1') {
-            this.currentCatalog === '0'
-            this.currentCatalogTitle === ''
+            const anchorTitle = h2.dataset.anchorTitle
+            this.currentCatalogTitle = anchorTitle
           }
+          // } else if (step === '1' && this.currentCatalog === '1') {
+          //   this.currentCatalog === '0'
+          //   this.currentCatalogTitle === ''
+          // }
         })
       }, options)
 
