@@ -19,8 +19,8 @@ ul
   list-style none
   margin 0
   padding 16px 0
-  border-top 1px solid black
-  border-bottom 1px solid black
+  // border-top 1px solid black
+  // border-bottom 1px solid black
   line-height 1.5
   li
     font-size 16px

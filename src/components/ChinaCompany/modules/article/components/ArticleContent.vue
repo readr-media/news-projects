@@ -4,7 +4,6 @@
       <span>錢出去，人進來，</span><br>
       <span>中國讓你發大財！？</span>
     </h1>
-    <Credits class="credits" />
     <div class="content">
       <section class="article-subsection" data-step="0">
         <a class="anchor" id="h2-0" data-anchor-title="誰領中國補助款" />
@@ -637,6 +636,7 @@
         </Chart>
       </section>
     </div>
+    <Credits class="credits" />
   </article>
 </template>
 
@@ -700,7 +700,7 @@ article
   margin 20px 0 0 0
 
 .content
-  margin 42px 0 0 0
+  margin 32px 0 0 0
 
 .chart
   margin 50px 0
