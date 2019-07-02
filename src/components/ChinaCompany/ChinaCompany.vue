@@ -22,8 +22,9 @@
           class="swiper-slide"
           :title="'1980 年'"
           :description="`
-            <span>中國向華資招手，</span><br>
-            <span>臺商變成中國經濟起飛的重要因素</span>
+            <span>中國因天安門事件</span><br>
+            <span>遭西方國家民主制裁</span><br>
+            <span>轉向華資招手</span>
           `"
           :img="'poster1'"
         />
@@ -32,11 +33,10 @@
           :direction="'reverse'"
           :title="'2020 年'"
           :description="`
-            <span>中國成為世界第二大經濟體，</span><br>
-            <span>臺商不再那麼重要，</span><br>
-            <span>因政治因素向各行各業的臺灣人</span><br>
-            <span>（尤其青年）招手，</span><br>
-            <span>而中國的強大也成為對臺灣人的一股吸引力</span>
+            <span>中國成為世界第二大經濟體</span><br>
+            <span>反而吸引人湧入這個巨大市場</span><br>
+            <span>招手對象已經從商界</span><br>
+            <span>擴大到各年齡層</span>
           `"
           :img="'poster2'"
         />
@@ -53,8 +53,9 @@
           class="swiper-slide"
           :title="'1980 年'"
           :description="`
-            <span>中國向華資招手，</span><br>
-            <span>臺商變成中國經濟起飛的重要因素</span>
+            <span>中國因天安門事件</span><br>
+            <span>遭西方國家民主制裁</span><br>
+            <span>轉向華資招手</span>
           `"
         />
         <LandingPagePoster
@@ -66,11 +67,11 @@
           :direction="'reverse'"
           :title="'2020 年'"
           :description="`
-            <span>中國成為世界第二大經濟體，</span><br>
-            <span>臺商不再那麼重要，</span><br>
-            <span>因政治因素向各行各業的臺灣人</span><br>
-            <span>（尤其青年）招手，</span><br>
-            <span>而中國的強大也成為對臺灣人的一股吸引力</span>
+            <span>中國成為世界第二大經濟體</span><br>
+            <span>反而吸引人湧入這個巨大市場</span><br>
+            <span>中國則因政治因素</span><br>
+            <span>招手對象已經從商界</span><br>
+            <span>擴大到各年齡層</span>
           `"
         />
         <Article
