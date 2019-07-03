@@ -47,9 +47,36 @@
         alt=""
       >
       <nav
-        class="catalog-wrapper__catalog"
+        class="catalog-wrapper__catalog catalog"
       >
-        <a href="#h2-3">測試索引：「補助款」只是金錢補助，還是有政治意圖？</a>
+        <ol class="catalog__list catalog__list--left">
+          <li>
+            <a href="#h2-0">誰領中國補助款</a>
+          </li>
+          <li>
+            <a href="#h2-1">旺旺至中國插旗</a>
+          </li>
+          <li>
+            <a href="#h2-2">富士康的重要性</a>
+          </li>
+          <li>
+            <a href="#h2-3">為什麼要給補助款</a>
+          </li>
+        </ol>
+        <ol class="catalog__list catalog__list--right">
+          <li>
+            <a href="#h2-4">領中國補助的隱憂</a>
+          </li>
+          <li>
+            <a href="#h2-5">香港也受中資影響</a>
+          </li>
+          <li>
+            <a href="#h2-6">官方擴大讓利對象</a>
+          </li>
+          <li>
+            <a href="#h2-7">臺灣青年的中國夢</a>
+          </li>
+        </ol>
       </nav>
     </div>
   </footer>
@@ -136,7 +163,7 @@ export default {
   &__catalog-wrapper
     position absolute
     right 74px
-    bottom 0
+    bottom 34px
     z-index 10000
 
 .banner-mobile
@@ -149,12 +176,28 @@ export default {
     width 100%
   &__catalog
     position absolute
-    top 50px
-    left 100px
-    width 200px
-    height 50px
+    top 80px
+    left 110px
+    // width 200px
+    // height 50px
     // border 1px solid red
-    pointer-events auto
+
+.catalog
+  pointer-events auto
+  display flex
+  &__list
+    list-style none
+    margin 0
+    padding 0
+    li
+      a
+        font-size 20px
+        color white
+        text-decoration none
+        line-height 2
+    &--right
+      margin 80px 0 0 20px
+
 
 @media (max-width 1400px)
   .rich-footer

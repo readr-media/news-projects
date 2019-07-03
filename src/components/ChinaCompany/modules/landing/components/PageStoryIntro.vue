@@ -50,12 +50,12 @@ export default {
   &--reverse
     padding 98px 98px 98px 0
   &__title
-    font-size 120px
+    font-size 60px
     font-weight 500
     color #dd3c2d
     margin 0
   &__description
-    font-size 40px
+    font-size 30px
     color white
     line-height 1.5
     margin 35px 0 0 0
@@ -66,7 +66,7 @@ export default {
     flex-direction column
     justify-content center
     align-items center !important
-    padding 33px
+    padding 30px
     text-align left !important
     height 100vh
     &__title
@@ -74,6 +74,7 @@ export default {
     &__description
       font-size 20px
       margin 35px 0 0 0
-      & >>> br
-        display none
+      text-align center
+      // & >>> br
+      //   display none
 </style>
