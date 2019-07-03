@@ -22,8 +22,7 @@
           class="swiper-slide"
           :title="'1980 年'"
           :description="`
-            <span>中國因天安門事件</span><br>
-            <span>遭西方國家民主制裁</span><br>
+            <span>中國因天安門事件遭西方國家民主制裁</span><br>
             <span>轉向華資招手</span>
           `"
           :img="'poster1'"
@@ -35,8 +34,7 @@
           :description="`
             <span>中國成為世界第二大經濟體</span><br>
             <span>反而吸引人湧入這個巨大市場</span><br>
-            <span>招手對象已經從商界</span><br>
-            <span>擴大到各年齡層</span>
+            <span>招手對象已經從商界擴大到各年齡層</span>
           `"
           :img="'poster2'"
         />

@@ -1,16 +1,10 @@
 <template>
   <main class="img-wrapper">
-    <picture>
-      <source
-        :srcset="`/proj-assets/china-company/${img}-mobile.png`"
-        media="(max-width: 1400px)"
-      >
-      <img
-        class="img-wrapper__img"
-        :src="`/proj-assets/china-company/${img}-web.png`"
-        alt=""
-      >
-    </picture>
+    <img
+      class="img-wrapper__img"
+      :src="`/proj-assets/china-company/${img}.jpg`"
+      alt=""
+    >
   </main>
 </template>
 
