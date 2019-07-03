@@ -11,7 +11,7 @@
       >
         <a
           v-show="currentCatalog !== '0'"
-          :href="`#h2-${Number(currentCatalog) - 1}`"
+          :href="`#h2-${currentCatalog - 1}`"
         >
           <img
             class="banner-mobile__arrow banner-mobile__arrow--left"
@@ -25,7 +25,7 @@
         />
         <a
           v-show="currentCatalog !== '7'"
-          :href="`#h2-${Number(currentCatalog) + 1}`"
+          :href="`#h2-${currentCatalog + 1}`"
         >
           <img
             class="banner-mobile__arrow banner-mobile__arrow--right"
@@ -51,30 +51,110 @@
       >
         <ol class="catalog__list catalog__list--left">
           <li>
-            <a href="#h2-0">誰領中國補助款</a>
+            <a href="#h2-0">
+              <IconStar
+                :class="[
+                  'star',
+                  { 'star--show': currentCatalog === 0 }
+                ]"
+              />
+              <span>
+                誰領中國補助款
+              </span>
+            </a>
           </li>
           <li>
-            <a href="#h2-1">旺旺至中國插旗</a>
+            <a href="#h2-1">
+              <IconStar
+                :class="[
+                  'star',
+                  { 'star--show': currentCatalog === 1 }
+                ]"
+              />
+              <span>
+                旺旺至中國插旗
+              </span>
+            </a>
           </li>
           <li>
-            <a href="#h2-2">富士康的重要性</a>
+            <a href="#h2-2">
+              <IconStar
+                :class="[
+                  'star',
+                  { 'star--show': currentCatalog === 2 }
+                ]"
+              />
+              <span>
+                富士康的重要性
+              </span>
+            </a>
           </li>
           <li>
-            <a href="#h2-3">為什麼要給補助款</a>
+            <a href="#h2-3">
+              <IconStar
+                :class="[
+                  'star',
+                  { 'star--show': currentCatalog === 3 }
+                ]"
+              />
+              <span>
+                為什麼要給補助款
+              </span>
+            </a>
           </li>
         </ol>
         <ol class="catalog__list catalog__list--right">
           <li>
-            <a href="#h2-4">領中國補助的隱憂</a>
+            <a href="#h2-4">
+              <IconStar
+                :class="[
+                  'star',
+                  { 'star--show': currentCatalog === 4 }
+                ]"
+              />
+              <span>
+                領中國補助的隱憂
+              </span>
+            </a>
           </li>
           <li>
-            <a href="#h2-5">香港也受中資影響</a>
+            <a href="#h2-5">
+              <IconStar
+                :class="[
+                  'star',
+                  { 'star--show': currentCatalog === 5 }
+                ]"
+              />
+              <span>
+                香港也受中資影響
+              </span>
+            </a>
           </li>
           <li>
-            <a href="#h2-6">官方擴大讓利對象</a>
+            <a href="#h2-6">
+              <IconStar
+                :class="[
+                  'star',
+                  { 'star--show': currentCatalog === 6 }
+                ]"
+              />
+              <span>
+                官方擴大讓利對象
+              </span>
+            </a>
           </li>
           <li>
-            <a href="#h2-7">臺灣青年的中國夢</a>
+            <a href="#h2-7">
+              <IconStar
+                :class="[
+                  'star',
+                  { 'star--show': currentCatalog === 7 }
+                ]"
+              />
+              <span>
+                臺灣青年的中國夢
+              </span>
+            </a>
           </li>
         </ol>
       </nav>
@@ -83,10 +163,15 @@
 </template>
 
 <script>
+import IconStar from '../../../components/IconStar.vue'
+
 export default {
+  components: {
+    IconStar
+  },
   data () {
     return {
-      currentCatalog: '0',
+      currentCatalog: 0,
       currentCatalogTitle: '誰領中國補助款',
       catalogTitles: [
         '誰領中國補助款',
@@ -125,17 +210,30 @@ export default {
           //   entry.rootBounds
           //   entry.target
           //   entry.time
-          const step = entry.target.dataset.step
+
+          // console.log(entry.target)
+          // console.log('isIntersecting: ', entry.isIntersecting)
+          // console.log(entry.intersectionRect)
+          const step = Number(entry.target.dataset.step)
           if (entry.isIntersecting) {
             this.currentCatalog = step
             const h2 = entry.target.querySelector('h2')
             const anchorTitle = h2.dataset.anchorTitle
             this.currentCatalogTitle = anchorTitle
+          } else {
+            const exitFromTop = this.currentCatalog >= step
+            const exitFromBottom = this.currentCatalog < step
+
+            if (exitFromTop) {
+              this.currentCatalog = step + 1
+              const anchorTitle = this.catalogTitles[this.currentCatalog]
+              this.currentCatalogTitle = anchorTitle
+            } else if (exitFromBottom) {
+              this.currentCatalog = step - 1
+              const anchorTitle = this.catalogTitles[this.currentCatalog]
+              this.currentCatalogTitle = anchorTitle
+            }
           }
-          // } else if (step === '1' && this.currentCatalog === '1') {
-          //   this.currentCatalog === '0'
-          //   this.currentCatalogTitle === ''
-          // }
         })
       }, options)
 
@@ -177,7 +275,7 @@ export default {
   &__catalog
     position absolute
     top 80px
-    left 110px
+    left 100px
     // width 200px
     // height 50px
     // border 1px solid red
@@ -191,12 +289,19 @@ export default {
     padding 0
     li
       a
-        font-size 20px
+        font-size 18px
         color white
         text-decoration none
         line-height 2
+        display flex
+        align-items center
+        .star
+          margin 0 5px 0 0
+          opacity 0
+          &--show
+            opacity 1
     &--right
-      margin 80px 0 0 20px
+      margin 70px 0 0 20px
 
 
 @media (max-width 1400px)
