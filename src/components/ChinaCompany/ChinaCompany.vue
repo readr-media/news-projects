@@ -99,9 +99,12 @@ import RichBadge from './modules/article/components/RichBadge.vue'
 import Article from './modules/article/index.vue'
 import Footer from './modules/article/components/Footer.vue'
 
+import mixinGA from './mixinGA'
+
 const debug = require('debug')('china-company')
 
 export default {
+  mixins: [ mixinGA ],
   metaInfo () {
     return {
       title: '中國發大財',
