@@ -10,7 +10,7 @@
         class="banner-mobile"
       >
         <a
-          v-show="currentCatalog !== '0'"
+          v-show="currentCatalog !== 0"
           :href="`#h2-${currentCatalog - 1}`"
         >
           <img
@@ -24,7 +24,7 @@
           v-text="currentCatalogTitle"
         />
         <a
-          v-show="currentCatalog !== '7'"
+          v-show="currentCatalog !== 7"
           :href="`#h2-${currentCatalog + 1}`"
         >
           <img
