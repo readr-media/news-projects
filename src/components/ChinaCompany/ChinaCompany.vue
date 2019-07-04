@@ -18,59 +18,30 @@
     />
     <div class="swiper-wrapper">
       <template v-if="vw > 1400">
-        <LandingPage
+        <LandingIntro
           class="swiper-slide"
-          :title="'1980 年'"
-          :description="`
-            <span>中國因天安門事件遭西方國家民主制裁</span><br>
-            <span>轉向華資招手</span>
-          `"
-          :img="'poster1'"
+          @nextSlide="mySwiper.slideNext()"
         />
-        <LandingPage
+        <LandingPosters
           class="swiper-slide"
-          :direction="'reverse'"
-          :title="'2020 年'"
-          :description="`
-            <span>中國成為世界第二大經濟體</span><br>
-            <span>反而吸引人湧入這個巨大市場</span><br>
-            <span>招手對象已經從商界擴大到各年齡層</span>
-          `"
-          :img="'poster2'"
+          :isActive="activeIndex === 1"
         />
         <Article
           class="swiper-slide"
         />
       </template>
       <template v-else>
-        <LandingPagePoster
+        <LandingIntro
           class="swiper-slide"
-          :img="'poster1'"
+          @nextSlide="mySwiper.slideNext()"
         />
-        <LandingPageIntro
+        <LandingPoster
           class="swiper-slide"
-          :title="'1980 年'"
-          :description="`
-            <span>中國因天安門事件</span><br>
-            <span>遭西方國家民主制裁</span><br>
-            <span>轉向華資招手</span>
-          `"
+          :img="'1990'"
         />
-        <LandingPagePoster
+        <LandingPoster
           class="swiper-slide"
-          :img="'poster2'"
-        />
-        <LandingPageIntro
-          class="swiper-slide"
-          :direction="'reverse'"
-          :title="'2020 年'"
-          :description="`
-            <span>中國成為世界第二大經濟體</span><br>
-            <span>反而吸引人湧入這個巨大市場</span><br>
-            <span>中國則因政治因素</span><br>
-            <span>招手對象已經從商界</span><br>
-            <span>擴大到各年齡層</span>
-          `"
+          :img="'2020'"
         />
         <Article
           class="swiper-slide"
@@ -92,9 +63,9 @@ if (process.browser) {
 }
 import 'swiper/dist/css/swiper.css'
 
-import LandingPage from './modules/landing/components/PageStory.vue'
-import LandingPagePoster from './modules/landing/components/PageStoryPoster.vue'
-import LandingPageIntro from './modules/landing/components/PageStoryIntro.vue'
+import LandingIntro from './components/LandingIntro.vue'
+import LandingPosters from './components/LandingPosters.vue'
+import LandingPoster from './components/LandingPoster.vue'
 import RichBadge from './modules/article/components/RichBadge.vue'
 import Article from './modules/article/index.vue'
 import Footer from './modules/article/components/Footer.vue'
@@ -117,9 +88,9 @@ export default {
     }
   },
   components: {
-    LandingPage,
-    LandingPagePoster,
-    LandingPageIntro,
+    LandingIntro,
+    LandingPosters,
+    LandingPoster,
     RichBadge,
     Article,
     Footer
@@ -151,7 +122,8 @@ export default {
       isScrollbarReachTop: true,
       showOuterFrames: false,
       vw: 0,
-      ts: undefined
+      ts: undefined,
+      activeIndex: 0
     }
   },
   watch: {
@@ -198,6 +170,7 @@ export default {
     },
     onSlideNextTransitionEnd () {
       debug('Handle slideNextTransitionEnd event')
+      this.activeIndex = this.mySwiper.activeIndex
       this.isSwiperLastSlide = this.mySwiper.activeIndex === this.mySwiper.slides.length - 1
     },
     onScroll (e) {
