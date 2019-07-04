@@ -195,7 +195,7 @@ export default {
 
       const options = {
         root: document.querySelector('#china-company'),
-        rootMargin: '-75px 0px 0px 0px',
+        rootMargin: '-40% 0px',
         threshold: 0
       }
 
@@ -210,29 +210,12 @@ export default {
           //   entry.rootBounds
           //   entry.target
           //   entry.time
-
-          // console.log(entry.target)
-          // console.log('isIntersecting: ', entry.isIntersecting)
-          // console.log(entry.intersectionRect)
           const step = Number(entry.target.dataset.step)
           if (entry.isIntersecting) {
             this.currentCatalog = step
             const h2 = entry.target.querySelector('h2')
             const anchorTitle = h2.dataset.anchorTitle
             this.currentCatalogTitle = anchorTitle
-          } else {
-            const exitFromTop = this.currentCatalog >= step
-            const exitFromBottom = this.currentCatalog < step
-
-            if (exitFromTop) {
-              this.currentCatalog = step + 1
-              const anchorTitle = this.catalogTitles[this.currentCatalog]
-              this.currentCatalogTitle = anchorTitle
-            } else if (exitFromBottom) {
-              this.currentCatalog = step - 1
-              const anchorTitle = this.catalogTitles[this.currentCatalog]
-              this.currentCatalogTitle = anchorTitle
-            }
           }
         })
       }, options)
