@@ -28,7 +28,7 @@ export default {
     height 100%
     object-fit cover
 
-@media (max-width 1400px)
+@media (max-width 1005px)
   .img-wrapper
     &__img
       height 100vh

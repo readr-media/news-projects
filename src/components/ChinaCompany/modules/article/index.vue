@@ -35,16 +35,17 @@ export default {
 .article
   background-color #e9dbb6
   &__inner-wrapper
-    max-width 1400px
-    margin 0 auto
+    max-width 1005px
+    margin 0 570px 0 100px
     padding 50px 0
 
-@media (max-width 1400px)
+@media (max-width 1005px)
   .article-section
     padding 65px 10px 0 10px
 
   .article
     &__inner-wrapper
       max-width auto
+      margin 0
       padding 30px 0 100px 0
 </style>

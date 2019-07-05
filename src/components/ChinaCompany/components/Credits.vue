@@ -51,7 +51,7 @@ a
   img
     width 100%
 
-@media (max-width 1400px)
+@media (max-width 1005px)
   ul
     line-height 1.25
     li

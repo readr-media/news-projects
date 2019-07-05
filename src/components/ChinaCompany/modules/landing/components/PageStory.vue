@@ -59,7 +59,7 @@ export default {
   height 100vh
   background-color #000537
   display flex
-  max-width 1400px
+  max-width 1005px
   margin 0 auto
   &--normal
     flex-direction row
@@ -71,7 +71,7 @@ export default {
   &__wrapper
     width 50%
 
-@media (max-width 1400px)
+@media (max-width 1005px)
   .story
     height 200vh
     &--normal, &--reverse

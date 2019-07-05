@@ -659,7 +659,8 @@ export default {
 
 <style lang="stylus" scoped>
 article
-  max-width 800px
+  // max-width 800px
+  // width 50%
   h1
     font-size 60px
     font-weight 500
@@ -708,7 +709,7 @@ article
 .chart
   margin 50px 0
 
-@media (max-width 1400px)
+@media (max-width 1005px)
   article
     max-width auto
     padding 0 30px
