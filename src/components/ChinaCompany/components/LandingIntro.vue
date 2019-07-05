@@ -72,7 +72,7 @@
     color white
     text-align center
   &__title
-    width 1000px
+    width 800px
   &__scroll-down-hint
     position absolute
     bottom 50px
