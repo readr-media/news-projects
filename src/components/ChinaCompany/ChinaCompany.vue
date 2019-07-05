@@ -25,6 +25,7 @@
         <LandingPosters
           class="swiper-slide"
           :isActive="activeIndex === 1"
+          @nextSlide="mySwiper.slideNext()"
         />
         <Article
           class="swiper-slide"
