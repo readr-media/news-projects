@@ -27,12 +27,23 @@
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translate3d(0, -100%, 0) rotate(-90deg);
+    transform translateY(-100%) rotate(-90deg)
   }
 
   50% {
     opacity: 1;
-    transform: translate3d(0, 0, 0) rotate(-90deg);
+    transform translateY(0) rotate(-90deg)
+  }
+}
+@keyframes fadeInDownBottom {
+  from {
+    opacity: 0;
+    bottom: 150px
+  }
+
+  50% {
+    opacity: 1;
+    bottom: 110px
   }
 }
 
@@ -77,12 +88,20 @@
 
 @media (max-width 1440px)
   .landing-intro
+    padding 0 0 100px 0
+    box-sizing border-box
     h1
       line-height 1.5
       font-size 28px
     &__scroll-down-hint
       position absolute
-      bottom 10px
+      bottom 110px
+      animation-name fadeInDownBottom
+      animation-duration 3s
+      animation-timing-function ease-out
+      animation-iteration-count infinite
+      img
+        animation-name none
 
   .scroll-down-hint
     border none
