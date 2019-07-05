@@ -17,7 +17,7 @@
       class="rich-badge"
     />
     <div class="swiper-wrapper">
-      <template v-if="vw > 1400">
+      <template v-if="vw > 1005">
         <LandingIntro
           class="swiper-slide"
           @nextSlide="mySwiper.slideNext()"

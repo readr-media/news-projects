@@ -93,7 +93,7 @@ export default {
     cursor pointer
     color #686868
 
-// @media (max-width 1400px)
+// @media (max-width 1005px)
 //   .title
 //     &__icon
 //       margin 0 5px

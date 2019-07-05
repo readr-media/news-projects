@@ -60,7 +60,7 @@ export default {
     line-height 1.5
     margin 35px 0 0 0
 
-@media (max-width 1400px)
+@media (max-width 1005px)
   .intro-wrapper
     display flex
     flex-direction column

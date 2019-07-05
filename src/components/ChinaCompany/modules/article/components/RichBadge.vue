@@ -37,7 +37,7 @@
   &__rich
     height 50px
 
-@media (max-width 1400px)
+@media (max-width 1005px)
   .rich-badge
     height 65px
     padding 10px 0

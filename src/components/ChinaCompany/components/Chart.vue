@@ -51,7 +51,7 @@ export default {
     // text-align right
     line-height 1.5
 
-@media (max-width 1400px)
+@media (max-width 1005px)
   .chart
     padding 16px 5px
     width calc(100vw - 10px - 10px)

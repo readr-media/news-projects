@@ -287,7 +287,7 @@ export default {
       margin 70px 0 0 20px
 
 
-@media (max-width 1400px)
+@media (max-width 1005px)
   .rich-footer
     background linear-gradient(to bottom, transparent 50%, #e9dbb6 50%)
     &__square-word

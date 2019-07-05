@@ -94,7 +94,7 @@
     animation-timing-function ease-out
     animation-iteration-count infinite
 
-@media (max-width 1440px)
+@media (max-width 1005px)
   .landing-intro
     padding 0 10px 100px 10px
     box-sizing border-box
