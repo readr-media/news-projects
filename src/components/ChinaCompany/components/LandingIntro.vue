@@ -1,15 +1,14 @@
 <template>
   <section class="landing-intro">
     <h1>
-      <span>錢出去，人進來，</span>
-      <span>中國讓你發大財！？</span>
+      <span>錢進來，人出去，中國讓你發大財！</span>
+      <span>解密臺商領取的中國補助款</span>
     </h1>
     <p>
-      <span>簡短前言簡短前言</span>
-      <span>簡短前言簡短前言</span>
-      <span>簡短前言簡短前言</span>
-      <span>簡短前言簡短前言</span>
-      <span>簡短前言簡短前言</span>
+      <span>在「中國因素」愈來愈敏感之際，臺灣企業旺旺及鴻海陷入領取高額中國補助款的輿論風暴。</span>
+      <span>READr 針對中港上市的臺商，調查超過百份財報，</span>
+      <span>發現中國在這 10 年內針對 42 家臺商發放了 663 億（新台幣）的補助款，光旺旺、鴻海、頂新就包辦了六成。</span>
+      <span>這些補助款代表什麼意義？靠錢打造的中國夢近年來又發生什麼變化？</span>
     </p>
     <div
       class="landing-intro__scroll-down-hint scroll-down-hint"
@@ -59,12 +58,14 @@
     line-height 1.5
     font-size 80px
     color white
+    text-align center
   p
     display flex
     flex-direction column
     line-height 1.5
     font-size 20px
     color white
+    text-align center
   &__scroll-down-hint
     position absolute
     bottom 50px
@@ -88,11 +89,13 @@
 
 @media (max-width 1440px)
   .landing-intro
-    padding 0 0 100px 0
+    padding 0 10px 100px 10px
     box-sizing border-box
     h1
       line-height 1.5
-      font-size 28px
+      font-size 22px
+    p
+      font-size 18px
     &__scroll-down-hint
       position absolute
       bottom 110px
@@ -105,4 +108,11 @@
 
   .scroll-down-hint
     border none
+
+@media (max-width 320px)
+  .landing-intro
+    h1
+      font-size 20px
+    p
+      font-size 12px
 </style>
