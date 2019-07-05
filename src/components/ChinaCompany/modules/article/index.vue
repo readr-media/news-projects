@@ -46,5 +46,5 @@ export default {
   .article
     &__inner-wrapper
       max-width auto
-      padding 30px 0 50px 0
+      padding 30px 0 100px 0
 </style>
