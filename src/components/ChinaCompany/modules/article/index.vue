@@ -37,7 +37,7 @@ export default {
   &__inner-wrapper
     max-width 1400px
     margin 0 auto
-    padding 70px 0
+    padding 50px 0
 
 @media (max-width 1400px)
   .article-section
@@ -46,5 +46,5 @@ export default {
   .article
     &__inner-wrapper
       max-width auto
-      padding 30px 0
+      padding 30px 0 50px 0
 </style>

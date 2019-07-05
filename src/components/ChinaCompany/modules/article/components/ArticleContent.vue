@@ -1,9 +1,9 @@
 <template>
   <article>
-    <h1>
+    <!-- <h1>
       <span>錢出去，人進來，</span><br>
       <span>中國讓你發大財！？</span>
-    </h1>
+    </h1> -->
     <div class="content">
       <section class="article-subsection" data-step="0">
         <a class="anchor" id="h2-0" />
@@ -700,10 +700,10 @@ article
 
 
 .credits
-  margin 20px 0 0 0
+  margin 100px 0 0 0
 
-.content
-  margin 32px 0 0 0
+// .content
+//   margin 32px 0 0 0
 
 .chart
   margin 50px 0
