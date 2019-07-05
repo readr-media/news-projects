@@ -76,7 +76,7 @@ export default {
         animation-name fadeInLeft
         animation-fill-mode forwards
     &--right
-      animation-delay 2s
+      animation-delay 1s
       &.landing-posters__poster--active-animate
         animation-name fadeInRight
         animation-fill-mode forwards
