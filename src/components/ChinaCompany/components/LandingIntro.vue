@@ -1,9 +1,14 @@
 <template>
   <section class="landing-intro">
-    <h1>
+    <!-- <h1>
       <span>錢進來，人出去，中國讓你發大財！</span>
       <span>解密臺商領取的中國補助款</span>
-    </h1>
+    </h1> -->
+    <img
+      class="landing-intro__title"
+      src="/proj-assets/china-company/title.png"
+      alt=""
+    >
     <p>
       <span>在「中國因素」愈來愈敏感之際，臺灣企業旺旺及鴻海陷入領取高額中國補助款的輿論風暴。</span>
       <span>READr 針對中港上市的臺商，調查超過百份財報，</span>
@@ -66,6 +71,8 @@
     font-size 20px
     color white
     text-align center
+  &__title
+    width 1000px
   &__scroll-down-hint
     position absolute
     bottom 50px
@@ -96,6 +103,10 @@
       font-size 22px
     p
       font-size 18px
+      display initial
+      text-align left
+    &__title
+      width 100%
     &__scroll-down-hint
       position absolute
       bottom 110px

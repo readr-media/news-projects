@@ -82,7 +82,7 @@ export default {
       title: '錢進來，人出去，中國讓你發大財！ 解密臺商領取的中國補助款',
       description: '在「中國因素」愈來愈敏感之際，臺灣企業旺旺及鴻海陷入領取高額中國補助款的輿論風暴。READr 針對中港上市的臺商，調查超過百份財報，發現中國在這 10 年內針對 42 家臺商發放了 663 億（新台幣）的補助款，光旺旺、鴻海、頂新就包辦了六成。這些補助款代表什麼意義？靠錢打造的中國夢近年來又發生什麼變化？',
       metaUrl: 'china-company',
-      metaImage: 'china-company/ogimage.jpg',
+      metaImage: 'china-company/ogimage.png',
       customScript: `
         <script src="https://public.flourish.studio/resources/embed.js"><\/script>
       `
