@@ -4,6 +4,15 @@
     <div class="article-section__article article">
       <div class="article__inner-wrapper">
         <ArticleContent />
+        <div
+          class="fb-comments"
+          data-href="https://www.readr.tw/project/china-company"
+          data-colorscheme="light"
+          data-numposts="10"
+          data-width="100%"
+          data-order-by="reverse_time"
+          style="width: 100%"
+        />
       </div>
     </div>
   </section>
