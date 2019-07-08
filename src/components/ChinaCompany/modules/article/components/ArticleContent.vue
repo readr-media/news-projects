@@ -701,7 +701,7 @@ article
 
 
 .credits
-  margin 100px 0 0 0
+  margin 100px 0
 
 // .content
 //   margin 32px 0 0 0
