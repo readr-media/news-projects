@@ -11,10 +11,12 @@
       v-text="additionalText"
     />
     <a
-      v-if="linkText"
+      v-if="link && linkText"
       :href="link"
       class="step-block__link"
+      target="_blank"
       v-text="linkText"
+      @click="$emit('click')"
     />
   </div>
 </template>

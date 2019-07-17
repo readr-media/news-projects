@@ -48,4 +48,24 @@ router.post('/', authGoogleAPI, (req, res) => {
   })
 })
 
+router.get('/nonredis', authGoogleAPI, async (req, res) => {
+  try {
+    const auth = req.auth
+    const sheets = google.sheets({version: 'v4', auth})
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: req.query.spreadsheet_id,
+      range: req.query.range
+    })
+    if (response.data.values) {
+      res.status(200).json(response.data.values)
+    } else {
+      res.status(200).send('No data found in Google Sheet.')
+    }
+  } catch (error) {
+    res.status(500).send(`The Google Sheet API returned an error while get.`, error)
+    console.log(error)
+  }
+  
+})
+
 module.exports = router

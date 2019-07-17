@@ -37,7 +37,7 @@
     "express-useragent": "^1.0.12",
     "fontfaceobserver": "^2.1.0",
     "fullpage.js": "3.0.2",
-    "googleapis": "^32.0.0",
+    "googleapis": "^41.0.0",
     "highcharts": "^7.0.1",
     "humps": "^2.0.1",
     "image-comparison": "^2.0.4",
