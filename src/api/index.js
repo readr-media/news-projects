@@ -1,10 +1,11 @@
 import { camelizeKeys, } from 'humps'
-import { getHost } from '../util/comm'
+import { getHost, getProtocol } from '../util/comm'
 import _ from 'lodash'
 import axios from 'axios'
 import qs from 'qs'
 
 const host = getHost()
+const protocol = getProtocol()
 
 function _buildQuery (params = {}) {
   let query = {}
@@ -65,6 +66,15 @@ export function getReportsCount ({ params = {}} = {}) {
 
 export function getSheet ({ params = {} } = {}) {
   let url = `/project-api/googlesheet`
+  const query = _buildQuery(params)
+  if (query && (query.length > 0)) {
+    url = url + `?${query}`
+  }
+  return _doFetch(url)
+}
+
+export function getSheetWithoutRedis ({ params = {} } = {}) {
+  let url = `${protocol}//${host}/project-api/googlesheet/nonredis`
   const query = _buildQuery(params)
   if (query && (query.length > 0)) {
     url = url + `?${query}`

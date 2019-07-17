@@ -41,6 +41,14 @@ export function getHost () {
   }
 }
 
+export function getProtocol () {
+  const browser = typeof window !== 'undefined'
+  if (browser) {
+    return location.protocol
+  }
+  return 'http:'
+}
+
 export function getMmid ({ assisgnedRole, distribution }) {
   const mmid = Cookie.get('mmid')
   if (assisgnedRole) {
