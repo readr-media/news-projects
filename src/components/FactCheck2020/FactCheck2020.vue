@@ -53,14 +53,15 @@
           indexText="步驟四"
         />
       </div>
-      <div
-        v-show="showFixedInfo && typeLink"
-        class="info-fixed"
-      >
-        <a :href="typeLink" target="_blank"><span>我願意盡一份力！</span>點我開始編打逐字稿</a>
-        <button @click="showFixedInfo = false"><img src="/proj-assets/fact-check/close.png" alt="關閉"></button>
-      </div>
+      <p>媒體查證結果及完整資料會在 10 月正式上線，並隨計畫同步進度更新至選舉結束。</p>
     </section>
+    <div
+      v-show="showFixedInfo && typeLink"
+      class="info-fixed"
+    >
+      <a :href="typeLink" target="_blank"><span>我願意盡一份力！</span>點我開始編打逐字稿</a>
+      <button @click="showFixedInfo = false"><img src="/proj-assets/fact-check/close.png" alt="關閉"></button>
+    </div>
   </div>
 </template>
 <script>
@@ -133,7 +134,7 @@ export default {
     }
   },
   mounted () {
-    this.detectCurrent()
+    // this.detectCurrent()
     this.detectHiddenEle()
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('scroll', this.handleScrollForHiddenEffect)
@@ -243,10 +244,14 @@ export default {
       text-align justify
   .process
     padding 20px 0 75px
+    > p
+      max-width 95%
+      margin 20px auto 0
+      text-align center
+      line-height 1.3
     &__step
       width 95%
       margin 20px auto 0
-      
 
   .info-fixed
     display flex
