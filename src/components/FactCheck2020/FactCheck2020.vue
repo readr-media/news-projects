@@ -15,7 +15,7 @@
       direction="down"
     />
     <section class="landing">
-      <h1>總統候選人之<br>事實查核計畫</h1>
+      <h1>2020<br>總統候選人之<br>事實查核計畫</h1>
       <h3>2020 總統大選在即，總統候選人在公開的發言中，<br>有幾分真？幾分假？我們一起來看看！</h3>
     </section>
     <section class="process">
@@ -179,6 +179,9 @@ export default {
     },
     detectHiddenEle () {
       const eles = [ ...document.querySelectorAll('.hidden-effect:not(.active)') ]
+      if (eles.length < 1) {
+        window.removeEventListener('scroll', this.handleScrollForHiddenEffect)
+      }
       eles.forEach(item => {
         const rect = item.getBoundingClientRect()
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight
