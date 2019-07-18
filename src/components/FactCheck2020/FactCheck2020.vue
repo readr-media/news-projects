@@ -35,6 +35,7 @@
           contentText="驗證逐字稿是否正確"
           imgSrc="/proj-assets/fact-check/step-02.png"
           indexText="步驟二"
+          :disabled="typeList.length < 1"
           :link="verifyLink"
           :linkText="verifyList.length > 0 ? '我要驗證逐字稿' : '目前已驗證完畢'"
           @click="clickVerifyLinkBtn"
@@ -252,6 +253,9 @@ export default {
     &__step
       width 95%
       margin 20px auto 0
+      &:last-child
+        img
+          transform translateX(10px)
 
   .info-fixed
     display flex
@@ -331,6 +335,11 @@ export default {
       display flex
       flex-direction column
       justify-content center
-      height 100vh
-      padding 0
+      padding 20px 0 75px
+      h2
+        margin-bottom 40px
+      &__step
+        &:last-child
+          img
+            transform translateX(15px)
 </style>
