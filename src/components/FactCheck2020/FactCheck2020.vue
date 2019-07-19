@@ -27,7 +27,7 @@
           imgSrc="/proj-assets/fact-check/step-01.png"
           indexText="步驟一"
           :link="typeLink"
-          :linkText="typeList.length > 0 ? '我要打逐字稿' : '目前已撰寫完畢'"
+          :linkText="typeList.length > 0 ? '我要打逐字稿' : '目前無逐字稿需撰寫'"
           @click="clickTypeLinkBtn"
         />
         <StepBlock
@@ -37,7 +37,7 @@
           indexText="步驟二"
           :disabled="typeList.length < 1"
           :link="verifyLink"
-          :linkText="verifyList.length > 0 ? '我要驗證逐字稿' : '目前已驗證完畢'"
+          :linkText="verifyList.length > 0 ? '我要驗證逐字稿' : '目前無逐字稿需驗證'"
           @click="clickVerifyLinkBtn"
         />
         <StepBlock
@@ -187,7 +187,7 @@ export default {
       eles.forEach(item => {
         const rect = item.getBoundingClientRect()
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight
-        if (rect.top <= viewportHeight * 2/3) {
+        if (rect.top <= viewportHeight * 2/3 || rect.bottom <= viewportHeight ) {
           item.classList.add('active')
         }
       })
