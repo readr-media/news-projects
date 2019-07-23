@@ -36,10 +36,10 @@ export default {
       console.error('Error while fetching sheet', err)
     })
   },
-  FETCH_SHEET_WITHOUT_REDIS: ({ commit }, { params }) => {
+  FETCH_SHEET_WITHOUT_REDIS: ({ commit }, { filename, params }) => {
     return getSheetWithoutRedis({ params })
       .then(res => {
-        commit('SET_SHEET', res)
+        commit('SET_SHEET', { filename, data: _.get(res, 'body') })
       })
       .catch(err => err)
   },
