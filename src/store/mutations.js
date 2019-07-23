@@ -13,8 +13,8 @@ export default {
     state.viewport = viewport
   },
 
-  SET_SHEET: (state, data) => {
-    state.googleSheet = data
+  SET_SHEET: (state, { filename, data }) => {
+    state.googleSheet[filename] = data
   }
 
 }

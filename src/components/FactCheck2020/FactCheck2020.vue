@@ -26,7 +26,7 @@
           contentText="將候選人的發言影片轉換成逐字稿"
           imgSrc="/proj-assets/fact-check/step-01.png"
           indexText="步驟一"
-          :link="typeLink"
+          :link="getTypeLink()"
           :linkText="typeList.length > 0 ? '我要打逐字稿' : '目前無逐字稿需撰寫'"
           @click="clickTypeLinkBtn"
         />
@@ -36,7 +36,7 @@
           imgSrc="/proj-assets/fact-check/step-02.png"
           indexText="步驟二"
           :disabled="typeList.length < 1"
-          :link="verifyLink"
+          :link="getVerifyLink()"
           :linkText="verifyList.length > 0 ? '我要驗證逐字稿' : '目前無逐字稿需驗證'"
           @click="clickVerifyLinkBtn"
         />
@@ -47,7 +47,7 @@
           indexText="步驟三"
         />
         <StepBlock
-          additionalText="合作媒體：鏡週刊、公視新聞、公視P#新聞實驗室、華視、沃草、未來城市＠天下、ITHome、關鍵評論網、上下游News&Market、環境資訊中心"
+          additionalText="合作媒體（按筆畫排序）：iThome、中央社新聞學院、公視 P# 新聞實驗室、公視新聞、未來城市＠天下、沃草、環境資訊中心、鏡週刊、關鍵評論網<br>協作單位：新興科技媒體中心"
           class="process__step hidden-effect"
           contentText="各家媒體針對需驗證的項目進行查證"
           imgSrc="/proj-assets/fact-check/step-04.png"
@@ -57,10 +57,10 @@
       <p>媒體查證結果及完整資料會在 10 月正式上線，並隨計畫同步進度更新至選舉結束。</p>
     </section>
     <div
-      v-show="showFixedInfo && typeLink"
+      v-show="showFixedInfo && typeList.length > 0"
       class="info-fixed"
     >
-      <a :href="typeLink" target="_blank"><span>我願意盡一份力！</span>點我開始編打逐字稿</a>
+      <a :href="getTypeLink()" target="_blank"><span>我願意盡一份力！</span>點我開始編打逐字稿</a>
       <button @click="showFixedInfo = false"><img src="/proj-assets/fact-check/close.png" alt="關閉"></button>
     </div>
   </div>
@@ -71,6 +71,16 @@ import Share from '../Share.vue'
 import StepBlock from './components/StepBlock.vue'
 import { READR_SITE_URL } from '../../constants'
 import { throttle } from 'lodash'
+
+const fetchTypeVerifyData = (store) => {
+  return store.dispatch('FETCH_SHEET_WITHOUT_REDIS', {
+    filename: 'type-verify',
+    params: {
+      spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
+      range: '1.貼上影片與秒數!E:Q'
+    }
+  })
+}
 
 export default {
   name: 'FactCheck',
@@ -92,46 +102,44 @@ export default {
       READR_SITE_URL,
       current: 0,
       showFixedInfo: false,
-      typeLinkIndex: 0,
-      verifyLinkIndex: 0
+      typeLinkClicked: '',
+      verifyLinkClicked: '',
+      verifyLinkClickedIndex: undefined
     }
   },
   computed: {
     sheet () {
-      return this.$store.state.googleSheet.body || []
-    },
-    typeLink () {
-      return this.typeList[this.typeLinkIndex]
+      return this.$store.state.googleSheet['type-verify'] || []
     },
     typeList () {
       return this.sheet
-        .filter(item => item[1].match(/www.youtube.com/) && item[4] && item[5] && item[13] < 2)
-        .sort((a, b) => a[13] - b[13])
-        .map(item => item[12])
-    },
-    verifyLink () {
-      return this.verifyList[this.verifyLinkIndex]
+        .filter(item => item[0] && item[1] && item[8] !== this.typeLinkClicked && item[9] < 1)
+        .sort((a, b) => a[9] - b[9])
+        .map(item => item[8])
     },
     verifyList () {
       return this.sheet
-        .filter(item => item[16].match(/docs.google.com/))
-        .map(item => item[16])
+        .filter(item => item[12].match(/docs.google.com/) && item[12] !== this.verifyLinkClicked)
+        .map(item => item[12])
     }
   },
   serverPrefetch () {
-    return this.$store.dispatch('FETCH_SHEET_WITHOUT_REDIS', {
-      params: {
-        spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
-        range: '1.貼上影片與秒數'
-      }
-    })
+    return fetchTypeVerifyData(this.$store)
   },
   created() {
     const params = this.$route.params.params
-    if (process.env.VUE_ENV === 'client' && params === 'transcript-type' && this.typeList[0]) {
-      window.location.replace(this.typeList[0])
-    } else if (process.env.VUE_ENV === 'client' && params === 'transcript-verify' && this.verifyList[0]) {
-      window.location.replace(this.verifyList[0])
+    const isTypeUrl = process.env.VUE_ENV === 'client' && params === 'transcript-type'
+    const isVerifyUrl = process.env.VUE_ENV === 'client' && params === 'transcript-verify'
+    const canGoToTypePage = this.typeList.length > 0
+    const canGoToVerifyPage = this.verifyList.length > 0
+    if (isTypeUrl && canGoToTypePage) {
+      window.location.replace(this.getTypeLink())
+    } else if (isTypeUrl && canGoToVerifyPage) {
+      window.location.replace(this.getVerifyLink())
+    } else if (isVerifyUrl && canGoToVerifyPage) {
+      window.location.replace(this.getVerifyLink())
+    } else if (isVerifyUrl && canGoToTypePage) {
+      window.location.replace(this.getTypeLink())
     }
   },
   mounted () {
@@ -153,20 +161,14 @@ export default {
     }
   },
   methods: {
-    clickTypeLinkBtn () {
-      if (this.typeLinkIndex + 1 > this.typeList.length - 1) {
-        this.typeLinkIndex = 0
-      } else {
-        this.typeLinkIndex += 1
-      }
+    clickTypeLinkBtn (e) {
+      this.typeLinkClicked = e.target.href
+      fetchTypeVerifyData(this.$store)
       ga('send', 'event', 'projects', 'click', `click type link`, { nonInteraction: false })
     },
-    clickVerifyLinkBtn () {
-      if (this.verifyLinkIndex + 1 > this.verifyList.length - 1) {
-        this.verifyLinkIndex = 0
-      } else {
-        this.verifyLinkIndex += 1
-      }
+    clickVerifyLinkBtn (e) {
+      this.verifyLinkClicked = this.verifyList[this.verifyLinkClickedIndex]
+      fetchTypeVerifyData(this.$store)
       ga('send', 'event', 'projects', 'click', `click verify link`, { nonInteraction: false })
     },
     detectCurrent () {
@@ -191,6 +193,15 @@ export default {
           item.classList.add('active')
         }
       })
+    },
+    getTypeLink () {
+      const random = Math.floor(Math.random() * this.typeList.length)
+      return this.typeList[random]
+    },
+    getVerifyLink () {
+      const random = Math.floor(Math.random() * this.verifyList.length)
+      this.verifyLinkClickedIndex = random
+      return this.verifyList[random]
     },
     handleScroll: throttle(function () {
       this.detectCurrent()

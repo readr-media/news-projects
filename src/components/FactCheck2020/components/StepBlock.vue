@@ -7,7 +7,7 @@
         <p
           v-if="additionalText"
           class="small"
-          v-text="additionalText"
+          v-html="additionalText"
         />
       </div>
       <img v-lazy="imgSrc" :alt="contentText">
@@ -19,7 +19,7 @@
         class="step-block__link"
         target="_blank"
         v-text="linkText"
-        @click="$emit('click')"
+        @click="handleClick"
       />
       <p
         v-else-if="!link && linkText"
@@ -52,8 +52,12 @@ export default {
     linkText: {
       type: String
     }
+  },
+  methods: {
+    handleClick (e) {
+      this.$emit('click', e)
+    }
   }
-
 }
 </script>
 <style lang="stylus" scoped>
@@ -66,6 +70,8 @@ export default {
       margin-top 15px
       color #9b9b9b
       line-height 1.43
+      >>> br
+        line-height 2
   &__container
     display flex
     align-items flex-start
