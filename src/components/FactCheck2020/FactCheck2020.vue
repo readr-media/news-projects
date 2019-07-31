@@ -58,7 +58,7 @@
         <a
           href="https://beta.hackfoldr.org/2020electionfactcheck/"
           target="_blank">
-          點我看計畫源起
+          點我看計畫緣起
         </a>
       </p>
     </section>
