@@ -47,14 +47,20 @@
           indexText="步驟三"
         />
         <StepBlock
-          additionalText="合作媒體（按筆畫排序）：iThome、中央社新聞學院、公視 P# 新聞實驗室、公視新聞、未來城市＠天下、沃草、環境資訊中心、鏡週刊、關鍵評論網<br>協作單位：新興科技媒體中心"
+          additionalText="合作媒體（按筆畫排序）：iThome、上下游 News&Market、中央社新聞學院、公視 P# 新聞實驗室、公視新聞、未來城市＠天下、沃草、數位時代、環境資訊中心、鏡週刊、關鍵評論網<br>協作單位：新興科技媒體中心"
           class="process__step hidden-effect"
           contentText="各家媒體針對需驗證的項目進行查證"
           imgSrc="/proj-assets/fact-check/step-04.png"
           indexText="步驟四"
         />
       </div>
-      <p>媒體查證結果及完整資料會在 10 月正式上線，並隨計畫同步進度更新至選舉結束。</p>
+      <p>媒體查證結果及完整資料會在 10 月正式上線，並隨計畫同步進度更新至選舉結束。
+        <a
+          href="https://beta.hackfoldr.org/2020electionfactcheck/"
+          target="_blank">
+          點我看計畫源起
+        </a>
+      </p>
     </section>
     <div
       v-show="showFixedInfo && typeList.length > 0"
@@ -94,7 +100,7 @@ export default {
       title: '2020 總統候選人之事實查核計畫',
       description: '2020 總統大選在即，總統候選人在公開的發言中，有幾分真？幾分假？我們一起來看看！',
       metaUrl: 'fact-check-2020',
-      metaImage: 'fact-check/og.jpg',
+      metaImage: 'fact-check/og-v2.jpg',
     }
   },
   data () {
@@ -233,6 +239,8 @@ export default {
     font-size 1rem
     &.small
       font-size .875rem
+    > a
+      color #e56300
   a
     color #fff
     text-decoration none
