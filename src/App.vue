@@ -1,12 +1,13 @@
 <template>
   <div id="app">
+    <AppHeader />
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
   </div>
 </template>
 <script>
-import postMessageScroll from './mixins/postMessageScroll'
+import AppHeader from './components/AppHeader.vue'
 
 const updateViewport = (store) => {
   const w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
@@ -15,7 +16,9 @@ const updateViewport = (store) => {
   return store.dispatch('UPDATE_VIEWPORT', viewport)
 }
 export default {
-  mixins: [ postMessageScroll ],
+  components: {
+    AppHeader
+  },
   beforeMount () {
     updateViewport(this.$store)
   },
