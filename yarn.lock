@@ -141,9 +141,9 @@
     through2 "^2.0.0"
     xdg-basedir "^3.0.0"
 
-"@readr-ui/app-header@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@readr-ui/app-header/-/app-header-1.0.1.tgz#0e89b4b436bfde066c4b57f944c5dc18a182263c"
+"@readr-ui/app-header@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@readr-ui/app-header/-/app-header-1.1.0.tgz#82a9ed16feb512ca490125a6c909f2a7fc9e5269"
   dependencies:
     "@readr-ui/icon" "^1.0.1"
     "@readr-ui/icon-share" "^1.0.1"
