@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <AppHeader />
+    <AppHeader
+      :class="{
+        hide: hideAppHeader
+      }"
+    />
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
@@ -19,6 +23,21 @@ export default {
   components: {
     AppHeader
   },
+  computed: {
+    hideAppHeader() {
+      const slugs = [
+        'factcheck',
+        'political-contribution',
+        'newtype',
+        'election-board',
+        'marathon',
+        'puyuma',
+        'disinformation'
+      ]
+
+      return slugs.includes(this.$route.params.project)
+    }
+  },
   beforeMount () {
     updateViewport(this.$store)
   },
@@ -36,6 +55,8 @@ export default {
 }
 </script>
 <style lang="stylus">
+.hide
+  display none
 
 // noUi
 .noUi-base
