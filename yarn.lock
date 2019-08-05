@@ -141,11 +141,11 @@
     through2 "^2.0.0"
     xdg-basedir "^3.0.0"
 
-"@readr-ui/app-header@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@readr-ui/app-header/-/app-header-1.1.2.tgz#980a2df02f4a84660445b4d1a458ec42af69ced2"
+"@readr-ui/app-header@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@readr-ui/app-header/-/app-header-1.1.3.tgz#65b79cdc4bf371f8f2c4cef235b49a90e1ea0cb9"
   dependencies:
-    "@readr-ui/icon" "^1.0.3"
+    "@readr-ui/icon" "^1.0.4"
     "@readr-ui/icon-share" "^1.0.1"
     "@readr-ui/logo" "^2.0.0"
     "@readr-ui/radio-item" "^1.0.0"
@@ -159,9 +159,9 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@readr-ui/icon-share/-/icon-share-1.0.1.tgz#523ab62b21640cf0b6b5153a8130e4689b9a1c82"
 
-"@readr-ui/icon@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@readr-ui/icon/-/icon-1.0.3.tgz#2467dc09307c71f624d438a3d30dce2b4ebc1d8e"
+"@readr-ui/icon@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@readr-ui/icon/-/icon-1.0.4.tgz#78386a13829cdad5bd3f3d7bfccf53d4036e7002"
 
 "@readr-ui/logo@^2.0.0":
   version "2.0.0"
