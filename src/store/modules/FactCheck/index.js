@@ -1,24 +1,30 @@
 import Vue from 'vue'
+import { get } from 'lodash'
+import { getSheetWithoutRedis } from '../../../api'
 
 export default {
   namespaced: true,
   state () {
     return {
-      // googleSheet: {}
+      googleSheet: {
+        'netizen-1': [],
+        'netizen-2': [],
+        volunteer: []
+      }
     }
   },
   actions: {
-    // FETCH_SHEET: ({ dispatch, commit }, { params }) => {
-    //   return dispatch('FETCH_SHEET_WITHOUT_REDIS', { params }, { root: true })
-    //     .then(res => {
-    //       commit('SET_SHEET', res)
-    //     })
-    //     .catch(err => err)
-    // }
+    FETCH_GOOGLE_SHEET: ({ commit }, { name, params }) => {
+      return getSheetWithoutRedis({ params })
+        .then(res => {
+          commit('SET_GOOGLE_SHEET', { name, data: get(res, 'body') })
+        })
+        .catch(err => err)
+    }
   },
   mutations: {
-    // SET_SHEET: (state, data) => {
-    //   Vue.set(state, 'googleSheet', data)
-    // }
+    SET_GOOGLE_SHEET: (state, { name, data }) => {
+      Vue.set(state.googleSheet, name, data)
+    }
   }
 }
