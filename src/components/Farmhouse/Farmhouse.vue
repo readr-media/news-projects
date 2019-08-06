@@ -440,7 +440,7 @@ h2,h3,h4,h5 {margin:0;
 letter-spacing:1px; line-height:1.2; 
 }
 
-h2 {margin-bottom:15px;
+.farmhouse h2 {margin-bottom:15px;
 color:#273947; font-size:34px; text-align:center;
 }
 .dark h2 {color:#fff;}
@@ -459,7 +459,7 @@ p strong {color:#ff788d;}
 
 a {color:#79caa1;}
 
-img {display:block; max-width:100%;}
+.farmhouse img {display:block; max-width:100%;}
 
 .additional {padding:20px 35px; margin-top:30px;
 color:#1a1a1a;

@@ -8,7 +8,7 @@ article,aside,canvas,figure,figure img,figcaption,footer,header,hgroup,menu,nav,
 
 /* ----- common ----- */
 html {overflow-y:scroll;}
-body {text-align:center; font-size:18px; line-height:1.6; 
+.dollclaw {text-align:center; font-size:18px; line-height:1.6; 
 font-family:"source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif; color:#544356;
 background-color:#f8f5f3;
 }
