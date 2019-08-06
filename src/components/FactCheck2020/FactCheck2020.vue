@@ -179,9 +179,9 @@ export default {
   computed: {
     netizenList () {
       const netizen1 = uniq(this.$store.state.FactCheck.googleSheet['netizen-1']
-        .map(item => item[0]).slice(2).filter(item => item))
+        .map(item => item[0]).slice(2).filter(item => item && typeof item === 'string'))
       const netizen2 = uniq(this.$store.state.FactCheck.googleSheet['netizen-2']
-        .map(item => item[0]).slice(2).filter(item => item))
+        .map(item => item[0]).slice(2).filter(item => item && typeof item === 'string'))
       return union(netizen1, netizen2).sort()
     },
     sheet () {
@@ -195,12 +195,13 @@ export default {
     },
     verifyList () {
       return this.sheet
+        .filter(item => item && typeof item[12] === 'string')
         .filter(item => item[12].match(/docs.google.com/) && item[12] !== this.verifyLinkClicked)
         .map(item => item[12])
     },
     volunteerList () {
       return uniq(this.$store.state.FactCheck.googleSheet['volunteer']
-        .map(item => item[0]).slice(2).filter(item => item))
+        .map(item => item[0]).slice(2).filter(item => item && typeof item === 'string'))
     }
   },
   serverPrefetch () {
