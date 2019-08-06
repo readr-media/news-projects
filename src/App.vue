@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader
-      :class="{
-        hide: hideAppHeader
-      }"
-    />
+    <AppHeader v-if="!hideAppHeader" />
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
@@ -55,9 +51,6 @@ export default {
 }
 </script>
 <style lang="stylus">
-.hide
-  display none
-
 // noUi
 .noUi-base
   position relative
