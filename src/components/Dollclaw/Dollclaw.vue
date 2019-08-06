@@ -1,6 +1,6 @@
 <template>
 
-<div id="mainWrapper">
+<div id="mainWrapper" class="dollclaw">
 
 <app-logo class="no-sprite" href="https://www.readr.tw/" top="20px" left="20px" bgImage="/proj-assets/dollclaw/images/logo_readr.png"></app-logo>
 <app-share :shareUrl="shareLink" top="20px" right="20px" bgColor="#544356" direction="down"></app-share>
