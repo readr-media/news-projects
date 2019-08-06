@@ -1,24 +1,10 @@
 <template>
   <div class="fact-check">
-    <Logo
-      class="eastern-district__logo no-sprite"
-      href="https://www.readr.tw/"
-      top="10px"
-      left="10px"
-      bgImage="/proj-assets/logo_readr.png"
-    />
-    <Share
-      :shareUrl="`${READR_SITE_URL}fact-check-2020`"
-      class="eastern-district__share"
-      top="10px"
-      right="10px"
-      direction="down"
-    />
     <section class="landing">
       <h1>2020<br>總統候選人之<br>事實查核計畫</h1>
       <h3>2020 總統大選在即，總統候選人在公開的發言中，<br>有幾分真？幾分假？我們一起來看看！</h3>
     </section>
-    <section class="process">
+    <section class="section process">
       <h2>本專案透過四個步驟進行</h2>
       <div class="process__steps">
         <StepBlock
@@ -62,6 +48,59 @@
         </a>
       </p>
     </section>
+    <lazy-component class="section cooperation">
+      <h2>功德牆</h2>
+      <template v-if="netizenList.length > 0">
+        <h3>赴湯蹈火鄉民</h3>
+        <div class="cooperation__list">
+          <p
+            v-for="(name, index) in netizenList"
+            :key="`netizen-${index}`"
+            v-text="name"
+          />
+        </div>
+      </template>
+      <template v-if="volunteerList.length > 0">
+        <h3>雪中送炭志工</h3>
+        <div class="cooperation__list">
+          <p
+            v-for="(name, index) in volunteerList"
+            :key="`volunteer-${index}`"
+            v-text="name"
+          />
+        </div>
+      </template>
+      <h3>事實查核媒體</h3>
+      <div class="cooperation__list media">
+        <picture>
+          <img src="/proj-assets/fact-check/logo/ithome.png" style="transform: scale(2);" alt="iThome">
+        </picture>
+        <picture>
+          <img src="/proj-assets/fact-check/logo/cna.svg" alt="中央社新聞學院">
+        </picture>
+        <picture>
+          <img src="/proj-assets/fact-check/logo/newslab.svg" style="transform: scale(1.4);" alt="公視 P# 新聞實驗室">
+        </picture>
+        <picture>
+          <img src="/proj-assets/fact-check/logo/pts.png" alt="公視新聞">
+        </picture>
+        <picture>
+          <img src="/proj-assets/fact-check/logo/futurecity.png" alt="未來城市＠天下">
+        </picture>
+        <picture>
+          <img src="/proj-assets/fact-check/logo/watchout.png" alt="沃草">
+        </picture>
+        <picture>
+          <img src="/proj-assets/fact-check/logo/e-info.png" style="transform: scale(1.3);" alt="環境資訊中心">
+        </picture>
+        <picture>
+          <img src="/proj-assets/fact-check/logo/mirrormedia.svg" alt="鏡週刊">
+        </picture>
+        <picture>
+          <img src="/proj-assets/fact-check/logo/thenewslens.png" alt="關鍵評論網">
+        </picture>
+      </div>
+    </lazy-component>
     <div
       v-show="showFixedInfo && typeList.length > 0"
       class="info-fixed"
@@ -72,11 +111,11 @@
   </div>
 </template>
 <script>
-import Logo from '../Logo.vue'
-import Share from '../Share.vue'
 import StepBlock from './components/StepBlock.vue'
 import { READR_SITE_URL } from '../../constants'
-import { throttle } from 'lodash'
+import { throttle, union, uniq } from 'lodash'
+
+import FactCheckStoreModule from '../../store/modules/FactCheck'
 
 const fetchTypeVerifyData = (store) => {
   return store.dispatch('FETCH_SHEET_WITHOUT_REDIS', {
@@ -88,11 +127,35 @@ const fetchTypeVerifyData = (store) => {
   })
 }
 
+const fetchVolunteerList = (store) => {
+  return Promise.all([
+    store.dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
+      name: 'netizen-1',
+      params: {
+        spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
+        range: '顯示在網站的志工名單!A:A'
+      }
+    }),
+    store.dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
+      name: 'netizen-2',
+      params: {
+        spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
+        range: '顯示在網站的志工名單!B:B'
+      }
+    }),
+    store.dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
+      name: 'volunteer',
+      params: {
+        spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
+        range: '顯示在網站的志工名單!C:C'
+      }
+    })
+  ])
+}
+
 export default {
   name: 'FactCheck',
   components: {
-    Logo,
-    Share,
     StepBlock
   },
   metaInfo() {
@@ -114,6 +177,13 @@ export default {
     }
   },
   computed: {
+    netizenList () {
+      const netizen1 = uniq(this.$store.state.FactCheck.googleSheet['netizen-1']
+        .map(item => item[0]).slice(2).filter(item => item))
+      const netizen2 = uniq(this.$store.state.FactCheck.googleSheet['netizen-2']
+        .map(item => item[0]).slice(2).filter(item => item))
+      return union(netizen1, netizen2).sort()
+    },
     sheet () {
       return this.$store.state.googleSheet['type-verify'] || []
     },
@@ -127,12 +197,18 @@ export default {
       return this.sheet
         .filter(item => item[12].match(/docs.google.com/) && item[12] !== this.verifyLinkClicked)
         .map(item => item[12])
+    },
+    volunteerList () {
+      return uniq(this.$store.state.FactCheck.googleSheet['volunteer']
+        .map(item => item[0]).slice(2).filter(item => item))
     }
   },
   serverPrefetch () {
     return fetchTypeVerifyData(this.$store)
   },
   created() {
+    this.$store.registerModule('FactCheck', FactCheckStoreModule)
+
     const params = this.$route.params.params
     const isTypeUrl = process.env.VUE_ENV === 'client' && params === 'transcript-type'
     const isVerifyUrl = process.env.VUE_ENV === 'client' && params === 'transcript-verify'
@@ -148,6 +224,9 @@ export default {
       window.location.replace(this.getTypeLink())
     }
   },
+  beforeMount () {
+    fetchVolunteerList(this.$store)
+  },
   mounted () {
     // this.detectCurrent()
     this.detectHiddenEle()
@@ -158,6 +237,7 @@ export default {
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)
     window.removeEventListener('scroll', this.handleScrollForHiddenEffect)
+    this.$store.unregisterModule('FactCheck')
   },
   watch: {
     current (value) {
@@ -262,8 +342,9 @@ export default {
       margin 35px auto 0
       line-height 1.7
       text-align justify
-  .process
+  .section
     padding 20px 0 75px
+  .process
     > p
       max-width 95%
       margin 20px auto 0
@@ -275,6 +356,34 @@ export default {
       &:last-child
         img
           transform translateX(10px)
+  .cooperation
+    > *
+      width 90%
+      margin 0 auto
+    h3
+      margin-top 2em
+      text-align center
+    &__list
+      margin-top 1em
+      width calc(90% + 1em)
+      p
+        display inline-block
+        margin .2em .5em
+      picture
+        position relative
+        display inline-block
+        width calc(50% - 1em)
+        margin .2em .5em
+        padding-top calc((50% - 1em) * 0.5625)
+        overflow hidden
+        img
+          position absolute
+          top 0
+          left 0
+          width 100%
+          height 100%
+          object-position center center
+          object-fit contain
 
   .info-fixed
     display flex
@@ -323,6 +432,8 @@ export default {
       h3
         text-align center
     .process
+      > p
+        max-width 60%
       h2
         margin-bottom 80px
       &__steps
@@ -335,6 +446,17 @@ export default {
       &__step
         width calc(50% - 20px)
         margin: 20px 10px 0
+    .cooperation
+      > *
+        width 60%
+        max-width 1140px
+      &__list
+        width calc(60% + 1em)
+        max-width calc(1140px + 1em)
+        picture
+          width calc(33% - 1em)
+          max-width 200px
+          padding-top calc((33% - 1em) * 0.5625)
     .info-fixed
       a
         span
@@ -361,4 +483,15 @@ export default {
         &:last-child
           img
             transform translateX(15px)
+    .cooperation
+      &__list
+        &.media
+          display flex
+          flex-wrap wrap
+          justify-content center
+        picture
+          width 200px
+          padding-top calc(200px * 0.5625)
+          margin: .5em .5em;
+
 </style>
