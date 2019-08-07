@@ -1,7 +1,7 @@
 <template>
   <div class="fact-check">
     <section class="landing">
-      <h1>2020<br>事實查核計畫</h1>
+      <h1>2020<br>總統候選人之<br>事實查核計畫</h1>
       <div class="landing__image">
         <img class="quote left-top" src="/proj-assets/fact-check/landing_quote.png" alt="">
         <img class="quote left-bottom" src="/proj-assets/fact-check/landing_quote.png" alt="">
@@ -24,6 +24,7 @@
           indexText="步驟一"
           :link="getTypeLink()"
           :linkText="typeList.length > 0 ? '我要打逐字稿' : '目前無逐字稿需撰寫'"
+          :progress="progress[1]"
           @click="clickTypeLinkBtn"
         />
         <StepBlock
@@ -34,16 +35,19 @@
           :disabled="typeList.length < 1"
           :link="getVerifyLink()"
           :linkText="verifyList.length > 0 ? '我要驗證逐字稿' : '目前無逐字稿需驗證'"
+          :progress="progress[2]"
           @click="clickVerifyLinkBtn"
         />
         <StepBlock
+          :progress="progress[3]"
           class="process__step hidden-effect"
           contentText="針對逐字稿內容進行標籤其屬性"
           imgSrc="/proj-assets/fact-check/step-03.png"
           indexText="步驟三"
         />
         <StepBlock
-          additionalText="合作媒體（按筆畫排序）：iThome、上下游 News&Market、中央社新聞學院、公視 P# 新聞實驗室、公視新聞、未來城市＠天下、沃草、數位時代、環境資訊中心、鏡週刊、關鍵評論網<br>協作單位：新興科技媒體中心"
+          :progress="progress[4]"
+          additionalText="合作媒體（按筆畫排序）：iThome、上下游 News&Market、公視 P# 新聞實驗室、公視新聞、未來城市＠天下、沃草、數位時代、環境資訊中心、鏡週刊、關鍵評論網<br>協作單位：中央社新聞學院、新興科技媒體中心"
           class="process__step hidden-effect"
           contentText="各家媒體針對需驗證的項目進行查證"
           imgSrc="/proj-assets/fact-check/step-04.png"
@@ -86,9 +90,6 @@
           <img src="/proj-assets/fact-check/logo/ithome.png" style="transform: scale(2);" alt="iThome">
         </picture>
         <picture>
-          <img src="/proj-assets/fact-check/logo/cna.svg" alt="中央社新聞學院">
-        </picture>
-        <picture>
           <img src="/proj-assets/fact-check/logo/newslab.svg" style="transform: scale(1.4);" alt="公視 P# 新聞實驗室">
         </picture>
         <picture>
@@ -108,6 +109,15 @@
         </picture>
         <picture>
           <img src="/proj-assets/fact-check/logo/thenewslens.png" alt="關鍵評論網">
+        </picture>
+      </div>
+      <h3>查核協作單位</h3>
+      <div class="cooperation__list media center">
+        <picture>
+          <img src="/proj-assets/fact-check/logo/cna.svg" alt="中央社新聞學院">
+        </picture>
+        <picture>
+          <img src="/proj-assets/fact-check/logo/smctw.svg" style="transform: scale(1.5);" alt="新興科技媒體中心">
         </picture>
       </div>
     </lazy-component>
@@ -163,6 +173,16 @@ const fetchVolunteerList = (store) => {
   ])
 }
 
+const fetchProgress = (store) => {
+  return store.dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
+    name: 'progress',
+    params: {
+      spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
+      range: 'Dashboard!E:E'
+    }
+  })
+}
+
 export default {
   name: 'FactCheck',
   components: {
@@ -188,11 +208,15 @@ export default {
   },
   computed: {
     netizenList () {
-      const netizen1 = uniq(this.$store.state.FactCheck.googleSheet['netizen-1']
+      const netizen1 = uniq((this.$store.state.FactCheck.googleSheet['netizen-1'] || [])
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
-      const netizen2 = uniq(this.$store.state.FactCheck.googleSheet['netizen-2']
+      const netizen2 = uniq((this.$store.state.FactCheck.googleSheet['netizen-2'] || [])
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
       return union(netizen1, netizen2).sort()
+    },
+    progress ( ) {
+      const data = this.$store.state.FactCheck.googleSheet['progress'] || []
+      return data.map(item => item[0]).filter(item => typeof item === 'string')
     },
     sheet () {
       return this.$store.state.googleSheet['type-verify'] || []
@@ -210,7 +234,7 @@ export default {
         .map(item => item[12])
     },
     volunteerList () {
-      return uniq(this.$store.state.FactCheck.googleSheet['volunteer']
+      return uniq((this.$store.state.FactCheck.googleSheet['volunteer'] || [])
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
     }
   },
@@ -237,6 +261,7 @@ export default {
   },
   beforeMount () {
     fetchVolunteerList(this.$store)
+    fetchProgress(this.$store)
   },
   mounted () {
     // this.detectCurrent()
@@ -342,11 +367,11 @@ export default {
   .landing
     display flex
     flex-direction column
-    justify-content center
-    height 100vh
+    min-height 100vh
     text-align center
     overflow hidden
     h1
+      margin-top 60px
       color #e56300
       line-height 1.3
     h3
@@ -531,6 +556,10 @@ export default {
           width calc(33% - 1em)
           max-width 200px
           padding-top calc((33% - 1em) * 0.5625)
+        &.media
+          display flex
+          flex-wrap wrap
+          justify-content center
     .info-fixed
       a
         span
@@ -539,6 +568,13 @@ export default {
         img
           width 20px
           height 20px
+
+@media (min-width: 768px) and (orientation : portrait)
+  .fact-check
+    .landing
+      justify-content center
+      h1
+        margin-top 0
 
 @media (min-width: 1024px)
   .fact-check
@@ -571,7 +607,7 @@ export default {
       display flex
       flex-direction column
       justify-content center
-      padding 20px 0 75px
+      padding 60px 0 75px
       h2
         margin-bottom 40px
       &__step
@@ -580,10 +616,7 @@ export default {
             transform translateX(15px)
     .cooperation
       &__list
-        &.media
-          display flex
-          flex-wrap wrap
-          justify-content center
+        
         picture
           width 200px
           padding-top calc(200px * 0.5625)

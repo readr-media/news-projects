@@ -9,6 +9,13 @@
           class="small"
           v-html="additionalText"
         />
+        <p
+          v-if="progress"
+          class="progress"
+        >
+          目前進度
+          <span class="highlight" v-text="progress"></span>
+        </p>
       </div>
       <img v-lazy="imgSrc" :alt="contentText">
     </div>
@@ -51,6 +58,9 @@ export default {
     },
     linkText: {
       type: String
+    },
+    progress: {
+      type: String
     }
   },
   methods: {
@@ -83,6 +93,9 @@ export default {
     flex 1
     h3
       line-height 1.5
+    * 
+      & + p
+        margin-top .5em
   &__link
     display block
     display flex
@@ -100,6 +113,12 @@ export default {
       color #a04500
       background-color #f4c099
 
+  .progress
+    color #9b9b9b
+    .highlight
+      margin-left .2em
+      color #f6b721
+      font-size 1.25rem
 @media (min-width: 768px)
   .step-block
     padding 20px
@@ -112,5 +131,8 @@ export default {
       img
         width 85px
         margin 0 auto
+    .progress
+      .highlight
+        font-size 1.75rem
 
 </style>
