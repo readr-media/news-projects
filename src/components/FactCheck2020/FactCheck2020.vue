@@ -1,7 +1,17 @@
 <template>
   <div class="fact-check">
     <section class="landing">
-      <h1>2020<br>總統候選人之<br>事實查核計畫</h1>
+      <h1>2020<br>事實查核計畫</h1>
+      <div class="landing__image">
+        <img class="quote left-top" src="/proj-assets/fact-check/landing_quote.png" alt="">
+        <img class="quote left-bottom" src="/proj-assets/fact-check/landing_quote.png" alt="">
+        <img class="quote right-top" src="/proj-assets/fact-check/landing_quote.png" alt="">
+        <img class="quote right-bottom" src="/proj-assets/fact-check/landing_quote.png" alt="">
+        <img src="/proj-assets/fact-check/landing_main.png" alt="">
+        <img class="magnifier middle" src="/proj-assets/fact-check/landing_middle.jpg" alt="">
+        <div class="magnifier bottom" />
+        <!-- <img class="magnifier bottom" src="/proj-assets/fact-check/landing_bottom.jpg" alt=""> -->
+      </div>
       <h3>2020 總統大選在即，總統候選人在公開的發言中，<br>有幾分真？幾分假？我們一起來看看！</h3>
     </section>
     <section class="section process">
@@ -179,9 +189,9 @@ export default {
   computed: {
     netizenList () {
       const netizen1 = uniq(this.$store.state.FactCheck.googleSheet['netizen-1']
-        .map(item => item[0]).slice(2).filter(item => item && typeof item === 'string'))
+        .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
       const netizen2 = uniq(this.$store.state.FactCheck.googleSheet['netizen-2']
-        .map(item => item[0]).slice(2).filter(item => item && typeof item === 'string'))
+        .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
       return union(netizen1, netizen2).sort()
     },
     sheet () {
@@ -195,13 +205,13 @@ export default {
     },
     verifyList () {
       return this.sheet
-        .filter(item => item && typeof item[12] === 'string')
+        .filter(item => Array.isArray(item) && typeof item[12] === 'string')
         .filter(item => item[12].match(/docs.google.com/) && item[12] !== this.verifyLinkClicked)
         .map(item => item[12])
     },
     volunteerList () {
       return uniq(this.$store.state.FactCheck.googleSheet['volunteer']
-        .map(item => item[0]).slice(2).filter(item => item && typeof item === 'string'))
+        .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
     }
   },
   serverPrefetch () {
@@ -335,14 +345,54 @@ export default {
     justify-content center
     height 100vh
     text-align center
+    overflow hidden
     h1
       color #e56300
       line-height 1.3
     h3
       max-width 90%
-      margin 35px auto 0
+      margin 10px auto 0
       line-height 1.7
       text-align justify
+    &__image
+      position relative
+      width 60%
+      margin 10px auto 0
+      img
+        width 100%
+      .quote
+        position absolute
+        z-index 10
+        &.left-top
+          top 30%
+          left 0
+          width 100px
+          transform translate(-80%, -50%)
+        &.left-bottom
+          display none
+        &.right-top
+          top 10%
+          right 0
+          width 100px
+          transform scaleX(-1) translate(-70%, -50%)
+        &.right-bottom
+          display none
+
+      .magnifier
+        position absolute
+        &.middle
+          top 50%
+          right 0
+          width 30px
+          transform translate(100%, -50%)
+        &.bottom
+          top 50%
+          right 0
+          width 50%
+          height 40px
+          transform translate(calc(100% + 29px), -50%)
+          background-image url(/proj-assets/fact-check/landing_bottom.jpg)
+          background-repeat repeat-x
   .section
     padding 20px 0 75px
   .process
@@ -431,7 +481,30 @@ export default {
   .fact-check
     .landing
       h3
+        margin-top 30px
         text-align center
+      &__image
+        margin-top 30px
+        max-width 350px
+        .quote
+          &.left-top
+            width 150px
+          &.left-bottom
+            display block
+            top 50%
+            left 0
+            width 100px
+            transform translate(-80%, 0)
+          &.right-top
+            width 150px
+            top 15%
+            transform scaleX(-1) translate(-80%, -50%)
+          &.right-bottom
+            display block
+            top 60%
+            right 0
+            width 100px
+            transform scaleX(-1) translate(-60%, -20%)
     .process
       > p
         max-width 60%
@@ -470,9 +543,30 @@ export default {
 @media (min-width: 1024px)
   .fact-check
     h1
-      font-size 4.75rem
+      font-size 3rem
     h3
       font-size 1.25rem
+    .landing
+      &__image
+        margin-top 3%
+        .quote.left-top
+          width 200px
+          transform translate(-120%, -50%)
+        .quote.left-bottom
+          width 120px
+          transform translate(-120%, 40%)
+        .quote.right-top
+          width 200px
+          transform scaleX(-1) translate(-110%, -50%)
+        .quote.right-bottom
+          width 120px
+          transform scaleX(-1) translate(-60%, 30%)
+        .magnifier.middle
+          width 60px
+        .magnifier.bottom
+          width 100%
+          height 90px
+          transform translate(calc(100% + 59px), -50%)
     .process
       display flex
       flex-direction column
@@ -494,5 +588,8 @@ export default {
           width 200px
           padding-top calc(200px * 0.5625)
           margin: .5em .5em;
-
+@media (min-width: 1024px) and (min-height: 900px)
+  .fact-check
+    .landing__image
+      max-width 550px
 </style>
