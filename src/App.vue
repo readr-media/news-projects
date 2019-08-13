@@ -22,7 +22,6 @@ export default {
   computed: {
     hideAppHeader() {
       const slugs = [
-        'fact-check-2020',
         'political-contribution',
         'newtype',
         'election-board',

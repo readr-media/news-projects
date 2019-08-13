@@ -10,7 +10,6 @@
         <img src="/proj-assets/fact-check/landing_main.png" alt="">
         <img class="magnifier middle" src="/proj-assets/fact-check/landing_middle.jpg" alt="">
         <div class="magnifier bottom" />
-        <!-- <img class="magnifier bottom" src="/proj-assets/fact-check/landing_bottom.jpg" alt=""> -->
       </div>
       <h3>2020 總統大選在即，總統候選人在公開的發言中，<br>有幾分真？幾分假？我們一起來看看！</h3>
     </section>
@@ -23,7 +22,7 @@
           imgSrc="/proj-assets/fact-check/step-01.png"
           indexText="步驟一"
           :link="getTypeLink()"
-          :linkText="typeList.length > 0 ? '我要打逐字稿' : '目前無逐字稿需撰寫'"
+          :linkText="typeList.length > 0 ? '我要打逐字稿' : '目前無逐字稿需謄打'"
           :progress="progress[1]"
           @click="clickTypeLinkBtn"
         />
@@ -47,7 +46,7 @@
         />
         <StepBlock
           :progress="progress[4]"
-          additionalText="合作媒體（按筆畫排序）：iThome、上下游 News&Market、公視 P# 新聞實驗室、公視新聞、未來城市＠天下、沃草、數位時代、環境資訊中心、鏡週刊、關鍵評論網<br>協作單位：中央社新聞學院、新興科技媒體中心"
+          additionalText="合作媒體（按筆畫排序）： iThome、READr、Right Plus 多多益善研究站、上下游News&Market、公視P# 新聞實驗室、公視新聞、未來城市＠天下、沃草、華視、環境資訊中心、鏡週刊、關鍵評論網<br>協作單位：中央社新聞學院、新興科技媒體中心"
           class="process__step hidden-effect"
           contentText="各家媒體針對需驗證的項目進行查證"
           imgSrc="/proj-assets/fact-check/step-04.png"
@@ -121,6 +120,15 @@
         </picture>
       </div>
     </lazy-component>
+    <section class="section credit">
+      <div class="credit-container">
+        <p>文字：李又如</p>
+        <p>工程：Tin Chen & HY Tan</p>
+        <p>設計：Weiwei Hsu</p>
+        <p>資料整理：李昭妟</p>
+        <p>監製：簡信昌</p>
+      </div>
+    </section>
     <div
       v-show="showFixedInfo && typeList.length > 0"
       class="info-fixed"
@@ -488,7 +496,13 @@ export default {
       img
         width 15px
         height 15px
-
+  .credit
+    text-align center
+    background-color #010a2b
+    p
+      font-size .875rem
+      & + p
+        margin-top .5em
   .hidden-effect
     opacity 0
     transition opacity .9s
@@ -616,11 +630,19 @@ export default {
             transform translateX(15px)
     .cooperation
       &__list
-        
+        width calc((200px + 1em) * 3)
         picture
           width 200px
           padding-top calc(200px * 0.5625)
-          margin: .5em .5em;
+          margin: .5em .5em
+    .credit
+      &-container
+        width calc((200px + 1em) * 3)
+        margin 0 auto
+        p
+          display inline-block
+          & + p
+            margin 0 0 0 1em
 @media (min-width: 1024px) and (min-height: 900px)
   .fact-check
     .landing__image
