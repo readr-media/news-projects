@@ -22,6 +22,7 @@ export default {
   computed: {
     hideAppHeader() {
       const slugs = [
+        'hong-kong-protests-2019',
         'political-contribution',
         'newtype',
         'election-board',

@@ -1,13 +1,17 @@
 <template>
-  <div :is="currentComponent"></div>
+  <div>
+    <Header />
+    <div :is="currentComponent" class="hong-kong"></div>
+  </div>
 </template>
 <script>
-
+import Header from './components/Header.vue'
 import LennonWall from './components/LennonWall.vue'
 
 export default {
   name: 'HongKongProtests2019',
   components: {
+    Header,
     LennonWall
   },
   metaInfo() {
@@ -29,3 +33,8 @@ export default {
   }
 }
 </script>
+<style lang="stylus" scoped>
+.hong-kong
+  padding 60px 0 0 0
+</style>
+
