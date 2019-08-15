@@ -7,12 +7,14 @@
 <script>
 import Header from './components/Header.vue'
 import LennonWall from './components/LennonWall.vue'
+import Timeline from './components/Timeline.vue'
 
 export default {
   name: 'HongKongProtests2019',
   components: {
     Header,
-    LennonWall
+    LennonWall,
+    Timeline
   },
   metaInfo() {
     return {
@@ -24,9 +26,8 @@ export default {
   },
   computed: {
     currentComponent () {
-      // 替換成大事紀要用的 url 
-      if (this.$route.params.params === '大事記') {
-        return ''
+      if (this.$route.params.params === 'timeline') {
+        return 'Timeline'
       }
       return 'LennonWall'
     }
