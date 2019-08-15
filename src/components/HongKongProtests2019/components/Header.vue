@@ -25,21 +25,21 @@
     <nav class="header__nav right">
       <a
         class="header__item switch"
-        href=""
-        target="_blank"
+        :href="isTimelinePage ? '/project/hong-kong-protests-2019/lennon-wall' : '/project/hong-kong-protests-2019/timeline'"
       >
         <img
           src="/proj-assets/hong-kong-protests-2019/switch.png"
-          alt=""
+          :alt="isTimelinePage ? '連儂牆' : '大事記'"
         >
-        <span></span>
+        <span>{{ isTimelinePage ? '連儂牆' : '大事記' }}</span>
       </a>
       <button
+        :class="{ active: showMessageBoard }"
         class="header__item message"
         @click="$emit('openMessageBoard')"
       >
         <img
-          src="/proj-assets/hong-kong-protests-2019/message.png"
+          :src="showMessageBoard ? '/proj-assets/hong-kong-protests-2019/message_black.png' : '/proj-assets/hong-kong-protests-2019/message.png'"
           alt="我要留言"
         >
         <span>我要留言</span>
@@ -49,7 +49,18 @@
 </template>
 <script>
 export default {
-  name: 'HongKongHeader'  
+  name: 'HongKongHeader',
+  props: {
+    showMessageBoard: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    isTimelinePage () {
+      return this.$route.params.params === 'timeline'
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -63,6 +74,7 @@ export default {
   height 60px
   padding 0 10px
   background-color #000000
+  z-index 999
   &__nav
     display flex
     &.left, &.right
@@ -79,6 +91,7 @@ export default {
     height 40px
     background-color transparent
     border 2px solid #fff
+    color #fff
     text-decoration none
     cursor pointer
     & + .header__item
@@ -102,6 +115,9 @@ export default {
   .message
     img
       transform scale(.8) translateY(2px)
+    &.active
+      color #000
+      background-color #fff
 
 @media (min-width: 768px)
   .header
@@ -122,7 +138,6 @@ export default {
           span
             display inline
             margin-left 10px
-            color #fff
 
 @media (min-width: 1024px)
   .header
