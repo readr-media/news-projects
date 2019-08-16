@@ -45,11 +45,16 @@ export default {
   },
   watch: {
     content (value) {
-      if (value.length > 20) {
-        this.content = truncate(value, { length: 20, omission: '' })
+      if (value.length > 200) {
+        this.content = truncate(value, { length: 200, omission: '' })
         this.remainingWords = 0
       }
       this.remainingWords = 200 - value.length
+    },
+    nickname (value) {
+      if (value.length > 20) {
+        this.content = truncate(value, { length: 20, omission: '' })
+      }
     }
   },
   methods: {
