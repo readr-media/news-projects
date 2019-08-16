@@ -8,12 +8,12 @@ Vue.use(Vuex)
 
 export function createStore () {
   return new Vuex.Store({
-    state: {
+    state: () => ({
       reports: [],
       reportsCount: 0,
       viewport: [ 0, 0 ],
       googleSheet: {}
-    },
+    }),
     actions,
     mutations,
     getters
