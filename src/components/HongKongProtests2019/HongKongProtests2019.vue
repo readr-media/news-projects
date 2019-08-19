@@ -52,12 +52,21 @@ export default {
       return 'LennonWall'
     }
   },
-  created () {
-    this.$store.registerModule('HongKongProtests', storeModule)
+  serverPrefetch () {
+    this.registerStoreModule()
+    return Promise.resolve()
+  },
+  beforeMount () {
+    this.registerStoreModule(true)
   },
   beforeDestroy () {
     this.$store.unregisterModule('HongKongProtests')
   },
+  methods: {
+    registerStoreModule (shouldPreserveState = false) {
+      this.$store.registerModule('HongKongProtests', storeModule, { preserveState: shouldPreserveState })
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>

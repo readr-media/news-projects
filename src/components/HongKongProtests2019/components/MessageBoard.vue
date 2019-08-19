@@ -53,7 +53,7 @@ export default {
     },
     nickname (value) {
       if (value.length > 20) {
-        this.content = truncate(value, { length: 20, omission: '' })
+        this.nickname = truncate(value, { length: 20, omission: '' })
       }
     }
   },
