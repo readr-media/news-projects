@@ -7,59 +7,13 @@
   >
     <ol class="list">
       <TimelineListItem
+        v-for="(item, i) in dataTimeline"
+        :key="i"
         class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
-        @click.native="$emit('openLightbox')"
-      />
-      <TimelineListItem
-        class="list__list-item"
+        :h1="getH1(item)"
+        :h2="getH2(item)"
+        :imgUrl="getImgUrl(item)"
+        :imgCaption="getImgCaption(item)"
         @click.native="$emit('openLightbox')"
       />
     </ol>
@@ -69,6 +23,8 @@
 <script>
 import TimelineListItem from './TimelineListItem.vue'
 import viewportMixin from '../mixins/viewport'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('HongKongProtests')
 
 export default {
   components: {
@@ -76,7 +32,28 @@ export default {
   },
   mixins: [
     viewportMixin
-  ]
+  ],
+  computed: {
+    ...mapState([
+      'dataTimeline'
+    ])
+  },
+  methods: {
+    getH1(item) {
+      return item['時間']
+    },
+    getH2(item) {
+      return item['一二三四五六七八九十（標題）']
+    },
+    getImgUrl(item) {
+      return item['圖片（填 gcs 網址）']
+    },
+    getImgCaption(item) {
+      const content = item['完整內容']
+      const hasBreak = content.includes('<br>')
+      return hasBreak ? content.split('<br>')[0] : content
+    }
+  }
 }
 </script>
 
@@ -114,7 +91,7 @@ marginListItem = 16px
     & + &
       margin-top "calc(-1 * (560px - 400px) + 16px + %s)" % marginListItem
 
-@media (max-width 768px)
+@media (max-width 425px)
   .list
     margin 90vw 0 0 0
     padding-top calc((100vw - 90vw + 16px) / 2)
