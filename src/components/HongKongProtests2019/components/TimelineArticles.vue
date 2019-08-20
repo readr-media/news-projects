@@ -4,6 +4,7 @@
       v-for="(item, i) in dataTimeline"
       :key="i"
       class="articles__article"
+      :id="`article-${getId(item)}`"
       :h1="getH1(item)"
       :h2="getH2(item)"
       :imgUrl="getImgUrl(item)"
@@ -27,6 +28,9 @@ export default {
     ])
   },
   methods: {
+    getId(item) {
+      return this.getH1(item).replace(/\./g, '')
+    },
     getH1(item) {
       return item['時間']
     },

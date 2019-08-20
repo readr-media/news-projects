@@ -81,6 +81,7 @@ img
 p
   font-size 15px
   line-height 1.73
+  text-align justify
 
 @media (max-width 1024px)
   header

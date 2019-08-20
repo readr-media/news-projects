@@ -16,14 +16,16 @@
       <figcaption
         class="figure__figcapiton"
       >
-        <p v-text="imgCaption" />
+        <p v-text="imgCaptionProcessed" />
       </figcaption>
     </figure>
   </li>
 </template>
 
 <script>
+import viewportMixin from '../mixins/viewport'
 import { image } from '../utils'
+import { truncate } from 'lodash'
 
 export default {
   props: {
@@ -44,10 +46,24 @@ export default {
       required: true
     }
   },
+  mixins: [
+    viewportMixin
+  ],
   computed: {
     imageUrlProcessed() {
       return image(this.imgUrl)
         .getResolution('mobile')
+    },
+    imgCaptionProcessed() {
+      let limit
+      if (this.vw > 425) {
+        limit = 130
+      } else if (this.vw > 325) {
+        limit = 70
+      } else {
+        limit = 40
+      }
+      return truncate(this.imgCaption, { length: limit })
     }
   }
 }
@@ -132,15 +148,15 @@ export default {
       line-height 1.73
       text-align justify
       word-wrap break-word
-      display -webkit-box
-      -webkit-line-clamp 6
-      -webkit-box-orient vertical
-      overflow hidden
+      // display -webkit-box
+      // -webkit-line-clamp 6
+      // -webkit-box-orient vertical
+      // overflow hidden
 
 @media (max-width 425px)
   .list-item
     width 90vw
-    height 70vh
+    height calc(70vh - 50px)
 
   .title-box
     width 87%
@@ -150,8 +166,12 @@ export default {
     h1, h2
       line-height 1.25
 
-  .figure
-    &__figcapiton
-      p
-        -webkit-line-clamp 4
+  // .figure
+  //   &__figcapiton
+  //     p
+  //       -webkit-line-clamp 3
+
+@media (max-width 325px)
+  .title-box
+    height 30%
 </style>
