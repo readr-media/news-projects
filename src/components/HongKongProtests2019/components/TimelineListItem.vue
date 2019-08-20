@@ -10,18 +10,21 @@
     <figure class="figure">
       <img
         class="figure__img"
-        :src="imgUrl"
+        v-lazy="imageUrlProcessed"
         alt=""
       >
       <figcaption
         class="figure__figcapiton"
-        v-text="imgCaption"
-      />
+      >
+        <p v-text="imgCaption" />
+      </figcaption>
     </figure>
   </li>
 </template>
 
 <script>
+import { image } from '../utils'
+
 export default {
   props: {
     h1: {
@@ -39,6 +42,12 @@ export default {
     imgCaption: {
       type: String,
       required: true
+    }
+  },
+  computed: {
+    imageUrlProcessed() {
+      return image(this.imgUrl)
+        .getResolution('mobile')
     }
   }
 }
@@ -64,12 +73,14 @@ export default {
   height 118px
   border-radius 4px
   background-color #d20640
-  padding 14px
+  padding 12px
   display flex
   align-items center
   justify-content space-between
   &__title-texts
     height 100%
+    flex 1 1 auto
+    width 0
   &__arrow
     position relative
     right 10px
@@ -77,11 +88,11 @@ export default {
 .title-texts
   display flex
   flex-direction column
-  justify-content space-between
+  justify-content space-around
   h1
     margin 0
     line-height 1
-    font-size 58px
+    font-size 32px
     color white
   h2
     margin 0
@@ -107,27 +118,40 @@ export default {
     min-width 100%
     // min-height 400px
     min-height 70%
+    max-height 70%
     background-color black
     border none
+    object-fit cover
   &__figcapiton
     // height 140px
-    height 30%
+    height 29%
     padding 11px 19px
-    font-size 15px
-    line-height 1.73
-    text-align justify
-    word-wrap break-word
-    -webkit-line-clamp 5
-    display -webkit-box
-    -webkit-box-orient vertical
-    overflow hidden
+    p
+      margin 0
+      font-size 15px
+      line-height 1.73
+      text-align justify
+      word-wrap break-word
+      display -webkit-box
+      -webkit-line-clamp 6
+      -webkit-box-orient vertical
+      overflow hidden
 
-@media (max-width 768px)
+@media (max-width 425px)
   .list-item
     width 90vw
     height 70vh
 
   .title-box
     width 87%
-    height 22%
+    height 25%
+
+  .title-texts
+    h1, h2
+      line-height 1.25
+
+  .figure
+    &__figcapiton
+      p
+        -webkit-line-clamp 4
 </style>

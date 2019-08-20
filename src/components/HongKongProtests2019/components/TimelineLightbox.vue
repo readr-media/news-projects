@@ -46,9 +46,10 @@ export default {
   background-color rgba(0, 0, 0, 0.75)
   display flex
   justify-content center
+  z-index 1000
 
 .article-wrapper
-  width 1000px
+  width 1024px
   background-color black
   overflow-y scroll
   // position relative
@@ -61,6 +62,7 @@ export default {
     top 0
     left 0
     display none
+    z-index 9999
   &__article
     margin 0 auto
 
@@ -83,4 +85,11 @@ export default {
   border none
   outline none
   color white
+
+@media (max-width 1024px)
+  .article-wrapper
+    &__close-icon
+      display none
+    &__close-button
+      display initial
 </style>

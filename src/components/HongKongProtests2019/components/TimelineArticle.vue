@@ -1,19 +1,50 @@
 <template>
   <article>
     <header>
-      <h1>2003</h1>
-      <h2>全民行動，反對洗腦</h2>
+      <h1 v-text="h1" />
+      <h2 v-text="h2" />
     </header>
     <section>
-      <p>
-        「全民行動，反對洗腦，7 月 29 日，萬人大遊行」是香港的一次遊行示威活動，為一連串反國民教育科運動之一，於 2012 年 7 月 29 日下午3時由維園到添馬艦新政府總部，由民間反對國民教育科大聯盟主辦，目的是要求政府撤回德育及國民教育科。比里怎有的一傳院不奇話星的邊音竟起構由境要有門兒形把性臉手告回檢起做經生樂是下水分地代小，庭試心：是排我，兒有她我了反消自覺館？常紅件低寫區，他應樣持的近期入題們訴如麼男每！行打過開解到理引，時不是；最到國量，亞視在或，團銀這加今界經文產克大雙還對際器他頭策著府景；回破方大中來會，低已幾改界果有樣合過玩布，分好本人畫外益。
-      </p>
+      <img
+        v-lazy="imageUrlProcessed"
+        alt=""
+      >
+      <div class="description-wrapper">
+        <p v-html="description" />
+      </div>
     </section>
   </article>
 </template>
 
 <script>
+import { image } from '../utils'
 
+export default {
+  props: {
+    h1: {
+      type: String,
+      required: true
+    },
+    h2: {
+      type: String,
+      required: true
+    },
+    imgUrl: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    imageUrlProcessed() {
+      return image(this.imgUrl)
+        .getResolution('mobile')
+    }
+  }
+}
 </script>
 
 <style lang="stylus" scoped>
@@ -24,6 +55,8 @@ header
   border-left 8px solid #d20640
   padding 0 0 0 10px
   height 142px
+  position relative
+  z-index 2
 
 h1
   font-size 58px
@@ -35,7 +68,39 @@ h2
   line-height 1
   margin 20px 0 0 0
 
+section
+  position relative
+  top -20px
+  z-index 1
+
+img
+  width 100%
+  height 408px
+  object-fit cover
+
 p
   font-size 15px
   line-height 1.73
+
+@media (max-width 1024px)
+  header
+    height 120px
+    padding 0 0 0 20px
+
+  h1
+    font-size 32px
+    line-height 1
+
+  h2
+    font-size 21px
+    margin 10px 0 0 0
+
+  section
+    top -40px
+
+  img
+    height 64vw
+
+  .description-wrapper
+    padding 0 20px
 </style>
