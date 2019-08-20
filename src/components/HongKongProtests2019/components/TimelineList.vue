@@ -14,7 +14,7 @@
         :h2="getH2(item)"
         :imgUrl="getImgUrl(item)"
         :imgCaption="getImgCaption(item)"
-        @click.native="$emit('openLightbox')"
+        @click.native="$emit('openLightbox', { articleDate: getH1(item) })"
       />
     </ol>
   </div>
@@ -97,5 +97,5 @@ marginListItem = 16px
     padding-top calc((100vw - 90vw + 16px) / 2)
     &__list-item
       & + &
-        margin-top "calc(-1 * (70vh - 90vw) + 16px + %s)" % marginListItem
+        margin-top "calc(-1 * (70vh - 50px - 90vw) + 16px + %s)" % marginListItem
 </style>

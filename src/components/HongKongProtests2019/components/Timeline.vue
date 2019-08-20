@@ -35,6 +35,13 @@ import TimelineLightbox from './TimelineLightbox.vue'
 import viewportMixin from '../mixins/viewport'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('HongKongProtests')
+import Vue from 'vue'
+import VueScrollTo from 'vue-scrollto'
+Vue.use(VueScrollTo, {
+  container: '.article-wrapper',
+  easing: 'ease',
+  duration: 600
+})
 
 export default {
   components: {
@@ -63,8 +70,16 @@ export default {
     }
   },
   methods: {
-    handleOpenLightbox() {
+    scrollIntoArticle(articleDate) {
+      const dateFormatted = articleDate.replace(/\./g, '')
+      this.$scrollTo(`#article-${dateFormatted}`, { offset: -60 })
+    },
+    handleOpenLightbox({ articleDate }) {
       this.showLightbox = true
+      this.$nextTick()
+        .then(() => {
+          this.scrollIntoArticle(articleDate)
+        })
     },
     handleCloseLightbox() {
       this.showLightbox = false
@@ -117,6 +132,8 @@ export default {
     padding 100px 8px 0 8px !important
     justify-content flex-start
     background-image linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://storage.googleapis.com/mirrormedia-files/assets/images/20190815151015-4fc8be4b020e17fa12a021f2351af858-mobile.jpg)
+    &__list
+      margin 10px 0 0 0
 
   .intros
     h1

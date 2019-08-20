@@ -6,6 +6,12 @@
     }"
     @click.self="$emit('closeLightbox')"
   >
+    <button
+      class="article-wrapper__close-button close-button"
+      @click="$emit('closeLightbox')"
+    >
+      關閉視窗
+    </button>
     <div class="lightbox__article-wrapper article-wrapper">
       <div
         class="article-wrapper__close-icon close-icon"
@@ -13,12 +19,6 @@
       >
         <div class="close-icon__icon" />
       </div>
-      <button
-        class="article-wrapper__close-button close-button"
-        @click="$emit('closeLightbox')"
-      >
-        關閉視窗
-      </button>
       <TimelineArticles
         class="article-wrapper__article"
       />
@@ -53,16 +53,11 @@ export default {
   background-color black
   overflow-y scroll
   // position relative
+  -webkit-overflow-scrolling touch
   &__close-icon
     position fixed
     top 16px
     right calc((100vw - 1000px) / 2 + 16px)
-  &__close-button
-    position fixed
-    top 0
-    left 0
-    display none
-    z-index 9999
   &__article
     margin 0 auto
 
@@ -78,6 +73,11 @@ export default {
     clip-path polygon(5% 0, 0 5%, 45% 50%, 0 95%, 5% 100%, 50% 55%, 95% 100%, 100% 95%, 55% 50%, 100% 5%, 95% 0, 50% 45%)
 
 .close-button
+  position fixed
+  top 0
+  left 0
+  display none
+  z-index 9999
   width 100%
   height 40px
   cursor pointer
@@ -88,8 +88,10 @@ export default {
 
 @media (max-width 1024px)
   .article-wrapper
+    // -webkit-overflow-scrolling touch
     &__close-icon
       display none
-    &__close-button
+      
+  .close-button
       display initial
 </style>
