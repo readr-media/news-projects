@@ -64,6 +64,7 @@
     "sanitize-html": "^1.20.0",
     "scrollama": "^1.4.4",
     "serve-favicon": "^2.4.4",
+    "smoothscroll-polyfill": "^0.4.4",
     "swiper": "^4.1.6",
     "topojson": "^3.0.2",
     "uuid": "^3.3.2",
