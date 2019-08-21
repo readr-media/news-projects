@@ -86,8 +86,6 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .hong-kong
-  &__main
-    padding 60px 0 0 0
   &__message-board
     position fixed
     top 0
@@ -102,8 +100,4 @@ export default {
       opacity 1
       visibility visible
 
-// @media (min-width: 768px)
-//   .hong-kong
-    
 </style>
-

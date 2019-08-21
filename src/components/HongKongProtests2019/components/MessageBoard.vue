@@ -12,7 +12,7 @@
           <p class="message-board__remaining">剩餘字數 {{ remainingWords }} 字</p>
         </div>
         <p>暱稱</p>
-        <input v-model="nickname" placeholder="怎麼稱呼您呢？（限制 20 字）">
+        <input v-model="nickname" placeholder="怎麼稱呼您呢？（限制 10 字）">
         <div>
           <p
             v-if="showErrorMsg"
@@ -27,8 +27,10 @@
   </section>
 </template>
 <script>
-
+import { createNamespacedHelpers } from 'vuex'
 import { truncate } from 'lodash'
+
+const { mapActions } = createNamespacedHelpers('HongKongProtests')
 
 const addMessage = (store, message) => store.dispatch('HongKongProtests/ADD_MESSAGE', { resource: message })
 
@@ -52,12 +54,16 @@ export default {
       this.remainingWords = 200 - value.length
     },
     nickname (value) {
-      if (value.length > 20) {
-        this.nickname = truncate(value, { length: 20, omission: '' })
+      if (value.length > 10) {
+        this.nickname = truncate(value, { length: 10, omission: '' })
       }
     }
   },
   methods: {
+    ...mapActions([
+      'ADD_MESSAGE',
+      'FETCH_SHEET',
+    ]),
     addMessage () {
       window.ga('send', 'event', 'projects', 'click', 'summit comment', { nonInteraction: false })
 
@@ -68,13 +74,22 @@ export default {
 
       if (!this.loading && !this.showErrorMsg) {
         this.loading = true
-        addMessage(this.$store, {
-          majorDimension: 'ROWS',
-          values: [
-            [ this.content, this.nickname, 0, Number(Date.now()) ]
-          ]
+        this.ADD_MESSAGE({
+          resource: {
+            majorDimension: 'ROWS',
+            values: [
+              [ this.content, this.nickname, Number(Date.now()) ]
+            ]
+          }
         })
-          .then(res => this.close())
+          .then(res =>{
+            if (this.$route.params.params === 'lennon-wall') {
+              setTimeout(() => {
+                this.FETCH_SHEET({ stateName: 'messages', range: '連儂牆留言板!A2:C21' })
+              }, 500)
+            }
+            this.close()
+          })
           .catch(err => {
             console.error(err)
           })
