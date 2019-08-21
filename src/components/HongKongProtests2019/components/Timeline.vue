@@ -33,6 +33,7 @@
 import TimelineList from './TimelineList.vue'
 import TimelineLightbox from './TimelineLightbox.vue'
 import viewportMixin from '../mixins/viewport'
+import scrollGATimelineMixin from '../mixins/scrollGATimeline'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('HongKongProtests')
 import Vue from 'vue'
@@ -49,7 +50,8 @@ export default {
     TimelineLightbox
   },
   mixins: [
-    viewportMixin
+    viewportMixin,
+    scrollGATimelineMixin
   ],
   serverPrefetch() {
     return this.FETCH_TIMELINE()
@@ -74,12 +76,13 @@ export default {
       const dateFormatted = articleDate.replace(/\./g, '')
       this.$scrollTo(`#article-${dateFormatted}`, { offset: -60 })
     },
-    handleOpenLightbox({ articleDate }) {
+    handleOpenLightbox({ articleDate, articleSubtitle }) {
       this.showLightbox = true
       this.$nextTick()
         .then(() => {
           this.scrollIntoArticle(articleDate)
         })
+      window.ga('send', 'event', 'projects', 'click', articleSubtitle, { nonInteraction: false })
     },
     handleCloseLightbox() {
       this.showLightbox = false

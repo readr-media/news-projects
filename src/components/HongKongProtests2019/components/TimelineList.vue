@@ -1,6 +1,7 @@
 <template>
   <div
     class="horizontal-scroll-wrapper"
+    id="hk-timeline-horizontal-scroll-wrapper"
     :style="{
       height: `${vw}px`
     }"
@@ -9,12 +10,13 @@
       <TimelineListItem
         v-for="(item, i) in dataTimeline"
         :key="i"
-        class="list__list-item"
+        class="list__list-item hk-timeline-list-item"
         :h1="getH1(item)"
         :h2="getH2(item)"
+        :data-h2="getH2(item)"
         :imgUrl="getImgUrl(item)"
         :imgCaption="getImgCaption(item)"
-        @click.native="$emit('openLightbox', { articleDate: getH1(item) })"
+        @click.native="handleClickListItem(item)"
       />
     </ol>
   </div>
@@ -52,6 +54,12 @@ export default {
       const content = item['完整內容']
       const hasBreak = content.includes('<br>')
       return hasBreak ? content.split('<br>')[0] : content
+    },
+    handleClickListItem(item) {
+      this.$emit('openLightbox', {
+        articleDate: this.getH1(item),
+        articleSubtitle: this.getH2(item)
+      })
     }
   }
 }
