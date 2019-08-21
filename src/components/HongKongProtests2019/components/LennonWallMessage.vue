@@ -72,6 +72,7 @@ export default {
       this.ADD_LIKE({ timestamp })
         .then(() => this.FETCH_SHEET({ stateName: 'likes', range: '留言讚總數!A:B' }))
         .catch(err => console.error('Error: ', err))
+      window.ga('send', 'event', 'projects', 'click', 'like', { nonInteraction: false })
     },
     getBgColor () {
       const random = Math.floor(Math.random() * 5)

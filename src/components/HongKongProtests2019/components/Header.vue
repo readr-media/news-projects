@@ -12,6 +12,10 @@
           alt="readr"
         >
       </a>
+      <Share
+        :shareUrl="`https://www.readr.tw${$route.fullPath}`"
+        class="header__item share"
+      />
       <a
         class="header__item donate"
         href="https://www.readr.tw/donate"
@@ -51,8 +55,14 @@
   </header>
 </template>
 <script>
+
+import Share from '../../Share.vue'
+
 export default {
   name: 'HongKongHeader',
+  components: {
+    Share
+  },
   props: {
     showMessageBoard: {
       type: Boolean,
@@ -126,6 +136,10 @@ export default {
   .logo
     img
       transform scale(.9) translate(1px, 4px)
+  .share
+    position relative
+    >>> .toggle
+      background-position -62px -3px
   .donate
     img
       transform scale(.8)
