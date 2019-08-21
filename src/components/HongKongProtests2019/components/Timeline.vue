@@ -64,7 +64,11 @@ export default {
   computed: {
     introsBottom() {
       const breakpoint = 425
+
       if (this.vw > breakpoint) {
+        if (this.vw <= 1280) {
+          return this.vh / 2 + 392 / 2 - 26 - 50 - 10
+        }
         return this.vh / 2 + 560 / 2 - 26 - 50
       } else {
         return this.vh / 2 + this.vh * 0.7 / 2 - 26 - 10
