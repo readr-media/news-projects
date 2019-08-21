@@ -59,6 +59,8 @@ export default {
   },
   methods: {
     addMessage () {
+      window.ga('send', 'event', 'projects', 'click', 'summit comment', { nonInteraction: false })
+
       this.showErrorMsg = false
       if (!this.content) {
         this.showErrorMsg =true

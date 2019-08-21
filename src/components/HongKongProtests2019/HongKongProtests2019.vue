@@ -71,6 +71,9 @@ export default {
   beforeMount () {
     this.registerStoreModule(true)
   },
+  mounted () {
+    window.ga('send', 'pageview')
+  },
   beforeDestroy () {
     this.$store.unregisterModule('HongKongProtests')
   },

@@ -5,6 +5,7 @@
         class="header__item logo"
         href="https://www.readr.tw/"
         target="_blank"
+        @click="handleClickLogo"
       >
         <img
           src="/proj-assets/hong-kong-protests-2019/readrlogo.png"
@@ -15,6 +16,7 @@
         class="header__item donate"
         href="https://www.readr.tw/donate"
         target="_blank"
+        @click="handleClickDonate"
       >
         <img
           src="/proj-assets/hong-kong-protests-2019/donate.png"
@@ -26,6 +28,7 @@
       <a
         class="header__item switch"
         :href="isTimelinePage ? '/project/hong-kong-protests-2019/lennon-wall' : '/project/hong-kong-protests-2019/timeline'"
+        @click="handleClickSwitch"
       >
         <img
           src="/proj-assets/hong-kong-protests-2019/switch.png"
@@ -36,7 +39,7 @@
       <button
         :class="{ active: showMessageBoard }"
         class="header__item message"
-        @click="$emit('openMessageBoard')"
+        @click="handleClickMessage"
       >
         <img
           :src="showMessageBoard ? '/proj-assets/hong-kong-protests-2019/message_black.png' : '/proj-assets/hong-kong-protests-2019/message.png'"
@@ -59,6 +62,22 @@ export default {
   computed: {
     isTimelinePage () {
       return this.$route.params.params === 'timeline'
+    }
+  },
+  methods: {
+    handleClickLogo () {
+      window.ga('send', 'event', 'projects', 'click', 'back to home', { nonInteraction: false })
+    },
+    handleClickDonate () {
+      window.ga('send', 'event', 'projects', 'click', 'donate', { nonInteraction: false })
+    },
+    handleClickSwitch () {
+      const switchTo = this.isTimelinePage ? 'LennonWall' : 'Timeline'
+      window.ga('send', 'event', 'projects', 'click', `header switch to ${switchTo}`, { nonInteraction: false })
+    },
+    handleClickMessage () {
+      this.$emit('openMessageBoard')
+      window.ga('send', 'event', 'projects', 'click', 'header add comment', { nonInteraction: false })
     }
   }
 }
