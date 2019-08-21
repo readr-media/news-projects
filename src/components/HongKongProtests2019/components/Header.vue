@@ -108,6 +108,7 @@ export default {
   &__item
     display block
     height 40px
+    padding 0
     background-color transparent
     border 2px solid #fff
     color #fff
@@ -133,7 +134,7 @@ export default {
       transform scale(.6)
   .message
     img
-      transform scale(.8) translateY(2px)
+      transform scale(.6) translateY(2px)
     &.active
       color #000
       background-color #fff
