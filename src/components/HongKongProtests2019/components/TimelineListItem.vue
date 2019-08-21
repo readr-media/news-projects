@@ -57,7 +57,11 @@ export default {
     imgCaptionProcessed() {
       let limit
       if (this.vw > 425) {
-        limit = 130
+        if (this.vw <= 1280) {
+          limit = 60
+        } else {
+          limit = 130
+        }
       } else if (this.vw > 325) {
         limit = 70
       } else {
@@ -86,7 +90,7 @@ export default {
 
 .title-box
   width 276px
-  height 118px
+  height 98px
   border-radius 4px
   background-color #d20640
   padding 12px
@@ -152,6 +156,11 @@ export default {
       // -webkit-line-clamp 6
       // -webkit-box-orient vertical
       // overflow hidden
+
+@media (max-width 1280px)
+  .list-item
+    width 280px
+    height 392px
 
 @media (max-width 425px)
   .list-item

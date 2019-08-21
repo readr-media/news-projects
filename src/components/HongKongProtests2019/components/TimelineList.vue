@@ -99,6 +99,13 @@ marginListItem = 16px
     & + &
       margin-top "calc(-1 * (560px - 400px) + 16px + %s)" % marginListItem
 
+@media (max-width 1280px)
+  .list
+    margin 280px 80px 0 0
+    &__list-item
+      & + &
+        margin-top "calc(-1 * (392px - 280px) + 16px + %s)" % marginListItem
+
 @media (max-width 425px)
   .list
     margin 90vw 0 0 0
