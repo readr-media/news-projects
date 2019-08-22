@@ -12,8 +12,8 @@
         bottom: `${introsBottom}px`
       }"
     >
-      <h1>香港民運</h1>
-      <p>立語的正的想確土你第過交行？活中他名位所少，且教臺不才快走間理！傳得許成意用地才。辦空美任給一產由沒生造廣難究：調洋活期魚不：的我位部目但不養：輕人。個怎獨傷古錢們在的作眼落查性道上樂長入雙道要得。約 80 字</p>
+      <h1>一國兩制 22 年，<br>香港民主運動軌跡</h1>
+      <p>1984 年，香港回歸中國，當時前中國領導人鄧小平承諾「港人治港」的方針 50 年不變，近年卻出現巨大變化。港人對民主進步的追求從未停歇，從最早聲援中國六四的遊行、四年前的雨傘運動、到今年反對中國干預司法獨立性的「反送中」，READr 帶你從 1989 年開始回顧。</p>
     </div>
     <TimelineList
       class="timeline__list"
@@ -71,7 +71,7 @@ export default {
         }
         return this.vh / 2 + 560 / 2 - 26 - 50
       } else {
-        return this.vh / 2 + this.vh * 0.7 / 2 - 26 - 10
+        return this.vh / 2 + this.vh * 0.65 / 2 - 26 - 35
       }
     }
   },
@@ -122,6 +122,8 @@ export default {
   h1
     margin 15px 0
     font-size 32px
+    br
+      display none
   p
     margin 0
     font-size 18px
@@ -140,11 +142,14 @@ export default {
     justify-content flex-start
     background-image linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://storage.googleapis.com/mirrormedia-files/assets/images/20190815151015-4fc8be4b020e17fa12a021f2351af858-mobile.jpg)
     &__list
-      margin 10px 0 0 0
+      margin 40px 0 0 0
 
   .intros
     h1
       margin 0
+      line-height 1.25
+      br
+        display initial
     p
       display none
 </style>
