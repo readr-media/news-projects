@@ -32,10 +32,22 @@ export default {
     Timeline
   },
   metaInfo() {
+    const isTimeline = this.$route.params.params === 'timeline'
+
+    let title = '連儂牆留言撐香港'
+    let description = '連儂牆源自於捷克，最早的牆上都是約翰・藍儂風格的塗鴉與樂團披頭四的歌詞，演變成愛與和平的精神象徵。香港的連儂牆最早出現在 2014 年的雨傘運動，群眾用便利貼在牆上留下理念或打氣的字眼，成為代表性的地標。在反送中運動裡，連儂牆更是在香港的大街小巷遍地開花。READr 在線上打造了一座連儂牆，歡迎留下對港人想說的話。'
+    let metaUrl = 'hong-kong-protests-2019/lennon-wall'
+
+    if (isTimeline) {
+      title = '一國兩制 22 年，香港民主運動軌跡'
+      description = '1984 年，香港回歸中國，當時前中國領導人鄧小平承諾「港人治港」的方針 50 年不變，近年卻出現巨大變化。港人對民主進步的追求從未停歇，從最早聲援中國六四的遊行、四年前的雨傘運動、到今年反對中國干預司法獨立性的「反送中」，READr 帶你從 1989 年開始回顧。'
+      metaUrl = 'hong-kong-protests-2019/timeline'
+    }
+
     return {
-      title: '',
-      description: '',
-      metaUrl: '',
+      title,
+      description,
+      metaUrl,
       metaImage: '',
       customScript: `
         <script>

@@ -138,6 +138,7 @@ export default {
       transform scale(.9) translate(1px, 4px)
   .share
     position relative
+    height 40px
     >>> .toggle
       background-position -62px -3px
   .donate
