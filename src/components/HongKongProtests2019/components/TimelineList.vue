@@ -112,5 +112,5 @@ marginListItem = 16px
     padding-top calc((100vw - 90vw + 16px) / 2)
     &__list-item
       & + &
-        margin-top "calc(-1 * (70vh - 50px - 90vw) + 16px + %s)" % marginListItem
+        margin-top "calc(-1 * (65vh - 50px - 90vw) + 16px + %s)" % marginListItem
 </style>

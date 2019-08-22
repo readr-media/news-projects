@@ -63,7 +63,7 @@ export default {
           limit = 130
         }
       } else if (this.vw > 325) {
-        limit = 70
+        limit = 55
       } else {
         limit = 40
       }
@@ -165,7 +165,7 @@ export default {
 @media (max-width 425px)
   .list-item
     width 90vw
-    height calc(70vh - 50px)
+    height calc(65vh - 50px)
 
   .title-box
     width 87%
@@ -182,5 +182,5 @@ export default {
 
 @media (max-width 325px)
   .title-box
-    height 30%
+    height 35%
 </style>
