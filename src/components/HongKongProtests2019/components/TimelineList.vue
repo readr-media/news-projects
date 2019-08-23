@@ -113,4 +113,10 @@ marginListItem = 16px
     &__list-item
       & + &
         margin-top "calc(-1 * (65vh - 50px - 90vw) + 16px + %s)" % marginListItem
+
+@media (max-width 425px) and (min-height 630px)
+  .list
+    &__list-item
+      & + &
+        margin-top "calc(-1 * (55vh - 50px - 90vw) + 16px + %s)" % marginListItem
 </style>

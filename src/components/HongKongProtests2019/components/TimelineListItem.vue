@@ -57,7 +57,7 @@ export default {
     imgCaptionProcessed() {
       let limit
       if (this.vw > 425) {
-        if (this.vw <= 1280) {
+        if (this.vw <= 1440) {
           limit = 60
         } else {
           limit = 130
@@ -157,7 +157,7 @@ export default {
       // -webkit-box-orient vertical
       // overflow hidden
 
-@media (max-width 1280px)
+@media (max-width 1440px)
   .list-item
     width 280px
     height 392px
@@ -166,6 +166,7 @@ export default {
   .list-item
     width 90vw
     height calc(65vh - 50px)
+    // max-height calc(55vh - 50px)
 
   .title-box
     width 87%
@@ -179,6 +180,11 @@ export default {
   //   &__figcapiton
   //     p
   //       -webkit-line-clamp 3
+
+@media (max-width 425px) and (min-height 630px)
+  .list-item
+    width 90vw
+    height calc(55vh - 50px)
 
 @media (max-width 325px)
   .title-box

@@ -60,7 +60,7 @@ export default {
     async FETCH_TIMELINE({ commit }) {
       const res = await axios.get('https://storage.googleapis.com/projects.readr.tw/json/1bkpL84QQxqludEGTxSKhmJZN3eIzREZBFpEkImrRJfk-2.json')
       const { data = [] } = res
-      commit('ADD_TIMELINE_DATA', data)
+      commit('ADD_TIMELINE_DATA', data.reverse())
       return res
     },
     async LOAD_MORE_MESSAGES ({ commit, state }, { range }) {
