@@ -66,7 +66,7 @@ export default {
       const breakpoint = 425
 
       if (this.vw > breakpoint) {
-        if (this.vw <= 1280) {
+        if (this.vw <= 1440) {
           return this.vh / 2 + 392 / 2 - 26 - 50 - 10
         }
         return this.vh / 2 + 560 / 2 - 26 - 50
@@ -106,7 +106,7 @@ export default {
   display flex
   flex-direction column
   justify-content center
-  background-image linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://storage.googleapis.com/mirrormedia-files/assets/images/20190815151015-4fc8be4b020e17fa12a021f2351af858-tablet.jpg)
+  background-image linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://storage.googleapis.com/mirrormedia-files/assets/images/20190816121749-c4a9d27601008cc827d1d66c4761f243-tablet.jpg)
   background-repeat no-repeat
   background-size cover
   &__list
@@ -140,7 +140,7 @@ export default {
   .timeline
     padding 100px 8px 0 8px !important
     justify-content flex-start
-    background-image linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://storage.googleapis.com/mirrormedia-files/assets/images/20190815151015-4fc8be4b020e17fa12a021f2351af858-mobile.jpg)
+    background-image linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://storage.googleapis.com/mirrormedia-files/assets/images/20190816121749-c4a9d27601008cc827d1d66c4761f243-mobile.jpg)
     &__list
       margin 40px 0 0 0
 
