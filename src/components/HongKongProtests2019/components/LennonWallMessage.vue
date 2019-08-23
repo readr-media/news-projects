@@ -45,7 +45,9 @@ export default {
   },
   data () {
     return {
-      bgColor: 'default'
+      bgColor: 'default',
+      clicked: false,
+      loading: false
     }
   },
   computed: {
@@ -69,9 +71,19 @@ export default {
       'FETCH_SHEET'
     ]),
     addLike (timestamp) {
-      this.ADD_LIKE({ timestamp })
-        .then(() => this.FETCH_SHEET({ stateName: 'likes', range: '留言讚總數!A:B' }))
-        .catch(err => console.error('Error: ', err))
+      if (!this.clicked && !this.loading) {
+        this.loading = true
+        this.ADD_LIKE({ timestamp })
+          .then(() => {
+            this.clicked = true
+            this.loading = false
+            this.FETCH_SHEET({ stateName: 'likes', range: '留言讚總數!A:B' })
+          })
+          .catch(err => {
+            this.loading = false
+            console.error('Error: ', err)
+          })
+      }
       window.ga('send', 'event', 'projects', 'click', 'like', { nonInteraction: false })
     },
     getBgColor () {
