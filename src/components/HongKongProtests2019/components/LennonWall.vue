@@ -11,12 +11,18 @@
           <div class="message">
             <h1>連儂牆留言<br>撐香港</h1>
           </div>
-          <!-- <div class="message">
-            <h2>這裡可以放副標</h2>
-          </div> -->
           <div class="message foreword">
-            <p>連儂牆源自於捷克，最早的牆上都是約翰・藍儂風格的塗鴉與樂團披頭四的歌詞，演變成愛與和平的精神象徵。香港的連儂牆最早出現在 2014 年的雨傘運動，群眾用便利貼在牆上留下理念或打氣的字眼，成為代表性的地標。在反送中運動裡，連儂牆更是在香港的大街小巷遍地開花。READr 在線上打造了一座連儂牆，歡迎留下對港人想說的話。</p>
+            <p>
+              {{ vw >= 414 || showMoreForeword ? '連儂牆源自於捷克，從樂團披頭四成員「約翰‧藍儂」風格的塗鴉演變成愛與和平的象徵。' : '' }}
+              香港的連儂牆最早在雨傘運動出現，群眾用便利貼在留下互相打氣的字眼，在反送中運動時期更在香港大街小巷遍地開花。READr 打造了一座線上連儂牆，歡迎留下對港人想說的話。
+            </p>
           </div>
+          <p class="credit">
+            <span>文／劉子維、曾芷筠</span><span>設計／Weiwei Hsu</span><br>
+            工程／HY Tan、熊凱文<br>
+            攝影／楊子磊、林俊耀、陳毅偉<br>
+            監製／簡信昌、Tin Chen、李又如
+          </p>
         </div>
         <div class="messages">
           <LennonWallMessage
@@ -60,7 +66,10 @@ export default {
   computed: {
     ...mapState({
       messages: state => state.spreadsheet.messages
-    })
+    }),
+    showMoreForeword () {
+      return this.vw === 375 && this.vh === 812
+    }
   },
   beforeMount () {
     this.FETCH_SHEET({ stateName: 'likes', range: '留言讚總數!A2:B' })
@@ -93,13 +102,15 @@ export default {
 <style lang="stylus" scoped>
 .lw
   height 100vh
+  background-image url(/proj-assets/hong-kong-protests-2019/bg.jpg)
+  background-position center bottom
+  background-repeat no-repeat
+  background-size cover
   background-color #000
-  h1, h2
+  h1
     text-align center
   h1
     font-size 3rem
-  h2
-    font-size 2rem
   p
     font-size 1.125rem
     text-align justify
@@ -131,6 +142,10 @@ export default {
     transform-origin right top
     overflow-y auto
     overflow-x hidden
+  .landing
+    display flex
+    flex-direction column
+    
   .messages
     display flex
     flex-wrap wrap
@@ -146,13 +161,29 @@ export default {
     border-radius 4px
     > *
       margin 0
-
+  .credit
+    padding-left 10px
+    margin auto 0 0 0
+    color #fff
+    font-size 1rem
+    span
+      & + span
+        margin-left 1em
 // iPhone SE
 @media (max-width: 320px)
   .lw
+    h1
+      font-size 2rem
+    .landing
+      .message
+        padding 12px 8px
+        margin-bottom 10px
     .foreword
       p
         font-size 1rem
+    .credit
+      padding-left 8px
+      font-size .875rem
         
 // iPhone XS, XR, XS Max
 @media only screen and (device-width : 375px) and (device-height : 812px),
@@ -163,6 +194,14 @@ export default {
       transform rotate(-90deg) translateY(calc(-100vh + 200px))
     .lw__list
       height calc(100vh - 200px)
+    .landing
+      padding-bottom 0
+
+@media (max-width: 767px)
+  .lw
+    .landing
+      height calc(100vh - 100px)
+      padding-bottom 55px
 
 @media (min-width: 768px)
   .lw

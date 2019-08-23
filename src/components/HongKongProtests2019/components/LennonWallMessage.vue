@@ -113,7 +113,7 @@ export default {
   .like
     width 25px
     height 25px
-    padding 2.5px
+    padding 5px
     img
       width 100%
       height 100%
