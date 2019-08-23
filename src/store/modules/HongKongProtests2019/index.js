@@ -89,8 +89,12 @@ export default {
       state.dataTimeline.push(...data)
     },
     INCREMENT_LIKE: (state, timestamp) => {
-      const index = state.spreadsheet.likes.findIndex(item => item.time === timestamp)
-      state.spreadsheet.likes[index].likeAmount++
+      const index = state.spreadsheet.likes.findIndex(item => item.time == timestamp)
+      if (index > -1) {
+        state.spreadsheet.likes[index].likeAmount++
+      } else {
+        state.spreadsheet.likes.push({ time: timestamp, likeAmount: 1 })
+      }
     },
     SET_LIKES: (state, { data }) => {
       const formatted = data
