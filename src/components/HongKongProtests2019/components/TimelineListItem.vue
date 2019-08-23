@@ -121,7 +121,7 @@ export default {
     color white
 
 .arrow
-  d = 40px
+  d = 32px
   width d
   height d
   border-right 10px solid white
