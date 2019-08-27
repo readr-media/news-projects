@@ -89,6 +89,9 @@
           <img src="/proj-assets/fact-check/logo/ithome.png" style="transform: scale(2);" alt="iThome">
         </picture>
         <picture>
+          <img src="/proj-assets/fact-check/logo/readr.svg" style="transform: scale(0.8);" alt="READr">
+        </picture>
+        <picture>
           <img src="/proj-assets/fact-check/logo/right-plus.svg" alt="Right Plus 多多益善研究站">
         </picture>
         <picture>
@@ -113,7 +116,7 @@
           <img src="/proj-assets/fact-check/logo/e-info.png" style="transform: scale(1.3);" alt="環境資訊中心">
         </picture>
         <picture>
-          <img src="/proj-assets/fact-check/logo/mirrormedia.svg" alt="鏡週刊">
+          <img src="/proj-assets/fact-check/logo/mirrormedia.svg" style="transform: scale(0.8);" alt="鏡週刊">
         </picture>
         <picture>
           <img src="/proj-assets/fact-check/logo/thenewslens-v2.png" alt="關鍵評論網">
