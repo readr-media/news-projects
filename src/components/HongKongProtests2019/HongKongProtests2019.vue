@@ -35,7 +35,7 @@ export default {
     const isTimeline = this.$route.params.params === 'timeline'
 
     let title = '連儂牆留言撐香港'
-    let description = '連儂牆源自於捷克，從樂團披頭四成員「約翰‧藍儂」風格的塗鴉演變成愛與和平的象徵。香港的連儂牆最早在雨傘運動出現，群眾用便利貼在留下互相打氣的字眼，在反送中運動時期更在香港大街小巷遍地開花。READr 打造了一座線上連儂牆，歡迎留下對港人想說的話。'
+    let description = '連儂牆源自於捷克，從樂團披頭四成員「約翰‧藍儂」風格的塗鴉演變成愛與和平的象徵。香港的連儂牆最早在雨傘運動出現，群眾用便利貼留下互相打氣的字眼，反送中運動時期更在香港大街小巷遍地開花。READr 打造了一座線上連儂牆，歡迎留下對港人想說的話。'
     let metaUrl = 'hong-kong-protests-2019/lennon-wall'
     let metaImage = 'hong-kong-protests-2019/og-lennon-wall.jpg'
 
