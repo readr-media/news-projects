@@ -89,6 +89,12 @@
           <img src="/proj-assets/fact-check/logo/ithome.png" style="transform: scale(2);" alt="iThome">
         </picture>
         <picture>
+          <img src="/proj-assets/fact-check/logo/right-plus.svg" alt="Right Plus 多多益善研究站">
+        </picture>
+        <picture>
+          <img src="/proj-assets/fact-check/logo/newsmarket.png" alt="上下游News&Market">
+        </picture>
+        <picture>
           <img src="/proj-assets/fact-check/logo/newslab.svg" style="transform: scale(1.4);" alt="公視 P# 新聞實驗室">
         </picture>
         <picture>
@@ -101,19 +107,22 @@
           <img src="/proj-assets/fact-check/logo/watchout.png" alt="沃草">
         </picture>
         <picture>
+          <img src="/proj-assets/fact-check/logo/cts.png" style="transform: scale(0.9);" alt="華視">
+        </picture>
+        <picture>
           <img src="/proj-assets/fact-check/logo/e-info.png" style="transform: scale(1.3);" alt="環境資訊中心">
         </picture>
         <picture>
           <img src="/proj-assets/fact-check/logo/mirrormedia.svg" alt="鏡週刊">
         </picture>
         <picture>
-          <img src="/proj-assets/fact-check/logo/thenewslens.png" alt="關鍵評論網">
+          <img src="/proj-assets/fact-check/logo/thenewslens-v2.png" alt="關鍵評論網">
         </picture>
       </div>
       <h3>查核協作單位</h3>
       <div class="cooperation__list media center">
         <picture>
-          <img src="/proj-assets/fact-check/logo/cna.svg" alt="中央社新聞學院">
+          <img src="/proj-assets/fact-check/logo/cna.png" style="transform: scale(0.9);" alt="中央社新聞學院">
         </picture>
         <picture>
           <img src="/proj-assets/fact-check/logo/smctw.svg" style="transform: scale(1.5);" alt="新興科技媒體中心">
