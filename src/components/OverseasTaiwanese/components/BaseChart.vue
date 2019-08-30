@@ -1,6 +1,6 @@
 <template>
   <figure :class="['article-chart', `${chart.id.includes('story') ? 'article-chart__story' : ''}`]" >
-    <img :src="`/proj-assets/img/chart/${chart.id}.png`" alt="">
+    <img :src="`/proj-assets/overseastaiwanese/img/chart/${chart.id}.png`" alt="">
     <figcaption v-html="chart.caption"></figcaption>
   </figure>
 </template>
