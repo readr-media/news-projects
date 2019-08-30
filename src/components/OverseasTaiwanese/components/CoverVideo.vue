@@ -1,13 +1,13 @@
 <template>
   <section class="cover">
-    <video src="/proj-assets/video/cover.mp4"
-      :poster="`/proj-assets/img/cover-${isLap ? 'lap' : 'mob'}.png`"
+    <video src="/proj-assets/overseastaiwanese/video/cover.mp4"
+      :poster="`/proj-assets/overseastaiwanese/img/cover-${isLap ? 'lap' : 'mob'}.png`"
       data-object-fit
       muted autoplay loop playsinline webkit-playsinline
     >
     </video>
-    <!-- <img src="/proj-assets/img/title.png" alt="海海人生：回流青年的告白" :class="[ !isLap ? 'big' : '', 'total-center']" > -->
-    <img src="/proj-assets/img/title.png" alt="海海人生：回流青年的告白" class="total-center" :style="{ width: isLap ? '41.7%' : '90.6%' }">
+    <!-- <img src="/proj-assets/overseastaiwanese/img/title.png" alt="海海人生：回流青年的告白" :class="[ !isLap ? 'big' : '', 'total-center']" > -->
+    <img src="/proj-assets/overseastaiwanese/img/title.png" alt="海海人生：回流青年的告白" class="total-center" :style="{ width: isLap ? '41.7%' : '90.6%' }">
   </section>
 </template>
 

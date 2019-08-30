@@ -1,7 +1,7 @@
 <template>
   <article class="video-story">
-    <!-- <div class="video-story__cover full-img" :style="{ backgroundImage: `url(/proj-assets/img/background/bg-black-${isLap ? 'lap' : 'mob'}.png)` }"> -->
-    <div class="video-story__cover full-img" :style="{ backgroundImage: `url(/proj-assets/img/background/bg-black-mob.png)` }">
+    <!-- <div class="video-story__cover full-img" :style="{ backgroundImage: `url(/proj-assets/overseastaiwanese/img/background/bg-black-${isLap ? 'lap' : 'mob'}.png)` }"> -->
+    <div class="video-story__cover full-img" :style="{ backgroundImage: `url(/proj-assets/overseastaiwanese/img/background/bg-black-mob.png)` }">
       <h2 class="total-center">「我為什麼回來臺灣？」<br>回流青年們的故事</h2>
     </div>
     <div class="video-story__content">

@@ -1,12 +1,12 @@
 <template>
   <div class="background-page background-page--one" ref="backgroundPage">
-    <div class="background-page__bg-img full-img" :style="{ backgroundImage: `url(/proj-assets/img/background/bg-${person.bgColor}-mob.png)` }"></div>
-    <img :src="`/proj-assets/img/person/person${person.id}-blur.png`" :alt="person.name"
+    <div class="background-page__bg-img full-img" :style="{ backgroundImage: `url(/proj-assets/overseastaiwanese/img/background/bg-${person.bgColor}-mob.png)` }"></div>
+    <img :src="`/proj-assets/overseastaiwanese/img/person/person${person.id}-blur.png`" :alt="person.name"
          :class="[`background-page__person--${person.bgColor}`, 'background-page__person']"
     >
     <!-- <transition name="clarify"> -->
     <transition name="fadeTitle">
-      <img :src="`/proj-assets/img/person/person${person.id}.png`" :alt="person.name"
+      <img :src="`/proj-assets/overseastaiwanese/img/person/person${person.id}.png`" :alt="person.name"
            v-if="isAnotherPage"
            :class="[`background-page__person--${person.bgColor}`, 'background-page__person']"
       >
