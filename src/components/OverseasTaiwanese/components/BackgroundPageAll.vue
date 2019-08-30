@@ -3,7 +3,7 @@
 
     <transition name="fadeBgImg">
       <div class="background-page__bg-img full-img"
-          :style="{ backgroundImage: `url(/proj-assets/img/background/bg-${bgColor}-lap.png)` }"
+          :style="{ backgroundImage: `url(/proj-assets/overseastaiwanese/img/background/bg-${bgColor}-lap.png)` }"
           :key="bgColor"
       ></div>
     </transition>
@@ -16,7 +16,7 @@
 
     <transition name="fadePerson">
       <div class="background-page__title-wrapper background-page__title-wrapper--person" :key="id" v-if="idx >= 1">
-        <img :src="`/proj-assets/img/person/person${id}.png`" :alt="name"
+        <img :src="`/proj-assets/overseastaiwanese/img/person/person${id}.png`" :alt="name"
              :class="[`background-page__person--${id}`, 'background-page__person']">
         <div class="background-page__title">{{ title }}</div>
       </div>
