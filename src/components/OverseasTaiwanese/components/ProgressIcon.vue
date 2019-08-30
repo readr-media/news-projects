@@ -61,7 +61,6 @@ export default {
     width 2px
     height 18px
     fill #4d4d4d
-  // &__yellow-circle
   // & polygon
   //   transition fill 0.2s
   & circle
@@ -69,9 +68,7 @@ export default {
     stroke #ffec2f
     stroke-miterlimit 10
     stroke-width 18.31px
-    // stroke-dasharray 258.8px
-    transition: stroke-dashoffset 0.5s
-    // stroke-dashoffset 258.8px
+    transition: stroke-dashoffset 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)
   &__shadow
     opacity 0.45
     mix-blend-mode multiply
