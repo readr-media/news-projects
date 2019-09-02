@@ -1,18 +1,6 @@
 <template>
   <article class="base-article">
     <slot></slot>
-    <!-- <h2>
-      <slot name="title"></slot>
-    </h2>
-    <div class="article__intro">
-      <slot name="intro"></slot>
-    </div>
-    <h3>
-      <slot name="subtitle"></slot>
-    </h3>
-    <div class="article__content">
-      <slot name="content"></slot>
-    </div> -->
   </article>
 </template>
 
@@ -31,8 +19,6 @@ export default {
   line-height 1.8
   margin-right auto
   margin-left auto
-  // padding 24px 15px 32px 15px
-  // padding 24px 15px
   padding 30px 15px
   @media (min-width $tab-breakpoint)
     font-size 2.0rem
@@ -43,7 +29,6 @@ export default {
   & h2
     font-size 2.4rem
     font-weight 300
-    // margin-bottom 15px
     line-height 1.4
     @media (min-width $tab-breakpoint)
       font-size 4.0rem

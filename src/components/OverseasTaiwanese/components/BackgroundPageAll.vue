@@ -21,6 +21,7 @@
         <div class="background-page__title">{{ title }}</div>
       </div>
     </transition>
+
   </div>
 </template>
 
@@ -63,8 +64,6 @@ export default {
         justify-content center
       &--person
         flex-direction column
-    // &__bg-img
-    //   transform translateX(0vw)
     &__person
       margin-top 92px
       margin-bottom 30px
@@ -85,15 +84,7 @@ export default {
   & h2
     text-shadow 0 2px 4px rgba(0, 0, 0, 0.5)
     color #f8e71c
-// .unfold
-//   &-enter-active, &-leave-active
-//     transition all 0.8s cubic-bezier(0.77, 0, 0.175, 1)
-//   &-enter
-//     transform translateX(-100vw)
-//   &-enter-to
-//     position absolute  
-//   &-leave-to
-//     opacity 0
+
 .fadeBgImg
   &-enter-active, &-leave-active
     transition opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1)

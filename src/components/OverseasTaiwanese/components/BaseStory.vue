@@ -1,24 +1,20 @@
 <template>
-  <!-- <article class="story" :id="`story${id}`"> -->
   <article class="base-story">
-    <!-- <div> -->
-      <h3>
-        <slot name="title"></slot>
-      </h3>
-      <div class="base-story__intro">
-        <slot name="intro"></slot>
-      </div>
-      <div class="base-story__content">
-        <slot name="content"></slot>
-      </div>
-    <!-- </div> -->
+    <h3>
+      <slot name="title"></slot>
+    </h3>
+    <div class="base-story__intro">
+      <slot name="intro"></slot>
+    </div>
+    <div class="base-story__content">
+      <slot name="content"></slot>
+    </div>
   </article>
 </template>
 
 <script>
 export default {
   name: 'BaseStory'
-  // props: ['id']
 }
 </script>
 

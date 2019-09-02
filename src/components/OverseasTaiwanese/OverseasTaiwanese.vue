@@ -1,8 +1,8 @@
 <template>
   <div>
     <main>
-      <CoverVideo :isLap="isLap" />
-      <ProgressIcon :length="progressL" @click.native="scrollToNext" />
+      <CoverVideo :isLapW="isLapW" />
+      <ProgressIcon :length="progressL" @[touchOrClick].native="scrollToNext" />
 
       <BaseArticle ref="opening">
         <p>「年輕人赴海外工作人數屢創新高」、「臺灣人才外流」、「青年低薪」等議題長期佔據媒體版面，在「出國工作」的風氣彷彿浪潮席捲年輕世代時，卻有一小群在國外有穩定工作的青年「回流」臺灣定居。對這些人來說，臺灣有什麼不可取代的吸引力？回國是為了什麼？回到臺灣的他們過得好嗎？是否後悔當初的決定？</p>
@@ -16,13 +16,14 @@
       </BaseArticle>
       
       <div ref="storyWrapper">
-        <BackgroundPageAll v-if="isLap" :persons="persons" :idx="bgPageAllIdx" ref="backgroundPageAll" :style="{ marginTop: bgPageAllMarginTop }" />
+        <BackgroundPageAll v-if="isLapW" :persons="persons" :idx="bgPageAllIdx" ref="backgroundPageAll" :style="{ marginTop: bgPageAllMarginTop }" />
 
-        <VideoStory v-if="isMob" ref="videoStory" />
-        <BaseStoryVideo v-if="isLap" ref="story0" />
+        <VideoStory v-if="isMobW" ref="videoStory" />
+        <BaseStoryVideo v-if="isLapW" ref="story0" />
 
-        <BackgroundPage v-if="isMob" :person="persons[1]" ref="backgroundPage1" />
-        <BaseStory ref="story1">
+        <!-- 若不加 key，多次變換頁面尺寸，BaseStory 就會亂掉 -->
+        <BackgroundPage v-if="isMobW" :person="persons[1]" ref="backgroundPage1" />
+        <BaseStory ref="story1" key="story1">
           <template #title>
             Ellen<br>地點：美國東岸、廈門、上海、香港
           </template>
@@ -43,8 +44,8 @@
           </template>
         </BaseStory>
 
-        <BackgroundPage v-if="isMob" :person="persons[2]" ref="backgroundPage2" />
-        <BaseStory ref="story2">
+        <BackgroundPage v-if="isMobW" :person="persons[2]" ref="backgroundPage2" />
+        <BaseStory ref="story2" key="story2">
           <template #title>
             蔡裕杰<br>地點：美國德州、美國波士頓
           </template>
@@ -64,8 +65,8 @@
           </template>
         </BaseStory>
 
-        <BackgroundPage v-if="isMob" :person="persons[3]" ref="backgroundPage3" />
-        <BaseStory ref="story3">
+        <BackgroundPage v-if="isMobW" :person="persons[3]" ref="backgroundPage3" />
+        <BaseStory ref="story3" key="story3">
           <template #title>
             曾鈺茜<br>地點：美國佛羅里達州
           </template>
@@ -89,8 +90,8 @@
           </template>
         </BaseStory>
 
-        <BackgroundPage v-if="isMob" :person="persons[4]" ref="backgroundPage4" />
-        <BaseStory ref="story4">
+        <BackgroundPage v-if="isMobW" :person="persons[4]" ref="backgroundPage4" />
+        <BaseStory ref="story4" key="story4">
           <template #title>
             張哲輔<br>地點：德國慕尼黑
           </template>
@@ -112,8 +113,8 @@
           </template>
         </BaseStory>
 
-        <BackgroundPage v-if="isMob" :person="persons[5]" ref="backgroundPage5" />
-        <BaseStory ref="story5">
+        <BackgroundPage v-if="isMobW" :person="persons[5]" ref="backgroundPage5" />
+        <BaseStory ref="story5" key="story5">
           <template #title>
             Sunny<br>地點：法國巴黎、英國倫敦、澳洲雪梨
           </template>
@@ -136,8 +137,8 @@
           </template>
         </BaseStory>
 
-        <BackgroundPage v-if="isMob" :person="persons[6]" ref="backgroundPage6" />
-        <BaseStory ref="story6">
+        <BackgroundPage v-if="isMobW" :person="persons[6]" ref="backgroundPage6" />
+        <BaseStory ref="story6" key="story6">
           <template #title>
             Jacy<br>地點：加拿大、香港
           </template>
@@ -197,21 +198,18 @@ import smoothscroll from 'smoothscroll-polyfill'
 if (typeof window !== 'undefined') {
   smoothscroll.polyfill();
 }
+import { debounce, checkMob } from './util/tool.js'
 
 import CoverVideo from './components/CoverVideo.vue'
 import ProgressIcon from './components/ProgressIcon.vue'
 import VideoStory from './components/VideoStory.vue'
 import BaseStoryVideo from './components/BaseStoryVideo.vue'
 import YouTube from './components/YouTube.vue'
-// import BackgroundPage from './components/BackgroundPage.vue'
-// import BackgroundPageAll from './components/BackgroundPageAll.vue'
 import BaseStory from './components/BaseStory.vue'
 import BaseChart from './components/BaseChart.vue'
 import StoryNotation from './components/StoryNotation.vue'
 import BaseArticle from './components/BaseArticle.vue'
 import TheFooter from './components/TheFooter.vue'
-
-// import OverseasTaiwaneseStoreModule from '../../store/modules/OverseasTaiwanese'
 
 // FT = fine tune = 微調
 const FT_OFFSET_TOP = 8
@@ -234,29 +232,33 @@ export default {
   },
   metaInfo () {
     return {
-      title: '',
-      description: '',
-      metaUrl: '',
-      metaImage: '',
+      title: '海海人生：「回流青年」的告白',
+      description: '根據行政院主計處最新公布的統計，2017 年一共有超過 70 萬名臺灣人在海外工作，超過 6 成是年齡低於 40 歲的青年。READr 透過問卷調查與個案採訪描繪「海漂青年」的輪廓，並專訪 7 位在國外工作後決定回到臺灣的「回流青年」，試圖理解他們選擇離開或歸鄉的原因，以及這個現象對於臺灣的影響。',
+      metaUrl: 'overseastaiwanese',
+      metaImage: 'overseastaiwanese/img/og.jpg',
       customScript: '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha256-gvEnj2axkqIj4wbYhPjbWV7zttgpzBVEgHub9AAZQD4=" crossorigin="anonymous" />'
     }
   },
-  // created () {
-  //   this.$store.registerModule('OverseasTaiwanese', OverseasTaiwaneseStoreModule)
-  // },
   beforeMount () {
     this.wEl = window
-    this.htmlEl = document.documentElement
+    // this.htmlEl = document.documentElement
     this.ww = this.wEl.innerWidth
-    this.wh = this.htmlEl.clientHeight
+    // this.wh = this.htmlEl.clientHeight
+    this.wh = this.wEl.innerHeight
     // this.ww = this.htmlEl.clientWidth
     this.beforeWw = this.ww
-    this.wEl.addEventListener('resize', this.alterWindowWidth)
   },
   mounted () {
+    this.lazyers = document.querySelectorAll('.lazyer')
     this.isMounted = true
+    this.wEl.addEventListener('scroll', debounce(this.lazyLoad, 50))
+    this.wEl.addEventListener('resize', debounce(this.lazyLoad, 50))
+    this.wEl.addEventListener('orientationChange', debounce(this.lazyLoad, 50))
+
     this.wEl.addEventListener('scroll', this.doProgresses)
-    if (this.isLap) {
+    this.wEl.addEventListener('resize', debounce(this.alterWindowWidth, 300))
+    this.wEl.addEventListener('orientationChange', debounce(this.alterWindowWidth, 300))
+    if (this.isLapW) {
       this.wEl.addEventListener('scroll', this.controlBackgroundPageAll)
     } else {
       this.wEl.addEventListener('scroll', this.fixedBackgroundPages)
@@ -268,7 +270,7 @@ export default {
       wh: 0,
       beforeWw: 0,
       wEl: null,
-      htmlEl: null,
+      // htmlEl: null,
       isMounted: false,
       bgPageAllIdx: 0,
       bgPageAllMarginTop: 0,
@@ -276,6 +278,8 @@ export default {
       clickFreq: 0,
       isStopProgress: false,
       isStopFixedBgPage: false,
+      checkMob: checkMob(),
+      lazyers: [],
       persons: [
         {
           id: 0,
@@ -324,59 +328,81 @@ export default {
         opening: [
           {
             id: 'opening1',
-            caption: '資料來源：行政院主計總處'
+            caption: '資料來源：行政院主計總處',
+            isLazy: false,
+            aspectRatio: 604 / 800
           },
           {
             id: 'opening2',
-            caption: '資料來源：行政院主計總處<br>註：東南亞包括汶萊、緬甸、柬埔寨、印尼、寮國、馬來西亞、菲律賓、新加坡、泰國、越南。'
+            caption: '資料來源：行政院主計總處<br>註：東南亞包括汶萊、緬甸、柬埔寨、印尼、寮國、馬來西亞、菲律賓、新加坡、泰國、越南。',
+            isLazy: true,
+            aspectRatio: 764 / 800
           }
         ],
         story1: [
           {
             id: 'story1-1',
-            caption: '高達一半以上的受訪者對於「回臺」沒有明確時間表。完全不打算回臺者僅佔 18.6% ，顯示大部分的人對於回臺與否仍有討論空間。原始問題為：計畫從現在開始的幾年之後回臺灣定居？選項為「 1 年以內」、「1-3 年間」等時間區段，以及「不打算回台定居」、「還不知道」、「走一步算一步」共 9 個選項。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。'
+            caption: '高達一半以上的受訪者對於「回臺」沒有明確時間表。完全不打算回臺者僅佔 18.6% ，顯示大部分的人對於回臺與否仍有討論空間。原始問題為：計畫從現在開始的幾年之後回臺灣定居？選項為「 1 年以內」、「1-3 年間」等時間區段，以及「不打算回台定居」、「還不知道」、「走一步算一步」共 9 個選項。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。',
+            isLazy: true,
+            aspectRatio: 435 / 800
           }
         ],
         story2: [
           {
             id: 'story2-1',
-            caption: '在國外工作，有海外高等教育學歷是必要的嗎？從問卷結果來看，在亞洲工作比較不需要。且從行業別來看，特別在設計／藝術相關、教育／學術研究、金融領域有超過 6 成有海外學歷。原始問題為：您是否有海外高等教育學歷？選項為「無」、「有海外碩士學位」、「有海外學士學位」等 4 個選項，並依照填答者的所在位置進行統計。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。'
+            caption: '在國外工作，有海外高等教育學歷是必要的嗎？從問卷結果來看，在亞洲工作比較不需要。且從行業別來看，特別在設計／藝術相關、教育／學術研究、金融領域有超過 6 成有海外學歷。原始問題為：您是否有海外高等教育學歷？選項為「無」、「有海外碩士學位」、「有海外學士學位」等 4 個選項，並依照填答者的所在位置進行統計。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。',
+            isLazy: true,
+            aspectRatio: 735 / 800
           },
           {
             id: 'story2-2',
-            caption: '以推拉理論而言，臺灣職場的推力與國外就業的拉力是一體兩面的。原始問題為：為什麼想離開臺灣到海外工作？此為多選題，填答者可在「覺得在臺灣工作發展有限」、「薪水太低」、「工時、福利不佳」等 6 個選項中選 2 項；以及：吸引您到海外就業的原因？同樣為多選題，填答者可在「薪資條件好」、「工時、福利比臺灣好」、「想成為國際化人才」等 13 個選項中選 4 項。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。'
+            caption: '以推拉理論而言，臺灣職場的推力與國外就業的拉力是一體兩面的。原始問題為：為什麼想離開臺灣到海外工作？此為多選題，填答者可在「覺得在臺灣工作發展有限」、「薪水太低」、「工時、福利不佳」等 6 個選項中選 2 項；以及：吸引您到海外就業的原因？同樣為多選題，填答者可在「薪資條件好」、「工時、福利比臺灣好」、「想成為國際化人才」等 13 個選項中選 4 項。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。',
+            isLazy: true,
+            aspectRatio: 646 / 800
           }
         ],
         story3: [
           {
             id: 'story3-1',
-            caption: '在問卷列出的 8 個選項中，「想念臺灣親友」是多數海外臺灣人難以克服的關卡，對於在非母語國家討生活的臺灣人來說，「語言隔閡」是無可避免的難題。而在幾乎沒有語言隔閡的中國，「職場行事風格差異」則為最大障礙。問卷原始問題為：您在海外生活時，覺得最難克服的障礙？此為多選題，填答者在想念臺灣親友、語言隔閡、職場行事風格差異等 10 個選項，最多可選 3 項。統計時依照受訪者填答的工作區域進行分類。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。'
+            caption: '在問卷列出的 8 個選項中，「想念臺灣親友」是多數海外臺灣人難以克服的關卡，對於在非母語國家討生活的臺灣人來說，「語言隔閡」是無可避免的難題。而在幾乎沒有語言隔閡的中國，「職場行事風格差異」則為最大障礙。問卷原始問題為：您在海外生活時，覺得最難克服的障礙？此為多選題，填答者在想念臺灣親友、語言隔閡、職場行事風格差異等 10 個選項，最多可選 3 項。統計時依照受訪者填答的工作區域進行分類。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。',
+            isLazy: true,
+            aspectRatio: 615 / 800
           },
           {
             id: 'story3-2',
-            caption: '在 16 個選項至多選 5 項的多選題中，「想陪伴家人」和「臺灣有更好的工作機會」是讓人想回臺的兩大原因，遠遠高出第三名選項「自身健康出問題」。原始問題為：在什麼情況下會考慮回臺灣定居？此為多選題，填答者在想多陪伴在臺灣的家人朋友、臺灣有更好的工作機會、自身健康出問題等 17 個選項中可選 5 項。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。'
+            caption: '在 16 個選項至多選 5 項的多選題中，「想陪伴家人」和「臺灣有更好的工作機會」是讓人想回臺的兩大原因，遠遠高出第三名選項「自身健康出問題」。原始問題為：在什麼情況下會考慮回臺灣定居？此為多選題，填答者在想多陪伴在臺灣的家人朋友、臺灣有更好的工作機會、自身健康出問題等 17 個選項中可選 5 項。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。',
+            isLazy: true,
+            aspectRatio: 642 / 800
           },
         ],
         story4: [
           {
             id: 'story4-1',
-            caption: '在不同地區工作的臺灣人，停留在當地的時間長短也有所不同。在亞洲地區工作者， 69% 在 5 年之內會離開該國或地區，停留 5 年以上者佔 31%。在大洋洲、北美洲、歐洲工作的臺灣人，留在當地 5 年以上的比例則佔 47.8% 。原始問題為：包含求學和工作，至今累計在海外生活多久了？選項是「未滿 1 年」、「1 - 3 年」等 6 個時間區段。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。'
+            caption: '在不同地區工作的臺灣人，停留在當地的時間長短也有所不同。在亞洲地區工作者， 69% 在 5 年之內會離開該國或地區，停留 5 年以上者佔 31%。在大洋洲、北美洲、歐洲工作的臺灣人，留在當地 5 年以上的比例則佔 47.8% 。原始問題為：包含求學和工作，至今累計在海外生活多久了？選項是「未滿 1 年」、「1 - 3 年」等 6 個時間區段。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。',
+            isLazy: true,
+            aspectRatio: 315 / 800
           }
         ],
         story5: [
           {
             id: 'story5-1',
-            caption: '70% 以上的受訪者有從臺灣移民到他國的意願。原始問題為：有考慮過移民海外嗎？原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。'
+            caption: '70% 以上的受訪者有從臺灣移民到他國的意願。原始問題為：有考慮過移民海外嗎？原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。',
+            isLazy: true,
+            aspectRatio: 697 / 800
           },
           {
             id: 'story5-2',
-            caption: '598 名問卷受訪者表示有移民意願，當中「追求更好的生活品質」是這些人想移民的主因。「擔心臺灣政治情勢發展」則位居想移民原因的第三位。原始問題為：考慮過移民的原因？此為多選題，填答者在追求更好的生活品質、想讓下一代在比臺灣更好的環境中成長、擔心臺灣政治情勢發展等 5 個選項中選 2 項。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。'
+            caption: '598 名問卷受訪者表示有移民意願，當中「追求更好的生活品質」是這些人想移民的主因。「擔心臺灣政治情勢發展」則位居想移民原因的第三位。原始問題為：考慮過移民的原因？此為多選題，填答者在追求更好的生活品質、想讓下一代在比臺灣更好的環境中成長、擔心臺灣政治情勢發展等 5 個選項中選 2 項。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。',
+            isLazy: true,
+            aspectRatio: 783 / 800
           }
         ],
         story6: [
           {
             id: 'story6-1',
-            caption: '從問卷結果顯示，回答「海外年薪變多」的受訪者約佔 7 成，其中從事科技業、設計／藝術相關行業的受訪者，薪水漲幅最明顯。原始問題為：您從事的行業為？選項參考人力銀行共 10 個行業類別（包含其他），再根據填答者的答案進行統整。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。'
+            caption: '從問卷結果顯示，回答「海外年薪變多」的受訪者約佔 7 成，其中從事科技業、設計／藝術相關行業的受訪者，薪水漲幅最明顯。原始問題為：您從事的行業為？選項參考人力銀行共 10 個行業類別（包含其他），再根據填答者的答案進行統整。原始問卷及填答結果請見<a href="https://docs.google.com/spreadsheets/d/15JW6MXzGGU-EzLAS6OQg490QAVyb7Buqf1pjovRxIVw/edit" target="_blank">連結</a>。',
+            isLazy: true,
+            aspectRatio: 511 / 800
           }
         ]
       },
@@ -415,26 +441,30 @@ export default {
     }
   },
   computed: {
-    isMob () {
+    isMobW () {
       return this.isMounted && this.ww <= 767.98
     },
-    isLap () {
+    isLapW () {
       return this.isMounted && this.ww >= 768
     },
     headerH () {
       return this.ww <= 768 ? 40 : 50
+    },
+    touchOrClick () {
+      return this.checkMob ? 'touchstart' : 'click'
     }
   },
   methods: {
     alterWindowWidth () {
-      // todo: debounce
       this.ww = this.wEl.innerWidth
-      this.wh = this.htmlEl.clientHeight
+      this.wh = this.wEl.innerHeight
+      // this.wh = this.htmlEl.clientHeight
+      this.checkMob = checkMob()
       // this.ww = this.htmlEl.clientWidth
-      if (this.isLap && this.beforeWw <= 767.98) {
+      if (this.isLapW && this.beforeWw <= 767.98) {
         this.wEl.addEventListener('scroll', this.controlBackgroundPageAll)
         this.wEl.removeEventListener('scroll', this.fixedBackgroundPages)
-      } else if (!this.isLap && this.beforeWw >= 768) {
+      } else if (!this.isLapW && this.beforeWw >= 768) {
         this.wEl.addEventListener('scroll', this.fixedBackgroundPages)
         this.wEl.removeEventListener('scroll', this.controlBackgroundPageAll)
       }
@@ -450,17 +480,18 @@ export default {
     // todo this.isStopFixedBgPage
     fixedBackgroundPage (before, after, fixed) {
       if (!this.$refs[before] || !this.$refs[fixed] || this.isStopFixedBgPage) return
-      // console.log(fixed)
+
       const beforeEl = this.$refs[before].$el
       const afterElT = this.$refs[after].$el.offsetTop
       const backgroundPage = this.$refs[fixed].$el
       const scrollH = this.wEl.pageYOffset
       const beforeElB = beforeEl.offsetTop + beforeEl.offsetHeight
-      // const afterElT = afterEl.offsetTop
+
       if ((scrollH >= (beforeElB - FT_OFFSET_TOP)) && scrollH < afterElT) {
         backgroundPage.classList.add('fixed')
         this.isStopFixedBgPage = true
-      } else if (backgroundPage.classList.contains('fixed')) {
+      // } else if (backgroundPage.classList.contains('fixed')) {
+      } else {
         backgroundPage.classList.remove('fixed')
       }
     },
@@ -472,14 +503,16 @@ export default {
       this.switchBackgroundPageAll('story6', '', 6)
     },
     // todo this.isStopFixedBgPageAll
+    // todo 停在中間重整後，若不滑動，圖片不會出現
     fixedBackgroundPageAll () {
       if (!this.$refs.backgroundPageAll) return
+
       const opening = this.$refs.opening.$el
       const finalT = this.$refs.final.$el.offsetTop
       const backgroundPageAll = this.$refs.backgroundPageAll.$el
       const scrollH = this.wEl.pageYOffset
       const openingB = opening.offsetTop + opening.offsetHeight
-      // const finalT = final.offsetTop
+
       if (scrollH >= openingB && scrollH < (finalT - this.wh)) {
         backgroundPageAll.classList.add('fixed')
         this.bgPageAllMarginTop = 0
@@ -495,6 +528,7 @@ export default {
       const scrollH = this.wEl.pageYOffset
       const beforeEl = this.$refs[before].$el
       const beforeElT = beforeEl.offsetTop
+
       if (after) {
         const afterEl = this.$refs[after].$el
         const afterElT = afterEl.offsetTop
@@ -510,7 +544,7 @@ export default {
     doProgresses () {
       this.isStopProgress = false
       this.doProgress0()
-      if (this.isMob) {
+      if (this.isMobW) {
         this.doProgress('videoStory', 'story1', 1)
       } else {
         this.doProgress('story0', 'story1', 1)
@@ -531,8 +565,8 @@ export default {
       const beforeElT = this.$refs[before].$el.offsetTop
       const afterElT = this.$refs[after].$el.offsetTop
 
-      const beforeMinus = (this.isLap || part === 1 || part === 8) ? 0 : this.wh * 2
-      const afterMinus = (this.isLap || part === 7 || part === 8) ? 0 : this.wh * 2
+      const beforeMinus = (this.isLapW || part === 1 || part === 8) ? 0 : this.wh * 2
+      const afterMinus = (this.isLapW || part === 7 || part === 8) ? 0 : this.wh * 2
 
       if ((scrollH >= (beforeElT - beforeMinus - FT_OFFSET_TOP)) && (scrollH < (afterElT - afterMinus - FT_OFFSET_TOP - (part === 8 ? this.wh : 0)))) {
         this.progressL = 28.76 * part
@@ -542,8 +576,10 @@ export default {
     },
     doProgress0 () {
       if (this.isStopProgress) return
+
       const scrollH = this.wEl.pageYOffset
-      const afterElT = this.$refs[this.isMob ? 'videoStory' : 'story0'].$el.offsetTop
+      const afterElT = this.$refs[this.isMobW ? 'videoStory' : 'story0'].$el.offsetTop
+
       if (scrollH < (afterElT - FT_OFFSET_TOP)) {
         this.progressL = 0
         this.clickFreq = 0
@@ -552,8 +588,10 @@ export default {
     },
     doProgress9 () {
       if (this.isStopProgress) return
+
       const scrollH = this.wEl.pageYOffset
       const beforeElT = this.$refs.footer.$el.offsetTop
+
       if (scrollH >= (beforeElT - this.wh)) {
         this.progressL = 258.87
         this.clickFreq = 9
@@ -563,27 +601,28 @@ export default {
     scrollToNext () {
       this.clickFreq += 1
       const order = this.clickFreq % 10
+      
       switch (order) {
         case 1:
-          this.$refs[this.isMob ? 'videoStory' : 'story0'].$el.scrollIntoView({ behavior: 'smooth' })
+          this.$refs[this.isMobW ? 'videoStory' : 'story0'].$el.scrollIntoView({ behavior: 'smooth' })
           break
         case 2:
-          this.$refs[this.isMob ? 'backgroundPage1' : 'story1'].$el.scrollIntoView({ behavior: 'smooth' })
+          this.$refs[this.isMobW ? 'backgroundPage1' : 'story1'].$el.scrollIntoView({ behavior: 'smooth' })
           break
         case 3:
-          this.$refs[this.isMob ? 'backgroundPage2' : 'story2'].$el.scrollIntoView({ behavior: 'smooth' })
+          this.$refs[this.isMobW ? 'backgroundPage2' : 'story2'].$el.scrollIntoView({ behavior: 'smooth' })
           break
         case 4:
-          this.$refs[this.isMob ? 'backgroundPage3' : 'story3'].$el.scrollIntoView({ behavior: 'smooth' })
+          this.$refs[this.isMobW ? 'backgroundPage3' : 'story3'].$el.scrollIntoView({ behavior: 'smooth' })
           break
         case 5:
-          this.$refs[this.isMob ? 'backgroundPage4' : 'story4'].$el.scrollIntoView({ behavior: 'smooth' })
+          this.$refs[this.isMobW ? 'backgroundPage4' : 'story4'].$el.scrollIntoView({ behavior: 'smooth' })
           break
         case 6:
-          this.$refs[this.isMob ? 'backgroundPage5' : 'story5'].$el.scrollIntoView({ behavior: 'smooth' })
+          this.$refs[this.isMobW ? 'backgroundPage5' : 'story5'].$el.scrollIntoView({ behavior: 'smooth' })
           break
         case 7:
-          this.$refs[this.isMob ? 'backgroundPage6' : 'story6'].$el.scrollIntoView({ behavior: 'smooth' })
+          this.$refs[this.isMobW ? 'backgroundPage6' : 'story6'].$el.scrollIntoView({ behavior: 'smooth' })
           break
         case 8:
           this.$refs.final.$el.scrollIntoView({ behavior: 'smooth' })
@@ -595,6 +634,20 @@ export default {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' })
           break
       }
+    },
+    lazyLoad () {
+      if (this.lazyers.length === 0) return
+      const scrollH = this.wEl.pageYOffset
+      Array.prototype.forEach.call(this.lazyers, (lazyer, idx) => {
+        if (lazyer.offsetTop < (scrollH + this.wh * 1.5)) {
+          const img = lazyer.firstElementChild
+          img.src = img.dataset.src
+          lazyer.classList.remove('lazyer')
+          if (idx === (this.lazyers.length - 1)) {
+            this.lazyers = []
+          }
+        }
+      })
     }
   }
 }

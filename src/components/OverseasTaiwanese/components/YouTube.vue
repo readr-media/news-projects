@@ -1,5 +1,9 @@
 <template>
   <div id="youtube" class="youtube">
+    <!-- 
+      https://github.com/yeefun/yeefun.github.io/blob/master/udn-new-media/farewell-to-lin/src/index/App.vue
+      https://developers.google.com/youtube/iframe_api_reference
+     -->
     <p>YouTube</p>
   </div>
 </template>
@@ -14,9 +18,4 @@ export default {
 .youtube
   width 100%
   border 1px solid #000
-  // height 100vh
-  // font-size 3.2rem
-  // display flex
-  // justify-content center
-  // align-items center
 </style>
