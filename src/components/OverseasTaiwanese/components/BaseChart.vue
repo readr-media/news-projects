@@ -32,18 +32,6 @@ export default {
   font-size 1.2rem
   line-height 1.8
   font-weight 300
-  // background-color #4d4d4d
-  // background-image linear-gradient(to right, #fafafa 8%, #f4f4f4 38%, #fafafa 54%)
-  // background-size 850px 832px
-  // animation shimmer 1.8s linear infinite forwards
-  // @keyframes shimmer {
-  //   0% {
-  //     background-position -425px 0
-  //   }
-  //   100% {
-  //     background-position 425px 0
-  //   }
-  // }
   &--story
     margin-left -25px
     margin-right -25px

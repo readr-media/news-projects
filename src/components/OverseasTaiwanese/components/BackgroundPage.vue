@@ -5,13 +5,13 @@
          :class="[`background-page__person--${person.bgColor}`, 'background-page__person']"
     >
 
-    <transition name="fadeTitle">
+    <transition name="fadeBgTitle">
       <img :src="`/proj-assets/overseastaiwanese/img/person/person${person.id}.png`" :alt="person.name"
            v-show="isAnotherPage"
            :class="[`background-page__person--${person.bgColor}`, 'background-page__person']"
       >
     </transition>
-    <transition name="fadeTitle">
+    <transition name="fadeBgTitle">
       <div class="background-page__title" v-if="isAnotherPage">{{ person.title }}</div>
     </transition>
   </div>
@@ -20,19 +20,14 @@
 <script>
 export default {
   name: 'BackgroundPage',
-  props: ['person'],
+  props: ['person', 'wEl'],
   data () {
     return {
       isAnotherPage: false
     }
   },
-  beforeMount () {
+  mounted () {
     this.wEl.addEventListener('scroll', this.clarifyBackgroundPage)
-  },
-  computed: {
-    wEl () {
-      return this.$parent.wEl
-    }
   },
   methods: {
     clarifyBackgroundPage () {
@@ -68,7 +63,7 @@ export default {
     line-height 1.2
     width 225px
 
-.fadeTitle
+.fadeBgTitle
   &-enter-active
     transition opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1)
   &-enter

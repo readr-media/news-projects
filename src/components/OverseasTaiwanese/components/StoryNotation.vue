@@ -1,5 +1,5 @@
 <template>
-  <abbr :title="notation" class="story-notation">
+  <abbr :title="notation.txt" class="story-notation">
     <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" :class="notation.color" @click="toggleNotation">
       <g transform="translate(2, 2)">
         <circle stroke-width="4" fill="#fff" cx="20" cy="20" r="20"></circle>
@@ -41,11 +41,12 @@ export default {
     position relative
     top 2px
     width 14px
-    height auto
+    height 14px
     cursor: pointer
     @media (min-width $tab-breakpoint)
       top 4px
       width 20px
+      height 20px
     &.green
       & circle
         stroke #4f7e7a
