@@ -27,6 +27,7 @@ const apiParamsCatalog = {
 }
 
 const apiUrlDonate = 'https://www.readr.tw/api/donate'
+const apiUrlDonateDev = 'http://dev.readr.tw/api/donate'
 const apiParamsDonate = {
   object_type: 5
 }
@@ -114,6 +115,8 @@ export default {
         invoiceItem
       } = donateData
 
+      const projectId = await this.fetchProjectId()
+
       const params = {
         ...apiParamsDonate,
         currency: points,
@@ -121,9 +124,14 @@ export default {
         member_name,
         member_phone,
         member_mail,
-        invoiceItem
+        invoiceItem,
+        object_id: projectId,
+        reason: location && location.pathname
       }
-      return await axios.post(apiUrlDonate, params)
+
+      const isDev = location && (location.host.includes('dev') || location.host.includes('localhost'))
+      const urlDonate = isDev ? apiUrlDonateDev : apiUrlDonate
+      return await axios.post(urlDonate, params)
     },
     async handleSubmitDonate({ donateData }) {
       try {
