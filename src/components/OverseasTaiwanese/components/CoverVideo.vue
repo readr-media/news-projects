@@ -8,7 +8,9 @@
     >
     </video>
 
-    <img src="/proj-assets/overseastaiwanese/img/title.png" alt="海海人生：回流青年的告白" class="total-center" :style="{ width: isLapW ? '41.7%' : '90.6%' }">
+    <transition name="fadeCoverTitle">
+      <img src="/proj-assets/overseastaiwanese/img/title.png" alt="海海人生：回流青年的告白" class="total-center" v-if="isMounted" :style="{ width: isLapW ? '41.7%' : '90.6%' }">
+    </transition>
 
   </section>
 </template>
@@ -18,7 +20,15 @@ import '../util/objectFitPolyfill.basic.min'
 
 export default {
   name: 'CoverVideo',
-  props: ['isLapW']
+  props: ['isLapW'],
+  data () {
+    return {
+      isMounted: false
+    }
+  },
+  mounted () {
+    this.isMounted = true
+  }
 }
 </script>
 
@@ -34,4 +44,10 @@ export default {
     width 100%
     height 100%
     object-fit cover
+
+.fadeCoverTitle
+  &-enter
+    opacity 0
+  &-enter-active
+    transition opacity 1.6s ease-out
 </style>

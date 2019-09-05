@@ -1,8 +1,32 @@
+'use strict'
+
 function debounce(fn, wait) {
   let timer
   return () => {
     clearTimeout(timer)
     timer = setTimeout(fn, wait)
+  }
+}
+
+function throttle(fn, wait, musrRun, needName, arr, name) {
+  let timer
+  let startTime = new Date()
+  const coreFn = () => {
+    let currentTime = new Date()
+    clearTimeout(timer)
+    if (currentTime - startTime >= musrRun) {
+      fn()
+      startTime = currentTime
+    } else {
+      timer = setTimeout(fn, wait)
+    }
+  }
+  if (needName) {
+    return arr[name] = () => {
+      coreFn()
+    }
+  } else {
+    return coreFn
   }
 }
 
@@ -18,5 +42,6 @@ function checkMob() {
 
 module.exports = {
   debounce,
+  throttle,
   checkMob
 }

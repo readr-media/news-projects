@@ -73,14 +73,17 @@ export default {
         margin-top 100px
         margin-bottom 20px
     &__title
-      width 78.125%
-      font-size 3.0rem
+      // width 78.125%
+      width 80%
+      // font-size 3.0rem
+      font-size 2.4rem
       font-weight 500
       text-align center
       line-height normal
       @media (min-width $lap-breakpoint)
-        width 82.86%
-        font-size 4.0rem
+        // width 82.86%
+        width 84%
+        font-size 3.6rem
   & h2
     text-shadow 0 2px 4px rgba(0, 0, 0, 0.5)
     color #f8e71c
@@ -88,12 +91,10 @@ export default {
 .fadeBgImg
   &-enter-active, &-leave-active
     transition opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1)
-  &-enter
+  &-enter, &-leave-to
     opacity 0
   &-enter-to
     position absolute  
-  &-leave-to
-    opacity 0
 
 .fadePerson
   &-enter-active
