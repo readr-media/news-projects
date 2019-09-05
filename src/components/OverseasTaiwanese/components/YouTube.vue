@@ -18,12 +18,6 @@ export default {
     this.isMounted = true
   },
   computed: {
-    // wh () {
-    //   return this.$parent.$parent.wh
-    // },
-    // isMobW () {
-    //   return this.$parent.$parent.isMobW
-    // },
     youtubeH () {
       if (!this.isMounted) return 0
       const youtubeEl = this.$refs.youtube

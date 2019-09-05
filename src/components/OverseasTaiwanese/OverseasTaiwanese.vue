@@ -202,10 +202,6 @@ if (typeof window !== 'undefined') {
 import { debounce, throttle, checkMob } from './util/tool.js'
 
 import CoverVideo from './components/CoverVideo.vue'
-// import ProgressIcon from './components/ProgressIcon.vue'
-// import TitleAnchor from './components/TitleAnchor.vue'
-// import VideoStory from './components/VideoStory.vue'
-// import BaseStoryVideo from './components/BaseStoryVideo.vue'
 import BaseStory from './components/BaseStory.vue'
 import BaseChart from './components/BaseChart.vue'
 import StoryNotation from './components/StoryNotation.vue'
@@ -251,9 +247,9 @@ export default {
   mounted () {
     this.lazyers = document.querySelectorAll('.lazyer')
     this.isMounted = true
-    this.wEl.addEventListener('scroll', debounce(this.lazyLoad, 50))
-    this.wEl.addEventListener('resize', debounce(this.lazyLoad, 50))
-    this.wEl.addEventListener('orientationChange', debounce(this.lazyLoad, 50))
+    this.wEl.addEventListener('scroll', throttle(this.lazyLoad, 250, 500, true, this.throttleFn, 'lazyLoad1'))
+    this.wEl.addEventListener('resize', throttle(this.lazyLoad, 250, 500, true, this.throttleFn, 'lazyLoad2'))
+    this.wEl.addEventListener('orientationChange', throttle(this.lazyLoad, 250, 500, true, this.throttleFn, 'lazyLoad3'))
 
     this.wEl.addEventListener('resize', debounce(this.alterWindowWidth, 300))
     this.wEl.addEventListener('orientationChange', debounce(this.alterWindowWidth, 300))
@@ -275,7 +271,6 @@ export default {
       wh: 0,
       beforeWw: 0,
       wEl: null,
-      // htmlEl: null,
       isMounted: false,
       bgPageAllIdx: 0,
       bgPageAllMarginTop: 0,
@@ -288,7 +283,6 @@ export default {
       checkMob: checkMob(),
       activeAnchorIdx: -1,
       throttleFn: {},
-      // isScroll: false,
       lazyers: [],
       persons: [
         {
@@ -458,13 +452,10 @@ export default {
       return this.isMounted && this.ww >= 768
     },
     isLapLargeW () {
-      // todo recover
       return this.isMounted && this.ww >= 1200
-      // return this.isMounted && this.ww >= 1024
     },
     isNotLapLargeW () {
       return this.isMounted && this.ww <= 1199.98
-      // return this.isMounted && this.ww <= 1023.98
     },
     headerH () {
       return this.ww <= 768 ? 40 : 50
@@ -477,9 +468,8 @@ export default {
     alterWindowWidth () {
       this.ww = this.wEl.innerWidth
       this.wh = this.wEl.innerHeight
-      // this.wh = this.htmlEl.clientHeight
       this.checkMob = checkMob()
-      // this.ww = this.htmlEl.clientWidth
+
       if (this.isLapW && this.beforeWw <= 767.98) {
         this.wEl.addEventListener('scroll', this.controlBackgroundPageAll)
         this.wEl.removeEventListener('scroll', this.fixedBackgroundPages)
@@ -488,12 +478,10 @@ export default {
         this.wEl.removeEventListener('scroll', this.controlBackgroundPageAll)
       }
       if (this.isLapLargeW && this.beforeWw <= 1199.98) {
-      // if (this.isLapLargeW && this.beforeWw <= 1023.98) {
-        this.wEl.addEventListener('scroll', throttle(this.stretchAnchors, 500, 1000, true, this.throttleFn, 'stretchAnchors'))
+        this.wEl.addEventListener('scroll', throttle(this.stretchAnchors, 250, 500, true, this.throttleFn, 'stretchAnchors'))
         this.wEl.removeEventListener('scroll', this.throttleFn['doProgresses'])
       } else if (this.isNotLapLargeW && this.beforeWw >= 1200) {
-      // } else if (this.isNotLapLargeW && this.beforeWw >= 1024) {
-        this.wEl.addEventListener('scroll', throttle(this.doProgresses, 500, 1000, true, this.throttleFn, 'doProgresses'))
+        this.wEl.addEventListener('scroll', throttle(this.doProgresses, 250, 500, true, this.throttleFn, 'doProgresses'))
         this.wEl.removeEventListener('scroll', this.throttleFn['stretchAnchors'])
       }
       this.beforeWw = this.ww
@@ -682,7 +670,6 @@ export default {
       }
     },
     lazyLoad () {
-      if (this.lazyers.length === 0) return
       const scrollH = this.wEl.pageYOffset
       Array.prototype.forEach.call(this.lazyers, (lazyer, idx) => {
         if (lazyer.offsetTop < (scrollH + this.wh * 1.5)) {
@@ -690,7 +677,9 @@ export default {
           img.src = img.dataset.src
           lazyer.classList.remove('lazyer')
           if (idx === (this.lazyers.length - 1)) {
-            this.lazyers = []
+            this.wEl.removeEventListener('scroll', this.throttleFn['lazyLoad1'])
+            this.wEl.removeEventListener('resize', this.throttleFn['lazyLoad2'])
+            this.wEl.removeEventListener('orientationChange', this.throttleFn['lazyLoad3'])
           }
         }
       })

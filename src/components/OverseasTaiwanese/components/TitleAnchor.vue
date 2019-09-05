@@ -66,10 +66,6 @@ export default {
       this.isHover = !this.isHover
       Vue.set(this.isTitles, idx, !this.isTitles[idx])
     },
-    // hideTitle (evt, idx) {
-    //   this.isHover = false
-    //   Vue.set(this.isTitles, idx, false)
-    // },
     scrollToTitle (idx) {
       switch (idx) {
         case 0:
@@ -100,7 +96,6 @@ export default {
     flex-direction column
     cursor pointer
     align-items flex-end
-    // transition transform 0.2s
     &.hover, &.active
       & .title-anchor
         &__line

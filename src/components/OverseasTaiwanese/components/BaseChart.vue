@@ -54,8 +54,6 @@ export default {
     top 0
     left 0
     max-width 100%
-    // display block
-    // width 100%
   & figcaption
     padding 15px 25px
     background-color #4d4d4d

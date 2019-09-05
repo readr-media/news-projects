@@ -73,15 +73,12 @@ export default {
         margin-top 100px
         margin-bottom 20px
     &__title
-      // width 78.125%
       width 80%
-      // font-size 3.0rem
       font-size 2.4rem
       font-weight 500
       text-align center
       line-height normal
       @media (min-width $lap-breakpoint)
-        // width 82.86%
         width 84%
         font-size 3.6rem
   & h2
