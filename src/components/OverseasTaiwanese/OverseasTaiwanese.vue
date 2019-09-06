@@ -236,6 +236,48 @@ export default {
       customScript: '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha256-gvEnj2axkqIj4wbYhPjbWV7zttgpzBVEgHub9AAZQD4=" crossorigin="anonymous" />'
     }
   },
+  created () {
+    const unwatch = this.$watch('activeAnchorIdx', (val) => {
+      if (val > this.maxAnchorIdx) {
+        this.maxAnchorIdx = val
+        switch (this.maxAnchorIdx) {
+          case 0:
+            window.ga('send', 'event', 'projects', 'scroll', '愈來愈多臺灣青年出國工作', 1)
+            break
+          case 1:
+            window.ga('send', 'event', 'projects', 'scroll', '陳蔚宣', 2)
+            break
+          case 2:
+            window.ga('send', 'event', 'projects', 'scroll', 'Ellen', 3)
+            break
+          case 3:
+            window.ga('send', 'event', 'projects', 'scroll', '蔡裕杰', 4)
+            break
+          case 4:
+            window.ga('send', 'event', 'projects', 'scroll', '曾鈺茜', 5)
+            break
+          case 5:
+            window.ga('send', 'event', 'projects', 'scroll', '張哲輔', 6)
+            break
+          case 6:
+            window.ga('send', 'event', 'projects', 'scroll', 'Sunny', 7)
+            break
+          case 7:
+            window.ga('send', 'event', 'projects', 'scroll', 'Jacy', 8)
+            break
+          case 8:
+            window.ga('send', 'event', 'projects', 'scroll', '面對人才跨國移動，臺灣如何從中獲利？', 9)
+            break
+          case 9:
+            window.ga('send', 'event', 'projects', 'scroll', 'end', 10)
+            break
+          default:
+            break
+        }
+        if (this.maxAnchorIdx === 9) unwatch()
+      }
+    })
+  },
   beforeMount () {
     this.wEl = window
     // this.htmlEl = document.documentElement
@@ -282,6 +324,7 @@ export default {
       isStopSwitchBgPageAll: false,
       checkMob: checkMob(),
       activeAnchorIdx: -1,
+      maxAnchorIdx: -1,
       throttleFn: {},
       lazyers: [],
       persons: [
@@ -494,19 +537,22 @@ export default {
       }
     },
     fixedBackgroundPage (before, after, fixed) {
-      if (!this.$refs[before] || !this.$refs[after] || !this.$refs[fixed] || this.isStopFixedBgPage) return
+      before = this.$refs[before]
+      after = this.$refs[after]
+      fixed = this.$refs[fixed]
+      if (!before || !after || !fixed || this.isStopFixedBgPage) return
 
-      const beforeEl = this.$refs[before].$el
-      const afterElT = this.$refs[after].$el.offsetTop
-      const backgroundPage = this.$refs[fixed].$el
+      const beforeEl = before.$el
+      const afterElT = after.$el.offsetTop
+      const fixedEl = fixed.$el
       const scrollH = this.wEl.pageYOffset
       const beforeElB = beforeEl.offsetTop + beforeEl.offsetHeight
 
       if ((scrollH >= (beforeElB - FT_OFFSET_TOP)) && scrollH < afterElT) {
-        backgroundPage.classList.add('fixed')
+        fixedEl.classList.add('fixed')
         this.isStopFixedBgPage = true
       } else {
-        backgroundPage.classList.remove('fixed')
+        fixedEl.classList.remove('fixed')
       }
     },
     controlBackgroundPageAll () {
@@ -519,36 +565,40 @@ export default {
     },
     // todo 停在中間重整後，若不滑動，圖片不會出現
     fixedBackgroundPageAll () {
-      if (!this.$refs.opening || !this.$refs.final || !this.$refs.backgroundPageAll || !this.$refs.backgroundPageAll) return
+      const opening = this.$refs.opening
+      const final = this.$refs.final
+      const bgPageAll = this.$refs.backgroundPageAll
+      if (!opening || !final || !bgPageAll) return
 
-      const opening = this.$refs.opening.$el
-      const finalT = this.$refs.final.$el.offsetTop
-      const backgroundPageAll = this.$refs.backgroundPageAll.$el
+      const openingEl = opening.$el
+      const finalElT = final.$el.offsetTop
+      const bgPageAllEl = bgPageAll.$el
       const scrollH = this.wEl.pageYOffset
-      const openingB = opening.offsetTop + opening.offsetHeight
+      const openingB = openingEl.offsetTop + openingEl.offsetHeight
 
-      if (scrollH >= openingB && scrollH < (finalT - this.wh)) {
-        backgroundPageAll.classList.add('fixed')
+      if (scrollH >= openingB && scrollH < (finalElT - this.wh)) {
+        bgPageAllEl.classList.add('fixed')
         this.bgPageAllMarginTop = 0
-      } else if (scrollH >= (finalT - this.wh)) {
-        backgroundPageAll.classList.remove('fixed')
+      } else if (scrollH >= (finalElT - this.wh)) {
+        bgPageAllEl.classList.remove('fixed')
         this.isStopSwitchBgPageAll = true
         const totalStoryH = this.$refs.storyWrapper.offsetHeight
         this.bgPageAllMarginTop = `${totalStoryH - this.wh}px`
       } else {
-        backgroundPageAll.classList.remove('fixed')
+        bgPageAllEl.classList.remove('fixed')
         this.isStopSwitchBgPageAll = true
       }
     },
     switchBackgroundPageAll (before, after, idx) {
-      if (!this.$refs[before] || this.isStopSwitchBgPageAll) return
+      before = this.$refs[before]
+      if (!before || this.isStopSwitchBgPageAll) return
       const scrollH = this.wEl.pageYOffset
-      const beforeEl = this.$refs[before].$el
-      const beforeElT = beforeEl.offsetTop
+      const beforeElT = before.$el.offsetTop
 
       if (after) {
-        const afterEl = this.$refs[after].$el
-        const afterElT = afterEl.offsetTop
+        after = this.$refs[after]
+        if (!after) return
+        const afterElT = after.$el.offsetTop
         if ((scrollH >= (beforeElT - this.headerH)) && (scrollH < (afterElT - this.headerH))) {
           this.bgPageAllIdx = idx
           this.isStopSwitchBgPageAll = true
@@ -576,11 +626,13 @@ export default {
       this.doProgress9()
     },
     doProgress (before, after, part) {
-      if (!this.$refs[before] || !this.$refs[after] || this.isStopProgress) return
+      before = this.$refs[before]
+      after = this.$refs[after]
+      if (!before || !after || this.isStopProgress) return
       // 258.87 / 9 = 28.76
       const scrollH = this.wEl.pageYOffset
-      const beforeElT = this.$refs[before].$el.offsetTop
-      const afterElT = this.$refs[after].$el.offsetTop
+      const beforeElT = before.$el.offsetTop
+      const afterElT = after.$el.offsetTop
 
       const beforeMinus = (this.isLapW || part === 1 || part === 8) ? 0 : this.wh * 2
       const afterMinus = (this.isLapW || part === 7 || part === 8) ? 0 : this.wh * 2
@@ -588,31 +640,39 @@ export default {
       if ((scrollH >= (beforeElT - beforeMinus - FT_OFFSET_TOP)) && (scrollH < (afterElT - afterMinus - FT_OFFSET_TOP - (part === 8 ? this.wh : 0)))) {
         this.progressL = 28.76 * part
         this.clickFreq = part
+        this.activeAnchorIdx = part
         this.isStopProgress = true
       }
     },
     doProgress0 () {
-      const after = this.isMobW ? 'videoStory' : 'story0'
-      if (!this.$refs[after] || this.isStopProgress) return
+      const opening = this.$refs.opening
+      const after = this.$refs[this.isMobW ? 'videoStory' : 'story0']
+      if (!opening || !after || this.isStopProgress) return
 
       const scrollH = this.wEl.pageYOffset
-      const afterElT = this.$refs[after].$el.offsetTop
+      const openingElT = opening.$el.offsetTop
+      const afterElT = after.$el.offsetTop
 
       if (scrollH < (afterElT - FT_OFFSET_TOP)) {
         this.progressL = 0
         this.clickFreq = 0
+        if (scrollH >= (openingElT - FT_OFFSET_TOP)) {
+          this.activeAnchorIdx = 0
+        }
         this.isStopProgress = true
       }
     },
     doProgress9 () {
-      if (!this.$refs.footer ||this.isStopProgress) return
+      const footer = this.$refs.footer
+      if (!footer || this.isStopProgress) return
 
       const scrollH = this.wEl.pageYOffset
-      const beforeElT = this.$refs.footer.$el.offsetTop
+      const footerElT = footer.$el.offsetTop
 
-      if (scrollH >= (beforeElT - this.wh)) {
+      if (scrollH >= (footerElT - this.wh)) {
         this.progressL = 258.87
         this.clickFreq = 9
+        this.activeAnchorIdx = 9
         this.isStopProgress = true
       }
     },
@@ -639,7 +699,6 @@ export default {
       }
     },
     stretchAnchors () {
-      // if (this.isScroll) return
       this.isStopStretchAnchor = false
       this.stretchNoAnchors()
       this.stretchAnchor('opening', 'story0', 0)
@@ -648,12 +707,22 @@ export default {
       }
       this.stretchAnchor('story6', 'final', 7)
       this.stretchAnchor('final', 'footer', 8)
+      
+      const footer = this.$refs.footer
+      if (!footer) return
+      const scrollH = this.wEl.pageYOffset
+      const footerElT = footer.$el.offsetTop
+      if (scrollH >= (footerElT - this.wh)) {
+        this.activeAnchorIdx = 9
+      }
     },
     stretchAnchor (before, after, idx) {
-      if (!this.$refs[before] || !this.$refs[after] || this.isStopStretchAnchor) return
+      before = this.$refs[before]
+      after = this.$refs[after]
+      if (!before || !after || this.isStopStretchAnchor) return
       const scrollH = this.wEl.pageYOffset
-      const beforeElT = this.$refs[before].$el.offsetTop
-      const afterElT = this.$refs[after].$el.offsetTop
+      const beforeElT = before.$el.offsetTop
+      const afterElT = after.$el.offsetTop
 
       if ((scrollH >= (beforeElT - FT_OFFSET_TOP)) && (scrollH < (afterElT - FT_OFFSET_TOP))) {
         this.activeAnchorIdx = idx
@@ -661,10 +730,11 @@ export default {
       }
     },
     stretchNoAnchors () {
-      if (!this.$refs.opening || this.isStopStretchAnchor) return
+      const opening = this.$refs.opening
+      if (!opening || this.isStopStretchAnchor) return
       const scrollH = this.wEl.pageYOffset
-      const afterElT = this.$refs.opening.$el.offsetTop
-      if (scrollH < (afterElT - FT_OFFSET_TOP)) {
+      const openingElT = opening.$el.offsetTop
+      if (scrollH < (openingElT - FT_OFFSET_TOP)) {
         this.activeAnchorIdx = -1
         this.isStopStretchAnchor = true
       }
@@ -684,7 +754,7 @@ export default {
         }
       })
     }
-  }
+  },
 }
 </script>
 
