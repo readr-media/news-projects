@@ -53,17 +53,10 @@ export default {
   bottom 12px
   cursor: pointer
   z-index 999
-  // @media (min-width $lap-breakpoint)
-  //   width 100px
-  //   right 2%
-  //   bottom 2%
   &:active polygon
     fill #ffec2f
-    // transition none
   & rect
     fill #4d4d4d
-  // & polygon
-  //   transition fill 0.2s
   & circle
     fill none
     stroke #ffec2f
