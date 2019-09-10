@@ -148,22 +148,35 @@ export default {
 </script>
 <style lang="stylus">
 .election-board
+  // overflow hidden
+  // position relative
+
   color #000
   font-size 16px
   font-style normal
   font-family "source-han-sans-traditional", sans-serif
   line-height 1.67
-  h3, p
+  // background-color rgba(0,0,0,1)
+  & h3, p
     margin 0
-  a
+  & a
     color #000
     text-decoration none
     cursor pointer
   &__share
     &.share
-      .toggle
+      & .toggle
         background-image url(/proj-assets/election-board/images/share.png) !important
         background-size 34px auto !important
         background-position center center !important
+  // & .bg-arrow
+  //   position absolute
+  //   width 91.875%
+  //   left 0
+  //   top 83.86vh
+  //   @media (min-width 768px)
+  //     width 514px
+  //     left 50%
+  //     transform translateX(-50%)
 </style>
 
