@@ -32,22 +32,41 @@
       </div>
       <div class="item">
         <p>候選人</p>
-        <template v-for="n in candidateAmount">
-          <FormSelectCandidate :key="n"
+        <!-- <template v-for="n in candidateAmount"> -->
+          <!-- <FormSelectCandidate :key="n"
             :class="{ 'has-minus': n > 1 }"
             :councilorCandidates="councilorCandidates"
             :index="n"
             :mayorCandidates="mayorCandidates"
             :selectedIds="selectedCandidates"
             @minusCandidateAmount="minusSelectCandidate"
-            @updateSelectedId="updateSelectedId" />
-        </template>
-        <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p>
+            @updateSelectedId="updateSelectedId" /> -->
+        <FormSelectCandidate
+          :councilorCandidates="councilorCandidates"
+          :mayorCandidates="mayorCandidates"
+          :selectedIds="selectedCandidates"
+          @updateSelectedId="updateSelectedId"
+        />
+        <!-- </template> -->
+        <!-- <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p> -->
+        <p class="candidates-info">若有多位候選人，請上傳多次</p>
+      </div>
+      <div class="item">
+        <p>標語</p>
+        <!-- todo v-model -->
+        <input type="text" placeholder="請輸入看板標語">
       </div>
       <div class="item">
         <p>拍攝時間</p>
         <FormSelectDatetime :datetime="datetime" @updateDatetime="updateDatetime"/>
       </div>
+
+      <div class="item">
+        <p>照片提供</p>
+        <!-- todo v-model -->
+        <input type="text" placeholder="請問芳名">
+      </div>
+
       <div class="item recaptcha">
         <VueRecaptcha :sitekey="GOOGLE_RECAPTCHA_SITE_KEY" @verify="recaptchaVerify">
           <button :class="{ verified: recaptchaVerified }" class="recaptcha__btn"></button>
@@ -261,15 +280,15 @@ export default {
         this.hasGeolocation = false
       })
     },
-    minusSelectCandidate (id) {
-      if (id) {
-        const index = this.selectedCandidates.findIndex((value, index, arr) => value === id)
-        if (index > -1) {
-          this.selectedCandidates.splice(index, 1)
-        }
-      }
-      this.candidateAmount -= 1
-    },
+    // minusSelectCandidate (id) {
+    //   if (id) {
+    //     const index = this.selectedCandidates.findIndex((value, index, arr) => value === id)
+    //     if (index > -1) {
+    //       this.selectedCandidates.splice(index, 1)
+    //     }
+    //   }
+    //   this.candidateAmount -= 1
+    // },
     recaptchaVerify (res) {
       this.recaptchaVerified = true
     },
@@ -419,21 +438,21 @@ export default {
         &__item
           &.type
             color #fa6e59
-      .add-candidate
-        display inline
-        margin-top 10px
-        color theme-color
-        font-size .875rem
-        line-height 20px
-        cursor pointer
-        &::before
-          content '\2795'
-          position relative
-          top 1px
-          height 20px
-          margin-right 5px
-          color transparent
-          text-shadow 0 0 0 theme-color
+      // .add-candidate
+      //   display inline
+      //   margin-top 10px
+      //   color theme-color
+      //   font-size .875rem
+      //   line-height 20px
+      //   cursor pointer
+      //   &::before
+      //     content '\2795'
+      //     position relative
+      //     top 1px
+      //     height 20px
+      //     margin-right 5px
+      //     color transparent
+      //     text-shadow 0 0 0 theme-color
     .btn
       font-weight 500
       border none
@@ -456,7 +475,7 @@ export default {
     .recaptcha
       >>> > div
         display flex
-        justify-content center
+        // justify-content center
         align-items center
         line-height 1
       &__btn
@@ -486,8 +505,16 @@ export default {
       color #fa6e59
       font-size .8rem
       text-align right
-
+    .candidates-info
+      font-size 0.875rem
+      color #a0a0a0
+      margin-top 10px
+      @media (min-width 768px)
+        font-size 1rem
     >>> .grecaptcha-badge
       visibility hidden
       opacity 0
+input[type="text"]
+  margin-top 0.5em
+  padding-left 0.5em
 </style>

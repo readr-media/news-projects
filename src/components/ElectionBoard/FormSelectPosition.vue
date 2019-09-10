@@ -21,7 +21,7 @@
       </div>
     </div>
     <template v-if="showAdvanced">
-      <input v-model="road" type="text" @keyup="showBtn = true">
+      <input v-model="road" type="text" placeholder="請填寫地址" @keyup="showBtn = true">
       <button v-show="showBtn" @click="validateAddress">更新地圖位置</button>
     </template>
     <span v-show="errors.length > 0" class="error">請選擇/輸入正確的 {{ errors.includes('district') ? '行政區' : '' }} {{ errors.includes('road') ? '街道路名' : '' }} </span>

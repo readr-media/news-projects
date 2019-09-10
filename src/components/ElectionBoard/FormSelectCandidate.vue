@@ -11,9 +11,9 @@
         </optgroup>
       </select>
     </div>
-    <div v-if="index > 1" class="select-candidate__minus" @click="$emit('minusCandidateAmount', selectedId)">
+    <!-- <div v-if="index > 1" class="select-candidate__minus" @click="$emit('minusCandidateAmount', selectedId)">
       &#10134;
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -35,9 +35,9 @@ export default {
   //   }
   // },
   props: {
-    index: {
-      type: Number,
-    },
+    // index: {
+    //   type: Number,
+    // },
     councilorCandidates: {
       type: Array,
     },
