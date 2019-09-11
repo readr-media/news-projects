@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import { get, } from 'lodash'
+import { get } from 'lodash'
 
 export default {
   name: 'VerifyInputCandidate',
@@ -156,17 +156,20 @@ export default {
     // display flex
     // > *
     //   flex 1
-    > p
+    & > p
       // display inline-block
       // margin-left 10px
       color #a0a0a0
       font-size 0.875rem
       margin-top 10px
       line-height 1
+      @media (min-width 768px)
+        font-size 1rem
+        margin-top 12px
   .input-container
     position relative
     // max-width calc(50% - 5px)
-    .list
+    & .list
       position absolute
       top 30px
       left 0
@@ -179,12 +182,12 @@ export default {
       visibility hidden
       &.open
         visibility visible
-      > p
+      & > p
         padding-left .5em
         line-height 30px
         user-select none
         cursor pointer
-        > span
+        & > span
           margin-left .5em
           font-size .75rem
   .error

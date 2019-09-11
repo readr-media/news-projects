@@ -583,13 +583,12 @@ theme-color = #fa6e59
     padding 0
     text-indent 0.5em
   & .select-container
-    flex 1
+    // flex 1
     position relative
     background-color #a0a0a0
     border-radius 2px
-    &.open
-      &::after
-        transform rotate(180deg)
+    &.open:after
+      transform rotate(180deg)
     &:after
       content ''
       position absolute
@@ -602,7 +601,7 @@ theme-color = #fa6e59
       background-position center center
       background-repeat no-repeat
       transition transform .5s
-    select
+    & select
       position relative
       z-index 10
       width 100%

@@ -31,7 +31,8 @@
       
       <p>標語</p>
       <input v-model="slogan" type="text" placeholder="請填寫看板標語（多句請用／分隔）">
-      <p class="current-info">目前資訊： {{ board.slogan || ' ' }}</p>
+      <!-- <p class="current-info">目前資訊： {{ board.slogan || ' ' }}</p> -->
+      <p class="current-info">目前資訊：小英栽培/吳沛憶 我陪你</p>
 
       <div class="party-symbol-item">
         <input type="checkbox" id="party-symbol" :class="['checkbox', hasPartySymbol ? 'checked' : '']" v-model="hasPartySymbol">
@@ -294,6 +295,15 @@ export default {
       if (this.errors.length < 1) {
         this.uploadBoardVerified(true)
       }
+    },
+    handleSelectBlur (e) {
+      e.target.parentNode.classList.remove('open')
+    },
+    handleSelectChange (e) {
+      e.target.parentNode.classList.remove('open')
+    },
+    handleSelectFocus (e) {
+      e.target.parentNode.classList.add('open')
     }
   }
 }
@@ -310,6 +320,7 @@ theme-color-hidden = #6d5810
   background-color #000
   & button
     cursor pointer
+    font-family "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, sans-serif
   & .image
     // flex 1
     position relative
@@ -332,41 +343,80 @@ theme-color-hidden = #6d5810
     display flex
     align-items center
     line-height 1
+    @media (min-width 768px)
+      margin-top 35px
     & input
       position relative
-      width 20px
-      height 20px
+      width 16px
+      height 16px
       padding 0
       background-color #a0a0a0
       border none
       border-radius 2px
       appearance none
       outline none
+      @media (min-width 768px)
+        width 20px
+        height 20px
       &.checked:after
         content ''
         position absolute
         top 0
         left 5px
         transform rotate(45deg)
-        width 10px
-        height 15px
+        width 7px
+        height 14px
         border 1px solid #fff
         border-width 0 3px 3px 0
+        @media (min-width 768px)
+          width 10px
+          height 15px
     & label
       margin-left 10px
       user-select none
-  .form
-    // max-height 60vh
-    padding 25px
-    overflow-y auto
-    > input
-      display block
+      @media (min-width 768px)
+        font-size 1.25rem
+  & .select-container
+    // flex 1
+    position relative
+    background-color #a0a0a0
+    border-radius 2px
+    &.open:after
+      transform rotate(180deg)
+    &:after
+      content ''
+      position absolute
+      top 0
+      right 0
+      width 30px
+      height 30px
+      background-image url(/proj-assets/election-board/images/filter.png)
+      background-size 16px auto
+      background-position center center
+      background-repeat no-repeat
+      transition transform .5s
+    & select
+      position relative
+      z-index 10
       width 100%
       height 30px
+      padding 0
+      text-indent .5em
+      background-color transparent
+      border none
+      appearance none
+  & .form
+    // max-height 60vh
+    padding 25px 25px 30px 25px
+    overflow-y auto
+    & > input
+      display block
+      width 100%
+      height 32px
       margin-top 10px
       // padding-left .5em
-      padding 0
-      text-indent 0.5em
+      padding 0 0 0 12px
+      // text-indent 0.5em
       line-height 30px
       background-color #a0a0a0
       border none
@@ -378,9 +428,13 @@ theme-color-hidden = #6d5810
       // margin-top 5px
       // margin-top 15px
       margin-top 25px
-      margin-bottom 0.5em
+      margin-bottom 12px
       color #fff
       line-height 1
+      @media (min-width 768px)
+        font-size 1.25rem
+        margin-top 35px
+        margin-bottom 16px
       &.error
         margin-top 10px
         color #fa6e59
@@ -394,15 +448,21 @@ theme-color-hidden = #6d5810
       font-size 0.875rem
       margin-top 10px
       line-height 1
+      @media (min-width 768px)
+        font-size 1rem
+        margin-top 12px
     & > button
       width 100%
       height 50px
-      margin-top 15px
+      // margin-top 15px
+      margin-top 20px
       font-size 1.25rem
       font-weight 700
       line-height 1.4
       border none
       border-radius 2px
+      @media (min-width 768px)
+        margin-top 40px
     &__heading
       display flex
       justify-content space-between
@@ -432,7 +492,6 @@ theme-color-hidden = #6d5810
         background-color #a0a0a0
         border none
         border-radius 2px
-
     &__candidate
       margin-top 10px
       & + .form__candidate
@@ -452,12 +511,12 @@ theme-color-hidden = #6d5810
         margin-right 5px
         color transparent
         text-shadow 0 0 0 theme-color
-    .action
+    & .action
       display flex
       justify-content space-between
-      margin-top 10px
+      margin-top 12px
       > button
-        width calc(50% - 5px)
+        width calc(50% - 6px)
         height 75px
         font-size 1.25rem
         font-weight 700
@@ -476,11 +535,12 @@ theme-color-hidden = #6d5810
           color #000
           background-color theme-color-hidden
 
-@media (min-width: 768px)
-  .eb-verify
+@media (min-width 768px)
+  & .eb-verify
     justify-content center
-    padding 55px 0
-    .image
+    padding-top 55px
+    padding-bottom 45px
+    & .image
       // flex none
       width 450px
       // height 300px
@@ -489,7 +549,7 @@ theme-color-hidden = #6d5810
       //   position static
       //   width 100%
       //   object-fit contain
-    .form
+    & .form
       width 450px
       padding 0
       margin 40px auto 0
