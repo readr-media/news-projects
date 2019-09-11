@@ -159,7 +159,9 @@ export default {
     width 100%
     height 30px
     margin-top .5em
-    padding-left .5em
+    // padding-left .5em
+    padding 0
+    text-indent 0.5em
     line-height 30px
     background-color #a0a0a0
     border none

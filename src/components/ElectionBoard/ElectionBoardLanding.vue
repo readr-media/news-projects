@@ -130,7 +130,7 @@ export default {
   }
 }
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
 color-upload = #fa6e59
 color-verify = #ffdb5c
 color-data = #4897db
@@ -151,6 +151,10 @@ color-data = #4897db
     justify-content flex-start
   // background-color rgba(0,0,0,1)
   // z-index -2
+  & a
+    color #000
+    text-decoration none
+    cursor pointer
   & h1
     margin .5em 0 0
     color #fff
@@ -433,6 +437,4 @@ color-data = #4897db
         margin 0 auto
     .credit
       width 100%
-img
-  height auto
 </style>

@@ -1,7 +1,12 @@
 <template>
   <div class="select-candidate">
     <div class="select-container">
-      <select v-model="selectedName">
+      <select
+        v-model="selectedName"
+        @blur="handleSelectBlur"
+        @focus="handleSelectFocus"
+        @change="handleSelectChange"
+      >
         <option disabled value="">請選擇候選人</option>
         <optgroup label="縣 / 市長">
           <option v-for="item in mayorCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
@@ -82,6 +87,15 @@ export default {
     // closeCandidateList () {
     //   this.showCandidateList = false
     // },
+    handleSelectBlur (e) {
+      e.target.parentNode.classList.remove('open')
+    },
+    handleSelectChange (e) {
+      e.target.parentNode.classList.remove('open')
+    },
+    handleSelectFocus (e) {
+      e.target.parentNode.classList.add('open')
+    },
     selectCandidate (id) {
       this.selectedId = id
     }
@@ -94,7 +108,7 @@ theme-color = #fa6e59
 .select-candidate
   display flex
   position relative
-  margin-top .5em
+  // margin-top .5em
   .select-container
     flex 1
     position relative
@@ -124,8 +138,6 @@ theme-color = #fa6e59
       text-indent .5em
       background-color transparent
       border none
-      -webkit-appearance none
-      -moz-appearance none
       appearance none
     // > input
     //   width 100%

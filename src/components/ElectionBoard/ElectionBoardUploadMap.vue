@@ -84,4 +84,6 @@ export default {
     z-index 10
     font-size .875rem
     background-color rgba(0,0,0, .75)
+    @media (min-width 768px)
+      font-size 1.3rem
 </style>

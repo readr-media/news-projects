@@ -146,7 +146,7 @@ export default {
   },
 }
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
 .election-board
   // overflow hidden
   // position relative
@@ -159,10 +159,10 @@ export default {
   // background-color rgba(0,0,0,1)
   & h3, p
     margin 0
-  & a
-    color #000
-    text-decoration none
-    cursor pointer
+  // & a
+  //   color #000
+  //   text-decoration none
+  //   cursor pointer
   &__share
     &.share
       & .toggle

@@ -2,7 +2,7 @@
   <div class="input-candidate">
     <div class="input-candidate-container">
       <div class="input-container" v-click-outside="closeList">
-        <input v-model.trim="selectedName" type="text" placeholder="候選人名字" @focus="openList = true">
+        <input v-model.trim="selectedName" type="text" placeholder="請填寫候選人姓名" @focus="openList = true">
         <div class="list" :class="{ open: openList }">
           <p
             v-for="item in candidatesForList"
@@ -13,7 +13,8 @@
           </p>
         </div>
       </div>
-      <p v-if="candidate">目前資訊：{{ candidate.name }}</p>
+      <!-- <p v-if="candidate">目前資訊：{{ candidate.name }}</p> -->
+      <p>目前資訊：吳沛憶</p>
     </div>
     <!-- <p v-show="hasError" class="error">目前沒有這位候選人的資料</p> -->
   </div>
@@ -152,16 +153,19 @@ export default {
       color #4c4c4c
   
   &-container
-    display flex
-    > *
-      flex 1
+    // display flex
+    // > *
+    //   flex 1
     > p
-      display inline-block
-      margin-left 10px
-      color #fff
+      // display inline-block
+      // margin-left 10px
+      color #a0a0a0
+      font-size 0.875rem
+      margin-top 10px
+      line-height 1
   .input-container
     position relative
-    max-width calc(50% - 5px)
+    // max-width calc(50% - 5px)
     .list
       position absolute
       top 30px

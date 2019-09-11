@@ -56,6 +56,28 @@
         <!-- todo v-model -->
         <input type="text" placeholder="請輸入看板標語">
       </div>
+      <div class="item item--checkbox">
+        <input type="checkbox" id="party-symbol" :class="['checkbox', hasPartySymbol ? 'checked' : '']" v-model="hasPartySymbol">
+        <label for="party-symbol">有黨徽</label>
+        <!-- todo v-model -->
+      </div>
+      <div class="item">
+        <!-- todo v-model -->
+        <p>類型</p>
+        <div class="select-container">
+          <select
+            @blur="handleSelectBlur"
+            @change="handleSelectChange"
+            @focus="handleSelectFocus"
+          >
+            <option disabled selected value="">請選擇看板類型</option>
+            <option value="戶外看板">戶外看板</option>
+            <option value="旗幟">旗幟</option>
+            <option value="競選總部">競選總部</option>
+            <option value="其它">其它</option>
+          </select>
+        </div>
+      </div>
       <div class="item">
         <p>拍攝時間</p>
         <FormSelectDatetime :datetime="datetime" @updateDatetime="updateDatetime"/>
@@ -69,7 +91,7 @@
 
       <div class="item recaptcha">
         <VueRecaptcha :sitekey="GOOGLE_RECAPTCHA_SITE_KEY" @verify="recaptchaVerify">
-          <button :class="{ verified: recaptchaVerified }" class="recaptcha__btn"></button>
+          <button :class="{ verified: recaptchaVerified }" class="recaptcha__btn checkbox"></button>
           <span class="recaptcha__text">我不是機器人</span>
         </VueRecaptcha>
       </div>
@@ -184,7 +206,8 @@ export default {
       selectedCandidates: [],
       showCheckBoards: false,
       showCheckPosition: true,
-      showPreview: false
+      showPreview: false,
+      hasPartySymbol: false
     }
   },
   computed: {
@@ -356,165 +379,237 @@ export default {
       .catch(err => {
         this.hasError = true
       })
+    },
+    handleSelectBlur (e) {
+      e.target.parentNode.classList.remove('open')
+    },
+    handleSelectChange (e) {
+      e.target.parentNode.classList.remove('open')
+    },
+    handleSelectFocus (e) {
+      e.target.parentNode.classList.add('open')
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
-  theme-color = #fa6e59
+theme-color = #fa6e59
 
-  .eb-upload-form
-    padding 25px
-    overflow-y auto
-    button
-      cursor pointer
-    .item
-      margin-bottom 25px
-      p
-        line-height 1
-      input
-        height 30px
-        background-color #a0a0a0
-        border-radius 2px
-        border none
-      &.image-preview
-        .item__heading
-          button
-            &.open
-              img
-                transform rotate(0)
-            img
-              transform rotate(-180deg)
-      &__heading
-        > p, > button
-          display inline
-        > button
-          padding 0
-          margin-left 10px
-          vertical-align middle
-          background-color transparent
-          border none
-          outline none
-          img
-            width 16px
-        > span
-          margin-left 10px
-          color theme-color
-          font-size .8rem
-      &--row
-        display flex
-        justify-content space-between
-        margin-top .5em
-        &.col--two
-          > *
-            width calc(50% - 5px)
-      .image-preview__img
-        margin-top 15px
-        height 200px
-        > img
-          width 100%
-          height 100%
-          object-fit contain
-          object-position center center
-      .select-candidate
-        position relative
-        margin-top .5em
-        > input
-          width 100%
-          padding-left .5em
-          border-radius 0
-        &__list
-          position absolute
-          top 30px
-          left 0
-          right 0
-          z-index 10
-          max-height 180px
-          overflow-y auto
-          background-color #2b2b2b
-          > div
-            height 30px
-            padding-left .5em
-        &__item
-          &.type
-            color #fa6e59
-      // .add-candidate
-      //   display inline
-      //   margin-top 10px
-      //   color theme-color
-      //   font-size .875rem
-      //   line-height 20px
-      //   cursor pointer
-      //   &::before
-      //     content '\2795'
-      //     position relative
-      //     top 1px
-      //     height 20px
-      //     margin-right 5px
-      //     color transparent
-      //     text-shadow 0 0 0 theme-color
-    .btn
-      font-weight 500
-      border none
+.eb-upload-form
+  padding 25px
+  overflow-y auto
+  button
+    cursor pointer
+  & .item
+    margin-bottom 25px
+    & p
+      line-height 1
+      margin-bottom 0.5em
+    & input:not(.checkbox)
+      height 30px
+      background-color #a0a0a0
       border-radius 2px
-      &--negative, &--positive
-        padding .3em 0
-      &--negative
-        background-color #a0a0a0
-      &--positive
-        background-color theme-color
-      &--submit
-        width 100%
-        margin-top 10px
-        padding .5em 0
-        letter-spacing 1px
-        background-color theme-color
-        &:disabled
-          color #000
-          background-color #fcb6ac
-    .recaptcha
-      >>> > div
-        display flex
-        // justify-content center
-        align-items center
-        line-height 1
-      &__btn
-        position relative
-        width 20px
-        height 20px
+      border none
+    &--checkbox
+      display flex
+      align-items center
+      line-height 1
+      & > *
+        cursor pointer
+    & label
+      margin-left 10px
+      user-select none
+    &.image-preview
+      .item__heading
+        button
+          &.open
+            img
+              transform rotate(0)
+          img
+            transform rotate(-180deg)
+    &__heading
+      > p, > button
+        display inline
+      > button
         padding 0
-        background-color #a0a0a0
-        border none
-        border-radius 2px
-        &.verified
-          &::after
-            content ''
-            position absolute
-            top 0
-            left 5px
-            transform rotate(45deg)
-            width 10px
-            height 15px
-            border 1px solid #fff
-            border-width 0 3px 3px 0
-      &__text
         margin-left 10px
-        line-height 20px
-    .error
-      display block
-      color #fa6e59
-      font-size .8rem
-      text-align right
-    .candidates-info
-      font-size 0.875rem
-      color #a0a0a0
+        vertical-align middle
+        background-color transparent
+        border none
+        outline none
+        img
+          width 16px
+      > span
+        margin-left 10px
+        color theme-color
+        font-size .8rem
+    &--row
+      display flex
+      justify-content space-between
+      margin-top .5em
+      &.col--two
+        > *
+          width calc(50% - 5px)
+    .image-preview__img
+      margin-top 15px
+      height 200px
+      > img
+        width 100%
+        height 100%
+        object-fit contain
+        object-position center center
+    .select-candidate
+      position relative
+      margin-top .5em
+      > input
+        width 100%
+        padding-left .5em
+        border-radius 0
+      &__list
+        position absolute
+        top 30px
+        left 0
+        right 0
+        z-index 10
+        max-height 180px
+        overflow-y auto
+        background-color #2b2b2b
+        > div
+          height 30px
+          padding-left .5em
+      &__item
+        &.type
+          color #fa6e59
+    // .add-candidate
+    //   display inline
+    //   margin-top 10px
+    //   color theme-color
+    //   font-size .875rem
+    //   line-height 20px
+    //   cursor pointer
+    //   &::before
+    //     content '\2795'
+    //     position relative
+    //     top 1px
+    //     height 20px
+    //     margin-right 5px
+    //     color transparent
+    //     text-shadow 0 0 0 theme-color
+  & .btn
+    font-weight 500
+    border none
+    border-radius 2px
+    &--negative, &--positive
+      padding .3em 0
+    &--negative
+      background-color #a0a0a0
+    &--positive
+      background-color theme-color
+    &--submit
+      width 100%
       margin-top 10px
-      @media (min-width 768px)
-        font-size 1rem
-    >>> .grecaptcha-badge
-      visibility hidden
-      opacity 0
-input[type="text"]
-  margin-top 0.5em
-  padding-left 0.5em
+      padding .5em 0
+      letter-spacing 1px
+      background-color theme-color
+      &:disabled
+        color #000
+        background-color #fcb6ac
+  & .recaptcha
+    >>> > div
+      display flex
+      // justify-content center
+      align-items center
+      line-height 1
+    // &__btn
+    //   position relative
+    //   width 20px
+    //   height 20px
+    //   padding 0
+    //   background-color #a0a0a0
+    //   border none
+    //   border-radius 2px
+    //   &.verified
+    //     &:after
+    //       content ''
+    //       position absolute
+    //       top 0
+    //       left 5px
+    //       transform rotate(45deg)
+    //       width 10px
+    //       height 15px
+    //       border 1px solid #fff
+    //       border-width 0 3px 3px 0
+    &__text
+      margin-left 10px
+      line-height 20px
+  & .checkbox
+    position relative
+    width 20px
+    height 20px
+    padding 0
+    background-color #a0a0a0
+    border none
+    border-radius 2px
+    appearance none
+    outline none
+    &.verified, &.checked
+      &:after
+        content ''
+        position absolute
+        top 0
+        left 5px
+        transform rotate(45deg)
+        width 10px
+        height 15px
+        border 1px solid #fff
+        border-width 0 3px 3px 0
+  & .error
+    display block
+    color #fa6e59
+    font-size .8rem
+    text-align right
+  & .candidates-info
+    font-size 0.875rem
+    color #a0a0a0
+    margin-top 10px
+    // @media (min-width 768px)
+    //   font-size 1rem
+  >>> .grecaptcha-badge
+    visibility hidden
+    opacity 0
+  & input[type="text"]
+    // margin-top 0.5em
+    // padding-left 0.5em
+    padding 0
+    text-indent 0.5em
+  & .select-container
+    flex 1
+    position relative
+    background-color #a0a0a0
+    border-radius 2px
+    &.open
+      &::after
+        transform rotate(180deg)
+    &:after
+      content ''
+      position absolute
+      top 0
+      right 0
+      width 30px
+      height 30px
+      background-image url(/proj-assets/election-board/images/filter.png)
+      background-size 16px auto
+      background-position center center
+      background-repeat no-repeat
+      transition transform .5s
+    select
+      position relative
+      z-index 10
+      width 100%
+      height 30px
+      padding 0
+      text-indent .5em
+      background-color transparent
+      border none
+      appearance none
 </style>
