@@ -385,8 +385,8 @@ theme-color = #fa6e59
       margin-bottom 30px
       color theme-color
       font-size 1.25rem
-      font-weight 300
-      letter-spacing 1px
+      // font-weight 300
+      // letter-spacing 1px
     img
       width 100%
       margin-top 10px
@@ -463,10 +463,10 @@ theme-color = #fa6e59
     position relative
     display flex
     flex-direction column
-    .map
-      flex 2
-    .form
-      flex 3
+    // .map
+    //   flex 2
+    // .form
+    //   flex 3
   &__step-5
     display flex
     flex-direction column
@@ -503,10 +503,11 @@ theme-color = #fa6e59
         padding 0
     &__step-4
       .form
-        flex none
+        // flex none
         width 450px
-        height 500px
-        margin 0 auto
+        // height 500px
+        margin-left auto
+        margin-right auto
     &__step-5
       > img
         width 100px

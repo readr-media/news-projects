@@ -125,7 +125,7 @@ export default {
       }
     },
     sendGA (value) {
-      // window.ga('send', 'event', 'projects', 'click', value, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', value, { nonInteraction: false })
     }
   }
 }

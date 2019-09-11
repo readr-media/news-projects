@@ -71,7 +71,11 @@ export default {
 .eb-map
   position relative
   #map
-    height 100%
+    // height 100%
+    height 40vh
+    // min-height 195px
+    // @media (min-width 768px)
+    //   min-height 384px
   &__hint
     display flex
     justify-content center

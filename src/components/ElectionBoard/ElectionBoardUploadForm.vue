@@ -2,7 +2,7 @@
   <div class="eb-upload-form">
     <div class="container">
       <div v-show="showCheckPosition" class="item">
-        <p>這是看板的地點嗎？</p>
+        <p class="item__title" style="margin-top: 0;">這是看板的地點嗎？</p>
         <div class="item--row col--two">
           <button class="btn btn--negative" @click="denyPosition">否</button>
           <button class="btn btn--positive" @click="confirmPosition">是</button>
@@ -20,7 +20,8 @@
           @updateAddress="updateAddress"
           @updateCoordinate="updateCoordinate" />
       </div>
-      <div v-if="imgURL" class="item image-preview">
+      <!-- <div v-if="imgURL" class="item image-preview"> -->
+      <div class="item image-preview">
         <div class="item__heading">
           <p>照片縮圖</p>
           <button :class="{ open: showPreview }" @click="showPreview = !showPreview"><img src="/proj-assets/election-board/images/arrow-orange.png" alt=""></button>
@@ -31,7 +32,7 @@
         </div>
       </div>
       <div class="item">
-        <p>候選人</p>
+        <p class="item__title">候選人</p>
         <!-- <template v-for="n in candidateAmount"> -->
           <!-- <FormSelectCandidate :key="n"
             :class="{ 'has-minus': n > 1 }"
@@ -52,7 +53,7 @@
         <p class="candidates-info">若有多位候選人，請上傳多次</p>
       </div>
       <div class="item">
-        <p>標語</p>
+        <p class="item__title">標語</p>
         <!-- todo v-model -->
         <input type="text" placeholder="請輸入看板標語">
       </div>
@@ -63,7 +64,7 @@
       </div>
       <div class="item">
         <!-- todo v-model -->
-        <p>類型</p>
+        <p class="item__title">類型</p>
         <div class="select-container">
           <select
             @blur="handleSelectBlur"
@@ -79,12 +80,12 @@
         </div>
       </div>
       <div class="item">
-        <p>拍攝時間</p>
+        <p class="item__title">拍攝時間</p>
         <FormSelectDatetime :datetime="datetime" @updateDatetime="updateDatetime"/>
       </div>
 
       <div class="item">
-        <p>照片提供</p>
+        <p class="item__title">照片提供</p>
         <!-- todo v-model -->
         <input type="text" placeholder="請問芳名">
       </div>
@@ -396,17 +397,41 @@ export default {
 theme-color = #fa6e59
 
 .eb-upload-form
-  padding 25px
+  // padding 25px
+  padding 0 25px 30px 25px
+  margin-top 25px
   overflow-y auto
-  button
+  @media (min-width 768px)
+    padding 0 0 45px 0
+    margin-top 40px
+  & button
     cursor pointer
   & .item
     margin-bottom 25px
-    & p
+    @media (min-width 768px)
+      margin-bottom 35px
+    &.recaptcha
+      margin-bottom 30px
+      @media (min-width 768px)
+        margin-bottom 40px
+    &__title
       line-height 1
-      margin-bottom 0.5em
+      margin-bottom 12px
+      margin-top 0
+      @media (min-width 768px)
+        font-size 1.25rem
+        margin-bottom 16px
+        // margin-top 35px
+    // & p
+    //   line-height 1
+    //   margin-bottom 12px
+    //   margin-top 25px
+    //   @media (min-width 768px)
+    //     font-size 1.25rem
+    //     margin-bottom 16px
+    //     margin-top 35px
     & input:not(.checkbox)
-      height 30px
+      height 32px
       background-color #a0a0a0
       border-radius 2px
       border none
@@ -414,43 +439,58 @@ theme-color = #fa6e59
       display flex
       align-items center
       line-height 1
+      @media (min-width 768px)
+        font-size 1.25rem
       & > *
         cursor pointer
     & label
       margin-left 10px
       user-select none
     &.image-preview
-      .item__heading
-        button
-          &.open
-            img
-              transform rotate(0)
-          img
+      & .item__heading
+        // line-height 1
+        & button
+          &.open img
+            transform rotate(0)
+          & img
             transform rotate(-180deg)
     &__heading
-      > p, > button
-        display inline
-      > button
+      line-height 1
+      display flex
+      align-items flex-end
+      & > p
+        margin 0
+        @media (min-width 768px)
+          font-size 1.25rem
+      // & > p, & > button
+      //   display inline
+      & > button
         padding 0
         margin-left 10px
-        vertical-align middle
+        // vertical-align middle
         background-color transparent
         border none
         outline none
-        img
+        // display flex
+        // align-items center
+        & img
           width 16px
-      > span
-        margin-left 10px
+          height auto
+          vertical-align middle
+      & > span
+        margin-left 8px
         color theme-color
-        font-size .8rem
+        font-size .875rem
+        @media (min-width 768px)
+          font-size 1rem
     &--row
       display flex
       justify-content space-between
-      margin-top .5em
+      // margin-top .5em
       &.col--two
         > *
           width calc(50% - 5px)
-    .image-preview__img
+    & .image-preview__img
       margin-top 15px
       height 200px
       > img
@@ -458,13 +498,13 @@ theme-color = #fa6e59
         height 100%
         object-fit contain
         object-position center center
-    .select-candidate
+    & .select-candidate
       position relative
-      margin-top .5em
-      > input
-        width 100%
-        padding-left .5em
-        border-radius 0
+      // margin-top .5em
+      // & > input
+      //   width 100%
+      //   padding-left .5em
+      //   border-radius 0
       &__list
         position absolute
         top 30px
@@ -500,21 +540,29 @@ theme-color = #fa6e59
     border none
     border-radius 2px
     &--negative, &--positive
-      padding .3em 0
+      // padding .3em 0
+      // padding 6px 0
+      height 32px
+      line-height 32px
     &--negative
       background-color #a0a0a0
     &--positive
       background-color theme-color
     &--submit
       width 100%
-      margin-top 10px
-      padding .5em 0
-      letter-spacing 1px
+      // margin-top 10px
+      padding-top 12px
+      padding-bottom 12px
+      font-weight 700
+      // letter-spacing 1px
       background-color theme-color
+      font-size 1.25rem
       &:disabled
         color #000
         background-color #fcb6ac
   & .recaptcha
+    @media (min-width 768px)
+      font-size 1.25rem
     >>> > div
       display flex
       // justify-content center
@@ -544,14 +592,17 @@ theme-color = #fa6e59
       line-height 20px
   & .checkbox
     position relative
-    width 20px
-    height 20px
+    width 16px
+    height 16px
     padding 0
     background-color #a0a0a0
     border none
     border-radius 2px
     appearance none
     outline none
+    @media (min-width 768px)
+      width 20px
+      height 20px
     &.verified, &.checked
       &:after
         content ''
@@ -559,29 +610,40 @@ theme-color = #fa6e59
         top 0
         left 5px
         transform rotate(45deg)
-        width 10px
-        height 15px
+        width 7px
+        height 14px
         border 1px solid #fff
         border-width 0 3px 3px 0
+        @media (min-width 768px)
+          width 10px
+          height 15px
   & .error
     display block
     color #fa6e59
-    font-size .8rem
+    font-size .875rem
     text-align right
+    margin-top 10px
+    margin-bottom 0
+    line-height 1
+    @media (min-width 768px)
+      font-size 1rem
+      margin-top 12px
   & .candidates-info
     font-size 0.875rem
     color #a0a0a0
     margin-top 10px
-    // @media (min-width 768px)
-    //   font-size 1rem
-  >>> .grecaptcha-badge
+    line-height 1
+    @media (min-width 768px)
+      font-size 1rem
+      margin-top 12px
+  & >>> .grecaptcha-badge
     visibility hidden
     opacity 0
   & input[type="text"]
     // margin-top 0.5em
     // padding-left 0.5em
-    padding 0
-    text-indent 0.5em
+    padding 0 0 0 12px
+    // text-indent 0.5em
   & .select-container
     // flex 1
     position relative
@@ -605,9 +667,9 @@ theme-color = #fa6e59
       position relative
       z-index 10
       width 100%
-      height 30px
-      padding 0
-      text-indent .5em
+      height 32px
+      padding 0 0 0 12px
+      // text-indent .5em
       background-color transparent
       border none
       appearance none

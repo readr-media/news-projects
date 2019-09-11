@@ -399,15 +399,16 @@ theme-color-hidden = #6d5810
       position relative
       z-index 10
       width 100%
-      height 30px
-      padding 0
-      text-indent .5em
+      height 32px
+      padding 0 0 0 12px
+      // text-indent .5em
       background-color transparent
       border none
       appearance none
   & .form
     // max-height 60vh
-    padding 25px 25px 30px 25px
+    margin-top 25px
+    padding 0 25px 30px 25px
     overflow-y auto
     & > input
       display block
@@ -417,7 +418,7 @@ theme-color-hidden = #6d5810
       // padding-left .5em
       padding 0 0 0 12px
       // text-indent 0.5em
-      line-height 30px
+      line-height 32px
       background-color #a0a0a0
       border none
       border-radius 2px
@@ -437,11 +438,12 @@ theme-color-hidden = #6d5810
         margin-bottom 16px
       &.error
         margin-top 10px
+        margin-bottom 0
         color #fa6e59
         font-size .875rem
         text-align right
         &.error--board
-          font-size .75rem
+          // font-size .75rem
           text-align left
     & .current-info
       color #a0a0a0
@@ -455,7 +457,7 @@ theme-color-hidden = #6d5810
       width 100%
       height 50px
       // margin-top 15px
-      margin-top 20px
+      margin-top 30px
       font-size 1.25rem
       font-weight 700
       line-height 1.4
@@ -468,30 +470,34 @@ theme-color-hidden = #6d5810
       justify-content space-between
       align-items center
       line-height 1
-      h2
+      & h2
         margin 0
         color theme-color
         font-size 1rem
-      p
+        @media (min-width 768px)
+          font-size 1.25rem
+      & p
         margin 0
         color #a0a0a0
         font-size .875rem
-    &__amount
-      display flex
-      margin-top .5em
-      > p
-        margin-right 20px
-        color #fff
-        line-height 1.4
-      > input
-        width 60px
-        height 30px
-        margin-top .2em
-        padding-left .5em
-        line-height 30px
-        background-color #a0a0a0
-        border none
-        border-radius 2px
+        @media (min-width 768px)
+          font-size 1rem
+    // &__amount
+    //   display flex
+    //   margin-top .5em
+    //   > p
+    //     margin-right 20px
+    //     color #fff
+    //     line-height 1.4
+    //   > input
+    //     width 60px
+    //     height 30px
+    //     margin-top .2em
+    //     padding-left .5em
+    //     line-height 30px
+    //     background-color #a0a0a0
+    //     border none
+    //     border-radius 2px
     &__candidate
       margin-top 10px
       & + .form__candidate
@@ -539,7 +545,7 @@ theme-color-hidden = #6d5810
   & .eb-verify
     justify-content center
     padding-top 55px
-    padding-bottom 45px
+    // padding-bottom 45px
     & .image
       // flex none
       width 450px
@@ -551,6 +557,9 @@ theme-color-hidden = #6d5810
       //   object-fit contain
     & .form
       width 450px
-      padding 0
-      margin 40px auto 0
+      padding 0 0 45px 0
+      margin-top 40px
+      // margin 40px auto 0
+      margin-right auto
+      margin-left auto
 </style>

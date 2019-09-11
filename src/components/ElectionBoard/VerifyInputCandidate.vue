@@ -138,10 +138,10 @@ export default {
     position relative
     z-index 10
     width 100%
-    height 30px
-    padding 0
-    text-indent .5em
-    line-height 30px
+    height 32px
+    padding 0 0 0 12px
+    // text-indent .5em
+    line-height 32px
     background-color #a0a0a0
     border none
     border-radius 2px
@@ -151,7 +151,6 @@ export default {
     &::-webkit-input-placeholder
       font-size 1rem
       color #4c4c4c
-  
   &-container
     // display flex
     // > *
@@ -183,8 +182,10 @@ export default {
       &.open
         visibility visible
       & > p
-        padding-left .5em
-        line-height 30px
+        padding-left 12px
+        height 32px
+        display flex
+        align-items center
         user-select none
         cursor pointer
         & > span
@@ -193,5 +194,4 @@ export default {
   .error
     color #fa6e59
     font-size .75rem
-    
 </style>

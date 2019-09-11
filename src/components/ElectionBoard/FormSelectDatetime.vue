@@ -71,13 +71,12 @@ export default {
   justify-content space-between
   // margin-top .5em
   > select
-    width calc(33% - 5px)
-    height 30px
-    text-indent .5em
+    width calc(33.33% - 6px)
+    height 32px
+    // text-indent .5em
+    padding 0 0 0 12px
     background-color #a0a0a0
     border none
     border-radius 2px
-    -webkit-appearance none
-    -moz-appearance none
     appearance none
 </style>

@@ -153,25 +153,29 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .select-position
-  margin-top .5em
+  margin-top 12px
   text-align right
+  @media (min-width 768px)
+    margin-top 16px
   > input
     width 100%
-    height 30px
-    margin-top .5em
+    height 32px
+    margin-top 10px
     // padding-left .5em
-    padding 0
-    text-indent 0.5em
-    line-height 30px
+    padding 0 0 0 12px
+    // text-indent 0.5em
+    line-height 32px
     background-color #a0a0a0
     border none
     border-radius 2px
-  > button
+  & > button
     width 100%
-    margin-top .5em
-    padding .5em 0
+    margin-top 10px
+    padding 0
+    height 32px
+    line-height 32px
     font-weight 500
-    letter-spacing 1px
+    // letter-spacing 1px
     background-color #fa6e59
     border none
     border-radius 2px
@@ -183,10 +187,9 @@ export default {
     width calc(50% - 5px)
     background-color #a0a0a0
     border-radius 2px
-    &.open
-      &::after
-        transform rotate(180deg)
-    &::after
+    &.open:after
+      transform rotate(180deg)
+    &:after
       content ''
       position absolute
       top 0
@@ -198,14 +201,14 @@ export default {
       background-position center center
       background-repeat no-repeat
       transition transform .5s
-    select
+    & select
       position relative
       z-index 10
       width 100%
-      height 30px
-      padding 0
-      text-indent .5em
-      line-height 30px
+      height 32px
+      padding 0 0 0 12px
+      // text-indent .5em
+      line-height 32px
       background-color transparent
       border none
       -webkit-appearance none
@@ -213,5 +216,5 @@ export default {
       appearance none
   .error
     color #fa6e59
-    font-size .8rem
+    font-size .875rem
 </style>
