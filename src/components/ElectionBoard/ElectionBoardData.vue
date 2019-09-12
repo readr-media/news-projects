@@ -191,7 +191,7 @@ color-data = #4897db
     font-weight 400
     text-align justify
     margin-bottom 25px
-    line-height 1.64
+    line-height 1.8
   // &__select-pos
   //   margin-top 1em
   //   margin-top 25px

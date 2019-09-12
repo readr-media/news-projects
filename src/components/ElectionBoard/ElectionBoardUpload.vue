@@ -395,8 +395,10 @@ theme-color = #fa6e59
         margin-top 20px
     button
       width 100%
-      padding .5em
+      padding 0
       margin-top 30px
+      height 48px
+      line-height 48px
       color #000
       font-size 1.25rem
       font-weight 500
@@ -446,19 +448,22 @@ theme-color = #fa6e59
         flex-direction column
         justify-content center
         align-items center
-        height 50px
+        height 48px
+        line-height 48px
         color #000
         font-size 1.25rem
         text-align center
         border-radius 2px
         cursor pointer
+        @media (min-width 768px)
+          border-radius 6px
         > span
           font-weight 500
           line-height 1
       &--retake
         background-color #a0a0a0
       &--verified
-        margin-left 15px
+        margin-left 14px
         background-color theme-color
   &__step-4
     position relative
@@ -487,8 +492,10 @@ theme-color = #fa6e59
 @media (min-width: 768px)
   .eb-upload
     &__step-1
-      > div
+      & > div
        width 450px
+      & button
+        border-radius 6px
     &__step-3
       justify-content center
       padding 55px 0

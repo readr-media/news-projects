@@ -321,6 +321,7 @@ theme-color-hidden = #6d5810
   & button
     cursor pointer
     font-family "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, sans-serif
+    padding 0
   & .image
     // flex 1
     position relative
@@ -474,6 +475,7 @@ theme-color-hidden = #6d5810
       border-radius 2px
       @media (min-width 768px)
         margin-top 40px
+        border-radius 6px
     &__heading
       display flex
       justify-content space-between
@@ -541,6 +543,8 @@ theme-color-hidden = #6d5810
         line-height 1.4
         border none
         border-radius 2px
+        @media (min-width 768px)
+          border-radius 6px
     .btn
       &--grey
         background-color #a0a0a0
@@ -549,6 +553,8 @@ theme-color-hidden = #6d5810
           background-color #626262
       &--yellow
         background-color theme-color
+        height 48px
+        line-height 48px
         &:disabled
           color #000
           background-color theme-color-hidden

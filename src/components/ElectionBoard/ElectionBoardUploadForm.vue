@@ -408,7 +408,7 @@ theme-color = #fa6e59
     padding-right 0
     padding-left 0
     margin-top 40px
-    margin-top 45px
+    margin-bottom 45px
   & button
     cursor pointer
   & .item
@@ -495,6 +495,7 @@ theme-color = #fa6e59
       &.col--two
         > *
           width calc(50% - 5px)
+          padding 0
     & .image-preview__img
       margin-top 15px
       height 200px
@@ -556,12 +557,17 @@ theme-color = #fa6e59
     &--submit
       width 100%
       // margin-top 10px
-      padding-top 12px
-      padding-bottom 12px
+      // padding-top 12px
+      // padding-bottom 12px
+      padding 0
+      height 48px
+      line-height 48px
       font-weight 700
       // letter-spacing 1px
       background-color theme-color
       font-size 1.25rem
+      @media (min-width 768px)
+        border-radius 6px
       &:disabled
         color #000
         background-color #fcb6ac

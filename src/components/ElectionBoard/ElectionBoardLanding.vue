@@ -127,7 +127,11 @@ export default {
     sendGA (value) {
       window.ga('send', 'event', 'projects', 'click', value, { nonInteraction: false })
     }
-  }
+  },
+  beforeDestroy () {
+    this.wEl.removeEventListener('resize', this.alterWindowWidth)
+    this.wEl.removeEventListener('orientationChange', this.alterWindowWidth)
+  },
 }
 </script>
 <style lang="stylus" scoped>
@@ -259,11 +263,12 @@ color-data = #4897db
     // letter-spacing 1px
     text-align center
     background-color #a0a0a0
-    border-radius 6px
+    border-radius 2px
     cursor pointer
     position relative
     @media (min-width 768px)
       max-width 698px
+      border-radius 6px
     & + a
       margin-top 15px
   // .image
