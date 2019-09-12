@@ -54,7 +54,8 @@ router.get('/nonredis', authGoogleAPI, async (req, res) => {
     const sheets = google.sheets({version: 'v4', auth})
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: req.query.spreadsheet_id,
-      range: req.query.range
+      range: req.query.range,
+      majorDimension: req.query.majorDimension || 'ROWS'
     })
     if (response.data.values) {
       res.status(200).json(response.data.values)

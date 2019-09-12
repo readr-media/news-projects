@@ -22,7 +22,7 @@
           imgSrc="/proj-assets/fact-check/step-01.png"
           indexText="步驟一"
           :link="getTypeLink()"
-          :linkText="typeList.length > 0 ? '我要打逐字稿' : '目前無逐字稿需謄打'"
+          :linkText="untypedTranscriptList.length > 0 ? '我要打逐字稿' : '目前無逐字稿需謄打'"
           :progress="progress[1]"
           @click="clickTypeLinkBtn"
         />
@@ -31,9 +31,9 @@
           contentText="驗證逐字稿是否正確"
           imgSrc="/proj-assets/fact-check/step-02.png"
           indexText="步驟二"
-          :disabled="typeList.length < 1"
+          :disabled="untypedTranscriptList.length < 1"
           :link="getVerifyLink()"
-          :linkText="verifyList.length > 0 ? '我要驗證逐字稿' : '目前無逐字稿需驗證'"
+          :linkText="unverifiedTranscriptList.length > 0 ? '我要驗證逐字稿' : '目前無逐字稿需驗證'"
           :progress="progress[2]"
           @click="clickVerifyLinkBtn"
         />
@@ -61,7 +61,15 @@
         </a>
       </p>
     </section>
-    <lazy-component class="section cooperation">
+    <lazy-component class="section statistics narrow-width">
+      <DisinformationStatistics
+        v-for="(data, index) in statistics"
+        :key="data.candidate"
+        :data="data"
+        :index="index"
+      />
+    </lazy-component>
+    <lazy-component class="section cooperation narrow-width">
       <h2>功德牆</h2>
       <template v-if="netizenList.length > 0">
         <h3>赴湯蹈火鄉民</h3>
@@ -142,7 +150,7 @@
       </div>
     </section>
     <div
-      v-show="showFixedInfo && typeList.length > 0"
+      v-show="showFixedInfo && untypedTranscriptList.length > 0"
       class="info-fixed"
     >
       <a :href="getTypeLink()" target="_blank"><span>我願意盡一份力！</span>點我開始編打逐字稿</a>
@@ -151,61 +159,64 @@
   </div>
 </template>
 <script>
+import DisinformationStatistics from './components/DisinformationStatistics.vue'
 import StepBlock from './components/StepBlock.vue'
 import { READR_SITE_URL } from '../../constants'
-import { throttle, union, uniq } from 'lodash'
+import { get, throttle, union, uniq } from 'lodash'
 
-import FactCheckStoreModule from '../../store/modules/FactCheck'
+import storeModule from '../../store/modules/FactCheck'
 
-const fetchTypeVerifyData = (store) => {
-  return store.dispatch('FETCH_SHEET_WITHOUT_REDIS', {
-    filename: 'type-verify',
+const fetchGoogleSheet = (store, { stateName, spreadsheetId, range, majorDimension = 'ROWS' }) => store
+  .dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
+    name: stateName,
     params: {
-      spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
-      range: '1.貼上影片與秒數!E:Q'
+      spreadsheetId,
+      range,
+      majorDimension
     }
   })
-}
 
-const fetchVolunteerList = (store) => {
-  return Promise.all([
-    store.dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
-      name: 'netizen-1',
-      params: {
-        spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
-        range: '顯示在網站的志工名單!A:A'
-      }
-    }),
-    store.dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
-      name: 'netizen-2',
-      params: {
-        spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
-        range: '顯示在網站的志工名單!B:B'
-      }
-    }),
-    store.dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
-      name: 'volunteer',
-      params: {
-        spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
-        range: '顯示在網站的志工名單!C:C'
-      }
-    })
-  ])
-}
+const fetchTranscriptData = store => fetchGoogleSheet(store, {
+  stateName: 'transcript',
+  spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
+  range: '1.貼上影片與秒數!E:Q'
+})
 
-const fetchProgress = (store) => {
-  return store.dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
-    name: 'progress',
-    params: {
-      spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
-      range: 'Dashboard!E:E'
-    }
+const fetchVolunteerList = store => Promise.all([
+  fetchGoogleSheet(store, {
+    stateName: 'typeNetizen',
+    spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
+    range: '顯示在網站的志工名單!A:A'
+  }),
+  fetchGoogleSheet(store, {
+    stateName: 'verifyNetizen',
+    spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
+    range: '顯示在網站的志工名單!B:B'
+  }),
+  fetchGoogleSheet(store, {
+    stateName: 'volunteer',
+    spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
+    range: '顯示在網站的志工名單!C:C'
   })
-}
+])
+
+const fetchProgressData = store => fetchGoogleSheet(store, {
+  stateName: 'progress',
+  spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
+  range: 'Dashboard!E:E'
+})
+
+const fetchStatisticsData = store => fetchGoogleSheet(store, {
+  stateName: 'statistics',
+  spreadsheetId: '1C2pFWQNuixd7tBRz3FkPK6mzXEw7m7vrcJAgzg7Y7EI',
+  range: '排行榜!B:C',
+  majorDimension: 'COLUMNS'
+})
 
 export default {
   name: 'FactCheck',
   components: {
+    DisinformationStatistics,
     StepBlock
   },
   metaInfo() {
@@ -228,27 +239,30 @@ export default {
   },
   computed: {
     netizenList () {
-      const netizen1 = uniq((this.$store.state.FactCheck.googleSheet['netizen-1'] || [])
+      const typeNetizen = uniq((this.$store.state.FactCheck.googleSheet.typeNetizen || [])
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
-      const netizen2 = uniq((this.$store.state.FactCheck.googleSheet['netizen-2'] || [])
+      const verifyNetizen = uniq((this.$store.state.FactCheck.googleSheet.verifyNetizen || [])
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
-      return union(netizen1, netizen2).sort()
+      return union(typeNetizen, verifyNetizen).sort()
     },
-    progress ( ) {
-      const data = this.$store.state.FactCheck.googleSheet['progress'] || []
+    progress () {
+      const data = this.$store.state.FactCheck.googleSheet.progress || []
       return data.map(item => item[0]).filter(item => typeof item === 'string')
     },
-    sheet () {
-      return this.$store.state.googleSheet['type-verify'] || []
+    statistics () {
+      return get(this.$store, 'getters.FactCheck/statisticsFormated') || []
     },
-    typeList () {
-      return this.sheet
+    transcriptData () {
+      return get(this.$store, 'state.FactCheck.googleSheet.transcript') || []
+    },
+    untypedTranscriptList () {
+      return this.transcriptData
         .filter(item => item[0] && item[1] && item[8] !== this.typeLinkClicked && item[9] < 1)
         .sort((a, b) => a[9] - b[9])
         .map(item => item[8])
     },
-    verifyList () {
-      return this.sheet
+    unverifiedTranscriptList () {
+      return this.transcriptData
         .filter(item => Array.isArray(item) && typeof item[12] === 'string')
         .filter(item => item[12].match(/docs.google.com/) && item[12] !== this.verifyLinkClicked)
         .map(item => item[12])
@@ -259,16 +273,15 @@ export default {
     }
   },
   serverPrefetch () {
-    return fetchTypeVerifyData(this.$store)
+    this.registerStoreModule()
+    return fetchTranscriptData(this.$store)
   },
   created() {
-    this.$store.registerModule('FactCheck', FactCheckStoreModule)
-
     const params = this.$route.params.params
     const isTypeUrl = process.env.VUE_ENV === 'client' && params === 'transcript-type'
     const isVerifyUrl = process.env.VUE_ENV === 'client' && params === 'transcript-verify'
-    const canGoToTypePage = this.typeList.length > 0
-    const canGoToVerifyPage = this.verifyList.length > 0
+    const canGoToTypePage = this.untypedTranscriptList.length > 0
+    const canGoToVerifyPage = this.unverifiedTranscriptList.length > 0
     if (isTypeUrl && canGoToTypePage) {
       window.location.replace(this.getTypeLink())
     } else if (isTypeUrl && canGoToVerifyPage) {
@@ -280,8 +293,10 @@ export default {
     }
   },
   beforeMount () {
+    this.registerStoreModule(true)
     fetchVolunteerList(this.$store)
-    fetchProgress(this.$store)
+    fetchProgressData(this.$store)
+    fetchStatisticsData(this.$store)
   },
   mounted () {
     // this.detectCurrent()
@@ -305,12 +320,12 @@ export default {
   methods: {
     clickTypeLinkBtn (e) {
       this.typeLinkClicked = e.target.href
-      fetchTypeVerifyData(this.$store)
+      fetchTranscriptData(this.$store)
       ga('send', 'event', 'projects', 'click', `click type link`, { nonInteraction: false })
     },
     clickVerifyLinkBtn (e) {
-      this.verifyLinkClicked = this.verifyList[this.verifyLinkClickedIndex]
-      fetchTypeVerifyData(this.$store)
+      this.verifyLinkClicked = this.unverifiedTranscriptList[this.verifyLinkClickedIndex]
+      fetchTranscriptData(this.$store)
       ga('send', 'event', 'projects', 'click', `click verify link`, { nonInteraction: false })
     },
     detectCurrent () {
@@ -337,20 +352,23 @@ export default {
       })
     },
     getTypeLink () {
-      const random = Math.floor(Math.random() * this.typeList.length)
-      return this.typeList[random]
+      const random = Math.floor(Math.random() * this.untypedTranscriptList.length)
+      return this.untypedTranscriptList[random]
     },
     getVerifyLink () {
-      const random = Math.floor(Math.random() * this.verifyList.length)
+      const random = Math.floor(Math.random() * this.unverifiedTranscriptList.length)
       this.verifyLinkClickedIndex = random
-      return this.verifyList[random]
+      return this.unverifiedTranscriptList[random]
     },
     handleScroll: throttle(function () {
       this.detectCurrent()
     }, 300),
     handleScrollForHiddenEffect: throttle(function () {
       this.detectHiddenEle()
-    }, 300)
+    }, 300),
+    registerStoreModule (shouldPreserveState = false) {
+      this.$store.registerModule('FactCheck', storeModule, { preserveState: shouldPreserveState })
+    }
   }
 }
 </script>
@@ -452,10 +470,8 @@ export default {
       &:last-child
         img
           transform translateX(10px)
+  
   .cooperation
-    > *
-      width 90%
-      margin 0 auto
     h3
       margin-top 2em
       text-align center
@@ -488,6 +504,7 @@ export default {
     position fixed
     left 0
     bottom 0
+    z-index 999
     width 100%
     height 55px
     background-color #e56300
@@ -515,6 +532,13 @@ export default {
       font-size .875rem
       & + p
         margin-top .5em
+  
+  .narrow-width
+    > *
+      width 90%
+      margin-left auto
+      margin-right auto
+
   .hidden-effect
     opacity 0
     transition opacity .9s
@@ -571,6 +595,12 @@ export default {
       &__step
         width calc(50% - 20px)
         margin: 20px 10px 0
+    
+    .statistics
+      > *
+        width 60%
+    
+    
     .cooperation
       > *
         width 60%
@@ -640,6 +670,17 @@ export default {
         &:last-child
           img
             transform translateX(15px)
+    .statistics
+      display flex
+      justify-content center
+      padding-left 2.5%
+      padding-right 2.5%
+      > *
+        flex 1
+        max-width 340px
+        margin-left 10px
+        margin-right 10px
+    
     .cooperation
       &__list
         width calc((200px + 1em) * 3)

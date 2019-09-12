@@ -19,6 +19,7 @@ function _buildQuery (params = {}) {
     'where',
     'page',
     'sort',
+    'majorDimension'
   ]
   const snakeCaseParams = _.mapKeys(params, (value, key) => _.snakeCase(key))
   whitelist.forEach((ele) => {
@@ -32,6 +33,8 @@ function _buildQuery (params = {}) {
       })
     } else if (snakeCaseParams.hasOwnProperty(ele)) {
       query[ele] = snakeCaseParams[ele]
+    } else {
+      query[ele] = params[ele]
     }
   })
   query = qs.stringify(query)
