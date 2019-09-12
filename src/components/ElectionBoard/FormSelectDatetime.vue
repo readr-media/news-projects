@@ -70,7 +70,7 @@ export default {
   display flex
   justify-content space-between
   // margin-top .5em
-  > select
+  & > select
     width calc(33.33% - 6px)
     height 32px
     // text-indent .5em

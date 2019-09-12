@@ -27,9 +27,11 @@
     <span v-show="errors.length > 0" class="error">請選擇/輸入正確的 {{ errors.includes('district') ? '行政區' : '' }} {{ errors.includes('road') ? '街道路名' : '' }} </span>
   </div>
 </template>
+
 <script>
 import axios from 'axios'
 import { ADMINISTRATIVE_DISTRICT, } from './constants'
+import { GOOGLE_API_KEY } from 'api/config.js'
 
 const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
 const REGEX_ADDRESS_FOR_DATA = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))/
@@ -132,7 +134,7 @@ export default {
       if (this.errors.length === 0) {
         const geocoder = new google.maps.Geocoder()
 
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.addressSelected}&key=AIzaSyCgwPtUjWMKGKdp62Hnank6TTl3lhXwa3o&language=zh-TW`)
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.addressSelected}&key=${GOOGLE_API_KEY}&language=zh-TW`)
           .then(res => {
             if (res.data.status === 'OK' && res.data.results.length > 0) {
               const addressFormatted = this.formatAddress(res.data.results[0].formatted_address)
@@ -187,9 +189,9 @@ export default {
     width calc(50% - 5px)
     background-color #a0a0a0
     border-radius 2px
-    &.open:after
+    &.open::after
       transform rotate(180deg)
-    &:after
+    &::after
       content ''
       position absolute
       top 0

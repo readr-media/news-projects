@@ -398,12 +398,17 @@ theme-color = #fa6e59
 
 .eb-upload-form
   // padding 25px
-  padding 0 25px 30px 25px
+  // padding 0 25px 30px 25px
+  padding-right 25px
+  padding-left 25px
   margin-top 25px
+  margin-bottom 30px
   overflow-y auto
   @media (min-width 768px)
-    padding 0 0 45px 0
+    padding-right 0
+    padding-left 0
     margin-top 40px
+    margin-top 45px
   & button
     cursor pointer
   & .item
@@ -604,7 +609,7 @@ theme-color = #fa6e59
       width 20px
       height 20px
     &.verified, &.checked
-      &:after
+      &::after
         content ''
         position absolute
         top 0
@@ -649,9 +654,9 @@ theme-color = #fa6e59
     position relative
     background-color #a0a0a0
     border-radius 2px
-    &.open:after
+    &.open::after
       transform rotate(180deg)
-    &:after
+    &::after
       content ''
       position absolute
       top 0

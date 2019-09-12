@@ -358,7 +358,7 @@ theme-color-hidden = #6d5810
       @media (min-width 768px)
         width 20px
         height 20px
-      &.checked:after
+      &.checked::after
         content ''
         position absolute
         top 0
@@ -381,9 +381,9 @@ theme-color-hidden = #6d5810
     position relative
     background-color #a0a0a0
     border-radius 2px
-    &.open:after
+    &.open::after
       transform rotate(180deg)
-    &:after
+    &::after
       content ''
       position absolute
       top 0
@@ -408,8 +408,17 @@ theme-color-hidden = #6d5810
   & .form
     // max-height 60vh
     margin-top 25px
-    padding 0 25px 30px 25px
+    margin-bottom 30px
+    // padding 0 25px 30px 25px
+    padding-left 25px
+    padding-right 25px
     overflow-y auto
+    @media (min-width 768px)
+      width 450px
+      // padding 0 0 45px 0
+      padding-left 0
+      padding-right 0
+      margin 40px auto 45px auto
     & > input
       display block
       width 100%
@@ -469,17 +478,20 @@ theme-color-hidden = #6d5810
       display flex
       justify-content space-between
       align-items center
+      // todo firefox 文字會不見
       line-height 1
       & h2
         margin 0
         color theme-color
         font-size 1rem
+        // line-height 1
         @media (min-width 768px)
           font-size 1.25rem
       & p
         margin 0
         color #a0a0a0
         font-size .875rem
+        // line-height 1
         @media (min-width 768px)
           font-size 1rem
     // &__amount
@@ -555,11 +567,11 @@ theme-color-hidden = #6d5810
       //   position static
       //   width 100%
       //   object-fit contain
-    & .form
-      width 450px
-      padding 0 0 45px 0
-      margin-top 40px
-      // margin 40px auto 0
-      margin-right auto
-      margin-left auto
+    // & .form
+    //   width 450px
+    //   padding 0 0 45px 0
+    //   margin-top 40px
+    //   // margin 40px auto 0
+    //   margin-right auto
+    //   margin-left auto
 </style>

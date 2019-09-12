@@ -114,9 +114,9 @@ theme-color = #fa6e59
     position relative
     background-color #a0a0a0
     border-radius 2px
-    &.open:after
+    &.open::after
       transform rotate(180deg)
-    &:after
+    &::after
       content ''
       position absolute
       top 0
