@@ -401,7 +401,7 @@ theme-color = #fa6e59
       line-height 48px
       color #000
       font-size 1.25rem
-      font-weight 500
+      font-weight 700
       background-color theme-color
       border none
       border-radius 2px
@@ -420,6 +420,8 @@ theme-color = #fa6e59
         bottom 0
         width 100%
         height 100%
+        // padding-left 25px
+        // padding-right 25px
         object-fit contain
         object-position center center
       &__alert
@@ -441,7 +443,7 @@ theme-color = #fa6e59
           border-radius 5px
     .action
       display flex
-      padding 25px
+      padding 30px 25px 30px 25px
       > div
         flex 1
         display flex
@@ -458,8 +460,8 @@ theme-color = #fa6e59
         @media (min-width 768px)
           border-radius 6px
         > span
-          font-weight 500
-          line-height 1
+          font-weight 700
+          // line-height 1
       &--retake
         background-color #a0a0a0
       &--verified
@@ -498,16 +500,16 @@ theme-color = #fa6e59
         border-radius 6px
     &__step-3
       justify-content center
-      padding 55px 0
-      .preview
+      padding 40px 0 45px 0
+      & .preview
         flex 1
         width 450px
         margin 0 auto
-        > img
+        & > img
           object-fit contain
       .action
         width 450px
-        margin 30px auto 0
+        margin 40px auto 0
         padding 0
     &__step-4
       .form

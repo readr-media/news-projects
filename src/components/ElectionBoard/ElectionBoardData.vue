@@ -1,6 +1,6 @@
 <template>
   <section :class="{ 'no-scroll': candidate }" class="eb-data">
-    <h1>看板<span class="title--upload">追</span><span class="title--verify">追</span><span class="title--data">追</span></h1>
+    <h1>看板<span class="title--upload">追</span><span class="title--verify">追</span><span class="title--data">追</span>{{ is2018 ? '' : ' 2.0' }}</h1>
     <h2>每到選舉期間，大街小巷冒出的宣傳看板已經成為台灣的獨特風景。看板追追追計畫邀請你一起為此次選舉留下紀錄，為催生選舉廣告管理制度提供初步的想像。</h2>
     <FormSelectPosition
       :address="address"
@@ -13,8 +13,8 @@
       </select>
     </div>
     <div class="eb-data__year-title">
-      <p>2018 看板</p>
-      <a href="#" target="_blank">看 2020 看板資料</a>
+      <p>{{ is2018 ? '2018' : '2020' }} 看板</p>
+      <a :href="`/project/election-board/data${is2018 ? '' : '-2018'}`" target="_blank">看 {{ is2018 ? '2020' : '2018' }} 看板資料</a>
     </div>
     <template v-for="item in candidates">
       <router-link :key="item.uid" :to="`/project/election-board/data?candidate=${item.name}`" class="data-candidate" @click.native="sendGA(item.name)">
@@ -68,7 +68,8 @@ export default {
     return {
       address: '台北市信義區',
       type: 'mayors',
-      loading: true
+      loading: true,
+      is2018: false
     }
   },
   components: {
@@ -127,6 +128,10 @@ export default {
     .catch(() => {
       this.loading = false
     })
+  },
+  mounted () {
+    this.is2018 = this.$route.params.params.includes('2018')
+    console.log(this.is2018);
   },
   methods: {
     getBoardImage (candidate) {

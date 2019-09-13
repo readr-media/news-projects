@@ -161,7 +161,7 @@ export default {
       color #a0a0a0
       font-size 0.875rem
       margin-top 10px
-      line-height 1
+      // line-height 1
       @media (min-width 768px)
         font-size 1rem
         margin-top 12px

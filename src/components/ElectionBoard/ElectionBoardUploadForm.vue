@@ -420,7 +420,7 @@ theme-color = #fa6e59
       @media (min-width 768px)
         margin-bottom 40px
     &__title
-      line-height 1
+      // line-height 1
       margin-bottom 12px
       margin-top 0
       @media (min-width 768px)
@@ -460,7 +460,7 @@ theme-color = #fa6e59
           & img
             transform rotate(-180deg)
     &__heading
-      line-height 1
+      // line-height 1
       display flex
       align-items flex-end
       & > p
@@ -542,7 +542,7 @@ theme-color = #fa6e59
     //     color transparent
     //     text-shadow 0 0 0 theme-color
   & .btn
-    font-weight 500
+    font-weight 700
     border none
     border-radius 2px
     &--negative, &--positive
@@ -578,7 +578,7 @@ theme-color = #fa6e59
       display flex
       // justify-content center
       align-items center
-      line-height 1
+      // line-height 1
     // &__btn
     //   position relative
     //   width 20px
@@ -635,7 +635,7 @@ theme-color = #fa6e59
     text-align right
     margin-top 10px
     margin-bottom 0
-    line-height 1
+    // line-height 1
     @media (min-width 768px)
       font-size 1rem
       margin-top 12px
@@ -643,7 +643,7 @@ theme-color = #fa6e59
     font-size 0.875rem
     color #a0a0a0
     margin-top 10px
-    line-height 1
+    // line-height 1
     @media (min-width 768px)
       font-size 1rem
       margin-top 12px

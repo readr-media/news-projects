@@ -441,7 +441,7 @@ theme-color-hidden = #6d5810
       margin-top 25px
       margin-bottom 12px
       color #fff
-      line-height 1
+      // line-height 1
       @media (min-width 768px)
         font-size 1.25rem
         margin-top 35px
@@ -459,7 +459,7 @@ theme-color-hidden = #6d5810
       color #a0a0a0
       font-size 0.875rem
       margin-top 10px
-      line-height 1
+      // line-height 1
       @media (min-width 768px)
         font-size 1rem
         margin-top 12px
@@ -480,8 +480,7 @@ theme-color-hidden = #6d5810
       display flex
       justify-content space-between
       align-items center
-      // todo firefox 文字會不見
-      line-height 1
+      // line-height 1
       & h2
         margin 0
         color theme-color

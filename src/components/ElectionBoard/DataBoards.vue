@@ -10,7 +10,7 @@
           <p class="money">NT$ 1, 234, 567, 890</p>
           <a href="#" target="_blank" v-if="isLapW">看蘇貞昌政治獻金資料</a>
         </div>
-        <p class="descrip">宣傳支出與看板有關的金額總計為 5000000 元，並未區分單塊看板明細。宣傳支出與看板有關的金額總計為 5000000 元，並未區分單塊看板明細。</p>
+        <p class="descrip">宣傳支出與看板有關的金額總計為 5000000 元，並未區分單塊看板明細。</p>
         <a href="#" target="_blank" v-if="isMobW">看蘇貞昌政治獻金資料</a>
       </div>
 
@@ -253,6 +253,8 @@ theme-color = #4897db
     margin-top 30px
     margin-right -7px
     margin-left -7px
+    // todo depend on 政治獻金描述多寡
+    // min-height 206px
     @media (min-width 768px)
       margin-right -15px
       margin-left -15px
@@ -278,17 +280,20 @@ theme-color = #4897db
         cursor pointer
         padding-left 7px
         padding-right 7px
+        &:nth-of-type(1), &:nth-of-type(2)
+          margin-top 0
+        @media (min-width 576px)
+          width 33.33%
+          &:nth-of-type(3)
+            margin-top 0
         @media (min-width 768px)
           width 25%
           padding-left 15px
           padding-right 15px
           margin-top 30px
-          // width calc(25% - 22.5px)
-        &:nth-of-type(1), &:nth-of-type(2)
-          margin-top 0
-        @media (min-width 768px)
-          &:nth-of-type(3), &:nth-of-type(4)
+          &:nth-of-type(4)
             margin-top 0
+          // width calc(25% - 22.5px)
         & > p
           // color #fff
           // text-align justify

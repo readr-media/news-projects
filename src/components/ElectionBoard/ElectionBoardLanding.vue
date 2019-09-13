@@ -6,26 +6,32 @@
       <img :src="`/proj-assets/election-board/images/title-${isLapW ? 'lap' : 'mob'}.png`" alt="看板追追追">
       <div class="menu">
         <div>
-          <div class="menu__item menu__item--upload" @click="sendGA('upload')">
-            <router-link to="/project/election-board/upload">
-              <img src="/proj-assets/election-board/images/upload.png" alt="我要上傳">
-              <div>我要上傳</div>
-            </router-link>
-          </div>
-          <div class="menu__item menu__item--verify" @click="sendGA('verified')">
-            <router-link to="/project/election-board/verify" >
-              <img src="/proj-assets/election-board/images/check.png" alt="幫忙驗證">
-              <div>幫忙驗證</div>
-            </router-link>
-          </div>
-          <div class="menu__item menu__item--data" @click="sendGA('seedata')">
-            <router-link to="/project/election-board/data">
-              <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
-              <div>我要看資料</div>
-            </router-link>
-          </div>
+          <router-link to="/project/election-board/upload">
+            <div class="menu__item menu__item--upload" @click="sendGA('upload')">
+              <!-- <router-link to="/project/election-board/upload"> -->
+                <img src="/proj-assets/election-board/images/upload.png" alt="我要上傳">
+                <div>我要上傳</div>
+              <!-- </router-link> -->
+            </div>
+          </router-link>
+          <router-link to="/project/election-board/verify" >
+            <div class="menu__item menu__item--verify" @click="sendGA('verified')">
+              <!-- <router-link to="/project/election-board/verify" > -->
+                <img src="/proj-assets/election-board/images/check.png" alt="幫忙驗證">
+                <div>幫忙驗證</div>
+              <!-- </router-link> -->
+            </div>
+          </router-link>
+          <router-link to="/project/election-board/data">
+            <div class="menu__item menu__item--data" @click="sendGA('seedata')">
+              <!-- <router-link to="/project/election-board/data"> -->
+                <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
+                <div>我要看資料</div>
+              <!-- </router-link> -->
+            </div>
+          </router-link>
         </div>
-        <a href="#" target="_blank" class="menu__2018data">2018 看板資料</a>
+        <a href="/project/election-board/data-2018" target="_blank" class="menu__2018data">2018 看板資料</a>
       </div>
       <!-- <div class="image">
         <img src="/proj-assets/election-board/images/title.png" alt="看板追追追">
@@ -60,6 +66,11 @@
       <p>工程：HY Tan、mich</p>
       <p>資料協力：<a href="https://councils.g0v.tw" target="_blank">投票指南</a></p>
       <p>CC BY-SA 3.0</p>
+    </div>
+
+    <div class="thanks">
+      <p class="thanks__title">感謝 2020 一起追的朋友</p>
+      <p class="thanks__name">A-Hsiung LinAYAAlice ChenAlvitaAmberAndy LiaoAri HsuAriel ChouArtemis C.AskaAstor LimBaronBilly TiBodieBrian HsuBuzuhooC G CCCCWCKCK LinCP值最高打字員CW TsaiCafe la PauseCarltsaiChan GemeChangYi WangChenlingChuyu HuangCliffClytieDDLDaniel HsuDaniela AertDaniela AertsDeVDesolveDuncan HUANGEAEASONEdward PaiElaine JiangElaine KungEliane JiangEsther ChangEvelynEven TanFangFrank ChenFreddy LiuG.B.GBGJGiselleGoldieGraysonGuy WuHOLYBHankHanna ChenHoward YangHsinTzuHugo CheongICIKEA ChenIdIssac ShihIzaac LuoJeiJet S.C.Jill LinJong wagaJoseph DuJouanJulian ZhuKCHKVLKarenKaren Karen LAiKaren LaiKate LiaoKen LinKrisKris YenKueiLancelotLandyFoxLauren LuLaw LLee桑Leo ChienLeo Chien 一貫三不是啾啾鞋不知道有沒有和其他傑哥撞名五彩痣仲漁余承翰修奕蘋傑哥公民叮劉于緁劉士煒劉宇庭劉泰谷劉薈博麗貓吳亞璇吳亦捷吳懿妏吳政哲吳聲吳虹儒呂旻璁呂昀慶呂育誠周依筠呱呱唯一支持視網膜與神獸柚子嘎嘎嘟嘟d男友地方太太均均坎門夕鴿周星星大總統其實是陰陽師小灰小碗麵線糊香菜多一點山爪帕拉幕之內一步廖婉婷張妄張庭瑄張心佳張敬婕張晉瑋張森林張沛淇張瑋翔張簡宏名張繼文張詩婷張雅涵張雲耀張騰元彭惠芬恆春太太恬興我要吃花生醬口味的漢堡包我頭好痛(;´༎ຶД༎ຶ`)戴文欣施佳吟施旻君暐浪曼努曾天白曾瑄月球木木李仁維李佩璇李光雄李孟桓李安泰李明勳李晉緯李若嫻李鴻亞杜咪咪杜宛庭林佩蓁林佳穎林依叡林倢愷林力榛林力癸林士粧林宓璇林宣妏林巧豈林志剛林文雄林玿弘林穎林莉榛林裕叡</p>
     </div>
     <!-- <h1>其他議題</h1> -->
     <!-- <RelatedReports /> -->
@@ -147,34 +158,38 @@ color-data = #4897db
   align-items center
   min-height 100vh
   // padding 80px 0 20px
-  padding 80px 25px 20px 25px
-  background-color rgba(0,0,0,1)
+  padding 80px 25px 40px 25px
+  // background-color rgba(0,0,0,1)
+  max-width 425px
+  margin-right auto
+  margin-left auto
   // overflow hidden
   @media (min-width 768px)
     padding 88px 0
     justify-content flex-start
+    max-width 698px
   // background-color rgba(0,0,0,1)
   // z-index -2
   & a
     color #000
     text-decoration none
     cursor pointer
-  & h1
-    margin .5em 0 0
-    color #fff
-    font-weight 300
+  // & h1
+  //   margin .5em 0 0
+  //   color #fff
+  //   font-weight 300
   & main
     display flex
     position relative
     // max-width 270px
-    max-width 425px
+    // max-width 425px
     width 100%
     justify-content space-between
     margin-bottom 68px
     @media (min-width 768px)
       flex-direction column
       align-items center
-      max-width 698px
+      // max-width 698px
       margin-bottom 30px
     & > img
       // max-width 100px
@@ -202,7 +217,7 @@ color-data = #4897db
       position relative
       width 51.85%
       text-align center
-      line-height 1.3
+      line-height 1
       @media (min-width 768px)
         width 100%
       & > div
@@ -210,18 +225,27 @@ color-data = #4897db
           display flex
           justify-content space-between
       // max-width 140px
+      & a
+        display block
+        @media (min-width 768px)
+          width 30.66%
+        &:not(:last-child)
+          margin-bottom 20px
+          @media (min-width 768px)
+            margin-bottom 0
       &__item
         border-radius 2px
         font-weight 700
         padding-top 20px
         padding-bottom 15px
         @media (min-width 768px)
-          width 30.66%
+          // width 30.66%
           border-radius 6px
-        &:not(:last-child)
-          margin-bottom 20px
-          @media (min-width 768px)
-            margin-bottom 0
+          font-size 1.25rem
+        // &:not(:last-child)
+        //   margin-bottom 20px
+        //   @media (min-width 768px)
+        //     margin-bottom 0
         & img
           width 48px
           vertical-align middle
@@ -251,15 +275,15 @@ color-data = #4897db
   //     flex 1
   //     max-width 200px
   & > a
-    max-width 425px
+    // max-width 425px
     // width 90%
     width 100%
-    height 50px
+    height 48px
     // margin-top 25px
     // margin-top 68px
     font-size 1.25rem
     font-weight 700
-    line-height 50px
+    line-height 48px
     // letter-spacing 1px
     text-align center
     background-color #a0a0a0
@@ -267,7 +291,7 @@ color-data = #4897db
     cursor pointer
     position relative
     @media (min-width 768px)
-      max-width 698px
+      // max-width 698px
       border-radius 6px
     & + a
       margin-top 15px
@@ -325,17 +349,35 @@ color-data = #4897db
   //         &.feature-hide
   //           margin-top 0
   //           font-size .875rem
-  .credit
+  & .credit
     // width 80%
-    margin-top 20px
+    margin-top 25px
+    margin-bottom 35px
     color #a0a0a0
     font-size .875rem
     text-align center
+    line-height 1.8
+    // @media (min-width 768px)
+    //   margin-top 25px
     > img
       width 28px
+      vertical-align middle
+      margin-bottom 10px
+      // @media (min-width 768px)
+      //   margin-bottom 14px
     a
       color #a0a0a0
-  .intro
+  & .thanks
+    color #a0a0a0
+    text-align center
+    &__title
+      font-size 1.25rem
+      font-weight 600
+      margin-bottom 15px
+    &__name
+      font-size 0.875rem
+      line-height 1.6
+  & .intro
     display flex
     align-items center
     position fixed
@@ -369,13 +411,18 @@ color-data = #4897db
       width 100%
       max-height 100%
       height auto
-      padding 45px 20px 30px
+      // padding 45px 20px 30px
+      padding 40px 20px 25px 20px
       background-color #000
       border 2px solid #fff
+      @media (min-width 768px)
+        padding 45px 25px 30px 25px
+        // padding-right 25px
+        // padding-left 25px
       h3
         color #fff
         font-size 1.25rem
-        font-weight 500
+        font-weight 700
         .title
           &--upload
             color color-upload
@@ -384,24 +431,33 @@ color-data = #4897db
           &--data
             color color-data
       a
+        // margin-top 20px
         margin-top 20px
-        padding .2em .2em
+        // padding 0
         color #000
         font-size 1.25rem
-        font-weight 500
+        font-weight 700
         text-align center
         background-color #a0a0a0
         border-radius 2px
+        height 48px
+        line-height 48px
+        @media (min-width 768px)
+          border-radius 6px
+          margin-top 25px
       .content
         flex 1
         position relative
-        margin-top 25px
+        margin-top 20px
         overflow-y auto
+        @media (min-width 768px)
+          margin-top 25px
         &-container
           width 100%
           color #fff
-          text-align justify
-          font-weight 300
+          line-height 1.8
+          // text-align justify
+          // font-weight 300
           p
             & + p
               margin-top 1em
