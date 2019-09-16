@@ -1,18 +1,19 @@
 <template>
   <section class="eb-verify">
     <div class="image">
-      <img :src="boardImage" alt="">
+      <!-- <img :src="boardImage" alt=""> -->
+      <img src="https://attach.setn.com/newsimages/2018/03/11/1277743-PH.jpg" alt="">
     </div>
     <div class="form">
       <div class="form__heading">
         <h2>看板資訊</h2>
         <p>此資料已被驗證 {{ board.verifiedAmount || 0 }} 次</p>
       </div>
-      <div class="form__amount">
+      <!-- <div class="form__amount">
         <p>照片裡有幾位縣市長 / 議員候選人？</p>
         <input v-model.number="candidateAmount" type="number" pattern="[0-9]*">
-      </div>
-      <p>他 / 她是誰？</p>
+      </div> -->
+      <p>他是誰？</p>
       <p v-show="errors.includes('empty')" class="error">請填寫候選人資訊</p>
 
       <VerifyInputCandidate
@@ -25,10 +26,34 @@
         :index="n"
         :selectedCandidates="selectedCandidates"
         class="form__candidate"
-        @updateSelectedId="updateSelectedCandidates" />
+        @updateSelectedId="updateSelectedCandidates"
+      />
       
+      <p>標語</p>
       <input v-model="slogan" type="text" placeholder="請填寫看板標語（多句請用／分隔）">
-      <p>目前資訊： {{ board.slogan || ' ' }}</p>
+      <!-- <p class="current-info">目前資訊： {{ board.slogan || ' ' }}</p> -->
+      <p class="current-info">目前資訊：小英栽培/吳沛憶 我陪你</p>
+
+      <div class="party-symbol-item">
+        <input type="checkbox" id="party-symbol" :class="['checkbox', hasPartySymbol ? 'checked' : '']" v-model="hasPartySymbol">
+        <label for="party-symbol">有黨徽</label>
+      </div>
+
+      <p>類型</p>
+      <div class="select-container">
+        <select
+          @blur="handleSelectBlur"
+          @change="handleSelectChange"
+          @focus="handleSelectFocus"
+        >
+          <option disabled selected value="">請選擇看板類型</option>
+          <option value="戶外看板">戶外看板</option>
+          <option value="旗幟">旗幟</option>
+          <option value="競選總部">競選總部</option>
+          <option value="其它">其它</option>
+        </select>
+      </div>
+
       <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後...</p>
       <p v-if="hasError" class="error error--board">系統發生錯誤，請重新整理或稍後再試...</p>
       <button :disabled="(!boardID && loading) || hasError" class="btn--yellow" @click="uploadBoardVerified(true)">沒問題送出</button>
@@ -98,7 +123,8 @@ export default {
       selectedCandidates: [],
       showVerifyBoards: false,
       slogan: '',
-      loading: false
+      loading: false,
+      hasPartySymbol: false
     }
   },
   computed: {
@@ -269,6 +295,15 @@ export default {
       if (this.errors.length < 1) {
         this.uploadBoardVerified(true)
       }
+    },
+    handleSelectBlur (e) {
+      e.target.parentNode.classList.remove('open')
+    },
+    handleSelectChange (e) {
+      e.target.parentNode.classList.remove('open')
+    },
+    handleSelectFocus (e) {
+      e.target.parentNode.classList.add('open')
     }
   }
 }
@@ -283,88 +318,199 @@ theme-color-hidden = #6d5810
   flex-direction column
   height 100vh
   background-color #000
-  button
+  & button
     cursor pointer
-  .image
-    flex 1
+    font-family "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, sans-serif
+    padding 0
+  & .image
+    // flex 1
     position relative
-    img
+    & img
+      // position absolute
+      // top 0
+      // left 0
+      // right 0
+      // bottom 0
+      width 100%
+      height auto
+      vertical-align middle
+      // height 100%
+      // object-fit contain
+      // object-position center center
+      // image-orientation from-image
+  & .party-symbol-item
+    margin-top 25px
+    color #fff
+    display flex
+    align-items center
+    line-height 1
+    @media (min-width 768px)
+      margin-top 35px
+    & input
+      position relative
+      width 16px
+      height 16px
+      padding 0
+      background-color #a0a0a0
+      border none
+      border-radius 2px
+      appearance none
+      outline none
+      @media (min-width 768px)
+        width 20px
+        height 20px
+      &.checked::after
+        content ''
+        position absolute
+        top 0
+        left 5px
+        transform rotate(45deg)
+        width 7px
+        height 14px
+        border 1px solid #fff
+        border-width 0 3px 3px 0
+        @media (min-width 768px)
+          width 10px
+          height 15px
+    & label
+      margin-left 10px
+      user-select none
+      @media (min-width 768px)
+        font-size 1.25rem
+  & .select-container
+    // flex 1
+    position relative
+    background-color #a0a0a0
+    border-radius 2px
+    &.open::after
+      transform rotate(180deg)
+    &::after
+      content ''
       position absolute
       top 0
-      left 0
       right 0
-      bottom 0
+      width 30px
+      height 30px
+      background-image url(/proj-assets/election-board/images/filter.png)
+      background-size 16px auto
+      background-position center center
+      background-repeat no-repeat
+      transition transform .5s
+    & select
+      position relative
+      z-index 10
       width 100%
-      height 100%
-      object-fit contain
-      object-position center center
-      image-orientation from-image
-  .form
-    max-height 60vh
-    padding 25px
+      height 32px
+      padding 0 0 0 12px
+      // text-indent .5em
+      background-color transparent
+      border none
+      appearance none
+  & .form
+    // max-height 60vh
+    margin-top 25px
+    margin-bottom 30px
+    // padding 0 25px 30px 25px
+    padding-left 25px
+    padding-right 25px
     overflow-y auto
-    > input
+    @media (min-width 768px)
+      width 450px
+      // padding 0 0 45px 0
+      padding-left 0
+      padding-right 0
+      margin 40px auto 45px auto
+    & > input
       display block
       width 100%
-      height 30px
+      height 32px
       margin-top 10px
-      padding-left .5em
-      line-height 30px
+      // padding-left .5em
+      padding 0 0 0 12px
+      // text-indent 0.5em
+      line-height 32px
       background-color #a0a0a0
       border none
       border-radius 2px
       &::-webkit-input-placeholder
         font-size 1rem
         color #4c4c4c
-    > p
-      margin-top 5px
+    & > p
+      // margin-top 5px
+      // margin-top 15px
+      margin-top 25px
+      margin-bottom 12px
       color #fff
+      // line-height 1
+      @media (min-width 768px)
+        font-size 1.25rem
+        margin-top 35px
+        margin-bottom 16px
       &.error
         margin-top 10px
+        margin-bottom 0
         color #fa6e59
         font-size .875rem
         text-align right
         &.error--board
-          font-size .75rem
+          // font-size .75rem
           text-align left
-    > button
+    & .current-info
+      color #a0a0a0
+      font-size 0.875rem
+      margin-top 10px
+      // line-height 1
+      @media (min-width 768px)
+        font-size 1rem
+        margin-top 12px
+    & > button
       width 100%
       height 50px
-      margin-top 15px
+      // margin-top 15px
+      margin-top 30px
       font-size 1.25rem
       font-weight 700
       line-height 1.4
       border none
       border-radius 2px
+      @media (min-width 768px)
+        margin-top 40px
+        border-radius 6px
     &__heading
       display flex
       justify-content space-between
       align-items center
-      h2
+      // line-height 1
+      & h2
         margin 0
         color theme-color
         font-size 1rem
-      p
+        // line-height 1
+        @media (min-width 768px)
+          font-size 1.25rem
+      & p
         margin 0
         color #a0a0a0
         font-size .875rem
-    &__amount
-      display flex
-      margin-top .5em
-      > p
-        margin-right 20px
-        color #fff
-        line-height 1.4
-      > input
-        width 60px
-        height 30px
-        margin-top .2em
-        padding-left .5em
-        line-height 30px
-        background-color #a0a0a0
-        border none
-        border-radius 2px
-
+        // line-height 1
+        @media (min-width 768px)
+          font-size 1rem
+    // &__amount
+    //   display flex
+    //   margin-top .5em
+    //   > p
+    //     margin-right 20px
+    //     color #fff
+    //     line-height 1.4
+    //   > input
+    //     width 60px
+    //     height 30px
+    //     margin-top .2em
+    //     padding-left .5em
+    //     line-height 30px
+    //     background-color #a0a0a0
+    //     border none
+    //     border-radius 2px
     &__candidate
       margin-top 10px
       & + .form__candidate
@@ -384,18 +530,20 @@ theme-color-hidden = #6d5810
         margin-right 5px
         color transparent
         text-shadow 0 0 0 theme-color
-    .action
+    & .action
       display flex
       justify-content space-between
-      margin-top 10px
+      margin-top 12px
       > button
-        width calc(50% - 5px)
+        width calc(50% - 6px)
         height 75px
         font-size 1.25rem
         font-weight 700
         line-height 1.4
         border none
         border-radius 2px
+        @media (min-width 768px)
+          border-radius 6px
     .btn
       &--grey
         background-color #a0a0a0
@@ -404,25 +552,31 @@ theme-color-hidden = #6d5810
           background-color #626262
       &--yellow
         background-color theme-color
+        height 48px
+        line-height 48px
         &:disabled
           color #000
           background-color theme-color-hidden
 
-@media (min-width: 768px)
-  .eb-verify
+@media (min-width 768px)
+  & .eb-verify
     justify-content center
-    padding 55px 0
-    .image
-      flex none
+    padding-top 55px
+    // padding-bottom 45px
+    & .image
+      // flex none
       width 450px
-      height 300px
+      // height 300px
       margin 0 auto
-      img
-        position static
-        width 100%
-        object-fit contain
-    .form
-      width 450px
-      padding 0
-      margin 25px auto 0
+      // img
+      //   position static
+      //   width 100%
+      //   object-fit contain
+    // & .form
+    //   width 450px
+    //   padding 0 0 45px 0
+    //   margin-top 40px
+    //   // margin 40px auto 0
+    //   margin-right auto
+    //   margin-left auto
 </style>
