@@ -15,7 +15,7 @@ export default {
     dataTimeline: []
   }),
   actions: {
-    async ADD_LIKE ({ commit }, { resource, timestamp }) {
+    async ADD_LIKE ({ commit }, { timestamp }) {
       commit('INCREMENT_LIKE', timestamp)
       return appendSheet({
         params: {
