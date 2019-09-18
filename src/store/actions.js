@@ -10,6 +10,21 @@ import {
 } from '../api'
 
 export default {
+  ADD_SUBSCRIPTION: ({}, { email, datetime, slug, url }) => {
+    return appendSheet({
+      params: {
+        spreadsheetId: '1-7YTT5Y-VINVAYy8Aem0kGnerQfTEoBASQxI_J1YR8c',
+        range: 'Email',
+        valueInputOption: 'RAW',
+        resource: {
+          majorDimension: 'ROWS',
+          values: [
+            [ email, datetime, slug, url ]
+          ]
+        }
+      }
+    })
+  },
   FETCH_REPORTS: ({ state, commit }, { params }) => {
     return getReports({ params })
     .then(({ status, body }) => {
