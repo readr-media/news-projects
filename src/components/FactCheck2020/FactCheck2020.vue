@@ -61,7 +61,15 @@
         </a>
       </p>
     </section>
+    <lazy-component class="section subscr">
+      <h2>留下你的 E-mail</h2>
+      <div class="subscr-container">
+        <p>媒體查證結果及完整資料會在 10 月正式上線時通知你！</p>
+        <Subscription />
+      </div>
+    </lazy-component>
     <lazy-component class="section statistics narrow-width">
+      <h2>看看現在誰是冠軍</h2>
       <DisinformationStatistics
         v-for="(data, index) in statistics"
         :key="data.candidate"
@@ -161,6 +169,7 @@
 <script>
 import DisinformationStatistics from './components/DisinformationStatistics.vue'
 import StepBlock from './components/StepBlock.vue'
+import Subscription from 'src/components/Subscription.vue'
 import { READR_SITE_URL } from '../../constants'
 import { get, throttle, union, uniq } from 'lodash'
 
@@ -217,7 +226,8 @@ export default {
   name: 'FactCheck',
   components: {
     DisinformationStatistics,
-    StepBlock
+    StepBlock,
+    Subscription
   },
   metaInfo() {
     return {
@@ -471,6 +481,27 @@ export default {
         img
           transform translateX(10px)
   
+  .subscr
+    padding 20px 2.5% 20px
+    margin-bottom 55px
+    > *
+      & + *
+        margin-top 20px
+    &-container
+      padding 1em
+      background-color rgba(255, 255, 255, .1)
+      border-radius 4px
+      > p
+        line-height 1.45 
+      .subscription-wrapper
+        margin-top 20px
+      .subscription__btn
+        background-color #e56300
+  
+  .statistics
+    .statistics-data.first
+      margin-top 20px
+  
   .cooperation
     h3
       margin-top 2em
@@ -596,10 +627,19 @@ export default {
         width calc(50% - 20px)
         margin: 20px 10px 0
     
+    .subscr
+      padding 20px 0
+      background-color rgba(255,255,255,0.1)
+      &-container
+        width 60%
+        margin 20px auto 0
+        padding 0
+        background-color transparent
+        > p
+          text-align center
     .statistics
       > *
         width 60%
-    
     
     .cooperation
       > *
@@ -673,9 +713,12 @@ export default {
     .statistics
       display flex
       justify-content center
+      flex-wrap wrap
       padding-left 2.5%
       padding-right 2.5%
-      > *
+      > h2
+        width 100%
+      > div
         flex 1
         max-width 340px
         margin-left 10px
