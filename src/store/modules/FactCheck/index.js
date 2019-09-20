@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { get } from 'lodash'
+import { concat, get, values } from 'lodash'
 import { getSheetWithoutRedis } from '../../../api'
 
 export default {
@@ -11,17 +11,28 @@ export default {
         typeNetizen: [],
         transcript: [],
         verifyNetizen: [],
+        verifiedDataItems: [],
+        verifiedDataCount: [],
         volunteer: []
-      }
+      },
+      dataListLoading: false,
+      page: 1
     }
   },
   actions: {
-    async FETCH_GOOGLE_SHEET ({ commit }, { name, params }) {
+    async FETCH_GOOGLE_SHEET ({ state, commit }, { name, params, isLoadMore = false }) {
       try {
         const res = await getSheetWithoutRedis({ params })
         const data = get(res, 'body')
-        commit('SET_GOOGLE_SHEET', { name, data })
-        return data
+        if (isLoadMore) {
+          const orig = values(get(state, `googleSheet.${name}`) || [])
+          const concatedData = concat(orig, data)
+          commit('SET_GOOGLE_SHEET', { name, data: concatedData })
+          return concatedData
+        } else {
+          commit('SET_GOOGLE_SHEET', { name, data })
+          return data
+        }
       } catch (error) {
         return error
       }
@@ -30,27 +41,46 @@ export default {
   mutations: {
     SET_GOOGLE_SHEET: (state, { name, data }) => {
       Vue.set(state.googleSheet, name, data)
-    }
+    },
+    SET_LOADING_STATUS: (state, { status }) => Vue.set(state, 'dataListLoading', status),
+    SET_PAGE: (state, value) => Vue.set(state, 'page', value)
   },
   getters: {
     statisticsFormated: state => state.googleSheet.statistics.map(data => ({
-      candidate: data[1],
+      candidate: data[0],
       amount: {
-        wrong: data[2],
-        real: data[4],
-        controversial: data[6],
-        verifiable: data[10],
-        verified: data[8],
-        unverification: data[12],
-        normal: data[14],
-        frequency: data[17],
-        total: data[16]
+        wrong: data[1],
+        real: data[3],
+        controversial: data[5],
+        verifiable: data[9],
+        verified: data[7],
+        unverification: data[11],
+        normal: data[13],
+        frequency: data[16],
+        total: data[15]
       },
       percentage: {
-        wrong: Number.isNaN(Number(data[3])) ? 0 : Number(data[3]),
-        real: Number.isNaN(Number(data[5])) ? 0 : Number(data[5]),
-        controversial: Number.isNaN(Number(data[7])) ? 0 : Number(data[7]),
+        wrong: Number.isNaN(Number(data[2])) ? 0 : Number(data[2]),
+        real: Number.isNaN(Number(data[4])) ? 0 : Number(data[4]),
+        controversial: Number.isNaN(Number(data[6])) ? 0 : Number(data[6]),
       }
-    })).sort((a, b) => a.amount.wrong - b.amount.wrong)
+    })).sort((a, b) => b.amount.wrong - a.amount.wrong),
+    verifiedDataFormated: state => state.googleSheet.verifiedDataItems
+      .filter(data => data[0] && data[0] !== '#N/A')
+      .map(data => ({
+        candidate: data[0],
+        sentences: data[1],
+        result: data[2],
+        tags: data[3],
+        description: data[4].replace(/\n/g, '<br>'),
+        reference: data[5],
+        date: data[6],
+        media: data[7],
+        typescript: data[8]
+      })),
+    verifiedDataCountFormated: state => {
+      const count = get(state, 'googleSheet.verifiedDataCount.0.0') || 0
+      return Number(count)
+    }
   }
 }

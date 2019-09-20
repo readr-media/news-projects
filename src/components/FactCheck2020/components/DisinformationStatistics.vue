@@ -45,7 +45,7 @@
         />
       </div>
       <div class="legend">
-        <div v-if="percentage.real > 0" class="real">真實無誤</div>
+        <div v-if="percentage.real > 0" class="real">正確</div>
         <div v-if="percentage.controversial > 0" class="controversial">片面事實</div>
         <div v-if="percentage.wrong > 0" class="wrong">含有錯誤訊息</div>
       </div>
@@ -153,6 +153,7 @@ export default {
     .bar
       display flex
       height 15px
+      font-size .75rem
       > div
         display flex
         justify-content center

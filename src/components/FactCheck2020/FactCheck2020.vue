@@ -77,6 +77,10 @@
         :index="index"
       />
     </lazy-component>
+    <lazy-component class="section narrow-width">
+      <h2>候選人們究竟說了什麼</h2>
+      <DisinformationData @updateDataList="updateDataList" />
+    </lazy-component>
     <lazy-component class="section cooperation narrow-width">
       <h2>功德牆</h2>
       <template v-if="netizenList.length > 0">
@@ -167,6 +171,7 @@
   </div>
 </template>
 <script>
+import DisinformationData from './components/DisinformationData.vue'
 import DisinformationStatistics from './components/DisinformationStatistics.vue'
 import StepBlock from './components/StepBlock.vue'
 import Subscription from 'src/components/Subscription.vue'
@@ -175,14 +180,15 @@ import { get, throttle, union, uniq } from 'lodash'
 
 import storeModule from '../../store/modules/FactCheck'
 
-const fetchGoogleSheet = (store, { stateName, spreadsheetId, range, majorDimension = 'ROWS' }) => store
+const fetchGoogleSheet = (store, { stateName, spreadsheetId, range, majorDimension = 'ROWS', isLoadMore }) => store
   .dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
     name: stateName,
     params: {
       spreadsheetId,
       range,
       majorDimension
-    }
+    },
+    isLoadMore
   })
 
 const fetchTranscriptData = store => fetchGoogleSheet(store, {
@@ -217,14 +223,32 @@ const fetchProgressData = store => fetchGoogleSheet(store, {
 
 const fetchStatisticsData = store => fetchGoogleSheet(store, {
   stateName: 'statistics',
-  spreadsheetId: '1C2pFWQNuixd7tBRz3FkPK6mzXEw7m7vrcJAgzg7Y7EI',
-  range: '排行榜!B:C',
+  spreadsheetId: '1YR6C5hTKxCguXH9txtajEcbOW7YNMiMFZTC3M3guuf8',
+  range: '排行榜!B2:C18',
   majorDimension: 'COLUMNS'
 })
+
+const fetchVerifiedData = (store, { sheet = '全部資料', page = 1, isLoadMore = false } = {}) =>{
+  const MAX_RESULT = 5
+  return Promise.all([
+    fetchGoogleSheet(store, {
+      stateName: 'verifiedDataItems',
+      spreadsheetId: '1YR6C5hTKxCguXH9txtajEcbOW7YNMiMFZTC3M3guuf8',
+      range: `${sheet}!A${(page - 1) * MAX_RESULT + 2}:I${page * MAX_RESULT + 1}`,
+      isLoadMore
+    }),
+    fetchGoogleSheet(store, {
+      stateName: 'verifiedDataCount',
+      spreadsheetId: '1YR6C5hTKxCguXH9txtajEcbOW7YNMiMFZTC3M3guuf8',
+      range: `${sheet}!J1:J1`
+    })
+  ])
+}
 
 export default {
   name: 'FactCheck',
   components: {
+    DisinformationData,
     DisinformationStatistics,
     StepBlock,
     Subscription
@@ -254,6 +278,9 @@ export default {
       const verifyNetizen = uniq((this.$store.state.FactCheck.googleSheet.verifyNetizen || [])
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
       return union(typeNetizen, verifyNetizen).sort()
+    },
+    page () {
+      return this.$store.state.FactCheck.page
     },
     progress () {
       const data = this.$store.state.FactCheck.googleSheet.progress || []
@@ -307,6 +334,9 @@ export default {
     fetchVolunteerList(this.$store)
     fetchProgressData(this.$store)
     fetchStatisticsData(this.$store)
+    this.$store.commit('FactCheck/SET_LOADING_STATUS', { status: true })
+    fetchVerifiedData(this.$store)
+      .then(() => this.$store.commit('FactCheck/SET_LOADING_STATUS', { status: false }))
   },
   mounted () {
     // this.detectCurrent()
@@ -378,6 +408,24 @@ export default {
     }, 300),
     registerStoreModule (shouldPreserveState = false) {
       this.$store.registerModule('FactCheck', storeModule, { preserveState: shouldPreserveState })
+    },
+    updateDataList ({ authenticity = '', candidate = '', isLoadMore = false, page }) {
+      const candidateSheetName = candidate ?  candidate : '全部'
+      const authenticitySheetName = authenticity ? authenticity : '全部資料'
+      let sheetName = '全部資料'
+      if (authenticity || candidate) {
+        sheetName = `${candidateSheetName}${authenticitySheetName}`
+      }
+      this.$store.commit('FactCheck/SET_LOADING_STATUS', { status: true })
+      if (isLoadMore) {
+        this.$store.commit('FactCheck/SET_PAGE', this.page + 1)
+      } else if (page) {
+        this.$store.commit('FactCheck/SET_PAGE', Number(page))
+      } else {
+        this.$store.commit('FactCheck/SET_PAGE', 1)
+      }
+      fetchVerifiedData(this.$store, { sheet: sheetName , page: this.page, isLoadMore })
+        .then(() => this.$store.commit('FactCheck/SET_LOADING_STATUS', { status: false }))
     }
   }
 }
@@ -502,6 +550,9 @@ export default {
     .statistics-data.first
       margin-top 20px
   
+  .d-data
+    margin-top 20px
+
   .cooperation
     h3
       margin-top 2em
@@ -641,6 +692,9 @@ export default {
       > *
         width 60%
     
+    .d-data
+      width 60%
+
     .cooperation
       > *
         width 60%
@@ -723,7 +777,13 @@ export default {
         max-width 340px
         margin-left 10px
         margin-right 10px
+      .statistics-data
+        margin-top 20px
     
+    .d-data
+      width 95%
+      max-width 1140px
+
     .cooperation
       &__list
         width calc((200px + 1em) * 3)
@@ -739,6 +799,7 @@ export default {
           display inline-block
           & + p
             margin 0 0 0 1em
+
 @media (min-width: 1024px) and (min-height: 900px)
   .fact-check
     .landing__image
