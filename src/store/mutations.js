@@ -11,10 +11,5 @@ export default {
 
   SET_VIEWPORT: (state, viewport) => {
     state.viewport = viewport
-  },
-
-  SET_SHEET: (state, { filename, data }) => {
-    state.googleSheet[filename] = data
   }
-
 }

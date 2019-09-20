@@ -3,7 +3,6 @@ import {
   getReports,
   getReportsCount,
   getSheet,
-  getSheetWithoutRedis,
   appendSheet,
   getDriveFile,
   uploadImage,
@@ -50,13 +49,6 @@ export default {
     .catch(err => {
       console.error('Error while fetching sheet', err)
     })
-  },
-  FETCH_SHEET_WITHOUT_REDIS: ({ commit }, { filename, params }) => {
-    return getSheetWithoutRedis({ params })
-      .then(res => {
-        commit('SET_SHEET', { filename, data: _.get(res, 'body') })
-      })
-      .catch(err => err)
   },
   APPEND_SHEET: ({ state }, { params }) => {
     return appendSheet({ params })
