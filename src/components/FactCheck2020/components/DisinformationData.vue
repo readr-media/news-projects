@@ -1,11 +1,12 @@
 <template>
   <div class="d-data">
-    <p>在此你可以自行選擇想要看的候選人、議題、地點等項目，看看他們說了什麼話，哪些是真是假。</p>
+    <p>在此你可以自行選擇想要看的候選人和查核結果，看看他們說了什麼話，哪些是真、哪些是假。</p>
     <DisinformationDataSelector
       :authenticity.sync="authenticity"
       :candidate.sync="candidate"
     />
     <DisinformationDataList
+      :class="{ switching: switchLoading }"
       :data="verifiedDataFormated"
     >
       <template v-slot:loadMore>
@@ -42,10 +43,16 @@ export default {
     DisinformationDataPagination,
     DisinformationDataSelector
   },
+  props: {
+    switchLoading: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       authenticity: '',
-      candidate: '',
+      candidate: ''
     }
   },
   computed: {

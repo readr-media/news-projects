@@ -1,6 +1,6 @@
 <template>
   <div class="fact-check">
-    <section class="landing">
+    <section class="section landing">
       <h1>2020<br>總統候選人之<br>事實查核計畫</h1>
       <div class="landing__image">
         <img class="quote left-top" src="/proj-assets/fact-check/landing_quote.png" alt="">
@@ -46,17 +46,24 @@
         />
         <StepBlock
           :progress="progress[4]"
-          additionalText="合作媒體（按筆畫排序）： iThome、READr、Right Plus 多多益善研究站、上下游News&Market、公視P# 新聞實驗室、公視新聞、未來城市＠天下、沃草、華視、環境資訊中心、鏡週刊、關鍵評論網<br>協作單位：中央社新聞學院、新興科技媒體中心"
           class="process__step hidden-effect"
           contentText="各家媒體針對需驗證的項目進行查證"
           imgSrc="/proj-assets/fact-check/step-04.png"
           indexText="步驟四"
-        />
+        >
+          <template v-slot:additionalText>
+            <p class="small" >
+              合作媒體（按筆畫排序）： iThome、READr、Right Plus 多多益善研究站、上下游News&Market、公視P# 新聞實驗室、未來城市＠天下、沃草、華視、環境資訊中心、鏡週刊、關鍵評論網<br>協作單位：公視新聞、中央社新聞學院、新興科技媒體中心
+            </p>
+          </template>
+        </StepBlock>
       </div>
-      <p>媒體查證結果及完整資料會在 10 月正式上線，並隨計畫同步進度更新至選舉結束。
+      <p>媒體查證結果將隨計畫同步進度更新至選舉結束。 
         <a
           href="https://beta.hackfoldr.org/2020electionfactcheck/"
-          target="_blank">
+          target="_blank"
+          @click="sendGaClickEvent('點擊「點我看計畫緣起」')"
+        >
           點我看計畫緣起
         </a>
       </p>
@@ -64,12 +71,12 @@
     <lazy-component class="section subscr">
       <h2>留下你的 E-mail</h2>
       <div class="subscr-container">
-        <p>媒體查證結果及完整資料會在 10 月正式上線時通知你！</p>
+        <p>有更新資料與最新報導出爐時，第一時間通知你！</p>
         <Subscription />
       </div>
     </lazy-component>
     <lazy-component class="section statistics narrow-width">
-      <h2>看看現在誰是冠軍</h2>
+      <h2>目前最新查核狀況</h2>
       <DisinformationStatistics
         v-for="(data, index) in statistics"
         :key="data.candidate"
@@ -78,8 +85,11 @@
       />
     </lazy-component>
     <lazy-component class="section narrow-width">
-      <h2>候選人們究竟說了什麼</h2>
-      <DisinformationData @updateDataList="updateDataList" />
+      <h2>候選人談話資料庫</h2>
+      <DisinformationData
+        :switchLoading="switchLoading"
+        @updateDataList="updateDataList"
+      />
     </lazy-component>
     <lazy-component class="section cooperation narrow-width">
       <h2>功德牆</h2>
@@ -121,9 +131,6 @@
           <img src="/proj-assets/fact-check/logo/newslab.svg" style="transform: scale(1.4);" alt="公視 P# 新聞實驗室">
         </picture>
         <picture>
-          <img src="/proj-assets/fact-check/logo/pts.png" alt="公視新聞">
-        </picture>
-        <picture>
           <img src="/proj-assets/fact-check/logo/futurecity.png" alt="未來城市＠天下">
         </picture>
         <picture>
@@ -144,6 +151,9 @@
       </div>
       <h3>查核協作單位</h3>
       <div class="cooperation__list media center">
+        <picture>
+          <img src="/proj-assets/fact-check/logo/pts.png" alt="公視新聞">
+        </picture>
         <picture>
           <img src="/proj-assets/fact-check/logo/cna.png" style="transform: scale(0.9);" alt="中央社新聞學院">
         </picture>
@@ -265,6 +275,8 @@ export default {
     return {
       READR_SITE_URL,
       current: 0,
+      maxReadingDepth: 0,
+      switchLoading: false,
       showFixedInfo: false,
       typeLinkClicked: '',
       verifyLinkClicked: '',
@@ -352,8 +364,20 @@ export default {
   },
   watch: {
     current (value) {
+      const gaScrollLabel = {
+        1: '讀到「本專案透過四個步驟進行」',
+        2: '讀到「留下你的 E-mail」',
+        3: '讀到「目前最新查核狀況」',
+        4: '讀到「候選人談話資料庫」',
+        5: '讀到「功德牆」',
+        6: '讀到 credit '
+      }
       if (value > 0 && !this.showFixedInfo) {
         this.showFixedInfo = true
+      }
+      if (value > this.maxReadingDepth && window.ga) {
+        this.maxReadingDepth = value
+        gaScrollLabel[value] && window.ga('send', 'event', 'projects', 'scroll', gaScrollLabel[value], { nonInteraction: false })
       }
     }
   },
@@ -361,15 +385,15 @@ export default {
     clickTypeLinkBtn (e) {
       this.typeLinkClicked = e.target.href
       fetchTranscriptData(this.$store)
-      ga('send', 'event', 'projects', 'click', `click type link`, { nonInteraction: false })
+      this.sendGaClickEvent('點擊「我要打逐字稿」')
     },
     clickVerifyLinkBtn (e) {
       this.verifyLinkClicked = this.unverifiedTranscriptList[this.verifyLinkClickedIndex]
       fetchTranscriptData(this.$store)
-      ga('send', 'event', 'projects', 'click', `click verify link`, { nonInteraction: false })
+      this.sendGaClickEvent('點擊「我要驗證逐字稿」')
     },
     detectCurrent () {
-      const sections = [ ...document.querySelectorAll('section') ]
+      const sections = [ ...document.querySelectorAll('.section') ]
       sections.forEach((item, index) => {
         const rect = item.getBoundingClientRect()
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight
@@ -409,6 +433,9 @@ export default {
     registerStoreModule (shouldPreserveState = false) {
       this.$store.registerModule('FactCheck', storeModule, { preserveState: shouldPreserveState })
     },
+    sendGaClickEvent (label) {
+      window.ga && window.ga('send', 'event', 'projects', 'click', label, { nonInteraction: false })
+    },
     updateDataList ({ authenticity = '', candidate = '', isLoadMore = false, page }) {
       const candidateSheetName = candidate ?  candidate : '全部'
       const authenticitySheetName = authenticity ? authenticity : '全部資料'
@@ -422,10 +449,14 @@ export default {
       } else if (page) {
         this.$store.commit('FactCheck/SET_PAGE', Number(page))
       } else {
+        this.switchLoading = true
         this.$store.commit('FactCheck/SET_PAGE', 1)
       }
       fetchVerifiedData(this.$store, { sheet: sheetName , page: this.page, isLoadMore })
-        .then(() => this.$store.commit('FactCheck/SET_LOADING_STATUS', { status: false }))
+        .then(() => {
+          this.$store.commit('FactCheck/SET_LOADING_STATUS', { status: false })
+          this.switchLoading = false
+        })
     }
   }
 }
@@ -464,6 +495,7 @@ export default {
     display flex
     flex-direction column
     min-height 100vh
+    padding 0 !important
     text-align center
     overflow hidden
     h1

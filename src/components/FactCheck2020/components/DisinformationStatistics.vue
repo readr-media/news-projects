@@ -9,14 +9,14 @@
         <h2 v-text="get(data, 'candidate')" />
         <p class="amount">假訊息數<span v-text="get(data, 'amount.wrong')|| 0"></span></p>
         <div class="detailed">
-          <p>拆成 {{ get(data, 'amount.total')|| 0 }} 則，其中：</p>
+          <p>談話內容拆成 {{ get(data, 'amount.total')|| 0 }} 則，其中：</p>
           <ul>
             <li>・含有可查證內容 {{ get(data, 'amount.verifiable')|| 0 }} 則</li>
             <li>・不屬於查證範圍 {{ get(data, 'amount.unverification')|| 0 }} 則</li>
             <li>・一般敘述性文字或個人意見 {{ get(data, 'amount.normal')|| 0 }} 則</li>
           </ul>
         </div>
-        <p class="verified">目前已驗證 {{ get(data, 'amount.verified') }}/{{ get(data, 'amount.total') }} 則</p>
+        <p class="verified">目前已查核 {{ get(data, 'amount.verified') }}/{{ get(data, 'amount.total') }} 則</p>
       </div>
       <div class="info__photo">
         <div class="info__photo-image" />
