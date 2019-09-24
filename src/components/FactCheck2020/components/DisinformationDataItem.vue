@@ -4,7 +4,7 @@
       :class="{ active: showDetailed  }"
       class="data__control"
       alt="查核說明"
-      @click="showDetailed = !showDetailed"
+      @click="toggleDetailed()"
     />
     <div class="data__image">
       <img :src="candidateImage" :alt="data.candidate">
@@ -22,8 +22,22 @@
           class="small"
           v-html="data.description"
         />
-        <p class="small">
-          出處：{{ data.reference }}
+        <p class="small reference" v-if="data.references.length > 0">
+          出處：
+          <template v-for="item in data.references">
+            <a
+              v-if="item.url"
+              :key="`${data.sentences}-${item.name}`"
+              :href="item.url"
+              target="_blank"
+              v-text="item.name"
+            />
+            <span
+              v-else
+              :key="`${data.sentences}-${item.name}`"
+              v-text="item.name"
+            />
+          </template>
         </p>
       </div>
       <div class="data__info">
@@ -79,6 +93,12 @@ export default {
         '真實': '/proj-assets/fact-check/real.png'
       }
       return list[this.data.result]
+    }
+  },
+  methods:{
+    toggleDetailed () {
+      !this.showDetailed && window.ga && window.ga('send', 'event', 'projects', 'click', '點選「查看更多」', { nonInteraction: false })
+      this.showDetailed = !this.showDetailed
     }
   }
 }
@@ -150,12 +170,26 @@ export default {
     object-fit contain
     object-position center center
   &__tags-date
+    display flex
+    flex-wrap wrap
+    align-items center
     margin-left 5px
     color #9b9b9b
     font-size .875rem
     span
-      & + span
-        margin-left 1em
+      margin-right .5em
+
+.reference
+  > *
+    word-break break-all
+    & + *
+      &:before
+        content '、'
+  a
+    color #9b9b9b
+    padding-bottom 1px
+    border-bottom 1px solid #9b9b9b
+
 .justify
   text-align justify
 
@@ -165,6 +199,30 @@ export default {
     padding 20px
   .data__control
     right 20px
+    &:hover
+      &::before
+        content ''
+      &::after
+        content '看原文'
+    &::before, &::after
+      position absolute
+      left 50%
+      transform translateX(-50%)
+    &::before
+      top calc(100% + 5px)
+      width 0
+      height 0
+      border-style solid
+      border-width 0 3px 5.2px 3px
+      border-color transparent transparent rgba(0, 0, 0, .8) transparent
+    &::after
+      top calc(100% + 10px)
+      width 70px
+      padding .4em .8em
+      color rgba(255, 255, 255, .8)
+      font-size .875rem
+      background-color rgba(0, 0, 0, .8)
+      border-radius 2px
   .data__image
     width 85px
     height 85px

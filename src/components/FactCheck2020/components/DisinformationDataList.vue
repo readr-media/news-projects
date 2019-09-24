@@ -96,14 +96,14 @@ export default {
 
 @media (max-width: 1023px)
   .data-list
+    &.switching
+      .data-item, .count-info
+        display none
     .pagination
       display none !important
 
 @media (min-width: 1024px)
   .data-list
-    &.loading
-      .data-item
-        display none
     .heading
       > p, > p.small
         display inline-block

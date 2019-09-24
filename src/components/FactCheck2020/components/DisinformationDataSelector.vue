@@ -63,10 +63,15 @@ export default {
   },
   methods: {
     selectCandidate (value = '') {
+      this.candidate !== value ? this.sendGaClickEvent(value ? `篩選「${value}」` : '候選人全部') : ''
       this.candidate === value ? this.$emit('update:candidate', '') : this.$emit('update:candidate', value)
     },
     selectAuthenticity (value = '') {
+      this.authenticity !== value ? this.sendGaClickEvent(value ? `篩選「${value}」` : '查核狀態全部') : ''
       this.authenticity === value ? this.$emit('update:authenticity', '') : this.$emit('update:authenticity', value)
+    },
+    sendGaClickEvent (label) {
+      window.ga && window.ga('send', 'event', 'projects', 'click', label, { nonInteraction: false })
     }
   }
 }

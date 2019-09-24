@@ -4,11 +4,7 @@
     <div class="step-block__container">
       <div class="step-block__text">
         <h3 v-text="contentText"></h3>
-        <p
-          v-if="additionalText"
-          class="small"
-          v-html="additionalText"
-        />
+        <slot name="additionalText" />
         <p
           v-if="progress"
           class="progress"
@@ -41,9 +37,6 @@
 export default {
   name: 'StepBlock',
   props: {
-    additionalText: {
-      type: String
-    },
     contentText: {
       type: String
     },
