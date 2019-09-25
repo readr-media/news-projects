@@ -83,16 +83,16 @@ export default {
           }
         })
         return {
-          candidate: data[0],
-          sentences: data[1],
-          result: data[2],
-          tags: data[3],
-          description: data[4].replace(/\n/g, '<br>'),
-          reference: data[5],
-          references,
-          date: data[6],
-          media: data[7],
-          typescript: data[8]
+          candidate: data[0], // 候選人
+          sentences: data[1], // 需查核的句子
+          result: data[2], // 查核結果
+          tags: data[3], // 內容標籤
+          description: data[4].replace(/\n/g, '<br>'), // 查核說明
+          references, // 查核參考資料
+          date: data[6], // 發言時間
+          media: data[7], // 認領媒體
+          typescript: data[8], // 分段的逐字稿
+          typescriptSource: data[9] // 影片網址
         }
       }),
     verifiedDataCountFormated: state => {

@@ -75,7 +75,7 @@
         <Subscription />
       </div>
     </lazy-component>
-    <lazy-component class="section statistics narrow-width">
+    <lazy-component class="section statistics narrow-width hidden-effect">
       <h2>目前最新查核狀況</h2>
       <DisinformationStatistics
         v-for="(data, index) in statistics"
@@ -244,13 +244,13 @@ const fetchVerifiedData = (store, { sheet = '全部資料', page = 1, isLoadMore
     fetchGoogleSheet(store, {
       stateName: 'verifiedDataItems',
       spreadsheetId: '1YR6C5hTKxCguXH9txtajEcbOW7YNMiMFZTC3M3guuf8',
-      range: `${sheet}!A${(page - 1) * MAX_RESULT + 2}:I${page * MAX_RESULT + 1}`,
+      range: `${sheet}!A${(page - 1) * MAX_RESULT + 2}:J${page * MAX_RESULT + 1}`,
       isLoadMore
     }),
     fetchGoogleSheet(store, {
       stateName: 'verifiedDataCount',
       spreadsheetId: '1YR6C5hTKxCguXH9txtajEcbOW7YNMiMFZTC3M3guuf8',
-      range: `${sheet}!J1:J1`
+      range: `${sheet}!K1:K1`
     })
   ])
 }
@@ -289,7 +289,10 @@ export default {
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
       const verifyNetizen = uniq((this.$store.state.FactCheck.googleSheet.verifyNetizen || [])
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
-      return union(typeNetizen, verifyNetizen).sort()
+      return union(typeNetizen, verifyNetizen)
+        .map(item => item.trim())
+        .filter(item => item)
+        .sort()
     },
     page () {
       return this.$store.state.FactCheck.page
