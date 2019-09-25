@@ -12,19 +12,22 @@
     <div class="data__content">
       <h3
         class="justify"
-        v-text="data.typescript"
+        v-text="data.sentences"
       />
       <div
         v-show="showDetailed"
         class="data__detailed"
       >
-        <p
-          class="small"
-          v-html="data.description"
-        />
-        <p class="small reference" v-if="data.references.length > 0">
-          出處：
-          <template v-for="item in data.references">
+        <p class="description" v-html="data.description" />
+        <p v-if="data.references.length > 0" class="small reference">
+          參考資料：
+          <template v-for="(item, i) in data.references">
+            <span
+              v-if="i > 0 && i < data.references.length"
+              :key="`${data.sentences}-${item.name}-separator`"
+            >
+              、
+            </span>
             <a
               v-if="item.url"
               :key="`${data.sentences}-${item.name}`"
@@ -39,6 +42,8 @@
             />
           </template>
         </p>
+        <p class="small typescript">原文：{{ data.typescript }}</p>
+        <p class="small typescript-source">出處：<a :href="data.typescriptSource" target="_blank" >發言影片</a></p>
       </div>
       <div class="data__info">
         <img
@@ -153,17 +158,41 @@ export default {
         margin-top 10px
 
   &__detailed
+    display flex
+    flex-direction column
+    align-items flex-start
     color #9b9b9b
+    p, a
+      word-break break-all
     p
       &:first-child
         text-align justify
-      & + p
-        margin-top 2px
-        
+    a
+      color #9b9b9b
+      border-bottom 1px solid #9b9b9b
+    .description
+      color #fff
+    .reference
+      align-self flex-end
+      color #fff
+      margin-top 5px
+      a
+        color #fff
+        border-bottom-color #fff
+    .typescript
+      margin-top 10px
+      padding-top 10px
+    .typescript-source
+      align-self flex-end
+      margin-top 2px
+      font-size .875rem
+      text-align right
+
   &__typescript
     text-align justify
   &__info
-    display flex 
+    display flex
+    margin-top 5px
   &__authenticity
     width 35px
     height 35px
@@ -178,17 +207,6 @@ export default {
     font-size .875rem
     span
       margin-right .5em
-
-.reference
-  > *
-    word-break break-all
-    & + *
-      &:before
-        content '、'
-  a
-    color #9b9b9b
-    padding-bottom 1px
-    border-bottom 1px solid #9b9b9b
 
 .justify
   text-align justify
