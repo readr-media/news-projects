@@ -254,9 +254,7 @@ export default {
     this.pageUrl = getFBCommentsUrl();
   },
   mounted() {
-    
     window.addEventListener('mousemove', this.$_hotelHostess_handleMouseMove);
-    ga('send', 'pageview');
   },
   beforeDestroy() {
     window.removeEventListener('mousemove', this.$_hotelHostess_handleMouseMove);

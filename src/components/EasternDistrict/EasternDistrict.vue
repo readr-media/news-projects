@@ -311,7 +311,6 @@ export default {
     this.detectCurrent()
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('resize', this.detectCurrent)
-    ga('send', 'pageview')
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)

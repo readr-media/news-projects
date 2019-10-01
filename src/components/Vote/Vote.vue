@@ -45,7 +45,6 @@ export default {
     ga('require', 'maxScrollTracker')
     ga('require', 'eventTracker')
     ga('require', 'pageVisibilityTracker')
-    ga('send', 'pageview')
   },
 }
 </script>

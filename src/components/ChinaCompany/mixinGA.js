@@ -5,7 +5,6 @@ export default {
     }
   },
   mounted () {
-    window.ga && window.ga('send', 'pageview')
     this.createScrollEventHandler()
   },
   methods: {

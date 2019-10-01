@@ -125,7 +125,6 @@ export default {
   mounted () {
     this.setAllowScrolling(false)
     if (this.shouldNavToCategoryPromiseDone) this.moveTo('section-result')
-    window.ga('send', 'pageview')
   }
 }
 </script>

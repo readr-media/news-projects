@@ -41,9 +41,6 @@ export default {
     if (this.$route.query && this.$route.query.locale === 'en') {
       this.$i18n.locale = 'en'
     }
-  },
-  mounted () {
-    window.ga('send', 'pageview')
   }
 }
 </script>

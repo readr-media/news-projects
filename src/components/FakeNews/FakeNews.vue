@@ -189,7 +189,6 @@ export default {
   },
   mounted () {
     this.mounted = true
-    window.ga && window.ga('send', 'pageview')
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)

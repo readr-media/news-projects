@@ -185,7 +185,6 @@
     },
     mounted () {
       window.addEventListener('scroll', this.$_marathon_scrollEvent)
-      window.ga('send', 'pageview')
     },
     methods: {
       $_marathon_changeSelectedTime(shareLink) {

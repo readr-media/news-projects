@@ -248,8 +248,6 @@
       window.addEventListener('scroll', this.$_foreignLabour_handleScrollForCaption)
       window.addEventListener('resize', this.$_foreignLabour_getViewport)
       window.addEventListener('resize', this.$_foreignLabour_calcSectionTop)
-      
-      window.ga('send', 'pageview')
     },
     beforeDestroy () {
       window.removeEventListener('scroll', this.$_foreignLabour_handleScroll)

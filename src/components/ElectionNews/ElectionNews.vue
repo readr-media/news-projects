@@ -168,7 +168,6 @@ export default {
     })
     ga('require', 'pageVisibilityTracker')
     ga('require', 'urlChangeTracker')
-    ga('send', 'pageview')
 
     this.setVueScrollOptions()
     window.addEventListener('resize', this.setVueScrollOptions)

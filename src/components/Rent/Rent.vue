@@ -98,7 +98,6 @@
       this.$store.unregisterModule('Rent')
     },   
     mounted () {
-      window.ga('send', 'pageview')
       Promise.resolve()
       .then(() => {
         this.isLoading = false

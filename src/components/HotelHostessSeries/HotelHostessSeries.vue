@@ -807,7 +807,6 @@ export default {
     this.pageUrl = getFBCommentsUrl();
     this.$_hotelHostess_initGAScrollPos();
     window.addEventListener('scroll', this.$_hotelHostess_handleScrollGAEvent)
-    ga('send', 'pageview');
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.$_hotelHostess_handleScrollGAEvent)

@@ -62,7 +62,6 @@ export default {
     }
   },
   mounted () {
-    ga('send', 'pageview')
     this.scrollPos = setScrollPos()
     window.addEventListener('scroll', this.handleScroll)
   },

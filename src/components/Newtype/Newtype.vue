@@ -58,7 +58,6 @@ export default {
     }
   },
   mounted () {
-    window.ga('send', 'pageview')
     if (this.$route.params.params) {
       this.$scrollTo(`#${this.$route.params.params}`)
     }

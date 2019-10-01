@@ -106,9 +106,6 @@ export default {
   },
   destroyed () {
     this.$store.unregisterModule('PresidentPromiseInterest')
-  },
-  mounted () {
-    window.ga('send', 'pageview')
   }
 }
 </script>

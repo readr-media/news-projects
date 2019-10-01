@@ -50,9 +50,6 @@ export default {
   created () {
     this.$store.registerModule('VoteResult', module)
   },
-  mounted () {
-    ga('send', 'pageview')
-  },
   destroyed () {
     this.$store.unregisterModule('VoteResult')
   },
