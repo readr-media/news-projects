@@ -281,7 +281,6 @@ export default {
     this.$refs.video.children[0].src = '/proj-assets/foreign-labour/videos/iv/14.mp4'
     this.$refs.video.load()
     stage.setAutoPlay(false)
-    ga('send', 'pageview')
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)

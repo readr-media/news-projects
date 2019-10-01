@@ -306,7 +306,6 @@ export default {
     } else {
       this.wEl.addEventListener('scroll', this.fixedBackgroundPages)
     }
-    window.ga('send', 'pageview')
   },
   data () {
     return {

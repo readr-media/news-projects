@@ -104,7 +104,6 @@
       this.titleHeight = get(this.$refs, 'title.offsetHeight', 0)
       window.addEventListener('scroll', this.$_foreignLabour_handleScroll)
       window.addEventListener('resize', this.$_foreignLabour_getViewport)
-      ga('send', 'pageview')
     },
     beforeDestroy () {
       window.removeEventListener('scroll', this.$_foreignLabour_handleScroll)

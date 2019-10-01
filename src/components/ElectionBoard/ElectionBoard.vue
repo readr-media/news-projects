@@ -141,9 +141,6 @@ export default {
     fetchCandidates(this.$store),
     fetchCandidates(this.$store, { type: 'councilors' })
   },
-  mounted () {
-    window.ga('send', 'pageview')
-  },
   destroyed () {
     this.$store.unregisterModule('ElectionBoard')
   }

@@ -139,13 +139,11 @@ export default {
     }
   },
   mounted () {
-    // window.ga('send', 'pageview')
     require('autotrack')
     ga('require', 'cleanUrlTracker')
     ga('require', 'maxScrollTracker')
     ga('require', 'eventTracker')
     ga('require', 'pageVisibilityTracker')
-    ga('send', 'pageview')
 
     this.footerHeight = document.querySelector('.puyuma__footer').offsetHeight
     window.onresize = () => {

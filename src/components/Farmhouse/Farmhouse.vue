@@ -241,7 +241,6 @@
       });
       debug('role', this.abRole)
       window.ga('set', 'contentGroup3', `project:farmhouse:${this.abRole}`)
-      window.ga('send', 'pageview')
       if (process.browser) {
         if(!this.getParams){
           this.setScene(this.$store.state.isMobile);        

@@ -254,7 +254,6 @@ export default {
   },
   mounted: function() {      
     this.isClientSide = true;
-    window.ga('send', 'pageview')
   }
 };
 </script>

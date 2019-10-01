@@ -358,7 +358,6 @@ export default {
     this.detectHiddenEle()
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('scroll', this.handleScrollForHiddenEffect)
-    ga('send', 'pageview')
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)

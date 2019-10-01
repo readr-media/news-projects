@@ -192,7 +192,6 @@ export default {
       console.log('get data fail')
     })
 
-    ga('send', 'pageview')
   },
 
   beforeDestroy: function() {

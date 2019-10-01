@@ -281,7 +281,6 @@
       window.addEventListener('resize', this.$_foreignLabour_calcImagesScrollTop)
       window.addEventListener('mouseover', () => this.inAction = true)
 
-      window.ga('send', 'pageview')
       // setInterval(() => {
       //   if (this.inAction) {
       //     this.inAction = false

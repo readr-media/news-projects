@@ -372,7 +372,6 @@ export default {
     setTimeout(() => {
       $.fn.fullpage.reBuild()
     }, 500)
-    ga('send', 'pageview')
   },
   methods: {
     initFullPage () {

@@ -39,6 +39,7 @@ export default {
   },
   mounted () {
     window.addEventListener('resize', this.$_app_updateViewport)
+    window.ga && window.ga('send', 'pageview')
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.$_app_updateViewport)

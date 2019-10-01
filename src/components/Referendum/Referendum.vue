@@ -70,7 +70,6 @@
     mounted () {
       this.isClientSide = process.browser
       this.$store.registerModule('Referendum', ReferendumStoreModule)
-      window.ga('send', 'pageview')
       if (this.isDesktop) {
         Promise.all(map(new Array(10), (o, i) => fetchRefAppDetail(this.$store, `no${i + 7}`))).then(() => {
           debug('GOT ALL DATA')
