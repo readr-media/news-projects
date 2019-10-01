@@ -280,8 +280,7 @@ export default {
   },
   beforeMount () {
     this.wEl = window
-    // this.htmlEl = document.documentElement
-    this.ww = this.wEl.innerWidth
+    this.ww = Math.min(this.wEl.innerWidth, document.documentElement.clientWidth)
     // this.wh = this.htmlEl.clientHeight
     this.wh = this.wEl.innerHeight
     this.beforeWw = this.ww
