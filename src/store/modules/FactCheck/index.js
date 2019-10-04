@@ -49,20 +49,19 @@ export default {
     statisticsFormated: state => state.googleSheet.statistics.map(data => ({
       candidate: data[0],
       amount: {
-        wrong: data[1],
-        real: data[3],
-        controversial: data[5],
-        verifiable: data[9],
-        verified: data[7],
-        unverification: data[11],
-        normal: data[13],
-        frequency: data[16],
-        total: data[15]
+        wrong: data[1], // 含有錯誤訊息
+        real: data[3], // 真實
+        controversial: data[5], // 片面事實
+        verifiable: data[9], // 含有可查證內容
+        verified: data[7], // 已驗證則數
+        unverification: data[11], // 不屬於查證範圍
+        normal: data[13], // 一般敘述性文字或個人意見
+        total: data[15] // 目前總發言拆段數
       },
       percentage: {
-        wrong: Number.isNaN(Number(data[2])) ? 0 : Number(data[2]),
-        real: Number.isNaN(Number(data[4])) ? 0 : Number(data[4]),
-        controversial: Number.isNaN(Number(data[6])) ? 0 : Number(data[6]),
+        wrong: Number.isNaN(Number(data[2])) ? 0 : Number(data[2]), // 含有錯誤訊息%
+        real: Number.isNaN(Number(data[4])) ? 0 : Number(data[4]), // 真實％
+        controversial: Number.isNaN(Number(data[6])) ? 0 : Number(data[6]), // 片面事實%
       }
     })).sort((a, b) => b.amount.wrong - a.amount.wrong),
     verifiedDataFormated: state => state.googleSheet.verifiedDataItems

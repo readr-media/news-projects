@@ -76,7 +76,7 @@
       </div>
     </lazy-component>
     <lazy-component class="section statistics narrow-width hidden-effect">
-      <h2>目前最新查核狀況</h2>
+      <h2>最新查核狀況</h2>
       <DisinformationStatistics
         v-for="(data, index) in statistics"
         :key="data.candidate"

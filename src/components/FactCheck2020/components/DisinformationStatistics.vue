@@ -7,7 +7,7 @@
       <div class="info__data">
         <p class="ranking">NO. {{ index + 1 }}</p>
         <h2 v-text="get(data, 'candidate')" />
-        <p class="amount">假訊息數<span v-text="get(data, 'amount.wrong')|| 0"></span></p>
+        <p class="amount">錯誤訊息數<span v-text="get(data, 'amount.wrong')|| 0"></span></p>
         <div class="detailed">
           <p>談話內容拆成 {{ get(data, 'amount.total')|| 0 }} 則，其中：</p>
           <ul>
@@ -16,7 +16,7 @@
             <li>・一般敘述性文字或個人意見 {{ get(data, 'amount.normal')|| 0 }} 則</li>
           </ul>
         </div>
-        <p class="verified">目前已查核 {{ get(data, 'amount.verified') }}/{{ get(data, 'amount.total') }} 則</p>
+        <p class="verified">目前已查核 {{ get(data, 'amount.verified') }}/{{ get(data, 'amount.verifiable') }} 則</p>
       </div>
       <div class="info__photo">
         <div class="info__photo-image" />
