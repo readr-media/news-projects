@@ -6,8 +6,17 @@
       alt="查核說明"
       @click="toggleDetailed()"
     />
-    <div class="data__image">
-      <img :src="candidateImage" :alt="data.candidate">
+    <div class="data__image-container">
+      <div class="data__image">
+        <img :src="candidateImage" :alt="data.candidate">
+      </div>
+      <img
+        v-if="resultImage"
+        :src="resultImage"
+        :alt="resultText"
+        class="data__result-image"
+      >
+      <p v-text="resultText" />
     </div>
     <div class="data__content">
       <h3
@@ -49,7 +58,7 @@
         <img
           v-if="resultImage"
           :src="resultImage"
-          :alt="data.result"
+          :alt="resultText"
           class="data__authenticity"
         >
         <div class="data__tags-date">
@@ -98,6 +107,12 @@ export default {
         '真實': '/proj-assets/fact-check/real.png'
       }
       return list[this.data.result]
+    },
+    resultText () {
+      const mapping = {
+        '真實': '正確'
+      }
+      return mapping[this.data.result] || this.data.result
     }
   },
   methods:{
@@ -131,6 +146,11 @@ export default {
     cursor pointer
     &.active
       background-image url(/proj-assets/fact-check/read_pressed.png)
+  &__image-container
+    display flex
+    align-items center
+    p
+      font-size .875rem
   &__image
     position relative
     width 35px
@@ -141,6 +161,8 @@ export default {
     background-position center bottom
     border-radius 50%
     overflow hidden
+    & + *
+      margin-left 10px
     img
       position absolute
       left 2.5px
@@ -149,6 +171,11 @@ export default {
       height 30px
       object-fit contain
       object-position center center
+  &__result-image
+    width 30px
+    height 30px
+    object-fit contain
+    object-position center center
   &__content
     margin-top 5px
     line-height 1.4
@@ -202,7 +229,6 @@ export default {
     display flex
     flex-wrap wrap
     align-items center
-    margin-left 5px
     color #9b9b9b
     font-size .875rem
     span
@@ -210,6 +236,11 @@ export default {
 
 .justify
   text-align justify
+
+@media (max-width: 1023px)
+  .data__info
+    img
+      display none
 
 @media (min-width: 1024px)
   .data-item
@@ -241,17 +272,23 @@ export default {
       font-size .875rem
       background-color rgba(0, 0, 0, .8)
       border-radius 2px
+  .data__image-container
+    p
+      display none
   .data__image
     width 85px
     height 85px
     img
       width 80px
       height 80px
+  .data__result-image
+    display none
   .data__content
     flex 1
     margin-top 0
     margin-left 30px
     > h3
       padding-right 40px
-    
+  .data__tags-date
+    margin-left 5px
 </style>
