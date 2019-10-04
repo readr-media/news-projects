@@ -328,23 +328,9 @@ export default {
     this.registerStoreModule()
     return fetchTranscriptData(this.$store)
   },
-  created() {
-    const params = this.$route.params.params
-    const isTypeUrl = process.env.VUE_ENV === 'client' && params === 'transcript-type'
-    const isVerifyUrl = process.env.VUE_ENV === 'client' && params === 'transcript-verify'
-    const canGoToTypePage = this.untypedTranscriptList.length > 0
-    const canGoToVerifyPage = this.unverifiedTranscriptList.length > 0
-    if (isTypeUrl && canGoToTypePage) {
-      window.location.replace(this.getTypeLink())
-    } else if (isTypeUrl && canGoToVerifyPage) {
-      window.location.replace(this.getVerifyLink())
-    } else if (isVerifyUrl && canGoToVerifyPage) {
-      window.location.replace(this.getVerifyLink())
-    } else if (isVerifyUrl && canGoToTypePage) {
-      window.location.replace(this.getTypeLink())
-    }
-  },
   beforeMount () {
+    this.detectToRedirect()
+
     this.registerStoreModule(true)
     fetchVolunteerList(this.$store)
     fetchProgressData(this.$store)
@@ -354,7 +340,6 @@ export default {
       .then(() => this.$store.commit('FactCheck/SET_LOADING_STATUS', { status: false }))
   },
   mounted () {
-    // this.detectCurrent()
     this.detectHiddenEle()
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('scroll', this.handleScrollForHiddenEffect)
@@ -416,6 +401,22 @@ export default {
           item.classList.add('active')
         }
       })
+    },
+    detectToRedirect () {
+      const params = this.$route.params.params
+      const isTypeUrl = params === 'transcript-type'
+      const isVerifyUrl = params === 'transcript-verify'
+      const canGoToTypePage = this.untypedTranscriptList.length > 0
+      const canGoToVerifyPage = this.unverifiedTranscriptList.length > 0
+      if (isTypeUrl && canGoToTypePage) {
+        window.location.replace(this.getTypeLink())
+      } else if (isTypeUrl && canGoToVerifyPage) {
+        window.location.replace(this.getVerifyLink())
+      } else if (isVerifyUrl && canGoToVerifyPage) {
+        window.location.replace(this.getVerifyLink())
+      } else if (isVerifyUrl && canGoToTypePage) {
+        window.location.replace(this.getTypeLink())
+      }
     },
     getTypeLink () {
       const random = Math.floor(Math.random() * this.untypedTranscriptList.length)
