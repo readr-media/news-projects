@@ -196,6 +196,7 @@ export default {
   &__legend
     margin-top 20px
     button
+      padding 0 10px 0 5px
       color #9b9b9b
       text-decoration underline
       background-color transparent
@@ -212,7 +213,7 @@ export default {
     &.fixed
       position fixed !important
       top 60px !important
-      left calc((100% - 1140px) / 2) !important
+      left 2.5% !important
     &.fixed-bottom
       position absolute !important
       top auto !important
@@ -233,4 +234,9 @@ export default {
             &.controversial
               &::before
                 background-image url(/proj-assets/fact-check/controversial_selected.png)
+
+@media (min-width: 1200px)
+  .data-selector
+    &.fixed
+      left calc((100% - 1140px) / 2) !important
 </style>
