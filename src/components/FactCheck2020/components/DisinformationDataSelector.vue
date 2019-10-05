@@ -157,7 +157,7 @@ export default {
       background-color rgba(155, 155, 155, .5)
       border-radius 4px
       transition background-color .5s
-      &:hover, &.active
+      &.active
         background-color #e56300
         span
           &.real
@@ -194,7 +194,7 @@ export default {
       button
         padding .2em 1em .2em .6em 
   &__legend
-    margin-top 10px
+    margin-top 20px
     button
       color #9b9b9b
       text-decoration underline
@@ -217,4 +217,20 @@ export default {
       position absolute !important
       top auto !important
       bottom 0 !important
+
+  .selector
+    &__options
+      button
+        &:hover
+          background-color #e56300
+          span
+            &.real
+              &::before
+                background-image url(/proj-assets/fact-check/real_selected.png)
+            &.wrong
+              &::before
+                background-image url(/proj-assets/fact-check/wrong_selected.png)
+            &.controversial
+              &::before
+                background-image url(/proj-assets/fact-check/controversial_selected.png)
 </style>

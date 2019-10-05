@@ -175,7 +175,7 @@
       v-show="showFixedInfo && untypedTranscriptList.length > 0"
       class="info-fixed"
     >
-      <a :href="getTypeLink()" target="_blank"><span>我願意盡一份力！</span>點我開始編打逐字稿</a>
+      <a :href="getTypeLink()" target="_blank" @click="sendGaClickEvent('點擊「我願意盡一份力！ 點我開始編打逐字稿」')"><span>我願意盡一份力！</span>點我開始編打逐字稿</a>
       <button @click="showFixedInfo = false"><img src="/proj-assets/fact-check/close.png" alt="關閉"></button>
     </div>
   </div>
@@ -578,6 +578,8 @@ export default {
         line-height 1.45 
       .subscription-wrapper
         margin-top 20px
+        .info.success
+          font-size 1rem
       .subscription__btn
         background-color #e56300
   
