@@ -75,6 +75,13 @@
           </span>
         </div>
       </div>
+      <a
+        :href="getErrorReportLink()"
+        class="error-report"
+        target="_blank"
+      >
+        我要回報
+      </a>
     </div>
   </div>
 </template>
@@ -116,6 +123,9 @@ export default {
     }
   },
   methods:{
+    getErrorReportLink () {
+      return `https://docs.google.com/forms/d/e/1FAIpQLSdW5VSIp4tZySW9lLgqO9rSl6AChQ3Odg-90apO-K6vFOTn-w/viewform?usp=pp_url&entry.295882445=${this.data.candidate}&entry.1734633711=${this.data.sentences}`
+    },
     toggleDetailed () {
       !this.showDetailed && window.ga && window.ga('send', 'event', 'projects', 'click', '點選「查看更多」', { nonInteraction: false })
       this.showDetailed = !this.showDetailed
@@ -234,6 +244,10 @@ export default {
     span
       margin-right .5em
 
+.error-report
+  color #9b9b9b
+  font-size .875rem
+  text-decoration underline
 .justify
   text-align justify
 
@@ -289,6 +303,13 @@ export default {
     margin-left 30px
     > h3
       padding-right 40px
+  .data__info
+    padding-right 70px
   .data__tags-date
     margin-left 5px
+  .error-report
+    position absolute
+    right 20px
+    bottom 20px
+    margin 0
 </style>

@@ -111,6 +111,7 @@ export default {
 @media (min-width: 1024px)
   .d-data
     position relative
+    min-height 400px
     > p
       width calc(100% - 350px)
       margin 0 0 0 auto

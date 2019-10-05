@@ -5,7 +5,7 @@
   >
     <div class="heading">
       <p>篩選結果</p>
-      <p class="small">第 1-10 則</p>
+      <p v-show="data.length > 0" class="small">第 {{ (page - 1) * 5 + 1 }}-{{ page * 5 }} 則</p>
     </div>
     <DisinformationDataItem
       v-for="item in data"
@@ -59,7 +59,10 @@ export default {
     }),
     currentCount () {
       return this.data.length
-    }
+    },
+    page () {
+      return this.$store.state.FactCheck.page
+    },
   }
 }
 </script>
