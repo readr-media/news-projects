@@ -133,10 +133,10 @@ const redisWriting = (key, data, callback, timeout) => {
 }
 
 const insertIntoRedis = (req, res) => {
-  redisWriting(req.url, res.dataString, () => {
-    // next()
-  })
+  const timeout = res.redisTimeout || REDIS_TIMEOUT
+  redisWriting(req.url, res.dataString, null, timeout)
 }
+
 const fetchFromRedis = (req, res, next) => {
   debug('req.url', req.url)
   debug('req.url', req.url)
