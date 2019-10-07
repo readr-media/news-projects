@@ -47,11 +47,11 @@ export default {
     SET_GOOGLE_SHEET: (state, { name, data }) => {
       Vue.set(state.googleSheet, name, data)
     },
-    SET_LOADING_STATUS: (state, { status }) => Vue.set(state, 'dataListLoading', status),
+    SET_LOADING_STATUS: (state, { status = false }) => Vue.set(state, 'dataListLoading', status),
     SET_PAGE: (state, value) => Vue.set(state, 'page', value)
   },
   getters: {
-    statisticsFormated: state => (state.googleSheet.statistics || []).map(data => ({
+    statisticsFormated: state => (get(state, 'googleSheet.statistics') || []).map(data => ({
       candidate: data[0],
       amount: {
         wrong: data[1], // 含有錯誤訊息
@@ -69,7 +69,7 @@ export default {
         controversial: Number.isNaN(Number(data[6])) ? 0 : Number(data[6]), // 片面事實%
       }
     })).sort((a, b) => b.amount.wrong - a.amount.wrong),
-    verifiedDataFormated: state => (state.googleSheet.verifiedDataItems || [])
+    verifiedDataFormated: state => (get(state, 'googleSheet.verifiedDataItems') || [])
       .filter(data => data[0] && data[0] !== '#N/A')
       .map(data => {
         const references = data[5].split('、').map(item => {

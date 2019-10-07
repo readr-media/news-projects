@@ -287,9 +287,9 @@ export default {
   },
   computed: {
     netizenList () {
-      const typeNetizen = uniq((this.$store.state.FactCheck.googleSheet.typeNetizen || [])
+      const typeNetizen = uniq((get(this.$store, 'state.FactCheck.googleSheet.typeNetizen') || [])
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
-      const verifyNetizen = uniq((this.$store.state.FactCheck.googleSheet.verifyNetizen || [])
+      const verifyNetizen = uniq((get(this.$store, 'state.FactCheck.googleSheet.verifyNetizen') || [])
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
       return union(typeNetizen, verifyNetizen)
         .map(item => item.trim())
@@ -300,7 +300,7 @@ export default {
       return this.$store.state.FactCheck.page
     },
     progress () {
-      const data = this.$store.state.FactCheck.googleSheet.progress || []
+      const data = get(this.$store, 'state.FactCheck.googleSheet.progress') || []
       return data.map(item => item[0]).filter(item => typeof item === 'string')
     },
     statistics () {
@@ -322,18 +322,19 @@ export default {
         .map(item => item[12])
     },
     volunteerList () {
-      return uniq((this.$store.state.FactCheck.googleSheet['volunteer'] || [])
+      return uniq((get(this.$store, 'state.FactCheck.googleSheet.volunteer') || [])
         .map(item => item[0]).slice(2).filter(item => typeof item === 'string'))
     }
   },
   serverPrefetch () {
     this.registerStoreModule()
-    return fetchTranscriptData(this.$store)
+    return Promise.resolve()
   },
   beforeMount () {
-    this.detectToRedirect()
-
     this.registerStoreModule(true)
+    fetchTranscriptData(this.$store)
+      .then(() => this.detectToRedirect())
+    
     fetchVolunteerList(this.$store)
     fetchProgressData(this.$store)
     fetchStatisticsData(this.$store)
