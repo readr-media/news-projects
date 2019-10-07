@@ -22,7 +22,12 @@ export default {
   actions: {
     async FETCH_GOOGLE_SHEET ({ state, commit }, { name, params, isLoadMore = false, useRedis = true }) {
       try {
-        const res = await useRedis ? getSheet({ params }) : getSheetWithoutRedis({ params })
+        let res
+        if (useRedis) {
+          res = await getSheet({ params })
+        } else {
+          res = await getSheetWithoutRedis({ params })
+        }
         const data = get(res, 'body')
         if (isLoadMore) {
           const orig = values(get(state, `googleSheet.${name}`) || [])
