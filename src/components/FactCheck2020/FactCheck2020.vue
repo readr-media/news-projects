@@ -190,7 +190,7 @@ import { get, throttle, union, uniq } from 'lodash'
 
 import storeModule from '../../store/modules/FactCheck'
 
-const fetchGoogleSheet = (store, { stateName, spreadsheetId, range, majorDimension = 'ROWS', isLoadMore }) => store
+const fetchGoogleSheet = (store, { stateName, spreadsheetId, range, majorDimension = 'ROWS', isLoadMore, useRedis = true }) => store
   .dispatch('FactCheck/FETCH_GOOGLE_SHEET', {
     name: stateName,
     params: {
@@ -198,13 +198,15 @@ const fetchGoogleSheet = (store, { stateName, spreadsheetId, range, majorDimensi
       range,
       majorDimension
     },
-    isLoadMore
+    isLoadMore,
+    useRedis
   })
 
 const fetchTranscriptData = store => fetchGoogleSheet(store, {
   stateName: 'transcript',
   spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
-  range: '1.貼上影片與秒數!E:Q'
+  range: '1.貼上影片與秒數!E:Q',
+  useRedis: false
 })
 
 const fetchVolunteerList = store => Promise.all([

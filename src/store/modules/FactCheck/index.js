@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { concat, get, values } from 'lodash'
-import { getSheetWithoutRedis } from '../../../api'
+import { getSheet, getSheetWithoutRedis } from '../../../api'
 
 export default {
   namespaced: true,
@@ -20,9 +20,9 @@ export default {
     }
   },
   actions: {
-    async FETCH_GOOGLE_SHEET ({ state, commit }, { name, params, isLoadMore = false }) {
+    async FETCH_GOOGLE_SHEET ({ state, commit }, { name, params, isLoadMore = false, useRedis = true }) {
       try {
-        const res = await getSheetWithoutRedis({ params })
+        const res = await useRedis ? getSheet({ params }) : getSheetWithoutRedis({ params })
         const data = get(res, 'body')
         if (isLoadMore) {
           const orig = values(get(state, `googleSheet.${name}`) || [])
@@ -46,7 +46,7 @@ export default {
     SET_PAGE: (state, value) => Vue.set(state, 'page', value)
   },
   getters: {
-    statisticsFormated: state => state.googleSheet.statistics.map(data => ({
+    statisticsFormated: state => (state.googleSheet.statistics || []).map(data => ({
       candidate: data[0],
       amount: {
         wrong: data[1], // 含有錯誤訊息
@@ -64,7 +64,7 @@ export default {
         controversial: Number.isNaN(Number(data[6])) ? 0 : Number(data[6]), // 片面事實%
       }
     })).sort((a, b) => b.amount.wrong - a.amount.wrong),
-    verifiedDataFormated: state => state.googleSheet.verifiedDataItems
+    verifiedDataFormated: state => (state.googleSheet.verifiedDataItems || [])
       .filter(data => data[0] && data[0] !== '#N/A')
       .map(data => {
         const references = data[5].split('、').map(item => {
