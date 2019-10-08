@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const uuidv4 = require('uuid/v4')
 const { JWT_ALG, JWT_EXPIRY, JWT_SECRET, } = require('../../config')
-const { redisFetching } = require('../../middle/redisHandler')
+const { redisFetching } = require('../../middle/ioredisHandler')
 
 
 const generateToken = () => {

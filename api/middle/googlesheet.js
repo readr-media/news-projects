@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { google, } = require('googleapis')
 const { authGoogleAPI, } = require('../service/google/auth')
-const { fetchFromRedis, insertIntoRedis, } = require('./redisHandler')
+const { fetchFromRedis, insertIntoRedis, } = require('./ioredisHandler')
 
 router.get('/', authGoogleAPI, fetchFromRedis, async (req, res, next) => {
   if (res.redis) {

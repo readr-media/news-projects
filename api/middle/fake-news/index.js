@@ -3,7 +3,7 @@ const router = express.Router()
 
 const axios = require('axios')
 const { MAILCHIMP_API_KEY, } = require('../../config')
-const { fetchFromRedis, redisWriting, } = require('../redisHandler')
+const { fetchFromRedis, redisWriting, } = require('../ioredisHandler')
 
 const handleError = (err, res) => {
   if (err.response) {

@@ -6,7 +6,7 @@ const router = express.Router()
 const { CITIES, VIEW_SIZE, AXIS, RENT_LOCALE, } = require('./constants')
 const { concat, filter, find, findIndex, each, get, map, slice, uniqWith, } = require('lodash')
 const { fetchCityData, getBounds, updateScales, renderChart, } = require('./common')
-const { fetchFromRedis, insertIntoRedis, redisWriting, redisFetching, } = require('../redisHandler')
+const { fetchFromRedis, insertIntoRedis, redisWriting, redisFetching, } = require('../ioredisHandler')
 const { RENT_PREPARE_AUTH, SERVER_HOST, SERVER_PROTOCOL } = require('../../config')
 
 
