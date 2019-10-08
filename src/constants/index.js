@@ -4,9 +4,9 @@ import { GOOGLE_API_KEY } from '../../api/config'
 export const PROJECTS = projectList
 
 // GA
-export const READR_GA_ID = 'UA-122455444-1'
+export const READR_GA_ID = 'UA-122455444-1' // deprecated
 
-export const READR_GA_TEST_ID = 'UA-122455444-3'
+export const READR_GA_TEST_ID = 'UA-122455444-3' // deprecated
 
 export const MM_GA_ID = 'UA-83609754-1'
 
