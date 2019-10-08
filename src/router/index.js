@@ -1,8 +1,5 @@
 import {
   PROJECTS,
-  PROJECTS_BELONGS_MM,
-  READR_GA_ID,
-  READR_GA_TEST_ID,
   MM_GA_ID,
   MM_GA_TEST_ID,
   PROJECTS_PREVENT_SCROLL_BEHAVIOR
@@ -36,12 +33,7 @@ export function createRouter () {
             throw e
           } else {
             if (process.env.VUE_ENV === 'client') {
-              let gaId
-              if (PROJECTS_BELONGS_MM.includes(get(to, 'params.project'))) {
-                gaId = location.hostname.match(/(www|m).readr.tw/) ? MM_GA_ID : MM_GA_TEST_ID
-              } else {
-                gaId = location.hostname.match(/(www|m).readr.tw/) ? READR_GA_ID : READR_GA_TEST_ID
-              }
+              const gaId = location.hostname.match(/(www|m).readr.tw/) ? MM_GA_ID : MM_GA_TEST_ID
               window.ga && !window.gaData && window.ga('create', gaId, 'auto')
             }
             next()
