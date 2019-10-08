@@ -45,6 +45,7 @@
     "image-comparison": "^2.0.4",
     "imagesloaded": "^4.1.4",
     "intersection-observer": "^0.5.1",
+    "ioredis": "^4.14.1",
     "jquery": "^3.3.1",
     "jsonwebtoken": "^8.5.0",
     "kc-scroll": "^0.2.71",

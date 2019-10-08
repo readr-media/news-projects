@@ -1,5 +1,5 @@
 const { API_HOST, API_PORT, API_PROTOCOL, API_TIMEOUT, } = require('./config')
-const { fetchFromRedis, insertIntoRedis, } = require('./middle/redisHandler')
+const { fetchFromRedis, insertIntoRedis, } = require('./middle/ioredisHandler')
 const { initBucket, makeFilePublic, uploadFileToBucket } = require('./service/google/storage')
 const { generateToken } = require('./service/jwt')
 const express = require('express')
