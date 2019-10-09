@@ -1,6 +1,6 @@
 <template>
   <ReadrAppHeader
-    class="header"
+    id="readr-app-header"
     :url="locationUrl"
     :catalog-list="catalogList"
     :donate-tappay-config="donateTappayConfig"
