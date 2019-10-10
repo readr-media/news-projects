@@ -2,17 +2,24 @@
   <section class="fixed-slides" ref="container">
     <div
       class="fixed-slides__graphic"
-      :style="{ width: `${this.ww}px`, height: `${imgH}px` }"
+      :style="{ width: `${ww}px`, height: `${imgH}px` }"
       :class="{ fixed: isGraphicFixed, bottom: isGraphicBottom }"
       ref="graphic"
     >
-      <img
+      <!-- <img
         :src="`/proj-assets/nanfangao-bridge/img/step/step${imgId}-${imgSize}.png`"
         v-for="imgId in imgsId"
         :key="imgId"
         :class="{ active: ImgActiveId === imgId }"
         alt=""
-      >
+      > -->
+      <picture v-for="imgId in imgsId" :key="imgId" :class="{ active: ImgActiveId === imgId }">
+        <source media="(min-width: 460px) and (max-width: 719.98px)" :srcset="imgSrc(imgId, 'tablet-small')">
+        <source media="(min-width: 720px) and (max-width: 999.98px)" :srcset="imgSrc(imgId, 'tablet-large')">
+        <source media="(min-width: 1000px) and (max-width: 1599.98px)" :srcset="imgSrc(imgId, 'desktop-small')">
+        <source media="(min-width: 1600px)" :srcset="imgSrc(imgId, 'desktop-large')">
+        <img :src="imgSrc(imgId, 'mobile')" alt="">
+      </picture>
     </div>
     <div class="fixed-slides__text" v-for="(text, idx) in texts" :key="text.id" :class="{ step1: idx === 0 }">
       <p>{{ text.content }}</p>
@@ -23,12 +30,13 @@
 <script>
 export default {
   name: 'FixedSlides',
+  props: [ 'ww', 'wh' ],
   data () {
     return {
       wEl: null,
-      htmlEl: null,
-      ww: 0,
-      wh: 0,
+      // htmlEl: null,
+      // ww: 0,
+      // wh: 0,
       isGraphicFixed: false,
       isGraphicBottom: false,
       ImgActiveId: 1,
@@ -63,53 +71,59 @@ export default {
   },
   mounted () {
     this.wEl = window
-    this.htmlEl = document.documentElement
-    this.ww = Math.min(this.wEl.innerWidth, this.htmlEl.clientWidth)
-    this.wh = this.wEl.innerHeight
+    // this.htmlEl = document.documentElement
+    // this.ww = Math.min(this.wEl.innerWidth, this.htmlEl.clientWidth)
+    // this.wh = this.wEl.innerHeight
 
     this.wEl.addEventListener('scroll', this.locateGraphic)
     this.wEl.addEventListener('scroll', this.changeImg)
-    this.wEl.addEventListener('resize', this.alterWindowSize)
-    this.wEl.addEventListener('orientationChange', this.alterWindowSize)
+
+    // this.wEl.addEventListener('resize', this.alterWindowSize)
+    // this.wEl.addEventListener('orientationChange', this.alterWindowSize)
   },
   computed: {
-    imgSize () {
-      if (this.ww >= 460 && this.ww < 719.98) {
-        return 'tablet-small'
-      } else if (this.ww >= 720 && this.ww < 999.98) {
-        return 'tablet-large'
-      } else if (this.ww >= 1000 && this.ww < 1599.98) {
-        return 'desktop-small'
-      } else if (this.ww >= 1600) {
-        return 'desktop-large'
-      } else {
-        return 'mobile'
-      }
-    },
+    // imgSize () {
+    //   if (this.ww >= 460 && this.ww < 719.98) {
+    //     return 'tablet-small'
+    //   } else if (this.ww >= 720 && this.ww < 999.98) {
+    //     return 'tablet-large'
+    //   } else if (this.ww >= 1000 && this.ww < 1599.98) {
+    //     return 'desktop-small'
+    //   } else if (this.ww >= 1600) {
+    //     return 'desktop-large'
+    //   } else {
+    //     return 'mobile'
+    //   }
+    // },
     imgH () {
-      let aspectRatio
-      switch (this.imgSize) {
-        case 'tablet-large':
-          aspectRatio = 1.143
-          break
-        case 'desktop-small':
-          aspectRatio = 1.143
-          break
-        case 'desktop-large':
-          aspectRatio = 1.143
-          break
-        default:
-          aspectRatio = 1
-          break
-      }
+      // let aspectRatio
+      const aspectRatio = (this.ww >= 720 ? 1.143 : 1)
       return Math.floor(this.ww / aspectRatio)
+      // switch (imgSize) {
+      //   case 'tablet-large':
+      //     aspectRatio = 1.143
+      //     break
+      //   case 'desktop-small':
+      //     aspectRatio = 1.143
+      //     break
+      //   case 'desktop-large':
+      //     aspectRatio = 1.143
+      //     break
+      //   default:
+      //     aspectRatio = 1
+      //     break
+      // }
+      // return Math.floor(this.ww / aspectRatio)
     }
   },
   methods: {
-    alterWindowSize () {
-      this.ww = this.htmlEl.clientWidth
-      this.wh = this.wEl.innerHeight
+    imgSrc (id, size) {
+      return `/proj-assets/nanfangao-bridge/img/step/step${id}-${size}.png`
     },
+    // alterWindowSize () {
+    //   this.ww = this.htmlEl.clientWidth
+    //   this.wh = this.wEl.innerHeight
+    // },
     locateGraphic () {
       const container = this.$refs.container
       const graphic = this.$refs.graphic
@@ -139,8 +153,9 @@ export default {
   },
   beforeDestroy () {
     this.wEl.removeEventListener('scroll', this.locateGraphic)
-    this.wEl.removeEventListener('resize', this.alterWindowSize)
-    this.wEl.removeEventListener('orientationChange', this.alterWindowSize)
+    this.wEl.removeEventListener('scroll', this.changeImg)
+    // this.wEl.removeEventListener('resize', this.alterWindowSize)
+    // this.wEl.removeEventListener('orientationChange', this.alterWindowSize)
   }
 }
 </script>
@@ -150,12 +165,14 @@ export default {
 
 .fixed-slides
   position relative
-  margin-top 40px
-  margin-bottom 40px
+  // margin-top 40px
+  // margin-bottom 40px
+  margin-top 30px
+  margin-bottom 30px
   background-color #404040
-  @media (min-width $desktop-breakpoint)
-    margin-top 30px
-    margin-bottom 30px
+  // @media (min-width $desktop-breakpoint)
+  //   margin-top 30px
+  //   margin-bottom 30px
   &__graphic
     position absolute
     top 0
@@ -168,8 +185,9 @@ export default {
     &.bottom
       top auto
       bottom 0
-    & img
+    & picture
       width 100%
+      height 100%
       display block
       position absolute
       top 0
@@ -178,9 +196,19 @@ export default {
       transition opacity 0.3s ease
       &.active
         opacity 1
+    & img
+      display block
+      width 100%
+      height 100%
+      // position absolute
+      // top 0
+      // left 0
+      // opacity 0
+      // transition opacity 0.3s ease
+      // &.active
+      //   opacity 1
   &__text
     position relative
-    // padding-top 70vh
     padding-bottom 70vh
     z-index 9
     margin-left auto

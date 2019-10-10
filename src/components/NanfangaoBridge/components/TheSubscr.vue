@@ -59,28 +59,31 @@ export default {
       @media (min-width 460px)
         margin-top 10px
         padding-left 0
-  & .subscription
-    &__input
-      background-color rgba(216, 216, 216, 0.15)
-      height 44px
-      font-size 1.4rem
-      border-radius 4px
-      padding-right 14px
+  & .subscription-wrapper
+    & .subscription
+      &__input
+        background-color rgba(216, 216, 216, 0.15)
+        height 44px
+        font-size 1.4rem
+        border-radius 4px
+        padding-right 14px
+        padding-left 14px
+        &::placeholder
+          color #9b9b9b
+      &__btn
+        background-color #427b80
+        line-height normal
+        font-size 1.4rem
+        height 44px
+        border-radius 4px
+        margin-left 6px
+        transition background-color 0.3s
+        // todo touch
+        &:hover
+          background-color #6fb4ba
+        &:active
+          background-color #30575a
+          transition none
+    & .info
       padding-left 14px
-      &::placeholder
-        color #9b9b9b
-    &__btn
-      background-color #427b80
-      line-height normal
-      font-size 1.4rem
-      height 44px
-      border-radius 4px
-      margin-left 6px
-      transition background-color 0.3s
-      // todo touch
-      &:hover
-        background-color #6fb4ba
-      &:active
-        background-color #30575a
-        transition none
 </style>

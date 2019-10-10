@@ -8,13 +8,13 @@ function debounce(fn, wait) {
   }
 }
 
-function throttle(fn, wait, musrRun, needName, arr, name) {
+function throttle(fn, wait, mustRun, needName, arr, name) {
   let timer
   let startTime = new Date()
   const coreFn = () => {
     let currentTime = new Date()
     clearTimeout(timer)
-    if (currentTime - startTime >= musrRun) {
+    if (currentTime - startTime >= mustRun) {
       fn()
       startTime = currentTime
     } else {

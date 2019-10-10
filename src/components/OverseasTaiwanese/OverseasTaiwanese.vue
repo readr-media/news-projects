@@ -562,7 +562,6 @@ export default {
       }
       this.switchBackgroundPageAll('story6', '', 6)
     },
-    // todo 停在中間重整後，若不滑動，圖片不會出現
     fixedBackgroundPageAll () {
       const opening = this.$refs.opening
       const final = this.$refs.final

@@ -20,9 +20,7 @@ export default {
 .cover
   height 100vh
   position relative
-  margin-bottom 10px
-  @media (min-width $desktop-breakpoint)
-    margin-bottom 30px
+  // margin-bottom 30px
   &__img
     position absolute
     top 0
@@ -64,14 +62,14 @@ export default {
         height 1px
         box-shadow 0 2px 1px 0 rgba(0, 0, 0, 0.5)
         background-color #fff
-        margin 20px auto 10px auto
+        margin 20px auto
         @media (min-width $desktop-breakpoint)
           margin-top 30px
-          margin-bottom 28px
+          margin-bottom 30px
           width 200px
     & p
       font-size 1.8rem
-      font-weight 500
+      font-weight 600
       line-height 1.89
       padding-right 15px
       padding-left 15px
