@@ -16,5 +16,6 @@ export default {
   margin 30px auto
   max-width 1440px
   & img
+    width 100%
     vertical-align middle
 </style>

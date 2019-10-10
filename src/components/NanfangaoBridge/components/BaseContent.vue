@@ -27,12 +27,6 @@ export default {
   @media (min-width 680px)
     padding-left 0
     padding-right 0
-  &__date
-    font-weight 700
-    line-height 1.5
-    font-family $font-serif
-    @media (min-width $desktop-breakpoint)
-      margin-bottom 60px
   & h2
     font-size 2.6rem
     font-weight 700
