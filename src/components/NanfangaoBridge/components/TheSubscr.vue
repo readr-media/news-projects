@@ -24,6 +24,7 @@ export default {
 
 .subscr
   max-width 650px
+  width 100%
   margin-top 80px
   margin-right auto
   margin-left auto
@@ -61,6 +62,9 @@ export default {
         padding-left 0
   & .subscription-wrapper
     & .subscription
+      width 100%
+      box-sizing border-box
+      max-width 100%
       &__input
         background-color rgba(216, 216, 216, 0.15)
         height 44px
@@ -68,6 +72,8 @@ export default {
         border-radius 4px
         padding-right 14px
         padding-left 14px
+        // debug layout error for Slack, but I don't know why.
+        min-width 0
         &::placeholder
           color #9b9b9b
       &__btn
@@ -78,6 +84,10 @@ export default {
         border-radius 4px
         margin-left 6px
         transition background-color 0.3s
+        flex-shrink 0
+        width 80px
+        @media (min-width 460px)
+          width 108px
         // todo touch
         &:hover
           background-color #6fb4ba

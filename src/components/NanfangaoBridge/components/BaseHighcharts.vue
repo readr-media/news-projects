@@ -12,8 +12,8 @@ export default {
 
 <style lang="stylus">
 .base-highcharts
-  margin-top 30px
-  margin-bottom 30px
+  margin 30px auto
+  max-width 650px
   // &__img
   //   margin-left -15px
   //   margin-right -15px
