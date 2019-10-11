@@ -18,7 +18,7 @@
         <source media="(min-width: 720px) and (max-width: 999.98px)" :srcset="imgSrc(imgId, 'tablet-large')">
         <source media="(min-width: 1000px) and (max-width: 1599.98px)" :srcset="imgSrc(imgId, 'desktop-small')">
         <source media="(min-width: 1600px)" :srcset="imgSrc(imgId, 'desktop-large')">
-        <img :src="imgSrc(imgId, 'mobile')" alt="">
+        <img loading="lazy" :src="imgSrc(imgId, 'mobile')" alt="">
       </picture>
     </div>
     <div class="fixed-slides__text" v-for="(text, idx) in texts" :key="text.id" :class="{ step1: idx === 0 }">
@@ -175,13 +175,16 @@ export default {
   //   margin-bottom 30px
   &__graphic
     position absolute
+    width 100%
     top 0
-    left 50%
-    transform translateX(-50%)
+    left 0
+    // left 50%
+    // transform translateX(-50%)
     &.fixed
       position fixed
       top 50%
-      transform translate(-50%, -50%)
+      // transform translate(-50%, -50%)
+      transform translateY(-50%)
     &.bottom
       top auto
       bottom 0
