@@ -286,7 +286,7 @@ export default {
     this.beforeWw = this.ww
   },
   mounted () {
-    this.lazyers = document.querySelectorAll('.lazyer')
+    this.lazyers = Array.from(document.querySelectorAll('.lazyer'))
     this.isMounted = true
     this.wEl.addEventListener('scroll', throttle(this.lazyLoad, 250, 500, true, this.throttleFn, 'lazyLoad1'))
     this.wEl.addEventListener('resize', throttle(this.lazyLoad, 250, 500, true, this.throttleFn, 'lazyLoad2'))
@@ -739,10 +739,11 @@ export default {
     },
     lazyLoad () {
       const scrollH = this.wEl.pageYOffset
-      Array.prototype.forEach.call(this.lazyers, (lazyer, idx) => {
+      this.lazyers.forEach((lazyer, idx) => {
         if (lazyer.offsetTop < (scrollH + this.wh * 1.5)) {
           const img = lazyer.firstElementChild
           img.src = img.dataset.src
+          this.lazyers.splice(idx, 1)
           lazyer.classList.remove('lazyer')
           if (idx === (this.lazyers.length - 1)) {
             this.wEl.removeEventListener('scroll', this.throttleFn['lazyLoad1'])

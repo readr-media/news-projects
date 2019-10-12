@@ -20,7 +20,6 @@ export default {
 .cover
   height 100vh
   position relative
-  // margin-bottom 30px
   &__img
     position absolute
     top 0
@@ -32,14 +31,6 @@ export default {
     background-size cover
     background-repeat no-repeat
     z-index -1
-    // @media (min-width 460px) and (max-width 719.98px)
-    //   background-image url(/proj-assets/nanfangao-bridge/img/cover-tablet-small.jpg)
-    // @media (min-width 720px) and (max-width 999.98px)
-    //   background-image url(/proj-assets/nanfangao-bridge/img/cover-tablet-large.jpg)
-    // @media (min-width 1000px) and (max-width 1599.98px)
-    //   background-image url(/proj-assets/nanfangao-bridge/img/cover-desktop-small.jpg)
-    // @media (min-width 1600px)
-    //   background-image url(/proj-assets/nanfangao-bridge/img/cover-desktop-large.jpg)
     &:after
       content ''
       position absolute
