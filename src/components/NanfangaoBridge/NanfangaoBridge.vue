@@ -16,7 +16,7 @@
 
       <picture class="chart chart--three-steps">
         <source media="(min-width: 1200px)" srcset="/proj-assets/nanfangao-bridge/img/chart/three-steps-desktop.png">
-        <img loading="lazy" src="/proj-assets/nanfangao-bridge/img/chart/three-steps-mobile.png" alt="">
+        <img class="lazyer" loading="lazy" data-src="/proj-assets/nanfangao-bridge/img/chart/three-steps-mobile.png" src="" alt="">
       </picture>
 
       <BaseContent>
@@ -28,7 +28,7 @@
       </BaseContent>
 
       <BaseHighcharts style="height: 316px;">
-        <iframe loading="lazy" class="highcharts-iframe" src="https://cloud.highcharts.com/embed/xmFx3EzZ/" style="border: 0; width: 100%; height: 100%;"></iframe>
+        <iframe loading="lazy" class="highcharts-iframe lazyer" data-src="https://cloud.highcharts.com/embed/xmFx3EzZ/" src="" style="border: 0; width: 100%; height: 100%;"></iframe>
       </BaseHighcharts>
 
       <BaseContent>
@@ -51,8 +51,7 @@
 
         <picture class="chart">
           <source media="(min-width: 576px)" srcset="/proj-assets/nanfangao-bridge/img/chart/timeline-desktop.png">
-          <img loading="lazy" src="/proj-assets/nanfangao-bridge/img/chart/timeline-mobile.png" alt="">
-          <!-- <img loading="lazy" :src="`/proj-assets/nanfangao-bridge/img/chart/timeline-${timelineImgSize}.png`" alt=""> -->
+          <img class="lazyer" loading="lazy" data-src="/proj-assets/nanfangao-bridge/img/chart/timeline-mobile.png" src="" alt="">
         </picture>
 
         <p>張嘉峰表示，歷年修訂的部頒橋梁檢測規範，是針對一般類型橋梁原則性所「訂出最基礎的檢測標準」，以提供各主管機關參考，並無斜張橋等特殊橋梁的規範，各主管機關應就轄管特殊橋梁另訂檢測項目。</p>
@@ -66,7 +65,7 @@
       </BaseContent>
 
       <BaseHighcharts style="height: 316px;">
-        <iframe loading="lazy" class="highcharts-iframe" src="https://cloud.highcharts.com/embed/2zfKylCg/" style="border: 0; width: 100%; height: 100%;"></iframe>
+        <iframe loading="lazy" class="highcharts-iframe lazyer" data-src="https://cloud.highcharts.com/embed/2zfKylCg/" src="" style="border: 0; width: 100%; height: 100%;"></iframe>
       </BaseHighcharts>
 
       <BaseContent>
@@ -113,8 +112,7 @@ export default {
       title: '通往悲劇之路：南方澳跨港大橋如何坍塌',
       description: '2019 年 10 月 1 日，南方澳跨港大橋斷裂，引發社會譁然，事故原因說法眾說紛紜。目前斷橋事故進入調查程序，我們透過 3D 圖解、南方澳跨港大橋的身世及橋梁檢測歷史切入，帶讀者理解這起悲劇的系統性問題。',
       metaUrl: 'nanfangao-bridge',
-      metaImage: 'nanfangao-bridge/img/cover.jpg'
-      // customScript: '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha256-gvEnj2axkqIj4wbYhPjbWV7zttgpzBVEgHub9AAZQD4=" crossorigin="anonymous" />'
+      metaImage: 'nanfangao-bridge/img/cover-desktop-large.jpg'
     }
   },
   data () {
@@ -127,9 +125,8 @@ export default {
       scrollY: 0,
       readingProgress: 0,
       prevReadingProgress: 0,
-      refsToDetectReadingProgress: [ 'main', 'contentTitle1', 'contentTitle2', 'contentTitle3', 'contentTitle4', 'contentTitle5', 'footer' ]
-      // lazyers: []
-      // needHiddenHeaderBar: true
+      refsToDetectReadingProgress: [ 'main', 'contentTitle1', 'contentTitle2', 'contentTitle3', 'contentTitle4', 'contentTitle5', 'footer' ],
+      lazyers: []
     }
   },
   created () {
@@ -169,6 +166,7 @@ export default {
     this.wEl = window
     this.htmlEl = document.documentElement
     this.headerBarEl = document.getElementById('readr-app-header')
+    this.lazyers = Array.from(document.querySelectorAll('.lazyer'))
 
     this.ww = Math.min(this.wEl.innerWidth, this.htmlEl.clientWidth)
     this.wh = this.wEl.innerHeight
@@ -178,26 +176,20 @@ export default {
     this.wEl.addEventListener('scroll', this.letElsDetectReadingProgress)
 
     this.headerBarEl.addEventListener('mouseenter', this.enterHeaderBar)
-    // this.headerBarEl.addEventListener('mouseleave', this.leaveHeaderBar)
 
-    this.wEl.addEventListener('resize', throttle(this.alterWindowSize, 300, 900))
-    this.wEl.addEventListener('orientationChange', throttle(this.alterWindowSize, 300, 900))
+    this.wEl.addEventListener('resize', throttle(this.alterWindowSize, 300, 600))
+    this.wEl.addEventListener('orientationChange', throttle(this.alterWindowSize, 300, 600))
 
-    // if (!('loading' in HTMLImageElement.prototype)) {
-    //   this.lazyers = document.querySelectorAll('.lazyer')
-    //   this.wEl.addEventListener('scroll', this.lazyLoad)
-    //   this.wEl.addEventListener('resize', this.lazyLoad)
-    //   this.wEl.addEventListener('orientationChange', this.lazyLoad)
-    // }
+    if ('loading' in HTMLImageElement.prototype) {
+      this.lazyers.forEach((lazyer) => {
+        lazyer.src = lazyer.dataset.src
+      })
+    } else {
+      this.wEl.addEventListener('scroll', this.lazyLoad)
+      this.wEl.addEventListener('resize', this.lazyLoad)
+      this.wEl.addEventListener('orientationChange', this.lazyLoad)
+    }
   },
-  // computed: {
-  //   threeStepsImgSize () {
-  //     return this.ww >= 1200 ? 'desktop' : 'mobile'
-  //   },
-  //   timelineImgSize () {
-  //     return this.ww >= 460 ? 'desktop' : 'mobile'
-  //   }
-  // },
   methods: {
     alterWindowSize () {
       this.ww = this.htmlEl.clientWidth
@@ -210,15 +202,8 @@ export default {
       this.scrollY = currentScrollY
     },
     enterHeaderBar () { 
-      // if (this.headerBarEl.classList.contains('hidden')) this.headerBarEl.classList.remove('hidden')
-      // else this.needHiddenHeaderBar = false
       this.headerBarEl.classList.remove('hidden')
     },
-    // leaveHeaderBar () {
-    //   // if (this.needHiddenHeaderBar) this.headerBarEl.classList.add('hidden')
-    //   // this.needHiddenHeaderBar = true
-    //   this.headerBarEl.classList.add('hidden')
-    // },
     letElsDetectReadingProgress () {
       this.refsToDetectReadingProgress.forEach((ref, idx) => { this.detectReadingProgress(ref, (idx + 1)) })
     },
@@ -228,16 +213,16 @@ export default {
       const elT = el.offsetTop
       const scrollY = this.wEl.pageYOffset
       if ((scrollY + (this.wh / 2)) > elT) this.readingProgress = part
+    },
+    lazyLoad () {
+      const scrollH = this.wEl.pageYOffset
+      this.lazyers.forEach((lazyer, idx) => {
+        if (lazyer.offsetTop < (scrollH + (this.wh * 1.5))) {
+          lazyer.src = lazyer.dataset.src
+          this.lazyers.splice(idx, 1)
+        }
+      })
     }
-    // lazyLoad () {
-    //   const scrollH = this.wEl.pageYOffset
-    //   this.lazyers.forEach((lazyer, idx) => {
-    //     if (lazyer.offsetTop < (scrollH + this.wh * 1.5)) {
-    //       lazyer.src = lazyer.dataset.src
-    //       lazyer.classList.remove('lazyer')
-    //     }
-    //   })
-    // }
   }
 }
 </script>
@@ -251,9 +236,9 @@ html, div, h1, h2, p, a, strong, figure, figcaption, footer, header, section
   vertical-align baseline
 html
   font-size 10px
-  font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "PingFang TC", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif
-body
-  overflow-anchor auto
+  font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang TC", "Noto Sans CJK TC", "Noto Sans CJK", "Source Han Sans", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif
+// body
+//   overflow-anchor auto
 .header
   transition transform 0.3s
   &.hidden
@@ -276,8 +261,6 @@ main
   overflow hidden
 footer
   margin 60px auto 50px auto
-  // width 100%
-  // box-sizing border-box
   padding-left 15px
   padding-right 15px
   max-width 650px

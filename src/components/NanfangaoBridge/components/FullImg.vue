@@ -1,13 +1,7 @@
 <template>
-  <!-- <figure class="full-img">
-    <img loading="lazy" :src="src" alt="">
-  </figure> -->
   <picture class="full-img">
-    <!-- <source media="(min-width: 460px) and (max-width: 719.98px)" :srcset="`${src}-tablet-small.jpg`">
-    <source media="(min-width: 720px) and (max-width: 999.98px)" :srcset="`${src}-tablet-large.jpg`">
-    <source media="(min-width: 1000px) and (max-width: 1599.98px)" :srcset="`${src}-desktop-small.jpg`"> -->
     <source media="(min-width: 992px)" :srcset="`${prefixSrc}-desktop-large.jpg`">
-    <img loading="lazy" :src="`${prefixSrc}-desktop-small.jpg`" alt="">
+    <img class="lazyer" loading="lazy" :data-src="`${prefixSrc}-desktop-small.jpg`" src="" alt="">
   </picture>
 </template>
 

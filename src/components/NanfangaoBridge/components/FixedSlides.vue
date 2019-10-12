@@ -18,7 +18,7 @@
         <source media="(min-width: 720px) and (max-width: 999.98px)" :srcset="imgSrc(imgId, 'tablet-large')">
         <source media="(min-width: 1000px) and (max-width: 1599.98px)" :srcset="imgSrc(imgId, 'desktop-small')">
         <source media="(min-width: 1600px)" :srcset="imgSrc(imgId, 'desktop-large')">
-        <img loading="lazy" :src="imgSrc(imgId, 'mobile')" alt="">
+        <img class="lazyer" loading="lazy" :data-src="imgSrc(imgId, 'mobile')" src="" alt="">
       </picture>
     </div>
     <div class="fixed-slides__text" v-for="(text, idx) in texts" :key="text.id" :class="{ step1: idx === 0 }">
@@ -169,7 +169,7 @@ export default {
   // margin-bottom 40px
   margin-top 30px
   margin-bottom 30px
-  background-color #404040
+  background-color #777
   // @media (min-width $desktop-breakpoint)
   //   margin-top 30px
   //   margin-bottom 30px

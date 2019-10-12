@@ -18,7 +18,6 @@ export default {
   color #333
   font-size 1.6rem
   line-height 1.88
-  // padding-top 10px
   padding-right 15px
   padding-left 15px
   max-width 650px
