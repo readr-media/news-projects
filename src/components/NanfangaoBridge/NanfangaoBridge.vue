@@ -135,25 +135,25 @@ export default {
         this.prevReadingProgress = val
         switch (val) {
           case 1:
-            window.ga('send', 'event', '讀完', '閱讀', '讀完「第一屏」', val)
+            window.ga('send', 'event', 'projects', 'scroll', '第一屏', val)
             break
           case 2:
-            window.ga('send', 'event', '讀完', '閱讀', '讀完「3D圖」', val)
+            window.ga('send', 'event', 'projects', 'scroll', '3D圖', val)
             break
           case 3:
-            window.ga('send', 'event', '讀完', '閱讀', '讀完「交接不清 南方澳大橋成孤兒」', val)
+            window.ga('send', 'event', 'projects', 'scroll', '交接不清 南方澳大橋成孤兒', val)
             break
           case 4:
-            window.ga('send', 'event', '讀完', '閱讀', '讀完「立委：目視檢測品質低劣」', val)
+            window.ga('send', 'event', 'projects', 'scroll', '立委：目視檢測品質低劣', val)
             break
           case 5:
-            window.ga('send', 'event', '讀完', '閱讀', '讀完「專家：部頒規範僅是低標」', val)
+            window.ga('send', 'event', 'projects', 'scroll', '專家：部頒規範僅是低標', val)
             break
           case 6:
-            window.ga('send', 'event', '讀完', '閱讀', '讀完「橋梁門外漢請託無門 只因檢測經費低」', val)
+            window.ga('send', 'event', 'projects', 'scroll', '橋梁門外漢請託無門 只因檢測經費低', val)
             break
           case 7:
-            window.ga('send', 'event', '讀完', '閱讀', '讀完「用兩元撐起橋梁安全標準」', val)
+            window.ga('send', 'event', 'projects', 'scroll', '用兩元撐起橋梁安全標準', val)
             break
           default:
             break
