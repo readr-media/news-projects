@@ -118,7 +118,7 @@ export default {
   },
   methods: {
     imgSrc (id, size) {
-      return `/proj-assets/nanfangao-bridge/img/step/step${id}-${size}.png`
+      return `/proj-assets/nanfangao-bridge/img/step/step${id}-${size}-v1.png`
     },
     // alterWindowSize () {
     //   this.ww = this.htmlEl.clientWidth

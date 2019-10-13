@@ -15,8 +15,8 @@
       </BaseContent>
 
       <picture class="chart chart--three-steps">
-        <source media="(min-width: 1200px)" srcset="/proj-assets/nanfangao-bridge/img/chart/three-steps-desktop.png">
-        <img class="lazyer" loading="lazy" data-src="/proj-assets/nanfangao-bridge/img/chart/three-steps-mobile.png" src="" alt="">
+        <source media="(min-width: 1200px)" srcset="/proj-assets/nanfangao-bridge/img/chart/three-steps-desktop-v1.png">
+        <img class="lazyer" loading="lazy" data-src="/proj-assets/nanfangao-bridge/img/chart/three-steps-mobile-v1.png" src="" alt="">
       </picture>
 
       <BaseContent>
