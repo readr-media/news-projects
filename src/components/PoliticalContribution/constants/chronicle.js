@@ -184,4 +184,12 @@ export const actionEvents = [
       '將查詢工具及視覺化圖表更新第七屆、第八屆立委營利事業資料',
     ]
   },
+  {
+    isByGovernment: true,
+    date: '2019 年 8 月 14 日',
+    title: '監察院政治獻金公開查閱平台正式上線',
+    listItems: [
+      '<a href="https://ardata.cy.gov.tw/home" target="_blank">監察院政治獻金公開查閱平台</a>',
+    ]
+  },
 ]
