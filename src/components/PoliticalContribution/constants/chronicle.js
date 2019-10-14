@@ -2,10 +2,10 @@ export const originEvents = [
   {
     isByGovernment: false,
     date: '2014 年 4 月 19 日',
-    title: 'g0v <a href="https://g0v.hackpad.tw/8ow2GnliH48" target="_blank">開放政治獻金專案</a>正式推出群眾外包介面',
+    title: 'g0v <a href="https://g0v.hackpad.tw/8ow2GnliH48" target="_blank" rel="noopener">開放政治獻金專案</a>正式推出群眾外包介面',
     listItems: [
       '在 24 小時內，完成七個專戶文字辨識，後續擬定 SOP 號召鄉民去監察院印資料。但據專案發起人之一王向榮表示，當時每個流程都很吃人力，加上藍綠立委都有共識修法，最後並沒有全數完成',
-      '<a href="https://readr.sayit.mysociety.org/%E6%94%BF%E6%B2%BB%E7%8D%BB%E9%87%912014%E5%B9%B4-g0v-%E5%B0%88%E6%A1%88%E7%99%BC%E8%B5%B7%E4%BA%BA%E7%8E%8B%E5%90%91%E6%A6%AE%E5%B0%88%E8%A8%AA" target="_blank">2017 年《數讀政治獻金》與專案發起人之一王向榮訪談逐字稿</a>'
+      '<a href="https://readr.sayit.mysociety.org/%E6%94%BF%E6%B2%BB%E7%8D%BB%E9%87%912014%E5%B9%B4-g0v-%E5%B0%88%E6%A1%88%E7%99%BC%E8%B5%B7%E4%BA%BA%E7%8E%8B%E5%90%91%E6%A6%AE%E5%B0%88%E8%A8%AA" target="_blank" rel="noopener">2017 年《數讀政治獻金》與專案發起人之一王向榮訪談逐字稿</a>'
     ]
   },
   {
@@ -13,7 +13,7 @@ export const originEvents = [
     date: '2014 年 4 月 23 日',
     title: '監察院針對 g0v 專案回應：「希望開啟這項專案的 g0v 更審慎思考，等政府來處理會比較好」',
     listItems: [
-      '<a href="https://tw.news.yahoo.com/%E7%9B%A3%E5%AF%9F%E9%99%A2%EF%BC%9A%E7%AD%89%E6%94%BF%E5%BA%9C%E4%BE%86%E5%81%9A%E6%9C%83%E6%AF%94%E8%BC%83%E5%A5%BD-101829199.html" target="_blank">當時媒體報導</a>',
+      '<a href="https://tw.news.yahoo.com/%E7%9B%A3%E5%AF%9F%E9%99%A2%EF%BC%9A%E7%AD%89%E6%94%BF%E5%BA%9C%E4%BE%86%E5%81%9A%E6%9C%83%E6%AF%94%E8%BC%83%E5%A5%BD-101829199.html" target="_blank" rel="noopener">當時媒體報導</a>',
     ]
   },
   {
@@ -43,7 +43,7 @@ export const actionEvents = [
     date: '2017 年 8 月 1 日',
     title: '資料人工 key in 完成，進入資料處理期',
     listItems: [
-      '<a href="https://www.readr.tw/series/political-contribution/19" target="_blank">政治獻金的資料清理</a>',
+      '<a href="https://www.readr.tw/series/political-contribution/19" target="_blank" rel="noopener">政治獻金的資料清理</a>',
     ]
   },
   {
@@ -52,7 +52,7 @@ export const actionEvents = [
     title: '發布數位化完畢的原始資料',
     listItems: [
       {
-        content: '<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2016/A12_scanallpublic.pdf" target="_blank">第九屆立委原始資料</a>',
+        content: '<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2016/A12_scanallpublic.pdf" target="_blank" rel="noopener">第九屆立委原始資料</a>',
         linkType: 'data'
       },
       {
@@ -64,16 +64,16 @@ export const actionEvents = [
   {
     isByGovernment: false,
     date: '2017 年 11 月 9 日',
-    title: '發布政治獻金查詢工具與<a href="story1" target="_blank">第一篇文章</a>，開啟報導連載',
+    title: '發布政治獻金查詢工具與<a href="story1" target="_blank" rel="noopener">第一篇文章</a>，開啟報導連載',
   },
   {
     isByGovernment: false,
     date: '2017 年 11 月 16 日',
-    title: '<a href="story4" target="_blank">政治獻金專題最後一篇文章發佈完成</a>',
+    title: '<a href="story4" target="_blank" rel="noopener">政治獻金專題最後一篇文章發佈完成</a>',
     listItems: [
       '開啟第二季（第七屆、第八屆立委政治獻金資料數位化）準備工作',
       {
-        content: '人工數位化會計報告書，製作成<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2008/A16_basicall_7.csv" target="_blank">第七屆</a>、<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2012/A15_basicall_8.csv" target="_blank">第八屆</a>立委基本資料',
+        content: '人工數位化會計報告書，製作成<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2008/A16_basicall_7.csv" target="_blank" rel="noopener">第七屆</a>、<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2012/A15_basicall_8.csv" target="_blank" rel="noopener">第八屆</a>立委基本資料',
         linkType: 'data'
       }
     ]
@@ -83,7 +83,7 @@ export const actionEvents = [
     date: '2017 年 11 月 30 日',
     title: '行政院通過政治獻金明細應公開上網，送交立法院審議',
     listItems: [
-      '<a href="https://www.ey.gov.tw/Page/9277F759E41CCD91/7780c1df-4f81-444d-b681-d7c30ae620eb" target="_blank">行政院會通過「政治獻金法」部分條文修正草案</a>',
+      '<a href="https://www.ey.gov.tw/Page/9277F759E41CCD91/7780c1df-4f81-444d-b681-d7c30ae620eb" target="_blank" rel="noopener">行政院會通過「政治獻金法」部分條文修正草案</a>',
     ]
   },
   {
@@ -92,7 +92,7 @@ export const actionEvents = [
     title: '至監察院查閱政治獻金資料',
     listItems: [
       {
-        content: '<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2008/A14_scanall_7.pdf" target="_blank">第七屆</a>、<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/A18_scanall_pub.pdf" target="_blank">第八屆</a>立委政治獻金原始資料',
+        content: '<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/2008/A14_scanall_7.pdf" target="_blank" rel="noopener">第七屆</a>、<a href="https://github.com/mirror-media/politicalcontribution/blob/master/legislators/A18_scanall_pub.pdf" target="_blank" rel="noopener">第八屆</a>立委政治獻金原始資料',
         linkType: 'data'
       }
     ]
@@ -107,7 +107,7 @@ export const actionEvents = [
     date: '2017 年 12 月 28 日',
     title: '鄉民救國專案正式復活',
     listItems: [
-      '<a href="https://campaign-finance.g0v.ctiml.tw/" target="_blank">數讀政治獻金鄉民一起來</a>',
+      '<a href="https://campaign-finance.g0v.ctiml.tw/" target="_blank" rel="noopener">數讀政治獻金鄉民一起來</a>',
     ]
   },
   {
@@ -138,7 +138,7 @@ export const actionEvents = [
     date: '2018 年 3 月 8 日',
     title: '資料全數 key in 完畢，正式進入資料校對期',
     listItems: [
-      '<a href="https://www.readr.tw/series/political-contribution/18" target="_blank">我們針對原始資料做了哪些校對？</a>',
+      '<a href="https://www.readr.tw/series/political-contribution/18" target="_blank" rel="noopener">我們針對原始資料做了哪些校對？</a>',
     ]
   },
   {
@@ -146,7 +146,7 @@ export const actionEvents = [
     date: '2018 年 5 月 29 日',
     title: '立法院三讀通過《政治獻金法》部分條文修正，立法明定未來政治獻金明細都會公開上網',
     listItems: [
-      '<a href="https://www.moi.gov.tw/chi/chi_news/news_detail.aspx?src=news&sn=14044&type_code=02" target="_blank">主管機關內政部新聞稿</a>',
+      '<a href="https://www.moi.gov.tw/chi/chi_news/news_detail.aspx?src=news&sn=14044&type_code=02" target="_blank" rel="noopener">主管機關內政部新聞稿</a>',
     ]
   },
   {
@@ -154,7 +154,7 @@ export const actionEvents = [
     date: '2018 年 6 月 29 日',
     title: '監察院以 59 萬元公開招標政治獻金公開查閱平台',
     listItems: [
-      '<a href="http://web.pcc.gov.tw/tps/main/pms/tps/atm/atmAwardAction.do?newEdit=false&searchMode=common&method=inquiryForPublic&pkAtmMain=52512400&tenderCaseNo=B1070602" target="_blank">政治獻金會計報告書公開查閱平臺委外建置案</a>',
+      '<a href="http://web.pcc.gov.tw/tps/main/pms/tps/atm/atmAwardAction.do?newEdit=false&searchMode=common&method=inquiryForPublic&pkAtmMain=52512400&tenderCaseNo=B1070602" target="_blank" rel="noopener">政治獻金會計報告書公開查閱平臺委外建置案</a>',
     ]
   },
   {
@@ -163,7 +163,7 @@ export const actionEvents = [
     title: '發布第七屆、第八屆立委營利事業政治獻金資料原始檔',
     listItems: [
       {
-        content: '<a href="https://github.com/mirror-media/politicalcontribution" target="_blank">第七屆、第八屆立委營利事業政治獻金資料</a>',
+        content: '<a href="https://github.com/mirror-media/politicalcontribution" target="_blank" rel="noopener">第七屆、第八屆立委營利事業政治獻金資料</a>',
         linkType: 'data'
       }
     ]
@@ -189,7 +189,7 @@ export const actionEvents = [
     date: '2019 年 8 月 14 日',
     title: '監察院政治獻金公開查閱平台正式上線',
     listItems: [
-      '<a href="https://ardata.cy.gov.tw/home" target="_blank">監察院政治獻金公開查閱平台</a>',
+      '<a href="https://ardata.cy.gov.tw/home" target="_blank" rel="noopener">監察院政治獻金公開查閱平台</a>',
     ]
   },
 ]
