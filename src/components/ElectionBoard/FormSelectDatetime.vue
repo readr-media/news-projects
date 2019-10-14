@@ -1,8 +1,7 @@
 <template>
   <div class="select-datetime">
     <select v-model.number="year">
-      <option value="2019">2019 年</option>
-      <option value="2020">2020 年</option>
+      <option value="2018">2018 年</option>
     </select>
     <select v-model.number="month">
       <template v-for="n in monthCurrent">
@@ -69,14 +68,15 @@ export default {
 .select-datetime
   display flex
   justify-content space-between
-  // margin-top .5em
-  & > select
-    width calc(33.33% - 6px)
-    height 32px
-    // text-indent .5em
-    padding 0 0 0 12px
+  margin-top .5em
+  > select
+    width calc(33% - 5px)
+    height 30px
+    text-indent .5em
     background-color #a0a0a0
     border none
     border-radius 2px
+    -webkit-appearance none
+    -moz-appearance none
     appearance none
 </style>

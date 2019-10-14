@@ -21,17 +21,15 @@
       </div>
     </div>
     <template v-if="showAdvanced">
-      <input v-model="road" type="text" placeholder="請填寫地址" @keyup="showBtn = true">
+      <input v-model="road" type="text" @keyup="showBtn = true">
       <button v-show="showBtn" @click="validateAddress">更新地圖位置</button>
     </template>
     <span v-show="errors.length > 0" class="error">請選擇/輸入正確的 {{ errors.includes('district') ? '行政區' : '' }} {{ errors.includes('road') ? '街道路名' : '' }} </span>
   </div>
 </template>
-
 <script>
 import axios from 'axios'
 import { ADMINISTRATIVE_DISTRICT, } from './constants'
-import { GOOGLE_API_KEY } from 'api/config.js'
 
 const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
 const REGEX_ADDRESS_FOR_DATA = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))/
@@ -134,7 +132,7 @@ export default {
       if (this.errors.length === 0) {
         const geocoder = new google.maps.Geocoder()
 
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.addressSelected}&key=${GOOGLE_API_KEY}&language=zh-TW`)
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.addressSelected}&key=AIzaSyCgwPtUjWMKGKdp62Hnank6TTl3lhXwa3o&language=zh-TW`)
           .then(res => {
             if (res.data.status === 'OK' && res.data.results.length > 0) {
               const addressFormatted = this.formatAddress(res.data.results[0].formatted_address)
@@ -155,29 +153,23 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .select-position
-  margin-top 12px
+  margin-top .5em
   text-align right
-  @media (min-width 768px)
-    margin-top 16px
   > input
     width 100%
-    height 32px
-    margin-top 10px
-    // padding-left .5em
-    padding 0 0 0 12px
-    // text-indent 0.5em
-    line-height 32px
+    height 30px
+    margin-top .5em
+    padding-left .5em
+    line-height 30px
     background-color #a0a0a0
     border none
     border-radius 2px
-  & > button
+  > button
     width 100%
-    margin-top 10px
-    padding 0
-    height 32px
-    line-height 32px
+    margin-top .5em
+    padding .5em 0
     font-weight 500
-    // letter-spacing 1px
+    letter-spacing 1px
     background-color #fa6e59
     border none
     border-radius 2px
@@ -189,8 +181,9 @@ export default {
     width calc(50% - 5px)
     background-color #a0a0a0
     border-radius 2px
-    &.open::after
-      transform rotate(180deg)
+    &.open
+      &::after
+        transform rotate(180deg)
     &::after
       content ''
       position absolute
@@ -203,14 +196,14 @@ export default {
       background-position center center
       background-repeat no-repeat
       transition transform .5s
-    & select
+    select
       position relative
       z-index 10
       width 100%
-      height 32px
-      padding 0 0 0 12px
-      // text-indent .5em
-      line-height 32px
+      height 30px
+      padding 0
+      text-indent .5em
+      line-height 30px
       background-color transparent
       border none
       -webkit-appearance none
@@ -218,5 +211,5 @@ export default {
       appearance none
   .error
     color #fa6e59
-    font-size .875rem
+    font-size .8rem
 </style>

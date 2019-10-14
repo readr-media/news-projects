@@ -67,7 +67,6 @@ import ElectionBoardUploadMap from './ElectionBoardUploadMap.vue'
 import axios from 'axios'
 import moment from 'moment'
 import { get, } from 'lodash'
-import { GOOGLE_API_KEY } from 'api/config.js'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
 const MAX_LATITUDE = 26
@@ -227,7 +226,7 @@ export default {
       this.coordinate[1] > MIN_LONGITUDE && this.coordinate[1] < MAX_LONGITUDE) {
         const geocoder = new google.maps.Geocoder()
         const coordinate = new google.maps.LatLng(this.coordinate[0], this.coordinate[1])
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.coordinate[0]},${this.coordinate[1]}&key=${GOOGLE_API_KEY}&language=zh-TW`)
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.coordinate[0]},${this.coordinate[1]}&key=AIzaSyCgwPtUjWMKGKdp62Hnank6TTl3lhXwa3o&language=zh-TW`)
           .then(res => {
             if (res.data.status === 'OK' && res.data.results.length > 0) {
               this.filterAddress(res.data.results)
@@ -386,8 +385,8 @@ theme-color = #fa6e59
       margin-bottom 30px
       color theme-color
       font-size 1.25rem
-      // font-weight 300
-      // letter-spacing 1px
+      font-weight 300
+      letter-spacing 1px
     img
       width 100%
       margin-top 10px
@@ -395,13 +394,11 @@ theme-color = #fa6e59
         margin-top 20px
     button
       width 100%
-      padding 0
+      padding .5em
       margin-top 30px
-      height 48px
-      line-height 48px
       color #000
       font-size 1.25rem
-      font-weight 700
+      font-weight 500
       background-color theme-color
       border none
       border-radius 2px
@@ -420,8 +417,6 @@ theme-color = #fa6e59
         bottom 0
         width 100%
         height 100%
-        // padding-left 25px
-        // padding-right 25px
         object-fit contain
         object-position center center
       &__alert
@@ -443,38 +438,35 @@ theme-color = #fa6e59
           border-radius 5px
     .action
       display flex
-      padding 30px 25px 30px 25px
+      padding 25px
       > div
         flex 1
         display flex
         flex-direction column
         justify-content center
         align-items center
-        height 48px
-        line-height 48px
+        height 50px
         color #000
         font-size 1.25rem
         text-align center
         border-radius 2px
         cursor pointer
-        @media (min-width 768px)
-          border-radius 6px
         > span
-          font-weight 700
-          // line-height 1
+          font-weight 500
+          line-height 1
       &--retake
         background-color #a0a0a0
       &--verified
-        margin-left 14px
+        margin-left 15px
         background-color theme-color
   &__step-4
     position relative
     display flex
     flex-direction column
-    // .map
-    //   flex 2
-    // .form
-    //   flex 3
+    .map
+      flex 2
+    .form
+      flex 3
   &__step-5
     display flex
     flex-direction column
@@ -494,30 +486,27 @@ theme-color = #fa6e59
 @media (min-width: 768px)
   .eb-upload
     &__step-1
-      & > div
+      > div
        width 450px
-      & button
-        border-radius 6px
     &__step-3
       justify-content center
-      padding 40px 0 45px 0
-      & .preview
+      padding 55px 0
+      .preview
         flex 1
         width 450px
         margin 0 auto
-        & > img
+        > img
           object-fit contain
       .action
         width 450px
-        margin 40px auto 0
+        margin 30px auto 0
         padding 0
     &__step-4
       .form
-        // flex none
+        flex none
         width 450px
-        // height 500px
-        margin-left auto
-        margin-right auto
+        height 500px
+        margin 0 auto
     &__step-5
       > img
         width 100px
