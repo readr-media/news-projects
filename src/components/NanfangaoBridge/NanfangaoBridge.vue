@@ -28,7 +28,7 @@
       </BaseContent>
 
       <BaseHighcharts style="height: 316px;">
-        <iframe loading="lazy" class="highcharts-iframe lazyer" data-src="https://cloud.highcharts.com/embed/xmFx3EzZ/" src="" style="border: 0; width: 100%; height: 100%;"></iframe>
+        <iframe loading="lazy" class="highcharts-iframe lazyer" data-src="https://cloud.highcharts.com/embed/rtPqRxMt/" src="" style="border: 0; width: 100%; height: 100%;"></iframe>
       </BaseHighcharts>
 
       <BaseContent>
