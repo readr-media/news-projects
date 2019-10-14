@@ -58,7 +58,6 @@ export default {
     const metaUrl = this.$route.fullPath.split('/project/')[1];
     const ogLocale = 'zh_TW';
 
-    // todo
     let title = `看板追追追——2018選舉看板紀錄`
     let metaImage = `election-board/images/og.jpg`;
     let description = '每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤。我們邀請你拍下身邊的看板，一起為這次的選舉留下紀錄！'
@@ -95,11 +94,10 @@ export default {
     };
   },
   computed: {
-    currentComponent () {
-      const params = this.$route.params.params
-      if (params) {
-        const part = params.charAt(0).toUpperCase() + params.slice(1)
-        return `ElectionBoard${part.includes('Data') ? 'Data' : part}` 
+    currentComponent() {
+      if (this.$route.params.params) {
+        const part = this.$route.params.params.charAt(0).toUpperCase() + this.$route.params.params.slice(1)
+        return `ElectionBoard${part}` 
       }
       return 'ElectionBoardLanding'
     },
@@ -109,7 +107,6 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      // todo
       let title = `看板追追追——2018選舉看板紀錄`
       switch (to.params.params) {
         case 'verify':
@@ -127,7 +124,7 @@ export default {
   },
   beforeCreate () {
     const route = this.$route.params.params || '';
-    const regex = /^(upload|verify|data|data-2018)$/
+    const regex = /^(upload|verify|data)$/
     if (!route.match(regex)) {
       this.$router.replace({ path: '/project/election-board' });
     }
@@ -143,7 +140,7 @@ export default {
   },
   destroyed () {
     this.$store.unregisterModule('ElectionBoard')
-  }
+  },
 }
 </script>
 <style lang="stylus">
@@ -152,19 +149,18 @@ export default {
   font-size 16px
   font-style normal
   font-family "source-han-sans-traditional", sans-serif
-  // line-height 1.67
-  line-height 1.2
-  background-color #000
-  // background-color rgba(0,0,0,1)
-  & h3, & p
+  line-height 1.67
+  h3, p
     margin 0
-  // & a
-  //   color #000
-  //   text-decoration none
-  //   cursor pointer
-  &__share.share .toggle
-    background-image url(/proj-assets/election-board/images/share.png) !important
-    background-size 34px auto !important
-    background-position center center !important
+  a
+    color #000
+    text-decoration none
+    cursor pointer
+  &__share
+    &.share
+      .toggle
+        background-image url(/proj-assets/election-board/images/share.png) !important
+        background-size 34px auto !important
+        background-position center center !important
 </style>
 
