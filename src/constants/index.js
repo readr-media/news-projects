@@ -79,7 +79,7 @@ export const OLD_PROJECTS_SLUGS = [
 ]
 
 // include project url path name if we want project to use mirrormedia's meta and GA setting
-export const PROJECTS_BELONGS_MM = [
+export const PROJECTS_BELONG_MM = [
   'chenuen'
 ]
 
@@ -102,6 +102,28 @@ export const PROJECTS_NEED_TYPEKIT = [
   'nanfangao-bridge'
 ]
 
+export const PROJECTS_NEED_FB_SDK = [
+  'chenuen',
+  'disinformation',
+  'dollclaw',
+  'fake-news',
+  'farmhouse',
+  'foreign-labour',
+  'foreign-labour-ii',
+  'foreign-labour-iii',
+  'foreign-labour-iv',
+  'hotel-hostess-series',
+  'marathon',
+  'newtype',
+  'president-promise',
+  'china-company',
+  'nanfangao-bridge'
+]
+
+export const PROJECTS_NEED_FB_QUOTE = [
+  'nanfangao-bridge'
+]
+
 // include project url path which NOT need to reset scroll position in vue router
 export const PROJECTS_PREVENT_SCROLL_BEHAVIOR = [
   'political-contribution',
@@ -113,5 +135,7 @@ export const SCRIPT_GOOGLE_MAP = `<script src="https://maps.googleapis.com/maps/
 
 export const SCRIPT_GOOGLE_RECAPTCHA = `<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=zh-TW" async defer></script>`
 
-export const SCRIPT_TYPEKIT = `<script src="https://use.typekit.net/mwt8dya.js"></script>
-                               <script>try{Typekit.load({ async: true });}catch(e){}</script>`
+export const SCRIPT_TYPEKIT = `
+  <script src="https://use.typekit.net/mwt8dya.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+`

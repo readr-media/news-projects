@@ -96,27 +96,6 @@
     <!-- typekit -->
     {{{ scriptTypeKit }}}
     <!-- End typekit -->
-    <!-- Facebook SDK -->
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId            : {{ fbAppId }},
-          autoLogAppEvents : true,
-          xfbml            : true,
-          version          : 'v2.12'
-        });
-        FB.AppEvents.logPageView();
-      };
-    
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "https://connect.facebook.net/zh_TW/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <!-- End Facebook SDK -->
     <!-- Google Map -->
     {{{ scriptGoogleMap }}}
     <!-- End Google Map -->
@@ -127,9 +106,14 @@
     {{{ customScript }}}
     <!-- End Custom Script -->
   </head>
+  
   <body>
-  <div id="skip"><a href="#app">skip to content</a></div>
-  <!--vue-ssr-outlet-->
+    <!-- Facebook SDK -->
+    {{{ fbSdk }}}
+    <!-- End Facebook SDK -->
+
+    <div id="skip"><a href="#app">skip to content</a></div>
+    <!--vue-ssr-outlet-->
   </body>
   
 </html>
