@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <ProgressBar v-if="hideProgressBar" />
     <AppHeader v-if="hideAppHeader" />
 
     <transition name="fade" mode="out-in">
@@ -10,10 +9,7 @@
 </template>
 
 <script>
-import {
-  PROJECTS_NOT_NEED_APP_HEADER,
-  PROJECTS_NOT_NEED_PROGRESS_BAR
-} from './constants/index.js'
+import { PROJECTS_NOT_NEED_APP_HEADER } from './constants/index.js'
 
 const updateViewport = (store) => {
   const wEl = window
@@ -25,15 +21,11 @@ const updateViewport = (store) => {
 }
 export default {
   components: {
-    AppHeader: () => import('./components/AppHeader.vue'),
-    ProgressBar: () => import('./components/ProgressBar.vue')
+    AppHeader: () => import('./components/AppHeader.vue')
   },
   computed: {
     hideAppHeader () {
       return !PROJECTS_NOT_NEED_APP_HEADER.includes(this.$route.params.project)
-    },
-    hideProgressBar () {
-      return !PROJECTS_NOT_NEED_PROGRESS_BAR.includes(this.$route.params.project)
     }
   },
   beforeMount () {
