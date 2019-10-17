@@ -1,37 +1,39 @@
 <template>
   <div id="app">
-    <AppHeader v-if="!hideAppHeader" />
+    <ProgressBar v-if="hideProgressBar" />
+    <AppHeader v-if="hideAppHeader" />
+
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
   </div>
 </template>
+
 <script>
-import AppHeader from './components/AppHeader.vue'
+import {
+  PROJECTS_NOT_NEED_APP_HEADER,
+  PROJECTS_NOT_NEED_PROGRESS_BAR
+} from './constants/index.js'
 
 const updateViewport = (store) => {
-  const w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-  const h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-  const viewport = [ w, h ]
+  const wEl = window
+  const htmlEl = document.documentElement
+  const ww = Math.min(wEl.innerWidth, htmlEl.clientWidth)
+  const wh = wEl.innerHeight || htmlEl.clientHeight
+  const viewport = [ ww, wh ]
   return store.dispatch('UPDATE_VIEWPORT', viewport)
 }
 export default {
   components: {
-    AppHeader
+    AppHeader: () => import('./components/AppHeader.vue'),
+    ProgressBar: () => import('./components/ProgressBar.vue')
   },
   computed: {
-    hideAppHeader() {
-      const slugs = [
-        'hong-kong-protests-2019',
-        'political-contribution',
-        'newtype',
-        'election-board',
-        'marathon',
-        'puyuma',
-        'disinformation'
-      ]
-
-      return slugs.includes(this.$route.params.project)
+    hideAppHeader () {
+      return !PROJECTS_NOT_NEED_APP_HEADER.includes(this.$route.params.project)
+    },
+    hideProgressBar () {
+      return !PROJECTS_NOT_NEED_PROGRESS_BAR.includes(this.$route.params.project)
     }
   },
   beforeMount () {
@@ -47,7 +49,7 @@ export default {
   methods: {
     $_app_updateViewport () {
       updateViewport(this.$store)
-    },
+    }
   }
 }
 </script>
