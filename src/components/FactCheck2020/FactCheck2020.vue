@@ -7,7 +7,10 @@
         <img class="quote left-bottom" src="/proj-assets/fact-check/landing_quote.png" alt="">
         <img class="quote right-top" src="/proj-assets/fact-check/landing_quote.png" alt="">
         <img class="quote right-bottom" src="/proj-assets/fact-check/landing_quote.png" alt="">
-        <img src="/proj-assets/fact-check/landing_main.png" alt="">
+        <picture>
+          <source srcset="/proj-assets/fact-check/landing_main.webp" type="image/webp">
+          <img src="/proj-assets/fact-check/landing_main.png" alt="">
+        </picture>
         <img class="magnifier middle" src="/proj-assets/fact-check/landing_middle.jpg" alt="">
         <div class="magnifier bottom" />
       </div>
@@ -517,8 +520,10 @@ export default {
       position relative
       width 60%
       margin 10px auto 0
-      img
+      img, picture
         width 100%
+      picture
+        display block
       .quote
         position absolute
         z-index 10

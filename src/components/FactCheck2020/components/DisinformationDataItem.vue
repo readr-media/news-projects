@@ -55,12 +55,14 @@
         <p class="small typescript-source">出處：<a :href="data.typescriptSource" target="_blank" >發言影片</a></p>
       </div>
       <div class="data__info">
-        <img
-          v-if="resultImage"
-          :src="resultImage"
-          :alt="resultText"
-          class="data__authenticity"
-        >
+        <div class="data__authenticity">
+          <img
+            v-if="resultImage"
+            :src="resultImage"
+            :alt="resultText"
+          >
+          <p v-text="resultText" />
+        </div>
         <div class="data__tags-date">
           <span
             v-if="data.tags"
@@ -111,7 +113,8 @@ export default {
       const list = {
         '片面事實': '/proj-assets/fact-check/controversial.png',
         '含有錯誤訊息': '/proj-assets/fact-check/wrong.png',
-        '真實': '/proj-assets/fact-check/real.png'
+        '真實': '/proj-assets/fact-check/real.png',
+        '不屬於查核範圍': '/proj-assets/fact-check/not_belong_to_scope.png'
       }
       return list[this.data.result]
     },
@@ -231,10 +234,12 @@ export default {
     display flex
     margin-top 5px
   &__authenticity
-    width 35px
     height 35px
-    object-fit contain
-    object-position center center
+    img
+      width 35px
+      height 35px
+      object-fit contain
+      object-position center center
   &__tags-date
     display flex
     flex-wrap wrap
@@ -253,7 +258,7 @@ export default {
 
 @media (max-width: 1023px)
   .data__info
-    img
+    .data__authenticity
       display none
 
 @media (min-width: 1024px)
@@ -304,9 +309,18 @@ export default {
     > h3
       padding-right 40px
   .data__info
+    position relative
+    left -7px
+    flex-wrap wrap
     padding-right 70px
+  .data__authenticity
+    width 100%
+    p
+      display inline
+      line-height 35px
+      vertical-align top
   .data__tags-date
-    margin-left 5px
+    margin-left 7px
   .error-report
     position absolute
     right 20px
