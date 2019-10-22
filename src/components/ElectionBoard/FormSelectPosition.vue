@@ -30,7 +30,7 @@
 
 <script>
 import axios from 'axios'
-import { ADMINISTRATIVE_DISTRICT, } from './constants'
+import { ADMINISTRATIVE_DISTRICT } from './constants'
 import { GOOGLE_API_KEY } from 'api/config.js'
 
 const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
@@ -155,10 +155,10 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .select-position
-  margin-top 12px
+  margin-top 10px
   text-align right
   @media (min-width 768px)
-    margin-top 16px
+    margin-top 12px
   > input
     width 100%
     height 32px
@@ -181,6 +181,7 @@ export default {
     background-color #fa6e59
     border none
     border-radius 2px
+    cursor pointer
   .row
     display flex
     justify-content space-between

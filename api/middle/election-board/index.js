@@ -1,12 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
-const { API_PROTOCOL, API_TIMEOUT, ELECTION_BOARD_HOST, ELECTION_BOARD_PORT, } = require('../../config')
+const { API_PROTOCOL, API_TIMEOUT, ELECTION_BOARD_HOST } = require('../../config')
 const { fetchFromRedis, insertIntoRedis, redisWriting, } = require('../ioredisHandler')
 const { mapKeys, snakeCase, } = require('lodash')
 const { verifyToken } = require('../../service/jwt')
 
-const apiHost = API_PROTOCOL + '://' + ELECTION_BOARD_HOST + ':' + ELECTION_BOARD_PORT
+// const apiHost = API_PROTOCOL + '://' + ELECTION_BOARD_HOST + ':' + ELECTION_BOARD_PORT
+
+const apiHost = API_PROTOCOL + '://' + ELECTION_BOARD_HOST
 
 const handleError = (err, res) => {
   if (err.response) {
@@ -18,7 +20,8 @@ const handleError = (err, res) => {
   }
 }
 
-router.get('/boards', fetchFromRedis, (req, res, next) => {
+// todo dis-comment fetchFromRedis
+router.get('/boards', /*fetchFromRedis,*/ (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
   if (res.redis) {
     console.error('fetch data from Redis.', url)
@@ -39,10 +42,9 @@ router.get('/boards', fetchFromRedis, (req, res, next) => {
     })
 }, insertIntoRedis)
 
-router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
+router.get('/candidates_terms', /*fetchFromRedis,*/ (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
   if (res.redis) {
-    console.error('fetch data from Redis.', url)
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
@@ -116,6 +118,26 @@ router.post('/boards', verifyToken, (req, res) => {
     handleError(err, res)
   })
 })
+
+router.get('/boards/gongdebook', /*fetchFromRedis,*/ (req, res, next) => {
+  if (res.redis) {
+    const resData = JSON.parse(res.redis)
+    return res.json(resData)
+  }
+  const url = `${apiHost}/api${req.url}`
+  axios.get(url, { timeout: API_TIMEOUT })
+    .then((result) => {
+      const dt = result.data
+      if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
+        res.dataString = JSON.stringify(dt)
+      }
+      res.json(dt)
+      next()
+    })
+    .catch((err) => {
+      handleError(err, res)
+    })
+}, insertIntoRedis)
 
 router.post('/verify/board', verifyToken, (req, res) => {
   const token = req.headers.authorization

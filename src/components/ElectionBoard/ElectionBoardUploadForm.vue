@@ -1,4 +1,5 @@
 <template>
+  <!-- todo 同一地點看板頁面調整 -->
   <div class="eb-upload-form">
     <div class="container">
       <div v-show="showCheckPosition" class="item">
@@ -12,7 +13,7 @@
         <div class="item__heading">
           <p>看板位置</p>
           <button v-if="hasGeolocation" v-show="!loadingPosition" @click="getCurrentPosition"><img src="/proj-assets/election-board/images/cursor.png" alt=""></button>
-          <span v-text="loadingPosition ? '取得地理位置中...' : '點此取得現在位置'"></span>
+          <span v-text="loadingPosition ? '取得地理位置中...' : '點此取得現在位置'" @click="getCurrentPosition"></span>
         </div>
         <FormSelectPosition
           :address="address"
@@ -25,7 +26,7 @@
         <div class="item__heading">
           <p>照片縮圖</p>
           <button :class="{ open: showPreview }" @click="showPreview = !showPreview"><img src="/proj-assets/election-board/images/arrow-orange.png" alt=""></button>
-          <span v-text="showPreview ? '收合' : '展開'"></span>
+          <span v-text="showPreview ? '收合' : '展開'" @click="showPreview = !showPreview"></span>
         </div>
         <div v-show="showPreview" class="image-preview__img">
           <img :src="imgURL" alt="">
@@ -36,15 +37,15 @@
         <!-- <template v-for="n in candidateAmount"> -->
           <!-- <FormSelectCandidate :key="n"
             :class="{ 'has-minus': n > 1 }"
-            :councilorCandidates="councilorCandidates"
+            :legislatorCandidates="legislatorCandidates"
             :index="n"
-            :mayorCandidates="mayorCandidates"
+            :presidentCandidates="presidentCandidates"
             :selectedIds="selectedCandidates"
             @minusCandidateAmount="minusSelectCandidate"
             @updateSelectedId="updateSelectedId" /> -->
         <FormSelectCandidate
-          :councilorCandidates="councilorCandidates"
-          :mayorCandidates="mayorCandidates"
+          :legislatorCandidates="legislatorCandidates"
+          :presidentCandidates="presidentCandidates"
           :selectedIds="selectedCandidates"
           @updateSelectedId="updateSelectedId"
         />
@@ -52,26 +53,27 @@
         <!-- <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p> -->
         <p class="candidates-info">若有多位候選人，請上傳多次</p>
       </div>
+
       <div class="item">
         <p class="item__title">標語</p>
-        <!-- todo v-model -->
-        <input type="text" placeholder="請輸入看板標語">
+        <input type="text" v-model="slogan" placeholder="請輸入看板標語">
       </div>
+
       <div class="item item--checkbox">
-        <input type="checkbox" id="party-symbol" :class="['checkbox', hasPartySymbol ? 'checked' : '']" v-model="hasPartySymbol">
-        <label for="party-symbol">有黨徽</label>
-        <!-- todo v-model -->
+        <input type="checkbox" id="partyIcon" :class="['checkbox', hasPartyIcon ? 'checked' : '']" v-model="hasPartyIcon">
+        <label for="partyIcon">有黨徽</label>
       </div>
+
       <div class="item">
-        <!-- todo v-model -->
         <p class="item__title">類型</p>
         <div class="select-container">
           <select
+            v-model="boardType"
             @blur="handleSelectBlur"
             @change="handleSelectChange"
             @focus="handleSelectFocus"
           >
-            <option disabled selected value="">請選擇看板類型</option>
+            <option disabled value="">請選擇看板類型</option>
             <option value="戶外看板">戶外看板</option>
             <option value="旗幟">旗幟</option>
             <option value="競選總部">競選總部</option>
@@ -79,6 +81,7 @@
           </select>
         </div>
       </div>
+
       <div class="item">
         <p class="item__title">拍攝時間</p>
         <FormSelectDatetime :datetime="datetime" @updateDatetime="updateDatetime"/>
@@ -86,8 +89,7 @@
 
       <div class="item">
         <p class="item__title">照片提供</p>
-        <!-- todo v-model -->
-        <input type="text" placeholder="請問芳名">
+        <input type="text" v-model="uploaderName" placeholder="請問芳名">
       </div>
 
       <div class="item recaptcha">
@@ -104,14 +106,15 @@
     <FormCheckUpload
       v-if="showCheckBoards"
       :address="address"
-      :councilorCandidates="councilorCandidates"
+      :legislatorCandidates="legislatorCandidates"
       :imgURL="imgURL"
-      :mayorCandidates="mayorCandidates"
+      :presidentCandidates="presidentCandidates"
       :selectedCandidates="selectedCandidates"
       @cancelUpload="$emit('cancelUpload')"
       @confirmUpload="uploadBoard" />
   </div>
 </template>
+
 <script>
 import FormCheckUpload from './FormCheckUpload.vue' 
 import FormSelectCandidate from './FormSelectCandidate.vue' 
@@ -120,7 +123,7 @@ import FormSelectPosition from './FormSelectPosition.vue'
 import VueRecaptcha from 'vue-recaptcha'
 import axios from 'axios'
 import { GOOGLE_RECAPTCHA_SITE_KEY, } from 'api/config'
-import { get, } from 'lodash'
+import { get } from 'lodash'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
 const DEFAULT_ADDRESS = '高雄市前鎮區成功二路39號'
@@ -139,8 +142,8 @@ const fetchBoards = (store, {
 } = {}) => {
   return store.dispatch('ElectionBoard/FETCH_BOARDS', {
     coordinates,
-    page: page,
-    maxResults: maxResults,
+    page,
+    maxResults,
     radius: 100,
     verifiedAmount: 3,
     notBoardAmount: 2,
@@ -148,15 +151,16 @@ const fetchBoards = (store, {
 }
 
 const fetchCandidates = (store, {
-  county = '台北市',
+  county = '全國,台北市',
   page = DEFAULT_PAGE,
-  type = 'mayors'
+  type = 'presidents'
+  // type = 'mayors'
 } = {}) => {
   store.dispatch('ElectionBoard/FETCH_CANDIDATES', {
-    county: county,
-    electionYear: 2018,
-    page: page,
-    type: type
+    county,
+    electionYear: 2020,
+    page,
+    type
   }).then(res => {
     if (res.next) {
       fetchCandidates(store, { county, type, page: page + 1 })
@@ -206,48 +210,52 @@ export default {
       recaptchaVerified: false,
       selectedCandidates: [],
       showCheckBoards: false,
+      // showCheckBoards: true,
       showCheckPosition: true,
       showPreview: false,
-      hasPartySymbol: false
+      slogan: '',
+      hasPartyIcon: false,
+      boardType: '',
+      uploaderName: ''
     }
   },
   computed: {
     canSubmit () {
       return this.current === 2 && this.userID && this.imgURL && this.coordinate.length === 2 && !this.showCheckPosition && this.recaptchaVerified
     },
-    councilorCandidates () {
-      if (this.county && this.district) {
-        const county = `${this.county.replace('台', '臺')}`
-        const regions = get(this.$store, [ 'state', 'ElectionBoard', 'elections', county, 'regions' ], []) || []
-        const district = this.district.substring(0, this.district.length - 1)
-        const regex = new RegExp(`(${district}|原住民)`)
-        const constituency = regions.filter(region => region.district.match(regex)).map(region => region.constituency) || []
-        const councilors = this.$store.state.ElectionBoard.candidates.councilors || []
-        const candidates = councilors.filter(councilor => constituency.includes(councilor.constituency))
-        return candidates
-      }
-      return []
+    legislatorCandidates () {
+      if (!(this.county && this.district)) return []
+      // if (this.county && this.district) {
+      const county = this.county.replace('台', '臺')
+      // const regions = get(this.$store, [ 'state', 'ElectionBoard', 'elections', county, 'regions' ], []) || []
+      // const district = this.district.substring(0, this.district.length - 1)
+      // const regex = new RegExp(`(${district}|原住民)`)
+      // const constituency = regions.filter(region => region.district.match(regex)).map(region => region.constituency) || []
+      const legislators = this.$store.state.ElectionBoard.candidates.legislators || []
+      // const legislators = this.$store.state.ElectionBoard.candidates.councilors || []
+      // const candidates = legislators.filter((legislator) => constituency.includes(legislator.constituency))
+      const regex = new RegExp(`${this.district}|全國`)
+      const candidates = legislators.filter((legis) => legis.district.match(regex))
+      // const candidates = legislators.filter((legis) => (legis.district === this.district || legis.district === '全國'))
+      return candidates
+      // }
+      // return []
+    },
+    isAddressMatched () {
+      return this.address.match(REGEX_ADDRESS) && this.address.match(REGEX_ADDRESS).length > 4
     },
     county () {
-      if (this.address.match(REGEX_ADDRESS) && this.address.match(REGEX_ADDRESS).length > 4) {
-        return this.address.match(REGEX_ADDRESS)[1]
-      }
-      return '台北市'
+      return this.isAddressMatched ? this.address.match(REGEX_ADDRESS)[1] : '台北市'
     },
     district () {
-      if (this.address.match(REGEX_ADDRESS) && this.address.match(REGEX_ADDRESS).length > 4) {
-        return this.address.match(REGEX_ADDRESS)[2]
-      }
-      return '信義區'
+      return this.isAddressMatched ? this.address.match(REGEX_ADDRESS)[2] : '信義區'
     },
-    mayorCandidates () {
-      return this.$store.state.ElectionBoard.candidates.mayors || []
+    presidentCandidates () {
+      return this.$store.state.ElectionBoard.candidates.presidents || []
+      // return this.$store.state.ElectionBoard.candidates.mayors || []
     },
     road () {
-      if (this.address.match(REGEX_ADDRESS) && this.address.match(REGEX_ADDRESS).length > 4) {
-        return this.address.match(REGEX_ADDRESS)[4]
-      }
-      return ''
+      return this.isAddressMatched ? this.address.match(REGEX_ADDRESS)[4] : ''
     },
     userID () {
       return this.$store.state.ElectionBoard.userID
@@ -259,23 +267,21 @@ export default {
       this.showCheckPosition = true
     },
     county (value) {
-      fetchCandidates(this.$store, { county: `${value}` })
-      fetchCandidates(this.$store, { county: `${value}`, type: 'councilors' })
+      // fetchCandidates(this.$store, { county: `${value}` })
+      fetchCandidates(this.$store, { county: `全國,${value}`, type: 'legislators' })
+      // fetchCandidates(this.$store, { county: `${value}`, type: 'councilors' })
     },
     initAddress (value) {
-      if (value.match(REGEX_ADDRESS)) {
-        this.address = value
-      } else {
-        this.address = DEFAULT_ADDRESS
-      }
+      this.address = (value.match(REGEX_ADDRESS) ? value : DEFAULT_ADDRESS)
     },
     initDatetime (value) {
       this.datetime = value
     }
   },
   beforeMount () {
-    fetchCandidates(this.$store)
-    fetchCandidates(this.$store, { type: 'councilors' })
+    fetchCandidates(this.$store, { county: '全國' })
+    fetchCandidates(this.$store, { type: 'legislators' })
+    // fetchCandidates(this.$store, { type: 'councilors' })
   },
   mounted () {
     this.hasGeolocation = this.detectGeolocationFeature()
@@ -293,6 +299,7 @@ export default {
       return navigator.geolocation
     },
     getCurrentPosition () {
+      if (this.loadingPosition) return
       this.loadingPosition = true
       navigator.geolocation.getCurrentPosition((position) => {
         const latitude = position.coords.latitude || DEFAULT_GPS_DMS[0]
@@ -321,7 +328,7 @@ export default {
       if (this.coordinate[0] > MIN_LATITUDE && this.coordinate[0] < MAX_LATITUDE &&
       this.coordinate[1] > MIN_LONGITUDE && this.coordinate[1] < MAX_LONGITUDE) {
         fetchBoards(this.$store, { coordinates: `(${this.coordinate[0]} ${this.coordinate[1]})` })
-        .then(res => {
+        .then((res) => {
           if (res.count > 0) {
             this.$emit('hideBackBtn')
             this.showCheckBoards = true
@@ -329,13 +336,13 @@ export default {
             this.uploadBoard()
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.uploadBoard()
         })
       } else {
         this.errors.push('coordinate')
       }
-      window.ga('send', 'event', 'projects', 'click', 'upload data done', { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', 'upload data done')
     },
     updateAddress (address) {
       this.address = address
@@ -366,18 +373,22 @@ export default {
         district: this.district,
         road: this.road,
         tookAt: this.datetime,
-        uploadedBy: this.userID
+        uploadedBy: this.userID,
+        slogan: this.slogan,
+        partyIcon: this.hasPartyIcon,
+        boardType: this.boardType,
+        uploaderName: this.uploaderName
       }
       axios.get('/project-api/token')
-      .then(response => {
+      .then((response) => {
         const token = response.data.token
         return axios.post('/project-api/election-board/boards', body, { headers: { Authorization: token }})
       })
-      .then(res => {
+      .then((res) => {
         this.hasError = false
         this.$emit('uploaded')
       })
-      .catch(err => {
+      .catch((err) => {
         this.hasError = true
       })
     },
@@ -421,11 +432,11 @@ theme-color = #fa6e59
         margin-bottom 40px
     &__title
       // line-height 1
-      margin-bottom 12px
+      margin-bottom 10px
       margin-top 0
       @media (min-width 768px)
         font-size 1.25rem
-        margin-bottom 16px
+        margin-bottom 12px
         // margin-top 35px
     // & p
     //   line-height 1
@@ -486,6 +497,7 @@ theme-color = #fa6e59
         margin-left 8px
         color theme-color
         font-size .875rem
+        cursor pointer
         @media (min-width 768px)
           font-size 1rem
     &--row
@@ -656,7 +668,7 @@ theme-color = #fa6e59
     padding 0 0 0 12px
     // text-indent 0.5em
   & .select-container
-    // flex 1
+    // todo disabled color
     position relative
     background-color #a0a0a0
     border-radius 2px

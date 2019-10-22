@@ -8,15 +8,18 @@ export default {
     boards: [],
     boardsByCoordinate: [],
     candidates: {
-      councilors: [],
       mayors: [],
+      councilors: [],
+      presidents: [],
+      legislators: []
     },
     candidatesForVerif: {
-      councilors: [],
-      mayors: [],
+      legislators: [],
+      presidents: []
     },
     elections: {},
-    userID: undefined
+    userID: undefined,
+    politiContribs: []
   }),
   actions,
   mutations,

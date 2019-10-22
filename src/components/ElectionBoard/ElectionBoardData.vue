@@ -5,11 +5,16 @@
     <FormSelectPosition
       :address="address"
       class="eb-data__select-pos"
-      @updateAddressForData="updateAddressForData"/>
+      @updateAddressForData="updateAddressForData"
+    />
     <div class="eb-data__select-type">
-      <select v-model="type" >
+      <select v-model="type" v-if="is2018">
         <option value="mayors">縣 / 市長</option>
         <option value="councilors">縣 / 市議員</option>
+      </select>
+      <select v-model="type" v-else>
+        <option value="presidents">總統</option>
+        <option value="legislators">立法委員</option>
       </select>
     </div>
     <div class="eb-data__year-title">
@@ -17,7 +22,7 @@
       <a :href="`/project/election-board/data${is2018 ? '' : '-2018'}`" target="_blank">看 {{ is2018 ? '2020' : '2018' }} 看板資料</a>
     </div>
     <template v-for="item in candidates">
-      <router-link :key="item.uid" :to="`/project/election-board/data?candidate=${item.name}`" class="data-candidate" @click.native="sendGA(item.name)">
+      <router-link :key="item.uid" :to="`/project/election-board/data${is2018 ? '-2018' : ''}?candidate=${item.name}`" class="data-candidate" @click.native="sendGA(item.name)">
         <img :src="`https://www.readr.tw${getBoardImage(item)}`" alt="">
         <div class="data-candidate__info">
           <h2 v-text="item.name"></h2>
@@ -36,30 +41,39 @@
 import DataBoards from './DataBoards.vue'
 import ElectionBoardBackBtn from './ElectionBoardBackBtn.vue'
 import FormSelectPosition from './FormSelectPosition.vue'
-import { get, } from 'lodash'
+import { get as _get } from 'lodash'
+import { get as axiosGet } from 'axios'
 
 const DEFAULT_PAGE = 1
 
 const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))/
 
 const fetchCandidates = (store, {
-  county = '台北市',
+  // county = '全國',
+  county,
+  electionYear = 2020,
   page = DEFAULT_PAGE,
-  type = 'mayors'
+  type = 'presidents'
 } = {}) => {
-  store.dispatch('ElectionBoard/FETCH_CANDIDATES', {
-    county: county,
-    electionYear: 2018,
-    page: page,
-    type: type,
-    verifiedAmount: 3,
-    notBoardAmount: 2,
-  }).then(res => {
-    if (res.next) {
-      fetchCandidates(store, { county, type, page: page + 1 })
-    }
-    return res
-  }).catch(err => err)
+  return store.dispatch('ElectionBoard/FETCH_CANDIDATES', {
+    county,
+    electionYear,
+    page,
+    type,
+    // 被驗證過 3 次
+    // todo 恢復
+    // verifiedAmount: 3,
+    verifiedAmount: 0,
+    // 驗證為「不是看板」少於 2 次
+    // notBoardAmount: 2,
+    notBoardAmount: 0
+  }).then((res) => {
+    if (res.next) return fetchCandidates(store, { county, type, electionYear, page: (page + 1) })
+  })
+}
+
+const fetchPolitiContrib = ({ dispatch }) => {
+  return dispatch('ElectionBoard/FETCH_POLITI_CONTRIB')
 }
 
 export default {
@@ -67,9 +81,10 @@ export default {
   data () {
     return {
       address: '台北市信義區',
-      type: 'mayors',
+      type: 'presidents',
       loading: true,
-      is2018: false
+      is2018: false,
+      fetchedData: []
     }
   },
   components: {
@@ -77,21 +92,60 @@ export default {
     ElectionBoardBackBtn,
     FormSelectPosition
   },
+  mounted () {
+    this.is2018 = this.$route.params.params.includes('2018')
+    if (this.is2018) this.type = 'mayors'
+    const electionYear = (this.is2018 ? 2018 : 2020)
+    this.fetchedData = (electionYear === 2018 ?
+      [
+        fetchCandidates(this.$store, { type: 'mayors', county: '台北市', electionYear }),
+        fetchCandidates(this.$store, { type: 'councilors', county: '台北市', electionYear }),
+        fetchPolitiContrib(this.$store)
+      ]
+      :
+      [
+        fetchCandidates(this.$store, { electionYear }),
+        fetchCandidates(this.$store, { type: 'legislators', county: '全國,台北市', electionYear })
+      ]
+    )
+    Promise.all(this.fetchedData)
+    .then(() => {
+      this.loading = false
+    })
+    .catch(() => {
+      this.loading = false
+    })
+  },
   computed: {
     candidate () {
-      return this.candidates.find(candidate => candidate.name === this.$route.query.candidate)
+      return this.candidates.find((candidate) => candidate.name === this.$route.query.candidate)
     },
     candidates () {
-      // return []
-      if (this.type === 'mayors') {
-        return this.$store.state.ElectionBoard.candidates.mayors.filter(candidate => candidate.boards.coordinates || candidate.boards[0])
-      } else {
-        const regions = get(this.$store, [ 'state', 'ElectionBoard', 'elections', this.county, 'regions' ], []) || []
-        const regex = new RegExp(`(${this.district}|原住民)`)
-        const constituency = regions.filter(region => region.district.match(regex)).map(region => region.constituency) || []
-        const councilors = this.$store.state.ElectionBoard.candidates.councilors || []
-        const candidates = councilors.filter(councilor => constituency.includes(councilor.constituency)).filter(candidate => candidate.boards.coordinates || candidate.boards[0])
-        return candidates
+      const data = this.$store.state.ElectionBoard.candidates
+      switch (this.type) {
+        case 'presidents':
+          return data.presidents.filter((candidate) => candidate.boards.coordinates || candidate.boards[0])
+          break
+        case 'legislators':
+          return data.legislators
+            .filter((legis) => legis.district.match(new RegExp(`${this.district}|全國`)))
+            .filter((candidate) => (candidate.boards.coordinates || candidate.boards[0]))
+          break
+        case 'mayors':
+          return data.mayors.filter(candidate => (candidate.boards.coordinates || candidate.boards[0]))
+          break
+        case 'councilors':
+          const regions = _get(this.$store, [ 'state', 'ElectionBoard', 'elections', this.county, 'regions' ], [])
+          // const regex = new RegExp(`(${this.district}|原住民)`)
+          const constituency = regions
+            .filter((region) => region.district.match(new RegExp(`${this.district}|原住民`)))
+            .map((region) => region.constituency) || []
+          return data.councilors
+            .filter(councilor => constituency.includes(councilor.constituency))
+            .filter(candidate => (candidate.boards.coordinates || candidate.boards[0]))
+          break
+        default:
+          break
       }
     },
     county () {
@@ -106,12 +160,27 @@ export default {
         return matched.substring(0, matched.length - 1)
       }
       return ''
+    },
+    politiContribs () {
+      return this.$store.state.ElectionBoard.politiContribs
     }
   },
   watch: {
-    county (value) {
+    county (val) {
       this.loading = true
-      Promise.all([ fetchCandidates(this.$store, { county: value }), fetchCandidates(this.$store, { county: value, type: 'councilors' }) ])
+      const electionYear = this.is2018 ? 2018 : 2020
+      if (electionYear === 2018) {
+        this.fetchedData = [
+          fetchCandidates(this.$store, { type: 'mayors', county: val, electionYear }),
+          fetchCandidates(this.$store, { type: 'councilors', county: val, electionYear }),
+        ]
+      } else {
+        this.fetchedData = [
+          // fetchCandidates(this.$store, { county, electionYear }),
+          fetchCandidates(this.$store, { type: 'legislators', county: `全國,${val}`, electionYear })
+        ]
+      }
+      Promise.all(this.fetchedData)
       .then(() => {
         this.loading = false
       })
@@ -119,19 +188,6 @@ export default {
         this.loading = false
       })
     }
-  },
-  beforeMount () {
-    Promise.all([ fetchCandidates(this.$store), fetchCandidates(this.$store, { type: 'councilors' }) ])
-    .then(() => {
-      this.loading = false
-    })
-    .catch(() => {
-      this.loading = false
-    })
-  },
-  mounted () {
-    this.is2018 = this.$route.params.params.includes('2018')
-    console.log(this.is2018);
   },
   methods: {
     getBoardImage (candidate) {
@@ -145,7 +201,7 @@ export default {
     },
     updateAddressForData (value) {
       this.address = value
-    },
+    }
   }
 }
 </script>
@@ -260,7 +316,7 @@ color-data = #4897db
       & h2
         font-size 1rem
         // margin-bottom .2em
-        margin-bottom 4px
+        margin-bottom 8px
         font-weight 700
         @media (min-width 768px)
           margin-bottom 20px
@@ -285,7 +341,7 @@ color-data = #4897db
       &__info
         margin-left 25px
         h2
-          margin-bottom 1em
+          // margin-bottom 1em
           font-size 1.25rem
         p
           font-size 1rem

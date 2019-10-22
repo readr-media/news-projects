@@ -107,4 +107,3 @@ export const ADMINISTRATIVE_DISTRICT = [
     '富里鄉' ]
   }
 ]
-
