@@ -249,7 +249,7 @@ const fetchVerifiedData = (store, { sheet = '全部資料', page = 1, isLoadMore
     fetchGoogleSheet(store, {
       stateName: 'verifiedDataItems',
       spreadsheetId: '1YR6C5hTKxCguXH9txtajEcbOW7YNMiMFZTC3M3guuf8',
-      range: `${sheet}!A${(page - 1) * MAX_RESULT + 2}:J${page * MAX_RESULT + 1}`,
+      range: `${sheet}!A${(page - 1) * MAX_RESULT + 2}:Q${page * MAX_RESULT + 1}`,
       isLoadMore
     }),
     fetchGoogleSheet(store, {

@@ -96,7 +96,11 @@ export default {
           date: data[6], // 發言時間
           media: data[7], // 認領媒體
           typescript: data[8], // 分段的逐字稿
-          typescriptSource: data[9] // 影片網址
+          typescriptSource: data[9], // 影片網址
+          opinionCount: Number(data[11]), // 網友回報次數
+          opinions: [ data[12], data[13], data[14] ], // 網友回報
+          mediaResponse: data[15], // 媒體回覆
+          showOpinion: data[16] === 'V' // 是否匯入網站上
         }
       }),
     verifiedDataCountFormated: state => {
