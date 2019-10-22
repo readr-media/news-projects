@@ -8,11 +8,13 @@
         @change="handleSelectChange"
       >
         <option disabled value="">請選擇候選人</option>
-        <optgroup label="縣 / 市長">
-          <option v-for="item in mayorCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
+        <!-- <optgroup label="縣 / 市長"> -->
+        <optgroup label="總統">
+          <option v-for="item in presidentCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
         </optgroup>
-        <optgroup label="縣 / 市議員">
-          <option v-for="item in councilorCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
+        <!-- <optgroup label="縣 / 市議員"> -->
+        <optgroup label="立法委員">
+          <option v-for="item in legislatorCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
         </optgroup>
       </select>
     </div>
@@ -43,10 +45,10 @@ export default {
     // index: {
     //   type: Number,
     // },
-    councilorCandidates: {
+    legislatorCandidates: {
       type: Array,
     },
-    mayorCandidates: {
+    presidentCandidates: {
       type: Array,
     },
     selectedIds: {
@@ -65,13 +67,13 @@ export default {
       return this.selectedIds.filter(id => id !== this.selectedId)
     },
     candidates () {
-      return this.mayorCandidates.concat(this.councilorCandidates)
+      return this.presidentCandidates.concat(this.legislatorCandidates)
     },
-    councilorCandidatesFiltered () {
-      return this.councilorCandidates.filter(item => !this.selectedIdsWithoutSelf.includes(item.id))
+    legislatorCandidatesFiltered () {
+      return this.legislatorCandidates.filter(item => !this.selectedIdsWithoutSelf.includes(item.id))
     },
-    mayorCandidatesFiltered () {
-      return this.mayorCandidates.filter(item => !this.selectedIdsWithoutSelf.includes(item.id))
+    presidentCandidatesFiltered () {
+      return this.presidentCandidates.filter(item => !this.selectedIdsWithoutSelf.includes(item.id))
     }
   },
   watch: {

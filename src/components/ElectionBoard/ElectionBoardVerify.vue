@@ -1,10 +1,11 @@
 <template>
+  <!-- todo 這不是競選看板照片調整 -->
   <section class="eb-verify">
     <div class="image">
-      <!-- <img :src="boardImage" alt=""> -->
-      <img src="https://attach.setn.com/newsimages/2018/03/11/1277743-PH.jpg" alt="">
+      <img :src="boardImage" alt="">
+      <!-- <img src="https://attach.setn.com/newsimages/2018/03/11/1277743-PH.jpg" alt=""> -->
     </div>
-    <div class="form">
+    <div class="form" ref="form">
       <div class="form__heading">
         <h2>看板資訊</h2>
         <p>此資料已被驗證 {{ board.verifiedAmount || 0 }} 次</p>
@@ -31,17 +32,19 @@
       
       <p>標語</p>
       <input v-model="slogan" type="text" placeholder="請填寫看板標語（多句請用／分隔）">
-      <!-- <p class="current-info">目前資訊： {{ board.slogan || ' ' }}</p> -->
-      <p class="current-info">目前資訊：小英栽培/吳沛憶 我陪你</p>
+      <p class="current-info">目前資訊：{{ board.slogan || '' }}</p>
+      <!-- <p class="current-info">目前資訊：小英栽培/吳沛憶 我陪你</p> -->
 
-      <div class="party-symbol-item">
-        <input type="checkbox" id="party-symbol" :class="['checkbox', hasPartySymbol ? 'checked' : '']" v-model="hasPartySymbol">
-        <label for="party-symbol">有黨徽</label>
+      <div class="party-icon-item">
+        <input type="checkbox" id="party-icon" :class="['checkbox', hasPartyIcon ? 'checked' : '']" v-model="hasPartyIcon">
+        <label for="party-icon">有黨徽</label>
       </div>
+      <p class="current-info">目前資訊：{{ (board.partyIcon ? '有黨徽' : (typeof(board.partyIcon) === 'undefined' ? '' : '無黨徽')) }}</p>
 
       <p>類型</p>
       <div class="select-container">
         <select
+          v-model="boardType"
           @blur="handleSelectBlur"
           @change="handleSelectChange"
           @focus="handleSelectFocus"
@@ -53,6 +56,7 @@
           <option value="其它">其它</option>
         </select>
       </div>
+      <p class="current-info">目前資訊：{{ board.boardType || '' }}</p>
 
       <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後...</p>
       <p v-if="hasError" class="error error--board">系統發生錯誤，請重新整理或稍後再試...</p>
@@ -124,7 +128,8 @@ export default {
       showVerifyBoards: false,
       slogan: '',
       loading: false,
-      hasPartySymbol: false
+      hasPartyIcon: false,
+      boardType: ''
     }
   },
   computed: {
@@ -137,6 +142,7 @@ export default {
     boardImage () {
       return this.board.image
     },
+    // todo remove amount
     candidateAmountForInput () {
       if ((typeof this.candidateAmount === 'string' && this.candidateAmountOrigin < 1) || (typeof this.candidateAmount === 'number' && this.candidateAmount < 2)) {
         return 1
@@ -150,45 +156,47 @@ export default {
       return get(this.board, 'candidates.length')
     },
     candidates () {
-      return this.mayorCandidates.concat(this.councilorCandidates)
+      return this.presidentCandidates.concat(this.legislatorCandidates)
     },
     candidatesOrigin () {
       return get(this.board, 'candidates', []) || []
     },
-    councilorCandidates () {
-      return this.$store.state.ElectionBoard.candidatesForVerif.councilors || []
+    legislatorCandidates () {
+      return this.$store.state.ElectionBoard.candidatesForVerif.legislators || []
+      // return this.$store.state.ElectionBoard.candidatesForVerif.councilors || []
     },
-    mayorCandidates () {
-      return this.$store.state.ElectionBoard.candidatesForVerif.mayors || []
+    presidentCandidates () {
+      return this.$store.state.ElectionBoard.candidatesForVerif.presidents || []
+      // return this.$store.state.ElectionBoard.candidatesForVerif.mayors || []
     },
   },
   watch: {
     board (value) {
       this.errors = []
       this.selectedCandidates = []
-      this.selectedCandidates = value.candidates.map(candidate => candidate.id)
-      this.slogan = ''
+      this.selectedCandidates = value.candidates.map((candidate) => candidate.id)
+
+      this.slogan = this.board.slogan
+      this.hasPartyIcon = this.board.partyIcon
+      this.boardType = this.board.boardType || ''
+
       this.candidateAmount = ''
     },
     candidateAmountForInput (value) {
       const candidatesOriginIds = this.candidatesOrigin.map(candidate => candidate.id)
-      if (value <= this.candidateAmountOrigin) {
-        this.selectedCandidates = take(candidatesOriginIds, value)
-      } else {
-        this.selectedCandidates = candidatesOriginIds
-      }
+      this.selectedCandidates = ((value <= this.candidateAmountOrigin) ? take(candidatesOriginIds, value) : candidatesOriginIds)
     }
   },
   beforeMount () {
     if (this.$route.query.board) {
       fetchBoardByID(this.$store, { id: this.$route.query.board, uploadedBy: this.$store.state.ElectionBoard.userID })
-      .catch(err => {
+      .catch((err) => {
         fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })
         this.$router.replace(`/project/election-board/verify`)
       })
     } else {
       fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })
-      .catch(err => {
+      .catch((err) => {
         this.hasError = true
       })
     }
@@ -198,7 +206,7 @@ export default {
       const body = {
         board: this.boardID,
         createdBy: this.$store.state.ElectionBoard.userID,
-        isBoard: isBoard
+        isBoard
       }
 
       if (typeof this.candidateAmount !== 'string') {
@@ -207,19 +215,21 @@ export default {
 
       if (isBoard) {
         body.candidates = this.selectedCandidates
-        if (this.slogan) {
-          body.slogan = this.slogan
-        }
+        // 傳空字串''會出錯
+        body.slogan = this.slogan || 'null'
+        body.partyIcon = this.hasPartyIcon
+        body.boardType = this.boardType
       }
       return body
     },
     skipBoard () {
       this.loading = true
       fetchBoard(this.$store, { skipBoard: this.boardID, uploadedBy: this.$store.state.ElectionBoard.userID })
-      .then(res => {
+      .then((res) => {
         this.loading = false
+        this.$refs.form.scrollTop = 0
       })
-      .catch(err => {
+      .catch((err) => {
         this.hasError = true
       })
       window.ga('send', 'event', 'projects', 'click', 'verified pass', { nonInteraction: false })
@@ -252,7 +262,7 @@ export default {
       const body = this.buildRequestBody(isBoard)
 
       axios.get('/project-api/token')
-      .then(response => {
+      .then((response) => {
         const token = response.data.token
         if (isBoard) {
           return axios.post('/project-api/election-board/verify/board', body, { headers: { Authorization: token }})
@@ -263,7 +273,7 @@ export default {
           ])
         }
       })
-      .then(res => {
+      .then((res) => {
         this.hasError = false
         this.loading = true
         if (!isBoard && res.length === 2 && res[1].count > 0) {
@@ -273,29 +283,30 @@ export default {
       })
       .then(() => {
         this.loading = false
+        this.$refs.form.scrollTop = 0
       })
-      .catch(err => {
+      .catch((err) => {
         this.hasError = true
       })
 
       if (isBoard) {
-        window.ga('send', 'event', 'projects', 'click', 'verified data confirmed', { nonInteraction: false })
+        window.ga('send', 'event', 'projects', 'click', 'verified data confirmed')
       } else {
-        window.ga('send', 'event', 'projects', 'click', 'verified data false', { nonInteraction: false })
+        window.ga('send', 'event', 'projects', 'click', 'verified data false')
       }
     },
-    validation () { // not use
-      const index = this.errors.findIndex((value, index, arr) => value === 'empty')
-      if (index > -1) {
-        this.errors.splice(index, 1)
-      }
-      if (this.selectedCandidates.length < 1) {
-        this.errors.push('empty')
-      }
-      if (this.errors.length < 1) {
-        this.uploadBoardVerified(true)
-      }
-    },
+    // validation () { // not use
+    //   const index = this.errors.findIndex((value, index, arr) => value === 'empty')
+    //   if (index > -1) {
+    //     this.errors.splice(index, 1)
+    //   }
+    //   if (this.selectedCandidates.length < 1) {
+    //     this.errors.push('empty')
+    //   }
+    //   if (this.errors.length < 1) {
+    //     this.uploadBoardVerified(true)
+    //   }
+    // },
     handleSelectBlur (e) {
       e.target.parentNode.classList.remove('open')
     },
@@ -325,20 +336,26 @@ theme-color-hidden = #6d5810
   & .image
     // flex 1
     position relative
+    height 60%
+    // display flex
+    // justify-content center
+    // max-height 40vh
     & img
-      // position absolute
-      // top 0
-      // left 0
-      // right 0
-      // bottom 0
+      position absolute
+      top 0
+      left 0
+      right 0
+      bottom 0
       width 100%
-      height auto
+      // width auto
+      height 100%
+      // max-height 40vh 
       vertical-align middle
       // height 100%
-      // object-fit contain
-      // object-position center center
+      object-fit contain
+      object-position bottom center
       // image-orientation from-image
-  & .party-symbol-item
+  & .party-icon-item
     margin-top 25px
     color #fff
     display flex
@@ -356,6 +373,7 @@ theme-color-hidden = #6d5810
       border-radius 2px
       appearance none
       outline none
+      cursor pointer
       @media (min-width 768px)
         width 20px
         height 20px
@@ -375,6 +393,7 @@ theme-color-hidden = #6d5810
     & label
       margin-left 10px
       user-select none
+      cursor pointer
       @media (min-width 768px)
         font-size 1.25rem
   & .select-container
@@ -439,19 +458,19 @@ theme-color-hidden = #6d5810
       // margin-top 5px
       // margin-top 15px
       margin-top 25px
-      margin-bottom 12px
+      margin-bottom 10px
       color #fff
       // line-height 1
       @media (min-width 768px)
         font-size 1.25rem
         margin-top 35px
-        margin-bottom 16px
+        margin-bottom 12px
       &.error
         margin-top 10px
         margin-bottom 0
         color #fa6e59
         font-size .875rem
-        text-align right
+        // text-align right
         &.error--board
           // font-size .75rem
           text-align left
@@ -459,6 +478,7 @@ theme-color-hidden = #6d5810
       color #a0a0a0
       font-size 0.875rem
       margin-top 10px
+      margin-bottom 0
       // line-height 1
       @media (min-width 768px)
         font-size 1rem
@@ -512,7 +532,7 @@ theme-color-hidden = #6d5810
     //     border none
     //     border-radius 2px
     &__candidate
-      margin-top 10px
+      // margin-top 10px
       & + .form__candidate
         margin-top 5px
     .add-candidate

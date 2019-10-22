@@ -63,16 +63,16 @@
     <div class="credit">
       <img src="/proj-assets/election-board/images/logo-mm.png" alt="mirrormedia">
       <p>文字：李又如 設計：Weiwei Hsu </p>
-      <p>工程：HY Tan、mich</p>
+      <p>工程：HY Tan、mich、yeefun</p>
       <p>資料協力：<a href="https://councils.g0v.tw" target="_blank">投票指南</a></p>
       <p>CC BY-SA 3.0</p>
     </div>
 
     <div class="thanks">
       <p class="thanks__title">感謝 2020 一起追的朋友</p>
-      <p class="thanks__name">A-Hsiung LinAYAAlice ChenAlvitaAmberAndy LiaoAri HsuAriel ChouArtemis C.AskaAstor LimBaronBilly TiBodieBrian HsuBuzuhooC G CCCCWCKCK LinCP值最高打字員CW TsaiCafe la PauseCarltsaiChan GemeChangYi WangChenlingChuyu HuangCliffClytieDDLDaniel HsuDaniela AertDaniela AertsDeVDesolveDuncan HUANGEAEASONEdward PaiElaine JiangElaine KungEliane JiangEsther ChangEvelynEven TanFangFrank ChenFreddy LiuG.B.GBGJGiselleGoldieGraysonGuy WuHOLYBHankHanna ChenHoward YangHsinTzuHugo CheongICIKEA ChenIdIssac ShihIzaac LuoJeiJet S.C.Jill LinJong wagaJoseph DuJouanJulian ZhuKCHKVLKarenKaren Karen LAiKaren LaiKate LiaoKen LinKrisKris YenKueiLancelotLandyFoxLauren LuLaw LLee桑Leo ChienLeo Chien 一貫三不是啾啾鞋不知道有沒有和其他傑哥撞名五彩痣仲漁余承翰修奕蘋傑哥公民叮劉于緁劉士煒劉宇庭劉泰谷劉薈博麗貓吳亞璇吳亦捷吳懿妏吳政哲吳聲吳虹儒呂旻璁呂昀慶呂育誠周依筠呱呱唯一支持視網膜與神獸柚子嘎嘎嘟嘟d男友地方太太均均坎門夕鴿周星星大總統其實是陰陽師小灰小碗麵線糊香菜多一點山爪帕拉幕之內一步廖婉婷張妄張庭瑄張心佳張敬婕張晉瑋張森林張沛淇張瑋翔張簡宏名張繼文張詩婷張雅涵張雲耀張騰元彭惠芬恆春太太恬興我要吃花生醬口味的漢堡包我頭好痛(;´༎ຶД༎ຶ`)戴文欣施佳吟施旻君暐浪曼努曾天白曾瑄月球木木李仁維李佩璇李光雄李孟桓李安泰李明勳李晉緯李若嫻李鴻亞杜咪咪杜宛庭林佩蓁林佳穎林依叡林倢愷林力榛林力癸林士粧林宓璇林宣妏林巧豈林志剛林文雄林玿弘林穎林莉榛林裕叡</p>
+      <p class="thanks__name">{{ uploaders.join(' ') }}</p>
     </div>
-    <!-- <h1>其他議題</h1> -->
+    <!-- <h1>其它議題</h1> -->
     <!-- <RelatedReports /> -->
     <div v-show="showIntro" class="intro">
       <div class="intro-container">
@@ -93,6 +93,7 @@
 </template>
 <script>
 import Cookie from 'vue-cookie'
+import { get as axiosGet } from 'axios'
 // import RelatedReports from '../RelatedReports.vue'
 
 export default {
@@ -105,13 +106,15 @@ export default {
       showIntro: false,
       wEl: null,
       ww: 0,
-      isMounted: false
+      isMounted: false,
+      uploaders: []
     }
   },
   beforeMount () {
     this.wEl = window
     this.ww = this.wEl.innerWidth
     this.getIntroCookie()
+    this.fetchUploaders()
   },
   mounted () {
     this.isMounted = true
@@ -135,8 +138,14 @@ export default {
         Cookie.set('eb-intro', true, { expires: '6M' })
       }
     },
+    fetchUploaders () {
+      axiosGet('/project-api/election-board/boards/gongdebook')
+        .then((res) => {
+          this.uploaders = res.data.results
+        })
+    },
     sendGA (value) {
-      window.ga('send', 'event', 'projects', 'click', value, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', value)
     }
   },
   beforeDestroy () {

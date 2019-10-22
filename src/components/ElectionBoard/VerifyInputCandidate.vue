@@ -13,8 +13,8 @@
           </p>
         </div>
       </div>
-      <!-- <p v-if="candidate">目前資訊：{{ candidate.name }}</p> -->
-      <p>目前資訊：吳沛憶</p>
+      <p>目前資訊：{{ candidate ? candidate.name : '' }}</p>
+      <!-- <p>目前資訊：吳沛憶</p> -->
     </div>
     <!-- <p v-show="hasError" class="error">目前沒有這位候選人的資料</p> -->
   </div>
@@ -96,7 +96,13 @@ export default {
     },
     selectedName (value) {
       const keyword = value.trim()
-      const regex = new RegExp(`${keyword}`)
+      let regex
+      try {
+        regex = new RegExp(`${keyword}`)
+      } catch (e) {
+        return false
+      }
+      // const regex = new RegExp(`${keyword}`)
       const candidate = this.candidatesFiltered.find(candidate => candidate.name === keyword)
       const matchedCandidates = this.candidatesFiltered.filter(candidate => {
         return candidate.name.match(regex) && (candidate.name !== keyword)
@@ -175,7 +181,7 @@ export default {
       z-index 500
       width 100%
       max-height 150px
-      background-color rgba(160, 160, 160, .95)
+      background-color rgba(160, 160, 160, .96)
       box-shadow 0px 2px 9px 1px rgba(0, 0, 0, .3)
       overflow-y auto
       visibility hidden

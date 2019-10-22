@@ -21,19 +21,20 @@ const DEFAULT_PAGE = 1
 
 const fetchCandidates = (store, {
   page = DEFAULT_PAGE,
-  type = 'mayors'
+  // type = 'mayors'
+  type = 'presidents'
 } = {}) => {
   store.dispatch('ElectionBoard/FETCH_CANDIDATES_FOR_VERIF', {
-    electionYear: 2018,
-    page: page,
-    type: type,
+    electionYear: 2020,
+    page,
+    type,
     maxResults: 100
-  }).then(res => {
+  }).then((res) => {
     if (res.next) {
       fetchCandidates(store, { type, page: page + 1 })
     }
     return res
-  }).catch(err => err)
+  }).catch((err) => err)
 }
 
 const fetchElections = (store, year = 2018) => {
@@ -52,15 +53,15 @@ export default {
     ElectionBoardUpload,
     ElectionBoardVerify,
     Logo,
-    Share,
+    Share
   },
-  metaInfo() {
-    const metaUrl = this.$route.fullPath.split('/project/')[1];
-    const ogLocale = 'zh_TW';
+  metaInfo () {
+    const metaUrl = this.$route.fullPath.split('/project/')[1]
+    const ogLocale = 'zh_TW'
 
     // todo
-    let title = `看板追追追——2018選舉看板紀錄`
-    let metaImage = `election-board/images/og.jpg`;
+    let title = `看板追追追——2020選舉看板紀錄`
+    let metaImage = `election-board/images/og.jpg`
     let description = '每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤。我們邀請你拍下身邊的看板，一起為這次的選舉留下紀錄！'
 
     switch (this.$route.params.params) {
@@ -73,6 +74,15 @@ export default {
         description = '看板追追追計畫進到下一步資料分析前，需要你協助確認資料的正確性。這裡有一堆選舉看板照片需要鍵盤協力，一起為這次的選舉留下紀錄吧！'
         break
       case 'data':
+        title = '看板追追追——2020選舉看板紀錄'
+        metaImage = `election-board/images/og-data.jpg`
+        description = '誰掛了最多看板？每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤。一起為這次的選舉留下紀錄吧！'
+        if (this.$route.query.candidate) {
+          title = `看板追追追——${this.$route.query.candidate}選舉看板紀錄`
+          description = `目前參選人${this.$route.query.candidate}掛了多少看板？你還有在哪裡看到${this.$route.query.candidate}的看板嗎？一起為這次的選舉留下紀錄吧！`
+        }
+        break
+      case 'data-2018':
         title = '看板追追追——2018選舉看板紀錄'
         metaImage = `election-board/images/og-data.jpg`
         description = '誰掛了最多看板？每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤。一起為這次的選舉留下紀錄吧！'
@@ -110,13 +120,13 @@ export default {
   watch: {
     '$route' (to, from) {
       // todo
-      let title = `看板追追追——2018選舉看板紀錄`
+      let title = `看板追追追——2020選舉看板紀錄`
       switch (to.params.params) {
         case 'verify':
           title = '看板追追追——鍵盤辨識徵求中！'
           break
         case 'data':
-          title = '看板追追追——2018選舉看板紀錄'
+          title = '看板追追追——2020選舉看板紀錄'
           if (to.query.candidate) {
             title = `看板追追追——${to.query.candidate}選舉看板紀錄`
           }
@@ -139,7 +149,7 @@ export default {
     fetchElections(this.$store)
     fetchUserID(this.$store)
     fetchCandidates(this.$store),
-    fetchCandidates(this.$store, { type: 'councilors' })
+    fetchCandidates(this.$store, { type: 'legislators' })
   },
   destroyed () {
     this.$store.unregisterModule('ElectionBoard')
@@ -166,5 +176,7 @@ export default {
     background-image url(/proj-assets/election-board/images/share.png) !important
     background-size 34px auto !important
     background-position center center !important
+select
+  cursor pointer
 </style>
 

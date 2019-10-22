@@ -8,10 +8,11 @@
               <div class="board__img">
                 <figure>
                   <img :src="`http://www.readr.tw${item.image}`" alt="">
+                  <!-- <img src="https://attach.setn.com/newsimages/2018/03/11/1277743-PH.jpg" alt=""> -->
                 </figure>
               </div>
               <div class="board__info">
-                <h2>已存在之照片 {{ index + 1 }}</h2>
+                <h2>已存在的照片 {{ index + 1 }}</h2>
                 <p>候選人： {{ getCandidatesName(item.candidates) }}</p>
                 <p>地點：{{ `${item.county}市${item.district}區${item.road}` }}</p>
               </div>
@@ -25,14 +26,15 @@
           <img src="/proj-assets/election-board/images/next.png" alt="下一張">
         </button>
       </div>
-      <div class="board">
+      <div class="board user">
         <div class="board__img">
           <figure >
             <img :src="`http://www.readr.tw${imgURL}`" alt="">
+            <!-- <img src="https://attach.setn.com/newsimages/2018/03/11/1277743-PH.jpg" alt=""> -->
           </figure>
         </div>
         <div class="board__info">
-          <h2>您欲上傳之照片</h2>
+          <h2>您將上傳的照片</h2>
           <p>候選人：{{ selectedCandidatesName }}</p>
           <p>地點：{{ address }}</p>
         </div>
@@ -54,13 +56,13 @@ export default {
     address: {
       type: String,
     },
-    councilorCandidates: {
+    legislatorCandidates: {
       type: Array,
     },
     imgURL: {
       type: String,
     },
-    mayorCandidates: {
+    presidentCandidates: {
       type: Array,
     },
     selectedCandidates: {
@@ -77,7 +79,7 @@ export default {
       return this.$store.state.ElectionBoard.boards
     },
     candidates () {
-      return this.mayorCandidates.concat(this.councilorCandidates)
+      return this.presidentCandidates.concat(this.legislatorCandidates)
     },
     selectedCandidatesName () {
       return this.candidates
@@ -129,21 +131,25 @@ theme-color = #fa6e59
     position relative
     display flex
     flex-direction column
-    padding 25px 0
+    // padding 40px 0
     background-color #000
+    // justify-content space-between
+    justify-content center
     > .board
       width calc(100% - 50px)
       margin 0 auto
     .action-conteiner
-      flex 1
+      // flex 1
       position relative
-      margin-bottom 5px
+      margin-bottom 30px
     .board
       flex 1
       display flex
       justify-content space-between
       align-items flex-start
-      margin-top 5px
+      // margin-top 5px
+      &.user
+        flex none
       > *
         width 50%
         max-height 100%
@@ -166,14 +172,15 @@ theme-color = #fa6e59
             object-fit cover
             object-position center center
       &__info
-        margin-left 20px
+        margin-left 15px
         h2
-          margin 0 0 5px 0
+          margin 0 0 8px 0
           color theme-color
           font-size 1rem
-          font-weight 500
+          font-weight 700
         p
           font-size .875rem
+          line-height 1.64
     .boards
       position relative
       width calc(100% - 50px)
@@ -213,19 +220,20 @@ theme-color = #fa6e59
       color #000
       font-size 1.25rem
       font-weight 500
-      line-height 1.4
-      text-align justify
+      line-height 1.64
+      // text-align justify
     .action-btns
       justify-content space-between
-      margin 10px auto 0
+      margin 20px auto 0
       button
-        width calc(50% - 5px)
-        height 100px
+        width calc(50% - 7px)
+        height 96px
         font-size 1.25rem
-        font-weight 500
+        font-weight 700
         line-height 1.4
         border none
         border-radius 2px
+        padding 0
         > span
           display none
       .btn--cancel
@@ -238,20 +246,22 @@ theme-color = #fa6e59
 @media (min-width: 768px)
   .check-upload
     &__info
-      justify-content center
+      // justify-content center
+      // padding-top 55px
+      // padding-bottom 55px
       .action-conteiner
         flex none
         width 550px
         margin 0 auto 40px auto
       .board
         flex none
-        align-items center
+        // align-items center
         width 450px
         margin 0 auto
         &__info
-          margin-left 40px
+          margin-left 25px
           h2
-            margin-bottom 15px
+            margin-bottom 20px
             font-size 1.25rem
           p
             font-size 1rem
@@ -259,6 +269,8 @@ theme-color = #fa6e59
         width 450px
     &__action
       justify-content center
+      padding-top 35px
+      padding-bottom 35px
       > *
         flex none
       .action-text
@@ -266,9 +278,12 @@ theme-color = #fa6e59
         margin 0 auto
       .action-btns
         width 450px
-        margin 60px auto 0
+        margin 25px auto 0
         button
-          height 50px
+          height 48px
+          border-radius 6px
+          line-height 48px
+          width calc(50% - 10px)
           > span
             display inline
           > br

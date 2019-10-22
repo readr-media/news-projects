@@ -12,7 +12,7 @@
           <p class="date" v-text="moment(board.uploaded_at).format('M 月 D 日上傳')"></p>
         </div>
       </div>
-      <p v-if="boards.length < 1">該位置目前尚無其他看板</p>
+      <p v-if="boards.length < 1">該位置目前尚無其它看板</p>
     </div>
     <div class="action">
       <button class="btn btn--back" @click="$emit('close')"><img src="/proj-assets/election-board/images/arrow.png"></button>
@@ -108,12 +108,12 @@ theme-color = #4897db
   bottom 0
   z-index 10
   width 100%
-  padding 60px 25px 90px
+  padding 60px 25px 113px
   background-color #000
   h3
     color #fff
     font-size 1.25rem
-    font-weight 500
+    font-weight 300
     > span
       margin-left .5em
       font-size .875rem
@@ -121,6 +121,10 @@ theme-color = #4897db
   p
     color #4897db
     font-size .875rem
+    line-height 1.64
+    // margin-top 2px
+    &.date
+      margin-top 2px
   button
     cursor pointer
   .boards-container
@@ -132,8 +136,8 @@ theme-color = #4897db
       font-size 1.25rem
     .boards
       display flex
-      justify-content space-between
-      align-items flex-start
+      // justify-content space-between
+      // align-items flex-start
       flex-wrap wrap
       position absolute
       top 0
@@ -142,17 +146,22 @@ theme-color = #4897db
       bottom 0
       width 100%
       height 100%
-      padding-bottom 10px
+      // padding-bottom 10px
       overflow-y auto
+      margin-left -7px
+      margin-right -7px
       &__item
-        width calc((100% - 15px) / 2)
-        margin-top 10px
+        // width calc((100% - 14px) / 2)
+        width 50%
+        padding-left 7px
+        padding-right 7px
+        margin-top 14px
         cursor pointer
         &:nth-of-type(1), &:nth-of-type(2)
           margin-top 0
         > p
           color #fff
-          text-align justify
+          // text-align justify
           &.date
             color #a0a0a0 
         .img-container
@@ -160,7 +169,7 @@ theme-color = #4897db
           display block
           width 100%
           padding-top 100%
-          margin-bottom .5em
+          margin-bottom 10px
           background-color #a0a0a0
           img
             position absolute
@@ -180,50 +189,73 @@ theme-color = #4897db
     left 0
     right 0
     width 100%
-    padding 25px
+    padding 0 25px 30px 25px
     background-color #000
     .btn
-      height 50px
+      height 48px
+      line-height 48px
       font-size 1.25rem
       font-weight 700
       border none
       border-radius 2px
+      padding 0
+      @media (min-width 768px)
+        border-radius 6px
       &--back
-        width 55px
-        padding 11px
+        width 56px
         background-color #a0a0a0
+        display flex
+        justify-content center
+        align-items center
+        @media (min-width 768px)
+          width 95px
         > img 
           width 34px
+          height auto
       &--upload
         flex 1
-        margin-left 15px
+        margin-left 14px
         background-color theme-color
+        @media (min-width 768px)
+          margin-left 20px
 
 @media (min-width: 768px)
   .data-boards
-    padding 60px calc((100% - 600px) / 2) 170px
+    padding 50px calc((100% - 602px) / 2) 123px
     h3
       font-size 2.25rem
+      margin-bottom 2px
       > span
         font-size 1.25rem
     p
-      font-size 1.25rem
+      font-size 1rem
     .boards-container
-      left -15px
-      width calc(100% + 30px)
-      margin-top 20px
+      // margin-left -15px
+      // margin-right -15px
+      // left -15px
+      // width calc(100% + 30px)
+      margin-top 30px
       .boards
-        justify-content flex-start
+        margin-left -15px
+        margin-right -15px
+        // justify-content flex-start
         &__item
-          width calc((100% - 120px) / 4)
-          margin 15px
-          &:nth-of-type(1), &:nth-of-type(2)
-            margin-top 15px
+          // width calc((100% - 120px) / 4)
+          width 25%
+          // margin 15px
+          padding-left 15px
+          padding-right 15px
+          margin-top 30px
+          &:nth-of-type(3), &:nth-of-type(4)
+            margin-top 0
+          // &:nth-of-type(1), &:nth-of-type(2)
+          //   margin-top 15px
     .action
-      bottom 65px
-      width 450px
+      // bottom 65px
+      // width 450px
+      max-width 602px
       margin 0 auto
-      padding 0
+      padding 0 0 45px 0
       .btn
         &--back
           width 95px

@@ -2,7 +2,14 @@ import Cookie from 'vue-cookie'
 import uuidv4 from 'uuid/v4'
 import { camelizeKeys, } from 'humps'
 import { concat, get, uniqBy, values } from 'lodash'
-import { fetchBoardForVerif, fetchBoardForVerifByID, fetchCandidates, fetchElections, fetchBoards } from './services'
+import {
+  fetchBoardForVerif,
+  fetchBoardForVerifByID,
+  fetchCandidates,
+  fetchElections,
+  fetchBoards,
+  fetchPolitiContrib
+} from './services'
 
 export default {
   FETCH_BOARD_FOR_VERIF: ({ commit }, params) => {
@@ -92,5 +99,11 @@ export default {
       id = Cookie.get('eb-user')
       commit('SET_USER_ID', id)
     }
+  },
+  FETCH_POLITI_CONTRIB: ({ commit }) => {
+    fetchPolitiContrib()
+      .then((res) => {
+        commit('SET_POLITI_CONTRIB', res.data)
+      })
   }
 }

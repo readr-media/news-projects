@@ -4,14 +4,14 @@
       <h3>{{ candidate.name }}<span>{{ candidate.party }}</span></h3>
       <p>{{ county }} / {{ type }}候選人</p>
 
-      <div class="data-boards__contrib">
+      <div class="data-boards__contrib" v-if="politiContrib">
         <p>政治獻金</p>
         <div>
-          <p class="money">NT$ 1, 234, 567, 890</p>
-          <a href="#" target="_blank" v-if="isLapW">看蘇貞昌政治獻金資料</a>
+          <p class="amount">NT$ {{ amount }}</p>
+          <a :href="link" target="_blank" v-if="isLapW && link">看{{ candidate.name }}政治獻金資料</a>
         </div>
-        <p class="descrip">宣傳支出與看板有關的金額總計為 5000000 元，並未區分單塊看板明細。</p>
-        <a href="#" target="_blank" v-if="isMobW">看蘇貞昌政治獻金資料</a>
+        <p class="descrip">{{ description }}</p>
+        <a :href="link" target="_blank" v-if="isMobW && link">看{{ candidate.name }}政治獻金資料</a>
       </div>
 
       <div v-show="loaded" class="boards-container">
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="action">
-        <button class="btn btn--back" @click="$router.push(`/project/election-board/data`)"><img src="/proj-assets/election-board/images/arrow.png"></button>
+        <button class="btn btn--back" @click="$router.push(`/project/election-board/data${is2018 ? '-2018' : ''}`)"><img src="/proj-assets/election-board/images/arrow.png"></button>
         <button class="btn btn--upload" @click="goUpload">我也要上傳</button>
       </div>
     </div>
@@ -48,8 +48,11 @@ const fetchBoards = (store, {
     candidates,
     page,
     maxResults,
-    verifiedAmount: 3,
-    notBoardAmount: 2,
+    // todo 恢復
+    // verifiedAmount: 3,
+    // notBoardAmount: 2
+    verifiedAmount: 0,
+    notBoardAmount: 0
   })
 }
 
@@ -74,7 +77,8 @@ export default {
       showDataBoard: false,
       wEl: null,
       ww: 0,
-      isMounted: false
+      isMounted: false,
+      is2018: false
     }
   },
   computed: {
@@ -85,7 +89,36 @@ export default {
       return this.candidate.county.replace('臺', '台')
     },
     type () {
-      return this.candidate.type === 'mayors' ? '市長' : '議員'
+      switch (this.candidate.type) {
+        case 'presidents':
+          return '總統'
+          break;
+        case 'legislators':
+          return '立法委員'
+        case 'mayors':
+          return '市長'
+        case 'legislators':
+          return '立法委員'
+        case 'councilors':
+          return '議員'
+        default:
+          return ''
+          break;
+      }
+      // return this.candidate.type === 'mayors' ? '市長' : '議員'
+      // return this.candidate.type === 'presidents' ? '總統' : '立法委員'
+    },
+    politiContrib () {
+      return this.$store.state.ElectionBoard.politiContribs.find((contrib) => contrib.name === this.candidate.name)
+    },
+    amount () {
+      return this.politiContrib ? (this.politiContrib.amount.split(',').join(', ') || 0) : 0
+    },
+    description () {
+      return this.politiContrib ? this.politiContrib.description : ''
+    },
+    link () {
+      return this.politiContrib ? this.politiContrib.link : ''
     },
     isMobW () {
       return this.isMounted && this.ww < 767.98
@@ -114,6 +147,7 @@ export default {
   },
   mounted () {
     this.isMounted = true
+    this.is2018 = this.$route.params.params.includes('2018')
     // todo debounce
     this.wEl.addEventListener('resize', this.alterWindowWidth)
     this.wEl.addEventListener('orientationChange', this.alterWindowWidth)
@@ -212,7 +246,7 @@ theme-color = #4897db
     // color #4897db
     color #fff
     font-size .875rem
-    &.money
+    &.amount
       font-size 1.25rem
       font-weight 600
       margin-top 6px
@@ -251,13 +285,12 @@ theme-color = #4897db
     flex 1
     position relative
     margin-top 30px
-    margin-right -7px
-    margin-left -7px
-    // todo depend on 政治獻金描述多寡
     // min-height 206px
-    @media (min-width 768px)
-      margin-right -15px
-      margin-left -15px
+    // margin-right -7px
+    // margin-left -7px
+    // @media (min-width 768px)
+    //   margin-right -15px
+    //   margin-left -15px
     & .boards
       display flex
       // justify-content space-between
@@ -269,9 +302,14 @@ theme-color = #4897db
       left 0
       bottom 0
       width 100%
+      margin-right -7px
+      margin-left -7px
       // height 100%
       // margin-bottom 35px
       overflow-y auto
+      @media (min-width 768px)
+        margin-right -15px
+        margin-left -15px
       &__item
         // width calc((100% - 15px) / 2)
         // width calc(50% - 7px)

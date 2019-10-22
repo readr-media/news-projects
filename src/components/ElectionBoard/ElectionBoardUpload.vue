@@ -435,10 +435,10 @@ theme-color = #fa6e59
         bottom 0
         background-color rgba(0,0,0,.5)
         span
-          padding 0 .5em
+          padding 10px 14px
           color #de1615
           font-weight 500
-          letter-spacing 1px
+          // letter-spacing 1px
           background-color rgb(0,0,0)
           border-radius 5px
     .action
@@ -483,14 +483,15 @@ theme-color = #fa6e59
     background-color theme-color
     > img
       width 52px
+      height auto
     > span
       width calc(100% - 50px)
       margin 20px auto 0
       color #000
       font-size 1.25rem
-      font-weight 500
+      font-weight 700
       line-height 1.4
-      text-align justify
+      text-align center
 @media (min-width: 768px)
   .eb-upload
     &__step-1
