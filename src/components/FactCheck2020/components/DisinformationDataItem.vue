@@ -55,35 +55,73 @@
         <p class="small typescript-source">出處：<a :href="data.typescriptSource" target="_blank" >發言影片</a></p>
       </div>
       <div class="data__info">
-        <div class="data__authenticity">
-          <img
-            v-if="resultImage"
-            :src="resultImage"
-            :alt="resultText"
-          >
-          <p v-text="resultText" />
+        <div>
+          <div class="data__authenticity">
+            <img
+              v-if="resultImage"
+              :src="resultImage"
+              :alt="resultText"
+            >
+            <p v-text="resultText" />
+          </div>
+          <div class="data__tags-date">
+            <span
+              v-if="data.tags"
+              v-text="data.tags"
+            />
+            <span
+              v-if="data.date && data.date !== '#N/A'"
+              v-text="data.date"
+            />
+            <span v-if="data.media">
+              主責媒體：{{ data.media }}
+            </span>
+          </div>
         </div>
-        <div class="data__tags-date">
-          <span
-            v-if="data.tags"
-            v-text="data.tags"
-          />
-          <span
-            v-if="data.date && data.date !== '#N/A'"
-            v-text="data.date"
-          />
-          <span v-if="data.media">
-            主責媒體：{{ data.media }}
-          </span>
-        </div>
+        <button
+          v-if="hasOpinion"
+          :class="{ open: showOpinion }"
+          class="btn-opinion"
+          @click="showOpinion = !showOpinion"
+        >
+          其他看法
+        </button>
       </div>
-      <a
-        :href="getErrorReportLink()"
-        class="error-report"
-        target="_blank"
+      
+      <div
+        v-if="hasOpinion"
+        v-show="showOpinion"
+        :class="{ open: showOpinion }"
+        class="opinion"
       >
-        我要回報
-      </a>
+        <p class="heading">網友回報</p>
+        <div>
+          <div
+            v-for="item in opinions"
+            :key="item.description"
+            class="opinion__item"
+          >
+            <p v-text="item.authenticity" />
+            <p v-text="item.description" />
+          </div>
+        </div>
+        <a
+          v-if="data.opinionCount > 3"
+          href="https://docs.google.com/spreadsheets/d/1jGKhvooG95B5x3dnwWN_fQwrT40-c0dWgb7Gxoe4idM/edit#gid=0"
+          target="_blank"
+        >
+          看更多
+        </a>
+        <p class="heading">媒體回覆</p>
+        <p v-text="data.mediaResponse"></p>
+        <a
+          :href="getErrorReportLink()"
+          class="feedback"
+          target="_blank"
+        >
+          我要回報
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -98,7 +136,8 @@ export default {
   },
   data () {
     return {
-      showDetailed: false
+      showDetailed: false,
+      showOpinion: false
     }
   },
   computed: {
@@ -108,6 +147,14 @@ export default {
         '韓國瑜': '/proj-assets/fact-check/han.png'
       }
       return list[this.data.candidate]
+    },
+    opinions () {
+      return this.data.opinions
+        .filter(opinion => (opinion && opinion !== '#N/A' ))
+        .map(opinion => ({
+          authenticity: (opinion.split('||')[0] || '').replace('應更正為：', '').trim(),
+          description: (opinion.split('||')[1] || '').trim()
+        }))
     },
     resultImage () {
       const list = {
@@ -123,6 +170,9 @@ export default {
         '真實': '正確'
       }
       return mapping[this.data.result] || this.data.result
+    },
+    hasOpinion () {
+      return this.data.showOpinion && this.opinions.length > 0
     }
   },
   methods:{
@@ -140,7 +190,7 @@ export default {
 
 .data-item
   position relative
-  padding 15px
+  padding 15px 0 0
   background-color rgba(255, 255, 255, .1)
   border-radius 4px
 
@@ -162,6 +212,9 @@ export default {
   &__image-container
     display flex
     align-items center
+    width calc(100% - 30px)
+    margin-left auto
+    margin-right auto
     p
       font-size .875rem
   &__image
@@ -194,9 +247,85 @@ export default {
     line-height 1.4
     word-break break-word
     > *
+      width calc(100% - 30px)
+      margin-left auto
+      margin-right auto
       & + *
         margin-top 10px
+    
+    .btn-opinion
+      width 100%
+      height 45px
+      margin-top 5px
+      color #fff
+      font-size .875rem
+      background-color rgba(255, 255, 255, .1)
+      border-radius 1px
+      &::after
+        content ''
+        display inline-block
+        width 20px
+        height 20px
+        margin-left 4px
+        vertical-align text-bottom
+        background-image url(/proj-assets/fact-check/dropdown.png)
+        background-size 60%
+        background-repeat no-repeat
+        background-position center center
+        transition transform .5s
+      &.open
+        &::after
+          transform rotate(-180deg)
 
+    .opinion
+      position relative
+      width auto
+      padding 5px 0 15px 0
+      margin 0
+      text-align right
+      background-color rgba(255, 255, 255, .1)
+      border-radius 1px
+      > *
+        & + *
+          margin-top 15px
+        & + p.heading
+          margin-top 25px
+      > p
+        width calc(100% - 30px)
+        margin-left auto
+        margin-right auto
+        font-size .875rem
+        text-align justify
+        &.heading
+          font-size 1rem
+      > a
+        display inline-block
+        margin-right 15px
+        font-size .875rem
+        text-decoration underline
+        & + p.heading
+          margin-top 25px
+      .feedback
+        margin 0
+      
+      &__item
+        display flex
+        align-items flex-start
+        padding 5px 15px 5px 5px
+        border-top 1px solid #979797
+        &:last-child
+          border-bottom 1px solid #979797
+        > p
+          font-size .875rem
+        > p:first-of-type
+          width 55px
+          margin-right 5px
+          text-align center
+        > p:last-of-type
+          flex 1
+          text-align justify
+          line-height 1.57
+          word-break break-all
   &__detailed
     display flex
     flex-direction column
@@ -232,7 +361,12 @@ export default {
     text-align justify
   &__info
     display flex
-    margin-top 5px
+    flex-direction column
+    width auto
+    margin-top 20px
+    > div
+      width calc(100% - 30px)
+      margin 0 auto 15px
   &__authenticity
     height 35px
     img
@@ -249,12 +383,13 @@ export default {
     span
       margin-right .5em
 
-.error-report
-  color #9b9b9b
-  font-size .875rem
-  text-decoration underline
 .justify
   text-align justify
+.feedback
+  position absolute
+  top 8px
+  right 15px
+  color #9b9b9b
 
 @media (max-width: 1023px)
   .data__info
@@ -265,6 +400,7 @@ export default {
   .data-item
     display flex
     padding 20px
+    align-items flex-start
   .data__control
     right 20px
     &:hover
@@ -292,6 +428,8 @@ export default {
       background-color rgba(0, 0, 0, .8)
       border-radius 2px
   .data__image-container
+    width auto
+    margin-top 4px
     p
       display none
   .data__image
@@ -306,24 +444,47 @@ export default {
     flex 1
     margin-top 0
     margin-left 30px
+    > *
+      width auto
     > h3
       padding-right 40px
+
+    .btn-opinion
+      display inline-block
+      width auto
+      height auto
+      margin 0
+      background-color transparent
+    .opinion
+      padding 20px 0
+      margin-top 20px
+      > div
+        width calc(100% - 30px)
+        margin-left auto
+        margin-right auto
+      > a:last-of-type
+        margin-bottom 0
+    .opinion__item
+      > p:first-of-type
+        width 110px
+      
   .data__info
-    position relative
-    left -7px
-    flex-wrap wrap
-    padding-right 70px
+    flex-direction row
+    flex-wrap nowrap
+    align-items flex-end
+    > div
+      width auto
+      margin 0 auto 0 0
   .data__authenticity
+    position relative
+    left -6px 
     width 100%
     p
       display inline
       line-height 35px
       vertical-align top
-  .data__tags-date
-    margin-left 7px
-  .error-report
-    position absolute
-    right 20px
-    bottom 20px
-    margin 0
+  
+  .feedback
+    top 23px
+  
 </style>
