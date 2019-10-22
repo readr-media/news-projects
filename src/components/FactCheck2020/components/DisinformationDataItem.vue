@@ -33,20 +33,20 @@
           <template v-for="(item, i) in data.references">
             <span
               v-if="i > 0 && i < data.references.length"
-              :key="`${data.sentences}-${item.name}-separator`"
+              :key="`${data.sentences}-${item.name}-${i}-separator`"
             >
               、
             </span>
             <a
               v-if="item.url"
-              :key="`${data.sentences}-${item.name}`"
+              :key="`${data.sentences}-${item.name}-${i}-a`"
               :href="item.url"
               target="_blank"
               v-text="item.name"
             />
             <span
               v-else
-              :key="`${data.sentences}-${item.name}`"
+              :key="`${data.sentences}-${item.name}-${i}-span`"
               v-text="item.name"
             />
           </template>
@@ -86,6 +86,14 @@
         >
           其他看法
         </button>
+        <a
+          v-if="!hasOpinion"
+          :href="getErrorReportLink()"
+          class="feedback"
+          target="_blank"
+        >
+          我要回報
+        </a>
       </div>
       
       <div
@@ -98,7 +106,7 @@
         <div>
           <div
             v-for="item in opinions"
-            :key="item.description"
+            :key="`opinion-${item.description}`"
             class="opinion__item"
           >
             <p v-text="item.authenticity" />
@@ -360,6 +368,7 @@ export default {
   &__typescript
     text-align justify
   &__info
+    position relative
     display flex
     flex-direction column
     width auto
@@ -367,6 +376,11 @@ export default {
     > div
       width calc(100% - 30px)
       margin 0 auto 15px
+    .feedback
+      top auto
+      bottom 15px
+      font-size .875rem
+      text-decoration underline
   &__authenticity
     height 35px
     img
@@ -378,6 +392,7 @@ export default {
     display flex
     flex-wrap wrap
     align-items center
+    padding-right 70px
     color #9b9b9b
     font-size .875rem
     span
@@ -475,6 +490,8 @@ export default {
     > div
       width auto
       margin 0 auto 0 0
+    .feedback
+      bottom 1px
   .data__authenticity
     position relative
     left -6px 
@@ -483,7 +500,8 @@ export default {
       display inline
       line-height 35px
       vertical-align top
-  
+  .data__tags-date
+    padding-right 110px
   .feedback
     top 23px
   

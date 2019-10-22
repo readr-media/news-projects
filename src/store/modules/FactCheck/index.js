@@ -29,13 +29,14 @@ export default {
           res = await getSheetWithoutRedis({ params })
         }
         const data = get(res, 'body')
-        if (isLoadMore) {
+        const hasData = data !== 'No data found in Google Sheet.'
+        if (hasData && isLoadMore) {
           const orig = values(get(state, `googleSheet.${name}`) || [])
           const concatedData = concat(orig, data)
           commit('SET_GOOGLE_SHEET', { name, data: concatedData })
           return concatedData
         } else {
-          commit('SET_GOOGLE_SHEET', { name, data })
+          hasData && commit('SET_GOOGLE_SHEET', { name, data })
           return data
         }
       } catch (error) {
