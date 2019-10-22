@@ -1,6 +1,6 @@
 <template>
   <section :class="{ 'no-scroll': candidate }" class="eb-data">
-    <h1>看板<span class="title--upload">追</span><span class="title--verify">追</span><span class="title--data">追</span></h1>
+    <h1>看板<span class="title--upload">追</span><span class="title--verify">追</span><span class="title--data">追</span>{{ is2018 ? '' : ' 2.0' }}</h1>
     <h2>每到選舉期間，大街小巷冒出的宣傳看板已經成為台灣的獨特風景。看板追追追計畫邀請你一起為此次選舉留下紀錄，為催生選舉廣告管理制度提供初步的想像。</h2>
     <FormSelectPosition
       :address="address"
@@ -11,6 +11,10 @@
         <option value="mayors">縣 / 市長</option>
         <option value="councilors">縣 / 市議員</option>
       </select>
+    </div>
+    <div class="eb-data__year-title">
+      <p>{{ is2018 ? '2018' : '2020' }} 看板</p>
+      <a :href="`/project/election-board/data${is2018 ? '' : '-2018'}`" target="_blank">看 {{ is2018 ? '2020' : '2018' }} 看板資料</a>
     </div>
     <template v-for="item in candidates">
       <router-link :key="item.uid" :to="`/project/election-board/data?candidate=${item.name}`" class="data-candidate" @click.native="sendGA(item.name)">
@@ -64,7 +68,8 @@ export default {
     return {
       address: '台北市信義區',
       type: 'mayors',
-      loading: true
+      loading: true,
+      is2018: false
     }
   },
   components: {
@@ -77,6 +82,7 @@ export default {
       return this.candidates.find(candidate => candidate.name === this.$route.query.candidate)
     },
     candidates () {
+      // return []
       if (this.type === 'mayors') {
         return this.$store.state.ElectionBoard.candidates.mayors.filter(candidate => candidate.boards.coordinates || candidate.boards[0])
       } else {
@@ -123,6 +129,10 @@ export default {
       this.loading = false
     })
   },
+  mounted () {
+    this.is2018 = this.$route.params.params.includes('2018')
+    console.log(this.is2018);
+  },
   methods: {
     getBoardImage (candidate) {
       if (candidate.boards[0]) {
@@ -149,31 +159,51 @@ color-data = #4897db
   min-height 100vh
   padding 60px 25px
   background-color #000
+  &__year-title
+    margin-top 20px
+    display flex
+    justify-content space-between
+    align-items center
+    @media (min-width 768px)
+      margin-top 30px
+    & p
+      font-size 1.25rem
+      font-weight 600
+    & a
+      color color-data
+      text-decoration underline
   &.no-scroll
     position fixed
     overflow hidden
-  h1, h2, p
+  & h1, & h2, & p
     margin 0
     color #fff
-  h1
+  & h1
     font-size 2.25rem
-    font-weight 500
+    font-weight 700
+    line-height 1
+    margin-bottom 20px
+    @media (min-width 768px)
+      margin-bottom 40px
     .title--upload
       color color-upload
     .title--verify
       color color-verify
     .title--data
       color color-data
-  h2
+  & > h2
     font-size 1rem
-    font-weight 300
+    font-weight 400
     text-align justify
-  &__select-pos
-    margin-top 1em
+    margin-bottom 25px
+    line-height 1.8
+  // &__select-pos
+  //   margin-top 1em
+  //   margin-top 25px
   &__select-type
     position relative
     width 100%
-    margin-top .5em
+    margin-top 10px
     background-color #a0a0a0
     border-radius 2px
     &.open
@@ -191,27 +221,30 @@ color-data = #4897db
       background-position center center
       background-repeat no-repeat
       transition transform .5s
-    select
+    & select
       position relative
       z-index 10
       width 100%
-      height 30px
-      padding 0
-      text-indent .5em
+      height 32px
+      padding 0 0 0 12px
+      // text-indent .5em
       background-color transparent
       border none
-      -webkit-appearance none
-      -moz-appearance none
+      // -webkit-appearance none
+      // -moz-appearance none
       appearance none
   .message
     display inline-block
     width 100%
-    margin-top 2em
+    margin-top 20px
     color #a0a0a0
     line-height 1.4
-  .data-candidate
+  & .data-candidate
     display flex
-    margin-top 25px
+    margin-top 20px
+    text-decoration none
+    // &:not(:last-child)
+    //   margin-bottom 20px
     > img
       width 90px
       height 90px
@@ -219,21 +252,31 @@ color-data = #4897db
       object-fit cover
       object-position center center
     &__info
-      flex 1
+      // flex 1
       margin-left 15px
-      h2
-        margin-bottom .2em
-      p
+      // display flex
+      // flex-direction column
+      // justify-content center
+      & h2
+        font-size 1rem
+        // margin-bottom .2em
+        margin-bottom 4px
+        font-weight 700
+        @media (min-width 768px)
+          margin-bottom 20px
+      & p
         color #a0a0a0
         font-size .875rem
+        line-height 1.64
 
 @media (min-width: 768px)
   .eb-data
     padding 60px calc((100% - 450px) / 2)
-    > h2
-      margin-top 40px
+    // > h2
+    //   margin-top 40px
     &__select-pos
-      margin 50px 0 40px 0
+      // margin 50px 0 40px 0
+      margin-top 30px
     
     .data-candidate
       > img
