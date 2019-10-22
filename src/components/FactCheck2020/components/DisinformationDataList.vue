@@ -9,7 +9,7 @@
     </div>
     <DisinformationDataItem
       v-for="item in data"
-      :key="item.sentences"
+      :key="`list-${item.sentences}`"
       :data="item"
     />
     <p
