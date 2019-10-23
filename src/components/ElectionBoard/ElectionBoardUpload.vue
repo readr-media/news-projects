@@ -397,6 +397,7 @@ theme-color = #fa6e59
     img
       width 100%
       margin-top 10px
+      border-radius 1px
       & + p
         margin-top 20px
     button

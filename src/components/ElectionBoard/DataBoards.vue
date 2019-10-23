@@ -283,6 +283,11 @@ theme-color = #4897db
     flex 1
     position relative
     margin-top 30px
+    margin-right -7px
+    margin-left -7px
+    @media (min-width 768px)
+      margin-right -15px
+      margin-left -15px
     // min-height 206px
     // margin-right -7px
     // margin-left -7px
@@ -300,14 +305,14 @@ theme-color = #4897db
       left 0
       bottom 0
       width 100%
-      margin-right -7px
-      margin-left -7px
+      // margin-right -7px
+      // margin-left -7px
       // height 100%
       // margin-bottom 35px
       overflow-y auto
-      @media (min-width 768px)
-        margin-right -15px
-        margin-left -15px
+      // @media (min-width 768px)
+      //   margin-right -15px
+      //   margin-left -15px
       &__item
         // width calc((100% - 15px) / 2)
         // width calc(50% - 7px)
@@ -349,6 +354,8 @@ theme-color = #4897db
           padding-top 100%
           margin-bottom 10px
           background-color #a0a0a0
+          border-radius 1px
+          overflow hidden
           & img
             position absolute
             top 0
@@ -359,6 +366,7 @@ theme-color = #4897db
             height 100%
             object-fit cover
             object-position center center
+            // border-radius 1px
   & .action
     display flex
     justify-content space-between

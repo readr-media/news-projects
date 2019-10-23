@@ -78,6 +78,7 @@ const fetchPolitiContrib = ({ dispatch }) => {
 
 export default {
   name: 'ElectionBoardData',
+  props: [ 'reload' ],
   data () {
     return {
       address: '台北市信義區',
@@ -307,6 +308,7 @@ color-data = #4897db
       background-color #a0a0a0
       object-fit cover
       object-position center center
+      border-radius 1px
     &__info
       // flex 1
       margin-left 15px

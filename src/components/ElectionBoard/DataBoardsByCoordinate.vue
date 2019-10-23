@@ -132,6 +132,8 @@ theme-color = #4897db
     flex 1
     position relative
     margin-top 25px
+    margin-left -7px
+    margin-right -7px
     > p
       color #a0a0a0
       font-size 1.25rem
@@ -149,8 +151,8 @@ theme-color = #4897db
       height 100%
       // padding-bottom 10px
       overflow-y auto
-      margin-left -7px
-      margin-right -7px
+      // margin-left -7px
+      // margin-right -7px
       &__item
         // width calc((100% - 14px) / 2)
         width 50%
@@ -172,6 +174,8 @@ theme-color = #4897db
           padding-top 100%
           margin-bottom 10px
           background-color #a0a0a0
+          border-radius 1px
+          overflow hidden
           img
             position absolute
             top 0
@@ -182,6 +186,7 @@ theme-color = #4897db
             height 100%
             object-fit cover
             object-position center center
+            // border-radius 1px
   .action
     display flex
     justify-content space-between
@@ -231,14 +236,14 @@ theme-color = #4897db
     p
       font-size 1rem
     .boards-container
-      // margin-left -15px
-      // margin-right -15px
+      margin-left -15px
+      margin-right -15px
       // left -15px
       // width calc(100% + 30px)
       margin-top 30px
       .boards
-        margin-left -15px
-        margin-right -15px
+        // margin-left -15px
+        // margin-right -15px
         // justify-content flex-start
         &__item
           // width calc((100% - 120px) / 4)
