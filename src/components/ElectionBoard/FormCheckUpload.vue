@@ -1,4 +1,5 @@
 <template>
+  <!-- todo 篩選年份 -->
   <div class="check-upload">
     <div class="check-upload__info">
       <div class="action-conteiner">
@@ -13,7 +14,7 @@
               </div>
               <div class="board__info">
                 <h2>已存在的照片 {{ index + 1 }}</h2>
-                <p>候選人： {{ getCandidatesName(item.candidates) }}</p>
+                <p>候選人：{{ getCandidatesName(item.candidates) }}</p>
                 <p>地點：{{ `${item.county}市${item.district}區${item.road}` }}</p>
               </div>
             </div>
@@ -49,6 +50,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: 'FormCheckUpload',
@@ -91,11 +93,11 @@ export default {
   methods: {
     cancel () {
       this.$emit('cancelUpload')
-      window.ga('send', 'event', 'projects', 'click', 'upload photo repeat cancelled', { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', 'upload photo repeat cancelled')
     },
     confirm () {
       this.$emit('confirmUpload')
-      window.ga('send', 'event', 'projects', 'click', 'upload photo repeat confirmed', { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', 'upload photo repeat confirmed')
     },
     getCandidatesName (candidates) {
       return candidates.map(candidate => candidate.name).join('、')
@@ -124,7 +126,8 @@ theme-color = #fa6e59
   right 0
   z-index 1000
   width 100%
-  height 100%
+  // height 100%
+  min-height 100%
   background-color theme-color
   &__info
     flex 1
@@ -135,6 +138,8 @@ theme-color = #fa6e59
     background-color #000
     // justify-content space-between
     justify-content center
+    padding-top 25px
+    padding-bottom 25px
     > .board
       width calc(100% - 50px)
       margin 0 auto
@@ -234,6 +239,7 @@ theme-color = #fa6e59
         border none
         border-radius 2px
         padding 0
+        cursor pointer
         > span
           display none
       .btn--cancel
@@ -243,7 +249,7 @@ theme-color = #fa6e59
         color #fff
         background-color #000
 
-@media (min-width: 768px)
+@media (min-width: 576px)
   .check-upload
     &__info
       // justify-content center
@@ -281,11 +287,14 @@ theme-color = #fa6e59
         margin 25px auto 0
         button
           height 48px
-          border-radius 6px
+          // border-radius 6px
           line-height 48px
           width calc(50% - 10px)
           > span
             display inline
           > br
             display none
+@media (min-width: 768px)
+  .check-upload__action .action-btns button
+    border-radius 6px
 </style>

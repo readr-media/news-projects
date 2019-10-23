@@ -64,20 +64,23 @@ export default {
   },
   computed: {
     selectedIdsWithoutSelf () {
-      return this.selectedIds.filter(id => id !== this.selectedId)
+      return this.selectedIds.filter((id) => id !== this.selectedId)
     },
     candidates () {
+      // this.selectedName = ''
       return this.presidentCandidates.concat(this.legislatorCandidates)
     },
     legislatorCandidatesFiltered () {
-      return this.legislatorCandidates.filter(item => !this.selectedIdsWithoutSelf.includes(item.id))
+      return this.legislatorCandidates.filter((item) => !this.selectedIdsWithoutSelf.includes(item.id))
     },
     presidentCandidatesFiltered () {
-      return this.presidentCandidates.filter(item => !this.selectedIdsWithoutSelf.includes(item.id))
+      return this.presidentCandidates.filter((item) => !this.selectedIdsWithoutSelf.includes(item.id))
     }
   },
   watch: {
     selectedName (newValue) {
+      // if (!newValue) return
+      // console.log(newValue);
       const id = this.candidates.filter(candidate => candidate.name === newValue)[0].id
       this.selectedId = id
     },

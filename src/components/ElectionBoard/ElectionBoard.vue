@@ -2,7 +2,7 @@
   <div class="election-board">
     <Logo v-show="currentComponent === 'ElectionBoardLanding'" class="no-sprite" href="https://www.readr.tw/" top="15px" left="15px" bgImage="/proj-assets/election-board/images/readr-logo.png" />
     <Share v-show="currentComponent === 'ElectionBoardLanding'" :shareUrl="shareLink" class="election-board__share" top="10px" left="70px" bgColor="#000" direction="right" />
-    <section :is="currentComponent"></section>
+    <section :is="currentComponent" v-if="isRouterAlive" :reload="reload"></section>
   </div>
 </template>
 <script>
@@ -55,28 +55,32 @@ export default {
     Logo,
     Share
   },
+  data () {
+    return {
+      isRouterAlive: true
+    }
+  },
   metaInfo () {
     const metaUrl = this.$route.fullPath.split('/project/')[1]
     const ogLocale = 'zh_TW'
 
-    // todo
-    let title = `看板追追追——2020選舉看板紀錄`
-    let metaImage = `election-board/images/og.jpg`
-    let description = '每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤。我們邀請你拍下身邊的看板，一起為這次的選舉留下紀錄！'
+    let title = '看板追追追——2020選舉看板紀錄'
+    let metaImage = 'election-board/images/og-2020.jpg'
+    let description = '每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，選舉金流的證據就會在選舉之後消失無蹤，去年我們就發現至少有 60 位候選人沒有申報自身看板的政治獻金。我們邀請你替選舉看板「打卡」，簡單三步驟：拍下照片、確認地點、標示候選人，一起為這次的選舉留下紀錄！'
 
     switch (this.$route.params.params) {
       case 'upload':
-        metaImage = `election-board/images/og-upload.jpg`
+        metaImage = 'election-board/images/og-upload-2020.jpg'
         break
       case 'verify':
         title = '看板追追追——鍵盤辨識徵求中！'
-        metaImage = `election-board/images/og-verify.jpg`
-        description = '看板追追追計畫進到下一步資料分析前，需要你協助確認資料的正確性。這裡有一堆選舉看板照片需要鍵盤協力，一起為這次的選舉留下紀錄吧！'
+        metaImage = 'election-board/images/og-verify-2020.jpg'
+        description = '看板追追追計畫募集了一堆選舉看板照片，進到下一步資料分析前，需要你協助確認資料的正確性。一起為這次的選舉留下紀錄吧！'
         break
       case 'data':
-        title = '看板追追追——2020選舉看板紀錄'
-        metaImage = `election-board/images/og-data.jpg`
-        description = '誰掛了最多看板？每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤。一起為這次的選舉留下紀錄吧！'
+        // title = '看板追追追——2020選舉看板紀錄'
+        metaImage = 'election-board/images/og-data-2020.jpg'
+        description = '誰掛了最多看板？每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，選舉金流的證據就會在選舉之後消失無蹤，去年我們就發現至少有 60 位候選人沒有申報自身看板的政治獻金。一起為這次的選舉留下紀錄吧！'
         if (this.$route.query.candidate) {
           title = `看板追追追——${this.$route.query.candidate}選舉看板紀錄`
           description = `目前參選人${this.$route.query.candidate}掛了多少看板？你還有在哪裡看到${this.$route.query.candidate}的看板嗎？一起為這次的選舉留下紀錄吧！`
@@ -84,11 +88,11 @@ export default {
         break
       case 'data-2018':
         title = '看板追追追——2018選舉看板紀錄'
-        metaImage = `election-board/images/og-data.jpg`
-        description = '誰掛了最多看板？每到選舉季節，街上就會掛滿大大小小的候選人看板，如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤。一起為這次的選舉留下紀錄吧！'
+        metaImage = 'election-board/images/og-data-2020.jpg'
+        description = '2018 年，READr 啟動「看板追追追」實驗，透過讀者幫街上的選舉看板「打卡」，試圖暸解實際狀況與申報資料中的黑數，我們發現，至少有 60 位候選人沒有申報自身看板的政治獻金。這代表，這些候選人如果不是用自己的財產支付這些看板的相關費用，就是違法。'
         if (this.$route.query.candidate) {
           title = `看板追追追——${this.$route.query.candidate}選舉看板紀錄`
-          description = `目前參選人${this.$route.query.candidate}掛了多少看板？你還有在哪裡看到${this.$route.query.candidate}的看板嗎？一起為這次的選舉留下紀錄吧！`
+          description = `候選人${this.$route.query.candidate}掛了多少看板？${this.$route.query.candidate}在選舉政治獻金資料中有沒有申報看板的支出？一起來看看！`
         }
         break
     }
@@ -119,20 +123,31 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      // todo
-      let title = `看板追追追——2020選舉看板紀錄`
+      let title = '看板追追追——2020選舉看板紀錄'
       switch (to.params.params) {
         case 'verify':
           title = '看板追追追——鍵盤辨識徵求中！'
           break
         case 'data':
-          title = '看板追追追——2020選舉看板紀錄'
+          // title = '看板追追追——2020選舉看板紀錄'
+          if (to.query.candidate) {
+            title = `看板追追追——${to.query.candidate}選舉看板紀錄`
+          }
+          break
+        case 'data-2018':
+          title = '看板追追追——2018選舉看板紀錄'
           if (to.query.candidate) {
             title = `看板追追追——${to.query.candidate}選舉看板紀錄`
           }
           break
       }
       window.ga('send', 'pageview', { title: `${title} - 讀＋READr`, location: to.fullPath })
+    }
+  },
+  methods: {
+    reload () {
+      this.isRouterAlive = false
+      this.$nextTick(() => { this.isRouterAlive = true })
     }
   },
   beforeCreate () {

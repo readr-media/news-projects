@@ -66,7 +66,7 @@ export default {
       .catch(err => {
         this.$emit('closeVerifyBoards')
       })
-      window.ga('send', 'event', 'projects', 'click', 'verified data false done', { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', 'verified data false done')
     }
   }
 }
@@ -89,6 +89,7 @@ theme-color = #ffdb5c
     flex 1
     padding 15px 25px
     background-color #000
+    overflow-y auto
     &-container
       display flex
       flex-wrap wrap
@@ -125,23 +126,27 @@ theme-color = #ffdb5c
   .action
     padding 25px
     .action-text
-      margin 0 auto
+      // margin 0 auto
       color #000
       font-size 1.25rem
       font-weight 500
-      line-height 1.4
-      text-align justify
+      line-height 1.64
+      // text-align justify
       > span
         border-bottom 5px solid #000
     > button
       width 100%
+      height 48px
+      line-height 48px
       margin-top 20px
-      padding .5em .5em
+      // padding .5em .5em
+      padding 0
       font-size 1.25rem
-      font-weight 500
+      font-weight 700
       background-color #a0a0a0
       border none
       border-radius 2px
+      cursor pointer
 
 @media (min-width: 768px)
   .verify-boards

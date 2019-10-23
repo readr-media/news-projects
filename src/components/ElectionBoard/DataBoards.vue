@@ -92,7 +92,6 @@ export default {
       switch (this.candidate.type) {
         case 'presidents':
           return '總統'
-          break;
         case 'legislators':
           return '立法委員'
         case 'mayors':
@@ -103,7 +102,6 @@ export default {
           return '議員'
         default:
           return ''
-          break;
       }
       // return this.candidate.type === 'mayors' ? '市長' : '議員'
       // return this.candidate.type === 'presidents' ? '總統' : '立法委員'
