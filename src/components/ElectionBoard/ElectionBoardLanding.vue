@@ -1,9 +1,12 @@
 <template>
   <section class="eb-landing">
-    <!-- <img src="/proj-assets/election-board/images/bg-arrow.png" alt="" class="bg-arrow"> -->
     <main>
       <img src="/proj-assets/election-board/images/bg-arrow.png" alt="" class="bg-arrow">
-      <img :src="`/proj-assets/election-board/images/title-${isLapW ? 'lap' : 'mob'}.png`" alt="看板追追追">
+      <picture>
+        <source media="(min-width: 768px)" srcset="/proj-assets/election-board/images/title-lap.png">
+        <img src="/proj-assets/election-board/images/title-mob.png" alt="看板追追追 2.0">
+      </picture>
+      <!-- <img :src="`/proj-assets/election-board/images/title-${isLapW ? 'lap' : 'mob'}.png`" alt="看板追追追"> -->
       <div class="menu">
         <div>
           <router-link to="/project/election-board/upload">
@@ -106,7 +109,7 @@ export default {
       showIntro: false,
       wEl: null,
       ww: 0,
-      isMounted: false,
+      // isMounted: false,
       uploaders: []
     }
   },
@@ -117,16 +120,16 @@ export default {
     this.fetchUploaders()
   },
   mounted () {
-    this.isMounted = true
+    // this.isMounted = true
     // todo debounce
     this.wEl.addEventListener('resize', this.alterWindowWidth)
     this.wEl.addEventListener('orientationChange', this.alterWindowWidth)
   },
-  computed: {
-    isLapW () {
-      return this.isMounted && this.ww >= 768
-    }
-  },
+  // computed: {
+  //   isLapW () {
+  //     return this.isMounted && this.ww >= 768
+  //   }
+  // },
   methods: {
     alterWindowWidth () {
       this.ww = this.wEl.innerWidth
@@ -200,13 +203,15 @@ color-data = #4897db
       align-items center
       // max-width 698px
       margin-bottom 30px
-    & > img
+    & picture
       // max-width 100px
       width 37.04%
       position relative
       @media (min-width 768px)
         width 26.65%
         margin-bottom 56px
+      & > img
+        width 100%
       // margin-right 15px
     & .bg-arrow
       position absolute

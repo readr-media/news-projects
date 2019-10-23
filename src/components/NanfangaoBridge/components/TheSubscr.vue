@@ -88,7 +88,6 @@ export default {
         width 80px
         @media (min-width 460px)
           width 108px
-        // todo touch
         &:hover
           background-color #6fb4ba
         &:active

@@ -47,7 +47,7 @@
           @showMapHint="showMapHint = true"
           @updateCoordinate="updateCoordinate"
           @uploaded="current = 3">
-          <p v-if="showImgError" slot="img-upload-error" class="error">圖片上傳發生錯誤...</p>
+          <p v-if="showImgError" slot="img-upload-error" class="error">圖片上傳發生錯誤⋯</p>
         </ElectionBoardUploadForm>
       </section>
       <section class="eb-upload__step-5">
@@ -76,7 +76,7 @@ const MAX_LONGITUDE = 122
 const MIN_LONGITUDE = 117
 
 const MAX_IMG_SIZE = 8 * 1024 * 1024 // 8 MB
-const MIN_TIMESTAMP = 1514736000 // 2018.01.01
+const MIN_TIMESTAMP = 1546272000 // 2019.01.01
 
 const uploadImage = (store, { file, folderName }) => {
   return store.dispatch('UPLOAD_IMAGE_TO_GCS', { file, folderName })
@@ -84,6 +84,7 @@ const uploadImage = (store, { file, folderName }) => {
 
 export default {
   name: 'ElectionBoardUpload',
+  props: [ 'reload' ],
   components: {
     ElectionBoardBackBtn,
     ElectionBoardUploadForm,
@@ -139,11 +140,17 @@ export default {
       this.showMapHint = false
     },
     current (value) {
-      if (value === 0) {
-        clearInterval(this.timer)
-        this.resetData()
-      } else if (value === 3) {
-        this.setTimer()
+      switch (value) {
+        case 0:
+          // clearInterval(this.timer)
+          // this.resetData()
+          this.reload()
+          break
+        case 3:
+          this.setTimer()
+          break
+        default:
+          break
       }
     },
     coordinateFromEXIF (value) {
@@ -163,9 +170,7 @@ export default {
       }
     },
     timeout (value) {
-      if (value === 0) {
-        this.current = 0
-      }
+      if (value === 0) this.current = 0
     }
   },
   mounted () {
@@ -312,19 +317,19 @@ export default {
         }
       }
     },
-    resetData () {
-      this.address = ''
-      this.coordinate = undefined
-      this.imgEXIF = {}
-      this.imgFile = undefined
-      this.imgSizeVerified = false
-      this.imgURL = ''
-      this.showBackBtn = true
-      this.showImgError = false
-      this.showMapHint = false
-      this.timeout = 3
-      document.getElementById('camera').value = ''
-    },
+    // resetData () {
+    //   this.address = ''
+    //   this.coordinate = undefined
+    //   this.imgEXIF = {}
+    //   this.imgFile = undefined
+    //   this.imgSizeVerified = false
+    //   this.imgURL = ''
+    //   this.showBackBtn = true
+    //   this.showImgError = false
+    //   this.showMapHint = false
+    //   this.timeout = 3
+    //   document.getElementById('camera').value = ''
+    // },
     resizeImage (image, orientation) {
       const MAX = 2000
       const widthOrigin = image.width
@@ -373,6 +378,7 @@ theme-color = #fa6e59
     > section
       flex 1
       height 100%
+      overflow-y auto
   input
     display none
   &__step-1
@@ -471,6 +477,7 @@ theme-color = #fa6e59
     position relative
     display flex
     flex-direction column
+    // overflow-y auto
     // .map
     //   flex 2
     // .form

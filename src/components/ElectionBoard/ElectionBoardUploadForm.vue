@@ -1,5 +1,4 @@
 <template>
-  <!-- todo 同一地點看板頁面調整 -->
   <div class="eb-upload-form">
     <div class="container">
       <div v-show="showCheckPosition" class="item">
@@ -668,7 +667,6 @@ theme-color = #fa6e59
     padding 0 0 0 12px
     // text-indent 0.5em
   & .select-container
-    // todo disabled color
     position relative
     background-color #a0a0a0
     border-radius 2px
