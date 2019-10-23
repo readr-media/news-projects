@@ -138,8 +138,8 @@ theme-color = #fa6e59
     background-color #000
     // justify-content space-between
     justify-content center
-    padding-top 25px
-    padding-bottom 25px
+    padding-top 40px
+    padding-bottom 40px
     > .board
       width calc(100% - 50px)
       margin 0 auto
@@ -176,6 +176,7 @@ theme-color = #fa6e59
             height 100%
             object-fit cover
             object-position center center
+            border-radius 1px
       &__info
         margin-left 15px
         h2
@@ -192,9 +193,11 @@ theme-color = #fa6e59
       height 100%
       margin 0 auto
       overflow hidden
+      max-width 450px
       &-container
         display flex
         height 100%
+        transition transform 0.3s
       &__btn
         position absolute
         top 50%
@@ -202,26 +205,40 @@ theme-color = #fa6e59
         background-color transparent
         border none
         outline none
+        user-select none
+        cursor pointer
+        transition transform 0.3s
         img
           width 20px
+          display block
         &.previous
           left 0
+          padding 0 0 0 10px
+          &:hover
+            transform translate(-2px, -50%)
           img
             transform rotate(-180deg)
         &.next
           right 0
+          padding 0 10px 0 0
+          &:hover
+            transform translate(2px, -50%)
   &__action
     display flex
     flex-direction column
     padding 25px 0
+    max-width 450px
+    margin-right auto
+    margin-left auto
+    width calc(100% - 50px)
     > *
       flex 1
       display flex
-      width calc(100% - 50px)
+      // width calc(100% - 50px)
     .action-text
       justify-content center
       align-items center
-      margin 0 auto
+      // margin 0 auto
       color #000
       font-size 1.25rem
       font-weight 500
@@ -229,7 +246,8 @@ theme-color = #fa6e59
       // text-align justify
     .action-btns
       justify-content space-between
-      margin 20px auto 0
+      margin-top 20px
+      // margin 20px auto 0
       button
         width calc(50% - 7px)
         height 96px
@@ -249,12 +267,12 @@ theme-color = #fa6e59
         color #fff
         background-color #000
 
-@media (min-width: 576px)
+@media (min-width 576px)
   .check-upload
     &__info
       // justify-content center
-      // padding-top 55px
-      // padding-bottom 55px
+      padding-top 50px
+      padding-bottom 50px
       .action-conteiner
         flex none
         width 550px
@@ -271,20 +289,20 @@ theme-color = #fa6e59
             font-size 1.25rem
           p
             font-size 1rem
-      .boards
-        width 450px
+      // .boards
+      //   width 450px
     &__action
       justify-content center
       padding-top 35px
       padding-bottom 35px
-      > *
+      & > *
         flex none
-      .action-text
-        width 450px
-        margin 0 auto
-      .action-btns
-        width 450px
-        margin 25px auto 0
+      // & .action-text
+      //   width 450px
+      //   margin 0 auto
+      & .action-btns
+        width 100%
+        margin-top 25px
         button
           height 48px
           // border-radius 6px
@@ -294,7 +312,7 @@ theme-color = #fa6e59
             display inline
           > br
             display none
-@media (min-width: 768px)
+@media (min-width 768px)
   .check-upload__action .action-btns button
     border-radius 6px
 </style>

@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="action">
-      <div class="action-text">這是同一個使用者上傳的資料，哪些<span>是</span>競選看板的照片？</div>
+      <div class="action-text">這是同一個使用者上傳的資料，哪些<span>是</span>競選看板的照片？請點選。</div>
       <button @click="submit">送出</button>
     </div>
   </div>
@@ -87,7 +87,9 @@ theme-color = #ffdb5c
   background-color theme-color
   .boards
     flex 1
-    padding 15px 25px
+    padding-top 40px
+    padding-left 25px
+    padding-right 25px
     background-color #000
     overflow-y auto
     &-container
@@ -96,22 +98,29 @@ theme-color = #ffdb5c
       justify-content space-between
       align-items flex-start
       width 100%
-      overflow-y auto
+      max-width 620px
+      margin-right auto
+      margin-left auto
+      padding-bottom 40px
+      // overflow-y auto
       .board
         position relative
-        width calc(50% - 15px)
-        padding-top calc(50% - 15px)
-        margin-top 10px
+        width calc(50% - 7px)
+        padding-top calc(50% - 7px)
+        margin-top 14px
         background-color #a0a0a0
         background-size cover
-        background-position 50% 50%
+        background-position center
         background-repeat no-repeat
+        cursor pointer
+        user-select none
+        border-radius 1px
         &:nth-of-type(1), &:nth-of-type(2)
           margin-top 0
         &.selected
           border 2px solid theme-color
-          width calc(50% - 19px)
-          padding-top calc(50% - 19px)
+          // width calc(50% - 19px)
+          padding-top calc(50% - 11px)
           &::after
             content ''
             position absolute
@@ -121,20 +130,27 @@ theme-color = #ffdb5c
             width 30px
             height 45px
             border 1px solid theme-color
-            border-width 0 10px 10px 0
-        
-  .action
-    padding 25px
-    .action-text
+            border-width 0 10px 10px 0     
+  & .action
+    padding-top 25px
+    padding-bottom 25px
+    width calc(100% - 50px)
+    max-width 620px
+    margin-right auto
+    margin-left auto
+    & .action-text
       // margin 0 auto
       color #000
       font-size 1.25rem
       font-weight 500
       line-height 1.64
+      // max-width 450px
+      // margin-right auto
+      // margin-left auto
       // text-align justify
-      > span
+      & > span
         border-bottom 5px solid #000
-    > button
+    & > button
       width 100%
       height 48px
       line-height 48px
@@ -147,29 +163,45 @@ theme-color = #ffdb5c
       border none
       border-radius 2px
       cursor pointer
+      // max-width 450px
+      margin-right auto
+      margin-left auto
 
-@media (min-width: 768px)
+@media (min-width 576px)
   .verify-boards
-    .boards
-      padding 50px 0
-    .boards-container
-      flex none
+    & .boards
+      padding-top 50px
+      // padding-bottom 50px
+    & .boards-container
+      // flex none
       justify-content flex-start
-      align-items center
-      width 620px
-      margin 0 auto
-      .board
-        width calc((100% - 60px) / 3)
-        padding-top calc((100% - 60px) / 3)
-        margin 20px 10px 0
+      padding-bottom 50px
+      // align-items center
+      // width 620px
+      // margin 0 auto
+      & .board
+        width calc((100% / 3) - 20px)
+        padding-top calc((100% / 3) - 20px)
+        margin-top 30px
+        margin-right 30px
+        // margin 20px 10px 0
+        &:nth-child(3n)
+          margin-right 0
         &:nth-of-type(3)
           margin-top 0
         &.selected
-          width calc((100% - 60px) / 3)
-          padding-top calc((100% - 60px) / 3 - 4px)
-    .action
+          padding-top calc((100% / 3) - 24px)
+          // width calc((100% - 60px) / 3)
+          // padding-top calc((100% - 60px) / 3 - 4px)
+    & .action
       display flex
       flex-direction column
       justify-content center
-      padding 50px calc((100% - 450px) / 2)
+      // padding 50px calc((100% - 450px) / 2)
+      padding 35px 0
+      // & button
+      //   border-radius 6px
+@media (min-width 768px)
+  .verify-boards .action button
+    border-radius 6px
 </style>

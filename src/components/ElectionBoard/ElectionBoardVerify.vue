@@ -1,5 +1,4 @@
 <template>
-  <!-- todo 這不是競選看板照片調整 -->
   <section class="eb-verify">
     <div class="image">
       <img :src="boardImage" alt="">
@@ -112,6 +111,7 @@ const fetchBoards = (store, {
 
 export default {
   name: 'ElectionBoardVerify',
+  props: [ 'reload' ],
   components: {
     ElectionBoardBackBtn,
     FormSelectCandidate,
