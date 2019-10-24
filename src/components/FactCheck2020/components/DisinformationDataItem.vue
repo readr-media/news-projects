@@ -120,8 +120,10 @@
         >
           看更多
         </a>
-        <p class="heading">媒體回覆</p>
-        <p v-text="data.mediaResponse"></p>
+        <template v-if="data.showOpinion">
+          <p class="heading">媒體回覆</p>
+          <p v-text="data.mediaResponse"></p>
+        </template>
         <a
           :href="getErrorReportLink()"
           class="feedback"
@@ -180,7 +182,7 @@ export default {
       return mapping[this.data.result] || this.data.result
     },
     hasOpinion () {
-      return this.data.showOpinion && this.opinions.length > 0
+      return this.opinions.length > 0
     }
   },
   methods:{
