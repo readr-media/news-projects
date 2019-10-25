@@ -61,12 +61,11 @@ const fetchCandidates = (store, {
     page,
     type,
     // 被驗證過 3 次
-    // todo 恢復
-    // verifiedAmount: 3,
-    verifiedAmount: 0,
+    verifiedAmount: 3,
+    // verifiedAmount: 0,
     // 驗證為「不是看板」少於 2 次
-    // notBoardAmount: 2,
-    notBoardAmount: 0
+    notBoardAmount: 2
+    // notBoardAmount: 0
   }).then((res) => {
     if (res.next) return fetchCandidates(store, { county, type, electionYear, page: (page + 1) })
   })

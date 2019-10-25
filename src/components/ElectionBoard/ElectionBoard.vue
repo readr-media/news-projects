@@ -2,15 +2,17 @@
   <div class="election-board">
     <Logo v-show="currentComponent === 'ElectionBoardLanding'" class="no-sprite" href="https://www.readr.tw/" top="15px" left="15px" bgImage="/proj-assets/election-board/images/readr-logo.png" />
     <Share v-show="currentComponent === 'ElectionBoardLanding'" :shareUrl="shareLink" class="election-board__share" top="10px" left="70px" bgColor="#000" direction="right" />
+    <!-- <transition name="fade"> -->
     <section :is="currentComponent" v-if="isRouterAlive" :reload="reload"></section>
+    <!-- </transition> -->
   </div>
 </template>
 <script>
 
-import ElectionBoardData from './ElectionBoardData.vue'
-import ElectionBoardLanding from './ElectionBoardLanding.vue'
-import ElectionBoardUpload from './ElectionBoardUpload.vue'
-import ElectionBoardVerify from './ElectionBoardVerify.vue'
+// import ElectionBoardData from './ElectionBoardData.vue'
+// import ElectionBoardLanding from './ElectionBoardLanding.vue'
+// import ElectionBoardUpload from './ElectionBoardUpload.vue'
+// import ElectionBoardVerify from './ElectionBoardVerify.vue'
 import Logo from '../Logo.vue'
 import Share from '../Share.vue'
 import { READR_SITE_URL } from '../../constants'
@@ -48,10 +50,10 @@ const fetchUserID = (store) => {
 export default {
   name: 'ElectionBoard',
   components: {
-    ElectionBoardData,
-    ElectionBoardLanding,
-    ElectionBoardUpload,
-    ElectionBoardVerify,
+    ElectionBoardData: () => import('./ElectionBoardData.vue'),
+    ElectionBoardLanding: () => import('./ElectionBoardLanding.vue'),
+    ElectionBoardUpload: () => import('./ElectionBoardUpload.vue'),
+    ElectionBoardVerify: () => import('./ElectionBoardVerify.vue'),
     Logo,
     Share
   },
@@ -193,5 +195,9 @@ export default {
     background-position center center !important
 select
   cursor pointer
+// .fade-enter-active, .fade-leave-active
+//   transition opacity 0.3s
+// .fade-enter, .fade-leave-to
+//   opacity 0
 </style>
 

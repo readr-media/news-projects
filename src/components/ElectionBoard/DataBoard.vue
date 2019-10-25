@@ -3,7 +3,7 @@
     <template v-if="board">
       <div class="data-board__image">
         <img :src="`https://www.readr.tw${board.image}`" alt="">
-        <a :href="`/project/election-board/verify?board=${board.id}`" class="data-board__correction" target="_blank">這不是{{ mode === 'coordinate' ? '看板' : $route.query.candidate }}，我要校正</a>
+        <a :href="`/project/election-board/verify?board=${board.id}`" class="data-board__correction" target="_blank">這不是{{ mode === 'coordinate' ? (candidatesName || '看板') : $route.query.candidate }}，我要校正</a>
       </div>
       <div class="data-board__info">
         <div class="content">
@@ -79,12 +79,15 @@ export default {
   },
   watch: {
     coordinates () {
-      window.ga('send', 'event', 'projects', 'click', `go board list by coordinates from board ${this.board.id}`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', `go board list by coordinates from board ${this.board.id}`)
     }
   },
   computed: {
     address () {
       return `${this.board.county.length < 3 ? `${this.board.county}市` : this.board.county}${this.board.district.length < 3 ? `${this.board.district}區` : this.board.district}${this.board.road}`
+    },
+    candidatesName () {
+      return this.board.candidates.map((cand) => cand.name).filter((name) => name).join('、')
     }
   },
   beforeMount () {
@@ -102,7 +105,7 @@ export default {
     },
     goCorrection (id) {
       this.$router.push(`/project/election-board/verify?board=${id}`)
-      window.ga('send', 'event', 'projects', 'click', `go correction from board ${id}`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', `go correction from board ${id}`)
     },
     openDataBoard (board) {
       this.boardByCoordinate = board
@@ -110,7 +113,7 @@ export default {
     },
     showReceiptBox (id) {
       this.showReceipt = true
-      window.ga('send', 'event', 'projects', 'click', `go receipt from board ${id}`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', `go receipt from board ${id}`)
     }
   }
 }
@@ -161,6 +164,7 @@ theme-color = #4897db
     height 40px
     background-color rgba(0,0,0,.5)
     cursor pointer
+    font-weight 500
   &__info
     padding 25px 25px 30px 25px
   .content

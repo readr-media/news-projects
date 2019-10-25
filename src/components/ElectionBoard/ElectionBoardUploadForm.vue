@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="item">
-        <p class="item__title">候選人</p>
+        <p class="item__title">候選人（必填）</p>
         <!-- <template v-for="n in candidateAmount"> -->
           <!-- <FormSelectCandidate :key="n"
             :class="{ 'has-minus': n > 1 }"
@@ -50,6 +50,7 @@
         />
         <!-- </template> -->
         <!-- <p class="add-candidate" @click="candidateAmount += 1">新增候選人</p> -->
+        <!-- <span v-if="errors.includes('candidate')" class="error">請選擇候選人</span> -->
         <p class="candidates-info">若有多位候選人，請上傳多次</p>
       </div>
 
@@ -64,7 +65,7 @@
       </div>
 
       <div class="item">
-        <p class="item__title">類型</p>
+        <p class="item__title">看板類型</p>
         <div class="select-container">
           <select
             v-model="boardType"
@@ -99,7 +100,8 @@
       </div>
       <button :disabled="!canSubmit" class="btn btn--submit" @click="submit">送出資料</button>
       <span v-if="errors.includes('coordinate')" class="error">地理位置不正確，請重新選擇</span>
-      <span v-if="hasError" class="error">系統目前維護中，請稍後再試...</span>
+      <span v-if="errors.includes('candidate')" class="error">請選擇候選人</span>
+      <span v-if="hasError" class="error">系統目前維護中，請稍後再試⋯</span>
       <slot name="img-upload-error"></slot>
     </div>
     <FormCheckUpload
@@ -115,6 +117,11 @@
 </template>
 
 <script>
+// import smoothscroll from 'smoothscroll-polyfill'
+// if (typeof window !== 'undefined') {
+//   smoothscroll.polyfill();
+// }
+
 import FormCheckUpload from './FormCheckUpload.vue' 
 import FormSelectCandidate from './FormSelectCandidate.vue' 
 import FormSelectDatetime from './FormSelectDatetime.vue' 
@@ -143,9 +150,12 @@ const fetchBoards = (store, {
     coordinates,
     page,
     maxResults,
+    electionYear: 2020,
     radius: 100,
+    // verifiedAmount: 0,
+    // notBoardAmount: 0
     verifiedAmount: 3,
-    notBoardAmount: 2,
+    notBoardAmount: 2
   })
 }
 
@@ -208,6 +218,7 @@ export default {
       loadingPosition: false,
       recaptchaVerified: false,
       selectedCandidates: [],
+      // isCandidateSelected: true,
       showCheckBoards: false,
       // showCheckBoards: true,
       showCheckPosition: true,
@@ -323,6 +334,10 @@ export default {
       this.recaptchaVerified = true
     },
     submit () {
+      if (this.selectedCandidates.length === 0) {
+        this.errors.push('candidate')
+        return
+      }
       this.errors = []
       if (this.coordinate[0] > MIN_LATITUDE && this.coordinate[0] < MAX_LATITUDE &&
       this.coordinate[1] > MIN_LONGITUDE && this.coordinate[1] < MAX_LONGITUDE) {
@@ -353,6 +368,7 @@ export default {
       this.datetime = timestamp
     },
     updateSelectedId (newValue, oldValue) {
+      this.errors.splice(this.errors.indexOf('candidate'), 1)
       if (oldValue) {
         const index = this.selectedCandidates.findIndex((value, index, arr) => value === oldValue)
         if (index > -1) {
@@ -373,11 +389,13 @@ export default {
         road: this.road,
         tookAt: this.datetime,
         uploadedBy: this.userID,
-        slogan: this.slogan,
+        // slogan: this.slogan,
         partyIcon: this.hasPartyIcon,
-        boardType: this.boardType,
+        // boardType: this.boardType,
         uploaderName: this.uploaderName
       }
+      if (this.slogan) body.slogan = this.slogan
+      if (this.boardType) body.boardType = this.boardType
       axios.get('/project-api/token')
       .then((response) => {
         const token = response.data.token
@@ -412,13 +430,19 @@ theme-color = #fa6e59
   padding-right 25px
   padding-left 25px
   margin-top 25px
-  margin-bottom 30px
+  // margin-top 25px
+  // margin-bottom 30px
   overflow-y auto
   @media (min-width 768px)
     padding-right 0
     padding-left 0
     margin-top 40px
-    margin-bottom 45px
+    // margin-top 40px
+    // margin-bottom 45px
+  & .container
+    margin-bottom 30px
+    @media (min-width 768px)
+      margin-bottom 45px
   & button
     cursor pointer
   & .item
@@ -446,6 +470,7 @@ theme-color = #fa6e59
     //     margin-bottom 16px
     //     margin-top 35px
     & input:not(.checkbox)
+      width 100%
       height 32px
       background-color #a0a0a0
       border-radius 2px
@@ -577,8 +602,10 @@ theme-color = #fa6e59
       // letter-spacing 1px
       background-color theme-color
       font-size 1.25rem
+      // margin-bottom 30px
       @media (min-width 768px)
         border-radius 6px
+        // margin-bottom 45px
       &:disabled
         color #000
         background-color #fcb6ac
@@ -645,11 +672,12 @@ theme-color = #fa6e59
     font-size .875rem
     text-align right
     margin-top 10px
-    margin-bottom 0
+    margin-bottom 30px
     // line-height 1
     @media (min-width 768px)
       font-size 1rem
       margin-top 12px
+      margin-bottom 45px
   & .candidates-info
     font-size 0.875rem
     color #a0a0a0

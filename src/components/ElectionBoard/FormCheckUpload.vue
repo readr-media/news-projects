@@ -1,5 +1,4 @@
 <template>
-  <!-- todo 篩選年份 -->
   <div class="check-upload">
     <div class="check-upload__info">
       <div class="action-conteiner">
@@ -155,6 +154,7 @@ theme-color = #fa6e59
       // margin-top 5px
       &.user
         flex none
+        max-width 450px
       > *
         width 50%
         max-height 100%

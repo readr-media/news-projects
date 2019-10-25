@@ -3,8 +3,8 @@
     <main>
       <img src="/proj-assets/election-board/images/bg-arrow.png" alt="" class="bg-arrow">
       <picture>
-        <source media="(min-width: 768px)" srcset="/proj-assets/election-board/images/title-lap.png">
-        <img src="/proj-assets/election-board/images/title-mob.png" alt="看板追追追 2.0">
+        <source media="(min-width: 768px)" srcset="/proj-assets/election-board/images/title-lap-v1.png">
+        <img src="/proj-assets/election-board/images/title-mob-v1.png" alt="看板追追追 2.0">
       </picture>
       <!-- <img :src="`/proj-assets/election-board/images/title-${isLapW ? 'lap' : 'mob'}.png`" alt="看板追追追"> -->
       <div class="menu">
@@ -61,12 +61,15 @@
       </div> -->
 
     </main>
-    <a href="http://www.readr.tw/post/1089" target="_blank" @click="sendGA('memo')">看完整計畫緣起</a>
-    <a href="#" target="_blank" @click="sendGA('')">新文章入口</a>
+    <a href="http://www.readr.tw/post/1089" class="origin" target="_blank" @click="sendGA('memo')">看完整計畫緣起</a>
+    <!-- todo 問 ga -->
+    <a href="#" target="_blank" class="news" @click="sendGA('')">看板政治：我們與公平選舉的距離</a>
+    <a href="#" target="_blank" class="news" @click="sendGA('')">新文章入口 2</a>
+
     <div class="credit">
       <img src="/proj-assets/election-board/images/logo-mm.png" alt="mirrormedia">
       <p>文字：李又如 設計：Weiwei Hsu </p>
-      <p>工程：HY Tan、mich、yeefun</p>
+      <p>工程：HY Tan、mich、Yeefun</p>
       <p>資料協力：<a href="https://councils.g0v.tw" target="_blank">投票指南</a></p>
       <p>CC BY-SA 3.0</p>
     </div>
@@ -101,39 +104,39 @@ import { get as axiosGet } from 'axios'
 
 export default {
   name: 'ElectionBoardLanding',
+  props: [ 'reload' ],
   // components: {
   //   RelatedReports
   // },
   data () {
     return {
       showIntro: false,
-      wEl: null,
-      ww: 0,
+      // wEl: null,
+      // ww: 0,
       // isMounted: false,
       uploaders: []
     }
   },
   beforeMount () {
-    this.wEl = window
-    this.ww = this.wEl.innerWidth
+    // this.wEl = window
+    // this.ww = this.wEl.innerWidth
     this.getIntroCookie()
     this.fetchUploaders()
   },
-  mounted () {
-    // this.isMounted = true
-    // todo debounce
-    this.wEl.addEventListener('resize', this.alterWindowWidth)
-    this.wEl.addEventListener('orientationChange', this.alterWindowWidth)
-  },
+  // mounted () {
+  //   this.isMounted = true
+  //   this.wEl.addEventListener('resize', this.alterWindowWidth)
+  //   this.wEl.addEventListener('orientationChange', this.alterWindowWidth)
+  // },
   // computed: {
   //   isLapW () {
   //     return this.isMounted && this.ww >= 768
   //   }
   // },
   methods: {
-    alterWindowWidth () {
-      this.ww = this.wEl.innerWidth
-    },
+    // alterWindowWidth () {
+    //   this.ww = this.wEl.innerWidth
+    // },
     getIntroCookie () {
       const hasCookie = Cookie.get('eb-intro')
       if (!hasCookie) {
@@ -151,10 +154,10 @@ export default {
       window.ga('send', 'event', 'projects', 'click', value)
     }
   },
-  beforeDestroy () {
-    this.wEl.removeEventListener('resize', this.alterWindowWidth)
-    this.wEl.removeEventListener('orientationChange', this.alterWindowWidth)
-  },
+  // beforeDestroy () {
+  //   this.wEl.removeEventListener('resize', this.alterWindowWidth)
+  //   this.wEl.removeEventListener('orientationChange', this.alterWindowWidth)
+  // },
 }
 </script>
 <style lang="stylus" scoped>
@@ -292,12 +295,12 @@ color-data = #4897db
     // max-width 425px
     // width 90%
     width 100%
-    height 48px
+    // height 48px
     // margin-top 25px
     // margin-top 68px
     font-size 1.25rem
     font-weight 700
-    line-height 48px
+    // line-height 48px
     // letter-spacing 1px
     text-align center
     background-color #a0a0a0
@@ -307,6 +310,12 @@ color-data = #4897db
     @media (min-width 768px)
       // max-width 698px
       border-radius 6px
+    &.origin
+      height 48px
+      line-height 48px
+    &.news
+      line-height 1.5
+      padding 9px 6px
     & + a
       margin-top 15px
   // .image
@@ -381,6 +390,7 @@ color-data = #4897db
       //   margin-bottom 14px
     a
       color #a0a0a0
+      text-decoration underline
   & .thanks
     color #a0a0a0
     text-align center

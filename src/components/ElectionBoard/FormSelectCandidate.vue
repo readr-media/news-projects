@@ -79,9 +79,7 @@ export default {
   },
   watch: {
     selectedName (newValue) {
-      // if (!newValue) return
-      // console.log(newValue);
-      const id = this.candidates.filter(candidate => candidate.name === newValue)[0].id
+      const id = this.candidates.filter((candidate) => candidate.name === newValue)[0].id
       this.selectedId = id
     },
     selectedId (newValue, oldValue) {
