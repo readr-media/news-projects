@@ -20,8 +20,7 @@ const handleError = (err, res) => {
   }
 }
 
-// todo dis-comment fetchFromRedis
-router.get('/boards', /*fetchFromRedis,*/ (req, res, next) => {
+router.get('/boards', fetchFromRedis, (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
   if (res.redis) {
     console.error('fetch data from Redis.', url)
@@ -42,7 +41,7 @@ router.get('/boards', /*fetchFromRedis,*/ (req, res, next) => {
     })
 }, insertIntoRedis)
 
-router.get('/candidates_terms', /*fetchFromRedis,*/ (req, res, next) => {
+router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
   if (res.redis) {
     const resData = JSON.parse(res.redis)
@@ -119,7 +118,7 @@ router.post('/boards', verifyToken, (req, res) => {
   })
 })
 
-router.get('/boards/gongdebook', /*fetchFromRedis,*/ (req, res, next) => {
+router.get('/boards/gongdebook', fetchFromRedis, (req, res, next) => {
   if (res.redis) {
     const resData = JSON.parse(res.redis)
     return res.json(resData)

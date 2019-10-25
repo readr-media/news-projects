@@ -13,8 +13,8 @@
         <p>照片裡有幾位縣市長 / 議員候選人？</p>
         <input v-model.number="candidateAmount" type="number" pattern="[0-9]*">
       </div> -->
-      <p>他是誰？</p>
-      <p v-show="errors.includes('empty')" class="error">請填寫候選人資訊</p>
+      <p>候選人姓名（限填一位）</p>
+      <!-- <p v-show="errors.includes('empty')" class="error">請填寫候選人資訊</p> -->
 
       <VerifyInputCandidate
         v-for="n in candidateAmountForInput"
@@ -29,7 +29,7 @@
         @updateSelectedId="updateSelectedCandidates"
       />
       
-      <p>標語</p>
+      <p>這塊看板的標語</p>
       <input v-model="slogan" type="text" placeholder="請填寫看板標語（多句請用／分隔）">
       <p class="current-info">目前資訊：{{ board.slogan || '' }}</p>
       <!-- <p class="current-info">目前資訊：小英栽培/吳沛憶 我陪你</p> -->
@@ -38,9 +38,9 @@
         <input type="checkbox" id="party-icon" :class="['checkbox', hasPartyIcon ? 'checked' : '']" v-model="hasPartyIcon">
         <label for="party-icon">有黨徽</label>
       </div>
-      <p class="current-info">目前資訊：{{ (board.partyIcon ? '有黨徽' : (typeof(board.partyIcon) === 'undefined' ? '' : '無黨徽')) }}</p>
+      <p class="current-info">目前資訊：{{ board.partyIcon ? '有黨徽' : '無黨徽' }}</p>
 
-      <p>類型</p>
+      <p>看板類型</p>
       <div class="select-container">
         <select
           v-model="boardType"
@@ -104,7 +104,7 @@ const fetchBoards = (store, {
 } = {}) => {
   return store.dispatch('ElectionBoard/FETCH_BOARDS', {
     uploadedBy,
-    page: page,
+    page,
     maxResults: 6,
   })
 }
@@ -142,7 +142,6 @@ export default {
     boardImage () {
       return this.board.image
     },
-    // todo remove amount
     candidateAmountForInput () {
       if ((typeof this.candidateAmount === 'string' && this.candidateAmountOrigin < 1) || (typeof this.candidateAmount === 'number' && this.candidateAmount < 2)) {
         return 1
@@ -176,15 +175,15 @@ export default {
       this.selectedCandidates = []
       this.selectedCandidates = value.candidates.map((candidate) => candidate.id)
 
-      this.slogan = this.board.slogan
+      this.slogan = this.board.slogan || ''
       this.hasPartyIcon = this.board.partyIcon
       this.boardType = this.board.boardType || ''
 
       this.candidateAmount = ''
     },
     candidateAmountForInput (value) {
-      const candidatesOriginIds = this.candidatesOrigin.map(candidate => candidate.id)
-      this.selectedCandidates = ((value <= this.candidateAmountOrigin) ? take(candidatesOriginIds, value) : candidatesOriginIds)
+      const candidatesOriginIds = this.candidatesOrigin.map((candidate) => candidate.id)
+      this.selectedCandidates = (value <= this.candidateAmountOrigin ? take(candidatesOriginIds, value) : candidatesOriginIds)
     }
   },
   beforeMount () {
@@ -209,16 +208,17 @@ export default {
         isBoard
       }
 
-      if (typeof this.candidateAmount !== 'string') {
-        body.headcount = this.candidateAmount
-      }
+      // if (typeof this.candidateAmount !== 'string') {
+      //   body.headcount = this.candidateAmount
+      // }
+      body.headcount = 1
 
       if (isBoard) {
         body.candidates = this.selectedCandidates
-        // 傳空字串''會出錯
-        body.slogan = this.slogan || 'null'
+        // 傳空字串會出錯
+        if (this.slogan) body.slogan = this.slogan
+        if (this.boardType) body.boardType = this.boardType
         body.partyIcon = this.hasPartyIcon
-        body.boardType = this.boardType
       }
       return body
     },
@@ -232,7 +232,7 @@ export default {
       .catch((err) => {
         this.hasError = true
       })
-      window.ga('send', 'event', 'projects', 'click', 'verified pass', { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', 'verified pass')
     },
     // updateInputError (index, value) {
     //   if (value) {
@@ -260,7 +260,6 @@ export default {
     },
     uploadBoardVerified (isBoard) {
       const body = this.buildRequestBody(isBoard)
-
       axios.get('/project-api/token')
       .then((response) => {
         const token = response.data.token
@@ -428,7 +427,7 @@ theme-color-hidden = #6d5810
   & .form
     // max-height 60vh
     margin-top 25px
-    margin-bottom 30px
+    // margin-bottom 30px
     // padding 0 25px 30px 25px
     padding-left 25px
     padding-right 25px
@@ -438,7 +437,10 @@ theme-color-hidden = #6d5810
       // padding 0 0 45px 0
       padding-left 0
       padding-right 0
-      margin 40px auto 45px auto
+      margin-top 40px
+      margin-left auto
+      margin-right auto
+      // margin 40px auto 45px auto
     & > input
       display block
       width 100%
@@ -554,6 +556,9 @@ theme-color-hidden = #6d5810
       display flex
       justify-content space-between
       margin-top 12px
+      margin-bottom 30px
+      @media (min-width 768px)
+        margin-bottom 45px
       > button
         width calc(50% - 6px)
         height 75px

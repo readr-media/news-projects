@@ -8,10 +8,10 @@
         <p>政治獻金</p>
         <div>
           <p class="amount">NT$ {{ amount }}</p>
-          <a :href="link" target="_blank" v-if="isLapW && link">看{{ candidate.name }}政治獻金資料</a>
+          <a :href="link" target="_blank" v-if="(ww >= 768) && link">看{{ candidate.name }}政治獻金資料</a>
         </div>
         <p class="descrip">{{ description }}</p>
-        <a :href="link" target="_blank" v-if="isMobW && link">看{{ candidate.name }}政治獻金資料</a>
+        <a :href="link" target="_blank" v-if="(ww < 767.98) && link">看{{ candidate.name }}政治獻金資料</a>
       </div>
 
       <div v-show="loaded" class="boards-container">
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="action">
-        <button class="btn btn--back" @click="$router.push(`/project/election-board/data${is2018 ? '-2018' : ''}`)"><img src="/proj-assets/election-board/images/arrow.png"></button>
+        <button class="btn btn--back" @click="$router.push(`/project/election-board/data${electionYear === 2018 ? '-2018' : ''}`)"><img src="/proj-assets/election-board/images/arrow.png"></button>
         <button class="btn btn--upload" @click="goUpload">我也要上傳</button>
       </div>
     </div>
@@ -43,16 +43,18 @@ const fetchBoards = (store, {
   candidates,
   page = DEFAULT_PAGE,
   maxResults = 12,
+  // maxResults = 3,
+  electionYear = 2020
 } = {}) => {
   return store.dispatch('ElectionBoard/FETCH_BOARDS', {
     candidates,
     page,
     maxResults,
-    // todo 恢復
-    // verifiedAmount: 3,
-    // notBoardAmount: 2
-    verifiedAmount: 0,
-    notBoardAmount: 0
+    electionYear,
+    verifiedAmount: 3,
+    notBoardAmount: 2
+    // verifiedAmount: 0,
+    // notBoardAmount: 0
   })
 }
 
@@ -75,10 +77,11 @@ export default {
       loaded: false,
       page: DEFAULT_PAGE,
       showDataBoard: false,
-      wEl: null,
-      ww: 0,
-      isMounted: false,
-      is2018: false
+      // wEl: null,
+      // ww: 0,
+      // isMounted: false,
+      // is2018: false,
+      electionYear: 2020
     }
   },
   computed: {
@@ -118,19 +121,24 @@ export default {
     link () {
       return this.politiContrib ? this.politiContrib.link : ''
     },
-    isMobW () {
-      return this.isMounted && this.ww < 767.98
-    },
-    isLapW () {
-      return this.isMounted && this.ww >= 768
+    // isMobW () {
+    //   return this.isMounted && this.ww < 767.98
+    // },
+    // isLapW () {
+    //   return this.isMounted && this.ww >= 768
+    // },
+    ww () {
+      return this.$store.state.viewport[0]
     }
   },
   beforeMount () {
+    this.electionYear = (this.$route.params.params.includes('2018') ? 2018 : 2020)
+    // this.is2018 = this.$route.params.params.includes('2018')
     this.fetching = true
-    this.wEl = window
-    this.ww = this.wEl.innerWidth
+    // this.wEl = window
+    // this.ww = this.wEl.innerWidth
 
-    fetchBoards(this.$store, { candidates: this.candidate.id })
+    fetchBoards(this.$store, { candidates: this.candidate.id, electionYear: this.electionYear })
     .then(res => {
       this.loaded = true
       this.fetching = false
@@ -143,13 +151,12 @@ export default {
     })
     
   },
-  mounted () {
-    this.isMounted = true
-    this.is2018 = this.$route.params.params.includes('2018')
-    // todo debounce
-    this.wEl.addEventListener('resize', this.alterWindowWidth)
-    this.wEl.addEventListener('orientationChange', this.alterWindowWidth)
-  },
+  // mounted () {
+    // this.isMounted = true
+    // this.is2018 = this.$route.params.params.includes('2018')
+    // this.wEl.addEventListener('resize', this.alterWindowWidth)
+    // this.wEl.addEventListener('orientationChange', this.alterWindowWidth)
+  // },
   methods: {
     closeDataBoard () {
       this.board = undefined
@@ -157,7 +164,7 @@ export default {
     },
     goUpload() {
       this.$router.push(`/project/election-board/upload`)
-      window.ga('send', 'event', 'projects', 'click', `go upload from candidate`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', 'go upload from candidate')
     },
     handleLoadMore () {
       if (this.boards.length < this.count) {
@@ -166,12 +173,12 @@ export default {
         const board = boards[boards.length - 3]
         if (!this.hasError && !this.fetching && board.getBoundingClientRect().top < boardsContainer.getBoundingClientRect().bottom) {
           this.fetching = true
-          fetchBoards(this.$store, { candidates: this.candidate.id, page: this.page + 1 })
-          .then(res => {
+          fetchBoards(this.$store, { candidates: this.candidate.id, page: this.page + 1, electionYear: this.electionYear })
+          .then((res) => {
             this.fetching = false
             this.page = this.page + 1
           })
-          .catch(err => {
+          .catch((err) => {
             this.fetching = false
             this.hasError = true
           })
@@ -182,16 +189,16 @@ export default {
     openDataBoard (id) {
       this.board = this.boards.find(board => board.id === id)
       this.showDataBoard = true
-      window.ga('send', 'event', 'projects', 'click', `go board ${id} from candidate`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', `go board ${id} from candidate`)
     },
-    alterWindowWidth () {
-      this.ww = this.wEl.innerWidth
-    }
+    // alterWindowWidth () {
+    //   this.ww = this.wEl.innerWidth
+    // }
   },
-  beforeDestroy () {
-    this.wEl.removeEventListener('resize', this.alterWindowWidth)
-    this.wEl.removeEventListener('orientationChange', this.alterWindowWidth)
-  }
+  // beforeDestroy () {
+  //   this.wEl.removeEventListener('resize', this.alterWindowWidth)
+  //   this.wEl.removeEventListener('orientationChange', this.alterWindowWidth)
+  // }
 }
 </script>
 <style lang="stylus" scoped>

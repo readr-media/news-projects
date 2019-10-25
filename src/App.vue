@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <!-- todo -->
-    <!-- <AppHeader v-if="!hideAppHeader" /> -->
+    <AppHeader v-if="hideAppHeader" />
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
@@ -20,9 +19,9 @@ const updateViewport = (store) => {
   return store.dispatch('UPDATE_VIEWPORT', viewport)
 }
 export default {
-  // components: {
-  //   AppHeader: () => import('./components/AppHeader.vue')
-  // },
+  components: {
+    AppHeader: () => import('./components/AppHeader.vue')
+  },
   computed: {
     hideAppHeader () {
       return !PROJECTS_NOT_NEED_APP_HEADER.includes(this.$route.params.project)

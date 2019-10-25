@@ -46,7 +46,8 @@
           @hideBackBtn="showBackBtn = false"
           @showMapHint="showMapHint = true"
           @updateCoordinate="updateCoordinate"
-          @uploaded="current = 3">
+          @uploaded="current = 3"
+        >
           <p v-if="showImgError" slot="img-upload-error" class="error">圖片上傳發生錯誤⋯</p>
         </ElectionBoardUploadForm>
       </section>
@@ -60,6 +61,7 @@
     <canvas ref="canvas"></canvas>
   </section>
 </template>
+
 <script>
 import ElectionBoardBackBtn from './ElectionBoardBackBtn.vue'
 import ElectionBoardUploadForm from './ElectionBoardUploadForm.vue'
@@ -238,7 +240,7 @@ export default {
               this.filterAddress(res.data.results)
             }
           })
-          .catch(err => {
+          .catch((err) => {
             console.log('err', err)
           })
       }

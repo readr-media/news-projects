@@ -42,7 +42,8 @@ export default {
     return fetchBoards(params)
       .then(res => {
         if (params.page > 1) {
-          const orig = values(get(state, 'boards', []))
+          // const orig = values(get(state, 'boards', []))
+          const orig = values(get(state, 'boardsByCoordinate', []))
           const concatedData = concat(orig, res.data.results)
           commit(`SET_BOARDS_BY_COORDINATE`, concatedData)
         } else {

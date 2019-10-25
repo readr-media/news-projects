@@ -1,10 +1,9 @@
 <template>
-  <!-- todo 篩選年份，檢查 loadmore -->
   <div class="data-boards">
     <h3>{{ address }}</h3>
     <p>附近的看板</p>
-    <div class="boards-container">
-      <div class="boards" @scroll="handleLoadMore">
+    <div class="boards-container" :class="{ none: !boards.length }">
+      <div class="boards" @scroll="handleLoadMore" ref="boards">
         <div v-for="board in boards" :key="`b-${board.id}`" class="boards__item" @click="openDataBoard(board.id)">
           <div class="img-container">
             <img :src="`https://www.readr.tw${board.image}`" alt="">
@@ -22,6 +21,7 @@
     <slot></slot>
   </div>
 </template>
+
 <script>
 import moment from 'moment'
 
@@ -31,13 +31,16 @@ const fetchBoards = (store, {
   coordinates,
   page = DEFAULT_PAGE,
   maxResults = 12,
+  // maxResults = 3,
+  electionYear = 2020
 } = {}) => {
   return store.dispatch('ElectionBoard/FETCH_BOARDS_BY_COORDINATE', {
     coordinates,
     page,
     maxResults,
+    electionYear,
     verifiedAmount: 3,
-    notBoardAmount: 2,
+    notBoardAmount: 2
   })
 }
 
@@ -57,32 +60,43 @@ export default {
     return {
       count: 0,
       page: DEFAULT_PAGE,
+      electionYear: 2020
     }
   },
   computed: {
     boards () {
-      return this.$store.state.ElectionBoard.boardsByCoordinate.filter(board => board.id !== this.boardID)
+      return this.$store.state.ElectionBoard.boardsByCoordinate.filter((board) => board.id !== this.boardID)
     },
   },
   beforeMount () {
-    fetchBoards(this.$store, { coordinates: this.coordinates })
-    .then(res => {
+    this.electionYear = (this.$route.params.params.includes('2018') ? 2018 : 2020)
+    fetchBoards(this.$store, { coordinates: this.coordinates, electionYear: this.electionYear })
+    .then((res) => {
       this.count = res.count
     })
   },
   methods: {
     goUpload () {
       this.$router.push(`/project/election-board/upload`)
-      window.ga('send', 'event', 'projects', 'click', `go upload from coordinate`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', 'go upload from coordinate')
     },
     handleLoadMore () {
-      if (this.boards.length < this.count) {
-        const boardsContainer = document.querySelector('.boards')
-        const boards = document.querySelectorAll('.boards__item')
-        const board = boards[boards.length - 3]
-        if (board.getBoundingClientRect().top < boardsContainer.getBoundingClientRect().bottom) {
-          fetchBoards(this.$store, { coordinates: this.coordinates, page: this.page + 1 })
-          .then(res => {
+      if (this.boards.length < (this.count - 1)) {
+        // const boardsContainer = document.querySelector('.boards')
+        // const boards = document.querySelectorAll('.boards__item')
+        // const board = boards[boards.length - 3]
+        // if (board.getBoundingClientRect().top < boardsContainer.getBoundingClientRect().bottom) {
+        //   fetchBoards(this.$store, { coordinates: this.coordinates, page: this.page + 1, electionYear: this.electionYear })
+        //   .then((res) => {
+        //     this.page = this.page + 1
+        //   })
+        // }
+        const boards = this.$refs.boards
+        const scrollH = boards.scrollHeight - boards.offsetHeight * 1.5
+        const scrollT = boards.scrollTop
+        if (scrollT >= scrollH) {
+          fetchBoards(this.$store, { coordinates: this.coordinates, page: this.page + 1, electionYear: this.electionYear })
+          .then((res) => {
             this.page = this.page + 1
           })
         }
@@ -90,8 +104,8 @@ export default {
     },
     moment,
     openDataBoard (id) {
-      this.$emit('openDataBoard', this.boards.find(board => board.id === id))
-      window.ga('send', 'event', 'projects', 'click', `go board ${id} from coordinate`, { nonInteraction: false })
+      this.$emit('openDataBoard', this.boards.find((board) => board.id === id))
+      window.ga('send', 'event', 'projects', 'click', `go board ${id} from coordinate`)
     }
   }
 }
@@ -134,6 +148,9 @@ theme-color = #4897db
     margin-top 25px
     margin-left -7px
     margin-right -7px
+    &.none
+      margin-left 0
+      margin-right 0
     > p
       color #a0a0a0
       font-size 1.25rem
