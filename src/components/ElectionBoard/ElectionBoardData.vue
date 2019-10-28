@@ -32,7 +32,7 @@
       </router-link>
     </template>
     <router-link v-show="!loading && candidates.length < 1" to="/project/election-board/upload" class="message">目前沒有候選人有看板資訊，你有看板照想上傳嗎？（點擊到上傳頁面）</router-link>
-    <p v-show="loading" class="message">讀取資料中，請稍候...</p>
+    <p v-show="loading" class="message">讀取資料中，請稍候⋯</p>
     <DataBoards v-if="candidate" :candidate="candidate"/>
     <ElectionBoardBackBtn />
   </section>

@@ -12,7 +12,7 @@
         <div class="item__heading">
           <p>看板位置</p>
           <button v-if="hasGeolocation" v-show="!loadingPosition" @click="getCurrentPosition"><img src="/proj-assets/election-board/images/cursor.png" alt=""></button>
-          <span v-text="loadingPosition ? '取得地理位置中...' : '點此取得現在位置'" @click="getCurrentPosition"></span>
+          <span v-text="loadingPosition ? '取得地理位置中⋯' : '點此取得現在位置'" @click="getCurrentPosition"></span>
         </div>
         <FormSelectPosition
           :address="address"
@@ -517,6 +517,8 @@ theme-color = #fa6e59
           width 16px
           height auto
           vertical-align middle
+          // @media (min-width 768px)
+          //   vertical-align top
       & > span
         margin-left 8px
         color theme-color
