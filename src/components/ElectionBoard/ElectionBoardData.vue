@@ -1,7 +1,7 @@
 <template>
   <section :class="{ 'no-scroll': candidate }" class="eb-data">
     <h1>看板<span class="title--upload">追</span><span class="title--verify">追</span><span class="title--data">追</span>{{ is2018 ? '' : ' 2.0' }}</h1>
-    <h2>每到選舉期間，大街小巷冒出的宣傳看板已經成為台灣的獨特風景。看板追追追計畫邀請你一起為此次選舉留下紀錄，為催生選舉廣告管理制度提供初步的想像。</h2>
+    <h2>{{ intro }}</h2>
     <FormSelectPosition
       :address="address"
       class="eb-data__select-pos"
@@ -117,6 +117,12 @@ export default {
     })
   },
   computed: {
+    intro () {
+      return (this.is2018 ?
+        '「看板追追追」計畫邀請鄉民一起為選舉留下紀錄，為催生選舉廣告管理制度提供初步的想像。我們發現，2018 年至少有 60 位候選人的政治獻金沒有申報看板的花費。'
+        :
+        '每到選舉期間，大街小巷冒出的宣傳看板已經成為台灣的獨特風景。「看板追追追」計畫邀請你一起為此次選舉留下紀錄，為催生選舉廣告管理制度提供初步的想像。')
+    },
     candidate () {
       return this.candidates.find((candidate) => candidate.name === this.$route.query.candidate)
     },
