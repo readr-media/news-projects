@@ -7,12 +7,14 @@
     <!-- </transition> -->
   </div>
 </template>
-<script>
 
-// import ElectionBoardData from './ElectionBoardData.vue'
-// import ElectionBoardLanding from './ElectionBoardLanding.vue'
-// import ElectionBoardUpload from './ElectionBoardUpload.vue'
-// import ElectionBoardVerify from './ElectionBoardVerify.vue'
+<script>
+// todo async
+import ElectionBoardData from './ElectionBoardData.vue'
+import ElectionBoardLanding from './ElectionBoardLanding.vue'
+import ElectionBoardUpload from './ElectionBoardUpload.vue'
+import ElectionBoardVerify from './ElectionBoardVerify.vue'
+
 import Logo from '../Logo.vue'
 import Share from '../Share.vue'
 import { READR_SITE_URL } from '../../constants'
@@ -50,10 +52,14 @@ const fetchUserID = (store) => {
 export default {
   name: 'ElectionBoard',
   components: {
-    ElectionBoardData: () => import('./ElectionBoardData.vue'),
-    ElectionBoardLanding: () => import('./ElectionBoardLanding.vue'),
-    ElectionBoardUpload: () => import('./ElectionBoardUpload.vue'),
-    ElectionBoardVerify: () => import('./ElectionBoardVerify.vue'),
+    // ElectionBoardData: () => import('./ElectionBoardData.vue'),
+    // ElectionBoardLanding: () => import('./ElectionBoardLanding.vue'),
+    // ElectionBoardUpload: () => import('./ElectionBoardUpload.vue'),
+    // ElectionBoardVerify: () => import('./ElectionBoardVerify.vue'),
+    ElectionBoardData,
+    ElectionBoardLanding,
+    ElectionBoardUpload,
+    ElectionBoardVerify,
     Logo,
     Share
   },
