@@ -72,23 +72,13 @@ router.get('/boards', fetchFromRedis, (req, res, next) => {
 
 router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
-  console.log('------ ', url)
   if (res.redis) {
-<<<<<<< HEAD
-    console.log('============')
-=======
     console.error('fetch data from Redis.', url)
->>>>>>> modify google map api get method
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
   axios.get(url, { timeout: API_TIMEOUT })
-<<<<<<< HEAD
-    .then(response => {
-      console.log('--==--', response)
-=======
     .then((response) => {
->>>>>>> modify google map api get method
       const dt = response.data
       res.json(dt)
       if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
@@ -96,12 +86,7 @@ router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
         next()
       }
     })
-<<<<<<< HEAD
-    .catch(err => {
-      console.log('xxxxx', err)
-=======
     .catch((err) => {
->>>>>>> modify google map api get method
       handleError(err, res)
     })
 }, insertIntoRedis)
