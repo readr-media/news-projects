@@ -31,7 +31,7 @@
 <script>
 import axios from 'axios'
 import { ADMINISTRATIVE_DISTRICT } from './constants'
-import { GOOGLE_API_KEY_ELECTION_BOARD } from 'api/config.js'
+// import { GOOGLE_API_KEY_ELECTION_BOARD } from 'api/config.js'
 
 const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(.+)/
 const REGEX_ADDRESS_FOR_DATA = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))/
@@ -134,8 +134,9 @@ export default {
       if (this.errors.length === 0) {
         const geocoder = new google.maps.Geocoder()
 
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.addressSelected}&key=${GOOGLE_API_KEY_ELECTION_BOARD}&language=zh-TW`)
-          .then(res => {
+        // axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.addressSelected}&key=${GOOGLE_API_KEY_ELECTION_BOARD}&language=zh-TW`)
+        axios.get(`/project-api/election-board/google_map?address=${this.addressSelected}`)
+          .then((res) => {
             if (res.data.status === 'OK' && res.data.results.length > 0) {
               const addressFormatted = this.formatAddress(res.data.results[0].formatted_address)
               const coordinate = [ res.data.results[0].geometry.location.lat, res.data.results[0].geometry.location.lng ]
@@ -145,7 +146,7 @@ export default {
               this.errors.push('district')
             }
           })
-          .catch(err => {
+          .catch((err) => {
             this.errors.push('district')
           })
       }

@@ -69,7 +69,7 @@ import ElectionBoardUploadMap from './ElectionBoardUploadMap.vue'
 import axios from 'axios'
 import moment from 'moment'
 import { get, } from 'lodash'
-import { GOOGLE_API_KEY_ELECTION_BOARD } from 'api/config.js'
+// import { GOOGLE_API_KEY_ELECTION_BOARD } from 'api/config.js'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
 const MAX_LATITUDE = 26
@@ -234,8 +234,9 @@ export default {
       this.coordinate[1] > MIN_LONGITUDE && this.coordinate[1] < MAX_LONGITUDE) {
         const geocoder = new google.maps.Geocoder()
         const coordinate = new google.maps.LatLng(this.coordinate[0], this.coordinate[1])
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.coordinate[0]},${this.coordinate[1]}&key=${GOOGLE_API_KEY_ELECTION_BOARD}&language=zh-TW`)
-          .then(res => {
+
+        axios.get(`/project-api/election-board/google_map?latlng=${this.coordinate[0]},${this.coordinate[1]}`)
+          .then((res) => {
             if (res.data.status === 'OK' && res.data.results.length > 0) {
               this.filterAddress(res.data.results)
             }
