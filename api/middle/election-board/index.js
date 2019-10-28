@@ -11,7 +11,7 @@ const { fetchFromRedis, insertIntoRedis, redisWriting, } = require('../ioredisHa
 const { mapKeys, snakeCase, } = require('lodash')
 const { verifyToken } = require('../../service/jwt')
 
-const apiHost = API_PROTOCOL + '://' + ELECTION_BOARD_HOST + ':' + ELECTION_BOARD_PORT
+const apiHost = `${API_PROTOCOL}://${ELECTION_BOARD_HOST}:${ELECTION_BOARD_PORT}/project/election-boards`
 
 // const apiHost = API_PROTOCOL + '://' + ELECTION_BOARD_HOST
 
