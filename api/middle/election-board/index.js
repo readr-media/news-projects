@@ -1,7 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
-const { API_PROTOCOL, API_TIMEOUT, ELECTION_BOARD_HOST } = require('../../config')
+const {
+  API_PROTOCOL,
+  API_TIMEOUT,
+  ELECTION_BOARD_HOST,
+  ELECTION_BOARD_PORT
+} = require('../../config')
 const { fetchFromRedis, insertIntoRedis, redisWriting, } = require('../ioredisHandler')
 const { mapKeys, snakeCase, } = require('lodash')
 const { verifyToken } = require('../../service/jwt')
