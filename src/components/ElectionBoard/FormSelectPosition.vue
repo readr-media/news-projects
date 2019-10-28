@@ -24,7 +24,7 @@
       <input v-model="road" type="text" placeholder="請填寫地址" @keyup="showBtn = true">
       <button v-show="showBtn" @click="validateAddress">更新地圖位置</button>
     </template>
-    <span v-show="errors.length > 0" class="error">請選擇/輸入正確的 {{ errors.includes('district') ? '行政區' : '' }} {{ errors.includes('road') ? '街道路名' : '' }} </span>
+    <span v-show="errors.length > 0" class="error">請選擇/輸入正確的{{ errors.includes('district') ? ' 行政區' : '' }}{{ errors.includes('road') ? ' 街道路名' : '' }} </span>
   </div>
 </template>
 
@@ -221,4 +221,9 @@ export default {
   .error
     color #fa6e59
     font-size .875rem
+    margin-top 10px
+    display block
+    @media (min-width 768px)
+      font-size 1rem
+      margin-top 12px
 </style>

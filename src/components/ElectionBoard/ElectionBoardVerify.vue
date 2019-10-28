@@ -57,8 +57,8 @@
       </div>
       <p class="current-info">目前資訊：{{ board.boardType || '' }}</p>
 
-      <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後...</p>
-      <p v-if="hasError" class="error error--board">系統發生錯誤，請重新整理或稍後再試...</p>
+      <p v-show="!boardID && !hasError" class="error error--board">取得看板資訊中，請稍後⋯</p>
+      <p v-if="hasError" class="error error--board">系統發生錯誤，請重新整理或稍後再試⋯</p>
       <button :disabled="(!boardID && loading) || hasError" class="btn--yellow" @click="uploadBoardVerified(true)">沒問題送出</button>
       <div class="action">
         <button :disabled="(!boardID && loading) || hasError" class="btn--grey" @click="uploadBoardVerified(false)">這不是競選<br>看板照片</button>

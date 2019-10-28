@@ -12,9 +12,10 @@ const { fetchFromRedis, insertIntoRedis, redisWriting, } = require('../ioredisHa
 const { mapKeys, snakeCase, } = require('lodash')
 const { verifyToken } = require('../../service/jwt')
 
-const apiHost = `${API_PROTOCOL}://${ELECTION_BOARD_HOST}:${ELECTION_BOARD_PORT}`
+// const apiHost = `${API_PROTOCOL}://${ELECTION_BOARD_HOST}:${ELECTION_BOARD_PORT}`
 
-// const apiHost = API_PROTOCOL + '://' + ELECTION_BOARD_HOST
+// todo 恢復
+const apiHost = API_PROTOCOL + '://' + ELECTION_BOARD_HOST
 
 const handleError = (err, res) => {
   if (err.response) {

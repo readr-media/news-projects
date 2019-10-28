@@ -54,9 +54,9 @@ export default {
         notBoard: this.notBoardIds,
         createdBy: this.$store.state.ElectionBoard.userID
       }
-
+      // todo 在未全選或未全不選的狀況下會出 bug
       axios.get('/project-api/token')
-      .then(response => {
+      .then((response) => {
         const token = response.data.token
         return axios.post('/project-api/election-board/verify/boards', body, { headers: { Authorization: token }})
       })
