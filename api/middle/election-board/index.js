@@ -11,7 +11,7 @@ const { fetchFromRedis, insertIntoRedis, redisWriting, } = require('../ioredisHa
 const { mapKeys, snakeCase, } = require('lodash')
 const { verifyToken } = require('../../service/jwt')
 
-const apiHost = `${API_PROTOCOL}://${ELECTION_BOARD_HOST}:${ELECTION_BOARD_PORT}/project/election-boards`
+const apiHost = `${API_PROTOCOL}://${ELECTION_BOARD_HOST}:${ELECTION_BOARD_PORT}`
 
 // const apiHost = API_PROTOCOL + '://' + ELECTION_BOARD_HOST
 
@@ -48,12 +48,15 @@ router.get('/boards', fetchFromRedis, (req, res, next) => {
 
 router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
+  console.log('------ ', url)
   if (res.redis) {
+    console.log('============')
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
   axios.get(url, { timeout: API_TIMEOUT })
     .then(response => {
+      console.log('--==--', response)
       const dt = response.data
       if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
         res.dataString = JSON.stringify(response.data)
@@ -62,6 +65,7 @@ router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
       next()
     })
     .catch(err => {
+      console.log('xxxxx', err)
       handleError(err, res)
     })
 }, insertIntoRedis)
