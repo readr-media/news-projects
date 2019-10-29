@@ -2,12 +2,23 @@
   <div>
     <HeaderIcons />
     <TableOfContents />
+    <BaseReport>
+      <template #report>
+        <ReportContent1 />
+      </template>
+      <template #result>
+        <ReportResult />
+      </template>
+    </BaseReport>
   </div>
 </template>
 
 <script>
 import HeaderIcons from './components/HeaderIcons.vue'
 import TableOfContents from './components/TableOfContents.vue'
+import BaseReport from './components/BaseReport.vue'
+import ReportResult from './components/ReportResult.vue'
+import ReportContent1 from './components/ReportContent1.vue'
 
 export default {
   name: 'FoodDelivery',
@@ -20,16 +31,23 @@ export default {
     }
   },
   components: {
+    HeaderIcons,
     TableOfContents,
-    HeaderIcons
+    BaseReport,
+    ReportResult,
+    ReportContent1
   }
 }
 </script>
 
 <style lang="stylus">
+@import './util/report-content.styl'
+
 html
   font-size 10px
   font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Noto Sans CJK TC", "Noto Sans CJK", "Source Han Sans", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif
+body
+  background-color #f5f4f5
 img
   max-width 100%
   height auto
