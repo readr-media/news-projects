@@ -1,10 +1,12 @@
 <template>
   <div>
+    <HeaderIcons />
     <TableOfContents />
   </div>
 </template>
 
 <script>
+import HeaderIcons from './components/HeaderIcons.vue'
 import TableOfContents from './components/TableOfContents.vue'
 
 export default {
@@ -18,7 +20,8 @@ export default {
     }
   },
   components: {
-    TableOfContents
+    TableOfContents,
+    HeaderIcons
   }
 }
 </script>
