@@ -59,7 +59,7 @@ router.get('/boards', fetchFromRedis, (req, res, next) => {
   }
   axios.get(url, {
     timeout: API_TIMEOUT,
-    header: {
+    headers: {
       'X-Forwarded-Host': ELECTION_BOARD_HOST,
       SCRIPT_NAME: '/project/election-boards'
     }
@@ -88,7 +88,7 @@ router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
   }
   axios.get(url, {
     timeout: API_TIMEOUT,
-    header: {
+    headers: {
       'X-Forwarded-Host': ELECTION_BOARD_HOST,
       SCRIPT_NAME: '/project/election-boards'
     }
@@ -118,7 +118,7 @@ router.get('/elections/:year', (req, res, next) => {
   }
   axios.get(url, {
     timeout: API_TIMEOUT,
-    header: {
+    headers: {
       'X-Forwarded-Host': ELECTION_BOARD_HOST,
       SCRIPT_NAME: '/project/election-boards'
     }
@@ -140,7 +140,7 @@ router.get('/verify/board', (req, res) => {
   const url = `${apiHost}/api${req.url}`
   axios.get(url, {
     timeout: API_TIMEOUT,
-    header: {
+    headers: {
       'X-Forwarded-Host': ELECTION_BOARD_HOST,
       SCRIPT_NAME: '/project/election-boards'
     }
@@ -157,7 +157,7 @@ router.get('/verify/board/:id', (req, res) => {
   const url = `${apiHost}/api${req.url}`
   axios.get(url, {
     timeout: API_TIMEOUT,
-    header: {
+    headers: {
       'X-Forwarded-Host': ELECTION_BOARD_HOST,
       SCRIPT_NAME: '/project/election-boards'
     }
@@ -177,7 +177,7 @@ router.post('/boards', verifyToken, (req, res) => {
   redisWriting(token, 'used', null, 48 * 60 * 60 * 1000)
   axios.post(url, body, {
     timeout: API_TIMEOUT,
-    header: {
+    headers: {
       'X-Forwarded-Host': ELECTION_BOARD_HOST,
       SCRIPT_NAME: '/project/election-boards'
     }
@@ -198,7 +198,7 @@ router.get('/boards/gongdebook', fetchFromRedis, (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
   axios.get(url, {
     timeout: API_TIMEOUT,
-    header: {
+    headers: {
       'X-Forwarded-Host': ELECTION_BOARD_HOST,
       SCRIPT_NAME: '/project/election-boards'
     }
@@ -223,7 +223,7 @@ router.post('/verify/board', verifyToken, (req, res) => {
   redisWriting(token, 'used', null, 48 * 60 * 60 * 1000)
   axios.post(url, body, {
     timeout: API_TIMEOUT,
-    header: {
+    headers: {
       'X-Forwarded-Host': ELECTION_BOARD_HOST,
       SCRIPT_NAME: '/project/election-boards'
     }
@@ -243,7 +243,7 @@ router.post('/verify/boards', verifyToken, (req, res) => {
   redisWriting(token, 'used', null, 48 * 60 * 60 * 1000)
   axios.post(url, body, {
     timeout: API_TIMEOUT,
-    header: {
+    headers: {
       'X-Forwarded-Host': ELECTION_BOARD_HOST,
       SCRIPT_NAME: '/project/election-boards'
     }
