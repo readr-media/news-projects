@@ -3,7 +3,7 @@
     <template v-if="board">
       <div class="data-board__image">
         <img :src="`https://www.readr.tw${board.image}`" alt="">
-        <a :href="`/project/election-board/verify?board=${board.id}`" class="data-board__correction" target="_blank">這不是{{ mode === 'coordinate' ? (candidatesName || '看板') : $route.query.candidate }}，我要校正</a>
+        <a :href="`/project/election-board/verify?board=${board.id}`" class="data-board__correction" target="_blank" @click="goCorrection(board.id)">這不是{{ mode === 'coordinate' ? (candidatesName || '看板') : $route.query.candidate }}，我要校正</a>
       </div>
       <div class="data-board__info">
         <div class="content">
@@ -104,7 +104,7 @@ export default {
       return url.split('?id=')[1]
     },
     goCorrection (id) {
-      this.$router.push(`/project/election-board/verify?board=${id}`)
+      // this.$router.push(`/project/election-board/verify?board=${id}`)
       window.ga('send', 'event', 'projects', 'click', `go correction from board ${id}`)
     },
     openDataBoard (board) {

@@ -1,7 +1,7 @@
 <template>
   <div class="election-board">
     <Logo v-show="currentComponent === 'ElectionBoardLanding'" class="no-sprite" href="https://www.readr.tw/" top="15px" left="15px" bgImage="/proj-assets/election-board/images/readr-logo.png" />
-    <Share v-show="currentComponent === 'ElectionBoardLanding'" :shareUrl="shareLink" class="election-board__share" top="10px" left="70px" bgColor="#000" direction="right" />
+    <Share v-show="currentComponent === 'ElectionBoardLanding'" :shareUrl="shareLink" class="election-board__share" top="10px" left="70px" direction="right" />
     <!-- <transition name="fade"> -->
     <section :is="currentComponent" v-if="isRouterAlive" :reload="reload"></section>
     <!-- </transition> -->

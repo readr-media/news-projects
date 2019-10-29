@@ -132,7 +132,7 @@ import { GOOGLE_RECAPTCHA_SITE_KEY, } from 'api/config'
 import { get } from 'lodash'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
-const DEFAULT_ADDRESS = '高雄市前鎮區成功二路39號'
+const DEFAULT_ADDRESS = '台北市信義區東興路51號'
 const DEFAULT_PAGE = 1
 const MAX_LATITUDE = 26
 const MIN_LATITUDE = 21

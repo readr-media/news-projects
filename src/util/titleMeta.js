@@ -83,7 +83,7 @@ const serverMetaInfoMixin = {
       this.$ssrContext.fbAppId = fbAppId
       this.$ssrContext.fbPageId = fbPageId
       this.$ssrContext.fbPageUrl = fbPageUrl
-      this.$ssrContext.fbSdk = PROJECTS_NEED_FB_SDK.includes(project) ? fbSdk : ''
+      this.$ssrContext.fbSdk = ((PROJECTS_NEED_FB_QUOTE.includes(project) || PROJECTS_NEED_FB_SDK.includes(project)) ? fbSdk : '')
 
       this.$ssrContext.scriptGoogleMap = PROJECTS_NEED_GOOGLE_MAP.includes(project) ? SCRIPT_GOOGLE_MAP : ''
       this.$ssrContext.scriptGoogleReCaptcha = PROJECTS_NEED_GOOGLE_RECAPTCHA.includes(project) ? SCRIPT_GOOGLE_RECAPTCHA : ''

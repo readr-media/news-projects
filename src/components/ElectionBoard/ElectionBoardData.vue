@@ -203,7 +203,7 @@ export default {
       return candidate.boards.image
     },
     sendGA (value) {
-      window.ga('send', 'event', 'projects', 'click', `go board list ${value}`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', `go board list ${value}`)
     },
     updateAddressForData (value) {
       this.address = value
