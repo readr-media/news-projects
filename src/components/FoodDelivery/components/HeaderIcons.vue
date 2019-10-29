@@ -13,9 +13,19 @@ export default {
 
 <style lang="stylus">
 .header-icons
+  // position fixed
   position absolute
+  // top 30px
+  top 0
+  right 20px
+  height 84px
+  display flex
+  align-items center
+  & img
+    cursor pointer
   &__donate
     width 13.4px
+    margin-right 20px
   &__info
     width 25px
 </style>

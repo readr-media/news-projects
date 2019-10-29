@@ -70,7 +70,7 @@ export default {
   background-size cover
   background-position center
   background-repeat no-repeat
-  min-height 100vh
+  // min-height 100vh
   &__num
     width 25.42px
     height 35.8px

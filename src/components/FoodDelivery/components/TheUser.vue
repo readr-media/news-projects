@@ -9,7 +9,12 @@
 <script>
 export default {
   name: 'TheUser',
-  props: [ 'order' ],
+  props: {
+    order: {
+      type: Number,
+      default: 0
+    }
+  },
   computed: {
     status () {
       return `
@@ -27,8 +32,8 @@ export default {
   align-items center
   justify-content center
   position relative
-  padding-top 18px
-  padding-bottom 18px
+  padding-top 17px
+  padding-bottom 17px
   max-width 276px
   margin-left auto
   margin-right auto
