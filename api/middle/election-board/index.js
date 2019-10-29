@@ -57,18 +57,24 @@ router.get('/boards', fetchFromRedis, (req, res, next) => {
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
-  axios.get(url, { timeout: API_TIMEOUT })
-    .then(response => {
-      const dt = response.data
-      res.json(dt)
-      if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
-        res.dataString = JSON.stringify(response.data)
-        next()
-      }
-    })
-    .catch(err => {
-      handleError(err, res)
-    })
+  axios.get(url, {
+    timeout: API_TIMEOUT,
+    header: {
+      'X-Forwarded-Host': ELECTION_BOARD_HOST,
+      SCRIPT_NAME: '/project/election-boards'
+    }
+  })
+  .then(response => {
+    const dt = response.data
+    res.json(dt)
+    if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
+      res.dataString = JSON.stringify(response.data)
+      next()
+    }
+  })
+  .catch(err => {
+    handleError(err, res)
+  })
 }, insertIntoRedis)
 
 router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
@@ -80,19 +86,25 @@ router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
-  axios.get(url, { timeout: API_TIMEOUT })
-    .then((response) => {
-      const dt = response.data
-      res.json(dt)
-      if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
-        res.dataString = JSON.stringify(response.data)
-        next()
-      }
-    })
-    .catch((err) => {
-      console.log('@@@@@@@ candidates_terms error', err);
-      handleError(err, res)
-    })
+  axios.get(url, {
+    timeout: API_TIMEOUT,
+    header: {
+      'X-Forwarded-Host': ELECTION_BOARD_HOST,
+      SCRIPT_NAME: '/project/election-boards'
+    }
+  })
+  .then((response) => {
+    const dt = response.data
+    res.json(dt)
+    if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
+      res.dataString = JSON.stringify(response.data)
+      next()
+    }
+  })
+  .catch((err) => {
+    console.log('@@@@@@@ candidates_terms error', err);
+    handleError(err, res)
+  })
 }, insertIntoRedis)
 
 router.get('/elections/:year', (req, res, next) => {
@@ -104,40 +116,58 @@ router.get('/elections/:year', (req, res, next) => {
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
-  axios.get(url, { timeout: API_TIMEOUT })
-    .then((response) => {
-      const dt = response.data
-      res.json(dt)
-      if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
-        res.dataString = JSON.stringify(response.data)
-        next()
-      }
-    })
-    .catch((err) => {
-      handleError(err, res)
-    })
+  axios.get(url, {
+    timeout: API_TIMEOUT,
+    header: {
+      'X-Forwarded-Host': ELECTION_BOARD_HOST,
+      SCRIPT_NAME: '/project/election-boards'
+    }
+  })
+  .then((response) => {
+    const dt = response.data
+    res.json(dt)
+    if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
+      res.dataString = JSON.stringify(response.data)
+      next()
+    }
+  })
+  .catch((err) => {
+    handleError(err, res)
+  })
 }, insertIntoRedis)
 
 router.get('/verify/board', (req, res) => {
   const url = `${apiHost}/api${req.url}`
-  axios.get(url, { timeout: API_TIMEOUT })
-    .then((response) => {
-      res.json(response.data)
-    })
-    .catch((err) => {
-      handleError(err, res)
-    })
+  axios.get(url, {
+    timeout: API_TIMEOUT,
+    header: {
+      'X-Forwarded-Host': ELECTION_BOARD_HOST,
+      SCRIPT_NAME: '/project/election-boards'
+    }
+  })
+  .then((response) => {
+    res.json(response.data)
+  })
+  .catch((err) => {
+    handleError(err, res)
+  })
 })
 
 router.get('/verify/board/:id', (req, res) => {
   const url = `${apiHost}/api${req.url}`
-  axios.get(url, { timeout: API_TIMEOUT })
-    .then((response) => {
-      res.json(response.data)
-    })
-    .catch((err) => {
-      handleError(err, res)
-    })
+  axios.get(url, {
+    timeout: API_TIMEOUT,
+    header: {
+      'X-Forwarded-Host': ELECTION_BOARD_HOST,
+      SCRIPT_NAME: '/project/election-boards'
+    }
+  })
+  .then((response) => {
+    res.json(response.data)
+  })
+  .catch((err) => {
+    handleError(err, res)
+  })
 })
 
 router.post('/boards', verifyToken, (req, res) => {
@@ -145,7 +175,13 @@ router.post('/boards', verifyToken, (req, res) => {
   const body = mapKeys(req.body, (value, key) => snakeCase(key))
   const url = `${apiHost}/api${req.url}/`
   redisWriting(token, 'used', null, 48 * 60 * 60 * 1000)
-  axios.post(url, body, { timeout: API_TIMEOUT })
+  axios.post(url, body, {
+    timeout: API_TIMEOUT,
+    header: {
+      'X-Forwarded-Host': ELECTION_BOARD_HOST,
+      SCRIPT_NAME: '/project/election-boards'
+    }
+  })
   .then((response) => {
     res.json(response.data)
   })
@@ -160,18 +196,24 @@ router.get('/boards/gongdebook', fetchFromRedis, (req, res, next) => {
     return res.json(resData)
   }
   const url = `${apiHost}/api${req.url}`
-  axios.get(url, { timeout: API_TIMEOUT })
-    .then((result) => {
-      const dt = result.data
-      res.json(dt)
-      if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
-        res.dataString = JSON.stringify(dt)
-        next()
-      }
-    })
-    .catch((err) => {
-      handleError(err, res)
-    })
+  axios.get(url, {
+    timeout: API_TIMEOUT,
+    header: {
+      'X-Forwarded-Host': ELECTION_BOARD_HOST,
+      SCRIPT_NAME: '/project/election-boards'
+    }
+  })
+  .then((result) => {
+    const dt = result.data
+    res.json(dt)
+    if (Object.keys(dt).length !== 0 && dt.constructor === Object) {
+      res.dataString = JSON.stringify(dt)
+      next()
+    }
+  })
+  .catch((err) => {
+    handleError(err, res)
+  })
 }, insertIntoRedis)
 
 router.post('/verify/board', verifyToken, (req, res) => {
@@ -179,7 +221,13 @@ router.post('/verify/board', verifyToken, (req, res) => {
   const body = mapKeys(req.body, (value, key) => snakeCase(key))
   const url = `${apiHost}/api${req.url}`
   redisWriting(token, 'used', null, 48 * 60 * 60 * 1000)
-  axios.post(url, body, { timeout: API_TIMEOUT })
+  axios.post(url, body, {
+    timeout: API_TIMEOUT,
+    header: {
+      'X-Forwarded-Host': ELECTION_BOARD_HOST,
+      SCRIPT_NAME: '/project/election-boards'
+    }
+  })
   .then(response => {
     res.json(response.data)
   })
@@ -193,7 +241,13 @@ router.post('/verify/boards', verifyToken, (req, res) => {
   const body = mapKeys(req.body, (value, key) => snakeCase(key))
   const url = `${apiHost}/api${req.url}`
   redisWriting(token, 'used', null, 48 * 60 * 60 * 1000)
-  axios.post(url, body, { timeout: API_TIMEOUT })
+  axios.post(url, body, {
+    timeout: API_TIMEOUT,
+    header: {
+      'X-Forwarded-Host': ELECTION_BOARD_HOST,
+      SCRIPT_NAME: '/project/election-boards'
+    }
+  })
   .then((response) => {
     res.json(response.data)
   })
