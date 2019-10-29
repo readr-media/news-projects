@@ -194,7 +194,7 @@ export default {
       } else {
         this.goToUploadForm()
       }
-      window.ga('send', 'event', 'projects', 'click', 'upload photo confirmed', { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', 'upload photo confirmed')
     },
     dataURLtoBlob (dataURL) {
       const binary = atob(dataURL.split(',')[1])

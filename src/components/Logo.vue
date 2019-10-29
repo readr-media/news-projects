@@ -60,7 +60,7 @@
     },
     methods: {
       $_logo_ga() {
-        window.ga('send', 'event', 'projects', 'click', 'back to home', { nonInteraction: false })
+        window.ga('send', 'event', 'projects', 'click', 'back to home')
       }
     },
     mounted () {},

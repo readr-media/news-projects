@@ -32,7 +32,7 @@ router.get('/google_map', fetchFromRedis, (req, res, next) => {
   const url = `https://maps.googleapis.com/maps/api/geocode/json?${param}&key=${GOOGLE_API_KEY_ELECTION_BOARD}&language=zh-TW`
 
   if (res.redis) {
-    console.error('fetch data from Redis.', url)
+    console.log('fetch data from Redis.', url)
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
@@ -53,7 +53,7 @@ router.get('/google_map', fetchFromRedis, (req, res, next) => {
 router.get('/boards', fetchFromRedis, (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
   if (res.redis) {
-    console.error('fetch data from Redis.', url)
+    console.log('fetch data from Redis.', url)
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
@@ -73,8 +73,10 @@ router.get('/boards', fetchFromRedis, (req, res, next) => {
 
 router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
+  console.log('@@@@@@@ candidates_terms', url);
+  
   if (res.redis) {
-    console.error('fetch data from Redis.', url)
+    console.log('fetch data from Redis.', url)
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
@@ -88,14 +90,17 @@ router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
       }
     })
     .catch((err) => {
+      console.log('@@@@@@@ candidates_terms error', err);
       handleError(err, res)
     })
 }, insertIntoRedis)
 
 router.get('/elections/:year', (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
+  console.log("======== elections/:year", url);
+  
   if (res.redis) {
-    console.error('fetch data from Redis.', url)
+    console.log('fetch data from Redis.', url)
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }

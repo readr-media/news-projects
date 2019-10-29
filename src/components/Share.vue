@@ -65,7 +65,7 @@
     },
     methods: {
       $_share_ga(media) {
-        window.ga('send', 'event', 'projects', 'click', `share to ${media}`, { nonInteraction: false })
+        window.ga('send', 'event', 'projects', 'click', `share to ${media}`)
       },
       $_share_toggleItmes() {
         this.isOpen = !this.isOpen

@@ -14,7 +14,7 @@ import {
 export default {
   FETCH_BOARD_FOR_VERIF: ({ commit }, params) => {
     return fetchBoardForVerif(params)
-      .then(res => {
+      .then((res) => {
         commit(`SET_BOARD_FOR_VERIF`, camelizeKeys(get(res, 'data')))
       })
   },

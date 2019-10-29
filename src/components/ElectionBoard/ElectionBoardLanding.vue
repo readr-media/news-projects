@@ -26,7 +26,7 @@
             </div>
           </router-link>
           <router-link to="/project/election-board/data">
-            <div class="menu__item menu__item--data" @click="sendGA('seedata')">
+            <div class="menu__item menu__item--data" @click="sendGA('seedata 2020')">
               <!-- <router-link to="/project/election-board/data"> -->
                 <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
                 <div>我要看資料</div>
@@ -34,7 +34,7 @@
             </div>
           </router-link>
         </div>
-        <a href="/project/election-board/data-2018" target="_blank" class="menu__2018data">2018 看板資料</a>
+        <a href="/project/election-board/data-2018" target="_blank" class="menu__2018data" @click="sendGA('seedata 2018')">2018 看板資料</a>
       </div>
       <!-- <div class="image">
         <img src="/proj-assets/election-board/images/title.png" alt="看板追追追">
@@ -62,9 +62,11 @@
 
     </main>
     <a href="http://www.readr.tw/post/1089" class="origin" target="_blank" @click="sendGA('memo')">看完整計畫緣起</a>
-    <!-- todo 問 ga -->
+    <!-- todo ga -->
     <a href="#" target="_blank" class="news" @click="sendGA('')">看板政治：我們與公平選舉的距離</a>
     <a href="#" target="_blank" class="news" @click="sendGA('')">新文章入口 2</a>
+
+    <a href="https://www.readr.tw/donate" target="_blank" class="news" @click="sendGA('donate')">贊助我們</a>
 
     <div class="credit">
       <img src="/proj-assets/election-board/images/logo-mm.png" alt="mirrormedia">

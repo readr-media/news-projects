@@ -275,10 +275,9 @@ export default {
       .then((res) => {
         this.hasError = false
         this.loading = true
-        if (!isBoard && res.length === 2 && res[1].count > 0) {
-          this.showVerifyBoards = true
-        }
-        setTimeout(() => fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID }), 1000)
+        if (!isBoard && res.length === 2 && res[1].count > 0) this.showVerifyBoards = true
+        // setTimeout(() => fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID }), 1000)
+        return fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })
       })
       .then(() => {
         this.loading = false
