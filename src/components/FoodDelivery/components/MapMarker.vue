@@ -34,4 +34,5 @@ export default {
 <style lang="stylus">
 .marker-color
   fill #9b9b9b
+  transition fill 0.2s
 </style>
