@@ -64,7 +64,6 @@
     <a href="http://www.readr.tw/post/1089" class="origin" target="_blank" @click="sendGA('memo')">看完整計畫緣起</a>
     <!-- todo ga -->
     <a href="#" target="_blank" class="news" @click="sendGA('')">看板政治：我們與公平選舉的距離</a>
-    <a href="#" target="_blank" class="news" @click="sendGA('')">新文章入口 2</a>
 
     <a href="https://www.readr.tw/donate" target="_blank" class="news" @click="sendGA('donate')">贊助我們</a>
 
@@ -90,7 +89,7 @@
         <h3><span class="title--data">看板</span><span class="title--verify">計畫</span><span class="title--upload">緣起</span></h3>
         <div class="content">
           <div class="content-container">
-            <p>每到選舉季節，街上就會掛滿大大小小的候選人看板，這種輕鬆打知名度方式成為沒有資源的候選人難以跨越的門檻，看板背後的金流卻只能從政治獻金申報資料找到線索。但如果候選人不申報，就會在選舉之後隨著卸下的看板消失無蹤，2018 年，我們就發現至少有 60 位候選人的政治獻金沒有申報看板的花費。誰掛了最多看板？愈多看板就等於愈多選票嗎？誰的照片又是最佳輔選員？「看板追追追」計畫邀請你拍下身邊的看板，一起為選舉留下紀錄，解答這些問題！</p>
+            <p>每到選舉季節，街上就會掛滿大大小小的候選人看板，這種輕鬆打知名度方式成為沒有資源的候選人難以跨越的門檻，在現行制度下又不需要登記或申報，難以留下紀錄。誰掛了最多看板？愈多看板就等於愈多選票嗎？誰的照片又是最佳輔選員？「看板追追追」計畫邀請你拍下身邊的看板，一起為選舉留下紀錄，解答這些問題！</p>
           </div>
         </div>
         <a href="http://www.readr.tw/post/1089" target="_blank" @click="closeIntro">看完整計畫緣起</a>

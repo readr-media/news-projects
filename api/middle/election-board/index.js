@@ -14,7 +14,6 @@ const { verifyToken } = require('../../service/jwt')
 
 const apiHost = `${API_PROTOCOL}://${ELECTION_BOARD_HOST}:${ELECTION_BOARD_PORT}`
 
-// todo 恢復
 // const apiHost = API_PROTOCOL + '://' + ELECTION_BOARD_HOST
 
 const handleError = (err, res) => {
@@ -73,8 +72,6 @@ router.get('/boards', fetchFromRedis, (req, res, next) => {
 
 router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
-  console.log('@@@@@@@ candidates_terms', url);
-  
   if (res.redis) {
     console.log('fetch data from Redis.', url)
     const resData = JSON.parse(res.redis)
@@ -90,15 +87,12 @@ router.get('/candidates_terms', fetchFromRedis, (req, res, next) => {
     }
   })
   .catch((err) => {
-    console.log('@@@@@@@ candidates_terms error', err);
     handleError(err, res)
   })
 }, insertIntoRedis)
 
 router.get('/elections/:year', (req, res, next) => {
   const url = `${apiHost}/api${req.url}`
-  console.log("======== elections/:year", url);
-  
   if (res.redis) {
     console.log('fetch data from Redis.', url)
     const resData = JSON.parse(res.redis)
