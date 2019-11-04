@@ -1,9 +1,9 @@
 <template>
   <section class="table-of-contents">
-    <TheUser :order="contents.length" />
+    <TheUser />
     <nav>
       <ul>
-        <li v-for="(content, idx) in contents" :key="content.id" :class="{ top: idx === 0 }">
+        <li v-for="content in contents" :key="`content-${content.id}`" @click="showReport(content.id)">
           <div class="table-of-contents__num">
             <MapMarker :num="content.id" />
           </div>
@@ -12,7 +12,7 @@
             <p class="table-of-contents__time">預估時間：{{ content.time }}</p>
           </div>
           <!-- <div class="table-of-contents__arrow"> -->
-          <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/enter.svg" alt="">
+          <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="">
           <!-- </div> -->
         </li>
       </ul>
@@ -60,6 +60,17 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    stateFD () {
+      return this.$store.state.FoodDelivery
+    }
+  },
+  methods: {
+    showReport (id) {
+      this.stateFD.isReportContent = true
+      this.stateFD.clickedReportId = id
+    }
   }
 }
 </script>
@@ -70,14 +81,16 @@ export default {
   background-size cover
   background-position center
   background-repeat no-repeat
-  // min-height 100vh
+  min-height 100vh
   &__num
     width 25.42px
     height 35.8px
     margin-right 10px
+    user-select none
   &__text
     color #4a4a4a
     line-height normal
+    transition all 0.2s
   &__title
     font-size 1.8rem
   &__time
@@ -85,13 +98,14 @@ export default {
   &__arrow
     width 20px
     margin-left auto
-  // & ul
-  //   padding-top 10px
-  //   padding-left 10px
-  //   padding-right 20px
-  //   background-color #ffdc03
-  //   border-top-left-radius 24px
-  //   border-top-right-radius 24px
+  & ul
+    background-color #ffdc03
+    border-top-left-radius 24px
+    border-top-right-radius 24px
+    // padding-top 10px
+    overflow hidden
+    background-color #ffdc03
+    height calc(100vh - 84px)
   & li
     background-color #ffdc03
     padding-left 10px
@@ -101,10 +115,9 @@ export default {
     display flex
     align-items center
     cursor pointer
-    &.top
+    transition background-color 0.2s
+    &:first-child
       padding-top 20px
-      border-top-left-radius 24px
-      border-top-right-radius 24px
     &:hover
       background-color #ffec78
       & .table-of-contents__text
