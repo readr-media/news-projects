@@ -143,7 +143,7 @@ router.get('/verify/board/:id', (req, res) => {
 router.post('/boards', verifyToken, (req, res) => {
   const token = req.headers.authorization
   const body = mapKeys(req.body, (value, key) => snakeCase(key))
-  const url = `${apiHost}/api${req.url}/`
+  const url = `${apiHost}/api${req.url}`
   redisWriting(token, 'used', null, 48 * 60 * 60 * 1000)
   axios.post(url, body, { timeout: API_TIMEOUT })
   .then((response) => {
