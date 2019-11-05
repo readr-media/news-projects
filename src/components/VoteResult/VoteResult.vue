@@ -1,12 +1,12 @@
 <template>
   <section class="vote-result">
-    <div class="vote-result__to-desktop-hint" v-show="!$store.state.useragent.isDesktop && showHint">
+    <div class="vote-result__to-desktop-hint" v-show="!get($store, 'state.useragent.isDesktop') && showHint">
       <p>建議使用電腦瀏覽器進行地圖互動</p>
       <p style="margin: 30px 0 0 0;color: #9e005d" @click="showHint = false">確定</p>
     </div>
     <Logo class="no-sprite" href="https://www.readr.tw/" top="15px" left="15px" bgImage="/proj-assets/vote2018-result/readr-logo.png" />
     <Share :shareUrl="`${READR_SITE_URL}vote2018-result`" class="vote-result__share" top="15px" right="15px" direction="down" />
-    <Dashboard v-show="$store.state.useragent.isDesktop"/>
+    <Dashboard v-show="get($store, 'state.useragent.isDesktop')"/>
     <VoteArticle />
     <RelatedReports :theme="'light'"/>
     <div class="vote-result__comment">
@@ -21,8 +21,9 @@ import Dashboard from './components/Dashboard.vue'
 import RelatedReports from 'src/components/RelatedReports.vue'
 import Share from '../Share.vue'
 import VoteArticle from './components/VoteArticle.vue'
-import module from 'src/store/modules/VoteResult'
+import storeModule from 'src/store/modules/VoteResult'
 import { READR_SITE_URL } from '../../constants'
+import { get } from 'lodash'
 
 export default {
   name: 'VoteResult',
@@ -48,11 +49,18 @@ export default {
     }
   },
   created () {
-    this.$store.registerModule('VoteResult', module)
+    const shouldPreserveState = process.env.VUE_ENV === 'client'
+    this.registerStoreModule(shouldPreserveState)
   },
   destroyed () {
     this.$store.unregisterModule('VoteResult')
   },
+  methods: {
+    get,
+    registerStoreModule (shouldPreserveState = false) {
+      this.$store.registerModule('VoteResult', storeModule, { preserveState: shouldPreserveState })
+    },
+  }
 }
 </script>
 <style lang="stylus">
