@@ -23,7 +23,7 @@ pipeline:
     - cp ../default/readr-site/gcskeyfile.json ./gcskeyfile.json
     when:
       event: [push]
-      branch: [dev, ElectionBoard]
+      branch: dev
   
   get_production_config:
     image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
@@ -45,7 +45,7 @@ pipeline:
     - yarn run build
     when:
       event: [push]
-      branch: [master, dev, ElectionBoard]
+      branch: [master, dev]
   
   publish:
     image: plugins/gcr
@@ -56,7 +56,7 @@ pipeline:
     secrets: [google_credentials]
     when:
       event: [push]
-      branch: [master, dev, ElectionBoard]
+      branch: [master, dev]
   
   deploy_dev:
     image: nytimes/drone-gke:develop
@@ -75,7 +75,7 @@ pipeline:
       tier: frontend
     when:
       event: [push]
-      branch: [dev, ElectionBoard]
+      branch: dev
  
   finish_slack:
     image: plugins/slack
