@@ -5,6 +5,7 @@
     <!-- <transition name="fade"> -->
     <section :is="currentComponent" v-if="isRouterAlive" :reload="reload"></section>
     <!-- </transition> -->
+    <LoadingMask v-show="$store.state.ElectionBoard.loadingStatus" />
   </div>
 </template>
 
@@ -16,6 +17,8 @@
 
 import Logo from '../Logo.vue'
 import Share from '../Share.vue'
+import LoadingMask from './LoadingMask.vue'
+
 import { READR_SITE_URL } from '../../constants'
 
 import ElectionBoardStoreModule from '../../store/modules/ElectionBoard'
@@ -40,9 +43,9 @@ const fetchCandidates = (store, {
   }).catch((err) => err)
 }
 
-const fetchElections = (store, year = 2018) => {
-  return store.dispatch('ElectionBoard/FETCH_ELECTIONS', year)
-}
+// const fetchElections = (store, year = 2018) => {
+//   return store.dispatch('ElectionBoard/FETCH_ELECTIONS', year)
+// }
 
 const fetchUserID = (store) => {
   return store.dispatch('ElectionBoard/FETCH_USER_ID')
@@ -59,6 +62,7 @@ export default {
     // ElectionBoardLanding,
     // ElectionBoardUpload,
     // ElectionBoardVerify,
+    LoadingMask,
     Logo,
     Share
   },
@@ -168,7 +172,7 @@ export default {
     this.$store.registerModule('ElectionBoard', ElectionBoardStoreModule)
   },
   beforeMount () {
-    fetchElections(this.$store)
+    // fetchElections(this.$store)
     fetchUserID(this.$store)
     fetchCandidates(this.$store),
     fetchCandidates(this.$store, { type: 'legislators' })

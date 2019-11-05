@@ -63,7 +63,7 @@
     </main>
     <a href="http://www.readr.tw/post/1089" class="origin" target="_blank" @click="sendGA('memo')">看完整計畫緣起</a>
     <!-- todo ga -->
-    <a href="#" target="_blank" class="news" @click="sendGA('')">看板政治：我們與公平選舉的距離</a>
+    <a href="#" target="_blank" class="news" @click="sendGA('看板政治：政治獻金資料沒有告訴你的事')">看板政治：政治獻金資料沒有告訴你的事</a>
 
     <a href="https://www.readr.tw/donate" target="_blank" class="news" @click="sendGA('donate')">贊助我們</a>
 

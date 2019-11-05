@@ -223,13 +223,18 @@ export default {
       return body
     },
     skipBoard () {
+      const stateEB = this.$store.state.ElectionBoard
+      stateEB.loadingStatus = 'check board'
+
       this.loading = true
       fetchBoard(this.$store, { skipBoard: this.boardID, uploadedBy: this.$store.state.ElectionBoard.userID })
       .then((res) => {
+        stateEB.loadingStatus = ''
         this.loading = false
         this.$refs.form.scrollTop = 0
       })
       .catch((err) => {
+        stateEB.loadingStatus = ''
         this.hasError = true
       })
       window.ga('send', 'event', 'projects', 'click', 'verified pass')
@@ -259,13 +264,18 @@ export default {
       }
     },
     uploadBoardVerified (isBoard) {
+      const stateEB = this.$store.state.ElectionBoard
+      // stateEB.loadingStatus = 'upload board'
+
       const body = this.buildRequestBody(isBoard)
       axios.get('/project-api/token')
       .then((response) => {
         const token = response.data.token
         if (isBoard) {
+          stateEB.loadingStatus = 'upload board'
           return axios.post('/project-api/election-board/verify/board', body, { headers: { Authorization: token }})
         } else {
+          stateEB.loadingStatus = 'check board'
           return Promise.all([
             axios.post('/project-api/election-board/verify/board', body, { headers: { Authorization: token }}),
             fetchBoards(this.$store, { uploadedBy: this.board.uploadedBy })
@@ -275,15 +285,20 @@ export default {
       .then((res) => {
         this.hasError = false
         this.loading = true
-        if (!isBoard && res.length === 2 && res[1].count > 0) this.showVerifyBoards = true
+        if (!isBoard && res.length === 2 && res[1].count > 0) {
+          stateEB.loadingStatus = ''
+          this.showVerifyBoards = true
+        }
         // setTimeout(() => fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID }), 1000)
         return fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })
       })
       .then(() => {
+        stateEB.loadingStatus = ''
         this.loading = false
         this.$refs.form.scrollTop = 0
       })
       .catch((err) => {
+        stateEB.loadingStatus = ''
         this.hasError = true
       })
 

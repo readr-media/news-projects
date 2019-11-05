@@ -108,7 +108,8 @@ export default {
       showImgError: false,
       showMapHint: false,
       timeout: 3,
-      timer: undefined,
+      timer: undefined
+      // loadingStatus: this.$store.state.ElectionBoard.loadingStatus
     }
   },
   computed: {
@@ -181,18 +182,23 @@ export default {
   },
   methods: {
     checkCoordinate () {
+      const stateEB = this.$store.state.ElectionBoard
+      stateEB.loadingStatus = 'check coordinate'
       if (!this.coordinateFromEXIF && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           const latitude = position.coords.latitude || DEFAULT_GPS_DMS[0]
           const longitude = position.coords.longitude || DEFAULT_GPS_DMS[1]
           this.coordinate = [ latitude, longitude ]
           this.goToUploadForm()
+          stateEB.loadingStatus = ''
         }, (err) => {
           this.coordinate = DEFAULT_GPS_DMS
           this.goToUploadForm()
+          stateEB.loadingStatus = ''
         })
       } else {
         this.goToUploadForm()
+        stateEB.loadingStatus = ''
       }
       window.ga('send', 'event', 'projects', 'click', 'upload photo confirmed')
     },
@@ -268,6 +274,8 @@ export default {
       }
     },
     processImage (file) {
+      const stateEB = this.$store.state.ElectionBoard
+      stateEB.loadingStatus = 'process image'
       if (window.File && window.FileReader && window.Blob) {
         this.imgSizeVerified = true
         const reader = new FileReader()
@@ -303,6 +311,7 @@ export default {
             this.imgFile = this.dataURLtoBlob(dataUrl)
             this.$refs.preview.src = dataUrl
             this.current = 1
+            stateEB.loadingStatus = ''
           }
         }
       } else {
@@ -318,6 +327,7 @@ export default {
         } else {
           this.current = 0
         }
+        stateEB.loadingStatus = ''
       }
     },
     // resetData () {
@@ -430,8 +440,8 @@ theme-color = #fa6e59
         bottom 0
         width 100%
         height 100%
-        // padding-left 25px
-        // padding-right 25px
+        padding-left 25px
+        padding-right 25px
         object-fit contain
         object-position center center
       &__alert
@@ -518,7 +528,9 @@ theme-color = #fa6e59
         width 450px
         margin 0 auto
         & > img
-          object-fit contain
+          padding-left 0
+          padding-right 0
+        //   object-fit contain
       .action
         width 450px
         margin 40px auto 0

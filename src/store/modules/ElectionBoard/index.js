@@ -19,7 +19,8 @@ export default {
     },
     elections: {},
     userID: undefined,
-    politiContribs: []
+    politiContribs: [],
+    loadingStatus: ''
   }),
   actions,
   mutations,

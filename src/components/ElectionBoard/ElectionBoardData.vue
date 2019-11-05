@@ -48,6 +48,10 @@ const DEFAULT_PAGE = 1
 
 const REGEX_ADDRESS = /(\D+[縣市])(\D+?(市區|鎮區|鎮市|[鄉鎮市區]))/
 
+const fetchElections = (store, year = 2018) => {
+  return store.dispatch('ElectionBoard/FETCH_ELECTIONS', year)
+}
+
 const fetchCandidates = (store, {
   // county = '全國',
   county,
@@ -98,6 +102,7 @@ export default {
     const electionYear = (this.is2018 ? 2018 : 2020)
     this.fetchedData = (electionYear === 2018 ?
       [
+        fetchElections(this.$store),
         fetchCandidates(this.$store, { type: 'mayors', county: '台北市', electionYear }),
         fetchCandidates(this.$store, { type: 'councilors', county: '台北市', electionYear }),
         fetchPolitiContrib(this.$store)
@@ -211,6 +216,7 @@ export default {
   }
 }
 </script>
+
 <style lang="stylus" scoped>
 color-upload = #fa6e59
 color-verify = #ffdb5c

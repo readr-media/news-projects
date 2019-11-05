@@ -49,6 +49,8 @@ export default {
       e.target.classList.toggle('selected')
     },
     submit () {
+      const stateEB = this.$store.state.ElectionBoard
+      stateEB.loadingStatus = 'upload board'
       const body = {
         isBoard: this.isBoardIds,
         notBoard: this.notBoardIds,
@@ -56,13 +58,19 @@ export default {
       }
       axios.get('/project-api/token')
       .then((response) => {
+        console.log('11');
+        
         const token = response.data.token
         return axios.post('/project-api/election-board/verify/boards', body, { headers: { Authorization: token }})
       })
       .then(res => {
+        console.log('22');
+        stateEB.loadingStatus = ''
         this.$emit('closeVerifyBoards')
       })
       .catch(err => {
+        console.log('33');
+        stateEB.loadingStatus = ''
         this.$emit('closeVerifyBoards')
       })
       window.ga('send', 'event', 'projects', 'click', 'verified data false done')

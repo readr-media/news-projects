@@ -12,7 +12,7 @@
           <p class="date" v-text="moment(board.uploaded_at).format('M 月 D 日上傳')"></p>
         </div>
       </div>
-      <p v-if="boards.length < 1">該位置目前尚無其它看板</p>
+      <p v-if="boards.length < 1">{{ this.isLoading ? '正在努力加載看板⋯' : '該位置目前尚無其它看板' }}</p>
     </div>
     <div class="action">
       <button class="btn btn--back" @click="$emit('close')"><img src="/proj-assets/election-board/images/arrow.png"></button>
@@ -60,7 +60,8 @@ export default {
     return {
       count: 0,
       page: DEFAULT_PAGE,
-      electionYear: 2020
+      electionYear: 2020,
+      isLoading: false
     }
   },
   computed: {
@@ -69,9 +70,11 @@ export default {
     },
   },
   beforeMount () {
+    this.isLoading = true
     this.electionYear = (this.$route.params.params.includes('2018') ? 2018 : 2020)
     fetchBoards(this.$store, { coordinates: this.coordinates, electionYear: this.electionYear })
     .then((res) => {
+      this.isLoading = false
       this.count = res.count
     })
   },

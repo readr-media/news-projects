@@ -338,12 +338,19 @@ export default {
         this.errors.push('candidate')
         return
       }
+
       this.errors = []
+
       if (this.coordinate[0] > MIN_LATITUDE && this.coordinate[0] < MAX_LATITUDE &&
       this.coordinate[1] > MIN_LONGITUDE && this.coordinate[1] < MAX_LONGITUDE) {
+
+        const stateEB = this.$store.state.ElectionBoard
+        stateEB.loadingStatus = 'check board'
+
         fetchBoards(this.$store, { coordinates: `(${this.coordinate[0]} ${this.coordinate[1]})` })
         .then((res) => {
           if (res.count > 0) {
+            stateEB.loadingStatus = ''
             this.$emit('hideBackBtn')
             this.showCheckBoards = true
           } else {
@@ -380,6 +387,9 @@ export default {
       }
     },
     uploadBoard () {
+      const stateEB = this.$store.state.ElectionBoard
+      stateEB.loadingStatus = 'upload board'
+
       const body = {
         candidates: this.selectedCandidates,
         image: this.imgURL,
@@ -394,6 +404,7 @@ export default {
         // boardType: this.boardType,
         uploaderName: this.uploaderName
       }
+
       if (this.slogan) body.slogan = this.slogan
       if (this.boardType) body.boardType = this.boardType
       axios.get('/project-api/token')
@@ -402,10 +413,12 @@ export default {
         return axios.post('/project-api/election-board/boards', body, { headers: { Authorization: token }})
       })
       .then((res) => {
+        stateEB.loadingStatus = ''
         this.hasError = false
         this.$emit('uploaded')
       })
       .catch((err) => {
+        stateEB.loadingStatus = ''
         this.hasError = true
       })
     },
