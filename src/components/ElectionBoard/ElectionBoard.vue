@@ -2,19 +2,13 @@
   <div class="election-board">
     <Logo v-show="currentComponent === 'ElectionBoardLanding'" class="no-sprite" href="https://www.readr.tw/" top="15px" left="15px" bgImage="/proj-assets/election-board/images/readr-logo.png" />
     <Share v-show="currentComponent === 'ElectionBoardLanding'" :shareUrl="shareLink" class="election-board__share" top="10px" left="70px" direction="right" />
-    <!-- <transition name="fade"> -->
     <section :is="currentComponent" v-if="isRouterAlive" :reload="reload"></section>
-    <!-- </transition> -->
+
     <LoadingMask v-show="$store.state.ElectionBoard.loadingStatus" />
   </div>
 </template>
 
 <script>
-// import ElectionBoardData from './ElectionBoardData.vue'
-// import ElectionBoardLanding from './ElectionBoardLanding.vue'
-// import ElectionBoardUpload from './ElectionBoardUpload.vue'
-// import ElectionBoardVerify from './ElectionBoardVerify.vue'
-
 import Logo from '../Logo.vue'
 import Share from '../Share.vue'
 import LoadingMask from './LoadingMask.vue'
@@ -27,7 +21,6 @@ const DEFAULT_PAGE = 1
 
 const fetchCandidates = (store, {
   page = DEFAULT_PAGE,
-  // type = 'mayors'
   type = 'presidents'
 } = {}) => {
   store.dispatch('ElectionBoard/FETCH_CANDIDATES_FOR_VERIF', {
@@ -43,10 +36,6 @@ const fetchCandidates = (store, {
   }).catch((err) => err)
 }
 
-// const fetchElections = (store, year = 2018) => {
-//   return store.dispatch('ElectionBoard/FETCH_ELECTIONS', year)
-// }
-
 const fetchUserID = (store) => {
   return store.dispatch('ElectionBoard/FETCH_USER_ID')
 }
@@ -58,10 +47,6 @@ export default {
     ElectionBoardLanding: () => import('./ElectionBoardLanding.vue'),
     ElectionBoardUpload: () => import('./ElectionBoardUpload.vue'),
     ElectionBoardVerify: () => import('./ElectionBoardVerify.vue'),
-    // ElectionBoardData,
-    // ElectionBoardLanding,
-    // ElectionBoardUpload,
-    // ElectionBoardVerify,
     LoadingMask,
     Logo,
     Share
@@ -89,7 +74,6 @@ export default {
         description = '看板追追追計畫募集了一堆選舉看板照片，進到下一步資料分析前，需要你協助確認資料的正確性。一起為這次的選舉留下紀錄吧！'
         break
       case 'data':
-        // title = '看板追追追——2020選舉看板紀錄'
         metaImage = 'election-board/images/og-data-2020.jpg'
         description = '誰掛了最多看板？每到選舉季節，街上就會掛滿大大小小的候選人看板，在現行制度下又不需要登記或申報，難以留下紀錄。我們邀請你替選舉看板「打卡」，簡單三步驟：拍下照片、確認地點、標示候選人，一起為這次的選舉留下紀錄！'
         if (this.$route.query.candidate) {
@@ -140,7 +124,6 @@ export default {
           title = '看板追追追——鍵盤辨識徵求中！'
           break
         case 'data':
-          // title = '看板追追追——2020選舉看板紀錄'
           if (to.query.candidate) {
             title = `看板追追追——${to.query.candidate}選舉看板紀錄`
           }
@@ -172,7 +155,6 @@ export default {
     this.$store.registerModule('ElectionBoard', ElectionBoardStoreModule)
   },
   beforeMount () {
-    // fetchElections(this.$store)
     fetchUserID(this.$store)
     fetchCandidates(this.$store),
     fetchCandidates(this.$store, { type: 'legislators' })
@@ -188,25 +170,15 @@ export default {
   font-size 16px
   font-style normal
   font-family "source-han-sans-traditional", sans-serif
-  // line-height 1.67
   line-height 1.2
   background-color #000
-  // background-color rgba(0,0,0,1)
   & h3, & p
     margin 0
-  // & a
-  //   color #000
-  //   text-decoration none
-  //   cursor pointer
   &__share.share .toggle
     background-image url(/proj-assets/election-board/images/share.png) !important
     background-size 34px auto !important
     background-position center center !important
 select
   cursor pointer
-// .fade-enter-active, .fade-leave-active
-//   transition opacity 0.3s
-// .fade-enter, .fade-leave-to
-//   opacity 0
 </style>
 

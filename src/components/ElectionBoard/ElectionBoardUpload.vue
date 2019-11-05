@@ -68,8 +68,7 @@ import ElectionBoardUploadForm from './ElectionBoardUploadForm.vue'
 import ElectionBoardUploadMap from './ElectionBoardUploadMap.vue'
 import axios from 'axios'
 import moment from 'moment'
-import { get, } from 'lodash'
-// import { GOOGLE_API_KEY_ELECTION_BOARD } from 'api/config.js'
+import { get } from 'lodash'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
 const MAX_LATITUDE = 26
@@ -109,7 +108,6 @@ export default {
       showMapHint: false,
       timeout: 3,
       timer: undefined
-      // loadingStatus: this.$store.state.ElectionBoard.loadingStatus
     }
   },
   computed: {
@@ -145,8 +143,6 @@ export default {
     current (value) {
       switch (value) {
         case 0:
-          // clearInterval(this.timer)
-          // this.resetData()
           this.reload()
           break
         case 3:
@@ -330,19 +326,6 @@ export default {
         stateEB.loadingStatus = ''
       }
     },
-    // resetData () {
-    //   this.address = ''
-    //   this.coordinate = undefined
-    //   this.imgEXIF = {}
-    //   this.imgFile = undefined
-    //   this.imgSizeVerified = false
-    //   this.imgURL = ''
-    //   this.showBackBtn = true
-    //   this.showImgError = false
-    //   this.showMapHint = false
-    //   this.timeout = 3
-    //   document.getElementById('camera').value = ''
-    // },
     resizeImage (image, orientation) {
       const MAX = 2000
       const widthOrigin = image.width
@@ -405,8 +388,7 @@ theme-color = #fa6e59
       margin-bottom 30px
       color theme-color
       font-size 1.25rem
-      // font-weight 300
-      // letter-spacing 1px
+      line-height 1.4
     img
       width 100%
       margin-top 10px
@@ -458,7 +440,6 @@ theme-color = #fa6e59
           padding 10px 14px
           color #de1615
           font-weight 500
-          // letter-spacing 1px
           background-color rgb(0,0,0)
           border-radius 5px
     .action
@@ -481,7 +462,6 @@ theme-color = #fa6e59
           border-radius 6px
         > span
           font-weight 700
-          // line-height 1
       &--retake
         background-color #a0a0a0
       &--verified
@@ -491,11 +471,6 @@ theme-color = #fa6e59
     position relative
     display flex
     flex-direction column
-    // overflow-y auto
-    // .map
-    //   flex 2
-    // .form
-    //   flex 3
   &__step-5
     display flex
     flex-direction column
@@ -530,16 +505,13 @@ theme-color = #fa6e59
         & > img
           padding-left 0
           padding-right 0
-        //   object-fit contain
       .action
         width 450px
         margin 40px auto 0
         padding 0
     &__step-4
       .form
-        // flex none
         width 450px
-        // height 500px
         margin-left auto
         margin-right auto
     &__step-5

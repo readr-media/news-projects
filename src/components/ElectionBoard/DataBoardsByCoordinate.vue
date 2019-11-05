@@ -31,7 +31,6 @@ const fetchBoards = (store, {
   coordinates,
   page = DEFAULT_PAGE,
   maxResults = 12,
-  // maxResults = 3,
   electionYear = 2020
 } = {}) => {
   return store.dispatch('ElectionBoard/FETCH_BOARDS_BY_COORDINATE', {
@@ -85,15 +84,6 @@ export default {
     },
     handleLoadMore () {
       if (this.boards.length < (this.count - 1)) {
-        // const boardsContainer = document.querySelector('.boards')
-        // const boards = document.querySelectorAll('.boards__item')
-        // const board = boards[boards.length - 3]
-        // if (board.getBoundingClientRect().top < boardsContainer.getBoundingClientRect().bottom) {
-        //   fetchBoards(this.$store, { coordinates: this.coordinates, page: this.page + 1, electionYear: this.electionYear })
-        //   .then((res) => {
-        //     this.page = this.page + 1
-        //   })
-        // }
         const boards = this.$refs.boards
         const scrollH = boards.scrollHeight - boards.offsetHeight * 1.5
         const scrollT = boards.scrollTop
@@ -140,7 +130,6 @@ theme-color = #4897db
     color #4897db
     font-size .875rem
     line-height 1.64
-    // margin-top 2px
     &.date
       margin-top 2px
   button
@@ -159,8 +148,6 @@ theme-color = #4897db
       font-size 1.25rem
     .boards
       display flex
-      // justify-content space-between
-      // align-items flex-start
       flex-wrap wrap
       position absolute
       top 0
@@ -169,12 +156,8 @@ theme-color = #4897db
       bottom 0
       width 100%
       height 100%
-      // padding-bottom 10px
       overflow-y auto
-      // margin-left -7px
-      // margin-right -7px
       &__item
-        // width calc((100% - 14px) / 2)
         width 50%
         padding-left 7px
         padding-right 7px
@@ -184,7 +167,6 @@ theme-color = #4897db
           margin-top 0
         > p
           color #fff
-          // text-align justify
           &.date
             color #a0a0a0 
         .img-container
@@ -206,7 +188,6 @@ theme-color = #4897db
             height 100%
             object-fit cover
             object-position center center
-            // border-radius 1px
   .action
     display flex
     justify-content space-between
@@ -258,32 +239,20 @@ theme-color = #4897db
     .boards-container
       margin-left -15px
       margin-right -15px
-      // left -15px
-      // width calc(100% + 30px)
       margin-top 30px
       .boards
-        // margin-left -15px
-        // margin-right -15px
-        // justify-content flex-start
         &__item
-          // width calc((100% - 120px) / 4)
           width 25%
-          // margin 15px
           padding-left 15px
           padding-right 15px
           margin-top 30px
           &:nth-of-type(3), &:nth-of-type(4)
             margin-top 0
-          // &:nth-of-type(1), &:nth-of-type(2)
-          //   margin-top 15px
     .action
-      // bottom 65px
-      // width 450px
       max-width 602px
       margin 0 auto
       padding 0 0 45px 0
       .btn
         &--back
           width 95px
-
 </style>

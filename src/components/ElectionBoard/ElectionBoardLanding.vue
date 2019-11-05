@@ -6,64 +6,32 @@
         <source media="(min-width: 768px)" srcset="/proj-assets/election-board/images/title-lap-v1.png">
         <img src="/proj-assets/election-board/images/title-mob-v1.png" alt="看板追追追 2.0">
       </picture>
-      <!-- <img :src="`/proj-assets/election-board/images/title-${isLapW ? 'lap' : 'mob'}.png`" alt="看板追追追"> -->
       <div class="menu">
         <div>
           <router-link to="/project/election-board/upload">
             <div class="menu__item menu__item--upload" @click="sendGA('upload')">
-              <!-- <router-link to="/project/election-board/upload"> -->
-                <img src="/proj-assets/election-board/images/upload.png" alt="我要上傳">
-                <div>我要上傳</div>
-              <!-- </router-link> -->
+              <img src="/proj-assets/election-board/images/upload.png" alt="我要上傳">
+              <div>我要上傳</div>
             </div>
           </router-link>
           <router-link to="/project/election-board/verify" >
             <div class="menu__item menu__item--verify" @click="sendGA('verified')">
-              <!-- <router-link to="/project/election-board/verify" > -->
-                <img src="/proj-assets/election-board/images/check.png" alt="幫忙驗證">
-                <div>幫忙驗證</div>
-              <!-- </router-link> -->
+              <img src="/proj-assets/election-board/images/check.png" alt="幫忙驗證">
+              <div>幫忙驗證</div>
             </div>
           </router-link>
           <router-link to="/project/election-board/data">
             <div class="menu__item menu__item--data" @click="sendGA('seedata 2020')">
-              <!-- <router-link to="/project/election-board/data"> -->
-                <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
-                <div>我要看資料</div>
-              <!-- </router-link> -->
+              <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
+              <div>我要看資料</div>
             </div>
           </router-link>
         </div>
         <a href="/project/election-board/data-2018" target="_blank" class="menu__2018data" @click="sendGA('seedata 2018')">2018 看板資料</a>
       </div>
-      <!-- <div class="image">
-        <img src="/proj-assets/election-board/images/title.png" alt="看板追追追">
-      </div>
-      <div class="menu">
-        <div class="item item--upload" @click="sendGA('upload')">
-          <router-link to="/project/election-board/upload" >
-            <img src="/proj-assets/election-board/images/upload.png" alt="我要上傳">
-            <span>我要上傳</span>
-          </router-link>
-        </div>
-        <div class="item item--verify" @click="sendGA('verified')">
-          <router-link to="/project/election-board/verify" >
-            <img src="/proj-assets/election-board/images/check.png" alt="幫忙驗證">
-            <span>幫忙驗證</span>
-          </router-link>
-        </div>
-        <div class="item item--data" @click="sendGA('seedata')">
-          <router-link to="/project/election-board/data">
-            <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
-            <span>我要看資料</span>
-          </router-link>
-        </div>
-      </div> -->
-
     </main>
     <a href="http://www.readr.tw/post/1089" class="origin" target="_blank" @click="sendGA('memo')">看完整計畫緣起</a>
-    <!-- todo ga -->
-    <a href="#" target="_blank" class="news" @click="sendGA('看板政治：政治獻金資料沒有告訴你的事')">看板政治：政治獻金資料沒有告訴你的事</a>
+    <a href="https://www.readr.tw/post/2038" target="_blank" class="news" @click="sendGA('看板政治：政治獻金資料沒有告訴你的事')">看板政治：<br>政治獻金資料沒有告訴你的事</a>
 
     <a href="https://www.readr.tw/donate" target="_blank" class="news" @click="sendGA('donate')">贊助我們</a>
 
@@ -79,8 +47,6 @@
       <p class="thanks__title">感謝 2020 一起追的朋友</p>
       <p class="thanks__name">{{ uploaders.join(' ') }}</p>
     </div>
-    <!-- <h1>其它議題</h1> -->
-    <!-- <RelatedReports /> -->
     <div v-show="showIntro" class="intro">
       <div class="intro-container">
         <div class="intro__close" @click="showIntro = false">
@@ -100,43 +66,21 @@
 <script>
 import Cookie from 'vue-cookie'
 import { get as axiosGet } from 'axios'
-// import RelatedReports from '../RelatedReports.vue'
 
 export default {
   name: 'ElectionBoardLanding',
   props: [ 'reload' ],
-  // components: {
-  //   RelatedReports
-  // },
   data () {
     return {
       showIntro: false,
-      // wEl: null,
-      // ww: 0,
-      // isMounted: false,
       uploaders: []
     }
   },
   beforeMount () {
-    // this.wEl = window
-    // this.ww = this.wEl.innerWidth
     this.getIntroCookie()
     this.fetchUploaders()
   },
-  // mounted () {
-  //   this.isMounted = true
-  //   this.wEl.addEventListener('resize', this.alterWindowWidth)
-  //   this.wEl.addEventListener('orientationChange', this.alterWindowWidth)
-  // },
-  // computed: {
-  //   isLapW () {
-  //     return this.isMounted && this.ww >= 768
-  //   }
-  // },
   methods: {
-    // alterWindowWidth () {
-    //   this.ww = this.wEl.innerWidth
-    // },
     getIntroCookie () {
       const hasCookie = Cookie.get('eb-intro')
       if (!hasCookie) {
@@ -157,11 +101,7 @@ export default {
       this.showIntro = false
       this.sendGA('memo')
     }
-  },
-  // beforeDestroy () {
-  //   this.wEl.removeEventListener('resize', this.alterWindowWidth)
-  //   this.wEl.removeEventListener('orientationChange', this.alterWindowWidth)
-  // },
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -170,48 +110,34 @@ color-verify = #ffdb5c
 color-data = #4897db
 
 .eb-landing
-  // position relative
   display flex
   flex-direction column
   justify-content center
   align-items center
   min-height 100vh
-  // padding 80px 0 20px
   padding 80px 25px 40px 25px
-  // background-color rgba(0,0,0,1)
   max-width 425px
   margin-right auto
   margin-left auto
-  // overflow hidden
   @media (min-width 768px)
     padding 88px 0
     justify-content flex-start
     max-width 698px
-  // background-color rgba(0,0,0,1)
-  // z-index -2
   & a
     color #000
     text-decoration none
     cursor pointer
-  // & h1
-  //   margin .5em 0 0
-  //   color #fff
-  //   font-weight 300
   & main
     display flex
     position relative
-    // max-width 270px
-    // max-width 425px
     width 100%
     justify-content space-between
     margin-bottom 68px
     @media (min-width 768px)
       flex-direction column
       align-items center
-      // max-width 698px
       margin-bottom 30px
     & picture
-      // max-width 100px
       width 37.04%
       position relative
       @media (min-width 768px)
@@ -219,22 +145,19 @@ color-data = #4897db
         margin-bottom 56px
       & > img
         width 100%
-      // margin-right 15px
+        user-select none
     & .bg-arrow
       position absolute
-      // width 91.875%
       width 125.93%
       right 0
       top 400px
+      user-select none
       @media (min-width 768px)
         width 73.64%
         top 228px
         left 50%
         transform translateX(-50%)
-      // top 83.86vh
-      // z-index -1
     & .menu
-      // margin-left 15px
       position relative
       width 51.85%
       text-align center
@@ -245,7 +168,6 @@ color-data = #4897db
         @media (min-width 768px)
           display flex
           justify-content space-between
-      // max-width 140px
       & a
         display block
         @media (min-width 768px)
@@ -260,13 +182,8 @@ color-data = #4897db
         padding-top 20px
         padding-bottom 15px
         @media (min-width 768px)
-          // width 30.66%
           border-radius 6px
           font-size 1.25rem
-        // &:not(:last-child)
-        //   margin-bottom 20px
-        //   @media (min-width 768px)
-        //     margin-bottom 0
         & img
           width 48px
           vertical-align middle
@@ -287,32 +204,16 @@ color-data = #4897db
           margin-top 10px
           width 30.66%
           margin-left auto
-  // main
-  //   display flex
-  //   justify-content center
-  //   width 90%
-  //   max-height 700px
-  //   > *
-  //     flex 1
-  //     max-width 200px
   & > a
-    // max-width 425px
-    // width 90%
     width 100%
-    // height 48px
-    // margin-top 25px
-    // margin-top 68px
     font-size 1.25rem
     font-weight 700
-    // line-height 48px
-    // letter-spacing 1px
     text-align center
     background-color #a0a0a0
     border-radius 2px
     cursor pointer
     position relative
     @media (min-width 768px)
-      // max-width 698px
       border-radius 6px
     &.origin
       height 48px
@@ -322,76 +223,17 @@ color-data = #4897db
       padding 9px 6px
     & + a
       margin-top 15px
-  // .image
-  //   position relative
-  //   > img
-  //     position absolute
-  //     top 0
-  //     left 0
-  //     right 0
-  //     bottom 0
-  //     width 100%
-  //     height 100%
-  //     object-fit contain
-  //     object-position center center
-  // .menu
-  //   display flex
-  //   flex-direction column
-  //   justify-content space-between
-  //   margin-left 25px
-    
-  //   .item
-  //     position relative
-  //     display block
-  //     padding-top 78%
-  //     border-radius 2px
-  //     & + .item
-  //       margin-top 20px
-  //     &--upload
-  //       background-color color-upload
-  //     &--verify
-  //       background-color color-verify
-  //     &--data
-  //       background-color color-data
-  //     > a
-  //       display flex
-  //       flex-direction column
-  //       justify-content center
-  //       align-items center
-  //       position absolute
-  //       top 0
-  //       left 0
-  //       right 0
-  //       bottom 0
-  //       width 100%
-  //       cursor pointer
-  //       img
-  //         width 35%
-  //       span
-  //         margin-top 15px
-  //         font-size 1.25rem
-  //         font-weight 500
-  //         line-height 1
-  //         letter-spacing 1px
-  //         &.feature-hide
-  //           margin-top 0
-  //           font-size .875rem
   & .credit
-    // width 80%
     margin-top 25px
     margin-bottom 35px
     color #a0a0a0
     font-size .875rem
     text-align center
     line-height 1.8
-    // @media (min-width 768px)
-    //   margin-top 25px
     > img
       width 28px
       vertical-align middle
       margin-bottom 10px
-      // @media (min-width 768px)
-      //   margin-bottom 14px
     a
       color #a0a0a0
       text-decoration underline
@@ -439,14 +281,11 @@ color-data = #4897db
       width 100%
       max-height 100%
       height auto
-      // padding 45px 20px 30px
       padding 40px 20px 25px 20px
       background-color #000
       border 2px solid #fff
       @media (min-width 768px)
         padding 45px 25px 30px 25px
-        // padding-right 25px
-        // padding-left 25px
       h3
         color #fff
         font-size 1.25rem
@@ -459,9 +298,7 @@ color-data = #4897db
           &--data
             color color-data
       a
-        // margin-top 20px
         margin-top 20px
-        // padding 0
         color #000
         font-size 1.25rem
         font-weight 700
@@ -484,46 +321,14 @@ color-data = #4897db
           width 100%
           color #fff
           line-height 1.8
-          // text-align justify
-          // font-weight 300
           p
             & + p
               margin-top 1em
 @media (min-width 768px)
-  // .eb-landing
-    // padding 60px 10%
-    // padding 88px 0
-    // main
-    //   display block
-    //   max-width 700px
-    //   width 100%
-    //   > *
-    //     max-width none
-    // > a
-    //   max-width 700px
-    //   width 100%
-    // .image
-    //   width 100%
-    //   text-align center
-    //   > img
-    //     position static
-    //     width 100px
-    //     height auto
-    // .menu
-    //   flex-direction row
-    //   margin 55px 0 0 0
-    //   .item
-    //     width calc(33% - 20px)
-    //     padding-top calc((33% - 20px) * .5)
-    //     & + .item
-    //       margin-top 0
-    //     > a
-    //       img
-    //         width 48px
-    .intro
-      .intro-container
-        max-width 500px
-        margin 0 auto
-    .credit
-      width 100%
+  .intro
+    .intro-container
+      max-width 500px
+      margin 0 auto
+  .credit
+    width 100%
 </style>

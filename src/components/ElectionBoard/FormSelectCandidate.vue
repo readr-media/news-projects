@@ -8,19 +8,14 @@
         @change="handleSelectChange"
       >
         <option disabled value="">請選擇候選人</option>
-        <!-- <optgroup label="縣 / 市長"> -->
         <optgroup label="總統">
           <option v-for="item in presidentCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
         </optgroup>
-        <!-- <optgroup label="縣 / 市議員"> -->
         <optgroup label="立法委員">
           <option v-for="item in legislatorCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
         </optgroup>
       </select>
     </div>
-    <!-- <div v-if="index > 1" class="select-candidate__minus" @click="$emit('minusCandidateAmount', selectedId)">
-      &#10134;
-    </div> -->
   </div>
 </template>
 <script>
@@ -42,9 +37,6 @@ export default {
   //   }
   // },
   props: {
-    // index: {
-    //   type: Number,
-    // },
     legislatorCandidates: {
       type: Array,
     },
@@ -58,8 +50,7 @@ export default {
   data () {
     return {
       selectedId: '',
-      selectedName: '',
-      // showCandidateList: false,
+      selectedName: ''
     }
   },
   computed: {
@@ -67,7 +58,6 @@ export default {
       return this.selectedIds.filter((id) => id !== this.selectedId)
     },
     candidates () {
-      // this.selectedName = ''
       return this.presidentCandidates.concat(this.legislatorCandidates)
     },
     legislatorCandidatesFiltered () {
@@ -87,9 +77,6 @@ export default {
     }
   },
   methods: {
-    // closeCandidateList () {
-    //   this.showCandidateList = false
-    // },
     handleSelectBlur (e) {
       e.target.parentNode.classList.remove('open')
     },
@@ -111,7 +98,6 @@ theme-color = #fa6e59
 .select-candidate
   display flex
   position relative
-  // margin-top .5em
   .select-container
     flex 1
     position relative
@@ -137,48 +123,7 @@ theme-color = #fa6e59
       width 100%
       height 32px
       padding 0 0 0 12px
-      // text-indent .5em
       background-color transparent
       border none
       appearance none
-    // > input
-    //   width 100%
-    //   height 30px
-    //   padding-left .5em
-    //   background-color #a0a0a0
-    //   border none
-    //   border-radius 0
-    // .btn--dropdown
-    //   position absolute
-    //   top 0
-    //   right 0
-    //   width 30px
-    //   height 30px
-    //   background-image url(/proj-assets/election-board/images/filter.png)
-    //   background-size 16px auto
-    //   background-position center center
-    //   background-repeat no-repeat
-    //   transition transform .5s
-    //   &.open
-    //     transform rotate(180deg)
-  // &__list
-  //   position absolute
-  //   top 30px
-  //   left 0
-  //   right 0
-  //   z-index 10
-  //   max-height 180px
-  //   overflow-y auto
-  //   background-color #2b2b2b
-  //   > div
-  //     height 30px
-  //     padding-left .5em
-  // &__item
-  //   &.type
-  //     color #fa6e59
-  // &__minus
-  //   margin-left 10px
-  //   line-height 30px
-  //   color transparent
-  //   text-shadow 0 0 0 theme-color
 </style>

@@ -58,18 +58,14 @@ export default {
       }
       axios.get('/project-api/token')
       .then((response) => {
-        console.log('11');
-        
         const token = response.data.token
         return axios.post('/project-api/election-board/verify/boards', body, { headers: { Authorization: token }})
       })
       .then(res => {
-        console.log('22');
         stateEB.loadingStatus = ''
         this.$emit('closeVerifyBoards')
       })
       .catch(err => {
-        console.log('33');
         stateEB.loadingStatus = ''
         this.$emit('closeVerifyBoards')
       })
@@ -109,7 +105,6 @@ theme-color = #ffdb5c
       margin-right auto
       margin-left auto
       padding-bottom 40px
-      // overflow-y auto
       .board
         position relative
         width calc(50% - 7px)
@@ -126,7 +121,6 @@ theme-color = #ffdb5c
           margin-top 0
         &.selected
           border 2px solid theme-color
-          // width calc(50% - 19px)
           padding-top calc(50% - 11px)
           &::after
             content ''
@@ -146,15 +140,10 @@ theme-color = #ffdb5c
     margin-right auto
     margin-left auto
     & .action-text
-      // margin 0 auto
       color #000
       font-size 1.25rem
       font-weight 500
       line-height 1.64
-      // max-width 450px
-      // margin-right auto
-      // margin-left auto
-      // text-align justify
       & > span
         border-bottom 5px solid #000
     & > button
@@ -162,7 +151,6 @@ theme-color = #ffdb5c
       height 48px
       line-height 48px
       margin-top 20px
-      // padding .5em .5em
       padding 0
       font-size 1.25rem
       font-weight 700
@@ -170,7 +158,6 @@ theme-color = #ffdb5c
       border none
       border-radius 2px
       cursor pointer
-      // max-width 450px
       margin-right auto
       margin-left auto
 
@@ -178,36 +165,25 @@ theme-color = #ffdb5c
   .verify-boards
     & .boards
       padding-top 50px
-      // padding-bottom 50px
     & .boards-container
-      // flex none
       justify-content flex-start
       padding-bottom 50px
-      // align-items center
-      // width 620px
-      // margin 0 auto
       & .board
         width calc((100% / 3) - 20px)
         padding-top calc((100% / 3) - 20px)
         margin-top 30px
         margin-right 30px
-        // margin 20px 10px 0
         &:nth-child(3n)
           margin-right 0
         &:nth-of-type(3)
           margin-top 0
         &.selected
           padding-top calc((100% / 3) - 24px)
-          // width calc((100% - 60px) / 3)
-          // padding-top calc((100% - 60px) / 3 - 4px)
     & .action
       display flex
       flex-direction column
       justify-content center
-      // padding 50px calc((100% - 450px) / 2)
       padding 35px 0
-      // & button
-      //   border-radius 6px
 @media (min-width 768px)
   .verify-boards .action button
     border-radius 6px
