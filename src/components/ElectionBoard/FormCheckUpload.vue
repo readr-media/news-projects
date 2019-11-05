@@ -8,7 +8,6 @@
               <div class="board__img">
                 <figure>
                   <img :src="`http://www.readr.tw${item.image}`" alt="">
-                  <!-- <img src="https://attach.setn.com/newsimages/2018/03/11/1277743-PH.jpg" alt=""> -->
                 </figure>
               </div>
               <div class="board__info">
@@ -30,7 +29,6 @@
         <div class="board__img">
           <figure >
             <img :src="`http://www.readr.tw${imgURL}`" alt="">
-            <!-- <img src="https://attach.setn.com/newsimages/2018/03/11/1277743-PH.jpg" alt=""> -->
           </figure>
         </div>
         <div class="board__info">
@@ -125,7 +123,6 @@ theme-color = #fa6e59
   right 0
   z-index 1000
   width 100%
-  // height 100%
   min-height 100%
   background-color theme-color
   &__info
@@ -133,9 +130,7 @@ theme-color = #fa6e59
     position relative
     display flex
     flex-direction column
-    // padding 40px 0
     background-color #000
-    // justify-content space-between
     justify-content center
     padding-top 40px
     padding-bottom 40px
@@ -143,7 +138,6 @@ theme-color = #fa6e59
       width calc(100% - 50px)
       margin 0 auto
     .action-conteiner
-      // flex 1
       position relative
       margin-bottom 30px
     .board
@@ -151,7 +145,6 @@ theme-color = #fa6e59
       display flex
       justify-content space-between
       align-items flex-start
-      // margin-top 5px
       &.user
         flex none
         max-width 450px
@@ -234,20 +227,16 @@ theme-color = #fa6e59
     > *
       flex 1
       display flex
-      // width calc(100% - 50px)
     .action-text
       justify-content center
       align-items center
-      // margin 0 auto
       color #000
       font-size 1.25rem
       font-weight 500
       line-height 1.64
-      // text-align justify
     .action-btns
       justify-content space-between
       margin-top 20px
-      // margin 20px auto 0
       button
         width calc(50% - 7px)
         height 96px
@@ -270,7 +259,6 @@ theme-color = #fa6e59
 @media (min-width 576px)
   .check-upload
     &__info
-      // justify-content center
       padding-top 50px
       padding-bottom 50px
       .action-conteiner
@@ -279,7 +267,6 @@ theme-color = #fa6e59
         margin 0 auto 40px auto
       .board
         flex none
-        // align-items center
         width 450px
         margin 0 auto
         &__info
@@ -289,23 +276,17 @@ theme-color = #fa6e59
             font-size 1.25rem
           p
             font-size 1rem
-      // .boards
-      //   width 450px
     &__action
       justify-content center
       padding-top 35px
       padding-bottom 35px
       & > *
         flex none
-      // & .action-text
-      //   width 450px
-      //   margin 0 auto
       & .action-btns
         width 100%
         margin-top 25px
         button
           height 48px
-          // border-radius 6px
           line-height 48px
           width calc(50% - 10px)
           > span

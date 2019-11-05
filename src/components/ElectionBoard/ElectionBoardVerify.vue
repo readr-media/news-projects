@@ -2,19 +2,13 @@
   <section class="eb-verify">
     <div class="image">
       <img :src="boardImage" alt="">
-      <!-- <img src="https://attach.setn.com/newsimages/2018/03/11/1277743-PH.jpg" alt=""> -->
     </div>
     <div class="form" ref="form">
       <div class="form__heading">
         <h2>看板資訊</h2>
         <p>此資料已被驗證 {{ board.verifiedAmount || 0 }} 次</p>
       </div>
-      <!-- <div class="form__amount">
-        <p>照片裡有幾位縣市長 / 議員候選人？</p>
-        <input v-model.number="candidateAmount" type="number" pattern="[0-9]*">
-      </div> -->
       <p>候選人姓名（限填一位）</p>
-      <!-- <p v-show="errors.includes('empty')" class="error">請填寫候選人資訊</p> -->
 
       <VerifyInputCandidate
         v-for="n in candidateAmountForInput"
@@ -162,12 +156,10 @@ export default {
     },
     legislatorCandidates () {
       return this.$store.state.ElectionBoard.candidatesForVerif.legislators || []
-      // return this.$store.state.ElectionBoard.candidatesForVerif.councilors || []
     },
     presidentCandidates () {
       return this.$store.state.ElectionBoard.candidatesForVerif.presidents || []
-      // return this.$store.state.ElectionBoard.candidatesForVerif.mayors || []
-    },
+    }
   },
   watch: {
     board (value) {
@@ -208,9 +200,6 @@ export default {
         isBoard
       }
 
-      // if (typeof this.candidateAmount !== 'string') {
-      //   body.headcount = this.candidateAmount
-      // }
       body.headcount = 1
 
       if (isBoard) {
@@ -239,16 +228,6 @@ export default {
       })
       window.ga('send', 'event', 'projects', 'click', 'verified pass')
     },
-    // updateInputError (index, value) {
-    //   if (value) {
-    //     this.errors.push(`input-${index}`)
-    //   } else {
-    //     const errorsIndex = this.errors.findIndex((value, index, arr) => value === `input-${index}`)
-    //     if (index > -1) {
-    //       this.errors.splice(errorsIndex, 1)
-    //     }
-    //   }
-    // },
     updateSelectedCandidates (newValue, oldValue) {
       if (oldValue) {
         const index = this.selectedCandidates.findIndex((value, index, arr) => value === oldValue)
@@ -265,8 +244,6 @@ export default {
     },
     uploadBoardVerified (isBoard) {
       const stateEB = this.$store.state.ElectionBoard
-      // stateEB.loadingStatus = 'upload board'
-
       const body = this.buildRequestBody(isBoard)
       axios.get('/project-api/token')
       .then((response) => {
@@ -289,7 +266,6 @@ export default {
           stateEB.loadingStatus = ''
           this.showVerifyBoards = true
         }
-        // setTimeout(() => fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID }), 1000)
         return fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })
       })
       .then(() => {
@@ -347,12 +323,8 @@ theme-color-hidden = #6d5810
     font-family "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, sans-serif
     padding 0
   & .image
-    // flex 1
     position relative
     height 60%
-    // display flex
-    // justify-content center
-    // max-height 40vh
     & img
       position absolute
       top 0
@@ -360,14 +332,10 @@ theme-color-hidden = #6d5810
       right 0
       bottom 0
       width 100%
-      // width auto
       height 100%
-      // max-height 40vh 
       vertical-align middle
-      // height 100%
       object-fit contain
       object-position bottom center
-      // image-orientation from-image
   & .party-icon-item
     margin-top 25px
     color #fff
@@ -410,7 +378,6 @@ theme-color-hidden = #6d5810
       @media (min-width 768px)
         font-size 1.25rem
   & .select-container
-    // flex 1
     position relative
     background-color #a0a0a0
     border-radius 2px
@@ -434,35 +401,27 @@ theme-color-hidden = #6d5810
       width 100%
       height 32px
       padding 0 0 0 12px
-      // text-indent .5em
       background-color transparent
       border none
       appearance none
   & .form
-    // max-height 60vh
     margin-top 25px
-    // margin-bottom 30px
-    // padding 0 25px 30px 25px
     padding-left 25px
     padding-right 25px
     overflow-y auto
     @media (min-width 768px)
       width 450px
-      // padding 0 0 45px 0
       padding-left 0
       padding-right 0
       margin-top 40px
       margin-left auto
       margin-right auto
-      // margin 40px auto 45px auto
     & > input
       display block
       width 100%
       height 32px
       margin-top 10px
-      // padding-left .5em
       padding 0 0 0 12px
-      // text-indent 0.5em
       line-height 32px
       background-color #a0a0a0
       border none
@@ -471,12 +430,9 @@ theme-color-hidden = #6d5810
         font-size 1rem
         color #4c4c4c
     & > p
-      // margin-top 5px
-      // margin-top 15px
       margin-top 25px
       margin-bottom 10px
       color #fff
-      // line-height 1
       @media (min-width 768px)
         font-size 1.25rem
         margin-top 35px
@@ -486,23 +442,19 @@ theme-color-hidden = #6d5810
         margin-bottom 0
         color #fa6e59
         font-size .875rem
-        // text-align right
         &.error--board
-          // font-size .75rem
           text-align left
     & .current-info
       color #a0a0a0
       font-size 0.875rem
       margin-top 10px
       margin-bottom 0
-      // line-height 1
       @media (min-width 768px)
         font-size 1rem
         margin-top 12px
     & > button
       width 100%
       height 50px
-      // margin-top 15px
       margin-top 30px
       font-size 1.25rem
       font-weight 700
@@ -516,39 +468,19 @@ theme-color-hidden = #6d5810
       display flex
       justify-content space-between
       align-items center
-      // line-height 1
       & h2
         margin 0
         color theme-color
         font-size 1rem
-        // line-height 1
         @media (min-width 768px)
           font-size 1.25rem
       & p
         margin 0
         color #a0a0a0
         font-size .875rem
-        // line-height 1
         @media (min-width 768px)
           font-size 1rem
-    // &__amount
-    //   display flex
-    //   margin-top .5em
-    //   > p
-    //     margin-right 20px
-    //     color #fff
-    //     line-height 1.4
-    //   > input
-    //     width 60px
-    //     height 30px
-    //     margin-top .2em
-    //     padding-left .5em
-    //     line-height 30px
-    //     background-color #a0a0a0
-    //     border none
-    //     border-radius 2px
     &__candidate
-      // margin-top 10px
       & + .form__candidate
         margin-top 5px
     .add-candidate
@@ -601,21 +533,7 @@ theme-color-hidden = #6d5810
   & .eb-verify
     justify-content center
     padding-top 55px
-    // padding-bottom 45px
     & .image
-      // flex none
       width 450px
-      // height 300px
       margin 0 auto
-      // img
-      //   position static
-      //   width 100%
-      //   object-fit contain
-    // & .form
-    //   width 450px
-    //   padding 0 0 45px 0
-    //   margin-top 40px
-    //   // margin 40px auto 0
-    //   margin-right auto
-    //   margin-left auto
 </style>

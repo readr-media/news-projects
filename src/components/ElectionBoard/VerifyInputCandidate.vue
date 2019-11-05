@@ -14,9 +14,7 @@
         </div>
       </div>
       <p>目前資訊：{{ candidate ? candidate.name : '' }}</p>
-      <!-- <p>目前資訊：吳沛憶</p> -->
     </div>
-    <!-- <p v-show="hasError" class="error">目前沒有這位候選人的資料</p> -->
   </div>
 </template>
 <script>
@@ -70,9 +68,6 @@ export default {
     candidatesFiltered () {
       return this.candidates.filter(item => !this.selectedCandidatesWithoutSelf.includes(item.id))
     },
-    // hasError () {
-    //   return this.selectedName && !this.selectedId
-    // },
     selectedCandidatesWithoutSelf () {
       return this.selectedCandidates.filter(id => id !== this.selectedId)
     },
@@ -88,9 +83,6 @@ export default {
       this.selectedId = get(this.selectedCandidates, [ this.index - 1 ], undefined) || undefined
       this.selectedName = get(this.board, [ 'candidates', this.index - 1, 'name' ], '') || ''
     },
-    // hasError (value) {
-    //   this.$emit('updateInputError', this.index, value)
-    // },
     selectedId (newValue, oldValue) {
       this.$emit('updateSelectedId', newValue, oldValue)
     },
@@ -102,7 +94,6 @@ export default {
       } catch (e) {
         return false
       }
-      // const regex = new RegExp(`${keyword}`)
       const candidate = this.candidatesFiltered.find(candidate => candidate.name === keyword)
       const matchedCandidates = this.candidatesFiltered.filter(candidate => {
         return candidate.name.match(regex) && (candidate.name !== keyword)
@@ -146,7 +137,6 @@ export default {
     width 100%
     height 32px
     padding 0 0 0 12px
-    // text-indent .5em
     line-height 32px
     background-color #a0a0a0
     border none
@@ -158,22 +148,15 @@ export default {
       font-size 1rem
       color #4c4c4c
   &-container
-    // display flex
-    // > *
-    //   flex 1
     & > p
-      // display inline-block
-      // margin-left 10px
       color #a0a0a0
       font-size 0.875rem
       margin-top 10px
-      // line-height 1
       @media (min-width 768px)
         font-size 1rem
         margin-top 12px
   .input-container
     position relative
-    // max-width calc(50% - 5px)
     & .list
       position absolute
       top 30px

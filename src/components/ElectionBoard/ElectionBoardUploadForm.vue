@@ -117,11 +117,6 @@
 </template>
 
 <script>
-// import smoothscroll from 'smoothscroll-polyfill'
-// if (typeof window !== 'undefined') {
-//   smoothscroll.polyfill();
-// }
-
 import FormCheckUpload from './FormCheckUpload.vue' 
 import FormSelectCandidate from './FormSelectCandidate.vue' 
 import FormSelectDatetime from './FormSelectDatetime.vue' 
@@ -152,8 +147,6 @@ const fetchBoards = (store, {
     maxResults,
     electionYear: 2020,
     radius: 100,
-    // verifiedAmount: 0,
-    // notBoardAmount: 0
     verifiedAmount: 3,
     notBoardAmount: 2
   })
@@ -163,7 +156,6 @@ const fetchCandidates = (store, {
   county = '全國,台北市',
   page = DEFAULT_PAGE,
   type = 'presidents'
-  // type = 'mayors'
 } = {}) => {
   store.dispatch('ElectionBoard/FETCH_CANDIDATES', {
     county,
@@ -218,9 +210,7 @@ export default {
       loadingPosition: false,
       recaptchaVerified: false,
       selectedCandidates: [],
-      // isCandidateSelected: true,
       showCheckBoards: false,
-      // showCheckBoards: true,
       showCheckPosition: true,
       showPreview: false,
       slogan: '',
@@ -235,21 +225,11 @@ export default {
     },
     legislatorCandidates () {
       if (!(this.county && this.district)) return []
-      // if (this.county && this.district) {
       const county = this.county.replace('台', '臺')
-      // const regions = get(this.$store, [ 'state', 'ElectionBoard', 'elections', county, 'regions' ], []) || []
-      // const district = this.district.substring(0, this.district.length - 1)
-      // const regex = new RegExp(`(${district}|原住民)`)
-      // const constituency = regions.filter(region => region.district.match(regex)).map(region => region.constituency) || []
       const legislators = this.$store.state.ElectionBoard.candidates.legislators || []
-      // const legislators = this.$store.state.ElectionBoard.candidates.councilors || []
-      // const candidates = legislators.filter((legislator) => constituency.includes(legislator.constituency))
       const regex = new RegExp(`${this.district}|全國`)
       const candidates = legislators.filter((legis) => legis.district.match(regex))
-      // const candidates = legislators.filter((legis) => (legis.district === this.district || legis.district === '全國'))
       return candidates
-      // }
-      // return []
     },
     isAddressMatched () {
       return this.address.match(REGEX_ADDRESS) && this.address.match(REGEX_ADDRESS).length > 4
@@ -262,7 +242,6 @@ export default {
     },
     presidentCandidates () {
       return this.$store.state.ElectionBoard.candidates.presidents || []
-      // return this.$store.state.ElectionBoard.candidates.mayors || []
     },
     road () {
       return this.isAddressMatched ? this.address.match(REGEX_ADDRESS)[4] : ''
@@ -277,9 +256,7 @@ export default {
       this.showCheckPosition = true
     },
     county (value) {
-      // fetchCandidates(this.$store, { county: `${value}` })
       fetchCandidates(this.$store, { county: `全國,${value}`, type: 'legislators' })
-      // fetchCandidates(this.$store, { county: `${value}`, type: 'councilors' })
     },
     initAddress (value) {
       this.address = (value.match(REGEX_ADDRESS) ? value : DEFAULT_ADDRESS)
@@ -291,7 +268,6 @@ export default {
   beforeMount () {
     fetchCandidates(this.$store, { county: '全國' })
     fetchCandidates(this.$store, { type: 'legislators' })
-    // fetchCandidates(this.$store, { type: 'councilors' })
   },
   mounted () {
     this.hasGeolocation = this.detectGeolocationFeature()
@@ -321,15 +297,6 @@ export default {
         this.hasGeolocation = false
       })
     },
-    // minusSelectCandidate (id) {
-    //   if (id) {
-    //     const index = this.selectedCandidates.findIndex((value, index, arr) => value === id)
-    //     if (index > -1) {
-    //       this.selectedCandidates.splice(index, 1)
-    //     }
-    //   }
-    //   this.candidateAmount -= 1
-    // },
     recaptchaVerify (res) {
       this.recaptchaVerified = true
     },
@@ -399,9 +366,7 @@ export default {
         road: this.road,
         tookAt: this.datetime,
         uploadedBy: this.userID,
-        // slogan: this.slogan,
         partyIcon: this.hasPartyIcon,
-        // boardType: this.boardType,
         uploaderName: this.uploaderName
       }
 
@@ -438,20 +403,14 @@ export default {
 theme-color = #fa6e59
 
 .eb-upload-form
-  // padding 25px
-  // padding 0 25px 30px 25px
   padding-right 25px
   padding-left 25px
   margin-top 25px
-  // margin-top 25px
-  // margin-bottom 30px
   overflow-y auto
   @media (min-width 768px)
     padding-right 0
     padding-left 0
     margin-top 40px
-    // margin-top 40px
-    // margin-bottom 45px
   & .container
     margin-bottom 30px
     @media (min-width 768px)
@@ -467,21 +426,11 @@ theme-color = #fa6e59
       @media (min-width 768px)
         margin-bottom 40px
     &__title
-      // line-height 1
       margin-bottom 10px
       margin-top 0
       @media (min-width 768px)
         font-size 1.25rem
         margin-bottom 12px
-        // margin-top 35px
-    // & p
-    //   line-height 1
-    //   margin-bottom 12px
-    //   margin-top 25px
-    //   @media (min-width 768px)
-    //     font-size 1.25rem
-    //     margin-bottom 16px
-    //     margin-top 35px
     & input:not(.checkbox)
       width 100%
       height 32px
@@ -501,37 +450,28 @@ theme-color = #fa6e59
       user-select none
     &.image-preview
       & .item__heading
-        // line-height 1
         & button
           &.open img
             transform rotate(0)
           & img
             transform rotate(-180deg)
     &__heading
-      // line-height 1
       display flex
       align-items flex-end
       & > p
         margin 0
         @media (min-width 768px)
           font-size 1.25rem
-      // & > p, & > button
-      //   display inline
       & > button
         padding 0
         margin-left 10px
-        // vertical-align middle
         background-color transparent
         border none
         outline none
-        // display flex
-        // align-items center
         & img
           width 16px
           height auto
           vertical-align middle
-          // @media (min-width 768px)
-          //   vertical-align top
       & > span
         margin-left 8px
         color theme-color
@@ -542,7 +482,6 @@ theme-color = #fa6e59
     &--row
       display flex
       justify-content space-between
-      // margin-top .5em
       &.col--two
         > *
           width calc(50% - 5px)
@@ -557,11 +496,6 @@ theme-color = #fa6e59
         object-position center center
     & .select-candidate
       position relative
-      // margin-top .5em
-      // & > input
-      //   width 100%
-      //   padding-left .5em
-      //   border-radius 0
       &__list
         position absolute
         top 30px
@@ -577,28 +511,11 @@ theme-color = #fa6e59
       &__item
         &.type
           color #fa6e59
-    // .add-candidate
-    //   display inline
-    //   margin-top 10px
-    //   color theme-color
-    //   font-size .875rem
-    //   line-height 20px
-    //   cursor pointer
-    //   &::before
-    //     content '\2795'
-    //     position relative
-    //     top 1px
-    //     height 20px
-    //     margin-right 5px
-    //     color transparent
-    //     text-shadow 0 0 0 theme-color
   & .btn
     font-weight 700
     border none
     border-radius 2px
     &--negative, &--positive
-      // padding .3em 0
-      // padding 6px 0
       height 32px
       line-height 32px
     &--negative
@@ -607,20 +524,14 @@ theme-color = #fa6e59
       background-color theme-color
     &--submit
       width 100%
-      // margin-top 10px
-      // padding-top 12px
-      // padding-bottom 12px
       padding 0
       height 48px
       line-height 48px
       font-weight 700
-      // letter-spacing 1px
       background-color theme-color
       font-size 1.25rem
-      // margin-bottom 30px
       @media (min-width 768px)
         border-radius 6px
-        // margin-bottom 45px
       &:disabled
         color #000
         background-color #fcb6ac
@@ -629,28 +540,7 @@ theme-color = #fa6e59
       font-size 1.25rem
     >>> > div
       display flex
-      // justify-content center
       align-items center
-      // line-height 1
-    // &__btn
-    //   position relative
-    //   width 20px
-    //   height 20px
-    //   padding 0
-    //   background-color #a0a0a0
-    //   border none
-    //   border-radius 2px
-    //   &.verified
-    //     &:after
-    //       content ''
-    //       position absolute
-    //       top 0
-    //       left 5px
-    //       transform rotate(45deg)
-    //       width 10px
-    //       height 15px
-    //       border 1px solid #fff
-    //       border-width 0 3px 3px 0
     &__text
       margin-left 10px
       line-height 20px
@@ -688,7 +578,6 @@ theme-color = #fa6e59
     text-align right
     margin-top 10px
     margin-bottom 30px
-    // line-height 1
     @media (min-width 768px)
       font-size 1rem
       margin-top 12px
@@ -697,7 +586,6 @@ theme-color = #fa6e59
     font-size 0.875rem
     color #a0a0a0
     margin-top 10px
-    // line-height 1
     @media (min-width 768px)
       font-size 1rem
       margin-top 12px
@@ -705,10 +593,7 @@ theme-color = #fa6e59
     visibility hidden
     opacity 0
   & input[type="text"]
-    // margin-top 0.5em
-    // padding-left 0.5em
     padding 0 0 0 12px
-    // text-indent 0.5em
   & .select-container
     position relative
     background-color #a0a0a0
@@ -733,7 +618,6 @@ theme-color = #fa6e59
       width 100%
       height 32px
       padding 0 0 0 12px
-      // text-indent .5em
       background-color transparent
       border none
       appearance none

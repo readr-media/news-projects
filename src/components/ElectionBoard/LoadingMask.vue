@@ -15,7 +15,7 @@ export default {
           return '正在努力處理照片⋯'
           break
         case 'check coordinate':
-          return '正在確認看板位置⋯'
+          return '正在取得看板位置⋯'
           break
         case 'check board':
           return '正在處理看板資訊⋯'

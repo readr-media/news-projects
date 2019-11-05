@@ -43,7 +43,6 @@ const fetchBoards = (store, {
   candidates,
   page = DEFAULT_PAGE,
   maxResults = 12,
-  // maxResults = 3,
   electionYear = 2020
 } = {}) => {
   return store.dispatch('ElectionBoard/FETCH_BOARDS', {
@@ -53,8 +52,6 @@ const fetchBoards = (store, {
     electionYear,
     verifiedAmount: 3,
     notBoardAmount: 2
-    // verifiedAmount: 0,
-    // notBoardAmount: 0
   })
 }
 
@@ -77,10 +74,6 @@ export default {
       loaded: false,
       page: DEFAULT_PAGE,
       showDataBoard: false,
-      // wEl: null,
-      // ww: 0,
-      // isMounted: false,
-      // is2018: false,
       electionYear: 2020
     }
   },
@@ -106,8 +99,6 @@ export default {
         default:
           return ''
       }
-      // return this.candidate.type === 'mayors' ? '市長' : '議員'
-      // return this.candidate.type === 'presidents' ? '總統' : '立法委員'
     },
     politiContrib () {
       return this.$store.state.ElectionBoard.politiContribs.find((contrib) => contrib.name === this.candidate.name)
@@ -121,22 +112,13 @@ export default {
     link () {
       return this.politiContrib ? this.politiContrib.link : ''
     },
-    // isMobW () {
-    //   return this.isMounted && this.ww < 767.98
-    // },
-    // isLapW () {
-    //   return this.isMounted && this.ww >= 768
-    // },
     ww () {
       return this.$store.state.viewport[0]
     }
   },
   beforeMount () {
     this.electionYear = (this.$route.params.params.includes('2018') ? 2018 : 2020)
-    // this.is2018 = this.$route.params.params.includes('2018')
     this.fetching = true
-    // this.wEl = window
-    // this.ww = this.wEl.innerWidth
 
     fetchBoards(this.$store, { candidates: this.candidate.id, electionYear: this.electionYear })
     .then(res => {
@@ -149,14 +131,7 @@ export default {
       this.fetching = false
       this.hasError = true
     })
-    
   },
-  // mounted () {
-    // this.isMounted = true
-    // this.is2018 = this.$route.params.params.includes('2018')
-    // this.wEl.addEventListener('resize', this.alterWindowWidth)
-    // this.wEl.addEventListener('orientationChange', this.alterWindowWidth)
-  // },
   methods: {
     closeDataBoard () {
       this.board = undefined
@@ -190,31 +165,16 @@ export default {
       this.board = this.boards.find(board => board.id === id)
       this.showDataBoard = true
       window.ga('send', 'event', 'projects', 'click', `go board ${id} from candidate`)
-    },
-    // alterWindowWidth () {
-    //   this.ww = this.wEl.innerWidth
-    // }
-  },
-  // beforeDestroy () {
-  //   this.wEl.removeEventListener('resize', this.alterWindowWidth)
-  //   this.wEl.removeEventListener('orientationChange', this.alterWindowWidth)
-  // }
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
 theme-color = #4897db
 
 .data-boards
-  // display flex
-  // flex-direction column
-  // position fixed
   top 0
   left 0
-  // right 0
-  // bottom 0
-  // z-index 10
-  // width 100%
-  // padding 60px 25px 115px
   width 100%
   background-color #000
   z-index 10
@@ -225,13 +185,8 @@ theme-color = #4897db
     flex-direction column
     padding 60px 25px 113px
     position relative
-    // position fixed
-    top 0
-    left 0
     height 100vh
     width 100%
-    // right 0
-    // bottom 0
     @media (min-width 768px)
       max-width 602px
       padding 50px 0 123px 0
@@ -246,9 +201,7 @@ theme-color = #4897db
       margin-left 10px
       font-size .875rem
       font-weight 400
-      // font-weight 300
   & p
-    // color #4897db
     color #fff
     font-size .875rem
     &.amount
@@ -295,16 +248,8 @@ theme-color = #4897db
     @media (min-width 768px)
       margin-right -15px
       margin-left -15px
-    // min-height 206px
-    // margin-right -7px
-    // margin-left -7px
-    // @media (min-width 768px)
-    //   margin-right -15px
-    //   margin-left -15px
     & .boards
       display flex
-      // justify-content space-between
-      // align-items flex-start
       flex-wrap wrap
       position absolute
       top 0
@@ -312,17 +257,8 @@ theme-color = #4897db
       left 0
       bottom 0
       width 100%
-      // margin-right -7px
-      // margin-left -7px
-      // height 100%
-      // margin-bottom 35px
       overflow-y auto
-      // @media (min-width 768px)
-      //   margin-right -15px
-      //   margin-left -15px
       &__item
-        // width calc((100% - 15px) / 2)
-        // width calc(50% - 7px)
         width 50%
         margin-top 14px
         cursor pointer
@@ -341,10 +277,7 @@ theme-color = #4897db
           margin-top 30px
           &:nth-of-type(4)
             margin-top 0
-          // width calc(25% - 22.5px)
         & > p
-          // color #fff
-          // text-align justify
           line-height 1.64
           @media (min-width 768px)
             font-size 1rem
@@ -352,8 +285,6 @@ theme-color = #4897db
             color #a0a0a0
             font-size 0.875rem
             margin-top 2px
-            // @media (min-width 768px)
-            //   margin-top 2px
         & .img-container
           position relative
           display block
@@ -373,7 +304,6 @@ theme-color = #4897db
             height 100%
             object-fit cover
             object-position center center
-            // border-radius 1px
   & .action
     display flex
     justify-content space-between
@@ -383,7 +313,6 @@ theme-color = #4897db
     right 0
     width 100%
     padding 0 25px 30px 25px
-    // padding-bottom 30px
     background-color #000
     @media (min-width 768px)
       padding 0 0 45px 0
@@ -400,7 +329,6 @@ theme-color = #4897db
         border-radius 6px
       &--back
         width 56px
-        // padding 11px
         background-color #a0a0a0
         display flex
         justify-content center
@@ -417,7 +345,6 @@ theme-color = #4897db
 
 @media (min-width 768px)
   .data-boards
-    // padding 60px calc((100% - 600px) / 2) 170px
     & h3
       font-size 2.25rem
       margin-bottom 12px
@@ -426,22 +353,7 @@ theme-color = #4897db
         margin-left 12px
     & p
       font-size 1.25rem
-    // & .boards-container
-    //   left -15px
-    //   width calc(100% + 30px)
-    //   margin-top 20px
-    //   & .boards
-    //     justify-content flex-start
-    //     &__item
-    //       width calc((100% - 120px) / 4)
-    //       margin 15px
-    //       &:nth-of-type(1), &:nth-of-type(2)
-    //         margin-top 15px
     .action
-      // bottom 65px
-      // width 450px
-      // margin 0 auto
-      // padding 0
       .btn
         &--back
           width 95px

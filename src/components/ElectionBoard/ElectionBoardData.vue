@@ -53,7 +53,6 @@ const fetchElections = (store, year = 2018) => {
 }
 
 const fetchCandidates = (store, {
-  // county = '全國',
   county,
   electionYear = 2020,
   page = DEFAULT_PAGE,
@@ -66,10 +65,8 @@ const fetchCandidates = (store, {
     type,
     // 被驗證過 3 次
     verifiedAmount: 3,
-    // verifiedAmount: 0,
     // 驗證為「不是看板」少於 2 次
     notBoardAmount: 2
-    // notBoardAmount: 0
   }).then((res) => {
     if (res.next) return fetchCandidates(store, { county, type, electionYear, page: (page + 1) })
   })
@@ -147,7 +144,6 @@ export default {
           break
         case 'councilors':
           const regions = _get(this.$store, [ 'state', 'ElectionBoard', 'elections', this.county, 'regions' ], [])
-          // const regex = new RegExp(`(${this.district}|原住民)`)
           const constituency = regions
             .filter((region) => region.district.match(new RegExp(`${this.district}|原住民`)))
             .map((region) => region.constituency) || []
@@ -187,7 +183,6 @@ export default {
         ]
       } else {
         this.fetchedData = [
-          // fetchCandidates(this.$store, { county, electionYear }),
           fetchCandidates(this.$store, { type: 'legislators', county: `全國,${val}`, electionYear })
         ]
       }
@@ -265,9 +260,6 @@ color-data = #4897db
     text-align justify
     margin-bottom 25px
     line-height 1.8
-  // &__select-pos
-  //   margin-top 1em
-  //   margin-top 25px
   &__select-type
     position relative
     width 100%
@@ -295,11 +287,8 @@ color-data = #4897db
       width 100%
       height 32px
       padding 0 0 0 12px
-      // text-indent .5em
       background-color transparent
       border none
-      // -webkit-appearance none
-      // -moz-appearance none
       appearance none
   .message
     display inline-block
@@ -311,8 +300,6 @@ color-data = #4897db
     display flex
     margin-top 20px
     text-decoration none
-    // &:not(:last-child)
-    //   margin-bottom 20px
     > img
       width 90px
       height 90px
@@ -321,14 +308,9 @@ color-data = #4897db
       object-position center center
       border-radius 1px
     &__info
-      // flex 1
       margin-left 15px
-      // display flex
-      // flex-direction column
-      // justify-content center
       & h2
         font-size 1rem
-        // margin-bottom .2em
         margin-bottom 8px
         font-weight 700
         @media (min-width 768px)
@@ -341,12 +323,8 @@ color-data = #4897db
 @media (min-width: 768px)
   .eb-data
     padding 60px calc((100% - 450px) / 2)
-    // > h2
-    //   margin-top 40px
     &__select-pos
-      // margin 50px 0 40px 0
       margin-top 30px
-    
     .data-candidate
       > img
         width 120px
@@ -354,7 +332,6 @@ color-data = #4897db
       &__info
         margin-left 25px
         h2
-          // margin-bottom 1em
           font-size 1.25rem
         p
           font-size 1rem

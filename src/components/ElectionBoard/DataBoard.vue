@@ -13,7 +13,6 @@
             <li>此資料已被驗證 {{ board.verified_amount }} 次</li>
             <template>
               <li v-if="board.price !== null" class="content__price">候選人共花了 <strong>{{ board.price || 0 | currency }}</strong> 元購買此塊看板 <span v-if="board.note" v-text="board.note"></span></li>
-              <!-- <li v-if="board.price !== null" class="content__price">候選人共花了 <strong>{{ board.price || 0 | currency }}</strong> 元購買此塊看板 <span>"此為 13 面看板總金額及施工費 221459元，含部份輸出、拆掛、吊車、鐵架工程。 </span></li> -->
               <li v-else>此廣告還未有價位資料</li>
             </template>
             <template>
@@ -104,7 +103,6 @@ export default {
       return url.split('?id=')[1]
     },
     goCorrection (id) {
-      // this.$router.push(`/project/election-board/verify?board=${id}`)
       window.ga('send', 'event', 'projects', 'click', `go correction from board ${id}`)
     },
     openDataBoard (board) {
@@ -133,22 +131,16 @@ theme-color = #4897db
   width 100%
   background-color #000
   &__image
-    // flex 1
     position relative
     height 100%
-    // justify-content center
-    // max-height 40vh
-    // display flex
     > img
       position absolute
       top 0
       left 0
       right 0
       bottom 0
-      // width auto
       width 100%
       height 100%
-      // vertical-align middle
       object-fit contain
       object-position bottom center
   &__correction
@@ -159,7 +151,6 @@ theme-color = #4897db
     color theme-color
     text-align center
     font-size .875rem
-    // line-height 30px
     line-height 40px
     height 40px
     background-color rgba(0,0,0,.5)
@@ -176,8 +167,6 @@ theme-color = #4897db
       line-height 1.4
       li
         color #a0a0a0
-        // line-height 1.4
-        // font-weight 300
         strong
           color #4897db
         span
@@ -234,7 +223,6 @@ theme-color = #4897db
         border-radius 6px
       &--back
         width 56px
-        // padding 11px
         background-color #a0a0a0
         display flex
         justify-content center
@@ -268,9 +256,6 @@ theme-color = #4897db
       font-size 1.25rem
       font-weight 700
     &__btn
-      // position absolute
-      // left 25px
-      // bottom 20px
       padding 0
       width 100%
       height 48px
@@ -300,22 +285,8 @@ theme-color = #4897db
   .data-board
     justify-content center
     padding 0 calc((100% - 450px) / 2)
-    &__image
-      // flex none
-      // width 450px
-      // padding-top 56.25%
-      // > img
-      //   position absolute
-      //   top 0
-      //   left 0
-      //   right 0
-      //   bottom 0
-      //   width 100%
-      //   height 100%
-      //   object-fit contain
     &__info
       padding 35px 0 0 0
-      // margin-top 35px
     .content
       h3
         font-size 1.25rem
