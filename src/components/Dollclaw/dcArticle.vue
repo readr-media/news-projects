@@ -727,6 +727,7 @@
 
 <script>
 import { currentYPosition, elmYPosition } from 'kc-scroll'
+import { get } from 'lodash'
 import Highcharts from 'highcharts'
 import axios from 'axios'
 import moment from 'moment'
@@ -767,7 +768,7 @@ export default {
 
   computed: {
     isMobile () {
-      return this.$store.state.useragent.isMobile
+      return get(this.$store, 'state.useragent.isMobile')
     }
   },
 
