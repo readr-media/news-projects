@@ -66,6 +66,10 @@ html, div, h1, h2, p, a, strong, figure, figcaption, footer, header, section, ul
   vertical-align baseline
 ul
   list-style none
+button
+  border none
+  cursor pointer
+  padding 0
 // .op0
 //   opacity 0
 </style>
