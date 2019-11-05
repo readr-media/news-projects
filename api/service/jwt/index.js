@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {
     jwt.verify(req.headers.authorization, JWT_SECRET, (err, decoded) => {
       if (err) return res.status(401).send('Unauthorized.')
       redisFetching(req.headers.authorization, ({ error, data }) => {
-        if (error) return res.status(500).send('Error occurred during fetching token from redis.')
+        if (error !== 'Key does not exist.') return res.status(500).send('Error occurred during fetching token from redis.')
         if (data) return res.status(401).send('Unauthorized.')
         next()
       })

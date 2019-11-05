@@ -2,12 +2,19 @@ import Cookie from 'vue-cookie'
 import uuidv4 from 'uuid/v4'
 import { camelizeKeys, } from 'humps'
 import { concat, get, uniqBy, values } from 'lodash'
-import { fetchBoardForVerif, fetchBoardForVerifByID, fetchCandidates, fetchElections, fetchBoards } from './services'
+import {
+  fetchBoardForVerif,
+  fetchBoardForVerifByID,
+  fetchCandidates,
+  fetchElections,
+  fetchBoards,
+  fetchPolitiContrib
+} from './services'
 
 export default {
   FETCH_BOARD_FOR_VERIF: ({ commit }, params) => {
     return fetchBoardForVerif(params)
-      .then(res => {
+      .then((res) => {
         commit(`SET_BOARD_FOR_VERIF`, camelizeKeys(get(res, 'data')))
       })
   },
@@ -35,7 +42,8 @@ export default {
     return fetchBoards(params)
       .then(res => {
         if (params.page > 1) {
-          const orig = values(get(state, 'boards', []))
+          // const orig = values(get(state, 'boards', []))
+          const orig = values(get(state, 'boardsByCoordinate', []))
           const concatedData = concat(orig, res.data.results)
           commit(`SET_BOARDS_BY_COORDINATE`, concatedData)
         } else {
@@ -92,5 +100,11 @@ export default {
       id = Cookie.get('eb-user')
       commit('SET_USER_ID', id)
     }
+  },
+  FETCH_POLITI_CONTRIB: ({ commit }) => {
+    fetchPolitiContrib()
+      .then((res) => {
+        commit('SET_POLITI_CONTRIB', res.data)
+      })
   }
 }

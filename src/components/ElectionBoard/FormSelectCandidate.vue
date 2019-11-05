@@ -1,19 +1,26 @@
 <template>
   <div class="select-candidate">
     <div class="select-container">
-      <select v-model="selectedName">
+      <select
+        v-model="selectedName"
+        @blur="handleSelectBlur"
+        @focus="handleSelectFocus"
+        @change="handleSelectChange"
+      >
         <option disabled value="">請選擇候選人</option>
-        <optgroup label="縣 / 市長">
-          <option v-for="item in mayorCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
+        <!-- <optgroup label="縣 / 市長"> -->
+        <optgroup label="總統">
+          <option v-for="item in presidentCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
         </optgroup>
-        <optgroup label="縣 / 市議員">
-          <option v-for="item in councilorCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
+        <!-- <optgroup label="縣 / 市議員"> -->
+        <optgroup label="立法委員">
+          <option v-for="item in legislatorCandidatesFiltered" :key="item.uid" :value="item.name" v-text="item.name"></option>
         </optgroup>
       </select>
     </div>
-    <div v-if="index > 1" class="select-candidate__minus" @click="$emit('minusCandidateAmount', selectedId)">
+    <!-- <div v-if="index > 1" class="select-candidate__minus" @click="$emit('minusCandidateAmount', selectedId)">
       &#10134;
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -35,13 +42,13 @@ export default {
   //   }
   // },
   props: {
-    index: {
-      type: Number,
-    },
-    councilorCandidates: {
+    // index: {
+    //   type: Number,
+    // },
+    legislatorCandidates: {
       type: Array,
     },
-    mayorCandidates: {
+    presidentCandidates: {
       type: Array,
     },
     selectedIds: {
@@ -57,21 +64,22 @@ export default {
   },
   computed: {
     selectedIdsWithoutSelf () {
-      return this.selectedIds.filter(id => id !== this.selectedId)
+      return this.selectedIds.filter((id) => id !== this.selectedId)
     },
     candidates () {
-      return this.mayorCandidates.concat(this.councilorCandidates)
+      // this.selectedName = ''
+      return this.presidentCandidates.concat(this.legislatorCandidates)
     },
-    councilorCandidatesFiltered () {
-      return this.councilorCandidates.filter(item => !this.selectedIdsWithoutSelf.includes(item.id))
+    legislatorCandidatesFiltered () {
+      return this.legislatorCandidates.filter((item) => !this.selectedIdsWithoutSelf.includes(item.id))
     },
-    mayorCandidatesFiltered () {
-      return this.mayorCandidates.filter(item => !this.selectedIdsWithoutSelf.includes(item.id))
+    presidentCandidatesFiltered () {
+      return this.presidentCandidates.filter((item) => !this.selectedIdsWithoutSelf.includes(item.id))
     }
   },
   watch: {
     selectedName (newValue) {
-      const id = this.candidates.filter(candidate => candidate.name === newValue)[0].id
+      const id = this.candidates.filter((candidate) => candidate.name === newValue)[0].id
       this.selectedId = id
     },
     selectedId (newValue, oldValue) {
@@ -82,6 +90,15 @@ export default {
     // closeCandidateList () {
     //   this.showCandidateList = false
     // },
+    handleSelectBlur (e) {
+      e.target.parentNode.classList.remove('open')
+    },
+    handleSelectChange (e) {
+      e.target.parentNode.classList.remove('open')
+    },
+    handleSelectFocus (e) {
+      e.target.parentNode.classList.add('open')
+    },
     selectCandidate (id) {
       this.selectedId = id
     }
@@ -94,15 +111,14 @@ theme-color = #fa6e59
 .select-candidate
   display flex
   position relative
-  margin-top .5em
+  // margin-top .5em
   .select-container
     flex 1
     position relative
     background-color #a0a0a0
     border-radius 2px
-    &.open
-      &::after
-        transform rotate(180deg)
+    &.open::after
+      transform rotate(180deg)
     &::after
       content ''
       position absolute
@@ -115,17 +131,15 @@ theme-color = #fa6e59
       background-position center center
       background-repeat no-repeat
       transition transform .5s
-    select
+    & select
       position relative
       z-index 10
       width 100%
-      height 30px
-      padding 0
-      text-indent .5em
+      height 32px
+      padding 0 0 0 12px
+      // text-indent .5em
       background-color transparent
       border none
-      -webkit-appearance none
-      -moz-appearance none
       appearance none
     // > input
     //   width 100%
@@ -162,9 +176,9 @@ theme-color = #fa6e59
   // &__item
   //   &.type
   //     color #fa6e59
-  &__minus
-    margin-left 10px
-    line-height 30px
-    color transparent
-    text-shadow 0 0 0 theme-color
+  // &__minus
+  //   margin-left 10px
+  //   line-height 30px
+  //   color transparent
+  //   text-shadow 0 0 0 theme-color
 </style>

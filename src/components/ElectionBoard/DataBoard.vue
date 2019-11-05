@@ -3,7 +3,7 @@
     <template v-if="board">
       <div class="data-board__image">
         <img :src="`https://www.readr.tw${board.image}`" alt="">
-        <a :href="`/project/election-board/verify?board=${board.id}`" class="data-board__correction" target="_blank">這不是{{ mode === 'coordinate' ? '看板' : $route.query.candidate }}，我要校正</a>
+        <a :href="`/project/election-board/verify?board=${board.id}`" class="data-board__correction" target="_blank" @click="goCorrection(board.id)">這不是{{ mode === 'coordinate' ? (candidatesName || '看板') : $route.query.candidate }}，我要校正</a>
       </div>
       <div class="data-board__info">
         <div class="content">
@@ -13,10 +13,11 @@
             <li>此資料已被驗證 {{ board.verified_amount }} 次</li>
             <template>
               <li v-if="board.price !== null" class="content__price">候選人共花了 <strong>{{ board.price || 0 | currency }}</strong> 元購買此塊看板 <span v-if="board.note" v-text="board.note"></span></li>
+              <!-- <li v-if="board.price !== null" class="content__price">候選人共花了 <strong>{{ board.price || 0 | currency }}</strong> 元購買此塊看板 <span>"此為 13 面看板總金額及施工費 221459元，含部份輸出、拆掛、吊車、鐵架工程。 </span></li> -->
               <li v-else>此廣告還未有價位資料</li>
             </template>
             <template>
-              <li v-if="board.receipt !== null && board.receipt.length > 0" class="has-receipt" @click="showReceiptBox(board.id)">候選人自主上傳的廣告購買資料<br><span>點我看</span></li>
+              <li v-if="board.receipt !== null && board.receipt.length > 0" class="has-receipt" @click="showReceiptBox(board.id)">候選人自主上傳的廣告購買資料<br><span>點我看購買資料</span></li>
               <li v-else>此廣告還未有價位資料</li>
             </template>
           </ul>
@@ -25,7 +26,7 @@
         </div>
         <div class="action" :class="{ coordinate: mode === 'coordinate' }">
           <button class="btn btn--back" @click="$emit('closeDataBoard')"><img src="/proj-assets/election-board/images/arrow.png"></button>
-          <button v-if="mode !== 'coordinate'" class="btn btn--upload" @click="coordinates = board.coordinates">同一地點其他看板</button>
+          <button v-if="mode !== 'coordinate'" class="btn btn--upload" @click="coordinates = board.coordinates">同一地點其它看板</button>
         </div>
       </div>
     </template>
@@ -78,12 +79,15 @@ export default {
   },
   watch: {
     coordinates () {
-      window.ga('send', 'event', 'projects', 'click', `go board list by coordinates from board ${this.board.id}`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', `go board list by coordinates from board ${this.board.id}`)
     }
   },
   computed: {
     address () {
       return `${this.board.county.length < 3 ? `${this.board.county}市` : this.board.county}${this.board.district.length < 3 ? `${this.board.district}區` : this.board.district}${this.board.road}`
+    },
+    candidatesName () {
+      return this.board.candidates.map((cand) => cand.name).filter((name) => name).join('、')
     }
   },
   beforeMount () {
@@ -100,8 +104,8 @@ export default {
       return url.split('?id=')[1]
     },
     goCorrection (id) {
-      this.$router.push(`/project/election-board/verify?board=${id}`)
-      window.ga('send', 'event', 'projects', 'click', `go correction from board ${id}`, { nonInteraction: false })
+      // this.$router.push(`/project/election-board/verify?board=${id}`)
+      window.ga('send', 'event', 'projects', 'click', `go correction from board ${id}`)
     },
     openDataBoard (board) {
       this.boardByCoordinate = board
@@ -109,7 +113,7 @@ export default {
     },
     showReceiptBox (id) {
       this.showReceipt = true
-      window.ga('send', 'event', 'projects', 'click', `go receipt from board ${id}`, { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', `go receipt from board ${id}`)
     }
   }
 }
@@ -129,18 +133,24 @@ theme-color = #4897db
   width 100%
   background-color #000
   &__image
-    flex 1
+    // flex 1
     position relative
+    height 100%
+    // justify-content center
+    // max-height 40vh
+    // display flex
     > img
       position absolute
       top 0
       left 0
       right 0
       bottom 0
+      // width auto
       width 100%
       height 100%
+      // vertical-align middle
       object-fit contain
-      object-position center center
+      object-position bottom center
   &__correction
     position absolute
     left 0
@@ -149,35 +159,43 @@ theme-color = #4897db
     color theme-color
     text-align center
     font-size .875rem
-    line-height 30px
+    // line-height 30px
+    line-height 40px
+    height 40px
     background-color rgba(0,0,0,.5)
     cursor pointer
+    font-weight 500
   &__info
-    padding 25px
+    padding 25px 25px 30px 25px
   .content
     color #fff
     ul
-      margin-top 20px
-      padding-left 1.5em
+      margin-top 15px
+      margin-bottom 15px
+      padding-left 25px
+      line-height 1.4
       li
         color #a0a0a0
-        font-weight 300
+        // line-height 1.4
+        // font-weight 300
         strong
           color #4897db
         span
           display inline-block
-          padding 0 .3em
+          padding 2px 8px
           color #000
           font-size 0.875rem
           background-color #4897db
           border-radius 2px
+          margin-top 4px
         &.content__price
           > span
             padding 0
             color #4897db
             font-size 0.875rem
             background-color transparent
-            border-radius none
+            border-radius 0
+            margin-bottom 4px
         &.has-receipt
           cursor pointer
     > h3
@@ -186,12 +204,14 @@ theme-color = #4897db
     > p
       color #4897db
       font-size .875rem
+      line-height 1.64
     > a
       display inline-block
-      padding-left 1.5em
+      padding-left 25px
       color theme-color
       font-size .875rem
       cursor pointer
+      line-height 1.4
       > span
         border-bottom 1px solid theme-color
   .action
@@ -202,22 +222,34 @@ theme-color = #4897db
       .btn--back
         width 100%
     .btn
-      height 50px
+      height 48px
+      line-height 48px
       font-size 1.25rem
       font-weight 700
       border none
       border-radius 2px
       cursor pointer
+      padding 0
+      @media (min-width 768px)
+        border-radius 6px
       &--back
-        width 55px
-        padding 11px
+        width 56px
+        // padding 11px
         background-color #a0a0a0
+        display flex
+        justify-content center
+        align-items center
+        @media (min-width 768px)
+          width 95px
         > img 
           width 34px
+          height auto
       &--upload
         flex 1
-        margin-left 15px
+        margin-left 14px
         background-color theme-color
+        @media (min-width 768px)
+          margin-left 20px
   .receipt
     display flex
     flex-direction column
@@ -228,33 +260,40 @@ theme-color = #4897db
     bottom 0
     width 100%
     height 100%
-    padding 25px
+    padding 60px 25px 30px 25px
     background-color #000
     overflow-y auto
     h3
       color #fff
       font-size 1.25rem
-      font-weight 500
+      font-weight 700
     &__btn
       // position absolute
       // left 25px
       // bottom 20px
+      padding 0
       width 100%
-      height 50px
-      margin-top 20px
+      height 48px
+      line-height 48px
+      margin-top 30px
       background-color #a0a0a0
       border none
       border-radius 2px
       cursor pointer
+      font-size 1.25rem
+      font-weight 700
+      @media (min-width 768px)
+        border-radius 6px
       
     .receipt-container
       flex 1
-      margin-top 20px
+      margin-top 25px
       overflow-y auto
       > img
         width 100%
         object-fit contain
         object-position center center
+        vertical-align top
         & + img
           margin-top 20px
 @media (min-width: 768px)
@@ -262,26 +301,28 @@ theme-color = #4897db
     justify-content center
     padding 0 calc((100% - 450px) / 2)
     &__image
-      flex none
-      width 450px
-      padding-top 56.25%
-      > img
-        position absolute
-        top 0
-        left 0
-        right 0
-        bottom 0
-        width 100%
-        height 100%
-        object-fit contain
+      // flex none
+      // width 450px
+      // padding-top 56.25%
+      // > img
+      //   position absolute
+      //   top 0
+      //   left 0
+      //   right 0
+      //   bottom 0
+      //   width 100%
+      //   height 100%
+      //   object-fit contain
     &__info
-      padding 0
-      margin-top 35px
+      padding 35px 0 0 0
+      // margin-top 35px
     .content
       h3
         font-size 1.25rem
+        line-height 1.4
     .action
       margin-top 30px
+      margin-bottom 45px
     .receipt
       padding 50px calc((100% - 450px) / 2)
 </style>

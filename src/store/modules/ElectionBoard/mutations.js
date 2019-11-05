@@ -8,11 +8,17 @@ export default {
   SET_BOARDS_BY_COORDINATE: (state, data) => {
     state.boardsByCoordinate = data
   },
+  SET_CANDIDATES_LEGISLATORS: (state, data) => {
+    state.candidates.legislators = data
+  },
   SET_CANDIDATES_COUNCILORS: (state, data) => {
     state.candidates.councilors = data
   },
   SET_CANDIDATES_FOR_VERIF: (state, { type, data }) => {
     state.candidatesForVerif[type] = data
+  },
+  SET_CANDIDATES_PRESIDENTS: (state, data) => {
+    state.candidates.presidents = data
   },
   SET_CANDIDATES_MAYORS: (state, data) => {
     state.candidates.mayors = data
@@ -22,5 +28,8 @@ export default {
   },
   SET_USER_ID: (state, id) => {
     state.userID = id
+  },
+  SET_POLITI_CONTRIB: (state, data) => {
+    state.politiContribs = data
   }
 }

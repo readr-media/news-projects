@@ -46,8 +46,9 @@
           @hideBackBtn="showBackBtn = false"
           @showMapHint="showMapHint = true"
           @updateCoordinate="updateCoordinate"
-          @uploaded="current = 3">
-          <p v-if="showImgError" slot="img-upload-error" class="error">圖片上傳發生錯誤...</p>
+          @uploaded="current = 3"
+        >
+          <p v-if="showImgError" slot="img-upload-error" class="error">圖片上傳發生錯誤⋯</p>
         </ElectionBoardUploadForm>
       </section>
       <section class="eb-upload__step-5">
@@ -60,6 +61,7 @@
     <canvas ref="canvas"></canvas>
   </section>
 </template>
+
 <script>
 import ElectionBoardBackBtn from './ElectionBoardBackBtn.vue'
 import ElectionBoardUploadForm from './ElectionBoardUploadForm.vue'
@@ -67,6 +69,7 @@ import ElectionBoardUploadMap from './ElectionBoardUploadMap.vue'
 import axios from 'axios'
 import moment from 'moment'
 import { get, } from 'lodash'
+// import { GOOGLE_API_KEY_ELECTION_BOARD } from 'api/config.js'
 
 const DEFAULT_GPS_DMS = [ 22.6079361, 120.2968442 ]
 const MAX_LATITUDE = 26
@@ -75,7 +78,7 @@ const MAX_LONGITUDE = 122
 const MIN_LONGITUDE = 117
 
 const MAX_IMG_SIZE = 8 * 1024 * 1024 // 8 MB
-const MIN_TIMESTAMP = 1514736000 // 2018.01.01
+const MIN_TIMESTAMP = 1546272000 // 2019.01.01
 
 const uploadImage = (store, { file, folderName }) => {
   return store.dispatch('UPLOAD_IMAGE_TO_GCS', { file, folderName })
@@ -83,6 +86,7 @@ const uploadImage = (store, { file, folderName }) => {
 
 export default {
   name: 'ElectionBoardUpload',
+  props: [ 'reload' ],
   components: {
     ElectionBoardBackBtn,
     ElectionBoardUploadForm,
@@ -104,7 +108,8 @@ export default {
       showImgError: false,
       showMapHint: false,
       timeout: 3,
-      timer: undefined,
+      timer: undefined
+      // loadingStatus: this.$store.state.ElectionBoard.loadingStatus
     }
   },
   computed: {
@@ -138,11 +143,17 @@ export default {
       this.showMapHint = false
     },
     current (value) {
-      if (value === 0) {
-        clearInterval(this.timer)
-        this.resetData()
-      } else if (value === 3) {
-        this.setTimer()
+      switch (value) {
+        case 0:
+          // clearInterval(this.timer)
+          // this.resetData()
+          this.reload()
+          break
+        case 3:
+          this.setTimer()
+          break
+        default:
+          break
       }
     },
     coordinateFromEXIF (value) {
@@ -162,9 +173,7 @@ export default {
       }
     },
     timeout (value) {
-      if (value === 0) {
-        this.current = 0
-      }
+      if (value === 0) this.current = 0
     }
   },
   mounted () {
@@ -173,20 +182,25 @@ export default {
   },
   methods: {
     checkCoordinate () {
+      const stateEB = this.$store.state.ElectionBoard
+      stateEB.loadingStatus = 'check coordinate'
       if (!this.coordinateFromEXIF && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           const latitude = position.coords.latitude || DEFAULT_GPS_DMS[0]
           const longitude = position.coords.longitude || DEFAULT_GPS_DMS[1]
           this.coordinate = [ latitude, longitude ]
           this.goToUploadForm()
+          stateEB.loadingStatus = ''
         }, (err) => {
           this.coordinate = DEFAULT_GPS_DMS
           this.goToUploadForm()
+          stateEB.loadingStatus = ''
         })
       } else {
         this.goToUploadForm()
+        stateEB.loadingStatus = ''
       }
-      window.ga('send', 'event', 'projects', 'click', 'upload photo confirmed', { nonInteraction: false })
+      window.ga('send', 'event', 'projects', 'click', 'upload photo confirmed')
     },
     dataURLtoBlob (dataURL) {
       const binary = atob(dataURL.split(',')[1])
@@ -226,13 +240,14 @@ export default {
       this.coordinate[1] > MIN_LONGITUDE && this.coordinate[1] < MAX_LONGITUDE) {
         const geocoder = new google.maps.Geocoder()
         const coordinate = new google.maps.LatLng(this.coordinate[0], this.coordinate[1])
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.coordinate[0]},${this.coordinate[1]}&key=AIzaSyCgwPtUjWMKGKdp62Hnank6TTl3lhXwa3o&language=zh-TW`)
-          .then(res => {
+
+        axios.get(`/project-api/election-board/google_map?latlng=${this.coordinate[0]},${this.coordinate[1]}`)
+          .then((res) => {
             if (res.data.status === 'OK' && res.data.results.length > 0) {
               this.filterAddress(res.data.results)
             }
           })
-          .catch(err => {
+          .catch((err) => {
             console.log('err', err)
           })
       }
@@ -259,6 +274,8 @@ export default {
       }
     },
     processImage (file) {
+      const stateEB = this.$store.state.ElectionBoard
+      stateEB.loadingStatus = 'process image'
       if (window.File && window.FileReader && window.Blob) {
         this.imgSizeVerified = true
         const reader = new FileReader()
@@ -294,6 +311,7 @@ export default {
             this.imgFile = this.dataURLtoBlob(dataUrl)
             this.$refs.preview.src = dataUrl
             this.current = 1
+            stateEB.loadingStatus = ''
           }
         }
       } else {
@@ -309,21 +327,22 @@ export default {
         } else {
           this.current = 0
         }
+        stateEB.loadingStatus = ''
       }
     },
-    resetData () {
-      this.address = ''
-      this.coordinate = undefined
-      this.imgEXIF = {}
-      this.imgFile = undefined
-      this.imgSizeVerified = false
-      this.imgURL = ''
-      this.showBackBtn = true
-      this.showImgError = false
-      this.showMapHint = false
-      this.timeout = 3
-      document.getElementById('camera').value = ''
-    },
+    // resetData () {
+    //   this.address = ''
+    //   this.coordinate = undefined
+    //   this.imgEXIF = {}
+    //   this.imgFile = undefined
+    //   this.imgSizeVerified = false
+    //   this.imgURL = ''
+    //   this.showBackBtn = true
+    //   this.showImgError = false
+    //   this.showMapHint = false
+    //   this.timeout = 3
+    //   document.getElementById('camera').value = ''
+    // },
     resizeImage (image, orientation) {
       const MAX = 2000
       const widthOrigin = image.width
@@ -372,6 +391,7 @@ theme-color = #fa6e59
     > section
       flex 1
       height 100%
+      overflow-y auto
   input
     display none
   &__step-1
@@ -385,20 +405,23 @@ theme-color = #fa6e59
       margin-bottom 30px
       color theme-color
       font-size 1.25rem
-      font-weight 300
-      letter-spacing 1px
+      // font-weight 300
+      // letter-spacing 1px
     img
       width 100%
       margin-top 10px
+      border-radius 1px
       & + p
         margin-top 20px
     button
       width 100%
-      padding .5em
+      padding 0
       margin-top 30px
+      height 48px
+      line-height 48px
       color #000
       font-size 1.25rem
-      font-weight 500
+      font-weight 700
       background-color theme-color
       border none
       border-radius 2px
@@ -417,6 +440,8 @@ theme-color = #fa6e59
         bottom 0
         width 100%
         height 100%
+        padding-left 25px
+        padding-right 25px
         object-fit contain
         object-position center center
       &__alert
@@ -430,43 +455,47 @@ theme-color = #fa6e59
         bottom 0
         background-color rgba(0,0,0,.5)
         span
-          padding 0 .5em
+          padding 10px 14px
           color #de1615
           font-weight 500
-          letter-spacing 1px
+          // letter-spacing 1px
           background-color rgb(0,0,0)
           border-radius 5px
     .action
       display flex
-      padding 25px
+      padding 30px 25px 30px 25px
       > div
         flex 1
         display flex
         flex-direction column
         justify-content center
         align-items center
-        height 50px
+        height 48px
+        line-height 48px
         color #000
         font-size 1.25rem
         text-align center
         border-radius 2px
         cursor pointer
+        @media (min-width 768px)
+          border-radius 6px
         > span
-          font-weight 500
-          line-height 1
+          font-weight 700
+          // line-height 1
       &--retake
         background-color #a0a0a0
       &--verified
-        margin-left 15px
+        margin-left 14px
         background-color theme-color
   &__step-4
     position relative
     display flex
     flex-direction column
-    .map
-      flex 2
-    .form
-      flex 3
+    // overflow-y auto
+    // .map
+    //   flex 2
+    // .form
+    //   flex 3
   &__step-5
     display flex
     flex-direction column
@@ -475,38 +504,44 @@ theme-color = #fa6e59
     background-color theme-color
     > img
       width 52px
+      height auto
     > span
       width calc(100% - 50px)
       margin 20px auto 0
       color #000
       font-size 1.25rem
-      font-weight 500
+      font-weight 700
       line-height 1.4
-      text-align justify
+      text-align center
 @media (min-width: 768px)
   .eb-upload
     &__step-1
-      > div
+      & > div
        width 450px
+      & button
+        border-radius 6px
     &__step-3
       justify-content center
-      padding 55px 0
-      .preview
+      padding 40px 0 45px 0
+      & .preview
         flex 1
         width 450px
         margin 0 auto
-        > img
-          object-fit contain
+        & > img
+          padding-left 0
+          padding-right 0
+        //   object-fit contain
       .action
         width 450px
-        margin 30px auto 0
+        margin 40px auto 0
         padding 0
     &__step-4
       .form
-        flex none
+        // flex none
         width 450px
-        height 500px
-        margin 0 auto
+        // height 500px
+        margin-left auto
+        margin-right auto
     &__step-5
       > img
         width 100px

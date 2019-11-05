@@ -43,3 +43,7 @@ export function fetchCandidates (params) {
 export function fetchElections (year = 2018) {
   return axios.get(`/project-api/election-board/elections/${year}`)
 }
+
+export function fetchPolitiContrib () { 
+  return axios.get('/proj-assets/election-board/data/political-contribution-2018.json')
+}
