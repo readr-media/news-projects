@@ -26,7 +26,6 @@
       <p>這塊看板的標語</p>
       <input v-model="slogan" type="text" placeholder="請填寫看板標語（多句請用／分隔）">
       <p class="current-info">目前資訊：{{ board.slogan || '' }}</p>
-      <!-- <p class="current-info">目前資訊：小英栽培/吳沛憶 我陪你</p> -->
 
       <div class="party-icon-item">
         <input type="checkbox" id="party-icon" :class="['checkbox', hasPartyIcon ? 'checked' : '']" v-model="hasPartyIcon">
@@ -146,7 +145,8 @@ export default {
       }
     },
     candidateAmountOrigin () {
-      return get(this.board, 'candidates.length')
+      // return get(this.board, 'candidates.length')
+      return 1
     },
     candidates () {
       return this.presidentCandidates.concat(this.legislatorCandidates)
