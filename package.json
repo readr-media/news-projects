@@ -51,7 +51,7 @@
     "imagesloaded": "^4.1.4",
     "intersection-observer": "^0.5.1",
     "ioredis": "^4.14.1",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "jsonwebtoken": "^8.5.0",
     "kc-scroll": "^0.2.71",
     "lodash": "^4.17.15",
