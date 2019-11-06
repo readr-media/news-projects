@@ -1,14 +1,15 @@
 {
   "presets": [
-    ["env", { "modules": false }]
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": "3"
+      }
+    ],
+    "@vue/babel-preset-jsx"
   ],
   "plugins": [
-    "syntax-dynamic-import",
-    "transform-object-rest-spread",
-    "transform-vue-jsx",
-    ["transform-runtime", {
-      "polyfill": false,
-      "regenerator": true
-    }]
+    "@babel/plugin-syntax-dynamic-import"
   ]
 }
