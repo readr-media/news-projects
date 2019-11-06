@@ -4,11 +4,11 @@
 export default {
   namespaced: true,
   state: () => ({
-    isReportContent: false,
-    clickedReportId: 1,
+    isReportContent: true,
+    clickedReportId: 5,
     readReports: 1,
     reportIds: [ 1, 2, 3, 4, 5 ],
-    isInfo: true
+    isInfo: false
   })
   // actions,
   // mutations,

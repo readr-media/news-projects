@@ -10,6 +10,7 @@
         <ReportResult />
       </template> -->
     </BaseReport>
+    <!-- <TheFooter /> -->
     <TheInfo v-if="$store.state.FoodDelivery.isInfo" />
   </div>
 </template>
@@ -22,6 +23,7 @@ import TableOfContents from './components/TableOfContents.vue'
 import BaseReport from './components/BaseReport.vue'
 // import ReportResult from './components/ReportResult.vue'
 import ReportContent1 from './components/ReportContent1.vue'
+// import TheFooter from './components/TheFooter.vue'
 import TheInfo from './components/TheInfo.vue'
 
 export default {
@@ -39,6 +41,7 @@ export default {
     TableOfContents,
     BaseReport,
     TheInfo
+    // TheFooter
     // ReportResult
     // ReportContent1
   },
@@ -73,6 +76,8 @@ button
   border none
   cursor pointer
   padding 0
+a
+  cursor pointer
 // .op0
 //   opacity 0
 </style>

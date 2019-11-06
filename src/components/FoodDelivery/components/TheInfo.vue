@@ -5,6 +5,7 @@
       <img class="the-info__cancel" src="/proj-assets/food-delivery/img/x--comp.svg" alt="" @click="$store.state.FoodDelivery.isInfo = false">
     </div>
     <div class="the-info__slides" :style="{ transform: `translateX(-${81.25 * (currentPage - 1)}vw)` }">
+      <!-- <div class="the-info__slide" style="padding-top: 20px;"> -->
       <div class="the-info__slide">
         <img src="/proj-assets/food-delivery/img/readr--comp.svg" alt="">
         <p>文字：名字名字</p>
@@ -14,6 +15,7 @@
         <p>工程：名字名字</p>
         <p>監製：名字名字、名字名字</p>
       </div>
+      <!-- <div class="the-info__slide" style="padding-top: 25px;"> -->
       <div class="the-info__slide">
         <OtherReports />
       </div>
@@ -37,7 +39,7 @@ export default {
   },
   data () {
     return {
-      currentPage: 2
+      currentPage: 1
       // slides: [
       //   {
       //     id: 1
@@ -96,6 +98,8 @@ export default {
     flex 0 0 75vw
     height 75vw
     border-radius 24px
+    padding-right 30px
+    padding-left 30px
     & + .the-info__slide
       margin-left 6.25vw
     & img
