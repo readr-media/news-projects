@@ -3,7 +3,7 @@
     <img class="header-icons__enter" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="" @click="showTOC" v-show="$store.state.FoodDelivery.isReportContent">
     <div class="header-icons__wrapper">
       <img class="header-icons__donate" src="/proj-assets/food-delivery/img/donate--comp.svg" alt="">
-      <img class="header-icons__info" src="/proj-assets/food-delivery/img/info--comp.svg" alt="">
+      <img class="header-icons__info" src="/proj-assets/food-delivery/img/info--comp.svg" alt="" @click="$store.state.FoodDelivery.isInfo = true">
     </div>
   </div>
 </template>

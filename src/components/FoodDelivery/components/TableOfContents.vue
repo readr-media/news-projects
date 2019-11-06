@@ -1,6 +1,6 @@
 <template>
   <section class="table-of-contents">
-    <TheUser />
+    <UserStatus />
     <nav>
       <ul>
         <li v-for="content in contents" :key="`content-${content.id}`" @click="showReport(content.id)">
@@ -21,13 +21,13 @@
 </template>
 
 <script>
-import TheUser from './TheUser.vue'
+import UserStatus from './UserStatus.vue'
 import MapMarker from './MapMarker.vue'
 
 export default {
   name: 'TableOfContents',
   components: {
-    TheUser,
+    UserStatus,
     MapMarker
   },
   data () {
