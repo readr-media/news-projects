@@ -99,10 +99,7 @@ module.exports = {
           {
             use: [
               'vue-style-loader',
-              {
-                loader: 'css-loader',
-                options: { minimize: isProd }
-              },
+              'css-loader',
               'postcss-loader'
             ]
           }
@@ -114,10 +111,7 @@ module.exports = {
           {
             use: [
               'vue-style-loader',
-              {
-                loader: 'css-loader',
-                options: { minimize: isProd }
-              },
+              'css-loader',
               'postcss-loader',
               'stylus-loader'
             ]
