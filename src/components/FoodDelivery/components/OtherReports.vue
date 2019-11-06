@@ -19,7 +19,6 @@ export default {
   &__title
     margin-bottom 20px
   & a
-    cursor pointer
     text-decoration underline
     color #000
     font-weight 500

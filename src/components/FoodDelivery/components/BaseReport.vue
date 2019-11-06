@@ -10,6 +10,7 @@
       <component :is="`ReportContent${reportId}`" />
       <ReportResult />
     </section>
+    <TheFooter />
   </div>
 </template>
 
@@ -18,6 +19,7 @@
 import HeaderIcons from './HeaderIcons.vue'
 import MapMarker from './MapMarker.vue'
 import ReportResult from './ReportResult.vue'
+import TheFooter from './TheFooter.vue'
 
 export default {
   name: 'BaseReport',
@@ -26,6 +28,7 @@ export default {
     HeaderIcons,
     MapMarker,
     ReportResult,
+    TheFooter,
     ReportContent1: () => import('./ReportContent1.vue'),
     ReportContent2: () => import('./ReportContent2.vue'),
     ReportContent3: () => import('./ReportContent3.vue'),
