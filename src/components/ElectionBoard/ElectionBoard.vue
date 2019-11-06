@@ -11,6 +11,7 @@
 <script>
 import Logo from '../Logo.vue'
 import Share from '../Share.vue'
+import ElectionBoardUpload from './ElectionBoardUpload.vue'
 import LoadingMask from './LoadingMask.vue'
 
 import { READR_SITE_URL } from '../../constants'
@@ -45,7 +46,8 @@ export default {
   components: {
     ElectionBoardData: () => import('./ElectionBoardData.vue'),
     ElectionBoardLanding: () => import('./ElectionBoardLanding.vue'),
-    ElectionBoardUpload: () => import('./ElectionBoardUpload.vue'),
+    // ElectionBoardUpload: () => import('./ElectionBoardUpload.vue'),
+    ElectionBoardUpload,
     ElectionBoardVerify: () => import('./ElectionBoardVerify.vue'),
     LoadingMask,
     Logo,
