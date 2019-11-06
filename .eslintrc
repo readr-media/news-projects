@@ -4,9 +4,7 @@
     "plugin:vue/recommended",
     "plugin:import/errors"
   ],
-  "parserOptions": {
-    "parser": "babel-eslint"
-  },
+  "parser": "babel-eslint",
   "plugins": [
     "vue"
   ],
