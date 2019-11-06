@@ -10,6 +10,7 @@
         <ReportResult />
       </template> -->
     </BaseReport>
+    <TheInfo v-if="$store.state.FoodDelivery.isInfo" />
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import TableOfContents from './components/TableOfContents.vue'
 import BaseReport from './components/BaseReport.vue'
 // import ReportResult from './components/ReportResult.vue'
 import ReportContent1 from './components/ReportContent1.vue'
+import TheInfo from './components/TheInfo.vue'
 
 export default {
   name: 'FoodDelivery',
@@ -36,6 +38,7 @@ export default {
     HeaderIcons,
     TableOfContents,
     BaseReport,
+    TheInfo
     // ReportResult
     // ReportContent1
   },

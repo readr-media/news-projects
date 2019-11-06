@@ -1,6 +1,6 @@
 <template>
   <section class="report-result">
-    <TheUser />
+    <UserStatus />
     <div class="report-result__reward">
       <div>
         <p class="report-result__num">3</p>
@@ -27,12 +27,12 @@
 </template>
 
 <script>
-import TheUser from './TheUser.vue'
+import UserStatus from './UserStatus.vue'
 
 export default {
   name: 'ReportResult',
   components: {
-    TheUser
+    UserStatus
   }
 }
 </script>
