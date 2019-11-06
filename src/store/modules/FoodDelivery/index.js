@@ -8,7 +8,7 @@ export default {
     clickedReportId: 1,
     readReports: 1,
     reportIds: [ 1, 2, 3, 4, 5 ],
-    isInfo: false
+    isInfo: true
   })
   // actions,
   // mutations,
