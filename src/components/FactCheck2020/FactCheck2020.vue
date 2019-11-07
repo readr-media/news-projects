@@ -608,6 +608,8 @@ export default {
       p
         display inline-block
         margin .2em .5em
+        word-break break-all
+        word-wrap break-word
       picture
         position relative
         display inline-block
