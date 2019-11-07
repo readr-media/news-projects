@@ -1,4 +1,4 @@
-# Project List
+# READr News Project
 
 | Project |
 |--------------------------------------------------------------|
@@ -20,7 +20,7 @@
 
 ## Build Setup
 
-**Requires Node.js 7+**
+**Requires Node.js 10+**
 
 ``` bash
 # install dependencies
@@ -28,6 +28,10 @@ yarn # or yarn install
 
 # serve in dev mode, with hot reload at localhost:8080
 yarn run dev
+
+# serve specific project in dev mode
+yarn dev -- {Folder Name}
+(yarn dev -- NanfangaoBridge)
 
 # build for production
 yarn run build
@@ -44,4 +48,4 @@ yarn start
 
 based on [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0)
 
-Copyright (c) 2017 MirroMedia
+Copyright (c) 2017-present Mirror Media
