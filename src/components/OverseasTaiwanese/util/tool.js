@@ -1,6 +1,6 @@
 'use strict'
 
-function debounce(fn, wait) {
+export function debounce(fn, wait) {
   let timer
   return () => {
     clearTimeout(timer)
@@ -8,7 +8,7 @@ function debounce(fn, wait) {
   }
 }
 
-function throttle(fn, wait, mustRun, needName, arr, name) {
+export function throttle(fn, wait, mustRun, needName, arr, name) {
   let timer
   let startTime = new Date()
   const coreFn = () => {
@@ -30,7 +30,7 @@ function throttle(fn, wait, mustRun, needName, arr, name) {
   }
 }
 
-function checkMob() {
+export function checkMob() {
   let check = false
   if (typeof navigator !== 'undefined') {
     (function (a) {
@@ -38,10 +38,4 @@ function checkMob() {
     })(navigator.userAgent || navigator.vendor || window.opera)
   }
   return check
-}
-
-module.exports = {
-  debounce,
-  throttle,
-  checkMob
 }
