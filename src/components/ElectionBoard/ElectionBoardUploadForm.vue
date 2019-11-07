@@ -419,6 +419,9 @@ theme-color = #fa6e59
     cursor pointer
   & .item
     margin-bottom 25px
+    & input::-webkit-input-placeholder
+      font-size 1rem
+      color #4c4c4c
     @media (min-width 768px)
       margin-bottom 35px
     &.recaptcha

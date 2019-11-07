@@ -28,9 +28,7 @@ const handleError = (err, res) => {
 
 router.get('/google_map', fetchFromRedis, (req, res, next) => {
   const param = req.url.split('/google_map?')[1]
-  console.log('???????????????' + param)
   const url = `https://maps.googleapis.com/maps/api/geocode/json?${param}&key=${GOOGLE_API_KEY_ELECTION_BOARD}&language=zh-TW`
-  console.log('???????????????' + url)
   if (res.redis) {
     console.log('fetch data from Redis.', url)
     const resData = JSON.parse(res.redis)

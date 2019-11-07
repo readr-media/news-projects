@@ -166,6 +166,9 @@ export default {
     background-color #a0a0a0
     border none
     border-radius 2px
+    &::-webkit-input-placeholder
+      font-size 1rem
+      color #4c4c4c
   & > button
     width 100%
     margin-top 10px
