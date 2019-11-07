@@ -2,7 +2,7 @@
   <div class="header-icons">
     <img class="header-icons__enter" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="" @click="showTOC" v-show="$store.state.FoodDelivery.isReportContent">
     <div class="header-icons__wrapper">
-      <img class="header-icons__donate" src="/proj-assets/food-delivery/img/donate--comp.svg" alt="">
+      <a href="https://www.readr.tw/donate" target="_blank"><img class="header-icons__donate" src="/proj-assets/food-delivery/img/donate--comp.svg" alt=""></a>
       <img class="header-icons__info" src="/proj-assets/food-delivery/img/info--comp.svg" alt="" @click="$store.state.FoodDelivery.isInfo = true">
     </div>
   </div>
@@ -14,6 +14,7 @@ export default {
   methods: {
     showTOC () {
       this.$store.state.FoodDelivery.isReportContent = false
+      this.$router.push(`/project/food-delivery`)
     }
   }
 }
@@ -41,10 +42,13 @@ export default {
     transform scaleX(-1)
   &__wrapper
     margin-left auto
+    & a
+      display inline-block
+      margin-right 20px
   &__donate
     // width 13.4px
     width 14.36px
-    margin-right 20px
+    // margin-right 20px
   &__info
     width 25px
 </style>
