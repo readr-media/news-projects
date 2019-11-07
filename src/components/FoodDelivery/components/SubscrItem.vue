@@ -20,6 +20,9 @@ export default {
 <style lang="stylus">
 .subscr-item
   text-align center
+  // 層級不調高，focus 框會被擋住
+  position relative
+  z-index 9
   & .subscription-wrapper
     margin-top 20px
     & .subscription

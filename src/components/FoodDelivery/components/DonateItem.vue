@@ -3,7 +3,7 @@
     <p>覺得這篇報導不錯嗎？</p>
     <p>歡迎用新台幣支持 READr，</p>
     <p>讓更多深度報導浮上檯面。</p>
-    <a href="http://" target="_blank"><button type="button">用新台幣跟 READr 一起幹大事</button></a>
+    <a href="https://www.readr.tw/donate" target="_blank"><button type="button">用新台幣跟 READr 一起幹大事</button></a>
   </section>
 </template>
 

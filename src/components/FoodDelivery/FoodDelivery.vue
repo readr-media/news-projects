@@ -45,8 +45,20 @@ export default {
     // ReportResult
     // ReportContent1
   },
-  created () {
+  beforeCreate () {
     this.$store.registerModule('FoodDelivery', FoodDeliveryStoreModule)
+    const params = this.$route.params.params || ''
+    // todo [1-?]
+    const regex = /^(order[1-5])$/i
+    // todo 升級 vue-router
+    // https://blog.csdn.net/weixin_43202608/article/details/98884620
+    if (params.match(regex)) {
+      const stateFD = this.$store.state.FoodDelivery
+      stateFD.isReportContent = true
+      stateFD.clickedReportId = Number(params.split('order')[1])
+    } else {
+      this.$router.replace('/project/food-delivery')
+    }
   },
   beforeDestroy () {
     this.$store.unregisterModule('FoodDelivery')

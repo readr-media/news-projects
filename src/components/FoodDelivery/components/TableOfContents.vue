@@ -70,6 +70,7 @@ export default {
     showReport (id) {
       this.stateFD.isReportContent = true
       this.stateFD.clickedReportId = id
+      this.$router.push(`/project/food-delivery/order${id}`)
     }
   }
 }
