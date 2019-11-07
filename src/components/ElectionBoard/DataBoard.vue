@@ -3,7 +3,7 @@
     <template v-if="board">
       <div class="data-board__image">
         <img :src="`https://www.readr.tw${board.image}`" alt="">
-        <a :href="`/project/election-board/verify?board=${board.id}`" class="data-board__correction" target="_blank" @click="goCorrection(board.id)">這不是{{ mode === 'coordinate' ? (candidatesName || '看板') : $route.query.candidate }}，我要校正</a>
+        <a :href="`/project/election-board/verify?board=${board.id}`" class="data-board__correction" target="_blank" v-if="electionYear === 2020" @click="goCorrection(board.id)">這不是{{ mode === 'coordinate' ? (candidatesName || '看板') : $route.query.candidate }}，我要校正</a>
       </div>
       <div class="data-board__info">
         <div class="content">
@@ -12,7 +12,7 @@
           <ul>
             <li>此資料已被驗證 {{ board.verified_amount }} 次</li>
             <template>
-              <li v-if="board.price !== null" class="content__price">候選人共花了 <strong>{{ board.price || 0 | currency }}</strong> 元購買此塊看板 <span v-if="board.note" v-text="board.note"></span></li>
+              <li v-if="board.price !== null" class="content__price">候選人共花了 <strong>{{ board.price || 0 | currency }}</strong> 元購買此塊看板 <span v-if="board.note && board.note !== 'string'" v-text="board.note"></span></li>
               <li v-else>此廣告還未有價位資料</li>
             </template>
             <template>
@@ -73,7 +73,8 @@ export default {
       coordinates: undefined,
       showDataBoard: false,
       showReceipt: false,
-      isProd: false
+      isProd: false,
+      electionYear: 2020
     }
   },
   watch: {
@@ -93,6 +94,7 @@ export default {
     if (currEnv() === 'prod') {
       this.isProd = true
     }
+    this.electionYear = (this.$route.params.params.includes('2018') ? 2018 : 2020)
   },
   methods: {
     closeDataBoard () {
@@ -153,7 +155,7 @@ theme-color = #4897db
     font-size .875rem
     line-height 40px
     height 40px
-    background-color rgba(0,0,0,.5)
+    background-color rgba(0,0,0,0.72)
     cursor pointer
     font-weight 500
   &__info

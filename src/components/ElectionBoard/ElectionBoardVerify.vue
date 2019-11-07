@@ -75,30 +75,36 @@ const DEFAULT_PAGE = 1
 
 const fetchBoard = (store, {
   skipBoard,
-  uploadedBy
+  uploadedBy,
+  electionYear = 2020
 } = {}) => store.dispatch('ElectionBoard/FETCH_BOARD_FOR_VERIF', {
   skipBoard,
-  uploadedBy
+  uploadedBy,
+  electionYear
 })
 
 const fetchBoardByID = (store, {
   id,
-  uploadedBy
+  uploadedBy,
+  electionYear = 2020
 } = {}) => store.dispatch('ElectionBoard/FETCH_BOARD_FOR_VERIF_BY_ID', {
   id,
   params: {
-    uploadedBy
+    uploadedBy,
+    electionYear
   }
 })
 
 const fetchBoards = (store, {
   uploadedBy,
   page = DEFAULT_PAGE,
+  electionYear = 2020
 } = {}) => {
   return store.dispatch('ElectionBoard/FETCH_BOARDS', {
     uploadedBy,
     page,
     maxResults: 6,
+    electionYear
   })
 }
 
@@ -183,7 +189,7 @@ export default {
       fetchBoardByID(this.$store, { id: this.$route.query.board, uploadedBy: this.$store.state.ElectionBoard.userID })
       .catch((err) => {
         fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })
-        this.$router.replace(`/project/election-board/verify`)
+        this.$router.replace('/project/election-board/verify')
       })
     } else {
       fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })
