@@ -72,7 +72,8 @@ span
       width calc(100vw - 4em)
       .swiper-wrapper
         // height 600px
-        height calc(auto + 100px)
+        // height calc(auto + 100px)
+        height calc(100% + 100px)
         width calc(100vw - 4em)
         display flex
         justify-content center
@@ -85,7 +86,8 @@ span
           transform translateX(calc((100vw - 4em) * 1.5))
           img
             width calc(100vw - 4em)
-            height calc(auto + 100px)
+            // height calc(auto + 100px)
+            height calc(100% + 100px)
       .swiper-pagination
         bottom 0
     .swiper-description

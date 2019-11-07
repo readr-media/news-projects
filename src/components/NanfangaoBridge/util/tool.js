@@ -1,6 +1,6 @@
 'use strict'
 
-function throttle(fn, wait, mustRun) {
+export function throttle(fn, wait, mustRun) {
   let timer
   let startTime = new Date()
   return () => {
@@ -13,8 +13,4 @@ function throttle(fn, wait, mustRun) {
       timer = setTimeout(fn, wait)
     }
   }
-}
-
-module.exports = {
-  throttle
 }
