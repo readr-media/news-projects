@@ -7,12 +7,18 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('FoodDelivery')
+
 export default {
   name: 'UserStatus',
   computed: {
+    ...mapState([
+      'reportIds'
+    ]),
     status () {
       return `
-        <p>您有 <span>${this.$store.state.FoodDelivery.reportIds.length}</span> 個訂單</p>
+        <p>您有 <span>${this.reportIds.length}</span> 個訂單</p>
         <p>前往取餐</p>
       `
     }
