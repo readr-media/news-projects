@@ -1,9 +1,9 @@
 <template>
-  <div class="base-report">
+  <div class="base-report" @scroll="changeRouter" ref="baseReport">
     <!-- <HeaderIconsReport /> -->
     <!-- <MapMarker num="1" class="base-report__marker" /> -->
     <HeaderIcons />
-    <section v-for="reportId in reportIds" :key="`report-${reportId}`">
+    <section v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report">
       <div class="base-report__wrapper">
         <MapMarker :num="reportId" class="base-report__marker" />
       </div>
@@ -35,6 +35,11 @@ export default {
     ReportContent4: () => import('./ReportContent4.vue'),
     ReportContent5: () => import('./ReportContent5.vue')
   },
+  data () {
+    return {
+      reportIdx: 0
+    }
+  },
   computed: {
     stateFD () {
       return this.$store.state.FoodDelivery
@@ -42,6 +47,25 @@ export default {
     reportIds () {
       const start = (this.stateFD.clickedReportId - 1)
       return this.stateFD.reportIds.slice(start)
+    }
+  },
+  methods: {
+    changeRouter () {
+      const reportContainer = this.$refs.baseReport
+      const reportPrev = this.$refs.report[this.reportIdx]
+      const reportNext = this.$refs.report[(this.reportIdx + 1)] || reportContainer.scrollHeight
+
+      const reportContainerScrollT = reportContainer.scrollTop
+      const reportPrevOffsetT = reportPrev.offsetTop
+      const reportNextOffsetT = reportNext.offsetTop
+
+      if (reportContainerScrollT >= reportNextOffsetT) {
+        this.reportIdx += 1
+        this.$router.replace(`/project/food-delivery/order${this.stateFD.clickedReportId + this.reportIdx}`).catch((err) => {})
+      } else if (reportContainerScrollT < reportPrevOffsetT) {
+        this.reportIdx -= 1
+        this.$router.replace(`/project/food-delivery/order${this.stateFD.clickedReportId + this.reportIdx}`).catch((err) => {})
+      }
     }
   }
 }

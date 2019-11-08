@@ -74,7 +74,7 @@ export default {
         padding-left 14px
         // debug layout error for Slack, but I don't know why.
         min-width 0
-        &::placeholder
+        &::-webkit-input-placeholder
           color #9b9b9b
       &__btn
         background-color #427b80
