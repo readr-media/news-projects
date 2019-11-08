@@ -1,20 +1,32 @@
 <template>
   <div class="header-icons">
-    <img class="header-icons__enter" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="" @click="showTOC" v-show="$store.state.FoodDelivery.isReportContent">
+    <img class="header-icons__enter" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="" @click="showTOC" v-show="isReportContent">
     <div class="header-icons__wrapper">
       <a href="https://www.readr.tw/donate" target="_blank"><img class="header-icons__donate" src="/proj-assets/food-delivery/img/donate--comp.svg" alt=""></a>
-      <img class="header-icons__info" src="/proj-assets/food-delivery/img/info--comp.svg" alt="" @click="$store.state.FoodDelivery.isInfo = true">
+      <img class="header-icons__info" src="/proj-assets/food-delivery/img/info--comp.svg" alt="" @click="toggleInfo(true)">
     </div>
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
+
 export default {
   name: 'HeaderIcons',
+  computed: {
+    ...mapState([
+      'isReportContent'
+    ])
+  },
   methods: {
+    ...mapMutations([
+      'toggleInfo',
+      'toggleReportContent'
+    ]),
     showTOC () {
-      this.$store.state.FoodDelivery.isReportContent = false
-      this.$router.push(`/project/food-delivery`)
+      this.toggleReportContent(false)
+      this.$router.push('/project/food-delivery').catch((err) => {})
     }
   }
 }

@@ -1,29 +1,22 @@
 <template>
   <div>
-    <HeaderIcons />
-    <TableOfContents />
-    <BaseReport v-if="$store.state.FoodDelivery.isReportContent">
-      <!-- <template #report>
-        <ReportContent1 />
-      </template> -->
-      <!-- <template #result>
-        <ReportResult />
-      </template> -->
+    <HeaderIcons :class="{ hide: isInfo }" />
+    <TableOfContents :class="{ hide: isReportContent || isInfo }" />
+    <BaseReport :class="{ hide: isInfo }" >
     </BaseReport>
-    <!-- <TheFooter /> -->
-    <TheInfo v-if="$store.state.FoodDelivery.isInfo" />
+    <TheInfo v-if="isInfo" />
   </div>
 </template>
 
 <script>
 import FoodDeliveryStoreModule from '../../store/modules/FoodDelivery'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
 
 import HeaderIcons from './components/HeaderIcons.vue'
 import TableOfContents from './components/TableOfContents.vue'
 import BaseReport from './components/BaseReport.vue'
-// import ReportResult from './components/ReportResult.vue'
 import ReportContent1 from './components/ReportContent1.vue'
-// import TheFooter from './components/TheFooter.vue'
 import TheInfo from './components/TheInfo.vue'
 
 export default {
@@ -34,6 +27,7 @@ export default {
       description: '',
       metaUrl: 'food-delivery',
       metaImage: ''
+      // customScript: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yakuhanjp@3.3.1/dist/css/yakuhanjp_s-narrow.min.css">'
     }
   },
   components: {
@@ -45,17 +39,28 @@ export default {
     // ReportResult
     // ReportContent1
   },
-  beforeCreate () {
+  computed: {
+    ...mapState([
+      'isReportContent',
+      'isInfo'
+    ])
+  },
+  methods: {
+    ...mapMutations([
+      'toggleReportContent',
+      'changeClickedReportId'
+    ])
+  },
+  created () {
     this.$store.registerModule('FoodDelivery', FoodDeliveryStoreModule)
     const params = this.$route.params.params || ''
     // todo [1-?]
     const regex = /^(order[1-5])$/i
-    // todo catch error
-    // https://blog.csdn.net/weixin_43202608/article/details/98884620
+
     if (params.match(regex)) {
-      const stateFD = this.$store.state.FoodDelivery
-      stateFD.isReportContent = true
-      stateFD.clickedReportId = Number(params.split('order')[1])
+      const orderNum = Number(params.split('order')[1])
+      this.toggleReportContent(true)
+      this.changeClickedReportId(orderNum)
     } else {
       this.$router.replace('/project/food-delivery').catch((err) => {})
     }
@@ -68,12 +73,17 @@ export default {
 
 <style lang="stylus">
 @import './util/report-content.styl'
+// $ff-sans-serif = YakuHanJPs_Narrow, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Noto Sans CJK TC", "Noto Sans CJK", "Source Han Sans", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif
+$ff-sans-serif = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Noto Sans CJK TC", "Noto Sans CJK", "Source Han Sans", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif
 
 html
   font-size 10px
-  font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Noto Sans CJK TC", "Noto Sans CJK", "Source Han Sans", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif
-// body
-//   background-color #f5f4f5
+  font-family $ff-sans-serif
+body
+  background-image url(/proj-assets/food-delivery/img/map.jpg)
+  background-size contain
+  background-position center top
+  background-repeat repeat
 img
   max-width 100%
   height auto
@@ -88,8 +98,11 @@ button
   border none
   cursor pointer
   padding 0
+  font-family $ff-sans-serif
 a
   cursor pointer
+.hide
+  visibility hidden
 // .op0
 //   opacity 0
 </style>

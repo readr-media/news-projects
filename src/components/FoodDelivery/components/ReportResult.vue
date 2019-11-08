@@ -39,10 +39,11 @@ export default {
 
 <style lang="stylus">
 .report-result
-  background-image url(/proj-assets/food-delivery/img/map.jpg)
-  background-size cover
-  background-position center
-  background-repeat no-repeat
+  // background-image url(/proj-assets/food-delivery/img/map.jpg)
+  // background-size cover
+  // background-position center
+  // background-repeat no-repeat
+  background-color rgba(#000, 0.3)
   height 100vh
   &__cheers
     width 82px

@@ -1,7 +1,5 @@
 <template>
   <article class="report-content">
-    <!-- <HeaderIconsReport />
-    <HeaderIcons /> -->
     <h2>3. 外送業難題：提早訂、近距離、人力調度沒彈性？</h2>
     <p>我對外送服務的第一個印象，來自一部台灣導演在紐約拍的劇情電影《你的今天和我的明天》。劇情描述一個在紐約以外送為業的男子，因為工作得以穿梭各式各樣的大樓，一窺這個城市的樣貌——用最私密的方式——因為無論如何，你必須打開門。</p>
     <p>很可惜再一次回想起這個片段時非常困窘。我透過募資支持小農鮮奶，某天，在從定期配送的外送員手中接過一週量的牛奶後不久，我的臉書收到了一則陌生訊息。</p>
@@ -14,15 +12,11 @@
 </template>
 
 <script>
-// import HeaderIconsReport from './HeaderIconsReport.vue'
-// import HeaderIcons from './HeaderIcons.vue'
 import ReportFigure from './ReportFigure.vue'
 
 export default {
   name: 'ReportContent3',
   components: {
-    // HeaderIconsReport,
-    // HeaderIcons,
     ReportFigure
   }
 }

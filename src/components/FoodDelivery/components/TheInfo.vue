@@ -2,7 +2,7 @@
   <section class="the-info">
     <UserStatus />
     <div class="the-info__wrapper">
-      <img class="the-info__cancel" src="/proj-assets/food-delivery/img/x--comp.svg" alt="" @click="$store.state.FoodDelivery.isInfo = false">
+      <img class="the-info__cancel" src="/proj-assets/food-delivery/img/x--comp.svg" alt="" @click="toggleInfo(false)">
     </div>
     <div class="the-info__slides" :style="{ transform: `translateX(-${81.25 * (currentPage - 1)}vw)` }">
       <!-- <div class="the-info__slide" style="padding-top: 20px;"> -->
@@ -28,6 +28,9 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapMutations } = createNamespacedHelpers('FoodDelivery')
+
 import UserStatus from './UserStatus.vue'
 import OtherReports from './OtherReports.vue'
 
@@ -48,6 +51,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'toggleInfo'
+    ]),
     showPage (page) {
       this.currentPage = page
     }
@@ -60,10 +66,10 @@ export default {
   position absolute
   top 0
   left 0
-  background-image url(/proj-assets/food-delivery/img/map.jpg)
-  background-size cover
-  background-position center
-  background-repeat no-repeat
+  // background-image url(/proj-assets/food-delivery/img/map.jpg)
+  // background-size cover
+  // background-position center
+  // background-repeat no-repeat
   width 100%
   height 100vh
   z-index 999

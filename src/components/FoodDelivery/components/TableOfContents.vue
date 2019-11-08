@@ -1,9 +1,11 @@
 <template>
   <section class="table-of-contents">
     <UserStatus />
-    <nav>
+    <nav ref="nav">
+      <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
       <ul>
         <li v-for="content in contents" :key="`content-${content.id}`" @click="showReport(content.id)">
+        <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
           <div class="table-of-contents__num">
             <MapMarker :num="content.id" />
           </div>
@@ -21,6 +23,9 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapMutations } = createNamespacedHelpers('FoodDelivery')
+
 import UserStatus from './UserStatus.vue'
 import MapMarker from './MapMarker.vue'
 
@@ -58,18 +63,27 @@ export default {
           title: '為了賺更多錢剝削外送員',
           time: '04 : 40'
         }
-      ]
+      ],
+      lineH: 0
     }
   },
-  computed: {
-    stateFD () {
-      return this.$store.state.FoodDelivery
-    }
+  mounted () {
+    this.lineH = this.$refs.nav.offsetHeight - 24.6
   },
+  // computed: {
+  //   ...mapState([
+  //     'isReportContent',
+  //     'isInfo'
+  //   ])
+  // },
   methods: {
+    ...mapMutations([
+      'toggleReportContent',
+      'changeClickedReportId'
+    ]),
     showReport (id) {
-      this.stateFD.isReportContent = true
-      this.stateFD.clickedReportId = id
+      this.toggleReportContent(true)
+      this.changeClickedReportId(id)
       this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
     }
   }
@@ -78,16 +92,23 @@ export default {
 
 <style lang="stylus">
 .table-of-contents
-  background-image url(/proj-assets/food-delivery/img/map.jpg)
-  background-size cover
-  background-position center
-  background-repeat no-repeat
+  // background-image url(/proj-assets/food-delivery/img/map.jpg)
+  // background-size cover
+  // background-position center
+  // background-repeat no-repeat
   min-height 100vh
+  background-color rgba(#000, 0.3)
+  overflow hidden
+  // &.hide
+  //   visibility hidden
+  & nav
+    position relative
   &__num
     width 25.42px
     height 35.8px
     margin-right 10px
     user-select none
+    z-index 1
   &__text
     color #4a4a4a
     line-height normal
@@ -126,4 +147,8 @@ export default {
         color #000
       & .marker-color
         fill #000
+  &__line
+    position absolute
+    top 24.6px
+    left 22.205px
 </style>
