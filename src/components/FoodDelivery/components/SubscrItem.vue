@@ -33,8 +33,7 @@ export default {
         border-radius 10px
         line-height 40px
         flex 1 0 70.83%
-        // font-weight 500
-        &::placeholder
+        &::-webkit-input-placeholder
           color #9b9b9b
           font-weight 500
       &__btn
