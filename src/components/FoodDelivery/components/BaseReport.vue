@@ -1,7 +1,8 @@
 <template>
   <div class="base-report" id="base-report" @scroll="changeRouter" :class="{ show: isReportContent }">
     <!-- <HeaderIcons /> -->
-    <section v-for="(reportId, idx) in currentReportIds" :key="`report-${reportId}`" :ref="`report${idx}`">
+    <!-- <section v-for="(reportId, idx) in currentReportIds" :key="`report-${reportId}`" :ref="`report${idx}`"> -->
+    <section v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)">
       <div class="base-report__wrapper">
         <MapMarker :num="reportId" class="base-report__marker" />
       </div>
@@ -14,7 +15,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('FoodDelivery')
+const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
 
 // import HeaderIcons from './HeaderIcons.vue'
 import MapMarker from './MapMarker.vue'
@@ -36,7 +37,8 @@ export default {
   },
   data () {
     return {
-      reportIdx: 0
+      // reportIdx: 0
+      currentReadReportId: 1
     }
   },
   computed: {
@@ -45,29 +47,43 @@ export default {
       'clickedReportId',
       'reportIds'
     ]),
-    currentReportIds () {
+    // currentReportIds () {
+    //   const start = (this.clickedReportId - 1)
+    //   return this.reportIds.slice(start)
+    // }
+    reportIdsNeedToShow () {
       const start = (this.clickedReportId - 1)
       return this.reportIds.slice(start)
     }
   },
   methods: {
+    ...mapMutations([
+      'changeClickedReportId'
+    ]),
     changeRouter () {
+      // this.currentReadReportId = this.clickedReportId
       const reportContainer = this.$el
-      // const reportPrev = this.$refs.report[this.reportIdx]
-      // const reportNext = this.$refs.report[(this.reportIdx + 1)] || reportContainer.scrollHeight
-      const reportPrev = this.$refs[`report${this.reportIdx}`][0]
-      const reportNext = this.$refs[`report${this.reportIdx + 1}`][0] || reportContainer.scrollHeight
+      const reportPrev = this.$refs.report[this.currentReadReportId - 1]
+      const reportNext = this.$refs.report[this.currentReadReportId] || reportContainer.scrollHeight
+      // let currentReportId
+      // console.log(this.reportIdx);
+      
+      // const reportPrev = this.$refs[`report${this.reportIdx}`][0]
+      // const reportNext = this.$refs[`report${this.reportIdx + 1}`][0] || reportContainer.scrollHeight
 
       const reportContainerScrollT = reportContainer.scrollTop
       const reportPrevOffsetT = reportPrev.offsetTop
       const reportNextOffsetT = reportNext.offsetTop
 
       if (reportContainerScrollT >= reportNextOffsetT) {
-        this.reportIdx += 1
-        this.$router.replace(`/project/food-delivery/order${this.clickedReportId + this.reportIdx}`).catch((err) => {})
+        // this.reportIdx += 1
+        // this.changeClickedReportId()
+        this.currentReadReportId += 1
+        this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
       } else if (reportContainerScrollT < reportPrevOffsetT) {
-        this.reportIdx -= 1
-        this.$router.replace(`/project/food-delivery/order${this.clickedReportId + this.reportIdx}`).catch((err) => {})
+        // this.reportIdx -= 1
+        this.currentReadReportId -= 1
+        this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
       }
     }
   },
@@ -75,7 +91,8 @@ export default {
     isReportContent (newVal) {
       if (newVal) {
         this.$el.scrollTop = 0
-        this.reportIdx = 0
+        this.currentReadReportId = this.clickedReportId
+        // this.reportIdx = 0
       }
     }
   }

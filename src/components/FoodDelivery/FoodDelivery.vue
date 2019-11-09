@@ -102,7 +102,8 @@ button
 a
   cursor pointer
 .hide
-  visibility hidden
+  // visibility hidden
+  opacity 0
 // .op0
 //   opacity 0
 </style>
