@@ -75,6 +75,7 @@ export default {
   z-index 999
   line-height normal
   overflow hidden
+  background-color rgba(#000, 0.3)
   &__wrapper
     position absolute
     height 84px
@@ -85,6 +86,7 @@ export default {
   &__cancel
     width 20px
     display block
+    cursor pointer
   &__slides
     display flex
     padding-left 12.5vw
