@@ -150,7 +150,7 @@ export default {
     const route = this.$route.params.params || '';
     const regex = /^(upload|verify|data|data-2018)$/
     if (!route.match(regex)) {
-      this.$router.replace({ path: '/project/election-board' });
+      this.$router.replace({ path: '/project/election-board' }).catch((err) => {})
     }
   },
   created () {

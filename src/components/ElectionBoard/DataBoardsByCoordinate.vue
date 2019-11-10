@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     goUpload () {
-      this.$router.push(`/project/election-board/upload`)
+      this.$router.push(`/project/election-board/upload`).catch((err) => {})
       window.ga('send', 'event', 'projects', 'click', 'go upload from coordinate')
     },
     handleLoadMore () {
