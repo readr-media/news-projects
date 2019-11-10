@@ -136,7 +136,7 @@ export default {
           break
         case 'legislators':
           return data.legislators
-            .filter((legis) => legis.district.match(new RegExp(`${this.district}|全國`)))
+            .filter((legis) => legis.district.match(new RegExp(`${this.county}|全國`)))
             .filter((candidate) => (candidate.boards.coordinates || candidate.boards[0]))
           break
         case 'mayors':

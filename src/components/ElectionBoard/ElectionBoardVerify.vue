@@ -189,7 +189,7 @@ export default {
       fetchBoardByID(this.$store, { id: this.$route.query.board, uploadedBy: this.$store.state.ElectionBoard.userID })
       .catch((err) => {
         fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })
-        this.$router.replace('/project/election-board/verify')
+        this.$router.replace('/project/election-board/verify').catch((err) => {})
       })
     } else {
       fetchBoard(this.$store, { uploadedBy: this.$store.state.ElectionBoard.userID })

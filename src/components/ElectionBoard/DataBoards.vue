@@ -138,7 +138,7 @@ export default {
       this.showDataBoard = false
     },
     goUpload() {
-      this.$router.push(`/project/election-board/upload`)
+      this.$router.push(`/project/election-board/upload`).catch((err) => {})
       window.ga('send', 'event', 'projects', 'click', 'go upload from candidate')
     },
     handleLoadMore () {

@@ -227,7 +227,7 @@ export default {
       if (!(this.county && this.district)) return []
       const county = this.county.replace('台', '臺')
       const legislators = this.$store.state.ElectionBoard.candidates.legislators || []
-      const regex = new RegExp(`${this.district}|全國`)
+      const regex = new RegExp(`${county}|全國`)
       const candidates = legislators.filter((legis) => legis.district.match(regex))
       return candidates
     },
