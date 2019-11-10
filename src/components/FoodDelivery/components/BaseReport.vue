@@ -92,7 +92,6 @@ export default {
       if (newVal) {
         this.$el.scrollTop = 0
         this.currentReadReportId = this.clickedReportId
-        // this.reportIdx = 0
       }
     }
   }
