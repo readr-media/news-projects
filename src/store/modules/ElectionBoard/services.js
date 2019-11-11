@@ -6,6 +6,7 @@ const county = {
   '台北': '臺北',
   '台中': '臺中',
   '台南': '臺南',
+  '台東': '臺東'
 }
 
 function buildURL (url, params) {
@@ -13,7 +14,7 @@ function buildURL (url, params) {
     if (Array.isArray(params.county)) {
       params.county = JSON.stringify(params.county)
     } else {
-      params.county = params.county.replace(/台北|台中|台南/gi, (matched) => county[matched])
+      params.county = params.county.replace(/台北|台中|台南|台東/gi, (matched) => county[matched])
     }
   }
   const snakeCaseParams = mapKeys(params, (value, key) => snakeCase(key))

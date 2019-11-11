@@ -51,7 +51,7 @@ export default {
       districtSelected: this.getDistrict(this.address),
       errors: [],
       road: this.getRoad(this.address),
-      showBtn: false,
+      showBtn: false
     }
   },
   computed: {
@@ -65,7 +65,7 @@ export default {
     districts () {
       const county = ADMINISTRATIVE_DISTRICT.filter(item => item.county === this.countySelected) || []
       return county[0].districts || []
-    },
+    }
   },
   watch: {
     address (value) {

@@ -18,24 +18,24 @@ import { READR_SITE_URL } from '../../constants'
 
 import ElectionBoardStoreModule from '../../store/modules/ElectionBoard'
 
-const DEFAULT_PAGE = 1
+// const DEFAULT_PAGE = 1
 
-const fetchCandidates = (store, {
-  page = DEFAULT_PAGE,
-  type = 'presidents'
-} = {}) => {
-  store.dispatch('ElectionBoard/FETCH_CANDIDATES_FOR_VERIF', {
-    electionYear: 2020,
-    page,
-    type,
-    maxResults: 100
-  }).then((res) => {
-    if (res.next) {
-      fetchCandidates(store, { type, page: page + 1 })
-    }
-    return res
-  }).catch((err) => err)
-}
+// const fetchCandidates = (store, {
+//   page = DEFAULT_PAGE,
+//   type = 'presidents'
+// } = {}) => {
+//   store.dispatch('ElectionBoard/FETCH_CANDIDATES_FOR_VERIF', {
+//     electionYear: 2020,
+//     page,
+//     type,
+//     maxResults: 100
+//   }).then((res) => {
+//     if (res.next) {
+//       fetchCandidates(store, { type, page: page + 1 })
+//     }
+//     return res
+//   }).catch((err) => err)
+// }
 
 const fetchUserID = (store) => {
   return store.dispatch('ElectionBoard/FETCH_USER_ID')
@@ -158,8 +158,8 @@ export default {
   },
   beforeMount () {
     fetchUserID(this.$store)
-    fetchCandidates(this.$store),
-    fetchCandidates(this.$store, { type: 'legislators' })
+    // fetchCandidates(this.$store),
+    // fetchCandidates(this.$store, { type: 'legislators' })
   },
   destroyed () {
     this.$store.unregisterModule('ElectionBoard')
