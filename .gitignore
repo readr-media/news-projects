@@ -17,3 +17,5 @@ archives
 
 proj-assets/
 uploads/
+
+package-lock.json
