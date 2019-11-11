@@ -62,6 +62,7 @@
     <ElectionBoardBackBtn />
   </section>
 </template>
+
 <script>
 import ElectionBoardBackBtn from './ElectionBoardBackBtn.vue'
 import FormSelectCandidate from './FormSelectCandidate.vue'
@@ -72,6 +73,23 @@ import axios from 'axios'
 import { get, take } from 'lodash'
 
 const DEFAULT_PAGE = 1
+
+const fetchCandidates = (store, {
+  page = DEFAULT_PAGE,
+  type = 'presidents'
+} = {}) => {
+  store.dispatch('ElectionBoard/FETCH_CANDIDATES_FOR_VERIF', {
+    electionYear: 2020,
+    page,
+    type,
+    maxResults: 100
+  }).then((res) => {
+    if (res.next) {
+      fetchCandidates(store, { type, page: page + 1 })
+    }
+    return res
+  }).catch((err) => err)
+}
 
 const fetchBoard = (store, {
   skipBoard,
@@ -197,6 +215,8 @@ export default {
         this.hasError = true
       })
     }
+    fetchCandidates(this.$store),
+    fetchCandidates(this.$store, { type: 'legislators' })
   },
   methods: {
     buildRequestBody (isBoard) {

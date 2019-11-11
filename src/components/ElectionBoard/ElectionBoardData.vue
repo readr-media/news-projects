@@ -135,8 +135,10 @@ export default {
           return data.presidents.filter((candidate) => candidate.boards.coordinates || candidate.boards[0])
           break
         case 'legislators':
-          return data.legislators
-            .filter((legis) => legis.district.match(new RegExp(`${this.county}|全國`)))
+          const county = this.county.replace('台', '臺')
+          const district = this.$store.getters['ElectionBoard/isCountyOnlyHasOneDistrict'](county) ? county : this.district
+          
+          return data.legislators.filter((legis) => legis.district.match(new RegExp(`${district}|全國`)))
             .filter((candidate) => (candidate.boards.coordinates || candidate.boards[0]))
           break
         case 'mayors':
@@ -144,11 +146,9 @@ export default {
           break
         case 'councilors':
           const regions = _get(this.$store, [ 'state', 'ElectionBoard', 'elections', this.county, 'regions' ], [])
-          const constituency = regions
-            .filter((region) => region.district.match(new RegExp(`${this.district}|原住民`)))
+          const constituency = regions.filter((region) => region.district.match(new RegExp(`${this.district}|原住民`)))
             .map((region) => region.constituency) || []
-          return data.councilors
-            .filter(councilor => constituency.includes(councilor.constituency))
+          return data.councilors.filter(councilor => constituency.includes(councilor.constituency))
             .filter(candidate => (candidate.boards.coordinates || candidate.boards[0]))
           break
         default:

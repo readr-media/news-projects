@@ -225,9 +225,11 @@ export default {
     },
     legislatorCandidates () {
       if (!(this.county && this.district)) return []
-      const county = this.county.replace('台', '臺')
       const legislators = this.$store.state.ElectionBoard.candidates.legislators || []
-      const regex = new RegExp(`${county}|全國`)
+      const county = this.county.replace('台', '臺')
+      const district = this.$store.getters['ElectionBoard/isCountyOnlyHasOneDistrict'](county) ? county : this.district
+      
+      const regex = new RegExp(`${district}|全國`)    
       const candidates = legislators.filter((legis) => legis.district.match(regex))
       return candidates
     },

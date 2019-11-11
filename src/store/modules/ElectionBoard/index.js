@@ -1,3 +1,5 @@
+
+import getters from './getters'
 import actions from './actions'
 import mutations from './mutations'
 
@@ -22,6 +24,7 @@ export default {
     politiContribs: [],
     loadingStatus: ''
   }),
+  getters,
   actions,
   mutations,
 }
