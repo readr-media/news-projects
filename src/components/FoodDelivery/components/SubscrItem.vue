@@ -1,7 +1,6 @@
 <template>
   <section class="subscr-item">
-    <p>留下信箱，</p>
-    <p>第一時間獲得專題相關消息。</p>
+    <p>留下信箱，<br>第一時間獲得專題相關消息。</p>
     <Subscription />
   </section>
 </template>
@@ -18,13 +17,21 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../util/global.styl'
+
 .subscr-item
   text-align center
   // 層級不調高，focus 框會被擋住
   position relative
   z-index 9
+  & br
+    @media (min-width $mobile)
+      display none
   & .subscription-wrapper
     margin-top 20px
+    max-width 400px
+    margin-left auto
+    margin-right auto
     & .subscription
       // font-size 1.5rem
       &__input
@@ -45,4 +52,5 @@ export default {
         line-height 40px
         // width 18.75%
         flex 0 0 25%
+        max-width 70px
 </style>

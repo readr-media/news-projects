@@ -1,16 +1,17 @@
 <template>
-  <div class="base-report" id="base-report" @scroll="changeRouter" :class="{ show: isReportContent }">
+  <main class="base-report" id="base-report" @scroll="changeRouter" :class="{ show: isReportContent }">
     <!-- <HeaderIcons /> -->
     <!-- <section v-for="(reportId, idx) in currentReportIds" :key="`report-${reportId}`" :ref="`report${idx}`"> -->
-    <section v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)">
+    <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)">
       <div class="base-report__wrapper">
         <MapMarker :num="reportId" class="base-report__marker" />
       </div>
       <component :is="`ReportContent${reportId}`" />
       <ReportResult />
+      <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
     </section>
     <TheFooter />
-  </div>
+  </main>
 </template>
 
 <script>
@@ -20,6 +21,7 @@ const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
 // import HeaderIcons from './HeaderIcons.vue'
 import MapMarker from './MapMarker.vue'
 import ReportResult from './ReportResult.vue'
+import OrderIndex from './OrderIndex.vue'
 import TheFooter from './TheFooter.vue'
 
 export default {
@@ -28,6 +30,7 @@ export default {
     // HeaderIcons,
     MapMarker,
     ReportResult,
+    OrderIndex,
     TheFooter,
     ReportContent1: () => import('./ReportContent1.vue'),
     ReportContent2: () => import('./ReportContent2.vue'),
@@ -45,7 +48,8 @@ export default {
     ...mapState([
       'isReportContent',
       'clickedReportId',
-      'reportIds'
+      'reportIds',
+      'isMounted'
     ]),
     // currentReportIds () {
     //   const start = (this.clickedReportId - 1)
@@ -99,8 +103,11 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../util/global.styl'
+
 .base-report
   position fixed
+  // position absolute
   top 0
   left 0
   z-index 9
@@ -111,15 +118,24 @@ export default {
   transform translateX(100%)
   &.show
     transform translateX(0%)
+  &__report
+    position relative
   &__wrapper
     height 84px
     display flex
     align-items center
     justify-content center
     background-color #f5f4f5
+    @media (min-width $mobile)
+      height 120px
+    @media (min-width $tablet)
+      display none
   &__marker
     width 25.42px
     height 35.8px
-  & .marker-color
-    fill #000
+    @media (min-width $mobile)
+      width 28.4px
+      height 40px
+    & .marker-color
+      fill #000
 </style>

@@ -7,5 +7,8 @@ export default {
   },
   toggleInfo (state, isShow) {
     state.isInfo = isShow
+  },
+  setIsMounted (state) {
+    state.isMounted = true
   }
 }

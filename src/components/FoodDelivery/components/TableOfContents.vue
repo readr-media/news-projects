@@ -68,7 +68,8 @@ export default {
     }
   },
   mounted () {
-    this.lineH = this.$refs.nav.offsetHeight - 24.6
+    const height = this.$refs.nav.offsetHeight - 24.6
+    this.lineH = (height >= 0 ? height : 0)
   },
   // computed: {
   //   ...mapState([
@@ -91,12 +92,14 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../util/global.styl'
+
 .table-of-contents
   // background-image url(/proj-assets/food-delivery/img/map.jpg)
   // background-size cover
   // background-position center
   // background-repeat no-repeat
-  min-height 100vh
+  // min-height 100vh
   background-color rgba(#000, 0.3)
   overflow hidden
   // &.hide
@@ -127,7 +130,9 @@ export default {
     // padding-top 10px
     overflow hidden
     background-color #ffdc03
-    height calc(100vh - 84px)
+    min-height calc(100vh - 84px)
+    @media (min-width $mobile)
+      min-height calc(100vh - 120px)
   & li
     background-color #ffdc03
     padding-left 10px
@@ -138,6 +143,9 @@ export default {
     align-items center
     cursor pointer
     transition background-color 0.2s
+    @media (min-width $mobile)
+      padding-left 45px
+      padding-right 45px
     &:first-child
       padding-top 20px
     &:hover
@@ -149,6 +157,11 @@ export default {
         fill #000
   &__line
     position absolute
+    // 20 + (45 - 35.8) / 2
     top 24.6px
-    left 22.205px
+    // 10 + (25.42 / 2) - (1 / 2)
+    left 22.21px
+    @media (min-width $mobile)
+      // 45 + (25.42 / 2) - (1 / 2)
+      left 57.21px
 </style>

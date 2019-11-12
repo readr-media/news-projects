@@ -62,6 +62,8 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../util/global.styl'
+
 .the-info
   position absolute
   top 0
@@ -83,15 +85,26 @@ export default {
     align-items center
     top 0
     right 20px
+    @media (min-width $mobile)
+      height 120px
+      right 40px
   &__cancel
     width 20px
     display block
     cursor pointer
+    @media (min-width $mobile)
+      width 40px
   &__slides
     display flex
     padding-left 12.5vw
-    margin-bottom 15px
+    // margin-bottom 15px
     transition transform 0.32s
+    @media (min-width $mobile)
+      padding-left 0
+      padding-top 50px
+      // height calc(100vh - 120px)
+      // align-items center
+      justify-content center
   &__slide
     background-color #ffdc03
     display flex
@@ -108,14 +121,27 @@ export default {
     border-radius 24px
     padding-right 30px
     padding-left 30px
+    @media (min-width $mobile)
+      padding-right 0
+      padding-left 0
+      flex-basis 240px
+      height 240px
+    & .other-reports
+      @media (min-width $mobile)
+        max-width 180px
     & + .the-info__slide
       margin-left 6.25vw
+      @media (min-width $mobile)
+        margin-left 20px
     & img
       width 50px
       margin-bottom 10px
   &__pages
     display flex
     justify-content center
+    margin-top 15px
+    @media (min-width $mobile)
+      display none
   &__page
     border-radius 50%
     width 15px

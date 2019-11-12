@@ -30,4 +30,5 @@ export default {
     padding 10px 16px
     line-height normal
     width 100%
+    max-width 400px
 </style>

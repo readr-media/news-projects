@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="food-delivery">
     <HeaderIcons :class="{ hide: isInfo }" />
     <TableOfContents :class="{ hide: isReportContent || isInfo }" />
     <BaseReport :class="{ hide: isInfo }" >
@@ -48,7 +48,8 @@ export default {
   methods: {
     ...mapMutations([
       'toggleReportContent',
-      'changeClickedReportId'
+      'changeClickedReportId',
+      'setIsMounted'
     ])
   },
   created () {
@@ -64,6 +65,10 @@ export default {
     } else {
       this.$router.replace('/project/food-delivery').catch((err) => {})
     }
+    // window.addEventListener('resize')
+  },
+  mounted () {
+    this.setIsMounted()
   },
   beforeDestroy () {
     this.$store.unregisterModule('FoodDelivery')
@@ -84,10 +89,15 @@ body
   background-size contain
   background-position center top
   background-repeat repeat
+.food-delivery
+  max-width 800px
+  margin-right auto
+  margin-left auto
+  transform translateZ(0)
 img
   max-width 100%
   height auto
-html, div, h1, h2, p, a, strong, figure, figcaption, footer, header, section, ul, li
+html, div, h1, h2, h3, p, a, strong, figure, figcaption, footer, header, section, ul, li
   margin 0
   padding 0
   border 0
