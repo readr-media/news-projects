@@ -30,6 +30,8 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../util/global.styl'
+
 .the-footer
   background-color #ffdc03
   font-size 1.5rem
@@ -39,9 +41,17 @@ export default {
   position relative
   // padding-left 40px
   // padding-right 40px
+  @media (min-width $mobile)
+    padding-top 30px
   &__wrapper
     padding-left 40px
     padding-right 40px
+    max-width 600px
+    margin-left auto
+    margin-right auto
+    @media (min-width 680px)
+      padding-left 0
+      padding-right 0
   &__readr-img
     width 45px
     display block
@@ -49,13 +59,20 @@ export default {
     margin-bottom 15px
     margin-left auto
     margin-right auto
+    @media (min-width $mobile)
+      width 60px
+      margin-bottom 20px
   &__end-img
     vertical-align top
     width 100%
   &__other-reports
     margin-bottom 20px
+    @media (min-width $mobile)
+      margin-bottom 30px
   &__donate
     margin-bottom 20px
+    @media (min-width $mobile)
+      margin-bottom 30px
   &__share
     position absolute
     bottom 0
@@ -71,10 +88,17 @@ export default {
     flex-direction column
     padding-top 20px
     cursor pointer
+    @media (min-width $mobile)
+      width 300px
+      height 300px
+      padding-top 32px
     & img
       width 30px
       vertical-align middle
       margin-bottom 4px
+      @media (min-width $mobile)
+        width 60px
+        margin-bottom 10px
     & p
       font-size 1.8rem
       color #fff
