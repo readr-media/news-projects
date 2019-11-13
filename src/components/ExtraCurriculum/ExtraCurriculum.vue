@@ -104,6 +104,9 @@ export default {
     font-size 0
     img
       width 100%
+  >>> h1, >>> h2, >>> p, >>> a
+    word-break break-word
+    word-wrap break-word
   h2, p
     color #4a4a4a
   h2
@@ -115,6 +118,7 @@ export default {
     font-size .9375rem
     line-height 1.87
     text-align justify
+  
   &__landing
     width 100%
     height 414px

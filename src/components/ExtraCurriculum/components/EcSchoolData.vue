@@ -30,7 +30,7 @@
     </div>
     <div class="info">
       <img src="/proj-assets/extra-curriculum/clock.png" alt="">
-      <div>
+      <div class="info__content">
         <p class="heading">
           <span>苗栗縣</span><span>新興區</span><span>海寶國小</span>晨光時間 <span>有</span> 校外團體
         </p>
@@ -182,5 +182,7 @@ export default {
       p.heading
         margin-top 5px
         text-align left
+      &__content
+        flex 1
 
 </style>
