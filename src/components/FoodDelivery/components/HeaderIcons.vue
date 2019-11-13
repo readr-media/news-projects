@@ -1,6 +1,6 @@
 <template>
   <div class="header-icons">
-    <img class="header-icons__enter" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="" @click="showTOC" v-show="isReportContent && $store.state.viewport[0] <= 767.98">
+    <img class="header-icons__enter" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="" @click="showTOC" v-show="isMounted && isReportContent && $store.state.viewport[0] <= 767.98">
     <div class="header-icons__wrapper">
       <a href="https://www.readr.tw/donate" target="_blank"><img class="header-icons__donate" src="/proj-assets/food-delivery/img/donate--comp.svg" alt=""></a>
       <img class="header-icons__info" src="/proj-assets/food-delivery/img/info--comp.svg" alt="" @click="toggleInfo(true)">
@@ -16,7 +16,8 @@ export default {
   name: 'HeaderIcons',
   computed: {
     ...mapState([
-      'isReportContent'
+      'isReportContent',
+      'isMounted'
     ])
   },
   methods: {
@@ -48,6 +49,7 @@ export default {
   padding-right 20px
   box-sizing border-box
   user-select none
+  max-width 800px
   @media (min-width $mobile)
     height 120px
     padding-left 40px

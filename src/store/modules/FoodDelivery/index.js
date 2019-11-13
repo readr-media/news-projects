@@ -10,6 +10,7 @@ export default {
     reportIds: [ 1, 2, 3, 4, 5 ],
     isInfo: false,
     isMounted: false
+    // isScrollBar: false
   }),
   // actions,
   mutations

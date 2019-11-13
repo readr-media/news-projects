@@ -29,6 +29,8 @@ const { mapMutations } = createNamespacedHelpers('FoodDelivery')
 import UserStatus from './UserStatus.vue'
 import MapMarker from './MapMarker.vue'
 
+const scrollIntoView = require('scroll-into-view')
+
 export default {
   name: 'TableOfContents',
   components: {
@@ -37,30 +39,31 @@ export default {
   },
   data () {
     return {
+      // todo time
       contents: [
         {
           id: 1,
-          title: '外送業的難題',
+          title: '如何成為外送員',
           time: '02 : 30'
         },
         {
           id: 2,
-          title: '我要如何成為外送員？',
+          title: '美食外送平台解決了什麼問題',
           time: '05 : 15'
         },
         {
           id: 3,
-          title: '市場龍頭大戰：開拓店家',
+          title: '司機管理仰賴檢舉和評價',
           time: '07 : 56'
         },
         {
           id: 4,
-          title: '消費者促銷優惠',
+          title: '外送員最害怕的事：車禍',
           time: '06 : 38'
         },
         {
           id: 5,
-          title: '為了賺更多錢剝削外送員',
+          title: '外送產業帶來的好與壞',
           time: '04 : 40'
         }
       ],
@@ -83,9 +86,12 @@ export default {
       'changeClickedReportId'
     ]),
     showReport (id) {
-      this.toggleReportContent(true)
-      this.changeClickedReportId(id)
-      this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
+      const reportEl = document.getElementById(`report${id}`)
+      scrollIntoView(reportEl, { time: 0, align: { top: 0, left: 0 } }, () => {
+        this.changeClickedReportId(id)
+        this.toggleReportContent(true)
+        this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
+      })
     }
   }
 }
@@ -116,6 +122,7 @@ export default {
     color #4a4a4a
     line-height normal
     transition all 0.2s
+  // todo max-width
   &__title
     font-size 1.8rem
   &__time

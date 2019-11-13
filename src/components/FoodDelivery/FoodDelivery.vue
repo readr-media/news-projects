@@ -1,9 +1,15 @@
 <template>
+  <!-- <div class="food-delivery" :class="{ 'overflow-h': !isScrollBar }"> -->
   <div class="food-delivery">
-    <HeaderIcons :class="{ hide: isInfo }" />
-    <TableOfContents :class="{ hide: isReportContent || isInfo }" />
-    <BaseReport :class="{ hide: isInfo }" >
-    </BaseReport>
+    <HeaderIcons :class="{ 'opacity-0': isInfo }" />
+    <!-- todo transition -->
+    <TableOfContents :class="{ 'opacity-0': isReportContent || isInfo }" />
+    <!-- <TableOfContents :class="{ 'opacity-0': isInfo }" /> -->
+    <!-- todo v-if -->
+    <!-- <transition name="slideLeft"> -->
+    <BaseReport :class="{ 'opacity-0': isInfo, 'visibility-h': !isReportContent }" />
+    <!-- </transition> -->
+
     <TheInfo v-if="isInfo" />
   </div>
 </template>
@@ -12,6 +18,11 @@
 import FoodDeliveryStoreModule from '../../store/modules/FoodDelivery'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
+
+// import smoothscroll from 'smoothscroll-polyfill'
+// if (typeof window !== 'undefined') {
+//   smoothscroll.polyfill()
+// }
 
 import HeaderIcons from './components/HeaderIcons.vue'
 import TableOfContents from './components/TableOfContents.vue'
@@ -42,8 +53,13 @@ export default {
   computed: {
     ...mapState([
       'isReportContent',
-      'isInfo'
+      'isInfo',
+      'isScrollBar'
     ])
+  },
+  watch: {
+    '$route' (to, from) {
+    }
   },
   methods: {
     ...mapMutations([
@@ -55,13 +71,13 @@ export default {
   created () {
     this.$store.registerModule('FoodDelivery', FoodDeliveryStoreModule)
     const params = this.$route.params.params || ''
-    // todo [1-?]
     const regex = /^(order[1-5])$/i
 
     if (params.match(regex)) {
       const orderNum = Number(params.split('order')[1])
-      this.toggleReportContent(true)
       this.changeClickedReportId(orderNum)
+      // console.log(document.getElementById(`report${orderNum}`))
+      this.toggleReportContent(true)
     } else {
       this.$router.replace('/project/food-delivery').catch((err) => {})
     }
@@ -93,7 +109,9 @@ body
   max-width 800px
   margin-right auto
   margin-left auto
-  transform translateZ(0)
+  // transform translateZ(0)
+  // overflow hidden
+  position relative
 img
   max-width 100%
   height auto
@@ -111,9 +129,17 @@ button
   font-family $ff-sans-serif
 a
   cursor pointer
-.hide
-  // visibility hidden
+.opacity-0
   opacity 0
-// .op0
-//   opacity 0
+.visibility-h
+  visibility hidden
+// .overflow-h
+//   overflow hidden
+// transition
+// .slideLeft
+//   // todo
+//   &-enter-active, &-leave-active
+//     transition transform 0.32s
+//   &-enter, &-leave-to
+//     transform translateX(100%)
 </style>

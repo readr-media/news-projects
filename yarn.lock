@@ -7889,6 +7889,11 @@ schema-utils@^2.0.0, schema-utils@^2.4.1, schema-utils@^2.5.0:
     ajv "^6.10.2"
     ajv-keywords "^3.4.1"
 
+scroll-into-view@^1.12.2:
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/scroll-into-view/-/scroll-into-view-1.12.2.tgz#23207834ac32c914cd259f18c758fa3ad8222fb1"
+  integrity sha512-bRfeapQ5YQPNCqH1b2qXTRTOvVabkbp/YUpd/Ud54XurKKns+Qg53r5VL1vnEe1xEPlvqCj6gtXrnHXWNxBJ4Q==
+
 scrollama@^1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/scrollama/-/scrollama-1.4.4.tgz#e0fd474e04c0be4c95d08280bdc2d636f619db59"
