@@ -1,28 +1,30 @@
 <template>
   <section class="the-info">
-    <UserStatus />
-    <div class="the-info__wrapper">
-      <img class="the-info__cancel" src="/proj-assets/food-delivery/img/x--comp.svg" alt="" @click="toggleInfo(false)">
-    </div>
-    <div class="the-info__slides" :style="{ transform: `translateX(-${81.25 * (currentPage - 1)}vw)` }">
-      <!-- <div class="the-info__slide" style="padding-top: 20px;"> -->
-      <div class="the-info__slide">
-        <img src="/proj-assets/food-delivery/img/readr--comp.svg" alt="">
-        <p>文字：名字名字</p>
-        <p>攝影：名字名字、名字名</p>
-        <p>設計：名字名</p>
-        <p>插畫：名字</p>
-        <p>工程：名字名字</p>
-        <p>監製：名字名字、名字名字</p>
+    <div class="the-info__container">
+      <UserStatus />
+      <div class="the-info__wrapper">
+        <img class="the-info__cancel" src="/proj-assets/food-delivery/img/x--comp.svg" alt="" @click="toggleInfo(false)">
       </div>
-      <!-- <div class="the-info__slide" style="padding-top: 25px;"> -->
-      <div class="the-info__slide">
-        <OtherReports />
+      <div class="the-info__slides" :style="{ transform: `translateX(-${81.25 * (currentPage - 1)}vw)` }">
+        <!-- <div class="the-info__slide" style="padding-top: 20px;"> -->
+        <div class="the-info__slide">
+          <img src="/proj-assets/food-delivery/img/readr--comp.svg" alt="">
+          <p>文字：名字名字</p>
+          <p>攝影：名字名字、名字名</p>
+          <p>設計：名字名</p>
+          <p>插畫：名字</p>
+          <p>工程：名字名字</p>
+          <p>監製：名字名字、名字名字</p>
+        </div>
+        <!-- <div class="the-info__slide" style="padding-top: 25px;"> -->
+        <div class="the-info__slide">
+          <OtherReports />
+        </div>
       </div>
-    </div>
-    <div class="the-info__pages">
-      <div class="the-info__page" :class="{ active: currentPage === 1 }" @click="showPage(1)"></div>
-      <div class="the-info__page" :class="{ active: currentPage === 2 }" @click="showPage(2)"></div>
+      <div class="the-info__pages">
+        <div class="the-info__page" :class="{ active: currentPage === 1 }" @click="showPage(1)"></div>
+        <div class="the-info__page" :class="{ active: currentPage === 2 }" @click="showPage(2)"></div>
+      </div>
     </div>
   </section>
 </template>
@@ -65,7 +67,7 @@ export default {
 @import '../util/global.styl'
 
 .the-info
-  position absolute
+  position fixed
   top 0
   left 0
   // background-image url(/proj-assets/food-delivery/img/map.jpg)
@@ -73,11 +75,17 @@ export default {
   // background-position center
   // background-repeat no-repeat
   width 100%
-  height 100vh
+  // height 100vh
   z-index 999
   line-height normal
   overflow hidden
   background-color rgba(#000, 0.3)
+  &__container
+    min-height 100vh
+    max-width 800px
+    position relative
+    margin-right auto
+    margin-left auto
   &__wrapper
     position absolute
     height 84px

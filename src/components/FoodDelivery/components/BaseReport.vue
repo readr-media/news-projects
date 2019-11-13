@@ -1,28 +1,45 @@
 <template>
-  <main class="base-report" id="base-report" @scroll="changeRouter" :class="{ show: isReportContent }">
+  <!-- <main class="base-report" id="base-report" @scroll="changeRouter" :class="{ show: isReportContent }"> -->
+  <main class="base-report" @scroll="changeRouter">
     <!-- <HeaderIcons /> -->
     <!-- <section v-for="(reportId, idx) in currentReportIds" :key="`report-${reportId}`" :ref="`report${idx}`"> -->
-    <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)">
-      <div class="base-report__wrapper">
-        <MapMarker :num="reportId" class="base-report__marker" />
-      </div>
-      <component :is="`ReportContent${reportId}`" />
-      <ReportResult />
-      <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
-    </section>
-    <TheFooter />
+    <!-- <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)"> -->
+    <div class="base-report__container">
+      <!-- <transition name="slideLeft"> -->
+        <div class="base-report__reports-wrapper" :class="{ show: isReportContent }">
+        <!-- <div class="base-report__reports-wrapper" v-show="isReportContent"> -->
+          <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" :id="`report${reportId}`">
+            <div class="base-report__marker-wrapper">
+              <MapMarker :num="reportId" class="base-report__marker" />
+            </div>
+            <component :is="`ReportContent${reportId}`" />
+            <ReportResult />
+            <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
+          </section>
+          <TheFooter />
+        </div>
+      <!-- </transition> -->
+    </div>
   </main>
 </template>
 
 <script>
+const scrollIntoView = require('scroll-into-view')
+
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
+const { mapState } = createNamespacedHelpers('FoodDelivery')
 
 // import HeaderIcons from './HeaderIcons.vue'
 import MapMarker from './MapMarker.vue'
 import ReportResult from './ReportResult.vue'
 import OrderIndex from './OrderIndex.vue'
 import TheFooter from './TheFooter.vue'
+
+import ReportContent1 from './ReportContent1.vue'
+import ReportContent2 from './ReportContent2.vue'
+import ReportContent3 from './ReportContent3.vue'
+import ReportContent4 from './ReportContent4.vue'
+import ReportContent5 from './ReportContent5.vue'
 
 export default {
   name: 'BaseReport',
@@ -32,15 +49,26 @@ export default {
     ReportResult,
     OrderIndex,
     TheFooter,
-    ReportContent1: () => import('./ReportContent1.vue'),
-    ReportContent2: () => import('./ReportContent2.vue'),
-    ReportContent3: () => import('./ReportContent3.vue'),
-    ReportContent4: () => import('./ReportContent4.vue'),
-    ReportContent5: () => import('./ReportContent5.vue')
+    // ReportContent1: () => import('./ReportContent1.vue'),
+    // ReportContent2: () => import('./ReportContent2.vue'),
+    // ReportContent3: () => import('./ReportContent3.vue'),
+    // ReportContent4: () => import('./ReportContent4.vue'),
+    // ReportContent5: () => import('./ReportContent5.vue')
+    ReportContent1,
+    ReportContent2,
+    ReportContent3,
+    ReportContent4,
+    ReportContent5
+  },
+  beforeMount () {
+    const reportEl = document.getElementById(`report${this.clickedReportId}`)
+    scrollIntoView(reportEl, { time: 0, align: { top: 0, left: 0 } })
   },
   data () {
     return {
       // reportIdx: 0
+      // wEl: null,
+      // canChangeRouter: false,
       currentReadReportId: 1
     }
   },
@@ -50,53 +78,46 @@ export default {
       'clickedReportId',
       'reportIds',
       'isMounted'
-    ]),
+    ])
     // currentReportIds () {
     //   const start = (this.clickedReportId - 1)
     //   return this.reportIds.slice(start)
     // }
-    reportIdsNeedToShow () {
-      const start = (this.clickedReportId - 1)
-      return this.reportIds.slice(start)
-    }
+    // reportIdsNeedToShow () {
+    //   const start = (this.clickedReportId - 1)
+    //   return this.reportIds.slice(start)
+    // }
   },
   methods: {
-    ...mapMutations([
-      'changeClickedReportId'
-    ]),
     changeRouter () {
-      // this.currentReadReportId = this.clickedReportId
-      const reportContainer = this.$el
+      // if (!this.canChangeRouter) return
+      const reportBase = this.$el
       const reportPrev = this.$refs.report[this.currentReadReportId - 1]
-      const reportNext = this.$refs.report[this.currentReadReportId] || reportContainer.scrollHeight
-      // let currentReportId
-      // console.log(this.reportIdx);
-      
-      // const reportPrev = this.$refs[`report${this.reportIdx}`][0]
-      // const reportNext = this.$refs[`report${this.reportIdx + 1}`][0] || reportContainer.scrollHeight
+      const reportNext = this.$refs.report[this.currentReadReportId] || reportBase.scrollHeight
 
-      const reportContainerScrollT = reportContainer.scrollTop
+      const reportBaseScrollT = reportBase.scrollTop
       const reportPrevOffsetT = reportPrev.offsetTop
       const reportNextOffsetT = reportNext.offsetTop
-
-      if (reportContainerScrollT >= reportNextOffsetT) {
-        // this.reportIdx += 1
-        // this.changeClickedReportId()
+      
+      if (reportBaseScrollT >= reportNextOffsetT) {
         this.currentReadReportId += 1
         this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
-      } else if (reportContainerScrollT < reportPrevOffsetT) {
-        // this.reportIdx -= 1
+        // this.wEl.history.replaceState({}, '', `/project/food-delivery/order${this.currentReadReportId}`)
+      } else if (reportBaseScrollT < reportPrevOffsetT) {
         this.currentReadReportId -= 1
         this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
+        // this.wEl.history.replaceState({}, '', `/project/food-delivery/order${this.currentReadReportId}`)
       }
     }
   },
   watch: {
-    isReportContent (newVal) {
-      if (newVal) {
-        this.$el.scrollTop = 0
-        this.currentReadReportId = this.clickedReportId
-      }
+    isReportContent: {
+      handler (newVal) {
+        if (newVal) {
+          this.currentReadReportId = this.clickedReportId
+        }
+      },
+      immediate: true
     }
   }
 }
@@ -115,12 +136,25 @@ export default {
   width 100%
   height 100%
   overflow-y auto
-  transform translateX(100%)
-  &.show
-    transform translateX(0%)
+  // max-width 800px
+  // max-width 800px
+  // transform translateX(100%)
+  // transition transform 0.32s
+  // &.show
+  //   transform translateX(0)
+  &__container
+    max-width 800px
+    margin-left auto
+    margin-right auto
+    overflow hidden
+  &__reports-wrapper
+    transform translateX(100%)
+    transition transform 0.32s
+    &.show
+      transform translateX(0%)
   &__report
     position relative
-  &__wrapper
+  &__marker-wrapper
     height 84px
     display flex
     align-items center
