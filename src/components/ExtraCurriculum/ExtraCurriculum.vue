@@ -19,6 +19,7 @@
           <figcaption>照片圖說照片圖說</figcaption>
         </figure>
       </article>
+      <EcSchoolData class="ec__school-data"/>
       <section class="ec__credit">
         <p>
           <span>credit</span>
@@ -34,9 +35,21 @@
 </template>
 <script>
 
+import storeModule from '../../store/modules/ExtraCurriculum'
+
+const fetchElementarySchoolData = store => store
+  .dispatch('ExtraCurriculum/FETCH_SCHOOL_DATA', {
+    params: {
+      spreadsheetId: '12TTAKuaDKL_v6u80HFQWPEHr7eueKUHAf_XXYZ8z_z8',
+      range: '學校明細（all）!B:K'
+    }
+  })
+
+
 export default {
   name: 'ExtraCurriculum',
   components: {
+    EcSchoolData: () => import('./components/EcSchoolData.vue'),
     EcSidebar: () => import('./components/EcSidebar.vue'),
     EcSubscription: () => import('./components/EcSubscription.vue')
   },
@@ -52,6 +65,19 @@ export default {
     return {
       openSidebar: false
     }
+  },
+  serverPrefetch () {
+    this.registerStoreModule()
+    return Promise.resolve()
+  },
+  beforeMount () {
+    this.registerStoreModule(true)
+    fetchElementarySchoolData(this.$store)
+  },
+  methods: {
+    registerStoreModule (shouldPreserveState = false) {
+      this.$store.registerModule('ExtraCurriculum', storeModule, { preserveState: shouldPreserveState })
+    },
   }
 }
 </script>
@@ -113,6 +139,10 @@ export default {
       font-weight 300
       text-align center
 
+  &__school-data
+    width 100% !important
+    padding 30px 5%
+    margin-top 40px
   &__credit
     margin-top 30px
     p
@@ -172,4 +202,7 @@ export default {
       padding-left 400px
       > *
         width 80%
+    &__school-data
+      padding-left 10%
+      padding-right 10%
 </style>
