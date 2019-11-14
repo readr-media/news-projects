@@ -1,20 +1,18 @@
 <template>
   <div class="fact-check">
     <section class="section landing">
-      <h1>2020<br>總統候選人之<br>事實查核計畫</h1>
-      <div class="landing__image">
-        <img class="quote left-top" src="/proj-assets/fact-check/landing_quote.png" alt="">
-        <img class="quote left-bottom" src="/proj-assets/fact-check/landing_quote.png" alt="">
-        <img class="quote right-top" src="/proj-assets/fact-check/landing_quote.png" alt="">
-        <img class="quote right-bottom" src="/proj-assets/fact-check/landing_quote.png" alt="">
-        <picture>
-          <source srcset="/proj-assets/fact-check/landing_main.webp" type="image/webp">
-          <img src="/proj-assets/fact-check/landing_main.png" alt="">
-        </picture>
-        <img class="magnifier middle" src="/proj-assets/fact-check/landing_middle.jpg" alt="">
-        <div class="magnifier bottom" />
+      <div class="landing__title">
+        <h1><span class="small">2020 總統候選人</span><br>事實查核計畫</h1>
+        <h3>2020 總統大選在即，總統候選人在公開的發言中，<br>有幾分真？幾分假？我們一起來看看！</h3>
       </div>
-      <h3>2020 總統大選在即，總統候選人在公開的發言中，<br>有幾分真？幾分假？我們一起來看看！</h3>
+      <div class="landing__image">
+        <picture>
+          <source media="(min-width: 768px)" srcset="/proj-assets/fact-check/landing_desktop.webp" type="image/webp"/>
+          <source media="(min-width: 768px)" srcset="/proj-assets/fact-check/landing_desktop.png" />
+          <source srcset="/proj-assets/fact-check/landing_mobile.webp" type="image/webp">
+          <img src="/proj-assets/fact-check/landing_mobile.png" alt="2020 總統候選人事實查核計畫">
+        </picture>
+      </div>
     </section>
     <section class="section process">
       <h2>本專案透過四個步驟進行</h2>
@@ -273,7 +271,7 @@ export default {
       title: '2020 總統候選人之事實查核計畫',
       description: '2020 總統大選在即，總統候選人在公開的發言中，有幾分真？幾分假？我們一起來看看！',
       metaUrl: 'fact-check-2020',
-      metaImage: 'fact-check/og-v2.jpg',
+      metaImage: 'fact-check/og-v3.jpg',
     }
   },
   data () {
@@ -501,65 +499,48 @@ export default {
     border none
     cursor pointer
   .landing
+    position relative
     display flex
     flex-direction column
     min-height 100vh
     padding 0 !important
     text-align center
     overflow hidden
-    h1
-      margin-top 60px
-      color #e56300
-      line-height 1.3
-    h3
-      max-width 90%
-      margin 10px auto 0
-      line-height 1.7
-      text-align justify
+    &__title
+      position absolute
+      top 45%
+      left 50%
+      transform translate(-50%, -100%)
+      width 255px
+      z-index 1
+      h1
+        margin 0 auto
+        color #e56300
+        line-height 1.3
+        span.small
+          font-size 2rem
+      h3
+        max-width 252px
+        margin 20px auto 0
+        font-size 1.125rem
+        line-height 1.7
+        text-align justify
+        br
+          display none
     &__image
-      position relative
-      width 60%
-      margin 10px auto 0
+      position absolute
+      left 0
+      bottom 0
+      width 100%
       img, picture
         width 100%
       picture
         display block
-      .quote
-        position absolute
-        z-index 10
-        &.left-top
-          top 30%
-          left 0
-          width 100px
-          transform translate(-80%, -50%)
-        &.left-bottom
-          display none
-        &.right-top
-          top 10%
-          right 0
-          width 100px
-          transform scaleX(-1) translate(-70%, -50%)
-        &.right-bottom
-          display none
 
-      .magnifier
-        position absolute
-        &.middle
-          top 50%
-          right 0
-          width 30px
-          transform translate(100%, -50%)
-        &.bottom
-          top 50%
-          right 0
-          width 50%
-          height 40px
-          transform translate(calc(100% + 29px), -50%)
-          background-image url(/proj-assets/fact-check/landing_bottom.jpg)
-          background-repeat repeat-x
   .section
     padding 20px 0 75px
   .process
+    padding-top 40px
     > p
       max-width 95%
       margin 20px auto 0
@@ -684,31 +665,19 @@ export default {
 @media (min-width: 768px)
   .fact-check
     .landing
-      h3
-        margin-top 30px
-        text-align center
-      &__image
-        margin-top 30px
-        max-width 350px
-        .quote
-          &.left-top
-            width 150px
-          &.left-bottom
-            display block
-            top 50%
-            left 0
-            width 100px
-            transform translate(-80%, 0)
-          &.right-top
-            width 150px
-            top 15%
-            transform scaleX(-1) translate(-80%, -50%)
-          &.right-bottom
-            display block
-            top 60%
-            right 0
-            width 100px
-            transform scaleX(-1) translate(-60%, -20%)
+      &__title
+        top 45%
+        width 60%
+        transform translate(-50%, -50%)
+        h1
+          font-size 4.625rem
+          span.small
+            font-size 3rem
+        h3
+          max-width 440px
+          margin-top 30px
+          font-size 1.625rem
+          text-align center
     .process
       > p
         max-width 60%
@@ -773,33 +742,31 @@ export default {
       h1
         margin-top 0
 
+@media (min-width: 900px)
+  .fact-check
+    .landing
+      &__title
+        top calc(10% + 50px)
+        transform translateX(-50%)
+        width 700px
+        h1
+          font-size 3rem
+          span.small
+            font-size 3rem
+          br
+            display none
+        h3
+          max-width 700px
+          font-size 1.25rem
+          br
+            display inline
 @media (min-width: 1024px)
   .fact-check
     h1
       font-size 3rem
     h3
       font-size 1.25rem
-    .landing
-      &__image
-        margin-top 3%
-        .quote.left-top
-          width 200px
-          transform translate(-120%, -50%)
-        .quote.left-bottom
-          width 120px
-          transform translate(-120%, 40%)
-        .quote.right-top
-          width 200px
-          transform scaleX(-1) translate(-110%, -50%)
-        .quote.right-bottom
-          width 120px
-          transform scaleX(-1) translate(-60%, 30%)
-        .magnifier.middle
-          width 60px
-        .magnifier.bottom
-          width 100%
-          height 90px
-          transform translate(calc(100% + 59px), -50%)
+        
     .process
       display flex
       flex-direction column
@@ -847,8 +814,4 @@ export default {
           & + p
             margin 0 0 0 1em
 
-@media (min-width: 1024px) and (min-height: 900px)
-  .fact-check
-    .landing__image
-      max-width 550px
 </style>
