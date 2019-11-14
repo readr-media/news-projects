@@ -136,10 +136,10 @@ a
 // .overflow-h
 //   overflow hidden
 // transition
-// .slideLeft
-//   // todo
-//   &-enter-active, &-leave-active
-//     transition transform 0.32s
-//   &-enter, &-leave-to
-//     transform translateX(100%)
+.slideLeft
+  // todo
+  &-enter-active, &-leave-active
+    transition transform 0.32s
+  &-enter, &-leave-to
+    transform translateX(100%)
 </style>

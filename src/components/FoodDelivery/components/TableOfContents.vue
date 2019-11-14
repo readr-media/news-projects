@@ -29,7 +29,7 @@ const { mapMutations } = createNamespacedHelpers('FoodDelivery')
 import UserStatus from './UserStatus.vue'
 import MapMarker from './MapMarker.vue'
 
-const scrollIntoView = require('scroll-into-view')
+// const scrollIntoView = require('scroll-into-view')
 
 export default {
   name: 'TableOfContents',
@@ -44,27 +44,27 @@ export default {
         {
           id: 1,
           title: '如何成為外送員',
-          time: '02 : 30'
+          time: '05:02'
         },
         {
           id: 2,
           title: '美食外送平台解決了什麼問題',
-          time: '05 : 15'
+          time: '03:10'
         },
         {
           id: 3,
           title: '司機管理仰賴檢舉和評價',
-          time: '07 : 56'
+          time: '07:28'
         },
         {
           id: 4,
           title: '外送員最害怕的事：車禍',
-          time: '06 : 38'
+          time: '05:30'
         },
         {
           id: 5,
           title: '外送產業帶來的好與壞',
-          time: '04 : 40'
+          time: '01:40'
         }
       ],
       lineH: 0
@@ -86,12 +86,12 @@ export default {
       'changeClickedReportId'
     ]),
     showReport (id) {
-      const reportEl = document.getElementById(`report${id}`)
-      scrollIntoView(reportEl, { time: 0, align: { top: 0, left: 0 } }, () => {
+      // const reportEl = document.getElementById(`report${id}`)
+      // scrollIntoView(reportEl, { time: 0, align: { top: 0, left: 0 } }, () => {
         this.changeClickedReportId(id)
         this.toggleReportContent(true)
         this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
-      })
+      // })
     }
   }
 }
