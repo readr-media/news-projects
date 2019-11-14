@@ -9,12 +9,11 @@
         <!-- <div class="the-info__slide" style="padding-top: 20px;"> -->
         <div class="the-info__slide">
           <img src="/proj-assets/food-delivery/img/readr--comp.svg" alt="">
-          <p>文字：名字名字</p>
-          <p>攝影：名字名字、名字名</p>
-          <p>設計：名字名</p>
-          <p>插畫：名字</p>
-          <p>工程：名字名字</p>
-          <p>監製：名字名字、名字名字</p>
+          <p>文字採訪／李又如</p>
+          <p>設計／陳怡蒨</p>
+          <p>插畫／許玲瑋</p>
+          <p>工程／林昱帆</p>
+          <p>攝影／李昭妟、簡信昌</p>
         </div>
         <!-- <div class="the-info__slide" style="padding-top: 25px;"> -->
         <div class="the-info__slide">

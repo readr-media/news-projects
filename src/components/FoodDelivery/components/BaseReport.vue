@@ -1,13 +1,16 @@
 <template>
   <!-- <main class="base-report" id="base-report" @scroll="changeRouter" :class="{ show: isReportContent }"> -->
-  <main class="base-report" @scroll="changeRouter">
+  <main class="base-report" id="base-report" @scroll="changeRouter">
     <!-- <HeaderIcons /> -->
     <!-- <section v-for="(reportId, idx) in currentReportIds" :key="`report-${reportId}`" :ref="`report${idx}`"> -->
     <!-- <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)"> -->
     <div class="base-report__container">
-      <!-- <transition name="slideLeft"> -->
-        <div class="base-report__reports-wrapper" :class="{ show: isReportContent }">
-        <!-- <div class="base-report__reports-wrapper" v-show="isReportContent"> -->
+      <transition
+        name="slideLeft"
+        @enter="scrollToReport"
+      >
+        <!-- <div class="base-report__reports-wrapper" :class="{ show: isReportContent }"> -->
+        <div v-show="isReportContent">
           <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" :id="`report${reportId}`">
             <div class="base-report__marker-wrapper">
               <MapMarker :num="reportId" class="base-report__marker" />
@@ -18,7 +21,7 @@
           </section>
           <TheFooter />
         </div>
-      <!-- </transition> -->
+      </transition>
     </div>
   </main>
 </template>
@@ -29,7 +32,6 @@ const scrollIntoView = require('scroll-into-view')
 import { createNamespacedHelpers } from 'vuex'
 const { mapState } = createNamespacedHelpers('FoodDelivery')
 
-// import HeaderIcons from './HeaderIcons.vue'
 import MapMarker from './MapMarker.vue'
 import ReportResult from './ReportResult.vue'
 import OrderIndex from './OrderIndex.vue'
@@ -61,8 +63,7 @@ export default {
     ReportContent5
   },
   beforeMount () {
-    const reportEl = document.getElementById(`report${this.clickedReportId}`)
-    scrollIntoView(reportEl, { time: 0, align: { top: 0, left: 0 } })
+    this.scrollToReport()
   },
   data () {
     return {
@@ -70,6 +71,7 @@ export default {
       // wEl: null,
       // canChangeRouter: false,
       currentReadReportId: 1
+      // isTransition: false
     }
   },
   computed: {
@@ -79,18 +81,11 @@ export default {
       'reportIds',
       'isMounted'
     ])
-    // currentReportIds () {
-    //   const start = (this.clickedReportId - 1)
-    //   return this.reportIds.slice(start)
-    // }
-    // reportIdsNeedToShow () {
-    //   const start = (this.clickedReportId - 1)
-    //   return this.reportIds.slice(start)
-    // }
   },
   methods: {
+    // todo 切換時會不準（scroll 沒到位）
     changeRouter () {
-      // if (!this.canChangeRouter) return
+      if (!this.isReportContent) return
       const reportBase = this.$el
       const reportPrev = this.$refs.report[this.currentReadReportId - 1]
       const reportNext = this.$refs.report[this.currentReadReportId] || reportBase.scrollHeight
@@ -108,6 +103,10 @@ export default {
         this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
         // this.wEl.history.replaceState({}, '', `/project/food-delivery/order${this.currentReadReportId}`)
       }
+    },
+    scrollToReport () {
+      const reportEl = document.getElementById(`report${this.clickedReportId}`)
+      scrollIntoView(reportEl, { time: 0, align: { top: 0, left: 0 } })
     }
   },
   watch: {
@@ -137,7 +136,6 @@ export default {
   height 100%
   overflow-y auto
   // max-width 800px
-  // max-width 800px
   // transform translateX(100%)
   // transition transform 0.32s
   // &.show
@@ -147,11 +145,14 @@ export default {
     margin-left auto
     margin-right auto
     overflow hidden
-  &__reports-wrapper
-    transform translateX(100%)
-    transition transform 0.32s
-    &.show
-      transform translateX(0%)
+  // &__reports-wrapper
+  //   // transform translateX(100%)
+  //   left 100%
+  //   // transition transform 0.32s
+  //   transition left 0.32s
+  //   &.show
+  //     left 0%
+  //     // transform translateX(0%)
   &__report
     position relative
   &__marker-wrapper

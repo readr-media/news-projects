@@ -7,6 +7,7 @@
   padding-bottom 42px
   position relative
   background-color #f5f4f5
+  line-height normal
   // @media (min-width $mobile)
   //   padding-left 100px
   //   padding-right 100px
@@ -21,13 +22,41 @@
     max-width 600px
     margin-left auto
     margin-right auto
+  & h1
+    font-size 2.4rem
+    font-weight 500
+    margin-bottom 15px
+    // line-height normal
   & h2
-    font-size 2.1rem
+    font-size 1.9rem
     font-weight 300
     margin-bottom 20px
-    line-height normal
+    margin-top 30px
+    // line-height normal
   & p
     font-size 1.5rem
     line-height 1.87
     & + p
       margin-top 28px
+  & .fixed-slides
+    margin 40px -20px
+    background-color #666
+    max-width 600px
+    @media (min-width 640px)
+      margin-left 0
+      margin-right 0
+    &__graphic
+      max-width 600px
+    &__text
+      padding-left 20px
+      padding-right 20px
+      padding-bottom 80vh
+      &.step1
+        padding-top 80vh
+      & p
+        padding 10px
+        box-shadow 0 2px 4px 0 rgba(#000, 0.5)
+        background-color rgba(#fff, 0.9)
+        font-size 1.5rem
+        @media (min-width $mobile)
+          padding 14px 30px
