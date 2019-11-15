@@ -25,13 +25,11 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapMutations } = createNamespacedHelpers('FoodDelivery')
+const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
 
 import UserStatus from './UserStatus.vue'
 import MapMarker from './MapMarker.vue'
 import HeaderIcons from './HeaderIcons.vue'
-
-// const scrollIntoView = require('scroll-into-view')
 
 export default {
   name: 'TableOfContents',
@@ -42,34 +40,33 @@ export default {
   },
   data () {
     return {
-      // todo time
-      contents: [
-        {
-          id: 1,
-          title: '如何成為外送員',
-          time: '05:02'
-        },
-        {
-          id: 2,
-          title: '美食外送平台解決了什麼問題',
-          time: '03:10'
-        },
-        {
-          id: 3,
-          title: '司機管理仰賴檢舉和評價',
-          time: '07:28'
-        },
-        {
-          id: 4,
-          title: '外送員最害怕的事：車禍',
-          time: '05:30'
-        },
-        {
-          id: 5,
-          title: '外送產業帶來的好與壞',
-          time: '01:40'
-        }
-      ],
+      // contents: [
+      //   {
+      //     id: 1,
+      //     title: '如何成為外送員',
+      //     time: '05:02'
+      //   },
+      //   {
+      //     id: 2,
+      //     title: '美食外送平台解決了什麼問題',
+      //     time: '03:10'
+      //   },
+      //   {
+      //     id: 3,
+      //     title: '司機管理仰賴檢舉和評價',
+      //     time: '07:28'
+      //   },
+      //   {
+      //     id: 4,
+      //     title: '外送員最害怕的事：車禍',
+      //     time: '05:30'
+      //   },
+      //   {
+      //     id: 5,
+      //     title: '外送產業帶來的好與壞',
+      //     time: '01:40'
+      //   }
+      // ],
       lineH: 0
     }
   },
@@ -77,25 +74,20 @@ export default {
     const height = this.$refs.nav.offsetHeight - 24.6
     this.lineH = (height >= 0 ? height : 0)
   },
-  // computed: {
-  //   ...mapState([
-  //     'isReportContent',
-  //     'isInfo'
-  //   ])
-  // },
+  computed: {
+    ...mapState([
+      'contents'
+    ])
+  },
   methods: {
     ...mapMutations([
       'toggleReportContent',
-      // 'changeClickedReportId'
       'changeCurrentReadReportId'
     ]),
     showReport (id) {
-      // const reportEl = document.getElementById(`report${id}`)
-      // scrollIntoView(reportEl, { time: 0, align: { top: 0, left: 0 } }, () => {
-        this.changeCurrentReadReportId(id)
-        this.toggleReportContent(true)
-        this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
-      // })
+      this.changeCurrentReadReportId(id)
+      this.toggleReportContent(true)
+      this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
     }
   }
 }
@@ -117,11 +109,15 @@ export default {
   & nav
     position relative
   &__num
-    width 25.42px
-    height 35.8px
+    // width 25.42px
+    // height 35.8px
     margin-right 10px
     user-select none
     z-index 1
+    & > svg
+      width 25.42px
+      height 35.8px
+      display block
   &__text
     color #4a4a4a
     line-height normal

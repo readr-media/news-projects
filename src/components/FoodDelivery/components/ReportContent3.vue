@@ -7,7 +7,7 @@
       <p>最大的任性，大概就是接到數量過大的訂單（例如 30 份麥當勞）可以按下拒單，代價會減少接單率，而接單率太低的話會影響到收入；或是看到顧客提了太任性的要求（例如要求你順便幫他買菸買飲料）可以拒絕，代價是可能收到負評，如果你的好評很多，平均下來不會影響，那倒沒什麼關係，不然，就會像柯志明（化名）一樣，覺得所有的衰事在他當外送員的時候通通都發生了。</p>
       <p>「可能是我運氣不好吧。」柯志明正職為酒店經紀，因為酒店有淡旺季，他選擇在淡季時跑外送兼差，工作體驗卻不是很好，接過違規停車、超速的罰單，還遇到很多「奧客」。他舉例，常遇到外國人訂餐，他們很依賴定位，但地址根本不準，又不接電話，還有連英文都不會講的人。</p>
       <p>「Uber Eats 很常有疊單（同一家餐廳，有兩張不同消費者的訂單），如果一個顧客卡住，下一個就要等很久，明明不是我的錯，卻都是我吃負評。」</p>
-      <p>柯志明提到最崩潰的一次經驗。疊單時，系統會自動計算路程來決定你先送哪一張單，「有一次，我送了炸雞、披薩這種很講究時效的食物，第一個客人在信義區，送完之後，APP 顯示另一張在永和（註）。」他苦笑，「你就知道他多生氣了吧。」</p>
+      <p>柯志明提到最崩潰的一次經驗。疊單時，系統會自動計算路程來決定你先送哪一張單，「有一次，我送了炸雞、披薩這種很講究時效的食物，第一個客人在信義區，送完之後，APP 顯示另一張在永和<PopUpNotation :text="notations[0]" />。」他苦笑，「你就知道他多生氣了吧。」</p>
       <p>「永和的客人等了超級久，收到餐點後，他一口氣給了我五個項目的負評。」明明也是努力將餐點送給客人，柯志明覺得滿腹委屈，「我真的是氣到把機車停在他樓下，按門鈴跟他理論。」</p>
       <p>之所以會這麼沮喪，是因為負面評價會影響司機的接單率。柯志明舉例，「以前有一次我一天就賺 3000 元，非常開心。但有負評之後，一天賺不到 800 元。」等待時間變得很長，「終於等到，結果跑一單只有 30 元⋯⋯真的是鬱卒到無話可說。」</p>
       <p>除此之外，相較於顧客會不斷收到訂餐免運費或折價卷、店家的權益至少有一紙合約保障，對於外送員，平台總是片面調整規定與獎勵制度，不斷下探外送員們能夠接受的底線。</p>
@@ -36,12 +36,14 @@
 
 <script>
 import FixedSlides from './FixedSlides.vue'
+import PopUpNotation from './PopUpNotation.vue'
 // import ReportFigure from './ReportFigure.vue'
 
 export default {
   name: 'ReportContent3',
   components: {
-    FixedSlides
+    FixedSlides,
+    PopUpNotation
     // ReportFigure
   },
   data () {
@@ -51,16 +53,16 @@ export default {
           imgCount: 3,
           imgSrcs: [
             [
-              '/proj-assets/food-delivery/img/step/report3-1-mobile.png',
-              '/proj-assets/food-delivery/img/step/report3-1-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report3-1-mobile.png',
+              '/proj-assets/food-delivery/img/report/step/report3-1-desktop.png'
             ],
             [
-              '/proj-assets/food-delivery/img/step/report3-2-mobile.png',
-              '/proj-assets/food-delivery/img/step/report3-2-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report3-2-mobile.png',
+              '/proj-assets/food-delivery/img/report/step/report3-2-desktop.png'
             ],
             [
-              '/proj-assets/food-delivery/img/step/report3-3-mobile.png',
-              '/proj-assets/food-delivery/img/step/report3-3-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report3-3-mobile.png',
+              '/proj-assets/food-delivery/img/report/step/report3-3-desktop.png'
             ]
           ],
           texts: [
@@ -80,6 +82,9 @@ export default {
           imgAspectRatio: [ 1.333, 1.484 ],
           breakPoints: [ 460 ]
         }
+      ],
+      notations: [
+        '​​兩者相距約 8 公里，騎車至少要 20 分鐘。'
       ]
     }
   }

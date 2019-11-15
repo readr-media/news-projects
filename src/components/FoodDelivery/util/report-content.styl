@@ -22,20 +22,25 @@
     max-width 600px
     margin-left auto
     margin-right auto
+    position relative
   & h1
     font-size 2.4rem
-    font-weight 500
+    // font-weight 500
+    font-weight 700
     margin-bottom 15px
     // line-height normal
   & h2
     font-size 1.9rem
-    font-weight 300
+    // font-weight 300
     margin-bottom 20px
     margin-top 30px
     // line-height normal
   & p
     font-size 1.5rem
     line-height 1.87
+    @media (min-width $mobile)
+      font-size 1.6rem
+      line-height 1.75
     & + p
       margin-top 28px
   & .fixed-slides
@@ -57,6 +62,6 @@
         padding 10px
         box-shadow 0 2px 4px 0 rgba(#000, 0.5)
         background-color rgba(#fff, 0.9)
-        font-size 1.5rem
+        // font-size 1.5rem
         @media (min-width $mobile)
           padding 14px 30px
