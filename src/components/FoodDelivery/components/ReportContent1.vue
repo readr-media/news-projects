@@ -8,9 +8,8 @@
       <h2>誰會來當外送員</h2>
       <p>「時間就是金錢」，完全是這一行的寫照。目前與三大外送平台 Uber Eats、空腹熊貓、戶戶送合作的外送員都是按件計酬，假設訂單源源不絕，能在同樣的時間內完成愈多訂單，收入就愈高。</p>
       <p>分秒之差影響的就是收入。因此外送員總在意客人有沒有準時抵達約定地點、願不願意到一樓領取餐點、甚至在馬路上演玩命關頭。</p>
-      <p>加上這些平台自認它們與外送員的關係屬於承攬制（註），不受《勞基法》工時、休假限制，外送員只要願意投入高工時，自然能換得高收入。</p>
+      <p>加上這些平台自認它們與外送員的關係屬於承攬制<PopUpNotation :text="notations[0]" />，不受《勞基法》工時、休假限制，外送員只要願意投入高工時，自然能換得高收入。</p>
       <p>我訪談的十數位外送員，無論本身是否有正職工作，都有個共同點：都是為了「高薪」和「自由」才踏入這一行。</p>
-      <!-- 圖表區：外送司機是什麼樣的人？ -->
       <FixedSlides
         :imgCount="fixedSlidesData[0].imgCount"
         :imgSrcs="fixedSlidesData[0].imgSrcs"
@@ -48,12 +47,14 @@
 
 <script>
 import FixedSlides from './FixedSlides.vue'
+import PopUpNotation from './PopUpNotation.vue'
 // import ReportFigure from './ReportFigure.vue'
 
 export default {
   name: 'ReportContent1',
   components: {
-    FixedSlides
+    FixedSlides,
+    PopUpNotation
     // ReportFigure
   },
   data () {
@@ -63,16 +64,16 @@ export default {
           imgCount: 3,
           imgSrcs: [
             [
-              '/proj-assets/food-delivery/img/step/report1-1-mobile.png',
-              '/proj-assets/food-delivery/img/step/report1-1-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report1-1-mobile.png',
+              '/proj-assets/food-delivery/img/report/step/report1-1-desktop.png'
             ],
             [
-              '/proj-assets/food-delivery/img/step/report1-2-mobile.png',
-              '/proj-assets/food-delivery/img/step/report1-2-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report1-2-mobile.png',
+              '/proj-assets/food-delivery/img/report/step/report1-2-desktop.png'
             ],
             [
-              '/proj-assets/food-delivery/img/step/report1-3-mobile.png',
-              '/proj-assets/food-delivery/img/step/report1-3-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report1-3-mobile.png',
+              '/proj-assets/food-delivery/img/report/step/report1-3-desktop.png'
             ]
           ],
           texts: [
@@ -92,6 +93,9 @@ export default {
           imgAspectRatio: [ 1.395, 1.586 ],
           breakPoints: [ 460 ]
         }
+      ],
+      notations: [
+        '勞動部在 10 月底抽查，依照平台跟外送員的從屬關係，僅認定戶戶送為承攬制，其餘都為僱傭關係。'
       ]
     }
   }

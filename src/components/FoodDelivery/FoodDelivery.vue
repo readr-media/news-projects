@@ -77,12 +77,10 @@ export default {
     if (params.match(regex)) {
       const orderNum = Number(params.split('order')[1])
       this.changeCurrentReadReportId(orderNum)
-      // console.log(document.getElementById(`report${orderNum}`))
       this.toggleReportContent(true)
     } else {
       this.$router.replace('/project/food-delivery').catch((err) => {})
     }
-    // window.addEventListener('resize')
   },
   mounted () {
     this.setIsMounted()

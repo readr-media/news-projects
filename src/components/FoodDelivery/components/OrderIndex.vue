@@ -1,12 +1,18 @@
 <template>
   <div class="order-index">
-    <MapMarker
-      :num="id"
-      v-for="id in reportIds"
-      :key="`order-index${id}`"
-      :class="[ { active: currentReadReportId === id }, 'order-index__marker']"
-      @click.native="scrollToOrder(id)"
-    />
+    <div class="order-index__wrapper" v-for="(reportId, idx) in reportIds" :key="`order-index${reportId}`">
+      <MapMarker
+        :num="reportId"
+        :class="[ { active: currentReadReportId === reportId }, 'order-index__marker']"
+        @click.native="scrollToOrder(reportId)"
+      />
+      <div class="order-index__popup">
+        <div>
+          <p class="order-index__title">{{ contents[idx].title }}</p>
+          <p>預估時間：{{ contents[idx].time }}</p>
+        </div>
+      </div>
+    </div>
     <svg class="order-index__line" width="1" height="259" xmlns="http://www.w3.org/2000/svg"><path d="M.5 0v259" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
   </div>
 </template>
@@ -26,6 +32,7 @@ export default {
   },
   computed: {
     ...mapState([
+      'contents',
       'reportIds',
       'currentReadReportId',
     ])
@@ -56,16 +63,55 @@ export default {
   flex-direction column
   align-items center
   z-index 199
+  &__wrapper
+    position relative
+    & + .order-index__wrapper
+      margin-top 20px
   &__marker
     width 25.42px
     height 35.8px
     cursor pointer
-    position relative
+    user-select none
+    display block
+    // position relative
     &.active, &:hover
       & .marker-color
         fill #000
-    & + .order-index__marker
-      margin-top 20px
+    &:hover + .order-index__popup
+      visibility visible
+  &__popup
+    position absolute
+    top 50%
+    left 61.4px
+    transform translateY(-50%)
+    font-size 1.4rem
+    color #4a4a4a
+    padding 10px 14px
+    background-color #fff
+    line-height normal
+    visibility hidden
+
+    width max-content
+    width -webkit-max-content
+    width -moz-max-content
+    @supports not ((width max-content) or (width -webkit-max-content) or (width -moz-max-content))
+      min-width 210px
+      padding-right 0
+    // todo 箭頭長寬、陰影
+    &:before
+      content ''
+      display block
+      position absolute
+      left -20px
+      top 50%
+      transform translateY(-50%)
+      width 0
+      height 0
+      border-style solid
+      border-width 13px 20px 13px 0
+      border-color transparent #fff transparent transparent
+  &__title
+    font-weight 700
   &__line
     position absolute
     top 0
