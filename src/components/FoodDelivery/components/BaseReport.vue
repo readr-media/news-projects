@@ -1,24 +1,25 @@
 <template>
   <!-- <main class="base-report" id="base-report" @scroll="changeRouter" :class="{ show: isReportContent }"> -->
   <main class="base-report" id="base-report" @scroll="changeRouter">
-    <!-- <HeaderIcons /> -->
     <!-- <section v-for="(reportId, idx) in currentReportIds" :key="`report-${reportId}`" :ref="`report${idx}`"> -->
     <!-- <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)"> -->
     <div class="base-report__container">
+      <HeaderIcons />
       <transition
         name="slideLeft"
         @enter="scrollToReport"
       >
         <!-- <div class="base-report__reports-wrapper" :class="{ show: isReportContent }"> -->
         <div v-show="isReportContent">
-          <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" :id="`report${reportId}`">
+          <section v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" :id="`report${reportId}`">
             <div class="base-report__marker-wrapper">
               <MapMarker :num="reportId" class="base-report__marker" />
             </div>
             <component :is="`ReportContent${reportId}`" />
             <ReportResult />
-            <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
+            <!-- <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" /> -->
           </section>
+          <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
           <TheFooter />
         </div>
       </transition>
@@ -30,8 +31,9 @@
 const scrollIntoView = require('scroll-into-view')
 
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('FoodDelivery')
+const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
 
+import HeaderIcons from './HeaderIcons.vue'
 import MapMarker from './MapMarker.vue'
 import ReportResult from './ReportResult.vue'
 import OrderIndex from './OrderIndex.vue'
@@ -46,7 +48,7 @@ import ReportContent5 from './ReportContent5.vue'
 export default {
   name: 'BaseReport',
   components: {
-    // HeaderIcons,
+    HeaderIcons,
     MapMarker,
     ReportResult,
     OrderIndex,
@@ -65,60 +67,66 @@ export default {
   beforeMount () {
     this.scrollToReport()
   },
-  data () {
-    return {
-      // reportIdx: 0
-      // wEl: null,
-      // canChangeRouter: false,
-      currentReadReportId: 1
-      // isTransition: false
-    }
-  },
+  // data () {
+  //   return {
+  //     // reportIdx: 0
+  //     // wEl: null,
+  //     // canChangeRouter: false,
+  //     currentReadReportId: 1
+  //     // isTransition: false
+  //   }
+  // },
   computed: {
     ...mapState([
       'isReportContent',
-      'clickedReportId',
+      // 'clickedReportId',
+      'currentReadReportId',
       'reportIds',
       'isMounted'
     ])
   },
   methods: {
-    // todo 切換時會不準（scroll 沒到位）
+    ...mapMutations([
+      'changeCurrentReadReportId'
+    ]),
+    // todo when auto scroll, need prevent trigger?
     changeRouter () {
       if (!this.isReportContent) return
       const reportBase = this.$el
       const reportPrev = this.$refs.report[this.currentReadReportId - 1]
       const reportNext = this.$refs.report[this.currentReadReportId] || reportBase.scrollHeight
 
-      const reportBaseScrollT = reportBase.scrollTop
+      const reportBaseScrollT = reportBase.scrollTop + 16
       const reportPrevOffsetT = reportPrev.offsetTop
       const reportNextOffsetT = reportNext.offsetTop
       
       if (reportBaseScrollT >= reportNextOffsetT) {
-        this.currentReadReportId += 1
+        // this.currentReadReportId += 1
+        this.changeCurrentReadReportId(this.currentReadReportId + 1)
         this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
         // this.wEl.history.replaceState({}, '', `/project/food-delivery/order${this.currentReadReportId}`)
       } else if (reportBaseScrollT < reportPrevOffsetT) {
-        this.currentReadReportId -= 1
+        // this.currentReadReportId -= 1
+        this.changeCurrentReadReportId(this.currentReadReportId - 1)
         this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
         // this.wEl.history.replaceState({}, '', `/project/food-delivery/order${this.currentReadReportId}`)
       }
     },
     scrollToReport () {
-      const reportEl = document.getElementById(`report${this.clickedReportId}`)
+      const reportEl = document.getElementById(`report${this.currentReadReportId}`)
       scrollIntoView(reportEl, { time: 0, align: { top: 0, left: 0 } })
     }
   },
-  watch: {
-    isReportContent: {
-      handler (newVal) {
-        if (newVal) {
-          this.currentReadReportId = this.clickedReportId
-        }
-      },
-      immediate: true
-    }
-  }
+  // watch: {
+  //   isReportContent: {
+  //     handler (newVal) {
+  //       if (newVal) {
+  //         this.currentReadReportId = this.currentReadReportId
+  //       }
+  //     },
+  //     immediate: true
+  //   }
+  // }
 }
 </script>
 
@@ -131,15 +139,9 @@ export default {
   top 0
   left 0
   z-index 9
-  // background-color #f5f4f5
   width 100%
   height 100%
   overflow-y auto
-  // max-width 800px
-  // transform translateX(100%)
-  // transition transform 0.32s
-  // &.show
-  //   transform translateX(0)
   &__container
     max-width 800px
     margin-left auto
@@ -153,8 +155,8 @@ export default {
   //   &.show
   //     left 0%
   //     // transform translateX(0%)
-  &__report
-    position relative
+  // &__report
+  //   position relative
   &__marker-wrapper
     height 84px
     display flex

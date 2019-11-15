@@ -1,6 +1,7 @@
 <template>
   <section class="table-of-contents">
     <UserStatus />
+    <HeaderIcons />
     <nav ref="nav">
       <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
       <ul>
@@ -28,6 +29,7 @@ const { mapMutations } = createNamespacedHelpers('FoodDelivery')
 
 import UserStatus from './UserStatus.vue'
 import MapMarker from './MapMarker.vue'
+import HeaderIcons from './HeaderIcons.vue'
 
 // const scrollIntoView = require('scroll-into-view')
 
@@ -35,7 +37,8 @@ export default {
   name: 'TableOfContents',
   components: {
     UserStatus,
-    MapMarker
+    MapMarker,
+    HeaderIcons
   },
   data () {
     return {
@@ -83,12 +86,13 @@ export default {
   methods: {
     ...mapMutations([
       'toggleReportContent',
-      'changeClickedReportId'
+      // 'changeClickedReportId'
+      'changeCurrentReadReportId'
     ]),
     showReport (id) {
       // const reportEl = document.getElementById(`report${id}`)
       // scrollIntoView(reportEl, { time: 0, align: { top: 0, left: 0 } }, () => {
-        this.changeClickedReportId(id)
+        this.changeCurrentReadReportId(id)
         this.toggleReportContent(true)
         this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
       // })
