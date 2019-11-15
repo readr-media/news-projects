@@ -1,5 +1,5 @@
 <template>
-  <div class="header-icons">
+  <div :class="[ 'header-icons', { 'opacity-0': isInfo } ]" >
     <img class="header-icons__enter" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="" @click="showTOC" v-show="isMounted && isReportContent && $store.state.viewport[0] <= 767.98">
     <div class="header-icons__wrapper">
       <a href="https://www.readr.tw/donate" target="_blank"><img class="header-icons__donate" src="/proj-assets/food-delivery/img/donate--comp.svg" alt=""></a>
@@ -17,7 +17,8 @@ export default {
   computed: {
     ...mapState([
       'isReportContent',
-      'isMounted'
+      'isMounted',
+      'isInfo'
     ])
   },
   methods: {

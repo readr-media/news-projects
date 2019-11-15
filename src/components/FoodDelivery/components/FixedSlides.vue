@@ -13,7 +13,7 @@
       ref="graphic"
     >
       <!-- <picture v-for="imgId in imgsId" :key="imgId" :class="{ active: ImgActiveId === imgId }"> -->
-      <picture v-for="(imgIdx, idx) in imgCount" :key="`fixed-slides-img${imgIdx}`" :class="{ active: ImgActiveId === imgIdx }">
+      <picture v-for="(imgId, idx) in imgCount" :key="`fixed-slides-img${imgId}`" :class="{ active: ImgActiveId === imgId }">
         <!-- <source media="(min-width: 460px) and (max-width: 719.98px)" :srcset="imgSrc(imgId, 'tablet-small')"> -->
         <!-- <source media="(min-width: 720px) and (max-width: 999.98px)" :srcset="imgSrc(imgId, 'tablet-large')"> -->
         <!-- <source media="(min-width: 1000px) and (max-width: 1599.98px)" :srcset="imgSrc(imgId, 'desktop-small')"> -->
@@ -77,6 +77,7 @@ export default {
 
     this.scrolledEl.addEventListener('scroll', this.locateGraphic)
     this.scrolledEl.addEventListener('scroll', this.changeImg)
+
     this.wEl.addEventListener('resize', this.updateContainerWidth)
     this.wEl.addEventListener('orientationChange', this.updateContainerWidth)
   },

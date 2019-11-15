@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="food-delivery" :class="{ 'overflow-h': !isScrollBar }"> -->
   <div class="food-delivery">
-    <HeaderIcons :class="{ 'opacity-0': isInfo }" />
+    <!-- <HeaderIcons :class="{ 'opacity-0': isInfo }" /> -->
     <!-- todo transition -->
     <TableOfContents :class="{ 'opacity-0': isReportContent || isInfo }" />
     <!-- <TableOfContents :class="{ 'opacity-0': isInfo }" /> -->
@@ -64,7 +64,8 @@ export default {
   methods: {
     ...mapMutations([
       'toggleReportContent',
-      'changeClickedReportId',
+      // 'changeClickedReportId',
+      'changeCurrentReadReportId',
       'setIsMounted'
     ])
   },
@@ -75,7 +76,7 @@ export default {
 
     if (params.match(regex)) {
       const orderNum = Number(params.split('order')[1])
-      this.changeClickedReportId(orderNum)
+      this.changeCurrentReadReportId(orderNum)
       // console.log(document.getElementById(`report${orderNum}`))
       this.toggleReportContent(true)
     } else {
