@@ -1,8 +1,8 @@
 <template>
   <div class="the-user">
-    <div v-html="status" class="the-user__status"></div>
+    <div class="the-user__state">{{ state || userState }}</div>
     <img src="/proj-assets/food-delivery/img/driver.png" alt="">
-    <!-- <div v-html="status" class="op0"></div> -->
+    <!-- <div v-html="state" class="op0"></div> -->
   </div>
 </template>
 
@@ -11,17 +11,17 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapState } = createNamespacedHelpers('FoodDelivery')
 
 export default {
-  name: 'UserStatus',
+  name: 'UserState',
+  props: [ 'state' ],
+  // props: {
+  //   state: {
+  //     default: '前往目的地的路上'
+  //   }
+  // },
   computed: {
     ...mapState([
-      'reportIds'
-    ]),
-    status () {
-      return `
-        <p>您有 <span>${this.reportIds.length}</span> 個訂單</p>
-        <p>前往取餐</p>
-      `
-    }
+      'userState'
+    ])
   }
 }
 </script>
@@ -46,7 +46,7 @@ export default {
     height 120px
     // ((70 / 2) + 24 + 113) * 2
     max-width 344px
-  &__status
+  &__state
     position absolute
     color #fff
     text-align right
@@ -54,11 +54,12 @@ export default {
     line-height normal
     left 0
     max-width 88px
+    width 100%
     @media (min-width $mobile)
       font-size 1.8rem
       max-width 113px
-    & span
-      color #ffdc03
+    // & span
+    //   color #ffdc03
   & img
     // position absolute
     width 50px

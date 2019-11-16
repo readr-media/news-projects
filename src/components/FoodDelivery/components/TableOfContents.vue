@@ -1,6 +1,6 @@
 <template>
   <section class="table-of-contents">
-    <UserStatus />
+    <UserState />
     <HeaderIcons />
     <nav ref="nav">
       <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
@@ -12,6 +12,7 @@
           </div>
           <div class="table-of-contents__text">
             <p class="table-of-contents__title">{{ content.title }}</p>
+            <!-- todo 預估？閱讀？時間 -->
             <p class="table-of-contents__time">預估時間：{{ content.time }}</p>
           </div>
           <!-- <div class="table-of-contents__arrow"> -->
@@ -27,46 +28,19 @@
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
 
-import UserStatus from './UserStatus.vue'
+import UserState from './UserState.vue'
 import MapMarker from './MapMarker.vue'
 import HeaderIcons from './HeaderIcons.vue'
 
 export default {
   name: 'TableOfContents',
   components: {
-    UserStatus,
+    UserState,
     MapMarker,
     HeaderIcons
   },
   data () {
     return {
-      // contents: [
-      //   {
-      //     id: 1,
-      //     title: '如何成為外送員',
-      //     time: '05:02'
-      //   },
-      //   {
-      //     id: 2,
-      //     title: '美食外送平台解決了什麼問題',
-      //     time: '03:10'
-      //   },
-      //   {
-      //     id: 3,
-      //     title: '司機管理仰賴檢舉和評價',
-      //     time: '07:28'
-      //   },
-      //   {
-      //     id: 4,
-      //     title: '外送員最害怕的事：車禍',
-      //     time: '05:30'
-      //   },
-      //   {
-      //     id: 5,
-      //     title: '外送產業帶來的好與壞',
-      //     time: '01:40'
-      //   }
-      // ],
       lineH: 0
     }
   },

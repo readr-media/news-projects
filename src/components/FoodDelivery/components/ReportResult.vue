@@ -1,23 +1,23 @@
 <template>
   <section class="report-result">
-    <UserStatus />
+    <UserState :state="result.state" />
     <div class="report-result__reward">
       <div>
-        <p class="report-result__num">3</p>
+        <p class="report-result__num">{{ result.orderCount }}</p>
         <p class="report-result__name">已配送</p>
       </div>
       <div>
-        <p class="report-result__num">120</p>
+        <p class="report-result__num">{{ result.money }}</p>
         <p class="report-result__name">金額</p>
       </div>
       <div>
-        <p class="report-result__num">08:45</p>
+        <p class="report-result__num">{{ result.time }}</p>
         <p class="report-result__name">時長</p>
       </div>
     </div>
     <img class="report-result__cheers" src="/proj-assets/food-delivery/img/cheers--comp.svg" alt="">
     <div class="report-result__action">
-      <button type="button" class="order">按鈕接單（繼續閱讀）</button>
+      <button type="button" class="order" v-if="result.action" >{{ result.action }}</button>
       <button type="button" class="share">分享成就（專題）</button>
       <!-- <div class="report-result__wrapper">
         <button type="button">回到目錄</button>
@@ -28,12 +28,13 @@
 </template>
 
 <script>
-import UserStatus from './UserStatus.vue'
+import UserState from './UserState.vue'
 
 export default {
   name: 'ReportResult',
+  props: [ 'result' ],
   components: {
-    UserStatus
+    UserState
   }
 }
 </script>
