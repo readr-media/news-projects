@@ -13,6 +13,9 @@ export default {
   },
   setIsMounted (state) {
     state.isMounted = true
+  },
+  changeUserState (state, userState) {
+    state.userState = userState
   }
   // toggleScrollBar (state, isShow) {
   //   state.isScrollBar = isShow

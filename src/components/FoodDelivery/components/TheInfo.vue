@@ -1,7 +1,7 @@
 <template>
   <section class="the-info">
     <div class="the-info__container">
-      <UserStatus />
+      <UserState />
       <div class="the-info__wrapper">
         <img class="the-info__cancel" src="/proj-assets/food-delivery/img/x--comp.svg" alt="" @click="toggleInfo(false)">
       </div>
@@ -32,13 +32,13 @@
 import { createNamespacedHelpers } from 'vuex'
 const { mapMutations } = createNamespacedHelpers('FoodDelivery')
 
-import UserStatus from './UserStatus.vue'
+import UserState from './UserState.vue'
 import OtherReports from './OtherReports.vue'
 
 export default {
   name: 'TheInfo',
   components: {
-    UserStatus,
+    UserState,
     OtherReports
   },
   data () {

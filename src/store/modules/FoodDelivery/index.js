@@ -37,7 +37,8 @@ export default {
         title: '外送產業帶來的好與壞',
         time: '01:40'
       }
-    ]
+    ],
+    userState: '前往目的地的路上'
     // isScrollBar: false
   }),
   // actions,
