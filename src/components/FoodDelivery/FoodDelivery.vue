@@ -1,6 +1,7 @@
 <template>
   <!-- <div class="food-delivery" :class="{ 'overflow-h': !isScrollBar }"> -->
   <div class="food-delivery">
+    <LoadingCover />
     <!-- <HeaderIcons :class="{ 'opacity-0': isInfo }" /> -->
     <!-- todo transition -->
     <TableOfContents :class="{ 'opacity-0': isReportContent || isInfo }" />
@@ -24,6 +25,7 @@ const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
 //   smoothscroll.polyfill()
 // }
 
+import LoadingCover from './components/LoadingCover.vue'
 import HeaderIcons from './components/HeaderIcons.vue'
 import TableOfContents from './components/TableOfContents.vue'
 import BaseReport from './components/BaseReport.vue'
@@ -42,6 +44,7 @@ export default {
     }
   },
   components: {
+    LoadingCover,
     HeaderIcons,
     TableOfContents,
     BaseReport,
