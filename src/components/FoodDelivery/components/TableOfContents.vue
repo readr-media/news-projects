@@ -5,7 +5,7 @@
     <nav ref="nav">
       <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
       <ul>
-        <li v-for="content in contents" :key="`content-${content.id}`" @click="showReport(content.id)">
+        <li v-for="content in contents" :key="`content-${content.id}`" @click="showReport(content.id)" :style="(content.id === 1 && isPrompt)? { zIndex: 499, position: 'relative' } : ''">
         <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
           <div class="table-of-contents__num">
             <MapMarker :num="content.id" />
@@ -21,6 +21,16 @@
         </li>
       </ul>
     </nav>
+    <div class="table-of-contents__prompt" v-if="isPrompt">
+      <div class="table-of-contents__prompt-mask"></div>
+      <div class="table-of-contents__prompt-action">
+        <!-- todo change finger -->
+        <img src="/proj-assets/food-delivery/img/icon/finger.svg" alt="">
+        <!-- todo text -->
+        <p>點選以閱讀報導</p>
+        <button type="button" @click="isPrompt = false">我知道了</button>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -41,7 +51,8 @@ export default {
   },
   data () {
     return {
-      navH: 0
+      navH: 0,
+      isPrompt: true
     }
   },
   mounted () {
@@ -90,6 +101,7 @@ export default {
   // min-height 100vh
   background-color rgba(#000, 0.3)
   overflow hidden
+  position relative
   // &.hide
   //   visibility hidden
   & nav
@@ -111,6 +123,7 @@ export default {
   // todo max-width
   &__title
     font-size 1.8rem
+    // font-weight 500
   &__time
     font-size 1.4rem
   &__arrow
@@ -136,6 +149,7 @@ export default {
     align-items center
     cursor pointer
     transition background-color 0.2s
+    // position relative
     @media (min-width $mobile)
       padding-left 45px
       padding-right 45px
@@ -157,4 +171,53 @@ export default {
     @media (min-width $mobile)
       // 45 + (25.42 / 2) - (1 / 2)
       left 57.21px
+  &__prompt
+    position absolute
+    // background-color rgba(#000, 0.8)
+    width 100%
+    height 100%
+    top 0
+    left 0
+    // z-index 199
+    &-mask
+      position absolute
+      top 0
+      left 0
+      background-color rgba(#000, 0.8)
+      width 100%
+      height 100%
+      z-index 199
+    &-action
+      position absolute
+      top 159px
+      width 100%
+      display flex
+      flex-direction column
+      align-items center
+      color #fff
+      font-size 2.4rem
+      z-index 599
+      @media (min-width $mobile)
+        top 195px
+      // text-align center
+      // margin-right auto
+      // margin-left auto
+      & img
+        width 50px
+        display block
+        // transform rotate(-90deg)
+      & p
+        // font-size 2.4rem
+        line-height normal
+        margin-top 10px
+        margin-bottom 20px
+      & button
+        border-radius 10px
+        border 1px solid #fff
+        background-color transparent
+        color #fff
+        width 100%
+        max-width 240px
+        padding-top 8px
+        padding-bottom 8px
 </style>
