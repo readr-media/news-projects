@@ -60,7 +60,7 @@ export default {
   },
   data () {
     return {
-      wEl: null,
+      // wEl: null,
       isGraphicFixed: false,
       isGraphicBottom: false,
       ImgActiveId: 1,
@@ -70,7 +70,7 @@ export default {
     }
   },
   mounted () {
-    this.wEl = window
+    // this.wEl = window
     this.scrolledEl = document.getElementById('base-report')
 
     this.updateContainerWidth()
@@ -78,8 +78,8 @@ export default {
     this.scrolledEl.addEventListener('scroll', this.locateGraphic)
     this.scrolledEl.addEventListener('scroll', this.changeImg)
 
-    this.wEl.addEventListener('resize', this.updateContainerWidth)
-    this.wEl.addEventListener('orientationChange', this.updateContainerWidth)
+    window.addEventListener('resize', this.updateContainerWidth)
+    window.addEventListener('orientationChange', this.updateContainerWidth)
   },
   computed: {
     ...mapState([
@@ -140,8 +140,8 @@ export default {
     }
   },
   beforeDestroy () {
-    this.wEl.removeEventListener('resize', this.updateContainerWidth)
-    this.wEl.removeEventListener('orientationChange', this.updateContainerWidth)
+    window.removeEventListener('resize', this.updateContainerWidth)
+    window.removeEventListener('orientationChange', this.updateContainerWidth)
   }
 }
 </script>

@@ -41,28 +41,40 @@ export default {
   },
   data () {
     return {
-      lineH: 0
+      navH: 0
     }
   },
   mounted () {
-    const height = this.$refs.nav.offsetHeight - 24.6
-    this.lineH = (height >= 0 ? height : 0)
+    this.updateNavH()
+    window.addEventListener('resize', this.updateNavH)
+    window.addEventListener('orientationChange', this.updateNavH)
   },
   computed: {
     ...mapState([
       'contents'
-    ])
+    ]),
+    lineH () {
+      const height = this.navH - 24.6
+      return height >= 0 ? height : 0
+    }
   },
   methods: {
     ...mapMutations([
       'toggleReportContent',
       'changeCurrentReadReportId'
     ]),
+    updateNavH () {
+      this.navH = this.$refs.nav.offsetHeight
+    },
     showReport (id) {
       this.changeCurrentReadReportId(id)
       this.toggleReportContent(true)
       this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
     }
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.updateNavH)
+    window.removeEventListener('orientationChange', this.updateNavH)
   }
 }
 </script>
