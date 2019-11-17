@@ -35,12 +35,16 @@ import TheInfo from './components/TheInfo.vue'
 export default {
   name: 'FoodDelivery',
   metaInfo () {
+    // todo need to change description, title?
+    const params = this.$route.params.params
+    const metaUrl = `food-delivery${params ? `/${params}` : ''}`
+    const metaImage = `food-delivery/img/og-${params ? params.split('order')[ 1 ] : 'default'}.jpg`
+
     return {
-      title: '',
-      description: '',
-      metaUrl: 'food-delivery',
-      metaImage: ''
-      // customScript: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yakuhanjp@3.3.1/dist/css/yakuhanjp_s-narrow.min.css">'
+      title: '記者來當外送員：開箱美食外送秘辛！',
+      description: '美食外送服務如火如荼發展的同時，我成為臺灣 4 萬 5 千多個外送員的其中之一。這趟田野旅程讓我發現，這個新創服務就和它的老東家 Uber 一樣，雖然解決了產業的問題，卻也為社會帶來極大的麻煩。',
+      metaUrl,
+      metaImage
     }
   },
   components: {
@@ -60,10 +64,18 @@ export default {
       'isScrollBar'
     ])
   },
-  watch: {
-    '$route' (to, from) {
-    }
-  },
+  // watch: {
+  //   '$route' (to, from) {
+  //     switch (to.params.params) {
+  //       case value:
+          
+  //         break;
+      
+  //       default:
+  //         break;
+  //     }
+  //   }
+  // },
   methods: {
     ...mapMutations([
       'toggleReportContent',
@@ -129,6 +141,7 @@ button
   cursor pointer
   padding 0
   font-family $ff-sans-serif
+  outline none
 a
   cursor pointer
 .opacity-0

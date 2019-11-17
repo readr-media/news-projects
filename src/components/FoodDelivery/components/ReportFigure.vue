@@ -1,4 +1,5 @@
 <template>
+  <!-- todo remove this component -->
   <section class="report-figure">
     <h3>成為外送員額外多花了多少錢？</h3>
     <figure>
