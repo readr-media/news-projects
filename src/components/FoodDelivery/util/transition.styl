@@ -1,0 +1,13 @@
+.fade
+  &-enter-active, &-leave-active
+    transition opacity 0.6s cubic-bezier(0.075, 0.82, 0.165, 1)
+  &-enter-active
+    z-index 199
+  &-enter, &-leave-to
+    opacity 0
+
+.popOutNav
+  &-enter-active
+    transition transform 0.6s cubic-bezier(0.19, 1, 0.22, 1)
+  &-enter
+    transform translateY(100%)

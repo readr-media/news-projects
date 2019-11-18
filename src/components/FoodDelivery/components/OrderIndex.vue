@@ -82,13 +82,15 @@ export default {
   &__popup
     position absolute
     top 50%
-    left 61.4px
+    // left 61.4px
+    left 40.4px
     transform translateY(-50%)
     font-size 1.4rem
     color #4a4a4a
     padding 10px 14px
     background-color #fff
     line-height normal
+    box-shadow 0 2px 4px rgba(#000, 0.5)
     visibility hidden
 
     width max-content
@@ -98,18 +100,23 @@ export default {
       min-width 210px
       padding-right 0
     // todo 箭頭長寬、陰影
-    &:before
-      content ''
-      display block
-      position absolute
-      left -20px
-      top 50%
-      transform translateY(-50%)
-      width 0
-      height 0
-      border-style solid
-      border-width 13px 20px 13px 0
-      border-color transparent #fff transparent transparent
+    // &:before, &:after
+    //   content ''
+    //   display block
+    //   position absolute
+    //   top 50%
+    //   transform translateY(-50%)
+    //   width 0
+    //   height 0
+    //   border-style solid
+    //   border-width 10px 26px 10px 0
+    // &:before
+    //   border-color transparent rgba(#000, 0.5) transparent transparent
+    //   left -26px
+    // &:after
+    //   left -26px
+    //   border-color transparent #fff transparent transparent
+    //   // box-shadow 0 2px 4px rgba(#000, 0.5)
   &__title
     font-weight 700
   &__line

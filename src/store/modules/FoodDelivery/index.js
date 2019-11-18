@@ -38,7 +38,8 @@ export default {
         time: '01:40'
       }
     ],
-    userState: '前往目的地的路上'
+    userState: '前往目的地的路上',
+    isNav: false
     // isScrollBar: false
   }),
   // actions,

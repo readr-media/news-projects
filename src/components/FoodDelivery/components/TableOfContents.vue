@@ -2,35 +2,40 @@
   <section class="table-of-contents">
     <UserState />
     <HeaderIcons />
-    <nav ref="nav">
-      <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
-      <ul>
-        <li v-for="content in contents" :key="`content-${content.id}`" @click="showReport(content.id)" :style="(content.id === 1 && isPrompt)? { zIndex: 499, position: 'relative' } : ''">
-        <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
-          <div class="table-of-contents__num">
-            <MapMarker :num="content.id" />
+    <transition name="popOutNav" @before-enter="isNavTransition = true" @after-enter="afterEnterNav">
+      <nav ref="nav" v-if="isNav">
+        <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
+        <ul>
+          <li v-for="content in contents" :key="`content-${content.id}`" @click="showReport(content.id)" :style="(content.id === 1 && isPrompt)? { zIndex: 499, position: 'relative' } : ''">
+          <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
+            <div class="table-of-contents__num">
+              <MapMarker :num="content.id" />
+            </div>
+            <div class="table-of-contents__text">
+              <p class="table-of-contents__title">{{ content.title }}</p>
+              <!-- todo 預估？閱讀？時間 -->
+              <p class="table-of-contents__time">預估時間：{{ content.time }}</p>
+            </div>
+            <!-- <div class="table-of-contents__arrow"> -->
+            <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="">
+            <!-- </div> -->
+          </li>
+        </ul>
+      </nav>
+    </transition>
+    <transition name="fade" @after-enter="isPoint = true">
+      <div class="table-of-contents__prompt" v-if="isPrompt">
+        <div class="table-of-contents__prompt-mask"></div>
+        <div class="table-of-contents__prompt-action">
+          <div :class="{ point: isPoint }">
+            <img src="/proj-assets/food-delivery/img/icon/finger.svg" alt="">
+            <!-- todo text -->
+            <p>點選以閱讀報導</p>
           </div>
-          <div class="table-of-contents__text">
-            <p class="table-of-contents__title">{{ content.title }}</p>
-            <!-- todo 預估？閱讀？時間 -->
-            <p class="table-of-contents__time">預估時間：{{ content.time }}</p>
-          </div>
-          <!-- <div class="table-of-contents__arrow"> -->
-          <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="">
-          <!-- </div> -->
-        </li>
-      </ul>
-    </nav>
-    <div class="table-of-contents__prompt" v-if="isPrompt">
-      <div class="table-of-contents__prompt-mask"></div>
-      <div class="table-of-contents__prompt-action">
-        <!-- todo change finger -->
-        <img src="/proj-assets/food-delivery/img/icon/finger.svg" alt="">
-        <!-- todo text -->
-        <p>點選以閱讀報導</p>
-        <button type="button" @click="isPrompt = false">我知道了</button>
+          <button type="button" @click="isPrompt = false">我知道了</button>
+        </div>
       </div>
-    </div>
+    </transition>
   </section>
 </template>
 
@@ -52,7 +57,9 @@ export default {
   data () {
     return {
       navH: 0,
-      isPrompt: true
+      isPrompt: false,
+      isNavTransition: true,
+      isPoint: false
     }
   },
   mounted () {
@@ -62,7 +69,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'contents'
+      'contents',
+      'isNav'
     ]),
     lineH () {
       const height = this.navH - 24.6
@@ -75,12 +83,18 @@ export default {
       'changeCurrentReadReportId'
     ]),
     updateNavH () {
+      return 0
       this.navH = this.$refs.nav.offsetHeight
     },
     showReport (id) {
+      if (this.isPrompt || this.isNavTransition) return
       this.changeCurrentReadReportId(id)
       this.toggleReportContent(true)
       this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
+    },
+    afterEnterNav () {
+      this.isPrompt = true
+      this.isNavTransition = false
     }
   },
   beforeDestroy () {
@@ -92,6 +106,7 @@ export default {
 
 <style lang="stylus">
 @import '../util/global.styl'
+@import '../util/transition.styl'
 
 .table-of-contents
   // background-image url(/proj-assets/food-delivery/img/map.jpg)
@@ -189,7 +204,7 @@ export default {
       z-index 199
     &-action
       position absolute
-      top 159px
+      top 162px
       width 100%
       display flex
       flex-direction column
@@ -198,14 +213,30 @@ export default {
       font-size 2.4rem
       z-index 599
       @media (min-width $mobile)
-        top 195px
+        top 198px
       // text-align center
       // margin-right auto
       // margin-left auto
+      & > div
+        text-align center
+        &.point
+          // easeInOutSine
+          animation point 2s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite both
+          @keyframes point
+            0%
+              transform translateY(0px)
+            14%
+              transform translateY(-10px)
+            28%
+              transform translateY(0px)
+            42%
+              transform translateY(-10px)
+            70%
+              transform translateY(0px)
       & img
         width 50px
-        display block
-        // transform rotate(-90deg)
+        vertical-align top
+        // display block
       & p
         // font-size 2.4rem
         line-height normal
@@ -220,4 +251,11 @@ export default {
         max-width 240px
         padding-top 8px
         padding-bottom 8px
+        // easeOutCirc
+        transition all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)
+        &:hover
+          background-color #fff
+          color #000
+        &:active
+          background-color darken(#fff, 10%)
 </style>

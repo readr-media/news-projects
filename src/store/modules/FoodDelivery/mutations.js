@@ -16,6 +16,9 @@ export default {
   },
   changeUserState (state, userState) {
     state.userState = userState
+  },
+  showNav (state) {
+    state.isNav = true
   }
   // toggleScrollBar (state, isShow) {
   //   state.isScrollBar = isShow
