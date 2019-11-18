@@ -1,10 +1,19 @@
 <template>
   <section id="unitedfront">
-    <Article />
+    <Landing />
+    <div class="unitedfront__articles articles">
+      <div class="articles__inner-wrapper">
+        <Article />
+        <Article />
+        <Article />
+        <Article />
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
+import Landing from './components/Landing.vue'
 import Article from './components/Article.vue'
 
 export default {
@@ -13,14 +22,30 @@ export default {
       title: '',
       description: '',
       metaUrl: 'china-company',
-      metaImage: 'china-company/ogimage.png'
+      metaImage: 'china-company/ogimage.png',
+      customScript: `
+        <script src="https://public.flourish.studio/resources/embed.js"><\/script>
+      `
     }
   },
   components: {
+    Landing,
     Article
   }
 }
 </script>
 
 <style lang="stylus">
+#unitedfront
+  background-color black
+
+.articles
+  background linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(231,0,0,1) 100%)
+  &__inner-wrapper
+    max-width 1000px
+    margin 0 auto
+
+.flourish-embed
+  .flourish-credit
+    display none
 </style>

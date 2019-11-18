@@ -9,6 +9,7 @@
 
 <style lang="stylus" scoped>
 .article-content
+  background-color white
   padding 60px 100px
   h1
     font-size 21px
