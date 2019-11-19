@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <AppHeader v-if="hideAppHeader" />
+    <!-- todo recover -->
+    <!-- <AppHeader v-if="hideAppHeader" /> -->
+
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
@@ -22,20 +24,22 @@ export default {
   components: {
     AppHeader: () => import('./components/AppHeader.vue')
   },
-  computed: {
-    hideAppHeader () {
-      return !PROJECTS_NOT_NEED_APP_HEADER.includes(this.$route.params.project)
-    }
-  },
+  // computed: {
+  //   hideAppHeader () {
+  //     return !PROJECTS_NOT_NEED_APP_HEADER.includes(this.$route.params.project)
+  //   }
+  // },
   beforeMount () {
     updateViewport(this.$store)
   },
   mounted () {
     window.addEventListener('resize', this.$_app_updateViewport)
+    window.addEventListener('orientationChange', this.$_app_updateViewport)
     window.ga && window.ga('send', 'pageview')
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.$_app_updateViewport)
+    window.removeEventListener('orientationChange', this.$_app_updateViewport)
   },
   methods: {
     $_app_updateViewport () {

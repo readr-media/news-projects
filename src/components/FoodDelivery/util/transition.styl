@@ -1,0 +1,20 @@
+.fade
+  &-out
+    &-cover
+      &-leave-active
+        transition opacity 0.6s cubic-bezier(0.075, 0.82, 0.165, 1)
+      &-leave-to
+        opacity 0
+    &-nav
+      &-enter-active
+        transition opacity 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)
+      &-enter
+        opacity 0
+      &-enter-active
+        z-index 199
+
+.popOutNav
+  &-enter-active
+    transition transform 0.6s cubic-bezier(0.19, 1, 0.22, 1)
+  &-enter
+    transform translateY(100%)
