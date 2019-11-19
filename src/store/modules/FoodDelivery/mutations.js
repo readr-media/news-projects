@@ -24,6 +24,13 @@ export default {
   changeBeginningContent (state) {
     state.isTOC = !state.isTOC
     state.isBaseReport = !state.isBaseReport
+  },
+  toggleBodyScrollBar (state, isShow) {
+    if (isShow) {
+      document.body.classList.remove('overflow-h')
+    } else {
+      document.body.classList.add('overflow-h')
+    }
   }
   // toggleScrollBar (state, isShow) {
   //   state.isScrollBar = isShow

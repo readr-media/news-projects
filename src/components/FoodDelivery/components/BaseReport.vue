@@ -1,39 +1,33 @@
 <template>
-  <!-- <main class="base-report" id="base-report" @scroll="changeRouter" :class="{ show: isReportContent }"> -->
-    <main
-      id="base-report"
-      :class="[ 'base-report', { 'visibility-h': isHidden, 'below-the-bottom': !isBaseReport } ]"
-      @scroll="changeRouter(); changeResult()"
-    >
-      <!-- <section v-for="(reportId, idx) in currentReportIds" :key="`report-${reportId}`" :ref="`report${idx}`"> -->
-      <!-- <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)"> -->
-      <div class="base-report__container">
-        <HeaderIcons v-show="isHeaderIcons" />
-        <transition
-          name="slide-report"
-          @before-enter="isHidden = false"
-          @enter       ="scrollToReport"
-          @after-enter ="isHeaderIcons = true"
-          @before-leave="isHeaderIcons = false"
-          @after-leave ="isHidden = true"
-        >
-          <!-- <div class="base-report__reports-wrapper" :class="{ show: isReportContent }"> -->
-          <div v-show="isReportContent">
-            <section v-for="(reportId, idx) in reportIds" :key="`report-${reportId}`" ref="report" :id="`report${reportId}`">
-              <div class="base-report__marker-wrapper">
-                <MapMarker :num="reportId" class="base-report__marker" />
-              </div>
-              <component :is="`ReportContent${reportId}`" />
-              <ReportResult :result="results[ idx ]" ref="result" />
-              <!-- <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" /> -->
-            </section>
-            <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
-            <TheFooter />
-          </div>
-        </transition>
-      </div>
-    </main>
-  <!-- </transition> -->
+  <main
+    id="base-report"
+    :class="[ 'base-report', { 'visibility-h': isHidden, 'below-the-bottom': !isBaseReport } ]"
+    @scroll="changeRouter(); changeResult()"
+  >
+    <div class="base-report__container">
+      <HeaderIcons v-show="isHeaderIcons" />
+      <transition
+        name="slide-report"
+        @before-enter="isHidden = false"
+        @enter       ="scrollToReport"
+        @after-enter ="isHeaderIcons = true"
+        @before-leave="isHeaderIcons = false"
+        @after-leave ="afterLeaveReportContent"
+      >
+        <div v-show="isReportContent">
+          <section v-for="(reportId, idx) in reportIds" :key="`report-${reportId}`" ref="report" :id="`report${reportId}`">
+            <div class="base-report__marker-wrapper">
+              <MapMarker :num="reportId" class="base-report__marker" />
+            </div>
+            <component :is="`ReportContent${reportId}`" />
+            <ReportResult :result="results[ idx ]" ref="result" />
+          </section>
+          <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
+          <TheFooter />
+        </div>
+      </transition>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -73,7 +67,7 @@ export default {
     ReportContent4,
     ReportContent5
   },
-  beforeMount () {
+  mounted () {
     this.scrollToReport()
     if (!this.isBaseReport) {
       this.isHidden = false
@@ -128,14 +122,13 @@ export default {
         }
       ],
       beforeScrollT: 0,
-      isHidden: true,
+      isHidden: false,
       isHeaderIcons: true
     }
   },
   computed: {
     ...mapState([
       'isReportContent',
-      // 'clickedReportId',
       'currentReadReportId',
       'reportIds',
       'isMounted',
@@ -153,7 +146,8 @@ export default {
   methods: {
     ...mapMutations([
       'changeCurrentReadReportId',
-      'changeUserState'
+      'changeUserState',
+      'toggleBodyScrollBar'
     ]),
     // todo when auto scroll, need to prevent trigger?
     changeRouter () {
@@ -167,15 +161,11 @@ export default {
       const reportNextOffsetT = reportNext.offsetTop
       
       if (reportBaseScrollT >= reportNextOffsetT) {
-        // this.currentReadReportId += 1
         this.changeCurrentReadReportId(this.currentReadReportId + 1)
         this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
-        // this.wEl.history.replaceState({}, '', `/project/food-delivery/order${this.currentReadReportId}`)
       } else if (reportBaseScrollT < reportPrevOffsetT) {
-        // this.currentReadReportId -= 1
         this.changeCurrentReadReportId(this.currentReadReportId - 1)
         this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
-        // this.wEl.history.replaceState({}, '', `/project/food-delivery/order${this.currentReadReportId}`)
       }
     },
     scrollToReport () {
@@ -192,7 +182,6 @@ export default {
       }
 
       const reportIdx = this.currentReadReportId - 1
-      // const resultEl = this.$refs.result[ reportIdx ].$el
       const resultOffsetT = this.$refs.result[ reportIdx ].$el.offsetTop
 
       if (baseReportScrollT >= (resultOffsetT - this.wh / 2)) {
@@ -216,25 +205,12 @@ export default {
       }
 
       this.beforeScrollT = baseReportScrollT
+    },
+    afterLeaveReportContent () {
+      this.isHidden = true
+      this.toggleBodyScrollBar(true)
     }
   }
-  // watch: {
-  //   // isReportContent: {
-  //   //   handler (newVal) {
-  //   //     if (newVal) {
-  //   //       this.currentReadReportId = this.currentReadReportId
-  //   //     }
-  //   //   },
-  //   //   immediate: true
-  //   // }
-  //   // isReportContent (newVal) {
-  //   //   if (newVal) {
-  //   //     document.body.classList.add('overflow-h')
-  //   //   } else {
-  //   //     document.body.classList.remove('overflow-h')
-  //   //   }
-  //   // }
-  // }
 }
 </script>
 
@@ -244,7 +220,6 @@ export default {
 
 .base-report
   position fixed
-  // position absolute
   top 0
   left 0
   z-index 9
@@ -259,16 +234,6 @@ export default {
     margin-left auto
     margin-right auto
     overflow hidden
-  // &__reports-wrapper
-  //   // transform translateX(100%)
-  //   left 100%
-  //   // transition transform 0.32s
-  //   transition left 0.32s
-  //   &.show
-  //     left 0%
-  //     // transform translateX(0%)
-  // &__report
-  //   position relative
   &__marker-wrapper
     height 84px
     display flex

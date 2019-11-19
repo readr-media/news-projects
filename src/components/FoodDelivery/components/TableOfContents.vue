@@ -23,7 +23,7 @@
                 <p class="table-of-contents__time">預估時間：{{ content.time }}</p>
               </div>
               <!-- <div class="table-of-contents__arrow"> -->
-              <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="">
+              <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/icon/enter--comp.svg" alt="">
               <!-- </div> -->
             </li>
           </ul>
@@ -89,7 +89,8 @@ export default {
   methods: {
     ...mapMutations([
       'toggleReportContent',
-      'changeCurrentReadReportId'
+      'changeCurrentReadReportId',
+      'toggleBodyScrollBar'
     ]),
     updateNavH () {
       this.navH = this.$refs.nav.offsetHeight      
@@ -98,12 +99,14 @@ export default {
       if (this.isPrompt || this.isTOCTransition) return
       this.changeCurrentReadReportId(id)
       this.toggleReportContent(true)
+      this.toggleBodyScrollBar(false)
       this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
     },
     afterEnterNav () {
       this.isPrompt = true
       this.isTOCTransition = false
       this.updateNavH()
+      this.toggleBodyScrollBar(true)
     }
   },
   beforeDestroy () {
@@ -142,7 +145,8 @@ export default {
   // todo max-width
   &__title
     font-size 1.8rem
-    // font-weight 500
+    // transition all 0.45s $easeOutCirc
+    font-weight 700
   &__time
     font-size 1.4rem
   &__arrow
@@ -177,11 +181,15 @@ export default {
       padding-right 45px
     &:first-child
       padding-top 20px
+      border-top-left-radius 24px
+      border-top-right-radius 24px
     &.can-hover:hover
       background-color #ffec78
       & .table-of-contents__text
-        font-weight 500
+        // font-weight 500
         color #000
+      // & .table-of-contents__text
+      //   color #000
       & .marker-color
         fill #000
   &__line

@@ -1,14 +1,15 @@
 <template>
   <footer class="the-footer">
     <div class="the-footer__wrapper">
-      <img class="the-footer__readr-img" src="/proj-assets/food-delivery/img/readr--comp.svg" alt="">
+      <img class="the-footer__readr-img" src="/proj-assets/food-delivery/img/icon/readr--comp.svg" alt="">
+      <!-- todo 記者筆記 -->
       <OtherReports class="the-footer__other-reports" />
       <DonateItem class="the-footer__donate"/>
       <SubscrItem />
     </div>
     <img class="the-footer__end-img" src="/proj-assets/food-delivery/img/end--comp.svg" alt="">
     <div class="the-footer__share" @click="isShareIcon = !isShareIcon">
-      <img src="/proj-assets/food-delivery/img/share--comp.svg" alt="">
+      <img src="/proj-assets/food-delivery/img/icon/share--comp.svg" alt="">
       <p v-if="!isShareIcon">分享專題</p>
       <!-- <template v-else> -->
       <!-- <a href="#" target="_blank" :class="['copylink', { show: isShareIcon }]"></a> -->
@@ -27,7 +28,6 @@ import { READR_SITE_URL } from 'src/constants'
 
 export default {
   name: 'TheFooter',
-  // props: [ 'shareUrl' ],
   components: {
     OtherReports,
     DonateItem,
@@ -56,8 +56,6 @@ export default {
   padding-top 20px
   overflow hidden
   position relative
-  // padding-left 40px
-  // padding-right 40px
   @media (min-width $mobile)
     padding-top 30px
   &__wrapper
@@ -72,7 +70,6 @@ export default {
   &__readr-img
     width 45px
     display block
-    // vertical-align middle
     margin-bottom 15px
     margin-left auto
     margin-right auto

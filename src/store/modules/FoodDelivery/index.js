@@ -40,7 +40,7 @@ export default {
       }
     ],
     userState: '前往目的地的路上',
-    isTOC: false,
+    isTOC: true,
     isBaseReport: true
     // isBodyScroll: true
     // beginningContent: 'toc'

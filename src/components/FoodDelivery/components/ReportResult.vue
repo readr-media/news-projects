@@ -32,14 +32,9 @@
         </g>
       </svg>
     </div>
-    <!-- <img class="report-result__cheers" src="/proj-assets/food-delivery/img/icon/cheers--comp.svg" alt=""> -->
     <div class="report-result__action">
       <button type="button" class="order" v-if="result.action" >{{ result.action }}</button>
       <button type="button" class="share">分享成就（專題）</button>
-      <!-- <div class="report-result__wrapper">
-        <button type="button">回到目錄</button>
-        <button type="button">分享成就</button>
-      </div> -->
     </div>
   </section>
 </template>
@@ -60,10 +55,6 @@ export default {
 @import '../util/global.styl'
 
 .report-result
-  // background-image url(/proj-assets/food-delivery/img/map.jpg)
-  // background-size cover
-  // background-position center
-  // background-repeat no-repeat
   background-color rgba(#000, 0.3)
   height 100vh
   @media (min-width $mobile)
@@ -72,7 +63,6 @@ export default {
     padding-bottom 100px
   &__cheers
     width 82px
-    // display block
     margin-left auto
     margin-right auto
     margin-top 20px
@@ -86,7 +76,6 @@ export default {
     max-width 240px
     margin-left auto
     margin-right auto
-    // margin-bottom 20px
     margin-top 13px
   &__num
     color #ffdc03
@@ -94,7 +83,6 @@ export default {
     line-height 1.4
   &__name
     font-size 1.4rem
-    // line-height normal
   & button
     font-weight 500
     color #4a4a4a
@@ -116,19 +104,9 @@ export default {
     @media (min-width 680px)
       padding-right 0
       padding-left 0
-    // & > button
-    //   // background-color #ffdc03
-    //   width 100%
     & .order
       background-color #ffdc03
       margin-bottom 16px
     & .share
       background-color #fff
-  // &__wrapper
-  //   margin-top 17px
-  //   display flex
-  //   justify-content space-between
-  //   & button
-  //     background-color #fff
-  //     width calc(50% - 10px)
 </style>

@@ -1,17 +1,10 @@
 <template>
-  <!-- <div class="food-delivery" :class="{ 'overflow-h': !isScrollBar }"> -->
   <div class="food-delivery">
     <LoadingCover />
-    <!-- <HeaderIcons :class="{ 'opacity-0': isInfo }" /> -->
-    <!-- todo transition -->
     <TableOfContents :class="{ 'opacity-0': isReportContent || isInfo }" />
-    <!-- <TableOfContents :class="{ 'opacity-0': isInfo }" /> -->
-    <!-- todo v-if -->
-    <!-- <transition name="slideLeft"> -->
     <BaseReport :class="{ 'opacity-0': isInfo }" />
-    <!-- </transition> -->
-    <transition name="fade-info">
-      <TheInfo v-if="isInfo" />
+    <transition name="fade-normal">
+      <TheInfo v-if="isInfo" :class="{ 'overflow-y-s': isReportContent }" />
     </transition>
   </div>
 </template>
@@ -20,11 +13,6 @@
 import FoodDeliveryStoreModule from '../../store/modules/FoodDelivery'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
-
-// import smoothscroll from 'smoothscroll-polyfill'
-// if (typeof window !== 'undefined') {
-//   smoothscroll.polyfill()
-// }
 
 import LoadingCover from './components/LoadingCover.vue'
 import HeaderIcons from './components/HeaderIcons.vue'
@@ -81,9 +69,6 @@ export default {
     TableOfContents,
     BaseReport,
     TheInfo
-    // TheFooter
-    // ReportResult
-    // ReportContent1
   },
   computed: {
     ...mapState([
@@ -99,27 +84,19 @@ export default {
         const orderId = Number(params.split('order')[ 1 ])
         this.changeCurrentReadReportId(orderId)
         this.toggleReportContent(true)
-        // this.$router.push(`/project/food-delivery/order${orderId}`).catch((err) => {})
+        this.toggleBodyScrollBar(false)
       } else {
         this.toggleReportContent(false)
-        // this.$router.push('/project/food-delivery').catch((err) => {})
       }
     }
-    // isReportContent (newVal) {
-    //   if (newVal) {
-    //     document.body.classList.add('overflow-h')
-    //   } else {
-    //     document.body.classList.remove('overflow-h')
-    //   }
-    // }
   },
   methods: {
     ...mapMutations([
       'toggleReportContent',
-      // 'changeClickedReportId',
       'changeCurrentReadReportId',
       'setIsMounted',
-      'changeBeginningContent'
+      'changeBeginningContent',
+      'toggleBodyScrollBar'
     ])
   },
   created () {
@@ -131,10 +108,12 @@ export default {
       const orderNum = Number(params.split('order')[ 1 ])
       this.changeCurrentReadReportId(orderNum)
       this.toggleReportContent(true)
-      this.changeBeginningContent()
     } else {
       this.$router.replace('/project/food-delivery').catch((err) => {})
     }
+  },
+  beforeMount () {
+    this.toggleBodyScrollBar(false)
   },
   mounted () {
     this.setIsMounted()
@@ -146,10 +125,9 @@ export default {
 </script>
 
 <style lang="stylus">
-// @import './util/global.styl'
 @import './util/transition.styl'
 @import './util/report-content.styl'
-// $ff-sans-serif = YakuHanJPs_Narrow, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Noto Sans CJK TC", "Noto Sans CJK", "Source Han Sans", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif
+
 $ff-sans-serif = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Noto Sans CJK TC", "Noto Sans CJK", "Source Han Sans", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif
 
 html
@@ -161,13 +139,10 @@ body
   background-position center top
   background-repeat repeat
   min-height 100vh
-  // overflow-y scroll
 .food-delivery
   max-width 800px
   margin-right auto
   margin-left auto
-  // transform translateZ(0)
-  // overflow hidden
   position relative
 img
   max-width 100%
@@ -187,12 +162,13 @@ button
   outline none
 a
   cursor pointer
+
 .opacity-0
   opacity 0
 .visibility-h
   visibility hidden
-// .overflow-h
-//   overflow hidden
-// .overflow-h
-//   overflow hidden
+.overflow-h
+  overflow hidden
+.overflow-y-s
+  overflow-y scroll
 </style>

@@ -20,7 +20,7 @@ export default {
   name: 'LoadingCover',
   data () {
     return {
-      isCover: true
+      isCover: false
     }
   },
   computed: {

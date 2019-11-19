@@ -33,7 +33,6 @@ export default {
     margin-left auto
     margin-right auto
     & .subscription
-      // font-size 1.5rem
       &__input
         height 40px
         font-size 1.5rem
@@ -50,7 +49,6 @@ export default {
         font-weight 500
         background-color #4a4a4a
         line-height 40px
-        // width 18.75%
         flex 0 0 25%
         max-width 70px
 </style>

@@ -3,22 +3,21 @@
     <div class="the-info__container">
       <UserState />
       <div class="the-info__wrapper">
-        <img class="the-info__cancel" src="/proj-assets/food-delivery/img/x--comp.svg" alt="" @click="toggleInfo(false)">
+        <img class="the-info__cancel" src="/proj-assets/food-delivery/img/icon/x--comp.svg" alt="" @click="toggleInfo(false)">
       </div>
+      <!-- todo 記者筆記 -->
       <div class="the-info__slides" :style="{ transform: `translateX(-${81.25 * (currentPage - 1)}vw)` }">
-        <!-- <div class="the-info__slide" style="padding-top: 20px;"> -->
-        <div class="the-info__slide">
-          <img src="/proj-assets/food-delivery/img/readr--comp.svg" alt="">
-          <p>文字採訪／李又如</p>
-          <p>設計／陳怡蒨</p>
-          <p>插畫／許玲瑋</p>
-          <p>工程／林昱帆</p>
-          <p>攝影／李昭妟、簡信昌</p>
-        </div>
-        <!-- <div class="the-info__slide" style="padding-top: 25px;"> -->
-        <div class="the-info__slide">
-          <OtherReports />
-        </div>
+      <div class="the-info__slide">
+        <img src="/proj-assets/food-delivery/img/icon/readr--comp.svg" alt="">
+        <p>文字採訪／李又如</p>
+        <p>設計／陳怡蒨</p>
+        <p>插畫／許玲瑋</p>
+        <p>工程／林昱帆</p>
+        <p>攝影／李昭妟、簡信昌</p>
+      </div>
+      <div class="the-info__slide">
+        <OtherReports />
+      </div>
       </div>
       <div class="the-info__pages">
         <div class="the-info__page" :class="{ active: currentPage === 1 }" @click="showPage(1)"></div>
@@ -44,11 +43,6 @@ export default {
   data () {
     return {
       currentPage: 1
-      // slides: [
-      //   {
-      //     id: 1
-      //   }
-      // ]
     }
   },
   methods: {
@@ -69,12 +63,7 @@ export default {
   position fixed
   top 0
   left 0
-  // background-image url(/proj-assets/food-delivery/img/map.jpg)
-  // background-size cover
-  // background-position center
-  // background-repeat no-repeat
   width 100%
-  // height 100vh
   z-index 999
   line-height normal
   overflow hidden
@@ -104,13 +93,10 @@ export default {
   &__slides
     display flex
     padding-left 12.5vw
-    // margin-bottom 15px
     transition transform 0.32s
     @media (min-width $mobile)
       padding-left 0
       padding-top 50px
-      // height calc(100vh - 120px)
-      // align-items center
       justify-content center
   &__slide
     background-color #ffdc03
@@ -120,9 +106,6 @@ export default {
     flex-direction column
     font-weight 300
     font-size 1.5rem
-    // padding-top 20px
-    // padding-bottom 40px
-    // width 240px
     flex 0 0 75vw
     height 75vw
     border-radius 24px

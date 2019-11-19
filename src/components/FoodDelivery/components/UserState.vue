@@ -2,7 +2,6 @@
   <div class="the-user">
     <div class="the-user__state">{{ state || userState }}</div>
     <img src="/proj-assets/food-delivery/img/driver.png" alt="">
-    <!-- <div v-html="state" class="op0"></div> -->
   </div>
 </template>
 
@@ -13,11 +12,6 @@ const { mapState } = createNamespacedHelpers('FoodDelivery')
 export default {
   name: 'UserState',
   props: [ 'state' ],
-  // props: {
-  //   state: {
-  //     default: '前往目的地的路上'
-  //   }
-  // },
   computed: {
     ...mapState([
       'userState'
@@ -34,10 +28,7 @@ export default {
   align-items center
   justify-content center
   position relative
-  // padding-top 17px
-  // padding-bottom 17px
   height 84px
-  // max-width 276px
   // ((50 / 2) + 24 + 88) * 2
   max-width 274px
   margin-left auto
@@ -58,10 +49,7 @@ export default {
     @media (min-width $mobile)
       font-size 1.8rem
       max-width 113px
-    // & span
-    //   color #ffdc03
   & img
-    // position absolute
     width 50px
     border-radius 50%
     @media (min-width $mobile)
