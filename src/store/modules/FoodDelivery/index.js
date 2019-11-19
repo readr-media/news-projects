@@ -1,4 +1,5 @@
 // import actions from './actions'
+// import getters from './getters'
 import mutations from './mutations'
 
 export default {
@@ -34,14 +35,18 @@ export default {
       },
       {
         id: 5,
-        title: '外送產業帶來的好與壞',
+        title: '平台經濟帶來的好與壞',
         time: '01:40'
       }
     ],
     userState: '前往目的地的路上',
-    isNav: false
+    isTOC: false,
+    isBaseReport: true
+    // isBodyScroll: true
+    // beginningContent: 'toc'
     // isScrollBar: false
   }),
   // actions,
+  // getters,
   mutations
 }

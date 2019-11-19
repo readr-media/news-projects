@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade-out-cover" @after-leave="showNav">
+  <transition name="fade-out-cover" @before-leave="showBeginningContent">
     <section class="loading-cover" v-if="isCover">
       <div class="loading-cover__wrapper">
         <h1>記者來當外送員：<br>開箱美食外送秘辛！</h1>
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'showNav'
+      'showBeginningContent'
     ]),
     hideCover () {
       this.isCover = false

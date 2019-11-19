@@ -1,46 +1,49 @@
 <template>
-  <section class="table-of-contents">
-    <UserState />
-    <HeaderIcons />
-    <transition name="popOutNav" @before-enter="isNavTransition = true" @after-enter="afterEnterNav">
-      <nav ref="nav" v-show="isNav">
-        <svg class="table-of-contents__line" width="1" :height="isPrompt ? 0 : navH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
-        <ul>
-          <li
-            v-for="content in contents"
-            :key="`content-${content.id}`"
-            @click="showReport(content.id)"
-            :class="{ 'can-hover': !isNavTransition && !isPrompt, 'spotlight': content.id === 1 && isPrompt }">
-          <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
-            <div class="table-of-contents__num">
-              <MapMarker :num="content.id" />
+  <transition name="pop-up-toc" @before-enter="isTOCTransition = true" @after-enter="afterEnterNav">
+    <section class="table-of-contents" v-show="isTOC">
+    <!-- <section :class="[ 'table-of-contents', { 'below-the-bottom': !isTOC } ]"> -->
+      <UserState />
+      <HeaderIcons />
+      <!-- <transition name="pop-up-nav" @before-enter="isTOCTransition = true" @after-enter="afterEnterNav"> -->
+        <nav ref="nav">
+          <svg class="table-of-contents__line" width="1" :height="isPrompt ? 0 : navH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
+          <ul>
+            <li
+              v-for="content in contents"
+              :key="`content-${content.id}`"
+              @click="showReport(content.id)"
+              :class="{ 'can-hover': !isTOCTransition && !isPrompt, 'spotlight': content.id === 1 && isPrompt }">
+            <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
+              <div class="table-of-contents__num">
+                <MapMarker :num="content.id" />
+              </div>
+              <div class="table-of-contents__text">
+                <p class="table-of-contents__title">{{ content.title }}</p>
+                <!-- todo 預估？閱讀？時間 -->
+                <p class="table-of-contents__time">預估時間：{{ content.time }}</p>
+              </div>
+              <!-- <div class="table-of-contents__arrow"> -->
+              <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="">
+              <!-- </div> -->
+            </li>
+          </ul>
+        </nav>
+      <!-- </transition> -->
+      <transition name="fade-out-nav" @after-enter="isPoint = true">
+        <div class="table-of-contents__prompt" v-if="isPrompt">
+          <div class="table-of-contents__prompt-mask"></div>
+          <div class="table-of-contents__prompt-action">
+            <div :class="{ point: isPoint }">
+              <img src="/proj-assets/food-delivery/img/icon/finger.svg" alt="">
+              <!-- todo text -->
+              <p>點選以閱讀報導</p>
             </div>
-            <div class="table-of-contents__text">
-              <p class="table-of-contents__title">{{ content.title }}</p>
-              <!-- todo 預估？閱讀？時間 -->
-              <p class="table-of-contents__time">預估時間：{{ content.time }}</p>
-            </div>
-            <!-- <div class="table-of-contents__arrow"> -->
-            <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="">
-            <!-- </div> -->
-          </li>
-        </ul>
-      </nav>
-    </transition>
-    <transition name="fade-out-nav" @after-enter="isPoint = true">
-      <div class="table-of-contents__prompt" v-if="isPrompt">
-        <div class="table-of-contents__prompt-mask"></div>
-        <div class="table-of-contents__prompt-action">
-          <div :class="{ point: isPoint }">
-            <img src="/proj-assets/food-delivery/img/icon/finger.svg" alt="">
-            <!-- todo text -->
-            <p>點選以閱讀報導</p>
+            <button type="button" @click="isPrompt = false">我知道了</button>
           </div>
-          <button type="button" @click="isPrompt = false">我知道了</button>
         </div>
-      </div>
-    </transition>
-  </section>
+      </transition>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -62,7 +65,7 @@ export default {
     return {
       navH: 0,
       isPrompt: false,
-      isNavTransition: true,
+      isTOCTransition: false,
       isPoint: false
     }
   },
@@ -74,7 +77,7 @@ export default {
   computed: {
     ...mapState([
       'contents',
-      'isNav'
+      'isTOC'
     ]),
     lineH () {
       // 24.6 + 35.8
@@ -92,14 +95,14 @@ export default {
       this.navH = this.$refs.nav.offsetHeight      
     },
     showReport (id) {
-      if (this.isPrompt || this.isNavTransition) return
+      if (this.isPrompt || this.isTOCTransition) return
       this.changeCurrentReadReportId(id)
       this.toggleReportContent(true)
       this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
     },
     afterEnterNav () {
       this.isPrompt = true
-      this.isNavTransition = false
+      this.isTOCTransition = false
       this.updateNavH()
     }
   },
@@ -115,16 +118,11 @@ export default {
 @import '../util/transition.styl'
 
 .table-of-contents
-  // background-image url(/proj-assets/food-delivery/img/map.jpg)
-  // background-size cover
-  // background-position center
-  // background-repeat no-repeat
   min-height 100vh
   background-color rgba(#000, 0.3)
   overflow hidden
   position relative
-  // &.hide
-  //   visibility hidden
+  transition opacity 0.45s $easeOutExpo, transform 0.6s $easeOutExpo
   & nav
     position relative
   &__num
@@ -140,7 +138,7 @@ export default {
   &__text
     color #4a4a4a
     line-height normal
-    transition all 0.2s
+    transition all 0.45s $easeOutCirc
   // todo max-width
   &__title
     font-size 1.8rem
@@ -158,6 +156,7 @@ export default {
     overflow hidden
     background-color #ffdc03
     min-height calc(100vh - 84px)
+    // height 100vh
     @media (min-width $mobile)
       min-height calc(100vh - 120px)
   & li
@@ -169,11 +168,10 @@ export default {
     display flex
     align-items center
     cursor pointer
-    transition background-color 0.2s
+    transition background-color 0.45s $easeOutCirc
     &.spotlight
       z-index 499
       position relative
-    // position relative
     @media (min-width $mobile)
       padding-left 45px
       padding-right 45px
@@ -265,7 +263,7 @@ export default {
         padding-top 8px
         padding-bottom 8px
         // easeOutCirc
-        transition all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)
+        transition all 0.45s $easeOutCirc
         &:hover
           background-color #fff
           color #000

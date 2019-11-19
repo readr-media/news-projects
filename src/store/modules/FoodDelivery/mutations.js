@@ -17,8 +17,13 @@ export default {
   changeUserState (state, userState) {
     state.userState = userState
   },
-  showNav (state) {
-    state.isNav = true
+  showBeginningContent (state) {
+    const beginningContent = (state.isTOC ? 'isBaseReport' : 'isTOC')
+    state[beginningContent] = true
+  },
+  changeBeginningContent (state) {
+    state.isTOC = !state.isTOC
+    state.isBaseReport = !state.isBaseReport
   }
   // toggleScrollBar (state, isShow) {
   //   state.isScrollBar = isShow

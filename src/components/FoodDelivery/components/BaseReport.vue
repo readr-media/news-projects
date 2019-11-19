@@ -1,30 +1,39 @@
 <template>
   <!-- <main class="base-report" id="base-report" @scroll="changeRouter" :class="{ show: isReportContent }"> -->
-  <main class="base-report" id="base-report" @scroll="changeRouter(); changeResult()">
-    <!-- <section v-for="(reportId, idx) in currentReportIds" :key="`report-${reportId}`" :ref="`report${idx}`"> -->
-    <!-- <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)"> -->
-    <div class="base-report__container">
-      <HeaderIcons />
-      <transition
-        name="slideLeft"
-        @enter="scrollToReport"
-      >
-        <!-- <div class="base-report__reports-wrapper" :class="{ show: isReportContent }"> -->
-        <div v-show="isReportContent">
-          <section v-for="(reportId, idx) in reportIds" :key="`report-${reportId}`" ref="report" :id="`report${reportId}`">
-            <div class="base-report__marker-wrapper">
-              <MapMarker :num="reportId" class="base-report__marker" />
-            </div>
-            <component :is="`ReportContent${reportId}`" />
-            <ReportResult :result="results[ idx ]" ref="result" />
-            <!-- <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" /> -->
-          </section>
-          <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
-          <TheFooter />
-        </div>
-      </transition>
-    </div>
-  </main>
+    <main
+      id="base-report"
+      :class="[ 'base-report', { 'visibility-h': isHidden, 'below-the-bottom': !isBaseReport } ]"
+      @scroll="changeRouter(); changeResult()"
+    >
+      <!-- <section v-for="(reportId, idx) in currentReportIds" :key="`report-${reportId}`" :ref="`report${idx}`"> -->
+      <!-- <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)"> -->
+      <div class="base-report__container">
+        <HeaderIcons v-show="isHeaderIcons" />
+        <transition
+          name="slide-report"
+          @before-enter="isHidden = false"
+          @enter       ="scrollToReport"
+          @after-enter ="isHeaderIcons = true"
+          @before-leave="isHeaderIcons = false"
+          @after-leave ="isHidden = true"
+        >
+          <!-- <div class="base-report__reports-wrapper" :class="{ show: isReportContent }"> -->
+          <div v-show="isReportContent">
+            <section v-for="(reportId, idx) in reportIds" :key="`report-${reportId}`" ref="report" :id="`report${reportId}`">
+              <div class="base-report__marker-wrapper">
+                <MapMarker :num="reportId" class="base-report__marker" />
+              </div>
+              <component :is="`ReportContent${reportId}`" />
+              <ReportResult :result="results[ idx ]" ref="result" />
+              <!-- <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" /> -->
+            </section>
+            <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
+            <TheFooter />
+          </div>
+        </transition>
+      </div>
+    </main>
+  <!-- </transition> -->
 </template>
 
 <script>
@@ -66,6 +75,9 @@ export default {
   },
   beforeMount () {
     this.scrollToReport()
+    if (!this.isBaseReport) {
+      this.isHidden = false
+    }
   },
   data () {
     return {
@@ -115,7 +127,9 @@ export default {
           state: '前往目的地的路上'
         }
       ],
-      beforeScrollT: 0
+      beforeScrollT: 0,
+      isHidden: true,
+      isHeaderIcons: true
     }
   },
   computed: {
@@ -124,7 +138,8 @@ export default {
       // 'clickedReportId',
       'currentReadReportId',
       'reportIds',
-      'isMounted'
+      'isMounted',
+      'isBaseReport'
     ]),
     wh () {
       return this.$store.state.viewport[1]
@@ -204,20 +219,28 @@ export default {
     }
   }
   // watch: {
-  //   isReportContent: {
-  //     handler (newVal) {
-  //       if (newVal) {
-  //         this.currentReadReportId = this.currentReadReportId
-  //       }
-  //     },
-  //     immediate: true
-  //   }
+  //   // isReportContent: {
+  //   //   handler (newVal) {
+  //   //     if (newVal) {
+  //   //       this.currentReadReportId = this.currentReadReportId
+  //   //     }
+  //   //   },
+  //   //   immediate: true
+  //   // }
+  //   // isReportContent (newVal) {
+  //   //   if (newVal) {
+  //   //     document.body.classList.add('overflow-h')
+  //   //   } else {
+  //   //     document.body.classList.remove('overflow-h')
+  //   //   }
+  //   // }
   // }
 }
 </script>
 
 <style lang="stylus">
 @import '../util/global.styl'
+@import '../util/transition.styl'
 
 .base-report
   position fixed
@@ -228,6 +251,9 @@ export default {
   width 100%
   height 100%
   overflow-y auto
+  transition opacity 0.45s $easeOutExpo, transform 0.6s $easeOutExpo
+  &.below-the-bottom
+    transform translateY(100%)
   &__container
     max-width 800px
     margin-left auto
