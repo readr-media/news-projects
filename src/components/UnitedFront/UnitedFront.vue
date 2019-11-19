@@ -3,10 +3,10 @@
     <Landing />
     <div class="unitedfront__articles articles articles--gradient-background">
       <div class="articles__inner-wrapper">
-        <Article />
-        <Article />
-        <Article />
-        <Article />
+        <Article class="article" />
+        <Article class="article" />
+        <Article class="article" />
+        <Article class="article" />
       </div>
     </div>
     <Credit />
