@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade" @after-leave="showNav">
+  <transition name="fade-out-cover" @after-leave="showNav">
     <section class="loading-cover" v-if="isCover">
       <div class="loading-cover__wrapper">
         <h1>記者來當外送員：<br>開箱美食外送秘辛！</h1>
@@ -49,7 +49,7 @@ export default {
 @import '../util/transition.styl'
 
 .loading-cover
-  background-image url(/proj-assets/food-delivery/img/cover.jpg)
+  background-image url(/proj-assets/food-delivery/img/cover.png)
   background-color #000
   background-size cover
   background-position center top

@@ -3,10 +3,14 @@
     <UserState />
     <HeaderIcons />
     <transition name="popOutNav" @before-enter="isNavTransition = true" @after-enter="afterEnterNav">
-      <nav ref="nav" v-if="isNav">
-        <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
+      <nav ref="nav" v-show="isNav">
+        <svg class="table-of-contents__line" width="1" :height="isPrompt ? 0 : navH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
         <ul>
-          <li v-for="content in contents" :key="`content-${content.id}`" @click="showReport(content.id)" :style="(content.id === 1 && isPrompt)? { zIndex: 499, position: 'relative' } : ''">
+          <li
+            v-for="content in contents"
+            :key="`content-${content.id}`"
+            @click="showReport(content.id)"
+            :class="{ 'can-hover': !isNavTransition && !isPrompt, 'spotlight': content.id === 1 && isPrompt }">
           <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
             <div class="table-of-contents__num">
               <MapMarker :num="content.id" />
@@ -23,7 +27,7 @@
         </ul>
       </nav>
     </transition>
-    <transition name="fade" @after-enter="isPoint = true">
+    <transition name="fade-out-nav" @after-enter="isPoint = true">
       <div class="table-of-contents__prompt" v-if="isPrompt">
         <div class="table-of-contents__prompt-mask"></div>
         <div class="table-of-contents__prompt-action">
@@ -63,7 +67,7 @@ export default {
     }
   },
   mounted () {
-    this.updateNavH()
+    // this.updateNavH()
     window.addEventListener('resize', this.updateNavH)
     window.addEventListener('orientationChange', this.updateNavH)
   },
@@ -73,8 +77,10 @@ export default {
       'isNav'
     ]),
     lineH () {
+      // 24.6 + 35.8
+      // const height = this.navH - 60.4
       const height = this.navH - 24.6
-      return height >= 0 ? height : 0
+      return (height >= 0 ? height : 0)
     }
   },
   methods: {
@@ -83,8 +89,7 @@ export default {
       'changeCurrentReadReportId'
     ]),
     updateNavH () {
-      return 0
-      this.navH = this.$refs.nav.offsetHeight
+      this.navH = this.$refs.nav.offsetHeight      
     },
     showReport (id) {
       if (this.isPrompt || this.isNavTransition) return
@@ -95,6 +100,7 @@ export default {
     afterEnterNav () {
       this.isPrompt = true
       this.isNavTransition = false
+      this.updateNavH()
     }
   },
   beforeDestroy () {
@@ -113,7 +119,7 @@ export default {
   // background-size cover
   // background-position center
   // background-repeat no-repeat
-  // min-height 100vh
+  min-height 100vh
   background-color rgba(#000, 0.3)
   overflow hidden
   position relative
@@ -164,13 +170,16 @@ export default {
     align-items center
     cursor pointer
     transition background-color 0.2s
+    &.spotlight
+      z-index 499
+      position relative
     // position relative
     @media (min-width $mobile)
       padding-left 45px
       padding-right 45px
     &:first-child
       padding-top 20px
-    &:hover
+    &.can-hover:hover
       background-color #ffec78
       & .table-of-contents__text
         font-weight 500
@@ -181,8 +190,11 @@ export default {
     position absolute
     // 20 + (45 - 35.8) / 2
     top 24.6px
+    // 20 + (45 - 35.8) / 2 + 35.8
+    // top 60.4px
     // 10 + (25.42 / 2) - (1 / 2)
     left 22.21px
+    transition height 5.5s linear
     @media (min-width $mobile)
       // 45 + (25.42 / 2) - (1 / 2)
       left 57.21px
@@ -212,6 +224,7 @@ export default {
       color #fff
       font-size 2.4rem
       z-index 599
+      user-select none
       @media (min-width $mobile)
         top 198px
       // text-align center
