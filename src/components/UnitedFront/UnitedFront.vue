@@ -1,7 +1,7 @@
 <template>
   <section id="unitedfront">
     <Landing />
-    <div class="unitedfront__articles articles">
+    <div class="unitedfront__articles articles articles--gradient-background">
       <div class="articles__inner-wrapper">
         <Article />
         <Article />
@@ -9,12 +9,16 @@
         <Article />
       </div>
     </div>
+    <Credit />
+    <Footer />
   </section>
 </template>
 
 <script>
 import Landing from './components/Landing.vue'
 import Article from './components/Article.vue'
+import Credit from './components/Credit.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   metaInfo () {
@@ -30,7 +34,9 @@ export default {
   },
   components: {
     Landing,
-    Article
+    Article,
+    Credit,
+    Footer
   }
 }
 </script>
@@ -40,7 +46,8 @@ export default {
   background-color black
 
 .articles
-  background linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(231,0,0,1) 100%)
+  &--gradient-background
+    background linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(231,0,0,1) 100%)
   &__inner-wrapper
     max-width 1000px
     margin 0 auto

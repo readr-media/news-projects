@@ -18,9 +18,6 @@
 <style lang="stylus" scoped>
 .landing
   background-color black
-  &__map-wrapper
-    max-width 1000px
-    margin auto
   &__title-wrapper
     margin 100px 0 0 0
 
