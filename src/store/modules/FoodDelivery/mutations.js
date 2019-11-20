@@ -34,6 +34,9 @@ export default {
   },
   addReadReportIds (state, id) {
     state.readReportIds.push(id)
+  },
+  toggleAutoScrolling (state, isAutoScrolling) {
+    state.isAutoScrolling = isAutoScrolling
   }
   // toggleScrollBar (state, isShow) {
   //   state.isScrollBar = isShow

@@ -61,7 +61,8 @@ export default {
       description,
       metaUrl,
       metaImage,
-      customScript: '<script src="https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js"><\/script>'
+      // customScript: '<script src="https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js"><\/script><script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"><\/script>'
+      customScript: '<script src="https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js"><\/script><script src="https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/TextPlugin.min.js"><\/script>'
     }
   },
   components: {

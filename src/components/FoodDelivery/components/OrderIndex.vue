@@ -30,25 +30,28 @@ export default {
   components: {
     MapMarker
   },
-  data () {
-    return {
-      isScrolling: false
-    }
-  },
+  // data () {
+  //   return {
+  //     isAutoScrolling: false
+  //   }
+  // },
   computed: {
     ...mapState([
       'contents',
       'reportIds',
       'currentReadReportId',
+      'isAutoScrolling'
     ])
   },
   methods: {
     ...mapMutations([
-      'changeCurrentReadReportId'
+      'changeCurrentReadReportId',
+      'toggleAutoScrolling'
     ]),
     scrollToOrder (id) {
-      if (this.isScrolling) return
-      this.isScrolling = true
+      if (this.isAutoScrolling) return
+      this.toggleAutoScrolling(true)
+      // this.isAutoScrolling = true
       this.changeCurrentReadReportId(id)
       const reportEl = document.getElementById(`report${this.currentReadReportId}`)
       scrollIntoView(reportEl,
@@ -57,7 +60,7 @@ export default {
           align: { top: 0, left: 0 },
           ease: (t) => t * t * t * t
         }, 
-        () => { this.isScrolling = false })
+        () => { this.toggleAutoScrolling(false) })
     }
   }
 }

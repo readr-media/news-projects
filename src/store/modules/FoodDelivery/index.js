@@ -1,14 +1,10 @@
-// import actions from './actions'
-// import getters from './getters'
 import mutations from './mutations'
 
 export default {
   namespaced: true,
   state: () => ({
     isReportContent: false,
-    // clickedReportId: 1,
     currentReadReportId: 1,
-    // readReports: 1,
     reportIds: [ 1, 2, 3, 4, 5 ],
     isInfo: false,
     isMounted: false,
@@ -42,12 +38,8 @@ export default {
     userState: '前往目的地的路上',
     isTOC: true,
     isBaseReport: true,
-    readReportIds: []
-    // isBodyScroll: true
-    // beginningContent: 'toc'
-    // isScrollBar: false
+    readReportIds: [],
+    isAutoScrolling: false
   }),
-  // actions,
-  // getters,
   mutations
 }

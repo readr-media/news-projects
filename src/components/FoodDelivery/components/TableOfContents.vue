@@ -274,5 +274,5 @@ export default {
           background-color #fff
           color #000
         &:active
-          background-color darken(#fff, 10%)
+          background-color darken(#fff, 20%)
 </style>

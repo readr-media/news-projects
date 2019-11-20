@@ -1,6 +1,6 @@
 <template>
   <div class="the-user">
-    <div class="the-user__state" v-html="state || userState"></div>
+    <div class="the-user__state" ref="state"></div>
     <img src="/proj-assets/food-delivery/img/driver.png" alt="">
   </div>
 </template>
@@ -16,6 +16,27 @@ export default {
     ...mapState([
       'userState'
     ])
+  },
+  data () {
+    return {
+      stateTl: null
+    }
+  },
+  methods: {
+    typing () {
+      if (this.stateTl) {
+        this.stateTl.reverse()
+      }
+      const state = this.state || this.userState
+      this.stateTl = gsap.timeline()
+      this.stateTl.to(this.$refs.state, {
+        duration: 1.5,
+        text: state,
+        ease: 'sine.inOut'
+      })
+      this.stateTl.addLabel('userState')
+      return this.stateTl
+    }
   }
 }
 </script>

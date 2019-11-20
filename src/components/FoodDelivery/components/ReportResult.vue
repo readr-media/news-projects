@@ -1,6 +1,6 @@
 <template>
   <section class="report-result">
-    <UserState :state="result.state" />
+    <UserState ref="userState" :state="result.state" />
     <div class="report-result__reward">
       <div>
         <p class="report-result__num" ref="orderCount">{{ orderCount }}</p>
@@ -11,7 +11,7 @@
         <p class="report-result__name">金額</p>
       </div>
       <div>
-        <p class="report-result__num" ref="readTime">{{ time.minutes }}:{{ time.seconds }}</p>
+        <p class="report-result__num" ref="readTime">{{ time }}</p>
         <p class="report-result__name">時間</p>
       </div>
     </div>
@@ -62,7 +62,8 @@ export default {
     return {
       orderCount: 0,
       money: 0,
-      times: { minutes: 0, seconds: 0 }
+      // times: { minutes: 0, seconds: 0 }
+      seconds: 0
     }
   },
   computed: {
@@ -72,19 +73,22 @@ export default {
       'currentReadReportId'
     ]),
     time () {
-      const { minutes, seconds } = this.times
-      return {
-        minutes: minutes >= 10 ? minutes : `0${minutes}`,
-        seconds: seconds >= 10 ? seconds : `0${seconds}`
-      }
+      // const { minutes, seconds } = this.times
+      // return {
+      //   minutes: minutes >= 10 ? minutes : `0${minutes}`,
+      //   seconds: seconds >= 10 ? seconds : `0${seconds}`
+      // }
+      const minutes = Math.floor(this.seconds / 60)
+      const seconds = (this.seconds % 60)
+      // return `${minutes.toString().length === 2 ? minutes : `0${minutes}`}:${seconds.toString().length === 2 ? seconds : `0${seconds}`}`
+      return `${minutes >= 10 ? minutes : `0${minutes}`}:${seconds >= 10 ? seconds : `0${seconds}`}`
+      // return { minutes, seconds }
     }
   },
   methods: {
     cheers () {
       const { glassL, glassR, clangL, clangC, clangR } = this.$refs
-      const tl = gsap.timeline({ 
-        onComplete () { this.restart(true) }
-      })
+      const tl = gsap.timeline({ repeat: -1 })
       tl.set([ glassL, glassR ], { transformOrigin: '50% 70%' })
       tl.to([ clangL, clangC, clangR ], { duration: 0.8, scale: 0, transformOrigin: '50% 100%', ease: 'expo.in' }, 0.4)
       tl.to(glassL, { duration: 1.6, rotation: '-=40', x: '-=10', scale: 0.88, ease: 'power1.in' }, 0.4)
@@ -92,6 +96,7 @@ export default {
       tl.to(glassL, { duration: 0.8, rotation: '+=40', x: '+=10', scale: 1,    ease: 'back.out(1.7)' }, '>')
       tl.to(glassR, { duration: 0.8, rotation: '-=40', x: '-=10', scale: 1,    ease: 'back.out(1.7)' }, '<')
       tl.to([ clangL, clangC, clangR ], { duration: 0.2, scale: 1, transformOrigin: '50% 100%', ease: 'expo.out' }, '<0.25')
+      return tl
       // gsap.set(glassL, {
       //   rotation: '-=40',
       //   x: '-=10',
@@ -114,7 +119,7 @@ export default {
       //   ease: 'elastic.out(2, 0.4)'
       // }, 0)
       tl.to(orderCount, {
-        scale: 1.75,
+        scale: 1.5,
         duration: 0.5,
         ease: 'expo.in',
       }, 0)
@@ -141,7 +146,7 @@ export default {
       //   ease: 'elastic.out(2, 0.4)'
       // }, 0)
       tl.to(money, {
-        scale: 1.75,
+        scale: 1.5,
         duration: 0.5,
         ease: 'expo.in',
       }, 0)
@@ -161,10 +166,10 @@ export default {
     changeTime () {
       const tl = gsap.timeline()
       const { readTime } = this.$refs
-      const { minutes, seconds } = this.result.times
-
+      // const { minutes, seconds } = this.result.times
+      
       tl.to(readTime, {
-        scale: 1.75,
+        scale: 1.5,
         duration: 0.5,
         ease: 'expo.in',
       }, 0)
@@ -173,9 +178,10 @@ export default {
         duration: 0.5,
         ease: 'circ.out'
       }, 0.5)
-      tl.to(this.times, {
-        minutes,
-        seconds,
+      tl.to(this, {
+        // minutes,
+        // seconds,
+        seconds: this.result.seconds,
         duration: 2,
         snap: { minutes: 1, seconds: 1 },
         ease: 'circ.out'
@@ -188,19 +194,21 @@ export default {
       if (this.currentReadReportId !== this.result.id) {
         this.orderCount = this.result.orderCount
         this.money = this.result.money
-        this.times = this.result.times
+        this.seconds = this.result.seconds
+        return
       }
 
       const readReportCount = this.readReportIds.length
       const ResultTl = gsap.timeline()
 
+      ResultTl.add(this.$refs.userState.typing(), 0)
+
       if (readReportCount === 3 || readReportCount === 5) {
-        ResultTl.add(this.changeOrderCount())
-        ResultTl.add(this.changeMoney(), '>-0.25')
-        ResultTl.add(this.changeTime(), '>-0.25')
-      } else {
-        ResultTl.add(this.changeTime())
+        ResultTl.add(this.changeOrderCount(), 'userState')
+        ResultTl.add(this.changeMoney(), 'userState')
       }
+      ResultTl.add(this.changeTime(), 'userState')
+      ResultTl.add(this.cheers(), '>-0.5')
     }
   }
 }
@@ -263,6 +271,14 @@ export default {
     & .order
       background-color #ffdc03
       margin-bottom 16px
+      transition background-color 0.45s $easeOutCirc
+      &:hover
+        background-color #ffec78
+        color #000
+      &:active
+        background-color darken(#ffec78, 40%)
     & .share
       background-color #fff
+      &:active
+        background-color darken(#fff, 20%)
 </style>
