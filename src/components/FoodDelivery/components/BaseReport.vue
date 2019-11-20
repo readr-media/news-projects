@@ -82,6 +82,7 @@ export default {
         orderCount: [ 0, 0, 1, 1, 2 ],
         money: [ 0, 0, 67, 67, 167 ],
         // todo '回到首篇' or '繼續閱讀'？
+        // todo 兩個 '已領取餐點' 要不要做一些區別
         action: [ '確認接單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單（回到首篇）' ],
         state: [ '收到第一張<br>訂單', '抵達餐廳', '即將與顧客<br>碰面', '抵達餐廳', '完成配送！' ]
       },
@@ -92,7 +93,7 @@ export default {
           id: 1,
           orderCount: 0,
           money: 0,
-          time: '00:00',
+          times: { minutes: 0, seconds: 0 },
           action: '確認接單（繼續閱讀）',
           state: '前往目的地的路上'
         },
@@ -100,7 +101,7 @@ export default {
           id: 2,
           orderCount: 0,
           money: 0,
-          time: '00:00',
+          times: { minutes: 0, seconds: 0 },
           action: '確認接單（繼續閱讀）',
           state: '前往目的地的路上'
         },
@@ -108,7 +109,7 @@ export default {
           id: 3,
           orderCount: 0,
           money: 0,
-          time: '00:00',
+          times: { minutes: 0, seconds: 0 },
           action: '確認接單（繼續閱讀）',
           state: '前往目的地的路上'
         },
@@ -116,7 +117,7 @@ export default {
           id: 4,
           orderCount: 0,
           money: 0,
-          time: '00:00',
+          times: { minutes: 0, seconds: 0 },
           action: '確認接單（繼續閱讀）',
           state: '前往目的地的路上'
         },
@@ -124,7 +125,7 @@ export default {
           id: 5,
           orderCount: 0,
           money: 0,
-          time: '00:00',
+          times: { minutes: 0, seconds: 0 },
           action: '確認接單（繼續閱讀）',
           state: '前往目的地的路上'
         }
@@ -146,10 +147,11 @@ export default {
     wh () {
       return this.$store.state.viewport[1]
     },
-    time () {
+    times () {
       const minutes = Math.floor(this.totalSeconds / 60)
       const seconds = (this.totalSeconds % 60)
-      return `${minutes.toString().length === 2 ? minutes : `0${minutes}`}:${seconds.toString().length === 2 ? seconds : `0${seconds}`}`
+      // return `${minutes.toString().length === 2 ? minutes : `0${minutes}`}:${seconds.toString().length === 2 ? seconds : `0${seconds}`}`
+      return { minutes, seconds }
     }
   },
   methods: {
@@ -198,7 +200,7 @@ export default {
         const stepIdx = this.readReportIds.length
         const state = this.steps.state[ stepIdx ]
 
-        this.results[ reportIdx ].state = state
+        // this.results[ reportIdx ].state = state
         
         this.changeUserState(state)
 
@@ -206,11 +208,13 @@ export default {
 
         this.results.forEach((result, idx) => {
           if (this.readReportIds.includes(idx + 1)) return
-
+          
+          result.state = state
           result.orderCount = this.steps.orderCount[ stepIdx ]
           result.money = this.steps.money[ stepIdx ]
           result.action = this.steps.action[ stepIdx ]
-          result.time = this.time
+          const { ...times } = this.times
+          result.times = times
         })
         // this.readReportIds.push(this.currentReadReportId)
         this.addReadReportIds(this.currentReadReportId)

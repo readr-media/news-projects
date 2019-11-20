@@ -11,7 +11,7 @@
         <p class="report-result__name">金額</p>
       </div>
       <div>
-        <p class="report-result__num" ref="readTime">{{ time }}</p>
+        <p class="report-result__num" ref="readTime">{{ time.minutes }}:{{ time.seconds }}</p>
         <p class="report-result__name">時間</p>
       </div>
     </div>
@@ -62,7 +62,7 @@ export default {
     return {
       orderCount: 0,
       money: 0,
-      time: '00:00'
+      times: { minutes: 0, seconds: 0 }
     }
   },
   computed: {
@@ -70,7 +70,14 @@ export default {
       'userState',
       'readReportIds',
       'currentReadReportId'
-    ])
+    ]),
+    time () {
+      const { minutes, seconds } = this.times
+      return {
+        minutes: minutes >= 10 ? minutes : `0${minutes}`,
+        seconds: seconds >= 10 ? seconds : `0${seconds}`
+      }
+    }
   },
   methods: {
     cheers () {
@@ -82,8 +89,8 @@ export default {
       tl.to([ clangL, clangC, clangR ], { duration: 0.8, scale: 0, transformOrigin: '50% 100%', ease: 'expo.in' }, 0.4)
       tl.to(glassL, { duration: 1.6, rotation: '-=40', x: '-=10', scale: 0.88, ease: 'power1.in' }, 0.4)
       tl.to(glassR, { duration: 1.6, rotation: '+=40', x: '+=10', scale: 0.88, ease: 'power1.in' }, 0.4)
-      tl.to(glassL, { duration: 0.8, rotation: '+=40', x: '+=10', scale: 1, ease: 'back.out(1.7)' }, '>')
-      tl.to(glassR, { duration: 0.8, rotation: '-=40', x: '-=10', scale: 1, ease: 'back.out(1.7)' }, '<')
+      tl.to(glassL, { duration: 0.8, rotation: '+=40', x: '+=10', scale: 1,    ease: 'back.out(1.7)' }, '>')
+      tl.to(glassR, { duration: 0.8, rotation: '-=40', x: '-=10', scale: 1,    ease: 'back.out(1.7)' }, '<')
       tl.to([ clangL, clangC, clangR ], { duration: 0.2, scale: 1, transformOrigin: '50% 100%', ease: 'expo.out' }, '<0.25')
       // gsap.set(glassL, {
       //   rotation: '-=40',
@@ -98,66 +105,103 @@ export default {
       //   transformOrigin: '50% 70%'
       // })
     },
-    // addNum () {
-    //   const { orderCount } = this.$refs
-    //   gsap.set(orderCount, {
-    //     scale: 0
-    //   })
-    //   gsap.to(orderCount, {
-    //     duration: 1,
-    //     scale: 1,
-    //     ease: 'elastic.out(1.75, 0.3)',
-    //     repeat: 10
-    //   })
-    // }
-    // changeTime () {
-    //   const tl = gsap.timeline()
-    //   const { readTime } = this.$refs
-    //   tl.from(readTime, {
-    //     duration: 1,
-    //     scale: 1,
-    //     ease: 'elastic.out(1.75, 0.3)'
-    //   }, 0)
-    //   return tl
-    // },
+    changeOrderCount () {
+      const tl = gsap.timeline()
+      const { orderCount } = this.$refs
+      // tl.from(orderCount, {
+      //   scale: 0,
+      //   duration: 1.5,
+      //   ease: 'elastic.out(2, 0.4)'
+      // }, 0)
+      tl.to(orderCount, {
+        scale: 1.75,
+        duration: 0.5,
+        ease: 'expo.in',
+      }, 0)
+      tl.to(orderCount, {
+        scale: 1,
+        duration: 0.5,
+        ease: 'circ.out'
+      }, 0.5)
+      tl.to(this, {
+        orderCount: this.result.orderCount,
+        duration: 1,
+        // duration: 2,
+        snap: { orderCount: 1 },
+        ease: 'circ.out'
+      }, 0.25)
+      return tl
+    },
     changeMoney () {
       const tl = gsap.timeline()
       const { money } = this.$refs
-      tl.from(money, {
-        scale: 0,
-        duration: 1.5,
-        ease: 'elastic.out(1.75, 0.4)'
+      // tl.from(money, {
+      //   scale: 0,
+      //   duration: 1.5,
+      //   ease: 'elastic.out(2, 0.4)'
+      // }, 0)
+      tl.to(money, {
+        scale: 1.75,
+        duration: 0.5,
+        ease: 'expo.in',
       }, 0)
+      tl.to(money, {
+        scale: 1,
+        duration: 0.5,
+        ease: 'circ.out'
+      }, 0.5)
       tl.to(this, {
         money: this.result.money,
-        duration: 2.5,
+        duration: 2,
         snap: { money: 1 },
         ease: 'circ.out'
+      }, 0.25)
+      return tl
+    },
+    changeTime () {
+      const tl = gsap.timeline()
+      const { readTime } = this.$refs
+      const { minutes, seconds } = this.result.times
+
+      tl.to(readTime, {
+        scale: 1.75,
+        duration: 0.5,
+        ease: 'expo.in',
       }, 0)
-      // return tl
+      tl.to(readTime, {
+        scale: 1,
+        duration: 0.5,
+        ease: 'circ.out'
+      }, 0.5)
+      tl.to(this.times, {
+        minutes,
+        seconds,
+        duration: 2,
+        snap: { minutes: 1, seconds: 1 },
+        ease: 'circ.out'
+      }, 0.25)
+      return tl
     }
   },
   watch: {
-    readReportIds () {
+    readReportIds (val) {
       if (this.currentReadReportId !== this.result.id) {
         this.orderCount = this.result.orderCount
         this.money = this.result.money
-        this.time = this.result.time
+        this.times = this.result.times
+      }
+
+      const readReportCount = this.readReportIds.length
+      const ResultTl = gsap.timeline()
+
+      if (readReportCount === 3 || readReportCount === 5) {
+        ResultTl.add(this.changeOrderCount())
+        ResultTl.add(this.changeMoney(), '>-0.25')
+        ResultTl.add(this.changeTime(), '>-0.25')
+      } else {
+        ResultTl.add(this.changeTime())
       }
     }
-    // userState () {
-    //   console.log('userState');
-      
-    // },
-    // 'result.state' () {
-    //   console.log('ff');
-      
-    // }
-    // 'result.money' () {
-    //   console.log('rr');
-      
-    //   // this.changeMoney()
-    // }
   }
 }
 </script>
