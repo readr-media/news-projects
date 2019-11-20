@@ -19,8 +19,7 @@
               </div>
               <div class="table-of-contents__text">
                 <p class="table-of-contents__title">{{ content.title }}</p>
-                <!-- todo 預估？閱讀？時間 -->
-                <p class="table-of-contents__time">預估時間：{{ content.time }}</p>
+                <p class="table-of-contents__time">閱讀時間：{{ content.time }}</p>
               </div>
               <!-- <div class="table-of-contents__arrow"> -->
               <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/icon/enter--comp.svg" alt="">
@@ -35,7 +34,6 @@
           <div class="table-of-contents__prompt-action">
             <div :class="{ point: isPoint }">
               <img src="/proj-assets/food-delivery/img/icon/finger.svg" alt="">
-              <!-- todo text -->
               <p>點選以閱讀報導</p>
             </div>
             <button type="button" @click="isPrompt = false">我知道了</button>

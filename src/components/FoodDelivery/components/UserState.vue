@@ -1,6 +1,6 @@
 <template>
   <div class="the-user">
-    <div class="the-user__state">{{ state || userState }}</div>
+    <div class="the-user__state" v-html="state || userState"></div>
     <img src="/proj-assets/food-delivery/img/driver.png" alt="">
   </div>
 </template>

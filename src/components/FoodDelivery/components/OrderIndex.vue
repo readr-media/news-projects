@@ -9,7 +9,7 @@
       <div class="order-index__popup">
         <div>
           <p class="order-index__title">{{ contents[idx].title }}</p>
-          <p>預估時間：{{ contents[idx].time }}</p>
+          <p>閱讀時間：{{ contents[idx].time }}</p>
         </div>
       </div>
     </div>

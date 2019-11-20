@@ -41,7 +41,8 @@ export default {
     ],
     userState: '前往目的地的路上',
     isTOC: true,
-    isBaseReport: true
+    isBaseReport: true,
+    readReportIds: []
     // isBodyScroll: true
     // beginningContent: 'toc'
     // isScrollBar: false

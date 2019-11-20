@@ -31,6 +31,9 @@ export default {
     } else {
       document.body.classList.add('overflow-h')
     }
+  },
+  addReadReportIds (state, id) {
+    state.readReportIds.push(id)
   }
   // toggleScrollBar (state, isShow) {
   //   state.isScrollBar = isShow

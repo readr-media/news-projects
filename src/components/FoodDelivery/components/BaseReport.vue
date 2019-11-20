@@ -20,7 +20,9 @@
               <MapMarker :num="reportId" class="base-report__marker" />
             </div>
             <component :is="`ReportContent${reportId}`" />
+
             <ReportResult :result="results[ idx ]" ref="result" />
+            
           </section>
           <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
           <TheFooter />
@@ -75,17 +77,19 @@ export default {
   },
   data () {
     return {
-      readReportIds: [],
+      // readReportIds: [],
       steps: {
         orderCount: [ 0, 0, 1, 1, 2 ],
         money: [ 0, 0, 67, 67, 167 ],
-        action: [ '確認接單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單（繼續閱讀）', '已領取餐點（繼續閱讀）', '' ],
-        state: [ '收到第一張訂單', '抵達餐廳', '即將與顧客碰面', '抵達餐廳', '完成配送！' ]
+        // todo '回到首篇' or '繼續閱讀'？
+        action: [ '確認接單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單（回到首篇）' ],
+        state: [ '收到第一張<br>訂單', '抵達餐廳', '即將與顧客<br>碰面', '抵達餐廳', '完成配送！' ]
       },
       seconds: [ 302, 190, 448, 330, 100 ],
       totalSeconds: 0,
       results: [
         {
+          id: 1,
           orderCount: 0,
           money: 0,
           time: '00:00',
@@ -93,6 +97,7 @@ export default {
           state: '前往目的地的路上'
         },
         {
+          id: 2,
           orderCount: 0,
           money: 0,
           time: '00:00',
@@ -100,6 +105,7 @@ export default {
           state: '前往目的地的路上'
         },
         {
+          id: 3,
           orderCount: 0,
           money: 0,
           time: '00:00',
@@ -107,6 +113,7 @@ export default {
           state: '前往目的地的路上'
         },
         {
+          id: 4,
           orderCount: 0,
           money: 0,
           time: '00:00',
@@ -114,6 +121,7 @@ export default {
           state: '前往目的地的路上'
         },
         {
+          id: 5,
           orderCount: 0,
           money: 0,
           time: '00:00',
@@ -132,7 +140,8 @@ export default {
       'currentReadReportId',
       'reportIds',
       'isMounted',
-      'isBaseReport'
+      'isBaseReport',
+      'readReportIds'
     ]),
     wh () {
       return this.$store.state.viewport[1]
@@ -147,7 +156,8 @@ export default {
     ...mapMutations([
       'changeCurrentReadReportId',
       'changeUserState',
-      'toggleBodyScrollBar'
+      'toggleBodyScrollBar',
+      'addReadReportIds'
     ]),
     // todo when auto scroll, need to prevent trigger?
     changeRouter () {
@@ -189,6 +199,7 @@ export default {
         const state = this.steps.state[ stepIdx ]
 
         this.results[ reportIdx ].state = state
+        
         this.changeUserState(state)
 
         this.totalSeconds += this.seconds[ reportIdx ]
@@ -201,7 +212,8 @@ export default {
           result.action = this.steps.action[ stepIdx ]
           result.time = this.time
         })
-        this.readReportIds.push(this.currentReadReportId)
+        // this.readReportIds.push(this.currentReadReportId)
+        this.addReadReportIds(this.currentReadReportId)
       }
 
       this.beforeScrollT = baseReportScrollT

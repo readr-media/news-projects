@@ -60,7 +60,8 @@ export default {
       title,
       description,
       metaUrl,
-      metaImage
+      metaImage,
+      customScript: '<script src="https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js"><\/script>'
     }
   },
   components: {
