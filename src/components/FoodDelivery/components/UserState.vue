@@ -1,6 +1,6 @@
 <template>
   <div class="the-user">
-    <div class="the-user__state" ref="state"></div>
+    <div class="the-user__state" ref="userState">{{ userStateResult || userState }}</div>
     <img src="/proj-assets/food-delivery/img/driver.png" alt="">
   </div>
 </template>
@@ -11,31 +11,43 @@ const { mapState } = createNamespacedHelpers('FoodDelivery')
 
 export default {
   name: 'UserState',
-  props: [ 'state' ],
+  props: [ 'userStateResult' ],
   computed: {
     ...mapState([
       'userState'
     ])
+    // aa () {
+    //   return this.state || this.userState
+    // }
   },
-  data () {
-    return {
-      stateTl: null
-    }
-  },
+  // data () {
+  //   return {
+  //     stateTl: null
+  //   }
+  // },
+  // mounted () {
+  //   this.typing()
+  // },
   methods: {
     typing () {
-      if (this.stateTl) {
-        this.stateTl.reverse()
-      }
-      const state = this.state || this.userState
-      this.stateTl = gsap.timeline()
-      this.stateTl.to(this.$refs.state, {
+      // if (this.stateTl) {
+      //   this.stateTl.reverse()
+      //   this.stateTl = null
+      //   return
+      // }
+      // const userState = this.userState
+      const tl = gsap.timeline()
+
+      tl.to(this.$refs.userState, {
+        text: this.userState,
         duration: 1.5,
-        text: state,
         ease: 'sine.inOut'
+        // onReverseComplete: () => {
+        //   this.typing()
+        // }
       })
-      this.stateTl.addLabel('userState')
-      return this.stateTl
+      tl.addLabel('userState')
+      return tl
     }
   }
 }

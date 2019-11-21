@@ -1,6 +1,7 @@
 <template>
   <section class="report-result">
-    <UserState ref="userState" :state="result.state" />
+    <UserState ref="userState" :userStateResult="state" />
+    <!-- <UserState ref="userState" /> -->
     <div class="report-result__reward">
       <div>
         <p class="report-result__num" ref="orderCount">{{ orderCount }}</p>
@@ -53,17 +54,18 @@ export default {
   components: {
     UserState
   },
-  mounted () {
-    // this.cheers()
-    // this.addNum()
-    // this.addOrderCount()
-  },
+  // mounted () {
+  //   // this.cheers()
+  //   // this.addNum()
+  //   // this.addOrderCount()
+  // },
   data () {
     return {
       orderCount: 0,
       money: 0,
       // times: { minutes: 0, seconds: 0 }
-      seconds: 0
+      seconds: 0,
+      state: '前往目的地的路上'
     }
   },
   computed: {
@@ -190,8 +192,9 @@ export default {
     }
   },
   watch: {
-    readReportIds (val) {
+    readReportIds () {
       if (this.currentReadReportId !== this.result.id) {
+        this.state = this.result.state
         this.orderCount = this.result.orderCount
         this.money = this.result.money
         this.seconds = this.result.seconds
@@ -200,7 +203,7 @@ export default {
 
       const readReportCount = this.readReportIds.length
       const ResultTl = gsap.timeline()
-
+      
       ResultTl.add(this.$refs.userState.typing(), 0)
 
       if (readReportCount === 3 || readReportCount === 5) {

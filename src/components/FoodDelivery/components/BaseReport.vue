@@ -145,7 +145,7 @@ export default {
       'isAutoScrolling'
     ]),
     wh () {
-      return this.$store.state.viewport[1]
+      return this.$store.state.viewport[ 1 ]
     }
   },
   methods: {
@@ -202,7 +202,7 @@ export default {
 
         this.results.forEach((result, idx) => {
           if (this.readReportIds.includes(idx + 1)) return
-
+          // console.log(state)
           result.state = state
           result.orderCount = this.steps.orderCount[ stepIdx ]
           result.money = this.steps.money[ stepIdx ]
