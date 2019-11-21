@@ -18,10 +18,10 @@
 </template>
 
 <script>
-const scrollIntoView = require('scroll-into-view')
+// const scrollIntoView = require('scroll-into-view')
 
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
+const { mapState, mapActions } = createNamespacedHelpers('FoodDelivery')
 
 import MapMarker from './MapMarker.vue'
 
@@ -40,28 +40,32 @@ export default {
       'contents',
       'reportIds',
       'currentReadReportId',
-      'isAutoScrolling'
+      // 'isAutoScrolling'
     ])
   },
   methods: {
-    ...mapMutations([
-      'changeCurrentReadReportId',
-      'toggleAutoScrolling'
-    ]),
-    scrollToOrder (id) {
-      if (this.isAutoScrolling) return
-      this.toggleAutoScrolling(true)
-      // this.isAutoScrolling = true
-      this.changeCurrentReadReportId(id)
-      const reportEl = document.getElementById(`report${this.currentReadReportId}`)
-      scrollIntoView(reportEl,
-        {
-          time: 1000,
-          align: { top: 0, left: 0 },
-          ease: (t) => t * t * t * t
-        }, 
-        () => { this.toggleAutoScrolling(false) })
-    }
+    // ...mapMutations([
+    //   'changeCurrentReadReportId',
+    //   'toggleAutoScrolling'
+    // ]),
+    ...mapActions([
+      'scrollToOrder'
+    ])
+    // scrollToOrder (id) {
+    //   if (this.isAutoScrolling) return
+    //   this.toggleAutoScrolling(true)
+    //   // this.isAutoScrolling = true
+    //   this.changeCurrentReadReportId(id)
+    //   const reportEl = document.getElementById(`report${this.currentReadReportId}`)
+    //   scrollIntoView(reportEl,
+    //     {
+    //       time: 1000,
+    //       align: { top: 0, left: 0 },
+    //       ease: (t) => t * t * t * t
+    //     }, 
+    //     () => { this.toggleAutoScrolling(false) }
+    //   )
+    // }
   }
 }
 </script>

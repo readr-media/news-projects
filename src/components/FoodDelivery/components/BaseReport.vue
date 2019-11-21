@@ -83,7 +83,7 @@ export default {
         seconds: [ 302, 190, 448, 330, 100 ],
         // todo '回到首篇' or '繼續閱讀'？
         // todo 兩個 '已領取餐點' 要不要做一些區別
-        action: [ '確認接單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單（回到首篇）' ],
+        action: [ '確認接單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單' ],
         state: [ '收到第一張訂單', '抵達餐廳', '即將與顧客碰面', '抵達餐廳', '完成配送！' ]
       },
       totalSeconds: 0,
@@ -94,7 +94,7 @@ export default {
           money: 0,
           seconds: 0,
           action: '確認接單（繼續閱讀）',
-          state: '前往目的地的路上'
+          // state: '前往目的地的路上'
         },
         {
           id: 2,
@@ -102,7 +102,7 @@ export default {
           money: 0,
           seconds: 0,
           action: '確認接單（繼續閱讀）',
-          state: '前往目的地的路上'
+          // state: '前往目的地的路上'
         },
         {
           id: 3,
@@ -110,7 +110,7 @@ export default {
           money: 0,
           seconds: 0,
           action: '確認接單（繼續閱讀）',
-          state: '前往目的地的路上'
+          // state: '前往目的地的路上'
         },
         {
           id: 4,
@@ -118,7 +118,7 @@ export default {
           money: 0,
           seconds: 0,
           action: '確認接單（繼續閱讀）',
-          state: '前往目的地的路上'
+          // state: '前往目的地的路上'
         },
         {
           id: 5,
@@ -126,7 +126,7 @@ export default {
           money: 0,
           seconds: 0,
           action: '確認接單（繼續閱讀）',
-          state: '前往目的地的路上'
+          // state: '前往目的地的路上'
         }
       ],
       beforeScrollT: 0,
@@ -202,11 +202,12 @@ export default {
 
         this.results.forEach((result, idx) => {
           if (this.readReportIds.includes(idx + 1)) return
-          // console.log(state)
-          result.state = state
+          // result.state = state
           result.orderCount = this.steps.orderCount[ stepIdx ]
           result.money = this.steps.money[ stepIdx ]
-          result.action = this.steps.action[ stepIdx ]
+
+          const suffix = (stepIdx === 4 ? (this.currentReadReportId === 5 ? '（回到首篇）' : '（繼續閱讀）') : '')
+          result.action = this.steps.action[ stepIdx ] + suffix
           result.seconds = this.totalSeconds
         })
         this.addReadReportIds(this.currentReadReportId)

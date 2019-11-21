@@ -1,7 +1,7 @@
 <template>
   <section class="report-result">
-    <UserState ref="userState" :userStateResult="state" />
-    <!-- <UserState ref="userState" /> -->
+    <!-- <UserState ref="userState" :userStateResult="state" /> -->
+    <UserState ref="userState" />
     <div class="report-result__reward">
       <div>
         <p class="report-result__num" ref="orderCount">{{ orderCount }}</p>
@@ -36,7 +36,7 @@
     </div>
     <div class="report-result__action">
       <!-- <button type="button" class="order" v-if="result.action" >{{ result.action }}</button> -->
-      <button type="button" class="order" >{{ result.action }}</button>
+      <button type="button" class="order" @click="scrollToOrder((result.id + 1) <= 5 ? (result.id + 1) : 1)">{{ result.action }}</button>
       <button type="button" class="share">分享成就（專題）</button>
     </div>
   </section>
@@ -44,7 +44,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('FoodDelivery')
+const { mapState, mapActions } = createNamespacedHelpers('FoodDelivery')
 
 import UserState from './UserState.vue'
 
@@ -54,11 +54,6 @@ export default {
   components: {
     UserState
   },
-  // mounted () {
-  //   // this.cheers()
-  //   // this.addNum()
-  //   // this.addOrderCount()
-  // },
   data () {
     return {
       orderCount: 0,
@@ -86,8 +81,15 @@ export default {
       return `${minutes >= 10 ? minutes : `0${minutes}`}:${seconds >= 10 ? seconds : `0${seconds}`}`
       // return { minutes, seconds }
     }
+    // action () {
+    //   const suffix = (this.readReportIds.length === 5 ? (this.currentReadReportId === 5 ? '（回到首篇）' : '（繼續閱讀）') : '')
+    //   return this.result.action + suffix
+    // }
   },
   methods: {
+    ...mapActions([
+      'scrollToOrder'
+    ]),
     cheers () {
       const { glassL, glassR, clangL, clangC, clangR } = this.$refs
       const tl = gsap.timeline({ repeat: -1 })
@@ -194,7 +196,7 @@ export default {
   watch: {
     readReportIds () {
       if (this.currentReadReportId !== this.result.id) {
-        this.state = this.result.state
+        // this.state = this.result.state
         this.orderCount = this.result.orderCount
         this.money = this.result.money
         this.seconds = this.result.seconds
@@ -204,13 +206,12 @@ export default {
       const readReportCount = this.readReportIds.length
       const ResultTl = gsap.timeline()
       
-      ResultTl.add(this.$refs.userState.typing(), 0)
-
+      ResultTl.add(this.$refs.userState.typingBack(), 0)
       if (readReportCount === 3 || readReportCount === 5) {
-        ResultTl.add(this.changeOrderCount(), 'userState')
-        ResultTl.add(this.changeMoney(), 'userState')
+        ResultTl.add(this.changeOrderCount(), 1.625)
+        ResultTl.add(this.changeMoney(), 1.625)
       }
-      ResultTl.add(this.changeTime(), 'userState')
+      ResultTl.add(this.changeTime(), 1.625)
       ResultTl.add(this.cheers(), '>-0.5')
     }
   }

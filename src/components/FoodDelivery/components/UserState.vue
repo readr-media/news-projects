@@ -1,6 +1,7 @@
 <template>
   <div class="the-user">
-    <div class="the-user__state" ref="userState">{{ userStateResult || userState }}</div>
+    <!-- <div class="the-user__state" ref="userState">{{ userStateResult || userState }}</div> -->
+    <div class="the-user__state" ref="userState"></div>
     <img src="/proj-assets/food-delivery/img/driver.png" alt="">
   </div>
 </template>
@@ -11,43 +12,34 @@ const { mapState } = createNamespacedHelpers('FoodDelivery')
 
 export default {
   name: 'UserState',
-  props: [ 'userStateResult' ],
+  // props: [ 'userStateResult' ],
+  data () {
+    return {
+      stateTl: null
+    }
+  },
+  mounted () {
+    this.typing()
+  },
   computed: {
     ...mapState([
       'userState'
     ])
-    // aa () {
-    //   return this.state || this.userState
-    // }
   },
-  // data () {
-  //   return {
-  //     stateTl: null
-  //   }
-  // },
-  // mounted () {
-  //   this.typing()
-  // },
   methods: {
+    typingBack () {
+      // 1.25 / 2 = 0.625
+      this.stateTl.timeScale(2).reverse()
+    },
     typing () {
-      // if (this.stateTl) {
-      //   this.stateTl.reverse()
-      //   this.stateTl = null
-      //   return
-      // }
-      // const userState = this.userState
-      const tl = gsap.timeline()
-
-      tl.to(this.$refs.userState, {
+      this.stateTl = gsap.timeline()
+      this.stateTl.to(this.$refs.userState, {
         text: this.userState,
-        duration: 1.5,
-        ease: 'sine.inOut'
-        // onReverseComplete: () => {
-        //   this.typing()
-        // }
+        duration: 1.25,
+        ease: 'power1.out',
+        onReverseComplete: () => { this.typing() }
       })
-      tl.addLabel('userState')
-      return tl
+      return this.stateTl
     }
   }
 }
