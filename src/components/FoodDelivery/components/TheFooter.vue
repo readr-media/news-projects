@@ -8,19 +8,20 @@
       <SubscrItem />
     </div>
     <img class="the-footer__end-img" src="/proj-assets/food-delivery/img/end--comp.svg" alt="">
-    <div class="the-footer__share" @click="isShareIcon = !isShareIcon">
+    <div class="the-footer__share" @click.once="isShareIcon = true" :class="{ 'cursor-p': !isShareIcon }">
       <img src="/proj-assets/food-delivery/img/icon/share--comp.svg" alt="">
       <p v-if="!isShareIcon">分享專題</p>
-      <!-- <template v-else> -->
-      <!-- <a href="#" target="_blank" :class="['copylink', { show: isShareIcon }]"></a> -->
-      <a :href="`https://line.me/R/msg/text/?${shareLink}`" target="_blank" :class="[ 'fb', { show: isShareIcon } ]"></a>
-      <a :href="`https://www.facebook.com/share.php?u=${shareLink}`" target="_blank" :class="[ 'line', { show: isShareIcon } ]"></a>
-      <!-- </template> -->
+      <a :href="`https://www.facebook.com/share.php?u=${shareLink}`" target="_blank" :class="[ 'the-footer__share-item', 'fb', { show: isShareIcon } ]"></a>
+      <a :href="`https://line.me/R/msg/text/?${shareLink}`" target="_blank" :class="[ 'the-footer__share-item', 'line', { show: isShareIcon } ]"></a>
+      <span :class="['copylink', 'the-footer__share-item', { show: isShareIcon }]" @click="copyLinkToClipboard(shareLink)"></span>
     </div>
   </footer>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapMutations } = createNamespacedHelpers('FoodDelivery')
+
 import OtherReports from './OtherReports.vue'
 import DonateItem from './DonateItem.vue'
 import SubscrItem from './SubscrItem.vue'
@@ -42,6 +43,11 @@ export default {
     shareLink () {
       return `${READR_SITE_URL}food-delivery`
     }
+  },
+  methods: {
+    ...mapMutations([
+      'copyLinkToClipboard'
+    ])
   }
 }
 </script>
@@ -101,7 +107,7 @@ export default {
     align-items center
     flex-direction column
     padding-top 20px
-    cursor pointer
+    // cursor pointer
     @media (min-width $mobile)
       width 300px
       height 300px
@@ -117,43 +123,45 @@ export default {
       font-size 1.8rem
       color #fff
       font-weight 500
-    & a
+    &-item
       width 30px
       height 30px
       position absolute
       background-size 30px
       background-position center
+      background-repeat no-repeat
       // 20 + (29.39 - 30) / 2
       top 19.7px
       opacity 0
       visibility hidden
       // todo transition
-      transition all 0.4s
+      transition all 0.45s $easeOutCubic
+      cursor pointer
       @media (min-width $mobile)
         // 32 + (58.8 - 30) / 2
         top 46.4px
       &.show
         opacity 1
         visibility visible
-      // &.copylink
-      //   background-image url(/proj-assets/food-delivery/img/icon/share-copylink--comp.svg)
-      //   // 29.39 + 5 + (20 - 19.7)
-      //   &.show
-      //     transform translate(-40px, 34.69px)
       &.fb
         background-image url(/proj-assets/food-delivery/img/icon/share-fb--comp.svg)
         &.show
           // 29.39 + 5 + (20 - 19.7)
-          // transform translateY(34.69px)
-          transform translate(-20px, 34.69px)
+          transform translate(-40px, 34.69px)
           @media (min-width $mobile)
-            transform translate(-20px, 49.4px)
+            transform translate(-50px, 54.4px)
       &.line
         background-image url(/proj-assets/food-delivery/img/icon/share-line--comp.svg)
         &.show
-          // transform translate(40px, 34.69px)
-          transform translate(20px, 34.69px)
+          transform translateY(34.69px)
           @media (min-width $mobile)
-            // (58.8 - (58.8 - 30) / 2) + 5
-            transform translate(20px, 49.4px)
+            // (58.8 - (58.8 - 30) / 2) + 10
+            transform translateY(54.4px)
+      &.copylink
+        background-image url(/proj-assets/food-delivery/img/icon/share-copylink--comp.svg)
+        // 29.39 + 5 + (20 - 19.7)
+        &.show
+          transform translate(40px, 34.69px)
+          @media (min-width $mobile)
+            transform translate(50px, 54.4px)
 </style>

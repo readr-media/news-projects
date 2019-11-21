@@ -3,7 +3,7 @@
     <LoadingCover />
     <TableOfContents :class="{ 'opacity-0': isReportContent || isInfo }" />
     <BaseReport :class="{ 'opacity-0': isInfo }" />
-    <transition name="fade-normal">
+    <transition name="fade-info">
       <TheInfo v-if="isInfo" :class="{ 'overflow-y-s': isReportContent }" />
     </transition>
   </div>
@@ -173,4 +173,6 @@ a
   overflow hidden
 .overflow-y-s
   overflow-y scroll
+.cursor-p
+  cursor pointer
 </style>

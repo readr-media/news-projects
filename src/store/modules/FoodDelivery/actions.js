@@ -4,8 +4,8 @@ export default {
   scrollToOrder ({ state, commit }, id) {
     if (state.isAutoScrolling) return
     commit('toggleAutoScrolling', true)
-    commit('changeCurrentReadReportId', id)
-    const reportEl = document.getElementById(`report${state.currentReadReportId}`)
+    // commit('changeCurrentReadReportId', id)
+    const reportEl = document.getElementById(`report${id}`)
     scrollIntoView(reportEl, {
         time: 1000,
         align: {

@@ -1,6 +1,6 @@
 <template>
   <div class="the-user">
-    <!-- <div class="the-user__state" ref="userState">{{ userStateResult || userState }}</div> -->
+    <!-- <div class="the-user__state" ref="userState">{{ userStateResult }}</div> -->
     <div class="the-user__state" ref="userState"></div>
     <img src="/proj-assets/food-delivery/img/driver.png" alt="">
   </div>
@@ -29,7 +29,7 @@ export default {
   methods: {
     typingBack () {
       // 1.25 / 2 = 0.625
-      this.stateTl.timeScale(2).reverse()
+      this.stateTl.timeScale(3).reverse()
     },
     typing () {
       this.stateTl = gsap.timeline()

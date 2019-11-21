@@ -37,14 +37,24 @@
     <div class="report-result__action">
       <!-- <button type="button" class="order" v-if="result.action" >{{ result.action }}</button> -->
       <button type="button" class="order" @click="scrollToOrder((result.id + 1) <= 5 ? (result.id + 1) : 1)">{{ result.action }}</button>
-      <button type="button" class="share">分享成就（專題）</button>
+      <!-- todo 將專題改成報導 -->
+      <!-- <button type="button" class="share">分享成就（報導）</button> -->
+      <!-- <div class="share" @click.once="showShare" @mouseenter.once="showShare" :class="{ 'can-share': isShare }"> -->
+      <div class="share">
+        <div class="share__text">分享成就（報導）</div>
+        <a :href="`https://www.facebook.com/share.php?u=${shareLink(result.id)}`" target="_blank" class="share__item fb"></a>
+        <a :href="`https://line.me/R/msg/text/?${shareLink(result.id)}`" target="_blank" class="share__item line"></a>
+        <span class="share__item copylink" @click="copyLinkToClipboard(shareLink(result.id))"></span>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
+import { READR_SITE_URL } from 'src/constants'
+
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('FoodDelivery')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('FoodDelivery')
 
 import UserState from './UserState.vue'
 
@@ -60,7 +70,8 @@ export default {
       money: 0,
       // times: { minutes: 0, seconds: 0 }
       seconds: 0,
-      state: '前往目的地的路上'
+      state: '前往目的地的路上',
+      isShare: false
     }
   },
   computed: {
@@ -87,9 +98,18 @@ export default {
     // }
   },
   methods: {
+    ...mapMutations([
+      'copyLinkToClipboard'
+    ]),
     ...mapActions([
       'scrollToOrder'
     ]),
+    shareLink (id) {
+      return `${READR_SITE_URL}food-delivery/order${id}`
+    },
+    showShare () {
+      this.isShare = true
+    },
     cheers () {
       const { glassL, glassR, clangL, clangC, clangR } = this.$refs
       const tl = gsap.timeline({ repeat: -1 })
@@ -197,6 +217,7 @@ export default {
     readReportIds () {
       if (this.currentReadReportId !== this.result.id) {
         // this.state = this.result.state
+        this.$refs.userState.typingBack()
         this.orderCount = this.result.orderCount
         this.money = this.result.money
         this.seconds = this.result.seconds
@@ -208,10 +229,10 @@ export default {
       
       ResultTl.add(this.$refs.userState.typingBack(), 0)
       if (readReportCount === 3 || readReportCount === 5) {
-        ResultTl.add(this.changeOrderCount(), 1.625)
-        ResultTl.add(this.changeMoney(), 1.625)
+        ResultTl.add(this.changeOrderCount(), 1.5)
+        ResultTl.add(this.changeMoney(), 1.5)
       }
-      ResultTl.add(this.changeTime(), 1.625)
+      ResultTl.add(this.changeTime(), 1.5)
       ResultTl.add(this.cheers(), '>-0.5')
     }
   }
@@ -251,18 +272,6 @@ export default {
     line-height 1.4
   &__name
     font-size 1.4rem
-  & button
-    font-weight 500
-    color #4a4a4a
-    font-size 1.8rem
-    border-radius 20px
-    padding-top 8px
-    padding-bottom 8px
-    text-align center
-    line-height normal
-    width 100%
-    @media (min-width $mobile)
-      border-radius 10px
   &__action
     margin-right auto
     margin-left auto
@@ -272,17 +281,85 @@ export default {
     @media (min-width 680px)
       padding-right 0
       padding-left 0
+    & button, & .share
+      font-weight 500
+      color #4a4a4a
+      font-size 1.8rem
+      border-radius 20px
+      // padding-top 8px
+      // padding-bottom 8px
+      height 40px
+      text-align center
+      // line-height normal
+      line-height 40px
+      width 100%
+      // display flex
+      @media (min-width $mobile)
+        border-radius 10px
     & .order
       background-color #ffdc03
+      // padding-top 8px
+      // padding-bottom 8px
       margin-bottom 16px
       transition background-color 0.45s $easeOutCirc
+      padding 0
       &:hover
         background-color #ffec78
         color #000
       &:active
         background-color darken(#ffec78, 40%)
     & .share
-      background-color #fff
-      &:active
-        background-color darken(#fff, 20%)
+      background-color #ffdc03
+      overflow hidden
+      position relative
+      display flex
+      align-items center
+      justify-content center
+      z-index 20
+      &:hover
+        & .share__item
+          opacity 1
+          transform translateX(0)
+          &.fb
+            transition-delay 0.5s
+          &.line
+            transition-delay 0.3s
+          &.copylink
+            transition-delay 0.1s
+        & .share__text
+          transform translateX(-100%)
+          // transition-delay 0.3s
+      &__text
+        background-color #fff
+        transition transform 0.6s $easeInOutCubic
+        border-radius 20px
+        position absolute
+        width 100%
+        cursor pointer
+        z-index 19
+        // &:active
+        //   background-color darken(#fff, 20%)
+        @media (min-width $mobile)
+          border-radius 10px
+      &__item
+        width 30px
+        height 30px
+        background-size 30px
+        background-position center
+        background-repeat no-repeat
+        transform translateX(-100%)
+        opacity 0
+        transition all 0.3s $easeOutCubic
+        cursor pointer
+        & + .share__item
+          margin-left 20px
+        &.fb
+          background-image url(/proj-assets/food-delivery/img/icon/share-fb-gray.svg)
+          transition-delay 0.6s
+        &.line
+          background-image url(/proj-assets/food-delivery/img/icon/share-line-gray.svg)
+          transition-delay 0.4s
+        &.copylink
+          background-image url(/proj-assets/food-delivery/img/icon/share-copylink-gray.svg)
+          transition-delay 0.2s
 </style>

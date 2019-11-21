@@ -14,10 +14,16 @@
         opacity 0
       &-enter-active
         z-index 199
-  &-normal
+  &-info
     &-enter-active, &-leave-active
       transition opacity 0.45s $easeOutExpo
     &-enter, &-leave-to
+      opacity 0
+  &-notation
+    &-enter-active, &-leave-active
+      transition transform 0.3s $easeOutExpo, opacity 0.3s $easeOutExpo
+    &-enter, &-leave-to
+      transform translateY(8px)
       opacity 0
 
 .pop-up-toc

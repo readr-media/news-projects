@@ -155,7 +155,6 @@ export default {
       'toggleBodyScrollBar',
       'addReadReportIds'
     ]),
-    // todo when auto scroll, need to prevent trigger?
     changeRouter () {
       if (!this.isReportContent) return
       const reportBase = this.$el
