@@ -1,9 +1,9 @@
 <template>
-  <!-- <span class="pop-up-notation" @mouseenter="showText" @mouseleave="hideText" @click="toggleText"> -->
   <span class="pop-up-notation" @click="toggleText">
-    <!-- todo 叉叉樣式 -->
-    <span class="pop-up-notation__symbol">{{ isText ? 'X' : '註' }}</span>
-    <span class="pop-up-notation__text" v-if="isText" :style="{ top: `${textTop}px` }" @click.stop v-html="text"></span>
+    <img :src="`/proj-assets/food-delivery/img/icon/notation-${isText ? 'close' : 'default'}.svg`" alt="">
+    <transition name="fade-notation">
+      <span class="pop-up-notation__text" v-if="isText" :style="{ top: `${textTop}px` }" @click.stop v-html="text"></span>
+    </transition>
   </span>
 </template>
 
@@ -15,32 +15,17 @@ export default {
     return {
       textTop: 0,
       isText: false
-      // isMouseEnter: true
     }
   },
   methods: {
-    // showText () {
-    //   // if (this.Text) this.Text
-    //   console.log('enter');
-    //   this.isMouseEnter = true
-    //   this.textTop = this.$el.offsetTop + 32
-    //   this.isText = true
-    // },
-    // hideText () {
-    //   console.log('leave');
-    //   this.isText = false
-    // },
     toggleText () {
-      // if (this.isMouseEnter) {
-      //   this.isMouseEnter = false
-      //   return
-      // }
       if (this.isText) {
         this.isText = false
       } else {
         this.textTop = this.$el.offsetTop + 32
         this.isText = true
       }
+      window.ga('send', 'event', 'projects', 'click', `註-${this.isText ? '開' : '關'}`)
     }
   }
 }
@@ -48,6 +33,7 @@ export default {
 
 <style lang="stylus">
 @import '../util/global.styl'
+@import '../util/transition.styl'
 
 .pop-up-notation
   border-radius 50%
@@ -62,12 +48,10 @@ export default {
   margin-right 4px
   margin-left 4px
   cursor pointer
-  // position relative
-  &__symbol
-    display inline-block
-    font-weight 500
+  & img
+    width 14px
+    vertical-align middle
     user-select none
-    // cursor pointer
   &__text
     position absolute
     box-shadow 0 2px 4px rgba(#000, 0.5)
@@ -76,18 +60,14 @@ export default {
     border-radius 12px
     border 2px solid #fff
     background-color #ffdc03
-    // font-size 1.6rem
-    line-height 1.38
+    // line-height 1.38
+    line-height 1.5
     padding 9px 15px
     cursor auto
     & span
       display block
       & + span
         margin-top 22px
-    // & br
-    //   content ''
-    //   display block
-    //   height 28px
     @media (min-width $mobile)
       border-radius 6px
       padding-left 20px

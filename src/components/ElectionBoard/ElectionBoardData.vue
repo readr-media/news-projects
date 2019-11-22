@@ -42,7 +42,6 @@ import DataBoards from './DataBoards.vue'
 import ElectionBoardBackBtn from './ElectionBoardBackBtn.vue'
 import FormSelectPosition from './FormSelectPosition.vue'
 import { get as _get } from 'lodash'
-import { get as axiosGet } from 'axios'
 
 const DEFAULT_PAGE = 1
 

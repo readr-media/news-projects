@@ -1,23 +1,28 @@
 <template>
-  <!-- <main class="base-report" id="base-report" @scroll="changeRouter" :class="{ show: isReportContent }"> -->
-  <main class="base-report" id="base-report" @scroll="changeRouter(); changeResult()">
-    <!-- <section v-for="(reportId, idx) in currentReportIds" :key="`report-${reportId}`" :ref="`report${idx}`"> -->
-    <!-- <section class="base-report__report" v-for="reportId in reportIds" :key="`report-${reportId}`" ref="report" v-show="reportIdsNeedToShow.includes(reportId)"> -->
+  <main
+    id="base-report"
+    :class="[ 'base-report', { 'visibility-h': isHidden, 'below-the-bottom': !isBaseReport } ]"
+    @scroll="changeRouter(); changeResult()"
+  >
     <div class="base-report__container">
-      <HeaderIcons />
+      <HeaderIcons v-show="isHeaderIcons" />
       <transition
-        name="slideLeft"
-        @enter="scrollToReport"
+        name="slide-report"
+        @before-enter="isHidden = false"
+        @enter       ="scrollToReport"
+        @after-enter ="isHeaderIcons = true"
+        @before-leave="isHeaderIcons = false"
+        @after-leave ="afterLeaveReportContent"
       >
-        <!-- <div class="base-report__reports-wrapper" :class="{ show: isReportContent }"> -->
         <div v-show="isReportContent">
           <section v-for="(reportId, idx) in reportIds" :key="`report-${reportId}`" ref="report" :id="`report${reportId}`">
             <div class="base-report__marker-wrapper">
               <MapMarker :num="reportId" class="base-report__marker" />
             </div>
             <component :is="`ReportContent${reportId}`" />
+
             <ReportResult :result="results[ idx ]" ref="result" />
-            <!-- <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" /> -->
+            
           </section>
           <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
           <TheFooter />
@@ -64,83 +69,92 @@ export default {
     ReportContent4,
     ReportContent5
   },
-  beforeMount () {
+  mounted () {
+    // console.log('rr');
+    
     this.scrollToReport()
+    if (!this.isBaseReport) {
+      this.isHidden = false
+    }
   },
   data () {
     return {
-      readReportIds: [],
       steps: {
         orderCount: [ 0, 0, 1, 1, 2 ],
         money: [ 0, 0, 67, 67, 167 ],
-        action: [ '確認接單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單（繼續閱讀）', '已領取餐點（繼續閱讀）', '' ],
+        seconds: [ 302, 190, 448, 330, 100 ],
+        action: [ '確認接單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單（繼續閱讀）', '已領取餐點（繼續閱讀）', '接下一張單' ],
         state: [ '收到第一張訂單', '抵達餐廳', '即將與顧客碰面', '抵達餐廳', '完成配送！' ]
       },
-      seconds: [ 302, 190, 448, 330, 100 ],
       totalSeconds: 0,
       results: [
         {
+          id: 1,
           orderCount: 0,
           money: 0,
-          time: '00:00',
+          seconds: 0,
           action: '確認接單（繼續閱讀）',
-          state: '前往目的地的路上'
+          // state: '前往目的地的路上'
         },
         {
+          id: 2,
           orderCount: 0,
           money: 0,
-          time: '00:00',
+          seconds: 0,
           action: '確認接單（繼續閱讀）',
-          state: '前往目的地的路上'
+          // state: '前往目的地的路上'
         },
         {
+          id: 3,
           orderCount: 0,
           money: 0,
-          time: '00:00',
+          seconds: 0,
           action: '確認接單（繼續閱讀）',
-          state: '前往目的地的路上'
+          // state: '前往目的地的路上'
         },
         {
+          id: 4,
           orderCount: 0,
           money: 0,
-          time: '00:00',
+          seconds: 0,
           action: '確認接單（繼續閱讀）',
-          state: '前往目的地的路上'
+          // state: '前往目的地的路上'
         },
         {
+          id: 5,
           orderCount: 0,
           money: 0,
-          time: '00:00',
+          seconds: 0,
           action: '確認接單（繼續閱讀）',
-          state: '前往目的地的路上'
+          // state: '前往目的地的路上'
         }
       ],
-      beforeScrollT: 0
+      beforeScrollT: 0,
+      isHidden: true,
+      isHeaderIcons: true
     }
   },
   computed: {
     ...mapState([
       'isReportContent',
-      // 'clickedReportId',
       'currentReadReportId',
       'reportIds',
-      'isMounted'
+      'isMounted',
+      'isBaseReport',
+      'readReportIds',
+      'isAutoScrolling'
     ]),
     wh () {
-      return this.$store.state.viewport[1]
-    },
-    time () {
-      const minutes = Math.floor(this.totalSeconds / 60)
-      const seconds = (this.totalSeconds % 60)
-      return `${minutes.toString().length === 2 ? minutes : `0${minutes}`}:${seconds.toString().length === 2 ? seconds : `0${seconds}`}`
+      return this.$store.state.viewport[ 1 ]
     }
   },
   methods: {
     ...mapMutations([
       'changeCurrentReadReportId',
-      'changeUserState'
+      'changeUserState',
+      'toggleBodyScrollBar',
+      'addReadReportIds'
     ]),
-    // todo when auto scroll, need to prevent trigger?
     changeRouter () {
       if (!this.isReportContent) return
       const reportBase = this.$el
@@ -152,15 +166,11 @@ export default {
       const reportNextOffsetT = reportNext.offsetTop
       
       if (reportBaseScrollT >= reportNextOffsetT) {
-        // this.currentReadReportId += 1
         this.changeCurrentReadReportId(this.currentReadReportId + 1)
         this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
-        // this.wEl.history.replaceState({}, '', `/project/food-delivery/order${this.currentReadReportId}`)
       } else if (reportBaseScrollT < reportPrevOffsetT) {
-        // this.currentReadReportId -= 1
         this.changeCurrentReadReportId(this.currentReadReportId - 1)
         this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
-        // this.wEl.history.replaceState({}, '', `/project/food-delivery/order${this.currentReadReportId}`)
       }
     },
     scrollToReport () {
@@ -168,7 +178,7 @@ export default {
       scrollIntoView(reportEl, { time: 0, align: { top: 0, left: 0 } })
     },
     changeResult () {
-      if (this.readReportIds.includes(this.currentReadReportId)) return
+      if (this.readReportIds.includes(this.currentReadReportId) || this.isAutoScrolling) return
 
       const baseReportScrollT = this.$el.scrollTop
       if (baseReportScrollT <= this.beforeScrollT) {
@@ -177,72 +187,84 @@ export default {
       }
 
       const reportIdx = this.currentReadReportId - 1
-      // const resultEl = this.$refs.result[ reportIdx ].$el
       const resultOffsetT = this.$refs.result[ reportIdx ].$el.offsetTop
 
-      if (baseReportScrollT >= (resultOffsetT - this.wh / 2)) {
+      if (baseReportScrollT >= (resultOffsetT - this.wh * 0.25)) {
+        
         const stepIdx = this.readReportIds.length
         const state = this.steps.state[ stepIdx ]
+        let gaLabel = ''
 
-        this.results[ reportIdx ].state = state
+        // this.results[ reportIdx ].state = state
+        
         this.changeUserState(state)
 
-        this.totalSeconds += this.seconds[ reportIdx ]
+        this.totalSeconds += this.steps.seconds[ reportIdx ]
 
         this.results.forEach((result, idx) => {
           if (this.readReportIds.includes(idx + 1)) return
-
+          // result.state = state
           result.orderCount = this.steps.orderCount[ stepIdx ]
           result.money = this.steps.money[ stepIdx ]
-          result.action = this.steps.action[ stepIdx ]
-          result.time = this.time
+
+          const suffix = (stepIdx === 4 ? (this.currentReadReportId === 5 ? '（回到首篇）' : '（繼續閱讀）') : '')
+          result.action = this.steps.action[ stepIdx ] + suffix
+          result.seconds = this.totalSeconds
         })
-        this.readReportIds.push(this.currentReadReportId)
+        this.addReadReportIds(this.currentReadReportId)
+
+        switch (this.currentReadReportId) {
+          case 1:
+            gaLabel = '如何成為外送員'
+            break
+          case 2:
+            gaLabel = '美食外送平台解決了什麼問題'
+            break
+          case 3:
+            gaLabel = '司機管理仰賴檢舉和評價'
+            break
+          case 4:
+            gaLabel = '外送員最害怕的事：車禍'
+            break
+          case 5:
+            gaLabel = '平台經濟帶來的好與壞'
+            break
+          default:
+            break
+        }
+        window.ga('send', 'event', 'projects', 'scroll', gaLabel, this.currentReadReportId)
       }
 
       this.beforeScrollT = baseReportScrollT
+    },
+    afterLeaveReportContent () {
+      this.isHidden = true
+      this.toggleBodyScrollBar(true)
     }
   }
-  // watch: {
-  //   isReportContent: {
-  //     handler (newVal) {
-  //       if (newVal) {
-  //         this.currentReadReportId = this.currentReadReportId
-  //       }
-  //     },
-  //     immediate: true
-  //   }
-  // }
 }
 </script>
 
 <style lang="stylus">
 @import '../util/global.styl'
+@import '../util/transition.styl'
 
 .base-report
   position fixed
-  // position absolute
   top 0
   left 0
   z-index 9
   width 100%
   height 100%
   overflow-y auto
+  transition transform 0.6s $easeOutExpo, opacity 0.45s $easeOutExpo
+  &.below-the-bottom
+    transform translateY(100%)
   &__container
     max-width 800px
     margin-left auto
     margin-right auto
     overflow hidden
-  // &__reports-wrapper
-  //   // transform translateX(100%)
-  //   left 100%
-  //   // transition transform 0.32s
-  //   transition left 0.32s
-  //   &.show
-  //     left 0%
-  //     // transform translateX(0%)
-  // &__report
-  //   position relative
   &__marker-wrapper
     height 84px
     display flex

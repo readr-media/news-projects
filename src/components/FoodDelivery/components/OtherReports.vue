@@ -1,10 +1,8 @@
 <template>
   <section class="other-reports">
     <div class="other-reports__title">更多精彩專題</div>
-    <!-- todo what -->
-    <a href="http://" target="_blank">通往悲劇之路：南方澳跨港大橋如何坍塌</a>
-    <a href="http://" target="_blank">海海人生：回流青年的告白</a>
-    <a href="http://" target="_blank">Twitter 大戰中國網軍 - 解密被刪帳號資料集</a>
+    <!-- todo what 最新報導 -->
+    <a v-for="report in this.$store.state.FoodDelivery.otherReports" :href="`https://www.readr.tw/project/${report.slug}`" :key="report.id" target="_blank">{{ report.title }}</a>
   </section>
 </template>
 

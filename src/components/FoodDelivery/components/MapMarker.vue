@@ -32,8 +32,9 @@ export default {
 </script>
 
 <style lang="stylus">
-// todo transition
+@import '../util/global.styl'
+
 .marker-color
   fill #9b9b9b
-  transition fill 0.2s
+  transition fill 0.45s $easeOutCirc
 </style>

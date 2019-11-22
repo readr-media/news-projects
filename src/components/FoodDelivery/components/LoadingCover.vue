@@ -1,10 +1,11 @@
 <template>
-  <transition name="fade-out-cover" @after-leave="showNav">
+  <transition name="fade-out-cover" @before-leave="showBeginningContent">
     <section class="loading-cover" v-if="isCover">
       <div class="loading-cover__wrapper">
         <h1>記者來當外送員：<br>開箱美食外送秘辛！</h1>
         <div class="loading-cover__progress">
-          <div :class="[ 'inner-bar', { loading: isMounted } ]" @transitionend="hideCover" @oTransitionEnd="hideCover" @webkitTransitionEnd="hideCover"></div>
+          <!-- <div :class="[ 'inner-bar', { loading: isMounted } ]" @transitionend="hideCover" @oTransitionEnd="hideCover" @webkitTransitionEnd="hideCover"></div> -->
+          <div ref="innerBar" class="inner-bar"></div>
         </div>
       </div>
       <!-- <img src="/proj-assets/food-delivery/img/cover.jpg" alt=""> -->
@@ -35,10 +36,24 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'showNav'
+      'showBeginningContent'
     ]),
     hideCover () {
       this.isCover = false
+    }
+  },
+  watch: {
+    isMounted (newVal) {
+      if (newVal) {
+        gsap.to(this.$refs.innerBar, {
+          width: '100%',
+          duration: 2.5,
+          ease: 'circ.in',
+          onComplete: () => {
+            this.hideCover()
+          }
+        })
+      }
     }
   }
 }
@@ -87,8 +102,7 @@ export default {
     border 1px solid #ffdc03
     padding 4px 5px
     box-shadow 0 0 8px rgba(#ffdc03, 0.8)
-    // easeInOutCirc
-    animation shining 1s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86) alternate
+    animation shining 1s infinite $easeInOutCirc alternate
     @keyframes shining
       100%
         box-shadow 0 0 16px rgba(#ffdc03, 0.8)
@@ -98,7 +112,7 @@ export default {
       border-radius 6px
       background-color #ffdc03
       // easeInCirc
-      transition width 3s cubic-bezier(0.6, 0.04, 0.98, 0.335)
-      &.loading
-        width 100%
+      // transition width 3s cubic-bezier(0.6, 0.04, 0.98, 0.335)
+      // &.loading
+      //   width 100%
 </style>

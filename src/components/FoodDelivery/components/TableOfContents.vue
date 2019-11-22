@@ -1,46 +1,49 @@
 <template>
-  <section class="table-of-contents">
-    <UserState />
-    <HeaderIcons />
-    <transition name="popOutNav" @before-enter="isNavTransition = true" @after-enter="afterEnterNav">
-      <nav ref="nav" v-show="isNav">
-        <svg class="table-of-contents__line" width="1" :height="isPrompt ? 0 : navH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
-        <ul>
-          <li
-            v-for="content in contents"
-            :key="`content-${content.id}`"
-            @click="showReport(content.id)"
-            :class="{ 'can-hover': !isNavTransition && !isPrompt, 'spotlight': content.id === 1 && isPrompt }">
-          <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
-            <div class="table-of-contents__num">
-              <MapMarker :num="content.id" />
+  <!-- <transition name="pop-up-toc" @before-enter="isTOCTransition = true" @after-enter="afterEnterNav"> -->
+    <!-- <section class="table-of-contents" v-show="isTOC"> -->
+    <section ref="toc" class="table-of-contents">
+    <!-- <section :class="[ 'table-of-contents', { 'below-the-bottom': !isTOC } ]"> -->
+      <UserState ref="userState" />
+      <HeaderIcons />
+      <!-- <transition name="pop-up-nav" @before-enter="isTOCTransition = true" @after-enter="afterEnterNav"> -->
+        <nav ref="nav">
+          <!-- <svg class="table-of-contents__line" width="1" :height="isPrompt ? 0 : navH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg> -->
+          <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
+          <ul>
+            <li
+              v-for="content in contents"
+              :key="`content-${content.id}`"
+              @click="showReport(content.id)"
+              :class="{ 'can-hover': !isTOCTransition && !isPrompt, 'spotlight': content.id === 1 && isPrompt }">
+            <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
+              <div class="table-of-contents__num">
+                <MapMarker :class="{ 'table-of-contents__map-marker': content.id !== 1 && isBeginning }" :num="content.id" />
+              </div>
+              <div class="table-of-contents__text">
+                <p class="table-of-contents__title">{{ content.title }}</p>
+                <p class="table-of-contents__time">閱讀時間：{{ content.time }}</p>
+              </div>
+              <!-- <div class="table-of-contents__arrow"> -->
+              <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/icon/enter.svg" alt="">
+              <!-- </div> -->
+            </li>
+          </ul>
+        </nav>
+      <!-- </transition> -->
+      <transition name="fade-out-nav" @after-enter="isPoint = true" @after-leave="afterLeavePrompt">
+        <div class="table-of-contents__prompt" v-if="isPrompt">
+          <div class="table-of-contents__prompt-mask"></div>
+          <div class="table-of-contents__prompt-action">
+            <div :class="{ point: isPoint }">
+              <img src="/proj-assets/food-delivery/img/icon/finger.svg" alt="">
+              <p>點選以閱讀報導</p>
             </div>
-            <div class="table-of-contents__text">
-              <p class="table-of-contents__title">{{ content.title }}</p>
-              <!-- todo 預估？閱讀？時間 -->
-              <p class="table-of-contents__time">預估時間：{{ content.time }}</p>
-            </div>
-            <!-- <div class="table-of-contents__arrow"> -->
-            <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="">
-            <!-- </div> -->
-          </li>
-        </ul>
-      </nav>
-    </transition>
-    <transition name="fade-out-nav" @after-enter="isPoint = true">
-      <div class="table-of-contents__prompt" v-if="isPrompt">
-        <div class="table-of-contents__prompt-mask"></div>
-        <div class="table-of-contents__prompt-action">
-          <div :class="{ point: isPoint }">
-            <img src="/proj-assets/food-delivery/img/icon/finger.svg" alt="">
-            <!-- todo text -->
-            <p>點選以閱讀報導</p>
+            <button type="button" @click="isPrompt = false">我知道了</button>
           </div>
-          <button type="button" @click="isPrompt = false">我知道了</button>
         </div>
-      </div>
-    </transition>
-  </section>
+      </transition>
+    </section>
+  <!-- </transition> -->
 </template>
 
 <script>
@@ -60,52 +63,134 @@ export default {
   },
   data () {
     return {
-      navH: 0,
+      // navH: 0,
       isPrompt: false,
-      isNavTransition: true,
-      isPoint: false
+      isTOCTransition: false,
+      isPoint: false,
+      lineH: 0,
+      canUpdateLineH: false,
+      isBeginning: true
     }
   },
   mounted () {
-    // this.updateNavH()
-    window.addEventListener('resize', this.updateNavH)
-    window.addEventListener('orientationChange', this.updateNavH)
+    // this.updateLineH()
+    if (this.isReportContent) {
+      this.isBeginning = false
+      this.lineH = this.$refs.nav.offsetHeight - 60.4
+    }
+    window.addEventListener('resize', this.updateLineH)
+    window.addEventListener('orientationChange', this.updateLineH)
   },
   computed: {
     ...mapState([
       'contents',
-      'isNav'
-    ]),
-    lineH () {
-      // 24.6 + 35.8
-      // const height = this.navH - 60.4
-      const height = this.navH - 24.6
-      return (height >= 0 ? height : 0)
-    }
+      'isTOC',
+      'isReportContent',
+      // 'isBaseReport'
+    ])
+    // lineH () {
+    //   // 24.6 + 35.8
+    //   const height = this.navH - 60.4
+    //   // const height = this.navH - 24.6
+    //   return (height >= 0 ? height : 0)
+    // }
   },
   methods: {
     ...mapMutations([
       'toggleReportContent',
-      'changeCurrentReadReportId'
+      'changeCurrentReadReportId',
+      'toggleBodyScrollBar'
     ]),
-    updateNavH () {
-      this.navH = this.$refs.nav.offsetHeight      
+    updateLineH () {
+      if (this.canUpdateLineH) {
+        this.lineH = this.$refs.nav.offsetHeight - 60.4
+      }
     },
     showReport (id) {
-      if (this.isPrompt || this.isNavTransition) return
+      if (this.isPrompt || this.isTOCTransition) return
       this.changeCurrentReadReportId(id)
       this.toggleReportContent(true)
+      this.toggleBodyScrollBar(false)
       this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
+
+      let gaLabel = ''
+      switch (id) {
+        case 1:
+          gaLabel = '如何成為外送員'
+          break
+        case 2:
+          gaLabel = '美食外送平台解決了什麼問題'
+          break
+        case 3:
+          gaLabel = '司機管理仰賴檢舉和評價'
+          break
+        case 4:
+          gaLabel = '外送員最害怕的事：車禍'
+          break
+        case 5:
+          gaLabel = '平台經濟帶來的好與壞'
+          break
+        default:
+          break
+      }
+      window.ga('send', 'event', 'projects', 'click', gaLabel)
     },
-    afterEnterNav () {
+    showPrompt () {
       this.isPrompt = true
-      this.isNavTransition = false
-      this.updateNavH()
+      this.isTOCTransition = false
+      // this.updateLineH()
+      this.toggleBodyScrollBar(true)
+    },
+    afterLeavePrompt () {
+      this.$refs.userState.typing()
+      const tl = gsap.timeline()
+      tl.to(this, {
+        // 65 * 3 + 14.6 + (65 - 14.6) = 65 * 4
+        lineH: 260,
+        duration: 3,
+        ease: 'none'
+      }, 0)
+      tl.to('.table-of-contents__map-marker', {
+        scale: 1,
+        duration: 0.75,
+        ease: 'elastic.out(1, 0.3)',
+        // ease: 'back.out(1.7)',
+        stagger: 0.75,
+      }, 0.45)
+      tl.to(this, {
+        lineH: this.$refs.nav.offsetHeight - 60.4,
+        duration: 3,
+        ease: 'none',
+        omComplete: () => {
+          this.canUpdateLineH = true
+        }
+      }, '>')
+      window.ga('send', 'event', 'projects', 'scroll', '第一屏')
+    }
+  },
+  watch: {
+    isTOC (newVal) {
+      if (newVal) {
+        this.isTOCTransition = true
+        gsap.from(this.$refs.toc, {
+          y: '100%',
+          duration: 0.6,
+          ease: 'expo.out',
+          onComplete: () => {
+            this.showPrompt()
+          }
+        })
+      }
+    },
+    isReportContent (newVal) {
+      if (!newVal) {
+        this.$refs.userState.setState()
+      }
     }
   },
   beforeDestroy () {
-    window.removeEventListener('resize', this.updateNavH)
-    window.removeEventListener('orientationChange', this.updateNavH)
+    window.removeEventListener('resize', this.updateLineH)
+    window.removeEventListener('orientationChange', this.updateLineH)
   }
 }
 </script>
@@ -115,16 +200,11 @@ export default {
 @import '../util/transition.styl'
 
 .table-of-contents
-  // background-image url(/proj-assets/food-delivery/img/map.jpg)
-  // background-size cover
-  // background-position center
-  // background-repeat no-repeat
   min-height 100vh
   background-color rgba(#000, 0.3)
   overflow hidden
   position relative
-  // &.hide
-  //   visibility hidden
+  transition opacity 0.45s $easeOutExpo
   & nav
     position relative
   &__num
@@ -137,14 +217,17 @@ export default {
       width 25.42px
       height 35.8px
       display block
+  &__map-marker
+    transform scale(0)
   &__text
     color #4a4a4a
     line-height normal
-    transition all 0.2s
+    transition all 0.45s $easeOutCirc
   // todo max-width
   &__title
     font-size 1.8rem
-    // font-weight 500
+    // transition all 0.45s $easeOutCirc
+    font-weight 700
   &__time
     font-size 1.4rem
   &__arrow
@@ -158,6 +241,8 @@ export default {
     overflow hidden
     background-color #ffdc03
     min-height calc(100vh - 84px)
+    user-select none
+    // height 100vh
     @media (min-width $mobile)
       min-height calc(100vh - 120px)
   & li
@@ -169,32 +254,35 @@ export default {
     display flex
     align-items center
     cursor pointer
-    transition background-color 0.2s
+    transition background-color 0.6s $easeOutCirc
     &.spotlight
       z-index 499
       position relative
-    // position relative
     @media (min-width $mobile)
       padding-left 45px
       padding-right 45px
     &:first-child
       padding-top 20px
+      border-top-left-radius 24px
+      border-top-right-radius 24px
     &.can-hover:hover
       background-color #ffec78
       & .table-of-contents__text
-        font-weight 500
+        // font-weight 500
         color #000
+      // & .table-of-contents__text
+      //   color #000
       & .marker-color
         fill #000
   &__line
     position absolute
     // 20 + (45 - 35.8) / 2
-    top 24.6px
+    // top 24.6px
     // 20 + (45 - 35.8) / 2 + 35.8
-    // top 60.4px
+    top 60.4px
     // 10 + (25.42 / 2) - (1 / 2)
     left 22.21px
-    transition height 5.5s linear
+    // transition height 5.5s linear
     @media (min-width $mobile)
       // 45 + (25.42 / 2) - (1 / 2)
       left 57.21px
@@ -265,10 +353,10 @@ export default {
         padding-top 8px
         padding-bottom 8px
         // easeOutCirc
-        transition all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)
+        transition all 0.45s $easeOutCirc
         &:hover
           background-color #fff
           color #000
         &:active
-          background-color darken(#fff, 10%)
+          background-color #c4c4c4
 </style>

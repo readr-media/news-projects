@@ -1,25 +1,31 @@
 <template>
   <footer class="the-footer">
     <div class="the-footer__wrapper">
-      <img class="the-footer__readr-img" src="/proj-assets/food-delivery/img/readr--comp.svg" alt="">
+      <img class="the-footer__readr-img" src="/proj-assets/food-delivery/img/icon/readr.svg" alt="">
+      <!-- todo 記者筆記 -->
       <OtherReports class="the-footer__other-reports" />
       <DonateItem class="the-footer__donate"/>
       <SubscrItem />
     </div>
-    <img class="the-footer__end-img" src="/proj-assets/food-delivery/img/end--comp.svg" alt="">
-    <div class="the-footer__share" @click="isShareIcon = !isShareIcon">
-      <img src="/proj-assets/food-delivery/img/share--comp.svg" alt="">
+    <picture class="the-footer__end-img">
+      <source media="(min-width: 768px)" srcset="/proj-assets/food-delivery/img/end-desktop.png">
+      <img src="/proj-assets/food-delivery/img/end-mobile.png" alt="">
+    </picture>
+    <!-- <img class="the-footer__end-img" src="/proj-assets/food-delivery/img/end.svg" alt=""> -->
+    <div class="the-footer__share" @click.once="isShareIcon = true" :class="{ 'can-share': isShareIcon }">
+      <img src="/proj-assets/food-delivery/img/icon/share-arrow.svg" alt="">
       <p v-if="!isShareIcon">分享專題</p>
-      <!-- <template v-else> -->
-      <!-- <a href="#" target="_blank" :class="['copylink', { show: isShareIcon }]"></a> -->
-      <a :href="`https://line.me/R/msg/text/?${shareLink}`" target="_blank" :class="[ 'fb', { show: isShareIcon } ]"></a>
-      <a :href="`https://www.facebook.com/share.php?u=${shareLink}`" target="_blank" :class="[ 'line', { show: isShareIcon } ]"></a>
-      <!-- </template> -->
+      <a :href="`https://www.facebook.com/share.php?u=${shareLink}`" target="_blank" class="the-footer__share-item fb"></a>
+      <a :href="`https://line.me/R/msg/text/?${shareLink}`" target="_blank" class="the-footer__share-item line"></a>
+      <span class="copylink the-footer__share-item" @click="copyLinkToClipboard(shareLink)"></span>
     </div>
   </footer>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapMutations } = createNamespacedHelpers('FoodDelivery')
+
 import OtherReports from './OtherReports.vue'
 import DonateItem from './DonateItem.vue'
 import SubscrItem from './SubscrItem.vue'
@@ -27,7 +33,6 @@ import { READR_SITE_URL } from 'src/constants'
 
 export default {
   name: 'TheFooter',
-  // props: [ 'shareUrl' ],
   components: {
     OtherReports,
     DonateItem,
@@ -42,6 +47,11 @@ export default {
     shareLink () {
       return `${READR_SITE_URL}food-delivery`
     }
+  },
+  methods: {
+    ...mapMutations([
+      'copyLinkToClipboard'
+    ])
   }
 }
 </script>
@@ -56,8 +66,6 @@ export default {
   padding-top 20px
   overflow hidden
   position relative
-  // padding-left 40px
-  // padding-right 40px
   @media (min-width $mobile)
     padding-top 30px
   &__wrapper
@@ -72,7 +80,6 @@ export default {
   &__readr-img
     width 45px
     display block
-    // vertical-align middle
     margin-bottom 15px
     margin-left auto
     margin-right auto
@@ -80,8 +87,10 @@ export default {
       width 60px
       margin-bottom 20px
   &__end-img
-    vertical-align top
-    width 100%
+    display block
+    & img
+      vertical-align top
+      width 100%
   &__other-reports
     margin-bottom 20px
     @media (min-width $mobile)
@@ -104,7 +113,30 @@ export default {
     align-items center
     flex-direction column
     padding-top 20px
+    user-select none
     cursor pointer
+    &:active
+      background-color #9b9b9b
+    &.can-share
+      cursor auto
+      & .the-footer__share-item
+        opacity 1
+        visibility visible
+      & .fb
+        // 29.39 + 5 + (20 - 19.7)
+        transform translate(-40px, 34.69px)
+        @media (min-width $mobile)
+          transform translate(-50px, 54.4px)
+      & .line
+        // (58.8 - (58.8 - 30) / 2) + 10
+        transform translateY(34.69px)
+        @media (min-width $mobile)
+          transform translateY(54.4px)
+      & .copylink
+        // 29.39 + 5 + (20 - 19.7)
+        transform translate(40px, 34.69px)
+        @media (min-width $mobile)
+          transform translate(50px, 54.4px)
     @media (min-width $mobile)
       width 300px
       height 300px
@@ -120,43 +152,26 @@ export default {
       font-size 1.8rem
       color #fff
       font-weight 500
-    & a
+    &-item
       width 30px
       height 30px
       position absolute
       background-size 30px
       background-position center
+      background-repeat no-repeat
       // 20 + (29.39 - 30) / 2
       top 19.7px
       opacity 0
       visibility hidden
-      // todo transition
-      transition all 0.4s
+      transition all 0.45s $easeOutCubic
+      cursor pointer
       @media (min-width $mobile)
         // 32 + (58.8 - 30) / 2
         top 46.4px
-      &.show
-        opacity 1
-        visibility visible
-      // &.copylink
-      //   background-image url(/proj-assets/food-delivery/img/icon/share-copylink--comp.svg)
-      //   // 29.39 + 5 + (20 - 19.7)
-      //   &.show
-      //     transform translate(-40px, 34.69px)
       &.fb
-        background-image url(/proj-assets/food-delivery/img/icon/share-fb--comp.svg)
-        &.show
-          // 29.39 + 5 + (20 - 19.7)
-          // transform translateY(34.69px)
-          transform translate(-20px, 34.69px)
-          @media (min-width $mobile)
-            transform translate(-20px, 49.4px)
+        background-image url(/proj-assets/food-delivery/img/icon/share-fb.svg)
       &.line
-        background-image url(/proj-assets/food-delivery/img/icon/share-line--comp.svg)
-        &.show
-          // transform translate(40px, 34.69px)
-          transform translate(20px, 34.69px)
-          @media (min-width $mobile)
-            // (58.8 - (58.8 - 30) / 2) + 5
-            transform translate(20px, 49.4px)
+        background-image url(/proj-assets/food-delivery/img/icon/share-line.svg)
+      &.copylink
+        background-image url(/proj-assets/food-delivery/img/icon/share-copylink.svg)
 </style>

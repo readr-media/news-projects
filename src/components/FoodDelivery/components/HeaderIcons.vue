@@ -1,9 +1,9 @@
 <template>
   <div :class="[ 'header-icons', { 'opacity-0': isInfo } ]" >
-    <img class="header-icons__enter" src="/proj-assets/food-delivery/img/enter--comp.svg" alt="" @click="showTOC" v-show="isMounted && isReportContent && $store.state.viewport[ 0 ] <= 767.98">
+    <img class="header-icons__back" src="/proj-assets/food-delivery/img/icon/back.svg" alt="" @click="showTOC" v-show="isMounted && isReportContent && $store.state.viewport[ 0 ] <= 767.98">
     <div class="header-icons__wrapper">
-      <a href="https://www.readr.tw/donate" target="_blank"><img class="header-icons__donate" src="/proj-assets/food-delivery/img/donate--comp.svg" alt=""></a>
-      <img class="header-icons__info" src="/proj-assets/food-delivery/img/info--comp.svg" alt="" @click="toggleInfo(true)">
+      <a href="https://www.readr.tw/donate" target="_blank" @click="sendDonateGA"><img class="header-icons__donate" src="/proj-assets/food-delivery/img/icon/donate.svg" alt=""></a>
+      <img class="header-icons__info" src="/proj-assets/food-delivery/img/icon/info.svg" alt="" @click="toggleInfo(true)">
     </div>
   </div>
 </template>
@@ -24,11 +24,14 @@ export default {
   methods: {
     ...mapMutations([
       'toggleInfo',
-      'toggleReportContent'
+      'toggleReportContent',
     ]),
     showTOC () {
       this.toggleReportContent(false)
       this.$router.push('/project/food-delivery').catch((err) => {})
+    },
+    sendDonateGA () {
+      window.ga('send', 'event', 'projects', 'click', '贊助按鈕-header')
     }
   }
 }
@@ -43,7 +46,6 @@ export default {
   height 84px
   display flex
   align-items center
-  // justify-content space-between
   z-index 99
   width 100%
   padding-left 20px
@@ -51,6 +53,7 @@ export default {
   box-sizing border-box
   user-select none
   max-width 800px
+  pointer-events none
   @media (min-width $mobile)
     height 120px
     padding-left 40px
@@ -58,13 +61,12 @@ export default {
   & img
     cursor pointer
     vertical-align middle
-  &__enter
+    pointer-events auto
+  &__back
     width 20px
-    transform scaleX(-1)
+    // transform scaleX(-1)
     @media (min-width $mobile)
       width 26px
-    // @media (min-width $tablet)
-    //   display none
   &__wrapper
     margin-left auto
     & a
@@ -73,9 +75,7 @@ export default {
       @media (min-width $mobile)
         margin-right 40px
   &__donate
-    // width 13.4px
     width 14.36px
-    // margin-right 20px
     @media (min-width $mobile)
       width 22.96px
   &__info

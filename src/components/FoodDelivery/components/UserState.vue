@@ -1,8 +1,8 @@
 <template>
   <div class="the-user">
-    <div class="the-user__state">{{ state || userState }}</div>
+    <!-- <div class="the-user__state" ref="userState">{{ userStateResult }}</div> -->
+    <div class="the-user__state" ref="userState"></div>
     <img src="/proj-assets/food-delivery/img/driver.png" alt="">
-    <!-- <div v-html="state" class="op0"></div> -->
   </div>
 </template>
 
@@ -12,17 +12,51 @@ const { mapState } = createNamespacedHelpers('FoodDelivery')
 
 export default {
   name: 'UserState',
-  props: [ 'state' ],
-  // props: {
-  //   state: {
-  //     default: '前往目的地的路上'
-  //   }
+  // props: [ 'userStateResult' ],
+  data () {
+    return {
+      stateTl: null
+    }
+  },
+  // mounted () {
+  //   if (this.isBaseReport)
+  //   this.typing()
   // },
   computed: {
     ...mapState([
       'userState'
     ])
-  }
+  },
+  methods: {
+    typingBack () {
+      // 1.25 / 2 = 0.625
+      this.stateTl.timeScale(3).reverse()
+    },
+    typing () {
+      this.stateTl = gsap.timeline()
+      this.stateTl.to(this.$refs.userState, {
+        text: this.userState,
+        duration: 1.25,
+        ease: 'power1.out',
+        onReverseComplete: () => { this.typing() }
+      })
+      return this.stateTl
+    },
+    setState () {
+      gsap.set(this.$refs.userState, {
+        text: this.userState
+      })
+    }
+  },
+  // watch: {
+  //   isBaseReport (newVal) {
+  //     if (!newVal) {
+  //       console.log('ff');
+        
+  //       this.typing()
+  //     }
+  //   }
+  // }
 }
 </script>
 
@@ -34,10 +68,7 @@ export default {
   align-items center
   justify-content center
   position relative
-  // padding-top 17px
-  // padding-bottom 17px
   height 84px
-  // max-width 276px
   // ((50 / 2) + 24 + 88) * 2
   max-width 274px
   margin-left auto
@@ -58,10 +89,7 @@ export default {
     @media (min-width $mobile)
       font-size 1.8rem
       max-width 113px
-    // & span
-    //   color #ffdc03
   & img
-    // position absolute
     width 50px
     border-radius 50%
     @media (min-width $mobile)

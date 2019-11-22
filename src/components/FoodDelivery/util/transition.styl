@@ -1,20 +1,41 @@
+@import './global.styl'
+
 .fade
   &-out
     &-cover
       &-leave-active
-        transition opacity 0.6s cubic-bezier(0.075, 0.82, 0.165, 1)
+        transition opacity 0.45s $easeOutCirc
       &-leave-to
         opacity 0
     &-nav
       &-enter-active
-        transition opacity 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)
-      &-enter
+        transition opacity 0.3s $easeOutCirc
+      &-leave-active
+        transition opacity 0.15s $easeOutCirc
+      &-enter, &-leave-to
         opacity 0
       &-enter-active
         z-index 199
+  &-info
+    &-enter-active, &-leave-active
+      transition opacity 0.45s $easeOutExpo
+    &-enter, &-leave-to
+      opacity 0
+  &-notation
+    &-enter-active, &-leave-active
+      transition transform 0.45s $easeOutExpo, opacity 0.45s $easeOutExpo
+    &-enter, &-leave-to
+      transform translateY(8px)
+      opacity 0
 
-.popOutNav
-  &-enter-active
-    transition transform 0.6s cubic-bezier(0.19, 1, 0.22, 1)
-  &-enter
-    transform translateY(100%)
+// .pop-up-toc
+//   &-enter-active
+//     transition transform 0.6s $easeOutExpo
+//   &-enter
+//     transform translateY(100%)
+
+.slide-report
+  &-enter-active, &-leave-active
+    transition transform 0.45s $easeOutExpo
+  &-enter, &-leave-to
+    transform translateX(100%)

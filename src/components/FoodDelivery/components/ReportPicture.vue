@@ -17,7 +17,6 @@ export default {
 
 .report-picture
   display block
-  // margin 20px -20px 30px -20px
   margin 30px -20px
   @media (min-width 640px)
     margin-left 0

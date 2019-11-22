@@ -3,13 +3,18 @@
     <p>覺得這篇報導不錯嗎？</p>
     <p>歡迎用新台幣支持 READr，</p>
     <p>讓更多深度報導浮上檯面。</p>
-    <a href="https://www.readr.tw/donate" target="_blank"><button type="button">用新台幣跟 READr 一起幹大事</button></a>
+    <a href="https://www.readr.tw/donate" target="_blank" @click="sendDonateGA"><button type="button">用新台幣跟 READr 一起幹大事</button></a>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'DonateItem'
+  name: 'DonateItem',
+  methods: {
+    sendDonateGA () {
+      window.ga('send', 'event', 'projects', 'click', '贊助按鈕-文末')
+    }
+  }
 }
 </script>
 
@@ -31,4 +36,6 @@ export default {
     line-height normal
     width 100%
     max-width 400px
+    &:active
+      background-color #9b9b9b
 </style>

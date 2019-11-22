@@ -1,13 +1,11 @@
-// import actions from './actions'
 import mutations from './mutations'
+import actions from './actions'
 
 export default {
   namespaced: true,
   state: () => ({
     isReportContent: false,
-    // clickedReportId: 1,
     currentReadReportId: 1,
-    // readReports: 1,
     reportIds: [ 1, 2, 3, 4, 5 ],
     isInfo: false,
     isMounted: false,
@@ -34,14 +32,17 @@ export default {
       },
       {
         id: 5,
-        title: '外送產業帶來的好與壞',
+        title: '平台經濟帶來的好與壞',
         time: '01:40'
       }
     ],
     userState: '前往目的地的路上',
-    isNav: false
-    // isScrollBar: false
+    isTOC: false,
+    isBaseReport: true,
+    readReportIds: [],
+    isAutoScrolling: false,
+    otherReports: []
   }),
-  // actions,
-  mutations
+  mutations,
+  actions
 }

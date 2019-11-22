@@ -48,14 +48,12 @@
 <script>
 import FixedSlides from './FixedSlides.vue'
 import PopUpNotation from './PopUpNotation.vue'
-// import ReportFigure from './ReportFigure.vue'
 
 export default {
   name: 'ReportContent1',
   components: {
     FixedSlides,
     PopUpNotation
-    // ReportFigure
   },
   data () {
     return {
