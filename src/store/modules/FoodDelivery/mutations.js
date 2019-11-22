@@ -19,7 +19,7 @@ export default {
   },
   showBeginningContent (state) {
     const beginningContent = (state.isTOC ? 'isBaseReport' : 'isTOC')
-    state[beginningContent] = true
+    state[ beginningContent ] = true
   },
   changeBeginningContent (state) {
     state.isTOC = !state.isTOC

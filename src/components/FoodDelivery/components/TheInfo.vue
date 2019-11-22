@@ -1,7 +1,7 @@
 <template>
   <section class="the-info">
     <div class="the-info__container">
-      <UserState />
+      <UserState ref="userState" />
       <div class="the-info__wrapper">
         <img class="the-info__cancel" src="/proj-assets/food-delivery/img/icon/x--comp.svg" alt="" @click="toggleInfo(false)">
       </div>
@@ -44,6 +44,14 @@ export default {
     return {
       currentPage: 1
     }
+  },
+  // computed: {
+  //   ...mapState([
+  //     'isInfo'
+  //   ])
+  // },
+  mounted () {
+    this.$refs.userState.setState()
   },
   methods: {
     ...mapMutations([

@@ -4,7 +4,8 @@
       <div class="loading-cover__wrapper">
         <h1>記者來當外送員：<br>開箱美食外送秘辛！</h1>
         <div class="loading-cover__progress">
-          <div :class="[ 'inner-bar', { loading: isMounted } ]" @transitionend="hideCover" @oTransitionEnd="hideCover" @webkitTransitionEnd="hideCover"></div>
+          <!-- <div :class="[ 'inner-bar', { loading: isMounted } ]" @transitionend="hideCover" @oTransitionEnd="hideCover" @webkitTransitionEnd="hideCover"></div> -->
+          <div ref="innerBar" class="inner-bar"></div>
         </div>
       </div>
       <!-- <img src="/proj-assets/food-delivery/img/cover.jpg" alt=""> -->
@@ -20,7 +21,7 @@ export default {
   name: 'LoadingCover',
   data () {
     return {
-      isCover: false
+      isCover: true
     }
   },
   computed: {
@@ -39,6 +40,20 @@ export default {
     ]),
     hideCover () {
       this.isCover = false
+    }
+  },
+  watch: {
+    isMounted (newVal) {
+      if (newVal) {
+        gsap.to(this.$refs.innerBar, {
+          width: '100%',
+          duration: 1,
+          ease: 'circ.in',
+          onComplete: () => {
+            this.hideCover()
+          }
+        })
+      }
     }
   }
 }
@@ -98,7 +113,7 @@ export default {
       border-radius 6px
       background-color #ffdc03
       // easeInCirc
-      transition width 3s cubic-bezier(0.6, 0.04, 0.98, 0.335)
-      &.loading
-        width 100%
+      // transition width 3s cubic-bezier(0.6, 0.04, 0.98, 0.335)
+      // &.loading
+      //   width 100%
 </style>

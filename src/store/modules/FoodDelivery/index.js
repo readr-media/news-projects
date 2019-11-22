@@ -37,7 +37,7 @@ export default {
       }
     ],
     userState: '前往目的地的路上',
-    isTOC: true,
+    isTOC: false,
     isBaseReport: true,
     readReportIds: [],
     isAutoScrolling: false

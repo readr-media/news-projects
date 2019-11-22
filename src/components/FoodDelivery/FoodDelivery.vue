@@ -110,6 +110,7 @@ export default {
       const orderNum = Number(params.split('order')[ 1 ])
       this.changeCurrentReadReportId(orderNum)
       this.toggleReportContent(true)
+      this.changeBeginningContent()
     } else {
       this.$router.replace('/project/food-delivery').catch((err) => {})
     }

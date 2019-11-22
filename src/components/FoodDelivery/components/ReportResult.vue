@@ -74,11 +74,15 @@ export default {
       isShare: false
     }
   },
+  mounted () {
+    this.$refs.userState.typing()
+  },
   computed: {
     ...mapState([
       'userState',
       'readReportIds',
-      'currentReadReportId'
+      'currentReadReportId',
+      'isBaseReport'
     ]),
     time () {
       // const { minutes, seconds } = this.times
@@ -92,10 +96,6 @@ export default {
       return `${minutes >= 10 ? minutes : `0${minutes}`}:${seconds >= 10 ? seconds : `0${seconds}`}`
       // return { minutes, seconds }
     }
-    // action () {
-    //   const suffix = (this.readReportIds.length === 5 ? (this.currentReadReportId === 5 ? '（回到首篇）' : '（繼續閱讀）') : '')
-    //   return this.result.action + suffix
-    // }
   },
   methods: {
     ...mapMutations([
@@ -115,33 +115,17 @@ export default {
       const tl = gsap.timeline({ repeat: -1 })
       tl.set([ glassL, glassR ], { transformOrigin: '50% 70%' })
       tl.to([ clangL, clangC, clangR ], { duration: 0.8, scale: 0, transformOrigin: '50% 100%', ease: 'expo.in' }, 0.4)
-      tl.to(glassL, { duration: 1.6, rotation: '-=40', x: '-=10', scale: 0.88, ease: 'power1.in' }, 0.4)
-      tl.to(glassR, { duration: 1.6, rotation: '+=40', x: '+=10', scale: 0.88, ease: 'power1.in' }, 0.4)
+      tl.to(glassL, { duration: 1.2, rotation: '-=40', x: '-=10', scale: 0.88, ease: 'power1.in' }, 0.4)
+      tl.to(glassR, { duration: 1.2, rotation: '+=40', x: '+=10', scale: 0.88, ease: 'power1.in' }, 0.4)
       tl.to(glassL, { duration: 0.8, rotation: '+=40', x: '+=10', scale: 1,    ease: 'back.out(1.7)' }, '>')
       tl.to(glassR, { duration: 0.8, rotation: '-=40', x: '-=10', scale: 1,    ease: 'back.out(1.7)' }, '<')
       tl.to([ clangL, clangC, clangR ], { duration: 0.2, scale: 1, transformOrigin: '50% 100%', ease: 'expo.out' }, '<0.25')
       return tl
-      // gsap.set(glassL, {
-      //   rotation: '-=40',
-      //   x: '-=10',
-      //   scale: 0.88,
-      //   transformOrigin: '50% 70%'
-      // })
-      // gsap.set(glassR, {
-      //   rotation: '+=40',
-      //   x: '+=10',
-      //   scale: 0.88,
-      //   transformOrigin: '50% 70%'
-      // })
     },
     changeOrderCount () {
       const tl = gsap.timeline()
       const { orderCount } = this.$refs
-      // tl.from(orderCount, {
-      //   scale: 0,
-      //   duration: 1.5,
-      //   ease: 'elastic.out(2, 0.4)'
-      // }, 0)
+      
       tl.to(orderCount, {
         scale: 1.5,
         duration: 0.5,
@@ -164,11 +148,7 @@ export default {
     changeMoney () {
       const tl = gsap.timeline()
       const { money } = this.$refs
-      // tl.from(money, {
-      //   scale: 0,
-      //   duration: 1.5,
-      //   ease: 'elastic.out(2, 0.4)'
-      // }, 0)
+
       tl.to(money, {
         scale: 1.5,
         duration: 0.5,
@@ -190,7 +170,6 @@ export default {
     changeTime () {
       const tl = gsap.timeline()
       const { readTime } = this.$refs
-      // const { minutes, seconds } = this.result.times
       
       tl.to(readTime, {
         scale: 1.5,

@@ -1,12 +1,14 @@
 <template>
-  <transition name="pop-up-toc" @before-enter="isTOCTransition = true" @after-enter="afterEnterNav">
-    <section class="table-of-contents" v-show="isTOC">
+  <!-- <transition name="pop-up-toc" @before-enter="isTOCTransition = true" @after-enter="afterEnterNav"> -->
+    <!-- <section class="table-of-contents" v-show="isTOC"> -->
+    <section ref="toc" class="table-of-contents">
     <!-- <section :class="[ 'table-of-contents', { 'below-the-bottom': !isTOC } ]"> -->
-      <UserState />
+      <UserState ref="userState" />
       <HeaderIcons />
       <!-- <transition name="pop-up-nav" @before-enter="isTOCTransition = true" @after-enter="afterEnterNav"> -->
         <nav ref="nav">
-          <svg class="table-of-contents__line" width="1" :height="isPrompt ? 0 : navH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
+          <!-- <svg class="table-of-contents__line" width="1" :height="isPrompt ? 0 : navH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg> -->
+          <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
           <ul>
             <li
               v-for="content in contents"
@@ -15,7 +17,7 @@
               :class="{ 'can-hover': !isTOCTransition && !isPrompt, 'spotlight': content.id === 1 && isPrompt }">
             <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
               <div class="table-of-contents__num">
-                <MapMarker :num="content.id" />
+                <MapMarker :class="{ 'table-of-contents__map-marker': content.id !== 1 && isBeginning }" :num="content.id" />
               </div>
               <div class="table-of-contents__text">
                 <p class="table-of-contents__title">{{ content.title }}</p>
@@ -28,7 +30,7 @@
           </ul>
         </nav>
       <!-- </transition> -->
-      <transition name="fade-out-nav" @after-enter="isPoint = true">
+      <transition name="fade-out-nav" @after-enter="isPoint = true" @after-leave="afterLeavePrompt">
         <div class="table-of-contents__prompt" v-if="isPrompt">
           <div class="table-of-contents__prompt-mask"></div>
           <div class="table-of-contents__prompt-action">
@@ -41,7 +43,7 @@
         </div>
       </transition>
     </section>
-  </transition>
+  <!-- </transition> -->
 </template>
 
 <script>
@@ -61,28 +63,37 @@ export default {
   },
   data () {
     return {
-      navH: 0,
+      // navH: 0,
       isPrompt: false,
       isTOCTransition: false,
-      isPoint: false
+      isPoint: false,
+      lineH: 0,
+      canUpdateLineH: false,
+      isBeginning: true
     }
   },
   mounted () {
-    // this.updateNavH()
-    window.addEventListener('resize', this.updateNavH)
-    window.addEventListener('orientationChange', this.updateNavH)
+    // this.updateLineH()
+    if (this.isReportContent) {
+      this.isBeginning = false
+      this.lineH = this.$refs.nav.offsetHeight - 60.4
+    }
+    window.addEventListener('resize', this.updateLineH)
+    window.addEventListener('orientationChange', this.updateLineH)
   },
   computed: {
     ...mapState([
       'contents',
-      'isTOC'
-    ]),
-    lineH () {
-      // 24.6 + 35.8
-      // const height = this.navH - 60.4
-      const height = this.navH - 24.6
-      return (height >= 0 ? height : 0)
-    }
+      'isTOC',
+      'isReportContent',
+      // 'isBaseReport'
+    ])
+    // lineH () {
+    //   // 24.6 + 35.8
+    //   const height = this.navH - 60.4
+    //   // const height = this.navH - 24.6
+    //   return (height >= 0 ? height : 0)
+    // }
   },
   methods: {
     ...mapMutations([
@@ -90,8 +101,10 @@ export default {
       'changeCurrentReadReportId',
       'toggleBodyScrollBar'
     ]),
-    updateNavH () {
-      this.navH = this.$refs.nav.offsetHeight      
+    updateLineH () {
+      if (this.canUpdateLineH) {
+        this.lineH = this.$refs.nav.offsetHeight - 60.4
+      }
     },
     showReport (id) {
       if (this.isPrompt || this.isTOCTransition) return
@@ -100,16 +113,61 @@ export default {
       this.toggleBodyScrollBar(false)
       this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
     },
-    afterEnterNav () {
+    showPrompt () {
       this.isPrompt = true
       this.isTOCTransition = false
-      this.updateNavH()
+      // this.updateLineH()
       this.toggleBodyScrollBar(true)
+    },
+    afterLeavePrompt () {
+      this.$refs.userState.typing()
+      const tl = gsap.timeline()
+      tl.to(this, {
+        // 65 * 3 + 14.6 + (65 - 14.6) = 65 * 4
+        lineH: 260,
+        duration: 3,
+        ease: 'none'
+      }, 0)
+      tl.to('.table-of-contents__map-marker', {
+        scale: 1,
+        duration: 0.75,
+        ease: 'elastic.out(1, 0.3)',
+        // ease: 'back.out(1.7)',
+        stagger: 0.75,
+      }, 0.45)
+      tl.to(this, {
+        lineH: this.$refs.nav.offsetHeight - 60.4,
+        duration: 3,
+        ease: 'none',
+        omComplete: () => {
+          this.canUpdateLineH = true
+        }
+      }, '>')
+    }
+  },
+  watch: {
+    isTOC (newVal) {
+      if (newVal) {
+        this.isTOCTransition = true
+        gsap.from(this.$refs.toc, {
+          y: '100%',
+          duration: 0.6,
+          ease: 'expo.out',
+          onComplete: () => {
+            this.showPrompt()
+          }
+        })
+      }
+    },
+    isReportContent (newVal) {
+      if (!newVal) {
+        this.$refs.userState.setState()
+      }
     }
   },
   beforeDestroy () {
-    window.removeEventListener('resize', this.updateNavH)
-    window.removeEventListener('orientationChange', this.updateNavH)
+    window.removeEventListener('resize', this.updateLineH)
+    window.removeEventListener('orientationChange', this.updateLineH)
   }
 }
 </script>
@@ -123,7 +181,7 @@ export default {
   background-color rgba(#000, 0.3)
   overflow hidden
   position relative
-  transition opacity 0.45s $easeOutExpo, transform 0.6s $easeOutExpo
+  transition opacity 0.45s $easeOutExpo
   & nav
     position relative
   &__num
@@ -136,6 +194,8 @@ export default {
       width 25.42px
       height 35.8px
       display block
+  &__map-marker
+    transform scale(0)
   &__text
     color #4a4a4a
     line-height normal
@@ -170,7 +230,7 @@ export default {
     display flex
     align-items center
     cursor pointer
-    transition background-color 0.45s $easeOutCirc
+    transition background-color 0.6s $easeOutCirc
     &.spotlight
       z-index 499
       position relative
@@ -193,12 +253,12 @@ export default {
   &__line
     position absolute
     // 20 + (45 - 35.8) / 2
-    top 24.6px
+    // top 24.6px
     // 20 + (45 - 35.8) / 2 + 35.8
-    // top 60.4px
+    top 60.4px
     // 10 + (25.42 / 2) - (1 / 2)
     left 22.21px
-    transition height 5.5s linear
+    // transition height 5.5s linear
     @media (min-width $mobile)
       // 45 + (25.42 / 2) - (1 / 2)
       left 57.21px

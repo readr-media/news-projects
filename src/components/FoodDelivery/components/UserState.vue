@@ -18,9 +18,10 @@ export default {
       stateTl: null
     }
   },
-  mounted () {
-    this.typing()
-  },
+  // mounted () {
+  //   if (this.isBaseReport)
+  //   this.typing()
+  // },
   computed: {
     ...mapState([
       'userState'
@@ -40,8 +41,22 @@ export default {
         onReverseComplete: () => { this.typing() }
       })
       return this.stateTl
+    },
+    setState () {
+      gsap.set(this.$refs.userState, {
+        text: this.userState
+      })
     }
-  }
+  },
+  // watch: {
+  //   isBaseReport (newVal) {
+  //     if (!newVal) {
+  //       console.log('ff');
+        
+  //       this.typing()
+  //     }
+  //   }
+  // }
 }
 </script>
 

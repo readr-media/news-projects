@@ -70,6 +70,8 @@ export default {
     ReportContent5
   },
   mounted () {
+    // console.log('rr');
+    
     this.scrollToReport()
     if (!this.isBaseReport) {
       this.isHidden = false
@@ -130,7 +132,7 @@ export default {
         }
       ],
       beforeScrollT: 0,
-      isHidden: false,
+      isHidden: true,
       isHeaderIcons: true
     }
   },
@@ -234,7 +236,7 @@ export default {
   width 100%
   height 100%
   overflow-y auto
-  transition opacity 0.45s $easeOutExpo, transform 0.6s $easeOutExpo
+  transition transform 0.6s $easeOutExpo, opacity 0.45s $easeOutExpo
   &.below-the-bottom
     transform translateY(100%)
   &__container
