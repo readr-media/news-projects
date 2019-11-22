@@ -1,49 +1,39 @@
 <template>
-  <!-- <transition name="pop-up-toc" @before-enter="isTOCTransition = true" @after-enter="afterEnterNav"> -->
-    <!-- <section class="table-of-contents" v-show="isTOC"> -->
-    <section ref="toc" class="table-of-contents">
-    <!-- <section :class="[ 'table-of-contents', { 'below-the-bottom': !isTOC } ]"> -->
-      <UserState ref="userState" />
-      <HeaderIcons />
-      <!-- <transition name="pop-up-nav" @before-enter="isTOCTransition = true" @after-enter="afterEnterNav"> -->
-        <nav ref="nav">
-          <!-- <svg class="table-of-contents__line" width="1" :height="isPrompt ? 0 : navH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg> -->
-          <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
-          <ul>
-            <li
-              v-for="content in contents"
-              :key="`content-${content.id}`"
-              @click="showReport(content.id)"
-              :class="{ 'can-hover': !isTOCTransition && !isPrompt, 'spotlight': content.id === 1 && isPrompt }">
-            <!-- <li v-for="content in contents" :key="`content-${content.id}`" @click="$emit('showReport', content.id)"> -->
-              <div class="table-of-contents__num">
-                <MapMarker :class="{ 'table-of-contents__map-marker': content.id !== 1 && isBeginning }" :num="content.id" />
-              </div>
-              <div class="table-of-contents__text">
-                <p class="table-of-contents__title">{{ content.title }}</p>
-                <p class="table-of-contents__time">閱讀時間：{{ content.time }}</p>
-              </div>
-              <!-- <div class="table-of-contents__arrow"> -->
-              <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/icon/enter.svg" alt="">
-              <!-- </div> -->
-            </li>
-          </ul>
-        </nav>
-      <!-- </transition> -->
-      <transition name="fade-out-nav" @after-enter="isPoint = true" @after-leave="afterLeavePrompt">
-        <div class="table-of-contents__prompt" v-if="isPrompt">
-          <div class="table-of-contents__prompt-mask"></div>
-          <div class="table-of-contents__prompt-action">
-            <div :class="{ point: isPoint }">
-              <img src="/proj-assets/food-delivery/img/icon/finger.svg" alt="">
-              <p>點選以閱讀報導</p>
+  <section ref="toc" class="table-of-contents">
+    <UserState ref="userState" />
+    <HeaderIcons />
+      <nav ref="nav">
+        <svg class="table-of-contents__line" width="1" :height="lineH" xmlns="http://www.w3.org/2000/svg"><path :d="`M.5 0v${lineH}`" stroke="#979797" fill="none" fill-rule="evenodd" stroke-dasharray="6" stroke-linecap="square"/></svg>
+        <ul>
+          <li
+            v-for="content in contents"
+            :key="`content-${content.id}`"
+            @click="showReport(content.id)"
+            :class="{ 'can-hover': !isTOCTransition && !isPrompt, 'spotlight': content.id === 1 && isPrompt }">
+            <div class="table-of-contents__num">
+              <MapMarker :class="{ 'table-of-contents__map-marker': content.id !== 1 && isBeginning }" :num="content.id" />
             </div>
-            <button type="button" @click="isPrompt = false">我知道了</button>
+            <div class="table-of-contents__text">
+              <p class="table-of-contents__title">{{ content.title }}</p>
+              <p class="table-of-contents__time">閱讀時間：{{ content.time }}</p>
+            </div>
+            <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/icon/enter.svg" alt="" loading="lazy">
+          </li>
+        </ul>
+      </nav>
+    <transition name="fade-out-nav" @after-enter="isPoint = true" @after-leave="afterLeavePrompt">
+      <div class="table-of-contents__prompt" v-if="isPrompt">
+        <div class="table-of-contents__prompt-mask"></div>
+        <div class="table-of-contents__prompt-action">
+          <div :class="{ point: isPoint }">
+            <img src="/proj-assets/food-delivery/img/icon/finger.svg" alt="" loading="lazy">
+            <p>點選以閱讀報導</p>
           </div>
+          <button type="button" @click="isPrompt = false">我知道了</button>
         </div>
-      </transition>
-    </section>
-  <!-- </transition> -->
+      </div>
+    </transition>
+  </section>
 </template>
 
 <script>
@@ -63,7 +53,6 @@ export default {
   },
   data () {
     return {
-      // navH: 0,
       isPrompt: false,
       isTOCTransition: false,
       isPoint: false,
@@ -73,8 +62,10 @@ export default {
     }
   },
   mounted () {
-    // this.updateLineH()
     if (this.isReportContent) {
+      gsap.set(this.$refs.toc, {
+        y: 0
+      })
       this.isBeginning = false
       this.lineH = this.$refs.nav.offsetHeight - 60.4
     }
@@ -85,15 +76,8 @@ export default {
     ...mapState([
       'contents',
       'isTOC',
-      'isReportContent',
-      // 'isBaseReport'
+      'isReportContent'
     ])
-    // lineH () {
-    //   // 24.6 + 35.8
-    //   const height = this.navH - 60.4
-    //   // const height = this.navH - 24.6
-    //   return (height >= 0 ? height : 0)
-    // }
   },
   methods: {
     ...mapMutations([
@@ -138,7 +122,6 @@ export default {
     showPrompt () {
       this.isPrompt = true
       this.isTOCTransition = false
-      // this.updateLineH()
       this.toggleBodyScrollBar(true)
     },
     afterLeavePrompt () {
@@ -154,7 +137,6 @@ export default {
         scale: 1,
         duration: 0.75,
         ease: 'elastic.out(1, 0.3)',
-        // ease: 'back.out(1.7)',
         stagger: 0.75,
       }, 0.45)
       tl.to(this, {
@@ -172,8 +154,8 @@ export default {
     isTOC (newVal) {
       if (newVal) {
         this.isTOCTransition = true
-        gsap.from(this.$refs.toc, {
-          y: '100%',
+        gsap.to(this.$refs.toc, {
+          y: 0,
           duration: 0.6,
           ease: 'expo.out',
           onComplete: () => {
@@ -205,11 +187,10 @@ export default {
   overflow hidden
   position relative
   transition opacity 0.45s $easeOutExpo
+  transform translateY(100%)
   & nav
     position relative
   &__num
-    // width 25.42px
-    // height 35.8px
     margin-right 10px
     user-select none
     z-index 1
@@ -226,7 +207,6 @@ export default {
   // todo max-width
   &__title
     font-size 1.8rem
-    // transition all 0.45s $easeOutCirc
     font-weight 700
   &__time
     font-size 1.4rem
@@ -237,12 +217,10 @@ export default {
     background-color #ffdc03
     border-top-left-radius 24px
     border-top-right-radius 24px
-    // padding-top 10px
     overflow hidden
     background-color #ffdc03
     min-height calc(100vh - 84px)
     user-select none
-    // height 100vh
     @media (min-width $mobile)
       min-height calc(100vh - 120px)
   & li
@@ -268,10 +246,7 @@ export default {
     &.can-hover:hover
       background-color #ffec78
       & .table-of-contents__text
-        // font-weight 500
         color #000
-      // & .table-of-contents__text
-      //   color #000
       & .marker-color
         fill #000
   &__line
@@ -282,18 +257,15 @@ export default {
     top 60.4px
     // 10 + (25.42 / 2) - (1 / 2)
     left 22.21px
-    // transition height 5.5s linear
     @media (min-width $mobile)
       // 45 + (25.42 / 2) - (1 / 2)
       left 57.21px
   &__prompt
     position absolute
-    // background-color rgba(#000, 0.8)
     width 100%
     height 100%
     top 0
     left 0
-    // z-index 199
     &-mask
       position absolute
       top 0
@@ -315,14 +287,10 @@ export default {
       user-select none
       @media (min-width $mobile)
         top 198px
-      // text-align center
-      // margin-right auto
-      // margin-left auto
       & > div
         text-align center
         &.point
-          // easeInOutSine
-          animation point 2s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite both
+          animation point 2s $easeInOutSine infinite both
           @keyframes point
             0%
               transform translateY(0px)
@@ -337,9 +305,7 @@ export default {
       & img
         width 50px
         vertical-align top
-        // display block
       & p
-        // font-size 2.4rem
         line-height normal
         margin-top 10px
         margin-bottom 20px

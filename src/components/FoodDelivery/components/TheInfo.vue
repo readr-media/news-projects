@@ -3,12 +3,11 @@
     <div class="the-info__container">
       <UserState ref="userState" />
       <div class="the-info__wrapper">
-        <img class="the-info__cancel" src="/proj-assets/food-delivery/img/icon/info-close.svg" alt="" @click="toggleInfo(false)">
+        <img class="the-info__cancel" src="/proj-assets/food-delivery/img/icon/info-close.svg" alt="" @click="toggleInfo(false)" loading="lazy">
       </div>
-      <!-- todo 記者筆記 -->
       <div class="the-info__slides" :style="{ transform: `translateX(-${81.25 * (currentPage - 1)}vw)` }">
       <div class="the-info__slide">
-        <img src="/proj-assets/food-delivery/img/icon/readr.svg" alt="">
+        <img src="/proj-assets/food-delivery/img/icon/readr.svg" alt="" loading="lazy">
         <p>文字採訪／李又如</p>
         <p>設計／陳怡蒨</p>
         <p>插畫／許玲瑋</p>
@@ -45,11 +44,6 @@ export default {
       currentPage: 1
     }
   },
-  // computed: {
-  //   ...mapState([
-  //     'isInfo'
-  //   ])
-  // },
   mounted () {
     this.$refs.userState.setState()
   },

@@ -1,19 +1,19 @@
 <template>
   <footer class="the-footer">
     <div class="the-footer__wrapper">
-      <img class="the-footer__readr-img" src="/proj-assets/food-delivery/img/icon/readr.svg" alt="">
-      <!-- todo 記者筆記 -->
+      <img class="the-footer__readr-img" src="/proj-assets/food-delivery/img/icon/readr.svg" alt="" loading="lazy">
       <OtherReports class="the-footer__other-reports" />
       <DonateItem class="the-footer__donate"/>
       <SubscrItem />
     </div>
     <picture class="the-footer__end-img">
-      <source media="(min-width: 768px)" srcset="/proj-assets/food-delivery/img/end-desktop.png">
-      <img src="/proj-assets/food-delivery/img/end-mobile.png" alt="">
+      <source type="image/webp" media="(min-width: 460px)" srcset="/proj-assets/food-delivery/img/end-desktop.webp">
+      <source type="image/png" media="(min-width: 460px)" srcset="/proj-assets/food-delivery/img/end-desktop.png">
+      <source type="image/webp" srcset="/proj-assets/food-delivery/img/end-mobile.webp">
+      <img src="/proj-assets/food-delivery/img/end-mobile.png" alt="" loading="lazy">
     </picture>
-    <!-- <img class="the-footer__end-img" src="/proj-assets/food-delivery/img/end.svg" alt=""> -->
-    <div class="the-footer__share" @click.once="isShareIcon = true" :class="{ 'can-share': isShareIcon }">
-      <img src="/proj-assets/food-delivery/img/icon/share-arrow.svg" alt="">
+    <div class="the-footer__share" @click.once="showShareIcon" :class="{ 'can-share': isShareIcon }">
+      <img src="/proj-assets/food-delivery/img/icon/share-arrow.svg" alt="" loading="lazy">
       <p v-if="!isShareIcon">分享專題</p>
       <a :href="`https://www.facebook.com/share.php?u=${shareLink}`" target="_blank" class="the-footer__share-item fb"></a>
       <a :href="`https://line.me/R/msg/text/?${shareLink}`" target="_blank" class="the-footer__share-item line"></a>
@@ -51,7 +51,11 @@ export default {
   methods: {
     ...mapMutations([
       'copyLinkToClipboard'
-    ])
+    ]),
+    showShareIcon () {
+      this.isShareIcon = true
+      window.ga('send', 'event', 'projects', 'click', '文末-分享')
+    }
   }
 }
 </script>

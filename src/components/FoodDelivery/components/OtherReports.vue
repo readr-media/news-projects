@@ -1,7 +1,6 @@
 <template>
   <section class="other-reports">
     <div class="other-reports__title">更多精彩專題</div>
-    <!-- todo what 最新報導 -->
     <a v-for="report in this.$store.state.FoodDelivery.otherReports" :href="`https://www.readr.tw/project/${report.slug}`" :key="report.id" target="_blank">{{ report.title }}</a>
   </section>
 </template>

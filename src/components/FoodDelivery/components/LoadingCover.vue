@@ -1,14 +1,12 @@
 <template>
   <transition name="fade-out-cover" @before-leave="showBeginningContent">
-    <section class="loading-cover" v-if="isCover">
+    <section class="loading-cover" v-if="isCover" :style="{ height: `${this.$store.state.viewport[ 1 ]}px` }">
       <div class="loading-cover__wrapper">
         <h1>記者來當外送員：<br>開箱美食外送秘辛！</h1>
         <div class="loading-cover__progress">
-          <!-- <div :class="[ 'inner-bar', { loading: isMounted } ]" @transitionend="hideCover" @oTransitionEnd="hideCover" @webkitTransitionEnd="hideCover"></div> -->
           <div ref="innerBar" class="inner-bar"></div>
         </div>
       </div>
-      <!-- <img src="/proj-assets/food-delivery/img/cover.jpg" alt=""> -->
     </section>
   </transition>
 </template>
@@ -28,11 +26,6 @@ export default {
     ...mapState([
       'isMounted'
     ])
-    // whichTransitionEnd () {
-    //   const innerBar = this.$refs.innerBar
-    //   // const innerBar = document.getElementById('inner-bar')
-    //   return 'transitionend'
-    // }
   },
   methods: {
     ...mapMutations([
@@ -69,8 +62,7 @@ export default {
   background-size cover
   background-position center top
   background-repeat no-repeat
-  height 100vh
-  // position relative
+  // height 100vh
   position absolute
   width 100%
   z-index 699

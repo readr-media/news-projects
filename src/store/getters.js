@@ -1,5 +1,5 @@
 function getVH () {
-  return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+  return window.innerHeight || document.documentElement.clientHeight
 }
 
 export default {

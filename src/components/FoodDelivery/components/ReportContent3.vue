@@ -53,16 +53,16 @@ export default {
           imgCount: 3,
           imgSrcs: [
             [
-              '/proj-assets/food-delivery/img/report/step/report3-1-mobile.png',
-              '/proj-assets/food-delivery/img/report/step/report3-1-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report3-1-mobile',
+              '/proj-assets/food-delivery/img/report/step/report3-1-desktop'
             ],
             [
-              '/proj-assets/food-delivery/img/report/step/report3-2-mobile.png',
-              '/proj-assets/food-delivery/img/report/step/report3-2-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report3-2-mobile',
+              '/proj-assets/food-delivery/img/report/step/report3-2-desktop'
             ],
             [
-              '/proj-assets/food-delivery/img/report/step/report3-3-mobile.png',
-              '/proj-assets/food-delivery/img/report/step/report3-3-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report3-3-mobile',
+              '/proj-assets/food-delivery/img/report/step/report3-3-desktop'
             ]
           ],
           texts: [
@@ -72,7 +72,7 @@ export default {
             },
             {
               id: 2,
-              content: '3 月 1 日改制後，全職一天要跑到 48 單甚至 60 單影響才會變小。就算一個小時能順利跑滿 4 單，一天要跑到 15 個小時才有機會「加薪」，變相鼓勵外送員超時工作。更別提後期因為司機量變多，每人分配到的單量變少，就算長時間待命也不一定有這麼高的單量。'
+              content: '3 月 1 日改制後，全職一天要跑到 48 單甚至 60 單影響才會變小。就算一個小時能順利跑滿 4 單，一天要跑到 15 個小時才有機會「加薪」，變相鼓勵外送員超時工作。'
             },
             {
               id: 3,

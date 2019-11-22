@@ -1,6 +1,5 @@
 <template>
   <section class="report-result">
-    <!-- <UserState ref="userState" :userStateResult="state" /> -->
     <UserState ref="userState" />
     <div class="report-result__reward">
       <div>
@@ -35,11 +34,8 @@
       </svg>
     </div>
     <div class="report-result__action">
-      <!-- <button type="button" class="order" v-if="result.action" >{{ result.action }}</button> -->
       <button type="button" class="order" @click="handleAction(result.id)">{{ result.action }}</button>
-      <!-- <button type="button" class="share">分享成就（報導）</button> -->
-      <!-- <div class="share" @click.once="showShare" @mouseenter.once="showShare" :class="{ 'can-share': isShare }"> -->
-      <div class="share" @click.once="isShare = true" :class="{ 'can-share': isShare }">
+      <div class="share" @click.once="showShareIcon(result.id)" :class="{ 'can-share': isShare }">
         <div class="share__text">分享成就（報導）</div>
         <a :href="`https://www.facebook.com/share.php?u=${shareLink(result.id)}`" target="_blank" class="share__item fb"></a>
         <a :href="`https://line.me/R/msg/text/?${shareLink(result.id)}`" target="_blank" class="share__item line"></a>
@@ -108,19 +104,43 @@ export default {
       let gaLabel = ''
       switch (id) {
         case 1:
-          gaLabel = '收到第一張訂單-繼續閱讀'
+          gaLabel = '如何成為外送員-繼續閱讀'
           break
         case 2:
-          gaLabel = '抵達餐廳-繼續閱讀'
+          gaLabel = '美食外送平台解決了什麼問題-繼續閱讀'
           break
         case 3:
-          gaLabel = '即將與顧客碰面-繼續閱讀'
+          gaLabel = '司機管理仰賴檢舉和評價-繼續閱讀'
           break
         case 4:
-          gaLabel = '抵達餐廳-繼續閱讀'
+          gaLabel = '外送員最害怕的事：車禍-繼續閱讀'
           break
         case 5:
-          gaLabel = '完成配送-繼續閱讀'
+          gaLabel = '平台經濟帶來的好與壞-繼續閱讀'
+          break
+        default:
+          break
+      }
+      window.ga('send', 'event', 'projects', 'click', gaLabel)
+    },
+    showShareIcon (id) {
+      this.isShare = true
+      let gaLabel = ''
+      switch (id) {
+        case 1:
+          gaLabel = '如何成為外送員-分享'
+          break
+        case 2:
+          gaLabel = '美食外送平台解決了什麼問題-分享'
+          break
+        case 3:
+          gaLabel = '司機管理仰賴檢舉和評價-分享'
+          break
+        case 4:
+          gaLabel = '外送員最害怕的事：車禍-分享'
+          break
+        case 5:
+          gaLabel = '平台經濟帶來的好與壞-分享'
           break
         default:
           break
@@ -202,8 +222,6 @@ export default {
         ease: 'circ.out'
       }, 0.5)
       tl.to(this, {
-        // minutes,
-        // seconds,
         seconds: this.result.seconds,
         duration: 2,
         snap: { minutes: 1, seconds: 1 },
@@ -242,7 +260,7 @@ export default {
 
 .report-result
   background-color rgba(#000, 0.3)
-  height 100vh
+  min-height 100vh
   @media (min-width $mobile)
     height auto
     // (120 - 70) / 2
@@ -296,14 +314,7 @@ export default {
     & .order
       background-color #ffdc03
       margin-bottom 16px
-      // transition background-color 0.45s $easeOutCirc
       padding 0
-      // &:hover
-      //   background-color #ffec78
-      //   color #000
-      // &:active
-      //   color #000
-      //   background-color #ffec78
     & .share
       background-color #ffdc03
       overflow hidden

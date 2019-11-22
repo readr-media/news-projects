@@ -62,16 +62,16 @@ export default {
           imgCount: 3,
           imgSrcs: [
             [
-              '/proj-assets/food-delivery/img/report/step/report1-1-mobile.png',
-              '/proj-assets/food-delivery/img/report/step/report1-1-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report1-1-mobile',
+              '/proj-assets/food-delivery/img/report/step/report1-1-desktop'
             ],
             [
-              '/proj-assets/food-delivery/img/report/step/report1-2-mobile.png',
-              '/proj-assets/food-delivery/img/report/step/report1-2-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report1-2-mobile',
+              '/proj-assets/food-delivery/img/report/step/report1-2-desktop'
             ],
             [
-              '/proj-assets/food-delivery/img/report/step/report1-3-mobile.png',
-              '/proj-assets/food-delivery/img/report/step/report1-3-desktop.png'
+              '/proj-assets/food-delivery/img/report/step/report1-3-mobile',
+              '/proj-assets/food-delivery/img/report/step/report1-3-desktop'
             ]
           ],
           texts: [
