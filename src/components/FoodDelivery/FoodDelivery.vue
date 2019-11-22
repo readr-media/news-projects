@@ -141,7 +141,7 @@ html
   font-size 10px
   font-family $ff-sans-serif
 body
-  background-image url(/proj-assets/food-delivery/img/map.jpg)
+  background-image url(/proj-assets/food-delivery/img/map.png)
   background-size contain
   background-position center top
   background-repeat repeat

@@ -10,6 +10,7 @@ export default {
   },
   toggleInfo (state, isShow) {
     state.isInfo = isShow
+    window.ga('send', 'event', 'projects', 'click', `information-${isShow ? '開' : '關'}`)
   },
   setIsMounted (state) {
     state.isMounted = true

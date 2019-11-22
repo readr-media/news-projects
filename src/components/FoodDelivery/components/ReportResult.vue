@@ -36,7 +36,7 @@
     </div>
     <div class="report-result__action">
       <!-- <button type="button" class="order" v-if="result.action" >{{ result.action }}</button> -->
-      <button type="button" class="order" @click="scrollToOrder((result.id + 1) <= 5 ? (result.id + 1) : 1)">{{ result.action }}</button>
+      <button type="button" class="order" @click="handleAction(result.id)">{{ result.action }}</button>
       <!-- <button type="button" class="share">分享成就（報導）</button> -->
       <!-- <div class="share" @click.once="showShare" @mouseenter.once="showShare" :class="{ 'can-share': isShare }"> -->
       <div class="share" @click.once="isShare = true" :class="{ 'can-share': isShare }">
@@ -102,6 +102,31 @@ export default {
     ...mapActions([
       'scrollToOrder'
     ]),
+    handleAction (id) {
+      this.scrollToOrder((id + 1) <= 5 ? (id + 1) : 1)
+      
+      let gaLabel = ''
+      switch (id) {
+        case 1:
+          gaLabel = '收到第一張訂單-繼續閱讀'
+          break
+        case 2:
+          gaLabel = '抵達餐廳-繼續閱讀'
+          break
+        case 3:
+          gaLabel = '即將與顧客碰面-繼續閱讀'
+          break
+        case 4:
+          gaLabel = '抵達餐廳-繼續閱讀'
+          break
+        case 5:
+          gaLabel = '完成配送-繼續閱讀'
+          break
+        default:
+          break
+      }
+      window.ga('send', 'event', 'projects', 'click', gaLabel)
+    },
     shareLink (id) {
       return `${READR_SITE_URL}food-delivery/order${id}`
     },

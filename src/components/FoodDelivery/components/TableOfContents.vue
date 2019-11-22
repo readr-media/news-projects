@@ -24,7 +24,7 @@
                 <p class="table-of-contents__time">閱讀時間：{{ content.time }}</p>
               </div>
               <!-- <div class="table-of-contents__arrow"> -->
-              <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/icon/enter--comp.svg" alt="">
+              <img class="table-of-contents__arrow" src="/proj-assets/food-delivery/img/icon/enter.svg" alt="">
               <!-- </div> -->
             </li>
           </ul>
@@ -112,6 +112,28 @@ export default {
       this.toggleReportContent(true)
       this.toggleBodyScrollBar(false)
       this.$router.push(`/project/food-delivery/order${id}`).catch((err) => {})
+
+      let gaLabel = ''
+      switch (id) {
+        case 1:
+          gaLabel = '如何成為外送員'
+          break
+        case 2:
+          gaLabel = '美食外送平台解決了什麼問題'
+          break
+        case 3:
+          gaLabel = '司機管理仰賴檢舉和評價'
+          break
+        case 4:
+          gaLabel = '外送員最害怕的事：車禍'
+          break
+        case 5:
+          gaLabel = '平台經濟帶來的好與壞'
+          break
+        default:
+          break
+      }
+      window.ga('send', 'event', 'projects', 'click', gaLabel)
     },
     showPrompt () {
       this.isPrompt = true
@@ -143,6 +165,7 @@ export default {
           this.canUpdateLineH = true
         }
       }, '>')
+      window.ga('send', 'event', 'projects', 'scroll', '第一屏')
     }
   },
   watch: {

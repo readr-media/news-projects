@@ -1,9 +1,9 @@
 <template>
   <div :class="[ 'header-icons', { 'opacity-0': isInfo } ]" >
-    <img class="header-icons__enter" src="/proj-assets/food-delivery/img/icon/enter--comp.svg" alt="" @click="showTOC" v-show="isMounted && isReportContent && $store.state.viewport[ 0 ] <= 767.98">
+    <img class="header-icons__back" src="/proj-assets/food-delivery/img/icon/back.svg" alt="" @click="showTOC" v-show="isMounted && isReportContent && $store.state.viewport[ 0 ] <= 767.98">
     <div class="header-icons__wrapper">
-      <a href="https://www.readr.tw/donate" target="_blank"><img class="header-icons__donate" src="/proj-assets/food-delivery/img/icon/donate--comp.svg" alt=""></a>
-      <img class="header-icons__info" src="/proj-assets/food-delivery/img/icon/info--comp.svg" alt="" @click="toggleInfo(true)">
+      <a href="https://www.readr.tw/donate" target="_blank" @click="sendDonateGA"><img class="header-icons__donate" src="/proj-assets/food-delivery/img/icon/donate.svg" alt=""></a>
+      <img class="header-icons__info" src="/proj-assets/food-delivery/img/icon/info.svg" alt="" @click="toggleInfo(true)">
     </div>
   </div>
 </template>
@@ -29,6 +29,9 @@ export default {
     showTOC () {
       this.toggleReportContent(false)
       this.$router.push('/project/food-delivery').catch((err) => {})
+    },
+    sendDonateGA () {
+      window.ga('send', 'event', 'projects', 'click', '贊助按鈕-header')
     }
   }
 }
@@ -59,9 +62,9 @@ export default {
     cursor pointer
     vertical-align middle
     pointer-events auto
-  &__enter
+  &__back
     width 20px
-    transform scaleX(-1)
+    // transform scaleX(-1)
     @media (min-width $mobile)
       width 26px
   &__wrapper

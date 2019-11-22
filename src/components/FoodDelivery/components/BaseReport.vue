@@ -189,9 +189,11 @@ export default {
       const reportIdx = this.currentReadReportId - 1
       const resultOffsetT = this.$refs.result[ reportIdx ].$el.offsetTop
 
-      if (baseReportScrollT >= (resultOffsetT - this.wh / 2)) {
+      if (baseReportScrollT >= (resultOffsetT - this.wh * 0.25)) {
+        
         const stepIdx = this.readReportIds.length
         const state = this.steps.state[ stepIdx ]
+        let gaLabel = ''
 
         // this.results[ reportIdx ].state = state
         
@@ -210,6 +212,27 @@ export default {
           result.seconds = this.totalSeconds
         })
         this.addReadReportIds(this.currentReadReportId)
+
+        switch (this.currentReadReportId) {
+          case 1:
+            gaLabel = '如何成為外送員'
+            break
+          case 2:
+            gaLabel = '美食外送平台解決了什麼問題'
+            break
+          case 3:
+            gaLabel = '司機管理仰賴檢舉和評價'
+            break
+          case 4:
+            gaLabel = '外送員最害怕的事：車禍'
+            break
+          case 5:
+            gaLabel = '平台經濟帶來的好與壞'
+            break
+          default:
+            break
+        }
+        window.ga('send', 'event', 'projects', 'scroll', gaLabel, this.currentReadReportId)
       }
 
       this.beforeScrollT = baseReportScrollT

@@ -1,6 +1,6 @@
 <template>
   <span class="pop-up-notation" @click="toggleText">
-    <img :src="`/proj-assets/food-delivery/img/icon/note-${isText ? 'x' : 'default'}.svg`" alt="">
+    <img :src="`/proj-assets/food-delivery/img/icon/notation-${isText ? 'close' : 'default'}.svg`" alt="">
     <transition name="fade-notation">
       <span class="pop-up-notation__text" v-if="isText" :style="{ top: `${textTop}px` }" @click.stop v-html="text"></span>
     </transition>
@@ -25,6 +25,7 @@ export default {
         this.textTop = this.$el.offsetTop + 32
         this.isText = true
       }
+      window.ga('send', 'event', 'projects', 'click', `註-${this.isText ? '開' : '關'}`)
     }
   }
 }

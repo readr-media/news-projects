@@ -1,15 +1,19 @@
 <template>
   <footer class="the-footer">
     <div class="the-footer__wrapper">
-      <img class="the-footer__readr-img" src="/proj-assets/food-delivery/img/icon/readr--comp.svg" alt="">
+      <img class="the-footer__readr-img" src="/proj-assets/food-delivery/img/icon/readr.svg" alt="">
       <!-- todo 記者筆記 -->
       <OtherReports class="the-footer__other-reports" />
       <DonateItem class="the-footer__donate"/>
       <SubscrItem />
     </div>
-    <img class="the-footer__end-img" src="/proj-assets/food-delivery/img/end--comp.svg" alt="">
+    <picture class="the-footer__end-img">
+      <source media="(min-width: 768px)" srcset="/proj-assets/food-delivery/img/end-desktop.png">
+      <img src="/proj-assets/food-delivery/img/end-mobile.png" alt="">
+    </picture>
+    <!-- <img class="the-footer__end-img" src="/proj-assets/food-delivery/img/end.svg" alt=""> -->
     <div class="the-footer__share" @click.once="isShareIcon = true" :class="{ 'can-share': isShareIcon }">
-      <img src="/proj-assets/food-delivery/img/icon/share--comp.svg" alt="">
+      <img src="/proj-assets/food-delivery/img/icon/share-arrow.svg" alt="">
       <p v-if="!isShareIcon">分享專題</p>
       <a :href="`https://www.facebook.com/share.php?u=${shareLink}`" target="_blank" class="the-footer__share-item fb"></a>
       <a :href="`https://line.me/R/msg/text/?${shareLink}`" target="_blank" class="the-footer__share-item line"></a>
@@ -83,8 +87,10 @@ export default {
       width 60px
       margin-bottom 20px
   &__end-img
-    vertical-align top
-    width 100%
+    display block
+    & img
+      vertical-align top
+      width 100%
   &__other-reports
     margin-bottom 20px
     @media (min-width $mobile)
@@ -163,9 +169,9 @@ export default {
         // 32 + (58.8 - 30) / 2
         top 46.4px
       &.fb
-        background-image url(/proj-assets/food-delivery/img/icon/share-fb--comp.svg)
+        background-image url(/proj-assets/food-delivery/img/icon/share-fb.svg)
       &.line
-        background-image url(/proj-assets/food-delivery/img/icon/share-line--comp.svg)
+        background-image url(/proj-assets/food-delivery/img/icon/share-line.svg)
       &.copylink
-        background-image url(/proj-assets/food-delivery/img/icon/share-copylink--comp.svg)
+        background-image url(/proj-assets/food-delivery/img/icon/share-copylink.svg)
 </style>
