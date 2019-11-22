@@ -40,7 +40,8 @@ export default {
     isTOC: false,
     isBaseReport: true,
     readReportIds: [],
-    isAutoScrolling: false
+    isAutoScrolling: false,
+    otherReports: []
   }),
   mutations,
   actions

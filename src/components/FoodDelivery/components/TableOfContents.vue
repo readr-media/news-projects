@@ -218,6 +218,7 @@ export default {
     overflow hidden
     background-color #ffdc03
     min-height calc(100vh - 84px)
+    user-select none
     // height 100vh
     @media (min-width $mobile)
       min-height calc(100vh - 120px)
@@ -334,5 +335,5 @@ export default {
           background-color #fff
           color #000
         &:active
-          background-color darken(#fff, 20%)
+          background-color #c4c4c4
 </style>

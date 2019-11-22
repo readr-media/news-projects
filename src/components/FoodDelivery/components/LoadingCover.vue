@@ -47,7 +47,7 @@ export default {
       if (newVal) {
         gsap.to(this.$refs.innerBar, {
           width: '100%',
-          duration: 1,
+          duration: 2.5,
           ease: 'circ.in',
           onComplete: () => {
             this.hideCover()
@@ -102,8 +102,7 @@ export default {
     border 1px solid #ffdc03
     padding 4px 5px
     box-shadow 0 0 8px rgba(#ffdc03, 0.8)
-    // easeInOutCirc
-    animation shining 1s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86) alternate
+    animation shining 1s infinite $easeInOutCirc alternate
     @keyframes shining
       100%
         box-shadow 0 0 16px rgba(#ffdc03, 0.8)

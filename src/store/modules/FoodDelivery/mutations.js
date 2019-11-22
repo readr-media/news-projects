@@ -53,5 +53,8 @@ export default {
       document.getSelection().removeAllRanges()
       document.getSelection().addRange(selected)
     }
+  },
+  setOtherReports (state, data) {
+    state.otherReports = data
   }
 }

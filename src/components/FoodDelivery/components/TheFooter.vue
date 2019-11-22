@@ -8,12 +8,12 @@
       <SubscrItem />
     </div>
     <img class="the-footer__end-img" src="/proj-assets/food-delivery/img/end--comp.svg" alt="">
-    <div class="the-footer__share" @click.once="isShareIcon = true" :class="{ 'cursor-p': !isShareIcon }">
+    <div class="the-footer__share" @click.once="isShareIcon = true" :class="{ 'can-share': isShareIcon }">
       <img src="/proj-assets/food-delivery/img/icon/share--comp.svg" alt="">
       <p v-if="!isShareIcon">分享專題</p>
-      <a :href="`https://www.facebook.com/share.php?u=${shareLink}`" target="_blank" :class="[ 'the-footer__share-item', 'fb', { show: isShareIcon } ]"></a>
-      <a :href="`https://line.me/R/msg/text/?${shareLink}`" target="_blank" :class="[ 'the-footer__share-item', 'line', { show: isShareIcon } ]"></a>
-      <span :class="['copylink', 'the-footer__share-item', { show: isShareIcon }]" @click="copyLinkToClipboard(shareLink)"></span>
+      <a :href="`https://www.facebook.com/share.php?u=${shareLink}`" target="_blank" class="the-footer__share-item fb"></a>
+      <a :href="`https://line.me/R/msg/text/?${shareLink}`" target="_blank" class="the-footer__share-item line"></a>
+      <span class="copylink the-footer__share-item" @click="copyLinkToClipboard(shareLink)"></span>
     </div>
   </footer>
 </template>
@@ -107,7 +107,30 @@ export default {
     align-items center
     flex-direction column
     padding-top 20px
-    // cursor pointer
+    user-select none
+    cursor pointer
+    &:active
+      background-color #9b9b9b
+    &.can-share
+      cursor auto
+      & .the-footer__share-item
+        opacity 1
+        visibility visible
+      & .fb
+        // 29.39 + 5 + (20 - 19.7)
+        transform translate(-40px, 34.69px)
+        @media (min-width $mobile)
+          transform translate(-50px, 54.4px)
+      & .line
+        // (58.8 - (58.8 - 30) / 2) + 10
+        transform translateY(34.69px)
+        @media (min-width $mobile)
+          transform translateY(54.4px)
+      & .copylink
+        // 29.39 + 5 + (20 - 19.7)
+        transform translate(40px, 34.69px)
+        @media (min-width $mobile)
+          transform translate(50px, 54.4px)
     @media (min-width $mobile)
       width 300px
       height 300px
@@ -134,34 +157,15 @@ export default {
       top 19.7px
       opacity 0
       visibility hidden
-      // todo transition
       transition all 0.45s $easeOutCubic
       cursor pointer
       @media (min-width $mobile)
         // 32 + (58.8 - 30) / 2
         top 46.4px
-      &.show
-        opacity 1
-        visibility visible
       &.fb
         background-image url(/proj-assets/food-delivery/img/icon/share-fb--comp.svg)
-        &.show
-          // 29.39 + 5 + (20 - 19.7)
-          transform translate(-40px, 34.69px)
-          @media (min-width $mobile)
-            transform translate(-50px, 54.4px)
       &.line
         background-image url(/proj-assets/food-delivery/img/icon/share-line--comp.svg)
-        &.show
-          transform translateY(34.69px)
-          @media (min-width $mobile)
-            // (58.8 - (58.8 - 30) / 2) + 10
-            transform translateY(54.4px)
       &.copylink
         background-image url(/proj-assets/food-delivery/img/icon/share-copylink--comp.svg)
-        // 29.39 + 5 + (20 - 19.7)
-        &.show
-          transform translate(40px, 34.69px)
-          @media (min-width $mobile)
-            transform translate(50px, 54.4px)
 </style>

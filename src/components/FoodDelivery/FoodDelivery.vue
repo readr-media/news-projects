@@ -12,7 +12,7 @@
 <script>
 import FoodDeliveryStoreModule from '../../store/modules/FoodDelivery'
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('FoodDelivery')
 
 import LoadingCover from './components/LoadingCover.vue'
 import HeaderIcons from './components/HeaderIcons.vue'
@@ -99,6 +99,9 @@ export default {
       'setIsMounted',
       'changeBeginningContent',
       'toggleBodyScrollBar'
+    ]),
+    ...mapActions([
+      'fetchOtherReports'
     ])
   },
   created () {
@@ -117,6 +120,7 @@ export default {
   },
   beforeMount () {
     this.toggleBodyScrollBar(false)
+    this.fetchOtherReports()
   },
   mounted () {
     this.setIsMounted()
@@ -174,6 +178,6 @@ a
   overflow hidden
 .overflow-y-s
   overflow-y scroll
-.cursor-p
-  cursor pointer
+// .cursor-p
+//   cursor pointer
 </style>

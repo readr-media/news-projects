@@ -37,10 +37,9 @@
     <div class="report-result__action">
       <!-- <button type="button" class="order" v-if="result.action" >{{ result.action }}</button> -->
       <button type="button" class="order" @click="scrollToOrder((result.id + 1) <= 5 ? (result.id + 1) : 1)">{{ result.action }}</button>
-      <!-- todo 將專題改成報導 -->
       <!-- <button type="button" class="share">分享成就（報導）</button> -->
       <!-- <div class="share" @click.once="showShare" @mouseenter.once="showShare" :class="{ 'can-share': isShare }"> -->
-      <div class="share">
+      <div class="share" @click.once="isShare = true" :class="{ 'can-share': isShare }">
         <div class="share__text">分享成就（報導）</div>
         <a :href="`https://www.facebook.com/share.php?u=${shareLink(result.id)}`" target="_blank" class="share__item fb"></a>
         <a :href="`https://line.me/R/msg/text/?${shareLink(result.id)}`" target="_blank" class="share__item line"></a>
@@ -68,7 +67,6 @@ export default {
     return {
       orderCount: 0,
       money: 0,
-      // times: { minutes: 0, seconds: 0 }
       seconds: 0,
       state: '前往目的地的路上',
       isShare: false
@@ -106,9 +104,6 @@ export default {
     ]),
     shareLink (id) {
       return `${READR_SITE_URL}food-delivery/order${id}`
-    },
-    showShare () {
-      this.isShare = true
     },
     cheers () {
       const { glassL, glassR, clangL, clangC, clangR } = this.$refs
@@ -195,7 +190,6 @@ export default {
   watch: {
     readReportIds () {
       if (this.currentReadReportId !== this.result.id) {
-        // this.state = this.result.state
         this.$refs.userState.typingBack()
         this.orderCount = this.result.orderCount
         this.money = this.result.money
@@ -265,28 +259,26 @@ export default {
       color #4a4a4a
       font-size 1.8rem
       border-radius 20px
-      // padding-top 8px
-      // padding-bottom 8px
       height 40px
       text-align center
-      // line-height normal
       line-height 40px
       width 100%
-      // display flex
+      &:active
+        color #000
+        background-color #ffec78
       @media (min-width $mobile)
         border-radius 10px
     & .order
       background-color #ffdc03
-      // padding-top 8px
-      // padding-bottom 8px
       margin-bottom 16px
-      transition background-color 0.45s $easeOutCirc
+      // transition background-color 0.45s $easeOutCirc
       padding 0
-      &:hover
-        background-color #ffec78
-        color #000
-      &:active
-        background-color darken(#ffec78, 40%)
+      // &:hover
+      //   background-color #ffec78
+      //   color #000
+      // &:active
+      //   color #000
+      //   background-color #ffec78
     & .share
       background-color #ffdc03
       overflow hidden
@@ -295,19 +287,12 @@ export default {
       align-items center
       justify-content center
       z-index 20
-      &:hover
+      &.can-share
         & .share__item
           opacity 1
-          transform translateX(0)
-          &.fb
-            transition-delay 0.5s
-          &.line
-            transition-delay 0.3s
-          &.copylink
-            transition-delay 0.1s
+          transform translateY(0)
         & .share__text
-          transform translateX(-100%)
-          // transition-delay 0.3s
+          transform translateY(-100%)
       &__text
         background-color #fff
         transition transform 0.6s $easeInOutCubic
@@ -316,8 +301,8 @@ export default {
         width 100%
         cursor pointer
         z-index 19
-        // &:active
-        //   background-color darken(#fff, 20%)
+        &:active
+          background-color #c4c4c4
         @media (min-width $mobile)
           border-radius 10px
       &__item
@@ -326,7 +311,7 @@ export default {
         background-size 30px
         background-position center
         background-repeat no-repeat
-        transform translateX(-100%)
+        transform translateY(100%)
         opacity 0
         transition all 0.3s $easeOutCubic
         cursor pointer
@@ -334,11 +319,11 @@ export default {
           margin-left 20px
         &.fb
           background-image url(/proj-assets/food-delivery/img/icon/share-fb-gray.svg)
-          transition-delay 0.6s
+          transition-delay 0.5s
         &.line
           background-image url(/proj-assets/food-delivery/img/icon/share-line-gray.svg)
-          transition-delay 0.4s
+          transition-delay 0.3s
         &.copylink
           background-image url(/proj-assets/food-delivery/img/icon/share-copylink-gray.svg)
-          transition-delay 0.2s
+          transition-delay 0.1s
 </style>

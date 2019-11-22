@@ -1,3 +1,5 @@
+import { get as axiosGet } from 'axios'
+
 const scrollIntoView = require('scroll-into-view')
 
 export default {
@@ -18,5 +20,11 @@ export default {
         commit('toggleAutoScrolling', false)
       }
     )
+  },
+  fetchOtherReports ({ commit }) {
+    axiosGet('https://www.readr.tw/api/public/posts?type={%22in%22:[4]}&sort=-created_at&max_result=3')
+    .then((res) => {
+      commit('setOtherReports', res.data._items)
+    })
   }
 }

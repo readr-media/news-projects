@@ -96,6 +96,7 @@ export default {
     width 20px
     display block
     cursor pointer
+    user-select none
     @media (min-width $mobile)
       width 40px
   &__slides

@@ -31,4 +31,6 @@ export default {
     line-height normal
     width 100%
     max-width 400px
+    &:active
+      background-color #9b9b9b
 </style>

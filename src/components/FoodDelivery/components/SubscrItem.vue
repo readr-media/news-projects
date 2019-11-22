@@ -39,6 +39,10 @@ export default {
         border-radius 10px
         line-height 40px
         flex 1 0 70.83%
+        outline none
+        transition box-shadow 0.15s $easeInOutCubic
+        &:focus
+          box-shadow 0 0 0 3.2px #9b9b9b
         &::-webkit-input-placeholder
           color #9b9b9b
           font-weight 500
@@ -51,4 +55,6 @@ export default {
         line-height 40px
         flex 0 0 25%
         max-width 70px
+        &:active
+          background-color #9b9b9b
 </style>

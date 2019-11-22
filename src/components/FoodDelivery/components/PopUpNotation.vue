@@ -1,7 +1,6 @@
 <template>
   <span class="pop-up-notation" @click="toggleText">
-    <!-- todo 叉叉樣式 -->
-    <span class="pop-up-notation__symbol">{{ isText ? 'X' : '註' }}</span>
+    <img :src="`/proj-assets/food-delivery/img/icon/note-${isText ? 'x' : 'default'}.svg`" alt="">
     <transition name="fade-notation">
       <span class="pop-up-notation__text" v-if="isText" :style="{ top: `${textTop}px` }" @click.stop v-html="text"></span>
     </transition>
@@ -48,9 +47,9 @@ export default {
   margin-right 4px
   margin-left 4px
   cursor pointer
-  &__symbol
-    display inline-block
-    // font-weight 700
+  & img
+    width 14px
+    vertical-align middle
     user-select none
   &__text
     position absolute
