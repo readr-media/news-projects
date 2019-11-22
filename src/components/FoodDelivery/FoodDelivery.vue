@@ -146,6 +146,7 @@ body
   background-position center top
   background-repeat repeat
   min-height 100vh
+  background-color #202020
 .food-delivery
   max-width 800px
   margin-right auto

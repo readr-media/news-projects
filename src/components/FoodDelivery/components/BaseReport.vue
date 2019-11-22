@@ -2,16 +2,16 @@
   <main
     id="base-report"
     :class="[ 'base-report', { 'visibility-h': isHidden, 'below-the-bottom': !isBaseReport } ]"
-    @scroll="changeRouter(); changeResult()"
+    @scroll="changeRouter(); changeResult(); sendGAFooter()"
   >
-    <div class="base-report__container">
+    <div class="base-report__container" :class="{ 'hide-fixed-bg': !isFixedBg } ">
       <HeaderIcons v-show="isHeaderIcons" />
       <transition
         name="slide-report"
         @before-enter="isHidden = false"
         @enter       ="scrollToReport"
-        @after-enter ="isHeaderIcons = true"
-        @before-leave="isHeaderIcons = false"
+        @after-enter ="afterEnterReportContent"
+        @before-leave="beforeLeaveReportContent"
         @after-leave ="afterLeaveReportContent"
       >
         <div v-show="isReportContent">
@@ -25,7 +25,7 @@
             
           </section>
           <OrderIndex v-if="isMounted && $store.state.viewport[0] >= 768" />
-          <TheFooter />
+          <TheFooter ref="theFooter" />
         </div>
       </transition>
     </div>
@@ -70,8 +70,6 @@ export default {
     ReportContent5
   },
   mounted () {
-    // console.log('rr');
-    
     this.scrollToReport()
     if (!this.isBaseReport) {
       this.isHidden = false
@@ -131,7 +129,9 @@ export default {
       ],
       beforeScrollT: 0,
       isHidden: true,
-      isHeaderIcons: true
+      isHeaderIcons: true,
+      isSendGAFooter: false,
+      isFixedBg: false
     }
   },
   computed: {
@@ -189,13 +189,11 @@ export default {
       const reportIdx = this.currentReadReportId - 1
       const resultOffsetT = this.$refs.result[ reportIdx ].$el.offsetTop
 
-      if (baseReportScrollT >= (resultOffsetT - this.wh * 0.25)) {
+      if (baseReportScrollT >= (resultOffsetT - this.wh * 0.5)) {
         
         const stepIdx = this.readReportIds.length
         const state = this.steps.state[ stepIdx ]
         let gaLabel = ''
-
-        // this.results[ reportIdx ].state = state
         
         this.changeUserState(state)
 
@@ -203,7 +201,6 @@ export default {
 
         this.results.forEach((result, idx) => {
           if (this.readReportIds.includes(idx + 1)) return
-          // result.state = state
           result.orderCount = this.steps.orderCount[ stepIdx ]
           result.money = this.steps.money[ stepIdx ]
 
@@ -237,9 +234,24 @@ export default {
 
       this.beforeScrollT = baseReportScrollT
     },
+    sendGAFooter () {
+      if (this.currentReadReportId !== 5 || this.isSendGAFooter) return
+      if (this.$el.scrollTop >= this.$refs.theFooter.$el.offsetTop - this.wh * 0.5) {
+        window.ga('send', 'event', 'projects', 'scroll', 'end', 6)
+        this.isSendGAFooter = true
+      }
+    },
     afterLeaveReportContent () {
       this.isHidden = true
       this.toggleBodyScrollBar(true)
+    },
+    afterEnterReportContent () {
+      this.isHeaderIcons = true
+      this.isFixedBg = true
+    },
+    beforeLeaveReportContent () {
+      this.isHeaderIcons = false
+      this.isFixedBg = false
     }
   }
 }
@@ -265,6 +277,22 @@ export default {
     margin-left auto
     margin-right auto
     overflow hidden
+    &::after
+      content ""
+      display block
+      position fixed
+      left 0
+      top 0
+      width 100%
+      height 100vh
+      z-index -1
+      background-image url(/proj-assets/food-delivery/img/map.png)
+      background-size contain
+      background-position center top
+      background-repeat repeat
+      background-color #202020
+    &.hide-fixed-bg::after
+      visibility hidden
   &__marker-wrapper
     height 84px
     display flex

@@ -1,9 +1,9 @@
 <template>
   <div :class="[ 'header-icons', { 'opacity-0': isInfo } ]" >
-    <img class="header-icons__back" src="/proj-assets/food-delivery/img/icon/back.svg" alt="" @click="showTOC" v-show="isMounted && isReportContent && $store.state.viewport[ 0 ] <= 767.98">
+    <img class="header-icons__back" src="/proj-assets/food-delivery/img/icon/back.svg" alt="" @click="showTOC" v-show="isMounted && isReportContent && $store.state.viewport[ 0 ] <= 767.98" loading="lazy">
     <div class="header-icons__wrapper">
       <a href="https://www.readr.tw/donate" target="_blank" @click="sendDonateGA"><img class="header-icons__donate" src="/proj-assets/food-delivery/img/icon/donate.svg" alt=""></a>
-      <img class="header-icons__info" src="/proj-assets/food-delivery/img/icon/info.svg" alt="" @click="toggleInfo(true)">
+      <img class="header-icons__info" src="/proj-assets/food-delivery/img/icon/info.svg" alt="" @click="toggleInfo(true)" loading="lazy">
     </div>
   </div>
 </template>

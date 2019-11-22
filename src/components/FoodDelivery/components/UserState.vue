@@ -1,8 +1,10 @@
 <template>
   <div class="the-user">
-    <!-- <div class="the-user__state" ref="userState">{{ userStateResult }}</div> -->
     <div class="the-user__state" ref="userState"></div>
-    <img src="/proj-assets/food-delivery/img/driver.png" alt="">
+    <picture>
+      <source type="image/webp" srcset="/proj-assets/food-delivery/img/driver.webp">
+      <img src="/proj-assets/food-delivery/img/driver.png" alt="" loading="lazy">
+    </picture>
   </div>
 </template>
 
@@ -12,16 +14,11 @@ const { mapState } = createNamespacedHelpers('FoodDelivery')
 
 export default {
   name: 'UserState',
-  // props: [ 'userStateResult' ],
   data () {
     return {
       stateTl: null
     }
   },
-  // mounted () {
-  //   if (this.isBaseReport)
-  //   this.typing()
-  // },
   computed: {
     ...mapState([
       'userState'
@@ -47,16 +44,7 @@ export default {
         text: this.userState
       })
     }
-  },
-  // watch: {
-  //   isBaseReport (newVal) {
-  //     if (!newVal) {
-  //       console.log('ff');
-        
-  //       this.typing()
-  //     }
-  //   }
-  // }
+  }
 }
 </script>
 
@@ -89,6 +77,8 @@ export default {
     @media (min-width $mobile)
       font-size 1.8rem
       max-width 113px
+  & picture
+    display block
   & img
     width 50px
     border-radius 50%

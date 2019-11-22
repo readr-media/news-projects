@@ -1,6 +1,6 @@
 <template>
   <span class="pop-up-notation" @click="toggleText">
-    <img :src="`/proj-assets/food-delivery/img/icon/notation-${isText ? 'close' : 'default'}.svg`" alt="">
+    <img :src="`/proj-assets/food-delivery/img/icon/notation-${isText ? 'close' : 'default'}.svg`" alt="" loading="lazy">
     <transition name="fade-notation">
       <span class="pop-up-notation__text" v-if="isText" :style="{ top: `${textTop}px` }" @click.stop v-html="text"></span>
     </transition>

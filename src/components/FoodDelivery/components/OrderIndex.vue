@@ -18,8 +18,6 @@
 </template>
 
 <script>
-// const scrollIntoView = require('scroll-into-view')
-
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('FoodDelivery')
 
@@ -30,42 +28,17 @@ export default {
   components: {
     MapMarker
   },
-  // data () {
-  //   return {
-  //     isAutoScrolling: false
-  //   }
-  // },
   computed: {
     ...mapState([
       'contents',
       'reportIds',
-      'currentReadReportId',
-      // 'isAutoScrolling'
+      'currentReadReportId'
     ])
   },
   methods: {
-    // ...mapMutations([
-    //   'changeCurrentReadReportId',
-    //   'toggleAutoScrolling'
-    // ]),
     ...mapActions([
       'scrollToOrder'
     ])
-    // scrollToOrder (id) {
-    //   if (this.isAutoScrolling) return
-    //   this.toggleAutoScrolling(true)
-    //   // this.isAutoScrolling = true
-    //   this.changeCurrentReadReportId(id)
-    //   const reportEl = document.getElementById(`report${this.currentReadReportId}`)
-    //   scrollIntoView(reportEl,
-    //     {
-    //       time: 1000,
-    //       align: { top: 0, left: 0 },
-    //       ease: (t) => t * t * t * t
-    //     }, 
-    //     () => { this.toggleAutoScrolling(false) }
-    //   )
-    // }
   }
 }
 </script>
@@ -119,7 +92,6 @@ export default {
   &__line
     position absolute
     top 0
-    // left calc((100% - 1px) / 2)
     left 50%
     transform translateX(-50%)
     z-index -1

@@ -21,7 +21,6 @@ export default {
 
 .subscr-item
   text-align center
-  // 層級不調高，focus 框會被擋住
   position relative
   z-index 9
   & br

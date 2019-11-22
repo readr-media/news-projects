@@ -14,13 +14,10 @@
     >
       <!-- <picture v-for="imgId in imgsId" :key="imgId" :class="{ active: ImgActiveId === imgId }"> -->
       <picture v-for="(imgId, idx) in imgCount" :key="`fixed-slides-img${imgId}`" :class="{ active: ImgActiveId === imgId }">
-        <!-- <source media="(min-width: 460px) and (max-width: 719.98px)" :srcset="imgSrc(imgId, 'tablet-small')"> -->
-        <!-- <source media="(min-width: 720px) and (max-width: 999.98px)" :srcset="imgSrc(imgId, 'tablet-large')"> -->
-        <!-- <source media="(min-width: 1000px) and (max-width: 1599.98px)" :srcset="imgSrc(imgId, 'desktop-small')"> -->
-        <!-- <source media="(min-width: 1600px)" :srcset="imgSrc(imgId, 'desktop-large')"> -->
-        <!-- <img class="lazyer" loading="lazy" :data-src="imgSrc(imgId, 'mobile')" src="" alt=""> -->
-        <source :media="`(min-width: ${breakPoints[0]}px)`" :srcset="imgSrcs[idx][1]">
-        <img :src="imgSrcs[idx][0]" alt="">
+        <source type="image/webp" :media="`(min-width: ${breakPoints[ 0 ]}px)`" :srcset="`${imgSrcs[ idx ][ 1 ]}.webp`">
+        <source type="image/png" :media="`(min-width: ${breakPoints[ 0 ]}px)`" :srcset="`${imgSrcs[ idx ][ 1 ]}.png`">
+        <source type="image/webp" :srcset="`${imgSrcs[ idx ][ 0 ]}.webp`">
+        <img :src="`${imgSrcs[ idx ][ 0 ]}.png`" alt="" loading="lazy">
       </picture>
     </div>
     <div class="fixed-slides__text" v-for="(text, idx) in texts" :key="`fixed-slides-text${text.id}`" :class="{ step1: idx === 0 }">
@@ -174,8 +171,6 @@ export default {
       top 0
       left 0
       opacity 0
-      // todo
-      transition opacity 0.3s ease
       &.active
         opacity 1
     & img
