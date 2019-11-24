@@ -4,7 +4,7 @@
       <MapMarker
         :num="reportId"
         :class="[ { active: currentReadReportId === reportId }, 'order-index__marker']"
-        @click.native="scrollToOrder(reportId)"
+        @click.native="handleClick(reportId)"
       />
       <div class="order-index__popup">
         <div>
@@ -38,7 +38,31 @@ export default {
   methods: {
     ...mapActions([
       'scrollToOrder'
-    ])
+    ]),
+    handleClick (id) {
+      this.scrollToOrder({ id })
+      let gaLabel = ''
+      switch (id) {
+        case 1:
+          gaLabel = '如何成為外送員'
+          break
+        case 2:
+          gaLabel = '美食外送平台解決了什麼問題'
+          break
+        case 3:
+          gaLabel = '司機管理仰賴檢舉和評價'
+          break
+        case 4:
+          gaLabel = '外送員最害怕的事：車禍'
+          break
+        case 5:
+          gaLabel = '平台經濟帶來的好與壞'
+          break
+        default:
+          break
+      }
+      window.ga('send', 'event', 'projects', 'click', `索引-${gaLabel}`)
+    }
   }
 }
 </script>

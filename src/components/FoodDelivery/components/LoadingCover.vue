@@ -40,7 +40,7 @@ export default {
       if (newVal) {
         gsap.to(this.$refs.innerBar, {
           width: '100%',
-          duration: 1,
+          duration: 2.5,
           ease: 'circ.in',
           onComplete: () => {
             this.hideCover()
@@ -61,8 +61,6 @@ export default {
   background-color #000
   background-size cover
   background-position center top
-  background-repeat no-repeat
-  // height 100vh
   position absolute
   width 100%
   z-index 699
