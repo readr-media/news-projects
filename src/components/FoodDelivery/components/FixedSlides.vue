@@ -34,6 +34,9 @@ export default {
   name: 'FixedSlides',
   // props: [ 'ww', 'wh' ],
   props: {
+    reportId: {
+      type: Number
+    },
     imgCount: {
       type: Number,
       required: true
@@ -80,7 +83,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'isReportContent'
+      'isReportContent',
+      'currentReadReportId'
     ]),
     imgH () {
       // const aspectRatio = (this.ww >= 720 ? 1.143 : 1)
@@ -103,12 +107,15 @@ export default {
       this.containerWidth = this.$refs.container.offsetWidth
     },
     locateGraphic () {
+      if (this.reportId !== this.currentReadReportId || !this.isReportContent) return
+
       const container = this.$refs.container
       const graphic = this.$refs.graphic
       const graphicH = graphic.offsetHeight
       const { top: containerT, bottom: containerB } = container.getBoundingClientRect()
       const offsetT = (this.wh - graphicH) / 2
       const offsetB = this.wh - offsetT
+      
       if (containerT > offsetT) {
         this.isGraphicFixed = false
       } else if (containerB <= offsetB) {

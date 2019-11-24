@@ -269,6 +269,7 @@ export default {
   width 100%
   height 100%
   overflow-y auto
+  // overflow-y scroll
   transition transform 0.6s $easeOutExpo, opacity 0.45s $easeOutExpo
   &.below-the-bottom
     transform translateY(100%)
@@ -311,4 +312,6 @@ export default {
       height 40px
     & .marker-color
       fill #000
+.webp .base-report__container::after
+  background-image url(/proj-assets/food-delivery/img/map.webp)
 </style>

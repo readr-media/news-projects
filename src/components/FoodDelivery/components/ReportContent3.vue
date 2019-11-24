@@ -12,6 +12,7 @@
       <p>之所以會這麼沮喪，是因為負面評價會影響司機的接單率。柯志明舉例，「以前有一次我一天就賺 3000 元，非常開心。但有負評之後，一天賺不到 800 元。」等待時間變得很長，「終於等到，結果跑一單只有 30 元⋯⋯真的是鬱卒到無話可說。」</p>
       <p>除此之外，相較於顧客會不斷收到訂餐免運費或折價卷、店家的權益至少有一紙合約保障，對於外送員，平台總是片面調整規定與獎勵制度，不斷下探外送員們能夠接受的底線。</p>
       <FixedSlides
+        :reportId="3"
         :imgCount="fixedSlidesData[0].imgCount"
         :imgSrcs="fixedSlidesData[0].imgSrcs"
         :imgAspectRatio="fixedSlidesData[0].imgAspectRatio"

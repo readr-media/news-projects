@@ -11,6 +11,7 @@
       <p>加上這些平台自認它們與外送員的關係屬於承攬制<PopUpNotation :text="notations[0]" />，不受《勞基法》工時、休假限制，外送員只要願意投入高工時，自然能換得高收入。</p>
       <p>我訪談的十數位外送員，無論本身是否有正職工作，都有個共同點：都是為了「高薪」和「自由」才踏入這一行。</p>
       <FixedSlides
+        :reportId="1"
         :imgCount="fixedSlidesData[0].imgCount"
         :imgSrcs="fixedSlidesData[0].imgSrcs"
         :imgAspectRatio="fixedSlidesData[0].imgAspectRatio"

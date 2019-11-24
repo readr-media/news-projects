@@ -201,7 +201,7 @@ export default {
       }, 0.5)
       tl.to(this, {
         money: this.result.money,
-        duration: 2,
+        duration: 1.5,
         snap: { money: 1 },
         ease: 'circ.out'
       }, 0.25)
@@ -223,7 +223,7 @@ export default {
       }, 0.5)
       tl.to(this, {
         seconds: this.result.seconds,
-        duration: 2,
+        duration: 1.5,
         snap: { minutes: 1, seconds: 1 },
         ease: 'circ.out'
       }, 0.25)
@@ -245,11 +245,11 @@ export default {
       
       ResultTl.add(this.$refs.userState.typingBack(), 0)
       if (readReportCount === 3 || readReportCount === 5) {
-        ResultTl.add(this.changeOrderCount(), 1.5)
-        ResultTl.add(this.changeMoney(), 1.5)
+        ResultTl.add(this.changeOrderCount(), 0.75)
+        ResultTl.add(this.changeMoney(), 0.75)
       }
-      ResultTl.add(this.changeTime(), 1.5)
-      ResultTl.add(this.cheers(), '>-0.5')
+      ResultTl.add(this.changeTime(), 0.75)
+      ResultTl.add(this.cheers(), '>-1')
     }
   }
 }
@@ -260,7 +260,7 @@ export default {
 
 .report-result
   background-color rgba(#000, 0.3)
-  min-height 100vh
+  height 100vh
   @media (min-width $mobile)
     height auto
     // (120 - 70) / 2

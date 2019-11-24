@@ -40,7 +40,7 @@ export default {
       if (newVal) {
         gsap.to(this.$refs.innerBar, {
           width: '100%',
-          duration: 2.5,
+          duration: 1,
           ease: 'circ.in',
           onComplete: () => {
             this.hideCover()
@@ -103,8 +103,6 @@ export default {
       height 4px
       border-radius 6px
       background-color #ffdc03
-      // easeInCirc
-      // transition width 3s cubic-bezier(0.6, 0.04, 0.98, 0.335)
-      // &.loading
-      //   width 100%
+.webp .loading-cover
+  background-image url(/proj-assets/food-delivery/img/cover.webp)
 </style>
