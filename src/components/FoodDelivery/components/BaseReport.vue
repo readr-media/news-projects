@@ -4,7 +4,7 @@
     :class="[ 'base-report', { 'visibility-h': isHidden, 'below-the-bottom': !isBaseReport } ]"
     @scroll="changeRouter(); changeResult(); sendGAFooter()"
   >
-    <div class="base-report__container" :class="{ 'hide-fixed-bg': !isFixedBg } ">
+    <div class="base-report__container">
       <HeaderIcons v-show="isHeaderIcons" />
       <transition
         name="slide-report"
@@ -130,8 +130,8 @@ export default {
       beforeScrollT: 0,
       isHidden: true,
       isHeaderIcons: true,
-      isSendGAFooter: false,
-      isFixedBg: false
+      isSendGAFooter: false
+      // isFixedBg: false
     }
   },
   computed: {
@@ -247,11 +247,11 @@ export default {
     },
     afterEnterReportContent () {
       this.isHeaderIcons = true
-      this.isFixedBg = true
+      // this.isFixedBg = true
     },
     beforeLeaveReportContent () {
       this.isHeaderIcons = false
-      this.isFixedBg = false
+      // this.isFixedBg = false
     }
   }
 }
@@ -278,22 +278,22 @@ export default {
     margin-left auto
     margin-right auto
     overflow hidden
-    &::after
-      content ""
-      display block
-      position fixed
-      left 0
-      top 0
-      width 100%
-      height 100vh
-      z-index -1
-      background-image url(/proj-assets/food-delivery/img/map.png)
-      background-size contain
-      background-position center top
-      background-repeat repeat
-      background-color #202020
-    &.hide-fixed-bg::after
-      visibility hidden
+    // &::after
+    //   content ""
+    //   display block
+    //   position absolute
+    //   left 0
+    //   top 0
+    //   width 100%
+    //   height 100vh
+    //   z-index -1
+    //   background-image url(/proj-assets/food-delivery/img/map.png)
+    //   background-size contain
+    //   background-position center top
+    //   background-repeat repeat
+    //   background-color #202020
+    // &.hide-fixed-bg::after
+    //   visibility hidden
   &__marker-wrapper
     height 84px
     display flex
