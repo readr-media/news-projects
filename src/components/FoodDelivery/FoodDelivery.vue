@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import detectWebp from './util/detect-webp.js'
+
 import FoodDeliveryStoreModule from '../../store/modules/FoodDelivery'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('FoodDelivery')
@@ -121,6 +123,7 @@ export default {
   beforeMount () {
     this.toggleBodyScrollBar(false)
     this.fetchOtherReports()
+    detectWebp(window, document)
   },
   mounted () {
     this.setIsMounted()
@@ -152,6 +155,8 @@ body
   margin-right auto
   margin-left auto
   position relative
+.webp body
+  background-image url(/proj-assets/food-delivery/img/map.webp)
 img
   max-width 100%
   height auto

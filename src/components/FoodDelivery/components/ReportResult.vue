@@ -35,6 +35,7 @@
     </div>
     <div class="report-result__action">
       <button type="button" class="order" @click="handleAction(result.id)">{{ result.action }}</button>
+      
       <div class="share" @click.once="showShareIcon(result.id)" :class="{ 'can-share': isShare }">
         <div class="share__text">分享成就（報導）</div>
         <a :href="`https://www.facebook.com/share.php?u=${shareLink(result.id)}`" target="_blank" class="share__item fb"></a>
@@ -99,53 +100,53 @@ export default {
       'scrollToOrder'
     ]),
     handleAction (id) {
-      this.scrollToOrder((id + 1) <= 5 ? (id + 1) : 1)
+      this.scrollToOrder({ id: (id + 1) <= 5 ? (id + 1) : 1 })
       
       let gaLabel = ''
       switch (id) {
         case 1:
-          gaLabel = '如何成為外送員-繼續閱讀'
+          gaLabel = '如何成為外送員'
           break
         case 2:
-          gaLabel = '美食外送平台解決了什麼問題-繼續閱讀'
+          gaLabel = '美食外送平台解決了什麼問題'
           break
         case 3:
-          gaLabel = '司機管理仰賴檢舉和評價-繼續閱讀'
+          gaLabel = '司機管理仰賴檢舉和評價'
           break
         case 4:
-          gaLabel = '外送員最害怕的事：車禍-繼續閱讀'
+          gaLabel = '外送員最害怕的事：車禍'
           break
         case 5:
-          gaLabel = '平台經濟帶來的好與壞-繼續閱讀'
+          gaLabel = '平台經濟帶來的好與壞'
           break
         default:
           break
       }
-      window.ga('send', 'event', 'projects', 'click', gaLabel)
+      window.ga('send', 'event', 'projects', 'click', `${gaLabel}-繼續閱讀`)
     },
     showShareIcon (id) {
       this.isShare = true
       let gaLabel = ''
       switch (id) {
         case 1:
-          gaLabel = '如何成為外送員-分享'
+          gaLabel = '如何成為外送員'
           break
         case 2:
-          gaLabel = '美食外送平台解決了什麼問題-分享'
+          gaLabel = '美食外送平台解決了什麼問題'
           break
         case 3:
-          gaLabel = '司機管理仰賴檢舉和評價-分享'
+          gaLabel = '司機管理仰賴檢舉和評價'
           break
         case 4:
-          gaLabel = '外送員最害怕的事：車禍-分享'
+          gaLabel = '外送員最害怕的事：車禍'
           break
         case 5:
-          gaLabel = '平台經濟帶來的好與壞-分享'
+          gaLabel = '平台經濟帶來的好與壞'
           break
         default:
           break
       }
-      window.ga('send', 'event', 'projects', 'click', gaLabel)
+      window.ga('send', 'event', 'projects', 'click', `${gaLabel}-分享`)
     },
     shareLink (id) {
       return `${READR_SITE_URL}food-delivery/order${id}`
@@ -154,12 +155,12 @@ export default {
       const { glassL, glassR, clangL, clangC, clangR } = this.$refs
       const tl = gsap.timeline({ repeat: -1 })
       tl.set([ glassL, glassR ], { transformOrigin: '50% 70%' })
-      tl.to([ clangL, clangC, clangR ], { duration: 0.8, scale: 0, transformOrigin: '50% 100%', ease: 'expo.in' }, 0.4)
+      tl.to([ clangR, clangC, clangL ], { duration: 0.8, scale: 0, transformOrigin: '50% 100%', ease: 'expo.in' }, 0.4)
       tl.to(glassL, { duration: 1.2, rotation: '-=40', x: '-=10', scale: 0.88, ease: 'power1.in' }, 0.4)
       tl.to(glassR, { duration: 1.2, rotation: '+=40', x: '+=10', scale: 0.88, ease: 'power1.in' }, 0.4)
       tl.to(glassL, { duration: 0.8, rotation: '+=40', x: '+=10', scale: 1,    ease: 'back.out(1.7)' }, '>')
       tl.to(glassR, { duration: 0.8, rotation: '-=40', x: '-=10', scale: 1,    ease: 'back.out(1.7)' }, '<')
-      tl.to([ clangL, clangC, clangR ], { duration: 0.2, scale: 1, transformOrigin: '50% 100%', ease: 'expo.out' }, '<0.25')
+      tl.to([ clangL, clangC, clangR ], { duration: 0.25, scale: 1, transformOrigin: '50% 100%', ease: 'elastic.out(1, 0.4)' }, '<0.25')
       return tl
     },
     changeOrderCount () {
@@ -201,7 +202,7 @@ export default {
       }, 0.5)
       tl.to(this, {
         money: this.result.money,
-        duration: 2,
+        duration: 1.5,
         snap: { money: 1 },
         ease: 'circ.out'
       }, 0.25)
@@ -223,7 +224,7 @@ export default {
       }, 0.5)
       tl.to(this, {
         seconds: this.result.seconds,
-        duration: 2,
+        duration: 1.5,
         snap: { minutes: 1, seconds: 1 },
         ease: 'circ.out'
       }, 0.25)
@@ -245,11 +246,11 @@ export default {
       
       ResultTl.add(this.$refs.userState.typingBack(), 0)
       if (readReportCount === 3 || readReportCount === 5) {
-        ResultTl.add(this.changeOrderCount(), 1.5)
-        ResultTl.add(this.changeMoney(), 1.5)
+        ResultTl.add(this.changeOrderCount(), 0.75)
+        ResultTl.add(this.changeMoney(), 0.75)
       }
-      ResultTl.add(this.changeTime(), 1.5)
-      ResultTl.add(this.cheers(), '>-0.5')
+      ResultTl.add(this.changeTime(), 0.75)
+      ResultTl.add(this.cheers(), '>-1')
     }
   }
 }
@@ -260,7 +261,7 @@ export default {
 
 .report-result
   background-color rgba(#000, 0.3)
-  min-height 100vh
+  height 100vh
   @media (min-width $mobile)
     height auto
     // (120 - 70) / 2

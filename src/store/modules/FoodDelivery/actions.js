@@ -3,22 +3,20 @@ import { get as axiosGet } from 'axios'
 const scrollIntoView = require('scroll-into-view')
 
 export default {
-  scrollToOrder ({ state, commit }, id) {
+  scrollToOrder ({ state, commit }, { id, callback }) {
     if (state.isAutoScrolling) return
+    
     commit('toggleAutoScrolling', true)
-    // commit('changeCurrentReadReportId', id)
+
     const reportEl = document.getElementById(`report${id}`)
+    callback = callback || function () { commit('toggleAutoScrolling', false) }
+
     scrollIntoView(reportEl, {
         time: 1000,
-        align: {
-          top: 0,
-          left: 0
-        },
+        align: { top: 0, left: 0 },
         ease: (t) => t * t * t * t
       },
-      () => {
-        commit('toggleAutoScrolling', false)
-      }
+      callback
     )
   },
   fetchOtherReports ({ commit }) {

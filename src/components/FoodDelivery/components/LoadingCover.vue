@@ -61,8 +61,6 @@ export default {
   background-color #000
   background-size cover
   background-position center top
-  background-repeat no-repeat
-  // height 100vh
   position absolute
   width 100%
   z-index 699
@@ -103,8 +101,6 @@ export default {
       height 4px
       border-radius 6px
       background-color #ffdc03
-      // easeInCirc
-      // transition width 3s cubic-bezier(0.6, 0.04, 0.98, 0.335)
-      // &.loading
-      //   width 100%
+.webp .loading-cover
+  background-image url(/proj-assets/food-delivery/img/cover.webp)
 </style>

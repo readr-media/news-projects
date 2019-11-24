@@ -24,7 +24,7 @@
       <p>「如果我們不及早根除這類問題，隨著零工經濟型態不斷發展⋯⋯明天我們可能一早醒來，就發現再也沒有任何勞工權利了。」她說。</p>
       <p>這樣的未來會很遠嗎？回到自身，我想到兩年前，臺灣最大的平面媒體《蘋果日報》鼓勵員工成為自由供稿者，成為公司的「外包」人力。</p>
       <p>這一趟田野之旅，讓我真正認識到的，是這群因為貧窮而在法規之外四處流動的人，替我們率先演示了未來的模樣。如何不以保護之名扼殺這些人，甚至是我們所有勞動者生存的機會，才是法規面對所謂的「新創產業」最大的挑戰。</p>
-      <p>此報導在採訪過程中蒐集大量外送員訪談，因篇幅限制未能放入，READr 已將這些材料、平台業者的完整回應、以及兩份針對消費者、外送員的問卷<a class="report-content__link" href="https://github.com/readr-media/readr-data/tree/master/food_delivery" target="_blank">一併公開</a>，歡迎有興趣研究此議題者自行利用。少部分以上班時間田野所獲得的酬勞（約新台幣 2600 元）已捐給慈善團體（台灣動物緊急救援小組）。</p>
+      <p class="report-content__quote">此報導在採訪過程中蒐集大量外送員訪談，因篇幅限制未能放入，READr 已將這些材料、平台業者的完整回應、以及兩份針對消費者、外送員的問卷<a class="report-content__link" href="https://github.com/readr-media/readr-data/tree/master/food_delivery" target="_blank">一併公開</a>，歡迎有興趣研究此議題者自行利用。少部分以上班時間田野所獲得的酬勞（約新台幣 2600 元）已捐給慈善團體（台灣動物緊急救援小組）。</p>
     </div>
   </article>
 </template>
@@ -53,5 +53,4 @@ export default {
 </script>
 
 <style lang="stylus">
-
 </style>

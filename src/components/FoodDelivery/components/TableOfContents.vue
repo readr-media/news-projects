@@ -67,6 +67,7 @@ export default {
         y: 0
       })
       this.isBeginning = false
+      this.canUpdateLineH = true
       this.lineH = this.$refs.nav.offsetHeight - 60.4
     }
     window.addEventListener('resize', this.updateLineH)
@@ -126,27 +127,20 @@ export default {
     },
     afterLeavePrompt () {
       this.$refs.userState.typing()
-      const tl = gsap.timeline()
-      tl.to(this, {
-        // 65 * 3 + 14.6 + (65 - 14.6) = 65 * 4
-        lineH: 260,
-        duration: 3,
-        ease: 'none'
-      }, 0)
-      tl.to('.table-of-contents__map-marker', {
+      gsap.to('.table-of-contents__map-marker', {
         scale: 1,
-        duration: 0.75,
-        ease: 'elastic.out(1, 0.3)',
-        stagger: 0.75,
-      }, 0.45)
-      tl.to(this, {
+        duration: 0.5,
+        ease: 'back.out(1.7)',
+        stagger: 0.5,
+      })
+      gsap.to(this, {
         lineH: this.$refs.nav.offsetHeight - 60.4,
-        duration: 3,
+        duration: 5,
         ease: 'none',
         omComplete: () => {
           this.canUpdateLineH = true
         }
-      }, '>')
+      })
       window.ga('send', 'event', 'projects', 'scroll', '第一屏')
     }
   },
@@ -204,7 +198,6 @@ export default {
     color #4a4a4a
     line-height normal
     transition all 0.45s $easeOutCirc
-  // todo max-width
   &__title
     font-size 1.8rem
     font-weight 700
@@ -251,8 +244,6 @@ export default {
         fill #000
   &__line
     position absolute
-    // 20 + (45 - 35.8) / 2
-    // top 24.6px
     // 20 + (45 - 35.8) / 2 + 35.8
     top 60.4px
     // 10 + (25.42 / 2) - (1 / 2)
@@ -318,7 +309,6 @@ export default {
         max-width 240px
         padding-top 8px
         padding-bottom 8px
-        // easeOutCirc
         transition all 0.45s $easeOutCirc
         &:hover
           background-color #fff

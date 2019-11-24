@@ -4,14 +4,14 @@
     :class="[ 'base-report', { 'visibility-h': isHidden, 'below-the-bottom': !isBaseReport } ]"
     @scroll="changeRouter(); changeResult(); sendGAFooter()"
   >
-    <div class="base-report__container" :class="{ 'hide-fixed-bg': !isFixedBg } ">
+    <div class="base-report__container">
       <HeaderIcons v-show="isHeaderIcons" />
       <transition
         name="slide-report"
         @before-enter="isHidden = false"
         @enter       ="scrollToReport"
-        @after-enter ="afterEnterReportContent"
-        @before-leave="beforeLeaveReportContent"
+        @after-enter ="isHeaderIcons = true"
+        @before-leave="isHeaderIcons = false"
         @after-leave ="afterLeaveReportContent"
       >
         <div v-show="isReportContent">
@@ -36,7 +36,7 @@
 const scrollIntoView = require('scroll-into-view')
 
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('FoodDelivery')
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('FoodDelivery')
 
 import HeaderIcons from './HeaderIcons.vue'
 import MapMarker from './MapMarker.vue'
@@ -58,11 +58,6 @@ export default {
     ReportResult,
     OrderIndex,
     TheFooter,
-    // ReportContent1: () => import('./ReportContent1.vue'),
-    // ReportContent2: () => import('./ReportContent2.vue'),
-    // ReportContent3: () => import('./ReportContent3.vue'),
-    // ReportContent4: () => import('./ReportContent4.vue'),
-    // ReportContent5: () => import('./ReportContent5.vue')
     ReportContent1,
     ReportContent2,
     ReportContent3,
@@ -70,8 +65,15 @@ export default {
     ReportContent5
   },
   mounted () {
-    this.scrollToReport()
     if (!this.isBaseReport) {
+      this.isBeginningAutoScrolling = true
+      this.scrollToOrder({
+        id: this.currentReadReportId,
+        callback: () => {
+          this.isBeginningAutoScrolling = false
+          this.toggleAutoScrolling(false)
+        }
+      })
       this.isHidden = false
     }
   },
@@ -131,7 +133,7 @@ export default {
       isHidden: true,
       isHeaderIcons: true,
       isSendGAFooter: false,
-      isFixedBg: false
+      isBeginningAutoScrolling: false
     }
   },
   computed: {
@@ -153,18 +155,26 @@ export default {
       'changeCurrentReadReportId',
       'changeUserState',
       'toggleBodyScrollBar',
-      'addReadReportIds'
+      'addReadReportIds',
+      'toggleAutoScrolling'
+    ]),
+    ...mapActions([
+      'scrollToOrder'
     ]),
     changeRouter () {
-      if (!this.isReportContent) return
+      if (!this.isReportContent || this.isBeginningAutoScrolling) return
+
       const reportBase = this.$el
       const reportPrev = this.$refs.report[ this.currentReadReportId - 1 ]
-      const reportNext = this.$refs.report[ this.currentReadReportId ] || reportBase.scrollHeight
+      const reportNext = this.$refs.report[ this.currentReadReportId ]
 
       const reportBaseScrollT = reportBase.scrollTop + 16
       const reportPrevOffsetT = reportPrev.offsetTop
-      const reportNextOffsetT = reportNext.offsetTop
-      
+      const reportNextOffsetT = (reportNext ? reportNext.offsetTop : reportBase.scrollHeight)
+
+      // Safari scrollTop can be less then 0
+      if (reportBaseScrollT < 0) return
+
       if (reportBaseScrollT >= reportNextOffsetT) {
         this.changeCurrentReadReportId(this.currentReadReportId + 1)
         this.$router.replace(`/project/food-delivery/order${this.currentReadReportId}`).catch((err) => {})
@@ -244,14 +254,6 @@ export default {
     afterLeaveReportContent () {
       this.isHidden = true
       this.toggleBodyScrollBar(true)
-    },
-    afterEnterReportContent () {
-      this.isHeaderIcons = true
-      this.isFixedBg = true
-    },
-    beforeLeaveReportContent () {
-      this.isHeaderIcons = false
-      this.isFixedBg = false
     }
   }
 }
@@ -277,22 +279,6 @@ export default {
     margin-left auto
     margin-right auto
     overflow hidden
-    &::after
-      content ""
-      display block
-      position fixed
-      left 0
-      top 0
-      width 100%
-      height 100vh
-      z-index -1
-      background-image url(/proj-assets/food-delivery/img/map.png)
-      background-size contain
-      background-position center top
-      background-repeat repeat
-      background-color #202020
-    &.hide-fixed-bg::after
-      visibility hidden
   &__marker-wrapper
     height 84px
     display flex
@@ -311,4 +297,6 @@ export default {
       height 40px
     & .marker-color
       fill #000
+.webp .base-report__container::after
+  background-image url(/proj-assets/food-delivery/img/map.webp)
 </style>
