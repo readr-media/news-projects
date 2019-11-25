@@ -167,7 +167,7 @@
       <div class="credit-container">
         <p>文字：李又如</p>
         <p>工程：Tin Chen & HY Tan</p>
-        <p>設計：Weiwei Hsu</p>
+        <p>設計：Weiwei Hsu & 陳星穎</p>
         <p>資料整理：李昭妟</p>
         <p>監製：簡信昌</p>
       </div>

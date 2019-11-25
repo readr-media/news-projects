@@ -5,7 +5,6 @@
   >
     <div class="info">
       <div class="info__data">
-        <p class="ranking">NO. {{ index + 1 }}</p>
         <h2 v-text="get(data, 'candidate')" />
         <p class="amount">錯誤訊息數<span v-text="get(data, 'amount.wrong')|| 0"></span></p>
         <div class="detailed">
@@ -120,9 +119,6 @@ export default {
           font-size 1.625rem
       .detailed
         display none
-      .ranking
-        font-size 2.625rem
-        font-weight 600
       .verified
         font-size .875rem
     &__photo
@@ -196,8 +192,6 @@ export default {
     .info
       &::before
         background-color rgba(102, 205, 165, .15)
-    .ranking
-      color #66cda5
     .info__photo-circle
       border-color #66cda5
     .info__photo-image
@@ -213,8 +207,6 @@ export default {
     .info
       &::before
         background-color rgba(47, 132, 201, .15)
-    .ranking
-      color #2f84c9
     .info__photo-circle
       border-color #2f84c9
     .info__photo-image
@@ -278,7 +270,7 @@ export default {
           font-size 1rem
       &__photo
         position absolute
-        top 70px
+        top 25px
         left 0
         width 100%
         height 200px
