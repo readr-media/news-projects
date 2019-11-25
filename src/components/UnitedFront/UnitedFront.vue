@@ -1,7 +1,15 @@
 <template>
   <section id="unitedfront">
+    <TheAsideNav class="unitedfront__aside-nav" />
     <Landing />
-    <div class="unitedfront__articles articles articles--gradient-background">
+    <div
+      class="
+        unitedfront__articles
+        articles
+        articles--gradient-background
+        articles--repeat-background-img
+      "
+    >
       <div class="articles__inner-wrapper">
         <Article class="article" />
         <Article class="article" />
@@ -15,6 +23,7 @@
 </template>
 
 <script>
+import TheAsideNav from './components/TheAsideNav.vue'
 import Landing from './components/Landing.vue'
 import Article from './components/Article.vue'
 import Credit from './components/Credit.vue'
@@ -33,6 +42,7 @@ export default {
     }
   },
   components: {
+    TheAsideNav,
     Landing,
     Article,
     Credit,
@@ -45,9 +55,18 @@ export default {
 #unitedfront
   background-color black
 
+.unitedfront
+  &__aside-nav
+    position fixed
+    top 50vh
+    left calc((100vw - 1000px) / 2 + 90px)
+    z-index 2
+
 .articles
   &--gradient-background
-    background linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(231,0,0,1) 100%)
+    background linear-gradient(180deg, #212338 0%, #d02525 100%)
+  &--repeat-background-img
+    background-image: url(/proj-assets/unitedfront/bg-asset.png)
   &__inner-wrapper
     max-width 1000px
     margin 0 auto

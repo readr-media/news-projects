@@ -7,7 +7,9 @@
       top: `calc(-${height}px + 100vh)`
     }"
   >
-    <ArticleLanding />
+    <ArticleLanding
+      :name="'主題式'"
+    />
     <ArticleContent />
   </section>
 </template>

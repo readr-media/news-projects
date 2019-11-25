@@ -1,9 +1,25 @@
 <template>
-  <section class="article-landing"></section>
+  <section class="article-landing">
+    <img
+      :src="`/proj-assets/unitedfront/article-landings/${name}-web.png`"
+      alt=""
+    >
+  </section>
 </template>
+
+<script>
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 .article-landing
-  height 500px
-  background-color blue
+  position relative
+  z-index 3
 </style>

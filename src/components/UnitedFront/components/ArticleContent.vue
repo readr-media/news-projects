@@ -21,7 +21,7 @@ export default {
 <style lang="stylus" scoped>
 .article-content
   background-color white
-  padding 60px 100px
+  padding 60px 80px 60px 220px
   h1
     font-size 21px
     font-weight 500
