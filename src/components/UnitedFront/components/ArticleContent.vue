@@ -21,7 +21,7 @@ export default {
 <style lang="stylus" scoped>
 .article-content
   background-color white
-  padding 60px 100px
+  padding 60px 80px 60px 220px
   h1
     font-size 21px
     font-weight 500
@@ -32,4 +32,8 @@ export default {
     text-align justify
     color #4a4a4a
     margin 40px 0
+
+@media (max-width 768px)
+  .article-content
+    padding 30px 20px
 </style>

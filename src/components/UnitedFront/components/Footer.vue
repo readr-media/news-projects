@@ -28,6 +28,12 @@ export default {
   display flex
   flex-direction column
   align-items center
+  position relative
+  z-index 200
   &__newsletter
     margin 50px 0 0 0
+
+@media (max-width 768px)
+  .footer
+    padding 0 10px
 </style>

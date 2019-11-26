@@ -1,11 +1,46 @@
 <template>
-  <section id="unitedfront">
-    <Landing />
-    <div class="unitedfront__articles articles articles--gradient-background">
+  <section
+    id="unitedfront"
+  >
+    <TheAsideNav
+      class="unitedfront__aside-nav"
+    />
+    <Landing
+      class="
+        unitedfront__landing
+        unitedfront__landing--desktop
+      "
+    />
+    <LandingMobile
+      class="
+        unitedfront__landing
+        unitedfront__landing--mobile
+      "
+    />
+    <div
+      class="
+        unitedfront__articles
+        articles
+        articles--gradient-background
+        articles--repeat-background-img
+      "
+    >
       <div class="articles__inner-wrapper">
+        <ArticleLanding
+          :name="'主題式'"
+        />
         <Article class="article" />
+        <ArticleLanding
+          :name="'主題式'"
+        />
         <Article class="article" />
+        <ArticleLanding
+          :name="'主題式'"
+        />
         <Article class="article" />
+        <ArticleLanding
+          :name="'主題式'"
+        />
         <Article class="article" />
       </div>
     </div>
@@ -15,7 +50,10 @@
 </template>
 
 <script>
+import TheAsideNav from './components/TheAsideNav.vue'
 import Landing from './components/Landing.vue'
+import LandingMobile from './components/LandingMobile.vue'
+import ArticleLanding from './components/ArticleLanding.vue'
 import Article from './components/Article.vue'
 import Credit from './components/Credit.vue'
 import Footer from './components/Footer.vue'
@@ -33,7 +71,10 @@ export default {
     }
   },
   components: {
+    TheAsideNav,
     Landing,
+    LandingMobile,
+    ArticleLanding,
     Article,
     Credit,
     Footer
@@ -45,9 +86,22 @@ export default {
 #unitedfront
   background-color black
 
+.unitedfront
+  &__aside-nav
+    position fixed
+    top 50vh
+    left calc((100vw - 1000px) / 2 + 90px)
+    z-index 2
+  &__landing
+    &--mobile
+      display none
+
 .articles
   &--gradient-background
-    background linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(231,0,0,1) 100%)
+    background linear-gradient(180deg, #212338 0%, #d02525 100%)
+  &--repeat-background-img
+    background-image: url(/proj-assets/unitedfront/bg-asset.png)
+    background-size contain
   &__inner-wrapper
     max-width 1000px
     margin 0 auto
@@ -55,4 +109,12 @@ export default {
 .flourish-embed
   .flourish-credit
     display none
+
+@media (max-width 768px)
+  .unitedfront
+    &__landing
+      &--mobile
+        display initial
+      &--desktop
+        display none
 </style>
