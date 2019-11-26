@@ -68,7 +68,7 @@ export default {
             ],
             [
               '/proj-assets/food-delivery/img/report/step/report1-2-mobile',
-              '/proj-assets/food-delivery/img/report/step/report1-2-desktop'
+              '/proj-assets/food-delivery/img/report/step/report1-2-desktop-v1'
             ],
             [
               '/proj-assets/food-delivery/img/report/step/report1-3-mobile',
