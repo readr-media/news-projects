@@ -12,4 +12,6 @@
   display flex
   justify-content center
   align-items center
+  position relative
+  z-index 200
 </style>

@@ -1,9 +1,9 @@
 <template>
   <section class="article-landing">
-    <img
+    <!-- <img
       :src="`/proj-assets/unitedfront/article-landings/${name}-web.png`"
       alt=""
-    >
+    > -->
   </section>
 </template>
 

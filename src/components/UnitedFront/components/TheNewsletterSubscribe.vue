@@ -11,8 +11,15 @@
           alt="readr logo"
         >
       </a>
-      <p>READr 致力於以有趣的形式，提供多元觀點的啟蒙式內容。</p>
-      <p>有更新資料與最新報導出爐時，第一時間通知你！</p>
+      <div class="subscr__text text">
+        <div class="text__desktop">
+          <p>READr 致力於以有趣的形式，提供多元觀點的啟蒙式內容。</p>
+          <p>有更新資料與最新報導出爐時，第一時間通知你！</p>
+        </div>
+        <div class="text__mobile">
+          <p>留下信箱，第一時間獲得專題相關消息。</p>
+        </div>
+      </div>
     </div>
     <Subscription
       class="subscr__form"
@@ -44,6 +51,8 @@ export default {
       margin 10px 0 0 0
       font-size 14px
       color #7d7d7d
+  &__text
+    text-align center
   &__img
     width 48px
   &__form
@@ -66,7 +75,7 @@ export default {
         &::placeholder
           color #9b9b9b
       &__btn
-        background-color #427b80
+        background-color #94d7cd
         line-height normal
         font-size 14px
         height 44px
@@ -79,10 +88,35 @@ export default {
         @media (min-width 460px)
           width 108px
         &:hover
-          background-color #6fb4ba
+          background-color #bdfaf1
         &:active
           background-color #30575a
           transition none
     & .info
       padding-left 14px
+
+.text
+  &__mobile
+    display none
+
+@media (max-width 768px)
+  .subscr
+    width 100%
+    &__intro
+      flex-direction row
+      align-items center
+    &__form
+      width 100%
+  
+  .text
+    width 206px
+    margin 0 0 0 17px
+    &__desktop
+      display none
+    &__mobile
+      display initial
+      text-align left
+      line-height 1.71
+      p
+        margin 0
 </style>

@@ -7,15 +7,15 @@
       top: `calc(-${height}px + 100vh)`
     }"
   >
-    <ArticleLanding
+    <!-- <ArticleLanding
       :name="'主題式'"
-    />
+    /> -->
     <ArticleContent />
   </section>
 </template>
 
 <script>
-import ArticleLanding from './ArticleLanding.vue'
+// import ArticleLanding from './ArticleLanding.vue'
 import ArticleContent from './ArticleContent.vue'
 
 const calcElementHeight = element => {
@@ -24,7 +24,7 @@ const calcElementHeight = element => {
 
 export default {
   components: {
-    ArticleLanding,
+    // ArticleLanding,
     ArticleContent
   },
   data() {

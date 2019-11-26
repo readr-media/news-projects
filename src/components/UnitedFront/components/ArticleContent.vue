@@ -32,4 +32,8 @@ export default {
     text-align justify
     color #4a4a4a
     margin 40px 0
+
+@media (max-width 768px)
+  .article-content
+    padding 30px 20px
 </style>
