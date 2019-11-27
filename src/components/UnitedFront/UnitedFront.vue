@@ -28,46 +28,19 @@
       "
     >
       <div class="articles__inner-wrapper">
-        <ArticleLanding
-          :name="'主題式'"
-        />
-        <Article class="article" />
-        <ArticleLanding
-          :name="'專業能力'"
-        />
-        <Article class="article" />
-        <ArticleLanding
-          :name="'主題式'"
-        />
-        <Article class="article" />
-        <ArticleLanding
-          :name="'主題式'"
-        />
-        <Article class="article" />
-        <ArticleLanding
-          :name="'主題式'"
-        />
-        <Article class="article" />
-        <ArticleLanding
-          :name="'主題式'"
-        />
-        <Article class="article" />
-        <ArticleLanding
-          :name="'主題式'"
-        />
-        <Article class="article" />
-        <ArticleLanding
-          :name="'主題式'"
-        />
-        <Article class="article" />
-        <ArticleLanding
-          :name="'主題式'"
-        />
-        <Article class="article" />
-        <ArticleLanding
-          :name="'主題式'"
-        />
-        <Article class="article" />
+        <template v-for="article in articles">
+          <ArticleLanding
+            class="article-landing"
+            :id="article.name"
+            :key="article.name"
+            :name="article.name"
+            :data-name="article.name"
+          />
+          <Article
+            :key="article.name"
+            class="article"
+          />
+        </template>
       </div>
     </div>
     <Credit />
@@ -84,6 +57,16 @@ import ArticleLanding from './components/ArticleLanding.vue'
 import Article from './components/Article.vue'
 import Credit from './components/Credit.vue'
 import Footer from './components/Footer.vue'
+
+import storeModule from 'src/store/modules/UnitedFront'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations } = createNamespacedHelpers('UnitedFront')
+
+import _ from 'lodash'
+
+import Vue from 'vue'
+import VueScrollTo from 'vue-scrollto'
+Vue.use(VueScrollTo)
 
 export default {
   metaInfo () {
@@ -106,6 +89,46 @@ export default {
     Article,
     Credit,
     Footer
+  },
+  computed: {
+    ...mapState({
+      articles: state => state.articles,
+      currentArticleName: state => state.nav.currentArticleName
+    })
+  },
+  created() {
+    this.$store.registerModule('UnitedFront', storeModule)
+  },
+  mounted() {
+    this.createScroller()
+  },
+  destroyed() {
+    this.$store.unregisterModule('UnitedFront')
+  },
+  methods: {
+    ...mapMutations({
+      SET_NAV: 'nav/SET_NAV'
+    }),
+    createScroller () {
+      require('intersection-observer')
+      const scrollama = require('scrollama')
+      this.scroller = scrollama()
+  
+      this.scroller
+        .setup({
+          step: '.article-landing',
+          offset: 0.5
+        })
+        .onStepExit(({element, index, direction}) => {
+          const encounterArticleName = element.dataset.name
+          const lastArticleName = _.get(this.articles, [ index - 1, 'name' ], '')
+          if (direction === 'down') {
+            this.SET_NAV(encounterArticleName)
+          } else if (direction === 'up') {
+            this.SET_NAV(lastArticleName)
+          }
+        })
+    }
   }
 }
 </script>

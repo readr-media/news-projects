@@ -1,6 +1,6 @@
 <template>
   <section
-    class="article"
+    class="article unitedfront-article"
     ref="root"
     :style="{
       position: 'sticky',

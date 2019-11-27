@@ -19,6 +19,7 @@
     </div>
     <TheReadMore
       class="landing__read-more-wrapper"
+      @click.native="$scrollTo(`#主題式`)"
     />
   </section>
 </template>
@@ -34,6 +35,42 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -50%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .landing
   background-color black
   position relative
@@ -59,6 +96,11 @@ export default {
     margin 34px 0 0 0
 
 .titles
+  opacity 0
+  animation-name fadeInDown
+  animation-duration .5s
+  animation-delay 1.5s
+  animation-fill-mode forwards
   h1
     margin 0
     font-size 60px
@@ -68,6 +110,11 @@ export default {
     font-weight normal
 
 .paragraphs
+  opacity 0
+  animation-name fadeInDown
+  animation-duration .5s
+  animation-delay 2s
+  animation-fill-mode forwards
   p
     margin 0
     font-size 24px
