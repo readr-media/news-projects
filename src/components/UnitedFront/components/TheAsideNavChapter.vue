@@ -5,24 +5,45 @@
         'chapter__triangle',
         { 'chapter__triangle--rotate': active }
       ]"
+      :style="{
+        borderColor: `transparent transparent ${color} transparent`
+      }"
     />
     <transition name="slide-fade">
       <p
         v-show="active"
         class="chapter__name"
-      >
-        索引假自索引甲字索引甲字
-      </p>
+        v-text="title"
+      />
     </transition>
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('UnitedFront')
+
 export default {
   props: {
-    active: {
-      type: Boolean,
-      default: false
+    name: {
+      type: String,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    color: {
+      type: String,
+      default: 'black'
+    }
+  },
+  computed: {
+    ...mapState({
+      currentArticleName: state => state.nav.currentArticleName
+    }),
+    active() {
+      return this.name === this.currentArticleName
     }
   }
 }
@@ -39,7 +60,7 @@ export default {
     height 0
     border-style solid
     border-width 0 15px 18px 15px
-    border-color transparent transparent #007bff transparent
+    // border-color transparent transparent #007bff transparent
     transform-origin 50% 50%
     transition transform .25s ease-out
     &--rotate

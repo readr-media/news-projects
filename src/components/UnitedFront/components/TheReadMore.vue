@@ -19,6 +19,18 @@
   &__arrow-down-icon
     margin 10px 0 0 0
 
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .arrow-down-icon
   d = 30px
   width d
@@ -37,4 +49,7 @@
     border-color: white transparent transparent transparent;
     position relative
     top 1px
+    animation-name fadeInDown
+    animation-duration 2.5s
+    animation-iteration-count infinite
 </style>
