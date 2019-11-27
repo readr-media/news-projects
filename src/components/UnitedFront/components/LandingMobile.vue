@@ -48,7 +48,9 @@ export default {
   flex-direction column
   align-items center
   justify-content space-between
-  padding 25px 0
+  padding 50px 0 25px 0
+  position relative
+  z-index 200
 
 .titles
   text-align center
@@ -69,6 +71,8 @@ export default {
   align-items center
   justify-content center
   padding 0 20px
+  position relative
+  z-index 200
 
 .intro
   font-size 16px

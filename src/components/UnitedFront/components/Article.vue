@@ -7,15 +7,11 @@
       top: `calc(-${height}px + 100vh)`
     }"
   >
-    <!-- <ArticleLanding
-      :name="'主題式'"
-    /> -->
-    <ArticleContent />
+    <ArticleContent @toggleHint="calcHeight" />
   </section>
 </template>
 
 <script>
-// import ArticleLanding from './ArticleLanding.vue'
 import ArticleContent from './ArticleContent.vue'
 
 const calcElementHeight = element => {
@@ -24,7 +20,6 @@ const calcElementHeight = element => {
 
 export default {
   components: {
-    // ArticleLanding,
     ArticleContent
   },
   data() {
@@ -33,7 +28,14 @@ export default {
     }
   },
   mounted() {
-    this.height = calcElementHeight(this.$refs.root)
+    this.calcHeight()
+  },
+  methods: {
+    calcHeight() {
+      this.$nextTick(() => {
+        this.height = calcElementHeight(this.$refs.root)
+      })
+    }
   }
 }
 </script>

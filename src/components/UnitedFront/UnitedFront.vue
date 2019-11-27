@@ -2,8 +2,11 @@
   <section
     id="unitedfront"
   >
-    <TheAsideNav
-      class="unitedfront__aside-nav"
+    <TheNavAside
+      class="unitedfront__nav-aside"
+    />
+    <TheNavBottom
+      class="unitedfront__nav-bottom"
     />
     <Landing
       class="
@@ -21,11 +24,34 @@
       class="
         unitedfront__articles
         articles
-        articles--gradient-background
-        articles--repeat-background-img
+        articles--styled-background
       "
     >
       <div class="articles__inner-wrapper">
+        <ArticleLanding
+          :name="'主題式'"
+        />
+        <Article class="article" />
+        <ArticleLanding
+          :name="'專業能力'"
+        />
+        <Article class="article" />
+        <ArticleLanding
+          :name="'主題式'"
+        />
+        <Article class="article" />
+        <ArticleLanding
+          :name="'主題式'"
+        />
+        <Article class="article" />
+        <ArticleLanding
+          :name="'主題式'"
+        />
+        <Article class="article" />
+        <ArticleLanding
+          :name="'主題式'"
+        />
+        <Article class="article" />
         <ArticleLanding
           :name="'主題式'"
         />
@@ -50,7 +76,8 @@
 </template>
 
 <script>
-import TheAsideNav from './components/TheAsideNav.vue'
+import TheNavAside from './components/TheNavAside.vue'
+import TheNavBottom from './components/TheNavBottom.vue'
 import Landing from './components/Landing.vue'
 import LandingMobile from './components/LandingMobile.vue'
 import ArticleLanding from './components/ArticleLanding.vue'
@@ -71,7 +98,8 @@ export default {
     }
   },
   components: {
-    TheAsideNav,
+    TheNavAside,
+    TheNavBottom,
     Landing,
     LandingMobile,
     ArticleLanding,
@@ -87,20 +115,20 @@ export default {
   background-color black
 
 .unitedfront
-  &__aside-nav
+  &__nav-aside
     position fixed
     top 50vh
     left calc((100vw - 1000px) / 2 + 90px)
     z-index 2
+  &__nav-bottom
+    display none
   &__landing
     &--mobile
       display none
 
 .articles
-  &--gradient-background
-    background linear-gradient(180deg, #212338 0%, #d02525 100%)
-  &--repeat-background-img
-    background-image: url(/proj-assets/unitedfront/bg-asset.png)
+  &--styled-background
+    background-image: url(/proj-assets/unitedfront/bg-asset.png), linear-gradient(180deg, #212338 0%, #d02525 100%)
     background-size contain
   &__inner-wrapper
     max-width 1000px
@@ -112,6 +140,15 @@ export default {
 
 @media (max-width 768px)
   .unitedfront
+    &__nav-aside
+      display none
+    &__nav-bottom
+      display flex
+      position fixed
+      left 0
+      bottom 0
+      width 100%
+      z-index 2
     &__landing
       &--mobile
         display initial

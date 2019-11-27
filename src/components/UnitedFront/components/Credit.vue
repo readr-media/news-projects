@@ -14,4 +14,8 @@
   align-items center
   position relative
   z-index 200
+
+@media(max-width 768px)
+  .credit
+    text-align center
 </style>
