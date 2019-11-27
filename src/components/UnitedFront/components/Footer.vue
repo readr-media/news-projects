@@ -35,5 +35,5 @@ export default {
 
 @media (max-width 768px)
   .footer
-    padding 0 10px
+    padding 30px 10px
 </style>
