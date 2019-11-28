@@ -117,7 +117,7 @@ export default {
       this.scroller
         .setup({
           step: '.article-landing',
-          offset: 0.5
+          offset: 1
         })
         .onStepExit(({element, index, direction}) => {
           const encounterArticleName = element.dataset.name

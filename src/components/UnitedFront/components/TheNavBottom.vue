@@ -1,12 +1,47 @@
 <template>
   <nav class="nav">
-    <div class="nav__prev-wrapper" />
-    <p class="nav__title">
-      索引坐在這裡索引坐在這裡索引坐在這裡索引坐在這裡索引坐在這裡索引坐在這裡
-    </p>
-    <div class="nav__next-wrapper" />
+    <div
+      class="nav__prev-wrapper"
+      @click="$scrollTo(`#${prevArticleName}`)"
+    />
+    <p
+      class="nav__title"
+      v-text="currentArticleTitle"
+    />
+    <div
+      class="nav__next-wrapper"
+      @click="$scrollTo(`#${nextArticleName}`)"
+    />
   </nav>
 </template>
+
+<script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('UnitedFront')
+
+import _ from 'lodash'
+
+export default {
+  computed: {
+    ...mapState({
+      articles: state => state.articles,
+      currentArticleName: state => state.nav.currentArticleName
+    }),
+    currentArticleIndex() {
+      return _.findIndex(this.articles, [ 'name', this.currentArticleName ])
+    },
+    currentArticleTitle() {
+      return _.get(this.articles, [ this.currentArticleIndex, 'title' ], '')
+    },
+    prevArticleName() {
+      return _.get(this.articles, [ this.currentArticleIndex - 1, 'name' ], '')
+    },
+    nextArticleName() {
+      return _.get(this.articles, [ this.currentArticleIndex + 1, 'name' ], '')
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 .nav

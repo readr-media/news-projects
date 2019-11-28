@@ -1,7 +1,7 @@
 export default [
   {
     name: '主題式',
-    title: 'test title 1',
+    title: '主題式',
     contents: [
       {
         type: 'h1',
@@ -15,7 +15,7 @@ export default [
   },
   {
     name: '專業能力',
-    title: 'test title 1',
+    title: '專業能力',
     contents: [
       {
         type: 'h1',
@@ -29,7 +29,7 @@ export default [
   },
   {
     name: '學術研討會',
-    title: 'test title 1',
+    title: '學術研討會',
     contents: [
       {
         type: 'h1',
@@ -43,7 +43,7 @@ export default [
   },
   {
     name: '旅遊',
-    title: 'test title 1',
+    title: '旅遊',
     contents: [
       {
         type: 'h1',
