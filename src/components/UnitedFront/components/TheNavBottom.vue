@@ -1,12 +1,53 @@
 <template>
   <nav class="nav">
-    <div class="nav__prev-wrapper" />
-    <p class="nav__title">
-      索引坐在這裡索引坐在這裡索引坐在這裡索引坐在這裡索引坐在這裡索引坐在這裡
-    </p>
-    <div class="nav__next-wrapper" />
+    <div
+      :class="[
+        'nav__prev-wrapper',
+        { 'nav__prev-wrapper--hide': currentArticleIndex === 0 }
+      ]"
+      @click="$scrollTo(`#${prevArticleName}`)"
+    />
+    <p
+      class="nav__title"
+      v-text="currentArticleTitle"
+    />
+    <div
+      :class="[
+        'nav__next-wrapper',
+        { 'nav__next-wrapper--hide': currentArticleIndex === articles.length - 1 }
+      ]"
+      @click="$scrollTo(`#${nextArticleName}`)"
+    />
   </nav>
 </template>
+
+<script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('UnitedFront')
+
+import _ from 'lodash'
+
+export default {
+  computed: {
+    ...mapState({
+      articles: state => state.articles,
+      currentArticleName: state => state.nav.currentArticleName
+    }),
+    currentArticleIndex() {
+      return _.findIndex(this.articles, [ 'name', this.currentArticleName ])
+    },
+    currentArticleTitle() {
+      return _.get(this.articles, [ this.currentArticleIndex, 'title' ], '')
+    },
+    prevArticleName() {
+      return _.get(this.articles, [ this.currentArticleIndex - 1, 'name' ], '')
+    },
+    nextArticleName() {
+      return _.get(this.articles, [ this.currentArticleIndex + 1, 'name' ], '')
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 .nav
@@ -29,6 +70,9 @@
       border-style: solid;
       border-width: 10px 12px 10px 0;
       border-color: transparent #d02525 transparent transparent;
+    &--hide
+      &:after
+        display none
   &__title
     margin 0 10px
     white-space: nowrap; 
@@ -47,5 +91,7 @@
       border-style: solid;
       border-width: 10px 0 10px 12px;
       border-color: transparent transparent transparent #d02525;
-
+    &--hide
+      &:after
+        display none
 </style>

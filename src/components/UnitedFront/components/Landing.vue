@@ -19,7 +19,7 @@
     </div>
     <TheReadMore
       class="landing__read-more-wrapper"
-      @click.native="$scrollTo(`#主題式`)"
+      @click.native="$scrollTo('#序篇')"
     />
   </section>
 </template>

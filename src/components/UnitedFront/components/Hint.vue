@@ -17,13 +17,18 @@
       v-show="showHintContent"
       class="hint__content"
     >
-      義守大學回應：「義守大學是一所國際化的綜合型大學，校內有來自 45 個國家或地區的師生，目前與美、英、澳、亞約 400 所大學簽訂姐妹校……為邁向國際化的大學，義大長期持續鼓勵師生與全球姐妹校，進行雙向學術教育文化交流，並持續注意各項活動屬性，謹遵守政府相關規定。」
+      {{ content }}
     </span>
   </span>
 </template>
 
 <script>
 export default {
+  props: {
+    content: {
+      type: String
+    }
+  },
   data() {
     return {
       showHintContent: false
