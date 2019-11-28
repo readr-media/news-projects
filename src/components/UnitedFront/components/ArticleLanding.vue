@@ -1,5 +1,10 @@
 <template>
-  <section class="article-landing">
+  <section
+    :class="[
+      'article-landing',
+      { 'article-landing--hidden': name === '序篇' }
+    ]"
+  >
     <picture>
       <source
         media="(max-width: 768px)"
@@ -32,6 +37,8 @@ export default {
   height 600px
   background-color white
   box-shadow: 0px -5px 5px 0px rgba(74,74,74,0.6);
+  &--hidden
+    height 0px
   &__img
     width 100%
 

@@ -37,8 +37,9 @@
             :data-name="article.name"
           />
           <Article
-            :key="article.name"
             class="article"
+            :key="article.name"
+            :name="article.name"
           />
         </template>
       </div>
@@ -140,7 +141,7 @@ export default {
 .unitedfront
   &__nav-aside
     position fixed
-    top 50vh
+    top 20vh
     left calc((100vw - 1000px) / 2 + 90px)
     z-index 2
   &__nav-bottom

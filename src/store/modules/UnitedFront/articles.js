@@ -1,58 +1,38 @@
 export default [
   {
-    name: '主題式',
-    title: '主題式',
-    contents: [
-      {
-        type: 'h1',
-        content: 'bla'
-      },
-      {
-        type: 'p',
-        content: 'blabla'
-      }
-    ]
+    name: '序篇',
+    title: '光五校在暑假就有破百交流團赴中'
   },
   {
-    name: '專業能力',
-    title: '專業能力',
-    contents: [
-      {
-        type: 'h1',
-        content: 'bla'
-      },
-      {
-        type: 'p',
-        content: 'blabla'
-      }
-    ]
+    name: '主題式論壇',
+    title: '涉及最廣泛：主題式論壇'
   },
   {
-    name: '學術研討會',
-    title: '學術研討會',
-    contents: [
-      {
-        type: 'h1',
-        content: 'bla'
-      },
-      {
-        type: 'p',
-        content: 'blabla'
-      }
-    ]
+    name: '企業實習團',
+    title: '最深入：企業實習團'
   },
   {
     name: '旅遊',
-    title: '旅遊',
-    contents: [
-      {
-        type: 'h1',
-        content: 'bla'
-      },
-      {
-        type: 'p',
-        content: 'blabla'
-      }
-    ]
+    title: '最多人參加過：旅遊觀光、創業園區參訪交流團'
+  },
+  {
+    name: '學術研討',
+    title: '談政治就太低級了：學術研討會'
+  },
+  {
+    name: '短期研修',
+    title: '「不要搞得太政治」：短期研修團'
+  },
+  {
+    name: '專業能力',
+    title: '年紀最小就能去：專業能力交流團'
+  },
+  {
+    name: '篇七',
+    title: '對青年「統戰」有用嗎？'
+  },
+  {
+    name: '篇八',
+    title: '統戰還是交流？'
   }
 ]

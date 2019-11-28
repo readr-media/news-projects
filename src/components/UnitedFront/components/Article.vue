@@ -7,7 +7,10 @@
       top: `calc(-${height}px + 100vh)`
     }"
   >
-    <ArticleContent @toggleHint="calcHeight" />
+    <ArticleContent
+      :name="name"
+      @toggleHint="calcHeight"
+    />
   </section>
 </template>
 
@@ -19,6 +22,12 @@ const calcElementHeight = element => {
 }
 
 export default {
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  },
   components: {
     ArticleContent
   },

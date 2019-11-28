@@ -13,10 +13,12 @@
       </div>
       <TheReadMore
         class="upper__read-more-wrapper"
+        @click.native="$scrollTo('#landing-mobile-lower')"
       />
     </section>
     <section
       class="landing__lower lower"
+      id="landing-mobile-lower"
     >
       <div
         class="lower__intro intro"

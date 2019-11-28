@@ -1,7 +1,10 @@
 <template>
   <nav class="nav">
     <div
-      class="nav__prev-wrapper"
+      :class="[
+        'nav__prev-wrapper',
+        { 'nav__prev-wrapper--hide': currentArticleIndex === 0 }
+      ]"
       @click="$scrollTo(`#${prevArticleName}`)"
     />
     <p
@@ -9,7 +12,10 @@
       v-text="currentArticleTitle"
     />
     <div
-      class="nav__next-wrapper"
+      :class="[
+        'nav__next-wrapper',
+        { 'nav__next-wrapper--hide': currentArticleIndex === articles.length - 1 }
+      ]"
       @click="$scrollTo(`#${nextArticleName}`)"
     />
   </nav>
@@ -64,6 +70,9 @@ export default {
       border-style: solid;
       border-width: 10px 12px 10px 0;
       border-color: transparent #d02525 transparent transparent;
+    &--hide
+      &:after
+        display none
   &__title
     margin 0 10px
     white-space: nowrap; 
@@ -82,5 +91,7 @@ export default {
       border-style: solid;
       border-width: 10px 0 10px 12px;
       border-color: transparent transparent transparent #d02525;
-
+    &--hide
+      &:after
+        display none
 </style>
