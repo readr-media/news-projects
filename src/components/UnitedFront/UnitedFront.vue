@@ -74,8 +74,8 @@ export default {
     return {
       title: '一統去交流：全方位解析兩岸青年交流團',
       description: '你知道一個暑假，至少有 3000 名臺灣青年去中國「交流」嗎？ 11 天甘肅絲路之旅、兩個月北京實習、青年創業基地參訪⋯⋯盤點已知的交流團形式，就能發現其「無孔不入」的程度：從小學就有機會參與，大學則是交流黃金期，甚至到畢業實習都有包辦。但這些交流真的只是平凡的交流嗎？',
-      metaUrl: 'china-company',
-      metaImage: 'china-company/ogimage.png',
+      metaUrl: 'unitedfront',
+      metaImage: 'unitedfront/ogimage.png',
       customScript: `
         <script src="https://public.flourish.studio/resources/embed.js"><\/script>
       `
