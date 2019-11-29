@@ -1,10 +1,12 @@
 <template>
   <section class="landing">
     <div class="landing__map-wrapper">
-      <div
-        class="flourish-embed"
-        data-src="visualisation/919227"
-      />
+      <NoSSR>
+        <div
+          class="flourish-embed"
+          data-src="visualisation/919227"
+        />
+      </NoSSR>
     </div>
     <div class="landing__intro-wrapper intro-wrapper">
       <div class="intro-wrapper__intro intro">
@@ -28,10 +30,12 @@
 
 <script>
 import TheReadMore from './TheReadMore.vue'
+import NoSSR from 'vue-no-ssr'
 
 export default {
   components: {
-    TheReadMore
+    TheReadMore,
+    NoSSR
   },
   methods: {
     handleReadMore() {

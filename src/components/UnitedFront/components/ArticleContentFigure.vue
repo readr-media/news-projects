@@ -61,10 +61,11 @@ figure
     font-size 21px
     font-weight 500
     line-height 1.25
-    margin 10px 0
+    margin 10px 0 0 0
   h2
     color #4a4a4a
     font-size 14px
+    font-weight normal
     margin 10px 0
   img
     display block

@@ -3,7 +3,6 @@
     class="article unitedfront-article"
     ref="root"
     :style="{
-      position: 'sticky',
       top: `calc(-${height}px + 100vh)`
     }"
   >
@@ -38,6 +37,7 @@ export default {
   },
   mounted() {
     this.calcHeight()
+    window.addEventListener('resize', this.calcHeight)
   },
   methods: {
     calcHeight() {
@@ -50,5 +50,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
+.article
+  position sticky
 </style>
