@@ -2,8 +2,8 @@
   <picture class="report-picture">
     <source type="image/webp" media="(min-width: 460px)" :srcset="`${imgSrc}-desktop.webp`">
     <source type="image/png" media="(min-width: 460px)" :srcset="`${imgSrc}-desktop.png`">
-    <source type="image/webp" :srcset="`${imgSrc}-mobile.webp`">
-    <img :src="`${imgSrc}-mobile.png`" alt="" loading="lazy">
+    <source type="image/webp" :srcset="`${imgSrc}-mobile-v2.webp`">
+    <img :src="`${imgSrc}-mobile-v2.png`" alt="" loading="lazy">
   </picture>
 </template>
 

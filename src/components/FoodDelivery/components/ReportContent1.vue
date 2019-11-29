@@ -63,15 +63,15 @@ export default {
           imgCount: 3,
           imgSrcs: [
             [
-              '/proj-assets/food-delivery/img/report/step/report1-1-mobile',
+              '/proj-assets/food-delivery/img/report/step/report1-1-mobile-v2',
               '/proj-assets/food-delivery/img/report/step/report1-1-desktop'
             ],
             [
-              '/proj-assets/food-delivery/img/report/step/report1-2-mobile',
+              '/proj-assets/food-delivery/img/report/step/report1-2-mobile-v2',
               '/proj-assets/food-delivery/img/report/step/report1-2-desktop-v1'
             ],
             [
-              '/proj-assets/food-delivery/img/report/step/report1-3-mobile',
+              '/proj-assets/food-delivery/img/report/step/report1-3-mobile-v2',
               '/proj-assets/food-delivery/img/report/step/report1-3-desktop'
             ]
           ],
@@ -89,7 +89,7 @@ export default {
               content: '而「彈性的工作時間」是外送員們當初想從事這份工作最主要原因。根據業者的資料顯示，Uber Eats 有超過 50% 以上的外送員一週上線不到 10 小時。'
             }
           ],
-          imgAspectRatio: [ 1.395, 1.586 ],
+          imgAspectRatio: [ 0.612, 1.586 ],
           breakPoints: [ 460 ]
         }
       ],
