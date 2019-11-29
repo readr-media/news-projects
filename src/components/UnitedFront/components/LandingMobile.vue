@@ -8,12 +8,14 @@
       <div
         class="upper__titles titles"
       >
-        <h1>一統去交流</h1>
+        <h1>
+          <img src="/proj-assets/unitedfront/title.png" alt="">
+        </h1>
         <h2>全方位解析兩岸青年交流團</h2>
       </div>
       <TheReadMore
         class="upper__read-more-wrapper"
-        @click.native="$scrollTo('#landing-mobile-lower')"
+        @click.native="handleReadMore"
       />
     </section>
     <section
@@ -35,11 +37,29 @@ import TheReadMore from './TheReadMore.vue'
 export default {
   components: {
     TheReadMore
+  },
+  methods: {
+    handleReadMore() {
+      this.$scrollTo('#landing-mobile-lower')
+      window.ga('send', 'event', 'projects', 'click', 'read more', { nonInteraction: false })
+    }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -50%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .upper
   height 100vh
   background-image: url(/proj-assets/unitedfront/landing-mobile.png)
@@ -57,13 +77,22 @@ export default {
 .titles
   text-align center
   color white
+  margin 20px 0 0 0
+  opacity 0
+  animation-name fadeInDown
+  animation-duration .5s
+  animation-delay 1.5s
+  animation-fill-mode forwards
   h1
     margin 0
     font-size 30px
+    img
+      width 50%
   h2
-    margin 10px 0 0 0
+    margin 0
     font-size 21px
     font-weight 300
+    color #f8e71c
 
 .lower
   height 100vh

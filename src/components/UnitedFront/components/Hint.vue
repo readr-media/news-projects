@@ -38,6 +38,9 @@ export default {
     toggle() {
       this.showHintContent = !this.showHintContent
       this.$emit('toggle')
+      if (this.showHintContent) {
+        window.ga('send', 'event', 'projects', 'click', 'hint', { nonInteraction: false })
+      }
     }
   }
 }

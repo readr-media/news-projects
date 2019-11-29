@@ -32,13 +32,13 @@
           <ArticleLanding
             class="article-landing"
             :id="article.name"
-            :key="article.name"
+            :key="`${article.name}-airticle-landing`"
             :name="article.name"
             :data-name="article.name"
           />
           <Article
             class="article"
-            :key="article.name"
+            :key="`${article.name}-airticle`"
             :name="article.name"
           />
         </template>
@@ -72,8 +72,8 @@ Vue.use(VueScrollTo)
 export default {
   metaInfo () {
     return {
-      title: '',
-      description: '',
+      title: '一統去交流：全方位解析兩岸青年交流團',
+      description: '你知道一個暑假，至少有 3000 名臺灣青年去中國「交流」嗎？ 11 天甘肅絲路之旅、兩個月北京實習、青年創業基地參訪⋯⋯盤點已知的交流團形式，就能發現其「無孔不入」的程度：從小學就有機會參與，大學則是交流黃金期，甚至到畢業實習都有包辦。但這些交流真的只是平凡的交流嗎？',
       metaUrl: 'china-company',
       metaImage: 'china-company/ogimage.png',
       customScript: `
@@ -90,6 +90,21 @@ export default {
     Article,
     Credit,
     Footer
+  },
+  data() {
+    return {
+      gaScrollRecord: {
+        '序篇': false,
+        '主題式論壇': false,
+        '企業實習團': false,
+        '旅遊': false,
+        '學術研討': false,
+        '短期研修': false,
+        '專業能力': false,
+        '篇七': false,
+        '篇八': false
+      }
+    }
   },
   computed: {
     ...mapState({
@@ -110,6 +125,12 @@ export default {
     ...mapMutations({
       SET_NAV: 'nav/SET_NAV'
     }),
+    handleGAScrollEvent(articleName) {
+      if (!this.gaScrollRecord[articleName]) {
+        window.ga('send', 'event', 'projects', 'scroll', `scroll to ${articleName}`, { nonInteraction: false })
+        this.gaScrollRecord[articleName] = true
+      }
+    },
     createScroller () {
       require('intersection-observer')
       const scrollama = require('scrollama')
@@ -125,6 +146,7 @@ export default {
           const lastArticleName = _.get(this.articles, [ index - 1, 'name' ], '')
           if (direction === 'down') {
             this.SET_NAV(encounterArticleName)
+            this.handleGAScrollEvent(encounterArticleName)
           } else if (direction === 'up') {
             this.SET_NAV(lastArticleName)
           }

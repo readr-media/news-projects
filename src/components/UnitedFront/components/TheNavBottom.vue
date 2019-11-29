@@ -5,7 +5,7 @@
         'nav__prev-wrapper',
         { 'nav__prev-wrapper--hide': currentArticleIndex === 0 }
       ]"
-      @click="$scrollTo(`#${prevArticleName}`)"
+      @click="handleClick('prev')"
     />
     <p
       class="nav__title"
@@ -16,7 +16,7 @@
         'nav__next-wrapper',
         { 'nav__next-wrapper--hide': currentArticleIndex === articles.length - 1 }
       ]"
-      @click="$scrollTo(`#${nextArticleName}`)"
+      @click="handleClick('next')"
     />
   </nav>
 </template>
@@ -44,6 +44,17 @@ export default {
     },
     nextArticleName() {
       return _.get(this.articles, [ this.currentArticleIndex + 1, 'name' ], '')
+    }
+  },
+  methods: {
+    handleClick(direction) {
+      if (direction === 'prev') {
+        this.$scrollTo(`#${this.prevArticleName}`)
+        window.ga('send', 'event', 'projects', 'click', `nav bottom ${direction}`, { nonInteraction: false })
+      } else {
+        this.$scrollTo(`#${this.nextArticleName}`)
+        window.ga('send', 'event', 'projects', 'click', `nav bottom ${direction}`, { nonInteraction: false })
+      }
     }
   }
 }

@@ -7,7 +7,7 @@
       :name="article.name"
       :title="article.title"
       :color="colors[i]"
-      @click.native="$scrollTo(`#${article.name}`)"
+      @click.native="handleClick(article.name)"
     />
   </nav>
 </template>
@@ -41,6 +41,12 @@ export default {
     ...mapState({
       articles: state => state.articles
     })
+  },
+  methods: {
+    handleClick(name) {
+      this.$scrollTo(`#${name}`)
+      window.ga('send', 'event', 'projects', 'click', `nav aside ${name}`, { nonInteraction: false })
+    }
   }
 }
 </script>
