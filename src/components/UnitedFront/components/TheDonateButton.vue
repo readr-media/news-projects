@@ -6,11 +6,22 @@
     <a
       href="https://www.readr.tw/donate"
       target="_blank"
+      @click="handleClick"
     >
       用新台幣跟 READr 一起幹大事
     </a>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    handleClick() {
+      window.ga('send', 'event', 'projects', 'click', 'donate bottom', { nonInteraction: false })
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 .wrapper

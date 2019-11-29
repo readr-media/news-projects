@@ -9,17 +9,19 @@
     <div class="landing__intro-wrapper intro-wrapper">
       <div class="intro-wrapper__intro intro">
         <div class="intro__titles titles">
-          <h1>一統去交流</h1>
+          <h1>
+            <img src="/proj-assets/unitedfront/title.png" alt="">
+          </h1>
           <h2>全方位解析兩岸青年交流團</h2>
         </div>
         <div class="intro__paragraphs paragraphs">
-          <p>你知道一個暑假，有多少年輕人去中國「交流」嗎？11 天甘肅絲路之旅、兩個月北京實習、青年創業基地參訪⋯⋯報名簡章上寫的「落地接待」、「補助」、「高規格參訪」有多優待？這些團去中國做了什麼？見了誰？READr 透過深度訪談和數據，呈現「交流」與「統戰」之間千絲萬縷的關係。</p>
+          <p>你知道一個暑假，至少有 3000 名臺灣青年去中國「交流」嗎？ 11 天甘肅絲路之旅、兩個月北京實習、青年創業基地參訪⋯⋯盤點已知的交流團形式，就能發現其「無孔不入」的程度：從小學就有機會參與，大學則是交流黃金期，甚至到畢業實習都有包辦。但這些交流真的只是平凡的交流嗎？READr 透過深度訪談和數據，呈現「交流」與「統戰」之間千絲萬縷的關係。 </p>
         </div>
       </div>
     </div>
     <TheReadMore
       class="landing__read-more-wrapper"
-      @click.native="$scrollTo('#序篇')"
+      @click.native="handleReadMore"
     />
   </section>
 </template>
@@ -30,6 +32,12 @@ import TheReadMore from './TheReadMore.vue'
 export default {
   components: {
     TheReadMore
+  },
+  methods: {
+    handleReadMore() {
+      this.$scrollTo('#序篇')
+      window.ga('send', 'event', 'projects', 'click', 'read more', { nonInteraction: false })
+    }
   }
 }
 </script>
@@ -93,7 +101,7 @@ export default {
 
 .intro
   &__paragraphs
-    margin 34px 0 0 0
+    margin 10px 0 0 0
 
 .titles
   opacity 0
@@ -103,10 +111,13 @@ export default {
   animation-fill-mode forwards
   h1
     margin 0
-    font-size 60px
+    // font-size 60px
+    img
+      width 360px
   h2
-    margin 10px 0 0 0
-    font-size 40px
+    margin 0
+    font-size 30px
+    color #f8e71c
     font-weight normal
 
 .paragraphs
@@ -117,7 +128,7 @@ export default {
   animation-fill-mode forwards
   p
     margin 0
-    font-size 24px
-    line-height 1.5
+    font-size 18px
+    line-height 1.67
     text-align justify
 </style>

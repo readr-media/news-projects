@@ -5,14 +5,14 @@
       { 'article-landing--hidden': name === '序篇' }
     ]"
   >
-    <picture>
+    <picture v-show="name !== '序篇'">
       <source
         media="(max-width: 768px)"
-        :srcset="`/proj-assets/unitedfront/article-landings/${name}-mobile.png`"
+        :srcset="`/proj-assets/unitedfront/article-landings/${name}-mobile.svg`"
       >
       <img
         class="article-landing__img"
-        :src="`/proj-assets/unitedfront/article-landings/${name}-web.png`"
+        :src="`/proj-assets/unitedfront/article-landings/${name}-web.svg`"
         alt=""
       >
     </picture>
