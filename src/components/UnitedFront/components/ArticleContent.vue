@@ -474,5 +474,7 @@ export default {
 
 @media (max-width 768px)
   .article-content
-    padding 30px 20px
+    padding 30px 20px 90px 20px
+    &--less-padding
+      padding-bottom 30px
 </style>
