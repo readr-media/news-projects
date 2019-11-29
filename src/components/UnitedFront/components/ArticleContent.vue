@@ -1,5 +1,10 @@
 <template>
-  <article class="article-content">
+  <article
+    :class="[
+      'article-content',
+      { 'article-content--less-padding': name === '篇八' }
+    ]"
+  >
     <template
       v-if="name === articles[0].name"
     >
@@ -450,6 +455,8 @@ export default {
 .article-content
   background-color white
   padding 60px 80px 240px 220px
+  &--less-padding
+    padding-bottom 60px
   h1
     font-size 21px
     font-weight 500
