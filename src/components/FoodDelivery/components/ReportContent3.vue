@@ -38,14 +38,12 @@
 <script>
 import FixedSlides from './FixedSlides.vue'
 import PopUpNotation from './PopUpNotation.vue'
-// import ReportFigure from './ReportFigure.vue'
 
 export default {
   name: 'ReportContent3',
   components: {
     FixedSlides,
     PopUpNotation
-    // ReportFigure
   },
   data () {
     return {
@@ -54,15 +52,15 @@ export default {
           imgCount: 3,
           imgSrcs: [
             [
-              '/proj-assets/food-delivery/img/report/step/report3-1-mobile',
+              '/proj-assets/food-delivery/img/report/step/report3-1-mobile-v2',
               '/proj-assets/food-delivery/img/report/step/report3-1-desktop'
             ],
             [
-              '/proj-assets/food-delivery/img/report/step/report3-2-mobile',
+              '/proj-assets/food-delivery/img/report/step/report3-2-mobile-v2',
               '/proj-assets/food-delivery/img/report/step/report3-2-desktop'
             ],
             [
-              '/proj-assets/food-delivery/img/report/step/report3-3-mobile',
+              '/proj-assets/food-delivery/img/report/step/report3-3-mobile-v2',
               '/proj-assets/food-delivery/img/report/step/report3-3-desktop'
             ]
           ],
@@ -80,7 +78,7 @@ export default {
               content: '單量不高的兼職族是 3 月 1 日改制後影響最劇烈的族群，但也因為單量不高，後期每週微幅的獎勵調整對他們比較沒有影響。'
             }
           ],
-          imgAspectRatio: [ 1.333, 1.484 ],
+          imgAspectRatio: [ 1.304, 1.484 ],
           breakPoints: [ 460 ]
         }
       ],
