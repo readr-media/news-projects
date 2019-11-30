@@ -9,6 +9,7 @@
     <ArticleContent
       :name="name"
       @toggleHint="calcHeight"
+      @imgLoad="calcHeight"
     />
   </section>
 </template>
@@ -41,6 +42,7 @@ export default {
   },
   methods: {
     calcHeight() {
+      console.log('calcHeight!')
       this.$nextTick(() => {
         this.height = calcElementHeight(this.$refs.root)
       })
