@@ -10,6 +10,7 @@
       <img
         :src="`/proj-assets/unitedfront/charts/${name}.png`"
         alt=""
+        @load="handleImgLoad"
       >
     </picture>
     <figcaption
@@ -45,6 +46,11 @@ export default {
     showSurveyLink: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    handleImgLoad() {
+      this.$emit('load')
     }
   }
 }
