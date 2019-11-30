@@ -5,7 +5,7 @@
       { 'article-landing--hidden': name === '序篇' }
     ]"
   >
-    <picture v-show="name !== '序篇'">
+    <picture v-if="name !== '序篇'">
       <source
         media="(max-width: 768px)"
         :srcset="`/proj-assets/unitedfront/article-landings/${name}-mobile.svg`"
