@@ -1,12 +1,10 @@
 <template>
   <section class="landing">
     <div class="landing__map-wrapper">
-      <NoSSR>
-        <div
-          class="flourish-embed"
-          data-src="visualisation/919227"
-        />
-      </NoSSR>
+      <div
+        class="flourish-embed"
+        data-src="visualisation/919227"
+      />
     </div>
     <div class="landing__intro-wrapper intro-wrapper">
       <div class="intro-wrapper__intro intro">
@@ -30,12 +28,10 @@
 
 <script>
 import TheReadMore from './TheReadMore.vue'
-import NoSSR from 'vue-no-ssr'
 
 export default {
   components: {
-    TheReadMore,
-    NoSSR
+    TheReadMore
   },
   methods: {
     handleReadMore() {
@@ -87,6 +83,12 @@ export default {
   background-color black
   position relative
   z-index 200
+  &__map-wrapper
+    background-image url(/proj-assets/unitedfront/landing-bg.png)
+    background-position center center
+    background-size cover
+    background-repeat norepeat
+    min-height 600px
   &__intro-wrapper
     position absolute
     top 0
