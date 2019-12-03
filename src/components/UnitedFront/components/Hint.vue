@@ -16,9 +16,8 @@
     <span
       v-show="showHintContent"
       class="hint__content"
-    >
-      {{ content }}
-    </span>
+      v-html="content"
+    />
   </span>
 </template>
 
