@@ -22,7 +22,8 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .ec-subscription
-  margin-top 50px
+  padding 50px 0
+  background-color #fff
   .subscr-heading
     display flex
     justify-content center

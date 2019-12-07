@@ -5,6 +5,7 @@
       <div class="filter__two-col">
         <div class="select">
           <select v-model="county">
+            <option value="" selected disabled hidden>縣市</option>
             <option
               v-for="county in counties"
               :key="county"
@@ -14,43 +15,71 @@
           </select>
         </div>
         <div class="select">
-          <select>
-            <option>花蓮縣</option>
-            <option>花蓮縣</option>
+          <select v-model="district">
+            <option value="" selected disabled hidden>鄉鎮市區</option>
+            <option
+              v-for="district in districts"
+              :key="district"
+              :value="district"
+              v-text="district"
+            />
           </select>
         </div>
       </div>
       <div class="select">
-        <select>
-          <option>海星國小</option>
-          <option>明禮國小</option>
+        <select v-model="school">
+          <option value="" selected disabled hidden>學校名稱</option>
+          <option
+            v-for="school in schools"
+            :key="school"
+            :value="school"
+            v-text="school"
+          />
         </select>
       </div>
       <p>的晨光時間</p>
     </div>
     <div class="info">
-      <img src="/proj-assets/extra-curriculum/clock.png" alt="">
+      <img v-lazy="'/proj-assets/extra-curriculum/clock.png'" alt="">
       <div class="info__content">
         <p class="heading">
-          <span>苗栗縣</span><span>新興區</span><span>海寶國小</span>晨光時間 <span>有</span> 校外團體
+          <span v-text="county"/> 
+          <span v-text="district"/> 
+          <span v-text="school"/>
+          <template v-if="get(schoolSelected, 'hasGroup')">
+            ，晨光時間<strong>{{ schoolSelected.hasGroup === 'Y' ? '有' : '無' }}</strong>校外團體
+          </template>
         </p>
-        <p>團體是<span>後龍鎮公所清潔隊、苗栗縣石虎保育協會、苗栗縣校外會、苗栗縣稅務局、開南大學運輸研究中心、苗栗縣警局、造橋衛生所、退休校長劉逸民、風箏DIY吳笠萍、苗栗縣婦幼警察隊、東南科大表藝系學生、苗栗高商教官李鎮原、苗栗縣大明社區大學余英傑、苗栗縣輔導諮商中心。</span></p>
-        <p>皆為一次性活動。</p>
+        <p>
+          <template v-if="get(schoolSelected, 'group')">
+            團體是<span v-text="schoolSelected.group" />
+          </template>
+          <template v-if="get(schoolSelected, 'teachingContent')">
+            ，教學內容為<span v-text="schoolSelected.teachingContent" />
+          </template>
+          <template v-if="get(schoolSelected, 'remarks')">
+            ，<span v-text="schoolSelected.remarks" />
+          </template>
+        </p>
       </div>
     </div>
-    <a class="opinion-link" href="" target="_blank">我覺得有遺漏或問題想回報</a>
+    <a class="opinion-link" href="https://forms.gle/bu6AEe3EfoLZRgd26" target="_blank">我覺得有遺漏或問題想回報</a>
   </section>
 </template>
 <script>
 
 import { createNamespacedHelpers } from 'vuex'
+import { get } from 'lodash'
+
 const { mapGetters } = createNamespacedHelpers('ExtraCurriculum')
 
 export default {
   name: 'EcSchoolData',
   data () {
     return {
-      county: '高雄市'
+      county: '',
+      district: '',
+      school: ''
     }
   },
   computed: {
@@ -62,7 +91,38 @@ export default {
         .map(data => data.county)
         .filter((data, pos, arr) => arr.indexOf(data) === pos)
         .filter(data => data.match(/(市|縣)/))
+    },
+    districts () {
+      const regex = new RegExp(this.county, 'g')
+      return this.schoolDataFormated
+        .filter(data => data.county.match(regex))
+        .map(data => data.district)
+        .filter((data, pos, arr) => arr.indexOf(data) === pos)
+    },
+    schoolSelected () {
+      return this.schoolDataFormated
+        .filter(data => data.county === this.county && data.school === this.school)[0]
+    },
+    schools () {
+      const regexCounty = new RegExp(this.county, 'g')
+      const regexDistrict = new RegExp(this.district, 'g')
+      return this.schoolDataFormated
+        .filter(data => data.county.match(regexCounty))
+        .filter(data => data.district.match(regexDistrict))
+        .map(data => data.school)
+        .filter((data, pos, arr) => arr.indexOf(data) === pos)
     }
+  },
+  watch: {
+    county () {
+      this.district = this.districts[0]
+    },
+    district () {
+      this.school = this.schools[0]
+    }
+  },
+  methods: {
+    get
   }
 }
 </script>
@@ -159,15 +219,17 @@ export default {
       > * + *
         margin-top 0
       select
-        width 120px
+        width 140px
       .select
-        width 120px
+        width 140px
         margin 0
         & + p
           margin-left 20px
       &__two-col
-        width 260px
+        width 220px
         margin 0 20px
+        select
+          width 100px
     .info
       display flex
       align-items flex-start

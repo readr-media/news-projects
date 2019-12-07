@@ -24,11 +24,13 @@ export default {
     schoolDataFormated: state => (state.schoolData || [])
       .map(data => ({
         county: data[0],
-        school: data[1],
-        hasOffCampusGroup: (typeof data[6] === 'string') ? data[6].toUpperCase() : data[6],
-        OffCampusGroup: data[7],
-        teachingContent: data[8],
-        notShow: data[9]
+        district: data[1],
+        school: data[2],
+        hasGroup: (typeof data[3] === 'string') ? data[3].toUpperCase() : data[3],
+        group: data[4],
+        teachingContent: data[5],
+        remarks: data[6],
+        notShow: data[7]
       }))
   }
 }
