@@ -130,7 +130,7 @@
         <p>在諸神永不休止的戰爭中，個人與群體的問答，都還在繼續。</p>
 
       </article>
-      <EcSchoolData id="chapter-4" class="ec__school-data"/>
+      <EcSchoolData id="chapter-4" class="ec__school-data" />
       <section class="ec__credit">
         <p>
           <span>記者：黃逸薰、李又如</span>
@@ -174,22 +174,22 @@ export default {
       'chapter-1': {
         title: '兩種不同的彩虹：全台小學晨光時間大解密',
         metaUrl: 'extra-curriculum/chapter-1',
-        metaImage: 'og-01.png'
+        metaImage: 'extra-curriculum/og-01.png'
       },
       'chapter-2': {
         title: '獨家調查：小學晨光時間入校團體解密',
         metaUrl: 'extra-curriculum/chapter-2',
-        metaImage: 'og-02.png'
+        metaImage: 'extra-curriculum/og-02.png'
       },
       'chapter-3': {
         title: '彩虹媽媽的面貌：全台小學晨光時間大解密',
         metaUrl: 'extra-curriculum/chapter-3',
-        metaImage: 'og-03.png'
+        metaImage: 'extra-curriculum/og-03.png'
       },
       'chapter-4': {
         title: '我要查詢：全台小學晨光時間大解密',
         metaUrl: 'extra-curriculum/chapter-4',
-        metaImage: 'og-04.png'
+        metaImage: 'extra-curriculum/og-04.png'
       },
     }
 
@@ -226,8 +226,9 @@ export default {
   mounted () {
     const routeParams = this.$route.params.params
     if (routeParams && routeParams.match(/chapter-(1|2|3|4)$/)) {
-      console.log('asdasd', routeParams)
       this.smoothScroll(`#${routeParams}`)
+    } else if (routeParams && routeParams.match(/chapter-4$/)) {
+      window.onload = () => this.smoothScroll(`#${routeParams}`)
     }
   },
   methods: {
@@ -236,6 +237,7 @@ export default {
     },
     scrollTo (index) {
       this.smoothScroll(`#${index}`)
+      this.openSidebar = false
     },
     smoothScroll (selector) {
       const distanceToTop = el => Math.floor(el.getBoundingClientRect().top - 30)

@@ -47,18 +47,18 @@
           <span v-text="district"/> 
           <span v-text="school"/>
           <template v-if="get(schoolSelected, 'hasGroup')">
-            ，晨光時間<strong>{{ schoolSelected.hasGroup === 'Y' ? '有' : '無' }}</strong>校外團體
+            <span>，晨光時間<strong>{{ schoolSelected.hasGroup === 'Y' ? '有' : '無' }}</strong>校外團體</span>
           </template>
         </p>
         <p>
           <template v-if="get(schoolSelected, 'group')">
-            團體是<span v-text="schoolSelected.group" />
+            <span>團體是</span><span v-text="schoolSelected.group" />
           </template>
           <template v-if="get(schoolSelected, 'teachingContent')">
-            ，教學內容為<span v-text="schoolSelected.teachingContent" />
+            <span>，教學內容為</span><span v-text="schoolSelected.teachingContent" />
           </template>
           <template v-if="get(schoolSelected, 'remarks')">
-            ，<span v-text="schoolSelected.remarks" />
+            <span v-if="showRemarksComma">，</span><span v-text="schoolSelected.remarks" />
           </template>
         </p>
       </div>
@@ -111,6 +111,9 @@ export default {
         .filter(data => data.district.match(regexDistrict))
         .map(data => data.school)
         .filter((data, pos, arr) => arr.indexOf(data) === pos)
+    },
+    showRemarksComma () {
+      return get(this.schoolSelected, 'group') || get(this.schoolSelected, 'teachingContent')
     }
   },
   watch: {
