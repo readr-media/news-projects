@@ -61,6 +61,10 @@
             <span v-if="showRemarksComma">，</span><span v-text="schoolSelected.remarks" />
           </template>
         </p>
+        <ul v-if="get(schoolSelected, 'source') || get(schoolSelected, 'sourceRemarks')">
+          <li v-if="get(schoolSelected, 'source')">資料來源：{{ get(schoolSelected, 'source') }}</li>
+          <li v-if="get(schoolSelected, 'sourceRemarks')">備註：{{ get(schoolSelected, 'sourceRemarks') }}</li>
+        </ul>
       </div>
     </div>
     <a class="opinion-link" href="https://forms.gle/bu6AEe3EfoLZRgd26" target="_blank">我覺得有遺漏或問題想回報</a>
@@ -209,6 +213,13 @@ export default {
         font-size 1.3125rem
         line-height 1.3
         text-align center
+    ul
+      padding-left 35px
+      color #fff
+      font-size .875rem
+      font-weight 300
+      text-align left
+      line-height 1.86
 
   .opinion-link
     display inline-block

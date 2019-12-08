@@ -125,7 +125,7 @@
         <p>再更進一步，也有家長在受訪時提到：一定要說故事嗎？麗雲就提到，如果現在有系統地講故事這麼爭議，可以做別的活動；佑安也說，講故事本來就是一件很模糊的事，就算教材是一樣的，詮釋的是人，本來就很容易帶入主觀的思考。</p>
         <p>「我覺得無論你是一個老師、一個基督徒，還是一個志工，你都要有一個認知是：『我的團隊絕對不是完美的』。」向陽說得直接。對他來說，若生命教育團體沒有虛心接受批評的空間、也沒有辦法被監督，也就沒有進步的可能；在制度建立起之前，或許更重要的，是各團體有意識地進行自律。</p>
         <p>「其實我們都希望孩子好，但我們用的方法南轅北轍。那有沒有機會讓我們好好去思辨一下，到底對不對？」翁麗淑停頓了一下，「這個對話，對我來說才是和解。」</p>
-        <p>去年七月，她在社區大學帶著一群婦女自組讀書會。因為有人主動提議，那個夏天，她們讀的是《道德浪女》。</p>
+        <p>去年七月，她在社區大學帶著一群婦女自組讀書會。因為有人主動提議，那個夏天，她們讀的是《道德浪女》<EcAnnotation :content="'翻譯文學書籍，探討自由性愛、一夫一妻制以外的關係。原文書名：The Ethical Slut: A Practical Guide to Polyamory, Open Relationships, and Other Freedoms in Sex and Love。'" />。</p>
         <p>「其實這些媽媽們反應都非常好，她們覺得，哇，過去從來不知道還有這些可能性。大家都覺得好棒。」翁麗淑笑了，「籠子需要被看見，要不要飛出來是一回事，但總要看見自己被什麼困住。」</p>
         <p>在諸神永不休止的戰爭中，個人與群體的問答，都還在繼續。</p>
 
@@ -135,12 +135,12 @@
         <p>
           <span>記者：黃逸薰、李又如</span>
           <span>設計：陳怡蒨</span><br>
-          <span>工程：譚學勇</span>
+          <span>工程：HY Tan</span>
           <span>封面攝影：黃逸薰</span>
         </p>
       </section>
       <EcSubscription />
-      <EcSidebar :class="{ active: openSidebar }" @scrollTo="scrollTo"/>
+      <EcSidebar :current="current" :class="{ active: openSidebar }" @scrollTo="scrollTo"/>
     </main>
     <EcChart />
     <div :class="{ open: openSidebar }" class="btn-sidebar" @click="openSidebar = !openSidebar" />
@@ -148,15 +148,15 @@
 </template>
 <script>
 import storeModule from '../../store/modules/ExtraCurriculum'
+import { throttle } from 'lodash'
 
 const fetchElementarySchoolData = store => store
   .dispatch('ExtraCurriculum/FETCH_SCHOOL_DATA', {
     params: {
       spreadsheetId: '1ho5FgQhoky04GjZA6BoozALi_XWk75aP_kp29W477eI',
-      range: '學校明細!A:H'
+      range: '學校明細!A:J'
     }
   })
-
 
 export default {
   name: 'ExtraCurriculum',
@@ -212,12 +212,23 @@ export default {
   },
   data () {
     return {
+      current: 0,
+      gaScroll: 0,
       openSidebar: false
     }
   },
   serverPrefetch () {
     this.registerStoreModule()
     return Promise.resolve()
+  },
+  watch: {
+    current (value) {
+      const gaScrollLabel = [ 'landing', 'chapter-1', 'chapter-2', 'chapter-3','chapter-4', 'credit' ]
+      if (value > this.gaScroll) {
+        this.gaScroll = value
+        window.ga('send', 'event', 'projects', 'scroll', gaScrollLabel[value], { nonInteraction: false })
+      }
+    }
   },
   beforeMount () {
     this.registerStoreModule(true)
@@ -230,8 +241,32 @@ export default {
     } else if (routeParams && routeParams.match(/chapter-4$/)) {
       window.onload = () => this.smoothScroll(`#${routeParams}`)
     }
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
+    detectCurrent () {
+      const sections = [
+        document.querySelector('.ec__landing'),
+        document.querySelector('#chapter-1'),
+        document.querySelector('#chapter-2'),
+        document.querySelector('#chapter-3'),
+        document.querySelector('#chapter-4'),
+        document.querySelector('.ec__credit')
+      ]
+      sections.forEach((item, index) => {
+        const rect = item.getBoundingClientRect()
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+        if (rect.top <= (viewportHeight * 2 / 3)) {
+          return this.current = index
+        }
+      })
+    },
+    handleScroll: throttle(function () {
+      this.detectCurrent()
+    }, 300),
     registerStoreModule (shouldPreserveState = false) {
       this.$store.registerModule('ExtraCurriculum', storeModule, { preserveState: shouldPreserveState })
     },
