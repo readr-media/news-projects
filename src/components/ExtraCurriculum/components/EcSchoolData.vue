@@ -128,6 +128,14 @@ export default {
       this.school = this.schools[0]
     }
   },
+  mounted () {
+    const routeParams = this.$route.params.params
+    if (routeParams && routeParams.match(/chapter-4$/)) {
+      window.onload = () => {
+        this.$emit('scrollTo', 'chapter-4')
+      }
+    }
+  },
   methods: {
     get
   }

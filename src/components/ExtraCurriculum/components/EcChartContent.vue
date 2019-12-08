@@ -4,7 +4,7 @@
       <p>全台灣 2632 間小學中，<strong>晨光時間有校外團體進入</strong>的學校佔了整體 33%。</p>
     </div>
     <div class="ec-c-c__text">
-      <p>這些團體的類型，<strong>以宗教團體為大宗</strong>，佔比超過四成。</p>
+      <p>這些團體的類型，<strong>以宗教團體為大宗</strong>，佔總入校團體類型的四成，服務校數更超過整體一半。</p>
     </div>
     <div class="ec-c-c__text">
       <p>宗教團體中，最大宗的分別是<strong>佛教慈濟慈善事業基金會（大愛媽媽）</strong>和<strong>彩虹愛家生命教育協會（彩虹媽媽）</strong>。</p>
