@@ -1,10 +1,10 @@
 <template>
   <aside class="ec-sidebar">
     <div class="ec-sidebar-container">
-      <a class="ec-sidebar__link" @click="$emit('scrollTo', 'chapter-1')">兩種不同的彩虹</a>
-      <a class="ec-sidebar__link" @click="$emit('scrollTo', 'chapter-2')">獨家調查：小學晨光時間入校團體解密</a>
-      <a class="ec-sidebar__link" @click="$emit('scrollTo', 'chapter-3')">彩虹媽媽的面貌</a>
-      <a class="ec-sidebar__link" @click="$emit('scrollTo', 'chapter-4')">我要查詢孩子學校晨光時間的活動</a>
+      <a :class="{ active: current === 1 }" class="ec-sidebar__link" @click="$emit('scrollTo', 'chapter-1')">兩種不同的彩虹</a>
+      <a :class="{ active: current === 2 }" class="ec-sidebar__link" @click="$emit('scrollTo', 'chapter-2')">獨家調查：小學晨光時間入校團體解密</a>
+      <a :class="{ active: current === 3 }" class="ec-sidebar__link" @click="$emit('scrollTo', 'chapter-3')">彩虹媽媽的面貌</a>
+      <a :class="{ active: current === 4 }" class="ec-sidebar__link" @click="$emit('scrollTo', 'chapter-4')">我要查詢孩子學校晨光時間的活動</a>
     </div>
   </aside>
 </template>
@@ -13,6 +13,12 @@ import { throttle } from 'lodash'
 
 export default {
   name: 'EcSidebar',
+  props: {
+    current: {
+      type: Number,
+      default: 0
+    }
+  },
   mounted () {
     if (this.$store.state.viewport[0] >= 768) {
       this.detectFixed()
@@ -67,6 +73,8 @@ export default {
     font-size .9375rem
     & + .ec-sidebar__link
       border-top 1px solid #9b9b9b
+    &.active
+      font-weight 700
 
 @media (max-width: 767px)
   .ec-sidebar

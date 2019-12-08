@@ -30,7 +30,9 @@ export default {
         group: data[4],
         teachingContent: data[5],
         remarks: data[6],
-        notShow: data[7]
+        notShow: data[7],
+        source: data[8],
+        sourceRemarks: data[9]
       }))
   }
 }
