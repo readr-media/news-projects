@@ -91,6 +91,12 @@ const { mapGetters } = createNamespacedHelpers('ExtraCurriculum')
 
 export default {
   name: 'EcChart',
+  props: {
+    currentChapter: {
+      type: Number,
+      default: 0
+    }
+  },
   data () {
     return {
       current: 0,
@@ -110,8 +116,16 @@ export default {
       return '晨光時間有無校外團體'
     }
   },
+  watch: {
+    currentChapter (value) {
+      if (value > 0) {
+        this.showChart = true
+      } else {
+        this.showChart = false
+      }
+    }
+  },
   mounted () {
-    this.showChart = true
     window.addEventListener('scroll', this.handleScroll)
   },
   beforeDestroy () {
@@ -237,7 +251,7 @@ export default {
   opacity 0
 
 .square-move
-  transition all 1s
+  transition transform 1s
 
 @media (min-width: 768px)
   .ec-chart
