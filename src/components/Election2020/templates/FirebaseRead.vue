@@ -1,0 +1,38 @@
+<template>
+  <section class="firebase-read-template">
+    <section>
+      <h1>即時開票資料：總統</h1>
+      <div
+        v-text="realtimeDataPresidents"
+      />
+    </section>
+    <section>
+      <h1>即時開票資料：區域立委</h1>
+      <div
+        v-text="realtimeRegionalLegislators"
+      />
+    </section>
+  </section>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  computed: {
+    ...mapState({
+      realtimeDataPresidents: state => state.realtimePresidents.data,
+      realtimeRegionalLegislators: state => state.realtimeRegionalLegislators.data
+    })
+  },
+  created() {
+    this.$store.dispatch('realtimePresidents/openDBChannel')
+    this.$store.dispatch('realtimeRegionalLegislators/openDBChannel')
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+.firebase-read-template
+  padding 100px
+</style>
