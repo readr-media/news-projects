@@ -26,6 +26,10 @@ export default {
     })
   },
   created() {
+    /*
+    ** Open realtime data sync channel.
+    ** For more info: https://mesqueeb.github.io/vuex-easy-firestore/query-data.html#realtime-updates-opendbchannel
+    */
     this.$store.dispatch('realtimePresidents/openDBChannel')
     this.$store.dispatch('realtimeRegionalLegislators/openDBChannel')
   }
