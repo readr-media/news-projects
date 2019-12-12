@@ -2,6 +2,7 @@
   <section
     id="election-2020"
   >
+    <FirebaseCreateUpdate />
     <FirebaseRead />
   </section>
 </template>
@@ -12,6 +13,7 @@ import { createNamespacedHelpers } from 'vuex'
 // const { mapState, mapMutations } = createNamespacedHelpers('Election2020')
 
 import FirebaseRead from './templates/FirebaseRead.vue'
+import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 
 export default {
   metaInfo () {
@@ -23,7 +25,8 @@ export default {
     }
   },
   components: {
-    FirebaseRead
+    FirebaseCreateUpdate,
+    FirebaseRead,
   },
   created() {
     this.$store.registerModule('Election2020', storeModule)
