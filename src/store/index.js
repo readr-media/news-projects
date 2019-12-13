@@ -8,9 +8,9 @@ Vue.use(Vuex)
 
 import VuexEasyFirestore from 'vuex-easy-firestore'
 import { Firebase, initFirebase } from './config/firebase.js'
-import realtimeTest from './modules/Election2020/firebase-modules/realtimeTest'
-import realtimePresidents from './modules/Election2020/firebase-modules/realtimePresidents'
-import realtimeRegionalLegislators from './modules/Election2020/firebase-modules/realtimeRegionalLegislators'
+import realtimeTest from './modules/firebase-modules/realtimeTest'
+import realtimePresidents from './modules/firebase-modules/realtimePresidents'
+import realtimeRegionalLegislators from './modules/firebase-modules/realtimeRegionalLegislators'
 const easyFirestore = VuexEasyFirestore(
   [
     realtimeTest,
