@@ -69,12 +69,11 @@ export function getReportsCount ({ params = {}} = {}) {
 }
 
 export function getSheet ({ params = {} } = {}) {
-  let url = `/project-api/googlesheet`
+  let url = `${protocol}//${host}/project-api/googlesheet`
   const query = _buildQuery(params)
   if (query && (query.length > 0)) {
     url = url + `?${query}`
   }
-  console.log('-------- getSheet', url)
   return _doFetch(url)
 }
 

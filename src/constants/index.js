@@ -99,7 +99,8 @@ export const PROJECTS_NEED_GOOGLE_RECAPTCHA = [
 export const PROJECTS_NEED_TYPEKIT = [
   'hotel-hostess',
   'hotel-hostess-series',
-  'nanfangao-bridge'
+  'nanfangao-bridge',
+  'election-2020'
 ]
 
 export const PROJECTS_NEED_FB_SDK = [
@@ -147,6 +148,14 @@ export const SCRIPT_GOOGLE_MAP = `<script src="https://maps.googleapis.com/maps/
 export const SCRIPT_GOOGLE_RECAPTCHA = `<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=zh-TW" async defer></script>`
 
 export const SCRIPT_TYPEKIT = `
-  <script src="https://use.typekit.net/mwt8dya.js"></script>
-  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'zua0gzf',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
 `

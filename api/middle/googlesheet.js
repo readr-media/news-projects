@@ -5,7 +5,6 @@ const { authGoogleAPI, } = require('../service/google/auth')
 const { fetchFromRedis, insertIntoRedis, } = require('./ioredisHandler')
 
 router.get('/', authGoogleAPI, fetchFromRedis, async (req, res, next) => {
-  console.log('---------- req.query', req.query)
   if (res.redis) {
     console.error('fetch data from Redis.', req.url)
     const resData = JSON.parse(res.redis)
@@ -24,7 +23,6 @@ router.get('/', authGoogleAPI, fetchFromRedis, async (req, res, next) => {
     if (data) {
       res.status(200).json(data)
       res.redisTimeout = req.query.redisTimeout || 7200
-      console.log('------ redisTimeout', res.redisTimeout)
       res.dataString = JSON.stringify(data)
       next()
     } else {
