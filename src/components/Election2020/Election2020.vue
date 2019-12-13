@@ -16,6 +16,14 @@ import { createNamespacedHelpers } from 'vuex'
 import FirebaseRead from './templates/FirebaseRead.vue'
 import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 
+const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET', {
+  params: {
+    spreadsheetId: '1p9GfrjPdcXbkq8aRIYTk3IFB7gmIR1lO2rLrxagp8do',
+    range: '記者填寫區!A3:G',
+    redisTimeout: 300
+  }
+})
+
 export default {
   metaInfo () {
     return {
@@ -27,7 +35,11 @@ export default {
   },
   serverPrefetch () {
     this.registerStoreModule()
-    return Promise.resolve()
+    
+    return Promise.all([
+      fetchLatestNews(this.$store)
+    ])
+      .catch(err => console.error(err)) // need error handle
   },
   components: {
     FirebaseCreateUpdate,

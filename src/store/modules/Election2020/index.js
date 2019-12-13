@@ -27,7 +27,18 @@ export default {
   },
   mutations: {
     SET_GOOGLE_SHEET: (state, { stateName, data }) => {
-      Vue.set(state.googleSheet, stateName, data)
+      Vue.set(state.spreadsheet, stateName, data)
     }
+  },
+  getters: {
+    latestNewsFormated: state => (get(state, 'spreadsheet.latestNews') || [])
+      .filter(data => data[6] && data[6] !== '#N/A')
+      .sort((a, b) => b - a)
+      .map(data => ({
+        number: data[0],
+        content: data[1],
+        link: data[3],
+        title: data[4]
+      }))
   }
 }
