@@ -19,7 +19,8 @@ function _buildQuery (params = {}) {
     'where',
     'page',
     'sort',
-    'majorDimension'
+    'majorDimension',
+    'redisTimeout'
   ]
   const snakeCaseParams = _.mapKeys(params, (value, key) => _.snakeCase(key))
   whitelist.forEach((ele) => {
@@ -73,6 +74,7 @@ export function getSheet ({ params = {} } = {}) {
   if (query && (query.length > 0)) {
     url = url + `?${query}`
   }
+  console.log('-------- getSheet', url)
   return _doFetch(url)
 }
 

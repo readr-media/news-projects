@@ -2,6 +2,7 @@
   <section
     id="election-2020"
   >
+    <LatestNews />
     <FirebaseCreateUpdate />
     <FirebaseRead />
   </section>
@@ -24,15 +25,25 @@ export default {
       metaImage: 'election2020/ogimage.png'
     }
   },
+  serverPrefetch () {
+    this.registerStoreModule()
+    return Promise.resolve()
+  },
   components: {
     FirebaseCreateUpdate,
     FirebaseRead,
+    LatestNews: () => import('./components/LatestNews.vue')
   },
-  created() {
-    this.$store.registerModule('Election2020', storeModule)
+  beforeMount () {
+    this.registerStoreModule(true)
   },
   destroyed() {
     this.$store.unregisterModule('Election2020')
+  },
+  methods: {
+    registerStoreModule (shouldPreserveState = false) {
+      this.$store.registerModule('Election2020', storeModule, { preserveState: shouldPreserveState })
+    },
   }
 }
 </script>
