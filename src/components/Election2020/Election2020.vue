@@ -2,7 +2,7 @@
   <section
     id="election-2020"
   >
-    <LatestNews />
+    <LatestNews @update="updateLatestNews" />
     <FirebaseCreateUpdate />
     <FirebaseRead />
   </section>
@@ -56,6 +56,10 @@ export default {
     registerStoreModule (shouldPreserveState = false) {
       this.$store.registerModule('Election2020', storeModule, { preserveState: shouldPreserveState })
     },
+    updateLatestNews () {
+      fetchLatestNews(this.$store)
+        .catch(err => console.error(err))
+    }
   }
 }
 </script>
