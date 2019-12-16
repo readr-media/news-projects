@@ -1,31 +1,69 @@
 <template>
   <section :class="{ empty: !hasLatestNews }" class="e-l-n">
     <span v-if="!hasLatestNews">尚無最新消息</span>
-    <div v-else class="e-l-n-container">
-      <div
-        v-for="news in latestNewsFormated"
-        :key="news.content"
-        class="item"
-      >
-        <p v-text="news.title" />
-        <div v-text="news.content" />
-      </div>
-    </div>
+    <template v-else>
+      <transition-group name="latestNews" class="e-l-n-container" tag="div">
+        <template v-for="news in latestNewsFormated">
+          <a 
+            v-if="news.link"
+            :key="news.content"
+            :href="news.link"
+            class="item"
+            target="_blank"
+          >
+            <p v-text="news.title" />
+            <div v-text="truncateText(news.content)" />
+          </a>
+          <div
+            v-else
+            :key="news.content"
+            class="item"
+          >
+            <p v-text="news.title" />
+            <div v-text="truncateText(news.content)" />
+          </div>
+        </template>
+      </transition-group>
+    </template>
   </section>
 </template>
 <script>
 
+import { truncate } from 'lodash'
+
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters, mapState } = createNamespacedHelpers('Election2020')
 
+const UPDATE_FREQUENCY = 5 * 60 * 1000 //ms
+
 export default {
   name: 'LatestNews',
+  data () {
+    return {
+      timer: undefined
+    }
+  },
   computed: {
     ...mapGetters({
       latestNewsFormated: 'latestNewsFormated'
     }),
     hasLatestNews () {
       return this.latestNewsFormated.length > 0
+    }
+  },
+  mounted () {
+    if (!this.timer) {
+      this.timer = setInterval(() => this.$emit('update'), UPDATE_FREQUENCY)
+    }
+  },
+  destroyed () {
+    clearInterval(this.timer)
+  },
+  methods: {
+    truncateText (text) {
+      return truncate(text, {
+        length: 50
+      })
     }
   }
 }
@@ -40,18 +78,26 @@ export default {
   span
     color rgba(0, 0, 0, 0.66)
   &-container
+    display flex
+    flex-wrap nowrap
     width calc(100% - 20px)
     margin 0 auto
     padding-bottom 12px
     text-align left
-    white-space nowrap
-    overflow-x scroll
+    // white-space nowrap
+    overflow-x auto
+    a
+      text-decoration none
   .item
-    display inline-block
+    flex 0 0 auto
+    display inline-flex
+    flex-direction column
+    // display inline-block
     width 100%
     padding 15px 20px 10px
     text-align left
     background-color #fff
+    // vertical-align top
     white-space pre-line
     & + .item
       margin-left 10px
@@ -66,6 +112,15 @@ export default {
       color rgba(0, 0, 0, 0.66)
       text-align justify
       line-height 1.88
+
+.latestNews-enter-active, .latestNews-leave-active
+  transition all 1s
+
+.latestNews-enter, .latestNews-leave-to
+  opacity 0
+
+.latestNews-move
+  transition all .5s ease-in
 
 @media (min-width 768px)
   .e-l-n
