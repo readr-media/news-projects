@@ -32,4 +32,5 @@ export default {
   &__count
     font-family $font-family-serif
     font-size 30px
+    font-weight bold
 </style>
