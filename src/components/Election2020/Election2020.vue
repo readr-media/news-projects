@@ -6,7 +6,7 @@
     <Header />
     <LatestNews @update="updateLatestNews" />
     <section class="section">
-      <h1>2020 總統大選<br>即時看</h1>
+      <h1 id="js-title">2020 總統大選<br>即時看</h1>
       <p>您想透過優雅的方式參與這場盛事嗎？只需要一雙雪亮的眼睛，就能和 READr 一起追蹤 2020 總統大選的最新消息，這裡有網友幫你嘴、圖表輕鬆看，還有最新選情一目了然。</p>
       <h2>下屆總統會是誰</h2>
       <Countdown />
@@ -156,7 +156,9 @@ $margin-center =
     .subscr
       width $content-width-tablet
 
-// @media (min-width: 1024px)
+@media (min-width: 1024px)
+  .election-2020
+    padding-top 70px
 
 @media (min-width: 1440px)
   .election-2020
