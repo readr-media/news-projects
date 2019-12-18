@@ -15,6 +15,10 @@
       <h2>立委激戰搶席次</h2>
       <Countdown />
     </section>
+    只是測試用：
+    <SeatTotal
+      :count="79"
+    />
     <lazy-component class="section subscr">
       <SubscriptionWithLogoMsg />
     </lazy-component>
@@ -31,6 +35,7 @@ import Countdown from './components/Countdown.vue'
 import FirebaseRead from './templates/FirebaseRead.vue'
 import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 import Header from './components/Header.vue'
+import SeatTotal from './components/SeatTotal.vue'
 
 const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET', {
   params: {
@@ -63,7 +68,8 @@ export default {
     FirebaseRead,
     Header,
     LatestNews: () => import('./components/LatestNews.vue'),
-    SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue')
+    SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue'),
+    SeatTotal
   },
   beforeMount () {
     this.registerStoreModule(true)
