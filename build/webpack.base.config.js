@@ -113,7 +113,17 @@ module.exports = {
               'vue-style-loader',
               'css-loader',
               'postcss-loader',
-              'stylus-loader'
+              {
+                loader: 'stylus-loader',
+                options: {
+                  // workaround import for Election2020 project,
+                  // variables import by this rule will available in every projects,
+                  // so i call this workaround.
+                  import: [
+                    path.resolve(__dirname, '../src/components/Election2020/styles/color.styl')
+                  ]
+                }
+              }
             ]
           }
         ]
