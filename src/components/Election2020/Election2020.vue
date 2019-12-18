@@ -3,6 +3,7 @@
     id="election-2020"
     class="election-2020"
   >
+    <Header />
     <LatestNews @update="updateLatestNews" />
     <section class="section">
       <h1>2020 總統大選<br>即時看</h1>
@@ -14,6 +15,9 @@
       <h2>立委激戰搶席次</h2>
       <Countdown />
     </section>
+    <lazy-component class="section subscr">
+      <SubscriptionWithLogoMsg />
+    </lazy-component>
     <FirebaseCreateUpdate />
     <FirebaseRead />
   </section>
@@ -26,6 +30,7 @@ import { createNamespacedHelpers } from 'vuex'
 import Countdown from './components/Countdown.vue'
 import FirebaseRead from './templates/FirebaseRead.vue'
 import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
+import Header from './components/Header.vue'
 
 const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET', {
   params: {
@@ -56,7 +61,9 @@ export default {
     Countdown,
     FirebaseCreateUpdate,
     FirebaseRead,
-    LatestNews: () => import('./components/LatestNews.vue')
+    Header,
+    LatestNews: () => import('./components/LatestNews.vue'),
+    SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue')
   },
   beforeMount () {
     this.registerStoreModule(true)
@@ -77,32 +84,40 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import './styles/common.styl'
+
+$content-width-mobile = 90%
+$content-width-tablet = 60%
+
+$margin-center =
+  margin-left auto
+  margin-right auto
 
 .election-2020
+  padding 44px 0 0
   h1, h2, p
     margin 0
   h1, h2
-    font-family source-han-serif-tc, STSong, serif
+    font-family $font-family-serif
   h1, p
-    color rgba(0, 0, 0, 0.87)
+    color $color-black-light
   h1
     font-size 2.625rem
     line-height 1.38
     & + *
       margin-top 30px
   h2
-    color rgba(0, 0, 0, 0.88)
+    color $color-black
     font-size 1.625rem
     line-height 1.42
-
+  p
+    font-size .9375rem
   .section
     padding 50px 0
     text-align center
-    p
-      width calc(100% - 20px)
-      margin-left auto
-      margin-right auto
-      font-size .9375rem
+    > p
+      width $content-width-mobile
+      {$margin-center}
       line-height 1.87
       text-align justify
       & + h2
@@ -110,4 +125,32 @@ export default {
     h2
       & + div
         margin-top 10px
+  .subscr
+    width $content-width-mobile
+    {$margin-center}
+    >>> .subscr-l-m__heading
+      p
+        color $color-black-lighter
+
+@media (min-width: 768px)
+  .election-2020
+    h1
+      font-size 4.5rem
+    h2
+      font-size 3rem
+    p
+      font-size 1rem
+    .section
+      > p
+        width $content-width-tablet
+    .subscr
+      width $content-width-tablet
+
+// @media (min-width: 1024px)
+
+@media (min-width: 1440px)
+  .election-2020
+    h1
+      br
+        display none
 </style>

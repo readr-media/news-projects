@@ -38,7 +38,7 @@ export default {
 
 <style lang="stylus" scoped>
 .firebase-read-template
-  padding 100px
+  padding 100px 5%
   white-space pre-wrap // 暫時
   word-break break-word // 暫時
   overflow-wrap break-word // 暫時

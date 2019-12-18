@@ -68,6 +68,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+@import '../styles/common.styl'
+
 .countdown
   display inline-block
   padding .4em 1.2em
@@ -75,5 +77,5 @@ export default {
   line-height 1.87
   background-color rgba(216, 216, 216, 0.3)
   span
-    color rgba(0, 0, 0, 0.87)
+    color $color-black-light
 </style>

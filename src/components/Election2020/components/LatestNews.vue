@@ -69,6 +69,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+@import '../styles/common.styl'
+
 .e-l-n
   padding 20px 0 8px
   text-align center
@@ -76,15 +78,15 @@ export default {
   p, span
     margin 0
   span
-    color rgba(0, 0, 0, 0.66)
+    color $color-black-lighter
+
   &-container
     display flex
     flex-wrap nowrap
-    width calc(100% - 20px)
+    width 90%
     margin 0 auto
     padding-bottom 12px
     text-align left
-    // white-space nowrap
     overflow-x auto
     a
       text-decoration none
@@ -92,24 +94,22 @@ export default {
     flex 0 0 auto
     display inline-flex
     flex-direction column
-    // display inline-block
     width 100%
     padding 15px 20px 10px
     text-align left
     background-color #fff
-    // vertical-align top
     white-space pre-line
     & + .item
       margin-left 10px
     > p
-      color rgba(0, 0, 0, 0.87)
+      color $color-black-light
       font-size 1.3125rem
-      font-family source-han-serif-tc, STSong, serif
+      font-family $font-family-serif
       font-weight bold
       line-height 1.14
     > div
       margin-top 3px
-      color rgba(0, 0, 0, 0.66)
+      color $color-black-lighter
       text-align justify
       line-height 1.88
 
