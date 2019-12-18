@@ -19,8 +19,11 @@
     <SeatTotal
       :count="79"
     />
-    <lazy-component class="section credits">
+    <lazy-component class="credits">
       <TheCredits />
+    </lazy-component>
+    <lazy-component class="donate">
+      <TheDonateFooter />
     </lazy-component>
     <lazy-component class="section subscr">
       <SubscriptionWithLogoMsg />
@@ -72,6 +75,7 @@ export default {
     Header,
     LatestNews: () => import('./components/LatestNews.vue'),
     TheCredits: () => import('./components/TheCredits.vue'),
+    TheDonateFooter: () => import('./components/TheDonateFooter.vue'),
     SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue'),
     SeatTotal
   },
