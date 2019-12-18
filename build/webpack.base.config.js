@@ -120,7 +120,7 @@ module.exports = {
                   // variables import by this rule will available in every projects,
                   // so i call this workaround.
                   import: [
-                    path.resolve(__dirname, '../src/components/Election2020/styles/color.styl')
+                    path.resolve(__dirname, '../src/components/Election2020/styles/common.styl')
                   ]
                 }
               }
