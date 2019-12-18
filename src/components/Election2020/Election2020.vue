@@ -1,8 +1,19 @@
 <template>
   <section
     id="election-2020"
+    class="election-2020"
   >
     <LatestNews @update="updateLatestNews" />
+    <section class="section">
+      <h1>2020 總統大選<br>即時看</h1>
+      <p>您想透過優雅的方式參與這場盛事嗎？只需要一雙雪亮的眼睛，就能和 READr 一起追蹤 2020 總統大選的最新消息，這裡有網友幫你嘴、圖表輕鬆看，還有最新選情一目了然。</p>
+      <h2>下屆總統會是誰</h2>
+      <Countdown />
+    </section>
+    <section class="section">
+      <h2>立委激戰搶席次</h2>
+      <Countdown />
+    </section>
     <FirebaseCreateUpdate />
     <FirebaseRead />
   </section>
@@ -12,7 +23,7 @@
 import storeModule from 'src/store/modules/Election2020'
 import { createNamespacedHelpers } from 'vuex'
 // const { mapState, mapMutations } = createNamespacedHelpers('Election2020')
-
+import Countdown from './components/Countdown.vue'
 import FirebaseRead from './templates/FirebaseRead.vue'
 import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 
@@ -42,6 +53,7 @@ export default {
       .catch(err => console.error(err)) // need error handle
   },
   components: {
+    Countdown,
     FirebaseCreateUpdate,
     FirebaseRead,
     LatestNews: () => import('./components/LatestNews.vue')
@@ -64,5 +76,38 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
+
+.election-2020
+  h1, h2, p
+    margin 0
+  h1, h2
+    font-family source-han-serif-tc, STSong, serif
+  h1, p
+    color rgba(0, 0, 0, 0.87)
+  h1
+    font-size 2.625rem
+    line-height 1.38
+    & + *
+      margin-top 30px
+  h2
+    color rgba(0, 0, 0, 0.88)
+    font-size 1.625rem
+    line-height 1.42
+
+  .section
+    padding 50px 0
+    text-align center
+    p
+      width calc(100% - 20px)
+      margin-left auto
+      margin-right auto
+      font-size .9375rem
+      line-height 1.87
+      text-align justify
+      & + h2
+        margin-top 98px
+    h2
+      & + div
+        margin-top 10px
 </style>
