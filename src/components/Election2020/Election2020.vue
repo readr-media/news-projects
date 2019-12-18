@@ -19,6 +19,9 @@
     <SeatTotal
       :count="79"
     />
+    <lazy-component class="section credits">
+      <TheCredits />
+    </lazy-component>
     <lazy-component class="section subscr">
       <SubscriptionWithLogoMsg />
     </lazy-component>
@@ -68,6 +71,7 @@ export default {
     FirebaseRead,
     Header,
     LatestNews: () => import('./components/LatestNews.vue'),
+    TheCredits: () => import('./components/TheCredits.vue'),
     SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue'),
     SeatTotal
   },
