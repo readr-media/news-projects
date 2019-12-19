@@ -1,6 +1,7 @@
 <template>
   <div class="formosa-incident">
     <FixedSlides />
+    <!-- <div class="test" id="test"></div> -->
     <!-- <FixedTimeline /> -->
   </div>
 </template>
@@ -41,7 +42,11 @@ html
   font-size 10px
 // body
 //   background-color #000
-  // background-image radial-gradient(circle at 50% 50%, #7a6a56, #000000 271%)
+//   // background-image radial-gradient(circle at 50% 50%, #7a6a56, #000000 271%)
 picture, img
   display block
+// .test
+//   width 100%
+//   height 100vh
+//   background-color green
 </style>
