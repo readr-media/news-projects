@@ -15,10 +15,31 @@
       <h2>立委激戰搶席次</h2>
       <Countdown />
     </section>
+
+    <!-- TODO: delete this block -->
     只是測試用：
     <SeatTotal
       :count="79"
     />
+    <button
+      @click="showLightbox = true"
+    >
+      lightbox 測試
+    </button>
+    <LightboxWrapper
+      :showLightbox.sync="showLightbox"
+    >
+      <div>hello lightbox</div>
+      <div>hello lightbox</div>
+      <div>hello lightbox</div>
+      <div>hello lightbox</div>
+      <div>hello lightbox</div>
+      <div>hello lightbox</div>
+      <div>hello lightbox</div>
+      <div>hello lightbox</div>
+    </LightboxWrapper>
+    <!-- -->
+
     <lazy-component class="credits">
       <TheCredits />
     </lazy-component>
@@ -41,7 +62,11 @@ import Countdown from './components/Countdown.vue'
 import FirebaseRead from './templates/FirebaseRead.vue'
 import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 import Header from './components/Header.vue'
+
+// TODO: delete block
 import SeatTotal from './components/SeatTotal.vue'
+import LightboxWrapper from './components/LightboxWrapper.vue'
+//
 
 const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET', {
   params: {
@@ -77,8 +102,21 @@ export default {
     TheCredits: () => import('./components/TheCredits.vue'),
     TheDonateFooter: () => import('./components/TheDonateFooter.vue'),
     SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue'),
-    SeatTotal
+
+    // TODO: delete block
+    SeatTotal,
+    LightboxWrapper
+    //
   },
+
+  // TODO: delete block
+  data () {
+    return {
+      showLightbox: false
+    }
+  },
+  //
+
   beforeMount () {
     this.registerStoreModule(true)
   },
