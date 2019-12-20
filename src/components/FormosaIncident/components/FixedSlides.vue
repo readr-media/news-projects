@@ -1,19 +1,21 @@
 <template>
-  <section class="fixed-slides">
+  <article class="fixed-slides">
     <div class="fixed-slides__picture-container" ref="pictureContainer">
       <picture class="fixed-slides__picture op-1 scale-1" id="slides-img1">
-        <!-- <source media="(min-width: 720px)" srcset=""> -->
+        <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/1-desk.png">
         <img src="/proj-assets/formosaincident/img/opening/1-mob.png" alt="">
       </picture>
       <picture class="fixed-slides__picture" id="slides-img2">
+        <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/2-desk.png">
         <img src="/proj-assets/formosaincident/img/opening/2-mob.png" alt="">
       </picture>
       <picture class="fixed-slides__picture" id="slides-img3">
+        <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/3-desk.png">
         <img src="/proj-assets/formosaincident/img/opening/3-mob.png" alt="">
       </picture>
-      <!-- <div class="picture-bg" id="slides-img4-bg"></div> -->
       <div class="fixed-slides__img-wrapper" id="slides-img4-wrapper">
         <picture class="fixed-slides__picture" id="slides-img4">
+          <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/4-desk.png">
           <img class="obf-cover" src="/proj-assets/formosaincident/img/opening/4-mob.png" alt="">
         </picture>
         <div id="slides-img4-text">
@@ -21,6 +23,7 @@
         </div>
       </div>
       <picture class="fixed-slides__picture" id="slides-img5-1">
+        <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/5-1-desk.png">
         <img src="/proj-assets/formosaincident/img/opening/5-1-mob.png" alt="">
       </picture>
       <!-- <picture class="fixed-slides__picture" id="slides-img5-2">
@@ -28,9 +31,11 @@
       </picture> -->
       <div class="fixed-slides__img-wrapper" id="slides-img6-wrapper">
         <picture class="fixed-slides__picture" id="slides-img6-1">
+          <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/puzzle-desk.png">
           <img class="obf-cover" src="/proj-assets/formosaincident/img/opening/puzzle-mob.png" alt="">
         </picture>
         <picture class="fixed-slides__title" id="slides-img6-2">
+          <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/title-desk.png">
           <img class="obf-cover" src="/proj-assets/formosaincident/img/opening/title-mob.png" alt="">
         </picture>
       </div>
@@ -61,7 +66,7 @@
       <div class="fixed-slides__text-wrapper" id="slides-text7"></div>
       <div class="fixed-slides__text-wrapper" id="slides-text8"></div>
     </div>
-  </section>
+  </article>
 </template>
 
 <script>
@@ -78,23 +83,26 @@ export default {
       tween1.to('#slides-img1', 0.3, { opacity: 0 })
       tween1.to('#slides-img2', 0.3, { opacity: 1, scale: 1 })
       new ScrollMagic.Scene(this.setScrollScene('#slides-text2'))
-        .setTween(tween1).addTo(controller).addIndicators()
+        .setTween(tween1).addTo(controller)
+        // .addIndicators()
 
       const tween2 = new TimelineLite()
       tween2.to('#slides-img2', 0.3, { opacity: 0 })
       tween2.to('#slides-img3', 0.3, { opacity: 1, scale: 1 })
       new ScrollMagic.Scene(this.setScrollScene('#slides-text3'))
-        .setTween(tween2).addTo(controller).addIndicators()
+        .setTween(tween2).addTo(controller)
+        // .addIndicators()
 
       const tween3 = new TimelineLite()
-      tween3.to('#slides-img4', 0.3, { opacity: 1, scale: 1 }, 0.3)
-      tween3.to('#slides-img4-text', 0.3, { scale: 1, opacity: 1, ease: Power4.easeOut }, '=')
+      tween3.to('#slides-img4', 0.3, { opacity: 1, scale: 1 })
+      tween3.to('#slides-img4-text', 0.3, { scale: 1, opacity: 1, ease: Power4.easeOut }, 0.3)
       new ScrollMagic.Scene(this.setScrollScene('#slides-text4', 0.8, '120%'))
         .on('start', function (e) {
           const isForward = e.scrollDirection === 'FORWARD'
           TweenLite.set('#slides-img3', { opacity: isForward ? 0 : 1 })
         })
-        .setTween(tween3).addTo(controller).addIndicators()
+        .setTween(tween3).addTo(controller)
+        // .addIndicators()
 
       const tween4 = new TimelineLite()
       tween4.to('#slides-img4-wrapper', 0.3, { opacity: 0 })
@@ -104,7 +112,8 @@ export default {
           const isForward = e.scrollDirection === 'FORWARD'
           TweenLite.set('#slides-img6-1', { opacity: isForward ? 1 : 0 })
         })
-        .setTween(tween4).addTo(controller).addIndicators()
+        .setTween(tween4).addTo(controller)
+        // .addIndicators()
 
       const tween5 = TweenLite.to('#slides-img5-1', 0.3, { scale: 1, ease: Power2.easeOut })
       new ScrollMagic.Scene(this.setScrollScene('#slides-text5-2', 0.5, '80%'))
@@ -113,18 +122,21 @@ export default {
         //   TweenLite.set('#slides-img5-1', { opacity: isForward ? 0 : 1 })
         //   TweenLite.set('#slides-img5-2', { opacity: isForward ? 1 : 0 })
         // })
-        .setTween(tween5).addTo(controller).addIndicators()
+        .setTween(tween5).addTo(controller)
+        // .addIndicators()
 
       // const tween6 = TweenLite.to('#slides-img5-2', 0.3, { scale: 0.5, opacity: 0, ease: Power2.easeOut })
       const tween6 = TweenLite.to('#slides-img5-1', 0.3, { transformOrigin: '50% 116%', scale: 0.8, opacity: 0, ease: Power2.easeOut })
       new ScrollMagic.Scene(this.setScrollScene('#slides-text6-1', 0.5, '80%'))
-        .setTween(tween6).addTo(controller).addIndicators()
+        .setTween(tween6).addTo(controller)
+        // .addIndicators()
 
       const tween7 = new TimelineLite()
       tween7.to('#slides-img6-1', 0.3, { scale: 1 })
       tween7.to('#slides-img6-2', 0.45, { opacity: 1, x: 0 })
       new ScrollMagic.Scene(this.setScrollScene('#slides-text7', 0.5, '160%'))
-        .setTween(tween7).addTo(controller).addIndicators()
+        .setTween(tween7).addTo(controller)
+        // .addIndicators()
 
       new ScrollMagic.Scene(this.setScrollScene('#slides-text8', 1, 0))
         .on('progress', (e) => {
@@ -135,7 +147,8 @@ export default {
           TweenLite.set(pictureContainer, { position: isForward ? 'absolute' : '' })
           TweenLite.set('#slides-img6-wrapper', { marginTop: isForward ? `${(textContainerH - this.$store.state.viewport[ 1 ])}px` : 0 })
         })
-        .addTo(controller).addIndicators()
+        .addTo(controller)
+        // .addIndicators()
     },
     setScrollScene (triggerElement, triggerHook = 0.8, duration = '40%') {
       return {
@@ -192,7 +205,6 @@ export default {
   height 140vh
 #slides-text7
   height 220vh
-  // margin-bottom 50vh
 #slides-text8
   height 0
 
@@ -257,12 +269,8 @@ export default {
     display flex
     flex-direction column
     justify-content center
-    // &:first-child
-    //   padding-top 50vh
     @media (min-width $breakpoint.sm)
       max-width 700px
-    // & + .fixed-slides__text-wrapper
-    //   padding-top 80vh
     & p
       padding 14px 22px
       background-color rgba(0, 0, 0, 0.9)

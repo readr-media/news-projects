@@ -1,3 +1,5 @@
+'use strict'
+
 export default [
   {
     id: 1,
@@ -105,7 +107,8 @@ export default [
     id: 18,
     date: '',
     text: '<p>示威群眾在大圓環席地而坐<br>周遭被鎮暴部隊團團圍住<br>呂秀蓮、張俊宏等人演講唱歌<br>民眾情緒高昂</p>',
-    imgSrc: 'timeline/quote1'
+    imgSrc: 'timeline/quote1',
+    smallMapName: '1-small'
   },
   {
     id: 19,
@@ -117,7 +120,8 @@ export default [
     id: 20,
     date: '',
     text: '<p>鎮暴車開始施放催淚瓦斯<br>示威群眾奔向中正四路</p>',
-    imgSrc: 'timeline/20'
+    imgSrc: 'timeline/20',
+    smallMapName: '2-small'
   },
   {
     id: 21,
@@ -129,7 +133,8 @@ export default [
     id: 22,
     date: '',
     text: '<p>群眾退回服務處<br>不願解散<br>鎮暴警察再次強力驅散<br>施放催淚瓦斯</p>',
-    imgSrc: 'timeline/22'
+    imgSrc: 'timeline/22',
+    smallMapName: '3-small'
   },
   {
     id: 23,

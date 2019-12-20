@@ -3,6 +3,7 @@
     <div class="fixed-timeline__bg">
       <img v-for="data in timelineData.filter((data) => data.id !== 28)" :src="`/proj-assets/formosaincident/img/${data.imgSrc}-desk.png`" alt="" :key="`img${data.id}`" :id="`timeline-img${data.id}`">
     </div>
+    
     <div class="fixed-timeline__text-container">
       <div class="fixed-timeline__text-wrapper" v-for="data in timelineData.filter((data) => data.id !== 19)" :key="`text${data.id}`" :id="`timeline-text${data.id}`">
         <p class="date" v-if="data.date">{{ data.date }}</p>
@@ -32,14 +33,14 @@ export default {
       for (let id = 1; id < timelineData.length; id++) {
         if (specials.includes(id) || specials.includes(id + 1)) { continue }
 
-        const tl = new TimelineLite()
-        tl.to(`#timeline-img${id}`, 0.3, { opacity: 0 })
-        tl.to(`#timeline-img${id + 1}`, 0.3, { opacity: 1, scale: 1 })
+        const tween = new TimelineLite()
+        tween.to(`#timeline-img${id}`, 0.3, { opacity: 0 })
+        tween.to(`#timeline-img${id + 1}`, 0.3, { opacity: 1, scale: 1 })
         new ScrollMagic.Scene({
           triggerElement: `#timeline-text${id + 1}`,
           duration: '40%'
         })
-        .setTween(tl)
+        .setTween(tween)
         .addTo(controller)
         // .addIndicators()
       }
@@ -50,6 +51,7 @@ export default {
 
 <style lang="stylus">
 .fixed-timeline
+  position relative
   &__bg
     position fixed
     top 0
@@ -57,8 +59,6 @@ export default {
     width 100%
     height 100vh
     background-image linear-gradient(to bottom, #000000, #7a6a56)
-    // background-color #000
-    // opacity 0
     & img
       top 0
       right 0
@@ -66,7 +66,6 @@ export default {
       width 72%
       height 100%
       object-fit cover
-      // object-fit contain
       margin-left auto
       opacity 0
       transform scale(1.02)
@@ -121,5 +120,4 @@ export default {
       font-weight 500
       line-height 1.67
       margin-bottom 20px
-    // background-image linear-gradient(to bottom, #000000, #7a6a56)
 </style>
