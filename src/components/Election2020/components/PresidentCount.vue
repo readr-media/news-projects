@@ -1,38 +1,40 @@
 <template>
-  <!-- <section class="e-p-c"> -->
-    <transition-group name="latestNews" class="e-p-c" tag="section">
-      <div
-        v-for="(candidate, name) in testData"
-        :key="`candidate-${name}`"
-        :class="getRankClassName(name)"
-        class="candidate"
-      >
-        <div class="candidate__info">
-          <picture class="candidate__image">
-            <img src="/proj-assets/election-2020/images/sung.png" alt="">
-            <div class="candidate__number">{{ name }}</div>
-          </picture>
-          <div class="candidate__count">
-            <p><span class="name">宋楚瑜</span><br><span class="label">得票數</span></p>
-            <p><span class="count">{{ candidate.tks }}</span></p>
-            <p class="ratio">{{ formatRatio(candidate.R, 0) }}<span>%</span></p>
-          </div>
-        </div>
-        <div class="candidate__ratio">
-          <span>親民黨</span>
-          <span>{{ formatRatio(candidate.R) }}%</span>
-          <div :style="{ width: `${formatRatio(candidate.R)}%` }" class="candidate__progress" />
+  <transition-group name="latestNews" class="e-p-c" tag="section">
+    <div
+      v-for="(candidate, name) in testData"
+      :key="`candidate-${name}`"
+      :class="getRankClassName(name)"
+      class="candidate"
+    >
+      <div class="candidate__info">
+        <picture class="candidate__image">
+          <img src="/proj-assets/election-2020/images/sung.png" alt="">
+          <div class="candidate__number">{{ name }}</div>
+        </picture>
+        <div class="candidate__count">
+          <p><span class="name">宋楚瑜</span><br><span class="label">得票數</span></p>
+          <p><Counter class="count" :count="candidate.tks" /></p>
+          <p class="ratio"><Counter :count="formatRatio(candidate.R, 0)" /><span class="percent">%</span></p>
         </div>
       </div>
-    </transition-group>
-    
-  <!-- </section> -->
+      <div class="candidate__ratio">
+        <span>親民黨</span>
+        <Counter :count="formatRatio(candidate.R)" />
+        <span>%</span>
+        <div :style="{ width: `${formatRatio(candidate.R)}%` }" class="candidate__progress" />
+      </div>
+    </div>
+  </transition-group>
 </template>
 <script>
 import { formatRatio } from '../utility/common'
+import Counter from './Counter.vue'
 
 export default {
   name: 'PresidentCount',
+  components: {
+    Counter
+  },
   data () {
     return {
       testData: {
@@ -146,6 +148,8 @@ export default {
       span
         color $color-black-lighter
         font-size .8125rem
+        &:nth-child(2)
+          margin 0 0 0 auto
     &__progress
       position absolute
       top 0
@@ -153,6 +157,12 @@ export default {
       z-index -1
       height 20px
       background-color red // 暫時
+
+@media (max-width: 767px)
+  .e-p-c
+    .candidate__count
+      p.ratio
+        display none
 
 @media (min-width: 768px)
   .e-p-c
@@ -193,7 +203,7 @@ export default {
               left 0
               transform translateX(-30%)
               font-size 3rem
-              span
+              .percent
                 font-size 1.875rem
 
       &.second, &.third
@@ -203,7 +213,7 @@ export default {
         width 45%
         border-bottom 1px solid rgba(0, 0, 0, .3)
         .candidate__count
-          padding-bottom .5em
+          padding-bottom 1em
           p
             &:first-child
               text-align left
@@ -233,10 +243,6 @@ export default {
         flex-direction column
         justify-content flex-end
         position static
-        // top auto
-        // left 0
-        // right 0
-        // bottom 0
         transform translateY(0)
         p
           &:first-child
@@ -244,28 +250,14 @@ export default {
           span
             &.name, &.label
               font-size 1.25rem
-              // font-size 1.875rem
             &.label
               margin 0
             &.count
               font-size 1.875rem
-              // font-size 3rem
           br
             display none
       &__ratio
         display none
-        // position static
-        // background-color transparent
-        // span
-        //   display none
-        // .ratio
-        //   display block
-        //   position absolute
-        //   bottom 55px
-        //   left 0
-        //   // transform translateY(-50%)
-        //   color $color-black-light
-        //   font-size 5rem
 
 @media (min-width: 1024px)
   .e-p-c
@@ -275,6 +267,7 @@ export default {
         max-width 400px
         .candidate__count
           transform translateY(-10%)
+          padding-bottom .5em
       &.first
         max-width 600px
         .candidate__count
@@ -310,6 +303,5 @@ export default {
           p.ratio
             font-size 6.875rem
             line-height 1
-      // &.second, &.third
-      //   width 400px
+      
 </style>
