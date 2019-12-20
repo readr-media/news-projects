@@ -69,8 +69,6 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-@import '../styles/common.styl'
-
 .e-l-n
   padding 20px 0 8px
   text-align center
