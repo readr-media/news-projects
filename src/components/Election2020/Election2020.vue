@@ -10,6 +10,7 @@
       <p>您想透過優雅的方式參與這場盛事嗎？只需要一雙雪亮的眼睛，就能和 READr 一起追蹤 2020 總統大選的最新消息，這裡有網友幫你嘴、圖表輕鬆看，還有最新選情一目了然。</p>
       <h2>下屆總統會是誰</h2>
       <Countdown />
+      <PresidentCount class="president-count"/>
     </section>
     <section class="section">
       <h2>立委激戰搶席次</h2>
@@ -62,6 +63,7 @@ import Countdown from './components/Countdown.vue'
 import FirebaseRead from './templates/FirebaseRead.vue'
 import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 import Header from './components/Header.vue'
+import PresidentCount from './components/PresidentCount.vue'
 
 // TODO: delete block
 import SeatTotal from './components/SeatTotal.vue'
@@ -99,6 +101,7 @@ export default {
     FirebaseRead,
     Header,
     LatestNews: () => import('./components/LatestNews.vue'),
+    PresidentCount,
     TheCredits: () => import('./components/TheCredits.vue'),
     TheDonateFooter: () => import('./components/TheDonateFooter.vue'),
     SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue'),
@@ -136,10 +139,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import './styles/common.styl'
-
 $content-width-mobile = 90%
 $content-width-tablet = 60%
+$content-width-tablet-extend = 80%
 
 $margin-center =
   margin-left auto
@@ -177,6 +179,7 @@ $margin-center =
     h2
       & + div
         margin-top 10px
+  
   .subscr
     width $content-width-mobile
     {$margin-center}
@@ -195,6 +198,12 @@ $margin-center =
     .section
       > p
         width $content-width-tablet
+    .president-count
+      width $content-width-tablet-extend
+      max-width 1000px
+      max-height 610px
+      {$margin-center}
+      height calc(40vw + 110px)
     .subscr
       width $content-width-tablet
 

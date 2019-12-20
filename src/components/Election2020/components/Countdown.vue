@@ -68,8 +68,6 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-@import '../styles/common.styl'
-
 .countdown
   display inline-block
   padding .4em 1.2em
