@@ -5,11 +5,10 @@
         href="https://www.readr.tw/"
         target="_blank"
       >
-        <img
-          class="the-subscr__img"
-          src="/proj-assets/formosaincident/img/logo-readr.png"
-          alt="READr logo"
-        >
+        <picture class="the-subscr__img" >
+          <source type="image/webp" srcset="/proj-assets/formosaincident/img/logo-readr.webp">
+          <img src="/proj-assets/formosaincident/img/logo-readr.png" alt="READr logo">
+        </picture>
       </a>
       <div class="the-subscr__text text">
         <div class="text__desktop">
@@ -55,6 +54,9 @@ export default {
     text-align center
   &__img
     width 48px
+    & img
+      width 100%
+      height auto
   &__form
     margin 10px 0 0 0
     width 650px

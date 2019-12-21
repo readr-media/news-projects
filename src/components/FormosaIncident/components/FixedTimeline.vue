@@ -2,7 +2,10 @@
   <article class="fixed-timeline">
     <div class="fixed-timeline__bg" ref="bg">
       <div class="fixed-timeline__img-container">
-        <img v-for="data in timelineData.filter((data) => data.id !== 28)" :src="`/proj-assets/formosaincident/img/${data.imgSrc}-desk.png`" alt="" :key="`img${data.id}`" :ref="`img${data.id}`">
+        <picture v-for="data in timelineData.filter((data) => data.id !== 28)" :key="`img${data.id}`" :ref="`img${data.id}`">
+          <source type="image/webp" :srcset="`/proj-assets/formosaincident/img/${data.imgSrc}-desk.webp`">
+          <img :class="{ 'obf-contain': data.imgSrc.includes('map') }" :src="`/proj-assets/formosaincident/img/${data.imgSrc}-desk.png`" alt="">
+        </picture>
       </div>
     </div>
     
@@ -10,7 +13,10 @@
       <div class="fixed-timeline__text-wrapper" v-for="data in timelineData.filter((data) => data.id !== 19)" :key="`text${data.id}`" :ref="`text${data.id}`">
         <p class="date" v-if="data.date">{{ data.date }}</p>
         <div v-html="data.text"></div>
-        <img class="small-map" v-if="data.smallMapName" :src="`/proj-assets/formosaincident/img/map/${data.smallMapName}.png`" alt="">
+        <picture class="small-map" v-if="data.smallMapName">
+          <source type="image/webp" :srcset="`/proj-assets/formosaincident/img/map/${data.smallMapName}.webp`">
+          <img :src="`/proj-assets/formosaincident/img/map/${data.smallMapName}.png`" alt="">
+        </picture>
       </div>
     </div>
     <div ref="end"></div>
@@ -121,18 +127,23 @@ export default {
       position fixed
     &.pos-a
       position absolute
-    & img
+    & picture
+      position absolute
       top 0
       right 0
-      position absolute
       width 100%
       height 100%
-      object-fit cover
       opacity 0
       transform scale(1.02)
       &:first-child
         opacity 1
         transform scale(1)
+    & img
+      width 100%
+      height 100%
+      object-fit cover
+      &.obf-contain
+        object-fit contain
   &__img-container
     width 72%
     height 100%
@@ -189,7 +200,9 @@ export default {
       margin-bottom 20px
     & .small-map
       width 100%
-      height auto
-      margin-top 128px
+      margin-top 35px
       max-width 260px
+      & img
+        width 100%
+        height auto
 </style>

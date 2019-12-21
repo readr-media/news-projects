@@ -2,23 +2,31 @@
   <article class="fixed-slides">
     <div class="fixed-slides__picture-container" ref="pictureContainer">
       <picture class="fixed-slides__picture first" ref="img1">
+        <source type="image/webp" media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/1-desk.webp">
         <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/1-desk.png">
+        <source type="image/webp" srcset="/proj-assets/formosaincident/img/opening/1-mob.webp">
         <img src="/proj-assets/formosaincident/img/opening/1-mob.png" alt="">
       </picture>
 
       <picture class="fixed-slides__picture" ref="img2">
+        <source type="image/webp" media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/2-desk.webp">
         <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/2-desk.png">
+        <source type="image/webp" srcset="/proj-assets/formosaincident/img/opening/2-mob.webp">
         <img src="/proj-assets/formosaincident/img/opening/2-mob.png" alt="">
       </picture>
 
       <picture class="fixed-slides__picture" ref="img3">
+        <source type="image/webp" media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/3-desk.webp">
         <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/3-desk.png">
+        <source type="image/webp" srcset="/proj-assets/formosaincident/img/opening/3-mob.webp">
         <img src="/proj-assets/formosaincident/img/opening/3-mob.png" alt="">
       </picture>
 
       <div class="fixed-slides__img-wrapper" ref="img4Wrapper">
         <picture class="fixed-slides__picture" id="slides-img4" ref="img4">
+          <source type="image/webp" media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/4-desk.webp">
           <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/4-desk.png">
+          <source type="image/webp" srcset="/proj-assets/formosaincident/img/opening/4-mob.webp">
           <img class="obf-cover" src="/proj-assets/formosaincident/img/opening/4-mob.png" alt="">
         </picture>
         <div id="slides-img4-text" ref="img4Text">
@@ -27,17 +35,23 @@
       </div>
 
       <picture class="fixed-slides__picture" id="slides-img5" ref="img5" :class="$parent.isDeskW ? 'desk' : ''">
+        <source type="image/webp" media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/5-desk.webp">
         <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/5-desk.png">
+        <source type="image/webp" srcset="/proj-assets/formosaincident/img/opening/5-mob.webp">
         <img src="/proj-assets/formosaincident/img/opening/5-mob.png" alt="">
       </picture>
 
       <div class="fixed-slides__img-wrapper" id="slides-img6-wrapper" ref="img6Wrapper">
         <picture class="fixed-slides__picture" id="slides-img6-1" ref="img61">
+          <source type="image/webp" media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/puzzle-desk.webp">
           <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/puzzle-desk.png">
+          <source type="image/webp" srcset="/proj-assets/formosaincident/img/opening/puzzle-mob.webp">
           <img class="obf-cover" src="/proj-assets/formosaincident/img/opening/puzzle-mob.png" alt="">
         </picture>
         <picture class="fixed-slides__title" id="slides-img6-2" ref="img62" :class="$parent.isDeskW ? 'desk' : ''">
+          <source type="image/webp" media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/title-desk.webp">
           <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/opening/title-desk.png">
+          <source type="image/webp" srcset="/proj-assets/formosaincident/img/opening/title-mob.webp">
           <img class="obf-cover" src="/proj-assets/formosaincident/img/opening/title-mob.png" alt="">
         </picture>
       </div>
