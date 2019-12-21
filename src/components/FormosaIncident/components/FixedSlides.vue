@@ -59,7 +59,7 @@
 
     <div class="fixed-slides__text-container" ref="textContainer">
       <div class="fixed-slides__text-wrapper" id="slides-text1" >
-        <p>這就是那本<br>不能讀的禁書嗎？</p>
+        <p>「這是什麼啊？」</p>
       </div>
       <div class="fixed-slides__text-wrapper" ref="text2">
         <p>「三十年來，國民黨以禁忌、神話隱蔽我們國家社會的許許多多問題⋯⋯」</p>
@@ -236,7 +236,7 @@ export default {
   &-text1
     margin-top 20vh
   &-text4
-    height 180vh
+    height 160vh
   &-text5-1
     height 140vh
   &-text7

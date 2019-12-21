@@ -8,9 +8,9 @@
       <div class="scroll-timeline__text">
         <p v-if="data.date">{{ data.date }}</p>
         <div v-html="data.text"></div>
-        <picture class="small-map">
+        <picture class="small-map" v-if="data.smallMapName" >
           <source type="image/webp" :srcset="`/proj-assets/formosaincident/img/map/${data.smallMapName}.webp`">
-          <img v-if="data.smallMapName" :src="`/proj-assets/formosaincident/img/map/${data.smallMapName}.png`" alt="">
+          <img :src="`/proj-assets/formosaincident/img/map/${data.smallMapName}.png`" alt="">
         </picture>
       </div>
     </div>
