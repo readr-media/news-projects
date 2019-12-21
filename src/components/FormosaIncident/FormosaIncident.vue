@@ -33,7 +33,7 @@ export default {
       title: '40年．致民主：重回美麗島現場',
       description: '未歷經過戒嚴年代，超過 31 萬的首投族，明年將用選票表達自己的理念，但對 40 年前的民眾來說，投票卻是禁忌，直到「美麗島事件」爆發，衝撞既有的黨國體制，民主運動在臺灣，才有了極大的躍進。',
       metaUrl: 'formosaincident',
-      metaImage: '',
+      metaImage: 'formosaincident/img/og.png',
       customScript: '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenLite.min.js"><\/script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineLite.min.js"><\/script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/CSSPlugin.min.js"><\/script><script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"><\/script><script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.min.js"><\/script>'
     }
   },
