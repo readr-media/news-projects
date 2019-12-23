@@ -237,7 +237,7 @@ const fetchProgressData = store => fetchGoogleSheet(store, {
 const fetchStatisticsData = store => fetchGoogleSheet(store, {
   stateName: 'statistics',
   spreadsheetId: '1YR6C5hTKxCguXH9txtajEcbOW7YNMiMFZTC3M3guuf8',
-  range: '排行榜!B2:C18',
+  range: '排行榜!B2:D18',
   majorDimension: 'COLUMNS'
 })
 

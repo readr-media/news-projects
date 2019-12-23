@@ -18,6 +18,12 @@
         >
           韓國瑜
         </button>
+        <button
+          :class="{ active: candidate === '宋楚瑜' }"
+          @click="selectCandidate('宋楚瑜')"
+        >
+          宋楚瑜
+        </button>
       </div>
     </div>
     <div class="selector-container">
