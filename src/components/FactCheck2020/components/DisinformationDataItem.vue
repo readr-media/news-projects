@@ -154,7 +154,8 @@ export default {
     candidateImage () {
       const list = {
         '蔡英文': '/proj-assets/fact-check/tsai.png',
-        '韓國瑜': '/proj-assets/fact-check/han.png'
+        '韓國瑜': '/proj-assets/fact-check/han.png',
+        '宋楚瑜': '/proj-assets/fact-check/soong.png'
       }
       return list[this.data.candidate]
     },

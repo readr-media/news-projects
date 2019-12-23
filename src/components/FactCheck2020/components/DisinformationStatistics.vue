@@ -81,7 +81,9 @@ export default {
       if (data.candidate === '蔡英文') {
         return 'tsai'
       } else if (data.candidate === '韓國瑜') {
-        return 'han' 
+        return 'han'
+      } else if (data.candidate === '宋楚瑜') {
+        return 'soong'
       }
       return 
     }
@@ -218,6 +220,21 @@ export default {
       .wrong
         &::before
           background-color #2f84c9 !important
+  &.soong
+    .info
+      &::before
+        background-color rgba(245, 166, 35, .15)
+    .info__photo-circle
+      border-color #f5a623
+    .info__photo-image
+      background-image url(/proj-assets/fact-check/soong.png)
+    .bar
+      .wrong
+        background-color #f5a623 !important
+    .legend
+      .wrong
+        &::before
+          background-color #f5a623 !important
   &.first
     .info
       &::before
@@ -298,6 +315,9 @@ export default {
     &.han
       &::before
         background-color rgba(47, 132, 201, .15)
+    &.soong
+      &::before
+        background-color rgba(245, 166, 35, .15)
     &.first
       &::before
         height 100%
