@@ -78,6 +78,7 @@ export default {
   d = 20px
   width d
   height d
+  cursor default
   animation-name animate-background
   animation-duration 0s
   animation-timing-function ease
@@ -150,4 +151,11 @@ export default {
       border solid 1px rgba(0, 0, 0, 0.1)
   &--animate
     animation-duration 4s
+
+@media (min-width 768px)
+  .square
+    &--with-number
+      &:hover
+        color rgba(0, 0, 0, 0.3)
+        border solid 1px rgba(0, 0, 0, 0.3)
 </style>
