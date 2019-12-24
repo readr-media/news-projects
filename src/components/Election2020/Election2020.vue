@@ -11,6 +11,7 @@
       <h2>下屆總統會是誰</h2>
       <Countdown />
       <PresidentCount class="president-count"/>
+      <PresidentCountChart class="president-count-chart" />
     </section>
     <section class="section">
       <h2>立委激戰搶席次</h2>
@@ -75,6 +76,7 @@ export default {
     LegislatorRegional,
     LatestNews: () => import('./components/LatestNews.vue'),
     PresidentCount,
+    PresidentCountChart: () => import('./components/PresidentCountChart.vue'),
     TheCredits: () => import('./components/TheCredits.vue'),
     TheDonateFooter: () => import('./components/TheDonateFooter.vue'),
     SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue')
@@ -145,6 +147,8 @@ $margin-center =
       & + div
         margin-top 10px
   
+  .president-count-chart
+    display none
   .subscr
     width $content-width-mobile
     {$margin-center}
@@ -163,12 +167,16 @@ $margin-center =
     .section
       > p
         width $content-width-tablet
-    .president-count
+    .president-count, .president-count-chart
       width $content-width-tablet-extend
       max-width 1000px
       max-height 610px
       {$margin-center}
+    .president-count
       height calc(40vw + 110px)
+    .president-count-chart
+      display block
+      margin-top 66px
     .subscr
       width $content-width-tablet
 
