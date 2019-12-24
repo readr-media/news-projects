@@ -216,4 +216,7 @@ $margin-center =
     h1
       br
         display none
+    .president-count
+      &.default
+        margin-top 60px
 </style>

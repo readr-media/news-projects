@@ -1,5 +1,10 @@
 <template>
-  <transition-group name="latestNews" class="e-p-c" tag="section">
+  <transition-group
+    :class="{ default: !startCounting }"
+    name="latestNews"
+    class="e-p-c"
+    tag="section"
+  >
     <div
       v-for="(candidate, name) in testData"
       :key="`candidate-${name}`"
@@ -24,6 +29,7 @@
         <div :style="{ width: `${formatRatio(candidate.R)}%` }" class="candidate__progress" />
       </div>
     </div>
+    <button key="butt" @click="add(1)">test 1</button>
   </transition-group>
 </template>
 <script>
@@ -39,33 +45,50 @@ export default {
     return {
       testData: {
         '1': {
-          R: 0.2587852392781253,
-          tks: 10808489,
+          R: 0,
+          tks: 0,
+          // R: 0.2587852392781253,
+          // tks: 10808489,
           isElected: false
         },
         '2': {
-          R: 0.37826896118277314,
-          tks: 15798876,
+          R: 0,
+          tks: 0,
+          // R: 0.37826896118277314,
+          // tks: 15798876,
           isElected: false
         },
         '3': {
-          R: 0.36294579953910155,
-          tks: 15158885,
+          R: 0,
+          tks: 0,
+          // R: 0.36294579953910155,
+          // tks: 15158885,
           isElected: false
         }
       }
+    }
+  },
+  computed: {
+    startCounting () {
+      return Object.values(this.testData).reduce((a, c) => a + c.tks, 0) > 0
     }
   },
   methods: {
     formatRatio,
     // 暫時
     getRankClassName (rank) {
+      if (!this.startCounting) {
+        return 'default'
+      }
       const className = {
         1: 'first',
         2: 'second',
         3: 'third'
       }
       return className[rank]
+    },
+    add (index) {
+      this.testData[`${index}`].tks += 1
     }
   }
 }
@@ -81,11 +104,11 @@ export default {
     left 0
     width 100%
     height 180px
-    &.first
+    &.first,  &.default:nth-child(1)
       transform translateY(0)
-    &.second
+    &.second, &.default:nth-child(2)
       transform translateY(180px)
-    &.third
+    &.third, &.default:nth-child(3)
       transform translateY(360px)
     &__info
       position relative
@@ -158,6 +181,9 @@ export default {
       height 20px
       background-color red // 暫時
 
+.latestNews-move
+  transition all 1s
+
 @media (max-width: 767px)
   .e-p-c
     .candidate__count
@@ -168,7 +194,7 @@ export default {
   .e-p-c
     .candidate
       height 110px
-      &.first
+      &.first, &.default:nth-child(1)
         width 50%
         height 100%
         .candidate__info
@@ -198,6 +224,7 @@ export default {
               &.count
                 font-size 3rem
             &.ratio
+              display block
               position absolute
               top 0
               left 0
@@ -206,7 +233,7 @@ export default {
               .percent
                 font-size 1.875rem
 
-      &.second, &.third
+      &.second, &.third, &.default:nth-child(2), &.default:nth-child(3)
         top auto
         left auto
         right 0
@@ -220,10 +247,10 @@ export default {
             &.ratio
               display none
         
-      &.second
+      &.second, &.default:nth-child(2)
         bottom 0
         transform translateY(-150px)
-      &.third
+      &.third, &.default:nth-child(3)
         bottom 0
         transform translateY(0)
       &__info
@@ -247,6 +274,8 @@ export default {
         p
           &:first-child
             margin 10px 0
+          &.ratio
+            display none
           span
             &.name, &.label
               font-size 1.25rem
@@ -263,12 +292,12 @@ export default {
   .e-p-c
     .candidate
       height 170px
-      &.second, &.third
+      &.second, &.third, &.default:nth-child(2), &.default:nth-child(3)
         max-width 400px
         .candidate__count
           transform translateY(-10%)
           padding-bottom .5em
-      &.first
+      &.first, &.default:nth-child(1)
         max-width 600px
         .candidate__count
           p
@@ -276,7 +305,7 @@ export default {
               transform translateX(0)
             &.ratio
               font-size 3.75rem
-      &.second
+      &.second, &.default:nth-child(2)
         transform translateY(-210px)
       &__image
         width 170px
@@ -294,7 +323,44 @@ export default {
 
 @media (min-width: 1440px)
   .e-p-c
+    &.default
+      height 170px
     .candidate
+      &.default
+        left 0 !important
+        right auto !important
+        width calc((100% - 80px) / 3) !important
+        max-width 320px !important
+        &:nth-child(1)
+          border-bottom 1px solid rgba(0, 0, 0, .3)
+          .candidate__info
+            display flex
+          .candidate__image
+            width 170px
+            height 170px
+            padding-top 0
+            border-bottom none
+            img
+              top 0
+          .candidate__count
+            transform translateY(-10%)
+            padding-bottom .5em
+            p
+              span
+                &.name, &.label
+                  font-size 1.25rem
+                &.count
+                  font-size 1.875rem
+              &.ratio
+                display none
+        &:nth-child(2)
+          transform translateX(calc(100% + 40px))
+        &:nth-child(3)
+          transform translateX(calc(200% + 80px))
+        .candidate__count
+          p
+            &:nth-child(1)
+              transform translateX(0)
       &.first
         .candidate__count
           p
