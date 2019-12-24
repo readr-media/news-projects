@@ -18,6 +18,12 @@
       <Countdown />
       <LegislatorRegional />
     </section>
+
+    <!-- TODO: delete this block -->
+    <section class="section">
+      <p>mapping 測試: 1 -> "{{presidentName}}" </p>
+    </section>
+
     <lazy-component class="credits">
       <TheCredits />
     </lazy-component>
@@ -42,6 +48,9 @@ import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 import Header from './components/Header.vue'
 import PresidentCount from './components/PresidentCount.vue'
 import LegislatorRegional from './components/legislator-regional/LegislatorRegional.vue'
+
+// TODO: delete block
+import { mapPresidentName } from './utility/mappings'
 
 const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET', {
   params: {
@@ -83,6 +92,7 @@ export default {
   },
   beforeMount () {
     this.registerStoreModule(true)
+    this.$store.dispatch('Election2020/gcs/FETCH_SOURCES')
   },
   mounted() {
     this.INIT_TIMER()
@@ -100,6 +110,11 @@ export default {
     updateLatestNews () {
       fetchLatestNews(this.$store)
         .catch(err => console.error(err))
+    }
+  },
+  computed: {
+    presidentName: function () {
+      return mapPresidentName(this.$store.state, 1);
     }
   }
 }
