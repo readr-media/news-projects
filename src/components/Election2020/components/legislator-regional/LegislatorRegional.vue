@@ -3,26 +3,22 @@
     <h1>2020</h1>
     <h2>區域及原住民立委</h2>
     <h3 v-text="h3" />
-    <CountyList
-      class="section__county-list"
-    />
-    <Legends
-      class="section__legends"
-    />
+    <Chart class="section__chart" />
+    <Seats class="section__seats" />
   </section>
 </template>
 
 <script>
-import CountyList from './CountyList.vue'
-import Legends from './Legends.vue'
+import Chart from './Chart.vue'
+import Seats from './Seats.vue'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('Election2020')
 
 export default {
   components: {
-    CountyList,
-    Legends
+    Chart,
+    Seats
   },
   computed: {
     ...mapGetters({
@@ -60,10 +56,8 @@ export default {
     font-weight normal
     line-height 1.87
     margin 11px 0 0 0
-  &__county-list
-    margin 44px 0 0 0
-  &__legends
-    margin-top 27px
+  &__seats
+    margin 71px 0 0 0
 
 @media (min-width 768px)
   .section
@@ -77,6 +71,8 @@ export default {
     h3
       font-size 16px
       text-align left
-    &__legends
-      margin-top 30px
+      margin 19px 0 0 0
+      float left
+    &__seats
+      margin 13px 0 0 0
 </style>

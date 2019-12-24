@@ -48,7 +48,8 @@ export default {
   display flex
   flex-direction column
   padding 10px 0
-  margin 0 10px
+  margin-left 10px
+  margin-right 10px
   border-top solid 2px rgba(0, 0, 0, 0.1)
   &__top, &__bottom
     display flex
@@ -60,7 +61,8 @@ export default {
   .legends
     flex-direction row
     justify-content flex-end
-    margin 0
+    margin-left 0
+    margin-right 0
     &__bottom
       margin 0 0 0 40px
     &__legend
