@@ -1,6 +1,6 @@
 <template>
   <div class="countdown">
-    <template v-if="remainingTime >= 0">
+    <template v-if="!isElectionBoxOpeningStart">
       <span>離開票還有 </span>
       <span v-if="remainingTimeInfo.days > 0" v-text="`${remainingTimeInfo.days} 日 `" />
       <span v-if="remainingTimeInfo.hours > 0" v-text="`${remainingTimeInfo.hours} 時 `" />
@@ -17,7 +17,10 @@
 
 import moment from 'moment'
 
-const COUNTING_START_TIME = '2020-01-11T16:00:00+0800' // ISO 8601
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('Election2020')
+
+import { COUNTING_START_TIME } from '../../../store/modules/Election2020/modules/timer.js'
 
 export default {
   name: 'Countdown',
@@ -27,40 +30,12 @@ export default {
       default: () => new Date(COUNTING_START_TIME)
     }
   },
-  data () {
-    return {
-      currentTime: new Date().toISOString(),
-      timer: undefined
-    }
-  },
   computed: {
-    remainingTime () {
-      return new Date(COUNTING_START_TIME) - new Date(this.currentTime)
-    },
-    remainingTimeInfo () {
-      const end = moment(COUNTING_START_TIME)
-      const now = moment(this.currentTime)
-      const diff = moment.duration(end.diff(now))
-      return {
-        days: diff.days(),
-        hours: diff.hours(),
-        minutes: diff.minutes(),
-        seconds: diff.seconds()
-      }
-    }
-  },
-  watch: {
-    remainingTime (value) {
-      value < 0 && clearInterval(this.timer)
-    }
-  },
-  mounted () {
-    if (!this.timer) {
-      this.timer = setInterval(() => this.currentTime = new Date().toISOString(), 1000)
-    }
-  },
-  destroyed () {
-    clearInterval(this.timer)
+    ...mapGetters({
+      remainingTime: 'timer/remainingTime',
+      remainingTimeInfo: 'timer/remainingTimeInfo',
+      isElectionBoxOpeningStart: 'timer/isElectionBoxOpeningStart'
+    })
   },
   methods: {
     moment

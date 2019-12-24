@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import { get } from 'lodash'
 import { getSheet } from 'src/api'
+import { timerModule as timer } from './modules/timer'
 
 export default {
   namespaced: true,
-  // modules: {
-  // },
+  modules: {
+    timer
+  },
   state: () => ({
     spreadsheet: {
       latestNews: []
