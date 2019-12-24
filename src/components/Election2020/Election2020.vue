@@ -58,7 +58,7 @@
 <script>
 import storeModule from 'src/store/modules/Election2020'
 import { createNamespacedHelpers } from 'vuex'
-// const { mapState, mapMutations } = createNamespacedHelpers('Election2020')
+const { mapActions } = createNamespacedHelpers('Election2020')
 import Countdown from './components/Countdown.vue'
 import FirebaseRead from './templates/FirebaseRead.vue'
 import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
@@ -123,10 +123,16 @@ export default {
   beforeMount () {
     this.registerStoreModule(true)
   },
+  mounted() {
+    this.INIT_TIMER()
+  },
   destroyed() {
     this.$store.unregisterModule('Election2020')
   },
   methods: {
+    ...mapActions({
+      INIT_TIMER: 'timer/INIT_TIMER'
+    }),
     registerStoreModule (shouldPreserveState = false) {
       this.$store.registerModule('Election2020', storeModule, { preserveState: shouldPreserveState })
     },
