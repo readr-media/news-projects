@@ -8,7 +8,11 @@ const module = {
   // this object is your store module (will be added as '/myModule')
   // you can also add state/getters/mutations/actions
   state: {},
-  getters: {},
+  getters: {
+    startCounting: state => Object.values(state.data).reduce((a, c) => {
+      return c.tks ? a + c.tks : a
+    }, 0)
+  },
   mutations: {},
   actions: {},
 }

@@ -29,7 +29,6 @@
         <div :style="{ width: `${formatRatio(candidate.R)}%` }" class="candidate__progress" />
       </div>
     </div>
-    <button key="butt" @click="add(1)">test 1</button>
   </transition-group>
 </template>
 <script>
@@ -86,9 +85,6 @@ export default {
         3: 'third'
       }
       return className[rank]
-    },
-    add (index) {
-      this.testData[`${index}`].tks += 1
     }
   }
 }
@@ -324,7 +320,7 @@ export default {
 @media (min-width: 1440px)
   .e-p-c
     &.default
-      height 170px
+      height 170px !important
     .candidate
       &.default
         left 0 !important
