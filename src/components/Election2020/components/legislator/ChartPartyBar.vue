@@ -109,7 +109,7 @@ export default {
   width 100%
   min-height 50px
   max-height 50px
-  border-top 1px solid rgba(0, 0, 0, 0.3)
+  // border-top 1px solid rgba(0, 0, 0, 0.3)
   display flex
   justify-content center
   align-items center

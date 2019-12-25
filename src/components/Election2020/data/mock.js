@@ -408,3 +408,101 @@ export const LegislatorCounties = [
     }
   }
 ]
+
+export const LegislatorParty = [
+  {
+    name: '民進黨',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '國民黨',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '民眾黨',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '時代力量',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '親民黨',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '綠黨',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '新黨',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '台聯',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '台灣基進黨',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '國會政黨聯盟',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '宗教聯盟',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '勞動黨',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '台灣維新',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '台澎黨',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '統促黨',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '喜樂島',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '合一行動聯盟',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '一邊一國',
+    r: 0.0,
+    tks: 0
+  },
+  {
+    name: '安定力量',
+    r: 0.0,
+    tks: 0
+  }
+]
