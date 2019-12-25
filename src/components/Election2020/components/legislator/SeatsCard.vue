@@ -48,9 +48,10 @@ export default {
     font-size 15px
     color $color-black-light
     width 100%
-    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
     overflow: hidden;
-    text-overflow: ellipsis;
   &__seat
     border-top 1px solid $color-black-light
     width 100%
@@ -70,9 +71,10 @@ export default {
     padding 0 17px
     &__party-name
       font-size 16px
+      margin 10px 0
 
   .seat
-    padding 16px 0
+    padding 10px 0
     &__count
       font-size 30px
 </style>

@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <h1>各政黨分區席次</h1>
+    <h1 v-text="title" />
     <div class="section__seats seats">
       <div class="seats__seats-wrapper seats-wrapper">
         <SeatsCard
@@ -29,7 +29,7 @@
         />
         <SeatsCard
           class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟無黨團結聯盟'"
+          :partyName="'無黨團結聯盟無黨團結聯盟無黨團結聯盟無黨團結聯盟無黨團結聯盟無黨團結聯盟'"
         />
         <SeatsCard
           class="seats-wrapper__seat"
@@ -67,6 +67,12 @@ import SeatsCard from './SeatsCard.vue'
 import SeatTotal from '../SeatTotal.vue'
 
 export default {
+  props: {
+    title: {
+      type: String,
+      required: true
+    }
+  },
   components: {
     SeatsCard,
     SeatTotal

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import CountyListItem from './ChartCountyListItem.vue'
+import CountyListItem from './ChartDistrictCountyListItem.vue'
 import ButtonExpandCounty from '../ButtonExpandCounty.vue'
 
 import { LegislatorCounties } from '../../data/mock'
