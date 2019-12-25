@@ -11,122 +11,20 @@
         0%
       </p>
     </div>
-    <div class="chart-wrapper__chart chart">
+    <transition-group
+      name="flip-list"
+      tag="div"
+      class="chart-wrapper__chart chart"
+    >
       <Bar
         class="chart__bar"
-        :partyName="'民進黨'"
-        :color="'green'"
-        :votePercentage="0.5"
+        v-for="party in parties"
+        :key="party.name"
+        :partyName="party.name"
+        :color="mapColor(party)"
+        :votePercentage="party.r"
       />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'blue'"
-        :votePercentage="0.05"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.23"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.1"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨民進黨民進黨民進黨民進黨民進黨民進黨民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.2"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-      <Bar
-        class="chart__bar"
-        :partyName="'民進黨民進黨民進黨'"
-        :color="'green'"
-        :votePercentage="0.4"
-      />
-    </div>
+    </transition-group>
     <Legends class="chart-wrapper__legends" />
   </div>
 </template>
@@ -135,15 +33,49 @@
 import Bar from './ChartPartyBar.vue'
 import Legends from './ChartPartyLegends.vue'
 
+import { LegislatorParty } from '../../data/mock'
+
 export default {
   components: {
     Bar,
     Legends
+  },
+  data() {
+    return {
+      LegislatorParty
+    }
+  },
+  computed: {
+    parties() {
+      return LegislatorParty.sort((a, b) => b.r - a.r)
+    }
+  },
+  methods: {
+    mapColor({ name = '', r = 0 }) {
+      if (r < 0.05) {
+        return 'default'
+      }
+
+      const map = {
+        民進黨: 'green',
+        國民黨: 'blue'
+      }
+
+      if (!Object.keys(map).includes(name)) {
+        return 'others'
+      } else {
+        return map[name]
+      }
+    }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+.flip-list-move {
+  transition: transform 1s;
+}
+
 .chart-wrapper
   position relative
   padding 0 10px
@@ -159,6 +91,8 @@ export default {
   height 238px
   pointer-events none
   border-top 1px solid rgba(0, 0, 0, 0.3)
+  border-bottom 1px solid rgba(0, 0, 0, 0.3)
+  z-index 1000
   &__top-tick
     position absolute
     top -16px

@@ -9,11 +9,12 @@
     >
       分配席次將於中選會公布後顯示
     </p>
-    <Seats
+    <!-- Seats are shown after 1/11 -->
+    <!-- <Seats
       v-show="true"
       class="section__seats"
       :title="'各政黨不分區席次'"
-    />
+    /> -->
   </section>
 </template>
 
