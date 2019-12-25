@@ -91,7 +91,7 @@ export default {
       text-align right
       border-left none
       margin 0
-      padding 0 0 24px 0
+      padding 0
       span
         &.mobile
           display none
@@ -100,6 +100,7 @@ export default {
 
   .list-item-wrapper
     display flex
+    margin 24px 0 0 0
     &__catalog
       width 576px
       &--hide-mobile
@@ -110,5 +111,5 @@ export default {
         border-left 2px solid rgba(0, 0, 0, .1)
         padding 0 0 0 51px
     &__expand-button
-      display none
+      display none !important
 </style>
