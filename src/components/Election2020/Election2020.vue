@@ -23,6 +23,36 @@
     <!-- TODO: delete this block -->
     <section class="section">
       <p>mapping 測試: 1 -> "{{presidentName}}" </p>
+      <p>example 1:</p>
+      <InfoDetailed
+        title="宋楚瑜、余湘"
+        subtitle="親民黨"
+        :tableData="[
+          { name: '得票數', tks: 429148 },
+          { name: '得票率', R: 0.11123213 }
+        ]"
+        style="width: 300px; margin: 0 auto;"
+      />
+      <p>example 2:</p>
+      <InfoDetailed
+        title="雲林縣第二選區"
+        description="崙背、二崙、西螺、莿桐、林內、斗六、大埤、斗南、古坑"
+        :tableHeading="{ P: '政黨', c: '候選人', R: '得票數', tks: '得票率' }"
+        :tableData="[
+          { P: 'green', c: '劉建國', R: 0.13251370605035, tks: 80730 },
+          { P: 'blue', c: '吳威志', R: 0.51370605035, tks: 180730 },
+          { P: 'purple', c: '王煒婷', R: 0.70605035, tks: 3070 }
+        ]"
+        style="width: 300px; margin: 0 auto;"
+      />
+      <p>example 3:</p>
+      <InfoDetailed
+        :tableData="[
+          { name: '得票數', tks: 757383 },
+          { name: '得票率', R: 0.5611123123 }
+        ]"
+        style="width: 300px; margin: 0 auto;"
+      />
     </section>
 
     <lazy-component class="credits">
@@ -84,6 +114,7 @@ export default {
     FirebaseCreateUpdate,
     FirebaseRead,
     Header,
+    InfoDetailed: () => import('./components/InfoDetailed.vue'), // for test
     LegislatorDistrict,
     LegislatorParty,
     LatestNews: () => import('./components/LatestNews.vue'),
