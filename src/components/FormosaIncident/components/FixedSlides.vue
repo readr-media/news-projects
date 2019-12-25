@@ -90,10 +90,43 @@
 export default {
   name: 'FixedSlides',
   mounted () {
-    this.animateOpening()
+    this.animateSlides()
+  },
+  computed: {
+    img5Scale () {
+      const [ ww, wh ] = this.$store.state.viewport
+      const windowAspectRatio = ww / wh
+
+      let imgOriginW
+      let imgOriginH
+      let imgInnerPhotoOriginW
+      let imgInnerPhotoOriginH
+      
+      if (ww >= 720) {
+        imgOriginW = 3845
+        imgOriginH = 2627
+        imgInnerPhotoOriginW = 1200
+        imgInnerPhotoOriginH = 839
+      } else {
+        imgOriginW = 1215
+        imgOriginH = 1572
+        imgInnerPhotoOriginW = 920
+        imgInnerPhotoOriginH = 643
+      }
+
+      const imgAspectRatio = imgOriginW / imgOriginH
+      const imgObjectFitContainRatio = (windowAspectRatio >= imgAspectRatio ? wh / imgOriginH : ww / imgOriginW)
+
+      const imgInnerPhotoW = imgInnerPhotoOriginW * imgObjectFitContainRatio
+      const imgInnerPhotoH = imgInnerPhotoOriginH * imgObjectFitContainRatio
+
+      const imgInnerPhotoAspectRatio = imgInnerPhotoOriginW / imgInnerPhotoOriginH
+      const scale = Math.ceil(windowAspectRatio >= imgInnerPhotoAspectRatio ? ww / imgInnerPhotoW : wh / imgInnerPhotoH)
+      return scale
+    }
   },
   methods: {
-    animateOpening () {
+    animateSlides () {
       const {
         img1,
         img2,
@@ -116,6 +149,8 @@ export default {
         pictureContainer,
         textContainer
       } = this.$refs
+
+      const [ ww, wh ] = this.$store.state.viewport
 
       const controller = new ScrollMagic.Controller()
 
@@ -156,12 +191,12 @@ export default {
         .setTween(tween4).addTo(controller)
         // .addIndicators()
 
-      const tween5 = TweenLite.to(img5, 0.3, { scale: 1, ease: Power2.easeOut })
+      const tween5 = TweenLite.from(img5, 0.3, { scale: this.img5Scale, ease: Power2.easeOut })
       new ScrollMagic.Scene(this.setScrollScene(text52, 0.5, '80%'))
         .setTween(tween5).addTo(controller)
         // .addIndicators()
 
-      const tween6 = TweenLite.to(img5, 0.3, { transformOrigin: this.$parent.ww >= 720 ? '49.88% 111%' : '50% 118%', scale: 0.8, opacity: 0, ease: Power2.easeOut })
+      const tween6 = TweenLite.to(img5, 0.3, { transformOrigin: ww >= 720 ? '49.88% 111%' : '50% 118%', scale: 0.8, opacity: 0, ease: Power2.easeOut })
       new ScrollMagic.Scene(this.setScrollScene(text61, 0.5, '80%'))
         .setTween(tween6).addTo(controller)
         // .addIndicators()
@@ -176,7 +211,7 @@ export default {
       new ScrollMagic.Scene(this.setScrollScene(text8, 1, 0))
         .on('start', (e) => {
           const textContainerH = textContainer.getBoundingClientRect().height
-          const wh = this.$store.state.viewport[ 1 ]
+          // const wh = this.$store.state.viewport[ 1 ]
 
           if (e.scrollDirection === 'FORWARD') {
             pictureContainer.classList.add('pos-a')
@@ -226,7 +261,8 @@ export default {
   &-img5
     // (643 / 2 + 99) / 1572
     transform-origin 50% 26.75%
-    transform scale(4)
+    transform scale(1)
+    // transform scale(4)
     background-image none
     &.desk
       transform-origin 49.88% 32.95%
