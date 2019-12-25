@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import CountyList from './ChartCountyList.vue'
-import Legends from './ChartLegends.vue'
+import CountyList from './ChartDistrictCountyList.vue'
+import Legends from './ChartDistrictLegends.vue'
 
 export default {
   components: {

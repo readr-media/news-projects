@@ -1,46 +1,36 @@
 <template>
   <section class="section">
-    <h1>2020</h1>
-    <h2>區域及原住民立委</h2>
-    <h3 v-text="h3" />
+    <h2>不分區立委</h2>
+    <h3>哪些政黨拿到了入場券</h3>
     <Chart class="section__chart" />
-    <Seats class="section__seats" />
+    <p
+      v-show="true"
+      class="section__seat-hint"
+    >
+      分配席次將於中選會公布後顯示
+    </p>
+    <Seats
+      v-show="true"
+      class="section__seats"
+      :title="'各政黨不分區席次'"
+    />
   </section>
 </template>
 
 <script>
-import Chart from './Chart.vue'
+import Chart from './ChartParty.vue'
 import Seats from './Seats.vue'
-
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('Election2020')
 
 export default {
   components: {
     Chart,
     Seats
-  },
-  computed: {
-    ...mapGetters({
-      isElectionBoxOpeningStart: 'timer/isElectionBoxOpeningStart'
-    }),
-    h3() {
-      return this.isElectionBoxOpeningStart ? '各選區開票狀態' : '尚未開票'
-    }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
 .section
-  h1
-    font-family $font-family-serif
-    font-size 36px
-    color $color-black
-    text-align center
-    font-weight 900
-    line-height 1
-    margin 0
   h2
     font-family $font-family-serif
     font-size 21px
@@ -56,6 +46,12 @@ export default {
     font-weight normal
     line-height 1.87
     margin 11px 0 0 0
+  &__chart
+    margin 18px 0 0 0
+  &__seat-hint
+    margin 20px 0 0 0
+    font-size 15px
+    color $color-black-light
   &__seats
     margin 71px 0 0 0
 
@@ -63,8 +59,6 @@ export default {
   .section
     max-width 1152px
     margin 0 auto
-    h1
-      font-size 48px
     h2
       font-size 30px
       text-align left
@@ -72,7 +66,11 @@ export default {
       font-size 16px
       text-align left
       margin 19px 0 0 0
-      float left
+    &__chart
+      margin 36px 0 0 0
+    &__seat-hint
+      margin 27px 0 0 0
+      font-size 16px
     &__seats
       margin 13px 0 0 0
 </style>

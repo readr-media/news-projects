@@ -16,7 +16,8 @@
     <section class="section">
       <h2>立委激戰搶席次</h2>
       <Countdown />
-      <LegislatorRegional />
+      <LegislatorDistrict />
+      <LegislatorParty />
     </section>
 
     <!-- TODO: delete this block -->
@@ -47,7 +48,8 @@ import FirebaseRead from './templates/FirebaseRead.vue'
 import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 import Header from './components/Header.vue'
 import PresidentCount from './components/PresidentCount.vue'
-import LegislatorRegional from './components/legislator-regional/LegislatorRegional.vue'
+import LegislatorDistrict from './components/legislator/LegislatorDistrict.vue'
+import LegislatorParty from './components/legislator/LegislatorParty.vue'
 
 // TODO: delete block
 import { mapPresidentName } from './utility/mappings'
@@ -82,7 +84,8 @@ export default {
     FirebaseCreateUpdate,
     FirebaseRead,
     Header,
-    LegislatorRegional,
+    LegislatorDistrict,
+    LegislatorParty,
     LatestNews: () => import('./components/LatestNews.vue'),
     PresidentCount,
     PresidentCountChart: () => import('./components/PresidentCountChart.vue'),
