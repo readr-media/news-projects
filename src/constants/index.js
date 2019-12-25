@@ -117,7 +117,8 @@ export const PROJECTS_NEED_FB_SDK = [
   'marathon',
   'newtype',
   'president-promise',
-  'china-company'
+  'china-company',
+  'election-2020'
 ]
 
 export const PROJECTS_NEED_FB_QUOTE = [
