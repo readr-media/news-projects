@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { get as axiosGet } from 'axios'
 import { findKey, get } from 'lodash'
 import { getSheet } from 'src/api'
