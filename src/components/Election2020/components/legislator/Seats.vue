@@ -2,61 +2,24 @@
   <section class="section">
     <h1 v-text="title" />
     <div class="section__seats seats">
-      <div class="seats__seats-wrapper seats-wrapper">
+      <transition-group
+        name="flip-list"
+        tag="div"
+        class="seats__seats-wrapper seats-wrapper"
+      >
         <SeatsCard
           class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟無黨團結聯盟'"
+          v-for="party in data"
+          :key="party.partyCode"
+          :partyName="party.name"
+          :seat="party.seats"
         />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'民進黨'"
-        />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟'"
-        />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟'"
-        />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟'"
-        />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟'"
-        />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟無黨團結聯盟無黨團結聯盟無黨團結聯盟無黨團結聯盟無黨團結聯盟'"
-        />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟'"
-        />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟'"
-        />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟'"
-        />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟'"
-        />
-        <SeatsCard
-          class="seats-wrapper__seat"
-          :partyName="'無黨團結聯盟'"
-        />
-      </div>
+      </transition-group>
     </div>
     <div class="section__seat-total-wrapper seat-total-wrapper">
       <SeatTotal
         class="seat-total-wrapper__seat-total"
-        :count="79"
+        :count="total"
       />
     </div>
   </section>
@@ -71,6 +34,14 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    data: {
+      type: Array,
+      required: true
+    },
+    total: {
+      type: Number,
+      default: 0
     }
   },
   components: {
@@ -81,6 +52,18 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.flip-list-move {
+  transition: transform .5s;
+}
+.flip-list-enter, .flip-list-leave-to
+/* .list-complete-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.flip-list-leave-active {
+  position: absolute;
+}
+
 .section
   h1
     font-size 15px
@@ -101,6 +84,7 @@ export default {
   margin -6px
   &__seat
     margin 6px
+    transition all .5s
 
 .seat-total-wrapper
   padding 10px 0

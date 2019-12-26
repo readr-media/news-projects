@@ -26,6 +26,9 @@ export default {
   components: {
     Chart,
     Seats
+  },
+  created() {
+    this.$store.dispatch('realtimeLegislatorsParty/openDBChannel')
   }
 }
 </script>
