@@ -65,7 +65,7 @@ export default {
     },
     tableHeading: {
       type: Object,
-      default: () => {}
+      default: () => ({})
     },
     tableData: {
       type: Array,
