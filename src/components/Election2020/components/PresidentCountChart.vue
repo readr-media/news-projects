@@ -12,6 +12,10 @@
           key="pfpBar"
           class="bar pfp"
           :style="{ width: `${formatRatio(testData['1'].R)}%` }"
+          @mouseenter="handleTooltip(true, $event)"
+          @mouseleave="handleTooltip(false)"
+          @click="handleTooltip(true, $event)"
+          @close="handleTooltip(false)"
         />
         <div
           key="kmtBar"
@@ -20,6 +24,10 @@
             width: `${formatRatio(testData['2'].R)}%`,
             left: `${formatRatio(testData['1'].R)}%`
           }"
+          @mouseenter="handleTooltip(true, $event)"
+          @mouseleave="handleTooltip(false)"
+          @click="handleTooltip(true, $event)"
+          @close="handleTooltip(false)"
         />
         <div
           key="dppBar"
@@ -28,6 +36,10 @@
             width: `${formatRatio(testData['3'].R)}%`,
             left: `${formatRatio(testData['1'].R) + formatRatio(testData['2'].R)}%`
           }"
+          @mouseenter="handleTooltip(true, $event)"
+          @mouseleave="handleTooltip(false)"
+          @click="handleTooltip(true, $event)"
+          @close="handleTooltip(false)"
         />
       </template>
     </transition-group>
@@ -36,35 +48,55 @@
       <div class="label kmt">國民黨</div>
       <div class="label dpp">民進黨</div>
     </div>
+    <Tooltip :showTooltip="showTooltip" :x="tooltipX" :y="tooltipY">
+      <InfoDetailed
+        title="宋楚瑜、余湘"
+        subtitle="親民黨"
+        :tableData="[
+          { name: '得票數', tks: 429148 },
+          { name: '得票率', R: 0.11123213 }
+        ]"
+      />
+    </Tooltip>
   </div>
 </template>
 <script>
 import { formatRatio } from '../utility/common'
+import { throttle } from 'lodash'
+import InfoDetailed from './InfoDetailed.vue'
+import Tooltip from './Tooltip.vue'
 
 export default {
   name: 'PresidentCountChart',
+  components: {
+    InfoDetailed,
+    Tooltip
+  },
   data () {
     return {
+      showTooltip: false,
+      tooltipX: 0,
+      tooltipY: 0,
       testData: {
         '1': {
-          R: 0,
-          tks: 0,
-          // R: 0.2587852392781253,
-          // tks: 10808489,
+          // R: 0,
+          // tks: 0,
+          R: 0.2587852392781253,
+          tks: 10808489,
           isElected: false
         },
         '2': {
-          R: 0,
-          tks: 0,
-          // R: 0.37826896118277314,
-          // tks: 15798876,
+          // R: 0,
+          // tks: 0,
+          R: 0.37826896118277314,
+          tks: 15798876,
           isElected: false
         },
         '3': {
-          R: 0,
-          tks: 0,
-          // R: 0.36294579953910155,
-          // tks: 15158885,
+          // R: 0,
+          // tks: 0,
+          R: 0.36294579953910155,
+          tks: 15158885,
           isElected: false
         }
       }
@@ -76,7 +108,14 @@ export default {
     }
   },
   methods: {
-    formatRatio
+    formatRatio,
+    handleTooltip (value, event) {
+      this.showTooltip = value
+      if (event) {
+        this.tooltipX = event.clientX
+        this.tooltipY = event.clientY
+      }
+    }
   }
 }
 </script>
