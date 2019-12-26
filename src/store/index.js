@@ -11,11 +11,13 @@ import { Firebase, initFirebase } from './config/firebase.js'
 import realtimeTest from './modules/firebase-modules/realtimeTest'
 import realtimePresidents from './modules/firebase-modules/realtimePresidents'
 import realtimeRegionalLegislators from './modules/firebase-modules/realtimeRegionalLegislators'
+import realtimeLegislatorsParty from './modules/firebase-modules/realtimeLegislatorsParty'
 const easyFirestore = VuexEasyFirestore(
   [
     realtimeTest,
     realtimePresidents,
-    realtimeRegionalLegislators
+    realtimeRegionalLegislators,
+    realtimeLegislatorsParty
   ],
   {
     logging: true,
