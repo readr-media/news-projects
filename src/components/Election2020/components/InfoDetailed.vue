@@ -64,8 +64,8 @@ export default {
       default: ''
     },
     tableHeading: {
-      type: Array,
-      default: () => []
+      type: Object,
+      default: () => {}
     },
     tableData: {
       type: Array,
