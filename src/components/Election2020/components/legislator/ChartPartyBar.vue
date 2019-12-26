@@ -9,6 +9,8 @@
         height: `${barHeight}px`
       }"
       @click="handleClick"
+      @mouseenter="handleTooltip(true, $event)"
+      @mouseleave="handleTooltip(false)"
     />
     <div
       class="bar-wrapper__tick tick"
@@ -22,13 +24,30 @@
     <LightboxWrapper
       :showLightbox.sync="showLightbox"
     >
-      this is a lightbox
+      <InfoDetailed
+        :tableData="[
+          { name: '得票數', tks: voteCount },
+          { name: '得票率', R: votePercentage }
+        ]"
+      />
     </LightboxWrapper>
+    <Tooltip :showTooltip="showTooltip" :x="tooltipX" :y="tooltipY">
+      <InfoDetailed
+        :tableData="[
+          { name: '得票數', tks: voteCount },
+          { name: '得票率', R: votePercentage }
+        ]"
+      />
+    </Tooltip>
   </div>
 </template>
 
 <script>
 import LightboxWrapper from '../LightboxWrapper.vue'
+import InfoDetailed from '../InfoDetailed.vue'
+import Tooltip from '../Tooltip.vue'
+
+import { mapState } from 'vuex'
 
 import { scaleLinear } from 'd3-scale'
 
@@ -56,17 +75,29 @@ export default {
       validator(value) {
         return value >= 0 && value <= 0.5
       }
+    },
+    voteCount: {
+      type: Number,
+      required: true
     }
   },
   components: {
-    LightboxWrapper
+    LightboxWrapper,
+    InfoDetailed,
+    Tooltip
   },
   data() {
     return {
-      showLightbox: false
+      showLightbox: false,
+      showTooltip: false,
+      tooltipX: 0,
+      tooltipY: 0
     }
   },
   computed: {
+    ...mapState({
+      vw: state => state.viewport[0]
+    }),
     barHeight() {
       const scale =
         scaleLinear()
@@ -79,6 +110,17 @@ export default {
   methods: {
     handleClick() {
       this.showLightbox = true
+    },
+    handleTooltip (value, event) {
+      if (this.vw < 768) {
+        return
+      }
+
+      this.showTooltip = value
+      if (event) {
+        this.tooltipX = event.clientX
+        this.tooltipY = event.clientY
+      }
     }
   }
 }

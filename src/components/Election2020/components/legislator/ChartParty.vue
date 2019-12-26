@@ -5,7 +5,9 @@
         50%
       </p>
       <div class="y-ticks__five-percent-tick five-percent-tick">
-        <p class="five-percent-tick__text">5%</p>
+        <p class="five-percent-tick__text">
+          5%
+        </p>
       </div>
       <p class="y-ticks__bottom-tick">
         0%
@@ -18,11 +20,12 @@
     >
       <Bar
         class="chart__bar"
-        v-for="party in parties"
-        :key="party.name"
+        v-for="party in dataChart"
+        :key="party.partyCode"
         :partyName="party.name"
         :color="mapColor(party)"
         :votePercentage="party.r"
+        :voteCount="party.tks"
       />
     </transition-group>
     <Legends class="chart-wrapper__legends" />
@@ -33,22 +36,20 @@
 import Bar from './ChartPartyBar.vue'
 import Legends from './ChartPartyLegends.vue'
 
-import { LegislatorParty } from '../../data/mock'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
     Bar,
     Legends
   },
-  data() {
-    return {
-      LegislatorParty
-    }
-  },
   computed: {
-    parties() {
-      return LegislatorParty.sort((a, b) => b.r - a.r)
-    }
+    ...mapState({
+      realtimeLegislatorsParty: state => state.realtimeLegislatorsParty.data
+    }),
+    ...mapGetters({
+      dataChart: 'realtimeLegislatorsParty/dataChart'
+    })
   },
   methods: {
     mapColor({ name = '', r = 0 }) {
@@ -67,6 +68,9 @@ export default {
         return map[name]
       }
     }
+  },
+  created() {
+    this.$store.dispatch('realtimeLegislatorsParty/openDBChannel')
   }
 }
 </script>
@@ -92,7 +96,7 @@ export default {
   pointer-events none
   border-top 1px solid rgba(0, 0, 0, 0.3)
   border-bottom 1px solid rgba(0, 0, 0, 0.3)
-  z-index 1000
+  z-index 499
   &__top-tick
     position absolute
     top -16px
