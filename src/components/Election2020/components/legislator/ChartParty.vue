@@ -68,9 +68,6 @@ export default {
         return map[name]
       }
     }
-  },
-  created() {
-    this.$store.dispatch('realtimeLegislatorsParty/openDBChannel')
   }
 }
 </script>

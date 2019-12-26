@@ -7,7 +7,7 @@
     <p class="card__seat seat">
       <Counter
         class="seat__count"
-        :count="20"
+        :count="seat"
       />
       席
     </p>

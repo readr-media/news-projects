@@ -7,6 +7,8 @@
     <Seats
       class="section__seats"
       :title="'各政黨分區席次'"
+      :data="dataSeats"
+      :total="totalSeats"
     />
   </section>
 </template>
@@ -15,6 +17,7 @@
 import Chart from './ChartDistrict.vue'
 import Seats from './Seats.vue'
 
+import { mapGetters as mapGettersRoot } from 'vuex'
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('Election2020')
 
@@ -25,11 +28,18 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isElectionBoxOpeningStart: 'timer/isElectionBoxOpeningStart'
+      isElectionBoxOpeningStart: 'timer/isElectionBoxOpeningStart',
+    }),
+    ...mapGettersRoot({
+      dataSeats: 'realtimeLegislatorsDistrictSeat/dataSeats',
+      totalSeats: 'realtimeLegislatorsDistrictSeat/totalSeats'
     }),
     h3() {
       return this.isElectionBoxOpeningStart ? '各選區開票狀態' : '尚未開票'
     }
+  },
+  created() {
+    this.$store.dispatch('realtimeLegislatorsDistrictSeat/openDBChannel')
   }
 }
 </script>
