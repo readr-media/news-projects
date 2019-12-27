@@ -1,5 +1,5 @@
 <template>
-  <div id="fact-check-debate-2020">
+  <div class="fact-check-debate-2020">
     <div class="section-container">
       <div class="hero">
         2020 總統候選人辯論
@@ -26,7 +26,7 @@
         />
         <div class="paging">
           <div class="position">
-            顯示 {{ limitNumber }} / {{ debates.length }} 則
+            顯示 {{ limitNumber }} / {{ total }} 則
           </div>
           <div
             class="loadmore"
@@ -76,7 +76,7 @@
       </div>
       <a
         class="action"
-        href="#"
+        href="/project/fact-check-2020"
       >看 2020 總統候選人事實查核計畫</a>
     </div>
 
@@ -89,28 +89,12 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import VueFirestore from 'vue-firestore';
-import firebase from 'firebase/app';
+import * as Firebase from 'firebase/app';
 import 'firebase/firestore';
 import Item from './components/Item.vue';
 
-Vue.use(VueFirestore);
-
-const config = {
-  apiKey: 'AIzaSyB61nfPkmQ9lBuJOG3HgTT-qJ_9NKZlMvA',
-  authDomain: 'mirrormedia-1470651750304.firebaseapp.com',
-  databaseURL: 'https://mirrormedia-1470651750304.firebaseio.com',
-  projectId: 'mirrormedia-1470651750304',
-  storageBucket: 'mirrormedia-1470651750304.appspot.com',
-  messagingSenderId: '983956931553',
-  appId: '1:983956931553:web:a880a20e7c8e0f3aab48a0',
-};
-
-firebase.initializeApp(config);
-const firestore = firebase.firestore();
-
 export default {
+  name: 'FactCheckDebate2020',
   metaInfo() {
     return {
       title: '2020 總統候選人辯論即時事實查核',
@@ -125,11 +109,11 @@ export default {
   data() {
     return {
       // 每次載入最大數量
-      pageLength: 1,
+      pageLength: 5,
       // 目前顯示數量
       limitNumber: 0,
       // YouTube 直播網址 (Embed形式)
-      liveUrl: 'https://www.youtube.com/embed/ApFfpb3RFR0',
+      liveUrl: 'https://www.youtube.com/embed/AAUqtzp1eX8',
       // 參與媒體
       mediaList: [
         {
@@ -155,7 +139,7 @@ export default {
     return {
       // Collection
       debates: {
-        ref: firestore.collection('debate').where('可上架（V）', '==', 'V').orderBy('編號', 'desc'),
+        ref: Firebase.firestore().collection('debate').where('可上架（V）', '==', 'V').orderBy('編號', 'desc'),
         resolve: () => {
           this.loadMore();
         },
@@ -164,8 +148,24 @@ export default {
   },
   computed: {
     limitedItems() {
-      return this.debates.slice(0, this.limitNumber);
+      return this.debates ? this.debates.slice(0, this.limitNumber) : [];
     },
+    total() {
+      return this.debates ? this.debates.length : 0;
+    },
+  },
+  mounted() {
+    if (!Firebase.apps.length) {
+      Firebase.initializeApp({
+        apiKey: 'AIzaSyB61nfPkmQ9lBuJOG3HgTT-qJ_9NKZlMvA',
+        authDomain: 'mirrormedia-1470651750304.firebaseapp.com',
+        databaseURL: 'https://mirrormedia-1470651750304.firebaseio.com',
+        projectId: 'mirrormedia-1470651750304',
+        storageBucket: 'mirrormedia-1470651750304.appspot.com',
+        messagingSenderId: '983956931553',
+        appId: '1:983956931553:web:a880a20e7c8e0f3aab48a0',
+      });
+    }
   },
   methods: {
     shareToFacebook() {
