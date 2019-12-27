@@ -85,6 +85,7 @@
     "vue-autosuggest": "^1.4.3",
     "vue-cookie": "^1.1.4",
     "vue-countup-v2": "^1.0.3",
+    "vue-firestore": "^0.3.22",
     "vue-highcharts": "^0.0.10",
     "vue-i18n": "^8.8.2",
     "vue-lazyload": "1.2.6",
