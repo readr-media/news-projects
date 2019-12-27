@@ -39,6 +39,7 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch('realtimeLegislatorsDistricts/openDBChannel')
     this.$store.dispatch('realtimeLegislatorsDistrictSeat/openDBChannel')
   }
 }
