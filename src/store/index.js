@@ -12,6 +12,7 @@ import realtimeTest from './modules/firebase-modules/realtimeTest'
 import realtimePresidents from './modules/firebase-modules/realtimePresidents'
 import realtimeRegionalLegislators from './modules/firebase-modules/realtimeRegionalLegislators'
 import realtimeLegislatorsParty from './modules/firebase-modules/realtimeLegislatorsParty'
+import realtimeLegislatorsDistricts from './modules/firebase-modules/realtimeLegislatorsDistricts'
 import realtimeLegislatorsDistrictSeat from './modules/firebase-modules/realtimeLegislatorsDistrictSeat'
 const easyFirestore = VuexEasyFirestore(
   [
@@ -19,6 +20,7 @@ const easyFirestore = VuexEasyFirestore(
     realtimePresidents,
     realtimeRegionalLegislators,
     realtimeLegislatorsParty,
+    realtimeLegislatorsDistricts,
     realtimeLegislatorsDistrictSeat
   ],
   {

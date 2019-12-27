@@ -1,7 +1,8 @@
 export const LegislatorCounties = [
   {
-    name: '台北市',
-    regions: {
+    name: '臺北市',
+    districtsCount: 8,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -18,7 +19,8 @@ export const LegislatorCounties = [
   },
   {
     name: '新北市',
-    regions: {
+    districtsCount: 12,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -35,7 +37,8 @@ export const LegislatorCounties = [
   },
   {
     name: '桃園市',
-    regions: {
+    districtsCount: 6,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -51,8 +54,9 @@ export const LegislatorCounties = [
     }
   },
   {
-    name: '台中市',
-    regions: {
+    name: '臺中市',
+    districtsCount: 8,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -68,8 +72,10 @@ export const LegislatorCounties = [
     }
   },
   {
-    name: '台南市',
-    regions: {
+    name: '臺南市',
+    // code: '000',
+    districtsCount: 6,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -86,7 +92,8 @@ export const LegislatorCounties = [
   },
   {
     name: '高雄市',
-    regions: {
+    districtsCount: 8,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -103,7 +110,9 @@ export const LegislatorCounties = [
   },
   {
     name: '基隆市',
-    regions: {
+    // code: '017',
+    districtsCount: 1,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -120,7 +129,9 @@ export const LegislatorCounties = [
   },
   {
     name: '宜蘭縣',
-    regions: {
+    // code: '002',
+    districtsCount: 1,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -137,7 +148,9 @@ export const LegislatorCounties = [
   },
   {
     name: '新竹縣',
-    regions: {
+    // code: '004',
+    districtsCount: 2,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -154,7 +167,9 @@ export const LegislatorCounties = [
   },
   {
     name: '新竹市',
-    regions: {
+    // code: '018',
+    districtsCount: 1,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -171,7 +186,9 @@ export const LegislatorCounties = [
   },
   {
     name: '苗栗縣',
-    regions: {
+    // code: '005',
+    districtsCount: 2,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -188,7 +205,9 @@ export const LegislatorCounties = [
   },
   {
     name: '彰化縣',
-    regions: {
+    // code: '007',
+    districtsCount: 4,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -205,7 +224,9 @@ export const LegislatorCounties = [
   },
   {
     name: '南投縣',
-    regions: {
+    // code: '008',
+    districtsCount: 2,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -222,7 +243,9 @@ export const LegislatorCounties = [
   },
   {
     name: '雲林縣',
-    regions: {
+    // code: '009',
+    districtsCount: 2,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -239,7 +262,9 @@ export const LegislatorCounties = [
   },
   {
     name: '嘉義縣',
-    regions: {
+    // code: '010',
+    districtsCount: 2,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -256,7 +281,8 @@ export const LegislatorCounties = [
   },
   {
     name: '嘉義市',
-    regions: {
+    districtsCount: 1,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -273,7 +299,9 @@ export const LegislatorCounties = [
   },
   {
     name: '屏東縣',
-    regions: {
+    // code: '013',
+    districtsCount: 2,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -289,8 +317,10 @@ export const LegislatorCounties = [
     }
   },
   {
-    name: '台東縣',
-    regions: {
+    name: '臺東縣',
+    // code: '014',
+    districtsCount: 1,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -307,7 +337,9 @@ export const LegislatorCounties = [
   },
   {
     name: '花蓮縣',
-    regions: {
+    // code: '015',
+    districtsCount: 1,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -324,7 +356,9 @@ export const LegislatorCounties = [
   },
   {
     name: '澎湖縣',
-    regions: {
+    // code: '016',
+    districtsCount: 1,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -341,7 +375,9 @@ export const LegislatorCounties = [
   },
   {
     name: '金門縣',
-    regions: {
+    // code: '020',
+    districtsCount: 1,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -358,7 +394,9 @@ export const LegislatorCounties = [
   },
   {
     name: '連江縣',
-    regions: {
+    // code: '007',
+    districtsCount: 1,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -375,7 +413,8 @@ export const LegislatorCounties = [
   },
   {
     name: '山地原住民',
-    regions: {
+    districtsCount: 3,
+    districts: {
       1: {
         L: -1,
         isElected: '*'
@@ -392,7 +431,8 @@ export const LegislatorCounties = [
   },
   {
     name: '平地原住民',
-    regions: {
+    districtsCount: 3,
+    districts: {
       1: {
         L: -1,
         isElected: '*'

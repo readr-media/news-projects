@@ -7,12 +7,12 @@
     <div class="list-item__regions regions">
       <Square
         class="regions__region"
-        v-for="(region, i) in countyRegions"
-        :key="`${countyName}-${i}`"
-        :color="getColor(region)"
-        :shouldAnimate="getShouldAnimate(region)"
-        :showBorder="getIsElected(region)"
-        :number="getSquareNumber(region, i)"
+        v-for="(region, i) in countyDistricts"
+        :key="`${countyName}-${i + 1}`"
+        :color="getColor(String(i + 1))"
+        :shouldAnimate="getShouldAnimate(String(i + 1))"
+        :showBorder="getIsElected(String(i + 1))"
+        :number="getSquareNumber(String(i + 1))"
         @click.native="handleClick"
       />
     </div>
@@ -30,8 +30,11 @@ import _ from 'lodash'
 import Square from '../Square.vue'
 import LightboxWrapper from '../LightboxWrapper.vue'
 
+import { mapGetters as mapGettersRoot } from 'vuex'
 import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('Election2020')
+const { mapState, mapGetters } = createNamespacedHelpers('Election2020')
+
+import { mapPartyNameAbbr } from '../../utility/mappings'
 
 export default {
   props: {
@@ -53,33 +56,60 @@ export default {
     ...mapGetters({
       isElectionBoxOpeningStart: 'timer/isElectionBoxOpeningStart'
     }),
+    ...mapGettersRoot({
+      realtimeLegislatorsDistricts: 'realtimeLegislatorsDistricts/dataPadKeys'
+    }),
     countyName() {
       return this.county.name
     },
-    countyRegions() {
-      return this.county.regions
+    ...mapState({
+      regionData: state => state.gcs.data.region,
+      partyData: state => state.gcs.data.party
+    }),
+    countyCode() {
+      const countyCode = _.findKey(this.regionData, [ 'name', this.countyName ])
+      return (countyCode || '').padStart(3, '0')
+    },
+    countyDistricts() {
+      return this.county.districtsCount
     }
   },
   methods: {
-    getHasPartyLeading(region) {
-      return _.get(region, 'L', -1) !== -1
+    getParty(i) {
+      const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, i.padStart(2, '0') ], {})
+      return _.get(district, 'L', -1)
     },
-    getIsElected(region) {
-      return _.get(region, 'isElected', '') === '*'
+    getHasPartyLeading(i) {
+      return this.getParty(i) !== -1
     },
-    getSquareNumber(region, i) {
-      const shouldShowNumber = !this.getHasPartyLeading(region)
-
+    getSquareNumber(i) {
+      const shouldShowNumber = !this.getHasPartyLeading(i)
       return shouldShowNumber ? Number(i) : -1
     },
-    getShouldAnimate(region) {
-      const hasPartyLeading = this.getHasPartyLeading(region)
-      const hasCandidateElected = this.getIsElected(region)
+    getIsElected(i) {
+      const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, i.padStart(2, '0') ], {})
+      return _.get(district, 'isElected', '') === '*'
+    },
+    getShouldAnimate(i) {
+      const hasPartyLeading = this.getHasPartyLeading(i)
+      const hasCandidateElected = this.getIsElected(i)
       return hasPartyLeading && !hasCandidateElected
     },
-    getColor(region) {
-      // TODO: we need a mapping of party <=> color
-      return 'blue'
+    getColor(i) {
+      const partyCode = String(this.getParty(i)).padStart(3, '0')
+      const partyName = this.partyData[partyCode]
+      const partyNameAbbr = mapPartyNameAbbr(partyName)
+
+      switch (partyNameAbbr) {
+        case '國民黨':
+          return 'blue'
+        case '民進黨':
+          return 'green'
+        case '無黨籍':
+          return 'gray'
+        default:
+          return 'purple'
+      }
     },
 
     handleClick() {
