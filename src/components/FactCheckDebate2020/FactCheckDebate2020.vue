@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="fact-check-debate-2020">
     <div class="section-container">
       <div class="hero">
         2020 總統候選人辯論
@@ -109,8 +109,8 @@ export default {
     return {
       title: '2020 總統候選人辯論即時事實查核',
       description: '總統候選人辯論，媒體即時查核！2020 總統候選人事實查核計畫陪你一起看辯論！',
-      metaUrl: 'META-URL-TBD',
-      metaImage: 'META-URL-IMG/ogimage.png',
+      metaUrl: 'fact-check-debate-2020',
+      metaImage: 'fact-check-debate-2020/img/og_img.jpg',
     };
   },
   components: {
