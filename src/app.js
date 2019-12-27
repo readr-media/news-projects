@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import VueLazyload from 'vue-lazyload'
+import VueFirestore from 'vue-firestore'
 import App from './App.vue'
 import { createStore } from './store'
 import { createRouter } from './router'
@@ -18,6 +19,8 @@ Vue.use(VueLazyload, {
   lazyComponent: true,
   observer: true
 })
+
+Vue.use(VueFirestore)
 
 // mixin for handling title
 Vue.mixin(titleMeta)
