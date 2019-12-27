@@ -64,6 +64,14 @@
     <lazy-component class="section subscr">
       <SubscriptionWithLogoMsg />
     </lazy-component>
+    <section class="section comment">
+      <div
+        class="fb-comments"
+        data-href="https://www.readr.tw/project/election-2020"
+        data-width="100%"
+        data-numposts="5"
+      />
+    </section>
     <FirebaseCreateUpdate />
     <FirebaseRead />
   </section>
@@ -158,6 +166,7 @@ export default {
 $content-width-mobile = 90%
 $content-width-tablet = 60%
 $content-width-tablet-extend = 80%
+$content-max-width = 650px
 
 $margin-center =
   margin-left auto
@@ -187,6 +196,7 @@ $margin-center =
     text-align center
     > p
       width $content-width-mobile
+      max-width $content-max-width
       {$margin-center}
       line-height 1.87
       text-align justify
@@ -198,9 +208,11 @@ $margin-center =
   
   .president-count-chart
     display none
-  .subscr
+  .subscr, .comment
     width $content-width-mobile
     {$margin-center}
+  .subscr
+    max-width $content-max-width
     >>> .subscr-l-m__heading
       p
         color $color-black-lighter
@@ -226,7 +238,7 @@ $margin-center =
     .president-count-chart
       display block
       margin-top 66px
-    .subscr
+    .subscr, .comment
       width $content-width-tablet
 
 @media (min-width: 1024px)
