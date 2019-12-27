@@ -32,8 +32,8 @@
   </transition-group>
 </template>
 <script>
-import { formatRatio } from '../utility/common'
-import Counter from './Counter.vue'
+import { formatRatio } from '../../utility/common'
+import Counter from '../Counter.vue'
 
 export default {
   name: 'PresidentCount',

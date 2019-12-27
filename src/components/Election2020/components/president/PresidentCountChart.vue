@@ -61,10 +61,10 @@
   </div>
 </template>
 <script>
-import { formatRatio } from '../utility/common'
+import { formatRatio } from '../../utility/common'
 import { throttle } from 'lodash'
-import InfoDetailed from './InfoDetailed.vue'
-import Tooltip from './Tooltip.vue'
+import InfoDetailed from '../InfoDetailed.vue'
+import Tooltip from '../Tooltip.vue'
 
 export default {
   name: 'PresidentCountChart',

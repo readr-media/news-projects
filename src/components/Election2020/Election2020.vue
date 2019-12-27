@@ -77,7 +77,7 @@ import Countdown from './components/Countdown.vue'
 import FirebaseRead from './templates/FirebaseRead.vue'
 import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 import Header from './components/Header.vue'
-import PresidentCount from './components/PresidentCount.vue'
+import PresidentCount from './components/president/PresidentCount.vue'
 import LegislatorDistrict from './components/legislator/LegislatorDistrict.vue'
 import LegislatorParty from './components/legislator/LegislatorParty.vue'
 
@@ -119,7 +119,7 @@ export default {
     LegislatorParty,
     LatestNews: () => import('./components/LatestNews.vue'),
     PresidentCount,
-    PresidentCountChart: () => import('./components/PresidentCountChart.vue'),
+    PresidentCountChart: () => import('./components/president/PresidentCountChart.vue'),
     TheCredits: () => import('./components/TheCredits.vue'),
     TheDonateFooter: () => import('./components/TheDonateFooter.vue'),
     SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue')
