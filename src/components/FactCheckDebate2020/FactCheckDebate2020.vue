@@ -98,7 +98,13 @@ import Item from './components/Item.vue';
 Vue.use(VueFirestore);
 
 const config = {
-  // Firebase Config
+  apiKey: 'AIzaSyB61nfPkmQ9lBuJOG3HgTT-qJ_9NKZlMvA',
+  authDomain: 'mirrormedia-1470651750304.firebaseapp.com',
+  databaseURL: 'https://mirrormedia-1470651750304.firebaseio.com',
+  projectId: 'mirrormedia-1470651750304',
+  storageBucket: 'mirrormedia-1470651750304.appspot.com',
+  messagingSenderId: '983956931553',
+  appId: '1:983956931553:web:a880a20e7c8e0f3aab48a0',
 };
 
 firebase.initializeApp(config);
