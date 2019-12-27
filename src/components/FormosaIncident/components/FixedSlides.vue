@@ -29,8 +29,10 @@
           <source type="image/webp" srcset="/proj-assets/formosaincident/img/opening/4-mob.webp">
           <img class="obf-cover" src="/proj-assets/formosaincident/img/opening/4-mob.png" alt="">
         </picture>
-        <div id="slides-img4-text" ref="img4Text">
-          <p>你這雜誌哪裡來的！<br>美麗島雜誌破壞團結，你哪裡找來的？<br>這本書我得沒收！</p>
+        <div id="slides-img4-text">
+          <p>你這雜誌哪裡來的！</p>
+          <p>美麗島雜誌破壞團結，你哪裡找來的？</p>
+          <p>這本書我得沒收！</p>
         </div>
       </div>
 
@@ -90,17 +92,49 @@
 export default {
   name: 'FixedSlides',
   mounted () {
-    this.animateOpening()
+    this.animateSlides()
+  },
+  computed: {
+    img5Scale () {
+      const [ ww, wh ] = this.$store.state.viewport
+      const windowAspectRatio = ww / wh
+
+      let imgOriginW
+      let imgOriginH
+      let imgInnerPhotoOriginW
+      let imgInnerPhotoOriginH
+      
+      if (ww >= 720) {
+        imgOriginW = 3845
+        imgOriginH = 2627
+        imgInnerPhotoOriginW = 1200
+        imgInnerPhotoOriginH = 839
+      } else {
+        imgOriginW = 1215
+        imgOriginH = 1572
+        imgInnerPhotoOriginW = 920
+        imgInnerPhotoOriginH = 643
+      }
+
+      const imgAspectRatio = imgOriginW / imgOriginH
+      const imgObjectFitContainRatio = (windowAspectRatio >= imgAspectRatio ? wh / imgOriginH : ww / imgOriginW)
+
+      const imgInnerPhotoW = imgInnerPhotoOriginW * imgObjectFitContainRatio
+      const imgInnerPhotoH = imgInnerPhotoOriginH * imgObjectFitContainRatio
+
+      const imgInnerPhotoAspectRatio = imgInnerPhotoOriginW / imgInnerPhotoOriginH
+      const scale = Math.ceil(windowAspectRatio >= imgInnerPhotoAspectRatio ? ww / imgInnerPhotoW : wh / imgInnerPhotoH)
+      return scale
+    }
   },
   methods: {
-    animateOpening () {
+    animateSlides () {
       const {
         img1,
         img2,
         img3,
         img4Wrapper,
         img4,
-        img4Text,
         img5,
         img6Wrapper,
         img61,
@@ -117,33 +151,48 @@ export default {
         textContainer
       } = this.$refs
 
+      const [ ww, wh ] = this.$store.state.viewport
+
       const controller = new ScrollMagic.Controller()
+
+      const sendGa1 = () => {
+        this.$parent.wEl.ga('send', 'event', 'projects', 'scroll', 'scroll to 這是什麼啊', 1)
+        scene1.off('leave', sendGa1)
+      }
+
+      const sendGa2 = () => {
+        this.$parent.wEl.ga('send', 'event', 'projects', 'scroll', 'scroll to 你這雜誌哪裡來的', 2)
+        scene2.off('leave', sendGa2)
+      }
+
+      const sendGa3 = () => {
+        this.$parent.wEl.ga('send', 'event', 'projects', 'scroll', 'scroll to 重回美麗島現場', 3)
+        scene3.off('progress', sendGa3)
+      }
 
       const tween1 = new TimelineLite()
       tween1.to(img1, 0.3, { opacity: 0 })
       tween1.to(img2, 0.3, { opacity: 1, scale: 1 })
-      new ScrollMagic.Scene(this.setScrollScene(text2))
+      const scene1 = new ScrollMagic.Scene(this.setScrollScene(text2))
+        .on('leave', sendGa1)
         .setTween(tween1).addTo(controller)
-        // .addIndicators()
 
       const tween2 = new TimelineLite()
       tween2.to(img2, 0.3, { opacity: 0 })
       tween2.to(img3, 0.3, { opacity: 1, scale: 1 })
       new ScrollMagic.Scene(this.setScrollScene(text3))
         .setTween(tween2).addTo(controller)
-        // .addIndicators()
 
       const tween3 = new TimelineLite()
       tween3.to(img4, 0.3, { opacity: 1, scale: 1 })
-      tween3.set(img4Text, { x: '-50%', y: '-50%' })
-      tween3.to(img4Text, 0.3, { scale: 1, opacity: 1, ease: Power4.easeOut }, 0.3)
-      new ScrollMagic.Scene(this.setScrollScene(text4, 0.8, '120%'))
+      tween3.staggerTo('#slides-img4-text > p', 0.3, { scale: 1, opacity: 1, ease: Power4.easeOut }, 0.15)
+      const scene2 = new ScrollMagic.Scene(this.setScrollScene(text4, 0.8, '160%'))
         .on('start', function (e) {
           const isForward = e.scrollDirection === 'FORWARD'
           TweenLite.set(img3, { opacity: isForward ? 0 : 1 })
         })
+        .on('leave', sendGa2)
         .setTween(tween3).addTo(controller)
-        // .addIndicators()
 
       const tween4 = new TimelineLite()
       tween4.to(img4Wrapper, 0.3, { opacity: 0 })
@@ -154,29 +203,24 @@ export default {
           TweenLite.set(img61, { opacity: isForward ? 1 : 0 })
         })
         .setTween(tween4).addTo(controller)
-        // .addIndicators()
 
-      const tween5 = TweenLite.to(img5, 0.3, { scale: 1, ease: Power2.easeOut })
+      const tween5 = TweenLite.from(img5, 0.3, { scale: this.img5Scale, ease: Power2.easeOut })
       new ScrollMagic.Scene(this.setScrollScene(text52, 0.5, '80%'))
         .setTween(tween5).addTo(controller)
-        // .addIndicators()
 
-      const tween6 = TweenLite.to(img5, 0.3, { transformOrigin: this.$parent.ww >= 720 ? '49.88% 111%' : '50% 118%', scale: 0.8, opacity: 0, ease: Power2.easeOut })
+      const tween6 = TweenLite.to(img5, 0.3, { transformOrigin: ww >= 720 ? '49.88% 111%' : '50% 118%', scale: 0.8, opacity: 0, ease: Power2.easeOut })
       new ScrollMagic.Scene(this.setScrollScene(text61, 0.5, '80%'))
         .setTween(tween6).addTo(controller)
-        // .addIndicators()
 
       const tween7 = new TimelineLite()
       tween7.to(img61, 0.3, { scale: 1 })
       tween7.to(img62, 0.45, { opacity: 1, x: 0 })
       new ScrollMagic.Scene(this.setScrollScene(text7, 0.5, '160%'))
         .setTween(tween7).addTo(controller)
-        // .addIndicators()
 
-      new ScrollMagic.Scene(this.setScrollScene(text8, 1, 0))
-        .on('start', (e) => {
+      const scene3 = new ScrollMagic.Scene(this.setScrollScene(text8, 1, 0))
+        .on('start', function (e) {
           const textContainerH = textContainer.getBoundingClientRect().height
-          const wh = this.$store.state.viewport[ 1 ]
 
           if (e.scrollDirection === 'FORWARD') {
             pictureContainer.classList.add('pos-a')
@@ -186,8 +230,8 @@ export default {
             img6Wrapper.style.marginTop = 0
           }
         })
+        .on('progress', sendGa3)
         .addTo(controller)
-        // .addIndicators()
     },
     setScrollScene (triggerElement, triggerHook = 0.8, duration = '40%') {
       return {
@@ -211,22 +255,26 @@ export default {
     width 100%
     top 50%
     left 50%
-    transform translate(-50%, -50%) scale(0)
+    transform translate(-50%, -50%)
     font-size 2.1rem
     color #fff
-    line-height 2.76
+    line-height 1.8
     font-weight 500
     text-align center
     padding-right 34px
     padding-left 34px
-    opacity 0
     @media (min-width $breakpoint.sm)
       font-size 4rem
       line-height 1.45
+    & > p
+      transform scale(0)
+      opacity 0
+      & + p
+        margin-top 10px
   &-img5
     // (643 / 2 + 99) / 1572
     transform-origin 50% 26.75%
-    transform scale(4)
+    transform scale(1)
     background-image none
     &.desk
       transform-origin 49.88% 32.95%
@@ -236,7 +284,7 @@ export default {
   &-text1
     margin-top 20vh
   &-text4
-    height 160vh
+    height 200vh
   &-text5-1
     height 140vh
   &-text7

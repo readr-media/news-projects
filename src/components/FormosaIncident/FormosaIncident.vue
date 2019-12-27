@@ -4,7 +4,7 @@
       <FixedSlides />
       <ScrollTimeline v-if="isMobW" />
       <FixedTimeline v-if="isDeskW" />
-      <div class="ending">
+      <div class="ending" ref="ending">
         <picture>
           <source media="(min-width: 720px)" srcset="/proj-assets/formosaincident/img/ending-bg-desk.png">
           <img src="/proj-assets/formosaincident/img/ending-bg-mob.png" alt="">
@@ -56,7 +56,7 @@ export default {
     this.wEl.addEventListener('scroll', this.displayHeaderBar)
     this.headerBarEl.addEventListener('mouseenter', this.enterHeaderBar)
 
-    // TweenLite.defaultEase = Power0.easeNone
+    this.wEl.addEventListener('scroll', this.sendGaEnding)
   },
   computed: {
     ww () {
@@ -81,6 +81,13 @@ export default {
     },
     enterHeaderBar () { 
       this.headerBarEl.classList.remove('hidden')
+    },
+    sendGaEnding () {
+      const { top } = this.$refs.ending.getBoundingClientRect()
+      if (top < 0) {
+        this.wEl.ga('send', 'event', 'projects', 'scroll', 'scroll to 40年的時間', 4)
+        this.wEl.removeEventListener('scroll', this.sendGaEnding)
+      }
     }
   }
 }
