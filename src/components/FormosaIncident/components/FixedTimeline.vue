@@ -43,7 +43,7 @@ export default {
 
       const controller = new ScrollMagic.Controller()
       new ScrollMagic.Scene(this.setScrollScene(textContainer, 0, 0))
-        .on('start', (e) => {
+        .on('start', function (e) {
           if (e.scrollDirection === 'FORWARD') {
             bg.classList.add('fixed')
           } else {
@@ -54,6 +54,7 @@ export default {
     },
     animateTimeline () {
       const { end, textContainer, bg, img17, img18, img19, img27, img29, text18, text29 } = this.$refs
+      const wh = this.$store.state.viewport[ 1 ]
       const controller = new ScrollMagic.Controller()
       const specials = [ 18, 28 ]
 
@@ -66,7 +67,6 @@ export default {
         new ScrollMagic.Scene(this.setScrollScene(this.$refs[ `text${id + 1}` ]))
         .setTween(tween)
         .addTo(controller)
-        // .addIndicators()
       }
 
       const tween1 = new TimelineLite()
@@ -77,7 +77,6 @@ export default {
       new ScrollMagic.Scene(this.setScrollScene(text18, 0.5, '120%'))
         .setTween(tween1)
         .addTo(controller)
-        // .addIndicators()
 
       const tween2 = new TimelineLite()
       tween2.to(img27, 0.3, { opacity: 0 })
@@ -85,12 +84,10 @@ export default {
       new ScrollMagic.Scene(this.setScrollScene(text29))
         .setTween(tween2)
         .addTo(controller)
-        // .addIndicators()
       
       new ScrollMagic.Scene(this.setScrollScene(end, 1, 0))
-        .on('start', (e) => {
+        .on('start', function (e) {
           const textContainerH = textContainer.getBoundingClientRect().height
-          const wh = this.$store.state.viewport[ 1 ]
 
           if (e.scrollDirection === 'FORWARD') {
             bg.classList.add('pos-a')
@@ -159,9 +156,9 @@ export default {
       position absolute
       display block
       width 2px
-      top 42vh
+      top 82vh
       background-color #fff
-      height calc(100% - 42vh)
+      height calc(100% - 82vh)
       left 4.1vw
   &__text-wrapper
     padding-top 40vh
@@ -171,6 +168,12 @@ export default {
     margin-left 6.81vw
     padding-right 2.71vw
     position relative
+    &:first-child
+      padding-top 80vh
+      &::before
+        top calc(80vh + 7.5px)
+      &::after
+        top calc(80vh + 19.5px)
     &:nth-child(18)
       padding-bottom 120vh
     &:nth-child(27)
