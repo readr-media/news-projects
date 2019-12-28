@@ -206,11 +206,8 @@ h1.hero {
     font-size: 14px;
     color: #fff;
 }
+.factcheck-list .item.active .expand i.icon-expand,
 .factcheck-list div.item:hover .expand > i.icon-expand {
-    background-image: url('/proj-assets/fact-check/read_pressed.png');
-}
-
-.factcheck-list div.item:active .expand > i.icon-expand {
     background-image: url('/proj-assets/fact-check/read_pressed.png');
 }
 
@@ -219,7 +216,7 @@ h1.hero {
 }
 
 .factcheck-list .item .content .fact-detail {
-    margin-bottom: 36px;
+    margin-bottom: 46px;
 }
 
 .factcheck-list .item .content .fact-detail .fact-explain {
@@ -402,7 +399,7 @@ i.icon-controversy {
 .media {
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: 170px 170px 170px 170px;
+    grid-template-columns: 170px 170px 170px;
     padding-bottom: 120px;
     padding-top: 40px;
     justify-content: center;
