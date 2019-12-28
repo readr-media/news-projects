@@ -1,5 +1,4 @@
 html, body {
-    background-color: #07172e;
     font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, sans-serif;
     margin: 0;
     padding: 0;
@@ -7,6 +6,7 @@ html, body {
 
 .fact-check-debate-2020 {
     color: #fff;
+    background-color: #07172e;
 }
 
 .section-container {
@@ -17,15 +17,21 @@ html, body {
 .section-container h2.title {
     font-size: 32px;
     font-weight: 400;
-    padding-top: 120px;
+    margin: 0;
+    padding-top: 60px;
     text-align: center;
 }
 
 .section-container h3.title {
     font-size: 20px;
     font-weight: 400;
-    padding-top: 120px;
+    padding-top: 60px;
     text-align: center;
+}
+
+.width-control {
+    max-width: 810px;
+    margin: 0 auto;
 }
 
 .video-container {
@@ -34,13 +40,14 @@ html, body {
     position: relative;
 }
 
-.hero {
+h1.hero {
     color: #e56300;
     font-size: 3rem;
     font-weight: 600;
     line-height: 1.3;
-    padding: 180px 0;
+    padding: 100px 0;
     text-align: center;
+    margin: 0;
 }
 
 .hero .small {
@@ -129,7 +136,7 @@ html, body {
 }
 
 .factcheck-list {
-    padding: 120px 0;
+    padding: 60px 0;
 }
 
 .factcheck-list .item {
@@ -187,12 +194,24 @@ html, body {
     line-height: 1.64;
     color: #9b9b9b;
 }
+.factcheck-list .item .expand i.icon-expand {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url('/proj-assets/fact-check/read_default.png');
+    background-size: contain;
+    margin-left: 7px;
+}
 .factcheck-list div.item:hover .expand {
     font-size: 14px;
     color: #fff;
 }
-.factcheck-list div.item:hover .expand > .icon-expand {
-    background-image: url('/proj-assets/fact-check-debate-2020/img/icon-file-active.svg');
+.factcheck-list div.item:hover .expand > i.icon-expand {
+    background-image: url('/proj-assets/fact-check/read_pressed.png');
+}
+
+.factcheck-list div.item:active .expand > i.icon-expand {
+    background-image: url('/proj-assets/fact-check/read_pressed.png');
 }
 
 .factcheck-list .item.active .expand span.text {
@@ -207,6 +226,7 @@ html, body {
     font-size: 16px;
     line-height: 2.81;
     color: #ffffff;
+    display: none;
 }
 .factcheck-list .item .content .fact-detail .fact-reference {
     font-size: 14px;
@@ -231,6 +251,7 @@ html, body {
 }
 .factcheck-list .item.active .content .fact-detail .fact-reference,
 .factcheck-list .item.active .content .fact-detail .fact-quote,
+.factcheck-list .item.active .content .fact-detail .fact-explain,
 .factcheck-list .item.active .content .fact-detail .fact-source {
     display: block;
 }
@@ -238,25 +259,23 @@ html, body {
 .factcheck-list .item .content .fact-status {
     bottom: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     position: absolute;
 }
 
 .factcheck-list .item .content .fact-status .status {
-    margin-right: 11px;
-    width: 34px;
-    height: 36px;
     align-items: center;
-    justify-content: center;
     display: flex;
+    font-size: 16px;
+    height: 36px;
+    margin-right: 11px;
 }
 .factcheck-list .item .content .fact-status .source {
     align-items: center;
-    justify-content: center;
+    color: #9b9b9b;
     display: flex;
     font-size: 14px;
-    line-height: 1.57;
-    color: #9b9b9b;
+    justify-content: center;
 }
 
 .img {
@@ -357,33 +376,24 @@ i {
     background-repeat: no-repeat;
 }
 
-i.icon-expand {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    background-image: url('/proj-assets/fact-check-debate-2020/img/icon-file.svg');
-    background-size: contain;
-    margin-left: 7px;
-}
-
 i.icon-true {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 30px;
+    height: 30px;
     background-image: url('/proj-assets/fact-check/real.png');
     background-size: contain;
 }
 i.icon-false {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 30px;
+    height: 30px;
     background-image: url('/proj-assets/fact-check/wrong.png');
     background-size: contain;
 }
 i.icon-controversy {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 30px;
+    height: 30px;
     background-image: url('/proj-assets/fact-check/controversial.png');
     background-size: contain;
 }
@@ -394,7 +404,7 @@ i.icon-controversy {
     grid-gap: 10px;
     grid-template-columns: 170px 170px 170px 170px;
     padding-bottom: 120px;
-    padding-top: 70px;
+    padding-top: 40px;
     justify-content: center;
     justify-items: center;
 }
@@ -423,19 +433,23 @@ i.icon-controversy {
 }
 
 .media .block .logo.readr {
-    width: 59px;
-    height: 54px;
+    width: 100px;
+    height: 100px;
     background-image: url('/proj-assets/fact-check/logo/readr.svg');
 }
 .media .block .logo.right-plus {
+    width: 120px;
+    height: 120px;
     background-image: url('/proj-assets/fact-check/logo/right-plus.svg');
 }
 .media .block .logo.newslab {
     width: 170px;
-    height: 38px;
+    height: 170px;
     background-image: url('/proj-assets/fact-check/logo/newslab.svg');
 }
 .media .block .logo.futurecity {
+    width: 170px;
+    height: 170px;
     background-image: url('/proj-assets/fact-check/logo/futurecity.png');
 }
 .media .block .logo.TEIA {
@@ -457,7 +471,7 @@ i.icon-controversy {
     .hero {
         font-size: 2.625rem;
         font-weight: 600;
-        padding: 25px 0;
+        padding: 15px 0;
     }
     .hero .small {
         font-size: 1.6rem;
@@ -467,19 +481,20 @@ i.icon-controversy {
     }
 
     .section-container h2.title {
-        font-size: 1.625rem;
+        font-size: 26px;
         font-weight: 500;
         line-height: 1.25;
+        padding-top: 40px;
     }
     .section-container h3.title {
         padding-top: 60px;
-        font-size: 20px;
-        font-weight: 400;
+        font-size: 26px;
+        font-weight: 500;
         line-height: 1.25;
     }
 
     .factcheck-list {
-        padding: 60px 0;
+        padding: 40px 0;
     }
 
     .factcheck-list .item {
@@ -499,10 +514,11 @@ i.icon-controversy {
         display: flex;
         flex-direction: row;
         align-items: center;
+        font-size: 14px;
     }
 
     .factcheck-list .item .row .status i {
-        margin-right: 10px;
+        margin-right: 0px;
     }
 
     .factcheck-list .item .avatar {
@@ -568,8 +584,8 @@ i.icon-controversy {
         padding-bottom: 60px;
         grid-gap: 10px;
         grid-template-columns: 146px 146px;
-        padding-bottom: 120px;
-        padding-top: 70px;
+        padding-bottom: 40px;
+        padding-top: 40px;
     }
 
     .media .block {
