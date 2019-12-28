@@ -112,7 +112,7 @@ export default {
   data() {
     return {
       // 每次載入最大數量
-      pageLength: 5,
+      pageLength: 20,
       // 目前顯示數量
       limitNumber: 0,
       // YouTube 直播網址 (Embed形式)
@@ -159,7 +159,9 @@ export default {
   },
   computed: {
     limitedItems() {
-      return this.debates ? this.debates.slice(0, this.limitNumber) : [];
+      return this.debates
+        ? this.debates.slice(0, this.limitNumber >= this.pageLength ? this.limitNumber : this.pageLength)
+        : [];
     },
     total() {
       return this.debates ? this.debates.length : 0;
