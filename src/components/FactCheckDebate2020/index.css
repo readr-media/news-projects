@@ -547,6 +547,7 @@ i.icon-controversy {
     .factcheck-list .item .content .fact-title {
         font-size: 18px;
         line-height: 1.33;
+        padding-right: 0;
     }
 
     .factcheck-list .item .content .fact-detail {
