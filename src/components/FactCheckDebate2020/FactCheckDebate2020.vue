@@ -167,7 +167,8 @@ export default {
       return this.debates ? this.debates.length : 0;
     },
     showLoadMore() {
-      return this.limitNumber < (this.debates ? this.debates.length : 0);
+      const itemCount = (this.debates ? this.debates.length : 0);
+      return (itemCount >= this.pageLength) && this.limitNumber < itemCount;
     },
   },
   mounted() {

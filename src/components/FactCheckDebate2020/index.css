@@ -181,6 +181,10 @@ h1.hero {
     font-size: 22px;
     line-height: 1.36;
     color: #ffffff;
+    padding-right: 100px;
+}
+.factcheck-list .item.active .content .fact-title {
+    padding-right: 30px;
 }
 
 .factcheck-list .item .expand {
