@@ -181,6 +181,10 @@ h1.hero {
     font-size: 22px;
     line-height: 1.36;
     color: #ffffff;
+    padding-right: 100px;
+}
+.factcheck-list .item.active .content .fact-title {
+    padding-right: 30px;
 }
 
 .factcheck-list .item .expand {
@@ -543,6 +547,7 @@ i.icon-controversy {
     .factcheck-list .item .content .fact-title {
         font-size: 18px;
         line-height: 1.33;
+        padding-right: 0;
     }
 
     .factcheck-list .item .content .fact-detail {
