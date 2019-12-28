@@ -77,7 +77,7 @@ export default {
     },
     factcheckStatusIcon() {
       switch (this.item['查核結果']) {
-        case '真實':
+        case '正確':
           return { 'icon-true': true };
         case '片面事實':
           return { 'icon-controversy': true };

@@ -1,10 +1,10 @@
 <template>
   <div class="fact-check-debate-2020">
     <div class="section-container">
-      <div class="hero">
-        2020 總統候選人辯論
+      <h1 class="hero">
+        <span class="small">2020 總統候選人辯論</span>
         <br>即時事實查核
-      </div>
+      </h1>
     </div>
 
     <div class="video-container">
@@ -15,9 +15,9 @@
     </div>
 
     <div class="section-container">
-      <div class="title">
+      <h2 class="title">
         辯論即時事實查核成果
-      </div>
+      </h2>
       <div class="factcheck-list">
         <Item
           v-for="(item, index) in limitedItems"
@@ -30,6 +30,7 @@
           </div>
           <div
             class="loadmore"
+            :class="{active: showLoadMore}"
             @click="loadMore"
           >
             載入更多
@@ -40,9 +41,9 @@
 
     <div class="highlight-background">
       <div class="section-container">
-        <div class="title">
+        <h3 class="title">
           此次參與查核媒體
-        </div>
+        </h3>
         <div class="media">
           <a
             v-for="(media, index) in mediaList"
@@ -121,16 +122,24 @@ export default {
           url: 'https://www.readr.tw/',
         },
         {
+          id: 'right-plus',
+          url: 'https://rightplus.org/',
+        },
+        {
+          id: 'futurecity',
+          url: 'https://futurecity.cw.com.tw/',
+        },
+        {
           id: 'newslab',
           url: 'https://newslab.pts.org.tw/',
         },
         {
-          id: 'TNL',
-          url: 'https://www.thenewslens.com/',
-        },
-        {
           id: 'TEIA',
           url: 'https://teia.tw/',
+        },
+        {
+          id: 'TNL',
+          url: 'https://www.thenewslens.com/',
         },
       ],
     };
@@ -152,6 +161,9 @@ export default {
     },
     total() {
       return this.debates ? this.debates.length : 0;
+    },
+    showLoadMore() {
+      return this.limitNumber < (this.debates ? this.debates.length : 0);
     },
   },
   mounted() {
