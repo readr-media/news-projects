@@ -7,11 +7,13 @@
       </h1>
     </div>
 
-    <div class="video-container">
-      <iframe
-        class="youtube-video"
-        :src="liveUrl"
-      />
+    <div class="width-control">
+      <div class="video-container">
+        <iframe
+          class="youtube-video"
+          :src="liveUrl"
+        />
+      </div>
     </div>
 
     <div class="section-container">

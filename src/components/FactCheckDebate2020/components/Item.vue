@@ -18,7 +18,7 @@
       <div class="status">
         <!-- [查核結果] -->
         <i :class="factcheckStatusIcon" />
-        <span>{{ item['標示'] }}</span>
+        <span>{{ item['查核結果'] }}</span>
       </div>
     </div>
     <div class="content">
@@ -40,6 +40,7 @@
         <div class="status">
           <!-- [查核結果] -->
           <i :class="factcheckStatusIcon" />
+          <span>{{ item['查核結果'] }}</span>
         </div>
         <div class="source">
           {{ item['內容標籤'] }} {{ item['日期'] }} 主責媒體：{{ item['認領媒體'] }}
