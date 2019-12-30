@@ -67,6 +67,10 @@ export default {
       partyData: state => state.gcs.data.party
     }),
     countyCode() {
+      if (this.county.code) {
+        return this.county.code
+      }
+
       const countyCode = _.findKey(this.regionData, [ 'name', this.countyName ])
       return (countyCode || '').padStart(3, '0')
     },
@@ -76,7 +80,8 @@ export default {
   },
   methods: {
     getParty(i) {
-      const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, i.padStart(2, '0') ], {})
+      const pad = (this.countyCode === 'L2' || this.countyCode === 'L3') ? 0 : 2
+      const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, i.padStart(pad, '0') ], {})
       return _.get(district, 'L', -1)
     },
     getHasPartyLeading(i) {
@@ -87,7 +92,8 @@ export default {
       return shouldShowNumber ? Number(i) : -1
     },
     getIsElected(i) {
-      const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, i.padStart(2, '0') ], {})
+      const pad = (this.countyCode === 'L2' || this.countyCode === 'L3') ? 0 : 2
+      const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, i.padStart(pad, '0') ], {})
       return _.get(district, 'isElected', '') === '*'
     },
     getShouldAnimate(i) {
