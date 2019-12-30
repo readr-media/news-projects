@@ -36,7 +36,7 @@
 import Bar from './ChartPartyBar.vue'
 import Legends from './ChartPartyLegends.vue'
 
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -44,9 +44,6 @@ export default {
     Legends
   },
   computed: {
-    ...mapState({
-      realtimeLegislatorsParty: state => state.realtimeLegislatorsParty.data
-    }),
     ...mapGetters({
       dataChart: 'realtimeLegislatorsParty/dataChart'
     })

@@ -15,7 +15,9 @@
     </section>
     <section class="section">
       <h2>立委激戰搶席次</h2>
-      <Countdown />
+      <Countdown
+        :updateTime="updateTimeLegislator"
+      />
       <LegislatorDistrict />
       <LegislatorParty />
     </section>
@@ -80,7 +82,7 @@
 <script>
 import storeModule from 'src/store/modules/Election2020'
 import { createNamespacedHelpers } from 'vuex'
-const { mapActions } = createNamespacedHelpers('Election2020')
+const { mapState, mapActions } = createNamespacedHelpers('Election2020')
 import Countdown from './components/Countdown.vue'
 import FirebaseRead from './templates/FirebaseRead.vue'
 import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
@@ -157,7 +159,10 @@ export default {
   computed: {
     presidentName: function () {
       return mapPresidentName(this.$store.state, 1);
-    }
+    },
+    ...mapState({
+      updateTimeLegislator: state => state.updateTime.legislator
+    })
   }
 }
 </script>
