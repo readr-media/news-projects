@@ -60,17 +60,17 @@ export default {
     FETCH_PRESIDENT_DATA ({ commit }) {
       return axiosGet(`${GCS_PATH}/presidentData.json`).then(res => {
         commit('SET', { targetPath: 'data', key: 'president', value: res.data })
-      })
+      }).catch((err) => { console.error(err) })
     },
     FETCH_LEGISLATOR_DATA ({ commit }) {
       return axiosGet(`${GCS_PATH}/legislatorData.json`).then(res => {
         commit('SET', { targetPath: 'data', key: 'legislator', value: res.data })
-      })
+      }).catch((err) => { console.error(err) })
     },
     FETCH_PARTY_DATA ({ commit }) {
       return axiosGet(`${GCS_PATH}/partyData.json`).then(res => {
         commit('SET', { targetPath: 'data', key: 'party', value: res.data })
-      })
+      }).catch((err) => { console.error(err) })
     },
   },
   mutations: {

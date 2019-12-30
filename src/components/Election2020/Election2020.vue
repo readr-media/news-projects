@@ -56,7 +56,10 @@
         style="width: 300px; margin: 0 auto;"
       />
     </section>
-
+    <section class="section">
+      <h2>賓果預測大贏家</h2>
+      <BingoSection/>
+    </section>
     <lazy-component class="credits">
       <TheCredits />
     </lazy-component>
@@ -90,6 +93,7 @@ import Header from './components/Header.vue'
 import PresidentCount from './components/president/PresidentCount.vue'
 import LegislatorDistrict from './components/legislator/LegislatorDistrict.vue'
 import LegislatorParty from './components/legislator/LegislatorParty.vue'
+import BingoSection from './components/bingo/BingoSection.vue'
 
 // TODO: delete block
 import { mapPresidentName } from './utility/mappings'
@@ -120,6 +124,7 @@ export default {
       .catch(err => console.error(err)) // need error handle
   },
   components: {
+    BingoSection,
     Countdown,
     FirebaseCreateUpdate,
     FirebaseRead,
