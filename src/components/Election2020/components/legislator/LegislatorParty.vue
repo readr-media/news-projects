@@ -22,10 +22,29 @@
 import Chart from './ChartParty.vue'
 import Seats from './Seats.vue'
 
+import { mapGetters } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapMutations } = createNamespacedHelpers('Election2020')
+
 export default {
   components: {
     Chart,
     Seats
+  },
+  computed: {
+    ...mapGetters({
+      dataChart: 'realtimeLegislatorsParty/dataChart'
+    })
+  },
+  watch: {
+    dataChart() {
+      this.SET_UPDATE_TIME({ key: 'legislator', time: new Date() })
+    }
+  },
+  methods: {
+    ...mapMutations({
+      SET_UPDATE_TIME: 'updateTime/SET_UPDATE_TIME'
+    })
   },
   created() {
     this.$store.dispatch('realtimeLegislatorsParty/openDBChannel')

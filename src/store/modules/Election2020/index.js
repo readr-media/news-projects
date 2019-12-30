@@ -3,12 +3,14 @@ import { get } from 'lodash'
 import { getSheet } from 'src/api'
 import { timerModule as timer } from './modules/timer'
 import gcs from './modules/gcs'
+import updateTime from './modules/updateTime'
 
 export default {
   namespaced: true,
   modules: {
     timer,
-    gcs
+    gcs,
+    updateTime
   },
   state: () => ({
     spreadsheet: {
