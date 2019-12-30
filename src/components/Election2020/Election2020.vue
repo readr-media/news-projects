@@ -18,12 +18,10 @@
       <Countdown />
       <LegislatorRegional />
     </section>
-
-    <!-- TODO: delete this block -->
     <section class="section">
-      <p>mapping 測試: 1 -> "{{presidentName}}" </p>
+      <h2>賓果預測大贏家</h2>
+      <BingoSection/>
     </section>
-
     <lazy-component class="credits">
       <TheCredits />
     </lazy-component>
@@ -48,6 +46,7 @@ import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 import Header from './components/Header.vue'
 import PresidentCount from './components/PresidentCount.vue'
 import LegislatorRegional from './components/legislator-regional/LegislatorRegional.vue'
+import BingoSection from './components/bingo/BingoSection.vue'
 
 // TODO: delete block
 import { mapPresidentName } from './utility/mappings'
@@ -78,6 +77,7 @@ export default {
       .catch(err => console.error(err)) // need error handle
   },
   components: {
+    BingoSection,
     Countdown,
     FirebaseCreateUpdate,
     FirebaseRead,
@@ -112,11 +112,6 @@ export default {
         .catch(err => console.error(err))
     }
   },
-  computed: {
-    presidentName: function () {
-      return mapPresidentName(this.$store.state, 1);
-    }
-  }
 }
 </script>
 

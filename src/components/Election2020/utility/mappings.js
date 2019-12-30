@@ -17,7 +17,6 @@ export function mapRegislatorInfo (store, id) {
 }
 
 export function mapPresidentName (store, id) {
-	console.log("mapPresidentName", store, id)
 	return get(store, ['Election2020', 'gcs', 'data', 'president', id.toString(), 'name'], ' ')
 }
 
