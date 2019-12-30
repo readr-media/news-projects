@@ -27,12 +27,7 @@ export default {
           }
         }
       },
-      president: {
-        "1": {
-          "name": "宋楚瑜",
-          "party": 1
-        }
-      },
+      president: {},
       legislator: {
         "000-001-1": {
           "name": "手中釘",
@@ -75,8 +70,7 @@ export default {
   },
   mutations: {
     SET: (state, { targetPath, key, value }) => {
-      const target = get(state, targetPath)
-      Vue.set(target, key, value)
+      Vue.set(state[targetPath], key, value)
     },
   }
 }

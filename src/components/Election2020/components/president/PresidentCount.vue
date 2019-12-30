@@ -6,34 +6,39 @@
     tag="section"
   >
     <div
-      v-for="(candidate, name) in testData"
+      v-for="(candidate, name) in realTimeData"
       :key="`candidate-${name}`"
-      :class="getRankClassName(name)"
+      :class="[getRankClassName(name), getClassName(name)]"
       class="candidate"
     >
       <div class="candidate__info">
         <picture class="candidate__image">
-          <img src="/proj-assets/election-2020/images/sung.png" alt="">
+          <img :src="`/proj-assets/election-2020/images/${getClassName(name)}.png`" :alt="mapPresidentName($store, name)">
           <div class="candidate__number">{{ name }}</div>
         </picture>
         <div class="candidate__count">
-          <p><span class="name">宋楚瑜</span><br><span class="label">得票數</span></p>
+          <p><span class="name" v-text="mapPresidentName($store, name)"></span><br><span class="label">得票數</span></p>
           <p><Counter class="count" :count="candidate.tks" /></p>
-          <p class="ratio"><Counter :count="formatRatio(candidate.R, 0)" /><span class="percent">%</span></p>
+          <p class="ratio"><Counter :count="candidate.R" /><span class="percent">%</span></p>
         </div>
       </div>
       <div class="candidate__ratio">
         <span>親民黨</span>
-        <Counter :count="formatRatio(candidate.R)" />
+        <Counter :count="candidate.R" />
         <span>%</span>
-        <div :style="{ width: `${formatRatio(candidate.R)}%` }" class="candidate__progress" />
+        <div :style="{ width: `${candidate.R}%` }" class="candidate__progress" />
       </div>
     </div>
   </transition-group>
 </template>
 <script>
 import { formatRatio } from '../../utility/common'
+import { get, omit } from 'lodash'
+import { mapPresidentName } from '../../utility/mappings'
 import Counter from '../Counter.vue'
+
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters, mapState } = createNamespacedHelpers('Election2020')
 
 export default {
   name: 'PresidentCount',
@@ -68,12 +73,24 @@ export default {
     }
   },
   computed: {
+    realTimeData () {
+      return omit(get(this.$store, 'state.realtimePresidents.data'), [ 'id' ])
+    },
     startCounting () {
-      return Object.values(this.testData).reduce((a, c) => a + c.tks, 0) > 0
+      return Object.values(this.realTimeData).reduce((a, c) => a + c.tks, 0) > 0
     }
   },
   methods: {
     formatRatio,
+    getClassName (number) {
+      const mapping = {
+        1: 'soong',
+        2: 'han',
+        3: 'tsai'
+      }
+      return mapping[number]
+    },
+    mapPresidentName,
     // 暫時
     getRankClassName (rank) {
       if (!this.startCounting) {
@@ -106,6 +123,15 @@ export default {
       transform translateY(180px)
     &.third, &.default:nth-child(3)
       transform translateY(360px)
+    &.soong
+      .candidate__number, .candidate__progress
+        background-color $color-orange
+    &.han
+      .candidate__number, .candidate__progress
+        background-color $color-blue
+    &.tsai
+      .candidate__number, .candidate__progress
+        background-color $color-green
     &__info
       position relative
       height 160px
@@ -123,7 +149,7 @@ export default {
       height 32px
       color #fff
       font-family $font-family-serif
-      background-color red // 暫時
+      
     &__image
       display block
       left 0
@@ -175,7 +201,6 @@ export default {
       left 0
       z-index -1
       height 20px
-      background-color red // 暫時
 
 .latestNews-move
   transition all 1s

@@ -17,7 +17,7 @@ export function mapRegislatorInfo (store, id) {
 }
 
 export function mapPresidentName (store, id) {
-	return get(store, ['Election2020', 'gcs', 'data', 'president', id.toString(), 'name'], ' ')
+  return get(store.state, `Election2020.gcs.data.president.${id.toString()}.name`, ' ')
 }
 
 export function mapPartyName (store, id) {
