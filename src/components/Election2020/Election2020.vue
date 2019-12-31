@@ -42,9 +42,6 @@
         data-numposts="5"
       />
     </section>
-    <!-- TODO: delete firebase sample -->
-    <FirebaseCreateUpdate />
-    <FirebaseRead />
   </section>
 </template>
 
@@ -53,8 +50,6 @@ import storeModule from 'src/store/modules/Election2020'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('Election2020')
 import Countdown from './components/Countdown.vue'
-import FirebaseRead from './templates/FirebaseRead.vue'
-import FirebaseCreateUpdate from './templates/FirebaseCreateUpdate.vue'
 import Header from './components/Header.vue'
 import PresidentCount from './components/president/PresidentCount.vue'
 import LegislatorDistrict from './components/legislator/LegislatorDistrict.vue'
@@ -89,8 +84,6 @@ export default {
   components: {
     BingoSection,
     Countdown,
-    FirebaseCreateUpdate,
-    FirebaseRead,
     Header,
     InfoDetailed: () => import('./components/InfoDetailed.vue'), // for test
     LegislatorDistrict,

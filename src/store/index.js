@@ -10,18 +10,20 @@ import VuexEasyFirestore from 'vuex-easy-firestore'
 import { Firebase, initFirebase } from './config/firebase.js'
 import realtimeTest from './modules/firebase-modules/realtimeTest'
 import realtimePresidents from './modules/firebase-modules/realtimePresidents'
-import realtimeRegionalLegislators from './modules/firebase-modules/realtimeRegionalLegislators'
-import realtimeLegislatorsParty from './modules/firebase-modules/realtimeLegislatorsParty'
 import realtimeLegislatorsDistricts from './modules/firebase-modules/realtimeLegislatorsDistricts'
+import realtimeLegislatorsDistrictCandidates from './modules/firebase-modules/realtimeLegislatorsDistrictCandidates'
+import realtimeLegislatorsDistrictCandidatesAboriginal from './modules/firebase-modules/realtimeLegislatorsDistrictCandidatesAboriginal'
 import realtimeLegislatorsDistrictSeat from './modules/firebase-modules/realtimeLegislatorsDistrictSeat'
+import realtimeLegislatorsParty from './modules/firebase-modules/realtimeLegislatorsParty'
 const easyFirestore = VuexEasyFirestore(
   [
     realtimeTest,
     realtimePresidents,
-    realtimeRegionalLegislators,
-    realtimeLegislatorsParty,
     realtimeLegislatorsDistricts,
-    realtimeLegislatorsDistrictSeat
+    realtimeLegislatorsDistrictCandidates,
+    realtimeLegislatorsDistrictCandidatesAboriginal,
+    realtimeLegislatorsDistrictSeat,
+    realtimeLegislatorsParty,
   ],
   {
     logging: true,

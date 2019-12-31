@@ -9,7 +9,7 @@
     <section>
       <h1>即時開票資料：區域立委</h1>
       <div
-        v-text="realtimeRegionalLegislators"
+        v-text="realtimeLegislatorsDistrictCandidates"
       />
     </section>
   </section>
@@ -22,7 +22,7 @@ export default {
   computed: {
     ...mapState({
       realtimeDataPresidents: state => state.realtimePresidents.data,
-      realtimeRegionalLegislators: state => state.realtimeRegionalLegislators.data
+      realtimeLegislatorsDistrictCandidates: state => state.realtimeLegislatorsDistrictCandidates.data
     })
   },
   created() {
@@ -31,7 +31,7 @@ export default {
     ** For more info: https://mesqueeb.github.io/vuex-easy-firestore/query-data.html#realtime-updates-opendbchannel
     */
     this.$store.dispatch('realtimePresidents/openDBChannel')
-    this.$store.dispatch('realtimeRegionalLegislators/openDBChannel')
+    this.$store.dispatch('realtimeLegislatorsDistrictCandidates/openDBChannel')
   }
 }
 </script>

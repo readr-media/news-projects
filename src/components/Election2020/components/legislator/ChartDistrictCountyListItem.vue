@@ -13,14 +13,29 @@
         :shouldAnimate="getShouldAnimate(String(i + 1))"
         :showBorder="getIsElected(String(i + 1))"
         :number="getSquareNumber(String(i + 1))"
-        @click.native="handleClick"
+        @click.native="handleClick(i + 1)"
+        @mouseenter.native="handleTooltip({ showTooltip: true, districtCode: i + 1 }, $event)"
+        @mouseleave.native="handleTooltip({ showTooltip: false, districtCode: i + 1 })"
       />
     </div>
     <LightboxWrapper
       :showLightbox.sync="showLightbox"
     >
-      this is a lightbox
+      <InfoDetailed
+        :title="currentRegionDataName"
+        :description="currentRegionDataLocations"
+        :tableHeading="{ P: '政黨', c: '候選人', R: '得票數', tks: '得票率' }"
+        :tableData="candidateData"
+      />
     </LightboxWrapper>
+    <Tooltip :showTooltip="showTooltip" :x="tooltipX" :y="tooltipY">
+      <InfoDetailed
+        :title="currentRegionDataName"
+        :description="currentRegionDataLocations"
+        :tableHeading="{ P: '政黨', c: '候選人', R: '得票數', tks: '得票率' }"
+        :tableData="candidateData"
+      />
+    </Tooltip>
   </li>
 </template>
 
@@ -29,12 +44,16 @@ import _ from 'lodash'
 
 import Square from '../Square.vue'
 import LightboxWrapper from '../LightboxWrapper.vue'
+import Tooltip from '../Tooltip.vue'
+import InfoDetailed from '../InfoDetailed.vue'
 
-import { mapGetters as mapGettersRoot } from 'vuex'
+import { mapState as mapStateRoot, mapGetters as mapGettersRoot } from 'vuex'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapGetters } = createNamespacedHelpers('Election2020')
 
 import { mapPartyNameAbbr } from '../../utility/mappings'
+
+import * as Firebase from 'firebase/app'
 
 export default {
   props: {
@@ -46,13 +65,25 @@ export default {
   components: {
     Square,
     LightboxWrapper,
+    Tooltip,
+    InfoDetailed
   },
   data() {
     return {
-      showLightbox: false
+      showLightbox: false,
+      showTooltip: false,
+      tooltipX: 0,
+      tooltipY: 0,
+      districtCode: null,
+      dbChannelOpenedList: []
     }
   },
   computed: {
+    ...mapStateRoot({
+      vw: state => state.viewport[0],
+      realtimeLegislatorsDistrictCandidates: state => state.realtimeLegislatorsDistrictCandidates.data,
+      realtimeLegislatorsDistrictCandidatesAboriginal: state => state.realtimeLegislatorsDistrictCandidatesAboriginal.data
+    }),
     ...mapGetters({
       isElectionBoxOpeningStart: 'timer/isElectionBoxOpeningStart'
     }),
@@ -63,7 +94,7 @@ export default {
       return this.county.name
     },
     ...mapState({
-      regionData: state => state.gcs.data.region,
+      regionData: state => _.mapKeys(state.gcs.data.region, (value, key) => key.toString().padStart(3, 0)),
       partyData: state => state.gcs.data.party
     }),
     countyCode() {
@@ -74,13 +105,109 @@ export default {
       const countyCode = _.findKey(this.regionData, [ 'name', this.countyName ])
       return (countyCode || '').padStart(3, '0')
     },
+    isCountyAboriginal() {
+      return this.countyCode === 'L2' || this.countyCode === 'L3'
+    },
     countyDistricts() {
       return this.county.districtsCount
+    },
+
+    districtCodePadded() {
+      return (this.districtCode || 0).toString().padStart(2, '0')
+    },
+    candidateDataKey() {
+      const countyCode = this.countyCode
+      const districtCode = this.districtCodePadded
+      const key = `${countyCode}-${districtCode}`
+      return key
+    },
+    currentRegionData() {
+      const regionData = this.regionData
+      const zones = _.get(regionData, [ this.countyCode, 'zones' ], {})
+      const hasOneZoneOnly = Object.keys(zones).length === 1
+      if (hasOneZoneOnly) {
+        return _.get(Object.values(zones), 0, {})
+      } else {
+        return _.get(zones, this.districtCodePadded, {})
+      }
+    },
+    currentRegionDataName() {
+      return _.get(this.currentRegionData, 'name', '')
+    },
+    currentRegionDataLocations() {
+      return _.get(this.currentRegionData, 'locations', '')
+    },
+    candidateData() {
+      let data
+      if (this.isCountyAboriginal) {
+        const store = this.realtimeLegislatorsDistrictCandidatesAboriginal
+        data = _.get(store, this.countyCode, [])
+      } else {
+        const store = this.realtimeLegislatorsDistrictCandidates
+        data = Object.values(_.get(store, this.candidateDataKey, {}))
+      }
+      
+      const result =
+        data
+          .sort((a, b) => b.tks - a.tks)
+          .map(({ P, R, tks, no }, index) => {
+            const partyCode = String(P).padStart(3, '0')
+            const color = this.mapColor(partyCode)
+            const candidateNumber = no || index + 1
+            const candidateName =
+              _.get(this.currentRegionData, [ 'candidates', candidateNumber, 'name' ], '')
+            return {
+              P: color,
+              c: candidateName,
+              tks,
+              R
+            }
+          })
+      return result
+    }
+  },
+  watch: {
+    showLightbox(value) {
+      if (value) {
+        this.openDBChannelCandidateData()
+      }
+    },
+    showTooltip(value) {
+      if (value) {
+        this.openDBChannelCandidateData()
+      }
     }
   },
   methods: {
+    openDBChannelCandidateData() {
+      if (this.isCountyAboriginal) {
+        if (_.isEmpty(this.realtimeLegislatorsDistrictCandidatesAboriginal)) {
+          this.$store.dispatch(
+            'realtimeLegislatorsDistrictCandidatesAboriginal/openDBChannel'
+          )
+        }
+      } else {
+        const key = this.candidateDataKey
+        if (!(this.dbChannelOpenedList.includes(key))) {
+          this.$store.dispatch(
+            'realtimeLegislatorsDistrictCandidates/openDBChannel',
+            {
+              where: [
+                [
+                  Firebase.firestore.FieldPath.documentId(),
+                  '==',
+                  key
+                ]
+              ]
+            }
+          )
+          this.dbChannelOpenedList.push(key)
+        }
+      }
+
+    },
     getParty(i) {
-      const pad = (this.countyCode === 'L2' || this.countyCode === 'L3') ? 0 : 2
+      const pad = this.isCountyAboriginal ? 0 : 2
       const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, i.padStart(pad, '0') ], {})
       return _.get(district, 'L', -1)
     },
@@ -103,6 +230,9 @@ export default {
     },
     getColor(i) {
       const partyCode = String(this.getParty(i)).padStart(3, '0')
+      return this.mapColor(partyCode)
+    },
+    mapColor(partyCode) {
       const partyName = this.partyData[partyCode]
       const partyNameAbbr = mapPartyNameAbbr(partyName)
 
@@ -118,8 +248,24 @@ export default {
       }
     },
 
-    handleClick() {
+    handleClick(districtCode) {
       this.showLightbox = true
+      this.districtCode = districtCode
+    },
+    handleTooltip ({ showTooltip, districtCode }, event) {
+      if (this.vw < 768) {
+        return
+      }
+
+      if (showTooltip) {
+        this.districtCode = districtCode
+      }
+      this.showTooltip = showTooltip
+
+      if (event) {
+        this.tooltipX = event.clientX
+        this.tooltipY = event.clientY
+      }
     }
   }
 }
