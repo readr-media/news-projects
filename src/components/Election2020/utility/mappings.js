@@ -1,27 +1,31 @@
 import {get} from 'lodash'
 
 export function mapCountyName (store, id) {
-	return get(store, ['Election2020', 'gcs', 'data', 'region', id.toString(), 'name'], '')
+	return get(store.state, ['Election2020', 'gcs', 'data', 'region', id.toString(), 'name'], '')
 }
 
 export function mapRegionName (store, countyId, regionId) {
-	return get(store, ['Election2020', 'gcs', 'data', 'region', countyId.toString(), 'zone', regionId.toString(), 'name' ], '')
+	return get(store.state, ['Election2020', 'gcs', 'data', 'region', countyId.toString(), 'zone', regionId.toString(), 'name' ], '')
 }
 
 export function mapRegislatorName (store, id) {
-	return get(store, ['Election2020', 'gcs', 'data', 'legislator', id.toString(), 'name'], '')
+	return get(store.state, ['Election2020', 'gcs', 'data', 'legislator', id.toString(), 'name'], '')
 }
 
 export function mapRegislatorInfo (store, id) {
-	return get(store, ['Election2020', 'gcs', 'data', 'legislator', id.toString()], {})
+	return get(store.state, ['Election2020', 'gcs', 'data', 'legislator', id.toString()], {})
 }
 
 export function mapPresidentName (store, id) {
   return get(store.state, `Election2020.gcs.data.president.${id.toString()}.name`, ' ')
 }
 
+export function mapPresidentParty (store, id) {
+  return get(store.state, `Election2020.gcs.data.president.${id.toString()}.party`, '')
+}
+
 export function mapPartyName (store, id) {
-	return get(store, ['Election2020', 'gcs', 'data', 'party', id.toString()], '')
+	return get(store.state, ['Election2020', 'gcs', 'data', 'party', id.toString()], '')
 }
 
 export function mapPartyNameAbbr(name) {
