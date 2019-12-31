@@ -95,6 +95,9 @@ export default {
     TheDonateFooter: () => import('./components/TheDonateFooter.vue'),
     SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue')
   },
+  created () {
+    this.$store.dispatch('realtimePresidents/openDBChannel')
+  },
   beforeMount () {
     this.registerStoreModule(true)
     this.$store.dispatch('Election2020/gcs/FETCH_SOURCES')
@@ -196,24 +199,23 @@ $margin-center =
       max-width 1000px
       max-height 610px
       {$margin-center}
-    .president-count
-      height calc(40vw + 110px)
-    .president-count-chart
-      display block
-      margin-top 66px
     .subscr, .comment
       width $content-width-tablet
 
 @media (min-width: 1024px)
   .election-2020
     padding-top 70px
-
+    .president-count
+      margin-top 60px
+      height 170px
+      &.counting
+        height calc(40vw + 110px)
+    .president-count-chart
+      display block
+      margin-top 66px
 @media (min-width: 1440px)
   .election-2020
     h1
       br
         display none
-    .president-count
-      &.default
-        margin-top 60px
 </style>
