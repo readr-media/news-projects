@@ -6,7 +6,7 @@ const { fetchFromRedis, insertIntoRedis, } = require('./ioredisHandler')
 
 router.get('/', authGoogleAPI, fetchFromRedis, async (req, res, next) => {
   if (res.redis) {
-    console.error('fetch data from Redis.', req.url)
+    console.log('fetch data from Redis.', req.url)
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
@@ -31,7 +31,7 @@ router.get('/', authGoogleAPI, fetchFromRedis, async (req, res, next) => {
 
   } catch (error) {
     res.status(500).send(`The Google Sheet API returned an error while get.`, error)
-    console.log(error)
+    console.error(`Fetch data from Google Sheet. url: ${req.url}`, error)
   }
 }, insertIntoRedis)
 
@@ -70,7 +70,7 @@ router.get('/nonredis', authGoogleAPI, async (req, res) => {
     }
   } catch (error) {
     res.status(500).send(`The Google Sheet API returned an error while get.`, error)
-    console.log(error)
+    console.error(`Fetch data from Google Sheet. url: ${req.url}`, error)
   }
   
 })

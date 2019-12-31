@@ -21,41 +21,6 @@
       <LegislatorDistrict />
       <LegislatorParty />
     </section>
-
-    <!-- TODO: delete this block -->
-    <section class="section">
-      <p>mapping 測試: 1 -> "{{presidentName}}" </p>
-      <p>example 1:</p>
-      <InfoDetailed
-        title="宋楚瑜、余湘"
-        subtitle="親民黨"
-        :tableData="[
-          { name: '得票數', tks: 429148 },
-          { name: '得票率', R: 0.11123213 }
-        ]"
-        style="width: 300px; margin: 0 auto;"
-      />
-      <p>example 2:</p>
-      <InfoDetailed
-        title="雲林縣第二選區"
-        description="崙背、二崙、西螺、莿桐、林內、斗六、大埤、斗南、古坑"
-        :tableHeading="{ P: '政黨', c: '候選人', R: '得票數', tks: '得票率' }"
-        :tableData="[
-          { P: 'green', c: '劉建國', R: 0.13251370605035, tks: 80730 },
-          { P: 'blue', c: '吳威志', R: 0.51370605035, tks: 180730 },
-          { P: 'purple', c: '王煒婷', R: 0.70605035, tks: 3070 }
-        ]"
-        style="width: 300px; margin: 0 auto;"
-      />
-      <p>example 3:</p>
-      <InfoDetailed
-        :tableData="[
-          { name: '得票數', tks: 757383 },
-          { name: '得票率', R: 0.5611123123 }
-        ]"
-        style="width: 300px; margin: 0 auto;"
-      />
-    </section>
     <section class="section">
       <h2>賓果預測大贏家</h2>
       <BingoSection/>
@@ -77,6 +42,7 @@
         data-numposts="5"
       />
     </section>
+    <!-- TODO: delete firebase sample -->
     <FirebaseCreateUpdate />
     <FirebaseRead />
   </section>
@@ -95,13 +61,10 @@ import LegislatorDistrict from './components/legislator/LegislatorDistrict.vue'
 import LegislatorParty from './components/legislator/LegislatorParty.vue'
 import BingoSection from './components/bingo/BingoSection.vue'
 
-// TODO: delete block
-import { mapPresidentName } from './utility/mappings'
-
 const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET', {
   params: {
     spreadsheetId: '1p9GfrjPdcXbkq8aRIYTk3IFB7gmIR1lO2rLrxagp8do',
-    range: '記者填寫區!A3:G',
+    range: '記者填寫區!A4:G',
     redisTimeout: 300
   }
 })
@@ -162,9 +125,6 @@ export default {
     }
   },
   computed: {
-    presidentName: function () {
-      return mapPresidentName(this.$store.state, 1);
-    },
     ...mapState({
       updateTimeLegislator: state => state.updateTime.legislator
     })
