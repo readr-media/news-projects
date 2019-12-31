@@ -413,7 +413,7 @@ export const LegislatorCounties = [
   },
   {
     name: '山地原住民',
-    code: 'L2',
+    code: 'L3',
     districtsCount: 3,
     districts: {
       1: {
@@ -432,7 +432,7 @@ export const LegislatorCounties = [
   },
   {
     name: '平地原住民',
-    code: 'L3',
+    code: 'L2',
     districtsCount: 3,
     districts: {
       1: {

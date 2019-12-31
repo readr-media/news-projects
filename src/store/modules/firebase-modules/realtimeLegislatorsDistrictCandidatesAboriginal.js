@@ -1,7 +1,7 @@
 const module = {
-  firestorePath: '/realtime-zone',
-  firestoreRefType: 'collection', // or 'doc'
-  moduleName: 'realtimeRegionalLegislators',
+  firestorePath: '/realtime/aboriginal',
+  firestoreRefType: 'doc', // or 'doc'
+  moduleName: 'realtimeLegislatorsDistrictCandidatesAboriginal',
   statePropName: 'data',
   namespaced: true, // automatically added
 
