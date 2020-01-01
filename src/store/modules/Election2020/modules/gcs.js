@@ -8,36 +8,11 @@ const GCS_PATH = '/proj-assets/election-2020/json'
 export default {
   namespaced: true,
   state: () => ({
-    // TODO: should remote when data is ready (in prod)
     data: {
-      region: {
-        "000": {
-          "name": "台北市",
-          "zones": {
-            "001": {
-              "name": "臺北市第八選舉區",
-              "locations": "文山區、中正區",
-              "candidates": {
-                "1": {
-                  "name": "賴土堡",
-                  "party": 1
-                }
-              }
-            }
-          }
-        }
-      },
+      region: {},
       president: {},
-      legislator: {
-        "000-001-1": {
-          "name": "手中釘",
-          "party": "1",
-          "zone": "臺北市第一選舉區"
-        }
-      },
-      party: {
-        "1": "中國國民黨"
-      },
+      legislator: {},
+      party: {},
     },
   }),
   actions: {

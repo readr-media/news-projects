@@ -1,5 +1,7 @@
 <template>
-  <div class="bingo-cell bingo-bs">
+  <div
+    class="bingo-cell bingo-bs"
+    v-on:click="TOGGLE_SELECTOR_PANEL">
     <div class="party celltexts">黨名字太多會點點</div>
     <div class="name celltextl">人名也會點點</div>
     <div class="region celltexts">選區一</div>
@@ -7,9 +9,15 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   props: {
     cells: Object
+  },
+  methods: {
+    ...mapMutations({
+      TOGGLE_SELECTOR_PANEL: 'Election2020/bingo/TOGGLE_SELECTOR_PANEL'
+    })
   },
 }
 </script>
