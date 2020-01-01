@@ -1,14 +1,15 @@
 <template>
   <section class="bingo-section">
-    <div class="bingotitle">
+    <div class="bingo-title">
       <h2>區域立委賓果盤</h2>
       <p v-html="contentText"/>
     </div>
-    <BingoFrame class="bingoframe" :cells="Array.apply(null, Array(25)).map(function () { return {}; })" />
-    <div class="bingostatus" :connectedLines="connectedLines">
+    <BingoFrame class="bingo-frame" :cells="Array.apply(null, Array(25)).map(function () { return {}; })" />
+    <div class="bingo-status" :connectedLines="connectedLines">
       <BingoStatus />
-      <button class="bingorandombtn" v-text=""/>
+      <button class="bingo-randombtn">{{buttonText}}</button>
     </div>
+    <BingoSelector/>
   </section>
 </template>
 
@@ -16,13 +17,13 @@
 
 import BingoFrame from './BingoFrame.vue'
 import BingoStatus from './BingoStatus.vue'
-//import BingoSelector from './BingoFrame'
+import BingoSelector from './BingoSelector.vue'
 
 export default {
   components: {
     BingoFrame,
     BingoStatus,
-    //BingoSelector
+    BingoSelector
   },
   props: {
     cells: Array,
@@ -71,15 +72,15 @@ export default {
     line-height 2.25
     font-size 0.8rem
     font-weight bold
-  .bingoframe
+  .bingo-frame
     width 90vw
     height 90vw
     margin 20px auto
-  .bingostatus
+  .bingo-status
     align-self self-end
-  .bingotitle,.bingostatus
+  .bingo-title,.bingo-status
     padding 0 65px
-  .bingorandombtn
+  .bingo-randombtn
     width 100%
     height 3rem
     border-radius 4px
@@ -90,9 +91,9 @@ export default {
       padding-right 50px
       padding-left 50px
       grid-template-columns: 1fr 1fr
-    .bingotitle
+    .bingo-title
       grid-column 1
-    .bingoframe
+    .bingo-frame
       grid-column 2
       grid-row 1 / span 2
       width 40vw

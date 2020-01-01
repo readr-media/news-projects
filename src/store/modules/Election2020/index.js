@@ -2,15 +2,17 @@ import Vue from 'vue'
 import { get } from 'lodash'
 import { getSheet } from 'src/api'
 import { timerModule as timer } from './modules/timer'
+import bingo from './modules/bingo'
 import gcs from './modules/gcs'
 import updateTime from './modules/updateTime'
 
 export default {
   namespaced: true,
   modules: {
-    timer,
+    bingo,
     gcs,
-    updateTime
+    timer,
+    updateTime,
   },
   state: () => ({
     spreadsheet: {
