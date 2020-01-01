@@ -24,7 +24,6 @@
 
     <!-- TODO: delete this block -->
     <section class="section">
-      <p>mapping 測試: 1 -> "{{presidentName}}" </p>
       <p>example 1:</p>
       <InfoDetailed
         title="宋楚瑜、余湘"
@@ -95,9 +94,6 @@ import LegislatorDistrict from './components/legislator/LegislatorDistrict.vue'
 import LegislatorParty from './components/legislator/LegislatorParty.vue'
 import BingoSection from './components/bingo/BingoSection.vue'
 
-// TODO: delete block
-import { mapPresidentName } from './utility/mappings'
-
 const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET', {
   params: {
     spreadsheetId: '1p9GfrjPdcXbkq8aRIYTk3IFB7gmIR1lO2rLrxagp8do',
@@ -162,9 +158,6 @@ export default {
     }
   },
   computed: {
-    presidentName: function () {
-      return mapPresidentName(this.$store.state, 1);
-    },
     ...mapState({
       updateTimeLegislator: state => state.updateTime.legislator
     })
