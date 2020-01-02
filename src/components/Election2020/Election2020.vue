@@ -12,7 +12,7 @@
       <h1 id="js-title">2020 總統立委大選<br>即時看</h1>
       <p>和 READr 一起追蹤 2020 總統大選的最新消息，這裡有圖表輕鬆看、立委賓果遊戲，還有最新選情一目了然。</p>
       <h2>下屆總統會是誰</h2>
-      <Countdown />
+      <Countdown :updateTime="updateTimePresident" />
       <PresidentCount class="president-count"/>
       <PresidentCountChart class="president-count-chart" />
     </section>
@@ -185,7 +185,8 @@ export default {
   },
   computed: {
     ...mapState({
-      updateTimeLegislator: state => state.updateTime.legislator
+      updateTimeLegislator: state => state.updateTime.legislator,
+      updateTimePresident: state => state.updateTime.president
     })
   }
 }

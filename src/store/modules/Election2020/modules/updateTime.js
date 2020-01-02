@@ -2,7 +2,8 @@ export default {
   namespaced: true,
   state () {
     return {
-      legislator: null
+      legislator: null,
+      president: null
     }
   },
   mutations: {

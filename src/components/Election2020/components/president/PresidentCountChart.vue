@@ -5,40 +5,17 @@
       <div class="prompt" />
       <div class="prompt" />
     </div>
-    <transition-group class="e-p-c-c__chart" tag="div">
+    <transition-group name="p-c-effect" class="e-p-c-c__chart" tag="div">
       <span key="default" v-if="!startCounting">0%</span>
-      <template v-else>
+      <template v-else v-for="(candidate) in sortedData">
         <div
-          key="pfpBar"
-          class="bar pfp"
-          :style="{ width: `${dataWithoutId['1'].R}%` }"
-          @mouseenter="handleTooltip(true, '1', $event)"
+          :key="`${candidate.party}-bar`"
+          :class="candidate.party"
+          class="bar"
+          :style="{ width: `${candidate.R}%` }"
+          @mouseenter="handleTooltip(true, candidate.number, $event)"
           @mouseleave="handleTooltip(false)"
-          @click="handleTooltip(true, '1', $event)"
-          @close="handleTooltip(false)"
-        />
-        <div
-          key="kmtBar"
-          class="bar kmt"
-          :style="{
-            width: `${dataWithoutId['2'].R}%`,
-            left: `${dataWithoutId['1'].R}%`
-          }"
-          @mouseenter="handleTooltip(true, '2', $event)"
-          @mouseleave="handleTooltip(false)"
-          @click="handleTooltip(true, '2', $event)"
-          @close="handleTooltip(false)"
-        />
-        <div
-          key="dppBar"
-          class="bar dpp"
-          :style="{
-            width: `${dataWithoutId['3'].R}%`,
-            left: `${dataWithoutId['1'].R + dataWithoutId['2'].R}%`
-          }"
-          @mouseenter="handleTooltip(true, '3', $event)"
-          @mouseleave="handleTooltip(false)"
-          @click="handleTooltip(true, '3', $event)"
+          @click="handleTooltip(true, candidate.number, $event)"
           @close="handleTooltip(false)"
         />
       </template>
@@ -89,6 +66,16 @@ export default {
       startCounting: 'startCounting',
       dataWithoutId: 'dataWithoutId'
     }),
+    sortedData () {
+      const mapping = {
+        '1': 'pfp',
+        '2': 'kmt',
+        '3': 'dpp'
+      }
+      return Object.entries(this.dataWithoutId)
+        .sort((a, b) => b[1].R - a[1].R)
+        .map(c => ({ number: c[0], R: c[1].R, tks: c[1].tks, party: mapping[c[0]] }))
+    },
     tooltipData () {
       const mapping = {
         '1': '宋楚瑜、余湘',
@@ -124,7 +111,7 @@ export default {
     display flex
     justify-content space-between
   &__chart
-    position relative
+    display flex
     height 35px
     margin-top 10px
     background-color rgba(216, 216, 216, .3)
@@ -158,10 +145,6 @@ export default {
       content '100%'
 
   .bar
-    position absolute
-    top 0
-    left 0
-    height 100%
     cursor pointer
     &.pfp
       background-color $color-orange
@@ -193,6 +176,12 @@ export default {
     &.dpp
       &::before
         background-color $color-green
+
+.p-c-effect-enter-active, .p-c-effect-leave-active, .p-c-effect-move
+  transition all 1s
+
+.p-c-effect-enter, .p-c-effect-leave-to
+  opacity 0
 
 @media (min-width: 1024px)
   .e-p-c-c
