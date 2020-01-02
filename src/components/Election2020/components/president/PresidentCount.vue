@@ -6,7 +6,7 @@
     tag="section"
   >
     <div
-      v-for="(candidate, number) in realTimeData"
+      v-for="(candidate, number) in dataWithoutId"
       :key="`candidate-${number}`"
       :class="[getClassName(number), getRank(number)]"
       class="candidate"
@@ -46,14 +46,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      startCounting: 'startCounting'
+      startCounting: 'startCounting',
+      dataWithoutId: 'dataWithoutId'
     }),
-    realTimeData () {
-      return omit(get(this.$store, 'state.realtimePresidents.data'), [ 'id' ])
-    },
     ranking () {
-      const sorting = Object.keys(this.realTimeData)
-        .sort((a, b) => this.realTimeData[b].tks - this.realTimeData[a].tks)
+      const sorting = Object.keys(this.dataWithoutId)
+        .sort((a, b) => this.dataWithoutId[b].tks - this.dataWithoutId[a].tks)
       const mapping = [ 'first', 'second', 'third' ]
       return Object.keys({ ...sorting }).reduce((a, c) => {
         a[sorting[c]] = mapping[Number(c)]
