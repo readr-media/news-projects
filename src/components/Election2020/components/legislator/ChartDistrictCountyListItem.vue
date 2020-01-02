@@ -144,12 +144,11 @@ export default {
         data = _.get(store, this.countyCode, [])
       } else {
         const store = this.realtimeLegislatorsDistrictCandidates
-        data = Object.values(_.get(store, this.candidateDataKey, {}))
+        data = Object.values(_.filter(_.get(store, this.candidateDataKey, {}), (value, key) => key !== 'id'))
       }
       
       const result =
         data
-          .sort((a, b) => b.tks - a.tks)
           .map(({ P, R, tks, no }, index) => {
             const partyCode = String(P).padStart(3, '0')
             const color = this.mapColor(partyCode)
@@ -163,6 +162,7 @@ export default {
               R
             }
           })
+          .sort((a, b) => b.tks - a.tks)
       return result
     }
   },
