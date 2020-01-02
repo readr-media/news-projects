@@ -9,8 +9,8 @@
       id="president"
       class="section"
     >
-      <h1 id="js-title">2020 總統大選<br>即時看</h1>
-      <p>您想透過優雅的方式參與這場盛事嗎？只需要一雙雪亮的眼睛，就能和 READr 一起追蹤 2020 總統大選的最新消息，這裡有網友幫你嘴、圖表輕鬆看，還有最新選情一目了然。</p>
+      <h1 id="js-title">2020 總統立委大選<br>即時看</h1>
+      <p>和 READr 一起追蹤 2020 總統大選的最新消息，這裡有圖表輕鬆看、立委賓果遊戲，還有最新選情一目了然。</p>
       <h2>下屆總統會是誰</h2>
       <Countdown />
       <PresidentCount class="president-count"/>
@@ -31,7 +31,7 @@
       id="bingo"
       class="section"
     >
-      <h2>賓果預測大贏家</h2>
+      <h2>區域立委賓果盤</h2>
       <BingoSection/>
     </section>
     <lazy-component class="credits">
@@ -90,7 +90,7 @@ export default {
         }
       case 'bingo':
         return {
-          title: '賓果預測大贏家',
+          title: '區域立委賓果盤',
           description: '2020 立委選舉將於1月11日舉行，來玩區域立委賓果預測吧，看你可以猜中幾個當選立委！',
           metaUrl: 'election2020/bingo',
           metaImage: 'election2020/images/ogimage-bingo.jpg'
