@@ -7,7 +7,7 @@
     <LatestNews @update="updateLatestNews" />
     <section
       id="president"
-      class="section"
+      class="section ga-scroll-event"
     >
       <h1 id="js-title">2020 總統立委大選<br>即時看</h1>
       <p>和 READr 一起追蹤 2020 總統大選的最新消息，這裡有圖表輕鬆看、立委賓果遊戲，還有最新選情一目了然。</p>
@@ -18,7 +18,7 @@
     </section>
     <section
       id="legislator"
-      class="section"
+      class="section ga-scroll-event"
     >
       <h2>立委激戰搶席次</h2>
       <Countdown
@@ -29,7 +29,7 @@
     </section>
     <section
       id="bingo"
-      class="section"
+      class="section ga-scroll-event"
     >
       <h2>區域立委賓果盤</h2>
       <BingoSection/>
@@ -43,7 +43,10 @@
     <lazy-component class="section subscr">
       <SubscriptionWithLogoMsg />
     </lazy-component>
-    <section class="section comment">
+    <section
+      id="comment"
+      class="section comment ga-scroll-event"
+    >
       <div
         class="fb-comments"
         data-href="https://www.readr.tw/project/election-2020"
@@ -69,6 +72,8 @@ import Vue from 'vue'
 import VueScrollTo from 'vue-scrollto'
 Vue.use(VueScrollTo)
 
+import gaScroll from './mixins/gaScroll'
+
 const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET', {
   params: {
     spreadsheetId: '1p9GfrjPdcXbkq8aRIYTk3IFB7gmIR1lO2rLrxagp8do',
@@ -80,27 +85,43 @@ const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET
 export default {
   metaInfo () {
     const params = this.$route.params.params
+    const customScript = `
+      <!-- Hotjar Tracking Code for www.readr.tw -->
+      <script>
+          (function(h,o,t,j,a,r){
+              h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+              h._hjSettings={hjid:1627433,hjsv:6};
+              a=o.getElementsByTagName('head')[0];
+              r=o.createElement('script');r.async=1;
+              r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+              a.appendChild(r);
+          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+      <\/script>
+    `
     switch (params) {
       case 'legislator':
         return {
           title: '立委激戰搶席次',
           description: '2020 立委選舉將於1月11日舉行，READr 將呈現區域立委以及不分區立委即時開票結果，讓你隨時掌握最新資訊！',
           metaUrl: 'election2020/legislator',
-          metaImage: 'election2020/images/ogimage-legislator.jpg'
+          metaImage: 'election2020/images/ogimage-legislator.jpg',
+          customScript
         }
       case 'bingo':
         return {
           title: '區域立委賓果盤',
           description: '2020 立委選舉將於1月11日舉行，來玩區域立委賓果預測吧，看你可以猜中幾個當選立委！',
           metaUrl: 'election2020/bingo',
-          metaImage: 'election2020/images/ogimage-bingo.jpg'
+          metaImage: 'election2020/images/ogimage-bingo.jpg',
+          customScript
         }
       default:
         return {
           title: '2020 總統立委大選即時看',
           description: '2020 總統立委選舉將於1月11日舉行，READr 將呈現即時開票結果、即時快訊，讓你隨時掌握最新資訊！',
           metaUrl: 'election2020',
-          metaImage: 'election2020/images/ogimage.jpg'
+          metaImage: 'election2020/images/ogimage.jpg',
+          customScript
         }
     }
   },
@@ -126,6 +147,9 @@ export default {
     TheDonateFooter: () => import('./components/TheDonateFooter.vue'),
     SubscriptionWithLogoMsg: () => import('src/components/SubscriptionWithLogoMsg.vue')
   },
+  mixins: [
+    gaScroll
+  ],
   created () {
     this.$store.dispatch('realtimePresidents/openDBChannel')
   },
