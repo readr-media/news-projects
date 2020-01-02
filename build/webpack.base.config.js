@@ -17,7 +17,7 @@ const createNoParse = () => {
   debug('exec createNoParse')
   if (isProd || !process.argv[2]) {
     debug('return default noParse')
-    return []
+    return undefined
   } else {
     const projectsDeveloping = process.argv[2].split(',')
     debug('argv[2] founded:', projectsDeveloping)
