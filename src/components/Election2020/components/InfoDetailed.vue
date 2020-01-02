@@ -81,7 +81,7 @@ export default {
   },
   filters: {
     currency (value) {
-      return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+      return value ? value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : ''
     }
   },
   methods: {
