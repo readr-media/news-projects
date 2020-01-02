@@ -15,11 +15,6 @@
 <script>
 export default {
   name: 'DonateItem'
-  // methods: {
-  //   sendGa () {
-  //     window.ga('send', 'event', 'projects', 'click', '贊助按鈕-文末')
-  //   }
-  // }
 }
 </script>
 
