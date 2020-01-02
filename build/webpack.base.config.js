@@ -15,21 +15,18 @@ const projects = require('../src/constants/projectList.json')
 // e.g. 'npm run dev -- Vote' when you are developing within the path src/components/Vote/*
 const createNoParse = () => {
   debug('exec createNoParse')
-  const noParseDefault = /es6-promise\.js$/ // avoid webpack shimming process
   if (isProd || !process.argv[2]) {
     debug('return default noParse')
-    return [ noParseDefault ]
+    return []
   } else {
     const projectsDeveloping = process.argv[2].split(',')
     debug('argv[2] founded:', projectsDeveloping)
 
-    const projectsNoParse =
-      Object.values(projects)
+    const projectsNoParse = Object.values(projects)
       .filter(project => !projectsDeveloping.includes(project))
       .map(project => new RegExp(`${project}/`))
-    projectsNoParse.push(noParseDefault)
+    
     debug('return custom noParse:', projectsNoParse)
-
     return projectsNoParse
   }
 }

@@ -1,4 +1,6 @@
-import 'es6-promise/auto'
+import "core-js/modules/es.promise"
+import "core-js/modules/es.array.iterator"
+
 import { createApp } from './app'
 
 const { app, router, store } = createApp()
