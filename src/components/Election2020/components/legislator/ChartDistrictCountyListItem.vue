@@ -113,6 +113,9 @@ export default {
     },
 
     districtCodePadded() {
+      if (this.countyDistricts === 1) {
+        return '00'
+      }
       return (this.districtCode || 0).toString().padStart(2, '0')
     },
     candidateDataKey() {
@@ -123,12 +126,17 @@ export default {
     },
     currentRegionData() {
       const regionData = this.regionData
-      const zones = _.get(regionData, [ this.countyCode, 'zones' ], {})
-      const hasOneZoneOnly = Object.keys(zones).length === 1
-      if (hasOneZoneOnly) {
-        return _.get(Object.values(zones), 0, {})
+      if (this.isCountyAboriginal) {
+        const zones = _.get(regionData, [ '00L', 'zones', this.countyCode ], {})
+        return zones
       } else {
-        return _.get(zones, this.districtCodePadded, {})
+        const zones = _.get(regionData, [ this.countyCode, 'zones' ], {})
+        const hasOneZoneOnly = Object.keys(zones).length === 1
+        if (hasOneZoneOnly) {
+          return _.get(Object.values(zones), 0, {})
+        } else {
+          return _.get(zones, this.districtCodePadded, {})
+        }
       }
     },
     currentRegionDataName() {
@@ -208,7 +216,9 @@ export default {
     },
     getParty(i) {
       const pad = this.isCountyAboriginal ? 0 : 2
-      const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, i.padStart(pad, '0') ], {})
+      const isDistrictSingle = this.countyDistricts === 1
+      const districtCode = isDistrictSingle ? '00' : i.padStart(pad, '0')
+      const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, districtCode ], {})
       return _.get(district, 'L', -1)
     },
     getHasPartyLeading(i) {
@@ -219,8 +229,10 @@ export default {
       return shouldShowNumber ? Number(i) : -1
     },
     getIsElected(i) {
-      const pad = (this.countyCode === 'L2' || this.countyCode === 'L3') ? 0 : 2
-      const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, i.padStart(pad, '0') ], {})
+      const pad = this.isCountyAboriginal ? 0 : 2
+      const isDistrictSingle = this.countyDistricts === 1
+      const districtCode = isDistrictSingle ? '00' : i.padStart(pad, '0')
+      const district = _.get(this.realtimeLegislatorsDistricts, [ this.countyCode, districtCode ], {})
       return _.get(district, 'isElected', '') === '*'
     },
     getShouldAnimate(i) {
