@@ -1,6 +1,6 @@
 <template>
   <transition-group
-    name="latestNews"
+    name="p-effect"
     :class="{ counting: startCounting }"
     class="e-p-c"
     tag="section"
@@ -15,6 +15,7 @@
         <picture class="candidate__image">
           <img :src="`/proj-assets/election-2020/images/${getClassName(number)}.png`" :alt="mapPresidentName($store, number)">
           <div class="candidate__number">{{ number }}</div>
+          <div v-if="candidate.isElected" class="candidate__elected" />
         </picture>
         <div class="candidate__count">
           <p><span class="name" v-text="mapPresidentName($store, number)"></span><br><span class="label">得票數</span></p>
@@ -38,6 +39,7 @@ import Counter from '../Counter.vue'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('realtimePresidents')
+const { mapMutations: mapMutationsElection } = createNamespacedHelpers('Election2020')
 
 export default {
   name: 'PresidentCount',
@@ -59,7 +61,15 @@ export default {
       }, {})
     }
   },
+  watch: {
+    dataWithoutId () {
+      this.SET_UPDATE_TIME({ key: 'president', time: new Date() })
+    }
+  },
   methods: {
+    ...mapMutationsElection({
+      SET_UPDATE_TIME: 'updateTime/SET_UPDATE_TIME'
+    }),
     getClassName (number) {
       const mapping = {
         1: 'soong',
@@ -143,6 +153,15 @@ export default {
         height 100%
         object-fit contain
         object-position center center
+    &__elected
+      position absolute
+      right 10px
+      bottom 10px
+      width 80px
+      height 80px
+      background-image url(/proj-assets/election-2020/images/winner.svg)
+      background-position center center
+      background-size contain
     &__count
       right 5%
       top 50%
@@ -184,7 +203,7 @@ export default {
       z-index -1
       height 20px
 
-.latestNews-move
+.p-effect-move
   transition all 1s
 
 @media (max-width: 767px)
@@ -215,6 +234,12 @@ export default {
       &__image
         width 170px
         height 170px
+      &__elected
+        right 0
+        bottom -5px
+        transform translateY(50%)
+        width 100px
+        height 100px
       &__number
         font-size 1.25rem
       &__count
