@@ -1,3 +1,5 @@
+import { get, omit } from 'lodash'
+
 const module = {
   firestorePath: '/realtime/president',
   firestoreRefType: 'doc', // or 'doc'
@@ -11,7 +13,8 @@ const module = {
   getters: {
     startCounting: state => Object.values(state.data).reduce((a, c) => {
       return c.tks ? a + c.tks : a
-    }, 0)
+    }, 0),
+    dataWithoutId: state => omit(get(state, 'data'), [ 'id' ])
   },
   mutations: {},
   actions: {},

@@ -11,34 +11,34 @@
         <div
           key="pfpBar"
           class="bar pfp"
-          :style="{ width: `${formatRatio(testData['1'].R)}%` }"
-          @mouseenter="handleTooltip(true, $event)"
+          :style="{ width: `${dataWithoutId['1'].R}%` }"
+          @mouseenter="handleTooltip(true, '1', $event)"
           @mouseleave="handleTooltip(false)"
-          @click="handleTooltip(true, $event)"
+          @click="handleTooltip(true, '1', $event)"
           @close="handleTooltip(false)"
         />
         <div
           key="kmtBar"
           class="bar kmt"
           :style="{
-            width: `${formatRatio(testData['2'].R)}%`,
-            left: `${formatRatio(testData['1'].R)}%`
+            width: `${dataWithoutId['2'].R}%`,
+            left: `${dataWithoutId['1'].R}%`
           }"
-          @mouseenter="handleTooltip(true, $event)"
+          @mouseenter="handleTooltip(true, '2', $event)"
           @mouseleave="handleTooltip(false)"
-          @click="handleTooltip(true, $event)"
+          @click="handleTooltip(true, '2', $event)"
           @close="handleTooltip(false)"
         />
         <div
           key="dppBar"
           class="bar dpp"
           :style="{
-            width: `${formatRatio(testData['3'].R)}%`,
-            left: `${formatRatio(testData['1'].R) + formatRatio(testData['2'].R)}%`
+            width: `${dataWithoutId['3'].R}%`,
+            left: `${dataWithoutId['1'].R + dataWithoutId['2'].R}%`
           }"
-          @mouseenter="handleTooltip(true, $event)"
+          @mouseenter="handleTooltip(true, '3', $event)"
           @mouseleave="handleTooltip(false)"
-          @click="handleTooltip(true, $event)"
+          @click="handleTooltip(true, '3', $event)"
           @close="handleTooltip(false)"
         />
       </template>
@@ -50,11 +50,11 @@
     </div>
     <Tooltip :showTooltip="showTooltip" :x="tooltipX" :y="tooltipY">
       <InfoDetailed
-        title="宋楚瑜、余湘"
-        subtitle="親民黨"
+        :title="tooltipData.name"
+        :subtitle="tooltipData.party"
         :tableData="[
-          { name: '得票數', tks: 429148 },
-          { name: '得票率', R: 0.11123213 }
+          { name: '得票數', tks: tooltipData.tks },
+          { name: '得票率', R: tooltipData.R }
         ]"
       />
     </Tooltip>
@@ -62,9 +62,13 @@
 </template>
 <script>
 import { formatRatio } from '../../utility/common'
-import { throttle } from 'lodash'
+import { get, throttle } from 'lodash'
+import { mapPartyName, mapPartyNameAbbr, mapPresidentParty } from '../../utility/mappings'
 import InfoDetailed from '../InfoDetailed.vue'
 import Tooltip from '../Tooltip.vue'
+
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('realtimePresidents')
 
 export default {
   name: 'PresidentCountChart',
@@ -77,41 +81,36 @@ export default {
       showTooltip: false,
       tooltipX: 0,
       tooltipY: 0,
-      testData: {
-        '1': {
-          // R: 0,
-          // tks: 0,
-          R: 0.2587852392781253,
-          tks: 10808489,
-          isElected: false
-        },
-        '2': {
-          // R: 0,
-          // tks: 0,
-          R: 0.37826896118277314,
-          tks: 15798876,
-          isElected: false
-        },
-        '3': {
-          // R: 0,
-          // tks: 0,
-          R: 0.36294579953910155,
-          tks: 15158885,
-          isElected: false
-        }
-      }
+      tooltipNumber: '1'
     }
   },
   computed: {
-    startCounting () {
-      return Object.values(this.testData).reduce((a, c) => a + c.tks, 0) > 0
+    ...mapGetters({
+      startCounting: 'startCounting',
+      dataWithoutId: 'dataWithoutId'
+    }),
+    tooltipData () {
+      const mapping = {
+        '1': '宋楚瑜、余湘',
+        '2': '韓國瑜、張善政',
+        '3': '蔡英文、賴清德'
+      }
+      const party = mapPresidentParty(this.$store, this.tooltipNumber)
+      
+      return ({
+        name: mapping[this.tooltipNumber],
+        party: mapPartyNameAbbr(mapPartyName(this.$store, party)),
+        tks: get(this.dataWithoutId, `${this.tooltipNumber}.tks`),
+        R: get(this.dataWithoutId, `${this.tooltipNumber}.R`) / 100 
+      }) 
     }
   },
   methods: {
     formatRatio,
-    handleTooltip (value, event) {
+    handleTooltip (value, number, event) {
       this.showTooltip = value
-      if (event) {
+      if (number && event) {
+        this.tooltipNumber = number
         this.tooltipX = event.clientX
         this.tooltipY = event.clientY
       }
@@ -129,6 +128,7 @@ export default {
     height 35px
     margin-top 10px
     background-color rgba(216, 216, 216, .3)
+    overflow hidden
     > span
       color $color-black-lighter
       font-size 1.5rem

@@ -23,6 +23,13 @@
             v-text="`${formatRatio(value)}%`"
           />
           <td
+            v-else-if="name === 'tks'"
+            :key="`d-${index}-${name}`"
+            :class="name"
+          >
+            {{ value | currency }}
+          </td>
+          <td
             v-else-if="name === 'P'"
             :key="`d-${index}-${name}`"
           >
@@ -70,6 +77,11 @@ export default {
     tableData: {
       type: Array,
       default: () => []
+    }
+  },
+  filters: {
+    currency (value) {
+      return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
   },
   methods: {
