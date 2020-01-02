@@ -5,7 +5,10 @@
   >
     <Header />
     <LatestNews @update="updateLatestNews" />
-    <section class="section">
+    <section
+      id="president"
+      class="section"
+    >
       <h1 id="js-title">2020 總統大選<br>即時看</h1>
       <p>您想透過優雅的方式參與這場盛事嗎？只需要一雙雪亮的眼睛，就能和 READr 一起追蹤 2020 總統大選的最新消息，這裡有網友幫你嘴、圖表輕鬆看，還有最新選情一目了然。</p>
       <h2>下屆總統會是誰</h2>
@@ -13,7 +16,10 @@
       <PresidentCount class="president-count"/>
       <PresidentCountChart class="president-count-chart" />
     </section>
-    <section class="section">
+    <section
+      id="legislator"
+      class="section"
+    >
       <h2>立委激戰搶席次</h2>
       <Countdown
         :updateTime="updateTimeLegislator"
@@ -21,7 +27,10 @@
       <LegislatorDistrict />
       <LegislatorParty />
     </section>
-    <section class="section">
+    <section
+      id="bingo"
+      class="section"
+    >
       <h2>賓果預測大贏家</h2>
       <BingoSection/>
     </section>
@@ -56,6 +65,10 @@ import LegislatorDistrict from './components/legislator/LegislatorDistrict.vue'
 import LegislatorParty from './components/legislator/LegislatorParty.vue'
 import BingoSection from './components/bingo/BingoSection.vue'
 
+import Vue from 'vue'
+import VueScrollTo from 'vue-scrollto'
+Vue.use(VueScrollTo)
+
 const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET', {
   params: {
     spreadsheetId: '1p9GfrjPdcXbkq8aRIYTk3IFB7gmIR1lO2rLrxagp8do',
@@ -66,11 +79,29 @@ const fetchLatestNews = store => store.dispatch('Election2020/FETCH_GOOGLE_SHEET
 
 export default {
   metaInfo () {
-    return {
-      title: '',
-      description: '',
-      metaUrl: 'election2020',
-      metaImage: 'election2020/ogimage.png'
+    const params = this.$route.params.params
+    switch (params) {
+      case 'legislator':
+        return {
+          title: '立委激戰搶席次',
+          description: '2020 立委選舉將於1月11日舉行，READr 將呈現區域立委以及不分區立委即時開票結果，讓你隨時掌握最新資訊！',
+          metaUrl: 'election2020/legislator',
+          metaImage: 'election2020/images/ogimage-legislator.jpg'
+        }
+      case 'bingo':
+        return {
+          title: '賓果預測大贏家',
+          description: '2020 立委選舉將於1月11日舉行，來玩區域立委賓果預測吧，看你可以猜中幾個當選立委！',
+          metaUrl: 'election2020/bingo',
+          metaImage: 'election2020/images/ogimage-bingo.jpg'
+        }
+      default:
+        return {
+          title: '2020 總統立委大選即時看',
+          description: '2020 總統立委選舉將於1月11日舉行，READr 將呈現即時開票結果、即時快訊，讓你隨時掌握最新資訊！',
+          metaUrl: 'election2020',
+          metaImage: 'election2020/images/ogimage.jpg'
+        }
     }
   },
   serverPrefetch () {
@@ -104,6 +135,7 @@ export default {
   },
   mounted() {
     this.INIT_TIMER()
+    this.performScrollTo()
   },
   destroyed() {
     this.$store.unregisterModule('Election2020')
@@ -118,6 +150,13 @@ export default {
     updateLatestNews () {
       fetchLatestNews(this.$store)
         .catch(err => console.error(err))
+    },
+    performScrollTo () {
+      const params = this.$route.params.params
+      const isParamsValid = params === 'legislator' || params === 'bingo'
+      if (isParamsValid) {
+        this.$scrollTo(`#${params}`)
+      }
     }
   },
   computed: {
