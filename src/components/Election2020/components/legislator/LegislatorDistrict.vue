@@ -103,7 +103,7 @@ export default {
       font-size 16px
       text-align left
       margin 19px 0 0 0
-      float left
+      // float left
     &__seats
       margin 13px 0 0 0
 </style>
