@@ -7,7 +7,7 @@
       >
         <picture class="the-subscr__img">
           <img
-            src="../img/logo.png"
+            src="/proj-assets/formosaincident/img/logo-readr.png"
             alt="READr logo"
           >
         </picture>
