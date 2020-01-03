@@ -1,10 +1,10 @@
 <template>
   <div class="the-third-force">
-    <HomeCover />
-    <ReportList />
+    <HomeCover ref="homeCover" />
+    <ReportList ref="reportList" />
     <DonateItem />
     <TheSubscr />
-    <footer>© 2020 READr All Rights Reserved</footer>
+    <footer ref="footer">© 2020 READr All Rights Reserved</footer>
   </div>
 </template>
 
@@ -29,11 +29,48 @@ export default {
       document.documentElement.classList.add('hovermq')
     }
   },
+  mounted () {
+    window.addEventListener('scroll', this.sendGaHomeCover)
+    window.addEventListener('scroll', this.sendGaReportList)
+    window.addEventListener('scroll', this.sendGaFooter)
+  },
   components: {
     HomeCover,
     ReportList,
     DonateItem,
     TheSubscr
+  },
+  data () {
+    return {
+      gaSentProfileIds: []
+    }
+  },
+  methods: {
+    sendGaHomeCover () {
+      const { bottom } = this.$refs[ 'homeCover' ].$el.getBoundingClientRect()
+      const wh = this.$store.state.viewport[ 1 ]
+      if ((bottom - wh * 0.5) < 0) {
+        window.ga('send', 'event', 'projects', 'scroll', '1', 1)
+        window.removeEventListener('scroll', this.sendGaHomeCover)
+      }
+    },
+    sendGaReportList () {
+      const { bottom } = this.$refs[ 'reportList' ].$el.getBoundingClientRect()
+      const wh = this.$store.state.viewport[ 1 ]
+      if ((bottom - wh * 0.5) < 0) {
+        window.ga('send', 'event', 'projects', 'scroll', '2', 2)
+        window.removeEventListener('scroll', this.sendGaReportList)
+      }
+    },
+    sendGaFooter () {
+      const scrollH = window.pageYOffset
+      const bodyH = document.body.offsetHeight
+      const wh = this.$store.state.viewport[ 1 ]
+      if (scrollH >= (bodyH - wh)) {
+        window.ga('send', 'event', 'projects', 'scroll', 'end', 3)
+        window.removeEventListener('scroll', this.sendGaFooter)
+      }
+    }
   }
 }
 </script>

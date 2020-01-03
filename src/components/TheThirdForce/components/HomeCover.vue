@@ -36,7 +36,7 @@ export default {
   background-color #212121
   color #fff
   &__content
-    padding-top 40px
+    padding-top 45px
     padding-right 15px
     padding-left 15px
     max-width 320px

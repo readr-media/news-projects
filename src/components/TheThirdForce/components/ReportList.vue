@@ -1,7 +1,7 @@
 <template>
   <main class="report-list">
     <article class="report-list__report" v-for="report in reports" :key="report.id">
-      <a :href="report.link" target="_blank">
+      <a :href="report.link" target="_blank" @click="sendGa(report.id)">
         <picture>
           <source type="image/webp" :srcset="`/proj-assets/the-third-force/img/report/${report.imgName}.webp`">
           <img :src="`/proj-assets/the-third-force/img/report/${report.imgName}.png`" alt="">
@@ -23,6 +23,11 @@ export default {
   data () {
     return {
       reports
+    }
+  },
+  methods: {
+    sendGa (id) {
+      window.ga('send', 'event', 'projects', 'click', `article ${id}`)
     }
   }
 }
