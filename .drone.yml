@@ -59,7 +59,7 @@ pipeline:
       branch: [master, dev]
   
   deploy_dev:
-    image: nytimes/drone-gke:develop
+    image: nytimes/drone-gke
     zone: asia-east1-a
     cluster: dev
     namespace: default
