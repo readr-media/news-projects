@@ -117,6 +117,10 @@ export default {
     th, td
       &.c
         text-align left
+        max-width 100px
+        word-wrap break-word
+        white-space normal
+        line-height 1.25
       &.tks, &.R
         text-align right
     th
