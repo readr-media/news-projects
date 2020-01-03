@@ -53,14 +53,9 @@ export default {
         this.$nextTick(() => {
           // const rect = this.$refs.tooltip.getBoundingClientRect()
           const isOutWidth = this.x + this.offset + 300 > viewportWidth // rect.right > viewportWidth
-          const isOutHeight = this.y + this.offset + this.$refs.tooltip.offsetHeight > viewportHeight // rect.bottom > viewportHeight
           
-          if (isOutWidth && isOutHeight) {
-            this.$refs.tooltip.classList.add('fix-both')
-          } else if (isOutWidth) {
+          if (isOutWidth) {
             this.$refs.tooltip.classList.add('fix-horiz')
-          } else if (isOutHeight) {
-            this.$refs.tooltip.classList.add('fix-vert')
           }
         })
       } else {
@@ -88,10 +83,6 @@ export default {
   z-index 500
   &.fix-horiz
     transform translateX(-100%)
-  &.fix-vert
-    transform translateY(-100%)
-  &.fix-both
-    transform translate(-100%, -100%)
   
 @media (min-width: 768px)
   .tooltip
