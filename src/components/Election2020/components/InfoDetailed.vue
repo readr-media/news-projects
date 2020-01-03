@@ -6,43 +6,47 @@
     </div>
     <p v-if="description" class="i-d__description" v-text="description" />
     <table class="i-d__table">
-      <tr v-if="Object.keys(tableHeading).length > 0">
-        <th
-          v-for="(value, name) in tableHeading"
-          :key="value"
-          :class="name"
-          v-text="value"
-        />
-      </tr>
-      <tr v-for="(item, i) in tableData" :key="`${(new Date()).valueOf}-${i}`">
-        <template v-for="(value, name, index) in item">
-          <td
-            v-if="name === 'R'"
-            :key="`d-${index}-${name}`"
-            :class="name"
-            v-text="`${formatRatio(value)}%`"
-          />
-          <td
-            v-else-if="name === 'tks'"
-            :key="`d-${index}-${name}`"
-            :class="name"
-          >
-            {{ value | currency }}
-          </td>
-          <td
-            v-else-if="name === 'P'"
-            :key="`d-${index}-${name}`"
-          >
-            <Square :color="value" />
-          </td>
-          <td
-            v-else
-            :key="`d-${index}-${name}`"
+      <thead>
+        <tr v-if="Object.keys(tableHeading).length > 0">
+          <th
+            v-for="(value, name) in tableHeading"
+            :key="value"
             :class="name"
             v-text="value"
           />
-        </template>
-      </tr>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, i) in tableData" :key="`${(new Date()).valueOf}-${i}`">
+          <template v-for="(value, name, index) in item">
+            <td
+              v-if="name === 'R'"
+              :key="`d-${index}-${name}`"
+              :class="name"
+              v-text="`${formatRatio(value)}%`"
+            />
+            <td
+              v-else-if="name === 'tks'"
+              :key="`d-${index}-${name}`"
+              :class="name"
+            >
+              {{ value | currency }}
+            </td>
+            <td
+              v-else-if="name === 'P'"
+              :key="`d-${index}-${name}`"
+            >
+              <Square :color="value" />
+            </td>
+            <td
+              v-else
+              :key="`d-${index}-${name}`"
+              :class="name"
+              v-text="value"
+            />
+          </template>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
