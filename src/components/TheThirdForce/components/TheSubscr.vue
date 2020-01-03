@@ -2,7 +2,10 @@
   <section class="subscr">
     <div class="subscr__intro">
       <a href="https://www.readr.tw/" target="_blank">
-        <img src="/proj-assets/the-third-force/img/logo-readr-black.png" alt="readr logo">
+        <picture>
+          <source type="image/webp" srcset="/proj-assets/the-third-force/img/logo-readr-black.webp">
+          <img src="/proj-assets/the-third-force/img/logo-readr-black.png" alt="READr logo">
+        </picture>
       </a>
       <div class="text">
         <p class="text__desk">READr 致力於以有趣的形式，提供多元觀點的啟蒙式內容。</p>
@@ -102,13 +105,14 @@ export default {
         height 44px
         border-radius 0
         margin-left 9px
-        transition background-color 0.3s
+        transition background-color 0.25s ease-out, box-shadow 0.25s ease-out
         flex-shrink 0
         width 80px
+        position relative
+        z-index 9
+        outline 0
         @media (min-width $breakpoint.sm)
           width 108px
-        // &:hover
-        //   background-color #6fb4ba
         &:active
           background-color #838b30
           transition none

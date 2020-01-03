@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { isTouchDevice } from './util/tool.js'
+
 import HomeCover from './components/HomeCover.vue'
 import ReportList from './components/ReportList.vue'
 import DonateItem from './components/DonateItem.vue'
@@ -22,16 +24,16 @@ export default {
     metaImage: 'the-third-force/img/og.jpg',
     customScript: ''
   },
+  beforeMount () {
+    if (!isTouchDevice()) {
+      document.documentElement.classList.add('hovermq')
+    }
+  },
   components: {
     HomeCover,
     ReportList,
     DonateItem,
     TheSubscr
-  },
-  data () {
-    return {
-
-    }
   }
 }
 </script>
@@ -55,6 +57,14 @@ footer
   text-align center
   color #fff
   padding 18px 15px
-// picture
-//   display block
+picture
+  display block
+
+.hovermq
+  & .report-list__report > a:hover
+    box-shadow 10px 10px 0 #000
+  & .donate-item a:hover
+    box-shadow 5px 5px 0 #000
+  & .subscr .subscription-wrapper .subscription__btn:hover
+    box-shadow 5px 5px 0 #000
 </style>

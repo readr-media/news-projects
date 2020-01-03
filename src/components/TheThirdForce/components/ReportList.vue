@@ -2,7 +2,10 @@
   <main class="report-list">
     <article class="report-list__report" v-for="report in reports" :key="report.id">
       <a :href="report.link" target="_blank">
-        <img :src="`/proj-assets/the-third-force/img/report/${report.imgName}.png`" alt="">
+        <picture>
+          <source type="image/webp" :srcset="`/proj-assets/the-third-force/img/report/${report.imgName}.webp`">
+          <img :src="`/proj-assets/the-third-force/img/report/${report.imgName}.png`" alt="">
+        </picture>
         <div class="report-list__text">
           <h2>{{ report.title }}</h2>
           <p>{{ report.intro }}</p>
@@ -29,7 +32,6 @@ export default {
 @import '../util/global-var.styl'
 
 .report-list
-  // padding-top 10px
   max-width 1104px
   margin-right auto
   margin-left auto
@@ -57,22 +59,7 @@ export default {
       text-decoration none
       color rgba(#000, 0.87)
       position relative
-      transition transform 0.25s ease-out
-      &:hover
-        transform translate(-10px, -10px)
-        &:after
-          transform translate(10px, 10px)
-      &:after
-        content ''
-        position absolute
-        display block
-        width 100%
-        height 100%
-        background-color #000
-        top 0
-        left 0
-        z-index -1
-        transition transform 0.25s ease-out
+      transition box-shadow 0.25s ease-out
     & img
       width 100%
       height 169px

@@ -43,11 +43,10 @@ export default {
     color rgba(0, 0, 0, 0.87)
     background-color #f0ff57
     text-decoration none
-    transition background-color .25s ease-out
+    transition background-color 0.25s ease-out, box-shadow 0.25s ease-out
     max-width 414px
+    position relative
     &:active
       background-color #838b30
       transition none
-    // &:hover
-    //   background-color #fff46c
 </style>
