@@ -40,7 +40,7 @@
 <script>
 import { formatRatio } from '../../utility/common'
 import { get, throttle } from 'lodash'
-import { mapPartyName, mapPartyNameAbbr, mapPresidentParty } from '../../utility/mappings'
+import { mapPartyName, mapPartyNameAbbr, mapPresidentParty, mapPresidentPartyAbbrEn } from '../../utility/mappings'
 import InfoDetailed from '../InfoDetailed.vue'
 import Tooltip from '../Tooltip.vue'
 
@@ -58,7 +58,7 @@ export default {
       showTooltip: false,
       tooltipX: 0,
       tooltipY: 0,
-      tooltipNumber: '1'
+      tooltipNumber: ''
     }
   },
   computed: {
@@ -74,7 +74,7 @@ export default {
       }
       return Object.entries(this.dataWithoutId)
         .sort((a, b) => b[1].R - a[1].R)
-        .map(c => ({ number: c[0], R: c[1].R, tks: c[1].tks, party: mapping[c[0]] }))
+        .map(c => ({ number: c[0], R: c[1].R, tks: c[1].tks, party: mapPresidentPartyAbbrEn(c[0]) }))
     },
     tooltipData () {
       const mapping = {

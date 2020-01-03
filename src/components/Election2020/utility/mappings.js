@@ -24,6 +24,15 @@ export function mapPresidentParty (store, id) {
   return get(store.state, `Election2020.gcs.data.president.${id.toString()}.party`, '')
 }
 
+export function mapPresidentPartyAbbrEn (id) {
+  const mapping = {
+    '1': 'pfp',
+    '2': 'kmt',
+    '3': 'dpp'
+  }
+  return mapping[id]
+}
+
 export function mapPartyName (store, id) {
 	return get(store.state, `Election2020.gcs.data.party.${id.toString()}`, '')
 }

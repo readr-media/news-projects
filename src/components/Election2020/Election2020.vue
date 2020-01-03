@@ -61,6 +61,8 @@
 import storeModule from 'src/store/modules/Election2020'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('Election2020')
+const { mapGetters: mapGettersPresident } = createNamespacedHelpers('realtimePresidents')
+import { mapPresidentPartyAbbrEn } from './utility/mappings'
 import Countdown from './components/Countdown.vue'
 import Header from './components/Header.vue'
 import PresidentCount from './components/president/PresidentCount.vue'
@@ -137,7 +139,6 @@ export default {
     BingoSection,
     Countdown,
     Header,
-    InfoDetailed: () => import('./components/InfoDetailed.vue'), // for test
     LegislatorDistrict,
     LegislatorParty,
     LatestNews: () => import('./components/LatestNews.vue'),
@@ -187,7 +188,22 @@ export default {
     ...mapState({
       updateTimeLegislator: state => state.updateTime.legislator,
       updateTimePresident: state => state.updateTime.president
-    })
+    }),
+    ...mapGettersPresident({
+      presidentData: 'dataWithoutId'
+    }),
+    presidentWinner () {
+      return Object.keys(this.presidentData)
+        .sort((a, b) => this.presidentData[b].tks - this.presidentData[a].tks)[0]
+    }
+  },
+  watch: {
+    presidentWinner (value) {
+      const page = document.querySelector('#election-2020')
+      const party = mapPresidentPartyAbbrEn(value)
+      page.classList.add(party)
+      setTimeout(() => page.classList.remove(party), 1000)
+    }
   }
 }
 </script>
@@ -204,6 +220,7 @@ $margin-center =
 
 .election-2020
   padding 44px 0 0
+  transition background-color .7s ease-out
   h1, h2, p
     margin 0
   h1, h2
@@ -246,6 +263,14 @@ $margin-center =
     >>> .subscr-l-m__heading
       p
         color $color-black-lighter
+
+.election-2020
+  &.pfp
+    background-color $color-orange
+  &.kmt
+    background-color $color-blue
+  &.dpp
+    background-color $color-green
 
 @media (min-width: 768px)
   .election-2020

@@ -1,6 +1,6 @@
 <template>
   <section class="credits">
-    <p>工程：凱文、學勇、Yen</p>
+    <p>工程：凱文、HY Tan、Yen</p>
     <p>設計：Weiwei Hsu</p>
     <p>文字：李又如、劉子維、陳珮瑜</p>
   </section>
