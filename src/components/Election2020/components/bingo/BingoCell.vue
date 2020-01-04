@@ -40,11 +40,6 @@ export default {
       }
     },
   },
-  methods: {
-    ...mapMutations({
-      TOGGLE_SELECTOR_PANEL: 'Election2020/bingo/TOGGLE_SELECTOR_PANEL'
-    })
-  },
 }
 </script>
 

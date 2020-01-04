@@ -33,7 +33,6 @@ export default {
           })
           if (bingo) {
             condition.positions.forEach( i => {
-              console.log("bingoline")
               bingoStatus[i][condition.line] = true
             })
             connectedLines += 1
@@ -41,7 +40,6 @@ export default {
 
         })
         this.UPDATE_CONNECTED_LINES(connectedLines)
-        console.log("AFTER", bingoStatus)
         return bingoStatus
       }else{
         return this.cells.map(()=>{return {"bingo":false}})
@@ -56,7 +54,6 @@ export default {
       return function(id) {
        let style = []
         const bingoStatus = this.bingoFrameStatus[id]
-        console.log(id, bingoStatus)
         if (get(bingoStatus, "bingo-h", false)) {
           style.push("linear-gradient(180deg, transparent calc(50% - 1px), black calc(50%), transparent calc(50% + 1px))")
         }

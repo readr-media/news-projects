@@ -117,6 +117,9 @@ export default {
     },
     UPDATE_CONNECTED_LINES: (state, lines) => {
       Vue.set(state, "connectedLines", lines)
+      if (lines >= 5) {
+        Vue.set(state, "bingoProgress", matching)
+      }
     }
   }
 }
