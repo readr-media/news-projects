@@ -21,8 +21,8 @@
       <LegislatorDistrict />
       <LegislatorParty />
     </section>
-    <section class="section">
-      <h2>賓果預測大贏家</h2>
+    <section class="section" id="bingo">
+      <h2>區域立委賓果盤</h2>
       <BingoSection/>
     </section>
     <lazy-component class="credits">
@@ -182,6 +182,8 @@ $margin-center =
     >>> .subscr-l-m__heading
       p
         color $color-black-lighter
+  #bingo
+    background-color #f5f5f5
 
 @media (min-width: 768px)
   .election-2020

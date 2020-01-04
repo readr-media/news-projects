@@ -1,12 +1,13 @@
 <template>
   <section class="bingo-status">
     <div class="bingo-status-conencted">
-      <p class="bingo-status-title">連線數</p>
-      <p class="bingo-status-highlight">{{connectedLines}}</p>
+      <div class="bingo-status-title">連線數</div>
+      <div class="bingo-status-highlight">{{connectedLines}}</div>
     </div>
+    <hr/>
     <div class="bingo-status-elapsed">
-      <p class="bingo-status-title">開票持續時間</p>
-      <p class="bingo-status-highlight">
+      <div class="bingo-status-title">開票持續時間</div>
+      <div class="bingo-status-highlight">
         <span v-if="remainingTimeInfo.hours < 0" v-text="`${remainingTimeInfo.hours}`" />
         <span v-else>00</span>
         <span>:</span>
@@ -15,20 +16,20 @@
         <span>:</span>
         <span v-if="remainingTimeInfo.seconds < 0" v-text="`${remainingTimeInfo.seconds}`" />
         <span v-else>00</span>
-      </p>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('Election2020')
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
-  props: {
-    connectedLines: Number
-  },
   computed: {
-    ...mapGetters({
+    ...mapState('Election2020/bingo', {
+      connectedLines: 'connectedLines',
+    }),
+    ...mapGetters('Election2020', {
       remainingTime: 'timer/remainingTime',
       remainingTimeInfo: 'timer/remainingTimeInfo'
     })
@@ -37,18 +38,25 @@ export default {
 </script>
 <style lang="stylus" scoped>
   .bingo-status
-    display: grid
-    grid-column-gap: 2px
+    display flex
+    flex-direction row
+    justify-content: space-evenly
   .bingo-status-title
     font-size 0.8rem
     font-weight bold
-  .bingo-status-conencted
-    grid-column 1
-  .bingo-status-elapsed
-    grid-column 2
+  .bingo-status hr
+    height 3rem
+    width 0
+    border 1px solid rgba(0, 0, 0, 0.6);
+    
+  .bingo-status-conencted, .bingo-status-elapsed
+    width 50%
+
   .bingo-status-highlight
     font-family $font-family-serif
     color $color-black
     font-size 1.625rem
     line-height 1.42
+    margin-top .5rem
+    margin-bottom 1rem
 </style>

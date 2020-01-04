@@ -12,8 +12,8 @@
       <DistrictSelector
         :districtid="zk"
         :district="zv"
+        :key="zk"
         v-for="(zv, zk) in selectorZones"
-        v-bind:key="zk"
         v-if="hasCandidate(zv.candidates)" />
     </LightboxWrapper>
   </div>
