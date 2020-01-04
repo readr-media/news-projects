@@ -64,6 +64,12 @@
               。
             </div>
           </div>
+          <div
+            class="no-result"
+            :class="{active: isEmpty}"
+          >
+            沒有以你的條件為觸及目標的政治廣告
+          </div>
         </div>
 
         <div class="candidate">
@@ -283,6 +289,7 @@ export default {
       ],
       filteredData: [],
       parsedResults: [],
+      isEmpty: false,
     };
   },
   computed: {
@@ -365,17 +372,7 @@ export default {
       // eslint-disable-next-line no-console
       console.log(`max: ${this.paging.max}`);
 
-      // const timeoutID = window.setInterval(() => {
-      //   this.$redrawVueMasonry();
-      // }, 1000);
-      // window.setTimeout(() => {
-      //   window.clearInterval(timeoutID);
-      // }, 10000);
-    },
-    toggledReadmore() {
-      // if (typeof this.$redrawVueMasonry === 'function') {
-      //   window.setTimeout(() => { this.$redrawVueMasonry(); }, 100);
-      // }
+      this.isEmpty = this.filteredData.length === 0;
     },
     goPrev() {
       if (this.paging.page > 1) {

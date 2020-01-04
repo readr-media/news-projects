@@ -30,6 +30,7 @@ html, body {
 .project-header {
     background-color: rgba(255, 245, 235, 0.6);
     margin: 0 auto;
+    margin-top: 30px;
     position: relative;
     width: 300px;
 }
@@ -161,6 +162,17 @@ html, body {
     letter-spacing: normal;
     line-height: 2.38;
     margin: 0;
+}
+.no-result {
+    display: none;
+    text-align: center;
+    margin: 30px auto;
+    margin-bottom: 0;
+    font-size: 21px;
+    color: #4a4a4a;
+}
+.no-result.active {
+    display: block;
 }
 .select-wrapper{
     margin: 0 8px;
@@ -577,11 +589,10 @@ html, body {
 
     .content {
         display: flex;
-        width: calc(90vw + 20px);
+        width: calc(90% + 20px);
         margin: 0px auto !important;
     }
     .content .item {
-        width: 30vw;
         margin-bottom: 20px;
     }
 }
