@@ -27,10 +27,7 @@
       <LegislatorDistrict />
       <LegislatorParty />
     </section>
-    <section
-      id="bingo"
-      class="section ga-scroll-event"
-    >
+    <section class="section" id="bingo">
       <h2>區域立委賓果盤</h2>
       <BingoSection/>
     </section>
@@ -263,6 +260,8 @@ $margin-center =
     >>> .subscr-l-m__heading
       p
         color $color-black-lighter
+  #bingo
+    background-color #f5f5f5
 
 .election-2020
   &.pfp

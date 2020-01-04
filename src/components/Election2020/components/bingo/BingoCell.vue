@@ -1,18 +1,44 @@
 <template>
   <div
-    class="bingo-cell bingo-bs"
-    v-on:click="TOGGLE_SELECTOR_PANEL">
-    <div class="party celltexts">黨名字太多會點點</div>
-    <div class="name celltextl">人名也會點點</div>
-    <div class="region celltexts">選區一</div>
+    class="bingo-cell"
+    :class="{'bingo-cell-selected':candidateid}"
+    v-on:click="CLICK_HANDLER">
+    <div class="party celltexts">{{info.party}}-</div>
+    <div class="name celltextl">{{info.name}}</div>
+    <div class="region celltexts">{{info.zone}}-</div>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
+import { mapRegislatorInfo } from '../../utility/mappings'
+import { get } from 'lodash'
 export default {
   props: {
-    cells: Object
+    cellid: Number,
+    candidateid: String,
+    bingoProgress: String,
+  },
+  computed: {
+    info: function() {
+      if (this.candidateid == "") {
+        return {name: "請選擇", party: "", zone: ""}
+      } else {
+        return mapRegislatorInfo(this.$store, this.candidateid)
+      }
+    }
+  },
+  methods: {
+    ...mapMutations({
+      TOGGLE_SELECTOR_PANEL: 'Election2020/bingo/TOGGLE_SELECTOR_PANEL',
+      UPDATE_CURRENT_CELL: 'Election2020/bingo/UPDATE_CURRENT_CELL'
+    }),
+    CLICK_HANDLER: function() {
+      if (this.bingoProgress === "init"){
+        this.TOGGLE_SELECTOR_PANEL()
+        this.UPDATE_CURRENT_CELL(this.cellid)
+      }
+    },
   },
   methods: {
     ...mapMutations({
@@ -27,13 +53,14 @@ export default {
   .bingo-cell
     margin-top -4px
     margin-left -4px
-    padding 10%
+    padding 15%
     box-sizing border-box
     box-shadow: inset 0 0 0 4px rgba(151, 151, 151, 0.25)
     overflow hidden
     display flex
     flex-direction column
     justify-content space-between
+    background-color rgba(155, 155, 155, 0.25)
 
   .bingo-cell div
     white-space nowrap
@@ -41,7 +68,10 @@ export default {
     text-overflow ellipsis
 
   .bingo-cell:hover
-    box-shadow: inset 0 0 0 4px rgba(101, 101, 101, 0.5)
+    background-color #ffffff
+
+  .bingo-cell-selected
+    background-color #ffffff
 
   .celltextl
     font-size 1.75rem
@@ -53,13 +83,5 @@ export default {
 
   .bongo-cell-elected
     background white
-  .bingo-v
-    background linear-gradient(#000, #000) no-repeat center/2px 100%
-  .bingo-h
-    background linear-gradient(180deg, transparent calc(50% - 1px), black calc(50%), transparent calc(50% + 1px))
-  .bingo-s
-    background linear-gradient(to bottom right, transparent calc(50% - 1px),  black calc(50% - 1px), black 50%, transparent calc(50% + 1px))
-  .bingo-bs
-    background linear-gradient(to bottom left, transparent calc(50% - 1px),  black calc(50% - 1px), black 50%, transparent calc(50% + 1px))
 
 </style>

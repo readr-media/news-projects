@@ -22,7 +22,16 @@ const module = {
           return key
         }
       })
-    }
+    },
+    electedList(state, getters, rootState) {
+      return _.transform(state.data, (result, value, key) => {
+        for (let zk in value) {
+          if (value[zk].isElected === "*") {
+            result[`${key}-${zk}-${value[zk].no}`] = true
+          }
+        }
+      }, {})
+    },
   },
   mutations: {},
   actions: {},
