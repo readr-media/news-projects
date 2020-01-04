@@ -143,14 +143,14 @@
               :key="`pages-${index}`"
               class="page"
               :class="{active: paging.page === item}"
-              @click="paging.page = item"
+              @click="setPage(item)"
             >
               {{ item }}
             </div>
           </div>
           <div
             class="next"
-            :class="[((paging.page + 1) >= paging.max) && 'disable']"
+            :class="[hideNext && 'disable']"
             @click="goNext"
           />
         </div>
@@ -196,14 +196,14 @@
               :key="`pages-${index}`"
               class="page"
               :class="{active: paging.page === item}"
-              @click="paging.page = item"
+              @click="setPage(item)"
             >
               {{ item }}
             </div>
           </div>
           <div
             class="next"
-            :class="[((paging.page + 1) >= paging.max) && 'disable']"
+            :class="[hideNext && 'disable']"
             @click="goNext"
           />
         </div>
@@ -299,15 +299,22 @@ export default {
       return _.slice(this.filteredData, from, end);
     },
     pages() {
+      let start = this.paging.page - this.paging.width;
+      let end = this.paging.page + this.paging.width;
       if (this.paging.page <= this.paging.width) {
-        return _.range(1, 1 + (2 * this.paging.width) + 1);
+        start = 1;
+        end = 1 + (2 * this.paging.width);
       } if (this.paging.page + this.paging.width >= this.paging.max) {
-        return _.range(this.paging.max - 2 * (this.paging.width), this.paging.max + 1);
+        start = this.paging.max - 2 * (this.paging.width);
+        end = this.paging.max;
       }
-      return _.range(
-        this.paging.page - this.paging.width,
-        this.paging.page + this.paging.width + 1,
-      );
+
+      if (start <= 0) start = 1;
+      if (end > this.paging.max) end = this.paging.max;
+      return _.range(start, end + 1);
+    },
+    hideNext() {
+      return (this.paging.page + 1) > this.paging.max;
     },
   },
   watch: {
@@ -382,6 +389,11 @@ export default {
     goNext() {
       if (this.paging.page < this.paging.max) {
         this.paging.page += 1;
+      }
+    },
+    setPage(page) {
+      if (page > 0 && page <= this.paging.max) {
+        this.paging.page = page;
       }
     },
     handleResize() {
