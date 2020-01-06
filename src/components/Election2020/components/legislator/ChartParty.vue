@@ -131,6 +131,7 @@ export default {
   display flex
   align-items flex-end
   overflow-y scroll
+  min-height 288px
 
 @media (min-width 768px)
   .chart-wrapper
