@@ -1,6 +1,6 @@
 <template>
   <section class="the-credit">
-    <p>設計：小草；工程：小島</p>
+    <p>記者／劉子維、設計／陳怡蒨、工程／小島、資料協力／王向榮</p>
   </section>
 </template>
 

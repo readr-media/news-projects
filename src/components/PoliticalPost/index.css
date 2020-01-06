@@ -450,6 +450,30 @@ html, body {
     background-color: #eb6201;
 }
 
+.article {
+    padding: 20px;
+    max-width: 320px;
+    margin: 0 auto;
+}
+.article h2 {
+    font-size: 21px;
+    font-weight: 300;
+}
+.article p {
+    font-size: 15px;
+    color: #4a4a4a;
+    line-height: 1.87;
+}
+.article p a {
+    font-weight: 500;
+    color: #2c585e;
+}
+.article img {
+    width: 100%;
+}
+.article iframe {
+    height: 300px !important;
+}
 
 @media (min-width: 960px) {
     .container {
@@ -594,5 +618,12 @@ html, body {
     }
     .content .item {
         margin-bottom: 20px;
+    }
+
+    .article {
+        max-width: 960px;
+    }
+    .article iframe {
+        height: 600px;
     }
 }
