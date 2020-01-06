@@ -621,7 +621,7 @@ html, body {
     }
 
     .article {
-        max-width: 960px;
+        max-width: 720px;
     }
     .article iframe {
         height: 600px;
