@@ -8,6 +8,7 @@ Vue.use(Vuex)
 
 import VuexEasyFirestore from 'vuex-easy-firestore'
 import { Firebase, initFirebase } from './config/firebase.js'
+import realtimeBingoCandidateStats from './modules/firebase-modules/realtimeBingoCandidateStats'
 import realtimeTest from './modules/firebase-modules/realtimeTest'
 import realtimePresidents from './modules/firebase-modules/realtimePresidents'
 import realtimeLegislatorsDistricts from './modules/firebase-modules/realtimeLegislatorsDistricts'
@@ -17,6 +18,7 @@ import realtimeLegislatorsDistrictSeat from './modules/firebase-modules/realtime
 import realtimeLegislatorsParty from './modules/firebase-modules/realtimeLegislatorsParty'
 const easyFirestore = VuexEasyFirestore(
   [
+    realtimeBingoCandidateStats,
     realtimeTest,
     realtimePresidents,
     realtimeLegislatorsDistricts,
