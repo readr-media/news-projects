@@ -1,16 +1,24 @@
 <template>
   <div class="card">
-    <p
-      class="card__party-name"
-      v-text="partyName"
-    />
-    <p class="card__seat seat">
-      <Counter
-        class="seat__count"
-        :count="seat"
+    <div class="card__party-name party-name">
+      <p
+        class="party-name__text"
+        v-text="partyName"
       />
-      席
-    </p>
+    </div>
+    <div class="card__seat seat">
+      <p>
+        <Counter
+          class="seat__count"
+          :count="seat"
+        />
+        <span
+          class="seat__text"
+        >
+          席
+        </span>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -45,20 +53,32 @@ export default {
   justify-content space-around
   align-items center
   &__party-name
+    width 100%
+    height 55%
+  &__seat
+    border-top 1px solid $color-black-light
+    width 100%
+    height 45%
+
+.party-name
+  display flex
+  justify-content center
+  align-items center
+  &__text
     font-size 15px
     color $color-black-light
-    width 100%
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;  
     overflow: hidden;
-  &__seat
-    border-top 1px solid $color-black-light
-    width 100%
+    margin 0
+    line-height 1.63
 
 .seat
   margin 0
-  padding 10px 0
+  display flex
+  justify-content center
+  align-items center
   &__count
     font-size 26px
     font-family $font-family-serif
@@ -69,12 +89,4 @@ export default {
     width 110px
     height 130px
     padding 0 17px
-    &__party-name
-      font-size 16px
-      margin 10px 0
-
-  .seat
-    padding 10px 0
-    &__count
-      font-size 30px
 </style>
