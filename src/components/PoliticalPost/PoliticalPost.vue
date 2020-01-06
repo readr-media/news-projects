@@ -7,10 +7,10 @@
           <div class="corner top right" />
           <div class="wrapper">
             <div class="people" />
-            <h2>Facebook <span style="display:inline-block;">政治廣告收集者</span></h2>
-            <h3>政治廣告客戶如何鎖定你</h3>
+            <h2>2020 大選 <span style="display:inline-block;">社群廣告戰</span></h2>
+            <h3>誰在臉書鎖定你</h3>
             <div class="people mobile" />
-            <p>Facebook 因應臺灣總統選舉，要求所有「政治性廣告」揭露廣告對象及金額，<br>來看看哪些人的廣告鎖定的是你！</p>
+            <p>總統大選剩不到 10 天，你是否曾在瀏覽 Facebook 時看到候選人、或其他政治相關的廣告呢？<br>Facebook 因應臺灣總統選舉，要求所有「政治性廣告」揭露廣告對象及金額，<br>來看看哪些候選人的廣告鎖定的是你！</p>
           </div>
           <div class="focus" />
           <div class="corner bottom left" />
@@ -252,7 +252,7 @@
         <p>例如國民黨高雄立委候選人黃昭順有一則宣傳推動長照政績的廣告未申報，但被 Facebook 判定為政治廣告，因此在廣告檔案庫裡留有金額紀錄。她另一則宣傳楠梓地區建設政績的廣告有申報，兩則貼文性質與內容都很相似（如下圖）。</p>
         <p>
           <img
-            src="https://paper-attachments.dropbox.com/s_F41E0F7F5DC64D0035C005FAAF753024F45BADC9FAB7C5F1980FAD77E46B00AE_1578280703760_photoad.jpg"
+            src="/proj-assets/political-post/img/facebook-1.jpg"
             alt=""
           >
         </p>
@@ -387,7 +387,7 @@
         <p>Facebook 於 2017 年 9 月公布一批資料，指出自 2015 年 6 月至 2017 年 5 月，有 400 多個有俄羅斯網軍背景的帳號，花費十萬美元對美國選民下廣告，企圖影響美國 2016 年總統大選。從 2018 年 3 月開始，Facebook 就成立廣告檔案庫，加強對廣告的管理，2019 年 6 月開始，逐步在全球推出「廣告資訊透明度工具」，廣告出資者及其顯示曝光對象、投放金額的資訊（如下圖）將會在廣告檔案庫中留存 7 年，12 月更公佈了廣告檔案庫報告。</p>
         <p>
           <img
-            src="https://paper-attachments.dropbox.com/s_AABA985E7B5A381D286ED11D0ABC7B1579114FA321473800B6D963CAFBFD72F7_1578076805441_+2020-01-04+2.37.31.png"
+            src="/proj-assets/political-post/img/facebook-2.png"
             alt=""
           >
         </p>
@@ -439,8 +439,8 @@ export default {
   name: 'PoliticalPost',
   metaInfo() {
     return {
-      title: 'Facebook 政治廣告收集者',
-      description: 'Facebook 因應臺灣總統選舉，要求所有「政治性廣告」揭露廣告對象及金額，來看看哪些人的廣告鎖定的是你！',
+      title: '2020 大選社群廣告戰：誰在臉書鎖定你',
+      description: '總統大選剩不到 10 天，你是否曾在瀏覽 Facebook 時看到候選人、或其他政治相關的廣告呢？Facebook 因應臺灣總統選舉，要求所有「政治性廣告」揭露廣告對象及金額，來看看哪些候選人的廣告鎖定的是你！',
       metaUrl: 'political-post',
       metaImage: 'political-post/img/og.png',
     };
