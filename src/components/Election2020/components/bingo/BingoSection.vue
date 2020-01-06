@@ -10,6 +10,13 @@
       <BingoStatus />
       <button v-on:click="CLICK_HANDLER" class="bingo-startbtn">{{buttonText}}</button>
     </div>
+    <div class="bingo-others">
+      <h2>大家都在猜</h2>
+    </div>
+    <div class="bingo-momentum">
+      <h2>看誰呼聲高</h2>
+      <BingoMomentum />
+    </div>
     <BingoSelector/>
   </section>
 </template>
@@ -19,15 +26,18 @@
 import BingoFrame from './BingoFrame.vue'
 import BingoStatus from './BingoStatus.vue'
 import BingoSelector from './BingoSelector.vue'
+//import BingoOthers from './BingoOthers.vue'
+import BingoMomentum from './BingoMomentum.vue'
 
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import { find } from 'lodash'
+import { find, get } from 'lodash'
 
 export default {
   components: {
     BingoFrame,
     BingoStatus,
-    BingoSelector
+    BingoSelector,
+    BingoMomentum
   },
   props: {
     cells: Array,
@@ -58,7 +68,10 @@ export default {
     }),
     ...mapGetters('Election2020/bingo', {
       randomCells: 'randomFrameCells',
-    })
+    }),
+    ...mapState('realtimeBingoCandidateStats', {
+      momentumCandidates: 'data',
+    }),
   },
   methods: {
     RANDOM_CLICK_HANDLER: function() {
@@ -69,6 +82,16 @@ export default {
       const emptycell = find(this.cells, (i) => {return i == ""})
       if (this.bingoProgress == "init") {
         this.START_BINGO_MATCHING()
+
+        let patch_obj = {}
+        for (let cellid in this.bingoCells) {
+          const candidateid = this.bingoCells[cellid]
+          patch_obj[candidateid] = get(this.momentumCandidates, candidateid, 0) + 1
+        }
+        this.$store.dispatch('realtimeBingoCandidateStats/patch', patch_obj)
+
+      }else{
+        window.open(`https://www.facebook.com/share.php?u=${window.location.href}`);
       }
     },
     ...mapMutations({
@@ -109,9 +132,12 @@ export default {
   .bingo-status
     align-self self-end
 
-  .bingo-title,.bingo-status
+  .bingo-title,.bingo-status,.bingo-others,.bingo-momentum
     padding 0 65px
   
+  .bingo-others h2, .bingo-momentum h2
+    padding 120px 0 0 0
+
   .bingo-title p
     margin-block-end 0
   
@@ -135,7 +161,7 @@ export default {
     .bingo-section
       padding-right 50px
       padding-left 50px
-      
+    
     .bingo-title
       grid-column 1
     .bingo-frame
@@ -143,4 +169,6 @@ export default {
       grid-row 1 / span 2
       width 40vw
       height 40vw
+    .bingo-others,.bingo-momentum
+      grid-column 1 / span 2
 </style>

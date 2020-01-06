@@ -45,7 +45,7 @@ export default {
         return this.cells.map(()=>{return {"bingo":false}})
       }
     },
-    bingoStatus: function() {
+    bingoCellStatus: function() {
       return function(id) {
         return this.bingoFrameStatus[id]
       }
@@ -53,20 +53,20 @@ export default {
     bingoBackground: function(){
       return function(id) {
        let style = []
-        const bingoStatus = this.bingoFrameStatus[id]
-        if (get(bingoStatus, "bingo-h", false)) {
+        const bingoCellStatus = this.bingoFrameStatus[id]
+        if (get(bingoCellStatus, "bingo-h", false)) {
           style.push("linear-gradient(180deg, transparent calc(50% - 1px), black calc(50%), transparent calc(50% + 1px))")
         }
-        if (get(bingoStatus, "bingo-v", false)) {
+        if (get(bingoCellStatus, "bingo-v", false)) {
           style.push("linear-gradient(#000, #000) no-repeat center/2px 100%")
         }
-        if (get(bingoStatus, "bingo-s", false)) {
+        if (get(bingoCellStatus, "bingo-s", false)) {
           style.push("linear-gradient(to bottom right, transparent calc(50% - 1px),  black calc(50% - 1px), black 50%, transparent calc(50% + 1px))")
         }
-        if (get(bingoStatus, "bingo-bs", false)) {
+        if (get(bingoCellStatus, "bingo-bs", false)) {
           style.push("linear-gradient(to bottom left, transparent calc(50% - 1px),  black calc(50% - 1px), black 50%, transparent calc(50% + 1px))")
         }
-        if (get(bingoStatus, "bingo", false)) {
+        if (get(bingoCellStatus, "bingo", false)) {
           style.push("radial-gradient(transparent calc(27% - 1px), rgb(159, 226, 188) 27%, rgb(159, 226, 188) 40%, transparent calc(40% + 1px))")
         }
         return {background: style.join()}
