@@ -471,9 +471,6 @@ html, body {
 .article img {
     width: 100%;
 }
-.article iframe {
-    height: 300px !important;
-}
 
 @media (min-width: 960px) {
     .container {
@@ -622,8 +619,5 @@ html, body {
 
     .article {
         max-width: 720px;
-    }
-    .article iframe {
-        height: 600px;
     }
 }
