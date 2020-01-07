@@ -3,9 +3,9 @@
     class="bingo-cell"
     :class="{'bingo-cell-selected':candidateid}"
     v-on:click="CLICK_HANDLER">
-    <div class="party celltexts">{{info.party}}-</div>
-    <div class="name celltextl">{{info.name}}</div>
-    <div class="region celltexts">{{info.zone}}-</div>
+    <div class="party celltexts" :title="info.party">{{info.party}}-</div>
+    <div class="name celltextl" :title="info.name" >{{info.name}}</div>
+    <div class="region celltexts" :title="info.zone">{{info.zone}}-</div>
   </div>
 </template>
 
