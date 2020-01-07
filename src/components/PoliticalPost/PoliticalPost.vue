@@ -225,7 +225,7 @@
           src="https://public.flourish.studio/visualisation/1187690/embed"
           frameborder="0"
           scrolling="no"
-          style="width:100%;height:600px;"
+          style="width:100%;height:300px;"
         /><div style="width:100%!;margin-top:4px!important;text-align:right!important;">
           <a
             class="flourish-credit"
@@ -258,123 +258,27 @@
         </p>
         <h2>民進黨花最多錢，國民黨沒在臉書下廣告</h2>
         <p>以「政黨粉絲頁」為單位，可以發現民進黨是花最多錢在臉書投放政治廣告的政黨，花費金額約在 35.5 萬至 41.9 萬元之間；其次是綠黨，花費約在 18.1 萬到 22.4 萬元之間；而國民黨沒有在臉書下廣告的紀錄。</p>
-        <iframe
-          src="https://public.flourish.studio/visualisation/1189351/embed"
-          frameborder="0"
-          scrolling="no"
-          style="width:100%;height:600px;"
-        /><div style="width:100%!;margin-top:4px!important;text-align:right!important;">
-          <a
-            class="flourish-credit"
-            href="https://public.flourish.studio/visualisation/1189351/?utm_source=embed&utm_campaign=visualisation/1189351"
-            target="_top"
-            style="text-decoration:none!important"
-          ><img
-            alt="Made with Flourish"
-            src="https://public.flourish.studio/resources/made_with_flourish.svg"
-            style="width:105px!important;height:16px!important;border:none!important;margin:0!important;"
-          > </a>
-        </div>
+        <iframe src='https://public.flourish.studio/visualisation/1195724/embed' frameborder='0' scrolling='no' style='width:100%;height:660px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/1195724/?utm_source=embed&utm_campaign=visualisation/1195724' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
         <p>國民黨文傳會代理主委程美華表示「因為我們沒錢」，國民黨中央直屬的 Facebook 專頁只有「中國國民黨 KMT」和「吳敦義 Wu, Den-Yih」，兩個都沒有下廣告。</p>
         <p>但若以區域立委候選人所屬政黨為單位，民進黨籍候選人仍然居冠，第二名就是國民黨籍候選人。</p>
-        <iframe
-          src="https://public.flourish.studio/visualisation/1189540/embed"
-          frameborder="0"
-          scrolling="no"
-          style="width:100%;height:600px;"
-        /><div style="width:100%!;margin-top:4px!important;text-align:right!important;">
-          <a
-            class="flourish-credit"
-            href="https://public.flourish.studio/visualisation/1189540/?utm_source=embed&utm_campaign=visualisation/1189540"
-            target="_top"
-            style="text-decoration:none!important"
-          ><img
-            alt="Made with Flourish"
-            src="https://public.flourish.studio/resources/made_with_flourish.svg"
-            style="width:105px!important;height:16px!important;border:none!important;margin:0!important;"
-          > </a>
-        </div>
+        <iframe src='https://public.flourish.studio/visualisation/1195759/embed' frameborder='0' scrolling='no' style='width:100%;height:690px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/1195759/?utm_source=embed&utm_campaign=visualisation/1195759' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
         <p>程美華表示，國民黨區域立委下廣告的資金，多是向選民募款而來，國民黨中央沒有足夠經營網路社群的資金，也沒有民進黨那般充沛的人力。</p>
         <p>「我想，這跟有沒有錢比較沒有絕對的正相關。」有超過 20 年網路產業經驗，擅長網路行銷的網路觀察家林柏蒼分析，「選民結構」是重要的因素之一，國民黨的支持者年齡偏高，這些族群在 Facebook 上的活動不如 LINE 上活躍。單單分析 Facebook的政治廣告，無法得知政黨在「線上選戰」中活動的全貌。</p>
         <h2>哪些人刊最多？花最多？</h2>
         <p>資料顯示，刊登最多筆廣告的，是欲在雲林縣第二選區爭取連任的民進黨現任立委劉建國，超過 400 筆廣告，大幅超越第二名的民進黨新竹縣第二選區參選人周江杰。</p>
-        <iframe
-          src="https://public.flourish.studio/visualisation/1189607/embed"
-          frameborder="0"
-          scrolling="no"
-          style="width:100%;height:600px;"
-        /><div style="width:100%!;margin-top:4px!important;text-align:right!important;">
-          <a
-            class="flourish-credit"
-            href="https://public.flourish.studio/visualisation/1189607/?utm_source=embed&utm_campaign=visualisation/1189607"
-            target="_top"
-            style="text-decoration:none!important"
-          ><img
-            alt="Made with Flourish"
-            src="https://public.flourish.studio/resources/made_with_flourish.svg"
-            style="width:105px!important;height:16px!important;border:none!important;margin:0!important;"
-          > </a>
-        </div>
+        <iframe src='https://public.flourish.studio/visualisation/1195768/embed' frameborder='0' scrolling='no' style='width:100%;height:750px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/1195768/?utm_source=embed&utm_campaign=visualisation/1195768' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
         <p>劉建國刊登次數雖多，但設定的金額都是小額，因此花費金額（介於 3.1 萬至 7.1 萬元）比周江杰（22.3 萬至 27.9 萬元）少，比起累計金額最多的，民進黨新竹市選區的鄭宏輝（45 萬至 66.5 萬元，刊登 70 筆）更是小得多。劉建國競選團隊的工作人員回應，「刊登很多廣告，是想讓地方鄉親更認識劉委員」。</p>
-        <iframe
-          src="https://public.flourish.studio/visualisation/1189567/embed"
-          frameborder="0"
-          scrolling="no"
-          style="width:100%;height:600px;"
-        /><div style="width:100%!;margin-top:4px!important;text-align:right!important;">
-          <a
-            class="flourish-credit"
-            href="https://public.flourish.studio/visualisation/1189567/?utm_source=embed&utm_campaign=visualisation/1189567"
-            target="_top"
-            style="text-decoration:none!important"
-          ><img
-            alt="Made with Flourish"
-            src="https://public.flourish.studio/resources/made_with_flourish.svg"
-            style="width:105px!important;height:16px!important;border:none!important;margin:0!important;"
-          > </a>
-        </div>
+        <iframe src='https://public.flourish.studio/visualisation/1195774/embed' frameborder='0' scrolling='no' style='width:100%;height:750px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/1195774/?utm_source=embed&utm_campaign=visualisation/1195774' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
         <p>以刊登筆數和花費金額前十名排序，前三名皆為民進黨籍的候選人。國民黨花最多錢下廣告的，是初次參選，挑戰新北市第一選區的洪孟楷，花費的金額約在 17.2 萬到 21.9 萬之間。</p>
         <p>洪孟楷是老牌立委郭素春之子，算是國民黨的「新生代」。接受訪問時，對自己是國民黨籍立委中花最多錢下廣告的結果「有點驚訝」，他不便透露線上廣告佔選舉經費的多少比例，僅說資金來自於選民小額捐款。</p>
         <p>洪孟楷認為自己這次在實體宣傳和線上廣告的預算，在國民黨或民進黨可能都只排後段，「但可能是因為我比較有在注意到社群經營的重要性，社群經營可以精準地花小錢來接觸到我們想接觸到的民眾。」比起可能 30 秒就花幾十萬的電視廣告，Facebook 政治廣告「可以讓我在最後這兩個月好好衝刺，並且接觸到很多這個地區真實選民，我覺得相對來講是『小兵立大功』的作戰方式」。</p>
         <p>雖然沒有政黨和候選人明確回應 Facebook 政治廣告的支出佔總競選支出的比例，但從過往資料可以推估，Facebook 廣告佔比並不大。以此次花費金額第二名的臺中民進黨現任立委何欣純為例，Facebook 政治廣告花費在 24.4 萬到 45.3 萬元之間，對比她 <a href="https://vote.ly.g0v.tw/candidate/%E8%87%BA%E4%B8%AD%E5%B8%82%E7%AC%AC%E4%B8%83%E9%81%B8%E8%88%89%E5%8D%80/%E4%BD%95%E6%AC%A3%E7%B4%94">2016 立委選舉政治獻金專戶</a>，申報的宣傳經費約為 971 萬元。</p>
         <h2>除了候選人，還有誰在下政治廣告？</h2>
         <p>除了此次參選的候選人以外，我們發現倡議型非營利組織「國際特赦組織 台灣分會」、「Greenpeace 綠色和平 （台灣網站）」投放的人權、環境議題等廣告，也屬於「社會議題、選舉或政治相關廣告」的範疇。前 10 名的還有網路媒體「BuzzOrange 報橘」、「品觀點」等。</p>
-        <iframe
-          src="https://public.flourish.studio/visualisation/1189652/embed"
-          frameborder="0"
-          scrolling="no"
-          style="width:100%;height:600px;"
-        /><div style="width:100%!;margin-top:4px!important;text-align:right!important;">
-          <a
-            class="flourish-credit"
-            href="https://public.flourish.studio/visualisation/1189652/?utm_source=embed&utm_campaign=visualisation/1189652"
-            target="_top"
-            style="text-decoration:none!important"
-          ><img
-            alt="Made with Flourish"
-            src="https://public.flourish.studio/resources/made_with_flourish.svg"
-            style="width:105px!important;height:16px!important;border:none!important;margin:0!important;"
-          > </a>
-        </div>
+        <iframe src='https://public.flourish.studio/visualisation/1195779/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/1195779/?utm_source=embed&utm_campaign=visualisation/1195779' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
         <p>但佔最多的是來自於同一個出資者「Sway Strategy 」的廣告。這是一家名叫「思為策略」的顧問公司，專門進行政治行為數據的分析。思為策略以「政治大廚房」和「地方政誌」兩個粉絲專頁投放合計 2752 筆政治廣告，內容都是號召網友填答 2020 大選相關線上民調的問卷連結。林柏蒼分析，這兩個粉絲團可以視為思為策略的官方粉絲專頁，只是用不同切面經營而已，「應該跟這一次選舉的行銷需求有關。」</p>
         <p>READr <a href="https://docs.google.com/spreadsheets/d/1Gvp51o4tXh2cIiOkyQ5UvuYQzXIxt4iVd-PzKM30OW0/edit?usp=sharing">另外收集了</a> 百個總統候選人韓國瑜、蔡英文支持者粉絲專頁（註），也發現了支持者自掏腰包幫候選人下廣告的狀況。</p>
-        <iframe
-          src="https://public.flourish.studio/visualisation/1189681/embed"
-          frameborder="0"
-          scrolling="no"
-          style="width:100%;height:600px;"
-        /><div style="width:100%!;margin-top:4px!important;text-align:right!important;">
-          <a
-            class="flourish-credit"
-            href="https://public.flourish.studio/visualisation/1189681/?utm_source=embed&utm_campaign=visualisation/1189681"
-            target="_top"
-            style="text-decoration:none!important"
-          ><img
-            alt="Made with Flourish"
-            src="https://public.flourish.studio/resources/made_with_flourish.svg"
-            style="width:105px!important;height:16px!important;border:none!important;margin:0!important;"
-          > </a>
-        </div>
+        <iframe src='https://public.flourish.studio/visualisation/1195788/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/1195788/?utm_source=embed&utm_campaign=visualisation/1195788' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
         <p>從次數來看， 「辣台派」、「我們顧面桶」都是少錢多次的小額廣告。「辣台派」的廣告內容以正面宣傳蔡英文政見為主題；「我們顧面桶」的廣告內容是嘲諷韓國瑜，例如說他是「烙跑市長」、「苦民所苦、睡到中午」。這兩個刊登次數多的粉絲頁，原先刊登廣告使用的都是美金，因為被認定「此廣告有關政治和重大國家議題」，但使用幣別與投遞區域的幣別不符合，已被 Facebook 下架。</p>
         <p>從金額來看，花最多錢下廣告的是「不禮貌鄉民團」，廣告大意為「蔡英文譴責中共軍機機繞臺、賣芭樂到美國，韓國瑜不對軍機繞臺發表意見，還讓高雄芭樂價格崩盤。」，花費金額在 2 萬至 2.5 萬元之間。自 2020 年一月初，已無法查看該粉絲團的內容。</p>
         <p>陸子鈞提醒，這份粉絲頁資料有其限制，雖然設定查找方式時排除了政黨直營粉絲頁，但很難得知「看起來是素人」的粉絲頁是否為政黨的側翼，以他在行銷圈多年的經驗，知道政黨和網紅、人氣粉絲頁之間可能「有些關係」。 </p>
@@ -398,7 +302,7 @@
           src="https://public.flourish.studio/visualisation/1187758/embed"
           frameborder="0"
           scrolling="no"
-          style="width:100%;height:600px;"
+          style="width:100%;height:300px;"
         /><div style="width:100%!;margin-top:4px!important;text-align:right!important;">
           <a
             class="flourish-credit"
