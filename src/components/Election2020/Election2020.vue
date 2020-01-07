@@ -17,6 +17,12 @@
       <PresidentCountChart class="president-count-chart" />
     </section>
     <section
+      class="section"
+    >
+      以下只是測試，選舉完才會上
+      <PresidentCounty />
+    </section>
+    <section
       id="legislator"
       class="section ga-scroll-event"
     >
@@ -63,6 +69,7 @@ import { mapPresidentPartyAbbrEn } from './utility/mappings'
 import Countdown from './components/Countdown.vue'
 import Header from './components/Header.vue'
 import PresidentCount from './components/president/PresidentCount.vue'
+import PresidentCounty from './components/president/PresidentCounty.vue'
 import LegislatorDistrict from './components/legislator/LegislatorDistrict.vue'
 import LegislatorParty from './components/legislator/LegislatorParty.vue'
 import BingoSection from './components/bingo/BingoSection.vue'
@@ -140,6 +147,7 @@ export default {
     LegislatorParty,
     LatestNews: () => import('./components/LatestNews.vue'),
     PresidentCount,
+    PresidentCounty,
     PresidentCountChart: () => import('./components/president/PresidentCountChart.vue'),
     TheCredits: () => import('./components/TheCredits.vue'),
     TheDonateFooter: () => import('./components/TheDonateFooter.vue'),
