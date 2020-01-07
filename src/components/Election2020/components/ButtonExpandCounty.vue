@@ -48,6 +48,7 @@ export default {
   padding 0
   background-color transparent
   border none
+  cursor pointer
   &__text
     font-size 15px
     color $color-black-light
