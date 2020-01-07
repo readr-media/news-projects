@@ -123,7 +123,7 @@ export default {
       background-color white
       border solid 1px rgba(0, 0, 0, 0.1)
   &--orange
-    background linear-gradient(316deg, $color-orange-light, $color-orange)
+    background linear-gradient(316deg, $color-orange, $color-orange)
     background-size 400% 400%
     &.square--with-border
       background-color $color-orange
