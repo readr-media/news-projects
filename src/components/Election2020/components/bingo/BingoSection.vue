@@ -1,7 +1,6 @@
 <template>
   <section class="bingo-section">
     <div class="bingo-title">
-      <h2>區域立委賓果盤</h2>
       <p v-html="contentText"/>
       <div v-on:click="RANDOM_CLICK_HANDLER" v-if="bingoProgress=='init'" class="bingo-randombtn">電腦選號</div>
     </div>
@@ -12,6 +11,7 @@
     </div>
     <div class="bingo-others">
       <h2>大家都在猜</h2>
+      <BingoOthers />
     </div>
     <div class="bingo-momentum">
       <h2>看誰呼聲高</h2>
@@ -24,10 +24,10 @@
 <script>
 
 import BingoFrame from './BingoFrame.vue'
+import BingoMomentum from './BingoMomentum.vue'
+import BingoOthers from './BingoOthers.vue'
 import BingoStatus from './BingoStatus.vue'
 import BingoSelector from './BingoSelector.vue'
-//import BingoOthers from './BingoOthers.vue'
-import BingoMomentum from './BingoMomentum.vue'
 
 import { mapState, mapGetters, mapMutations } from 'vuex'
 import { find, get } from 'lodash'
@@ -35,12 +35,10 @@ import { find, get } from 'lodash'
 export default {
   components: {
     BingoFrame,
+    BingoMomentum,
+    BingoOthers,
     BingoStatus,
     BingoSelector,
-    BingoMomentum
-  },
-  props: {
-    cells: Array,
   },
   computed: {
     contentText: function () {
@@ -79,8 +77,11 @@ export default {
       this.UPDATE_BINGO_CELL_ALL(cells)
     },
     CLICK_HANDLER: function() {
-      const emptycell = find(this.cells, (i) => {return i == ""})
-      if (this.bingoProgress == "init") {
+      const emptycell = find(this.bingoCells, (i) => {
+        return (i == "")
+      })
+
+      if (this.bingoProgress == "init" && emptycell === undefined) {
         this.START_BINGO_MATCHING()
 
         let patch_obj = {}
@@ -88,9 +89,11 @@ export default {
           const candidateid = this.bingoCells[cellid]
           patch_obj[candidateid] = get(this.momentumCandidates, candidateid, 0) + 1
         }
+        patch_obj['records'] = this.momentumCandidates.records.slice(0, 9)
+        patch_obj['records'].unshift(this.bingoCells.join())
         this.$store.dispatch('realtimeBingoCandidateStats/patch', patch_obj)
 
-      }else{
+      }else if (this.bingoProgress !== "init"){
         window.open(`https://www.facebook.com/share.php?u=${window.location.href}`);
       }
     },
@@ -136,7 +139,7 @@ export default {
     padding 0 65px
   
   .bingo-others h2, .bingo-momentum h2
-    padding 120px 0 0 0
+    padding 120px 0 60px 0
 
   .bingo-title p
     margin-block-end 0
@@ -161,6 +164,7 @@ export default {
     .bingo-section
       padding-right 50px
       padding-left 50px
+      grid-template-columns repeat(2, 1fr)
     
     .bingo-title
       grid-column 1

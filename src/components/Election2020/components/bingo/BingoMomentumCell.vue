@@ -44,9 +44,8 @@ export default {
   flex-direction row
   justify-content space-between
   background-color white
-  width 32%
+  width 80%
   height 16vh
-  margin-top 60px
 .bingo-momentum-zone
   display flex
   flex-direction column
@@ -81,4 +80,8 @@ export default {
   background-color $color-gray-light
 .partybg-other
   background-color $color-purple-light
+
+@media (min-width: 768px)
+  .bingo-momentum-cell
+    width 32%
 </style>
