@@ -18,8 +18,8 @@ import TheSubscr from './components/TheSubscr.vue'
 
 export default {
   metaInfo: {
-    title: '',
-    description: '',
+    title: '第三勢力投票指南',
+    description: '明年的國會選舉是有史以來最多政黨票選擇的一次！除了兩大黨民進黨、國民黨以外，剩下的 17 個政黨分別是什麼來頭？ READr 跟關鍵評論網合作，透過數據與專訪，全方位解析第三勢力！',
     metaUrl: 'the-third-force',
     metaImage: 'the-third-force/img/og.jpg',
     customScript: ''
