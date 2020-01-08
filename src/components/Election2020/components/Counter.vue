@@ -3,7 +3,7 @@
     class="counter"
     :startVal="iCountUp.startVal"
     :endVal="count"
-    :decimals="iCountUp.decimals"
+    :decimals="decimals"
     :duration="iCountUp.duration"
     :options="iCountUp.options"
   />
@@ -17,6 +17,10 @@ export default {
     count: {
       type: Number,
       default: 0
+    },
+    decimals: {
+      type: Number,
+      default: 0
     }
   },
   components: {
@@ -27,7 +31,6 @@ export default {
       iCountUp: {
         startVal: 0,
         // endVal: 0,
-        decimals: 0,
         duration: 1,
         options: {
           useEasing: true,
