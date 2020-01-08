@@ -8,7 +8,7 @@
     </picture>
     <div class="home-cover__content">
       <h1>第三勢力投票指南</h1>
-      <p>明年的國會選舉是有史以來最多政黨票選擇的一次！除了兩大黨民進黨、國民黨以外，剩下的 17 個政黨分別是什麼來頭？ READr 跟關鍵評論網合作，透過數據與專訪，全方位解析第三勢力！</p>
+      <p>今年的國會選舉是有史以來最多政黨票選擇的一次！除了兩大黨民進黨、國民黨以外，剩下的 17 個政黨分別是什麼來頭？READr 跟關鍵評論網合作，透過數據與專訪，全方位解析第三勢力！</p>
       <div class="home-cover__author">
         <picture class="readr">
           <source type="image/webp" srcset="/proj-assets/the-third-force/img/logo-readr.webp">
