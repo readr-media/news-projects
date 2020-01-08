@@ -26,7 +26,7 @@ export default {
         {"positions": [2,7,12,17,22], line: "bingo-v"},
         {"positions": [3,8,13,18,23], line: "bingo-v"},
         {"positions": [4,9,14,19,24], line: "bingo-v"},
-        {"positions": [0,6,16,18,24], line: "bingo-bs"},
+        {"positions": [0,6,12,18,24], line: "bingo-bs"},
         {"positions": [4,8,12,16,20], line: "bingo-s"},
       ]
   }),
