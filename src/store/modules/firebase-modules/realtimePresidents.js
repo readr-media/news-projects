@@ -14,7 +14,16 @@ const module = {
     startCounting: state => Object.values(state.data).reduce((a, c) => {
       return c.tks ? a + c.tks : a
     }, 0),
-    dataWithoutId: state => omit(get(state, 'data'), [ 'id' ])
+    dataWithoutId: state => {
+      const allowed = [ '1', '2', '3' ]
+      const raw = get(state, 'data')
+      return Object.keys(raw)
+        .filter(key => allowed.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = raw[key];
+          return obj;
+        }, {})
+    }
   },
   mutations: {},
   actions: {},
