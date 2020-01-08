@@ -119,6 +119,9 @@ export default {
 $color-grey = rgba(216, 216, 216, .3)
 
 .election-2020-embed
+  display flex
+  flex-direction column
+  justify-content center
   background-color $color-grey
   .title
     position relative
