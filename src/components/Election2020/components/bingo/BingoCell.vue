@@ -3,9 +3,9 @@
     class="bingo-cell"
     :class="{'bingo-cell-selected':candidateid}"
     v-on:click="CLICK_HANDLER">
-    <div class="party celltexts" :title="info.party">{{info.party}}-</div>
+    <div class="party celltexts" :title="info.party">{{info.party}}</div>
     <div class="name celltextl" :title="info.name" >{{info.name}}</div>
-    <div class="region celltexts" :title="info.zone">{{info.zone}}-</div>
+    <div class="region celltexts" :title="info.zone">{{info.zone}}</div>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
   computed: {
     info: function() {
       if (this.candidateid == "") {
-        return {name: "請選擇", party: "", zone: ""}
+        return {name: "請選擇", party: "-", zone: "-"}
       } else {
         return mapRegislatorInfo(this.$store, this.candidateid)
       }
@@ -48,7 +48,6 @@ export default {
   .bingo-cell
     margin-top -4px
     margin-left -4px
-    padding 15%
     box-sizing border-box
     box-shadow: inset 0 0 0 4px rgba(151, 151, 151, 0.25)
     overflow hidden
@@ -56,6 +55,8 @@ export default {
     flex-direction column
     justify-content space-between
     background-color rgba(155, 155, 155, 0.25)
+    flex-basis 18%
+    padding 3% 0
 
   .bingo-cell div
     white-space nowrap
@@ -69,11 +70,11 @@ export default {
     background-color #ffffff
 
   .celltextl
-    font-size 1.75rem
+    font-size 1.55rem
     font-weight bold
   
   .celltexts
-    font-size 0.8rem
+    font-size .75rem
     line-height 1.2
 
   .bongo-cell-elected

@@ -1,27 +1,33 @@
 <template>
   <div class="bingobox">
-    <BingoCell
+    <BingoCell v-if="!isMini"
       v-for="(cell, index) in cells"
       :key="index"
       :cellid="index"
       :candidateid="cell"
       :bingoProgress="bingoProgress"
       :style="bingoBackground(index)"/>
+    <BingoCellMini v-else
+      :key="index"
+      :candidateid="cell"
+      :style="bingoBackground(index)"/>
   </div>
 </template>
 
 <script>
 import BingoCell from './BingoCell.vue'
+import BingoCellMini from './BingoCellMini.vue'
 import { mapState, mapGetters, mapMutations } from 'vuex'
 import { get, reduce } from 'lodash'
 
 export default {
   props: {
+    isMini: Boolean,
     cells: Array,
   },
   computed: {
     bingoFrameStatus: function() {
-      if (this.bingoProgress !== "init") {
+      if (this.isMini || this.bingoProgress !== "init") {
         const bingoStatus = this.cells.map( (k) => {
           return { "bingo": get(this.electedList, k, false) }
         })
@@ -39,7 +45,9 @@ export default {
           }
 
         })
-        this.UPDATE_CONNECTED_LINES(connectedLines)
+        if (!this.isMini){
+          this.UPDATE_CONNECTED_LINES(connectedLines)
+        }
         return bingoStatus
       }else{
         return this.cells.map(()=>{return {"bingo":false}})
@@ -86,17 +94,16 @@ export default {
     }),
   },
   components: {
-    BingoCell
+    BingoCell,
+    BingoCellMini,
   },
 }
 </script>
 
 <style lang="stylus" scoped>
   .bingobox
-    padding-inline-start 0
-    margin-block-start 0
-    margin-block-end 0
-    display grid
-    grid-template-columns repeat(5, 1fr)
-    box-sizing border-box
+    display flex
+    flex-wrap wrap
+    width 100%
+    margin auto
 </style>

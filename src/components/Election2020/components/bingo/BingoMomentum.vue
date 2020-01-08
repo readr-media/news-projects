@@ -14,7 +14,7 @@
 <script>
 import BingoMomentumCell from './BingoMomentumCell.vue'
 import { mapGetters, mapState } from 'vuex'
-import { get, toPairs, sortBy } from 'lodash'
+import { clone, get, toPairs, sortBy } from 'lodash'
 export default {
   created() {
     this.$store.dispatch('realtimeBingoCandidateStats/fetchAndAdd')
@@ -24,9 +24,11 @@ export default {
       momentumCandidates: 'data',
     }),
     sortCandidates: function(){
-      delete this.momentumCandidates.id
-      delete this.momentumCandidates.updated_at
-      delete this.momentumCandidates.updated_by
+      let momentumCandidates = clone(this.momentumCandidates)
+      delete momentumCandidates.id
+      delete momentumCandidates.updated_at
+      delete momentumCandidates.updated_by
+      delete momentumCandidates.records
       const pairs = toPairs(this.momentumCandidates)
       return sortBy(pairs, (o) => {return -o[1]}).map((o) => o[0]).slice(0,3)
     },
@@ -65,7 +67,14 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+.bingo-momentum-root
+  display flex
+  flex-direction column
+  align-items center
+@media (min-width: 768px)
   .bingo-momentum-root
-    display flex
+    flex-direction row
     justify-content space-between
+
+  
 </style>
