@@ -125,8 +125,13 @@ export default {
     z-index 10000
     width 14px
     height 14px
-    clip-path polygon(10% 0, 0 10%, 39% 49%, 0 89%, 9% 100%, 50% 59%, 92% 100%, 100% 92%, 60% 49%, 100% 9%, 90% 0, 50% 38%)
-    background-color black
+    &:after
+      content ''
+      display block
+      width 100%
+      height 100%
+      clip-path polygon(10% 0, 0 10%, 39% 49%, 0 89%, 9% 100%, 50% 59%, 92% 100%, 100% 92%, 60% 49%, 100% 9%, 90% 0, 50% 38%)
+      background-color black
   &__content
     height 100%
     &--scrollable
