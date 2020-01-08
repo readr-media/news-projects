@@ -85,6 +85,9 @@ export default {
     this.$store.dispatch('realtimePresidents/openDBChannel')
     this.$store.dispatch('realtimeUpdate/openDBChannel')
   },
+  beforeMount () {
+    document.querySelector('html').classList.add('iframe')
+  },
   filters: {
     comma (value) {
       return value ? value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : ''
@@ -119,9 +122,6 @@ export default {
 $color-grey = rgba(216, 216, 216, .3)
 
 .election-2020-embed
-  display flex
-  flex-direction column
-  justify-content center
   background-color $color-grey
   .title
     position relative
