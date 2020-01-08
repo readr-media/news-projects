@@ -17,6 +17,7 @@ import realtimeLegislatorsDistrictCandidatesAboriginal from './modules/firebase-
 import realtimeLegislatorsDistrictSeat from './modules/firebase-modules/realtimeLegislatorsDistrictSeat'
 import realtimeLegislatorsParty from './modules/firebase-modules/realtimeLegislatorsParty'
 import realtimeUpdate from './modules/firebase-modules/realtimeUpdate'
+import electionResultToggler from './modules/firebase-modules/electionResultToggler'
 const easyFirestore = VuexEasyFirestore(
   [
     realtimeBingoCandidateStats,
@@ -27,7 +28,8 @@ const easyFirestore = VuexEasyFirestore(
     realtimeLegislatorsDistrictCandidatesAboriginal,
     realtimeLegislatorsDistrictSeat,
     realtimeLegislatorsParty,
-    realtimeUpdate
+    realtimeUpdate,
+    electionResultToggler
   ],
   {
     logging: true,
