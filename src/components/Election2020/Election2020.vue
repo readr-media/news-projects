@@ -20,7 +20,6 @@
       v-if="$store.state.electionResultToggler.data.value"
       class="section"
     >
-      以下只是測試，選舉完才會上
       <PresidentCounty />
     </section>
     <section
@@ -33,6 +32,9 @@
       />
       <LegislatorDistrict />
       <LegislatorParty />
+      <LegislatorCounty
+        v-if="$store.state.electionResultToggler.data.value"
+      />
     </section>
     <section class="section" id="bingo">
       <h2>區域立委賓果盤</h2>
@@ -73,6 +75,7 @@ import PresidentCount from './components/president/PresidentCount.vue'
 import PresidentCounty from './components/president/PresidentCounty.vue'
 import LegislatorDistrict from './components/legislator/LegislatorDistrict.vue'
 import LegislatorParty from './components/legislator/LegislatorParty.vue'
+import LegislatorCounty from './components/legislator/LegislatorCounty.vue'
 import BingoSection from './components/bingo/BingoSection.vue'
 
 import Vue from 'vue'
@@ -146,6 +149,7 @@ export default {
     Header,
     LegislatorDistrict,
     LegislatorParty,
+    LegislatorCounty,
     LatestNews: () => import('./components/LatestNews.vue'),
     PresidentCount,
     PresidentCounty,

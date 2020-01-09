@@ -22,7 +22,7 @@
       />
     </div>
     <HorizontalColumnBarLegends
-      v-if="legendsType === 'normal'"
+      :legendsType="legendsType"
       class="chart__legends"
     />
   </div>
