@@ -22,6 +22,7 @@ export default {
       dispatch('FETCH_LEGISLATOR_DATA')
       dispatch('FETCH_PARTY_DATA')
       dispatch('FETCH_RESULT_DATA_PRESIDENT')
+      dispatch('FETCH_RESULT_DATA_LEGISLATOR_PARTY')
     },
     FETCH_REGION_DATA ({ commit }) {
       return axiosGet(`${GCS_PATH}/regionData.json`, {withCredentials: false}).then(res => {
@@ -46,6 +47,11 @@ export default {
     FETCH_RESULT_DATA_PRESIDENT ({ commit }) {
       return axiosGet(`${GCS_PATH}/presidentResultBycounty.json`).then(res => {
         commit('SET', { targetPath: 'data', key: 'presidentResultByCounty', value: res.data })
+      }).catch((err) => { console.error(err) })
+    },
+    FETCH_RESULT_DATA_LEGISLATOR_PARTY ({ commit }) {
+      return axiosGet(`${GCS_PATH}/legislatorResultBycounty.json`).then(res => {
+        commit('SET', { targetPath: 'data', key: 'legislatorPartyResultByCounty', value: res.data })
       }).catch((err) => { console.error(err) })
     },
   },
