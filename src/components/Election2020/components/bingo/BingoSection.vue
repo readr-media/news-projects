@@ -82,6 +82,7 @@ export default {
       })
 
       if (this.bingoProgress == "init" && emptycell === undefined) {
+        this.$store.dispatch('realtimeBingoCandidateStats/fetchAndAdd')
         this.START_BINGO_MATCHING()
 
         let patch_obj = {}
@@ -100,7 +101,11 @@ export default {
     ...mapMutations({
       UPDATE_BINGO_CELL_ALL: 'Election2020/bingo/UPDATE_BINGO_CELL_ALL',
       START_BINGO_MATCHING: 'Election2020/bingo/START_BINGO_MATCHING',
+      LOAD_FROM_LOCALSTORAGE: 'Election2020/bingo/LOAD_FROM_LOCALSTORAGE',
     }),
+  },
+  created(){
+    this.LOAD_FROM_LOCALSTORAGE()
   }
 }
 </script>
