@@ -17,6 +17,7 @@
       <PresidentCountChart class="president-count-chart" />
     </section>
     <section
+      v-if="$store.state.electionResultToggler.data.value"
       class="section"
     >
       以下只是測試，選舉完才會上
@@ -157,6 +158,7 @@ export default {
     gaScroll
   ],
   created () {
+    this.$store.dispatch('electionResultToggler/fetchAndAdd')
     this.$store.dispatch('realtimePresidents/openDBChannel')
   },
   beforeMount () {

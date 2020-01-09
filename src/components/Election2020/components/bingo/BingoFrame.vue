@@ -12,6 +12,10 @@
       :key="index"
       :candidateid="cell"
       :style="bingoBackground(index)"/>
+    <BingoCellMini v-else
+      :key="index"
+      :candidateid="cell"
+      :style="bingoBackground(index)"/>
   </div>
 </template>
 

@@ -404,7 +404,7 @@ export default {
         { identifier: 'Hsinchu', name: '新竹縣' },
         { identifier: 'Miaoli', name: '苗栗縣' },
         { identifier: 'Taichung', name: '台中市' },
-        { identifier: 'Changhua', name: '彰化市' },
+        { identifier: 'Changhua', name: '彰化縣' },
         { identifier: 'Nantou', name: '南投縣' },
         { identifier: 'Yunlin', name: '雲林縣' },
         { identifier: 'Chiayi', name: '嘉義市' },

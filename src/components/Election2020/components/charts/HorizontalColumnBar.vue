@@ -13,6 +13,7 @@
         v-show="getShowGroup(i)"
         :key="group.title"
         :data="group"
+        :showDetailDataColor="showDetailDataColor"
       />
       <ButtonExpandCounty
         v-if="groupLimitToShow !== Infinity"
@@ -59,6 +60,10 @@ export default {
           'other'
         ].includes(value)
       }
+    },
+    showDetailDataColor: {
+      type: Boolean,
+      default: true
     }
   },
   components: {

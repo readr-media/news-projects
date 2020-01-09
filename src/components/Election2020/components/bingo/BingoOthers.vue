@@ -16,7 +16,6 @@
     <Tooltip :showTooltip="showTooltip" :x="tooltipX" :y="tooltipY">
       <BingoFrame class="bingo-frame" :cells="selectedFrame" :freeze="true" :style="{'font-size':'12px', 'width': '30vw'}"/>
     </Tooltip>
-
   </div>
 </template>
 

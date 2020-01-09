@@ -100,7 +100,8 @@ export const PROJECTS_NEED_TYPEKIT = [
   'hotel-hostess',
   'hotel-hostess-series',
   'nanfangao-bridge',
-  'election-2020'
+  'election-2020',
+  'election-2020-embed'
 ]
 
 export const PROJECTS_NEED_FB_SDK = [
@@ -141,7 +142,8 @@ export const PROJECTS_NOT_NEED_APP_HEADER = [
   'puyuma',
   'disinformation',
   'food-delivery',
-  'election-2020'
+  'election-2020',
+  'election-2020-embed'
 ]
 
 export const SCRIPT_GOOGLE_MAP = `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=drawing,visualization" async defer></script>`
