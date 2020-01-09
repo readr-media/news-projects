@@ -15,12 +15,12 @@
           @oTransitionEnd="tickerIndex === 1 ? handleTransitionEnd() : ''"
           @webkitTransitionEnd="tickerIndex === 1 ? handleTransitionEnd() : ''"
         >
-          <span
+          <div
             v-for="index in 3"
             :key="`news-${tickerIndex}-${index}-${(new Date()).valueOf}`"
           >
-            {{ news[getItemIndex(index + tickerIndex - 1)].zone }} {{ news[getItemIndex(index + tickerIndex - 1)].name }}（{{ news[getItemIndex(index + tickerIndex - 1)].party }}）以 {{ news[getItemIndex(index + tickerIndex - 1)].tks | comma }} 票{{ news[getItemIndex(index + tickerIndex - 1)].isElected ? '確定當選' : '暫時領先' }}。
-          </span>
+            <span>{{ news[getItemIndex(index + tickerIndex - 1)].zone }} {{ news[getItemIndex(index + tickerIndex - 1)].name }}（{{ news[getItemIndex(index + tickerIndex - 1)].party }}）以 {{ news[getItemIndex(index + tickerIndex - 1)].tks | comma }} 票{{ news[getItemIndex(index + tickerIndex - 1)].isElected ? '確定當選' : '暫時領先' }}。</span>
+          </div>
         </div>
       </div>
     </template>
@@ -43,7 +43,7 @@ export default {
   },
   data () {
     return {
-      current: 0,
+      current: 2,
       isTransiting: false,
       slideIndex: 0,
     }
@@ -61,10 +61,8 @@ export default {
     },
     autoSlide () {
       setTimeout(() => {
-        this.isTransiting = true
-        if (this.slideIndex + 1 > 2) {
-          this.slideIndex = 0
-        } else {
+        if (!this.isTransiting) {
+          this.isTransiting = true
           this.slideIndex += 1
         }
         this.autoSlide()
@@ -102,7 +100,7 @@ export default {
     margin-left 14px
     &.isTransiting
       transition transform 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95)
-    span
+    > div
       display inline-flex
       align-items center
       width 100%
@@ -110,14 +108,28 @@ export default {
       font-size .9375rem
       font-weight 600
       line-height 1.87
+      span
+        display -webkit-box
+        max-height 100%
+        -webkit-line-clamp 2
+        -webkit-box-orient vertical
+        overflow hidden
 
 @media (min-width: 1024px)
   .news-ticker
     &-item
       height 64px
+      padding-left 15px
       &:nth-child(2)
         border none
     &__news
-      span
+      max-width calc(100% - 35px)
+      margin-left 19px
+      > div
         height 64px
+        span
+          display inline-block
+          white-space nowrap
+          text-overflow ellipsis
+          overflow hidden
 </style>

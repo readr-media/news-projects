@@ -328,9 +328,10 @@ $color-grey = rgba(216, 216, 216, .3)
             font-size 2.25rem
     .news-and-btn
       display flex
-      padding-right 0
+      padding 0
       .news-ticker
         flex 1
+        max-width calc(100% - 340px)
       .link
         display flex
         flex-direction column
