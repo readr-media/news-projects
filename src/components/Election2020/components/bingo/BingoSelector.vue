@@ -6,8 +6,16 @@
       v-on:update:showLightbox="TOGGLE_SELECTOR_PANEL"
     >
       <div class="selectorContent">
-        <input v-model="query" placeholder="搜尋候選人姓名或政黨" class="selectorSearchBar"></input>
-        <button v-on:click="UPDATE_FILTER(query)" class="selectorSearchButton">搜尋</button>
+        <input
+          v-model="query"
+          v-on:keyup.enter="UPDATE_FILTER(query)"
+          placeholder="搜尋候選人姓名或政黨"
+          class="selectorSearchBar"
+        ></input>
+        <button
+          v-on:click="UPDATE_FILTER(query)"
+          class="selectorSearchButton"
+        >搜尋</button>
       </div>
       <DistrictSelector
         :districtid="zk"
