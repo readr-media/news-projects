@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <h1>2020</h1>
+    <!-- <h1>2020</h1> -->
     <h2>區域及原住民立委</h2>
     <h3 v-text="h3" />
     <Chart class="section__chart" />
