@@ -6,7 +6,7 @@
       :cells="cells"
       @click.native="HANDLE_CLICK({ cells: cells })"
       @mouseenter.native="HANDLE_TOOLTIP({ showTooltip: true, cells: cells }, $event)"
-      @mouseleave.native="HANDLE_TOOLTIP({ showTooltip: true, cells: cells })"/>
+      @mouseleave.native="HANDLE_TOOLTIP({ showTooltip: false, cells: cells })"/>
 
     <LightboxWrapper
       :showLightbox.sync="showLightbox"
@@ -108,7 +108,7 @@ export default {
 .bingo-others-container
   display grid
   grid-template-columns repeat(2, 1fr)
-  grid-gap 10px 10px
+  grid-gap 20px 0
   justify-content space-between
 
 @media (min-width: 768px)

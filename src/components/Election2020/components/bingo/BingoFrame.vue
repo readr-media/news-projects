@@ -110,4 +110,5 @@ export default {
   .bingobox
     display flex
     flex-wrap wrap
+    justify-content center
 </style>

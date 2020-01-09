@@ -111,8 +111,6 @@ export default {
 </script>
 <style lang="stylus" scoped>
   .bingo-section
-    padding-right 10px
-    padding-left 10px
     padding-top 100px
     display grid
     grid-column-gap 10px
@@ -125,6 +123,7 @@ export default {
     margin-block-start 0
     margin-block-end 0
     font-family $font-family-serif
+    cursor pointer
 
   .bingo-section p
     font-family PingFangTC
@@ -133,21 +132,19 @@ export default {
     font-weight bold
 
   .bingo-frame
-    width 90vw
-    height 90vw
-    margin 20px auto
+    width 100vw
+    height 100vw
+    margin 20px 0
 
   .bingo-status
     align-self self-end
 
-  .bingo-title,.bingo-status,.bingo-others,.bingo-momentum
-    padding 0 65px
-  
   .bingo-others h2, .bingo-momentum h2
     padding 120px 0 60px 0
 
   .bingo-title p
     margin-block-end 0
+    text-align center
   
   .bingo-startbtn
     width 100%
@@ -164,20 +161,29 @@ export default {
     background-color rgba(128,128,128,0.2)
     color black
     padding 1rem
+    margin 10px auto 0 auto
+    cursor pointer
     
   @media (min-width: 768px)
     .bingo-section
       padding-right 50px
       padding-left 50px
       grid-template-columns repeat(2, 1fr)
+    .bingo-title,.bingo-others,.bingo-momentum
+      padding 0 65px
     
     .bingo-title
       grid-column 1
+    .bingo-title p
+      text-align left
+    .bingo-randombtn
+      margin 10px 0 0 0
     .bingo-frame
       grid-column 2
       grid-row 1 / span 2
       width 40vw
       height 40vw
+      margin 20px auto
     .bingo-others,.bingo-momentum
       grid-column 1 / span 2
 </style>
