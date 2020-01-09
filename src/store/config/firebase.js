@@ -12,7 +12,7 @@ function initFirebase () {
       )
   }
   return new Promise((resolve, reject) => {
-    Firebase.firestore().enablePersistence()
+    Firebase.firestore()
       .then(resolve)
       .catch(err => {
         if (err.code === 'failed-precondition') {
