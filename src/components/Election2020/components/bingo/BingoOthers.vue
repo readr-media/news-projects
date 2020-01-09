@@ -1,21 +1,33 @@
 <template>
-  <div class="bingo-others-container">
-    <BingoFrame v-for="(cells, index) in bingoCellsToShow" 
-      :key="index" 
-      :isMini="true"
-      :cells="cells"
-      @click.native="HANDLE_CLICK({ cells: cells })"
-      @mouseenter.native="HANDLE_TOOLTIP({ showTooltip: true, cells: cells }, $event)"
-      @mouseleave.native="HANDLE_TOOLTIP({ showTooltip: false, cells: cells })"/>
-
-    <LightboxWrapper
-      :showLightbox.sync="showLightbox"
-    >
-      <BingoFrame class="bingo-frame" :cells="selectedFrame" :freeze="true"/>
-    </LightboxWrapper>
-    <Tooltip :showTooltip="showTooltip" :x="tooltipX" :y="tooltipY">
-      <BingoFrame class="bingo-frame" :cells="selectedFrame" :freeze="true" :style="{'font-size':'12px', 'width': '30vw'}"/>
-    </Tooltip>
+  <div>
+    <div class="bingo-others-container">
+      <BingoFrame v-for="(cells, index) in bingoCellsToShow"
+        :key="index"
+        :isMini="true"
+        :cells="cells"
+        @click.native="HANDLE_CLICK({ cells: cells })"
+        @mouseenter.native="HANDLE_TOOLTIP({ showTooltip: true, cells: cells }, $event)"
+        @mouseleave.native="HANDLE_TOOLTIP({ showTooltip: false, cells: cells })"/>
+      <LightboxWrapper
+        :showLightbox.sync="showLightbox"
+      >
+        <BingoFrame class="bingo-frame" :cells="selectedFrame" :freeze="true"/>
+      </LightboxWrapper>
+      <Tooltip :showTooltip="showTooltip" :x="tooltipX" :y="tooltipY">
+        <BingoFrame class="bingo-frame" :cells="selectedFrame" :freeze="true" :style="{'font-size':'12px', 'width': '30vw'}"/>
+      </Tooltip>
+    </div>
+    <div v-show="this.vw < 768" class="bingo-others-pagination">
+        <div href="#" v-on:click="HANDLE_LEFT_PAGE">
+          <span class="bingo-others-left"></span>
+        </div>
+        <div class="bingo-others-more">
+          看更多
+        </div>
+        <div href="#" v-on:click="HANDLE_RIGHT_PAGE">
+          <span class="bingo-others-right"></span>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -35,7 +47,8 @@ export default {
       showTooltip: false,
       tooltipX: 0,
       tooltipY: 0,
-      selectedFrame: null
+      selectedFrame: null,
+      page: 0,
     }
   },
   components: {
@@ -44,11 +57,6 @@ export default {
     Tooltip,
   },
   computed: {
-    data(){
-      return {
-        page: 0,
-      }
-    },
     ...mapState('realtimeBingoCandidateStats', {
       momentumCandidates: 'data',
     }),
@@ -59,7 +67,8 @@ export default {
       if (this.vw >= 768) {
         return this.bingoCells
       } else {
-        return this.bingoCells.slice( this.page * 2 ,2 )
+        const i = this.page * 2
+        return this.bingoCells.slice( i , i + 2 )
       }
     },
     bingoCells: function(){
@@ -97,7 +106,13 @@ export default {
         this.tooltipX = event.clientX
         this.tooltipY = event.clientY
       }
-    }
+    },
+    HANDLE_LEFT_PAGE(){
+      this.page = (this.page + 4) % 5
+    },
+    HANDLE_RIGHT_PAGE(){
+      this.page = (this.page + 1) % 5
+    },
   },
   created() {
     this.$store.dispatch('realtimeBingoCandidateStats/fetchAndAdd')
@@ -110,6 +125,55 @@ export default {
   grid-template-columns repeat(2, 1fr)
   grid-gap 20px 0
   justify-content space-between
+
+.bingo-others-pagination
+  display flex
+  flex-direction row
+  justify-content center
+  align-items center
+  margin-top 20px
+
+.bingo-others-left
+  display inline-block
+  width 2.75em
+  height 2.75em
+  border 1px solid #333
+  border-radius 50%
+  margin-right 1.5em
+  background-color black
+  cursor pointer
+
+.bingo-others-left:after
+  content ''
+  display inline-block
+  margin-top 1em
+  margin-left .3em
+  width .65em
+  height .65em
+  border-top .1em solid white
+  border-right .1em solid white
+  transform rotate(-135deg)
+
+.bingo-others-right
+  display inline-block
+  width 2.75em
+  height 2.75em
+  border 1px solid #333
+  border-radius 50%
+  margin-left 1.5em
+  background-color black
+  cursor pointer
+
+.bingo-others-right:after
+  content ''
+  display inline-block
+  margin-top 1em
+  margin-left -0.3em
+  width .65em
+  height .65em
+  border-top 0.1em solid white
+  border-right 0.1em solid white
+  transform rotate(45deg)
 
 @media (min-width: 768px)
   .bingo-others-container
