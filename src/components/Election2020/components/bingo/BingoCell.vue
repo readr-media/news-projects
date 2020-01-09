@@ -2,6 +2,7 @@
   <div
     class="bingo-cell"
     :class="{'bingo-cell-selected':candidateid}"
+    :style="cursor"
     v-on:click="CLICK_HANDLER">
     <div class="party celltexts" :title="info.party">{{info.party}}</div>
     <div class="name celltextl" :title="info.name" >{{info.name}}</div>
@@ -26,6 +27,11 @@ export default {
         return {name: "請選擇", party: "-", zone: "-"}
       } else {
         return mapRegislatorInfo(this.$store, this.candidateid)
+      }
+    },
+    cursor: function() {
+      return {
+        cursor: (this.bingoProgress === "init" && !this.freeze)? 'pointer': 'default'
       }
     }
   },

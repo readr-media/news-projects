@@ -37,26 +37,30 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  .bingo-status
-    display flex
-    flex-direction row
-    justify-content: space-evenly
-  .bingo-status-title
-    font-size 0.8rem
-    font-weight bold
-  .bingo-status hr
-    height 3rem
-    width 0
-    border 1px solid rgba(0, 0, 0, 0.6);
-    
-  .bingo-status-conencted, .bingo-status-elapsed
-    width 50%
+.bingo-status
+  display flex
+  flex-direction row
+  justify-content space-evenly
+.bingo-status-title
+  font-size 0.8rem
+  font-weight bold
+.bingo-status hr
+  height 3rem
+  width 0
+  border 1px solid rgba(0, 0, 0, 0.6);
+  
+.bingo-status-conencted, .bingo-status-elapsed
+  width 50%
 
-  .bingo-status-highlight
-    font-family $font-family-serif
-    color $color-black
-    font-size 1.625rem
-    line-height 1.42
-    margin-top .5rem
-    margin-bottom 1rem
+.bingo-status-highlight
+  font-family $font-family-serif
+  color $color-black
+  font-size 1.625rem
+  line-height 1.42
+  margin-top .5rem
+  margin-bottom 1rem
+
+@media (min-width: 768px)
+  .bingo-status
+    margin-bottom 20px
 </style>
