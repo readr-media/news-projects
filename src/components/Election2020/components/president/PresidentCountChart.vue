@@ -117,6 +117,8 @@ export default {
     background-color rgba(216, 216, 216, .3)
     overflow hidden
     > span
+      display inline
+      margin 0 auto
       color $color-black-lighter
       font-size 1.5rem
       line-height 35px

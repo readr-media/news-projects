@@ -281,7 +281,7 @@ $color-grey = rgba(216, 216, 216, .3)
         &.right 
           right 15px
     .real-time-president
-      min-height 170px
+      min-height 100px
       padding 0
       &__count
         display flex
@@ -316,6 +316,7 @@ $color-grey = rgba(216, 216, 216, .3)
 @media (min-width: 1024px)
   .election-2020-embed
     .real-time-president
+      min-height 170px
       &__count
         height 170px
         &:before
