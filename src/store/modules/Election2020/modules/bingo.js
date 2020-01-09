@@ -156,9 +156,9 @@ export default {
     LOAD_FROM_LOCALSTORAGE: (state) => {
       if (typeof window !== 'undefined') {
         const bingoObj = JSON.parse(window.localStorage.getItem("election-bingo"))
-        Vue.set(state, "bingoProgress", get(bingoObj, "bingoProgress"), "init")
-        Vue.set(state, "connectedLines", get(bingoObj, "connectedLines"), 0)
-        Vue.set(state, "bingoFrameCells", get(bingoObj, "bingoFrameCells"), Array.apply(null, Array(25)).map(function () { return ""; }))
+        Vue.set(state, "bingoProgress", get(bingoObj, "bingoProgress", "init"))
+        Vue.set(state, "connectedLines", get(bingoObj, "connectedLines", 0))
+        Vue.set(state, "bingoFrameCells", get(bingoObj, "bingoFrameCells", Array.apply(null, Array(25)).map(function () { return ""; })))
       }
     },
   }

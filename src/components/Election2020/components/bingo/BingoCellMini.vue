@@ -19,8 +19,8 @@ export default {
     margin-left -2px
     box-shadow: inset 0 0 0 2px rgba(151, 151, 151, 0.25)
     background-color white
-    width 7vw
-    height 7vw
+    width 9vw
+    height 9vw
 
 
 @media (min-width: 768px)
