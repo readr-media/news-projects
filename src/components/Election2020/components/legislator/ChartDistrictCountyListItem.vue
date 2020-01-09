@@ -261,6 +261,10 @@ export default {
     },
 
     handleClick(districtCode) {
+      if (this.vw >= 768) {
+        return
+      }
+
       this.showLightbox = true
       this.districtCode = districtCode
     },

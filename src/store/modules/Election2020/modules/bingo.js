@@ -1,6 +1,14 @@
 import Vue from 'vue'
 import { cloneDeep, find, get, reduce, sampleSize, transform } from 'lodash'
 
+function SAVE_TO_LOCALSTORAGE (state) {
+  window.localStorage.setItem("election-bingo", JSON.stringify({
+    bingoProgress: get(state, "bingoProgress"),
+    connectedLines: get(state, "connectedLines"),
+    bingoFrameCells: get(state, "bingoFrameCells")
+  }))
+}
+
 export default {
   namespaced: true,
   state: () => ({
@@ -94,6 +102,9 @@ export default {
   },
   mutations: {
     TOGGLE_SELECTOR_PANEL: (state) => {
+      if (state.selectorPanel) {
+        Vue.set(state, "selectorQuery", "")  
+      }
       Vue.set(state, "selectorPanel", !state.selectorPanel)
     },
     TOGGLE_SELECTOR: (state, {districtid, status}) => {
@@ -116,9 +127,11 @@ export default {
     },
     UPDATE_BINGO_CELL: (state, candidateid) => {
       state.bingoFrameCells.splice(state.currentSelectCell, 1, candidateid)
+      SAVE_TO_LOCALSTORAGE(state)
     },
     UPDATE_BINGO_CELL_ALL: (state, cells) => {
       Vue.set(state, "bingoFrameCells", cells)
+      SAVE_TO_LOCALSTORAGE(state)
     },
     CLEAR_BINGO_CELL: (state, districtid) => {
       for (let index in state.bingoFrameCells) {
@@ -127,15 +140,26 @@ export default {
           state.bingoFrameCells.splice(index, 1, "")
         }
       }
+      SAVE_TO_LOCALSTORAGE(state)
     },
     START_BINGO_MATCHING: (state) => {
       Vue.set(state, "bingoProgress", "matching")
+      SAVE_TO_LOCALSTORAGE(state)
     },
     UPDATE_CONNECTED_LINES: (state, lines) => {
       Vue.set(state, "connectedLines", lines)
       if (lines >= 5) {
         Vue.set(state, "bingoProgress", matching)
       }
-    }
+      SAVE_TO_LOCALSTORAGE(state)
+    },
+    LOAD_FROM_LOCALSTORAGE: (state) => {
+      if (typeof window !== 'undefined') {
+        const bingoObj = JSON.parse(window.localStorage.getItem("election-bingo"))
+        Vue.set(state, "bingoProgress", get(bingoObj, "bingoProgress"), "init")
+        Vue.set(state, "connectedLines", get(bingoObj, "connectedLines"), 0)
+        Vue.set(state, "bingoFrameCells", get(bingoObj, "bingoFrameCells"), Array.apply(null, Array(25)).map(function () { return ""; }))
+      }
+    },
   }
 }

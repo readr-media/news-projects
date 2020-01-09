@@ -18,6 +18,7 @@ export default {
     cellid: Number,
     candidateid: String,
     bingoProgress: String,
+    freeze: Boolean,
   },
   computed: {
     info: function() {
@@ -34,7 +35,7 @@ export default {
       UPDATE_CURRENT_CELL: 'Election2020/bingo/UPDATE_CURRENT_CELL'
     }),
     CLICK_HANDLER: function() {
-      if (this.bingoProgress === "init"){
+      if (this.bingoProgress === "init" && !this.freeze){
         this.TOGGLE_SELECTOR_PANEL()
         this.UPDATE_CURRENT_CELL(this.cellid)
       }
@@ -55,7 +56,7 @@ export default {
     flex-direction column
     justify-content space-between
     background-color rgba(155, 155, 155, 0.25)
-    flex-basis 18%
+    flex-basis 20%
     padding 3% 0
 
   .bingo-cell div
@@ -70,11 +71,11 @@ export default {
     background-color #ffffff
 
   .celltextl
-    font-size 1.55rem
+    font-size 1.55em
     font-weight bold
   
   .celltexts
-    font-size .75rem
+    font-size .75em
     line-height 1.2
 
   .bongo-cell-elected

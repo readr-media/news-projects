@@ -6,7 +6,8 @@
       :cellid="index"
       :candidateid="cell"
       :bingoProgress="bingoProgress"
-      :style="bingoBackground(index)"/>
+      :style="bingoBackground(index)"
+      :freeze="freeze"/>
     <BingoCellMini v-else
       :key="index"
       :candidateid="cell"
@@ -24,6 +25,7 @@ export default {
   props: {
     isMini: Boolean,
     cells: Array,
+    freeze: Boolean,
   },
   computed: {
     bingoFrameStatus: function() {
@@ -104,6 +106,4 @@ export default {
   .bingobox
     display flex
     flex-wrap wrap
-    width 100%
-    margin auto
 </style>
