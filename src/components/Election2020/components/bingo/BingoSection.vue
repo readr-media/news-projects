@@ -141,6 +141,7 @@ export default {
 
   .bingo-others h2, .bingo-momentum h2
     padding 120px 0 60px 0
+    text-align center
 
   .bingo-title p
     margin-block-end 0
@@ -169,8 +170,14 @@ export default {
       padding-right 50px
       padding-left 50px
       grid-template-columns repeat(2, 1fr)
-    .bingo-title,.bingo-others,.bingo-momentum
+    .bingo-others,.bingo-momentum
       padding 0 65px
+
+    .bingo-title,.bingo-status
+      margin 0 0 0 65px
+
+    .bingo-status
+      margin-bottom 20px
     
     .bingo-title
       grid-column 1

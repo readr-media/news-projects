@@ -1,5 +1,5 @@
 <template>
-  <section class="bingo-status">
+  <section class="bingo-status-root">
     <div class="bingo-status-conencted">
       <div class="bingo-status-title">連線數</div>
       <div class="bingo-status-highlight">{{connectedLines}}</div>
@@ -37,14 +37,14 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.bingo-status
+.bingo-status-root
   display flex
   flex-direction row
   justify-content space-evenly
 .bingo-status-title
-  font-size 0.8rem
+  font-size 1rem
   font-weight bold
-.bingo-status hr
+.bingo-status-root hr
   height 3rem
   width 0
   border 1px solid rgba(0, 0, 0, 0.6);
@@ -59,8 +59,4 @@ export default {
   line-height 1.42
   margin-top .5rem
   margin-bottom 1rem
-
-@media (min-width: 768px)
-  .bingo-status
-    margin-bottom 20px
 </style>
