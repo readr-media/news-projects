@@ -1,88 +1,7 @@
 <template>
   <section class="section">
-    <!-- <HorizontalColumnBar
-      :groupLimitToShow="1"
-      :data="[
-        {
-          title: '台北市',
-          bars: [
-            {
-              name: '蔡英文',
-              party: '民進黨',
-              rate: 1,
-              count: 123,
-              color: 'green',
-            },
-            {
-              name: '朱立倫',
-              party: '民進黨',
-              rate: 0.3,
-              count: 123123,
-              color: 'blue',
-            },
-            {
-              name: '王金平',
-              party: '民進黨',
-              rate: 0.5,
-              count: 12355,
-              color: 'orange',
-            },
-          ]
-        },
-        {
-          title: '新北市',
-          bars: [
-            {
-              name: '蔡英文',
-              party: '民進黨',
-              rate: 1,
-              count: 12333,
-              color: 'green',
-            },
-            {
-              name: '朱立倫',
-              party: '民進黨',
-              rate: 0.1,
-              count: 123123,
-              color: 'blue',
-            },
-            {
-              name: '王金平',
-              party: '民進黨',
-              rate: 0.01,
-              count: 1232423,
-              color: 'orange',
-            },
-          ]
-        },
-        {
-          title: '基隆市',
-          bars: [
-            {
-              name: '蔡英文',
-              party: '民進黨',
-              rate: 0.45,
-              count: 12345,
-              color: 'green',
-            },
-            {
-              name: '朱立倫',
-              party: '民進黨',
-              rate: 0.23,
-              count: 123664,
-              color: 'blue',
-            },
-            {
-              name: '王金平',
-              party: '民進黨',
-              rate: 0.56,
-              count: 12345,
-              color: 'orange',
-            },
-          ]
-        },
-      ]"
-    /> -->
+    <h2>你的故鄉是什麼顏色？</h2>
+    <h3>各縣市候選人票數比例，你的故鄉比較支持誰？</h3>
     <HorizontalColumnBar
       :groupLimitToShow="6"
       :data="data"
@@ -146,8 +65,31 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.section
+  h2
+    font-family $font-family-serif
+    font-size 21px
+    color $color-black
+    text-align center
+    font-weight bold
+    line-height 1.14
+    margin 28px 0 0 0
+  h3
+    font-size 15px
+    color $color-black
+    text-align center
+    font-weight normal
+    line-height 1.87
+    margin 11px 0 0 0
 @media (min-width 768px)
   .section
-    max-width 1000px
+    max-width 1152px
     margin 0 auto
+    h2
+      font-size 30px
+      text-align left
+    h3
+      font-size 16px
+      text-align left
+      margin 19px 0 0 0
 </style>
