@@ -77,14 +77,21 @@ export default {
     background-color #ffffff
 
   .celltextl
-    font-size 1.55em
+    font-size 1.1em
     font-weight bold
   
   .celltexts
-    font-size .75em
+    font-size .65em
     line-height 1.2
 
   .bongo-cell-elected
     background white
+
+@media (min-width: 768px)
+  .celltextl
+    font-size 1.55em
+  
+  .celltexts
+    font-size .75em
 
 </style>

@@ -123,7 +123,6 @@ export default {
     margin-block-start 0
     margin-block-end 0
     font-family $font-family-serif
-    cursor pointer
 
   .bingo-section p
     font-family PingFangTC
@@ -154,6 +153,7 @@ export default {
     background-color black
     color white
     outline none
+    cursor pointer
 
   .bingo-randombtn
     height 3rem
