@@ -65,16 +65,6 @@ export default {
       return this.dataSeats.reduce((acc, curr) => acc + curr.seats, 0)
     }
   },
-  watch: {
-    dataChart() {
-      this.SET_UPDATE_TIME({ key: 'legislator', time: new Date() })
-    }
-  },
-  methods: {
-    ...mapMutations({
-      SET_UPDATE_TIME: 'updateTime/SET_UPDATE_TIME'
-    })
-  },
   created() {
     this.$store.dispatch('realtimeLegislatorsParty/openDBChannel')
   }

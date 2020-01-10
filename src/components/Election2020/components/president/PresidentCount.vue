@@ -62,15 +62,7 @@ export default {
       }, {})
     }
   },
-  watch: {
-    dataWithoutId () {
-      this.SET_UPDATE_TIME({ key: 'president', time: new Date() })
-    }
-  },
   methods: {
-    ...mapMutationsElection({
-      SET_UPDATE_TIME: 'updateTime/SET_UPDATE_TIME'
-    }),
     getClassName (number) {
       const mapping = {
         1: 'soong',

@@ -12,7 +12,9 @@
       <h1 id="js-title">2020 總統立委大選<br>即時看</h1>
       <p>和 READr 一起追蹤 2020 總統大選的最新消息，這裡有圖表輕鬆看、立委賓果遊戲，還有最新選情一目了然。</p>
       <h2>下屆總統會是誰</h2>
-      <Countdown :updateTime="updateTimePresident" />
+      <Countdown
+        :updateTime="updateTimePresident"
+      />
       <PresidentCount class="president-count"/>
       <PresidentCountChart class="president-count-chart" />
     </section>
@@ -66,8 +68,8 @@
 <script>
 import _ from 'lodash'
 import storeModule from 'src/store/modules/Election2020'
-import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('Election2020')
+import { mapGetters as mapGettersRoot, createNamespacedHelpers } from 'vuex'
+const { mapActions } = createNamespacedHelpers('Election2020')
 const { mapGetters: mapGettersPresident } = createNamespacedHelpers('realtimePresidents')
 const { mapState: mapStateResultToggler } = createNamespacedHelpers('electionResultToggler')
 import { mapPresidentPartyAbbrEn } from './utility/mappings'
@@ -166,6 +168,7 @@ export default {
   created () {
     this.$store.dispatch('electionResultToggler/openDBChannel')
     this.$store.dispatch('realtimePresidents/openDBChannel')
+    this.$store.dispatch('realtimeTimestamp/openDBChannel')
   },
   beforeMount () {
     this.registerStoreModule(true)
@@ -198,9 +201,9 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      updateTimeLegislator: state => state.updateTime.legislator,
-      updateTimePresident: state => state.updateTime.president
+    ...mapGettersRoot({
+      updateTimeLegislator: 'realtimeTimestamp/updateTimeLegislator',
+      updateTimePresident: 'realtimeTimestamp/updateTimePresident'
     }),
     ...mapStateResultToggler({
       showResultContent: state => _.get(state, [ 'data', 'showContent', 'value' ], false)
