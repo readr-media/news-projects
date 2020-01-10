@@ -6,7 +6,6 @@
       :key="index"
       :candidateName="candidateName(candidate)"
       :zoneName="zoneName(candidate)"
-      :zoneDesc="zoneDesc(candidate)"
       :partyName="partyName(candidate)"/>
   </div>
 </template>
@@ -40,12 +39,6 @@ export default {
     zoneName: function() {
       return (id) => {
         return get(this.legislator, [id, 'zone'], '未知')
-      }
-    },
-    zoneDesc: function() {
-      return (id) => {
-        const idSlice = id.split('-')
-        return get(this.region, [idSlice[0], 'zones', idSlice[1], 'locations'], '未知')
       }
     },
     partyName: function() {

@@ -2,7 +2,7 @@
   <section class="bingo-section">
     <div class="bingo-title">
       <p v-html="contentText"/>
-      <div v-on:click="RANDOM_CLICK_HANDLER" v-if="bingoProgress=='init'" class="bingo-randombtn">電腦選號</div>
+      <div v-on:click="RANDOM_CLICK_HANDLER" v-show="bingoProgress=='init'" class="bingo-randombtn">電腦選號</div>
     </div>
     <BingoFrame class="bingo-frame" :cells="bingoCells"/>
     <div class="bingo-status">
