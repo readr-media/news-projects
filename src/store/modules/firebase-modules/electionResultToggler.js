@@ -1,6 +1,6 @@
 const module = {
-  firestorePath: '/election-result-toggler/showContent',
-  firestoreRefType: 'doc',
+  firestorePath: '/election-result-toggler',
+  firestoreRefType: 'collection',
   moduleName: 'electionResultToggler',
   statePropName: 'data',
   namespaced: true,
