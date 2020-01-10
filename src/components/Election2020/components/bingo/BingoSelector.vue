@@ -9,7 +9,7 @@
         <input
           v-model="query"
           v-on:keyup.enter="UPDATE_FILTER(query)"
-          placeholder="搜尋候選人姓名或政黨"
+          placeholder="搜尋候選人姓名、政黨或地名"
           class="selectorSearchBar"
         ></input>
         <button
