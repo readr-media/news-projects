@@ -17,7 +17,7 @@ const mapPartyNameAbbr = name => {
 
 const module = {
   firestorePath: '/realtime/party',
-  firestoreRefType: 'doc', // or 'doc'
+  firestoreRefType: 'collection', // or 'doc'
   moduleName: 'realtimeLegislatorsParty',
   statePropName: 'data',
   namespaced: true, // automatically added

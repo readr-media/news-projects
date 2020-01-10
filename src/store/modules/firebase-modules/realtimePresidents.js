@@ -2,7 +2,7 @@ import { get, omit } from 'lodash'
 
 const module = {
   firestorePath: '/realtime/president',
-  firestoreRefType: 'doc', // or 'doc'
+  firestoreRefType: 'collection', // or 'doc'
   moduleName: 'realtimePresidents',
   statePropName: 'data',
   namespaced: true, // automatically added

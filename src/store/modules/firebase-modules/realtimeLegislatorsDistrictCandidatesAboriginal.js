@@ -1,6 +1,6 @@
 const module = {
   firestorePath: '/realtime/aboriginal',
-  firestoreRefType: 'doc', // or 'doc'
+  firestoreRefType: 'collection', // or 'doc'
   moduleName: 'realtimeLegislatorsDistrictCandidatesAboriginal',
   statePropName: 'data',
   namespaced: true, // automatically added

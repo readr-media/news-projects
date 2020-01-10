@@ -2,7 +2,7 @@ import { get, omit } from 'lodash'
 
 const module = {
   firestorePath: '/realtime/update',
-  firestoreRefType: 'doc', // or 'doc'
+  firestoreRefType: 'collection', // or 'doc'
   moduleName: 'realtimeUpdate',
   statePropName: 'data',
   namespaced: true, // automatically added
