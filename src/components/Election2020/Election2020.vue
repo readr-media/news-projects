@@ -17,7 +17,7 @@
       <PresidentCountChart class="president-count-chart" />
     </section>
     <section
-      v-if="$store.state.electionResultToggler.data.showContent.value"
+      v-if="showResultContent"
       class="section"
     >
       <PresidentCounty />
@@ -33,7 +33,7 @@
       <LegislatorDistrict />
       <LegislatorParty />
       <LegislatorCounty
-        v-if="$store.state.electionResultToggler.data.showContent.value"
+        v-if="showResultContent"
       />
     </section>
     <section class="section" id="bingo">
@@ -64,10 +64,12 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import storeModule from 'src/store/modules/Election2020'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('Election2020')
 const { mapGetters: mapGettersPresident } = createNamespacedHelpers('realtimePresidents')
+const { mapState: mapStateResultToggler } = createNamespacedHelpers('electionResultToggler')
 import { mapPresidentPartyAbbrEn } from './utility/mappings'
 import Countdown from './components/Countdown.vue'
 import Header from './components/Header.vue'
@@ -199,6 +201,9 @@ export default {
     ...mapState({
       updateTimeLegislator: state => state.updateTime.legislator,
       updateTimePresident: state => state.updateTime.president
+    }),
+    ...mapStateResultToggler({
+      showResultContent: state => _.get(state, [ 'data', 'showContent', 'value' ], false)
     }),
     ...mapGettersPresident({
       presidentData: 'dataWithoutId'

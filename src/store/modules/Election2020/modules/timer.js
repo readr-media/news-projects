@@ -1,4 +1,5 @@
 import moment from 'moment'
+import _ from 'lodash'
 export const COUNTING_START_TIME = '2020-01-11T16:00:00+0800' // ISO 8601
 
 export const timerModule = {
@@ -47,7 +48,7 @@ export const timerModule = {
       }
     },
     isElectionBoxOpeningStart(state, getters, rootState) {
-      const isManualToggled = rootState.electionResultToggler.data.showCountdown.value
+      const isManualToggled = _.get(rootState, [ 'electionResultToggler', 'data', 'showCountdown' , 'value' ], false)
       return isManualToggled || getters.remainingTime < 0
     }
   }
