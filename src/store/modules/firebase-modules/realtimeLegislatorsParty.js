@@ -21,6 +21,9 @@ const module = {
   moduleName: 'realtimeLegislatorsParty',
   statePropName: 'data',
   namespaced: true, // automatically added
+  sync: {
+    preventInitialDocInsertion: true
+  },
 
   // this object is your store module (will be added as '/myModule')
   // you can also add state/getters/mutations/actions
