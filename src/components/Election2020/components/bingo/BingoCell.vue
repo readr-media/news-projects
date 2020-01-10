@@ -26,7 +26,11 @@ export default {
       if (this.candidateid == "") {
         return {name: "請選擇", party: "-", zone: "-"}
       } else {
-        return mapRegislatorInfo(this.$store, this.candidateid)
+        let info = mapRegislatorInfo(this.$store, this.candidateid)
+        if (info.name !== undefined) {
+          info.name = info.name.replace("^", "-")
+        }
+        return info
       }
     },
     cursor: function() {
