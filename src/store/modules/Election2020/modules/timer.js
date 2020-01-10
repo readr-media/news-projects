@@ -39,7 +39,7 @@ export const timerModule = {
     remainingTimeInfo(state) {
       const end = moment(COUNTING_START_TIME)
       const now = moment(state.currentTime)
-      const diff = moment.duration(end.diff(now))
+      const diff = moment.duration(now.diff(end))
       return {
         days: diff.days(),
         hours: diff.hours(),
