@@ -56,11 +56,12 @@ export default {
       })
       for (let zk in r) {
         const zone = r[zk]
+        const zoneDesc = get(rootState, ['Election2020', 'gcs', 'data', 'regionDesc', zone.name], "")
         zone.freeze = Boolean(getters.joinedCells.search(zk) >= 0)
         for (let ck in r[zk].candidates) {
           const candidate = r[zk].candidates[ck]
           const query = state.selectorQuery
-          candidate.show = Boolean(query == "" || candidate.name.search(query) >= 0 || candidate.name.search(query) >= 0)
+          candidate.show = Boolean(query == "" || candidate.name.search(query) >= 0 || candidate.party.search(query) >= 0 || getters.mapPartyNameAbbr(candidate.party).search(query) >= 0 || zoneDesc.search(query) >= 0 || zone.name.search(query) >= 0)
         }
       }
       return r
