@@ -117,24 +117,24 @@ export default {
         return {
           title: '立委激戰搶席次',
           description: '2020 立委選舉將於1月11日舉行，READr 將呈現區域立委以及不分區立委即時開票結果，讓你隨時掌握最新資訊！',
-          metaUrl: 'election2020/legislator',
-          metaImage: 'election2020/images/ogimage-legislator.jpg',
+          metaUrl: 'election-2020/legislator',
+          metaImage: 'election-2020/images/ogimage-legislator.jpg',
           customScript
         }
       case 'bingo':
         return {
           title: '區域立委賓果盤',
           description: '2020 立委選舉將於1月11日舉行，來玩區域立委賓果預測吧，看你可以猜中幾個當選立委！',
-          metaUrl: 'election2020/bingo',
-          metaImage: 'election2020/images/ogimage-bingo.jpg',
+          metaUrl: 'election-2020/bingo',
+          metaImage: 'election-2020/images/ogimage-bingo.jpg',
           customScript
         }
       default:
         return {
           title: '2020 總統立委大選即時看',
           description: '2020 總統立委選舉將於1月11日舉行，READr 將呈現即時開票結果、即時快訊，讓你隨時掌握最新資訊！',
-          metaUrl: 'election2020',
-          metaImage: 'election2020/images/ogimage.jpg',
+          metaUrl: 'election-2020',
+          metaImage: 'election-2020/images/ogimage.jpg',
           customScript
         }
     }
