@@ -13,6 +13,7 @@
     >
       <div class="candidate__info">
         <picture class="candidate__image">
+          <source :srcset="`/proj-assets/election-2020/images/${getClassName(number)}.webp`" type="image/webp">
           <img :src="`/proj-assets/election-2020/images/${getClassName(number)}.png`" :alt="mapPresidentName($store, number)">
           <div class="candidate__number">{{ number }}</div>
           <div v-if="candidate.isElected" class="candidate__elected" />
