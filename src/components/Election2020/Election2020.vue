@@ -17,7 +17,7 @@
       <PresidentCountChart class="president-count-chart" />
     </section>
     <section
-      v-if="$store.state.electionResultToggler.data.value"
+      v-if="$store.state.electionResultToggler.data.showContent.value"
       class="section"
     >
       <PresidentCounty />
@@ -33,7 +33,7 @@
       <LegislatorDistrict />
       <LegislatorParty />
       <LegislatorCounty
-        v-if="$store.state.electionResultToggler.data.value"
+        v-if="$store.state.electionResultToggler.data.showContent.value"
       />
     </section>
     <section class="section" id="bingo">
@@ -162,7 +162,7 @@ export default {
     gaScroll
   ],
   created () {
-    this.$store.dispatch('electionResultToggler/fetchAndAdd')
+    this.$store.dispatch('electionResultToggler/openDBChannel')
     this.$store.dispatch('realtimePresidents/openDBChannel')
   },
   beforeMount () {
