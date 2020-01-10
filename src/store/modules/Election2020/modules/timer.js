@@ -46,8 +46,9 @@ export const timerModule = {
         seconds: diff.seconds()
       }
     },
-    isElectionBoxOpeningStart(state, getters) {
-      return getters.remainingTime < 0
+    isElectionBoxOpeningStart(state, getters, rootState) {
+      const isManualToggled = rootState.electionResultToggler.data.showCountdown.value
+      return isManualToggled || getters.remainingTime < 0
     }
   }
 }
