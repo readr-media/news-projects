@@ -39,22 +39,6 @@ export default {
       return this.isElectionBoxOpeningStart ? '各選區開票狀態' : '尚未開票'
     }
   },
-  watch: {
-    realtimeLegislatorsDistricts: {
-      handler() {
-        this.SET_UPDATE_TIME({ key: 'legislator', time: new Date() })
-      },
-      deep: true
-    },
-    totalSeats() {
-      this.SET_UPDATE_TIME({ key: 'legislator', time: new Date() })
-    }
-  },
-  methods: {
-    ...mapMutations({
-      SET_UPDATE_TIME: 'updateTime/SET_UPDATE_TIME'
-    })
-  },
   created() {
     this.$store.dispatch('realtimeLegislatorsDistricts/openDBChannel')
     this.$store.dispatch('realtimeLegislatorsDistrictSeat/openDBChannel')
