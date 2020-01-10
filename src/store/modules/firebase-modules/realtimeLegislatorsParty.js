@@ -31,7 +31,7 @@ const module = {
   getters: {
     dataChart(state, getters, rootState) {
       const partyNameMap = _.get(rootState, [ 'Election2020', 'gcs', 'data', 'party' ], {})
-      const data = state.data || {}
+      const data = _.omit((state.data || {}), 'id')
       const dataEntries = Object.entries(data)
       const result = dataEntries.map(party => {
         const partyCode = _.get(party, 0, '0').padStart(3, '0')
