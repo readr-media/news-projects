@@ -10,6 +10,7 @@ export default {
   state: () => ({
     data: {
       region: {},
+      regionDesc: {},
       president: {},
       legislator: {},
       party: {},
@@ -18,6 +19,7 @@ export default {
   actions: {
     FETCH_SOURCES ({ dispatch }) {
       dispatch('FETCH_REGION_DATA')
+      dispatch('FETCH_REGION_DESC')
       dispatch('FETCH_PRESIDENT_DATA')
       dispatch('FETCH_LEGISLATOR_DATA')
       dispatch('FETCH_PARTY_DATA')
@@ -27,6 +29,11 @@ export default {
     FETCH_REGION_DATA ({ commit }) {
       return axiosGet(`${GCS_PATH}/regionData.json`, {withCredentials: false}).then(res => {
         commit('SET', { targetPath: 'data', key: 'region', value: res.data })
+      }).catch((err) => { console.error(err) })
+    },
+    FETCH_REGION_DESC ({ commit }) {
+      return axiosGet(`${GCS_PATH}/regionDept.json`, {withCredentials: false}).then(res => {
+        commit('SET', { targetPath: 'data', key: 'regionDesc', value: res.data })
       }).catch((err) => { console.error(err) })
     },
     FETCH_PRESIDENT_DATA ({ commit }) {
@@ -59,5 +66,5 @@ export default {
     SET: (state, { targetPath, key, value }) => {
       Vue.set(state[targetPath], key, value)
     },
-  }
+  },
 }

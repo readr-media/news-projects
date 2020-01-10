@@ -5,7 +5,7 @@
       v-on:click="TRIGGER_TOGGLE_SELECTOR" >
       <div class="bingo-selector-description">
         <span class="name" v-text="name"/>
-        <span class="desc-small" v-text="description"/>
+        <span class="desc-small" :title="description(name).l" v-text="description(name).s"/>
       </div>
       <div class="bingo-selector-functions">
       <p 
@@ -32,7 +32,8 @@
 
 <script>
 import LagislatorSelector from './LagislatorSelector.vue'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
+import { get } from 'lodash'
 export default {
   components: {
     LagislatorSelector
@@ -43,11 +44,40 @@ export default {
   },
   data() { return {
       name: this.district.name,
-      description: this.district.locations
     }
   },
   computed: {
     ...mapGetters('Election2020/bingo', ['getSelectorToggleStatus']),
+    ...mapState('Election2020/gcs', {
+      district_descs: state => state.data.regionDesc,
+    }),
+    ...mapState({
+      vw: state => state.viewport[0],
+    }),
+    description: function() {
+      return (name) => {
+        const long_desc = get(this.district_descs, name)
+        if (long_desc === undefined) {
+          return {
+            l: name,
+            s: ""
+          }
+        }
+
+        const array_desc = long_desc.split("，")
+        const remain_num = array_desc.length - this.locations_short_num
+        const s_main = array_desc.slice(0, this.locations_short_num).join(',')
+        const s_remains = `...與其他${remain_num}區域`
+        const short_desc = s_main + (remain_num > 0 ? s_remains : "")
+        return {
+          l: long_desc,
+          s: short_desc
+        }
+      }
+    },
+    locations_short_num: function(){
+      return (this.vw >= 768) ? 3 : 1
+    }
   },
   methods: {
     ...mapMutations({
