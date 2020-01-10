@@ -8,13 +8,13 @@
     <div class="bingo-status-elapsed">
       <div class="bingo-status-title">開票持續時間</div>
       <div class="bingo-status-highlight">
-        <span v-if="remainingTimeInfo.hours >= 0" v-text="`${remainingTimeInfo.hours}`" />
+        <span v-if="remainingTimeInfo.hours < 0" v-text="`${-remainingTimeInfo.hours}`" />
         <span v-else>00</span>
         <span>:</span>
-        <span v-if="remainingTimeInfo.minutes >= 0" v-text="`${remainingTimeInfo.hours}`" />
+        <span v-if="remainingTimeInfo.minutes < 0" v-text="`${-remainingTimeInfo.hours}`" />
         <span v-else>00</span>
         <span>:</span>
-        <span v-if="remainingTimeInfo.seconds >=0" v-text="`${remainingTimeInfo.seconds}`" />
+        <span v-if="remainingTimeInfo.seconds < 0" v-text="`${-remainingTimeInfo.seconds}`" />
         <span v-else>00</span>
       </div>
     </div>
