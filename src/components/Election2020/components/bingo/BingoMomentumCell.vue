@@ -6,7 +6,6 @@
     <div class="bingo-momentum-zone">
       <div class="bingo-momentum-name">{{candidateName}}</div>
       <div>{{zoneName}}</div>
-      <div>{{zoneDesc}}</div>
     </div>
     <div class="bingo-momentum-party" :class="partybgClass">{{partyName}}</div>
   </div>
@@ -19,7 +18,6 @@ export default {
     index: Number,
     candidateName: String,
     zoneName: String,
-    zoneDesc: String,
     partyName: String,
   },
   computed: {
