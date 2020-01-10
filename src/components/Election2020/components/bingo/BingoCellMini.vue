@@ -25,7 +25,7 @@ export default {
 
 @media (min-width: 768px)
   .bingo-cell
-    width 3vw
-    height 3vw
+    width calc((100vw - 230px - (10px * 4)) / 25)
+    height calc((100vw - 230px - (10px * 4)) / 25)
 
 </style>
