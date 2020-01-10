@@ -69,8 +69,8 @@ export default {
     return {
       title: '2020 總統立委大選即時看',
       description: '2020 總統立委選舉將於1月11日舉行，READr 將呈現即時開票結果、即時快訊，讓你隨時掌握最新資訊！',
-      metaUrl: 'election2020',
-      metaImage: 'election2020/images/ogimage.jpg',
+      metaUrl: 'election-2020-embed',
+      metaImage: 'election-2020/images/ogimage.jpg',
     }
   },
   computed: {
