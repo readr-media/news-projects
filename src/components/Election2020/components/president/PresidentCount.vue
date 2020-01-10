@@ -110,11 +110,11 @@ export default {
     &:nth-child(3)
       transform translateY(360px)
     &.first
-      transform translateY(0) !important
+      transform translateY(0)
     &.second
-      transform translateY(180px) !important
+      transform translateY(180px)
     &.third
-      transform translateY(360px) !important
+      transform translateY(360px)
     &.soong
       .candidate__number, .candidate__progress
         background-color $color-orange
@@ -221,11 +221,11 @@ export default {
       height 170px
       max-width 320px
       &:nth-child(1)
-        transform translate(0, -50%) !important
+        transform translate(0, -50%)
       &:nth-child(2)
-        transform translate(calc(100% + 40px), -50%) !important
+        transform translate(calc(100% + 40px), -50%)
       &:nth-child(3)
-        transform translate(calc(200% + 80px), -50%) !important
+        transform translate(calc(200% + 80px), -50%)
       &__info
         display flex
         justify-content flex-end
@@ -260,7 +260,7 @@ export default {
         display none
       &.first
         top 0
-        transform translateY(0) !important
+        transform translateY(0)
         width 50%
         height 100%
         max-width 600px
@@ -321,9 +321,9 @@ export default {
             &:first-child
               transform translateX(-20%)
       &.second
-        transform translateY(-210px) !important
+        transform translateY(-210px)
       &.third
-        transform translateY(0) !important
+        transform translateY(0)
 
 @media (min-width: 1440px)
   .e-p-c
