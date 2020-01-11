@@ -254,6 +254,7 @@ export default {
         case '民進黨':
           return 'green'
         case '無黨籍':
+        case '無':
           return 'gray'
         default:
           return 'purple'
