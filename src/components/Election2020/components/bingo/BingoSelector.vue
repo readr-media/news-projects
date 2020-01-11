@@ -37,7 +37,6 @@ export default {
   data() {
     return {
       type: "bingo",
-      query: "",
     }
   },
   components: {
@@ -47,6 +46,7 @@ export default {
   computed: {
     ...mapState('Election2020/bingo', {
       showLightbox: state => state.selectorPanel,
+      selectorQuery: state => state.selectorQuery
     }),
     ...mapGetters('Election2020/bingo', ['selectorZones']),
     hasCandidate: () => (candidates) => {
@@ -57,6 +57,14 @@ export default {
       }
       return false
     },
+      query: {
+        get (){
+          return this.selectorQuery
+        },
+        set (value){
+          this.UPDATE_FILTER(value)
+        }
+      }
   },
   methods: {
     ...mapMutations({

@@ -104,7 +104,10 @@ export default {
   mutations: {
     TOGGLE_SELECTOR_PANEL: (state) => {
       if (state.selectorPanel) {
-        Vue.set(state, "selectorQuery", "")  
+        Vue.set(state, "selectorQuery", "")
+        for (let dk in state.selectors) {
+          Vue.set(state.selectors, dk, false)
+        }
       }
       Vue.set(state, "selectorPanel", !state.selectorPanel)
     },
