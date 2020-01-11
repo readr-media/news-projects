@@ -12,10 +12,6 @@
       :key="index"
       :candidateid="cell"
       :style="bingoBackground(index)"/>
-    <BingoCellMini v-else
-      :key="index"
-      :candidateid="cell"
-      :style="bingoBackground(index)"/>
   </div>
 </template>
 
@@ -30,6 +26,7 @@ export default {
     isMini: Boolean,
     cells: Array,
     freeze: Boolean,
+    isOthers: Boolean,
   },
   computed: {
     bingoFrameStatus: function() {
@@ -51,7 +48,7 @@ export default {
           }
 
         })
-        if (!this.isMini){
+        if (!this.isMini && !this.isOthers){
           this.UPDATE_CONNECTED_LINES(connectedLines)
         }
         return bingoStatus

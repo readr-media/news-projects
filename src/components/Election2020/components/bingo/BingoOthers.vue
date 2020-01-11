@@ -11,10 +11,21 @@
       <LightboxWrapper
         :showLightbox.sync="showLightbox"
       >
-        <BingoFrame class="bingo-frame" :cells="selectedFrame" :freeze="true"/>
+        <BingoFrame
+          class="bingo-frame"
+          :cells="selectedFrame"
+          :freeze="true"
+          :isOthers="true"
+        />
       </LightboxWrapper>
       <Tooltip :showTooltip="showTooltip" :x="tooltipX" :y="tooltipY">
-        <BingoFrame class="bingo-frame" :cells="selectedFrame" :freeze="true" :style="{'font-size':'12px', 'width': '30vw'}"/>
+        <BingoFrame
+          class="bingo-frame"
+          :cells="selectedFrame"
+          :freeze="true"
+          :isOthers="true"
+          :style="{'font-size':'12px', 'width': '30vw'}"
+        />
       </Tooltip>
     </div>
     <div v-show="this.vw < 768" class="bingo-others-pagination">
