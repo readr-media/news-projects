@@ -11,7 +11,7 @@
         <span v-if="remainingTimeInfo.hours < 0" v-text="`${-remainingTimeInfo.hours}`" />
         <span v-else>00</span>
         <span>:</span>
-        <span v-if="remainingTimeInfo.minutes < 0" v-text="`${-remainingTimeInfo.hours}`" />
+        <span v-if="remainingTimeInfo.minutes < 0" v-text="`${-remainingTimeInfo.minutes}`" />
         <span v-else>00</span>
         <span>:</span>
         <span v-if="remainingTimeInfo.seconds < 0" v-text="`${-remainingTimeInfo.seconds}`" />

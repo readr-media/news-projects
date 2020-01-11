@@ -19,14 +19,11 @@ export const timerModule = {
   actions: {
     INIT_TIMER({ state, commit, getters }) {
       const isTimerExist = state.timer !== undefined
-      if (isTimerExist || getters.isElectionBoxOpeningStart) {
+      if (isTimerExist) {
         return
       }
 
       const timer = setInterval(() => {
-        if (getters.isElectionBoxOpeningStart) {
-          clearInterval(state.timer)
-        }
         commit('SET_CURRENT_TIME', new Date().toISOString())
       }, 1000)
       commit('SET_TIMER', timer)
