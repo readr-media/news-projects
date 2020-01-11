@@ -5,11 +5,11 @@ const { FIREBASE_CONFIG_ELECTION } = require('../../../api/config')
 function initFirebase () {
   if (!Firebase.apps.length) {
     Firebase.initializeApp(FIREBASE_CONFIG_ELECTION)
-    Firebase.auth()
-      .signInWithEmailAndPassword(
-        FIREBASE_CONFIG_ELECTION.authEmail,
-        FIREBASE_CONFIG_ELECTION.authPassword
-      )
+    // Firebase.auth()
+    //   .signInWithEmailAndPassword(
+    //     FIREBASE_CONFIG_ELECTION.authEmail,
+    //     FIREBASE_CONFIG_ELECTION.authPassword
+    //   )
   }
   return new Promise((resolve, reject) => {
     Firebase.firestore()
