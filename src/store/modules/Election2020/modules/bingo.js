@@ -9,6 +9,20 @@ function SAVE_TO_LOCALSTORAGE (state) {
   }))
 }
 
+function FREEZED_SELECTOR_INFO (cells, zk) {
+  for (let cid in cells) {
+    if (cells[cid].search(zk) >= 0) {
+      const s = cells[cid].split("-")
+      return {
+        "num": cid + 1,
+        "candidateid": cells[cid],
+        "cid": s[s.length - 1]
+      }
+    }
+  }
+  return null
+}
+
 export default {
   namespaced: true,
   state: () => ({
@@ -57,7 +71,10 @@ export default {
       for (let zk in r) {
         const zone = r[zk]
         const zoneDesc = get(rootState, ['Election2020', 'gcs', 'data', 'regionDesc', zone.name], "")
-        zone.freeze = Boolean(getters.joinedCells.search(zk) >= 0)
+        zone.freeze = FREEZED_SELECTOR_INFO(state.bingoFrameCells, zk)
+        if (zone.freeze !== null) {
+          zone.freeze.name = get(r[zk], ["candidates", zone.freeze.cid, "name"], "")
+        }
         for (let ck in r[zk].candidates) {
           const candidate = r[zk].candidates[ck]
           const query = state.selectorQuery

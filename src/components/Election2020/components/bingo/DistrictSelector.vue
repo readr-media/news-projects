@@ -5,7 +5,8 @@
       v-on:click="TRIGGER_TOGGLE_SELECTOR" >
       <div class="bingo-selector-description">
         <span class="name" v-text="name"/>
-        <span class="desc-small" :title="description(name).l" v-text="description(name).s"/>
+        <span v-if="district.freeze" class="desc-small" :title="`賓果格：第${district.freeze.num}格`" v-text="`此選區已選擇候選人：${district.freeze.name}`"/>
+        <span v-else class="desc-small" :title="description(name).l" v-text="description(name).s"/>
       </div>
       <div class="bingo-selector-functions">
       <p 

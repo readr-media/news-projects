@@ -12,7 +12,7 @@ export default {
     candidate: Object,
     candidateid: String,
     districtid: String,
-    freezed: Boolean,
+    freezed: Object,
   },
   computed: {
     name: function(){return this.candidate.name},
