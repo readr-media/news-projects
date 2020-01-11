@@ -17,7 +17,7 @@
     </div>
     <div class="real-time-president">
       <div
-        v-for="(candidate, number) in presidentData"
+        v-for="(candidate, number) in presidentTemp"
         :key="`candidate-${number}`"
         :class="mapPresidentPartyAbbrEn(number)"
         class="real-time-president__block"
@@ -25,13 +25,13 @@
         <div class="real-time-president__count">
           <div>
             <span class="name">{{ getPresidentName(number) }}</span><br><span class="label">得票數</span><br>
-            <span class="count"><Counter :count="candidate.tks" /></span>
+            <span v-if="presidentData[number]" class="count"><Counter :count="presidentData[number].tks" /></span>
           </div>
         </div>
         <div class="real-time-president__ratio">
-          <div class="bar" :style="{ width: `${candidate.R}%` }" />
+          <div v-if="presidentData[number]" class="bar" :style="{ width: `${presidentData[number].R}%` }" />
           <span v-text="getPresidentParty(number)"></span>
-          <span><Counter :count="candidate.R" :decimals="2" />%</span>
+          <span v-if="presidentData[number]"><Counter :count="presidentData[number].R" :decimals="2" />%</span>
         </div>
       </div>
     </div>
@@ -71,6 +71,15 @@ export default {
       description: '2020 總統立委選舉將於1月11日舉行，READr 將呈現即時開票結果、即時快訊，讓你隨時掌握最新資訊！',
       metaUrl: 'election-2020-embed',
       metaImage: 'election-2020/images/ogimage.jpg',
+    }
+  },
+  data () {
+    return {
+      presidentTemp: {
+        '1': {},
+        '2': {},
+        '3': {}
+      }
     }
   },
   computed: {
