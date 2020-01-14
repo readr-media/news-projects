@@ -66,6 +66,7 @@ export default {
     })
     .catch(err => {
       console.error('Error while fetching sheet', err)
+      throw err
     })
   },
   UPDATE_VIEWPORT: ({ state, commit }, viewport) => {

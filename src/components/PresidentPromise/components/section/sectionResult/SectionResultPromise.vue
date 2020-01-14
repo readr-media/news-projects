@@ -10,8 +10,8 @@
     </div>
     <div class="tooltip-mobile" v-if="VW <= 425" v-show="showTooltip">
       <TagPromise
-        v-show="currTooltipPromise.status !== null"
-        :tagType="currTooltipPromise.status"
+        v-show="promise.status && promise.status !== ''"
+        :tagType="promise.status"
       />
       <blockquote class="tooltip-mobile__stuck-reason" v-show="promise.isStuck"><span>“</span><span>{{ promise.stuckReason }}</span></blockquote>
       <p class="tooltip-mobile__description" v-html="promise.description"></p>
