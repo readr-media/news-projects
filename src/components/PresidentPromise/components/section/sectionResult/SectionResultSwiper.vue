@@ -46,7 +46,7 @@
     <div class="tooltip-desktop" v-if="VW > 425" v-show="showTooltip" ref="tooltip-desktop">
       <div class="content">
         <TagPromise
-          v-show="currTooltipPromise.status !== null"
+          v-show="currTooltipPromise.status && currTooltipPromise.status !== ''"
           :tagType="currTooltipPromise.status"
         />
         <blockquote class="tooltip-desktop__stuck-reason" v-show="currTooltipPromise.isStuck"><span>“</span><span>{{ currTooltipPromise.stuckReason }}</span></blockquote>
@@ -174,7 +174,7 @@ export default {
       },
       // isDesktop: get(this.$store.state, 'useragent.isDesktop', false),
       VW: 0,
-      modifiedTime: '',
+      modifiedTime: '2019-05-20',
     }
   },
   computed: {
@@ -247,14 +247,14 @@ export default {
     }
   },
   beforeMount () {
-    fetchSheetModifiedTime(this.$store, {
-      fileId: PROMISES_SHEET_ID,
-      fields: DEFAULT_DRIVE_FILE_FIELDS,
-    })
-    .then(({ modifiedTime })=> {
-      const date = new Date(modifiedTime)
-      this.modifiedTime = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`
-    })
+    // fetchSheetModifiedTime(this.$store, {
+    //   fileId: PROMISES_SHEET_ID,
+    //   fields: DEFAULT_DRIVE_FILE_FIELDS,
+    // })
+    // .then(({ modifiedTime })=> {
+    //   const date = new Date(modifiedTime)
+    //   this.modifiedTime = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`
+    // })
 
     // this.categoriesFetchStat[this.activeCategory].fetchStat = 'loading'
     // getCategoryInterestRequest(this.activeCategory)

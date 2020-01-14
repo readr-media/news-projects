@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { google, } = require('googleapis')
 const { authGoogleAPI, } = require('../service/google/auth')
-const { isEmpty } = require('lodash')
+const { isEmpty, get } = require('lodash')
 
 router.get('/', authGoogleAPI, (req, res) => {
   const auth = req.auth
@@ -10,8 +10,12 @@ router.get('/', authGoogleAPI, (req, res) => {
   drive.files.get({
     fileId: req.query.file_id,
     fields: req.query.fields
-  }, (err, {data}) => {
-    if (err) res.status(500).send(`The Google Drive API returned an error while get: ${err}`)
+  }, (err, response) => {
+    const data = get(response, 'data', {})
+    if (err) {
+      res.status(500).send(`The Google Drive API returned an error while get: ${err}`)
+    }
+
     if (!isEmpty(data)) {
       res.status(200).json(data)
     } else {
