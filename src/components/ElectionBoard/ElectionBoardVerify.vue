@@ -562,4 +562,20 @@ theme-color-hidden = #6d5810
     & .image
       width 450px
       margin 0 auto
+
+@media (min-width 1024px)
+  & .eb-verify
+    flex-direction row
+    & .image
+      width 50vw
+      height 100vh
+      position relative
+      top -55px
+      & img
+        object-position center
+        padding 2rem
+    & .form
+      width 50vw
+      padding 0 4rem
+      margin-top 0
 </style>
