@@ -1,0 +1,110 @@
+workspace:
+  base: /readr-media
+  path: news-projects
+pipeline:
+  start-slack:
+    image: plugins/slack
+    channel: jenkins
+    secrets: [slack_webhook]
+    username: drone
+    icon_url: https://avatars2.githubusercontent.com/u/2181346?s=200&v=4
+    template: >
+      *start* building *{{repo.name}}* <${DRONE_BUILD_LINK}|#{{build.number}}>.
+      *{{build.author}}* gave *{{build.branch}}* a little push.
+    when:
+      event: [push]
+  
+  get-dev-config:
+    image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
+    secrets: [google_credentials]
+    commands:
+    - gcloud source repos clone default default
+    - cp ./default/news-projects/dev/config.js api/config.js
+    - cp ./default/readr-site/gcskeyfile.json ./gcskeyfile.json
+    - rm -rf default
+    when:
+      event: [push]
+      branch: dev
+  
+  get-production-config:
+    image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
+    secrets: [google_credentials]
+    commands:
+    - gcloud source repos clone default default
+    - cp ./default/news-projects/production/config.js api/config.js
+    - cp ./default/readr-site/gcskeyfile.json ./gcskeyfile.json
+    - rm -rf default
+    when:
+      event: [push]
+      branch: master
+  
+  builds:
+    image: node:10-alpine
+    commands:
+    - apk update
+    - apk add --no-cache python build-base make
+    - yarn install
+    - yarn run build
+    when:
+      event: [push]
+      branch: [master, dev]
+  
+  publish:
+    image: plugins/gcr
+    repo: mirrormedia-1470651750304/${DRONE_REPO_NAME}
+    tag: ${DRONE_BRANCH}_${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER}
+    environment:
+      - DOCKER_LAUNCH_DEBUG=true
+    secrets: [google_credentials]
+    when:
+      event: [push]
+      branch: [master, dev]
+  
+  upload:
+    image: plugins/gcs
+    source: dist
+    target: readr-files/distribution/
+    acl: allUsers:READER
+    # cache_control: public, max-age=3600
+    secrets:
+      - source: google_credentials
+        target: token
+    when:
+      event: push
+      branch: master
+
+  deploy-dev:
+    image: nytimes/drone-gke      
+    zone: asia-east1-a
+    cluster: dev
+    namespace: default
+    # For debugging
+    dry_run: false
+    verbose: true
+    secrets:
+      - source: google_credentials
+        target: token
+    vars:
+      image: gcr.io/mirrormedia-1470651750304/${DRONE_REPO_NAME}:${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER}
+      app: news-projects
+      tier: frontend
+    when:
+      event: [push]
+      branch: dev
+ 
+  finish-slack:
+    image: plugins/slack
+    channel: jenkins
+    secrets: [slack_webhook]
+    username: drone
+    icon_url: https://avatars2.githubusercontent.com/u/2181346?s=200&v=4
+    when:
+      status: [success, failure]
+      event: [push]
+    template: >
+      {{#success build.status}}
+        *success* ${DRONE_REPO_NAME}:${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER} was well served.
+        Check out our new <https://dev.readr.tw/project/hotel-hostess|project>.
+      {{else}}
+        Houston, we have a problem. Build <${DRONE_BUILD_LINK}|#{{build.number}}> failed. Fix me please, {{build.author}}
+      {{/success}}

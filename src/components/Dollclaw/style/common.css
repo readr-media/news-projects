@@ -1,0 +1,70 @@
+/* ----- reset ----- */
+body,dl,dt,dd,ul,ol,li,th,td,form,input,textarea,p {margin:0; padding:0;}
+img {display:block; border:0;}
+li {list-style:none}
+sup {vertical-align:text-top;}
+sub {vertical-align:text-bottom;}
+article,aside,canvas,figure,figure img,figcaption,footer,header,hgroup,menu,nav,section,audio,video {display:block; margin:0; padding:0;}
+
+/* ----- common ----- */
+html {overflow-y:scroll;}
+.dollclaw {text-align:center; font-size:18px; line-height:1.6; 
+font-family:"source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif; color:#544356;
+background-color:#f8f5f3;
+}
+h1,h2,h3,h4,h5,h6 {margin:0; line-height:1.1;}
+p {text-align:justify; text-justify:distribute;}
+p+p {margin-top:30px;}
+table {border-collapse:collapse; border-spacing:0; border:none;}
+th {border:none;}
+td {border:none;}
+a {outline:none; text-decoration:none;}
+input {vertical-align:middle;}
+
+/* ----- Typekit sample ----- */
+/* 
+"source-han-sans-traditional" 400,700
+"prenton" 400,700 / normal & italic
+
+font-family:"source-han-sans-traditional","微軟正黑體", "Microsoft JhengHei", sans-serif;
+font-family:"prenton","微軟正黑體", "Microsoft JhengHei", sans-serif;
+*/
+
+/*--- logo, share ---*/
+#mainWrapper .logo {width:52px; height:52px;
+background-size:100% auto; background-position:0 0;
+z-index:1010 !important;
+}
+#mainWrapper .share {z-index:1010 !important;}
+
+/*--- section ---*/
+.sectionwpr {padding:70px 0 200px;
+background-color:#fbf9f8;
+}
+
+.sectionwpr:nth-child(even) {
+background-color:#f8f5f3;
+background-color:#f5f1ef;
+}
+
+.centerwpr {max-width:800px; padding:0 20px; margin:0 auto;
+position:relative;
+}
+.centerwpr.wide {max-width:100%; padding:0 30px;}
+.centerwpr .centerwpr {padding:0;}
+
+h1 {margin-bottom:30px;
+font-size:32px;
+}
+
+
+/* ---------- RWD ---------- */
+@media screen and (max-width: 1000px) {
+
+  .sectionwpr {padding:70px 0;}
+  .centerwpr {padding:0 15px;}  
+  .centerwpr.wide {padding:5px;}
+  
+  
+  }
+

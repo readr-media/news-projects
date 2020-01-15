@@ -1,17 +1,23 @@
 const _ = require('lodash')
+const Cookies = require('cookies')
+const debug = require('debug')('NEWS-PROJECT:server.js')
 const fs = require('fs')
 const path = require('path')
 const LRU = require('lru-cache')
 const express = require('express')
 const favicon = require('serve-favicon')
 const compression = require('compression')
+const maxMemUsageLimit = 1200 * 1024 * 1024
+const memwatch = require('node-memwatch')
 const microcache = require('route-cache')
 const requestIp = require('request-ip')
 const resolve = file => path.resolve(__dirname, file)
-const useragent = require('useragent')
+const useragent = require('express-useragent')
+const uuidv4 = require('uuid/v4')
 // const { VALID_PREVIEW_IP_ADD } = require('./api/config')
 const { createBundleRenderer } = require('vue-server-renderer')
 
+const config = require('./api/config')
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
 const serverInfo =
@@ -19,12 +25,15 @@ const serverInfo =
   `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
 
 const app = express()
+const formatMem = (bytes) => {
+  return (bytes / 1024 / 1024).toFixed(2) + ' Mb'
+}
 
 function createRenderer (bundle, options) {
   // https://github.com/vuejs/vue/blob/dev/packages/vue-server-renderer/README.md#why-use-bundlerenderer
   return createBundleRenderer(bundle, Object.assign(options, {
     // for component caching
-    cache: LRU({
+    cache: new LRU({
       max: 1000,
       maxAge: 1000 * 60 * 15
     }),
@@ -35,6 +44,7 @@ function createRenderer (bundle, options) {
   }))
 }
 
+app.use(useragent.express())
 app.use(requestIp.mw())
 app.set('views', path.join(__dirname, 'src/views'))
 app.set('view engine', 'ejs')
@@ -72,10 +82,11 @@ const serve = (path, cache) => express.static(resolve(path), {
 })
 
 app.use(compression({ threshold: 0 }))
-app.use(favicon(path.join(__dirname, './public/favicon-48x48.png')))
+// app.use(favicon(path.join(__dirname, './public/favicon-48x48.png')))
 app.use('/dist', serve(path.join(__dirname, './dist'), true))
-app.use('/public', serve(path.join(__dirname, './public'), true))
+// app.use('/public', serve(path.join(__dirname, './public'), true))
 app.use('/manifest.json', serve(path.join(__dirname, './manifest.json'), true))
+app.use('/project/service-worker.js', serve(path.join(__dirname, './dist/service-worker.js')))
 app.use('/service-worker.js', serve(path.join(__dirname, './dist/service-worker.js')))
 
 if (!isProd) {
@@ -91,13 +102,14 @@ if (!isProd) {
 app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl))
 
 function render (req, res, next) {
-  const agent = useragent.parse(req.headers['user-agent'], req.query.jsuseragent)
+  debug('req.useragent:')
+  debug(req.useragent)
   const s = Date.now()
   console.log('got req at ', s)
   console.log('req.url', req.url)
   console.log('dist path: (./dist)', path.join(__dirname, './dist'))
   
-  if (req.url.indexOf('/api/') === 0) {
+  if (req.url.indexOf('/project-api/') === 0) {
     next()
     return
   }
@@ -105,9 +117,15 @@ function render (req, res, next) {
   let isPageNotFound = false
   let isErrorOccurred = false  
 
-  res.setHeader('Cache-Control', 'public, max-age=3600')  
+  res.setHeader('Cache-Control', 'public, max-age=3600')
   res.setHeader("Content-Type", "text/html")
   res.setHeader("Server", serverInfo)
+
+  const cookies = new Cookies( req, res, {} )
+  const mmid = cookies.get('mmid')
+  if (!mmid) {
+    cookies.set('mmid', uuidv4(), { httpOnly: false, expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) })
+  }
 
   const handleError = err => {
     if (err.url) {
@@ -126,7 +144,13 @@ function render (req, res, next) {
   const context = {
     title: 'Readr Projects', // default title
     url: req.url,
-    os: agent.os.toString()
+    useragent: req.useragent,
+    setting: {
+      GOOGLE_RECAPTCHA_SITE_KEY: config.GOOGLE_RECAPTCHA_SITE_KEY,
+      DONATION_ACTIVE: config.DONATION_ACTIVE,
+    },
+    favicon: 'https://www.readr.tw/public/favicon.png',
+    siteName: '讀＋READr'
   }
   renderer.renderToString(context, (err, html) => {
     if (err) {
@@ -143,9 +167,46 @@ app.get('*', isProd ? render : (req, res, next) => {
   readyPromise.then(() => render(req, res, next))
 })
 
-app.use('/api', require('./api/index'))
+app.use('/project-api', require('./api/index'))
 
 const port = process.env.PORT || 8080
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`server started at localhost:${port}`)
+})
+
+memwatch.on('leak', function(info) {
+  const growth = formatMem(info.growth)
+  const mem = process.memoryUsage()
+  console.error('GETING MEMORY LEAK:', [ 'growth ' + growth, 'reason ' + info.reason ].join(', '))
+  console.error('MEMORY STAT(heapUsed):', formatMem(mem.heapUsed))
+})
+memwatch.on('stats', function(stats) {
+  const estBase = formatMem(stats.estimated_base)
+  const currBase = formatMem(stats.current_base)
+  const min = formatMem(stats.min)
+  const max = formatMem(stats.max)
+  console.error('GC STATs:', [
+    'num_full_gc ' + stats.num_full_gc,
+    'num_inc_gc ' + stats.num_inc_gc,
+    'heap_compactions ' + stats.heap_compactions,
+    'usage_trend ' + stats.usage_trend,
+    'estimated_base ' + estBase,
+    'current_base ' + currBase,
+    'min ' + min,
+    'max ' + max
+  ].join(', '))
+  if (stats.current_base > maxMemUsageLimit) {
+    for (let i = 0; i < 10; i += 1) {
+      console.error('MEMORY WAS RUNNING OUT')
+    } 
+    /**
+     * kill this process gracefully
+     */
+    const killTimer = setTimeout(() => {
+      process.exit(1)
+    }, 1000)
+    killTimer.unref()
+    server.close()
+    console.error(`GOING TO KILL PROCESS IN 1 SECOND(At ${(new Date).toString()})`)
+  }
 })

@@ -109,7 +109,7 @@
 </template>
 <script>
   import { smoothScroll } from 'kc-scroll'
-  import { SITE_URL } from '../../constants'
+  import { MM_SITE_URL } from '../../constants'
   import _ from 'lodash'
   import Logo from '../Logo.vue'
   import MarathonChart from './MarathonChart.vue'
@@ -133,7 +133,7 @@
         hasChangeSelectedTime: false,
         isFirstLoading: true,
         isLoading: true,
-        shareLink: `${SITE_URL}marathon`
+        shareLink: `${MM_SITE_URL}marathon`
       }
     },
     metaInfo () {
@@ -185,12 +185,11 @@
     },
     mounted () {
       window.addEventListener('scroll', this.$_marathon_scrollEvent)
-      window.ga('send', 'pageview')
     },
     methods: {
       $_marathon_changeSelectedTime(shareLink) {
         this.hasChangeSelectedTime = true
-        this.shareLink = `${SITE_URL}marathon${shareLink}`
+        this.shareLink = `${MM_SITE_URL}marathon${shareLink}`
       },
       $_marathon_detectFirstLoaded() {
         this.isFirstLoading = false

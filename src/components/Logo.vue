@@ -46,7 +46,7 @@
       },
       bgImage: {
         type: String,
-        default: '/public/navbtn.png'
+        default: '/proj-assets/navbtn.png'
       },
       border: {
         type: String,
@@ -60,7 +60,7 @@
     },
     methods: {
       $_logo_ga() {
-        window.ga('send', 'event', 'projects', 'click', 'back to home', { nonInteraction: true })
+        window.ga('send', 'event', 'projects', 'click', 'back to home')
       }
     },
     mounted () {},
@@ -77,5 +77,8 @@
   background-repeat no-repeat
   border-radius 50%
   cursor pointer
-
+  &.no-sprite
+    background-size 44px auto
+    background-position center center
+    border-radius 0
 </style>

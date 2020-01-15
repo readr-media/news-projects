@@ -1,49 +1,78 @@
+import _ from 'lodash'
 import {
-  fetchUser,
-  fetchItems,
-  fetchIdsByType
+  getReports,
+  getReportsCount,
+  getSheet,
+  appendSheet,
+  getDriveFile,
+  uploadImage,
 } from '../api'
 
 export default {
-  // ensure data for rendering given list type
-  FETCH_LIST_DATA: ({ commit, dispatch, state }, { type }) => {
-    commit('SET_ACTIVE_TYPE', { type })
-    return fetchIdsByType(type)
-      .then(ids => commit('SET_LIST', { type, ids }))
-      .then(() => dispatch('ENSURE_ACTIVE_ITEMS'))
-  },
-
-  // ensure all active items are fetched
-  ENSURE_ACTIVE_ITEMS: ({ dispatch, getters }) => {
-    return dispatch('FETCH_ITEMS', {
-      ids: getters.activeIds
+  ADD_SUBSCRIPTION: ({}, { email, datetime, slug, url }) => {
+    return appendSheet({
+      params: {
+        spreadsheetId: '1-7YTT5Y-VINVAYy8Aem0kGnerQfTEoBASQxI_J1YR8c',
+        range: 'Email',
+        valueInputOption: 'RAW',
+        resource: {
+          majorDimension: 'ROWS',
+          values: [
+            [ email, datetime, slug, url ]
+          ]
+        }
+      }
     })
   },
-
-  FETCH_ITEMS: ({ commit, state }, { ids }) => {
-    // on the client, the store itself serves as a cache.
-    // only fetch items that we do not already have, or has expired (3 minutes)
-    const now = Date.now()
-    ids = ids.filter(id => {
-      const item = state.items[id]
-      if (!item) {
-        return true
+  FETCH_REPORTS: ({ state, commit }, { params }) => {
+    return getReports({ params })
+    .then(({ status, body }) => {
+      let orig
+      if (params.page > 1) {
+        orig = _.values(_.get(state, 'reports', []))
+        body.items = _.concat(orig, body.items)
       }
-      if (now - item.__lastUpdated > 1000 * 60 * 3) {
-        return true
-      }
-      return false
+      commit('SET_REPORTS', { reports: body.items })
     })
-    if (ids.length) {
-      return fetchItems(ids).then(items => commit('SET_ITEMS', { items }))
-    } else {
-      return Promise.resolve()
-    }
+    .catch(err => console.error('Error while fetching reports', err))
   },
-
-  FETCH_USER: ({ commit, state }, { id }) => {
-    return state.users[id]
-      ? Promise.resolve(state.users[id])
-      : fetchUser(id).then(user => commit('SET_USER', { id, user }))
+  FETCH_REPORTS_COUNT: ({ state, commit }) => {
+    return getReportsCount()
+      .then(({ status, body }) => commit('SET_REPORTS_COUNT', { count: body.meta.total }))
+      .catch(err => console.error('Error while fetching reports count', err))
+  },
+  FETCH_SHEET: ({ state }, { params }) => {
+    return getSheet({ params })
+    .then(({ status, body }) => {
+      return { status, body }
+    })
+    .catch(err => {
+      console.error('Error while fetching sheet', err)
+    })
+  },
+  APPEND_SHEET: ({ state }, { params }) => {
+    return appendSheet({ params })
+    .then(({ status, body }) => {
+      return { status, body }
+    })
+    .catch(err => {
+      console.error('Error while appending sheet', err)
+    })
+  },
+  FETCH_DRIVE_FILE: ({ state }, { params }) => {
+    return getDriveFile({ params })
+    .then(({ status, body }) => {
+      return { status, body }
+    })
+    .catch(err => {
+      console.error('Error while fetching sheet', err)
+      throw err
+    })
+  },
+  UPDATE_VIEWPORT: ({ state, commit }, viewport) => {
+    commit('SET_VIEWPORT', viewport)
+  },
+  UPLOAD_IMAGE_TO_GCS: ({}, { file, folderName }) => {
+    return uploadImage({ file, folderName, })
   }
 }

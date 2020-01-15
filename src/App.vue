@@ -1,13 +1,53 @@
 <template>
   <div id="app">
+    <AppHeader v-if="hideAppHeader" />
+
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
   </div>
 </template>
 
-<style lang="stylus">
+<script>
+import { PROJECTS_NOT_NEED_APP_HEADER } from './constants/index.js'
 
+const updateViewport = (store) => {
+  const wEl = window
+  const htmlEl = document.documentElement
+  const ww = Math.min(wEl.innerWidth, htmlEl.clientWidth)
+  const wh = wEl.innerHeight || htmlEl.clientHeight
+  const viewport = [ ww, wh ]
+  return store.dispatch('UPDATE_VIEWPORT', viewport)
+}
+export default {
+  components: {
+    AppHeader: () => import('./components/AppHeader.vue')
+  },
+  computed: {
+    hideAppHeader () {
+      return !PROJECTS_NOT_NEED_APP_HEADER.includes(this.$route.params.project)
+    }
+  },
+  beforeMount () {
+    updateViewport(this.$store)
+  },
+  mounted () {
+    window.addEventListener('resize', this.$_app_updateViewport)
+    window.addEventListener('orientationChange', this.$_app_updateViewport)
+    window.ga && window.ga('send', 'pageview')
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.$_app_updateViewport)
+    window.removeEventListener('orientationChange', this.$_app_updateViewport)
+  },
+  methods: {
+    $_app_updateViewport () {
+      updateViewport(this.$store)
+    }
+  }
+}
+</script>
+<style lang="stylus">
 // noUi
 .noUi-base
   position relative
@@ -35,5 +75,4 @@
   left 0
   border-radius 50%
   cursor grab
-
 </style>

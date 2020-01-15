@@ -1,12 +1,40 @@
 const path = require('path')
 const webpack = require('webpack')
-const vueConfig = require('./vue-loader.config')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
+const TerserPlugin = require('terser-webpack-plugin')
+const debug = require('debug')('news-projects:webpack')
 
-const isProd = process.env.NODE_ENV === 'production'
+const NODE_ENV = process.env.NODE_ENV || 'development'
+const isProd = NODE_ENV === 'production'
+
+const projects = require('../src/constants/projectList.json')
+
+// 'npm run dev -- ExampleProject1,ExampleProject2' to exclude src/components/ExampleProject1/*, src/components/ExampleProject2/* from noParse
+// e.g. 'npm run dev -- Vote' when you are developing within the path src/components/Vote/*
+const createNoParse = () => {
+  debug('exec createNoParse')
+  if (isProd || !process.argv[2]) {
+    debug('return default noParse')
+    const noParseDefault = /deprecated\//
+    return [ noParseDefault ]
+  } else {
+    const projectsDeveloping = process.argv[2].split(',')
+    debug('argv[2] founded:', projectsDeveloping)
+
+    const projectsNoParse = Object.values(projects)
+      .filter(project => !projectsDeveloping.includes(project))
+      .map(project => new RegExp(`${project}/`))
+    
+    debug('return custom noParse:', projectsNoParse)
+    return projectsNoParse
+  }
+}
 
 module.exports = {
+  mode: NODE_ENV,
+  cache: !isProd,
   devtool: isProd
     ? false
     : '#cheap-module-source-map',
@@ -17,22 +45,43 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'public': path.resolve(__dirname, '../public'),
       'proj-assets': path.resolve(__dirname, '../proj-assets'),
+      'src': path.resolve(__dirname, '../src'),
+      'components': path.resolve(__dirname, '../src/components'),
+      'api': path.resolve(__dirname, '../api')
     }
   },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          // resolve "SyntaxError: Cannot declare a let variable twice: 'e'." in ios 10 safari
+          mangle: {
+            safari10: true,
+          }
+        },
+        // Parallelization can speedup your build significantly and is therefore highly recommended.
+        parallel: true
+      })
+    ]
+  },
   module: {
-    noParse: /es6-promise\.js$/, // avoid webpack shimming process
+    noParse: createNoParse(),
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueConfig
+        options: {
+          compilerOptions: {
+            preserveWhitespace: false
+          }
+        }
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules\/(?!(@readr-ui)\/).*/
+        // exclude: /node_modules\/(?!(dom7|swiper)\/).*/
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -44,30 +93,50 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: isProd
-          ? ExtractTextPlugin.extract({
-              use: 'css-loader?minimize',
-              fallback: 'vue-style-loader'
-            })
-          : ['vue-style-loader', 'css-loader']
-      }
+        oneOf: [
+          {
+            use: [
+              'vue-style-loader',
+              'css-loader',
+              'postcss-loader'
+            ]
+          }
+        ]
+      },
+      {
+        test: /\.styl(us)?$/,
+        oneOf: [
+          {
+            use: [
+              'vue-style-loader',
+              'css-loader',
+              'postcss-loader',
+              {
+                loader: 'stylus-loader',
+                options: {
+                  // workaround import for Election2020 project,
+                  // variables import by this rule will available in every projects,
+                  // so i call this workaround.
+                  import: [
+                    path.resolve(__dirname, '../src/components/Election2020/styles/common.styl')
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
     ]
   },
   performance: {
     maxEntrypointSize: 300000,
     hints: isProd ? 'warning' : false
   },
-  plugins: isProd
-    ? [
-        new webpack.optimize.UglifyJsPlugin({
-          compress: { warnings: false }
-        }),
-        new webpack.optimize.ModuleConcatenationPlugin(),
-        new ExtractTextPlugin({
-          filename: 'common.[chunkhash].css'
-        })
-      ]
-    : [
-        new FriendlyErrorsPlugin()
-      ]
+  plugins: [
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'common.[chunkhash].css'
+    }),
+    ... isProd ? [] : [ new FriendlyErrorsPlugin() ]
+  ]
 }

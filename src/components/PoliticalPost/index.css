@@ -1,0 +1,623 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: PingFangTC;
+}
+
+.background {
+    background: url('/proj-assets/political-post/img/bg-l.png') left top repeat-y, url('/proj-assets/political-post/img/bg-r.png') right top repeat-y, #a3ccde;
+    background-size: 30%;
+    padding-top: 30px;
+}
+
+.background-shadow {
+    box-shadow: 0 -4px 2px 0 rgba(0, 0, 0, 0.5);
+    background-color: #fff5eb;
+}
+
+.hide {
+    display: none;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 320px;
+    /* padding: 15px 20px; */
+}
+.container.inner {
+    padding: 15px 20px;
+}
+.project-header {
+    background-color: rgba(255, 245, 235, 0.6);
+    margin: 0 auto;
+    margin-top: 30px;
+    position: relative;
+    width: 300px;
+}
+.project-header .wrapper {
+    /* background-color: rgba(255, 245, 235, 0.6); */
+    /* padding: 8px; */
+    padding: 20px;
+    text-align: center;
+}
+.project-header .focus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    border: solid 10px #e47f6b;
+}
+.project-header > div.corner {
+    display: block;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-color: #e47f6b;
+    background-color: transparent;
+    border-width: 16px;
+    /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5); */
+}
+.corner.top {
+    top: -8px;
+    border-top-style: solid;
+}
+.corner.bottom {
+    bottom: -8px;
+    border-bottom-style: solid;
+}
+.corner.left {
+    left: -8px;
+    border-left-style: solid;
+}
+.corner.right {
+    right: -8px;
+    border-right-style: solid;
+}
+.corner.top.left {
+  border-top-left-radius: 8px;
+}
+.corner.top.right {
+  border-top-right-radius: 8px;
+}
+.corner.bottom.left {
+  border-bottom-left-radius: 8px;
+}
+.corner.bottom.right {
+  border-bottom-right-radius: 8px;
+}
+.project-header .wrapper p {
+    color: #4a4a4a;
+    font-size: 16px;
+    line-height: 1.75;
+    margin: 0;
+}
+.project-header h2 {
+    color: #4a4a4a;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 44px;
+    margin: 0;
+}
+
+.project-header h3 {
+    color: #4a4a4a;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 40px;
+    margin: 0;
+}
+.project-header .people {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.project-header .people.mobile {
+    margin: 0 auto;
+    margin-top: 48px;
+    width: 250px;
+    height: 90px;
+    background-image: url('/proj-assets/political-post/img/people.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.criteria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.criteria .title {
+    flex: 1;
+    align-self: flex-start;
+}
+.criteria .title h2 {
+    color: #4a4a4a;
+    display: block;
+    font-size: 21px;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: 2.38;
+    margin: 0;
+}
+
+.filter {
+    color: #4a4a4a;
+    font-size: 21px;
+    line-height: 2.38;
+}
+.filter .title h2 {
+    color: #4a4a4a;
+    display: block;
+    font-size: 21px;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: 2.38;
+    margin: 0;
+}
+.no-result {
+    display: none;
+    text-align: center;
+    margin: 30px auto;
+    margin-bottom: 0;
+    font-size: 21px;
+    color: #4a4a4a;
+}
+.no-result.active {
+    display: block;
+}
+.select-wrapper{
+    margin: 0 8px;
+    position: relative;
+    display: block;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+    user-select: none;
+    cursor: pointer;
+    z-index: 20;
+}
+.select-wrapper:after {
+    position: absolute;
+    content: "";
+    top: 10px;
+    right: 12px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 17.3px 10px 0 10px;
+    border-color: #30477d transparent transparent transparent;
+    z-index: 20;
+}
+.select-wrapper, .select-wrapper select{
+    width: 100%;
+    height: 40px;
+    line-height: 26px;
+    background-color: #fff5eb;
+    
+}
+.select-wrapper:hover{
+    border-color: #239fdb;
+    z-index: 20;
+}
+.select-wrapper .holder{
+    display: block;
+    padding: 0 45px 0 10px;
+    line-height: 40px;
+    /* background-color: #fff5eb; */
+    white-space: nowrap;            
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+}
+.select-wrapper select{
+    margin: 0;
+    position: absolute;
+    z-index: 2;            
+    cursor: pointer;
+    outline: none;
+    opacity: 0;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -khtml-opacity: 0;
+    -moz-opacity: 0;
+    z-index: 20;
+}
+
+
+.line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.select-area {
+    width: 200px;
+}
+
+.select-gender {
+    width: 100px;
+    margin-left: 4px;
+}
+
+.filter input {
+    width: 80px;
+    padding: 0 10px;
+    background-color: #fff5eb;
+    border-radius: 4px;
+    border: 0;
+    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+    color: #4a4a4a;
+    font-size: 21px;
+    line-height: 40px;
+    margin-right: 4px;
+}
+
+.candidate {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+.candidate .title {
+    flex: 1;
+    align-self: flex-start;
+}
+
+.candidate .title h2 {
+    color: #4a4a4a;
+    display: block;
+    font-size: 21px;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: 2.38;
+    margin: 0;
+}
+
+.candidate .person{
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: solid 2px #30477d;
+    box-sizing: border-box;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.candidate .person .wrapper {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-bottom: 22px;
+    padding-left: 13px;
+    padding-right: 25px;
+    padding-top: 19px;
+}
+.candidate .person .avatar {
+    border-radius: 50%;
+    display: block;
+    height: 52px;
+    margin-right: 20px;
+    width: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.candidate .person .avatar.a {
+    background-image: url('/proj-assets/political-post/img/face1.png');
+}
+.candidate .person .avatar.b {
+    background-image: url('/proj-assets/political-post/img/face2.png');
+}
+.candidate .person .avatar.c {
+    background-image: url('/proj-assets/political-post/img/face3.png');
+}
+.candidate .person .avatar.d {
+    background-image: url('/proj-assets/political-post/img/face4.png');
+}
+.candidate .person .desc {
+    color: #30477d;
+    font-size: 21px;
+}
+
+.candidate .person:hover {
+    background-color: #fff5eb;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.navigation .prev {
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 26.0px 15px 0;
+    border-color: transparent #30477d transparent transparent;
+}
+
+.navigation .next {
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 0 15px 26.0px;
+    border-color: transparent transparent transparent #30477d;
+}
+
+.navigation .prev.disable,
+.navigation .next.disable {
+    opacity: 0.1;
+}
+
+.navigation .paging {
+    display: flex;
+    flex-direction: row;
+}
+.navigation .paging .page {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;;
+    border: solid 2px #30477d;
+    text-align: center;
+    line-height: 40px;
+    font-size: 21px;
+    color: #30477d;
+    margin-right: 20px;
+}
+.navigation .paging .page.active {
+    background-color: #30477d;
+    color: #fff;
+}
+.navigation .paging .page:hover {
+    background-color: #fff5eb;
+}
+.navigation .paging .page:last-child {
+    margin-right: 0px;
+}
+
+.content {
+    /* display: none; */
+    display: flex;
+    justify-content: center;
+}
+.content .gutter {
+    width: 10px;
+}
+.content .item {
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: solid 2px #30477d;
+    background-color: #ffffff;
+    padding: 15px 10px;
+    margin-bottom: 20px;
+}
+.content .item .title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #30477d;
+}
+.content .item .category {
+    margin-top: 5px;
+    font-size: 15px;
+    color: #9b9b9b;
+}
+.content .item .inner-text {
+    color: #4a4a4a;
+    font-size: 15px;
+    line-height: 20px;
+    margin-top: 5px;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.content .item .inner-text p {
+    margin: 0;
+}
+.content .item .more {
+    font-size: 15px;
+    color: #30477d;
+}
+.content .item .image {
+    margin-top: 10px;
+    width: 100%;
+    overflow: hidden;
+}
+.content .item .image img {
+    width: 100%;
+}
+.content .item .image .place-holder {
+    width: 260px;
+    height: 153px;
+    background-color: #eb6201;
+}
+
+.article {
+    padding: 20px;
+    max-width: 320px;
+    margin: 0 auto;
+}
+.article h2 {
+    font-size: 21px;
+    font-weight: 300;
+}
+.article p {
+    font-size: 15px;
+    color: #4a4a4a;
+    line-height: 1.87;
+}
+.article p a {
+    font-weight: 500;
+    color: #2c585e;
+}
+.article img {
+    width: 100%;
+}
+
+@media (min-width: 960px) {
+    .container {
+        margin: 0 auto;
+        max-width: 1400px;
+        padding: 37px 20px;
+    }
+    .background {
+        padding: initial;
+        background-size: initial;
+    }
+    .project-header {
+        width: 960px;
+        display: block;
+        margin: 0 auto;
+        margin-top: 122px;
+        margin-bottom: 50px;
+    }
+    
+    .project-header .wrapper {
+        position: relative;
+        padding: 64px 0 35px 0;
+    }
+    .project-header .people {
+        position: absolute;
+        top: -72px;
+        height: 144px;
+        width: 960px;
+        background-image: url('/proj-assets/political-post/img/people_large.png');
+    }
+    .project-header .people.mobile {
+        display: none;
+    }
+    .footer h2,
+    .project-header h2 {
+        font-size: 70px;
+        line-height: 90px;
+        font-weight: 600;
+        margin: 0;
+    }
+    .project-header h3 {
+        margin-top: 40px;
+        line-height: 40px;
+    }
+    .footer p,
+    .project-header p {
+        font-size: 17px;
+        line-height: 1.65;
+        color: #4a4a4a;
+        margin: 0;
+    }
+    .footer {
+        display: block;
+        margin-top: 70px;
+    }
+
+    .criteria .title {
+        align-self: center;
+    }
+    .filter {
+        line-height: 1.9;
+    }
+    .filter input {
+        width: 100px;
+    }
+    .line {
+        display: inline-flex;
+    }
+
+    .candidate {
+        margin-top: 48px;
+    }
+    .candidate .title {
+        align-self: center;
+    }
+    .candidate .title h2 {
+        line-height: 1;
+    }
+    .candidate .people {
+        display: flex;
+        flex-direction: row;
+    }
+    .candidate .person {
+        width: 150px;
+        height: 150px;
+        margin-right: 30px;
+    }
+    .candidate .person:last-child {
+        margin-right: 0px;
+    }
+    .candidate .person .wrapper {
+        box-sizing: border-box;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+        padding: 10px;
+    }
+    .candidate .person .avatar {
+        margin-right: 0;
+        width: 80px;
+        height: 84px;
+    }
+    .candidate .person .desc {
+        display: flex;
+        flex-direction: column;
+        font-size: 16px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .navigation {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0;
+    }
+    .navigation .paging .page {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 18px;
+        margin-right: 12px;
+    }
+    .navigation .prev {
+        margin-right: 20px;
+        border-style: solid;
+        border-width: 10px 17.3px 10px 0;
+        border-color: transparent #30477d transparent transparent;
+    }
+    .navigation .next {
+        margin-left: 20px;
+        border-style: solid;
+        border-width: 10px 0 10px 17.3px;
+        border-color: transparent transparent transparent #30477d;
+    }
+
+    .content {
+        display: flex;
+        width: calc(90% + 20px);
+        margin: 0px auto !important;
+    }
+    .content .item {
+        margin-bottom: 20px;
+    }
+
+    .article {
+        max-width: 720px;
+    }
+}

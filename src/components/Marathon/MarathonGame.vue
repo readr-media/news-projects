@@ -1,5 +1,5 @@
 <template>
-  <section ref="marathonGame" class="marathonGame">
+  <section ref="marathonGame" v-show="showGame" class="marathonGame">
     <spinner class="marathonGame__loading" :show="loading"></spinner>
     <div class="marathonGame__menu">
       <div class="marathonGame__menu--raceName" v-html="raceN"></div>
@@ -69,8 +69,8 @@
   import { currentYPosition, elmYPosition } from 'kc-scroll'
   import _ from 'lodash'
   import Spinner from '../Spinner.vue'
+  import axios from 'axios'
   import moment from 'moment'
-  import superagent from 'superagent'
 
   const groups = []
   const containers = []
@@ -93,17 +93,7 @@
   let tickerValue = 10
 
   function fetchData(url) {
-    return new Promise((resolve, reject) => {
-      superagent
-      .get(url)
-      .end((err, res) => {
-        if (!err && res) {
-          return resolve(JSON.parse(res.text))
-        } else {
-          return reject(err)
-        }
-      })
-    })
+    return axios.get(url).then(response => response.data)
   }
 
   function secondToHHMMSS(second) {
@@ -153,6 +143,7 @@
         loading: false,
         race: 'boston',
         raceN: '2017 年波士頓馬拉松',
+        showGame: true,
         speedRatio: 1,
         viewWidth: 0,
       }
@@ -466,7 +457,7 @@
         isCompleted = false
         raceTimeMax = _.max(_.map(dataRunners, r => r[4]))
         raceTimeMin = _.min(_.map(dataRunners, r => r[4]))
-
+       
         this.isPause = false
         this.$refs.togglePlayMobile.querySelector('img').src = `/proj-assets/marathon/images/pause.png`
         this.$refs.togglePlayDesktop.querySelector('img').src = `/proj-assets/marathon/images/pause.png`
@@ -530,6 +521,7 @@
 
         const runnerAmount = runners.length
         const raceTimeAverage = _.floor(_.sum(_.map(dataRunners, r => r[4])) / runners.length)
+        console.log('raceTimeAverage', raceTimeAverage)
         this.convertedAverage = secondToHHMMSS(raceTimeAverage)
         this.$refs.selectedTimeControl.max = raceTimeMax
         this.$refs.selectedTimeControl.value = raceTimeAverage
@@ -675,6 +667,7 @@
           })
           .catch(() => {
             this.$emit('detectFirstLoaded')
+            this.showGame = false
             this.loading = false
           })
         } else {

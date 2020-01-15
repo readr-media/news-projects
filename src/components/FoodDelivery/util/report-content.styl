@@ -1,0 +1,67 @@
+@import './global.styl'
+
+.report-content
+  color #4a4a4a
+  padding-left 20px
+  padding-right 20px
+  padding-bottom 42px
+  position relative
+  background-color #f5f4f5
+  line-height normal
+  @media (min-width 640px)
+    padding-left 0
+    padding-right 0
+  @media (min-width $mobile)
+    padding-bottom 55px
+  @media (min-width $tablet)
+    padding-top 50px
+  &__wrapper
+    max-width 600px
+    margin-left auto
+    margin-right auto
+    position relative
+  & h1
+    font-size 2.4rem
+    font-weight 700
+    margin-bottom 15px
+  & h2
+    font-size 1.9rem
+    margin-bottom 20px
+    margin-top 30px
+    font-weight 500
+  & p
+    font-size 1.5rem
+    line-height 1.87
+    @media (min-width $mobile)
+      font-size 1.6rem
+      line-height 1.75
+    & + p
+      margin-top 28px
+  &__link
+    color #064894
+  &__quote
+    padding-left 16px
+    border-left 4px solid #d8d8d8
+  & .fixed-slides
+    margin 40px -20px
+    background-color #666
+    max-width 600px
+    @media (min-width 640px)
+      margin-left 0
+      margin-right 0
+    &__graphic
+      max-width 600px
+      & picture
+        transition opacity 0.3s $easeOutCubic
+    &__text
+      padding-left 20px
+      padding-right 20px
+      padding-bottom 80vh
+      &.step1
+        padding-top 80vh
+      & p
+        padding 10px
+        box-shadow 0 2px 4px 0 rgba(#000, 0.5)
+        background-color rgba(#fff, 0.9)
+        @media (min-width $mobile)
+          padding 14px 30px

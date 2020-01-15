@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
   <head>
     <title>{{ title }}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="theme-color" content="#f60">
     <meta name="description" content="{{ description }}">
-    <meta property="article:author" content="https://www.facebook.com/mirrormediamg/">
-    <meta property="article:publisher" content="https://www.facebook.com/mirrormediamg/">
-    <meta property="fb:app_id" content="175313259598308">
-    <meta property="fb:pages" content="1855418728011324">
-    <meta property="og:site_name" content="鏡週刊 Mirror Media" />
-    <meta property="og:locale" content="zh_TW" />
+    <meta property="article:author" content="{{ fbPageUrl }}">
+    <meta property="article:publisher" content="{{ fbPageUrl }}">
+    <meta property="fb:app_id" content="{{ fbAppId }}">
+    <meta property="fb:pages" content="{{ fbPageId }}">
+    <meta property="og:site_name" content="{{ siteName }}" />
+    <meta property="og:locale" content="{{ locale }}" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:description" content="{{ description }}" />
@@ -24,8 +24,8 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="800" />
 
-    <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon-120x120.png">
-    <link rel="shortcut icon" sizes="48x48" href="/public/favicon-48x48.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ favicon }}">
+    <link rel="shortcut icon" sizes="48x48" href="{{ favicon }}">
     <link rel="manifest" href="/manifest.json">
     <!-- Google Analytics -->
     <script>
@@ -87,37 +87,35 @@
       #app { position: relative; }
       *, *:before, *:after { box-sizing: inherit; }
       html { box-sizing: border-box; font-size: 16px; font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, sans-serif; }
+      html.iframe { width: 100%; height: 100%; display: flex; align-items: center; }
+      html.iframe body { width: 100%; }
     </style>
     <!-- End common css  -->
     <style>
       #skip a {  position:absolute;  left:-10000px;  top:auto;  width:1px;  height:1px;  overflow:hidden;  }
       #skip a:focus {  position:static;  width:auto;  height:auto;  }
     </style>
-    <!-- Facebook SDK -->
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId            : '175313259598308',
-          autoLogAppEvents : true,
-          xfbml            : true,
-          version          : 'v2.11'
-        });
-        FB.AppEvents.logPageView();
-      };
-    
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "https://connect.facebook.net/zh_TW/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <!-- End Facebook SDK -->
+    <!-- typekit -->
+    {{{ scriptTypeKit }}}
+    <!-- End typekit -->
+    <!-- Google Map -->
+    {{{ scriptGoogleMap }}}
+    <!-- End Google Map -->
+    <!-- Google Recaptcha -->
+    {{{ scriptGoogleReCaptcha }}}
+    <!-- End Google Recaptcha -->
+    <!-- Custom Script -->
+    {{{ customScript }}}
+    <!-- End Custom Script -->
   </head>
+  
   <body>
-  <div id="skip"><a href="#app">skip to content</a></div>
-  <!--vue-ssr-outlet-->
+    <!-- Facebook SDK -->
+    {{{ fbSdk }}}
+    <!-- End Facebook SDK -->
+
+    <div id="skip"><a href="#app">skip to content</a></div>
+    <!--vue-ssr-outlet-->
   </body>
   
 </html>

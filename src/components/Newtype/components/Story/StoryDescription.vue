@@ -1,6 +1,6 @@
 <template>
   <header :class="`header--story${storyOrderToNumber}`">
-    <h2 v-if="!isCommentary" :class="`story${storyOrderToNumber}`">個案故事{{ headerContent.storyOrder }}</h2>
+    <h2 v-if="!isCommentary" :class="`story${storyOrderToNumber}`">個案故事{{ headerContent.storyOrder === '四' ? '三' : headerContent.storyOrder }}</h2>
     <h1 :style="h1Color">{{ headerContent.title[0] }}<br>{{ headerContent.title[1] }}</h1>
     <div v-if="!isCommentary" class="description">
       <!-- Story protagonist image -->
@@ -38,6 +38,8 @@ export default {
         return 2
       } else if (this.headerContent.storyOrder === '三') {
         return 3
+      } else if (this.headerContent.storyOrder === '四') {
+        return 4
       } else if (this.headerContent.storyOrder === '五') {
         return 5
       }
@@ -47,6 +49,8 @@ export default {
         return { color: '#706e56' }
       } else if (this.storyOrderToNumber === 2) {
         return { color: '#567067' }
+      } else if (this.storyOrderToNumber === 4) {
+        return { color: '#364d77' }
       } else if (this.storyOrderToNumber === 3 || this.storyOrderToNumber === 5) {
         return { color: '#e4bb8b' }
       }
@@ -65,7 +69,7 @@ flex(flex-direction, justify-content, align-items)
 header
   flex(column, center, center)
   padding 0 20%
-  padding-bottom 200px
+  padding-bottom 100px
   h2
     // background-color #F4E5D2
     padding 0 30px
@@ -75,13 +79,15 @@ header
       background-color #fae2e4
     &.story2
       background-color #f4e5d2
+    &.story4
+      background-color #c4d3ce
   h1
     // color #567067
     br
       display none
   .description
     position relative
-    margin-top 40vh
+    margin-top 188px
     flex(column, center, center)
     // .element
     //   background-color green
@@ -94,9 +100,14 @@ header
     //   opacity .5
     &__protagonist
       position absolute
-      bottom 0px
+      // bottom 50%
+      top 0
       width 40%
+      left 50%
+      transform translateX(-50%)
     &__dock
+      position relative
+      bottom -1px
       z-index 1
       width 100%
     &__tape
@@ -119,6 +130,9 @@ header
         background-color #fae2e4
       &--story2
         background-color #f4e5d2
+      &--story4
+        background-color #c4d3ce
+        opacity .5
       &--top-left
         left calc(-200px * 0.3)
         top -30px
@@ -155,13 +169,14 @@ header
         padding 0 10%
         color #606060 !important
         &:nth-of-type(1)
-          margin-top 2em
+          margin-top 2em !important
         &:nth-last-of-type(1)
-          margin-bottom 4em
+          margin-bottom 4em !important
         &:nth-of-type(1)::first-letter
           float left
           font-size 350%
           line-height .9
+          margin-right 10px
   &.header--story3, &.header--story5
     padding-bottom 0
 
@@ -188,6 +203,7 @@ header
           &:nth-of-type(1)::first-letter
             font-size inherit
             line-height inherit
+            margin-right 0
 </style>
 
 

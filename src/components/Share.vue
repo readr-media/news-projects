@@ -10,12 +10,12 @@
     <a class="share__item toggle" :style="[{ backgroundColor: `${bgColor}`, border: `${border}` } ]"></a>
     <a class="share__item fb"
       :href="`https://www.facebook.com/share.php?u=${shareUrl}`"
+      target="_blank"
       @click="$_share_ga('fb')"></a>
     <a class="share__item line"
       :href="`https://line.me/R/msg/text/?${shareUrl}`"
+      target="_blank"
       @click="$_share_ga('line')"></a>
-    <a class="share__item gplus" :href="`https://plus.google.com/share?url=${shareUrl}`"
-      @click="$_share_ga('gplus')"></a>
   </div>
 </template>
 <script>
@@ -65,7 +65,7 @@
     },
     methods: {
       $_share_ga(media) {
-        window.ga('send', 'event', 'projects', 'click', `share to ${media}`, { nonInteraction: true })
+        window.ga('send', 'event', 'projects', 'click', `share to ${media}`)
       },
       $_share_toggleItmes() {
         this.isOpen = !this.isOpen
@@ -94,50 +94,43 @@
     background-repeat no-repeat
     border-radius 50%
     transition-duration .19s
+    visibility hidden
   .toggle
     z-index 910
-    background-image url(/public/navbtn.png)
+    background-image url(/proj-assets/navbtn.png)
     background-size 100px auto
     background-repeat no-repeat
     background-position -58px 0
+    visibility visible
   .fb
     background-color #3b5998
-    background-image url(/public/facebook.png)
+    background-image url(/proj-assets/facebook.png)
     background-size 20px
   .line
     background-color #00b900
-    background-image url(/public/line.png)
+    background-image url(/proj-assets/line.png)
     background-size 30px auto
-  .gplus
-    background-image url(/public/gplus.png)
-    background-size 47px
 .share.open
+  .fb, .line, .gplus
+    visibility visible
   &.up
     .fb
       transform translate3d(0,-49px,0)
     .line
       transform translate3d(0,-98px,0)
-    .gplus
-      transform translate3d(0,-147px,0)
   &.down
     .fb
       transform translate3d(0,49px,0)
     .line
       transform translate3d(0,98px,0)
-    .gplus
-      transform translate3d(0,147px,0)
   &.left
     .fb
       transform translate3d(-49px,0,0)
     .line
       transform translate3d(-98px,0,0)
-    .gplus
-      transform translate3d(-147px,0,0)
   &.right
     .fb
       transform translate3d(49px,0,0)
     .line
       transform translate3d(98px,0,0)
-    .gplus
-      transform translate3d(147px,0,0)
 </style>

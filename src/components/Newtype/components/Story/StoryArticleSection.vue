@@ -13,8 +13,10 @@
     <aside></aside>
     <!-- Main section -->
     <main>
-      <h2 :class="`story${storyIndex}`" v-if="sectionContent.title">{{ sectionContent.title }}</h2>
+      <h2 :class="[`story${storyIndex}`, `title--story${storyIndex}-paragraph${paragraphOrder}`]" v-if="sectionContent.title">{{ sectionContent.title }}</h2>
       <p v-for="(paragraph, paragraphIndex) in sectionContent.paragraphs" :key="paragraphIndex" :class="{ 'highlight': paragraphIndex === sectionContent.highlightParagraph - 1 }">
+        <Story4ChartSwiper
+          v-if="storyIndex === 4 && paragraphOrder === 2 && paragraphIndex === 2"/>
         <StoryCommentaryCharts
           v-if="storyIndex === 3 && paragraphOrder === 2 && paragraphIndex === 0"
           :chartIndex="2"/>
@@ -22,29 +24,42 @@
           v-if="storyIndex === 3 && paragraphOrder === 2 && paragraphIndex === 0"
           :chartIndex="3"/>
         <template v-for="(token, tokenIndex) in tokenizeParagraph(paragraph, paragraphIndex)">
-          <a class="hint" v-if="token === '（註）'" @click="toogleHint(`${paragraphIndex}-${tokenIndex}`)">{{ token }}</a>
-          <a class="anchor" v-else-if="token === '洪金晶' || token === '吳觀玲和簡雅婕'" v-scroll-to="token === '洪金晶' ? '#story1' : '#story2'">{{ token }}</a>
+          <!-- <a class="hint" v-if="token === '（註）'" @click="toogleHint(`${paragraphIndex}-${tokenIndex}`)">{{ token }}</a> -->
+          <span v-if="token === '（註）'">
+            <a :class="['hint', `hint--story${storyIndex}`]" @click="toogleHint(`${paragraphIndex}-${tokenIndex}`)">{{ token }}</a>
+            <span v-show="isHintToogle[`${paragraphIndex}-${tokenIndex}`]" :class="['hint-box', `hint-box--story${storyIndex}`]">
+              {{ sectionContent.hints[`${paragraphIndex}-${tokenIndex}`] }}
+            </span>
+          </span>
+          <a class="anchor" 
+             v-else-if="token === '洪金晶' || token === '吳觀玲和簡雅婕'" 
+             :href="token === '洪金晶' ? '/project/newtype/story1?single=true' : '/project/newtype/story2?single=true'"
+             @click="anchor(token)"
+             target="_blank">{{ token }}</a>
           <span class="highlight" v-else-if="sectionContent.highlights && sectionContent.highlights.includes(token)">{{ token }}</span>
+          <span v-else-if="token === '「媽媽平常都說什麼話？」' || token === '「台語。」' || token === '「那跟你呢？都講什麼文？」' || token === '「現在都講越南話。'">{{ token }}<br></span>
           <span v-else>{{ token }}</span>
         </template>
         <!-- hint -->
-        <template v-if="sectionContent.hints && hasHint(paragraphIndex)">
+        <!-- <template v-if="sectionContent.hints && hasHint(paragraphIndex)">
           <span v-for="hint in sectionContent.hints" v-show="isHintToogle[getHintKey(hint)]" class="hint-box">
             {{ getHintValue(hint) }}
           </span>
-        </template>
+        </template> -->
         <StoryCommentaryCharts
-          v-if="storyIndex === 3 && paragraphOrder === 0 && paragraphIndex === 0"
+          v-if="storyIndex === 3 && paragraphOrder === 0 && paragraphIndex === 2"
           :chartIndex="1"/>
         <StoryCommentaryCharts
-          v-if="storyIndex === 3 && paragraphOrder === 2 && paragraphIndex === 0"
+          v-if="storyIndex === 3 && paragraphOrder === 2 && paragraphIndex === 2"
           :chartIndex="4"/>
-        <img 
-          class="teacher"
-          v-if="storyIndex === 5 && paragraphOrder === 0 && paragraphIndex === sectionContent.paragraphs.length - 1" 
-          src="/proj-assets/newtype/images/story5/teacher.png" 
-          alt="">
+        <span class="teacher-container" v-if="device && storyIndex === 5 && paragraphOrder === 0 && paragraphIndex === sectionContent.paragraphs.length - 1">
+          <img 
+            class="teacher" 
+            :src="`/proj-assets/newtype/images/story5/${device}teacher.png`"
+            alt="">
+        </span>
       </p>
+      <AppCredits v-if="storyIndex === 5 && paragraphOrder === 3"/>
     </main>
   </section>
 </template>
@@ -53,11 +68,15 @@
 const _ = require('lodash')
 
 import StoryCommentaryCharts from './StoryCommentaryCharts.vue'
+import Story4ChartSwiper from './Story4ChartSwiper.vue'
+import AppCredits from '../AppCredits.vue'
 
 export default {
   props: [ 'storyIndex', 'sectionContent', 'currentVisible', 'paragraphOrder' ],
   components: {
-    StoryCommentaryCharts
+    StoryCommentaryCharts,
+    Story4ChartSwiper,
+    AppCredits
   },
   watch: {
     currentVisible () {
@@ -65,7 +84,7 @@ export default {
         if (this.$el.querySelector('.aside-figure__figure')) {
           const style = this.$el.querySelector('.aside-figure__figure').style
           style.position = 'fixed'
-          style.top = '35%'
+          style.top = '15%'
           style.left = '12%'
         }
       }
@@ -75,8 +94,10 @@ export default {
     return {
       isHintToogle: {
         "0-1": false,
-        "0-3": false
-      }
+        "1-1": false,
+        "3-1": false
+      },
+      device: undefined
     }
   },
   computed: {
@@ -90,19 +111,23 @@ export default {
     }
   },
   methods: {
+    anchor (token) {
+      if (token === '洪金晶') {
+        ga('send', 'event', 'projects', 'click', '3_story1', { nonInteraction: false })
+      } else if (token === '吳觀玲和簡雅婕') {
+        ga('send', 'event', 'projects', 'click', '3_story2', { nonInteraction: false })
+      }
+    },
     getFigureCaption (figObj) {
       return _.values(figObj)[0]
     },
     tokenizeParagraph (paragraph, paragraphIndex) {
-      const result = paragraph.split(/\/hint|\/highlight|\/anchor/)
+      const result = paragraph.split(/\/hint|\/highlight|\/anchor|\/br/)
       return result
     },
     toogleHint (toogleKey) {
-      Object.keys(this.isHintToogle).forEach((key) => {
-        if (key !== toogleKey)
-        this.isHintToogle[key] = false
-      })
       this.isHintToogle[toogleKey] = !this.isHintToogle[toogleKey]
+      setTimeout(() => { this.$emit('refreshWaypoint') }, 500)
     },
     getHintKey (hint) {
       return _.keys(hint)[0]
@@ -120,13 +145,16 @@ export default {
       })
       return bool
     }
+  },
+  mounted () {
+    window.innerWidth <= 767 ? this.device = 'phone' : this.device = 'web'
   }
 }
 </script>
 
 <style lang="stylus" scoped>
 section
-  padding 5% 12%
+  padding 4% 12%
   aside
     width 35%
     float left
@@ -159,7 +187,7 @@ section
       opacity 0
 
   main
-    width 65%
+    width 60%
     display flex
     flex-direction column
     justify-content flex-start
@@ -170,6 +198,7 @@ section
       position relative
       z-index 0
       padding-right 20px
+      margin-bottom 1.5em
       &.story1
         &:after
           content ''
@@ -198,7 +227,7 @@ section
           width calc(343px * 0.6)
           height calc(104px * 0.6)
           z-index -1
-      &.story3, &.story5
+      &.story4
         &:after
           content ''
           display inline-block
@@ -208,10 +237,25 @@ section
           -webkit-mask-position center center
           -webkit-mask-size 100% auto
           -webkit-mask-repeat no-repeat
-          background-color #7a7919
+          background-color #c4d3ce
+          opacity .5
           width calc(343px * 0.6)
           height calc(104px * 0.6)
           z-index -1
+      // &.story3, &.story5
+      //   &:after
+      //     content ''
+      //     display inline-block
+      //     position absolute
+      //     right 0
+      //     -webkit-mask-image url(/proj-assets/newtype/images/tape-mask.png)
+      //     -webkit-mask-position center center
+      //     -webkit-mask-size 100% auto
+      //     -webkit-mask-repeat no-repeat
+      //     background-color #7a7919
+      //     width calc(343px * 0.6)
+      //     height calc(104px * 0.6)
+      //     z-index -1
     p
       line-height 1.8
       text-align justify
@@ -219,25 +263,49 @@ section
       // display flex
       // flex-direction column
       &.highlight
-        color #567067 !important
+        color #597269 !important
         font-weight bold
       .highlight
-        color #fddcb6
-      .anchor, .hint
+        color #e5e973
+        // font-weight 400
+      .anchor
         cursor pointer
         color #fddcb6
+      .hint
+        cursor pointer
+        color #b5b5b5
+      .hint--story4
+        color #364d77
+      .anchor
+        border-bottom 2px solid #fddcb6
+        text-decoration none
       .hint-box
         display block
         border 1px solid white
         padding 50px
-        margin-top 2em
-      .teacher
-        width: 50%;
+        margin 2em 0
+        &--story4
+          border 1px solid black
+      .teacher-container
+        width: 70%;
         margin-top: 1em;
         margin-bottom: 1em;
         display: flex;
         margin-left: auto;
         margin-right: auto
+        .teacher
+          width 100%
+          height 50%
+
+#story4-section3-subsection1
+  main
+    h2
+      color white
+    p
+      color white
+
+#story5-section4-subsection1
+  padding-bottom 0
 
 .article-section--story3, .article-section--story5
   display flex
@@ -248,10 +316,20 @@ section
   aside
     width 0
   main
-    width 80%
+    width 900px
     // align-items center
     h2
       align-self center
+
+@media (max-width: 1440px)
+  .article-section--story3, .article-section--story5
+    main
+      width 800px
+
+@media (max-width: 1280px)
+  .article-section--story3, .article-section--story5
+    main
+      width 700px
 
 @media (max-width: 767px)
   section
@@ -259,9 +337,12 @@ section
     flex-direction column-reverse
     padding 0
     // background-position -250px 0%, 150% 0%
-    &.self-background
+    &.self-background:not(#story4-section3)
       main
         background-color rgba(255, 255, 255, .5)
+    &.self-background[id=story4-section3]
+      main
+        background-color rgba(86, 112, 103, .8)
     aside
       width 100%
       figure
@@ -282,17 +363,25 @@ section
     main
       width 100%
       padding 0 2em
+      overflow-x hidden
       h2
         padding-right 0
+        margin-top 2.5em
         &:after
           top 0
-          width calc(343px * 0.5)
-          height calc(104px * 0.5)
+          width calc(343px * 0.4) !important
+          height calc(104px * 0.4) !important
       p
         .hint-box
           padding 20px
-        .teacher
-          width 100%
+        .teacher-container
+          width 140%
+          position relative
+          left -4em
+          overflow-x hidden
+          .teacher
+            width 100%
+            height 50%
     
   .article-section--story3, .article-section--story5
     main 

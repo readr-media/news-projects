@@ -1,8 +1,15 @@
 {
   "presets": [
-    ["env", { "modules": false }]
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": "3"
+      }
+    ],
+    "@vue/babel-preset-jsx"
   ],
   "plugins": [
-    "syntax-dynamic-import"
+    "@babel/plugin-syntax-dynamic-import"
   ]
 }

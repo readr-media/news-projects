@@ -1,16 +1,29 @@
 {
-  "parser": "babel-eslint",
-  "extends": "vue",
-  "plugins": [
-      "import"
+  "extends": [
+    "airbnb-base",
+    "plugin:vue/recommended",
+    "plugin:import/errors"
   ],
-  "rules": { 
-    "array-bracket-spacing": [ 2, "always" ],
-    "camelcase": [ 0, "" ],
-    "yoda": [ 0, "never" ]
+  // If you want to use custom parsers such as babel-eslint or @typescript-eslint/parser,
+  // you have to use parserOptions.parser option instead of parser option. 
+  // ref: https://eslint.vuejs.org/user-guide/#usage
+  "parserOptions": {
+    "parser": "babel-eslint"
   },
+  "plugins": [
+    "vue"
+  ],
+  // "rules": { 
+  //   "array-bracket-spacing": [ 2, "always" ],
+  //   "camelcase": [ 0, "" ],
+  //   "yoda": [ 0, "never" ]
+  // },
   "globals": {
     "location": true,
     "source": true
+  },
+  "env": {
+    "es6": true,
+    "node": true
   }
 }

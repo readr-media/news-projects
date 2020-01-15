@@ -8,11 +8,11 @@
     <transition name="fade">
       <nav class="nav--hamburger-content" v-show="isMenuOpen">
         <!-- hamburger content -->
-        <img src="/proj-assets/newtype/images/header/story-menu-item.png" alt="" @click="clickMenuItem('story1')">
-        <img src="/proj-assets/newtype/images/header/story-menu-item.png" alt="" @click="clickMenuItem('story2')">
-        <img src="/proj-assets/newtype/images/header/story-menu-item.png" alt="" @click="clickMenuItem('story1')">
-        <img src="/proj-assets/newtype/images/header/story-menu-item.png" alt="" @click="clickMenuItem('story1')">
-        <img src="/proj-assets/newtype/images/header/story-menu-item.png" alt="" @click="clickMenuItem('story1')">
+        <img src="/proj-assets/newtype/images/header/ch1.png" alt="" @click="clickMenuItem('story1')">
+        <img src="/proj-assets/newtype/images/header/ch2.png" alt="" @click="clickMenuItem('story2')">
+        <img src="/proj-assets/newtype/images/header/ch3.png" alt="" @click="clickMenuItem('story3')">
+        <img src="/proj-assets/newtype/images/header/ch4.png" alt="" @click="clickMenuItem('story4')">
+        <img src="/proj-assets/newtype/images/header/ch5.png" alt="" @click="clickMenuItem('story5')">
       </nav>
     </transition>
     <img class="nav--top" src="/proj-assets/newtype/images/header/back-to-top.png" alt="" v-scroll-to="'.newtype-landing'">
@@ -54,27 +54,39 @@ export default {
       } else {
         return 0
       }
+    },
+    singleStory () {
+      return this.$store.state.route.query.single === 'true'
     }
   },
   methods: {
     toogleMenu () {
       this.isMenuOpen = !this.isMenuOpen
+      if (this.isMenuOpen) {
+        ga('send', 'event', 'projects', 'click', 'nav open', { nonInteraction: true })
+      }
     },
     clickMenuItem (anchor) {
-      this.$scrollTo(`#${anchor}`)
-      this.isMenuOpen = false
+      if (anchor === 'story1') {
+        ga('send', 'event', 'projects', 'click', 'nav1', { nonInteraction: false })
+      } else if (anchor === 'story2') {
+        ga('send', 'event', 'projects', 'click', 'nav2', { nonInteraction: false })
+      } else if (anchor === 'story3') {
+        ga('send', 'event', 'projects', 'click', 'nav3', { nonInteraction: false })
+      } else if (anchor === 'story4') {
+        ga('send', 'event', 'projects', 'click', 'nav4', { nonInteraction: false })
+      } else if (anchor === 'story5') {
+        ga('send', 'event', 'projects', 'click', 'nav5', { nonInteraction: false })
+      }
+
+      if (!this.singleStory) {
+        this.$scrollTo(`#${anchor}`)
+        this.isMenuOpen = false
+      } else {
+        window.open(`/project/newtype/${anchor}?single=true`)
+      }
     }
   }
-  // mounted () {
-  //   if (process.browser) {
-  //     window.onclick = () => {
-  //       console.log('fuck')
-  //       if (this.isMenuOpen) {
-  //         this.isMenuOpen = false
-  //       }
-  //     }
-  //   }
-  // }
 }
 </script>
 
@@ -124,6 +136,9 @@ export default {
     flex-direction column
     justify-content center
     align-items center
+    img
+      width 80%
+      height auto
   .nav--top
   //   display none
     width 10%

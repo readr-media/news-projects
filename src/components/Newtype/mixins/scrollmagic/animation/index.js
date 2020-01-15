@@ -93,11 +93,47 @@ const sceneConfig = {
         sceneRightHand.setTween(tweenRightHand)
       })
     },
+    setStory4Scene () {
+      let { TweenMax } = require('gsap')
+      let ScrollMagic = require('scrollmagic')
+      require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap')
+      require('imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js')
+
+      // init controller
+      var controller = new ScrollMagic.Controller()
+
+      // build story4 tween
+      var tweenBird = TweenMax.fromTo(
+        '#bird',
+        1,
+        { x: 0, y: 0, ease: Cubic.easeOut },
+        { x: window.innerWidth * 0.6, y: 0, ease: Cubic.easeOut }
+      )
+
+      // build scene
+      var sceneBird = new ScrollMagic.Scene({ triggerElement: '.animation--story4', duration: '50%', offset: 0 })
+                          .setTween(tweenBird)
+                          // .addIndicators({ name: 'moving2' }) // add indicators (requires plugin)
+                          .addTo(controller)
+
+
+      window.addEventListener('resize', () => {
+        tweenBird = TweenMax.fromTo(
+          '#bird',
+          1,
+          { x: 0, y: 0, ease: Cubic.easeOut },
+          { x: window.innerWidth * 0.6, y: 0, ease: Cubic.easeOut }
+        )
+        sceneBird.setTween(tweenBird)
+      })
+    },
     initAnimation () {
       if (this.storyIndex === 1) {
         this.setStory1Scene()
       } else if (this.storyIndex === 2) {
         this.setStory2Scene()
+      } else if (this.storyIndex === 4) {
+        this.setStory4Scene()
       }
     }
   },

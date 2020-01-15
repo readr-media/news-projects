@@ -1,0 +1,375 @@
+[
+    {
+      "times": 41,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 1, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 46,
+      "condition1": {"pass": 0, "fail": 2},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 54,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 65,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 68,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 74,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 79,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 80,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 1, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 82,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 1, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 85,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 1, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 90,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 92,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 93,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 1},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 96,
+      "condition1": {"pass": 0, "fail": 2},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 98,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 1},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 100,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 1, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 101,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 1, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 111,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 1, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 118,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 126,
+      "condition1": {"pass": 0, "fail": 4},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 128,
+      "condition1": {"pass": 0, "fail": 2},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 131,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 151,
+      "condition1": {"pass": 0, "fail": 2},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 158,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 162,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 165,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 2},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 167,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 4},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 169,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 4},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 206,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 2, "fail": 0}
+    },
+    {
+      "times": 207,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 2}
+    },
+    {
+      "times": 210,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 1, "fail": 0}
+    },
+    {
+      "times": 211,
+      "condition1": {"pass": 0, "fail": 2},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 228,
+      "condition1": {"pass": 0, "fail": 2},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 2, "fail": 0}
+    },
+    {
+      "times": 230,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 234,
+      "condition1": {"pass": 1, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 1}
+    },
+    {
+      "times": 241,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 1},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 251,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 1},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 254,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 257,
+      "condition1": {"pass": 0, "fail": 2},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 260,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 1},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 264,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 2},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 270,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 1},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 271,
+      "condition1": {"pass": 0, "fail": 2},
+      "condition2": {"pass": 0, "fail": 0},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 273,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 29},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 274,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 4},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 275,
+      "condition1": {"pass": 0, "fail": 1},
+      "condition2": {"pass": 0, "fail": 1},
+      "condition3": {"pass": 0, "fail": 6},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 276,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 19},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 277,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 7},
+      "condition3": {"pass": 1, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 278,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 15},
+      "condition3": {"pass": 0, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 279,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 2},
+      "condition3": {"pass": 2, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 280,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 4},
+      "condition3": {"pass": 4, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 281,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 0, "fail": 2},
+      "condition3": {"pass": 1, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    },
+    {
+      "times": 282,
+      "condition1": {"pass": 0, "fail": 0},
+      "condition2": {"pass": 4, "fail": 1},
+      "condition3": {"pass": 10, "fail": 0},
+      "condition4": {"pass": 0, "fail": 0}
+    }   
+     
+  
+  ]
