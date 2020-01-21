@@ -141,9 +141,9 @@ export const PROJECTS_NOT_NEED_APP_HEADER = [
   'marathon',
   'puyuma',
   'disinformation',
+  'fake-news',
   'food-delivery',
-  'election-2020',
-  'election-2020-embed'
+  'election-2020'
 ]
 
 export const SCRIPT_GOOGLE_MAP = `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=drawing,visualization" async defer></script>`

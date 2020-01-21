@@ -83,10 +83,6 @@ import { throttle } from 'lodash'
 
 import FakeNewsStoreModule from '../../store/modules/FakeNews'
 
-const chapterIds = ARTICLE.map(chapter => `#article-${chapter.chapter}-1`)
-
-const fetchCommentAmount = (store, id) => store.dispatch('FakeNews/FETCH_COMMENT_AMOUNT', id)
-
 const fetchCommentsAmount = (store, ids) => store.dispatch('FakeNews/FETCH_COMMENTS_AMOUNT', ids)
 
 const fetchReports = (store) => store.dispatch('FETCH_REPORTS', {
