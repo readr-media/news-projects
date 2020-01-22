@@ -85,7 +85,7 @@ pipeline:
       - source: google_credentials
         target: token
     vars:
-      image: gcr.io/mirrormedia-1470651750304/${DRONE_REPO_NAME}:${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER}
+      image: gcr.io/mirrormedia-1470651750304/${DRONE_REPO_NAME}:${DRONE_BRANCH}_${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER}
       app: news-projects
       tier: frontend
     when:
@@ -103,7 +103,7 @@ pipeline:
       event: [push]
     template: >
       {{#success build.status}}
-        *success* ${DRONE_REPO_NAME}:${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER} was well served.
+        *success* ${DRONE_REPO_NAME}:${DRONE_BRANCH}_${DRONE_COMMIT_AUTHOR}_${DRONE_BUILD_NUMBER} was well served.
         Check out our new <https://dev.readr.tw/project/hotel-hostess|project>.
       {{else}}
         Houston, we have a problem. Build <${DRONE_BUILD_LINK}|#{{build.number}}> failed. Fix me please, {{build.author}}
