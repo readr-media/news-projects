@@ -8,31 +8,25 @@
       </picture>
       <div class="menu">
         <div>
-          <router-link to="/project/election-board/upload">
-            <div class="menu__item menu__item--upload" @click="sendGA('upload')">
-              <img src="/proj-assets/election-board/images/upload.png" alt="我要上傳">
-              <div>我要上傳</div>
-            </div>
-          </router-link>
-          <router-link to="/project/election-board/verify" >
-            <div class="menu__item menu__item--verify" @click="sendGA('verified')">
-              <img src="/proj-assets/election-board/images/check.png" alt="幫忙驗證">
-              <div>幫忙驗證</div>
-            </div>
-          </router-link>
           <router-link to="/project/election-board/data">
-            <div class="menu__item menu__item--data" @click="sendGA('seedata 2020')">
+            <div class="menu__item" @click="sendGA('seedata 2020')">
               <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
-              <div>我要看資料</div>
+              <div>我要看 2020 資料</div>
+            </div>
+          </router-link>
+          <router-link to="/project/election-board/data-2018">
+            <div class="menu__item" @click="sendGA('seedata 2018')">
+              <img src="/proj-assets/election-board/images/data.png" alt="我要看資料">
+              <div>我要看 2018 資料</div>
             </div>
           </router-link>
         </div>
-        <a href="/project/election-board/data-2018" target="_blank" class="menu__2018data" @click="sendGA('seedata 2018')">2018 看板資料</a>
+        <p>上傳與驗證功能已於 2020/01/11 結束</p>
       </div>
     </main>
+
     <a href="http://www.readr.tw/post/1089" class="origin" target="_blank" @click="sendGA('memo')">看完整計畫緣起</a>
     <a href="https://www.readr.tw/post/2038" target="_blank" class="news" @click="sendGA('看板政治：政治獻金資料沒有告訴你的事')">看板政治：<br>政治獻金資料沒有告訴你的事</a>
-
     <a href="https://www.readr.tw/donate" target="_blank" class="news" @click="sendGA('donate')">贊助我們</a>
 
     <div class="credit">
@@ -69,7 +63,6 @@ import { get as axiosGet } from 'axios'
 
 export default {
   name: 'ElectionBoardLanding',
-  props: [ 'reload' ],
   data () {
     return {
       showIntro: false,
@@ -104,6 +97,7 @@ export default {
   }
 }
 </script>
+
 <style lang="stylus" scoped>
 color-upload = #fa6e59
 color-verify = #ffdb5c
@@ -128,21 +122,22 @@ color-data = #4897db
     text-decoration none
     cursor pointer
   & main
-    display flex
     position relative
     width 100%
-    justify-content space-between
-    margin-bottom 68px
+    margin-bottom 35px
     @media (min-width 768px)
       flex-direction column
       align-items center
-      margin-bottom 30px
+      margin-bottom 60px
     & picture
-      width 37.04%
+      display block
+      width 29.63%
       position relative
+      margin-right auto
+      margin-left auto
       @media (min-width 768px)
         width 26.65%
-        margin-bottom 56px
+        margin-bottom 68px
       & > img
         width 100%
         user-select none
@@ -150,7 +145,7 @@ color-data = #4897db
       position absolute
       width 125.93%
       right 0
-      top 400px
+      top 283px
       user-select none
       @media (min-width 768px)
         width 73.64%
@@ -159,51 +154,48 @@ color-data = #4897db
         transform translateX(-50%)
     & .menu
       position relative
-      width 51.85%
       text-align center
       line-height 1
-      @media (min-width 768px)
-        width 100%
+      margin-top 45px
       & > div
+        margin-bottom 10px
         @media (min-width 768px)
           display flex
           justify-content space-between
+          margin-bottom 20px
       & a
         display block
         @media (min-width 768px)
-          width 30.66%
-        &:not(:last-child)
-          margin-bottom 20px
+          width calc(50% - 18px)
+        & + a
+          margin-top 15px
           @media (min-width 768px)
-            margin-bottom 0
+            margin-top 0
+      & p
+        color color-data
+        font-weight 600
+        line-height 1.5
       &__item
         border-radius 2px
         font-weight 700
-        padding-top 20px
-        padding-bottom 15px
+        padding-top 10px
+        padding-bottom 10px
+        background-color color-data
+        display flex
+        align-items center
+        justify-content center
+        font-size 1.25rem
         @media (min-width 768px)
           border-radius 6px
-          font-size 1.25rem
+          padding-top 24px
+          padding-bottom 24px
         & img
-          width 48px
-          vertical-align middle
-          margin-bottom 15px
-        &--upload
-          background-color color-upload
-        &--verify
-          background-color color-verify
-        &--data
-          background-color color-data
-      &__2018data
-        display block
-        color #4897db
-        text-decoration underline
-        margin-top 15px
-        font-weight 600
-        @media (min-width 768px)
-          margin-top 10px
-          width 30.66%
-          margin-left auto
+          width 34px
+          display block
+          margin-right 10px
+          @media (min-width 768px)
+            width 48px
+            margin-right 18px
   & > a
     width 100%
     font-size 1.25rem
@@ -321,9 +313,8 @@ color-data = #4897db
           width 100%
           color #fff
           line-height 1.8
-          p
-            & + p
-              margin-top 1em
+          & p + p
+            margin-top 1em
 @media (min-width 768px)
   .intro
     .intro-container
