@@ -3,7 +3,6 @@
     <template v-if="board">
       <div class="data-board__image">
         <img :src="`https://www.readr.tw${board.image}`" alt="">
-        <a :href="`/project/election-board/verify?board=${board.id}`" class="data-board__correction" target="_blank" v-if="electionYear === 2020" @click="goCorrection(board.id)">這不是{{ mode === 'coordinate' ? (candidatesName || '看板') : $route.query.candidate }}，我要校正</a>
       </div>
       <div class="data-board__info">
         <div class="content">
@@ -60,10 +59,8 @@ export default {
     }
   },
   props: {
-    board: {
-    },
-    mode: {
-    }
+    board: {},
+    mode: {}
   },
   data () {
     return {
@@ -145,19 +142,6 @@ theme-color = #4897db
       height 100%
       object-fit contain
       object-position bottom center
-  &__correction
-    position absolute
-    left 0
-    bottom 0
-    width 100%
-    color theme-color
-    text-align center
-    font-size .875rem
-    line-height 40px
-    height 40px
-    background-color rgba(0,0,0,0.72)
-    cursor pointer
-    font-weight 500
   &__info
     padding 25px 25px 30px 25px
   .content
