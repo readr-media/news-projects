@@ -1,6 +1,6 @@
 const module = {
   firestorePath: '/coronavirus',
-  firestoreRefType: 'doc',
+  firestoreRefType: 'collection',
   moduleName: 'maskMap',
   statePropName: 'data',
   namespaced: true,
