@@ -1,17 +1,22 @@
 <template>
   <div class="mask-map">
     <div class="map" ref="map" />
+    <IntroInfo />
     <SearchBar />
+    <LegendField />
     <PharmacyInfo :isShow="isShowPharmacyInfo" :infoData="pharmacyInfoData" @close="isShowPharmacyInfo = false" />
+    <CommonInfo />
   </div>
 </template>
 
 <script>
-// import MaskMapStoreModule from '../../store/modules/firebase-modules/maskMap'
-// import { createNamespacedHelpers } from 'vuex'
-// const { mapState } = createNamespacedHelpers('maskMap')
+import IntroInfo from './components/IntroInfo.vue'
 import SearchBar from './components/SearchBar.vue'
+import LegendField from './components/LegendField.vue'
 import PharmacyInfo from './components/PharmacyInfo.vue'
+import CommonInfo from './components/CommonInfo.vue'
+
+import mapStyle from './data/mapStyle.js'
 
 // 110台北市信義區巿府路1號
 const DEFAULT_CENTER = { lat: 25.037891, lng: 121.564008 }
@@ -23,19 +28,17 @@ export default {
     return {
       title: '即時口罩存量查詢地圖',
       description: '',
-      metaUrl: 'maskmap'
-      // metaImage: 'maskmap/img/cover-desktop-large.jpg'
+      metaUrl: 'maskmap',
+      metaImage: 'maskmap/img/og.jpg'
     }
   },
   components: {
+    IntroInfo,
     SearchBar,
-    PharmacyInfo
+    LegendField,
+    PharmacyInfo,
+    CommonInfo
   },
-  // created () {
-  //   // this.$store.registerModule('MaskMap', MaskMapStoreModule)
-  //   // this.$store.dispatch('maskMap/openDBChannel')
-  //   // this.$store.dispatch('realtimeLegislatorsDistrictCandidates/openDBChannel')
-  // },
   beforeMount () {
     window.addEventListener('load', () => { this.initMap() })
   },
@@ -48,69 +51,82 @@ export default {
   },
   methods: {
     initMap () {
-      const lat = 25.037891
-      const lng = 121.564008
       this.map = new google.maps.Map(this.$refs.map, {
         center: DEFAULT_CENTER,
         zoom: DEFAULT_ZOOM,
         mapTypeControl: false,
         zoomControl: false,
         streetViewControl: false,
-        fullscreenControl: false
+        fullscreenControl: false,
+        styles: mapStyle
       })
-      // this.map.data.loadGeoJson('/proj-assets/maskmap/data/location.geojson', {}, (res) => {
-      //   console.log(res);
-      // })
-      this.map.data.loadGeoJson('https://storage.googleapis.com/projects.readr.tw/coronavirus2019/location_only.geojson')
-      // this.map.data.loadGeoJson('/proj-assets/maskmap/data/location.geojson')
+      new google.maps.Marker({
+        map: this.map,
+        position: DEFAULT_CENTER,
+        icon: '/proj-assets/maskmap/img/man.svg'
+      })
+      this.map.data.loadGeoJson('https://storage.googleapis.com/projects.readr.tw/coronavirus2019/location_only.geojson', {}, () => {
+        this.map.data.setStyle((feat) => {
+          const status = feat.getProperty('s')
+          let suffix = ''
+          switch (status) {
+            case 'O':
+              suffix = 'over'
+              break
+            case 'U':
+              suffix = 'under'
+              break
+            case 'N':
+              suffix = 'none'
+              break
+            default:
+              suffix = '0'
+              break
+          }
+          return {
+            icon: `/proj-assets/maskmap/img/location-${suffix}.svg`
+          }
+        })
+      })
       this.map.data.addListener('click', (evt) => {
-        const { id } = evt.feature.i
-        const key = id % 2 ? '1234567890' : '1234567891'
+        const { i } = evt.feature.i
         const { data } = this.$store.state.maskMap
-        // const { data } = this.maskMap
         this.isShowPharmacyInfo = true
-        if (key in data) {
-          this.pharmacyInfoData = data[ key ]
+        if (i in data) {
+          this.pharmacyInfoData = data[ i ]
         } else {
-          this.$store.dispatch('maskMap/fetchById', key).then(() => {
-            this.pharmacyInfoData = data[ key ]
+          this.$store.dispatch('maskMap/fetchById', i).then(() => {
+            this.pharmacyInfoData = data[ i ]
           })
         }
       })
-      
-      // this.map.data.setStyle((feat) => ({
-      //   icon: '/proj-assets/maskmap/img/location.svg'
-      // }))
-
     },
     getCurrentPosition () {
-      // const infoWindow = new google.maps.InfoWindow
       const { geolocation } = navigator
       if (geolocation) {
         geolocation.getCurrentPosition((pos) => {
-          const { latitude: lat, longitude: lng } = pos.coords
-          // infoWindow.setPosition(pos)
-          // infoWindow.setContent('Location found.')
-          // infoWindow.open(map)
-          this.map.setCenter({ lat, lng })
+          const position = { lat: pos.coords.latitude, lng: pos.coords.longitude }
+          this.map.setCenter(position)
+          this.map.setZoom(DEFAULT_ZOOM)
+          new google.maps.Marker({
+            map: this.map,
+            position,
+            icon: '/proj-assets/maskmap/img/man.svg'
+          })
         }, function (err) {
           console.log(err)
         })
       } else {
-        console.log('"Browser doesn\'t support Geolocation');
+        console.log('"Browser doesn\'t support Geolocation')
       }
     }
-  },
-  // beforeDestroy () {
-  //   this.$store.unregisterModule('FoodDelivery')
-  // }
+  }
 }
 </script>
 
 <style lang="stylus">
 @import './util/reset.css'
-// html, body
-//   height 100%
+
 html
   font-size 10px
 body

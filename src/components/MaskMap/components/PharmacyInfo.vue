@@ -4,9 +4,11 @@
     <p>{{ infoData.tel }}</p>
     <p>{{ infoData.add }}</p>
     <div class="pharmacy-info__divider" />
-    <p class="pharmacy-info__mask-total">• 成人口罩數量：{{ infoData.adult }}</p>
-    <p class="pharmacy-info__mask-total">• 兒童口罩數量：{{ infoData.child }}</p>
-    <p class="pharmacy-info__update-time">{{ infoData.update }}</p>
+    <ul>
+      <li>成人口罩數量：{{ infoData.adult }}</li>
+      <li>兒童口罩數量：{{ infoData.child }}</li>
+    </ul>
+    <p class="pharmacy-info__update-time">{{ infoData.update }} 更新</p>
     <svg @click="$emit('close')" class="pharmacy-info__close" height="14" viewBox="0 0 14 14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m310 13.4-1.4-1.4-5.6 5.6-5.6-5.6-1.4 1.4 5.6 5.6-5.6 5.6 1.4 1.4 5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z" fill="rgba(0, 0, 0, 0.87)" fill-rule="evenodd" transform="translate(-296 -12)"/></svg>
   </section>
 </template>
@@ -57,8 +59,12 @@ export default {
     border solid 1px rgba(0, 0, 0, 0.15)
     margin-top 16px
     margin-bottom 16px
-  &__mask-total
+  & ul
     color rgba(0, 0, 0, 0.66)
+    padding-left 24px
+    list-style-type disc
+    & li + li
+      margin-top 8px
   &__update-time
     text-align right
     color rgba(0, 0, 0, 0.66)
