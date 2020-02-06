@@ -1,23 +1,25 @@
 <template>
-  <div class="mask-map">
+  <div class="mask-map" :style="{ height: `${this.$store.state.viewport[ 1 ]}px` }">
     <div class="map" ref="map" />
     <IntroInfo />
-    <SearchBar />
+    <SearchBar @popupInfo="showPopupInfo" />
     <LegendField />
-    <PharmacyInfo :isShow="isShowPharmacyInfo" :infoData="pharmacyInfoData" @close="isShowPharmacyInfo = false" />
+    <PharmacyInfo :isShow="isShowPharmacyInfo" :infoData="pharmacyInfoData" @closeInfo="isShowPharmacyInfo = false" />
     <CommonInfo />
+    <PopupInfo :isShow="isShowPopupInfo" :infoData="popupInfoData" @closeInfo="isShowPopupInfo = false" />
   </div>
 </template>
 
 <script>
 import IntroInfo from './components/IntroInfo.vue'
+import PopupInfo from './components/PopupInfo.vue'
 import SearchBar from './components/SearchBar.vue'
 import LegendField from './components/LegendField.vue'
 import PharmacyInfo from './components/PharmacyInfo.vue'
 import CommonInfo from './components/CommonInfo.vue'
 
 import mapStyle from './data/mapStyle.js'
-import { GOOGLE_API_KEY } from '../../../api/config'
+import { GOOGLE_API_KEY_ELECTION_BOARD } from '../../../api/config'
 
 // 110台北市信義區巿府路1號
 const DEFAULT_CENTER = { lat: 25.037891, lng: 121.564008 }
@@ -31,7 +33,7 @@ export default {
       description: '因應新型冠狀病毒（武漢肺炎）疫情，從 2 月 6 日起，口罩採實名制購買，需要的民眾得依照身分證／居留證號尾數在指定日期，攜帶健保卡前往藥局購買。READr 依照最新資料製作實時口罩地圖，快來查詢離你最近的口罩購買處！',
       metaUrl: 'maskmap',
       metaImage: 'maskmap/img/og.jpg',
-      customScript: `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}" async defer><\/script>`
+      customScript: `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY_ELECTION_BOARD}" async defer><\/script>`
     }
   },
   components: {
@@ -39,19 +41,31 @@ export default {
     SearchBar,
     LegendField,
     PharmacyInfo,
-    CommonInfo
+    CommonInfo,
+    PopupInfo
   },
   beforeMount () {
-    window.addEventListener('load', () => { this.initMap() })
+    window.addEventListener('load', this.initAfterLoad)
   },
   data () {
     return {
       map: null,
       isShowPharmacyInfo: false,
-      pharmacyInfoData: {}
+      isShowPopupInfo: false,
+      pharmacyInfoData: {},
+      popupInfoData: {
+        status: 'opening',
+        question: '地圖需要取得你現在的位置',
+        optionA: '好',
+        optionB: '自己輸入地址'
+      }
     }
   },
   methods: {
+    initAfterLoad () {
+      this.isShowPopupInfo = true
+      this.initMap()
+    },
     initMap () {
       this.map = new google.maps.Map(this.$refs.map, {
         center: DEFAULT_CENTER,
@@ -90,18 +104,7 @@ export default {
           }
         })
       })
-      this.map.data.addListener('click', (evt) => {
-        const { i } = evt.feature.i
-        const { data } = this.$store.state.maskMap
-        this.isShowPharmacyInfo = true
-        if (i in data) {
-          this.pharmacyInfoData = data[ i ]
-        } else {
-          this.$store.dispatch('maskMap/fetchById', i).then(() => {
-            this.pharmacyInfoData = data[ i ]
-          })
-        }
-      })
+      this.map.data.addListener('click', this.showPharmacyInfo)
     },
     getCurrentPosition () {
       const { geolocation } = navigator
@@ -116,10 +119,28 @@ export default {
             icon: '/proj-assets/maskmap/img/man.svg'
           })
         }, function (err) {
-          console.log(err)
+          console.error(err)
         })
       } else {
-        console.log('"Browser doesn\'t support Geolocation')
+        console.error('"Browser doesn\'t support Geolocation')
+      }
+    },
+    showPopupInfo (infoData) {
+      this.popupInfoData = infoData
+      this.isShowPopupInfo = true
+    },
+    showPharmacyInfo (evt) {
+      const { i: key, s: status } = evt.feature.i
+      const { data } = this.$store.state.maskMap
+      this.isShowPharmacyInfo = true
+      if (key in data) {
+        this.pharmacyInfoData = data[ key ]
+        this.pharmacyInfoData.status = status
+      } else {
+        this.$store.dispatch('maskMap/fetchById', key).then(() => {
+          this.pharmacyInfoData = data[ key ] || {}
+          this.pharmacyInfoData.status = status
+        })
       }
     }
   }
@@ -140,5 +161,5 @@ body
   margin-left auto
   margin-right auto
 .map
-  height 100vh
+  height 100%
 </style>
