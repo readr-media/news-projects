@@ -64,23 +64,6 @@ export default {
           console.log(status)
         }
       })
-      // const geocoder = new google.maps.Geocoder()
-      // // todo https://developers.google.com/maps/documentation/javascript/geocoding#ComponentFiltering
-      // geocoder.geocode(
-      //   {
-      //     address: this.address,
-      //     // bounds:,
-      //     // componentRestrictions:,
-      //     // region:,
-      //   },
-      //   (results, status) => {
-      //     if (status === 'OK') {
-      //       this.$parent.map.setCenter(results[ 0 ].geometry.location)
-      //       // console.log('success')
-      //     } else {
-      //       console.log(status)
-      //     }
-      //   })
     },
     toggleShare () {
       this.isShare = !this.isShare
@@ -98,6 +81,7 @@ export default {
   padding-left 10px
   padding-right 10px
   font-size 1.5rem
+  user-select none
   &__search
     display flex
     justify-content space-between
@@ -164,7 +148,6 @@ export default {
       font-size 1.5rem
       font-weight 600
       cursor pointer
-      user-select none
       margin-left auto
       margin-top 5px
     & p

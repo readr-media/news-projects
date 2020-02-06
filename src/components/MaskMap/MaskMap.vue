@@ -17,6 +17,7 @@ import PharmacyInfo from './components/PharmacyInfo.vue'
 import CommonInfo from './components/CommonInfo.vue'
 
 import mapStyle from './data/mapStyle.js'
+import { GOOGLE_API_KEY } from '../../../api/config'
 
 // 110台北市信義區巿府路1號
 const DEFAULT_CENTER = { lat: 25.037891, lng: 121.564008 }
@@ -27,9 +28,10 @@ export default {
   metaInfo () {
     return {
       title: '即時口罩存量查詢地圖',
-      description: '',
+      description: '因應新型冠狀病毒（武漢肺炎）疫情，從 2 月 6 日起，口罩採實名制購買，需要的民眾得依照身分證／居留證號尾數在指定日期，攜帶健保卡前往藥局購買。READr 依照最新資料製作實時口罩地圖，快來查詢離你最近的口罩購買處！',
       metaUrl: 'maskmap',
-      metaImage: 'maskmap/img/og.jpg'
+      metaImage: 'maskmap/img/og.jpg',
+      customScript: `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}" async defer><\/script>`
     }
   },
   components: {
@@ -131,6 +133,12 @@ html
   font-size 10px
 body
   color rgba(0, 0, 0, 0.87)
+  background-color #000
+.mask-map
+  max-width 420px
+  position relative
+  margin-left auto
+  margin-right auto
 .map
   height 100vh
 </style>

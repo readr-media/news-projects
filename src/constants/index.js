@@ -86,8 +86,7 @@ export const PROJECTS_BELONG_MM = [
 // include project url path name which need google map
 export const PROJECTS_NEED_GOOGLE_MAP = [
   'eastern-district-of-taipei',
-  'farmhouse',
-  'maskmap'
+  'farmhouse'
 ]
 
 // include project url path name which need google reCAPTCHA
@@ -142,10 +141,10 @@ export const PROJECTS_NOT_NEED_APP_HEADER = [
   'disinformation',
   'fake-news',
   'food-delivery',
-  'election-2020'
+  'election-2020',
+  'maskmap'
 ]
 
-// todo not need to use libraries
 export const SCRIPT_GOOGLE_MAP = `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=drawing,visualization" async defer></script>`
 
 export const SCRIPT_GOOGLE_RECAPTCHA = `<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=zh-TW" async defer></script>`
