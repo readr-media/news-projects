@@ -2,7 +2,7 @@
   <div class="mask-map" :style="{ height: `${this.$store.state.viewport[ 1 ]}px` }">
     <div class="map" ref="map" />
     <IntroInfo />
-    <SearchBar @popupInfo="showPopupInfo" />
+    <SearchBar @popupInfo="showPopupInfo" ref="searchBar" />
     <LegendField />
     <PharmacyInfo :isShow="isShowPharmacyInfo" :infoData="pharmacyInfoData" @closeInfo="isShowPharmacyInfo = false" />
     <CommonInfo />
@@ -19,6 +19,7 @@ import PharmacyInfo from './components/PharmacyInfo.vue'
 import CommonInfo from './components/CommonInfo.vue'
 
 import mapStyle from './data/mapStyle.js'
+import { get } from 'axios'
 // import { GOOGLE_API_KEY_ELECTION_BOARD } from '../../../api/config'
 
 // 110台北市信義區巿府路1號
@@ -58,7 +59,8 @@ export default {
         question: '地圖需要取得你現在的位置',
         optionA: '好',
         optionB: '自己輸入地址'
-      }
+      },
+      manMarker: null
     }
   },
   methods: {
@@ -76,7 +78,7 @@ export default {
         fullscreenControl: false,
         styles: mapStyle
       })
-      new google.maps.Marker({
+      this.manMarker = new google.maps.Marker({
         map: this.map,
         position: DEFAULT_CENTER,
         icon: '/proj-assets/maskmap/img/man.svg'
@@ -113,10 +115,21 @@ export default {
           const position = { lat: pos.coords.latitude, lng: pos.coords.longitude }
           this.map.setCenter(position)
           this.map.setZoom(DEFAULT_ZOOM)
-          new google.maps.Marker({
+          // if (this.manMarker) {
+          this.manMarker.setMap(null)
+          // }
+          this.manMarker = new google.maps.Marker({
             map: this.map,
             position,
             icon: '/proj-assets/maskmap/img/man.svg'
+          })
+          get(`/project-api/election-board/google_map?latlng=${position.lat},${position.lng}`).then((res) => {
+            const { status, results } = res.data
+            if (status === 'OK') {
+              this.$refs.searchBar.address = this.formatAddress(results[ 0 ][ 'formatted_address' ])
+            } else {
+              console.error(status)
+            }
           })
         }, function (err) {
           console.error(err)
@@ -142,6 +155,11 @@ export default {
           this.pharmacyInfoData.status = status
         })
       }
+    },
+    formatAddress (address) {
+      let output = address
+      const idx = output.indexOf('台灣')
+      return idx > -1 ? output.slice(idx + 2) : output
     }
   }
 }
@@ -160,6 +178,9 @@ body
   position relative
   margin-left auto
   margin-right auto
+  overflow hidden
 .map
   height 100%
+input
+  appearance none
 </style>
