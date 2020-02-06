@@ -14,11 +14,11 @@ export default {
     return {
       legends: [
         {
-          color: '#f5a623',
+          color: '#269f84',
           text: '庫存＞50'
         },
         {
-          color: '#ba6d4e',
+          color: '#f5a623',
           text: '庫存＜50'
         },
         {
@@ -26,7 +26,7 @@ export default {
           text: '無庫存'
         },
         {
-          color: '#269f84',
+          color: '#fff',
           text: '無資料'
         }
       ]
