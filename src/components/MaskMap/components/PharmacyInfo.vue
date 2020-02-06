@@ -24,7 +24,7 @@ export default {
     infoData: {
       type: Object,
       default: () => ({
-        id: '',
+        // id: '',
         name: '',
         tel: '',
         add: '',
@@ -73,8 +73,10 @@ export default {
     color rgba(0, 0, 0, 0.66)
     padding-left 24px
     list-style-type disc
-    & li + li
-      margin-top 8px
+    & li
+      margin-bottom 8px
+    // & li + li
+    //   margin-top 8px
   &__update-time
     text-align right
     color rgba(0, 0, 0, 0.66)

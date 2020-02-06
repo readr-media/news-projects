@@ -131,7 +131,6 @@ export default {
         this.errors.push('district')
       }
       if (this.errors.length === 0) {
-        const geocoder = new google.maps.Geocoder()
         axios.get(`/project-api/election-board/google_map?address=${this.addressSelected}`)
           .then((res) => {
             if (res.data.status === 'OK' && res.data.results.length > 0) {
