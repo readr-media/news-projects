@@ -5,31 +5,14 @@
       <div class="step-block__text">
         <h3 v-text="contentText"></h3>
         <slot name="additionalText" />
-        <p
-          v-if="progress"
-          class="progress"
-        >
-          目前進度
-          <span class="highlight" v-text="progress"></span>
-        </p>
       </div>
       <img v-lazy="imgSrc" :alt="contentText">
     </div>
-    <template>
-      <a
-        v-if="link && linkText"
-        :href="link"
-        class="step-block__link"
-        target="_blank"
-        v-text="linkText"
-        @click="handleClick"
-      />
-      <p
-        v-else-if="!link && linkText"
-        class="step-block__link empty"
-        v-text="linkText"
-      />
-    </template>
+    <p
+      v-if="linkText"
+      class="step-block__link empty"
+      v-text="linkText"
+    />
     
   </div>
 </template>
@@ -46,13 +29,7 @@ export default {
     indexText: {
       type: String
     },
-    link: {
-      type: String
-    },
     linkText: {
-      type: String
-    },
-    progress: {
       type: String
     }
   },
@@ -96,22 +73,13 @@ export default {
     align-items center
     padding 15px 0
     margin-top 15px
-    color #fff
+    color #a04500
     font-size 1.25rem
     text-align center
     text-decoration none
-    background-color #e56300
+    background-color #f4c099
     border-radius 6px
-    &.empty
-      color #a04500
-      background-color #f4c099
 
-  .progress
-    color #9b9b9b
-    .highlight
-      margin-left .2em
-      color #f6b721
-      font-size 1.25rem
 @media (min-width: 768px)
   .step-block
     padding 20px
@@ -124,8 +92,5 @@ export default {
       img
         width 85px
         margin 0 auto
-    .progress
-      .highlight
-        font-size 1.75rem
 
 </style>
