@@ -9,7 +9,6 @@ export default {
       googleSheet: {
         statistics: [],
         typeNetizen: [],
-        transcript: [],
         verifyNetizen: [],
         verifiedDataItems: [],
         verifiedDataCount: [],

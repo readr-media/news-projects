@@ -13,6 +13,26 @@
           <img src="/proj-assets/fact-check/landing_mobile.png" alt="2020 總統候選人事實查核計畫">
         </picture>
       </div>
+      <div class="landing__links">
+        <a
+          href="https://docs.google.com/spreadsheets/d/1I5hIv8s5k5OfCI-ow5PkWNqCrEME6VW22avAU9UFVSg/edit#gid=0"
+          target="_blank"
+        >
+          開放資料
+        </a>
+        <a
+          href="https://www.readr.tw/post/2103"
+          target="_blank"
+        >
+          查核報告
+        </a>
+        <a
+          href="https://www.readr.tw/project/fact-check-debate-2020"
+          target="_blank"
+        >
+          總統辯論即時查核
+        </a>
+      </div>
     </section>
     <section class="section process">
       <h2>本專案透過四個步驟進行</h2>
@@ -22,31 +42,22 @@
           contentText="將候選人的發言影片轉換成逐字稿"
           imgSrc="/proj-assets/fact-check/step-01.png"
           indexText="步驟一"
-          :link="getTypeLink()"
-          :linkText="untypedTranscriptList.length > 0 ? '我要打逐字稿' : '目前無逐字稿需謄打'"
-          :progress="progress[1]"
-          @click="clickTypeLinkBtn"
+          linkText="協作已於 2020/01/11 結束"
         />
         <StepBlock
           class="process__step hidden-effect"
           contentText="驗證逐字稿是否正確"
           imgSrc="/proj-assets/fact-check/step-02.png"
           indexText="步驟二"
-          :disabled="untypedTranscriptList.length < 1"
-          :link="getVerifyLink()"
-          :linkText="unverifiedTranscriptList.length > 0 ? '我要驗證逐字稿' : '目前無逐字稿需驗證'"
-          :progress="progress[2]"
-          @click="clickVerifyLinkBtn"
+          linkText="協作已於 2020/01/11 結束"
         />
         <StepBlock
-          :progress="progress[3]"
           class="process__step hidden-effect"
           contentText="針對逐字稿內容進行標籤其屬性"
           imgSrc="/proj-assets/fact-check/step-03.png"
           indexText="步驟三"
         />
         <StepBlock
-          :progress="progress[4]"
           class="process__step hidden-effect"
           contentText="各家媒體針對需驗證的項目進行查證"
           imgSrc="/proj-assets/fact-check/step-04.png"
@@ -172,13 +183,6 @@
         <p>監製：簡信昌</p>
       </div>
     </section>
-    <div
-      v-show="showFixedInfo && untypedTranscriptList.length > 0"
-      class="info-fixed"
-    >
-      <a :href="getTypeLink()" target="_blank" @click="sendGaClickEvent('點擊「我願意盡一份力！ 點我開始編打逐字稿」')"><span>我願意盡一份力！</span>點我開始編打逐字稿</a>
-      <button @click="showFixedInfo = false"><img src="/proj-assets/fact-check/close.png" alt="關閉"></button>
-    </div>
   </div>
 </template>
 <script>
@@ -203,12 +207,6 @@ const fetchGoogleSheet = (store, { stateName, spreadsheetId, range, majorDimensi
     useRedis
   })
 
-const fetchTranscriptData = store => fetchGoogleSheet(store, {
-  stateName: 'transcript',
-  spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
-  range: '1.貼上影片與秒數!E:Q',
-  useRedis: false
-})
 
 const fetchVolunteerList = store => Promise.all([
   fetchGoogleSheet(store, {
@@ -227,12 +225,6 @@ const fetchVolunteerList = store => Promise.all([
     range: '顯示在網站的志工名單!C:C'
   })
 ])
-
-const fetchProgressData = store => fetchGoogleSheet(store, {
-  stateName: 'progress',
-  spreadsheetId: '18a90l_vmTxfbcwjSbEuovjDXvVsv-G4_zMsFcIkBDtE',
-  range: 'Dashboard!E:E'
-})
 
 const fetchStatisticsData = store => fetchGoogleSheet(store, {
   stateName: 'statistics',
@@ -300,27 +292,8 @@ export default {
     page () {
       return this.$store.state.FactCheck.page
     },
-    progress () {
-      const data = get(this.$store, 'state.FactCheck.googleSheet.progress') || []
-      return data.map(item => item[0]).filter(item => typeof item === 'string')
-    },
     statistics () {
       return get(this.$store, 'getters.FactCheck/statisticsFormated') || []
-    },
-    transcriptData () {
-      return get(this.$store, 'state.FactCheck.googleSheet.transcript') || []
-    },
-    untypedTranscriptList () {
-      return this.transcriptData
-        .filter(item => item[0] && item[1] && item[8] !== this.typeLinkClicked && item[9] < 1)
-        .sort((a, b) => a[9] - b[9])
-        .map(item => item[8])
-    },
-    unverifiedTranscriptList () {
-      return this.transcriptData
-        .filter(item => Array.isArray(item) && typeof item[12] === 'string')
-        .filter(item => item[12].match(/docs.google.com/) && item[12] !== this.verifyLinkClicked)
-        .map(item => item[12])
     },
     volunteerList () {
       return uniq((get(this.$store, 'state.FactCheck.googleSheet.volunteer') || [])
@@ -333,11 +306,8 @@ export default {
   },
   beforeMount () {
     this.registerStoreModule(true)
-    fetchTranscriptData(this.$store)
-      .then(() => this.detectToRedirect())
     
     fetchVolunteerList(this.$store)
-    fetchProgressData(this.$store)
     fetchStatisticsData(this.$store)
     this.$store.commit('FactCheck/SET_LOADING_STATUS', { status: true })
     fetchVerifiedData(this.$store)
@@ -373,16 +343,6 @@ export default {
     }
   },
   methods: {
-    clickTypeLinkBtn (e) {
-      this.typeLinkClicked = e.target.href
-      fetchTranscriptData(this.$store)
-      this.sendGaClickEvent('點擊「我要打逐字稿」')
-    },
-    clickVerifyLinkBtn (e) {
-      this.verifyLinkClicked = this.unverifiedTranscriptList[this.verifyLinkClickedIndex]
-      fetchTranscriptData(this.$store)
-      this.sendGaClickEvent('點擊「我要驗證逐字稿」')
-    },
     detectCurrent () {
       const sections = [ ...document.querySelectorAll('.section') ]
       sections.forEach((item, index) => {
@@ -405,31 +365,6 @@ export default {
           item.classList.add('active')
         }
       })
-    },
-    detectToRedirect () {
-      const params = this.$route.params.params
-      const isTypeUrl = params === 'transcript-type'
-      const isVerifyUrl = params === 'transcript-verify'
-      const canGoToTypePage = this.untypedTranscriptList.length > 0
-      const canGoToVerifyPage = this.unverifiedTranscriptList.length > 0
-      if (isTypeUrl && canGoToTypePage) {
-        window.location.replace(this.getTypeLink())
-      } else if (isTypeUrl && canGoToVerifyPage) {
-        window.location.replace(this.getVerifyLink())
-      } else if (isVerifyUrl && canGoToVerifyPage) {
-        window.location.replace(this.getVerifyLink())
-      } else if (isVerifyUrl && canGoToTypePage) {
-        window.location.replace(this.getTypeLink())
-      }
-    },
-    getTypeLink () {
-      const random = Math.floor(Math.random() * this.untypedTranscriptList.length)
-      return this.untypedTranscriptList[random]
-    },
-    getVerifyLink () {
-      const random = Math.floor(Math.random() * this.unverifiedTranscriptList.length)
-      this.verifyLinkClickedIndex = random
-      return this.unverifiedTranscriptList[random]
     },
     handleScroll: throttle(function () {
       this.detectCurrent()
@@ -500,17 +435,14 @@ export default {
     cursor pointer
   .landing
     position relative
-    display flex
-    flex-direction column
-    min-height 100vh
     padding 0 !important
     text-align center
     overflow hidden
     &__title
       position absolute
-      top 45%
+      top 60px
       left 50%
-      transform translate(-50%, -100%)
+      transform translateX(-50%)
       width 255px
       z-index 1
       h1
@@ -528,19 +460,28 @@ export default {
         br
           display none
     &__image
-      position absolute
-      left 0
-      bottom 0
-      width 100%
       img, picture
         width 100%
       picture
         display block
+        font-size 0
+    &__links
+      margin-top 20px
+      > a
+        display block
+        width 95%
+        margin 0 auto
+        padding 15px 0
+        font-size 1.25rem
+        background-color #e56300
+        border-radius 6px
+        & + a
+          margin-top 20px
 
   .section
     padding 20px 0 75px
   .process
-    padding-top 40px
+    padding-top 70px
     > p
       max-width 95%
       margin 20px auto 0
@@ -607,34 +548,6 @@ export default {
           object-position center center
           object-fit contain
 
-  .info-fixed
-    display flex
-    justify-content center
-    align-content center
-    position fixed
-    left 0
-    bottom 0
-    z-index 999
-    width 100%
-    height 55px
-    background-color #e56300
-    a
-      display flex
-      align-items center
-      padding 0 1em
-      font-size 1.25rem
-      span
-        display none
-    button
-      position absolute
-      top 50%
-      right 10px
-      transform translateY(-50%)
-      padding 10px
-      font-size 0
-      img
-        width 15px
-        height 15px
   .credit
     text-align center
     background-color #010a2b
@@ -666,7 +579,7 @@ export default {
   .fact-check
     .landing
       &__title
-        top 45%
+        top 30%
         width 60%
         transform translate(-50%, -50%)
         h1
@@ -678,6 +591,21 @@ export default {
           margin-top 30px
           font-size 1.625rem
           text-align center
+      &__image
+        position relative
+        height 80vh
+        picture
+          position absolute
+          bottom 0
+      &__links
+        display flex
+        padding 0 2.5%
+        > a
+          flex 1
+          width auto
+          margin 0 10px
+          & + a
+            margin-top 0
     .process
       > p
         max-width 60%
@@ -726,14 +654,6 @@ export default {
           display flex
           flex-wrap wrap
           justify-content center
-    .info-fixed
-      a
-        span
-          display inline
-      button
-        img
-          width 20px
-          height 20px
 
 @media (min-width: 768px) and (orientation : portrait)
   .fact-check
@@ -766,7 +686,25 @@ export default {
       font-size 3rem
     h3
       font-size 1.25rem
-        
+
+    .landing
+      &__image
+        height 100vh
+      &__links
+        justify-content center
+        position absolute
+        left 50%
+        bottom 50px
+        width 100%
+        margin 0
+        padding 0
+        transform translateX(-50%)
+        > a
+          flex none
+          width 260px
+          margin 0 2%
+          white-space nowrap
+
     .process
       display flex
       flex-direction column
