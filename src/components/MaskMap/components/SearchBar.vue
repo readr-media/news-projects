@@ -2,7 +2,7 @@
   <section class="search-bar">
     <div class="search-bar__search">
       <div :class="[ 'search-bar__address', { focus: isFocus } ]">
-        <input type="text" :placeholder=" isFocus ? '' : '輸入住址搜尋附近藥局⋯'" v-model="address" @focus="isFocus = true" @blur="isFocus = false">
+        <input id="address-input" type="text" :placeholder=" isFocus ? '' : '輸入地址搜尋附近藥局⋯'" v-model="address" @focus="isFocus = true" @blur="isFocus = false">
         <svg class="position" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg" @click="$parent.getCurrentPosition"><path d="m23.6000156 11.6000156h-.8000156c-.205875-5.65631247-4.7437031-10.1941406-10.4000156-10.4000156v-.80001562c0-.22092188-.1790625-.39998438-.3999844-.39998438s-.3999844.1790625-.3999844.39998438v.80001562c-5.65631247.205875-10.1941406 4.74370313-10.4000156 10.4000156h-.80001562c-.22092188 0-.39998438.1790625-.39998438.3999844s.1790625.3999844.39998438.3999844h.80001562c.205875 5.6563125 4.74370313 10.1941406 10.4000156 10.4000156v.8000156c0 .2209219.1790625.3999844.3999844.3999844s.3999844-.1790625.3999844-.3999844v-.8000156c5.6562656-.205875 10.1940937-4.7437031 10.4000156-10.4000156h.8000156c.2209219 0 .3999844-.1790625.3999844-.3999844s-.1790625-.3999844-.3999844-.3999844zm-12.04446 8.8444288c-4.32617486-.2114307-7.7865132-3.671711-8.00000004-8h4.81602443c.18792293 1.6752726 1.50949248 2.9975023 3.18397561 3.1855661zm0-5.3333333c-1.3810797-.2008037-2.46586302-1.285587-2.66666671-2.6666667h2.66666671zm0-3.5555555h-2.66666671c.20080369-1.3810797 1.28558701-2.46586302 2.66666671-2.66666671zm0-3.18397561c-1.67527259.18792293-2.99750232 1.50949248-3.18556615 3.18397561h-4.81443389c.21143075-4.32617486 3.67171108-7.7865132 8.00000004-8.00000004zm.8888888-4.81602443c4.3262218.21143075 7.7865132 3.67171108 8 8.00000004h-4.8160244c-.1879229-1.67527259-1.5094925-2.99750232-3.1839756-3.18556615zm0 5.33333333c1.3810797.20080369 2.465863 1.28558701 2.6666667 2.66666671h-2.6666667zm0 3.55555551h2.6666667c-.2008037 1.3810797-1.285587 2.465863-2.6666667 2.6666667zm0 3.1839756c1.6752726-.1879229 2.9975023-1.5094925 3.1855661-3.1839756h4.8144339c-.2114307 4.3262218-3.671711 7.7865132-8 8z"/></svg>
       </div>
       <button type="button" @click="search">搜尋</button>
@@ -29,7 +29,7 @@
 <script>
 import { get } from 'axios'
 import { READR_SITE_URL } from 'src/constants'
-const { GOOGLE_API_KEY } = require('../../../../api/config')
+import { GOOGLE_API_KEY_ELECTION_BOARD } from '../../../../api/config'
 
 export default {
   name: 'SearchBar',
@@ -49,9 +49,9 @@ export default {
   methods: {
     search () {
       if (!this.address) { return }
-      get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.address}&key=${GOOGLE_API_KEY}&language=zh-TW`).then((res) => {
+      get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.address}&key=${GOOGLE_API_KEY_ELECTION_BOARD}&language=zh-TW`).then((res) => {
         const { status, results } = res.data
-        if (status === 'OK' && results.length > 0) {
+        if (status === 'OK') {
           const { map } = this.$parent
           const { location } = results[ 0 ].geometry
           map.setCenter(location)
@@ -61,7 +61,13 @@ export default {
             icon: '/proj-assets/maskmap/img/man.svg'
           })
         } else {
-          console.log(status)
+          this.$emit('popupInfo', {
+            status: 'search error',
+            question: '抱歉，系統找不到這個地址',
+            optionA: '輸入新的地址',
+            optionB: '取得現在位置'
+          })
+          console.error(status)
         }
       })
     },
@@ -106,6 +112,7 @@ export default {
       width 100%
       outline 0
       background-color transparent
+      color rgba(0, 0, 0, 0.87)
       &::-webkit-input-placeholder
         font-size 1.5rem
         color rgba(0, 0, 0, 0.87)
@@ -123,6 +130,7 @@ export default {
     align-items center
     outline 0
     cursor pointer
+    color rgba(0, 0, 0, 0.87)
     &:active
       background-color #d98c0f
   &__share-icon

@@ -1,15 +1,15 @@
 <template>
   <section class="pharmacy-info" v-show="isShow">
-    <h2>{{ infoData.name }}</h2>
-    <p>{{ infoData.tel }}</p>
-    <p>{{ infoData.add }}</p>
+    <h2>{{ infoData.name || dataStatus }}</h2>
+    <p>{{ infoData.tel || dataStatus }}</p>
+    <p>{{ infoData.add || dataStatus }}</p>
     <div class="pharmacy-info__divider" />
     <ul>
-      <li>成人口罩數量：{{ infoData.adult }}</li>
-      <li>兒童口罩數量：{{ infoData.child }}</li>
+      <li>成人口罩數量：{{ infoData.adult || dataStatus }}</li>
+      <li>兒童口罩數量：{{ infoData.child || dataStatus }}</li>
     </ul>
-    <p class="pharmacy-info__update-time">{{ infoData.update }} 更新</p>
-    <svg @click="$emit('close')" class="pharmacy-info__close" height="14" viewBox="0 0 14 14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m310 13.4-1.4-1.4-5.6 5.6-5.6-5.6-1.4 1.4 5.6 5.6-5.6 5.6 1.4 1.4 5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z" fill="rgba(0, 0, 0, 0.87)" fill-rule="evenodd" transform="translate(-296 -12)"/></svg>
+    <p class="pharmacy-info__update-time">{{ infoData.update || dataStatus }} 更新</p>
+    <svg @click="$emit('closeInfo')" class="pharmacy-info__close" height="14" viewBox="0 0 14 14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m310 13.4-1.4-1.4-5.6 5.6-5.6-5.6-1.4 1.4 5.6 5.6-5.6 5.6 1.4 1.4 5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z" fill="rgba(0, 0, 0, 0.87)" fill-rule="evenodd" transform="translate(-296 -12)"/></svg>
   </section>
 </template>
 
@@ -33,6 +33,17 @@ export default {
         update: ''
       })
     }
+  },
+  computed: {
+    dataStatus () {
+      const { status } = this.infoData
+      switch (status) {
+        case 'N':
+          return '無資料'
+        default:
+          return '取得資料中⋯'
+      }
+    }
   }
 }
 </script>
@@ -48,7 +59,6 @@ export default {
   padding 16px 10px 58px 10px
   font-size 1.5rem
   line-height normal
-  // color rgba(0, 0, 0, 0.87)
   & h2
     font-size 2.1rem
     font-weight 700
