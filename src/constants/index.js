@@ -86,7 +86,8 @@ export const PROJECTS_BELONG_MM = [
 // include project url path name which need google map
 export const PROJECTS_NEED_GOOGLE_MAP = [
   'eastern-district-of-taipei',
-  'farmhouse'
+  'farmhouse',
+  'maskmap'
 ]
 
 // include project url path name which need google reCAPTCHA

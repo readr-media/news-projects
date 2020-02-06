@@ -29,7 +29,7 @@
 <script>
 import { get } from 'axios'
 import { READR_SITE_URL } from 'src/constants'
-import { GOOGLE_API_KEY_ELECTION_BOARD } from '../../../../api/config'
+// import { GOOGLE_API_KEY_ELECTION_BOARD } from '../../../../api/config'
 
 export default {
   name: 'SearchBar',
@@ -49,7 +49,7 @@ export default {
   methods: {
     search () {
       if (!this.address) { return }
-      get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.address}&key=${GOOGLE_API_KEY_ELECTION_BOARD}&language=zh-TW`).then((res) => {
+      get(`/project-api/election-board/google_map?address=${this.address}`).then((res) => {
         const { status, results } = res.data
         if (status === 'OK') {
           const { map } = this.$parent
@@ -70,6 +70,27 @@ export default {
           console.error(status)
         }
       })
+      // get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.address}&key=${GOOGLE_API_KEY_ELECTION_BOARD}&language=zh-TW`).then((res) => {
+      //   const { status, results } = res.data
+      //   if (status === 'OK') {
+      //     const { map } = this.$parent
+      //     const { location } = results[ 0 ].geometry
+      //     map.setCenter(location)
+      //     new google.maps.Marker({
+      //       map,
+      //       position: location,
+      //       icon: '/proj-assets/maskmap/img/man.svg'
+      //     })
+      //   } else {
+      //     this.$emit('popupInfo', {
+      //       status: 'search error',
+      //       question: '抱歉，系統找不到這個地址',
+      //       optionA: '輸入新的地址',
+      //       optionB: '取得現在位置'
+      //     })
+      //     console.error(status)
+      //   }
+      // })
     },
     toggleShare () {
       this.isShare = !this.isShare
