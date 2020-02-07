@@ -102,7 +102,7 @@ export default {
               break
           }
           return {
-            icon: `/proj-assets/maskmap/img/location-${suffix}.svg`
+            icon: `/proj-assets/maskmap/img/location-${suffix}-1.svg`
           }
         })
       })
