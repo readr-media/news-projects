@@ -14,7 +14,7 @@ import {
   PROJECTS_NEED_FB_SDK,
   PROJECTS_NEED_FB_QUOTE,
   PROJECTS_NEED_TYPEKIT,
-  SCRIPT_GOOGLE_MAP,
+  SCRIPT_GOOGLE_MAP_REQUIRED,
   SCRIPT_GOOGLE_RECAPTCHA,
   SCRIPT_TYPEKIT
 } from '../constants'
@@ -37,6 +37,21 @@ function getMetaInfo (vm) {
       ? metaInfo.call(vm)
       : metaInfo
   }
+}
+
+function getGoogleMapScript (project) {
+  const { required, drawing, geometry, places, visualization } = PROJECTS_NEED_GOOGLE_MAP
+  if (required.includes(project)) {
+    const libraries = [
+      drawing.includes(project) ? 'drawing' : '',
+      geometry.includes(project) ? 'geometry' : '',
+      places.includes(project) ? 'places' : '',
+      visualization.includes(project) ? 'visualization' : ''
+    ]
+    const librariesReal = libraries.filter((library) => library).join(',')
+    return SCRIPT_GOOGLE_MAP_REQUIRED.replace('&', (librariesReal ? `&libraries=${librariesReal}` : ''))
+  }
+  return ''
 }
 
 const serverMetaInfoMixin = {
@@ -85,7 +100,7 @@ const serverMetaInfoMixin = {
       this.$ssrContext.fbPageUrl = fbPageUrl
       this.$ssrContext.fbSdk = ((PROJECTS_NEED_FB_QUOTE.includes(project) || PROJECTS_NEED_FB_SDK.includes(project)) ? fbSdk : '')
 
-      this.$ssrContext.scriptGoogleMap = PROJECTS_NEED_GOOGLE_MAP.includes(project) ? SCRIPT_GOOGLE_MAP : ''
+      this.$ssrContext.scriptGoogleMap = getGoogleMapScript(project)
       this.$ssrContext.scriptGoogleReCaptcha = PROJECTS_NEED_GOOGLE_RECAPTCHA.includes(project) ? SCRIPT_GOOGLE_RECAPTCHA : ''
       this.$ssrContext.scriptTypeKit = PROJECTS_NEED_TYPEKIT.includes(project) ? SCRIPT_TYPEKIT : ''
       this.$ssrContext.customScript = customScript

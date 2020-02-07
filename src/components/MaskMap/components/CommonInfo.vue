@@ -76,7 +76,7 @@ export default {
     & > *
       flex 0 0 auto
   &__long
-    padding 16px 10px 23px 10px
+    padding 16px 10px
   & h2
     font-size 2.1rem
     font-weight 700
@@ -97,12 +97,10 @@ export default {
       margin-top 8px
   &__close
     position absolute
-    top 0
-    right 0
-    padding 10px 10px 6px 6px
+    top 2px
+    right 2px
+    padding 8px
     box-sizing content-box
-    // top 10px
-    // right 10px
     cursor pointer
     user-select none
 </style>
