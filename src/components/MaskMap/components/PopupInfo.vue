@@ -68,6 +68,7 @@ export default {
   font-size 1.7rem
   z-index 99
   font-weight 700
+  background-color rgba(#000, 0.75)
   & > div
     width 100%
   &__question

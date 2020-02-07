@@ -44,7 +44,7 @@ export default {
   top 0
   left 0
   z-index 199
-  padding 30px 10px
+  padding 30px 15px
   font-size 1.5rem
   color rgba(255, 255, 255, 0.87)
   line-height 2
@@ -63,7 +63,7 @@ export default {
   &__credit
     font-size 1.3rem
     text-align center
-    margin-bottom 14px
+    margin-bottom 16px
   & button
     border-radius 4px
     background-color #f5a623
