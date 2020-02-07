@@ -1,6 +1,7 @@
 <template>
   <section class="popup-info" v-show="isShow">
-    <div>
+    <svg v-if="isLoading" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50"><path fill="#fff" d="M25.25 6.46c-10.318 0-18.683 8.365-18.683 18.683h4.068a14.62 14.62 0 0 1 14.615-14.615V6.46z"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"/></path></svg>
+    <div v-else>
       <p class="popup-info__question">{{ infoData.question }}</p>
       <div class="popup-info__options">
         <button type="button" @click="chooseOptionA">{{ infoData.optionA }}</button>
@@ -21,33 +22,42 @@ export default {
     infoData: {
       type: Object,
       required: true
+    },
+    isLoading: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     chooseOptionA () {
-      this.closeInfo()
       switch (this.infoData.status) {
         case 'opening':
           this.$parent.getCurrentPosition()
           break
         case 'search error':
-          document.getElementById('address-input').focus()
+          this.focusAddressInput()
+          break
+        case 'position error':
+          this.focusAddressInput()
           break
       }
     },
     chooseOptionB () {
-      this.closeInfo()
       switch (this.infoData.status) {
         case 'opening':
-          document.getElementById('address-input').focus()
+          this.focusAddressInput()
           break
         case 'search error':
           this.$parent.getCurrentPosition()
           break
+        case 'position error':
+          this.$parent.getCurrentPosition()
+          break
       }
     },
-    closeInfo () {
+    focusAddressInput () {
       this.$emit('closeInfo')
+      document.getElementById('address-input').focus()
     }
   }
 }

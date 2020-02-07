@@ -84,11 +84,13 @@ export const PROJECTS_BELONG_MM = [
 ]
 
 // include project url path name which need google map
-export const PROJECTS_NEED_GOOGLE_MAP = [
-  'eastern-district-of-taipei',
-  'farmhouse',
-  'maskmap'
-]
+export const PROJECTS_NEED_GOOGLE_MAP = {
+  required: ['eastern-district-of-taipei', 'farmhouse', 'maskmap'],
+  drawing: [ 'eastern-district-of-taipei', 'farmhouse' ],
+  geometry: [],
+  places: [],
+  visualization: [ 'eastern-district-of-taipei', 'farmhouse' ]
+}
 
 // include project url path name which need google reCAPTCHA
 export const PROJECTS_NEED_GOOGLE_RECAPTCHA = [
@@ -146,7 +148,7 @@ export const PROJECTS_NOT_NEED_APP_HEADER = [
   'maskmap'
 ]
 
-export const SCRIPT_GOOGLE_MAP = `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=drawing,visualization" async defer></script>`
+export const SCRIPT_GOOGLE_MAP_REQUIRED = `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&" async defer></script>`
 
 export const SCRIPT_GOOGLE_RECAPTCHA = `<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=zh-TW" async defer></script>`
 
