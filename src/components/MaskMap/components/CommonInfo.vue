@@ -9,6 +9,7 @@
         <li>星期二、四、六：身分證／居留證號尾數為雙數者可購買</li>
         <li>星期日皆可購買</li>
         <li>購買後 7 日才可再次購買</li>
+        <li>部分藥局為方便民眾購買口罩，採發放號碼牌方式，而目前地圖無法顯示已發送號碼牌數量。若看到剩餘數量，可先電洽藥局</li>
       </ul>
       <svg @click="toggleInfo" class="common-info__close" height="14" viewBox="0 0 14 14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m310 13.4-1.4-1.4-5.6 5.6-5.6-5.6-1.4 1.4 5.6 5.6-5.6 5.6 1.4 1.4 5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z" fill="#fff" fill-rule="evenodd" transform="translate(-296 -12)"/></svg>
     </div>
