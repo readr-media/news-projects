@@ -1,6 +1,6 @@
 <template>
   <div class="mask-map" :style="{ height: `${this.$store.state.viewport[ 1 ]}px` }">
-    <div class="map" ref="map" @touchstart="blurAddressInput" />
+    <div class="map" ref="map" @touchstart="handleTochstartMap" />
     <IntroInfo />
     <SearchBar @showPopupInfo="showPopupInfo" ref="searchBar" />
     <LegendField />
@@ -185,7 +185,8 @@ export default {
       const idx = output.indexOf('台灣')
       return idx > -1 ? output.slice(idx + 2) : output
     },
-    blurAddressInput () {
+    handleTochstartMap () {
+      this.$refs.searchBar.closeShare()
       document.getElementById('address-input').blur()
     }
   }
