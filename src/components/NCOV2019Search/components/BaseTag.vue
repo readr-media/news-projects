@@ -1,0 +1,37 @@
+<template>
+  <router-link
+    class="tag"
+    :to="to"
+    append
+    v-text="text"
+  />
+</template>
+
+<script>
+export default {
+  props: {
+    to: {
+      type: String,
+      required: true
+    },
+    text: {
+      type: String,
+      required: true
+    }
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+.tag
+  border-radius 22px
+  background-color #caebd3
+  font-size 15px
+  color rgba(0, 0, 0, 0.87)
+  text-decoration none
+  padding 5px 13px
+  transition background-color .1s ease-out, color .1s ease-out
+  &:hover, &.router-link-active
+    background-color #429057
+    color white
+</style>
