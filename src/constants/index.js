@@ -145,7 +145,8 @@ export const PROJECTS_NOT_NEED_APP_HEADER = [
   'fake-news',
   'food-delivery',
   'election-2020',
-  'maskmap'
+  'maskmap',
+  'ncov2019search'
 ]
 
 export const SCRIPT_GOOGLE_MAP_REQUIRED = `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&" async defer></script>`
