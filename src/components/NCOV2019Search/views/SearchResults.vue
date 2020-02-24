@@ -1,5 +1,9 @@
 <template>
-  <section class="search-results">
+  <section
+    class="search-results"
+    v-infinite-scroll="loadmore"
+    infinite-scroll-disabled="shouldDisableLoadmore"
+  >
     <div class="search-results-wrapper">
       <main class="search-results__main main">
         <BaseInputSearch
@@ -17,9 +21,9 @@
             v-for="(item, i) in articleItems"
             :key="i"
             :title="getArticleTitle(item)"
-            :articleContent="getArticleContent(item)"
-            :relatedLinkText="getArticleLinkText(item)"
-            :relatedLinkHref="getArticleLinkHref(item)"
+            :article-content="getArticleContent(item)"
+            :related-link-text="getArticleLinkText(item)"
+            :related-link-href="getArticleLinkHref(item)"
             :keywords="getArticleKeywords(item)"
             :date="getArticleDate(item)"
           />
@@ -65,7 +69,14 @@ import BaseTag from '../components/BaseTag.vue'
 import BaseArticle from '../components/BaseArticle.vue'
 
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('NCOV2019Search')
+const { mapState, mapActions } = createNamespacedHelpers('NCOV2019Search')
+import { createPayload } from '../utils'
+
+import Vue from 'vue'
+if (process.browser) {
+  const infiniteScroll = require('vue-infinite-scroll')
+  Vue.use(infiniteScroll)
+}
 
 export default {
   props: {
@@ -83,7 +94,10 @@ export default {
   data() {
     return {
       titleDefaultSearchResults: '其他人也問了',
-      titleDiscuss: '找不到你想問的問題嗎？歡迎提問！'
+      titleDiscuss: '找不到你想問的問題嗎？歡迎提問！',
+      searchItemsPage: 0,
+      searchItemsPerPage: 10,
+      shouldDisableLoadmore: false
     }
   },
   computed: {
@@ -129,6 +143,25 @@ export default {
     },
     getArticleDate(article) {
       return _.get(article, [ '_source', 'updated_at' ], '')
+    },
+    
+    ...mapActions(['SEARCH_ARTICLE']),
+    async loadmore() {
+      this.searchItemsPage += 1
+      this.shouldDisableLoadmore = true
+
+      const currentFrom = this.searchItemsPerPage * this.searchItemsPage
+      await this.SEARCH_ARTICLE({
+        payload: createPayload({
+          query: this.searchResultInput,
+          from: currentFrom
+        }),
+        push: true
+      })
+
+      if (currentFrom + this.searchItemsPerPage < this.total) {
+        this.shouldDisableLoadmore = false
+      }
     }
   }
 }

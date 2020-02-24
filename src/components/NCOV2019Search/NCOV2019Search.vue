@@ -69,12 +69,16 @@ export default {
   },
   watch: {
     searchWord() {
-      this.SEARCH_ARTICLE(this.searchPayload)
+      this.SEARCH_ARTICLE({
+        payload: this.searchPayload
+      })
     }
   },
   async serverPrefetch () {
     this.registerStoreModule()
-    await this.SEARCH_ARTICLE(this.searchPayload)
+    await this.SEARCH_ARTICLE({
+      payload: this.searchPayload
+    })
   },
   beforeMount () {
     this.registerStoreModule(true)

@@ -90,6 +90,7 @@
     "vue-firestore": "^0.3.22",
     "vue-highcharts": "^0.0.10",
     "vue-i18n": "^8.8.2",
+    "vue-infinite-scroll": "^2.0.2",
     "vue-lazyload": "1.2.6",
     "vue-masonry-css": "^1.0.3",
     "vue-no-ssr": "^1.1.1",
