@@ -29,6 +29,8 @@ const { mapActions } = createNamespacedHelpers('NCOV2019Search')
 
 import { createPayload } from './utils'
 
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+
 export default {
   metaInfo () {
     return {
@@ -69,15 +71,23 @@ export default {
   },
   watch: {
     searchWord() {
-      this.SEARCH_ARTICLE(this.searchPayload)
+      this.SEARCH_ARTICLE({
+        payload: this.searchPayload
+      })
+    },
+    hideSearch() {
+      this.handleBodyScroll()
     }
   },
   async serverPrefetch () {
     this.registerStoreModule()
-    await this.SEARCH_ARTICLE(this.searchPayload)
+    await this.SEARCH_ARTICLE({
+      payload: this.searchPayload
+    })
   },
   beforeMount () {
     this.registerStoreModule(true)
+    this.handleBodyScroll()
   },
   destroyed() {
     this.$store.unregisterModule('NCOV2019Search')
@@ -86,7 +96,15 @@ export default {
     registerStoreModule (shouldPreserveState = false) {
       this.$store.registerModule('NCOV2019Search', storeModule, { preserveState: shouldPreserveState })
     },
-    ...mapActions(['SEARCH_ARTICLE'])
+    ...mapActions(['SEARCH_ARTICLE']),
+
+    handleBodyScroll() {
+      if (!this.hideSearch) {
+        disableBodyScroll()
+      } else {
+        enableBodyScroll()
+      }
+    }
   }
 }
 </script>

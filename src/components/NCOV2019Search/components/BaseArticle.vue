@@ -176,6 +176,7 @@ export default {
     font-size 21px
     font-weight 600
     color currentColor
+    line-height 1.6
   &__related-link
     margin 18px 0 0 0
   &__meta
@@ -186,6 +187,9 @@ export default {
   color rgba(0, 0, 0, 0.87)
   line-height 1.87
   margin 18px 0 0 0
+  & >>> *
+    word-wrap break-word
+    word-break break-all
   & >>> p
     margin 0
   & >>> p + p
@@ -219,10 +223,16 @@ export default {
 .related-link
   color currentColor
   font-size 13px
+  display flex
+  line-height 1.69
+  &__wording
+    min-width max-content
   &__link
     color #429057
     font-weight 600
     text-decoration none
+    word-wrap break-word
+    word-break break-all
     &:hover
       text-decoration underline
     &--visited
@@ -235,6 +245,9 @@ export default {
   align-items flex-end
   &--flex-end
     justify-content flex-end
+  &__keywords
+    flex 1 1 auto
+    width 0
   &__date
     font-size 13px
     color rgba(0, 0, 0, 0.66)
@@ -246,4 +259,29 @@ export default {
   margin -5px 23px 0 -5px
   &__keyword
     margin 5px
+
+@media (max-width 768px)
+  .article
+    padding 20px
+    &__title
+      font-size 20px
+    &__meta
+      margin 18px 0 0 0
+
+  .article-content
+    &__read-more
+      margin 18px 0 0 0
+
+  .meta
+    flex-direction column-reverse
+    justify-content flex-start
+    align-items flex-start
+    &__keywords
+      flex 1 1 auto
+      width 100%
+    &--flex-end
+      justify-content flex-start
+
+  .keywords
+    margin 13px 0 0 -5px
 </style>
