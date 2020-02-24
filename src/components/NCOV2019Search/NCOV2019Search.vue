@@ -108,12 +108,12 @@ export default {
     left 0
     z-index 2
   &__search-results
-    opacity 0
-    animation-name fadeIn
-    animation-fill-mode forwards
-    animation-delay 0s
+    opacity 1
     z-index 1
     &--fade-in // prevent user see search results page first
+      opacity 0
+      animation-name fadeIn
+      animation-fill-mode forwards
       animation-delay 1s
 
 .fade-enter-active, .fade-leave-active {
