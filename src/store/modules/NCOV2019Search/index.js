@@ -24,7 +24,7 @@ export default {
     async SEARCH_ARTICLE({ commit }, payload) {
       commit('SET_IS_SEARCHING', true)
       const res = await axios.post(
-        `${protocal}//${host}/readr-search`,
+        `${protocal}//${host}/project-api/readr-search`,
         payload
       )
       commit('SET_IS_SEARCHING', false)
