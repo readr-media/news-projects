@@ -31,6 +31,10 @@ export default {
   text-decoration none
   padding 5px 13px
   transition background-color .1s ease-out, color .1s ease-out
+  max-width 100%
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
   &:hover, &.router-link-active
     background-color #429057
     color white

@@ -206,4 +206,28 @@ export default {
   padding 15px
   &__result
     margin 5px
+
+@media (max-width 768px)
+  .search-results
+    padding 10px 10px
+
+  .search-results-wrapper
+    max-width auto
+    margin 0
+
+  .main
+    width 100vw
+    &__meta
+      line-height 2
+      margin 24px 0 0 0
+    &__articles
+      margin 24px 0 0 0
+
+  .articles
+    &__article
+      & + &
+        margin 10px 0 0 0
+
+  .aside
+    display none
 </style>
