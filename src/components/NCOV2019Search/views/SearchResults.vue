@@ -57,6 +57,34 @@
         </BaseAsideSectionWrapper>
       </aside>
     </div>
+    <button
+      class="search-results__lightbox-toggler-mobile"
+      v-text="wordingLightboxTogglerMobile"
+      @click="handleLightboxToggle"
+    />
+    <AppLightboxWrapper
+      class="app-lightbox"
+      :showLightbox.sync="showLightbox"
+    >
+      <section class="lightbox-content">
+        <header class="lightbox-content__header">
+          <h1
+            class="lightbox-content__title"
+            v-text="titleDiscuss"
+          />
+          <div
+            class="lightbox-content__close-button"
+            @click="handleCloseLightbox"
+          />
+        </header>
+        <iframe
+          src="https://meet.ps/covid19"
+          style="width: 100%; height: calc(100vh - 44px);"
+          frameborder="0"
+          scrolling="auto"
+        />
+      </section>
+    </AppLightboxWrapper>
   </section>
 </template>
 
@@ -67,6 +95,7 @@ import BaseInputSearch from '../components/BaseInputSearch.vue'
 import BaseAsideSectionWrapper from '../components/BaseAsideSectionWrapper.vue'
 import BaseTag from '../components/BaseTag.vue'
 import BaseArticle from '../components/BaseArticle.vue'
+import AppLightboxWrapper from '../components/AppLightboxWrapper.vue'
 
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('NCOV2019Search')
@@ -89,15 +118,18 @@ export default {
     BaseInputSearch,
     BaseAsideSectionWrapper,
     BaseTag,
-    BaseArticle
+    BaseArticle,
+    AppLightboxWrapper
   },
   data() {
     return {
       titleDefaultSearchResults: '其他人也問了',
       titleDiscuss: '找不到你想問的問題嗎？歡迎提問！',
+      wordingLightboxTogglerMobile: 'Ask',
       searchItemsPage: 0,
       searchItemsPerPage: 10,
-      shouldDisableLoadmore: false
+      shouldDisableLoadmore: false,
+      showLightbox: false
     }
   },
   computed: {
@@ -162,6 +194,13 @@ export default {
       if (currentFrom + this.searchItemsPerPage < this.total) {
         this.shouldDisableLoadmore = false
       }
+    },
+
+    handleLightboxToggle() {
+      this.showLightbox = !this.showLightbox
+    },
+    handleCloseLightbox() {
+      this.showLightbox = false
     }
   }
 }
@@ -172,6 +211,8 @@ export default {
   background-color rgba(216, 216, 216, 0.5)
   min-height 100vh
   padding 40px 0
+  &__lightbox-toggler-mobile
+    display none
 
 .search-results-wrapper
   max-width 1100px
@@ -207,9 +248,28 @@ export default {
   &__result
     margin 5px
 
+.app-lightbox
+  visibility hidden
+
 @media (max-width 768px)
   .search-results
     padding 10px 10px
+    &__lightbox-toggler-mobile
+      display flex
+      justify-content center
+      align-items center
+      position fixed
+      right 10px
+      bottom 10px
+      width: 40px;
+      height: 40px;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+      background-color: #429057;
+      border-radius 100%
+      color white
+      font-size 13px
+      font-weight 600
+      border none
 
   .search-results-wrapper
     max-width auto
@@ -230,4 +290,36 @@ export default {
 
   .aside
     display none
+
+  .app-lightbox
+    visibility visible
+
+  .lightbox-content
+    background-color #429057
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.15)
+    &__header
+      height 44px
+      font-size: 15px;
+      font-weight: 600;
+      color white
+      padding 0 20px
+      display flex
+      justify-content space-between
+      align-items center
+    &__title
+      margin 0
+      font-size inherit
+    &__close-button
+      cursor pointer
+      -webkit-tap-highlight-color transparent
+      z-index 10000
+      width 12px
+      height 12px
+      &:after
+        content ''
+        display block
+        width 100%
+        height 100%
+        clip-path polygon(10% 0, 0 10%, 39% 49%, 0 89%, 9% 100%, 50% 59%, 92% 100%, 100% 92%, 60% 49%, 100% 9%, 90% 0, 50% 38%)
+        background-color white
 </style>
