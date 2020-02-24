@@ -168,6 +168,7 @@ app.get('*', isProd ? render : (req, res, next) => {
 })
 
 app.use('/project-api', require('./api/index'))
+app.use('/readr-search', require('./api/middle/readr-search'))
 
 const port = process.env.PORT || 8080
 const server = app.listen(port, () => {

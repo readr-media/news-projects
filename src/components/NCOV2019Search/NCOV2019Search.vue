@@ -23,6 +23,12 @@ import _ from 'lodash'
 import Search from './views/Search.vue'
 import SearchResults from './views/SearchResults.vue'
 
+import storeModule from 'src/store/modules/NCOV2019Search'
+import { createNamespacedHelpers } from 'vuex'
+const { mapActions } = createNamespacedHelpers('NCOV2019Search')
+
+import { createPayload } from './utils'
+
 export default {
   metaInfo () {
     return {
@@ -49,9 +55,38 @@ export default {
     }
   },
   computed: {
+    searchWord() {
+      return _.get(this.$route, [ 'params', 'params' ], '')
+    },
     hideSearch() {
-      return _.get(this.$route, [ 'params', 'params' ], '') !== ''
+      return this.searchWord !== ''
+    },
+    searchPayload() {
+      return createPayload({
+        query: this.searchWord
+      })
     }
+  },
+  watch: {
+    searchWord() {
+      this.SEARCH_ARTICLE(this.searchPayload)
+    }
+  },
+  async serverPrefetch () {
+    this.registerStoreModule()
+    await this.SEARCH_ARTICLE(this.searchPayload)
+  },
+  beforeMount () {
+    this.registerStoreModule(true)
+  },
+  destroyed() {
+    this.$store.unregisterModule('NCOV2019Search')
+  },
+  methods: {
+    registerStoreModule (shouldPreserveState = false) {
+      this.$store.registerModule('NCOV2019Search', storeModule, { preserveState: shouldPreserveState })
+    },
+    ...mapActions(['SEARCH_ARTICLE'])
   }
 }
 </script>

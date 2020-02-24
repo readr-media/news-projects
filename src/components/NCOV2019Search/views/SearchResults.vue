@@ -7,14 +7,21 @@
           :is-done="true"
           @submit="handleSubmit"
         />
-        <p class="main__meta">
-          找到 {{ 5566 }} 個「{{ searchResultInput }}」的資訊
-        </p>
+        <p
+          class="main__meta"
+          v-text="metaWording"
+        />
         <section class="main__articles articles">
           <BaseArticle
             class="articles__article"
-            v-for="item in 10"
-            :key="item"
+            v-for="(item, i) in articleItems"
+            :key="i"
+            :title="getArticleTitle(item)"
+            :articleContent="getArticleContent(item)"
+            :relatedLinkText="getArticleLinkText(item)"
+            :relatedLinkHref="getArticleLinkHref(item)"
+            :keywords="getArticleKeywords(item)"
+            :date="getArticleDate(item)"
           />
         </section>
       </main>
@@ -57,6 +64,9 @@ import BaseAsideSectionWrapper from '../components/BaseAsideSectionWrapper.vue'
 import BaseTag from '../components/BaseTag.vue'
 import BaseArticle from '../components/BaseArticle.vue'
 
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('NCOV2019Search')
+
 export default {
   props: {
     defaultSearchResults: {
@@ -79,7 +89,16 @@ export default {
   computed: {
     searchResultInput() {
       return _.get(this.$route, [ 'params', 'params' ], '')
-    }
+    },
+    metaWording() {
+      const resultWording = `找到 ${this.total} 個「${this.searchResultInput}」的資訊`
+      return this.isSearching ? '搜尋中' : resultWording
+    },
+    ...mapState({
+      total: state => _.get(state, [ 'articleData', 'hits', 'total' ], 0),
+      articleItems: state => _.get(state, [ 'articleData', 'hits', 'hits' ], []),
+      isSearching: state => _.get(state, 'isSearching', false)
+    })
   },
   methods: {
     handleSubmit(value) {
@@ -90,6 +109,26 @@ export default {
       this.$router.push({
         path: `/project/ncov2019search/${value}`,
       })
+    },
+
+    getArticleTitle(article) {
+      return _.get(article, [ '_source', 'title' ], '')
+    },
+    getArticleContent(article) {
+      return _.get(article, [ '_source', 'content' ], '')
+    },
+    getArticleLinkText(article) {
+      return _.get(article, [ '_source', 'link_title' ], '')
+    },
+    getArticleLinkHref(article) {
+      return _.get(article, [ '_source', 'link' ], '')
+    },
+    getArticleKeywords(article) {
+      const tags = _.get(article, [ '_source', 'tags' ])
+      return (tags || []).map(tag => _.get(tag, 'text', ''))
+    },
+    getArticleDate(article) {
+      return _.get(article, [ '_source', 'updated_at' ], '')
     }
   }
 }
