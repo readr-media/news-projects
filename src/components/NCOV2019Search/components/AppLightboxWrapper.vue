@@ -76,7 +76,7 @@ export default {
   display flex
   justify-content center
   align-items center
-  z-index 10000
+  z-index 10000001
   &__dimmed
     width 100%
     height 100%

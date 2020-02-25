@@ -74,7 +74,7 @@ export default {
   border-radius 2px
   border 2px solid transparent
   transition border .25s ease-out
-  font-size 15px
+  font-size 16px
   color rgba(0, 0, 0, 0.6)
   min-width 220px
   &--show-border
@@ -88,6 +88,8 @@ export default {
     border-radius 2px
     font-size inherit
     color inherit
+    display flex
+    align-items center
     &:focus
       outline none
 

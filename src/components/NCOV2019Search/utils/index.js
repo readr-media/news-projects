@@ -21,7 +21,7 @@ export const createPayload = ({
         },
         {
           'match': {
-            'type': 5
+            'type': 8 // post type
           }
         }
       ]

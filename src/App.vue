@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader v-if="hideAppHeader" />
+    <AppHeader v-if="!hideAppHeader" />
 
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
@@ -9,6 +9,9 @@
 </template>
 
 <script>
+import _ from 'lodash'
+import { pathToRegexp } from 'path-to-regexp'
+
 import { PROJECTS_NOT_NEED_APP_HEADER } from './constants/index.js'
 
 const updateViewport = (store) => {
@@ -25,7 +28,13 @@ export default {
   },
   computed: {
     hideAppHeader () {
-      return !PROJECTS_NOT_NEED_APP_HEADER.includes(this.$route.params.project)
+      return PROJECTS_NOT_NEED_APP_HEADER.reduce(
+        (acc, curr) => {
+          const re = pathToRegexp(curr, [])
+          return acc || re.test(this.$route.fullPath)
+        },
+        false
+      )
     }
   },
   beforeMount () {

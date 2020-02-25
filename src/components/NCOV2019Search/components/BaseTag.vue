@@ -2,8 +2,8 @@
   <router-link
     class="tag"
     :to="to"
-    append
     v-text="text"
+    @click.native="handleClick"
   />
 </template>
 
@@ -17,6 +17,18 @@ export default {
     text: {
       type: String,
       required: true
+    }
+  },
+  methods: {
+    handleClick() {
+      window.ga(
+        'send', 
+        'event', 
+        'projects',
+        'click',
+        `tag ${this.text}`,
+        { nonInteraction: false }
+      )
     }
   }
 }
