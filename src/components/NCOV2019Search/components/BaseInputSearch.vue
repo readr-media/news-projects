@@ -92,6 +92,8 @@ export default {
     align-items center
     &:focus
       outline none
+    &::placeholder
+      line-height 1.25
 
 .submit-button
   display flex
