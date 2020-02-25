@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
   const size = _.get(req.query, 'size', 10)
   const query = _.get(req.query, 'query', '')
 
-  console.log(`[readr-search] ${req.query}`)
+  console.log(`[readr-search] from: ${from}, size: ${size}, query: ${query}`)
 
   const payload = {
     'from': from,
@@ -52,6 +52,9 @@ router.get('/', async (req, res) => {
       }
     ]
   }
+
+  console.log(`[readr-search] READR_SEARCH_HOST: ${READR_SEARCH_HOST}`)
+  console.log(`[readr-search] READR_SEARCH_PORT: ${READR_SEARCH_PORT}`)
   const result = await axios.post(
     `http://${READR_SEARCH_HOST}:${READR_SEARCH_PORT}/readr.posts/_doc/_search`,
     payload
