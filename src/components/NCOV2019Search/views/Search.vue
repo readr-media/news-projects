@@ -78,6 +78,14 @@ export default {
       this.$router.push({
         path: `/project/ncov2019search/${value}`,
       })
+      window.ga(
+        'send', 
+        'event', 
+        'projects',
+        'search',
+        value,
+        { nonInteraction: false }
+      )
     }
   }
 }
