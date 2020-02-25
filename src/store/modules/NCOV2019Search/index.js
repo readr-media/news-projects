@@ -10,7 +10,7 @@ export default {
   state() {
     return {
       articleData: {},
-      isSearching: false
+      searchStatus: 'done'
     }
   },
   mutations: {
@@ -22,25 +22,29 @@ export default {
     SET_ARTICLE_DATA(state, posts) {
       state.articleData = posts
     },
-    SET_IS_SEARCHING(state, value) {
-      state.isSearching = value
+    SET_SEARCH_STATUS(state, value) {
+      state.searchStatus = value
     }
   },
   actions: {
     async SEARCH_ARTICLE({ commit }, { payload, push = false }) {
-      commit('SET_IS_SEARCHING', true)
-      const res = await axios.post(
-        `${protocal}//${host}/project-api/readr-search`,
-        payload
-      )
-      commit('SET_IS_SEARCHING', false)
-
-      if (push) {
-        commit('PUSH_ARTICLE_DATA', res.data)
-      } else {
-        commit('SET_ARTICLE_DATA', res.data)
+      commit('SET_SEARCH_STATUS', 'loading')
+      try {
+        const res = await axios.post(
+          `${protocal}//${host}/project-api/readr-search`,
+          payload
+        )
+        commit('SET_SEARCH_STATUS', 'done')
+        if (push) {
+          commit('PUSH_ARTICLE_DATA', res.data)
+        } else {
+          commit('SET_ARTICLE_DATA', res.data)
+        }
+        return res
+      } catch (error) {
+        commit('SET_SEARCH_STATUS', 'error')
+        console.error(error)
       }
-      return res
     }
   }
 }

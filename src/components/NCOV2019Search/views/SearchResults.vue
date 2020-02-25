@@ -138,12 +138,20 @@ export default {
     },
     metaWording() {
       const resultWording = `找到 ${this.total} 個「${this.searchResultInput}」的資訊`
-      return this.isSearching ? '搜尋中' : resultWording
+      switch (this.searchStatus) {
+        case 'error':
+          return '發生錯誤'
+        case 'loading':
+          return '讀取中'
+        case 'done':
+        default:
+          return resultWording
+      }
     },
     ...mapState({
       total: state => _.get(state, [ 'articleData', 'hits', 'total' ], 0),
       articleItems: state => _.get(state, [ 'articleData', 'hits', 'hits' ], []),
-      isSearching: state => _.get(state, 'isSearching', false)
+      searchStatus: state => _.get(state, 'searchStatus', 'done')
     })
   },
   methods: {
