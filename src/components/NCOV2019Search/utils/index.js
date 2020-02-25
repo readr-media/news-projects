@@ -11,7 +11,7 @@ export const createPayload = ({
         {
           'multi_match': {
             'query': query,
-            'type': 'phrase',
+            // 'type': 'phrase',
             'fields': [
               'title^2',
               'content',
