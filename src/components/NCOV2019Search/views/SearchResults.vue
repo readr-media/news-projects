@@ -188,7 +188,7 @@ export default {
     },
     getArticleKeywords(article) {
       const tags = _.get(article, [ '_source', 'tags' ])
-      return (tags || []).map(tag => _.get(tag, 'text', ''))
+      return _.take((tags || []).map(tag => _.get(tag, 'text', '')), 3)
     },
     getArticleDate(article) {
       return _.get(article, [ '_source', 'updated_at' ], '')
