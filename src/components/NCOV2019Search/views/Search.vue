@@ -1,6 +1,17 @@
 <template>
   <section class="search">
-    <div class="search__background" />
+    <div class="search__background background">
+      <img
+        v-for="order in 5"
+        :class="[
+          'background__img',
+          { 'background__img--show': getShowBackgroundImg(order) }
+        ]"
+        :key="order"
+        :src="`/proj-assets/ncov2019search/background-imgs/${order}.jpg`"
+        alt="background"
+      >
+    </div>
     <div class="search__content-wrapper content-wrapper">
       <div class="content-wrapper__headings headings">
         <h1 class="headings__title title">
@@ -62,12 +73,26 @@ export default {
       title: '武漢肺炎知識家',
       subtitle: '在這裡你可以找到所有 READr 針對武漢肺炎所提供的資訊。',
       wordingDefaultResults: '其他人也問了：',
+      currentBackgroundOrderInternal: 1
     }
   },
   computed: {
     searchResults() {
       return _.take(this.defaultSearchResults, 3)
+    },
+    currentBackgroundOrder: {
+      get() {
+        return this.currentBackgroundOrderInternal
+      },
+      set(value) {
+        this.currentBackgroundOrderInternal = value > 5 ? 1 : value
+      }
     }
+  },
+  mounted() {
+    setInterval(() => {
+      this.currentBackgroundOrder += 1
+    }, 5000)
   },
   methods: {
     handleSubmit(value) {
@@ -86,6 +111,9 @@ export default {
         value,
         { nonInteraction: false }
       )
+    },
+    getShowBackgroundImg(order) {
+      return order === this.currentBackgroundOrder
     }
   }
 }
@@ -99,14 +127,14 @@ export default {
   justify-content center
   align-items center
   &__background
-    background-image url(/proj-assets/ncov2019search/background-imgs/1.jpg)
-    background-size cover
-    background-repeat no-repeat
+    // background-image url(/proj-assets/ncov2019search/background-imgs/1.jpg)
+    // background-size cover
+    // background-repeat no-repeat
     height 100vh
     position absolute
     width 100%
     height 100%
-    z-index 1
+    z-index 10000001
     &:before
       content ''
       position absolute
@@ -114,6 +142,7 @@ export default {
       width 100%
       height 100%
       background-color rgba(0, 0, 0, 0.7)
+      z-index 10000002
     &:after
       content 'Copyright © 2020 READr'
       position absolute
@@ -124,9 +153,21 @@ export default {
       color rgba(255, 255, 255, 0.6)
       text-align center
       margin 0 0 11px 0
+      z-index 10000002
   &__content-wrapper
     position relative
-    z-index 2
+    z-index 10000002
+
+.background
+  &__img
+    position absolute
+    width 100%
+    height 100%
+    object-fit cover
+    opacity 0
+    transition opacity .5s
+    &--show
+      opacity 1
 
 .content-wrapper
   width 684px
