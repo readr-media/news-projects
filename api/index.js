@@ -54,6 +54,7 @@ router.use('*', (req, res, next) => {
   next()
 })
 
+router.use('/readr-search', require('./middle/readr-search'))
 router.use('/election-board', require('./middle/election-board'))
 router.use('/fake-news', require('./middle/fake-news'))
 router.use('/googlesheet', require('./middle/googlesheet'))
