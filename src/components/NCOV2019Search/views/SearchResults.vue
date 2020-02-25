@@ -180,7 +180,8 @@ export default {
       return _.get(article, [ '_source', 'content' ], '')
     },
     getArticleLinkText(article) {
-      return _.get(article, [ '_source', 'link_title' ], '')
+      const ogTitle = _.get(article, [ '_source', 'og_title' ])
+      return ogTitle ? ogTitle : this.getArticleLinkHref(article)
     },
     getArticleLinkHref(article) {
       return _.get(article, [ '_source', 'link' ], '')

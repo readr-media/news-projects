@@ -28,12 +28,13 @@ export default {
   },
   actions: {
     async SEARCH_ARTICLE({ commit }, { payload, push = false }) {
+      const from = _.get(payload, 'from', 0)
+      const size = _.get(payload, 'size', 10)
+      const query = encodeURI(_.get(payload, 'query', ''))
+
       commit('SET_SEARCH_STATUS', 'loading')
       try {
-        const res = await axios.post(
-          `${protocal}//${host}/project-api/readr-search`,
-          payload
-        )
+        const res = await axios.get(`${protocal}//${host}/project-api/readr-search?from=${from}&size=${size}&query=${query}`)
         commit('SET_SEARCH_STATUS', 'done')
         if (push) {
           commit('PUSH_ARTICLE_DATA', res.data)
