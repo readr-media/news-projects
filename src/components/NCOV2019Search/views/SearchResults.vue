@@ -210,7 +210,7 @@ export default {
 .search-results
   background-color rgba(216, 216, 216, 0.5)
   min-height 100vh
-  padding 40px 0
+  padding 95.8px 0
   &__lightbox-toggler-mobile
     display none
 
@@ -253,7 +253,7 @@ export default {
 
 @media (max-width 768px)
   .search-results
-    padding 10px 10px
+    padding 60px 10px
     &__lightbox-toggler-mobile
       display flex
       justify-content center

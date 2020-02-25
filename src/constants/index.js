@@ -135,18 +135,18 @@ export const PROJECTS_PREVENT_SCROLL_BEHAVIOR = [
 ]
 
 export const PROJECTS_NOT_NEED_APP_HEADER = [
-  'hong-kong-protests-2019',
-  'political-contribution',
-  'newtype',
-  'election-board',
-  'marathon',
-  'puyuma',
-  'disinformation',
-  'fake-news',
-  'food-delivery',
-  'election-2020',
-  'maskmap',
-  'ncov2019search'
+  '/project/hong-kong-protests-2019',
+  '/project/political-contribution',
+  '/project/newtype',
+  '/project/election-board',
+  '/project/marathon',
+  '/project/puyuma',
+  '/project/disinformation',
+  '/project/fake-news',
+  '/project/food-delivery',
+  '/project/election-2020',
+  '/project/maskmap',
+  '/project/ncov2019search'
 ]
 
 export const SCRIPT_GOOGLE_MAP_REQUIRED = `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&" async defer></script>`
