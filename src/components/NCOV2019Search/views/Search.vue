@@ -76,8 +76,7 @@ export default {
       }
 
       this.$router.push({
-        path: value,
-        append: true
+        path: `/project/ncov2019search/${value}`,
       })
     }
   }
