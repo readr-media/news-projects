@@ -118,7 +118,7 @@ export default {
   },
   computed: {
     showRelatedLink() {
-      return this.relatedLinkText && this.relatedLinkText !== ''
+      return this.relatedLinkText && this.relatedLinkText !== '' && this.relatedLinkHref !== ''
     },
     showKeywords() {
       return _.get(this.keywords, 'length', 0)
