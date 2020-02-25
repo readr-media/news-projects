@@ -81,9 +81,11 @@ export default {
   },
   async serverPrefetch () {
     this.registerStoreModule()
-    await this.SEARCH_ARTICLE({
-      payload: this.searchPayload
-    })
+    if (this.searchWord !== '') {
+      await this.SEARCH_ARTICLE({
+        payload: this.searchPayload
+      })
+    }
   },
   beforeMount () {
     this.registerStoreModule(true)
