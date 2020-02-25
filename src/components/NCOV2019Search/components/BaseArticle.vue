@@ -203,6 +203,8 @@ export default {
   & >>> img
     width 100%
     object-fix contain
+  & >>> iframe
+    width 100%
   &__read-more
     margin 20px 0 0 0
 
