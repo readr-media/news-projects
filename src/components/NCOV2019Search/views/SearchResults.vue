@@ -18,8 +18,8 @@
         <section class="main__articles articles">
           <BaseArticle
             class="articles__article"
-            v-for="(item, i) in articleItems"
-            :key="i"
+            v-for="item in articleItems"
+            :key="item._id"
             :title="getArticleTitle(item)"
             :article-content="getArticleContent(item)"
             :related-link-text="getArticleLinkText(item)"
