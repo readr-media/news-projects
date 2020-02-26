@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
               'fields': [
                 'title^2',
                 'content',
-                'tags.text'
+                'tags.text^2'
               ]
             }
           },
