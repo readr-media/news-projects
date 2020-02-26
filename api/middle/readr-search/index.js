@@ -44,7 +44,7 @@ router.get('/', async (req, res) => {
       }
     },
     'sort': [
-      // '_score',
+      '_score',
       {
         'updated_at': {
           'order': 'desc'
