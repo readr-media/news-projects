@@ -31,7 +31,7 @@ export default {
       return PROJECTS_NOT_NEED_APP_HEADER.reduce(
         (acc, curr) => {
           const re = pathToRegexp(curr, [])
-          return acc || re.test(this.$route.fullPath)
+          return acc || re.test(this.$route.path)
         },
         false
       )
