@@ -47,6 +47,7 @@ export default {
   white-space: nowrap; 
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing 1px
   &:hover, &.router-link-active
     background-color #429057
     color white

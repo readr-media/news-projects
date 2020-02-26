@@ -46,6 +46,7 @@ export default {
   color #429057
   display flex
   align-items center
+  letter-spacing 1px
   &__icon
     display inline-block
     margin 0 0 0 4px

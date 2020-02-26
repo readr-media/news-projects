@@ -186,6 +186,7 @@ export default {
     font-weight normal
     margin 25px 0 0 0
     text-align justify
+    letter-spacing 1px
 
 .title
   margin 0
@@ -207,6 +208,7 @@ export default {
     padding 2px 0
     font-size 15px
     color white
+    letter-spacing 1px
 
 .results
   &__result

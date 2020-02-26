@@ -33,6 +33,7 @@ export default {
     padding 0 20px
     display flex
     align-items center
+    letter-spacing 1px
   &__content
     border-top 2px solid rgba(216, 216, 216, 0.5)
 </style>

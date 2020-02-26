@@ -90,6 +90,7 @@ export default {
     color inherit
     display flex
     align-items center
+    letter-spacing 1px
     &:focus
       outline none
 

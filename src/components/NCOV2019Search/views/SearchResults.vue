@@ -244,6 +244,7 @@ export default {
     font-weight 600
     color rgba(0, 0, 0, 0.87)
     margin 30px 0 0 0
+    letter-spacing 1px
   &__articles
     margin 30px 0 0 0
 

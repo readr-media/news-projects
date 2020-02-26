@@ -177,6 +177,7 @@ export default {
     font-weight 600
     color currentColor
     line-height 1.6
+    letter-spacing 1px
   &__related-link
     margin 18px 0 0 0
   &__meta
@@ -192,6 +193,7 @@ export default {
     word-break break-all
   & >>> p
     margin 0
+    letter-spacing 1px
   & >>> p + p
     margin 18px 0 0 0
   & >>> a
@@ -227,6 +229,7 @@ export default {
   font-size 13px
   display flex
   line-height 1.69
+  letter-spacing 1px
   &__wording
     min-width max-content
   &__link
