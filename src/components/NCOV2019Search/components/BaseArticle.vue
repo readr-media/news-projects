@@ -207,6 +207,10 @@ export default {
     object-fix contain
   & >>> iframe
     width 100%
+  &__full
+    & >>> p
+      margin 18px 0 0 0
+
   &__read-more
     margin 20px 0 0 0
 
