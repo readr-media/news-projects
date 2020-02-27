@@ -23,6 +23,8 @@ export default {
     display flex
     flex-direction column
     align-items center
+    opacity 0
+    transform translateY(-32px)
     & p
       background-color rgba(#fff, 0.7)
       padding 3px 14px
@@ -32,13 +34,14 @@ export default {
     &.dark p
       background-color rgba(#000, 0.7)
       color #fff
-  &__bg-img
+  &__img
     position absolute
     top 0
     left 0
-    height 100%
     width 100%
-    background-size cover
-    background-position 50% 50%
-    background-repeat no-repeat
+    height 100%
+    & img
+      width 100%
+      height 100%
+      object-fit cover
 </style>

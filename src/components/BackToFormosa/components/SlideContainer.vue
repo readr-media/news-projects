@@ -1,10 +1,12 @@
 <template>
   <div class="slide-container">
-    <SlideItem v-for="(item, key) in slideItems" :style="{ backgroundColor: item.bgColor }" :ref="`slideItem${key}`" :key="key">
-      <div class="slide-item__bg-img" v-for="bgImg in item.bgImgs" :style="bgImgStyle(bgImg, item)" />
+    <SlideItem v-for="(item, key) in slideItems" :style="{ backgroundColor: item.bgColor }" :ref="`slideItem${key}`" :key="`slideItem${key}`">
+      <picture class="slide-item__img" v-for="img in item.imgs" :style="imgStyle(img, item.animationPlayState)">
+        <img :src="`/proj-assets/backtoformosa/img/${img.name}.png`" alt="">
+      </picture>
       <div
-        :class="[ 'slide-item__text', item.content.color === 'dark' ? 'dark' : '' ]"
-        :style="textStyle(item.content)"
+        :class="[ 'slide-item__text', item.content.color ]"
+        :style="textStyle(item.content, item.animationPlayState)"
       >
         <p v-for="text in item.content.texts">{{ text }}</p>
       </div>
@@ -22,8 +24,8 @@ export default {
     SlideItem
   },
   mounted () {
-    window.addEventListener('scroll', this.controlBgImgAnimation)
-    this.controlBgImgAnimation()
+    window.addEventListener('scroll', this.controlSlideItemAnimation)
+    this.controlSlideItemAnimation()
   },
   data () {
     return {
@@ -33,18 +35,20 @@ export default {
     }
   },
   methods: {
-    bgImgStyle ({ name, animation = 'none' }, { canAnimate = false }) {
+    imgStyle ({ name, animation = 'none' }, animationPlayState = 'paused') {
       return {
-        backgroundImage: `url(/proj-assets/backtoformosa/img/${name}.png)`,
         animation,
-        animationPlayState: canAnimate ? 'running' : 'paused'
+        animationPlayState
       }
     },
-    textStyle ({ position = { top: 0, left: 0 } }) {
-      const { top = 'auto', right = 'auto', bottom = 'auto', left = 'auto' } = position
-      return { top, right, bottom, left }
+    textStyle ({ position = { top: 0, left: 0 }, animation = 'none' }, animationPlayState = 'paused') {
+      return {
+        ...position,
+        animation,
+        animationPlayState
+      }
     },
-    controlBgImgAnimation () {
+    controlSlideItemAnimation () {
       // console.log('enter')
       const nextSlideItemId = this.curtSlideItemId + 1
       if (this.animatedItemIds.includes(nextSlideItemId)) { return }
@@ -53,7 +57,7 @@ export default {
       const slideItem = this.$refs[ `slideItem${nextSlideItemId}` ][ 0 ].$el
       const { top } = slideItem.getBoundingClientRect()
       if (top <= 0) {
-        this.slideItems[ nextSlideItemId ].canAnimate = true
+        this.slideItems[ nextSlideItemId ][ 'animationPlayState' ] = 'running'
         this.animatedItemIds.push(nextSlideItemId)
         if (nextSlideItemId < this.slideItems.length) {
           this.curtSlideItemId += 1
@@ -65,21 +69,29 @@ export default {
 </script>
 
 <style lang="stylus">
-@keyframes slide1
+@keyframes slide-content
+  0%
+    opacity 0
+    transform translateY(-32px)
+  100%
+    opacity 1
+    transform translateY(0px)
+
+@keyframes slide1-img
+  0%
+    transform scale(1)
+  100%
+    transform scale(1.05)
+
+@keyframes slide2-img-back
+  0%
+    transform scale(1)
+  100%
+    transform scale(1.05)
+
+@keyframes slide2-img-front
   0%
     transform scale(1)
   100%
     transform scale(1.1)
-
-@keyframes slide2-back
-  0%
-    transform scale(1)
-  100%
-    transform scale(1.1)
-
-@keyframes slide2-front
-  0%
-    transform scale(1)
-  100%
-    transform scale(1.2)
 </style>
