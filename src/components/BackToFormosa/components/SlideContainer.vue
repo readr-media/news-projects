@@ -1,11 +1,12 @@
 <template>
   <div class="slide-container">
-    <SlideItem v-for="(item, key) in slideItems" :style="{ backgroundColor: item.bgColor }" :ref="`slideItem${key}`" :key="`slideItem${key}`">
-      <picture class="slide-item__img" v-for="img in item.imgs" :style="imgStyle(img, item.animationPlayState)">
-        <img :src="`/proj-assets/backtoformosa/img/${img.name}.png`" alt="">
+    <SlideItem v-for="(item, key) in slideItems" :style="{ ...item.bgStyle }" :ref="`slideItem${key}`" :key="`slideItem${key}`">
+      <picture v-for="picture in item.pictures" :style="pictureStyle(picture, item.animationPlayState)" :class="[ 'slide-item__picture', picture.className ]">
+        <img :src="`/proj-assets/backtoformosa/img/${picture.name}.png`" alt="">
       </picture>
       <div
-        :class="[ 'slide-item__text', item.content.color ]"
+        v-if="Object.keys(item.content).length"
+        :class="[ 'slide-item__text', ...item.content.classNames ]"
         :style="textStyle(item.content, item.animationPlayState)"
       >
         <p v-for="text in item.content.texts">{{ text }}</p>
@@ -35,7 +36,7 @@ export default {
     }
   },
   methods: {
-    imgStyle ({ name, animation = 'none' }, animationPlayState = 'paused') {
+    pictureStyle ({ name, animation = 'none' }, animationPlayState = 'paused') {
       return {
         animation,
         animationPlayState
@@ -59,7 +60,7 @@ export default {
       if (top <= 0) {
         this.slideItems[ nextSlideItemId ][ 'animationPlayState' ] = 'running'
         this.animatedItemIds.push(nextSlideItemId)
-        if (nextSlideItemId < this.slideItems.length) {
+        if (nextSlideItemId < Object.keys(this.slideItems).length) {
           this.curtSlideItemId += 1
         }
       }
@@ -77,19 +78,19 @@ export default {
     opacity 1
     transform translateY(0px)
 
-@keyframes slide1-img
+// @keyframes slide1-img
+//   0%
+//     transform scale(1)
+//   100%
+//     transform scale(1.05)
+
+@keyframes slide-img-back
   0%
     transform scale(1)
   100%
     transform scale(1.05)
 
-@keyframes slide2-img-back
-  0%
-    transform scale(1)
-  100%
-    transform scale(1.05)
-
-@keyframes slide2-img-front
+@keyframes slide-img-front
   0%
     transform scale(1)
   100%
