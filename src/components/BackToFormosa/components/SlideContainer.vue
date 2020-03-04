@@ -1,8 +1,8 @@
 <template>
   <div class="slide-container">
-    <SlideItem v-for="(item, key) in slideItems" :style="{ ...item.bgStyle }" :ref="`slideItem${key}`" :key="`slideItem${key}`">
+    <SlideItem v-for="(item, key) in slideItems" :style="slideItemStyle(item)" :ref="`slideItem${key}`" :key="`slideItem${key}`">
       <picture v-for="picture in item.pictures" :style="pictureStyle(picture, item.animationPlayState)" :class="[ 'slide-item__picture', picture.className ]">
-        <img :src="`/proj-assets/backtoformosa/img/${picture.name}.png`" alt="">
+        <img :src="`/proj-assets/backtoformosa/img/opening/${picture.name}.png`" alt="">
       </picture>
       <div
         v-if="Object.keys(item.content).length"
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { raf } from '../util/'
+
 import slideItems from '../data/slideItems.js'
 import SlideItem from './SlideItem.vue'
 
@@ -25,8 +27,8 @@ export default {
     SlideItem
   },
   mounted () {
-    window.addEventListener('scroll', this.controlSlideItemAnimation)
-    this.controlSlideItemAnimation()
+    window.addEventListener('scroll', raf(this.controlSlideItemAnimation))
+    // this.controlSlideItemAnimation()
   },
   data () {
     return {
@@ -35,7 +37,19 @@ export default {
       slideItems
     }
   },
+  computed: {
+    wh () {
+      return this.$store.state.viewport[ 1 ]
+    }
+  },
   methods: {
+    slideItemStyle ({ bgStyle, animation = 'none', animationPlayState = 'paused' }) {
+      return {
+        ...bgStyle,
+        animation,
+        animationPlayState
+      }
+    },
     pictureStyle ({ name, animation = 'none' }, animationPlayState = 'paused') {
       return {
         animation,
@@ -51,13 +65,16 @@ export default {
     },
     controlSlideItemAnimation () {
       // console.log('enter')
+
       const nextSlideItemId = this.curtSlideItemId + 1
       if (this.animatedItemIds.includes(nextSlideItemId)) { return }
 
       // console.log('detect')
       const slideItem = this.$refs[ `slideItem${nextSlideItemId}` ][ 0 ].$el
       const { top } = slideItem.getBoundingClientRect()
-      if (top <= 0) {
+      if ((top - this.wh * 0.25) <= 0) {
+        // console.log('trigger')
+
         this.slideItems[ nextSlideItemId ][ 'animationPlayState' ] = 'running'
         this.animatedItemIds.push(nextSlideItemId)
         if (nextSlideItemId < Object.keys(this.slideItems).length) {
@@ -70,6 +87,16 @@ export default {
 </script>
 
 <style lang="stylus">
+@keyframes take-in
+  0%
+    opacity 0.5
+    // transform translateX(-50%)
+  // 90%
+  //   transform translateX(0%) rotate(3deg)
+  100%
+    opacity 1
+    // transform translateX(0%)
+
 @keyframes slide-content
   0%
     opacity 0
