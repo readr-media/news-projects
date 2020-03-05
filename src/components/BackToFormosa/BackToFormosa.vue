@@ -36,7 +36,7 @@
           </picture>
           <div class="report-page__qa">
             <p>問：你返國後，對謀求臺灣獨立有何具體做法？</p>
-            <p>答：我認為海外台獨份子張燦鍙「臺獨聯盟」的主張，以暴力路線解決臺灣問題，是比較可行的做法。在國內，<strong>現有政權不允許臺灣獨立的，要達到目標，只有推翻現有政府才行</strong>，剛好近幾年，國內反政府運動氣氛高漲，力量不小，我們應該結合所有反政府力量，<strong>走暴力路線才是。</strong></p>
+            <p>答：我認為海外台獨份子張燦鍙「臺獨聯盟」的主張，以暴力路線解決臺灣問題，是比較可行的做法。在國內，<strong>現有政權不允許臺灣獨立的，要達到目標，只有推翻現有政府才行</strong>，剛好近幾年，國內反政府運動氣氛高漲，力量不小，我們應該結合所有反政府力量，<strong>走暴力路線才是</strong>。</p>
           </div>
         </div>
         <div class="report-page__content">
@@ -45,7 +45,7 @@
           </picture>
           <div class="report-page__qa">
             <p>問：你有無指示「美麗島雜誌」的編輯分針？</p>
-            <p>答：「美麗島雜誌」成立的目的就是我要聚集<strong>反政府人士的力量</strong>所籌組的一種政治性組織，<strong>假雜誌之名，散布臺獨意識</strong>，配合製造群眾活動，<strong>伺機顛覆政府、奪取政權，</strong>使臺灣獨立之執行機構。因此，我就指示編輯方針，表面上是主張民主自由，實際上是宣揚「臺獨」意識。</p>
+            <p>答：「美麗島雜誌」成立的目的就是我要聚集<strong>反政府人士的力量</strong>所籌組的一種政治性組織，<strong>假雜誌之名，散布臺獨意識</strong>，配合製造群眾活動，<strong>伺機顛覆政府、奪取政權</strong>，使臺灣獨立之執行機構。因此，我就指示編輯方針，表面上是主張民主自由，實際上是宣揚「臺獨」意識。</p>
           </div>
         </div>
       </div>
@@ -64,29 +64,32 @@
           <p>偵訊時，他們被如何對待</p>
         </div>
         <div class="list-page__list-container">
-          <div class="list-page__list-item">
-            <p class="list-page__name">林義雄</p>
+          <div class="list-page__list-item" v-for="item in listItems" :key="item.name">
+            <p class="list-page__name">{{ item.name }}</p>
             <ul>
-              <li>偵訊遭<strong>毆打、香煙燙臉、燒鬍子</strong></li>
-              <li>收押期間，發生<strong>林宅血案</strong>，母親和兩女兒慘死</li>
-              <li>筆錄中承認，要<strong>透過雜誌社文章中傷政府，揭發政府黑暗面，煽惑民眾，顛覆政府</strong></li>
-            </ul>
-          </div>
-          <div class="list-page__list-item">
-            <p class="list-page__name">施明德</p>
-            <ul>
-              <li>偵訊時被<strong>疲勞審訊、恐嚇</strong></li>
-              <li>筆錄中承認，要<strong>以暴力迫使政府束手無策，爭取國會席次，從事議會鬥爭，達到臺獨的目的</strong></li>
+              <li v-for="description in item.descriptions" v-html="description" />
             </ul>
           </div>
         </div>
+      </div>
+
+      <div class="middle__content">
+        <p>3 月 18 日，「高雄事件」叛亂案展開為期 9 天的軍法審判，審判席上坐著審判長劉岳平和 4 位審判官，控方則有主任檢察官蔡籐雄和軍事檢察官林輝煌；另一方，則是 8 名被告與蘇貞昌、謝長廷、陳水扁、尤清等 15 名律師組成的辯護團。審判期間開放旁聽和採訪，包含國際人權組織和國外媒體幾乎全程參與，民眾透過報紙記錄的控辯內容，得以暸解美麗島雜誌社幹部舉辦遊行的原因，以及其主張的政治理念。</p>
+        <p>公開審判庭一開始，律師團就提出三大質疑，包括<strong>為什麼被告要受軍事審判</strong>、<strong>戒嚴令的合法性</strong><TextNotation text="警總以戒嚴時期為由，擴充解釋犯罪構成要件，以此限制人民的政治活動" />，以及<strong>自白書的任意性</strong><TextNotation text="被告的自白是出於自願，不是以不正當方法逼供" />。黃信介首先接受提訊，他不同意偵訊筆錄的說法，稱自白書是「<strong>他們幫我作文的，我寫了再改，改了再寫</strong>」。檢察官則辯稱「一個人如果沒有犯罪，怎麼會受他人威脅利誘呢」。</p>
+        <p>接下來接受提訊的呂秀蓮更披露，偵訊時遭調查人員疲勞審訊和恐嚇，「在那邊有 3、40 天處於失眠狀態，覺得自己一定會死，跟他們合作還可以好好過，就照他們的話去做。」其他人紛紛跟進，例如林義雄就說：「<strong>我只想早點結束這個折磨，筆錄我沒看就簽名了，不知寫些什麼。</strong>」</p>
+        <p>張俊宏稱：「調查人員威脅趕快承認，如果不承認的話，<strong>政府會安其他的罪名</strong>。」</p>
+        <p>姚嘉文面對審判官詢問，其筆錄裡提及要成立另一個政府，直言「我是說更改國旗、國號並沒有必要，內部改革才是重點，<strong>筆錄都是斷章取義</strong>，沒辦法完整傳達我原本的意思，我認為筆錄沒有參考的價值，庭上應該以今天提訊的內容為主。」</p>
+        <p>八個被告裡，只有陳菊一度承認自白書是真實的。呂秀蓮在回憶錄裡曾提及，陳菊因為不認識她的律師，加上偵訊時嚇壞了，在法庭上很順從，直到審訊的最後幾天，才受到呂秀蓮的鼓勵，決定翻供。陳菊的弟弟陳武進出庭時曾說：「我姐姐審理時稱調查局自白實在，我知道她內心是痛苦的，為國家委曲求全，希望庭上以法律立場審理此案。」不過檢察官仍反駁，陳菊先前都承認了，這個翻供是假的，不足以採信。</p>
+        <p>除了推翻之前的說詞，被告在法庭上還侃侃而談政治理念，施明德出庭時常常掛著微笑，從容回應審判官的問題，表示「臺灣不存在獨立的問題，只有民主化的內部問題，這涉及到四個層面，包括<strong>黨禁、報禁、戒嚴令和萬年國會</strong>，其中我覺得最嚴重的是黨禁，所以我才會到各地成立服務處，希望成立一個沒有黨名的黨，推動<strong>全民參政</strong>，這是我的目的，絕不是叛亂。」</p>
+        <p>檢察官批評施明德，聲稱臺灣獨立已經 30 年，「是棄大陸 7 億同胞不顧嗎？居心叵測！」施明德則援引國際法指出，「獨立有兩種，一種是事實存在，一種是法律存在，現在臺灣國民黨主權不及大陸，然後美國和匪結交，等於承認中共的合法性，我方又硬要和美國建立實質關係，所以我只是陳述事實，不是主張臺灣獨立。」巧妙回應質問。</p>
       </div>
     </article>
   </div>
 </template>
 
 <script>
-import { controlCoveredEffect, raf } from './util/'
+import { controlCoveredEffect, raf } from './util/index.js'
+import listItems from './data/listItems.js'
 
 import SlideContainer from './components/SlideContainer.vue'
 import TextNotation from './components/TextNotation.vue'
@@ -104,6 +107,11 @@ export default {
   components: {
     SlideContainer,
     TextNotation
+  },
+  data () {
+    return {
+      listItems
+    }
   },
   mounted () {
     const { opening, middle } = this.$refs
@@ -145,7 +153,7 @@ html
     width 100%
     height 100%
     z-index -1
-    // opacity 0
+    opacity 0
 .middle
   &__content
     max-width 600px
@@ -167,7 +175,7 @@ html
     line-height 1.8
     margin-bottom 152px
 .report-page
-  margin-bottom 40vh
+  padding-bottom 40vh
   &__content + .report-page__content
     margin-top 80px
   &__picture
@@ -182,19 +190,25 @@ html
     & p + p
       margin-top 28px
 .list-page
-  margin-top 40vh
+  padding-top 40vh
+  padding-bottom 40vh
   &__name
     font-size 3.0rem
     line-height normal
     margin-bottom 8px
+    font-weight 700
   &__list-item + .list-page__list-item
     margin-top 40px
   & ul
-    line-height 2
+    line-height 1.8
     font-size 2.0rem
   & li
-    padding-left 22px
     position relative
+    padding-top 2px
+    padding-bottom 2px
+    padding-left 22px
+    // & + li
+    //   margin-top 4px
     &::before
       content ''
       display block
@@ -203,7 +217,7 @@ html
       height 12px
       border-radius 50%
       background-color #a56c6a
-      // (40 - 12) / 2
+      // (36 - 12) / 2 + 2
       top 14px
       left 0
 picture
