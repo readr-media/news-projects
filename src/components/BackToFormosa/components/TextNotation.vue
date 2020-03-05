@@ -3,7 +3,7 @@
     <!-- <img :src="`/proj-assets/food-delivery/img/icon/notation-${isText ? 'close' : 'default'}.svg`" alt="" loading="lazy"> -->
     <!-- <div class="text-notation__icon" @click="toggleText"></div> -->
     <div class="text-notation__text" v-if="isText">
-      <p>{{ text }}</p>
+      <p v-html="text" />
     </div>
   </span>
 </template>

@@ -1,5 +1,6 @@
 export const controlCoveredEffect = function (coveredEl, coverEl) {
   let isCovered = false
+  let curtSpace = 0
   
   return function () {
     const wh = window.innerHeight
@@ -8,7 +9,7 @@ export const controlCoveredEffect = function (coveredEl, coverEl) {
     if (isCovered) {
       if (top - wh * 1.5 >= 0) {
         coveredEl.style.position = ''
-        coverEl.style.marginTop = ''
+        document.body.style.paddingTop = `${curtSpace}px`
         coveredEl.style.width = ''
         coveredEl.style.bottom = ''
         coveredEl.style.left = ''
@@ -18,11 +19,12 @@ export const controlCoveredEffect = function (coveredEl, coverEl) {
       if (top - wh <= 0) {
         const coveredElH = coveredEl.clientHeight
 
+        curtSpace = parseFloat(document.body.style.paddingTop || 0)
         coveredEl.style.width = '100%'
         coveredEl.style.bottom = 0
         coveredEl.style.left = 0
         coveredEl.style.position = 'fixed'
-        coverEl.style.marginTop = `${coveredElH + wh * 0.5}px`
+        document.body.style.paddingTop = `${curtSpace + (coveredElH + wh * 0.5)}px`
         isCovered = true
       }
     }
