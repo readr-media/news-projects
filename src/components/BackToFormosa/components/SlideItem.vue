@@ -58,7 +58,7 @@ export default {
     & img
       width 100%
       height auto
-      vertical-align middle
+      // vertical-align middle
       // height 100%
       // object-fit cover
     &--cover img

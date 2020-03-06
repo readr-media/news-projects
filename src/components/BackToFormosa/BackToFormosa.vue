@@ -29,7 +29,7 @@
               <img src="/proj-assets/backtoformosa/img/scene2/report-lin.jpg" alt="">
             </picture>
             <div class="report-page__qa">
-              <p>問：你知不知道美麗島雜誌社成立的宗旨目的何在？</p>
+              <p>偵訊人員：你知不知道美麗島雜誌社成立的宗旨目的何在？</p>
               <p>答：初期是希望以一個<strong>反對黨的姿態</strong>，透過雜誌社文章<strong>中傷政府，揭發政府黑暗面，煽惑民眾、仇恨政府、反對政府</strong>。各地區服務處成立之後，可以上下呼應，增加聲勢。另外藉著舉辦各種聚會，發表演講，引起政府及治安單位注意及阻止，我們即可利用機會，<strong>大肆渲染政府不民主、不自由、沒有人權、壓制人民</strong>，爭取群眾同情及支持。</p>
             </div>
           </div>
@@ -38,7 +38,7 @@
               <img src="/proj-assets/backtoformosa/img/scene2/report-chen.jpg" alt="">
             </picture>
             <div class="report-page__qa">
-              <p>問：你返國後，對謀求臺灣獨立有何具體做法？</p>
+              <p>偵訊人員：你返國後，對謀求臺灣獨立有何具體做法？</p>
               <p>答：我認為海外台獨份子張燦鍙「臺獨聯盟」的主張，以暴力路線解決臺灣問題，是比較可行的做法。在國內，<strong>現有政權不允許臺灣獨立的，要達到目標，只有推翻現有政府才行</strong>，剛好近幾年，國內反政府運動氣氛高漲，力量不小，我們應該結合所有反政府力量，<strong>走暴力路線才是</strong>。</p>
             </div>
           </div>
@@ -47,7 +47,7 @@
               <img src="/proj-assets/backtoformosa/img/scene2/report-huang.jpg" alt="">
             </picture>
             <div class="report-page__qa">
-              <p>問：你有無指示「美麗島雜誌」的編輯分針？</p>
+              <p>偵訊人員：你有無指示「美麗島雜誌」的編輯分針？</p>
               <p>答：「美麗島雜誌」成立的目的就是我要聚集<strong>反政府人士的力量</strong>所籌組的一種政治性組織，<strong>假雜誌之名，散布臺獨意識</strong>，配合製造群眾活動，<strong>伺機顛覆政府、奪取政權</strong>，使臺灣獨立之執行機構。因此，我就指示編輯方針，表面上是主張民主自由，實際上是宣揚「臺獨」意識。</p>
             </div>
           </div>
@@ -137,30 +137,17 @@
         </div>
       </div>
     </article>
-    <article class="back-to-formosa__ending" ref="ending">
-      <div class="ending__container">
-        <div class="ending__wrapper ending__wrapper--linyi">
-          <picture class="ending__picture">
-            <img src="/proj-assets/backtoformosa/img/scene3/ending-linyi.png" alt="">
-          </picture>
-          <div class="ending__content r-40">
-            <p>請庭上能擺脫一切政治上、輿論上、感情上的壓力，依據天理、良心、法律作最公正判決。我所說感情的壓力，是指我家血案，我虔誠的祈求上天讓慘無人道的傷心事，不影響鈞庭的公正判決。但我堅信自己無罪，請庭上詳查。</p>
-            <p>我感覺到本案不僅是被告有罪、無罪的判決，將影響我國民主法治的前途，甚至於我們還能不能免於共產奴役、活在民主社會的一個關鍵。</p>
-            <p>我希望這一次的審理和判決，將會消除這些破壞全民團結，社會祥和的陰影，使我目前三人陳屍在殯儀館，一個僥倖生存回到宜蘭養傷，其餘二個在這法庭裡的整個家庭，所奉獻的自由、血淚、生命以及身心傷痛，獲得聊勝於無的生安死息。</p>
-            <div class="plus">輔佐人 方素敏（林義雄妻子）</div>
-            <p>當我身心交疲，躺在長庚醫院休養的時候，我想起義雄當時說的一句話：「被人誤解是最痛苦的，但被人誤解到危及家人則是絕望的、噬心的」。為了使他覺得，這世界還有了解他的人，所以我寫下「我的丈夫——林義雄」<TextNotation text="方素敏寫給林義雄的信" />，希望他在痛失慈母、愛女，萬念俱灰的情形下，能恢復一點生機，為我和奐均活下去。</p>
-          </div>
-        </div>
-        <div class="ending__wrapper ending__wrapper--shi">
-          <div class="ending__content l-40">
-            <p>林義雄家發生這件悲慘的事，讓我感到這個國家將會受到更多創傷及延伸更大的災禍，但我這份愛國家愛土地的心，在此懇切地向受傷的同胞及反對我們的同胞表示歉意，希望能平息他的報復心理，我呼籲國內外支持我們及我的妻子艾琳達，放下你們的拳頭，熄滅你們的怒火。我不是怕死的人，我不會為我的生命而低頭，我會為我們全民國家利益而低頭，我不是在此表演，也不是要博得減刑，如果能帶給國家社會和諧，我請求判我死刑。</p>
-          </div>
-          <picture class="ending__picture margin-l-auto">
-            <img src="/proj-assets/backtoformosa/img/scene3/ending-shi.png" alt="">
-          </picture>
-        </div>
-      </div>
-    </article>
+
+    <EndingPage ref="ending" />
+
+    <div class="back-to-formosa__after">
+      <picture>
+        <img src="/proj-assets/backtoformosa/img/after/photo-desk.png" alt="">
+      </picture>
+      <picture class="after__table">
+        <img src="/proj-assets/backtoformosa/img/after/table-desk.png" alt="">
+      </picture>
+    </div>
   </div>
 </template>
 
@@ -170,6 +157,7 @@ import listItems from './data/listItems.js'
 
 import SlideContainer from './components/SlideContainer.vue'
 import TextNotation from './components/TextNotation.vue'
+import EndingPage from './components/EndingPage.vue'
 
 export default {
   name: 'BackToFormosa',
@@ -183,7 +171,8 @@ export default {
   },
   components: {
     SlideContainer,
-    TextNotation
+    TextNotation,
+    EndingPage
   },
   data () {
     return {
@@ -193,7 +182,7 @@ export default {
   mounted () {
     const { container, opening, middle, ending } = this.$refs
     window.addEventListener('scroll', raf(controlCoveredEffect(opening.$el, middle)))
-    window.addEventListener('scroll', raf(controlCoveredEffect(middle, ending)))
+    window.addEventListener('scroll', raf(controlCoveredEffect(middle, ending.$el)))
   }
 }
 </script>
@@ -206,10 +195,12 @@ $ff-sans-serif = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helveti
 html
   font-size 10px
   font-family $ff-sans-serif
-picture
+picture, img
   display block
 strong
   font-weight 700
+.mg-l-auto
+  margin-left auto
 
 .back-to-formosa
   &__middle
@@ -217,12 +208,15 @@ strong
     position relative
     padding-top 64vh
     padding-bottom 64vh
-  &__ending
-    z-index 9
+  &__after
     position relative
-    background-color #fff
-    padding-top 80px
-    padding-bottom 80px
+    z-index 9
+    & picture
+      width 100%
+    & img
+      width 100%
+      height auto
+      // vertical-align middle
 
 .bg
   position absolute
@@ -256,49 +250,16 @@ strong
     & p + p
       margin-top 28px
 
-.ending
-  &__container
-    max-width 1000px
-    margin-left auto
-    margin-right auto
-    font-size 1.6rem
-    line-height 1.75
-  &__wrapper
-    position relative
-    & p + p
-      margin-top 28px
-    &--linyi
-      padding-top 170px
-      & .ending__picture
-        max-width 704px
-      & .ending__content
-        top 0
-    &--shi
-      & .ending__picture
-        max-width 612px
-      & .ending__content
-        top 220px
-  &__picture
+.after
+  &__table
+    background-image linear-gradient(to bottom, #000000, #a56c6a)
+    padding-top 80px
+    padding-bottom 80px
     & img
-      width 100%
-      height auto
-      vertical-align middle
-    &.margin-l-auto
+      max-width 900px
+      margin-right auto
       margin-left auto
-  &__content
-    max-width 400px
-    position absolute
-    &.r-40
-      right 40px
-      @media (min-width 1080px)
-        right 0
-    &.l-40
-      left 40px
-      @media (min-width 1080px)
-        left 0
-    & .plus
-      font-weight 700
-      margin-top 32px
+      // display block
 
 .report-page, .list-page
   color #fff
@@ -319,7 +280,7 @@ strong
     & img
       width 100%
       height auto
-      vertical-align middle
+      // vertical-align middle
   &__qa
     font-size 1.6rem
     line-height 1.75
@@ -363,5 +324,5 @@ strong
   & img
     width 100%
     height auto
-    vertical-align middle
+    // vertical-align middle
 </style>
