@@ -16,7 +16,7 @@
           <p>我感覺到本案不僅是被告有罪、無罪的判決，將影響我國民主法治的前途，甚至於我們還能不能免於共產奴役、活在民主社會的一個關鍵。</p>
           <p>我希望這一次的審理和判決，將會消除這些破壞全民團結，社會祥和的陰影，使我目前三人陳屍在殯儀館，一個僥倖生存回到宜蘭養傷，其餘二個在這法庭裡的整個家庭，所奉獻的自由、血淚、生命以及身心傷痛，獲得聊勝於無的生安死息。</p>
           <div class="ending-page__content__plus">輔佐人 方素敏（林義雄妻子）</div>
-          <p>當我身心交疲，躺在長庚醫院休養的時候，我想起義雄當時說的一句話：「被人誤解是最痛苦的，但被人誤解到危及家人則是絕望的、噬心的」。為了使他覺得，這世界還有了解他的人，所以我寫下「我的丈夫——林義雄」<TextNotation text="方素敏寫給林義雄的信" />，希望他在痛失慈母、愛女，萬念俱灰的情形下，能恢復一點生機，為我和奐均活下去。</p>
+          <p>當我身心交疲，躺在長庚醫院休養的時候，我想起義雄當時說的一句話：「被人誤解是最痛苦的，但被人誤解到危及家人則是絕望的、噬心的」。為了使他覺得，這世界還有了解他的人，所以我寫下「我的丈夫——林義雄」<TextNotation><p>方素敏寫給林義雄的信</p></TextNotation>，希望他在痛失慈母、愛女，萬念俱灰的情形下，能恢復一點生機，為我和奐均活下去。</p>
         </div>
       </div>
 
@@ -163,45 +163,54 @@ export default {
       & .ending-page
         &__pictures
           max-width 704px
+          width 70.4%
         &__content
           top 0
     &--shi .ending-page
       &__pictures
         max-width 612px
+        width 61.2%
       &__content
         top 220px
     &--chen .ending-page
       &__pictures
         max-width 612px
+        width 61.2%
       &__content
         top 190px
     &--lu .ending-page
       &__pictures
         max-width 786px
+        width 78.6%
       &__content
         top 64px
     &--linhong .ending-page
       &__pictures
         max-width 740px
+        width 74%
       &__content
         top 56px
     &--huang .ending-page
       &__pictures
         max-width 612px
+        width 61.2%
       &__content
         top 180px
     &--yao .ending-page
       &__pictures
         max-width 612px
+        width 61.2%
       &__content
         top 166px
     &--zhang .ending-page
       &__pictures
         max-width 648px
+        width 64.8%
       &__content
         top 294px
   &__pictures
     position relative
+    z-index -1
     &__title
       position absolute
       width 100%
@@ -210,9 +219,7 @@ export default {
     & img
       width 100%
       height auto
-      // vertical-align middle
   &__content
-    // max-width 400px
     position absolute
     text-align justify
     &.r-40

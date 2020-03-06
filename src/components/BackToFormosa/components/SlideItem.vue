@@ -16,7 +16,7 @@ export default {
   // width 100%
   min-height 100vh
   position relative
-  overflow hidden
+  // overflow hidden
   &__text
     position absolute
     &--caption
@@ -46,6 +46,7 @@ export default {
     &--description
       font-size 2.0rem
       color #fff
+      line-height normal
       & p + p
         // todo ask
         margin-top 16px
