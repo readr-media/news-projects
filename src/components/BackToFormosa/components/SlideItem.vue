@@ -12,6 +12,8 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../util/global.styl'
+
 .slide-item
   // width 100%
   min-height 100vh
@@ -19,12 +21,21 @@ export default {
   // overflow hidden
   &__text
     position absolute
-    &--caption
+    width 100%
+    padding-right 10px
+    padding-left 10px
+    left 50%
+    transform translateX(-50%)
+    text-align center
+    @media (min-width $breakpoint-md)
+      width auto
+      transform translateX(0)
+    &.caption
       font-size 2.0rem
       display flex
       flex-direction column
       align-items center
-      line-height normal
+      line-height 1.4
       // opacity 0
       // transform translateY(-32px)
       & p
@@ -36,20 +47,6 @@ export default {
       &--dark p
         background-color rgba(#000, 0.7)
         color #fff
-    &--single
-      font-size 3.0rem
-      font-weight 700
-      line-height normal
-      color #fff
-      width 100%
-      text-align center
-    &--description
-      font-size 2.0rem
-      color #fff
-      line-height normal
-      & p + p
-        // todo ask
-        margin-top 16px
   &__picture
     position absolute
     top 0
@@ -58,11 +55,6 @@ export default {
     height 100%
     & img
       width 100%
-      height auto
-      // vertical-align middle
-      // height 100%
-      // object-fit cover
-    &--cover img
       height 100%
       object-fit cover
 </style>

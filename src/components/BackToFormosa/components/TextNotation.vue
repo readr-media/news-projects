@@ -60,8 +60,11 @@ export default {
     box-shadow 0 2px 4px rgba(#000, 0.5)
     background-color #fff
     font-size 1.4rem
-    line-height normal
+    line-height 1.4
     margin-top 12px
     margin-bottom 12px
     text-align justify
+    & a
+      color #a56c6a
+      font-weight 500
 </style>

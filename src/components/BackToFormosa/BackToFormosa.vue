@@ -19,7 +19,7 @@
           <div class="middle__content">
             <p>1979 年 12 月 12 日，美麗島事件發生後的第 2 天，雜誌社核心人物施明德、呂秀蓮、林義雄、陳菊和張俊宏在姚嘉文家連夜開會，討論遊行善後的事情。結束後天色已晚，呂秀蓮聽從陳菊的建議，借住在施明德的家（位在美麗島雜誌社樓上）。</p>
             <p>隔日清晨 5 點多，門鈴突響，緊接著傳來施明德的叫聲：「他們來抓人了！」呂秀蓮趕忙衝進浴室換下睡衣，一旁的陳菊顧不得自己只穿著睡衣，抱著重要文件就從後院跳下去。沒想到，軍警早就團團包圍住雜誌社。</p>
-            <p>這是警備總部對美麗島事件的回應。遊行結束後不久，警備總部召開會議，檢討當天的警力配置，總司令汪敬煦最後下達指示，包括：一、將不法份子拘捕法辦；二、拘捕後注意可能引起的副作用，以及預先防範處置；三、全面加強維安。逮捕和偵訊計畫統稱為「一二一0專案」。</p>
+            <p>這是警備總部對美麗島事件的回應。遊行結束後不久，警備總部召開會議，檢討當天的警力配置，總司令汪敬煦最後下達指示，包括：一、將不法份子拘捕法辦；二、拘捕後注意可能引起的副作用，以及預先防範處置；三、全面加強維安。逮捕和偵訊計畫統稱為「一二一〇專案」。</p>
             <p>13 日天還未亮，林義雄、呂秀蓮和陳菊被情治人員押上囚車，施明德跳上屋頂，展開逃亡；同一時間，軍警突襲張俊宏、姚嘉文的住所，把他們送往看守所。14 日，立法院召開臨時院會，同意警總逮捕美麗島雜誌發行人、時任立委黃信介。隔年 1 月初，逃亡超過 20 天的施明德與林弘宣，在臺北落網。</p>
             <p>不到 1 個月，國民黨政府出動警總、調查局、警政署、憲兵司令部四大系統，將「美麗島雜誌社重要幹部」全數緝拿到案。</p>
           </div>
@@ -37,33 +37,7 @@
               <p>大逮捕之後，情治單位各自展開調查。</p>
               <p>漫長的偵訊過程，每個人都寫下了他們的「犯罪動機」。</p>
             </div>
-            <div class="report-page__content">
-              <picture class="report-page__picture">
-                <img src="/proj-assets/backtoformosa/img/scene2/report-lin.jpg" alt="">
-              </picture>
-              <div class="report-page__qa">
-                <p>偵訊人員：你知不知道美麗島雜誌社成立的宗旨目的何在？</p>
-                <p>答：初期是希望以一個<strong>反對黨的姿態</strong>，透過雜誌社文章<strong>中傷政府，揭發政府黑暗面，煽惑民眾、仇恨政府、反對政府</strong>。各地區服務處成立之後，可以上下呼應，增加聲勢。另外藉著舉辦各種聚會，發表演講，引起政府及治安單位注意及阻止，我們即可利用機會，<strong>大肆渲染政府不民主、不自由、沒有人權、壓制人民</strong>，爭取群眾同情及支持。</p>
-              </div>
-            </div>
-            <div class="report-page__content">
-              <picture class="report-page__picture">
-                <img src="/proj-assets/backtoformosa/img/scene2/report-chen.jpg" alt="">
-              </picture>
-              <div class="report-page__qa">
-                <p>偵訊人員：你返國後，對謀求臺灣獨立有何具體做法？</p>
-                <p>答：我認為海外台獨份子張燦鍙「臺獨聯盟」的主張，以暴力路線解決臺灣問題，是比較可行的做法。在國內，<strong>現有政權不允許臺灣獨立的，要達到目標，只有推翻現有政府才行</strong>，剛好近幾年，國內反政府運動氣氛高漲，力量不小，我們應該結合所有反政府力量，<strong>走暴力路線才是</strong>。</p>
-              </div>
-            </div>
-            <div class="report-page__content">
-              <picture class="report-page__picture">
-                <img src="/proj-assets/backtoformosa/img/scene2/report-huang.jpg" alt="">
-              </picture>
-              <div class="report-page__qa">
-                <p>偵訊人員：你有無指示「美麗島雜誌」的編輯分針？</p>
-                <p>答：「美麗島雜誌」成立的目的就是我要聚集<strong>反政府人士的力量</strong>所籌組的一種政治性組織，<strong>假雜誌之名，散布臺獨意識</strong>，配合製造群眾活動，<strong>伺機顛覆政府、奪取政權</strong>，使臺灣獨立之執行機構。因此，我就指示編輯方針，表面上是主張民主自由，實際上是宣揚「臺獨」意識。</p>
-              </div>
-            </div>
+            <ReportPageContent v-for="content in reportPageContent[ '1' ]" :content="content" src="scene2/" :key="content.name" />
           </div>
         </div>
 
@@ -86,7 +60,7 @@
         <div class="middle__container">
           <div class="list-page">
             <div class="list-page__intro">
-              <p>偵訊時，他們被如何對待</p>
+              <p>偵訊時，他們被如何對待：</p>
             </div>
             <div class="list-page__list-container">
               <div class="list-page__list-item" v-for="item in listItems" :key="item.name">
@@ -113,7 +87,7 @@
         <div class="middle__container">
           <div class="middle__content">
             <p>3 月 18 日，「高雄事件」叛亂案展開為期 9 天的軍法審判，審判席上坐著審判長劉岳平和 4 位審判官，控方則有主任檢察官蔡籐雄和軍事檢察官林輝煌；另一方，則是 8 名被告與蘇貞昌、謝長廷、陳水扁、尤清等 15 名律師組成的辯護團。審判期間開放旁聽和採訪，包含國際人權組織和國外媒體幾乎全程參與，民眾透過報紙記錄的控辯內容，得以暸解美麗島雜誌社幹部舉辦遊行的原因，以及其主張的政治理念。</p>
-            <p>公開審判庭一開始，律師團就提出三大質疑，包括<strong>為什麼被告要受軍事審判</strong>、<strong>戒嚴令的合法性</strong><TextNotation><p>警總以戒嚴時期為由，擴充解釋犯罪構成要件，以此限制人民的政治活動</p></TextNotation>，以及<strong>自白書的任意性</strong><TextNotation><p>被告的自白是出於自願，不是以不正當方法逼供</p></TextNotation>。黃信介首先接受提訊，他不同意偵訊筆錄的說法，稱自白書是「<strong>他們幫我作文的，我寫了再改，改了再寫</strong>」。檢察官則辯稱「一個人如果沒有犯罪，怎麼會受他人威脅利誘呢」。</p>
+            <p>公開審判庭一開始，律師團就提出三大質疑，包括<strong>為什麼被告要受軍事審判</strong>、<strong>戒嚴令的合法性</strong><TextNotation><p>警總以戒嚴時期為由，擴充解釋犯罪構成要件，以此限制人民的政治活動。</p></TextNotation>，以及<strong>自白書的任意性</strong><TextNotation><p>被告的自白是出於自願，不是以不正當方法逼供。</p></TextNotation>。黃信介首先接受提訊，他不同意偵訊筆錄的說法，稱自白書是「<strong>他們幫我作文的，我寫了再改，改了再寫</strong>」。檢察官則辯稱「一個人如果沒有犯罪，怎麼會受他人威脅利誘呢」。</p>
             <p>接下來接受提訊的呂秀蓮更披露，偵訊時遭調查人員疲勞審訊和恐嚇，「在那邊有 3、40 天處於失眠狀態，覺得自己一定會死，跟他們合作還可以好好過，就照他們的話去做。」其他人紛紛跟進，例如林義雄就說：「<strong>我只想早點結束這個折磨，筆錄我沒看就簽名了，不知寫些什麼。</strong>」</p>
             <p>張俊宏稱：「調查人員威脅趕快承認，如果不承認的話，<strong>政府會安其他的罪名</strong>。」</p>
             <p>姚嘉文面對審判官詢問，其筆錄裡提及要成立另一個政府，直言「我是說更改國旗、國號並沒有必要，內部改革才是重點，<strong>筆錄都是斷章取義</strong>，沒辦法完整傳達我原本的意思，我認為筆錄沒有參考的價值，庭上應該以今天提訊的內容為主。」</p>
@@ -125,42 +99,13 @@
 
         <div class="middle__container">
           <div class="report-page">
-            <div class="report-page__content">
-              <picture class="report-page__picture">
-                <img src="/proj-assets/backtoformosa/img/scene3/report-lin.jpg" alt="">
-              </picture>
-              <div class="report-page__qa">
-                <p>審判長：被告對你的調查筆錄、自白，有什麼意見？</p>
-                <p>林義雄：在保安處做的筆錄，<strong>幾乎完全不是我的思想與行為</strong>⋯⋯<strong>我急急答應，只想早點結束這個折磨，筆錄我沒看就簽名了，不知寫些什麼。</strong>我在調查庭時曾告訴各位法官，我的家庭美滿，對社會沒有什麼不滿，今天所講的和筆錄所寫的完全不同，請法官斟酌。</p>
-              </div>
-            </div>
-            <div class="report-page__content">
-              <picture class="report-page__picture">
-                <img src="/proj-assets/backtoformosa/img/scene3/report-chen.jpg" alt="">
-              </picture>
-              <div class="report-page__qa">
-                <p>被捕以來心中恐懼，我不懂法律，以為其他被告跟我一樣認命，但<strong>我發現自己的消極，影響其他人事大，影響自己事小</strong>。<strong>我在國外的確認識臺獨分子張燦鍙，但我主張和平的改革，對政權沒有興趣</strong>，所以和張燦鍙只相處 5、6 小時，怎麼可能會受其煽惑？我心中沒有恨，希望歷史悲劇不要再重演。</p>
-              </div>
-            </div>
-            <div class="report-page__content">
-              <picture class="report-page__picture">
-                <img src="/proj-assets/backtoformosa/img/scene3/report-huang.jpg" alt="">
-              </picture>
-              <div class="report-page__qa">
-                <p>審判長：美麗島雜誌社成立於何時？成立的目的？</p>
-                <p>黃信介：記不清楚，他們說我們需要一個研究機構，作為發表言論的地方，他們向我建議，我就同意了，這是他們五人的意思，我不太會寫文章，就請姚嘉文、林義雄擔任發行管理人。</p>
-                <p>審判長：根據調查筆錄，你要搞臺獨運動？</p>
-                <p>黃信介：<strong>筆錄是疲勞訊問，我亂說的。</strong></p>
-                <p>審判長：你對你的供詞，有何意見？</p>
-                <p>黃信介：<strong>我為了減輕罪刑，才這樣說的。</strong></p>
-              </div>
-            </div>
+            <ReportPageContent v-for="content in reportPageContent[ '2' ]" :content="content" src="scene3/" :key="content.name" />
           </div>
         </div>
 
         <div class="middle__container">
           <div class="middle__content">
-            <p>隨著審判進入尾聲，大部分被告才從家屬在庭上的發言，得知林義雄家發生血案<TextNotation><p>該年 2 月 28 日，林義雄臺北市住家發生兇殺案，其 60 歲母親游阿妹及 7 歲雙胞胎女兒林亮均、林亭均被刺殺身亡，9 歲長女林奐均重傷，此案至今未偵破。促轉會 2020 年 2 月 17 日公布「林義雄宅血案調查報告」，指出當年威權統治當局涉案的可能性不容排除。</p></TextNotation>，施明德在最後陳述時情緒難以平復，脫口而出：「林義雄家發生這件悲慘的事，讓我感到這個國家將會受到更多創傷及更大的災禍⋯⋯如果<strong>能帶給國家社會和諧，我請求判我死刑</strong>。」</p>
+            <p>隨著審判進入尾聲，大部分被告才從家屬在庭上的發言，得知林義雄家發生血案<TextNotation><p>該年 2 月 28 日，林義雄臺北市住家發生兇殺案，其 60 歲母親游阿妹及 7 歲雙胞胎女兒林亮均、林亭均被刺殺身亡，9 歲長女林奐均重傷，此案至今未偵破。促轉會 2020 年 2 月 17 日公布「<a href="https://admin.tjc.gov.tw/public/cipas-uploads/news/2020/02/3952c81b707e941391c462e3b17814cd.pdf" target="_blank">林義雄宅血案調查報告</a>」，指出當年威權統治當局涉案的可能性不容排除。</p></TextNotation>，施明德在最後陳述時情緒難以平復，脫口而出：「林義雄家發生這件悲慘的事，讓我感到這個國家將會受到更多創傷及更大的災禍⋯⋯如果<strong>能帶給國家社會和諧，我請求判我死刑</strong>。」</p>
             <p>林義雄則請求審判官「能擺脫一切政治上、輿論上、感情上的壓力，作最公正判決。」現場氣氛哀戚，從檢察官的話語，也看出他的態度軟化許多，他說：「對林義雄家變，心中很沉痛，我們是以哀矜勿喜的態度處理此案」，但仍不忘訓誡「被告要爭人權、爭自由、政治改革，應該循政治常軌，而不是打破人頭」。</p>
             <p>3 月 28 日，軍法大審結束最後一場言詞辯論，8 名被告還押看守所，等待判決的結果。</p>
           </div>
@@ -184,8 +129,10 @@
 <script>
 import { controlCoveredEffect, raf } from './util/index.js'
 import listItems from './data/listItems.js'
+import reportPageContent from './data/reportPageContent.js'
 
 import SlideContainer from './components/SlideContainer.vue'
+import ReportPageContent from './components/ReportPageContent.vue'
 import TextNotation from './components/TextNotation.vue'
 import EndingPage from './components/EndingPage.vue'
 
@@ -201,12 +148,14 @@ export default {
   },
   components: {
     SlideContainer,
+    ReportPageContent,
     TextNotation,
     EndingPage
   },
   data () {
     return {
-      listItems
+      listItems,
+      reportPageContent
     }
   },
   mounted () {
@@ -219,6 +168,7 @@ export default {
 
 <style lang="stylus">
 @import '../../util/reset.css'
+// @import './util/global.styl'
 
 $ff-sans-serif = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Noto Sans CJK TC", "Noto Sans CJK", "Source Han Sans", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif
 
@@ -235,6 +185,7 @@ strong
   position relative
 
 .back-to-formosa
+  overflow hidden
   &__middle
     z-index 9
     position relative
@@ -350,28 +301,26 @@ strong
     line-height 1.8
     margin-bottom 152px
 
-.report-page
-  &__content + .report-page__content
-    margin-top 80px
-  &__picture
-    margin-bottom 20px
-    & img
-      width 100%
-      height auto
-  &__qa
-    font-size 1.6rem
-    line-height 1.75
-    & p + p
-      margin-top 28px
+.report-page-content__qa picture
+  &.lin
+    width 80px
+    margin-left 20px
+  &.chen
+    width 50px
+    margin-left 24px
+  &.huang
+    width 70px
+    margin-left 32px
 
 .list-page
   &__name
     font-size 3.0rem
-    line-height normal
+    line-height 1.4
     margin-bottom 8px
     font-weight 700
-  &__list-item + .list-page__list-item
-    margin-top 40px
+  &__list-item
+    & + &
+      margin-top 40px
   & ul
     line-height 1.8
     font-size 2.0rem
