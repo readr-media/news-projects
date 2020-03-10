@@ -29,9 +29,13 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../util/global.styl'
+
 .report-page-content
   & + &
-    margin-top 80px
+    margin-top 64px
+    @media (min-width $breakpoint-md)
+      margin-top 80px
   &__picture
     margin-bottom 20px
     & img
@@ -41,8 +45,9 @@ export default {
     font-size 1.6rem
     line-height 1.75
     // @media (min-width $breakpoint-desktop)
-    display flex
-    align-items flex-start
+    @media (min-width $breakpoint-md)
+      display flex
+      align-items flex-start
     & picture
       flex 0 0 auto
     & img

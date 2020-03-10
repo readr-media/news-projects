@@ -5,8 +5,8 @@
       <div class="bg bg--file" />
       <div class="bg bg--dark" />
 
-      <div class="middle__scene middle__scene--1">
-        <div class="scene-heading scene-heading--1">
+      <div class="middle__scene" id="middle__scene--1">
+        <div class="scene-heading" id="scene-heading--1">
           <picture class="scene-heading__person">
             <img src="/proj-assets/backtoformosa/img/scene1/person.png" alt="">
           </picture>
@@ -26,8 +26,8 @@
         </div>
       </div>
 
-      <div class="middle__scene middle__scene--2">
-        <picture class="scene2-title">
+      <div class="middle__scene" id="middle__scene--2">
+        <picture id="scene2-title">
           <img src="/proj-assets/backtoformosa/img/scene2/title.svg" alt="">
         </picture>
 
@@ -41,19 +41,30 @@
           </div>
         </div>
 
-        <div class="scene2-yao-wrapper">
-          <picture class="scene2-yao">
+        <!-- <div id="scene2-yao">
+          <picture>
             <img src="/proj-assets/backtoformosa/img/scene2/yao.png" alt="">
           </picture>
-        </div>
-        <div class="middle__container">
-          <div class="middle__content">
-            <p>然而，從國發會檔案管理局收藏的政治犯筆錄中，卻發現了他們遭遇疲勞偵訊或是刑求的證據，例如被送往警總保安處的林義雄，他在 2 月 25 日撰寫的備忘錄中提及「偵訊就是反反覆覆問同樣的問題，一開始是好幾天不准睡覺，接下來是答覆的不滿意就打，打到讓你受不了，屈服了就改變態度。一方面以刑求做威脅，一方面以政府會寬大做引誘，要達到他們取得十全十美，令人一看就滿意的筆錄。」</p>
-            <p>偵訊人員軟硬兼施，林義雄寫下一些讓他印象深刻的恐嚇，例如「如果你不說，拿出證據來，每一樣都幾個人來痛打你一頓。打死了，就說你畏罪自殺」、「如果不合作，把你打成共產黨」、「人總是人，識時務者為俊傑，你這個身體受不了那些」；他也記錄了自己被刑求的過程：「打的部位是前胸、後背、腹部，腳踢的是小腿和腹部，有時候也用香菸燙我的臉，燒我的鬍子。他們一方面打，一方面以拖到地下室做威脅，說什麼過五關、打幸福針（我不知道這是什麼意思，只覺得很恐怖），痛打之後，他們看我已屈服，就不再打，開始對我好。」</p>
-            <p>連續幾 10 天的訊問，林義雄改了 5、6 次的筆錄，被迫承認美麗島活動就是一個叛亂行為，美麗島雜誌社是一個叛亂組織，他主張臺灣獨立，鼓勵人民反抗政府等等。林義雄語帶無奈寫道，「這些調查人員的主觀之強烈，是很少見的，在他們的心目中，黨外的言行除了顛覆政府外，不可能有其他目的。所謂民主自由都是黨外為了遂行自己的政治野心提出來的口號而已，他們自認為把黨外看得十分透徹，但我覺得這種態度，是今天黨外人士之所以會走極端，和國民黨站在絕對的立場之根本原因。」</p>
-            <p>呂秀蓮則被送到景美軍法看守所，她在 3 月 24 日撰寫的「司法行政部調查局違法偵訊實情」一文中寫道，「調查員常拿吳春發<TextNotation><p>吳春發原本是詐欺犯，逃亡日本後結識中國駐外人員，表明願意替中共在臺灣進行武裝暴動，1978 年遭逮，最後依「懲治叛亂條例」第二條第一項，判處死刑。</p></TextNotation>被槍斃的事情來威脅取供，某天他們還給我看他鮮血淋漓的照片，又勒令我高聲朗誦殯儀館通知吳妻認領屍體的公函，然後說『妳就是第二個吳春發，妳離靶場越來越近了，不久妳的家人也會收到殯儀館領屍的通知』等話，也會要我撰寫遺囑，交代後事，讓我覺得罪該萬死。」</p>
-            <p>除了言語恐嚇，呂秀蓮也記錄了身體遭受的苦痛，像是調查人員若逼供不成，會要求她罰站，往往一站就是 4、5 個小時以上；超過 12 個小時不予進食是家常便飯，當時她罹患甲狀腺癌，再加上全天候偵訊，常感覺頭暈眼花、痛苦不已。此外，呂秀蓮撰寫的供詞如果不合要求，調查人員會當面撕裂或焚燒，命她反覆重寫，所謂的自白書根本是「他白書」。</p>
-            <p>偵訊告一段落後，臺灣警備總司令部軍法處 2 月 20 日，以《懲治叛亂條例》第二條第一項的叛亂罪，起訴黃信介、施明德、張俊宏、姚嘉文、林義雄、陳菊、呂秀蓮、林弘宣 8 人，並由軍事法庭審理，其餘 37 人移送司法機關偵辦。</p>
+        </div> -->
+        <div id="middle-yao-container">
+          <div class="middle__container">
+            <div class="middle__content">
+              <p>然而，從國發會檔案管理局收藏的政治犯筆錄中，卻發現了他們遭遇疲勞偵訊或是刑求的證據，例如被送往警總保安處的林義雄，他在 2 月 25 日撰寫的備忘錄中提及「偵訊就是反反覆覆問同樣的問題，一開始是好幾天不准睡覺，接下來是答覆的不滿意就打，打到讓你受不了，屈服了就改變態度。一方面以刑求做威脅，一方面以政府會寬大做引誘，要達到他們取得十全十美，令人一看就滿意的筆錄。」</p>
+              <p>偵訊人員軟硬兼施，林義雄寫下一些讓他印象深刻的恐嚇，例如「如果你不說，拿出證據來，每一樣都幾個人來痛打你一頓。打死了，就說你畏罪自殺」、「如果不合作，把你打成共產黨」、「人總是人，識時務者為俊傑，你這個身體受不了那些」；他也記錄了自己被刑求的過程：「打的部位是前胸、後背、腹部，腳踢的是小腿和腹部，有時候也用香菸燙我的臉，燒我的鬍子。他們一方面打，一方面以拖到地下室做威脅，說什麼過五關、打幸福針（我不知道這是什麼意思，只覺得很恐怖），痛打之後，他們看我已屈服，就不再打，開始對我好。」</p>
+              <p>連續幾 10 天的訊問，林義雄改了 5、6 次的筆錄，被迫承認美麗島活動就是一個叛亂行為，美麗島雜誌社是一個叛亂組織，他主張臺灣獨立，鼓勵人民反抗政府等等。林義雄語帶無奈寫道，「這些調查人員的主觀之強烈，是很少見的，在他們的心目中，黨外的言行除了顛覆政府外，不可能有其他目的。所謂民主自由都是黨外為了遂行自己的政治野心提出來的口號而已，他們自認為把黨外看得十分透徹，但我覺得這種態度，是今天黨外人士之所以會走極端，和國民黨站在絕對的立場之根本原因。」</p>
+            </div>
+          </div>
+          <div id="scene2-yao">
+            <picture>
+              <img src="/proj-assets/backtoformosa/img/scene2/yao.png" alt="">
+            </picture>
+          </div>
+          <div class="middle__container">
+            <div class="middle__content">
+              <p>呂秀蓮則被送到景美軍法看守所，她在 3 月 24 日撰寫的「司法行政部調查局違法偵訊實情」一文中寫道，「調查員常拿吳春發<TextNotation><p>吳春發原本是詐欺犯，逃亡日本後結識中國駐外人員，表明願意替中共在臺灣進行武裝暴動，1978 年遭逮，最後依「懲治叛亂條例」第二條第一項，判處死刑。</p></TextNotation>被槍斃的事情來威脅取供，某天他們還給我看他鮮血淋漓的照片，又勒令我高聲朗誦殯儀館通知吳妻認領屍體的公函，然後說『妳就是第二個吳春發，妳離靶場越來越近了，不久妳的家人也會收到殯儀館領屍的通知』等話，也會要我撰寫遺囑，交代後事，讓我覺得罪該萬死。」</p>
+              <p>除了言語恐嚇，呂秀蓮也記錄了身體遭受的苦痛，像是調查人員若逼供不成，會要求她罰站，往往一站就是 4、5 個小時以上；超過 12 個小時不予進食是家常便飯，當時她罹患甲狀腺癌，再加上全天候偵訊，常感覺頭暈眼花、痛苦不已。此外，呂秀蓮撰寫的供詞如果不合要求，調查人員會當面撕裂或焚燒，命她反覆重寫，所謂的自白書根本是「他白書」。</p>
+              <p>偵訊告一段落後，臺灣警備總司令部軍法處 2 月 20 日，以《懲治叛亂條例》第二條第一項的叛亂罪，起訴黃信介、施明德、張俊宏、姚嘉文、林義雄、陳菊、呂秀蓮、林弘宣 8 人，並由軍事法庭審理，其餘 37 人移送司法機關偵辦。</p>
+            </div>
           </div>
         </div>
 
@@ -62,25 +73,23 @@
             <div class="list-page__intro">
               <p>偵訊時，他們被如何對待：</p>
             </div>
-            <div class="list-page__list-container">
-              <div class="list-page__list-item" v-for="item in listItems" :key="item.name">
-                <p class="list-page__name">{{ item.name }}</p>
-                <ul>
-                  <li v-for="description in item.descriptions" v-html="description" />
-                </ul>
-              </div>
-            </div>
+            <ListPageContent :listItems="listItems" />
+            <picture id="blood">
+              <img src="/proj-assets/backtoformosa/img/scene2/blood.svg" alt="">
+            </picture>
           </div>
         </div>
       </div>
 
-      <div class="middle__scene middle__scene--3">
-        <div class="scene-heading scene-heading--3">
+      <div class="middle__scene" id="middle__scene--3">
+        <div class="scene-heading" id="scene-heading--3">
           <picture class="scene-heading__person">
-            <img src="/proj-assets/backtoformosa/img/scene3/person-desk.png" alt="">
+            <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/scene3/person-desk.png">
+            <img src="/proj-assets/backtoformosa/img/scene3/person-mob.png" alt="">
           </picture>
           <picture class="scene-heading__title">
-            <img src="/proj-assets/backtoformosa/img/scene3/title-desk.svg" alt="">
+            <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/scene3/title-desk.svg">
+            <img src="/proj-assets/backtoformosa/img/scene3/title-mob.svg" alt="">
           </picture>
         </div>
 
@@ -117,7 +126,8 @@
 
     <div class="back-to-formosa__after">
       <picture>
-        <img src="/proj-assets/backtoformosa/img/after/photo-desk.png" alt="">
+        <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/after/photo-desk.png">
+        <img src="/proj-assets/backtoformosa/img/after/photo-mob.png" alt="">
       </picture>
       <picture class="after__table">
         <img src="/proj-assets/backtoformosa/img/after/table-desk.png" alt="">
@@ -133,6 +143,7 @@ import reportPageContent from './data/reportPageContent.js'
 
 import SlideContainer from './components/SlideContainer.vue'
 import ReportPageContent from './components/ReportPageContent.vue'
+import ListPageContent from './components/ListPageContent.vue'
 import TextNotation from './components/TextNotation.vue'
 import EndingPage from './components/EndingPage.vue'
 
@@ -149,6 +160,7 @@ export default {
   components: {
     SlideContainer,
     ReportPageContent,
+    ListPageContent,
     TextNotation,
     EndingPage
   },
@@ -168,7 +180,7 @@ export default {
 
 <style lang="stylus">
 @import '../../util/reset.css'
-// @import './util/global.styl'
+@import './util/global.styl'
 
 $ff-sans-serif = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Noto Sans CJK TC", "Noto Sans CJK", "Source Han Sans", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif
 
@@ -189,7 +201,13 @@ strong
   &__middle
     z-index 9
     position relative
-    padding-bottom 64vh
+    padding-bottom 80px
+    padding-left 10px
+    padding-right 10px
+    @media (min-width 620px)
+      padding-bottom 64vh
+      padding-left 0
+      padding-right 0
   &__after
     position relative
     z-index 9
@@ -221,15 +239,13 @@ strong
     opacity 0
 
 .scene-heading
-  position absolute
-  top 0
-  left 0
-  &--1
-    max-width 772px
-    width 53.61%
-  &--3
-    max-width 1062px
-    width 73.75%
+  position relative
+  margin-bottom 10px
+  @media (min-width $breakpoint-md)
+    position absolute
+    top 0
+    left 0
+    margin-bottom 0
   &__title
     position absolute
     width 100%
@@ -239,35 +255,55 @@ strong
     width 100%
     height auto
 
-.scene2
+#scene-heading
+  &--1
+    // margin-bottom 10px
+    @media (min-width $breakpoint-md)
+      // max-width 772px
+      max-width 862px
+      // width 53.61%
+      width 59.86%
+      left -6.25%
+      // margin-bottom 0
+  &--3
+    @media (min-width $breakpoint-md)
+      max-width 1062px
+      width 73.75%
+
+#scene2
   &-title
-    max-width 900px
-    width 62.5%
-    margin-left auto
-    position relative
-    right 7.43%
+    @media (min-width $breakpoint-md)
+      width 62.5%
+      right 7.43%
+      max-width 900px
+      margin-left auto
+      position relative
     & img
       width 100%
       height auto
   &-yao
-    max-width 500px
-    position absolute
-    top 0
-    right -7.64%
+    padding-top 10px
+    padding-bottom 35px
+    & picture
+      max-width 300px
+      right -10.94%
+      position relative
+      @media (min-width $breakpoint-md)
+        position absolute
+        max-width 500px
+        top 0
+        right -7.64%
     & img
       width 100%
       height auto
-  &-yao-wrapper
-    position relative
+#middle-yao-container
+  position relative
+  @media (min-width $breakpoint-md)
     padding-top 120px
 
 .middle
   &__scene
     position relative
-    &--1, &--3
-      padding-top 64vh
-    &--2
-      padding-top 80px
   &__container
     margin-right auto
     margin-left auto
@@ -278,6 +314,15 @@ strong
     text-align justify
     & p + p
       margin-top 28px
+// #middle
+//   &__scene
+//     &--1, &--3
+//       @media (min-width $breakpoint-md)
+//         padding-top 64vh
+//     &--2
+//       padding-top 20px
+//       @media (min-width $breakpoint-md)
+//         padding-top 80px
 
 .after
   &__table
@@ -291,53 +336,52 @@ strong
 
 .report-page, .list-page
   color #fff
-  padding-top 40vh
-  padding-bottom 40vh
+  // padding-top 20vh
+  // padding-bottom 20vh
   text-align justify
+  @media (min-width $breakpoint-md)
+    // padding-top 40vh
+    // padding-bottom 40vh
   &__intro
     font-size 2.0rem
     font-weight 500
     text-align center
     line-height 1.8
-    margin-bottom 152px
+    // margin-bottom 128px
+    // @media (min-width $breakpoint-md)
+    //   margin-bottom 152px
+.list-page
+  position relative
 
 .report-page-content__qa picture
+  margin-left auto
+  margin-right auto
+  margin-top 20px
+  @media (min-width $breakpoint-md)
+    margin-top 0
+    align-self center
   &.lin
     width 80px
-    margin-left 20px
+    @media (min-width $breakpoint-md)
+      margin-left 20px
   &.chen
     width 50px
-    margin-left 24px
+    @media (min-width $breakpoint-md)
+      margin-left 24px
   &.huang
     width 70px
-    margin-left 32px
+    @media (min-width $breakpoint-md)
+      margin-left 32px
 
-.list-page
-  &__name
-    font-size 3.0rem
-    line-height 1.4
-    margin-bottom 8px
-    font-weight 700
-  &__list-item
-    & + &
-      margin-top 40px
-  & ul
-    line-height 1.8
-    font-size 2.0rem
-  & li
-    position relative
-    padding-top 2px
-    padding-bottom 2px
-    padding-left 22px
-    &::before
-      content ''
-      display block
-      position absolute
-      width 12px
-      height 12px
-      border-radius 50%
-      background-color #a56c6a
-      // (36 - 12) / 2 + 2
-      top 14px
-      left 0
+#blood
+  position absolute
+  width 564px
+  top -208px
+  z-index -1
+  @media (min-width $breakpoint-md)
+    // 292 + 36
+    top 328px
+    // 120 / 600
+    left -20%
+    width 1500px
 </style>

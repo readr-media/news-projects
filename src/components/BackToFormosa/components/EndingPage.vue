@@ -2,7 +2,7 @@
   <article class="ending-page">
     <div class="ending-page__container">
 
-      <div class="ending-page__wrapper ending-page__wrapper--linyi">
+      <div class="ending-page__wrapper" id="ending-page__wrapper--linyi">
         <div class="ending-page__pictures">
           <picture>
             <img src="/proj-assets/backtoformosa/img/scene3/ending-linyi.png" alt="">
@@ -20,10 +20,7 @@
         </div>
       </div>
 
-      <div class="ending-page__wrapper ending-page__wrapper--shi">
-        <div class="ending-page__content mxw-400 l-40">
-          <p>林義雄家發生這件悲慘的事，讓我感到這個國家將會受到更多創傷及延伸更大的災禍，但我這份愛國家愛土地的心，在此懇切地向受傷的同胞及反對我們的同胞表示歉意，希望能平息他的報復心理，我呼籲國內外支持我們及我的妻子艾琳達，放下你們的拳頭，熄滅你們的怒火。我不是怕死的人，我不會為我的生命而低頭，我會為我們全民國家利益而低頭，我不是在此表演，也不是要博得減刑，如果能帶給國家社會和諧，我請求判我死刑。</p>
-        </div>
+      <div class="ending-page__wrapper" id="ending-page__wrapper--shi">
         <div class="ending-page__pictures mg-l-auto">
           <picture>
             <img src="/proj-assets/backtoformosa/img/scene3/ending-shi.png" alt="">
@@ -32,9 +29,12 @@
             <img src="/proj-assets/backtoformosa/img/scene3/ending-shi-title.svg" alt="">
           </picture>
         </div>
+        <div class="ending-page__content mxw-400 l-40">
+          <p>林義雄家發生這件悲慘的事，讓我感到這個國家將會受到更多創傷及延伸更大的災禍，但我這份愛國家愛土地的心，在此懇切地向受傷的同胞及反對我們的同胞表示歉意，希望能平息他的報復心理，我呼籲國內外支持我們及我的妻子艾琳達，放下你們的拳頭，熄滅你們的怒火。我不是怕死的人，我不會為我的生命而低頭，我會為我們全民國家利益而低頭，我不是在此表演，也不是要博得減刑，如果能帶給國家社會和諧，我請求判我死刑。</p>
+        </div>
       </div>
 
-      <div class="ending-page__wrapper ending-page__wrapper--chen">
+      <div class="ending-page__wrapper" id="ending-page__wrapper--chen">
         <div class="ending-page__pictures">
           <picture>
             <img src="/proj-assets/backtoformosa/img/scene3/ending-chen.png" alt="">
@@ -48,11 +48,7 @@
         </div>
       </div>
 
-      <div class="ending-page__wrapper ending-page__wrapper--lu">
-        <div class="ending-page__content mxw-290 l-40">
-          <p>我一直認為，無論國際局勢多橫逆，國家總是自己的，無論前途多晦暗，覺悟與奮鬥總有希望。我不曾主張臺灣獨立，雖然我被調查局以臺獨叛亂的罪名羅織，我所主張的，其實是臺灣的前途應由一千八百萬臺灣島上的住民來共同決定，而不是美國的霸權或中共的武裝侵略。</p>
-          <p>現在，我就要將我的生命，我的自由，我後半生的命運以及我家人的名譽與幸福，交給我面前代表國家執行法律的諸位審判官手上了。這希望的火殘忍地熄滅了，那時候，火光也許不再需要了，因為天已大亮！</p>
-        </div>
+      <div class="ending-page__wrapper" id="ending-page__wrapper--lu">
         <div class="ending-page__pictures mg-l-auto">
           <picture>
             <img src="/proj-assets/backtoformosa/img/scene3/ending-lu.png" alt="">
@@ -61,9 +57,13 @@
             <img src="/proj-assets/backtoformosa/img/scene3/ending-lu-title.svg" alt="">
           </picture>
         </div>
+        <div class="ending-page__content mxw-290 l-40">
+          <p>我一直認為，無論國際局勢多橫逆，國家總是自己的，無論前途多晦暗，覺悟與奮鬥總有希望。我不曾主張臺灣獨立，雖然我被調查局以臺獨叛亂的罪名羅織，我所主張的，其實是臺灣的前途應由一千八百萬臺灣島上的住民來共同決定，而不是美國的霸權或中共的武裝侵略。</p>
+          <p>現在，我就要將我的生命，我的自由，我後半生的命運以及我家人的名譽與幸福，交給我面前代表國家執行法律的諸位審判官手上了。這希望的火殘忍地熄滅了，那時候，火光也許不再需要了，因為天已大亮！</p>
+        </div>
       </div>
 
-      <div class="ending-page__wrapper ending-page__wrapper--linhong">
+      <div class="ending-page__wrapper" id="ending-page__wrapper--linhong">
         <div class="ending-page__pictures">
           <picture>
             <img src="/proj-assets/backtoformosa/img/scene3/ending-linhong.png" alt="">
@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      <div class="ending-page__wrapper ending-page__wrapper--huang">
+      <div class="ending-page__wrapper" id="ending-page__wrapper--huang">
         <div class="ending-page__pictures">
           <picture>
             <img src="/proj-assets/backtoformosa/img/scene3/ending-huang.png" alt="">
@@ -94,13 +94,7 @@
         </div>
       </div>
 
-      <div class="ending-page__wrapper ending-page__wrapper--yao">
-        <div class="ending-page__content mxw-400 l-40">
-          <p>感謝兩位檢察官，在審判中公開澄清高雄暴力事件不是被告等做為推翻政府的方法，以及說明「長短期奪權計畫」的名詞原來是辦案人員發明的。</p>
-          <p>請求庭上在判決書上記載被告不承認檢察官所指控的犯罪，只承認我們願為臺灣民主運動及「美麗島」獻身。被告只要求判無罪，並不要求因為認罪而減刑！我對各位的努力有很大的信心，就像我對我的信念一樣，我相信臺灣民主運動的推展不是任何人可以阻止的。</p>
-          <div class="ending-page__content__plus">輔佐人&nbsp;周清玉（姚嘉文妻子）</div>
-          <p>我們相處 18 年，互相了解、依賴，他為唯一死刑被羈押，我心如刀絞，他有他的理想和抱負，把工作分三等份，第一是做好律師，第二是好好做學問，教書寫文章，第三是積極參加社會服務工作，幫助他人，他的所有著作都離不開法律，用心教育大眾要守法，怎麼會叛國？他珍惜他的一切，熱愛自己的家庭，他是凡人，難免有缺失，但我和他確是愛國、愛人，希望庭上明察我丈夫，還我丈夫的清白。</p>
-        </div>
+      <div class="ending-page__wrapper" id="ending-page__wrapper--yao">
         <div class="ending-page__pictures mg-l-auto">
           <picture>
             <img src="/proj-assets/backtoformosa/img/scene3/ending-yao.png" alt="">
@@ -109,9 +103,15 @@
             <img src="/proj-assets/backtoformosa/img/scene3/ending-yao-title.svg" alt="">
           </picture>
         </div>
+        <div class="ending-page__content mxw-400 l-40">
+          <p>感謝兩位檢察官，在審判中公開澄清高雄暴力事件不是被告等做為推翻政府的方法，以及說明「長短期奪權計畫」的名詞原來是辦案人員發明的。</p>
+          <p>請求庭上在判決書上記載被告不承認檢察官所指控的犯罪，只承認我們願為臺灣民主運動及「美麗島」獻身。被告只要求判無罪，並不要求因為認罪而減刑！我對各位的努力有很大的信心，就像我對我的信念一樣，我相信臺灣民主運動的推展不是任何人可以阻止的。</p>
+          <div class="ending-page__content__plus">輔佐人&nbsp;周清玉（姚嘉文妻子）</div>
+          <p>我們相處 18 年，互相了解、依賴，他為唯一死刑被羈押，我心如刀絞，他有他的理想和抱負，把工作分三等份，第一是做好律師，第二是好好做學問，教書寫文章，第三是積極參加社會服務工作，幫助他人，他的所有著作都離不開法律，用心教育大眾要守法，怎麼會叛國？他珍惜他的一切，熱愛自己的家庭，他是凡人，難免有缺失，但我和他確是愛國、愛人，希望庭上明察我丈夫，還我丈夫的清白。</p>
+        </div>
       </div>
 
-      <div class="ending-page__wrapper ending-page__wrapper--zhang">
+      <div class="ending-page__wrapper" id="ending-page__wrapper--zhang">
         <div class="ending-page__pictures">
           <picture>
             <img src="/proj-assets/backtoformosa/img/scene3/ending-zhang.png" alt="">
@@ -142,12 +142,84 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../util/global.styl'
+
+#ending-page__wrapper
+  &--linyi
+    // padding-top 170px
+    & .ending-page
+      &__pictures
+        @media (min-width $breakpoint-md)
+          max-width 704px
+          width 70.4%
+      &__content
+        @media (min-width $breakpoint-md)
+          top 0
+  &--shi .ending-page
+    &__pictures
+      @media (min-width $breakpoint-md)
+        max-width 612px
+        width 61.2%
+    &__content
+      @media (min-width $breakpoint-md)
+        top 220px
+  &--chen .ending-page
+    &__pictures
+      @media (min-width $breakpoint-md)
+        max-width 612px
+        width 61.2%
+    &__content
+      @media (min-width $breakpoint-md)
+        top 190px
+  &--lu .ending-page
+    &__pictures
+      @media (min-width $breakpoint-md)
+        max-width 786px
+        width 78.6%
+    &__content
+      @media (min-width $breakpoint-md)
+        top 64px
+  &--linhong .ending-page
+    &__pictures
+      @media (min-width $breakpoint-md)
+        max-width 740px
+        width 74%
+    &__content
+      @media (min-width $breakpoint-md)
+        top 56px
+  &--huang .ending-page
+    &__pictures
+      @media (min-width $breakpoint-md)
+        max-width 612px
+        width 61.2%
+    &__content
+      @media (min-width $breakpoint-md)
+        top 180px
+  &--yao .ending-page
+    &__pictures
+      @media (min-width $breakpoint-md)
+        max-width 612px
+        width 61.2%
+    &__content
+      @media (min-width $breakpoint-md)
+        top 166px
+  &--zhang .ending-page
+    &__pictures
+      @media (min-width $breakpoint-md)
+        max-width 648px
+        width 64.8%
+    &__content
+      @media (min-width $breakpoint-md)
+        top 294px
+
 .ending-page
   z-index 9
   position relative
   background-color #fff
-  padding-top 80px
-  padding-bottom 80px
+  // padding-top 80px
+  // padding-bottom 80px
+  padding-top 60px
+  padding-bottom 60px
   &__container
     max-width 1000px
     margin-left auto
@@ -156,61 +228,19 @@ export default {
     line-height 1.75
   &__wrapper
     position relative
+    & + &
+      margin-top 60px
+      @media (min-width $breakpoint-md)
+        margin-top 0
     & p + p
-      margin-top 28px
-    &--linyi
-      padding-top 170px
-      & .ending-page
-        &__pictures
-          max-width 704px
-          width 70.4%
-        &__content
-          top 0
-    &--shi .ending-page
-      &__pictures
-        max-width 612px
-        width 61.2%
-      &__content
-        top 220px
-    &--chen .ending-page
-      &__pictures
-        max-width 612px
-        width 61.2%
-      &__content
-        top 190px
-    &--lu .ending-page
-      &__pictures
-        max-width 786px
-        width 78.6%
-      &__content
-        top 64px
-    &--linhong .ending-page
-      &__pictures
-        max-width 740px
-        width 74%
-      &__content
-        top 56px
-    &--huang .ending-page
-      &__pictures
-        max-width 612px
-        width 61.2%
-      &__content
-        top 180px
-    &--yao .ending-page
-      &__pictures
-        max-width 612px
-        width 61.2%
-      &__content
-        top 166px
-    &--zhang .ending-page
-      &__pictures
-        max-width 648px
-        width 64.8%
-      &__content
-        top 294px
+      // margin-top 28px
+      margin-top 16px
   &__pictures
-    position relative
-    z-index -1
+    margin-bottom 10px
+    @media (min-width $breakpoint-md)
+      position relative
+      z-index -1
+      margin-bottom 0
     &__title
       position absolute
       width 100%
@@ -220,21 +250,29 @@ export default {
       width 100%
       height auto
   &__content
-    position absolute
     text-align justify
+    padding-right 10px
+    padding-left 10px
+    @media (min-width $breakpoint-md)
+      position absolute
     &.r-40
-      right 40px
+      @media (min-width $breakpoint-md)
+        right 40px
       @media (min-width 1080px)
         right 0
     &.l-40
-      left 40px
+      @media (min-width $breakpoint-md)
+        left 40px
       @media (min-width 1080px)
         left 0
     &.mxw-400
-      max-width 400px
+      @media (min-width $breakpoint-md)
+        max-width 400px
     &.mxw-290
-      max-width 290px
+      @media (min-width $breakpoint-md)
+        max-width 290px
     &__plus
       font-weight 700
-      margin-top 32px
+      // margin-top 32px
+      margin-top 20px
 </style>
