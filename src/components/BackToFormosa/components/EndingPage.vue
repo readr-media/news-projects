@@ -250,7 +250,7 @@ export default {
       width 100%
       height auto
   &__content
-    text-align justify
+    // text-align justify
     padding-right 10px
     padding-left 10px
     @media (min-width $breakpoint-md)

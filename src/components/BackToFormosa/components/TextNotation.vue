@@ -63,7 +63,7 @@ export default {
     line-height 1.4
     margin-top 12px
     margin-bottom 12px
-    text-align justify
+    // text-align justify
     & a
       color #a56c6a
       font-weight 500

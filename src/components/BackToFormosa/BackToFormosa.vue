@@ -129,10 +129,28 @@
         <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/after/photo-desk.png">
         <img src="/proj-assets/backtoformosa/img/after/photo-mob.png" alt="">
       </picture>
-      <picture class="after__table">
-        <img src="/proj-assets/backtoformosa/img/after/table-desk.png" alt="">
-      </picture>
+      <div class="after__wrapper">
+        <div class="after__caption">
+          <p>4 月 18 日</p>
+          <p>軍事法庭判決 8 人全部有罪</p>
+          <p>施明德判處無期徒刑</p>
+          <p>黃信介 14 年有期徒刑</p>
+          <p>其餘 6 人 12 年有期徒刑</p>
+        </div>
+        <AfterTable :tableItems="afterTableItems" />
+        <!-- <div class="after__table">
+          <div class="after__table__wrapper">
+            <p class="after__table__title">施明德<br>服刑 10 年 4 個月</p>
+            <p class="after__table__intro">民進黨第 6 屆主席<br>2006 年發起反貪倒扁運動</p>
+          </div>
+        </div> -->
+        <!-- <picture class="after__table">
+          <img src="/proj-assets/backtoformosa/img/after/table-desk.png" alt="">
+        </picture> -->
+      </div>
     </div>
+
+    <TheFooter />
   </div>
 </template>
 
@@ -140,12 +158,15 @@
 import { controlCoveredEffect, raf } from './util/index.js'
 import listItems from './data/listItems.js'
 import reportPageContent from './data/reportPageContent.js'
+import afterTableItems from './data/afterTableItems.js'
 
 import SlideContainer from './components/SlideContainer.vue'
 import ReportPageContent from './components/ReportPageContent.vue'
 import ListPageContent from './components/ListPageContent.vue'
 import TextNotation from './components/TextNotation.vue'
 import EndingPage from './components/EndingPage.vue'
+import AfterTable from './components/AfterTable.vue'
+import TheFooter from './components/TheFooter.vue'
 
 export default {
   name: 'BackToFormosa',
@@ -162,12 +183,15 @@ export default {
     ReportPageContent,
     ListPageContent,
     TextNotation,
-    EndingPage
+    EndingPage,
+    AfterTable,
+    TheFooter
   },
   data () {
     return {
       listItems,
-      reportPageContent
+      reportPageContent,
+      afterTableItems
     }
   },
   mounted () {
@@ -311,7 +335,7 @@ strong
   &__content
     font-size 1.6rem
     line-height 1.75
-    text-align justify
+    // text-align justify
     & p + p
       margin-top 28px
 // #middle
@@ -325,20 +349,38 @@ strong
 //         padding-top 80px
 
 .after
-  &__table
-    background-image linear-gradient(to bottom, #000000, #a56c6a)
-    padding-top 80px
-    padding-bottom 80px
-    & img
-      max-width 900px
-      margin-right auto
-      margin-left auto
+  &__wrapper
+    background-image linear-gradient(to bottom, #a56c6a, #000000)
+    padding-top 32px
+  // &__table
+  //   padding-top 80px
+  //   padding-bottom 80px
+  //   & img
+  //     max-width 900px
+  //     margin-right auto
+  //     margin-left auto
+  &__caption
+    font-size 2.0rem
+    line-height 1.4
+    display flex
+    flex-direction column
+    align-items center
+    // @media (min-width $breakpoint-md)
+    //   position absolute
+    //   align-items flex-start
+    //   top 4.78%
+    //   right 23.36%
+    & p
+      padding 3px 14px
+      background-color rgba(#fff, 0.7)
+      & + p
+        margin-top 16px
 
 .report-page, .list-page
   color #fff
   // padding-top 20vh
   // padding-bottom 20vh
-  text-align justify
+  // text-align justify
   @media (min-width $breakpoint-md)
     // padding-top 40vh
     // padding-bottom 40vh

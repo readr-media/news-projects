@@ -65,6 +65,38 @@ export default {
         type: 'png'
         // className: 'slide-item__picture--cover'
         // animation: 'slide-img-back 3s ease-in forwards'
+      },
+      {
+        name: 'slide3-title1',
+        type: 'png'
+      },
+      {
+        name: 'slide3-title2',
+        type: 'png'
+      },
+      {
+        name: 'slide3-title3',
+        type: 'png'
+      },
+      {
+        name: 'slide3-title4',
+        type: 'png'
+      },
+      {
+        name: 'slide3-title5',
+        type: 'png'
+      },
+      {
+        name: 'slide3-title6',
+        type: 'png'
+      },
+      {
+        name: 'slide3-title7',
+        type: 'png'
+      },
+      {
+        name: 'slide3-title8',
+        type: 'png'
       }
     ],
     content: {}
