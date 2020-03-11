@@ -228,6 +228,7 @@ strong
     padding-bottom 80px
     padding-left 10px
     padding-right 10px
+    background-color #000
     @media (min-width 620px)
       padding-bottom 64vh
       padding-left 0

@@ -18,7 +18,11 @@ export default {
   // width 100%
   min-height 100vh
   position relative
-  // overflow hidden
+  overflow hidden
+  &.paused
+    animation-play-state paused !important
+    & *
+      animation-play-state paused !important
   &__text
     position absolute
     width 100%
@@ -27,7 +31,9 @@ export default {
     left 50%
     transform translateX(-50%)
     text-align center
+    animation slide-text-default 0.75s 2.25s $easeOutSine both
     @media (min-width $breakpoint-md)
+      animation-name slide-text-default-md
       width auto
       transform translateX(0)
     &.caption
