@@ -98,14 +98,10 @@ export default {
       text-align center
       & > div
         font-size 2.0rem
-        // line-height 1.4
         margin-top 124px
         font-weight 400
         & p + p
           margin-top 15px
-
-// .slide3-title
-//   animation slide3-img 3s $easeInOutCubic both
 
 #slide-item
   &--1
@@ -153,8 +149,6 @@ export default {
       width 93.75%
       height auto
       top auto
-      // left 50%
-      // transform translateX(-50%)
       margin-right auto
       margin-left auto
       bottom 0
@@ -163,12 +157,9 @@ export default {
       box-sizing content-box
       animation slide6-img-title 0.9s $easeInOutCubic both
       @media (min-width $breakpoint-md)
-        // max-width 928px
         width 64.51%
-        // right 55px
         right 3.8%
         left auto
-        // transform translateX(0)
         margin-left 0
         margin-right 0
         padding-right 0
@@ -179,15 +170,6 @@ export default {
   &__text
     &--1
       bottom 7.04%
-      // & > p
-      //   &:nth-child(1)
-      //     animation slide1-text 0.8s 1.6s linear both
-      //   &:nth-child(2)
-      //     animation slide1-text 0.7s 1.7s linear both
-      //   &:nth-child(3)
-      //     animation slide1-text 0.6s 1.8s linear both
-      //   &:nth-child(4)
-      //     animation slide1-text 0.5s 1.9s linear both
       @media (min-width $breakpoint-md)
         bottom 4.83%
         left 12.99%
@@ -210,11 +192,6 @@ export default {
         animation slide5-text 0.75s 0.9s $easeOutSine both
 
 // animations
-// @keyframes slide-item-default
-//   0%
-//     opacity 0.8
-//   100%
-//     opacity 1
 @keyframes slide-img-back-default
   0%
     // transform scale(1.12)

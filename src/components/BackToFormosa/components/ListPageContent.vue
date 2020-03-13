@@ -43,8 +43,6 @@ export default {
       line-height 2
   & li
     position relative
-    // padding-top 2px
-    // padding-bottom 2px
     padding-left 22px
     & + li
       margin-top 4px

@@ -26,9 +26,6 @@ export default {
   font-size 1.6rem
   line-height 1.4
   color #fff
-  // display flex
-  // flex-direction column
-  // align-items center
   text-align center
   padding 30px 10px 45px 10px
   max-width 600px

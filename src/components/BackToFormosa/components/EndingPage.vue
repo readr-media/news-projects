@@ -146,7 +146,8 @@ export default {
 
 #ending-page__wrapper
   &--linyi
-    // padding-top 170px
+    // 250 - 80
+    padding-top 170px
     & .ending-page
       &__pictures
         @media (min-width $breakpoint-md)
@@ -216,10 +217,11 @@ export default {
   z-index 9
   position relative
   background-color #fff
-  // padding-top 80px
-  // padding-bottom 80px
-  padding-top 60px
+  padding-top 30px
   padding-bottom 60px
+  @media (min-width $breakpoint-md)
+    padding-top 80px
+    padding-bottom 80px
   &__container
     max-width 1000px
     margin-left auto
@@ -234,7 +236,7 @@ export default {
         margin-top 0
     & p + p
       // margin-top 28px
-      margin-top 16px
+      margin-top 20px
   &__pictures
     margin-bottom 10px
     @media (min-width $breakpoint-md)
@@ -250,11 +252,12 @@ export default {
       width 100%
       height auto
   &__content
-    // text-align justify
     padding-right 10px
     padding-left 10px
     @media (min-width $breakpoint-md)
       position absolute
+      padding-left 0
+      padding-right 0
     &.r-40
       @media (min-width $breakpoint-md)
         right 40px
@@ -274,5 +277,5 @@ export default {
     &__plus
       font-weight 700
       // margin-top 32px
-      margin-top 20px
+      margin-top 24px
 </style>

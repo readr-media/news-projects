@@ -1,9 +1,9 @@
 <template>
   <div class="back-to-formosa">
     <SlideContainer ref="opening" />
-    <article class="back-to-formosa__middle" ref="middle">
+    <article class="back-to-formosa__middle" :style="{ color: isDark ? '#fff' : '' }" ref="middle">
       <div class="bg bg--file" />
-      <div class="bg bg--dark" />
+      <div class="bg bg--dark" :style="{ opacity: isDark ? '' : 0 }" />
 
       <div class="middle__scene" id="middle__scene--1">
         <div class="scene-heading" id="scene-heading--1">
@@ -31,7 +31,7 @@
           <img src="/proj-assets/backtoformosa/img/scene2/title.svg" alt="">
         </picture>
 
-        <div class="middle__container">
+        <div class="middle__container" ref="reportPage1">
           <div class="report-page">
             <div class="report-page__intro">
               <p>大逮捕之後，情治單位各自展開調查。</p>
@@ -41,11 +41,6 @@
           </div>
         </div>
 
-        <!-- <div id="scene2-yao">
-          <picture>
-            <img src="/proj-assets/backtoformosa/img/scene2/yao.png" alt="">
-          </picture>
-        </div> -->
         <div id="middle-yao-container">
           <div class="middle__container">
             <div class="middle__content">
@@ -68,7 +63,7 @@
           </div>
         </div>
 
-        <div class="middle__container">
+        <div class="middle__container" ref="listPage">
           <div class="list-page">
             <div class="list-page__intro">
               <p>偵訊時，他們被如何對待：</p>
@@ -81,7 +76,7 @@
         </div>
       </div>
 
-      <div class="middle__scene" id="middle__scene--3">
+      <div class="middle__scene" id="middle__scene--3" ref="scene3">
         <div class="scene-heading" id="scene-heading--3">
           <picture class="scene-heading__person">
             <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/scene3/person-desk.png">
@@ -106,7 +101,7 @@
           </div>
         </div>
 
-        <div class="middle__container">
+        <div class="middle__container" ref="reportPage2">
           <div class="report-page">
             <ReportPageContent v-for="content in reportPageContent[ '2' ]" :content="content" src="scene3/" :key="content.name" />
           </div>
@@ -155,7 +150,7 @@
 </template>
 
 <script>
-import { controlCoveredEffect, raf } from './util/index.js'
+import { ScrollController, controlCoveredEffect, raf } from './util/index.js'
 import listItems from './data/listItems.js'
 import reportPageContent from './data/reportPageContent.js'
 import afterTableItems from './data/afterTableItems.js'
@@ -176,6 +171,7 @@ export default {
       description: '',
       metaUrl: 'backtoformosa',
       metaImage: ''
+      // customScript: '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"><\/script>'
     }
   },
   components: {
@@ -191,13 +187,66 @@ export default {
     return {
       listItems,
       reportPageContent,
-      afterTableItems
+      afterTableItems,
+      isDarks: [ false, false, false ]
     }
   },
   mounted () {
-    const { container, opening, middle, ending } = this.$refs
+    const {
+      container,
+      opening,
+      middle,
+      ending,
+      reportPage1,
+      reportPage2,
+      listPage
+    } = this.$refs
+
     window.addEventListener('scroll', raf(controlCoveredEffect(opening.$el, middle)))
     window.addEventListener('scroll', raf(controlCoveredEffect(middle, ending.$el)))
+
+    // window.addEventListener('scroll', raf(triggerAnimation(middle, () => { this.animateSceneHeading(scene1HeadingPerson, scene1HeadingTitle, middleText1) }, 0.5)))
+
+    // window.addEventListener('scroll', raf(triggerAnimation(scene3, () => { this.animateSceneHeading(scene3HeadingPerson, scene3HeadingTitle, middleText2) }, 0.5)))
+
+    const scrollController = new ScrollController()
+
+    Array.prototype.forEach.call([ reportPage1, listPage, reportPage2 ], (el, idx) => {
+      scrollController.setScrollScene(idx + 1,
+        {
+          startEl: el,
+          includeBottom: true,
+          enterStartFn: () => { this.setDarkenPage(idx, true) },
+          leaveStartFn: () => { this.setDarkenPage(idx, false) }
+        }
+      )
+    })
+  },
+  computed: {
+    isDark () {
+      return this.isDarks.some((d) => d)
+    }
+  },
+  methods: {
+    // animateSceneHeading (personEl, titleEl, textEl) {
+    //   // const tl = gsap.timeline({ /* repeat: -1, repeatDelay: 1, */ defaults: { duration: 1.2 } })
+    //   const tl = gsap.timeline()
+    
+    //   // tl.set(personEl, { scale: 0.3, opacity: 1 })
+    //   // tl.to(personEl, { scale: 0.3, opacity: 0, ease: 'sine.in' })
+
+    //   // tl.set(personEl, { scale: 0.6, opacity: 1 })
+    //   // tl.to(personEl, { scale: 0.6, opacity: 0, ease: 'sine.in' })
+
+    //   // tl.set(personEl, { scale: 0.9, opacity: 1 }, '>0.15')
+
+    //   tl.to(personEl, { scale: 1, opacity: 1, duration: 0.9, ease: 'power2.out' })
+    //   tl.to(titleEl, { scale: 1, opacity: 1, duration: 0.45, ease: 'power1.in' }, '<0.45')
+    //   tl.to(textEl, { opacity: 1, y: 0, duration: 0.6, ease: 'sine.out' }, '>0.3')
+    // },
+    setDarkenPage (idx, darken) {
+      this.$set(this.isDarks, idx, darken)
+    }
   }
 }
 </script>
@@ -220,6 +269,12 @@ strong
 .po-r
   position relative
 
+// .animated-content
+//   opacity 0
+//   transform translateY(16px)
+.paused
+  animation-play-state paused !important
+
 .back-to-formosa
   overflow hidden
   &__middle
@@ -229,6 +284,7 @@ strong
     padding-left 10px
     padding-right 10px
     background-color #000
+    transition color 0.3s $easeOutSine
     @media (min-width 620px)
       padding-bottom 64vh
       padding-left 0
@@ -261,7 +317,7 @@ strong
     width 100%
     height 100%
     z-index -1
-    opacity 0
+    transition opacity 0.3s $easeOutSine
 
 .scene-heading
   position relative
@@ -271,29 +327,45 @@ strong
     top 0
     left 0
     margin-bottom 0
+  // &__person
+  //   transform-origin 50% 40%
   &__title
     position absolute
     width 100%
     top 0
     left 0
+    // transform-origin 50% 60%
   & img
     width 100%
     height auto
 
 #scene-heading
   &--1
-    // margin-bottom 10px
     @media (min-width $breakpoint-md)
-      // max-width 772px
       max-width 862px
-      // width 53.61%
       width 59.86%
       left -6.25%
-      // margin-bottom 0
+    & .scene-heading
+      &__person
+        animation heading1 0.9s $easeOutCubic both
+      &__title
+        animation heading1 0.45s 0.45s $easeInQuad both
   &--3
+    margin-left -10px
+    margin-right -10px
     @media (min-width $breakpoint-md)
       max-width 1062px
       width 73.75%
+      margin-left 0
+      margin-right 0
+
+@keyframes heading1
+  0%
+    opacity 0
+    transform scale(1.8)
+  100%
+    opacity 1
+    transform scale(1)
 
 #scene2
   &-title
@@ -309,6 +381,10 @@ strong
   &-yao
     padding-top 10px
     padding-bottom 35px
+    @media (min-width $breakpoint-md)
+      margin-top 28px
+      padding-top 0
+      padding-bottom 0
     & picture
       max-width 300px
       right -10.94%
@@ -336,41 +412,28 @@ strong
   &__content
     font-size 1.6rem
     line-height 1.75
-    // text-align justify
     & p + p
       margin-top 28px
-// #middle
-//   &__scene
-//     &--1, &--3
-//       @media (min-width $breakpoint-md)
-//         padding-top 64vh
-//     &--2
-//       padding-top 20px
-//       @media (min-width $breakpoint-md)
-//         padding-top 80px
+#middle
+  &__scene
+    &--1, &--3
+      @media (min-width $breakpoint-md)
+        padding-top 64vh
+    &--2
+      // padding-top 20px
+      // @media (min-width $breakpoint-md)
+      padding-top 80px
 
 .after
   &__wrapper
     background-image linear-gradient(to bottom, #a56c6a, #000000)
     padding-top 32px
-  // &__table
-  //   padding-top 80px
-  //   padding-bottom 80px
-  //   & img
-  //     max-width 900px
-  //     margin-right auto
-  //     margin-left auto
   &__caption
     font-size 2.0rem
     line-height 1.4
     display flex
     flex-direction column
     align-items center
-    // @media (min-width $breakpoint-md)
-    //   position absolute
-    //   align-items flex-start
-    //   top 4.78%
-    //   right 23.36%
     & p
       padding 3px 14px
       background-color rgba(#fff, 0.7)
@@ -378,21 +441,18 @@ strong
         margin-top 16px
 
 .report-page, .list-page
-  color #fff
   // padding-top 20vh
   // padding-bottom 20vh
-  // text-align justify
-  @media (min-width $breakpoint-md)
-    // padding-top 40vh
-    // padding-bottom 40vh
+  padding-top 40vh
+  margin-bottom 40vh
   &__intro
     font-size 2.0rem
     font-weight 500
     text-align center
     line-height 1.8
-    // margin-bottom 128px
-    // @media (min-width $breakpoint-md)
-    //   margin-bottom 152px
+    margin-bottom 128px
+    @media (min-width $breakpoint-md)
+      margin-bottom 152px
 .list-page
   position relative
 

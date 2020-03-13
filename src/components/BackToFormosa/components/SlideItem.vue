@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="slide-item" :style="{ height: `${this.$store.state.viewport[ 1 ]}px` }"> -->
   <div class="slide-item">
     <slot />
   </div>
@@ -15,14 +14,11 @@ export default {
 @import '../util/global.styl'
 
 .slide-item
-  // width 100%
   min-height 100vh
   position relative
   overflow hidden
-  &.paused
+  &.paused *
     animation-play-state paused !important
-    & *
-      animation-play-state paused !important
   &__text
     position absolute
     width 100%
@@ -42,8 +38,6 @@ export default {
       flex-direction column
       align-items center
       line-height 1.4
-      // opacity 0
-      // transform translateY(-32px)
       & p
         padding 3px 14px
         & + p

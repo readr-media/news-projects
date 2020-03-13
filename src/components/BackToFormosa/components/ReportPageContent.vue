@@ -44,7 +44,6 @@ export default {
   &__qa
     font-size 1.6rem
     line-height 1.75
-    // @media (min-width $breakpoint-desktop)
     @media (min-width $breakpoint-md)
       display flex
       align-items flex-start

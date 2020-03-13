@@ -1,4 +1,86 @@
-export const controlCoveredEffect = function (coveredEl, coverEl) {
+export class ScrollController {
+  constructor(args) {
+    const def = {
+      wEl: window,
+      beforeScrollH: 0,
+      curtOrder: 0,
+      scrollDirection: 'down'
+    }
+    Object.assign(def, args)
+    Object.assign(this, def)
+
+    this.wEl.addEventListener('scroll', raf(() => {
+      const curtScrollH = this.wEl.pageYOffset
+      const diff = curtScrollH - this.beforeScrollH
+      this.scrollDirection = (diff >= 0 ? 'down' : 'up')
+      this.beforeScrollH = curtScrollH
+    }))
+  }
+  setScrollScene (order, { startEl, includeBottom = false, enterStartFn, leaveStartFn }, { endEl, enterEndFn, leaveEndFn } = {}, { once = false } = {}) {
+    let inTriggerInterval = false
+    let isTriggerOnce = false
+
+    this.wEl.addEventListener('scroll', raf(() => {
+      if (isTriggerOnce) { return }
+
+      const isScrollDown = (this.scrollDirection === 'down')
+
+      if (!inTriggerInterval) {
+        if (isScrollDown) {
+          if (this.curtOrder !== (order - 1)) { return }
+        } else {
+          if (this.curtOrder !== order) { return }
+        }
+      }
+      
+      const { top: startT, bottom: startB } = startEl.getBoundingClientRect()
+      let endT = 'no value'
+
+      if (endEl) {
+        endT = endEl.getBoundingClientRect().top
+      } else if (includeBottom) {
+        endT = startB
+      }
+      
+      if (isScrollDown) {
+        // enter start
+        if (startT <= 0 && !inTriggerInterval) {
+          inTriggerInterval = true
+          enterStartFn && enterStartFn()
+          if (once) { isTriggerOnce = true }
+        }
+        // leave start
+        if (endT !== 'no value' && endT <= 0) {
+          this.curtOrder = order
+          inTriggerInterval = false
+          if (includeBottom) {
+            leaveStartFn && leaveStartFn()
+          } else {
+            leaveEndFn && leaveEndFn()
+          }
+        }
+      } else {
+        // enter end
+        if (endT !== 'no value' && endT > 0 && !inTriggerInterval) {
+          inTriggerInterval = true
+          if (includeBottom) {
+            enterStartFn && enterStartFn()
+          } else {
+            enterEndFn && enterEndFn()
+          }
+        }
+        // leave end
+        if (startT > 0) {
+          this.curtOrder = (order - 1)
+          inTriggerInterval = false
+          leaveStartFn && leaveStartFn()
+        }
+      }
+    }))
+  }
+}
+
+export function controlCoveredEffect (coveredEl, coverEl) {
   let isCovered = false
   let curtSpace = 0
   
@@ -31,7 +113,7 @@ export const controlCoveredEffect = function (coveredEl, coverEl) {
   }
 }
 
-export const raf = function (func) {
+export function raf (fn) {
   let isTicking = false
 
   return function () {
@@ -40,7 +122,7 @@ export const raf = function (func) {
     isTicking = true
 
     requestAnimationFrame(function () {
-      func()
+      fn()
       isTicking = false
     })
   }
