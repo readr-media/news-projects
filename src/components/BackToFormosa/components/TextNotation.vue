@@ -27,6 +27,7 @@ export default {
 .text-notation
   padding-right 4px
   padding-left 4px
+  color #000
   &__icon
     display inline-block
     width 18px

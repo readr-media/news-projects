@@ -1,9 +1,10 @@
 <template>
   <div class="back-to-formosa">
     <!-- <SlideContainer ref="opening" /> -->
-    <article class="back-to-formosa__middle" :style="{ color: isDark ? '#fff' : '' }" ref="middle">
+    <article class="back-to-formosa__middle" :style="{ color: isMiddleDark ? '#fff' : '' }" ref="middle">
       <div class="bg bg--file" />
-      <div class="bg bg--dark" :style="{ opacity: isDark ? '' : 0 }" />
+      <div class="bg bg--dark" :style="{ opacity: isMiddleDark ? '' : 0 }" />
+      <div class="bg bg--between" ref="bgBetweenMiddle" />
 
       <div class="middle__scene" id="middle__scene--1">
         <div class="scene-heading" id="scene-heading--1" ref="scene1Heading">
@@ -141,7 +142,9 @@
 </template>
 
 <script>
-import { ScrollController, controlCoveredEffect, raf } from './util/index.js'
+// import { ScrollController, controlCoveredEffect, raf } from './util/index.js'
+import { ScrollController, CoveredEffect, raf } from './util/index.js'
+
 import listItems from './data/listItems.js'
 import reportPageContent from './data/reportPageContent.js'
 import afterTableItems from './data/afterTableItems.js'
@@ -180,7 +183,7 @@ export default {
       listItems,
       reportPageContent,
       afterTableItems,
-      isDarks: [ false, false, false ],
+      isMiddleDarks: [ false, false, false ],
       scrollController: null,
       scrollSceneOrder: {
         once: 0,
@@ -195,6 +198,8 @@ export default {
       middle,
       ending,
       after,
+      bgBetweenMiddle,
+      // darkBg,
 
       scene1Heading,
       scene1HeadingPerson,
@@ -236,8 +241,13 @@ export default {
     this.wEl = window
 
     // this.wEl.addEventListener('scroll', raf(controlCoveredEffect(opening.$el, middle)))
-    this.wEl.addEventListener('scroll', raf(controlCoveredEffect(middle, ending.$el)))
-    this.wEl.addEventListener('scroll', raf(controlCoveredEffect(ending.$el, after)))
+    // this.wEl.addEventListener('scroll', raf(controlCoveredEffect(middle, ending.$el)))
+    // this.wEl.addEventListener('scroll', raf(controlCoveredEffect(ending.$el, after)))
+    new CoveredEffect({
+      coveredEl: middle,
+      coverEl: ending.$el,
+      betweenEl: bgBetweenMiddle
+    })
 
     this.scrollController = new ScrollController()
 
@@ -278,7 +288,7 @@ export default {
       .onceScene({
         order: this.counter('once'),
         triggerEl: scene3Heading,
-        whOffset: 0.5,
+        whOffset: 0.4,
         fn: () => { this.animate([ scene3HeadingPerson, scene3HeadingTitle, scene3HeadingText ]) }
       })
     
@@ -296,25 +306,25 @@ export default {
     /**
      * Interval Scenes
      */
-    this.darkenPage([ reportPage1, listPage, reportPage2 ])
+    this.darkenMiddlePage([ reportPage1, listPage, reportPage2 ])
   },
   computed: {
-    isDark () {
-      return this.isDarks.some((d) => d)
+    isMiddleDark () {
+      return this.isMiddleDarks.some((d) => d)
     }
   },
   methods: {
     animate (els = []) {
       Array.prototype.forEach.call(els, (el) => { el.classList.add('running') })
     },
-    darkenPage (els = []) {
+    darkenMiddlePage (els = []) {
       Array.prototype.forEach.call(els, (el, idx) => {
         this.scrollController.intervalScene({ order: this.counter('interval') },
           {
             startEl: el,
             startWhOffset: 0.5,
-            enterStartFn: () => { this.$set(this.isDarks, idx, true) },
-            leaveStartFn: () => { this.$set(this.isDarks, idx, false) }
+            enterStartFn: () => { this.$set(this.isMiddleDarks, idx, true) },
+            leaveStartFn: () => { this.$set(this.isMiddleDarks, idx, false) }
           }
         )
       })
@@ -333,7 +343,10 @@ export default {
     },
     counter (name) {
       return this[ 'scrollSceneOrder' ][ name ] += 1
-    }
+    },
+    // darkenPage () {
+    //   const curtScrollH = this.wEl.pageYOffset
+    // }
   }
 }
 </script>
@@ -368,7 +381,7 @@ strong
     padding-left 10px
     padding-right 10px
     background-color #000
-    transition color 0.15s $easeOutSine
+    transition color 0.3s $easeOutSine
     @media (min-width 620px)
       padding-bottom 64vh
       padding-left 0
@@ -388,20 +401,18 @@ strong
   left 0
   width 100%
   height 100%
-  z-index -1
   &--file
     background-image url(/proj-assets/backtoformosa/img/bg-file.png)
     background-size contain
     background-repeat repeat
+    z-index -9
   &--dark
     background-color rgba(#000, 0.8)
-    position absolute
-    top 0
-    left 0
-    width 100%
-    height 100%
-    z-index -1
-    transition opacity 0.15s $easeOutSine
+    transition opacity 0.3s $easeOutSine
+  &--between
+    background-color #fff
+    opacity 0
+    z-index 9
 
 .scene-heading
   position relative
