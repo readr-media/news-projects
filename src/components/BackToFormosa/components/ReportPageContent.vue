@@ -45,14 +45,14 @@ export default {
   &__qa
     font-size 1.6rem
     line-height 1.75
-    animation content-default 0.6s 0.6s $easeOutSine both paused
+    animation fade-in 0.6s 0.6s $easeOutSine both paused
     @media (min-width $breakpoint-md)
       display flex
       align-items flex-start
     & picture
       flex 0 0 auto
       // 0.6 + 0.6
-      animation content-default 0.6s 1.2s $easeOutSine both paused
+      animation fade-in 0.6s 1.2s $easeOutSine both paused
     & img
       width 100%
       height auto

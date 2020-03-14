@@ -1,6 +1,6 @@
 <template>
   <div class="back-to-formosa">
-    <SlideContainer ref="opening" />
+    <!-- <SlideContainer ref="opening" /> -->
     <article class="back-to-formosa__middle" :style="{ color: isDark ? '#fff' : '' }" ref="middle">
       <div class="bg bg--file" />
       <div class="bg bg--dark" :style="{ opacity: isDark ? '' : 0 }" />
@@ -41,20 +41,20 @@
           </div>
         </div>
 
-        <div id="middle-yao-container">
-          <div class="middle__container">
+        <div id="middle-yao-container" ref="middleYao">
+          <div class="middle__container" ref="middleYaoText1">
             <div class="middle__content">
               <p>然而，從國發會檔案管理局收藏的政治犯筆錄中，卻發現了他們遭遇疲勞偵訊或是刑求的證據，例如被送往警總保安處的林義雄，他在 2 月 25 日撰寫的備忘錄中提及「偵訊就是反反覆覆問同樣的問題，一開始是好幾天不准睡覺，接下來是答覆的不滿意就打，打到讓你受不了，屈服了就改變態度。一方面以刑求做威脅，一方面以政府會寬大做引誘，要達到他們取得十全十美，令人一看就滿意的筆錄。」</p>
               <p>偵訊人員軟硬兼施，林義雄寫下一些讓他印象深刻的恐嚇，例如「如果你不說，拿出證據來，每一樣都幾個人來痛打你一頓。打死了，就說你畏罪自殺」、「如果不合作，把你打成共產黨」、「人總是人，識時務者為俊傑，你這個身體受不了那些」；他也記錄了自己被刑求的過程：「打的部位是前胸、後背、腹部，腳踢的是小腿和腹部，有時候也用香菸燙我的臉，燒我的鬍子。他們一方面打，一方面以拖到地下室做威脅，說什麼過五關、打幸福針（我不知道這是什麼意思，只覺得很恐怖），痛打之後，他們看我已屈服，就不再打，開始對我好。」</p>
               <p>連續幾 10 天的訊問，林義雄改了 5、6 次的筆錄，被迫承認美麗島活動就是一個叛亂行為，美麗島雜誌社是一個叛亂組織，他主張臺灣獨立，鼓勵人民反抗政府等等。林義雄語帶無奈寫道，「這些調查人員的主觀之強烈，是很少見的，在他們的心目中，黨外的言行除了顛覆政府外，不可能有其他目的。所謂民主自由都是黨外為了遂行自己的政治野心提出來的口號而已，他們自認為把黨外看得十分透徹，但我覺得這種態度，是今天黨外人士之所以會走極端，和國民黨站在絕對的立場之根本原因。」</p>
             </div>
           </div>
-          <div id="scene2-yao">
-            <picture>
+          <div id="scene2-yao-img">
+            <picture ref="middleYaoPicture">
               <img src="/proj-assets/backtoformosa/img/scene2/yao.png" alt="">
             </picture>
           </div>
-          <div class="middle__container">
+          <div class="middle__container" ref="middleYaoText2">
             <div class="middle__content">
               <p>呂秀蓮則被送到景美軍法看守所，她在 3 月 24 日撰寫的「司法行政部調查局違法偵訊實情」一文中寫道，「調查員常拿吳春發<TextNotation><p>吳春發原本是詐欺犯，逃亡日本後結識中國駐外人員，表明願意替中共在臺灣進行武裝暴動，1978 年遭逮，最後依「懲治叛亂條例」第二條第一項，判處死刑。</p></TextNotation>被槍斃的事情來威脅取供，某天他們還給我看他鮮血淋漓的照片，又勒令我高聲朗誦殯儀館通知吳妻認領屍體的公函，然後說『妳就是第二個吳春發，妳離靶場越來越近了，不久妳的家人也會收到殯儀館領屍的通知』等話，也會要我撰寫遺囑，交代後事，讓我覺得罪該萬死。」</p>
               <p>除了言語恐嚇，呂秀蓮也記錄了身體遭受的苦痛，像是調查人員若逼供不成，會要求她罰站，往往一站就是 4、5 個小時以上；超過 12 個小時不予進食是家常便飯，當時她罹患甲狀腺癌，再加上全天候偵訊，常感覺頭暈眼花、痛苦不已。此外，呂秀蓮撰寫的供詞如果不合要求，調查人員會當面撕裂或焚燒，命她反覆重寫，所謂的自白書根本是「他白書」。</p>
@@ -65,10 +65,10 @@
 
         <div class="middle__container" ref="listPage">
           <div class="list-page">
-            <div class="list-page__intro">
+            <div class="list-page__intro" ref="listIntro">
               <p>偵訊時，他們被如何對待：</p>
             </div>
-            <ListPageContent :listItems="listItems" />
+            <ListPageContent class="list-page__content" :listItems="listItems" ref="listPageContent" />
             <picture id="blood">
               <img src="/proj-assets/backtoformosa/img/scene2/blood.svg" alt="">
             </picture>
@@ -77,18 +77,18 @@
       </div>
 
       <div class="middle__scene" id="middle__scene--3" ref="scene3">
-        <div class="scene-heading" id="scene-heading--3">
-          <picture class="scene-heading__person">
+        <div class="scene-heading" id="scene-heading--3" ref="scene3Heading">
+          <picture class="scene-heading__person" ref="scene3HeadingPerson">
             <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/scene3/person-desk.png">
             <img src="/proj-assets/backtoformosa/img/scene3/person-mob.png" alt="">
           </picture>
-          <picture class="scene-heading__title">
+          <picture class="scene-heading__title" ref="scene3HeadingTitle">
             <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/scene3/title-desk.svg">
             <img src="/proj-assets/backtoformosa/img/scene3/title-mob.svg" alt="">
           </picture>
         </div>
 
-        <div class="middle__container">
+        <div class="middle__container scene-heading-text" ref="scene3HeadingText">
           <div class="middle__content">
             <p>3 月 18 日，「高雄事件」叛亂案展開為期 9 天的軍法審判，審判席上坐著審判長劉岳平和 4 位審判官，控方則有主任檢察官蔡籐雄和軍事檢察官林輝煌；另一方，則是 8 名被告與蘇貞昌、謝長廷、陳水扁、尤清等 15 名律師組成的辯護團。審判期間開放旁聽和採訪，包含國際人權組織和國外媒體幾乎全程參與，民眾透過報紙記錄的控辯內容，得以暸解美麗島雜誌社幹部舉辦遊行的原因，以及其主張的政治理念。</p>
             <p>公開審判庭一開始，律師團就提出三大質疑，包括<strong>為什麼被告要受軍事審判</strong>、<strong>戒嚴令的合法性</strong><TextNotation><p>警總以戒嚴時期為由，擴充解釋犯罪構成要件，以此限制人民的政治活動。</p></TextNotation>，以及<strong>自白書的任意性</strong><TextNotation><p>被告的自白是出於自願，不是以不正當方法逼供。</p></TextNotation>。黃信介首先接受提訊，他不同意偵訊筆錄的說法，稱自白書是「<strong>他們幫我作文的，我寫了再改，改了再寫</strong>」。檢察官則辯稱「一個人如果沒有犯罪，怎麼會受他人威脅利誘呢」。</p>
@@ -103,11 +103,11 @@
 
         <div class="middle__container" ref="reportPage2">
           <div class="report-page">
-            <ReportPageContent v-for="content in reportPageContent[ '2' ]" :content="content" src="scene3/" :key="content.name" />
+            <ReportPageContent v-for="(content, idx) in reportPageContent[ '2' ]" :content="content" src="scene3/" :key="content.name" :ref="`report2Content${idx + 1}`" />
           </div>
         </div>
 
-        <div class="middle__container">
+        <div class="middle__container" id="middle__container--end" ref="middleEndText">
           <div class="middle__content">
             <p>隨著審判進入尾聲，大部分被告才從家屬在庭上的發言，得知林義雄家發生血案<TextNotation><p>該年 2 月 28 日，林義雄臺北市住家發生兇殺案，其 60 歲母親游阿妹及 7 歲雙胞胎女兒林亮均、林亭均被刺殺身亡，9 歲長女林奐均重傷，此案至今未偵破。促轉會 2020 年 2 月 17 日公布「<a href="https://admin.tjc.gov.tw/public/cipas-uploads/news/2020/02/3952c81b707e941391c462e3b17814cd.pdf" target="_blank">林義雄宅血案調查報告</a>」，指出當年威權統治當局涉案的可能性不容排除。</p></TextNotation>，施明德在最後陳述時情緒難以平復，脫口而出：「林義雄家發生這件悲慘的事，讓我感到這個國家將會受到更多創傷及更大的災禍⋯⋯如果<strong>能帶給國家社會和諧，我請求判我死刑</strong>。」</p>
             <p>林義雄則請求審判官「能擺脫一切政治上、輿論上、感情上的壓力，作最公正判決。」現場氣氛哀戚，從檢察官的話語，也看出他的態度軟化許多，他說：「對林義雄家變，心中很沉痛，我們是以哀矜勿喜的態度處理此案」，但仍不忘訓誡「被告要爭人權、爭自由、政治改革，應該循政治常軌，而不是打破人頭」。</p>
@@ -133,15 +133,6 @@
           <p>其餘 6 人 12 年有期徒刑</p>
         </div>
         <AfterTable :tableItems="afterTableItems" />
-        <!-- <div class="after__table">
-          <div class="after__table__wrapper">
-            <p class="after__table__title">施明德<br>服刑 10 年 4 個月</p>
-            <p class="after__table__intro">民進黨第 6 屆主席<br>2006 年發起反貪倒扁運動</p>
-          </div>
-        </div> -->
-        <!-- <picture class="after__table">
-          <img src="/proj-assets/backtoformosa/img/after/table-desk.png" alt="">
-        </picture> -->
       </div>
     </div>
 
@@ -191,7 +182,10 @@ export default {
       afterTableItems,
       isDarks: [ false, false, false ],
       scrollController: null,
-      once: 0
+      scrollSceneOrder: {
+        once: 0,
+        interval: 0
+      }
     }
   },
   mounted () {
@@ -211,21 +205,37 @@ export default {
       scene2HeadingTitle,
       scene2ReportIntro,
 
-      reportPage1,
-
       report1Content1,
       report1Content2,
       report1Content3,
 
-      reportPage2,
-      listPage
-    } = this.$refs
+      middleYao,
+      middleYaoText1,
+      middleYaoPicture,
+      middleYaoText2,
 
-    // const { reportPicture, reportQa, reportSign } = reportContent1[ 0 ].$refs
+      listIntro,
+      listPageContent,
+
+      scene3Heading,
+      scene3HeadingPerson,
+      scene3HeadingTitle,
+      scene3HeadingText,
+
+      report2Content1,
+      report2Content2,
+      report2Content3,
+
+      middleEndText,
+
+      reportPage1,
+      listPage,
+      reportPage2
+    } = this.$refs
 
     this.wEl = window
 
-    this.wEl.addEventListener('scroll', raf(controlCoveredEffect(opening.$el, middle)))
+    // this.wEl.addEventListener('scroll', raf(controlCoveredEffect(opening.$el, middle)))
     this.wEl.addEventListener('scroll', raf(controlCoveredEffect(middle, ending.$el)))
     this.wEl.addEventListener('scroll', raf(controlCoveredEffect(ending.$el, after)))
 
@@ -252,28 +262,41 @@ export default {
       this.animateReportPage(component[ 0 ])
     })
 
-    // this.scrollController.
+    this.scrollController
+      .onceScene({
+        order: this.counter('once'),
+        triggerEl: middleYaoPicture,
+        whOffset: 0.5,
+        fn: () => { this.animate([ middleYaoPicture, middleYaoText1, middleYaoText2 ]) }
+      })
+      .onceScene({
+        order: this.counter('once'),
+        triggerEl: listPage,
+        whOffset: 0.5,
+        fn: () => { this.animate([ listIntro, listPageContent.$el ]) }
+      })
+      .onceScene({
+        order: this.counter('once'),
+        triggerEl: scene3Heading,
+        whOffset: 0.5,
+        fn: () => { this.animate([ scene3HeadingPerson, scene3HeadingTitle, scene3HeadingText ]) }
+      })
+    
+    Array.prototype.forEach.call([ report2Content1, report2Content2, report2Content3 ], (component) => {
+      this.animateReportPage(component[ 0 ])
+    })
+
+    this.scrollController.onceScene({
+        order: this.counter('once'),
+        triggerEl: middleEndText,
+        whOffset: 0.4,
+        fn: () => { this.animate([ middleEndText ]) }
+      })
+
     /**
      * Interval Scenes
      */
-    this.scrollController.intervalScene({ order: 1 }, 
-      {
-        startEl: reportPage1,
-        enterStartFn: () => { this.darkenPage(0, true) },
-        leaveStartFn: () => { this.darkenPage(0, false) }
-      }
-    )
-    
-    // Array.prototype.forEach.call([ reportPage1, listPage, reportPage2 ], (el, idx) => {
-    //   this.scrollController.scene({ order: 1 + (idx + 1) },
-    //     {
-    //       startEl: el,
-    //       includeBottom: true,
-    //       enterStartFn: () => { this.darkenPage(idx, true) },
-    //       leaveStartFn: () => { this.darkenPage(idx, false) }
-    //     }
-    //   )
-    // })
+    this.darkenPage([ reportPage1, listPage, reportPage2 ])
   },
   computed: {
     isDark () {
@@ -284,8 +307,17 @@ export default {
     animate (els = []) {
       Array.prototype.forEach.call(els, (el) => { el.classList.add('running') })
     },
-    darkenPage (idx, darken) {
-      this.$set(this.isDarks, idx, darken)
+    darkenPage (els = []) {
+      Array.prototype.forEach.call(els, (el, idx) => {
+        this.scrollController.intervalScene({ order: this.counter('interval') },
+          {
+            startEl: el,
+            startWhOffset: 0.5,
+            enterStartFn: () => { this.$set(this.isDarks, idx, true) },
+            leaveStartFn: () => { this.$set(this.isDarks, idx, false) }
+          }
+        )
+      })
     },
     animateReportPage (component) {
       const { reportPicture, reportQa, reportSign } = component.$refs
@@ -294,13 +326,13 @@ export default {
         {
           order: this.counter('once'),
           triggerEl: component.$el,
-          whOffset: 0.5,
+          whOffset: 0.4,
           fn: () => { this.animate([ reportPicture, reportQa, reportSign ]) }
         }
       )
     },
     counter (name) {
-      return this[ name ] += 1
+      return this[ 'scrollSceneOrder' ][ name ] += 1
     }
   }
 }
@@ -336,7 +368,7 @@ strong
     padding-left 10px
     padding-right 10px
     background-color #000
-    transition color 0.3s $easeOutSine
+    transition color 0.15s $easeOutSine
     @media (min-width 620px)
       padding-bottom 64vh
       padding-left 0
@@ -369,7 +401,7 @@ strong
     width 100%
     height 100%
     z-index -1
-    transition opacity 0.3s $easeOutSine
+    transition opacity 0.15s $easeOutSine
 
 .scene-heading
   position relative
@@ -379,21 +411,23 @@ strong
     top 0
     left 0
     margin-bottom 0
-  // &__person
-  //   transform-origin 50% 40%
+  &__person
+    // transform-origin 50% 40%
+    animation zoom-out 0.9s $easeOutCubic both paused
   &__title
     position absolute
     width 100%
     top 0
     left 0
     // transform-origin 50% 60%
+    animation zoom-out 0.45s 0.45s $easeInQuad both paused
   & img
     width 100%
     height auto
 
 .scene-heading-text
   // 0.9 + 0.15
-  animation content-default 0.6s 1.05s $easeOutSine both paused
+  animation fade-in 0.6s 1.05s $easeOutSine both paused
 
 #scene-heading
   &--1
@@ -401,11 +435,11 @@ strong
       max-width 862px
       width 59.86%
       left -6.25%
-    & .scene-heading
-      &__person
-        animation heading-default 0.9s $easeOutCubic both paused
-      &__title
-        animation heading-default 0.45s 0.45s $easeInQuad both paused
+    // & .scene-heading
+    //   &__person
+    //     animation zoom-out 0.9s $easeOutCubic both paused
+    //   &__title
+    //     animation zoom-out 0.45s 0.45s $easeInQuad both paused
   &--3
     margin-left -10px
     margin-right -10px
@@ -415,7 +449,7 @@ strong
       margin-left 0
       margin-right 0
 
-@keyframes heading-default
+@keyframes zoom-out
   0%
     opacity 0
     transform scale(1.8)
@@ -423,7 +457,7 @@ strong
     opacity 1
     transform scale(1)
 
-@keyframes content-default
+@keyframes fade-in
   0%
     opacity 0
     transform translateY(16px)
@@ -433,7 +467,7 @@ strong
 
 #scene2
   &-title
-    animation heading-default 0.45s $easeInQuad both paused
+    animation zoom-out 0.45s $easeInQuad both paused
     @media (min-width $breakpoint-md)
       width 62.5%
       right 7.43%
@@ -443,18 +477,19 @@ strong
     & img
       width 100%
       height auto
-  &-yao
-    padding-top 10px
+  &-yao-img
+    margin-top 10px
     padding-bottom 35px
     @media (min-width $breakpoint-md)
       margin-top 28px
-      padding-top 0
+      // padding-top 0
       padding-bottom 0
     & picture
       max-width 300px
       right -10.94%
       position relative
       z-index -1
+      // animation yao-person 0.9s $easeOutQuad both
       @media (min-width $breakpoint-md)
         position absolute
         max-width 500px
@@ -466,12 +501,36 @@ strong
 
 #report-page1__intro
   // 0.45 + 0.15
-  animation content-default 0.6s 0.6s $easeOutSine both paused
+  animation fade-in 0.6s 0.6s $easeOutSine both paused
 
 #middle-yao-container
   position relative
   @media (min-width $breakpoint-md)
     padding-top 120px
+  & picture
+    animation yao-person 1.05s $easeInOutQuad both paused
+    // @media (min-width $breakpoint-md)
+    //   animation yao-person 0.9s $easeOutQuad both
+  & > .middle__container
+    // @media (min-width $breakpoint-md)
+    //   // 0.9 + 0.15
+    //   animation-delay 1.05s
+    &:first-child
+      // animation fade-in 0.6s $easeOutSine both paused
+      @media (min-width $breakpoint-md)
+        // 1.05 + 0.15
+        animation fade-in 0.6s 1.2s $easeOutSine both paused
+    &:last-child
+      // 1.05 + 0.15
+      animation fade-in 0.6s 1.2s $easeOutSine both paused
+
+@keyframes yao-person
+  0%
+    opacity 0
+    transform translateX(15%)
+  100%
+    opacity 1
+    transform translateX(0%)
 
 .middle
   &__scene
@@ -492,6 +551,10 @@ strong
         padding-top 64vh
     &--2
       margin-top 80px
+  &__container
+    &--end
+      animation fade-in 0.6s $easeOutSine both paused
+
 
 .after
   &__wrapper
@@ -512,7 +575,7 @@ strong
 .report-page, .list-page
   // padding-top 20vh
   // padding-bottom 20vh
-  padding-top 40vh
+  margin-top 40vh
   margin-bottom 40vh
   &__intro
     font-size 2.0rem
@@ -524,6 +587,10 @@ strong
       margin-bottom 152px
 .list-page
   position relative
+  &__intro
+    animation fade-in 0.6s $easeOutSine both paused
+  &__content
+    animation fade-in 0.6s 0.6s $easeOutSine both paused
 
 .report-page-content__qa picture
   margin-left auto
@@ -549,6 +616,7 @@ strong
   position absolute
   width 564px
   top -208px
+  left -25.67%
   z-index -1
   @media (min-width $breakpoint-md)
     // 292 + 36
