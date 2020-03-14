@@ -37,9 +37,12 @@ export default {
     height 40px
     padding 12px 0
     border-radius 4px
-    transition background-color .25s ease-out
-    // &:hover
-    //   background-color #fff46c
+    transition background-color 0.3s ease-out
+    &:hover
+      background-color #dc9794
+    &:active
+      background-color #dc9794
+      transition none
 
 @media (max-width 719.98px)
   .donate-item

@@ -6,16 +6,16 @@
       <div class="bg bg--dark" :style="{ opacity: isDark ? '' : 0 }" />
 
       <div class="middle__scene" id="middle__scene--1">
-        <div class="scene-heading" id="scene-heading--1">
-          <picture class="scene-heading__person">
+        <div class="scene-heading" id="scene-heading--1" ref="scene1Heading">
+          <picture class="scene-heading__person" ref="scene1HeadingPerson">
             <img src="/proj-assets/backtoformosa/img/scene1/person.png" alt="">
           </picture>
-          <picture class="scene-heading__title">
+          <picture class="scene-heading__title" ref="scene1HeadingTitle">
             <img src="/proj-assets/backtoformosa/img/scene1/title.svg" alt="">
           </picture>
         </div>
 
-        <div class="middle__container">
+        <div class="middle__container scene-heading-text" ref="scene1HeadingText">
           <div class="middle__content">
             <p>1979 年 12 月 12 日，美麗島事件發生後的第 2 天，雜誌社核心人物施明德、呂秀蓮、林義雄、陳菊和張俊宏在姚嘉文家連夜開會，討論遊行善後的事情。結束後天色已晚，呂秀蓮聽從陳菊的建議，借住在施明德的家（位在美麗島雜誌社樓上）。</p>
             <p>隔日清晨 5 點多，門鈴突響，緊接著傳來施明德的叫聲：「他們來抓人了！」呂秀蓮趕忙衝進浴室換下睡衣，一旁的陳菊顧不得自己只穿著睡衣，抱著重要文件就從後院跳下去。沒想到，軍警早就團團包圍住雜誌社。</p>
@@ -26,18 +26,18 @@
         </div>
       </div>
 
-      <div class="middle__scene" id="middle__scene--2">
-        <picture id="scene2-title">
+      <div class="middle__scene" id="middle__scene--2" ref="scene2">
+        <picture id="scene2-title" ref="scene2HeadingTitle">
           <img src="/proj-assets/backtoformosa/img/scene2/title.svg" alt="">
         </picture>
 
         <div class="middle__container" ref="reportPage1">
           <div class="report-page">
-            <div class="report-page__intro">
+            <div class="report-page__intro" id="report-page1__intro" ref="scene2ReportIntro">
               <p>大逮捕之後，情治單位各自展開調查。</p>
               <p>漫長的偵訊過程，每個人都寫下了他們的「犯罪動機」。</p>
             </div>
-            <ReportPageContent v-for="content in reportPageContent[ '1' ]" :content="content" src="scene2/" :key="content.name" />
+            <ReportPageContent v-for="(content, idx) in reportPageContent[ '1' ]" :content="content" src="scene2/" :key="content.name" :ref="`report1Content${idx + 1}`" />
           </div>
         </div>
 
@@ -119,7 +119,7 @@
 
     <EndingPage ref="ending" />
 
-    <div class="back-to-formosa__after">
+    <div class="back-to-formosa__after" ref="after">
       <picture>
         <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/after/photo-desk.png">
         <img src="/proj-assets/backtoformosa/img/after/photo-mob.png" alt="">
@@ -170,7 +170,8 @@ export default {
       title: '',
       description: '',
       metaUrl: 'backtoformosa',
-      metaImage: ''
+      metaImage: '',
+      wEl: null
       // customScript: '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"><\/script>'
     }
   },
@@ -188,7 +189,9 @@ export default {
       listItems,
       reportPageContent,
       afterTableItems,
-      isDarks: [ false, false, false ]
+      isDarks: [ false, false, false ],
+      scrollController: null,
+      once: 0
     }
   },
   mounted () {
@@ -197,30 +200,80 @@ export default {
       opening,
       middle,
       ending,
+      after,
+
+      scene1Heading,
+      scene1HeadingPerson,
+      scene1HeadingTitle,
+      scene1HeadingText,
+
+      scene2,
+      scene2HeadingTitle,
+      scene2ReportIntro,
+
       reportPage1,
+
+      report1Content1,
+      report1Content2,
+      report1Content3,
+
       reportPage2,
       listPage
     } = this.$refs
 
-    window.addEventListener('scroll', raf(controlCoveredEffect(opening.$el, middle)))
-    window.addEventListener('scroll', raf(controlCoveredEffect(middle, ending.$el)))
+    // const { reportPicture, reportQa, reportSign } = reportContent1[ 0 ].$refs
 
-    // window.addEventListener('scroll', raf(triggerAnimation(middle, () => { this.animateSceneHeading(scene1HeadingPerson, scene1HeadingTitle, middleText1) }, 0.5)))
+    this.wEl = window
 
-    // window.addEventListener('scroll', raf(triggerAnimation(scene3, () => { this.animateSceneHeading(scene3HeadingPerson, scene3HeadingTitle, middleText2) }, 0.5)))
+    this.wEl.addEventListener('scroll', raf(controlCoveredEffect(opening.$el, middle)))
+    this.wEl.addEventListener('scroll', raf(controlCoveredEffect(middle, ending.$el)))
+    this.wEl.addEventListener('scroll', raf(controlCoveredEffect(ending.$el, after)))
 
-    const scrollController = new ScrollController()
+    this.scrollController = new ScrollController()
 
-    Array.prototype.forEach.call([ reportPage1, listPage, reportPage2 ], (el, idx) => {
-      scrollController.setScrollScene(idx + 1,
-        {
-          startEl: el,
-          includeBottom: true,
-          enterStartFn: () => { this.setDarkenPage(idx, true) },
-          leaveStartFn: () => { this.setDarkenPage(idx, false) }
-        }
-      )
+    /**
+     * Once Scenes
+     */
+    this.scrollController
+      .onceScene({
+        order: this.counter('once'),
+        triggerEl: scene1Heading,
+        whOffset: 0.5,
+        fn: () => { this.animate([ scene1HeadingPerson, scene1HeadingTitle, scene1HeadingText ]) }
+      })
+      .onceScene({
+        order: this.counter('once'),
+        triggerEl: scene2,
+        whOffset: 0.3,
+        fn: () => { this.animate([ scene2HeadingTitle, scene2ReportIntro ]) }
+      })
+
+    Array.prototype.forEach.call([ report1Content1, report1Content2, report1Content3 ], (component) => {
+      this.animateReportPage(component[ 0 ])
     })
+
+    // this.scrollController.
+    /**
+     * Interval Scenes
+     */
+    this.scrollController.intervalScene({ order: 1 }, 
+      {
+        startEl: reportPage1,
+        enterStartFn: () => { this.darkenPage(0, true) },
+        leaveStartFn: () => { this.darkenPage(0, false) }
+      }
+    )
+    
+    // Array.prototype.forEach.call([ reportPage1, listPage, reportPage2 ], (el, idx) => {
+    //   this.scrollController.scene({ order: 1 + (idx + 1) },
+    //     {
+    //       startEl: el,
+    //       includeBottom: true,
+    //       enterStartFn: () => { this.darkenPage(idx, true) },
+    //       leaveStartFn: () => { this.darkenPage(idx, false) }
+    //     }
+    //   )
+    // })
   },
   computed: {
     isDark () {
@@ -228,24 +281,26 @@ export default {
     }
   },
   methods: {
-    // animateSceneHeading (personEl, titleEl, textEl) {
-    //   // const tl = gsap.timeline({ /* repeat: -1, repeatDelay: 1, */ defaults: { duration: 1.2 } })
-    //   const tl = gsap.timeline()
-    
-    //   // tl.set(personEl, { scale: 0.3, opacity: 1 })
-    //   // tl.to(personEl, { scale: 0.3, opacity: 0, ease: 'sine.in' })
-
-    //   // tl.set(personEl, { scale: 0.6, opacity: 1 })
-    //   // tl.to(personEl, { scale: 0.6, opacity: 0, ease: 'sine.in' })
-
-    //   // tl.set(personEl, { scale: 0.9, opacity: 1 }, '>0.15')
-
-    //   tl.to(personEl, { scale: 1, opacity: 1, duration: 0.9, ease: 'power2.out' })
-    //   tl.to(titleEl, { scale: 1, opacity: 1, duration: 0.45, ease: 'power1.in' }, '<0.45')
-    //   tl.to(textEl, { opacity: 1, y: 0, duration: 0.6, ease: 'sine.out' }, '>0.3')
-    // },
-    setDarkenPage (idx, darken) {
+    animate (els = []) {
+      Array.prototype.forEach.call(els, (el) => { el.classList.add('running') })
+    },
+    darkenPage (idx, darken) {
       this.$set(this.isDarks, idx, darken)
+    },
+    animateReportPage (component) {
+      const { reportPicture, reportQa, reportSign } = component.$refs
+
+      this.scrollController.onceScene(
+        {
+          order: this.counter('once'),
+          triggerEl: component.$el,
+          whOffset: 0.5,
+          fn: () => { this.animate([ reportPicture, reportQa, reportSign ]) }
+        }
+      )
+    },
+    counter (name) {
+      return this[ name ] += 1
     }
   }
 }
@@ -269,11 +324,8 @@ strong
 .po-r
   position relative
 
-// .animated-content
-//   opacity 0
-//   transform translateY(16px)
-.paused
-  animation-play-state paused !important
+.running
+  animation-play-state running !important
 
 .back-to-formosa
   overflow hidden
@@ -339,6 +391,10 @@ strong
     width 100%
     height auto
 
+.scene-heading-text
+  // 0.9 + 0.15
+  animation content-default 0.6s 1.05s $easeOutSine both paused
+
 #scene-heading
   &--1
     @media (min-width $breakpoint-md)
@@ -347,9 +403,9 @@ strong
       left -6.25%
     & .scene-heading
       &__person
-        animation heading1 0.9s $easeOutCubic both
+        animation heading-default 0.9s $easeOutCubic both paused
       &__title
-        animation heading1 0.45s 0.45s $easeInQuad both
+        animation heading-default 0.45s 0.45s $easeInQuad both paused
   &--3
     margin-left -10px
     margin-right -10px
@@ -359,7 +415,7 @@ strong
       margin-left 0
       margin-right 0
 
-@keyframes heading1
+@keyframes heading-default
   0%
     opacity 0
     transform scale(1.8)
@@ -367,8 +423,17 @@ strong
     opacity 1
     transform scale(1)
 
+@keyframes content-default
+  0%
+    opacity 0
+    transform translateY(16px)
+  100%
+    opacity 1
+    transform translateY(0px)
+
 #scene2
   &-title
+    animation heading-default 0.45s $easeInQuad both paused
     @media (min-width $breakpoint-md)
       width 62.5%
       right 7.43%
@@ -389,6 +454,7 @@ strong
       max-width 300px
       right -10.94%
       position relative
+      z-index -1
       @media (min-width $breakpoint-md)
         position absolute
         max-width 500px
@@ -397,6 +463,11 @@ strong
     & img
       width 100%
       height auto
+
+#report-page1__intro
+  // 0.45 + 0.15
+  animation content-default 0.6s 0.6s $easeOutSine both paused
+
 #middle-yao-container
   position relative
   @media (min-width $breakpoint-md)
@@ -420,9 +491,7 @@ strong
       @media (min-width $breakpoint-md)
         padding-top 64vh
     &--2
-      // padding-top 20px
-      // @media (min-width $breakpoint-md)
-      padding-top 80px
+      margin-top 80px
 
 .after
   &__wrapper

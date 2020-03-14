@@ -189,7 +189,7 @@ export default {
       transform translateX(0)
       animation slide5-text 0.75s $easeOutSine both
       & > div
-        animation slide5-text 0.75s 0.9s $easeOutSine both
+        animation slide5-text 0.75s 0.75s $easeOutSine both
 
 // animations
 @keyframes slide-img-back-default

@@ -3,7 +3,8 @@ export class ScrollController {
     const def = {
       wEl: window,
       beforeScrollH: 0,
-      curtOrder: 0,
+      curtIntervalOrder: 0,
+      curtOnceOrder: 0,
       scrollDirection: 'down'
     }
     Object.assign(def, args)
@@ -16,64 +17,78 @@ export class ScrollController {
       this.beforeScrollH = curtScrollH
     }))
   }
-  setScrollScene (order, { startEl, includeBottom = false, enterStartFn, leaveStartFn }, { endEl, enterEndFn, leaveEndFn } = {}, { once = false } = {}) {
-    let inTriggerInterval = false
-    let isTriggerOnce = false
+
+  onceScene ({ order, triggerEl, whOffset = 0, fn }) {
+    let isTriggered = false
 
     this.wEl.addEventListener('scroll', raf(() => {
-      if (isTriggerOnce) { return }
+      if (isTriggered || (this.curtOnceOrder !== order - 1)) { return }
 
+      const triggerT = triggerEl.getBoundingClientRect().top
+
+      if (triggerT - whOffset * this.wEl.innerHeight <= 0) {
+        this.curtOnceOrder = order
+        isTriggered = true
+        fn()
+      }
+    }))
+
+    return this
+  }
+
+  intervalScene ({ order }, { startEl, enterStartFn, leaveStartFn, startWhOffset = 0 }, { endEl, enterEndFn, leaveEndFn, endWhOffset = 0 } = {}) {
+    let inInterval = false
+
+    this.wEl.addEventListener('scroll', raf(() => {
       const isScrollDown = (this.scrollDirection === 'down')
 
-      if (!inTriggerInterval) {
+      if (!inInterval) {
         if (isScrollDown) {
-          if (this.curtOrder !== (order - 1)) { return }
+          if (this.curtIntervalOrder !== order - 1) { return }
         } else {
-          if (this.curtOrder !== order) { return }
+          if (this.curtIntervalOrder !== order) { return }
         }
       }
-      
-      const { top: startT, bottom: startB } = startEl.getBoundingClientRect()
-      let endT = 'no value'
 
-      if (endEl) {
-        endT = endEl.getBoundingClientRect().top
-      } else if (includeBottom) {
-        endT = startB
+      let startT
+      let endT
+      
+      if (!endEl || endEl.isEqualNode(startEl)) {
+        const startElBcr = startEl.getBoundingClientRect()
+        startT = startElBcr.top
+        endT = startElBcr.bottom
+      } else {
+        startT = startEl.getBoundingClientRect().top
+        endT = endEl.getBoundingClientRect().bottom
       }
       
       if (isScrollDown) {
-        // enter start
-        if (startT <= 0 && !inTriggerInterval) {
-          inTriggerInterval = true
-          enterStartFn && enterStartFn()
-          if (once) { isTriggerOnce = true }
+        if (!inInterval && startT - startWhOffset * this.wEl.innerHeight <= 0) {
+          // console.log(`${order}: Enter Start`)
+
+          inInterval = true
+          enterStartFn()
         }
-        // leave start
-        if (endT !== 'no value' && endT <= 0) {
-          this.curtOrder = order
-          inTriggerInterval = false
-          if (includeBottom) {
-            leaveStartFn && leaveStartFn()
-          } else {
-            leaveEndFn && leaveEndFn()
-          }
+        if (endT - endWhOffset * this.wEl.innerHeight <= 0) {
+          // console.log(`${order}: Leave End`)
+
+          this.curtIntervalOrder = order
+          inInterval = false
+          leaveEndFn ? leaveEndFn() : leaveStartFn()
         }
       } else {
-        // enter end
-        if (endT !== 'no value' && endT > 0 && !inTriggerInterval) {
-          inTriggerInterval = true
-          if (includeBottom) {
-            enterStartFn && enterStartFn()
-          } else {
-            enterEndFn && enterEndFn()
-          }
+        if (!inInterval && endT - endWhOffset * this.wEl.innerHeight > 0) {
+          // console.log(`${order}: Enter End`)
+
+          inInterval = true
+          enterEndFn ? enterEndFn() : enterStartFn()
         }
-        // leave end
-        if (startT > 0) {
-          this.curtOrder = (order - 1)
-          inTriggerInterval = false
-          leaveStartFn && leaveStartFn()
+        if (startT - startWhOffset * this.wEl.innerHeight > 0) {
+          // console.log(`${order}: Leave Start`)
+
+          this.curtIntervalOrder = order - 1
+          inInterval = false
+          leaveStartFn()
         }
       }
     }))

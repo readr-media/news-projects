@@ -78,17 +78,17 @@ export default {
         height 44px
         border-radius 4px
         margin-left 6px
-        transition background-color 0.3s
+        transition background-color 0.3s ease-out
         flex-shrink 0
         width 80px
         color #fff
         @media (min-width 460px)
           width 108px
-        // &:hover
-        //   background-color #bdfaf1
-        // &:active
-        //   background-color #30575a
-        //   transition none
+        &:hover
+          background-color #dc9794
+        &:active
+          background-color #dc9794
+          transition none
     & .info
       padding-left 14px
 
