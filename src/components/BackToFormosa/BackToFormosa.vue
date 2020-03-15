@@ -1,10 +1,11 @@
 <template>
   <div class="back-to-formosa">
-    <!-- <SlideContainer ref="opening" /> -->
+    <SlideContainer ref="opening" />
+    
     <article class="back-to-formosa__middle" :style="{ color: isMiddleDark ? '#fff' : '' }" ref="middle">
       <div class="bg bg--file" />
       <div class="bg bg--dark" :style="{ opacity: isMiddleDark ? '' : 0 }" />
-      <div class="bg bg--between" ref="bgBetweenMiddle" />
+      <div class="bg bg--between" id="bg-between-middle" ref="bgBetweenMiddle" />
 
       <div class="middle__scene" id="middle__scene--1">
         <div class="scene-heading" id="scene-heading--1" ref="scene1Heading">
@@ -142,7 +143,6 @@
 </template>
 
 <script>
-// import { ScrollController, controlCoveredEffect, raf } from './util/index.js'
 import { ScrollController, CoveredEffect, raf } from './util/index.js'
 
 import listItems from './data/listItems.js'
@@ -161,12 +161,10 @@ export default {
   name: 'BackToFormosa',
   metaInfo () {
     return {
-      title: '',
+      title: '40年．致民主：還原美麗島大審',
       description: '',
       metaUrl: 'backtoformosa',
-      metaImage: '',
-      wEl: null
-      // customScript: '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"><\/script>'
+      metaImage: 'backtoformosa/img/og.png'
     }
   },
   components: {
@@ -188,18 +186,17 @@ export default {
       scrollSceneOrder: {
         once: 0,
         interval: 0
-      }
+      },
+      names: [ 'Linyi', 'Shi', 'Chen', 'Lu', 'Linhong', 'Huang', 'Yao', 'Zhang' ]
     }
   },
   mounted () {
     const {
-      container,
       opening,
       middle,
       ending,
       after,
       bgBetweenMiddle,
-      // darkBg,
 
       scene1Heading,
       scene1HeadingPerson,
@@ -238,15 +235,23 @@ export default {
       reportPage2
     } = this.$refs
 
-    this.wEl = window
-
-    // this.wEl.addEventListener('scroll', raf(controlCoveredEffect(opening.$el, middle)))
-    // this.wEl.addEventListener('scroll', raf(controlCoveredEffect(middle, ending.$el)))
-    // this.wEl.addEventListener('scroll', raf(controlCoveredEffect(ending.$el, after)))
+    /**
+     * Covered Effect
+     */
+    new CoveredEffect({
+      coveredEl: opening.$el,
+      coverEl: middle,
+      betweenEl: opening.$refs.bgBetweenOpening
+    })
     new CoveredEffect({
       coveredEl: middle,
       coverEl: ending.$el,
       betweenEl: bgBetweenMiddle
+    })
+    new CoveredEffect({
+      coveredEl: ending.$el,
+      coverEl: after,
+      betweenEl: ending.$refs.bgBetweenEnding
     })
 
     this.scrollController = new ScrollController()
@@ -297,11 +302,15 @@ export default {
     })
 
     this.scrollController.onceScene({
-        order: this.counter('once'),
-        triggerEl: middleEndText,
-        whOffset: 0.4,
-        fn: () => { this.animate([ middleEndText ]) }
-      })
+      order: this.counter('once'),
+      triggerEl: middleEndText,
+      whOffset: 0.4,
+      fn: () => { this.animate([ middleEndText ]) }
+    })
+
+    this.names.forEach((name) => {
+      this.animateEndingPage(ending.$refs, name)
+    })
 
     /**
      * Interval Scenes
@@ -341,12 +350,19 @@ export default {
         }
       )
     },
+    animateEndingPage (endingRefs, name) {
+      const { person, title } = endingRefs[ `picture${name}` ].$refs
+
+      this.scrollController.onceScene({
+        order: this.counter('once'),
+        triggerEl: endingRefs[ `wrapper${name}` ],
+        whOffset: 0.5,
+        fn: () => { this.animate([ person, title, endingRefs[ `text${name}` ] ]) }
+      })
+    },
     counter (name) {
       return this[ 'scrollSceneOrder' ][ name ] += 1
-    },
-    // darkenPage () {
-    //   const curtScrollH = this.wEl.pageYOffset
-    // }
+    }
   }
 }
 </script>
@@ -380,7 +396,6 @@ strong
     padding-bottom 80px
     padding-left 10px
     padding-right 10px
-    background-color #000
     transition color 0.3s $easeOutSine
     @media (min-width 620px)
       padding-bottom 64vh
@@ -389,6 +404,7 @@ strong
   &__after
     position relative
     z-index 9
+    color #fff
     & picture
       width 100%
     & img
@@ -401,6 +417,7 @@ strong
   left 0
   width 100%
   height 100%
+  pointer-events none
   &--file
     background-image url(/proj-assets/backtoformosa/img/bg-file.png)
     background-size contain
@@ -413,6 +430,14 @@ strong
     background-color #fff
     opacity 0
     z-index 9
+#bg-between
+  &-opening
+    background-color #000
+  &-middle
+    background-color #fff
+  &-ending
+    background-color #9e6460
+
 
 .scene-heading
   position relative
@@ -438,7 +463,7 @@ strong
 
 .scene-heading-text
   // 0.9 + 0.15
-  animation fade-in 0.6s 1.05s $easeOutSine both paused
+  animation fade-in-top 0.6s 1.05s $easeOutSine both paused
 
 #scene-heading
   &--1
@@ -446,11 +471,6 @@ strong
       max-width 862px
       width 59.86%
       left -6.25%
-    // & .scene-heading
-    //   &__person
-    //     animation zoom-out 0.9s $easeOutCubic both paused
-    //   &__title
-    //     animation zoom-out 0.45s 0.45s $easeInQuad both paused
   &--3
     margin-left -10px
     margin-right -10px
@@ -468,7 +488,7 @@ strong
     opacity 1
     transform scale(1)
 
-@keyframes fade-in
+@keyframes fade-in-top
   0%
     opacity 0
     transform translateY(16px)
@@ -493,14 +513,12 @@ strong
     padding-bottom 35px
     @media (min-width $breakpoint-md)
       margin-top 28px
-      // padding-top 0
       padding-bottom 0
     & picture
       max-width 300px
       right -10.94%
       position relative
       z-index -1
-      // animation yao-person 0.9s $easeOutQuad both
       @media (min-width $breakpoint-md)
         position absolute
         max-width 500px
@@ -512,7 +530,7 @@ strong
 
 #report-page1__intro
   // 0.45 + 0.15
-  animation fade-in 0.6s 0.6s $easeOutSine both paused
+  animation fade-in-top 0.6s 0.6s $easeOutSine both paused
 
 #middle-yao-container
   position relative
@@ -520,20 +538,14 @@ strong
     padding-top 120px
   & picture
     animation yao-person 1.05s $easeInOutQuad both paused
-    // @media (min-width $breakpoint-md)
-    //   animation yao-person 0.9s $easeOutQuad both
   & > .middle__container
-    // @media (min-width $breakpoint-md)
-    //   // 0.9 + 0.15
-    //   animation-delay 1.05s
     &:first-child
-      // animation fade-in 0.6s $easeOutSine both paused
       @media (min-width $breakpoint-md)
         // 1.05 + 0.15
-        animation fade-in 0.6s 1.2s $easeOutSine both paused
+        animation fade-in-top 0.6s 1.2s $easeOutSine both paused
     &:last-child
       // 1.05 + 0.15
-      animation fade-in 0.6s 1.2s $easeOutSine both paused
+      animation fade-in-top 0.6s 1.2s $easeOutSine both paused
 
 @keyframes yao-person
   0%
@@ -564,8 +576,7 @@ strong
       margin-top 80px
   &__container
     &--end
-      animation fade-in 0.6s $easeOutSine both paused
-
+      animation fade-in-top 0.6s $easeOutSine both paused
 
 .after
   &__wrapper
@@ -573,19 +584,14 @@ strong
     padding-top 32px
   &__caption
     font-size 2.0rem
-    line-height 1.4
     display flex
     flex-direction column
     align-items center
-    & p
-      padding 3px 14px
-      background-color rgba(#fff, 0.7)
-      & + p
-        margin-top 16px
+    line-height 1.67
+    & p + p
+      margin-top 15px
 
 .report-page, .list-page
-  // padding-top 20vh
-  // padding-bottom 20vh
   margin-top 40vh
   margin-bottom 40vh
   &__intro
@@ -599,9 +605,9 @@ strong
 .list-page
   position relative
   &__intro
-    animation fade-in 0.6s $easeOutSine both paused
+    animation fade-in-top 0.6s $easeOutSine both paused
   &__content
-    animation fade-in 0.6s 0.6s $easeOutSine both paused
+    animation fade-in-top 0.6s 0.6s $easeOutSine both paused
 
 .report-page-content__qa picture
   margin-left auto

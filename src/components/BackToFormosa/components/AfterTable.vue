@@ -25,10 +25,9 @@ export default {
 .after-table
   font-size 1.6rem
   line-height 1.4
-  color #fff
   text-align center
   padding 30px 10px 45px 10px
-  max-width 600px
+  max-width 300px
   margin-right auto
   margin-left auto
   @media (min-width 620px)

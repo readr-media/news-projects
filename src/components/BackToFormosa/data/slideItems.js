@@ -1,18 +1,14 @@
 export default {
   1: {
-    // animationPlayState: 'running',
-    // animation: 'take-in 1s linear both',
     canAnimate: true,
     pictures: [
       {
         name: 'slide1-back',
         type: 'png'
-        // className: 'slide-item__picture--cover'
       },
       {
         name: 'slide1-front',
         type: 'png'
-        // className: 'slide-item__picture--cover'
       }
     ],
     content: {
@@ -26,19 +22,15 @@ export default {
     }
   },
   2: {
-    // animationPlayState: 'paused',
-    // animation: 'take-in 0.3s ease-out both',
     canAnimate: false,
     pictures: [
       {
         name: 'slide2-back',
         type: 'png'
-        // className: 'slide-item__picture--cover'
       },
       {
         name: 'slide2-front',
         type: 'png'
-        // className: 'slide-item__picture--cover'
       }
     ],
     content: {
@@ -54,70 +46,57 @@ export default {
     }
   },
   3: {
-    // animationPlayState: 'paused',
     canAnimate: false,
     pictures: [
       {
         name: 'slide3-bg',
         type: 'png'
-        // className: 'slide-item__picture--cover'
       },
       {
         name: 'slide3-title1',
-        type: 'png',
-        // className: [ 'slide3-title' ]
+        type: 'png'
       },
       {
         name: 'slide3-title2',
-        type: 'png',
-        // className: [ 'slide3-title' ]
+        type: 'png'
       },
       {
         name: 'slide3-title3',
-        type: 'png',
-        // className: [ 'slide3-title' ]
+        type: 'png'
       },
       {
         name: 'slide3-title4',
-        type: 'png',
-        // className: [ 'slide3-title' ]
+        type: 'png'
       },
       {
         name: 'slide3-title5',
-        type: 'png',
-        // className: [ 'slide3-title' ]
+        type: 'png'
       },
       {
         name: 'slide3-title6',
-        type: 'png',
-        // className: [ 'slide3-title' ]
+        type: 'png'
       },
       {
         name: 'slide3-title7',
-        type: 'png',
-        // className: [ 'slide3-title' ]
+        type: 'png'
       },
       {
         name: 'slide3-title8',
         type: 'png',
-        // className: [ 'slide3-title' ]
       }
     ],
     content: {}
   },
   4: {
-    // animationPlayState: 'paused',
     canAnimate: false,
     pictures: [
       {
         name: 'slide4-back',
         type: 'png'
-        // className: 'slide-item__picture--cover'
       },
       {
         name: 'slide4-front',
         type: 'png'
-        // className: 'slide-item__picture--cover'
       }
     ],
     content: {
@@ -132,7 +111,6 @@ export default {
     }
   },
   5: {
-    // animationPlayState: 'paused',
     canAnimate: false,
     pictures: [],
     content: {
@@ -151,7 +129,6 @@ export default {
     }
   },
   6: {
-    // animationPlayState: 'paused',
     canAnimate: false,
     pictures: [
       {
@@ -161,7 +138,6 @@ export default {
       {
         name: 'slide6-title',
         type: 'svg'
-        // className: 'slide-item__picture--cover'
       }
     ],
     content: {}

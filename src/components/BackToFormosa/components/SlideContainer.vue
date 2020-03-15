@@ -1,14 +1,16 @@
 <template>
   <div class="slide-container">
+    <div class="bg bg--between" id="bg-between-opening" ref="bgBetweenOpening" />
+
     <SlideItem v-for="(item, key) in slideItems" :ref="`slideItem${key}`" :key="`slideItem${key}`" :id="`slide-item--${key}`" :class="{ paused: !item.canAnimate }">
-      <picture class="slide-item__picture" v-for="picture in item.pictures" :id="`slide-item__picture--${picture.name}`" :class="[ ...picture.className || [] ]">
+      <picture class="slide-item__picture" v-for="picture in item.pictures" :id="`slide-item__picture--${picture.name}`">
         <img :src="`/proj-assets/backtoformosa/img/opening/${picture.name}.${picture.type}`" alt="">
       </picture>
       <div
         v-if="Object.keys(item.content).length"
         :id="`slide-item__text--${key}`"
         class="slide-item__text"
-        :class="[ ...item.content.className || [] ]"
+        :class="item.content.className"
         v-html="item.content.text"
       >
       </div>
@@ -44,23 +46,6 @@ export default {
     }
   },
   methods: {
-    // slideItemStyle ({ animation = 'none', animationPlayState = 'paused' }) {
-    //   return {
-    //     animation,
-    //     animationPlayState
-    //   }
-    // },
-    // pictureStyle (animationPlayState = 'paused') {
-    //   return {
-    //     animationPlayState
-    //   }
-    // },
-    // textStyle ({ animation = 'none' }, animationPlayState = 'paused') {
-    //   return {
-    //     animation,
-    //     animationPlayState
-    //   }
-    // },
     controlSlideItemAnimation () {
       // console.log('enter')
 

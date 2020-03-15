@@ -25,7 +25,6 @@ export default {
 .list-page-content
   &__name
     font-size 2.0rem
-    // font-weight 700
     line-height 1.4
     margin-bottom 8px
     @media (min-width $breakpoint-md)

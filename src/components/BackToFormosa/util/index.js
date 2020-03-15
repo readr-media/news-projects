@@ -121,7 +121,8 @@ export class CoveredEffect extends Scroll {
       coveredEl: null,
       coverEl: null,
       betweenEl: null,
-      bodyEl: document.body
+      bodyEl: document.body,
+      whOffset: 0.5
     }
     Object.assign(def, args)
     Object.assign(this, def)
@@ -148,7 +149,7 @@ export class CoveredEffect extends Scroll {
     const coverT = this.coverEl.getBoundingClientRect().top
 
     if (this.isCovered) {
-      if (coverT - wh * 1.5 >= 0) {
+      if (coverT - wh * (this.whOffset + 1) >= 0) {
         this.coveredEl.style.position = ''
         this.bodyEl.style.paddingTop = `${this.curtSpace}px`
         this.coveredEl.style.width = ''
@@ -171,7 +172,7 @@ export class CoveredEffect extends Scroll {
         this.coveredEl.style.bottom = '0'
         this.coveredEl.style.left = '0'
         this.coveredEl.style.position = 'fixed'
-        this.bodyEl.style.paddingTop = `${this.curtSpace + (coveredH + wh * 0.5)}px`
+        this.bodyEl.style.paddingTop = `${this.curtSpace + (coveredH + wh * this.whOffset)}px`
         this.isCovered = true
 
         // console.log('covered')
@@ -203,11 +204,13 @@ export class CoveredEffect extends Scroll {
     if (diff < 0) {
       // console.log('zero')
 
-      if (betweenOpacity !== '0') { this.betweenEl.style.opacity = '0' }
+      this.betweenEl.style.opacity = '0'
+      // if (betweenOpacity !== '0') { this.betweenEl.style.opacity = '0' }
     } else if (diff > totalH) {
       // console.log('one')
 
-      if (betweenOpacity !== '1') { this.betweenEl.style.opacity = '1' }
+      this.betweenEl.style.opacity = '1'
+      // if (betweenOpacity !== '1') { this.betweenEl.style.opacity = '1' }
     } else {
       // console.log('amount')
 
