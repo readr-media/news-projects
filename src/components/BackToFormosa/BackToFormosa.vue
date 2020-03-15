@@ -187,7 +187,10 @@ export default {
         once: 0,
         interval: 0
       },
-      names: [ 'Linyi', 'Shi', 'Chen', 'Lu', 'Linhong', 'Huang', 'Yao', 'Zhang' ]
+      names: [ 'Linyi', 'Shi', 'Chen', 'Lu', 'Linhong', 'Huang', 'Yao', 'Zhang' ],
+      wEl: null,
+      headerBarEl: null,
+      beforeScrollH: 0
     }
   },
   mounted () {
@@ -234,7 +237,6 @@ export default {
       listPage,
       reportPage2
     } = this.$refs
-
     /**
      * Covered Effect
      */
@@ -316,6 +318,11 @@ export default {
      * Interval Scenes
      */
     this.darkenMiddlePage([ reportPage1, listPage, reportPage2 ])
+
+    this.wEl = window
+    this.headerBarEl = document.getElementById('readr-app-header')
+    this.wEl.addEventListener('scroll', raf(() => { this.toggleHeaderBar() }))
+    this.headerBarEl.addEventListener('mouseenter', this.showHeaderBar)
   },
   computed: {
     isMiddleDark () {
@@ -362,6 +369,20 @@ export default {
     },
     counter (name) {
       return this[ 'scrollSceneOrder' ][ name ] += 1
+    },
+    toggleHeaderBar () {
+      const curtScrollH = this.wEl.pageYOffset
+      const diff = curtScrollH - this.beforeScrollH
+
+      if (diff >= 0) {
+        this.headerBarEl.classList.add('hidden')
+      } else {
+        this.headerBarEl.classList.remove('hidden')
+      }
+      this.beforeScrollH = curtScrollH
+    },
+    showHeaderBar () { 
+      this.headerBarEl.classList.remove('hidden')
     }
   }
 }
@@ -387,6 +408,11 @@ strong
 
 .running
   animation-play-state running !important
+
+.header
+  transition transform 0.3s $easeInOutSine
+  &.hidden
+    transform translateY(-100%)
 
 .back-to-formosa
   overflow hidden
