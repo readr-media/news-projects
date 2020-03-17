@@ -24,7 +24,7 @@ pipeline:
     - rm -rf default
     when:
       event: [push]
-      branch: dev
+      branch: [dev, feature-subscription]
   
   get-production-config:
     image: gcr.io/mirrormedia-1470651750304/drone-cloud-sdk:latest
@@ -47,7 +47,7 @@ pipeline:
     - yarn run build
     when:
       event: [push]
-      branch: [master, dev]
+      branch: [master, dev, feature-subscription]
   
   publish:
     image: plugins/gcr
@@ -58,7 +58,7 @@ pipeline:
     secrets: [google_credentials]
     when:
       event: [push]
-      branch: [master, dev]
+      branch: [master, dev, feature-subscription]
   
   upload:
     image: plugins/gcs
@@ -90,7 +90,7 @@ pipeline:
       tier: frontend
     when:
       event: [push]
-      branch: dev
+      branch: [dev, feature-subscription]
  
   finish-slack:
     image: plugins/slack
