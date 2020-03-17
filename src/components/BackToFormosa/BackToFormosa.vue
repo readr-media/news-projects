@@ -149,7 +149,7 @@
 
     <TitleIndex />
 
-    <TheFooter />
+    <TheFooter ref="theFooter" />
   </div>
 </template>
 
@@ -251,7 +251,9 @@ export default {
 
       reportPage1,
       listPage,
-      reportPage2
+      reportPage2,
+
+      theFooter
     } = this.$refs
     /**
      * Covered Effect
@@ -329,6 +331,19 @@ export default {
     // this.headerBarEl = document.getElementById('readr-app-header')
     // this.wEl.addEventListener('scroll', raf(() => { this.toggleHeaderBar() }))
     // this.headerBarEl.addEventListener('mouseenter', this.showHeaderBar)
+
+    // GA
+    const gaController = new ScrollController()
+    this.sendGa(gaController,
+      [ middle, scene2, scene3, ending.$el, after ],
+      [ '第一幕', '第二幕', '第三幕', '最後陳述', '大審之後' ]
+    )
+    gaController.lineScene({
+      order: 6,
+      triggerEl: theFooter.$el,
+      whOffset: 1,
+      enterFn: () => { this.wEl.ga('send', 'event', 'projects', 'scroll', 'scroll to end', 6) }
+    })
   },
   computed: {
     isMiddleDark () {
@@ -389,6 +404,18 @@ export default {
     },
     showHeaderBar () { 
       this.headerBarEl.classList.remove('hidden')
+    },
+    sendGa (controller, triggerEls = [], labels = []) {
+      labels.forEach((label, idx) => {
+        const triggerEl = triggerEls[ idx ]
+        const order = idx + 1
+
+        controller.lineScene({
+          order,
+          triggerEl,
+          enterFn: () => { this.wEl.ga('send', 'event', 'projects', 'scroll', `scroll to ${label}`, order) }
+        })
+      })
     }
   }
 }

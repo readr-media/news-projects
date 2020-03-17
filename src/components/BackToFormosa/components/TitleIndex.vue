@@ -106,6 +106,7 @@ export default {
       this.changeIndex(idx + 1, this.titleEl(title.id))
     })
 
+    // todo add resize
     new ScrollController().lineScene({
       order: 1,
       triggerEl: this.$parent.$refs.scene1,

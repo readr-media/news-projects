@@ -4,7 +4,10 @@
 
     <SlideItem v-for="(item, key) in slideItems" :ref="`slideItem${key}`" :key="`slideItem${key}`" :id="`slide-item--${key}`" :class="{ paused: !item.canAnimate }">
       <picture class="slide-item__picture" v-for="picture in item.pictures" :id="`slide-item__picture--${picture.name}`">
-        <img :src="`/proj-assets/backtoformosa/img/opening/${picture.name}.${picture.type}`" alt="">
+        <!-- <source media="(min-width: 460px) and (max-width: 719.98px)" :srcset="`/proj-assets/backtoformosa/img/opening/${picture.name}-ts.${picture.type}`"> -->
+        <source media="(min-width: 720px) and (max-width: 999.98px)" :srcset="`/proj-assets/backtoformosa/img/opening/${picture.name}-tl.${picture.type}`">
+        <source media="(min-width: 1000px)" :srcset="`/proj-assets/backtoformosa/img/opening/${picture.name}-ds.${picture.type}`">
+        <img :src="`/proj-assets/backtoformosa/img/opening/${picture.name}-ts.${picture.type}`" alt="">
       </picture>
       <div
         v-if="Object.keys(item.content).length"

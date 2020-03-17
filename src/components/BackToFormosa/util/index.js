@@ -165,11 +165,12 @@ export class CoveredEffect extends Scroll {
     return this.wEl.innerHeight
   }
 
+  // todo mobile has bug
   applyCoveredEffect(order, coveredEl, coverEl, whOffset = 0) {
     let curtSpace = 0
     let isCovered = false
 
-    this.wEl.addEventListener('scroll', raf(() => {
+    this.wEl.addEventListener('scroll', raf(() => {      
       if (this.isScrollDown) {
         if (this.curtOrder !== order - 1) { return }
       } else {
@@ -196,7 +197,7 @@ export class CoveredEffect extends Scroll {
       } else {
         // console.log(`${order}: detect cover`)
 
-        if (coverT - this.wh <= 0) {
+        if (coverT - this.wh < 0) {
           // console.log(`${order}: covered`)
 
           const coveredH = coveredEl.clientHeight
