@@ -95,7 +95,7 @@ export default {
       return this.$store.state.viewport[ 0 ]
     },
     isMobW () {
-      return this.ww <= 719.98
+      return this.ww <= 767.98
     }
   },
   mounted () {
@@ -106,7 +106,6 @@ export default {
       this.changeIndex(idx + 1, this.titleEl(title.id))
     })
 
-    // todo add resize
     new ScrollController().lineScene({
       order: 1,
       triggerEl: this.$parent.$refs.scene1,
@@ -166,7 +165,7 @@ export default {
 
 .the-index
   user-select none
-  @media (min-width $breakpoint-tl)
+  @media (min-width $breakpoint-md)
     position fixed
     z-index 29
     top 50%

@@ -35,7 +35,7 @@ export default {
 
 .page-picture
   margin-bottom 10px
-  @media (min-width $breakpoint-tl)
+  @media (min-width $breakpoint-lg)
     position relative
     z-index -1
     margin-bottom 0
@@ -52,10 +52,10 @@ export default {
     height auto
   &.later .page-picture
     &__person
-      @media (min-width $breakpoint-tl)
+      @media (min-width $breakpoint-lg)
         animation fade-in-left 0.9s 0.6s $easeOutSine both paused
     &__title
-      @media (min-width $breakpoint-tl)
+      @media (min-width $breakpoint-lg)
         animation fade-in-left 0.9s 1.2s $easeOutSine both paused
 
 @keyframes fade-in-left

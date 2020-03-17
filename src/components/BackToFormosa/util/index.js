@@ -158,19 +158,22 @@ export class CoveredEffect extends Scroll {
   get isScrollDown () {
     return this.scrollDirection === 'down'
   }
-  get curtScrollH () {
-    return parseFloat(this.bodyEl.style.paddingTop) - this.wh
-  }
-  get wh () {
-    return this.wEl.innerHeight
-  }
+  // get curtScrollH () {
+  //   return parseFloat(this.bodyEl.style.paddingTop) - this.wh
+  // }
 
-  // todo mobile has bug
+  // todo: why does it cause bug???
+  // get wh () {
+  //   return this.wEl.innerHeight
+  // }
+
   applyCoveredEffect(order, coveredEl, coverEl, whOffset = 0) {
     let curtSpace = 0
     let isCovered = false
 
-    this.wEl.addEventListener('scroll', raf(() => {      
+    this.wEl.addEventListener('scroll', raf(() => {     
+      const wh = this.wEl.innerHeight
+
       if (this.isScrollDown) {
         if (this.curtOrder !== order - 1) { return }
       } else {
@@ -182,7 +185,7 @@ export class CoveredEffect extends Scroll {
       if (isCovered) {
         // console.log(`${order}: detect uncover`)
 
-        if (coverT - this.wh * (whOffset + 1) >= 0) {
+        if (coverT - wh * (whOffset + 1) >= 0) {
           // console.log(`${order}: uncovered`)
 
           coveredEl.style.position = ''
@@ -197,7 +200,7 @@ export class CoveredEffect extends Scroll {
       } else {
         // console.log(`${order}: detect cover`)
 
-        if (coverT - this.wh < 0) {
+        if (coverT - wh < 0) {
           // console.log(`${order}: covered`)
 
           const coveredH = coveredEl.clientHeight
@@ -207,7 +210,7 @@ export class CoveredEffect extends Scroll {
           coveredEl.style.bottom = '0'
           coveredEl.style.left = '0'
           coveredEl.style.position = 'fixed'
-          this.bodyEl.style.paddingTop = `${curtSpace + (coveredH + this.wh * whOffset)}px`
+          this.bodyEl.style.paddingTop = `${curtSpace + (coveredH + wh * whOffset)}px`
           isCovered = true
 
           this.curtOrder = order
@@ -232,10 +235,12 @@ export class CoveredEffect extends Scroll {
 
       if (this.isScrollDown && curtBetweenOpacity === '1') { return }
 
+      const wh = this.wEl.innerHeight
       const afterScrollH = this.wEl.pageYOffset
-      const diff = afterScrollH - this.curtScrollH
+      const curtScrollH = parseFloat(this.bodyEl.style.paddingTop) - wh
+      const diff = afterScrollH - curtScrollH
 
-      if (diff > this.wh) {
+      if (diff > wh) {
         if (!this.isScrollDown) { return }
         // console.log(`${order}: one`)
 
@@ -243,7 +248,7 @@ export class CoveredEffect extends Scroll {
       } else {
         // console.log(`${order}: amount`)
 
-        betweenEl.style.opacity = `${(diff / this.wh).toFixed(2)}`
+        betweenEl.style.opacity = `${(diff / wh).toFixed(2)}`
       }
     }))
 

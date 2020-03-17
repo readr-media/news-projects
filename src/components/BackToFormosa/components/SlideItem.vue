@@ -31,8 +31,8 @@ export default {
     left 50%
     transform translateX(-50%)
     text-align center
-    animation slide-text-default 0.75s 2.25s $easeOutSine both
-    @media (min-width $breakpoint-tl)
+    animation slide-text-default 1.2s $easeOutSine both
+    @media (min-width $breakpoint-md)
       animation-name slide-text-default-md
       width auto
       transform translateX(0)

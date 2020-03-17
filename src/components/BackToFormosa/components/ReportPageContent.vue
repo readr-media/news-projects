@@ -35,7 +35,7 @@ export default {
 .report-page-content
   & + &
     margin-top 64px
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       margin-top 80px
   &__picture
     margin-bottom 20px
@@ -47,7 +47,7 @@ export default {
     font-size 1.6rem
     line-height 1.75
     animation fade-in-top 0.6s 0.6s $easeOutSine both paused
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       display flex
       align-items flex-start
     & picture

@@ -27,17 +27,17 @@ export default {
     font-size 2.0rem
     line-height 1.4
     margin-bottom 8px
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       font-size 3.0rem
   &__item
     & + &
       margin-top 30px
-      @media (min-width $breakpoint-tl)
+      @media (min-width $breakpoint-md)
         margin-top 40px
   & ul
     line-height 1.75
     font-size 1.6rem
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       font-size 2.0rem
       line-height 2
   & li
@@ -56,7 +56,7 @@ export default {
       // (28 - 12) / 2
       top 8px
       left 0
-      @media (min-width $breakpoint-tl)
+      @media (min-width $breakpoint-md)
         // (40 - 12) / 2
         top 14px
 </style>

@@ -255,13 +255,14 @@ export default {
 
       theFooter
     } = this.$refs
+
     /**
      * Covered Effect
      */
     new CoveredEffect()
-      .applyCoveredEffect(1, opening.$el, middle)
-      .applyCoveredEffect(2, middle, ending.$el)
-      .applyCoveredEffect(3, ending.$el, after)
+      .applyCoveredEffect(1, opening.$el, middle, 0.25)
+      .applyCoveredEffect(2, middle, ending.$el, 0.25)
+      .applyCoveredEffect(3, ending.$el, after, 0.25)
       .applyBetweenEffect(1, opening.$refs.bgBetweenOpening)
       .applyBetweenEffect(2, bgBetweenMiddle)
       .applyBetweenEffect(3, ending.$refs.bgBetweenEnding)
@@ -282,8 +283,15 @@ export default {
         order: this.counter('once'),
         triggerEl: scene2,
         whOffset: 0.3,
-        enterFn: () => { this.animate([ scene2HeadingTitle, scene2ReportIntro ]) }
+        enterFn: () => { this.animate([ scene2HeadingTitle ]) }
       })
+      .lineScene({
+        order: this.counter('once'),
+        triggerEl: reportPage1,
+        whOffset: 0.5,
+        enterFn: () => { this.animate([ scene2ReportIntro ]) }
+      })
+
 
     Array.prototype.forEach.call([ report1Content1, report1Content2, report1Content3 ], (component) => {
       this.animateReportPage(component[ 0 ])
@@ -328,9 +336,9 @@ export default {
      * Interval Scenes
      */
     this.darkenMiddlePage([ reportPage1, listPage, reportPage2 ])
-    // this.headerBarEl = document.getElementById('readr-app-header')
-    // this.wEl.addEventListener('scroll', raf(() => { this.toggleHeaderBar() }))
-    // this.headerBarEl.addEventListener('mouseenter', this.showHeaderBar)
+    this.headerBarEl = document.getElementById('readr-app-header')
+    this.wEl.addEventListener('scroll', raf(() => { this.toggleHeaderBar() }))
+    this.headerBarEl.addEventListener('mouseenter', this.showHeaderBar)
 
     // GA
     const gaController = new ScrollController()
@@ -482,11 +490,11 @@ strong
     background-size contain
     background-repeat repeat
     z-index -9
-    @media (min-width $breakpoint-tl)
+    @media (min-width 460px)
       background-image url(/proj-assets/backtoformosa/img/bg-file-ts.jpg)
-    @media (min-width $breakpoint-tl)
+    @media (min-width 720px)
       background-image url(/proj-assets/backtoformosa/img/bg-file-tl.jpg)
-    @media (min-width $breakpoint-ds)
+    @media (min-width 1000px)
       background-image url(/proj-assets/backtoformosa/img/bg-file-ds.jpg)
   &--dark
     background-color rgba(#000, 0.8)
@@ -507,20 +515,18 @@ strong
 .scene-heading
   position relative
   margin-bottom 10px
-  @media (min-width $breakpoint-tl)
+  @media (min-width $breakpoint-md)
     position absolute
     top 0
     left 0
     margin-bottom 0
   &__person
-    // transform-origin 50% 40%
     animation zoom-out 0.9s $easeOutCubic both paused
   &__title
     position absolute
     width 100%
     top 0
     left 0
-    // transform-origin 50% 60%
     animation zoom-out 0.45s 0.45s $easeInQuad both paused
   & img
     width 100%
@@ -532,14 +538,14 @@ strong
 
 #scene-heading
   &--1
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       max-width 862px
       width 59.86%
       left -6.25%
   &--3
     margin-left -10px
     margin-right -10px
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       max-width 1062px
       width 73.75%
       margin-left 0
@@ -564,7 +570,7 @@ strong
 #scene2
   &-title
     animation zoom-out 0.45s $easeInQuad both paused
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       width 62.5%
       right 7.43%
       max-width 900px
@@ -576,15 +582,16 @@ strong
   &-yao-img
     margin-top 10px
     padding-bottom 35px
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       margin-top 28px
       padding-bottom 0
     & picture
       max-width 300px
-      right -10.94%
+      // right -10.94%
+      margin-left auto
       position relative
       z-index -1
-      @media (min-width $breakpoint-tl)
+      @media (min-width $breakpoint-md)
         position absolute
         max-width 500px
         top 0
@@ -595,17 +602,17 @@ strong
 
 #report-page1__intro
   // 0.45 + 0.15
-  animation fade-in-top 0.6s 0.6s $easeOutSine both paused
+  animation fade-in-top 0.6s $easeOutSine both paused
 
 #middle-yao-container
   position relative
-  @media (min-width $breakpoint-tl)
+  @media (min-width $breakpoint-md)
     padding-top 120px
   & picture
     animation yao-person 1.05s $easeInOutQuad both paused
   & > .middle__container
     &:first-child
-      @media (min-width $breakpoint-tl)
+      @media (min-width $breakpoint-md)
         // 1.05 + 0.15
         animation fade-in-top 0.6s 1.2s $easeOutSine both paused
     &:last-child
@@ -634,7 +641,7 @@ strong
       margin-top 28px
 
 #scene1, #scene3
-  @media (min-width $breakpoint-tl)
+  @media (min-width $breakpoint-md)
     padding-top 64vh
 #scene2
   margin-top 80px
@@ -665,7 +672,7 @@ strong
     text-align center
     line-height 1.8
     margin-bottom 128px
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       margin-bottom 152px
 .list-page
   position relative
@@ -678,20 +685,20 @@ strong
   margin-left auto
   margin-right auto
   margin-top 20px
-  @media (min-width $breakpoint-tl)
+  @media (min-width $breakpoint-md)
     margin-top 0
     align-self center
   &.lin
     width 80px
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       margin-left 20px
   &.chen
     width 50px
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       margin-left 24px
   &.huang
     width 70px
-    @media (min-width $breakpoint-tl)
+    @media (min-width $breakpoint-md)
       margin-left 32px
 
 #blood
@@ -700,7 +707,7 @@ strong
   top -208px
   left -25.67%
   z-index -1
-  @media (min-width $breakpoint-tl)
+  @media (min-width $breakpoint-md)
     // 292 + 36
     top 328px
     // 120 / 600

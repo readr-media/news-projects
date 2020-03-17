@@ -4,10 +4,8 @@
 
     <SlideItem v-for="(item, key) in slideItems" :ref="`slideItem${key}`" :key="`slideItem${key}`" :id="`slide-item--${key}`" :class="{ paused: !item.canAnimate }">
       <picture class="slide-item__picture" v-for="picture in item.pictures" :id="`slide-item__picture--${picture.name}`">
-        <!-- <source media="(min-width: 460px) and (max-width: 719.98px)" :srcset="`/proj-assets/backtoformosa/img/opening/${picture.name}-ts.${picture.type}`"> -->
-        <source media="(min-width: 720px) and (max-width: 999.98px)" :srcset="`/proj-assets/backtoformosa/img/opening/${picture.name}-tl.${picture.type}`">
         <source media="(min-width: 1000px)" :srcset="`/proj-assets/backtoformosa/img/opening/${picture.name}-ds.${picture.type}`">
-        <img :src="`/proj-assets/backtoformosa/img/opening/${picture.name}-ts.${picture.type}`" alt="">
+        <img :src="`/proj-assets/backtoformosa/img/opening/${picture.name}-tl.${picture.type}`" alt="">
       </picture>
       <div
         v-if="Object.keys(item.content).length"
@@ -34,7 +32,6 @@ export default {
   },
   mounted () {
     window.addEventListener('scroll', raf(this.controlSlideItemAnimation))
-    // this.controlSlideItemAnimation()
   },
   data () {
     return {
@@ -108,9 +105,10 @@ export default {
     background-color #a56c6a
   &__picture
     &--slide1-back, &--slide2-back
-      animation slide-img-back-default 3s $easeInOutCubic both
+      animation slide-img-back-default 3s 0.3s $easeInOutCubic both
     &--slide1-front, &--slide2-front
-      animation slide-img-front-default 3s $easeInOutCubic both
+      animation slide-img-front-default 3s 0.3s $easeInOutCubic both
+      transform-origin 50% 60%
     &--slide3
       &-title1
         animation slide3-img 0.9s $easeInOutExpo both
@@ -130,9 +128,9 @@ export default {
         animation slide3-img 0.3s 2.4s $easeInOutExpo both
     &--slide4
       &-back
-        animation slide4-img-back 3s $easeInOutCubic both
+        animation slide4-img-back 3s 0.3s $easeInOutCubic both
       &-front
-        animation slide4-img-front 3s $easeInOutCubic both
+        animation slide4-img-front 3s 0.3s $easeInOutCubic both
     &--slide6-title
       width 93.75%
       height auto
@@ -144,7 +142,7 @@ export default {
       padding-left 10px
       box-sizing content-box
       animation slide6-img-title 0.9s $easeInOutCubic both
-      @media (min-width $breakpoint-tl)
+      @media (min-width $breakpoint-md)
         width 64.51%
         right 3.8%
         left auto
@@ -158,17 +156,17 @@ export default {
   &__text
     &--1
       bottom 7.04%
-      @media (min-width $breakpoint-tl)
+      @media (min-width $breakpoint-md)
         bottom 4.83%
         left 12.99%
     &--2
       top 7.04%
-      @media (min-width $breakpoint-tl)
+      @media (min-width $breakpoint-md)
         top 8.02%
         left 11.6%
     &--4
       top 7.04%
-      @media (min-width $breakpoint-tl)
+      @media (min-width $breakpoint-md)
         top 7.9%
         left 10%
     &--5
@@ -177,22 +175,18 @@ export default {
       transform translateX(0)
       animation slide5-text 0.75s $easeOutSine both
       & > div
-        animation slide5-text 0.75s 0.75s $easeOutSine both
+        animation slide5-text 0.75s 0.6s $easeOutSine both
 
-// animations
 @keyframes slide-img-back-default
   0%
-    // transform scale(1.12)
     transform scale(1)
   100%
     transform scale(1.06)
 @keyframes slide-img-front-default
   0%
-    // transform scale(1.06)
     transform scale(1)
   100%
     transform scale(1.12)
-    // transform scale(1)
 
 @keyframes slide-text-default
   0%
