@@ -26,7 +26,7 @@ export class ScrollController extends Scroll {
     Object.assign(this, def)
 
     this.curtIntervalOrder = 0
-    this.curtOnceOrder = 0
+    this.curtLineOrder = 0
 
     this.init()
   }
@@ -35,18 +35,38 @@ export class ScrollController extends Scroll {
     this.wEl.addEventListener('scroll', raf(() => { this.setScrollDirection() }))
   }
 
-  onceScene ({ order, triggerEl, whOffset = 0, fn }) {
-    let isTriggered = false
+  lineScene ({ order, triggerEl, whOffset = 0, enterFn, leaveFn }) {
+    let isOnceTriggered = false
 
     this.wEl.addEventListener('scroll', raf(() => {
-      if (isTriggered || (this.curtOnceOrder !== order - 1)) { return }
+      if (isOnceTriggered) { return }
+
+      const isScrollDown = this.scrollDirection === 'down'
+
+      if (isScrollDown) {
+        if (this.curtLineOrder !== order - 1) { return }
+      } else {
+        if (this.curtLineOrder !== order) { return }
+      }
 
       const triggerT = triggerEl.getBoundingClientRect().top
 
-      if (triggerT - whOffset * this.wEl.innerHeight <= 0) {
-        this.curtOnceOrder = order
-        isTriggered = true
-        fn()
+      if (isScrollDown) {
+        if (triggerT - whOffset * this.wEl.innerHeight <= 0) {
+          // console.log(`${order}: Enter Line`)
+
+          this.curtLineOrder = order
+          if (!leaveFn) { isOnceTriggered = true }
+          enterFn && enterFn()
+        }
+      } else {
+        if (triggerT - whOffset * this.wEl.innerHeight > 0) {
+          // console.log(`${order}: Leave Line`)
+
+          this.curtLineOrder = order - 1
+          if (!enterFn) { isOnceTriggered = true }
+          leaveFn && leaveFn()
+        }
       }
     }))
 
@@ -76,7 +96,7 @@ export class ScrollController extends Scroll {
         endT = startElBcr.bottom
       } else {
         startT = startEl.getBoundingClientRect().top
-        endT = endEl.getBoundingClientRect().bottom
+        endT = endEl.getBoundingClientRect().top
       }
       
       if (isScrollDown) {
@@ -84,28 +104,32 @@ export class ScrollController extends Scroll {
           // console.log(`${order}: Enter Start`)
 
           inInterval = true
-          enterStartFn()
+          enterStartFn && enterStartFn()
         }
         if (endT - endWhOffset * this.wEl.innerHeight <= 0) {
           // console.log(`${order}: Leave End`)
 
           this.curtIntervalOrder = order
           inInterval = false
-          leaveEndFn ? leaveEndFn() : leaveStartFn()
+
+          if (leaveEndFn) { leaveEndFn() }
+          else { if (leaveStartFn) { leaveStartFn() } }
         }
       } else {
         if (!inInterval && endT - endWhOffset * this.wEl.innerHeight > 0) {
           // console.log(`${order}: Enter End`)
 
           inInterval = true
-          enterEndFn ? enterEndFn() : enterStartFn()
+
+          if (enterEndFn) { enterEndFn() }
+          else { if (enterStartFn) { enterStartFn() } }
         }
         if (startT - startWhOffset * this.wEl.innerHeight > 0) {
           // console.log(`${order}: Leave Start`)
 
           this.curtIntervalOrder = order - 1
           inInterval = false
-          leaveStartFn()
+          leaveStartFn && leaveStartFn()
         }
       }
     }))
@@ -118,104 +142,117 @@ export class CoveredEffect extends Scroll {
   constructor (args) {
     super()
     const def = {
-      coveredEl: null,
-      coverEl: null,
-      betweenEl: null,
       bodyEl: document.body,
-      whOffset: 0.5
     }
     Object.assign(def, args)
     Object.assign(this, def)
 
-    this.curtSpace = 0
-    this.isCovered = false
-    this.canBetween = false
-    this.curtScrollH = 0
+    this.curtOrder = 0
 
     this.init()
   }
 
   init () {
-    this.wEl.addEventListener('scroll', raf(() => { this.applyCoveredEffect() }))
-    if (this.betweenEl) {
-      this.wEl.addEventListener('scroll', raf(() => { this.setScrollDirection() }))
-      this.wEl.addEventListener('scroll', raf(() => { this.applyBetween() }))
-    }
+    this.wEl.addEventListener('scroll', raf(() => { this.setScrollDirection() }))
   }
+  get isScrollDown () {
+    return this.scrollDirection === 'down'
+  }
+  // get curtScrollH () {
+  //   return parseFloat(this.bodyEl.style.paddingTop) - this.wh
+  // }
 
-  // todo: add order
-  applyCoveredEffect () {
-    const wh = this.wEl.innerHeight
-    const coverT = this.coverEl.getBoundingClientRect().top
+  // todo: why does it cause bug???
+  // get wh () {
+  //   return this.wEl.innerHeight
+  // }
 
-    if (this.isCovered) {
-      if (coverT - wh * (this.whOffset + 1) >= 0) {
-        this.coveredEl.style.position = ''
-        this.bodyEl.style.paddingTop = `${this.curtSpace}px`
-        this.coveredEl.style.width = ''
-        this.coveredEl.style.bottom = ''
-        this.coveredEl.style.left = ''
-        this.isCovered = false
+  applyCoveredEffect(order, coveredEl, coverEl, whOffset = 0) {
+    let curtSpace = 0
+    let isCovered = false
 
-        // console.log('uncovered')
+    this.wEl.addEventListener('scroll', raf(() => {     
+      const wh = this.wEl.innerHeight
 
-        if (this.betweenEl) {
-          this.canBetween = false
+      if (this.isScrollDown) {
+        if (this.curtOrder !== order - 1) { return }
+      } else {
+        if (this.curtOrder !== order) { return }
+      }
+
+      const coverT = coverEl.getBoundingClientRect().top
+
+      if (isCovered) {
+        // console.log(`${order}: detect uncover`)
+
+        if (coverT - wh * (whOffset + 1) >= 0) {
+          // console.log(`${order}: uncovered`)
+
+          coveredEl.style.position = ''
+          this.bodyEl.style.paddingTop = `${curtSpace}px`
+          coveredEl.style.width = ''
+          coveredEl.style.bottom = ''
+          coveredEl.style.left = ''
+          isCovered = false
+
+          this.curtOrder = order - 1
+        }
+      } else {
+        // console.log(`${order}: detect cover`)
+
+        if (coverT - wh < 0) {
+          // console.log(`${order}: covered`)
+
+          const coveredH = coveredEl.clientHeight
+
+          curtSpace = parseFloat(this.bodyEl.style.paddingTop) || 0
+          coveredEl.style.width = '100%'
+          coveredEl.style.bottom = '0'
+          coveredEl.style.left = '0'
+          coveredEl.style.position = 'fixed'
+          this.bodyEl.style.paddingTop = `${curtSpace + (coveredH + wh * whOffset)}px`
+          isCovered = true
+
+          this.curtOrder = order
         }
       }
-    } else {
-      if (coverT - wh <= 0) {
-        const coveredH = this.coveredEl.clientHeight
+    }))
 
-        this.curtSpace = parseFloat(this.bodyEl.style.paddingTop) || 0
-        this.coveredEl.style.width = '100%'
-        this.coveredEl.style.bottom = '0'
-        this.coveredEl.style.left = '0'
-        this.coveredEl.style.position = 'fixed'
-        this.bodyEl.style.paddingTop = `${this.curtSpace + (coveredH + wh * this.whOffset)}px`
-        this.isCovered = true
-
-        // console.log('covered')
-
-        if (this.betweenEl) {
-          this.curtScrollH = parseFloat(this.bodyEl.style.paddingTop) - wh
-          this.canBetween = true
-        }
-      }
-    }
+    return this
   }
 
-  applyBetween () {
-    if (!this.canBetween) { return }
-
-    const isScrollDown = this.scrollDirection === 'down'
-    const betweenOpacity = this.betweenEl.style.opacity
+  applyBetweenEffect (order, betweenEl) {
     
-    if (isScrollDown) {
-      if (betweenOpacity === '1') { return }
-    } else {
-      if (betweenOpacity === '0') { return }
-    }
+    this.wEl.addEventListener('scroll', raf(() => {
+      const curtBetweenOpacity = betweenEl.style.opacity
 
-    const afterScrollH = this.wEl.pageYOffset
-    const diff = afterScrollH - this.curtScrollH
-    const totalH = this.wEl.innerHeight
+      if (this.curtOrder !== order) {
+        if (!this.isScrollDown) {
+          if (curtBetweenOpacity !== '0') { betweenEl.style.opacity = '0' }
+        }
+        return
+      }
 
-    if (diff < 0) {
-      // console.log('zero')
+      if (this.isScrollDown && curtBetweenOpacity === '1') { return }
 
-      this.betweenEl.style.opacity = '0'
-      // if (betweenOpacity !== '0') { this.betweenEl.style.opacity = '0' }
-    } else if (diff > totalH) {
-      // console.log('one')
+      const wh = this.wEl.innerHeight
+      const afterScrollH = this.wEl.pageYOffset
+      const curtScrollH = parseFloat(this.bodyEl.style.paddingTop) - wh
+      const diff = afterScrollH - curtScrollH
 
-      this.betweenEl.style.opacity = '1'
-      // if (betweenOpacity !== '1') { this.betweenEl.style.opacity = '1' }
-    } else {
-      // console.log('amount')
+      if (diff > wh) {
+        if (!this.isScrollDown) { return }
+        // console.log(`${order}: one`)
 
-      this.betweenEl.style.opacity = `${(diff / totalH).toFixed(2)}`
-    }
+        betweenEl.style.opacity = '1'
+      } else {
+        // console.log(`${order}: amount`)
+
+        betweenEl.style.opacity = `${(diff / wh).toFixed(2)}`
+      }
+    }))
+
+    return this
   }
 }
 
@@ -236,4 +273,8 @@ export function raf (fn) {
       isTicking = false
     })
   }
+}
+
+export function isEl (el) {
+  return el instanceof Element || el instanceof HTMLDocument
 }

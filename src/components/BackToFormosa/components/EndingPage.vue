@@ -103,72 +103,72 @@ export default {
 #ending-page__wrapper
   &--linyi
     padding-top 0
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-lg)
       // 250 - 80
       padding-top 170px
     & .ending-page
       &__picture
-        @media (min-width $breakpoint-md)
+        @media (min-width $breakpoint-lg)
           max-width 704px
           width 70.4%
       &__content
-        @media (min-width $breakpoint-md)
+        @media (min-width $breakpoint-lg)
           top 0
   &--shi .ending-page
     &__picture
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         max-width 612px
         width 61.2%
     &__content
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         top 220px
   &--chen .ending-page
     &__picture
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         max-width 612px
         width 61.2%
     &__content
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         top 190px
   &--lu .ending-page
     &__picture
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         max-width 786px
         width 78.6%
     &__content
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         top 64px
   &--linhong .ending-page
     &__picture
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         max-width 740px
         width 74%
     &__content
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         top 56px
   &--huang .ending-page
     &__picture
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         max-width 612px
         width 61.2%
     &__content
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         top 180px
   &--yao .ending-page
     &__picture
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         max-width 612px
         width 61.2%
     &__content
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         top 166px
   &--zhang .ending-page
     &__picture
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         max-width 648px
         width 64.8%
     &__content
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         top 294px
 
 .ending-page
@@ -177,20 +177,22 @@ export default {
   background-color #fff
   padding-top 30px
   padding-bottom 60px
-  @media (min-width $breakpoint-md)
+  @media (min-width $breakpoint-lg)
     padding-top 80px
     padding-bottom 80px
   &__container
-    max-width 1000px
+    max-width 600px
     margin-left auto
     margin-right auto
     font-size 1.6rem
     line-height 1.75
+    @media (min-width $breakpoint-lg)
+      max-width 1000px
   &__wrapper
     position relative
     & + &
       margin-top 60px
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         margin-top 0
     & p + p
       margin-top 20px
@@ -199,28 +201,28 @@ export default {
     padding-left 10px
     // 0.6 + 0.9
     animation fade-in-top 0.6s 1.5s $easeOutSine both paused
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-lg)
       position absolute
       padding-left 0
       padding-right 0
     &.earlier
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         animation fade-in-top 0.6s $easeOutSine both paused
     &.r-40
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         right 40px
       @media (min-width 1080px)
         right 0
     &.l-40
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         left 40px
       @media (min-width 1080px)
         left 0
     &.mxw-400
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         max-width 400px
     &.mxw-290
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-lg)
         max-width 290px
     &__plus
       font-weight 700
