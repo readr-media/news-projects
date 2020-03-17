@@ -28,7 +28,7 @@ export default {
   flex-direction column
   align-items center
   position relative
-  z-index 200
+  z-index 9
   @media (max-width 768px)
     padding 30px 10px
   &__newsletter

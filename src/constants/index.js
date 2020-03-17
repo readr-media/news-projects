@@ -125,7 +125,8 @@ export const PROJECTS_NEED_FB_SDK = [
 
 export const PROJECTS_NEED_FB_QUOTE = [
   'nanfangao-bridge',
-  'food-delivery'
+  'food-delivery',
+  'backtoformosa'
 ]
 
 // include project url path which NOT need to reset scroll position in vue router

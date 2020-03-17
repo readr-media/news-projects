@@ -1,12 +1,17 @@
 <template>
-  <div class="slide-item">
+  <div class="slide-item" :style="{ minHeight: `${wh}px` }">
     <slot />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SlideItem'
+  name: 'SlideItem',
+  computed: {
+    wh () {
+      return this.$store.state.viewport[ 1 ]
+    } 
+  }
 }
 </script>
 
@@ -14,7 +19,6 @@ export default {
 @import '../util/global.styl'
 
 .slide-item
-  min-height 100vh
   position relative
   overflow hidden
   &.paused *
@@ -27,7 +31,7 @@ export default {
     left 50%
     transform translateX(-50%)
     text-align center
-    animation slide-text-default 0.75s 2.25s $easeOutSine both
+    animation slide-text-default 1.2s $easeOutSine both
     @media (min-width $breakpoint-md)
       animation-name slide-text-default-md
       width auto

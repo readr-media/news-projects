@@ -1,7 +1,8 @@
 <template>
   <div class="report-page-content">
     <picture class="report-page-content__picture" ref="reportPicture">
-      <img :src="`/proj-assets/backtoformosa/img/${src}report-${content.name}.jpg`" alt="">
+      <source type="image/jpg" media="(min-width: 460px)" :srcset="`/proj-assets/backtoformosa/img/${src}report-${content.name}-tl.jpg`">
+      <img :src="`/proj-assets/backtoformosa/img/${src}report-${content.name}-ts.jpg`" alt="">
     </picture>
     <div class="report-page-content__qa" ref="reportQa">
       <div v-html="content.qa" />
