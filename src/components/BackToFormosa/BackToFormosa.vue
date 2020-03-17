@@ -1,19 +1,23 @@
 <template>
   <div class="back-to-formosa">
-    <SlideContainer ref="opening" />
+    <SlideContainer ref="opening" id="opening" />
     
     <article class="back-to-formosa__middle" :style="{ color: isMiddleDark ? '#fff' : '' }" ref="middle">
       <div class="bg bg--file" />
       <div class="bg bg--dark" :style="{ opacity: isMiddleDark ? '' : 0 }" />
       <div class="bg bg--between" id="bg-between-middle" ref="bgBetweenMiddle" />
 
-      <div class="middle__scene" id="middle__scene--1">
+      <div class="middle__scene" id="scene1" ref="scene1">
         <div class="scene-heading" id="scene-heading--1" ref="scene1Heading">
           <picture class="scene-heading__person" ref="scene1HeadingPerson">
-            <img src="/proj-assets/backtoformosa/img/scene1/person.png" alt="">
+            <source type="image/png" media="(min-width: 460px) and (max-width: 719.98px)" srcset="/proj-assets/backtoformosa/img/scene1/person-ts.png">
+            <source type="image/png" media="(min-width: 720px)" srcset="/proj-assets/backtoformosa/img/scene1/person-tl.png">
+            <img src="/proj-assets/backtoformosa/img/scene1/person-m.png" alt="">
           </picture>
           <picture class="scene-heading__title" ref="scene1HeadingTitle">
-            <img src="/proj-assets/backtoformosa/img/scene1/title.svg" alt="">
+            <source media="(min-width: 460px) and (max-width: 719.98px)" srcset="/proj-assets/backtoformosa/img/scene1/title-ts.svg">
+            <source media="(min-width: 720px)" srcset="/proj-assets/backtoformosa/img/scene1/title-tl.svg">
+            <img src="/proj-assets/backtoformosa/img/scene1/title-m.svg" alt="">
           </picture>
         </div>
 
@@ -28,7 +32,7 @@
         </div>
       </div>
 
-      <div class="middle__scene" id="middle__scene--2" ref="scene2">
+      <div class="middle__scene" id="scene2" ref="scene2">
         <picture id="scene2-title" ref="scene2HeadingTitle">
           <img src="/proj-assets/backtoformosa/img/scene2/title.svg" alt="">
         </picture>
@@ -53,7 +57,8 @@
           </div>
           <div id="scene2-yao-img">
             <picture ref="middleYaoPicture">
-              <img src="/proj-assets/backtoformosa/img/scene2/yao.png" alt="">
+              <source type="image/png" media="(min-width: 460px)" srcset="/proj-assets/backtoformosa/img/scene2/yao-ts.png">
+              <img src="/proj-assets/backtoformosa/img/scene2/yao-m.png" alt="">
             </picture>
           </div>
           <div class="middle__container" ref="middleYaoText2">
@@ -78,15 +83,17 @@
         </div>
       </div>
 
-      <div class="middle__scene" id="middle__scene--3" ref="scene3">
+      <div class="middle__scene" id="scene3" ref="scene3">
         <div class="scene-heading" id="scene-heading--3" ref="scene3Heading">
           <picture class="scene-heading__person" ref="scene3HeadingPerson">
-            <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/scene3/person-desk.png">
-            <img src="/proj-assets/backtoformosa/img/scene3/person-mob.png" alt="">
+            <source type="image/png" media="(min-width: 460px) and (max-width: 719.98px)" srcset="/proj-assets/backtoformosa/img/scene3/person-ts.png">
+            <source type="image/png" media="(min-width: 720px)" srcset="/proj-assets/backtoformosa/img/scene3/person-tl.png">
+            <img src="/proj-assets/backtoformosa/img/scene3/person-m.png" alt="">
           </picture>
           <picture class="scene-heading__title" ref="scene3HeadingTitle">
-            <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/scene3/title-desk.svg">
-            <img src="/proj-assets/backtoformosa/img/scene3/title-mob.svg" alt="">
+            <source media="(min-width: 460px) and (max-width: 719.98px)" srcset="/proj-assets/backtoformosa/img/scene3/title-ts.svg">
+            <source media="(min-width: 720px)" srcset="/proj-assets/backtoformosa/img/scene3/title-tl.svg">
+            <img src="/proj-assets/backtoformosa/img/scene3/title-m.svg" alt="">
           </picture>
         </div>
 
@@ -109,7 +116,7 @@
           </div>
         </div>
 
-        <div class="middle__container" id="middle__container--end" ref="middleEndText">
+        <div class="middle__container" id="middle__container-end" ref="middleEndText">
           <div class="middle__content">
             <p>隨著審判進入尾聲，大部分被告才從家屬在庭上的發言，得知林義雄家發生血案<TextNotation><p>該年 2 月 28 日，林義雄臺北市住家發生兇殺案，其 60 歲母親游阿妹及 7 歲雙胞胎女兒林亮均、林亭均被刺殺身亡，9 歲長女林奐均重傷，此案至今未偵破。促轉會 2020 年 2 月 17 日公布「<a href="https://admin.tjc.gov.tw/public/cipas-uploads/news/2020/02/3952c81b707e941391c462e3b17814cd.pdf" target="_blank">林義雄宅血案調查報告</a>」，指出當年威權統治當局涉案的可能性不容排除。</p></TextNotation>，施明德在最後陳述時情緒難以平復，脫口而出：「林義雄家發生這件悲慘的事，讓我感到這個國家將會受到更多創傷及更大的災禍⋯⋯如果<strong>能帶給國家社會和諧，我請求判我死刑</strong>。」</p>
             <p>林義雄則請求審判官「能擺脫一切政治上、輿論上、感情上的壓力，作最公正判決。」現場氣氛哀戚，從檢察官的話語，也看出他的態度軟化許多，他說：「對林義雄家變，心中很沉痛，我們是以哀矜勿喜的態度處理此案」，但仍不忘訓誡「被告要爭人權、爭自由、政治改革，應該循政治常軌，而不是打破人頭」。</p>
@@ -119,12 +126,14 @@
       </div>
     </article>
 
-    <EndingPage ref="ending" />
+    <EndingPage id="ending" ref="ending" />
 
-    <div class="back-to-formosa__after" ref="after">
+    <div class="back-to-formosa__after" id="after" ref="after">
       <picture>
-        <source media="(min-width: 768px)" srcset="/proj-assets/backtoformosa/img/after/photo-desk.png">
-        <img src="/proj-assets/backtoformosa/img/after/photo-mob.png" alt="">
+        <source type="image/png" media="(min-width: 460px) and (max-width: 719.98px)" srcset="/proj-assets/backtoformosa/img/after/photo-ts.png">
+        <source type="image/png" media="(min-width: 720px) and (max-width: 999.98px)" srcset="/proj-assets/backtoformosa/img/after/photo-tl.png">
+        <source type="image/png" media="(min-width: 1000px)" srcset="/proj-assets/backtoformosa/img/after/photo-ds.png">
+        <img src="/proj-assets/backtoformosa/img/after/photo-m.png" alt="">
       </picture>
       <div class="after__wrapper">
         <div class="after__caption">
@@ -138,6 +147,8 @@
       </div>
     </div>
 
+    <TitleIndex />
+
     <TheFooter />
   </div>
 </template>
@@ -145,6 +156,7 @@
 <script>
 import { ScrollController, CoveredEffect, raf } from './util/index.js'
 
+import TitleIndex from './components/TitleIndex.vue'
 import listItems from './data/listItems.js'
 import reportPageContent from './data/reportPageContent.js'
 import afterTableItems from './data/afterTableItems.js'
@@ -162,12 +174,13 @@ export default {
   metaInfo () {
     return {
       title: '40年．致民主：還原美麗島大審',
-      description: '',
+      description: '2014 年的 318 運動，讓許多青年開始關注臺灣的公眾事務；40 年前的同一天，全臺民眾則因為美麗島政治犯的軍事大審，儼然上了一堂民主課。',
       metaUrl: 'backtoformosa',
       metaImage: 'backtoformosa/img/og.png'
     }
   },
   components: {
+    TitleIndex,
     SlideContainer,
     ReportPageContent,
     ListPageContent,
@@ -192,6 +205,9 @@ export default {
       headerBarEl: null,
       beforeScrollH: 0
     }
+  },
+  beforeMount () {
+    this.wEl = window
   },
   mounted () {
     const {
@@ -240,21 +256,13 @@ export default {
     /**
      * Covered Effect
      */
-    new CoveredEffect({
-      coveredEl: opening.$el,
-      coverEl: middle,
-      betweenEl: opening.$refs.bgBetweenOpening
-    })
-    new CoveredEffect({
-      coveredEl: middle,
-      coverEl: ending.$el,
-      betweenEl: bgBetweenMiddle
-    })
-    new CoveredEffect({
-      coveredEl: ending.$el,
-      coverEl: after,
-      betweenEl: ending.$refs.bgBetweenEnding
-    })
+    new CoveredEffect()
+      .applyCoveredEffect(1, opening.$el, middle)
+      .applyCoveredEffect(2, middle, ending.$el)
+      .applyCoveredEffect(3, ending.$el, after)
+      .applyBetweenEffect(1, opening.$refs.bgBetweenOpening)
+      .applyBetweenEffect(2, bgBetweenMiddle)
+      .applyBetweenEffect(3, ending.$refs.bgBetweenEnding)
 
     this.scrollController = new ScrollController()
 
@@ -262,17 +270,17 @@ export default {
      * Once Scenes
      */
     this.scrollController
-      .onceScene({
+      .lineScene({
         order: this.counter('once'),
         triggerEl: scene1Heading,
         whOffset: 0.5,
-        fn: () => { this.animate([ scene1HeadingPerson, scene1HeadingTitle, scene1HeadingText ]) }
+        enterFn: () => { this.animate([ scene1HeadingPerson, scene1HeadingTitle, scene1HeadingText ]) }
       })
-      .onceScene({
+      .lineScene({
         order: this.counter('once'),
         triggerEl: scene2,
         whOffset: 0.3,
-        fn: () => { this.animate([ scene2HeadingTitle, scene2ReportIntro ]) }
+        enterFn: () => { this.animate([ scene2HeadingTitle, scene2ReportIntro ]) }
       })
 
     Array.prototype.forEach.call([ report1Content1, report1Content2, report1Content3 ], (component) => {
@@ -280,34 +288,34 @@ export default {
     })
 
     this.scrollController
-      .onceScene({
+      .lineScene({
         order: this.counter('once'),
         triggerEl: middleYaoPicture,
         whOffset: 0.5,
-        fn: () => { this.animate([ middleYaoPicture, middleYaoText1, middleYaoText2 ]) }
+        enterFn: () => { this.animate([ middleYaoPicture, middleYaoText1, middleYaoText2 ]) }
       })
-      .onceScene({
+      .lineScene({
         order: this.counter('once'),
         triggerEl: listPage,
         whOffset: 0.5,
-        fn: () => { this.animate([ listIntro, listPageContent.$el ]) }
+        enterFn: () => { this.animate([ listIntro, listPageContent.$el ]) }
       })
-      .onceScene({
+      .lineScene({
         order: this.counter('once'),
         triggerEl: scene3Heading,
         whOffset: 0.4,
-        fn: () => { this.animate([ scene3HeadingPerson, scene3HeadingTitle, scene3HeadingText ]) }
+        enterFn: () => { this.animate([ scene3HeadingPerson, scene3HeadingTitle, scene3HeadingText ]) }
       })
     
     Array.prototype.forEach.call([ report2Content1, report2Content2, report2Content3 ], (component) => {
       this.animateReportPage(component[ 0 ])
     })
 
-    this.scrollController.onceScene({
+    this.scrollController.lineScene({
       order: this.counter('once'),
       triggerEl: middleEndText,
       whOffset: 0.4,
-      fn: () => { this.animate([ middleEndText ]) }
+      enterFn: () => { this.animate([ middleEndText ]) }
     })
 
     this.names.forEach((name) => {
@@ -318,11 +326,9 @@ export default {
      * Interval Scenes
      */
     this.darkenMiddlePage([ reportPage1, listPage, reportPage2 ])
-
-    this.wEl = window
-    this.headerBarEl = document.getElementById('readr-app-header')
-    this.wEl.addEventListener('scroll', raf(() => { this.toggleHeaderBar() }))
-    this.headerBarEl.addEventListener('mouseenter', this.showHeaderBar)
+    // this.headerBarEl = document.getElementById('readr-app-header')
+    // this.wEl.addEventListener('scroll', raf(() => { this.toggleHeaderBar() }))
+    // this.headerBarEl.addEventListener('mouseenter', this.showHeaderBar)
   },
   computed: {
     isMiddleDark () {
@@ -348,23 +354,23 @@ export default {
     animateReportPage (component) {
       const { reportPicture, reportQa, reportSign } = component.$refs
 
-      this.scrollController.onceScene(
+      this.scrollController.lineScene(
         {
           order: this.counter('once'),
           triggerEl: component.$el,
           whOffset: 0.4,
-          fn: () => { this.animate([ reportPicture, reportQa, reportSign ]) }
+          enterFn: () => { this.animate([ reportPicture, reportQa, reportSign ]) }
         }
       )
     },
     animateEndingPage (endingRefs, name) {
       const { person, title } = endingRefs[ `picture${name}` ].$refs
 
-      this.scrollController.onceScene({
+      this.scrollController.lineScene({
         order: this.counter('once'),
         triggerEl: endingRefs[ `wrapper${name}` ],
         whOffset: 0.5,
-        fn: () => { this.animate([ person, title, endingRefs[ `text${name}` ] ]) }
+        enterFn: () => { this.animate([ person, title, endingRefs[ `text${name}` ] ]) }
       })
     },
     counter (name) {
@@ -445,10 +451,16 @@ strong
   height 100%
   pointer-events none
   &--file
-    background-image url(/proj-assets/backtoformosa/img/bg-file.png)
+    background-image url(/proj-assets/backtoformosa/img/bg-file-m.jpg)
     background-size contain
     background-repeat repeat
     z-index -9
+    @media (min-width $breakpoint-tl)
+      background-image url(/proj-assets/backtoformosa/img/bg-file-ts.jpg)
+    @media (min-width $breakpoint-tl)
+      background-image url(/proj-assets/backtoformosa/img/bg-file-tl.jpg)
+    @media (min-width $breakpoint-ds)
+      background-image url(/proj-assets/backtoformosa/img/bg-file-ds.jpg)
   &--dark
     background-color rgba(#000, 0.8)
     transition opacity 0.3s $easeOutSine
@@ -468,7 +480,7 @@ strong
 .scene-heading
   position relative
   margin-bottom 10px
-  @media (min-width $breakpoint-md)
+  @media (min-width $breakpoint-tl)
     position absolute
     top 0
     left 0
@@ -493,14 +505,14 @@ strong
 
 #scene-heading
   &--1
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-tl)
       max-width 862px
       width 59.86%
       left -6.25%
   &--3
     margin-left -10px
     margin-right -10px
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-tl)
       max-width 1062px
       width 73.75%
       margin-left 0
@@ -525,7 +537,7 @@ strong
 #scene2
   &-title
     animation zoom-out 0.45s $easeInQuad both paused
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-tl)
       width 62.5%
       right 7.43%
       max-width 900px
@@ -537,7 +549,7 @@ strong
   &-yao-img
     margin-top 10px
     padding-bottom 35px
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-tl)
       margin-top 28px
       padding-bottom 0
     & picture
@@ -545,7 +557,7 @@ strong
       right -10.94%
       position relative
       z-index -1
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-tl)
         position absolute
         max-width 500px
         top 0
@@ -560,13 +572,13 @@ strong
 
 #middle-yao-container
   position relative
-  @media (min-width $breakpoint-md)
+  @media (min-width $breakpoint-tl)
     padding-top 120px
   & picture
     animation yao-person 1.05s $easeInOutQuad both paused
   & > .middle__container
     &:first-child
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-tl)
         // 1.05 + 0.15
         animation fade-in-top 0.6s 1.2s $easeOutSine both paused
     &:last-child
@@ -593,16 +605,16 @@ strong
     line-height 1.75
     & p + p
       margin-top 28px
+
+#scene1, #scene3
+  @media (min-width $breakpoint-tl)
+    padding-top 64vh
+#scene2
+  margin-top 80px
+
 #middle
-  &__scene
-    &--1, &--3
-      @media (min-width $breakpoint-md)
-        padding-top 64vh
-    &--2
-      margin-top 80px
-  &__container
-    &--end
-      animation fade-in-top 0.6s $easeOutSine both paused
+  &__container-end
+    animation fade-in-top 0.6s $easeOutSine both paused
 
 .after
   &__wrapper
@@ -626,7 +638,7 @@ strong
     text-align center
     line-height 1.8
     margin-bottom 128px
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-tl)
       margin-bottom 152px
 .list-page
   position relative
@@ -639,20 +651,20 @@ strong
   margin-left auto
   margin-right auto
   margin-top 20px
-  @media (min-width $breakpoint-md)
+  @media (min-width $breakpoint-tl)
     margin-top 0
     align-self center
   &.lin
     width 80px
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-tl)
       margin-left 20px
   &.chen
     width 50px
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-tl)
       margin-left 24px
   &.huang
     width 70px
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-tl)
       margin-left 32px
 
 #blood
@@ -661,7 +673,7 @@ strong
   top -208px
   left -25.67%
   z-index -1
-  @media (min-width $breakpoint-md)
+  @media (min-width $breakpoint-tl)
     // 292 + 36
     top 328px
     // 120 / 600

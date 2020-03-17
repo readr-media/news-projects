@@ -1,10 +1,14 @@
 <template>
   <div class="page-picture">
     <picture class="page-picture__person" ref="person">
-      <img :src="this.imgSrc(`${name}.png`)" alt="">
+      <source type="image/png" media="(min-width: 460px) and (max-width: 719.98px)" :srcset="this.imgSrc(`${name}-person-ts.png`)">
+      <source type="image/png" media="(min-width: 720px)" :srcset="this.imgSrc(`${name}-person-tl.png`)">
+      <img :src="this.imgSrc(`${name}-person-m.png`)" alt="">
     </picture>
     <picture class="page-picture__title" ref="title">
-      <img :src="this.imgSrc(`${name}-title.svg`)" alt="">
+      <source media="(min-width: 460px) and (max-width: 719.98px)" :srcset="this.imgSrc(`${name}-title-ts.svg`)">
+      <source media="(min-width: 720px)" :srcset="this.imgSrc(`${name}-title-tl.svg`)">
+      <img :src="this.imgSrc(`${name}-title-m.svg`)" alt="">
     </picture>
   </div>
 </template>
@@ -31,7 +35,7 @@ export default {
 
 .page-picture
   margin-bottom 10px
-  @media (min-width $breakpoint-md)
+  @media (min-width $breakpoint-tl)
     position relative
     z-index -1
     margin-bottom 0
@@ -48,12 +52,11 @@ export default {
     height auto
   &.later .page-picture
     &__person
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-tl)
         animation fade-in-left 0.9s 0.6s $easeOutSine both paused
     &__title
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-tl)
         animation fade-in-left 0.9s 1.2s $easeOutSine both paused
-
 
 @keyframes fade-in-left
   0%

@@ -141,7 +141,7 @@ export default {
       padding-left 10px
       box-sizing content-box
       animation slide6-img-title 0.9s $easeInOutCubic both
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-tl)
         width 64.51%
         right 3.8%
         left auto
@@ -155,17 +155,17 @@ export default {
   &__text
     &--1
       bottom 7.04%
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-tl)
         bottom 4.83%
         left 12.99%
     &--2
       top 7.04%
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-tl)
         top 8.02%
         left 11.6%
     &--4
       top 7.04%
-      @media (min-width $breakpoint-md)
+      @media (min-width $breakpoint-tl)
         top 7.9%
         left 10%
     &--5

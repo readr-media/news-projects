@@ -1,7 +1,8 @@
 <template>
   <div class="report-page-content">
     <picture class="report-page-content__picture" ref="reportPicture">
-      <img :src="`/proj-assets/backtoformosa/img/${src}report-${content.name}.jpg`" alt="">
+      <source type="image/jpg" media="(min-width: 460px)" :srcset="`/proj-assets/backtoformosa/img/${src}report-${content.name}-tl.jpg`">
+      <img :src="`/proj-assets/backtoformosa/img/${src}report-${content.name}-ts.jpg`" alt="">
     </picture>
     <div class="report-page-content__qa" ref="reportQa">
       <div v-html="content.qa" />
@@ -34,7 +35,7 @@ export default {
 .report-page-content
   & + &
     margin-top 64px
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-tl)
       margin-top 80px
   &__picture
     margin-bottom 20px
@@ -46,7 +47,7 @@ export default {
     font-size 1.6rem
     line-height 1.75
     animation fade-in-top 0.6s 0.6s $easeOutSine both paused
-    @media (min-width $breakpoint-md)
+    @media (min-width $breakpoint-tl)
       display flex
       align-items flex-start
     & picture
