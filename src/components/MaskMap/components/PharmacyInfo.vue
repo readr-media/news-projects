@@ -70,6 +70,7 @@ export default {
   padding 16px 10px 58px 10px
   font-size 1.5rem
   line-height normal
+  z-index 9
   & h2
     font-size 2.1rem
     font-weight 700
