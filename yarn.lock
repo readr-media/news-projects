@@ -1151,10 +1151,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@readr-ui/app-header@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/@readr-ui/app-header/-/app-header-1.3.3.tgz#b81cd6926474bdebe7f11ad0c6f54b3802e5510b"
-  integrity sha512-dLn3KGcB/k2Rbv3CbgW2+kgMmo89X7YSenSBqmKg9fOrd/dcSmXQv5v6McKsTxtqmrNyvLZ/JChioKFkBGMOvw==
+"@readr-ui/app-header@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@readr-ui/app-header/-/app-header-1.4.2.tgz#15d5427f88990ddec6443f39f82d78a8983a7411"
+  integrity sha512-Hmh2Imx+dR0sBky4XBvqAylUpkCzww1zEKtGAuGuLzM51gEAgFEv6f959q/UG358oK/4uHMqxQRN+j+fy0Akyg==
   dependencies:
     "@readr-ui/icon" "^1.0.4"
     "@readr-ui/icon-share" "^1.0.1"

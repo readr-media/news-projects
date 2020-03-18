@@ -6,12 +6,15 @@
     :donate-tappay-config="donateTappayConfig"
     :donate-user-profile="donateUserProfile"
     :donate-show-result="donateShowResult"
+    :donate-is-depositing="donateIsDepositing"
     :donate-is-result-success="donateIsResultSuccess"
     @clickReadrLogo="handleClickReadrLogo"
     @clickCatalogItem="handleClickCatalogItem"
     @loadmore="handleLoadmore"
     @submitDonate="handleSubmitDonate"
     @backToDonateForm="handleBackToDonateForm"
+    @startDeposit="handleDonateDepositing(true)"
+    @finishDeposit="handleDonateDepositing(false)"
   />
 </template>
 
@@ -26,8 +29,6 @@ const apiParamsCatalog = {
   sort: 'post_order,-published_at'
 }
 
-const apiUrlDonate = 'https://www.readr.tw/api/donate'
-const apiUrlDonateDev = 'http://dev.readr.tw/api/donate'
 const apiParamsDonate = {
   object_type: 5
 }
@@ -49,6 +50,7 @@ export default {
         nickname: ''
       },
       donateShowResult: false,
+      donateIsDepositing: false,
       donateIsResultSuccess: false
     }
   },
@@ -90,6 +92,17 @@ export default {
       const res = await axios.get(apiUrlCatalog, { params })
       return res.data['_items'] || []
     },
+    getPaymentUrl(donateType) {
+      const isDev = location && (location.host.includes('dev') || location.host.includes('localhost'))
+      const apiUrlMapping = {
+        once: 'donate',
+        subscription: 'subscriptions'
+      }
+      const url = isDev
+        ? `http://dev.readr.tw/api/${apiUrlMapping[donateType]}`
+        : `https://www.readr.tw/api/${apiUrlMapping[donateType]}`
+      return url
+    },
     async handleLoadmore($infiniteLoadingState) {
       try {
         const items = await this.fetchCatalog(this.catalogCurrentPage)
@@ -105,7 +118,10 @@ export default {
         $infiniteLoadingState.complete()
       }
     },
-    async requestDonate(donateData) {
+    async requestSubscription(submitInfo) {
+      return axios.post(this.getPaymentUrl(submitInfo.type), submitInfo.payload)
+    },
+    async requestDonateOnce(submitInfo) {
       const {
         points,
         token,
@@ -113,8 +129,7 @@ export default {
         member_phone,
         member_mail,
         invoiceItem
-      } = donateData
-
+      } = submitInfo.payload.donateData
       const projectId = await this.fetchProjectId()
 
       const params = {
@@ -128,24 +143,30 @@ export default {
         object_id: projectId,
         reason: location && location.pathname
       }
-
-      const isDev = location && (location.host.includes('dev') || location.host.includes('localhost'))
-      const urlDonate = isDev ? apiUrlDonateDev : apiUrlDonate
-      return await axios.post(urlDonate, params)
+      return await axios.post(this.getPaymentUrl(submitInfo.type), params)
     },
-    async handleSubmitDonate({ donateData }) {
+    async handleSubmitDonate(submitInfo) {
+      const requestStrategy = {
+        once: this.requestDonateOnce,
+        subscription: this.requestSubscription
+      }
       try {
-        await this.requestDonate(donateData)
+        await requestStrategy[submitInfo.type](submitInfo)
         this.donateShowResult = true
         this.donateIsResultSuccess = true
+        this.donateIsDepositing = false
       } catch(error) {
         this.donateShowResult = true
         this.donateIsResultSuccess = false
+        this.donateIsDepositing = false
       }
     },
     handleBackToDonateForm() {
       this.donateShowResult = false
       this.donateIsResultSuccess = false
+    },
+    handleDonateDepositing(isDepositing) {
+      this.donateIsDepositing = isDepositing
     }
   }
 }
