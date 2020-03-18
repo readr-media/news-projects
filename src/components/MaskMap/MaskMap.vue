@@ -7,6 +7,7 @@
     <PharmacyInfo :isShow="isShowPharmacyInfo" :infoData="pharmacyInfoData" @closeInfo="isShowPharmacyInfo = false" :isLoading="isLoadingPharmacy" :infoDataStatus="pharmacyInfoDataStatus" />
     <CommonInfo />
     <PopupInfo :isShow="isShowPopupInfo" :infoData="popupInfoData" :isLoading="isLoadingPopup" @closeInfo="closePopupInfo" />
+    <RelatedPosts />
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import SearchBar from './components/SearchBar.vue'
 import LegendField from './components/LegendField.vue'
 import PharmacyInfo from './components/PharmacyInfo.vue'
 import CommonInfo from './components/CommonInfo.vue'
+import RelatedPosts from './components/RelatedPosts.vue'
 
 import mapStyle from './data/mapStyle.js'
 import { get } from 'axios'
@@ -41,7 +43,8 @@ export default {
     LegendField,
     PharmacyInfo,
     CommonInfo,
-    PopupInfo
+    PopupInfo,
+    RelatedPosts
   },
   beforeMount () {
     // google.maps.event.addDomListenerOnce(window, 'load', this.initAfterLoad)
