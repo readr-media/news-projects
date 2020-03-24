@@ -1,8 +1,14 @@
 const express = require('express')
 const router = express.Router()
+const cors = require('cors')
 const { google, } = require('googleapis')
 const { authGoogleAPI, } = require('../service/google/auth')
 const { fetchFromRedis, insertIntoRedis, } = require('./ioredisHandler')
+
+router.use(cors({
+  origin: /(localhost|mirrormedia)/,
+  methods: 'GET,HEAD,PATCH,POST'
+}))
 
 router.get('/', authGoogleAPI, fetchFromRedis, async (req, res, next) => {
   if (res.redis) {
