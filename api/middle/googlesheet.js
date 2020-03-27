@@ -24,7 +24,14 @@ router.use((req, res, next) => {
     return res.status(403).send('403 Forbidden')
   }
 
-  if (!config[`GOOGLE_SHEET_ALLOW_${req.method}`][req.query.spreadsheet_id].includes(req.query.range)) {
+  const rangeIsAllowed = config[`GOOGLE_SHEET_ALLOW_${req.method}`][req.query.spreadsheet_id]
+    .some((range) => {
+      const rangeRegex = new RegExp(range)
+      return rangeRegex.test(req.query.range)
+    }
+  )
+
+  if (!rangeIsAllowed) {
     console.warn(`[GOOGLE_SHEET] try to ${req.method} id: ${req.query.spreadsheet_id} range: ${req.query.range}`)
     return res.status(403).send('403 Forbidden')
   }
