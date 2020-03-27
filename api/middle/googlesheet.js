@@ -1,6 +1,10 @@
 const express = require('express')
+
 const router = express.Router()
 const cors = require('cors')
+
+const config = require('../config')
+
 const { google, } = require('googleapis')
 const { authGoogleAPI, } = require('../service/google/auth')
 const { fetchFromRedis, insertIntoRedis, } = require('./ioredisHandler')
@@ -10,12 +14,37 @@ router.use(cors({
   methods: 'GET,HEAD,PATCH,POST'
 }))
 
+router.use((req, res, next) => {
+  if (!req.query.spreadsheet_id || !req.query.range) {
+    return res.status(404).send('404 Not Found')
+  }
+
+  if (!config[`GOOGLE_SHEET_ALLOW_${req.method}`].IDS.includes(req.query.spreadsheet_id)) {
+    console.warn(`[GOOGLE_SHEET] try to ${req.method} id: ${req.query.spreadsheet_id}`)
+    return res.status(403).send('403 Forbidden')
+  }
+
+  const rangeIsAllowed = config[`GOOGLE_SHEET_ALLOW_${req.method}`][req.query.spreadsheet_id]
+    .some((range) => {
+      const rangeRegex = new RegExp(range)
+      return rangeRegex.test(req.query.range)
+    }
+  )
+
+  if (!rangeIsAllowed) {
+    console.warn(`[GOOGLE_SHEET] try to ${req.method} id: ${req.query.spreadsheet_id} range: ${req.query.range}`)
+    return res.status(403).send('403 Forbidden')
+  }
+  return next()
+})
+
 router.get('/', authGoogleAPI, fetchFromRedis, async (req, res, next) => {
   if (res.redis) {
     console.log('fetch data from Redis.', req.url)
     const resData = JSON.parse(res.redis)
     return res.json(resData)
   }
+
   try {
     const auth = req.auth
     const sheets = google.sheets({version: 'v4', auth})
