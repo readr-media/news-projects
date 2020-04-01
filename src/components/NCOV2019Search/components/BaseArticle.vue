@@ -62,18 +62,12 @@
           :to="`/project/ncov2019search/${keyword}`"
         />
       </div>
-      <span
-        v-if="showDate"
-        class="meta__date"
-        v-text="dateFormatted"
-      />
     </div>
   </article>
 </template>
 
 <script>
 import _ from 'lodash'
-import dayjs from 'dayjs'
 
 import BaseButtonReadmore from './BaseButtonReadmore.vue'
 import BaseTag from '../components/BaseTag.vue'
@@ -123,9 +117,6 @@ export default {
     showKeywords() {
       return _.get(this.keywords, 'length', 0)
     },
-    showDate() {
-      return this.date !== ''
-    },
 
     hrPosition() {
       return this.articleContent.search('<hr>')
@@ -149,10 +140,6 @@ export default {
       } else {
         return ''
       }
-    },
-
-    dateFormatted() {
-      return dayjs(this.date).format('YYYY/MM/DD HH:mm')
     }
   },
   methods: {
