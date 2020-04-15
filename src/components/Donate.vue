@@ -2,7 +2,7 @@
   <div>
     <a
       v-if="donationActive && projectSlug"
-      :href="`/series/${projectSlug}/donate`"
+      href="https://www.readr.tw/donate"
       class="donate"
       target="_blank"
       @click="sendGA">
