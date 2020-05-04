@@ -27,7 +27,7 @@
         </div>
       </SectionContentExploreLightboxSidebar>
       <SectionContentExploreLightboxForce
-        v-if="$store.state.useragent.isDesktop"
+        v-if="isDesktop"
         class="section-content-explore-lightbox__force"
         :isSidebarToogledInfo="isSidebarToogledInfo"
         :isSidebarToogledRanks="isSidebarToogledRanks"
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { isEmpty, } from 'lodash'
+import { isEmpty, get } from 'lodash'
 
 import SectionContentExploreLightboxForce from './SectionContentExploreLightboxForce.vue'
 import SectionContentExploreLightboxSidebar from './SectionContentExploreLightboxSidebar.vue'
@@ -105,6 +105,9 @@ export default {
     }
   },
   computed: {
+    isDesktop () {
+      return get(this.$store.state, ['useragent', 'isDesktop'], true)
+    },
     ...mapState({
       corpNameTaxIdMappingGroupByName: state => state.corpNameTaxIdMappingGroupByName
     }),
@@ -144,7 +147,7 @@ export default {
       this.isSidebarToogledInfo = !this.isSidebarToogledInfo
     },
     resetLightboxScrollMobile () {
-      if (!this.$store.state.useragent.isDesktop) {
+      if (!this.isDesktop) {
         this.$scrollTo('.section-content-explore-lightbox__content', { container: '.section-content-explore-lightbox' })
       }
     }
