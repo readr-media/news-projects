@@ -49,7 +49,7 @@
           :title="titleDiscuss"
         >
           <iframe
-            src="https://meet.ps/covid19"
+            src="https://app.meet.ps/attendee/readr_covid19"
             style="width: 100%; height: 550px;"
             frameborder="0"
             scrolling="auto"
