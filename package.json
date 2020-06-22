@@ -42,6 +42,7 @@
     "d3-sankey": "^0.7.1",
     "dayjs": "^1.8.28",
     "debug": "^4.1.1",
+    "enter-view": "^2.0.0",
     "express": "^4.17.1",
     "express-useragent": "^1.0.13",
     "firebase": "^7.5.2",
