@@ -1,6 +1,6 @@
 {
   "extends": [
-    "airbnb-base",
+    "standard",
     "plugin:vue/recommended",
     "plugin:import/errors"
   ],
