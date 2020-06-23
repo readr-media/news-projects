@@ -8,6 +8,12 @@
       <p>2. 在二月時，主要的假訊息的主題跟「中國」有關。</p>
       <Chart2_1></Chart2_1>
     </template>
+    <template v-else-if="page === 'realproject'">
+      <ProjectReal></ProjectReal>
+    </template>
+    <template v-else-if="page === 'chartline'">
+      <ChartLine></ChartLine>
+    </template>
     <template v-else>
       <Project></Project>
     </template>
@@ -15,9 +21,11 @@
 </template>
 
 <script>
-import Chart1 from './Chart1.vue'
-import Chart2_1 from './Chart2-1.vue'
-import Project from './Project.vue'
+import Chart1 from './exp/Chart1.vue'
+import Chart2_1 from './exp/Chart2-1.vue'
+import Project from './exp/Project.vue'
+import ProjectReal from './ProjectReal.vue'
+import ChartLine from './exp/ChartLine.vue'
 
 export default {
   metaInfo () {
@@ -31,7 +39,9 @@ export default {
   components: {
     Chart1,
     Chart2_1,
-    Project
+    Project,
+    ProjectReal,
+    ChartLine
   },
   computed: {
     page() {
