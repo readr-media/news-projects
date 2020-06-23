@@ -67,6 +67,7 @@ export default {
   color #fff
   font-size 1.5rem
   line-height normal
+  z-index 9
   &__short
     display flex
     padding 12px 10px
