@@ -19,9 +19,9 @@
     },
     data() {
       return {
-        width: 1680,
-        height: 1050,
-        margin: { top: 30, right: 30, left: 30, bottom: 30 }
+        width: 414,
+        height: 500,
+        margin: { top: 50, right: 30, left: 30, bottom: 30 }
       }
     },
     computed: {
@@ -35,6 +35,9 @@
           case 1: {
             this._circles
               .attr('fill', '#EC894C')
+            this._force.force('x', d3.forceX(this.innerWidth * 0.5))
+            this._force.alpha(1).restart()
+            this._yAxisHighlighted && this._yAxisHighlighted.remove()
             break
           }
           case 2: {
@@ -54,11 +57,32 @@
                   return '#f2f2f2'
                 }
               })
+            this._force.force('x', d3.forceX(this.innerWidth * 0.5))
+            this._force.alpha(1).restart()
+            this._yAxisHighlighted && this._yAxisHighlighted.remove()
             break
           }
           case 3: {
             this._circles
               .attr('fill', '#f2f2f2')
+            this._force.force('x', d3.forceX(this.innerWidth * 0.75))
+            this._force.alpha(1).restart()
+            const yAxis = g => g
+              .call(
+                d3.axisLeft(this._y)
+                  .tickFormat(d => d3.timeFormat('%m/%d')(d))
+                  // .ticks(3)
+                  .tickValues([
+                    d3.timeParse('%Y-%m-%d')('2020-02-21'),
+                    d3.timeParse('%Y-%m-%d')('2020-02-25'),
+                    d3.timeParse('%Y-%m-%d')('2020-02-29')
+                  ])
+              )
+              .call(g => g.select('.domain').remove())
+              .call(g => g.selectAll('line').remove())
+              .call(g => g.selectAll('text').style('font-size', '16px').style('fill', '#ec894c'))
+              .attr('transform', 'translate(40, 0)')
+            this._yAxisHighlighted = this._wrapper.append('g').call(yAxis)
             break
           }
         }
@@ -76,7 +100,7 @@
       const height = this.height
       const margin = this.margin
       const innerWidth = this.innerWidth
-      const noSplitHeight = 500
+      const noSplitHeight = 550
 
       const svgElement = this.$refs.svgElement
       const svg = d3
@@ -85,6 +109,7 @@
       const wrapper = svg
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      this._wrapper = wrapper
 
       const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report.csv', (d) => {
         return {
@@ -122,27 +147,44 @@
         .scaleLinear()
         .domain(d3.extent(dataGroupByDate, (d) => d.date))
         .range([0, innerWidth])
-      const xAxis = g => g
+      // const xAxis = g => g
+      //   .call(
+      //     d3.axisTop(x)
+      //     .tickFormat(d => d3.timeFormat('%m/%d')(d))
+      //     // .ticks(20)
+      //   )
+      //   .call(g => g.select('.domain').remove())
+      //   .call(g => g.selectAll('line').remove())
+      //   .call(g => g.selectAll('text').style('font-size', '16px'))
+      // wrapper.append('g').call(xAxis)
+
+      // const y = d3.scaleBand().domain(['All']).range([noSplitHeight, 0])
+      const y = d3
+        .scaleLinear()
+        .domain(d3.extent(dataGroupByDate, (d) => d.date))
+        .range([0, noSplitHeight])
+      this._y = y
+      const yAxis = g => g
         .call(
-          d3.axisTop(x)
-          .tickFormat(d => d3.timeFormat('%m/%d')(d))
-          .ticks(10)
-          //   .tickValues([
-          //     d3.timeParse('%Y-%m-%d')('2020-01-30'),
-          //     d3.timeParse('%Y-%m-%d')('2020-03-20'),
-          //     d3.timeParse('%Y-%m-%d')('2020-05-12')
-          //   ])
+          d3.axisLeft(y)
+            .tickFormat(d => d3.timeFormat('%m/%d')(d))
+            // .ticks(3)
+            .tickValues([
+              d3.timeParse('%Y-%m-%d')('2020-01-30'),
+              d3.timeParse('%Y-%m-%d')('2020-03-20'),
+              d3.timeParse('%Y-%m-%d')('2020-05-12')
+            ])
         )
         .call(g => g.select('.domain').remove())
         .call(g => g.selectAll('line').remove())
         .call(g => g.selectAll('text').style('font-size', '16px'))
-      wrapper.append('g').call(xAxis)
+        .attr('transform', 'translate(40, 0)')
+      wrapper.append('g').call(yAxis)
 
-      const y = d3.scaleBand().domain(['All']).range([noSplitHeight, 0])
       const r = d3
         .scaleSqrt()
         .domain(d3.extent(dataGroupByDate, (d) => d.reportCount))
-        .range([5, 30])
+        .range([2, 14])
 
       const defs = svg.append('defs')
       const gradients = defs
@@ -200,26 +242,26 @@
         .attr('r', (d) => r(d.reportCount))
         .attr('fill', '#EC894C')
          // .style('transition', 'fill 1s ease')
-        .attr('x', (d) => x(d.date))
-        .attr('y', (d) => 10)
+        .attr('y', (d) => y(d.date))
+        .attr('x', (d) => innerWidth / 2)
       // .attr('y', (d) => y(d[0]) + y.bandwidth() / 2)
 
-      const force = d3
+      this._force = d3
         .forceSimulation(dataGroupByDate)
         .force('charge', d3.forceManyBody().strength(0))
         .force(
-          'x',
-          d3.forceX().x((d) => x(d.date))
+          'y',
+          d3.forceY().y((d) => y(d.date))
         )
         .force(
-          'y',
-          d3.forceY((d) => 10)
+          'x',
+          d3.forceX((d) => innerWidth / 2)
         )
         .force(
           'collision',
           d3.forceCollide().radius((d) => r(d.reportCount) + 1)
         )
-      force.on('tick', () => {
+      this._force.on('tick', () => {
         this._circles
           .transition()
           .ease(d3.easeLinear)
@@ -227,8 +269,9 @@
           .attr('cy', (d) => d.y)
       })
       // Update simulation
-      force.force('y', d3.forceY((noSplitHeight - margin.top - margin.bottom) / 2))
-      force.alpha(1).restart()
+      // force.force('y', d3.forceY((noSplitHeight - margin.top - margin.bottom) / 2))
+      // this._force.alpha(1).restart()
+
 
       window.addEventListener('resize', this.resizeHandler)
     },
