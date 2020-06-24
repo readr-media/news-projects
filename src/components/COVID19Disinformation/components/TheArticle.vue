@@ -1,24 +1,44 @@
 <template>
   <article class="covid-article">
-    <h2>副標要家海上童以裡定流不一臺</h2>
-    <p>開孩夫合時票，多林告家、樂班春導客管在、手清以新？<a href="/" target="_blank" rel="noopener noreferrer">月腦長自連結樣式</a>，務依排面通朋好？一教。</p>
-    <p>權比難展命的朋活存把方事比會廣因海行國直國不資熱布定事的，想土房相們我！全超子回包石故們標紅集，觀夜活發業東沒石和升教大是數期也自風長生。</p>
-    <p>眼有去怎轉書紀下沒了起？業軍你車國在……議辦子中，孩代人人過生出事手部樂力把點子本、令基者老道的是長內：斯正字的馬總也地到農部？行有的地就裡期！</p>
-    <p>我功開，是稱分技發！由有無的行較。</p>
-    <p>環用面的了投，有除自企太根養有財打子專車光生元了利以法治題路市該書氣自室名在一已容三數，東間水苦地動至任為幾命發一動情時。</p>
-    <p>效觀情就歌這說般星本構，決銀似得可要一樂甚圖……故水港……比大參好正事廣空一山廣動。</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_1') }}</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_2') }}</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_3.TEXT_1') }}<a href="https://www.poynter.org/fact-checking/2020/783880/" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_3.LINK') }}</a>{{ $t('COVID19_D.CHAPTER_1.P_3.TEXT_2') }}</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_4') }}</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_5.TEXT_1') }}<a href="https://www.poynter.org/fact-checking/2020/the-2019-coronavirus-virus-lands-in-the-u-s-after-killing-17-and-taking-eight-to-prison/" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_5.LINK') }}</a>{{ $t('COVID19_D.CHAPTER_1.P_5.TEXT_2') }}</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_6') }}</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_7') }}</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_8') }}</p>
+    <p><a href="https://reutersinstitute.politics.ox.ac.uk/risj-review/how-fact-checkers-are-fighting-coronavirus-misinformation-worldwide" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_9.LINK') }}</a>{{ $t('COVID19_D.CHAPTER_1.P_9.TEXT_1') }}</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_10.TEXT_1') }}<a href="https://www.poynter.org/ifcn-covid-19-misinformation/" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_10.LINK') }}</a>{{ $t('COVID19_D.CHAPTER_1.P_10.TEXT_2') }}</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_11') }}</p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_12.TEXT_1') }}<a href="/" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_12.LINK') }}</a></p>
+    <h2>{{ $t('COVID19_D.CHAPTER_2.HEADING') }}</h2>
+    <p>{{ $t('COVID19_D.CHAPTER_2.P_1') }}</p>
+    <!-- <p>
+      {{ $t('COVID19_D.CHAPTER_1.P_6.TEXT_1') }}<ArticleAnnotation
+        :text="$t('COVID19_D.CHAPTER_1.P_6.ANNOTATION')"
+        :annotationContent="$t('COVID19_D.CHAPTER_1.P_6.ANNOTATION_CONTENT')"
+      />{{ $t('COVID19_D.CHAPTER_1.P_6.TEXT_2') }}
+    </p> -->
     <div class="info-box">
-      <h3>｜研究方法｜</h3>
-      <p>開孩夫合時票，多林告家、樂班春導客管在、手清以新？月腦長自連結樣式，務依排面通朋好？一教。</p>
-      <p>權比難展命的朋活存把方事比會廣因海行國直國不資熱布定事的，想土房相們我！全超子回包石故們標紅集，觀夜活發業東沒石和升教大是數期也自風長生。</p>
-      <p>眼有去怎轉書紀下沒了起？業軍你車國在……議辦子中，孩代人人過生出事手部樂力把點子本、令基者老道的是長內：斯正字的馬總也地到農部？行有的地就裡期！</p>
+      <h3>{{ $t('COVID19_D.INFO_BOX.HEADING') }}</h3>
+      <ol>
+        <li>
+          {{ $t('COVID19_D.INFO_BOX.P_1.TEXT_1') }}<a href="https://www.poynter.org/ifcn-covid-19-misinformation/" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.INFO_BOX.P_1.LINK') }}</a>{{ $t('COVID19_D.INFO_BOX.P_1.TEXT_2') }}
+        </li>
+      </ol>
     </div>
   </article>
 </template>
 
 <script>
+import ArticleAnnotation from './ArticleAnnotation.vue'
+
 export default {
-  name: 'TheArticle'
+  name: 'TheArticle',
+  components: {
+    ArticleAnnotation
+  }
 }
 </script>
 
@@ -31,10 +51,13 @@ export default {
   *
     + .info-box
       margin-top 60px
+  h2, h3, p
+    margin-top 0
   h2
     + p
       margin-top 20px
   p
+    text-align justify
     + *
       margin-top 30px
   > *
@@ -44,7 +67,6 @@ export default {
     @media (min-width: 768px)
       width 60%
       max-width 800px
-
 .info-box
   h3
     font-size 16px

@@ -1,3 +1,4 @@
+import * as covid19Disinformation from './covid19-disinformation/zh-TW'
 import * as peng23 from './peng23'
 import * as rent from './rent'
 import * as referendum from './referendum'
@@ -104,4 +105,4 @@ export default Object.assign({
   'RELATED_REPORT': '其他議題',
   'DONATE_PREFIX': '贊助',
   'DONATE_POSTFIX': '報導',
-}, rent, referendum, peng23, electionNews, politicalContribution)
+}, covid19Disinformation, rent, referendum, peng23, electionNews, politicalContribution)
