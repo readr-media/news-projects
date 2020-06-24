@@ -4066,6 +4066,11 @@ ent@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/ent/-/ent-2.2.0.tgz#e964219325a21d05f44466a2f686ed6ce5f5dd1d"
 
+enter-view@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/enter-view/-/enter-view-2.0.0.tgz#7e8a939294029680525c6772ea6e0e70922ad418"
+  integrity sha512-8EizbpN293i8WngRo3jn26pW6s+gLhKrpfFiMzCk0Glnc9vqLxmdFSbVoHZN2ThRCkBlG5ns+KDNi7qQHqI+EA==
+
 entities@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.0.3.tgz#5c487e5742ab93c15abb5da22759b8590ec03b7f"

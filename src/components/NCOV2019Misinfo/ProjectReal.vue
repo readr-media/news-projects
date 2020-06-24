@@ -5,11 +5,28 @@
     </section>
     <section class="scrolly">
       <figure class="scrolly__sticky-chart sticky-chart">
-        <ChartFullData
-          class="sticky-chart__bubble-chart"
-          :chart-index="chartIndexScrolly"
-        />
-        <ChartLine v-show="chartIndexScrolly === 3" class="sticky-chart__line-chart" />
+        <template v-if="$store.state.viewport[0] >= 768">
+          <ChartFullData
+            v-if="chartIndexScrolly >= 1"
+            class="sticky-chart__bubble-chart"
+            :chart-index="chartIndexScrolly"
+          />
+          <ChartLine
+            v-if="chartIndexScrolly === 3"
+            class="sticky-chart__line-chart"
+          />
+        </template>
+        <template v-else>
+          <ChartFullDataMobile
+            v-if="chartIndexScrolly >= 1"
+            class="sticky-chart__bubble-chart"
+            :chart-index="chartIndexScrolly"
+          />
+          <ChartLineMobile
+            v-if="chartIndexScrolly === 3"
+            class="sticky-chart__line-chart"
+          />
+        </template>
       </figure>
       <article class="scrolly__textboxes textboxes">
         <div class="enter-view-step textboxes__textbox textboxes__textbox--scrolly" data-chart="1">
@@ -19,29 +36,13 @@
           <p>在二月時，主要的假訊息的主題跟「中國」有關。</p>
         </div>
         <div class="enter-view-step textboxes__textbox textboxes__textbox--scrolly" data-chart="3">
-          <p>但隨著病毒傳播到全世界，各國也開始面臨鋪天蓋地的假訊息。
-
-            2/21 伊朗開始成為傳染節點
-            2/25 義大利開始成為傳染節點
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-            2/29 美國出現第一起死亡案例
-
-          </p>
+          <p>但隨著病毒傳播到全世界，各國也開始面臨鋪天蓋地的假訊息。</p>
+          <div class="mobile-only">
+            <br>
+            <p><span class="orange">2/21</span> 伊朗開始成為傳染節點</p>
+            <p><span class="orange">2/25</span> 義大利開始成為傳染節點</p>
+            <p><span class="orange">2/29</span> 美國出現第一起死亡案例</p>
+          </div>
         </div>
       </article>
     </section>
@@ -52,12 +53,16 @@
   import enterView from 'enter-view'
   // import scrollama from 'scrollama'
   import ChartFullData from './ChartFullData.vue'
+  import ChartFullDataMobile from './ChartFullDataMobile.vue'
   import ChartLine from './exp/ChartLine.vue'
+  import ChartLineMobile from './exp/ChartLineMobile.vue'
 
   export default {
     components: {
       ChartFullData,
-      ChartLine
+      ChartFullDataMobile,
+      ChartLine,
+      ChartLineMobile
     },
     data() {
       return {
@@ -79,6 +84,13 @@
 </script>
 
 <style scoped>
+  .mobile-only {
+    display: block;
+  }
+
+  .orange {
+    color: #ec894c;
+  }
   figure {
     margin: 0;
   }
@@ -149,6 +161,10 @@
   }
 
   @media (min-width: 768px) {
+    .mobile-only {
+      display: none;
+    }
+
     .scrolly__textboxes	{
       width: 400px;
       margin: 0 200px 0 auto;
