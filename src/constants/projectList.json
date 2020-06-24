@@ -42,5 +42,7 @@
   "maskmap": "MaskMap",
   "ncov2019search": "NCOV2019Search",
   "backtoformosa": "BackToFormosa",
-  "ncov2019misinfo": "NCOV2019Misinfo"
+  "ncov2019misinfo": "NCOV2019Misinfo",
+  "covid19-disinformation": "COVID19Disinformation"
+
 }
