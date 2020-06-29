@@ -1,6 +1,7 @@
 <template>
   <div class="covid19-disinformation">
     <TheOpening />
+    <TheGame />
     <TheArticle />
     <TheCredit />
     <div class="donate">
@@ -20,6 +21,7 @@
 <script>
 import TheArticle from './components/TheArticle.vue'
 import TheCredit from './components/TheCredit.vue'
+import TheGame from './components/TheGame.vue'
 import TheOpening from './components/TheOpening.vue'
 import SubscriptionWithLogoMsg from 'src/components/SubscriptionWithLogoMsg.vue'
 
@@ -28,6 +30,7 @@ export default {
   components: {
     TheArticle,
     TheCredit,
+    TheGame,
     TheOpening,
     SubscriptionWithLogoMsg
   },
