@@ -13,9 +13,9 @@
   export default {
     data() {
       return {
-        width: 414,
-        height: 1500,
-        margin: { top: 50, right: 30, left: 30, bottom: 30 }
+        width: 1680,
+        height: 3000,
+        margin: { top: 30, right: 100, left: 200, bottom: 30 }
       }
     },
     computed: {
@@ -45,7 +45,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_country.csv', (d) => {
+      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_platform.csv', (d) => {
         return {
           // date: d3.timeParse('%Y-%m-%d')(d.date),
           date: d.date,
@@ -57,7 +57,7 @@
         }
       })
       const dataGroupByCountry =
-        Object.entries(_.groupBy(data, (d) => d.country))
+        Object.entries(_.groupBy(data, (d) => d.platform))
       let dataGroupByCountryTopTen = _.take(_.sortBy(dataGroupByCountry, (value) => {
         return -value[1].length
       }), 10)
@@ -72,47 +72,47 @@
         .scaleLinear()
         .domain(d3.extent(xDomainData, (d) => d3.timeParse('%Y-%m-%d')(d)))
         .range([0, innerWidth])
-      // const xAxis = g => g
-      //   .call(
-      //     d3.axisTop(x)
-      //       .tickFormat(d => d3.timeFormat('%m/%d')(d))
-      //       .ticks(10)
-      //     //   .tickValues([
-      //     //     d3.timeParse('%Y-%m-%d')('2020-01-30'),
-      //     //     d3.timeParse('%Y-%m-%d')('2020-03-20'),
-      //     //     d3.timeParse('%Y-%m-%d')('2020-05-12')
-      //     //   ])
-      //   )
-      //   .call(g => g.select('.domain').remove())
-      //   .call(g => g.selectAll('line').remove())
-      //   .call(g => g.selectAll('text').style('font-size', '16px'))
-      // wrapper.append('g').call(xAxis)
+      const xAxis = g => g
+        .call(
+          d3.axisTop(x)
+            .tickFormat(d => d3.timeFormat('%m/%d')(d))
+            .ticks(10)
+          //   .tickValues([
+          //     d3.timeParse('%Y-%m-%d')('2020-01-30'),
+          //     d3.timeParse('%Y-%m-%d')('2020-03-20'),
+          //     d3.timeParse('%Y-%m-%d')('2020-05-12')
+          //   ])
+        )
+        .call(g => g.select('.domain').remove())
+        .call(g => g.selectAll('line').remove())
+        .call(g => g.selectAll('text').style('font-size', '16px'))
+      wrapper.append('g').call(xAxis)
 
       const yDomainData = dataGroupByCountryTopTen.map(values => values[0])
       const y = d3.scaleBand().domain(yDomainData).range([0, noSplitHeight])
-      // const yAxis = g => g
-      //   .call(
-      //     d3.axisLeft(y)
-      //       .tickSizeInner(20)
-      //       // .tickPadding(100)
-      //       // .tickFormat(d => d3.timeFormat('%m/%d')(d))
-      //       // .ticks(10)
-      //     //   .tickValues([
-      //     //     d3.timeParse('%Y-%m-%d')('2020-01-30'),
-      //     //     d3.timeParse('%Y-%m-%d')('2020-03-20'),
-      //     //     d3.timeParse('%Y-%m-%d')('2020-05-12')
-      //     //   ])
-      //   )
-      //   .call(g => g.select('.domain').remove())
-      //   .call(g => g.selectAll('line').remove())
-      //   .call(g => g.selectAll('text').style('font-size', '16px'))
-      // wrapper.append('g').call(yAxis)
+      const yAxis = g => g
+        .call(
+          d3.axisLeft(y)
+            .tickSizeInner(20)
+            // .tickPadding(100)
+            // .tickFormat(d => d3.timeFormat('%m/%d')(d))
+            // .ticks(10)
+          //   .tickValues([
+          //     d3.timeParse('%Y-%m-%d')('2020-01-30'),
+          //     d3.timeParse('%Y-%m-%d')('2020-03-20'),
+          //     d3.timeParse('%Y-%m-%d')('2020-05-12')
+          //   ])
+        )
+        .call(g => g.select('.domain').remove())
+        .call(g => g.selectAll('line').remove())
+        .call(g => g.selectAll('text').style('font-size', '16px'))
+      wrapper.append('g').call(yAxis)
 
       const rDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[1].length)))
       const r = d3
         .scaleSqrt()
         .domain(d3.extent(rDomainData))
-        .range([1.5, 9])
+        .range([5, 30])
 
       const bubbleData = _.flatten(dataGroupByCountryTopTen.map(d => d[1].map(dd => ({
         date: dd[0],
@@ -132,18 +132,6 @@
         // .style('transition', 'fill 1s ease')
         .attr('x', (d) => x(d3.timeParse('%Y-%m-%d')(d.date)))
         .attr('y', (d) => y(d.country) + y.bandwidth() / 2)
-
-      wrapper
-        .selectAll('text')
-        .data(dataGroupByCountryTopTen)
-        .enter()
-        .append('text')
-        .attr('text-anchor', 'middle')
-        .attr('alignment-baseline', 'ideographic')
-        .attr('x', innerWidth / 2)
-        .attr('y', d => y(d[0]) + 36)
-        .style('font-size', '16px')
-        .text(d => d[0])
 
       const force = d3
         .forceSimulation(bubbleData)
