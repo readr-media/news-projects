@@ -12,7 +12,32 @@
     <p>{{ $t('COVID19_D.CHAPTER_1.P_10.TEXT_1') }}<a href="https://www.poynter.org/ifcn-covid-19-misinformation/" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_10.LINK') }}</a>{{ $t('COVID19_D.CHAPTER_1.P_10.TEXT_2') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_1.P_11') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_1.P_12.TEXT_1') }}<a href="/" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_12.LINK') }}</a></p>
+    <figure class="covid-article__img">
+      <p class="title" v-text="$t('COVID19_D.CHART_1.TITLE')" />
+      <picture>
+        <source
+          media="(min-width: 1024px)"
+          srcset="/proj-assets/covid19-disinformation/chart-01-desktop.jpg"
+        >
+        <img
+          src="/proj-assets/covid19-disinformation/chart-01.jpg"
+          :alt="$t('COVID19_D.CHART_1.TITLE')"
+        >
+      </picture>
+      <p>
+        <strong>{{ $t('COVID19_D.SOURCE') }}</strong>
+        <a
+          href="https://www.poynter.org/ifcn-covid-19-misinformation/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >The CoronaVirusFacts Alliance Database</a>（2020-01-29~2020-05-12）
+      </p>
+      <p><strong v-text="$t('COVID19_D.ANNOTATION')" />{{ $t('COVID19_D.CHART_1.ANNOTATION') }}</p>
+    </figure>
     <h2>{{ $t('COVID19_D.CHAPTER_2.HEADING') }}</h2>
+    <p class="quote">{{ $t('COVID19_D.CHAPTER_2.QUOTE_1') }}</p>
+    <p class="quote">{{ $t('COVID19_D.CHAPTER_2.QUOTE_2') }}</p>
+    <p class="quote">{{ $t('COVID19_D.CHAPTER_2.QUOTE_3') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_2.P_1') }}</p>
     <!-- <p>
       {{ $t('COVID19_D.CHAPTER_1.P_6.TEXT_1') }}<ArticleAnnotation
@@ -57,9 +82,12 @@ export default {
     + p
       margin-top 20px
   p
+    margin 0 auto
     text-align justify
     + *
       margin-top 30px
+  picture
+    margin 0
   > *
     width 280px
     margin-left auto
@@ -67,6 +95,50 @@ export default {
     @media (min-width: 768px)
       width 60%
       max-width 800px
+  &__img
+    color #4a4a4a
+    font-size 15px
+    font-weight 300
+    line-height normal
+    text-align justify
+    + h2
+      margin-top 60px
+    picture
+      display block
+      img
+        display block
+        width 100%
+      + *
+        margin-top 10px
+    .title
+      font-size 21px
+      text-align center
+      + *
+        margin-top 10px
+    p
+      + p
+        margin-top 1em
+.quote
+  position relative
+  padding-left 38px
+  color #000
+  font-size 16px
+  font-weight 500
+  line-height 30px
+  &::before
+    content ''
+    position absolute
+    top 6px
+    left 0
+    display inline-block
+    width 30px
+    height 30px
+    background-image url(/proj-assets/covid19-disinformation/quote-tw.svg)
+    background-size 30px 30px
+    background-repeat no-repeat
+    background-position center center
+    @media (min-width: 1024px)
+      top 0
 .info-box
   h3
     font-size 16px
