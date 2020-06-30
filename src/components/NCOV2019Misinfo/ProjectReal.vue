@@ -55,16 +55,48 @@
         </div>
       </article>
     </section>
-    <section class="long-chart">
-      <template v-if="$store.state.viewport[0] >= 768">
-        <ChartGroupByCountry class="long-chart__chart" />
+    <section class="long-chart long-chart-group-by-country">
+      <template v-if="showLongCharts">
+        <template v-if="$store.state.viewport[0] >= 768">
+          <ChartGroupByCountry class="long-chart__chart" />
+        </template>
+        <template v-else>
+          <ChartGroupByCountryMobile class="long-chart__chart" />
+        </template>
       </template>
-      <template v-else>
-        <ChartGroupByCountryMobile class="long-chart__chart" />
-      </template>
-      <article class="long-chart__textboxes textboxes" :class="{ fix: shouldFixLongChartArticle1 }">
+      <article class="long-chart__textboxes textboxes" :class="{ fix: shouldFixLongChartArticleCountry }">
         <div class="textboxes__textbox">
           <p>在所有國家中，印度的假訊息查核報告是最多的。除了當地事實查核組織的活躍度以外，也彰顯出印度受到假訊息的危害程度。</p>
+        </div>
+      </article>
+    </section>
+    <section class="long-chart long-chart-group-by-platform">
+      <template v-if="showLongCharts">
+        <template v-if="$store.state.viewport[0] >= 768">
+          <ChartGroupByPlatform class="long-chart__chart" />
+        </template>
+        <template v-else>
+          <ChartGroupByPlatformMobile class="long-chart__chart" />
+        </template>
+      </template>
+      <article class="long-chart__textboxes textboxes" :class="{ fix: shouldFixLongChartArticlePlatform }">
+        <div class="textboxes__textbox">
+          <p>而這些假訊息有超過一半都是透過 Facebook 傳播。社群平台 Twitter 和通訊軟體 Whatsapp 也是散播的主要媒介。</p>
+        </div>
+      </article>
+    </section>
+    <section class="long-chart long-chart-group-by-topic">
+      <template v-if="showLongCharts">
+        <template v-if="$store.state.viewport[0] >= 768">
+          <ChartGroupByTopic class="long-chart__chart" />
+        </template>
+        <template v-else>
+          <ChartGroupByTopicMobile class="long-chart__chart" />
+        </template>
+      </template>
+      <article class="long-chart__textboxes textboxes" :class="{ fix: shouldFixLongChartArticleTopic }">
+        <div class="textboxes__textbox">
+          <p>我們參考路透社新聞研究所的研究方法，人工替這些查核報告裡的假訊息分類，發現「病毒在社區中的傳播」（通常是誇大疫情的影響）是最多的。</p>
         </div>
       </article>
     </section>
@@ -80,6 +112,10 @@
   import ChartLineMobile from './ChartLineMobile.vue'
   import ChartGroupByCountry from './ChartGroupByCountry.vue'
   import ChartGroupByCountryMobile from './ChartGroupByCountryMobile.vue'
+  import ChartGroupByPlatform from './ChartGroupByPlatform.vue'
+  import ChartGroupByPlatformMobile from './ChartGroupByPlatformMobile.vue'
+  import ChartGroupByTopic from './ChartGroupByTopic.vue'
+  import ChartGroupByTopicMobile from './ChartGroupByTopicMobile.vue'
 
   export default {
     components: {
@@ -88,12 +124,19 @@
       ChartLine,
       ChartLineMobile,
       ChartGroupByCountry,
-      ChartGroupByCountryMobile
+      ChartGroupByCountryMobile,
+      ChartGroupByPlatform,
+      ChartGroupByPlatformMobile,
+      ChartGroupByTopic,
+      ChartGroupByTopicMobile
     },
     data() {
       return {
         chartIndexScrolly: 0,
-        shouldFixLongChartArticle1: false
+        showLongCharts: false,
+        shouldFixLongChartArticleCountry: false,
+        shouldFixLongChartArticlePlatform: false,
+        shouldFixLongChartArticleTopic: false
       }
     },
     mounted() {
@@ -108,18 +151,50 @@
       })
 
 
-      const scroller = scrollama()
+      const scrollerCountry = scrollama()
         .setup({
-          step: '.long-chart',
+          step: '.long-chart-group-by-country',
           offset: 1,
         })
         .onStepEnter((response) => {
-          this.shouldFixLongChartArticle1 = true
+          if (response.direction === 'down') {
+            this.showLongCharts = true
+          }
+          this.shouldFixLongChartArticleCountry = true
         })
         .onStepExit((response) => {
-          this.shouldFixLongChartArticle1 = false
+          if (response.direction === 'up') {
+            this.showLongCharts = false
+          }
+          this.shouldFixLongChartArticleCountry = false
         })
-      window.addEventListener('resize', scroller.resize)
+      window.addEventListener('resize', scrollerCountry.resize)
+
+      const scrollerPlatform = scrollama()
+        .setup({
+          step: '.long-chart-group-by-platform',
+          offset: 1,
+        })
+        .onStepEnter((response) => {
+          this.shouldFixLongChartArticlePlatform = true
+        })
+        .onStepExit((response) => {
+          this.shouldFixLongChartArticlePlatform = false
+        })
+      window.addEventListener('resize', scrollerPlatform.resize)
+
+      const scrollerTopic = scrollama()
+        .setup({
+          step: '.long-chart-group-by-topic',
+          offset: 1,
+        })
+        .onStepEnter((response) => {
+          this.shouldFixLongChartArticleTopic = true
+        })
+        .onStepExit((response) => {
+          this.shouldFixLongChartArticleTopic = false
+        })
+      window.addEventListener('resize', scrollerTopic.resize)
     }
   }
 </script>

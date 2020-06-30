@@ -45,7 +45,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_country.csv', (d) => {
+      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
         return {
           // date: d3.timeParse('%Y-%m-%d')(d.date),
           date: d.date,
@@ -57,10 +57,10 @@
         }
       })
       const dataGroupByCountry =
-        Object.entries(_.groupBy(data, (d) => d.country))
+        Object.entries(_.groupBy(data, (d) => d.topics))
       let dataGroupByCountryTopTen = _.take(_.sortBy(dataGroupByCountry, (value) => {
         return -value[1].length
-      }), 10)
+      }), 11)
       dataGroupByCountryTopTen = dataGroupByCountryTopTen.map(values => {
         const country = values[0]
         const data = values[1]

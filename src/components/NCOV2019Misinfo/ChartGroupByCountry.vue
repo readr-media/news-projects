@@ -15,7 +15,7 @@
       return {
         width: 1680,
         height: 3000,
-        margin: { top: 30, right: 100, left: 100, bottom: 30 }
+        margin: { top: 30, right: 100, left: 200, bottom: 30 }
       }
     },
     computed: {
@@ -157,7 +157,7 @@
       })
       // Update simulation
       // force.force('y', d3.forceY((noSplitHeight - margin.top - margin.bottom) / 2))
-      force.alpha(1).restart()
+      // force.alpha(1).restart()
 
       window.addEventListener('resize', this.resizeHandler)
     },
