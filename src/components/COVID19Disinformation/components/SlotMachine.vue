@@ -9,11 +9,10 @@
         <img src="/proj-assets/covid19-disinformation/slot-machine.png">
       </picture>
       <div
-        v-show="isPlayed"
         class="slot-machine__content"
       >
         <div class="slot">
-          <div class="scoll-container column1">
+          <div :class="[{transitioning }, `result-${column1}`]" class="scoll-container column1">
             <div
               v-for="item in SLOT_MACHINE_COLUMN_1_TW"
               :key="item"
@@ -23,7 +22,7 @@
           </div>
         </div>
         <div class="slot">
-          <div class="scoll-container column2">
+          <div :class="[{transitioning }, `result-${column2}`]" class="scoll-container column2">
             <div
               v-for="item in SLOT_MACHINE_COLUMN_2_TW"
               :key="item"
@@ -33,7 +32,7 @@
           </div>
         </div>
         <div class="slot">
-          <div class="scoll-container column3">
+          <div :class="[{transitioning }, `result-${column3}`]" class="scoll-container column3">
             <div
               v-for="item in SLOT_MACHINE_COLUMN_3_TW"
               :key="item"
@@ -136,7 +135,7 @@ export default {
           margin 0
     .scoll-container
       display flex
-      // animation rotate .5s 30 ease-in backwards
+      transition transform .5s ease-in-out 2.5s
       @media (min-width: 1024px)
         flex 1 !important
         flex-direction column
@@ -152,6 +151,8 @@ export default {
         flex 0 0 2940px
         @media (min-width: 1024px)
           height 2800px
+      &.transitioning
+        animation rotate 2.5s 30 ease-in-out backwards
       .option
         flex 1
         display flex
@@ -174,10 +175,45 @@ export default {
     @media (min-width: 1024px)
       transform translateY(-55px)
 
+.result-0
+  transform translateX(0)
+.result-1
+  transform translateX(-210px)
+.result-2
+  transform translateX(-420px)
+.result-3
+  transform translateX(-630px)
+.result-4
+  transform translateX(-840px)
+.result-5
+  transform translateX(-1050px)
+.result-6
+  transform translateX(-1260px)
+.result-7
+  transform translateX(-1470px)
+.result-8
+  transform translateX(-1680px)
+.result-9
+  transform translateX(-1890px)
+.result-10
+  transform translateX(-2100px)
+.result-11
+  transform translateX(-2310px)
+.result-12
+  transform translateX(-2520px)
+.result-13
+  transform translateX(-2730px)
+.result-14
+  transform translateX(-2940px)
+.result-15
+  transform translateX(-3150px)
+.result-16
+  transform translateX(-3360px)
+
 @keyframes rotate
   0%
     transform translateX(0)
   100%
-    transform translateX(-420px)
+    transform translateX(-100%)
 
 </style>

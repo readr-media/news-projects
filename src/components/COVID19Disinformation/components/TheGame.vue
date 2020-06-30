@@ -24,6 +24,7 @@ export default {
       column1: undefined,
       column2: undefined,
       column3: undefined,
+      timer: undefined,
       transitioning: false
     }
   },
@@ -35,9 +36,19 @@ export default {
       return `${this.column1}/${this.column2}/${this.column3}`
     }
   },
+  watch: {
+    transitioning (value) {
+      if (value) {
+        this.timer = setTimeout(() => {
+          this.transitioning = false
+          this.timer = undefined
+        }, 3000)
+      }
+    }
+  },
   methods: {
     generateResult () {
-      // this.transitioning = true
+      this.transitioning = true
       this.column1 = Math.floor(Math.random() * 13)
       this.column2 = Math.floor(Math.random() * 17)
       this.column3 = Math.floor(Math.random() * 14)
