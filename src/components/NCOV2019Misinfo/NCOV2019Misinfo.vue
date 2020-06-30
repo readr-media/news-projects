@@ -25,7 +25,7 @@ import Chart1 from './exp/Chart1.vue'
 import Chart2_1 from './exp/Chart2-1.vue'
 import Project from './exp/Project.vue'
 import ProjectReal from './ProjectReal.vue'
-import ChartLine from './exp/ChartLine.vue'
+import ChartLine from './ChartLine.vue'
 
 export default {
   metaInfo () {

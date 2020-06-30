@@ -14,7 +14,7 @@
       return {
         width: 1680,
         height: 1050,
-        margin: { top: 30, right: 30, left: 30, bottom: 300 }
+        margin: { top: 30, right: 100, left: 100, bottom: 300 }
       }
     },
     computed: {
