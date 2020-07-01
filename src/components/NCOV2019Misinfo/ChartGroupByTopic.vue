@@ -14,7 +14,7 @@
     data() {
       return {
         width: 1680,
-        height: 3000,
+        height: 1800,
         margin: { top: 30, right: 100, left: 200, bottom: 30 }
       }
     },

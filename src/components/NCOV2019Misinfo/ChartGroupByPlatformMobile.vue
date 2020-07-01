@@ -14,7 +14,7 @@
     data() {
       return {
         width: 414,
-        height: 1500,
+        height: 850,
         margin: { top: 50, right: 30, left: 30, bottom: 30 }
       }
     },
@@ -141,7 +141,7 @@
         .attr('text-anchor', 'middle')
         .attr('alignment-baseline', 'ideographic')
         .attr('x', innerWidth / 2)
-        .attr('y', d => y(d[0]) + 36)
+        .attr('y', d => y(d[0]) + 16)
         .style('font-size', '16px')
         .text(d => d[0])
 

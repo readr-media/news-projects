@@ -56,7 +56,7 @@
       </article>
     </section>
     <section class="long-chart long-chart-group-by-country">
-      <template v-if="showLongCharts">
+      <template v-if="showLongChartsCountry">
         <template v-if="$store.state.viewport[0] >= 768">
           <ChartGroupByCountry class="long-chart__chart" />
         </template>
@@ -71,7 +71,7 @@
       </article>
     </section>
     <section class="long-chart long-chart-group-by-platform">
-      <template v-if="showLongCharts">
+      <template v-if="showLongChartsPlatform">
         <template v-if="$store.state.viewport[0] >= 768">
           <ChartGroupByPlatform class="long-chart__chart" />
         </template>
@@ -86,7 +86,7 @@
       </article>
     </section>
     <section class="long-chart long-chart-group-by-topic">
-      <template v-if="showLongCharts">
+      <template v-if="showLongChartsTopic">
         <template v-if="$store.state.viewport[0] >= 768">
           <ChartGroupByTopic class="long-chart__chart" />
         </template>
@@ -100,6 +100,33 @@
         </div>
       </article>
     </section>
+    <section class="scrolly">
+      <figure class="scrolly__sticky-chart sticky-chart">
+<!--        <template v-if="$store.state.viewport[0] >= 768">-->
+<!--        </template>-->
+<!--        <template v-else>-->
+<!--        </template>-->
+      </figure>
+      <article class="scrolly__textboxes textboxes">
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="1"
+        >
+          <p>數量最多的，是「病毒在社區中的傳播」類的假訊息。內容主要闡述疫情的影響，例如誇大疫情的影響，如疫情造成民眾自殺、引起抗議等；或聲稱某個地方首次遭到病毒感染；指責某些種特定種族傳播病毒等等。平均每 4 則假訊息就有 1 則是這個主題。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="2"
+        >
+          <p>「棺材」（coffins）——用滿地是棺材的照片傳言該地區已經因為武漢肺炎死了很多人</p>
+          <p>「病例」（case）——宣稱某個地區已經有了第一起武漢肺炎病例</p>
+          <p>「圖片」（images）——挪用各式各樣不相干的圖片來誇大疫情的影響</p>
+          <p>「委內瑞拉」（venezuela）——佯稱義大利人覺得「錢對挽救生命毫無用處」，把錢撒在馬路上。但原本的故事發生在委內瑞拉，且與武漢肺炎無關</p>
+          <p>「暴動」（riots）——英國倫敦因為食物不足引起了暴動，但事實上挪用了舊影片</p>
+        </div>
+      </article>
+    </section>
+    <Footer />
   </div>
 </template>
 
@@ -116,6 +143,7 @@
   import ChartGroupByPlatformMobile from './ChartGroupByPlatformMobile.vue'
   import ChartGroupByTopic from './ChartGroupByTopic.vue'
   import ChartGroupByTopicMobile from './ChartGroupByTopicMobile.vue'
+  import Footer from './Footer.vue'
 
   export default {
     components: {
@@ -128,12 +156,16 @@
       ChartGroupByPlatform,
       ChartGroupByPlatformMobile,
       ChartGroupByTopic,
-      ChartGroupByTopicMobile
+      ChartGroupByTopicMobile,
+      Footer
     },
     data() {
       return {
         chartIndexScrolly: 0,
-        showLongCharts: false,
+        chartIndexScrollyTopics: 0,
+        showLongChartsCountry: false,
+        showLongChartsPlatform: false,
+        showLongChartsTopic: false,
         shouldFixLongChartArticleCountry: false,
         shouldFixLongChartArticlePlatform: false,
         shouldFixLongChartArticleTopic: false
@@ -149,6 +181,15 @@
           this.chartIndexScrolly = parseInt(el.dataset.chart) - 1
         },
       })
+      enterView({
+        selector: '.enter-view-step-topics',
+        enter: (el) => {
+          this.chartIndexScrollyTopics = parseInt(el.dataset.chart)
+        },
+        exit: (el) => {
+          this.chartIndexScrollyTopics = parseInt(el.dataset.chart) - 1
+        },
+      })
 
 
       const scrollerCountry = scrollama()
@@ -157,15 +198,10 @@
           offset: 1,
         })
         .onStepEnter((response) => {
-          if (response.direction === 'down') {
-            this.showLongCharts = true
-          }
+          this.showLongChartsCountry = true
           this.shouldFixLongChartArticleCountry = true
         })
         .onStepExit((response) => {
-          if (response.direction === 'up') {
-            this.showLongCharts = false
-          }
           this.shouldFixLongChartArticleCountry = false
         })
       window.addEventListener('resize', scrollerCountry.resize)
@@ -176,6 +212,7 @@
           offset: 1,
         })
         .onStepEnter((response) => {
+          this.showLongChartsPlatform = true
           this.shouldFixLongChartArticlePlatform = true
         })
         .onStepExit((response) => {
@@ -189,6 +226,7 @@
           offset: 1,
         })
         .onStepEnter((response) => {
+          this.showLongChartsTopic = true
           this.shouldFixLongChartArticleTopic = true
         })
         .onStepExit((response) => {
@@ -287,11 +325,11 @@
       margin: 0 200px 0 auto;
     }
 
-    .long-chart__textboxes	{
+    .long-chart__textboxes {
       width: 400px;
       right: 200px;
     }
-    .long-chart__textboxes.fix	{
+    .long-chart__textboxes.fix {
       right: 200px;
     }
   }
