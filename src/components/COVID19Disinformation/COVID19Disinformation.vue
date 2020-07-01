@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { throttle } from 'lodash'
 import TheArticle from './components/TheArticle.vue'
 import TheCredit from './components/TheCredit.vue'
 import TheGame from './components/TheGame.vue'
@@ -36,16 +37,43 @@ export default {
   },
   metaInfo () {
     return {
-      title: this.$t('COVID19_D.title'),
+      title: this.$t('COVID19_D.TITLE'),
       description: this.$t('COVID19_D.DESCRIPTION'),
       metaUrl: 'covid19-disinformation',
       metaImage: 'covid19-disinformation/og.jpg'
     }
   },
-  created () {
-    if (this.$route.params.params === 'en') {
-      this.$i18n.locale = 'en'
+  data () {
+    return {
+      gaIndex: 0,
+      gaElements: []
     }
+  },
+  // created () {
+  //   if (this.$route.params.params === 'en') {
+  //     this.$i18n.locale = 'en'
+  //   }
+  // },
+  mounted () {
+    this.gaElements = [
+      ...document.querySelectorAll('.covid-article > h2'),
+      ...document.querySelectorAll('.covid-credit')
+    ]
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.handleScroll)
+  },
+  methods: {
+    handleScroll: throttle(function () {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+      this.gaElements.forEach((ele, index) => {
+        const rect = ele.getBoundingClientRect()
+        if (index + 1 > this.gaIndex && rect.top < viewportHeight) {
+          this.gaIndex = index + 1
+        }
+      })
+    }, 300)
   }
 }
 </script>

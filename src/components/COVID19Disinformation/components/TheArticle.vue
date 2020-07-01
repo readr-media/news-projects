@@ -288,6 +288,30 @@
 
     <h2>{{ $t('COVID19_D.CHAPTER_6.HEADING') }}</h2>
     <p>{{ $t('COVID19_D.CHAPTER_6.P_1') }}</p>
+    <figure class="covid-article__img">
+      <p
+        class="title"
+        v-text="$t('COVID19_D.CHART_9.TITLE')"
+      />
+      <picture>
+        <source
+          media="(min-width: 1024px)"
+          srcset="/proj-assets/covid19-disinformation/chart-09-desktop.png"
+        >
+        <img
+          src="/proj-assets/covid19-disinformation/chart-09.png"
+          :alt="$t('COVID19_D.CHART_9.TITLE')"
+        >
+      </picture>
+      <p>
+        <strong>{{ $t('COVID19_D.SOURCE') }}</strong><a
+          href="https://www.poynter.org/ifcn-covid-19-misinformation/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >The CoronaVirusFacts Alliance Database</a>（2020-01-29~2020-05-12）
+      </p>
+      <p><strong v-text="$t('COVID19_D.ANNOTATION')" />{{ $t('COVID19_D.CHART_9.ANNOTATION') }}</p>
+    </figure>
     <p>{{ $t('COVID19_D.CHAPTER_6.P_2') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_6.P_3') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_6.P_4.TEXT_1') }}<a
@@ -309,6 +333,29 @@
     <h2>{{ $t('COVID19_D.CHAPTER_8.HEADING') }}</h2>
     <p>{{ $t('COVID19_D.CHAPTER_8.P_1') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_8.P_2.TEXT_1') }}<span class="annotation">{{ $t('COVID19_D.CHAPTER_8.P_2.ANNOTATION') }}</span>{{ $t('COVID19_D.CHAPTER_8.P_2.TEXT_2') }}</p>
+    <figure class="covid-article__img">
+      <p
+        class="title"
+        v-text="$t('COVID19_D.CHART_10.TITLE')"
+      />
+      <picture>
+        <source
+          media="(min-width: 1024px)"
+          srcset="/proj-assets/covid19-disinformation/chart-10-desktop.png"
+        >
+        <img
+          src="/proj-assets/covid19-disinformation/chart-10.png"
+          :alt="$t('COVID19_D.CHART_10.TITLE')"
+        >
+      </picture>
+      <p>
+        <strong>{{ $t('COVID19_D.SOURCE') }}</strong>{{ $t('COVID19_D.CHART_10.SOURCE.TEXT_1') }}<a
+          href="https://www.poynter.org/ifcn-covid-19-misinformation/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >{{ $t('COVID19_D.CHART_10.SOURCE.LINK') }}</a>{{ $t('COVID19_D.CHART_10.SOURCE.TEXT_2') }}
+      </p>
+    </figure>
     <p>{{ $t('COVID19_D.CHAPTER_8.P_3') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_8.P_4') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_8.P_5') }}</p>
