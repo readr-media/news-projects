@@ -268,7 +268,7 @@
           srcset="/proj-assets/covid19-disinformation/chart-08-desktop.png"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-8.png"
+          src="/proj-assets/covid19-disinformation/chart-08.png"
           :alt="$t('COVID19_D.CHART_8.TITLE')"
         >
       </picture>
@@ -338,7 +338,7 @@
         class="title"
         v-text="$t('COVID19_D.CHART_10.TITLE')"
       />
-      <picture>
+      <picture class="chart-10-img">
         <source
           media="(min-width: 1024px)"
           srcset="/proj-assets/covid19-disinformation/chart-10-desktop.png"
@@ -348,6 +348,14 @@
           :alt="$t('COVID19_D.CHART_10.TITLE')"
         >
       </picture>
+      <div class="chart-10-iframe">
+        <iframe src='https://flo.uri.sh/visualisation/2954585/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe>
+        <div style='width:100%!;margin-top:4px!important;text-align:right!important;'>
+          <a class='flourish-credit' href='https://public.flourish.studio/visualisation/2954585/?utm_source=embed&utm_campaign=visualisation/2954585' target='_top' style='text-decoration:none!important'>
+          <img v-lazy="'https://public.flourish.studio/resources/made_with_flourish.svg'" alt='Made with Flourish' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'>
+          </a>
+        </div>
+      </div>
       <p>
         <strong>{{ $t('COVID19_D.SOURCE') }}</strong>{{ $t('COVID19_D.CHART_10.SOURCE.TEXT_1') }}<a
           href="https://www.poynter.org/ifcn-covid-19-misinformation/"
@@ -578,5 +586,14 @@ export default {
           width 140px
     + p
       margin-top 30px
+
+.covid-article__img
+  .chart-10-img
+    @media (min-width: 1024px)
+      display none
+  .chart-10-iframe
+    display none
+    @media (min-width: 1024px)
+      display block
 
 </style>

@@ -10,13 +10,18 @@
       class="covid-opening__brief"
       v-text="$t('COVID19_D.DESCRIPTION')"
     />
-    <div class="covid-opening__arrow" />
+    <ShakeArrow class="covid-opening__arrow" />
   </section>
 </template>
 
 <script>
+import ShakeArrow from './ShakeArrow.vue'
+
 export default {
-  name: 'TheOpening'
+  name: 'TheOpening',
+  components: {
+    ShakeArrow
+  }
 }
 </script>
 
@@ -57,20 +62,8 @@ export default {
     @media (min-width: 1200px)
       transform translateX(-25%)
   &__arrow
-    width 25px
-    height 25px
     margin 70px auto 0
-    border-left 3px solid #fff
-    border-bottom 3px solid #fff
-    transform rotate(-45deg)
-    animation updown .8s infinite alternate
     @media (min-width: 768px)
       margin-top 160px
-
-@keyframes updown
-    0%
-      transform translateY(0) rotate(-45deg)
-    100%
-      transform translateY(-20px) rotate(-45deg)
 
 </style>

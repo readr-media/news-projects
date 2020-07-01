@@ -56,7 +56,9 @@ export default {
   // },
   mounted () {
     this.gaElements = [
+      ...document.querySelectorAll('.covid-game'),
       ...document.querySelectorAll('.covid-article > h2'),
+      ...document.querySelectorAll('.info-box'),
       ...document.querySelectorAll('.covid-credit')
     ]
     window.addEventListener('scroll', this.handleScroll)
@@ -71,6 +73,7 @@ export default {
         const rect = ele.getBoundingClientRect()
         if (index + 1 > this.gaIndex && rect.top < viewportHeight) {
           this.gaIndex = index + 1
+          window.ga && window.ga('send', 'event', 'projects', 'scroll', `scroll to ${this.gaIndex}`)
         }
       })
     }, 300)
