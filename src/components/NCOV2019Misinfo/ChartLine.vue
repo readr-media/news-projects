@@ -14,7 +14,7 @@
       return {
         width: 1680,
         height: 1050,
-        margin: { top: 30, right: 100, left: 200, bottom: 300 }
+        margin: { top: 30, right: 100, left: 210, bottom: 300 }
       }
     },
     computed: {
@@ -45,7 +45,10 @@
       })
 
       const x = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.date))
+        .domain([
+          d3.timeParse('%Y-%m-%d')('2020-01-29'),
+          d3.timeParse('%Y-%m-%d')('2020-05-12')
+        ])
         .range([0, innerWidth])
       const y = d3.scaleLinear()
         .domain(d3.extent(data, d => d.diagnoseCount))
@@ -71,6 +74,28 @@
         // .ease("linear")
         .attr("stroke-dashoffset", 0);
 
+      const axisDates = [
+        '2020-02-06',
+        '2020-02-18',
+        '2020-03-01',
+        '2020-03-12',
+        '2020-03-24',
+        '2020-04-04',
+        '2020-04-16',
+        '2020-04-27',
+        '2020-05-09',
+      ]
+      wrapper.selectAll('line')
+      .data(axisDates)
+      .enter()
+      .append('line')
+        .attr('stroke', '#d8d8d8')
+        .attr('stroke-width', 1)
+        .attr('x1', (d) => x(d3.timeParse('%Y-%m-%d')(d)))
+        .attr('y1', 0)
+        .attr('x2', (d) => x(d3.timeParse('%Y-%m-%d')(d)))
+        .attr('y2', 500)
+
       wrapper.append('line')
         .attr('stroke', '#d8d8d8')
         .attr('stroke-width', 1)
@@ -95,11 +120,11 @@
       text1.append('tspan')
         .attr('x', 0)
         .attr('dy', 25)
-        .text('伊朗開始成為')
-      text1.append('tspan')
-        .attr('x', 0)
-        .attr('dy', 25)
-        .text('傳染節點')
+        .text('伊朗開始成為傳染節點')
+      // text1.append('tspan')
+      //   .attr('x', 0)
+      //   .attr('dy', 25)
+      //   .text('傳染節點')
 
       wrapper.append('line')
         .attr('stroke', '#d8d8d8')
@@ -115,7 +140,7 @@
         .attr('stroke-width', 1)
         .attr('x1', 5)
         .attr('y1', -5)
-        .attr('x2', 30 + 62)
+        .attr('x2', 30 + 62 - 9)
         .attr('y2', -5)
       const text2 = textWrapper2.append('text')
         .attr('text-anchor', 'end')
@@ -125,11 +150,11 @@
       text2.append('tspan')
         .attr('x', 0)
         .attr('dy', 25)
-        .text('義大利開始成為')
-      text2.append('tspan')
-        .attr('x', 0)
-        .attr('dy', 25)
-        .text('傳染節點')
+        .text('義大利開始成為傳染節點')
+      // text2.append('tspan')
+      //   .attr('x', 0)
+      //   .attr('dy', 25)
+      //   .text('傳染節點')
 
       wrapper.append('line')
         .attr('stroke', '#d8d8d8')
@@ -145,7 +170,7 @@
         .attr('stroke-width', 1)
         .attr('x1', 5)
         .attr('y1', -5)
-        .attr('x2', 30 + 62 * 2)
+        .attr('x2', 30 + 62 * 2 - 19)
         .attr('y2', -5)
       const text3 = textWrapper3.append('text')
         .attr('text-anchor', 'end')
@@ -155,11 +180,11 @@
       text3.append('tspan')
         .attr('x', 0)
         .attr('dy', 25)
-        .text('美國出現')
-      text3.append('tspan')
-        .attr('x', 0)
-        .attr('dy', 25)
-        .text('第一起死亡案例')
+        .text('美國出現第一起死亡案例')
+      // text3.append('tspan')
+      //   .attr('x', 0)
+      //   .attr('dy', 25)
+      //   .text('第一起死亡案例')
     }
   }
 </script>

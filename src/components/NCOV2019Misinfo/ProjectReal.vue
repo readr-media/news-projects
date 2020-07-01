@@ -56,7 +56,7 @@
       </article>
     </section>
     <section class="long-chart long-chart-group-by-country">
-      <template v-if="showLongCharts">
+      <template v-if="showLongChartsCountry">
         <template v-if="$store.state.viewport[0] >= 768">
           <ChartGroupByCountry class="long-chart__chart" />
         </template>
@@ -71,7 +71,7 @@
       </article>
     </section>
     <section class="long-chart long-chart-group-by-platform">
-      <template v-if="showLongCharts">
+      <template v-if="showLongChartsPlatform">
         <template v-if="$store.state.viewport[0] >= 768">
           <ChartGroupByPlatform class="long-chart__chart" />
         </template>
@@ -86,7 +86,7 @@
       </article>
     </section>
     <section class="long-chart long-chart-group-by-topic">
-      <template v-if="showLongCharts">
+      <template v-if="showLongChartsTopic">
         <template v-if="$store.state.viewport[0] >= 768">
           <ChartGroupByTopic class="long-chart__chart" />
         </template>
@@ -133,7 +133,9 @@
     data() {
       return {
         chartIndexScrolly: 0,
-        showLongCharts: false,
+        showLongChartsCountry: false,
+        showLongChartsPlatform: false,
+        showLongChartsTopic: false,
         shouldFixLongChartArticleCountry: false,
         shouldFixLongChartArticlePlatform: false,
         shouldFixLongChartArticleTopic: false
@@ -157,15 +159,10 @@
           offset: 1,
         })
         .onStepEnter((response) => {
-          if (response.direction === 'down') {
-            this.showLongCharts = true
-          }
+          this.showLongChartsCountry = true
           this.shouldFixLongChartArticleCountry = true
         })
         .onStepExit((response) => {
-          if (response.direction === 'up') {
-            this.showLongCharts = false
-          }
           this.shouldFixLongChartArticleCountry = false
         })
       window.addEventListener('resize', scrollerCountry.resize)
@@ -176,6 +173,7 @@
           offset: 1,
         })
         .onStepEnter((response) => {
+          this.showLongChartsPlatform = true
           this.shouldFixLongChartArticlePlatform = true
         })
         .onStepExit((response) => {
@@ -189,6 +187,7 @@
           offset: 1,
         })
         .onStepEnter((response) => {
+          this.showLongChartsTopic = true
           this.shouldFixLongChartArticleTopic = true
         })
         .onStepExit((response) => {

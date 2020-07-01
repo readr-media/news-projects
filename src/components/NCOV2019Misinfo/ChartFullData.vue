@@ -134,7 +134,11 @@
           //   ])
         )
         .call(g => g.select('.domain').remove())
-        .call(g => g.selectAll('line').remove())
+        .call(g => g
+          .selectAll('line')
+          // .style('fill', 'red')
+          .remove()
+        )
         .call(g => g.selectAll('text').style('font-size', '16px'))
       wrapper.append('g').call(xAxis)
 
