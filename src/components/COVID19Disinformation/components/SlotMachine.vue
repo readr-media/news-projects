@@ -11,10 +11,7 @@
         >
         <img src="/proj-assets/covid19-disinformation/slot-machine.png">
       </picture>
-      <div
-        v-show="isPlayed"
-        class="slot-machine__content"
-      >
+      <div class="slot-machine__content">
         <div class="slot">
           <div
             :class="[{transitioning }, `result-${column1}`]"
@@ -60,6 +57,7 @@
         class="slot-machine__btn"
         @click="handleClick"
       />
+      <ShakeArrow class="slot-machine__arrow" />
     </div>
   </div>
 </template>
@@ -71,9 +69,13 @@ import {
   SLOT_MACHINE_COLUMN_2_TW,
   SLOT_MACHINE_COLUMN_3_TW
 } from '../const.js'
+import ShakeArrow from './ShakeArrow.vue'
 
 export default {
   name: 'SlotMachine',
+  components: {
+    ShakeArrow
+  },
   props: {
     column1: {
       type: Number,
@@ -203,13 +205,21 @@ export default {
     cursor pointer
     @media (min-width: 1024px)
       transform translateY(-55px)
+  &__arrow
+    margin 50px auto 0
+    visibility hidden
+    @media (min-width: 1024px)
+      display none
   &.isPlayed
     .slot-machine__btn
       background-image url(/proj-assets/covid19-disinformation/replay.svg)
+    .slot-machine__arrow
+      visibility visible
   &.transitioning
     .slot-machine__btn
       background-image url(/proj-assets/covid19-disinformation/playing.svg) !important
-
+    .slot-machine__arrow
+      visibility hidden !important
 .result-0
   transform translateX(0)
   @media (min-width: 1024px)
@@ -273,7 +283,7 @@ export default {
 .result-15
   transform translateX(-3150px)
   @media (min-width: 1024px)
-    transform translateY(-2000px)
+    transform translateY(-3000px)
 .result-16
   transform translateX(-3360px)
   @media (min-width: 1024px)

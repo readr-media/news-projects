@@ -33,9 +33,9 @@ export default {
   },
   data () {
     return {
-      column1: undefined,
-      column2: undefined,
-      column3: undefined,
+      column1: 12,
+      column2: 15,
+      column3: 10,
       isPlayed: false,
       timer: undefined,
       transitioning: false
@@ -66,6 +66,7 @@ export default {
       this.column1 = Math.floor(Math.random() * 13)
       this.column2 = Math.floor(Math.random() * 17)
       this.column3 = Math.floor(Math.random() * 14)
+      window.ga && window.ga('send', 'event', 'projects', 'click', '拉霸鈕')
     }
   }
 }

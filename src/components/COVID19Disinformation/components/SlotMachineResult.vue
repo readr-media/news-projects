@@ -23,6 +23,7 @@
           :href="SLOT_MACHINE_RESULTS_EXIST_LINk[result]"
           target="_blank"
           rel="noopener noreferrer"
+          @click="sendGAEvent('點我看查核報告')"
           v-text="$t('COVID19_D.GAME_RESULT_EXIST_LINK')" />{{ $t('COVID19_D.GAME_RESULT_EXIST_TEXT_2') }}</p>
       </template>
       <template v-else>
@@ -34,6 +35,7 @@
         class="result__share"
         target="_blank"
         rel="noopener noreferrer"
+        @click="sendGAEvent('分享我製造的假訊息')"
         v-html="$t('COVID19_D.GAME_RESULT_SHARE')"
       />
     </div>
@@ -95,6 +97,11 @@ export default {
     },
     textColumn3 () {
       return SLOT_MACHINE_COLUMN_3_TW[this.column3]
+    }
+  },
+  methods: {
+    sendGAEvent (label) {
+      window.ga && window.ga('send', 'event', 'projects', 'click', label)
     }
   }
 }
