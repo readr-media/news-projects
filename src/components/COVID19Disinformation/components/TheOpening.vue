@@ -1,9 +1,15 @@
 <template>
   <section class="covid-opening">
-    <h1>{{ $t('COVID19_D.title') }}</h1>
-    <p class="covid-opening__brief">
-      武漢肺炎在國外疫情仍在延燒，READr 探索了從一月至今在全世界傳播的假訊息。際價的代節究果機文車可未年利助都會點年發格這不文等背樂教父的體師排極才少子人全？去候然近……科書品生向投的神單出態接門只知利因：打隨全：樂你好生品時不例本生溫去人達新可大油是年醫用提選真童被在期會之，技其做業來語山的和家見灣一體國手一論。
-    </p>
+    <img
+      class="covid-opening__img"
+      src="/proj-assets/covid19-disinformation/title-tw.png"
+      :alt="$t('COVID19_D.TITLE')"
+    >
+    <h1 v-text="$t('COVID19_D.TITLE')" />
+    <p
+      class="covid-opening__brief"
+      v-text="$t('COVID19_D.DESCRIPTION')"
+    />
     <div class="covid-opening__arrow" />
   </section>
 </template>
@@ -16,16 +22,29 @@ export default {
 
 <style lang="stylus" scoped>
 .covid-opening
-  padding 81px 0 39px
+  display flex
+  flex-direction column
+  justify-content center
+  min-height calc(100vh - 40px)
   color #ffffff
   background-color #333333
+  background-image url(/proj-assets/covid19-disinformation/bg.png)
+  background-size cover
+  background-position center right
+  background-repeat no-repeat
+  @media (min-width: 1024px)
+    min-height calc(100vh - 50px)
   > *
     width 280px
     margin 0 auto
     @media (min-width: 768px)
       width 495px
   h1
+    display none
+  &__img
+    display block
     @media (min-width: 1200px)
+      width 600px
       transform translateX(-40%)
   &__brief
     margin 30px auto 0

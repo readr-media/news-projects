@@ -4,8 +4,18 @@
       :column1="column1"
       :column2="column2"
       :column3="column3"
+      :isPlayed="isPlayed"
       :transitioning="transitioning"
       @play="generateResult"
+    />
+    <SlotMachineResult
+      :column1="column1"
+      :column2="column2"
+      :column3="column3"
+      :isExist="isExist"
+      :isPlayed="isPlayed"
+      :result="result"
+      :transitioning="transitioning"
     />
   </section>
 </template>
@@ -13,17 +23,20 @@
 <script>
 import { SLOT_MACHINE_RESULTS_EXIST } from '../const.js'
 import SlotMachine from './SlotMachine.vue'
+import SlotMachineResult from './SlotMachineResult.vue'
 
 export default {
   name: 'TheGame',
   components: {
-    SlotMachine
+    SlotMachine,
+    SlotMachineResult
   },
   data () {
     return {
       column1: undefined,
       column2: undefined,
       column3: undefined,
+      isPlayed: false,
       timer: undefined,
       transitioning: false
     }
@@ -48,6 +61,7 @@ export default {
   },
   methods: {
     generateResult () {
+      this.isPlayed = true
       this.transitioning = true
       this.column1 = Math.floor(Math.random() * 13)
       this.column2 = Math.floor(Math.random() * 17)
@@ -59,9 +73,11 @@ export default {
 
 <style lang="stylus" scoped>
 .covid-game
-  padding 50px 0
   background-color #333
   @media (min-width: 1024px)
-    min-height 80vh
-    padding 79px 0
+    min-height 100vh
+    background-image url(/proj-assets/covid19-disinformation/bg.png)
+    background-size cover
+    background-position top right
+    background-repeat no-repeat
 </style>
