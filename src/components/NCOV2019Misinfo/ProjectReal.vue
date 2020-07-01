@@ -102,10 +102,10 @@
     </section>
     <section class="scrolly">
       <figure class="scrolly__sticky-chart sticky-chart">
-        <template v-if="$store.state.viewport[0] >= 768">
-        </template>
-        <template v-else>
-        </template>
+<!--        <template v-if="$store.state.viewport[0] >= 768">-->
+<!--        </template>-->
+<!--        <template v-else>-->
+<!--        </template>-->
       </figure>
       <article class="scrolly__textboxes textboxes">
         <div
@@ -325,11 +325,11 @@
       margin: 0 200px 0 auto;
     }
 
-    .long-chart__textboxes	{
+    .long-chart__textboxes {
       width: 400px;
       right: 200px;
     }
-    .long-chart__textboxes.fix	{
+    .long-chart__textboxes.fix {
       right: 200px;
     }
   }
