@@ -39,7 +39,7 @@
           class="enter-view-step textboxes__textbox textboxes__textbox--scrolly"
           data-chart="2"
         >
-          <p>在二月時，主要的假訊息的主題跟「中國」有關。</p>
+          <p>從事實查核報告的數量變化可以觀察到，2 月初期有一波小高峰，這時因為疫情主要都在中國，各國主要的假訊息主題跟和「中國」有關。</p>
         </div>
         <div
           class="enter-view-step textboxes__textbox textboxes__textbox--scrolly"
@@ -102,10 +102,18 @@
     </section>
     <section class="scrolly">
       <figure class="scrolly__sticky-chart sticky-chart">
-<!--        <template v-if="$store.state.viewport[0] >= 768">-->
-<!--        </template>-->
-<!--        <template v-else>-->
-<!--        </template>-->
+        <template v-if="$store.state.viewport[0] >= 768">
+          <br>
+          <br>
+          <br>
+          <p>pending</p>
+        </template>
+        <template v-else>
+          <br>
+          <br>
+          <br>
+          <p>pending</p>
+        </template>
       </figure>
       <article class="scrolly__textboxes textboxes">
         <div
@@ -126,7 +134,135 @@
         </div>
       </article>
     </section>
-    <Footer />
+    <section class="text-only-section">
+      <p>除了主題以外，READr 也嘗試探索這些假訊息的影響力。根據事實查核組織的註記，在這些報告中，有 782 篇是在 Twitter 上散佈的假訊息。我們人工抓出報告中假訊息的原文（由於有些事實查核報吿沒有標記原文、有些原文在 Twitter 上已經佚失，共找到 351 篇，佔整體 45%），並在 Twitter 以及政治大學鄭宇君團隊提供的 Twitter 封存推文資料中查詢它們的影響力。發現了不太一樣的趨勢。</p>
+    </section>
+    <section class="scrolly">
+      <figure class="scrolly__sticky-chart sticky-chart">
+        <template v-if="$store.state.viewport[0] >= 768">
+          <img
+            v-show="chartIndexScrollyRetweet === 1"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-1-web.png"
+            alt="retweet-chart-1"
+          >
+          <img
+            v-show="chartIndexScrollyRetweet === 2"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-2-web.png"
+            alt="retweet-chart-2"
+          >
+          <img
+            v-show="chartIndexScrollyRetweet === 3"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-3-web.png"
+            alt="retweet-chart-3"
+          >
+          <img
+            v-show="chartIndexScrollyRetweet === 4"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-4-web.png"
+            alt="retweet-chart-4"
+          >
+          <img
+            v-show="chartIndexScrollyRetweet === 5"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-5-web.png"
+            alt="retweet-chart-5"
+          >
+          <img
+            v-show="chartIndexScrollyRetweet === 6"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-6-web.png"
+            alt="retweet-chart-6"
+          >
+        </template>
+        <template v-else>
+          <img
+            v-show="chartIndexScrollyRetweet === 1"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-1-mobile.png"
+            alt="retweet-chart-1"
+          >
+          <img
+            v-show="chartIndexScrollyRetweet === 2"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-2-mobile.png"
+            alt="retweet-chart-2"
+          >
+          <img
+            v-show="chartIndexScrollyRetweet === 3"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-3-mobile.png"
+            alt="retweet-chart-3"
+          >
+          <img
+            v-show="chartIndexScrollyRetweet === 4"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-4-mobile.png"
+            alt="retweet-chart-4"
+          >
+          <img
+            v-show="chartIndexScrollyRetweet === 5"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-5-mobile.png"
+            alt="retweet-chart-5"
+          >
+          <img
+            v-show="chartIndexScrollyRetweet === 6"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-6-mobile.png"
+            alt="retweet-chart-6"
+          >
+        </template>
+      </figure>
+      <article class="scrolly__textboxes textboxes">
+        <div
+          class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="1"
+        >
+          <p>從轉推數可以看到，影響力最大的假訊息分類是「因為疫情衍生出的行為」，但從事實查核報告的統計中，此類型假訊息的數量只佔整體 8%。</p>
+        </div>
+        <div
+          class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="2"
+        >
+          <p>轉推數第一名、第二名的假訊息都是有關大自然因為人類減少活動而恢復。</p>
+          <br>
+          <p>被轉推了超過 30 萬次的這兩則推文是關於一組海豚與天鵝現身義大利威尼斯水道的照片。但事實上海豚沒有現身在那裡，天鵝也不是因為武漢肺炎封城後才出現，這是一種誤導的假訊息。</p>
+          <br>
+          <p>在疾病大流行的氛圍中，這類的訊息是一種「好消息」，但追根究底它們還是假的。</p>
+        </div>
+        <div
+          class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="3"
+        >
+          <p>這類的假訊息除了大自然恢復平靜以外，也包含了政治人物的說法或是政治鬥爭。由於這些人本身在推特上就有很多追蹤者，所說的話自然也容易被關注。</p>
+          <br>
+          <p>轉推數第三名的假訊息來自美國總統川普——但需要注意的是，讓它成為假訊息的原因是後續的效應——川普在推特上不斷稱讚奎寧的療效，加上媒體錯誤報導推波助瀾，讓害怕染疫的人在沒有醫囑的狀況下自行服用，造成危險。</p>
+          <br>
+          <p>前副總統喬・拜登的推文也在榜上。他指出對武漢肺炎提出警告的疾管署官員不再被重用，但被華盛頓郵報查核所言並非全部屬實。</p>
+        </div>
+        <div
+          class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="4"
+        >
+          <p>「病毒在社區中的傳播」、「醫學相關、疾病的影響」這兩個分類，在查核報告的統計中數量是最多的。</p>
+          <br>
+          <p>從轉推數來看，「醫學相關」的假訊息的影響力似乎大過於「病毒在社區中的傳播」，但那是因為前 2 則轉推數最高的都與川普稱讚奎寧的療效引發的效應有關。</p>
+          <br>
+          <p>若撇除這 2 則，兩個分類的影響力差不多。而在推特上關於「病毒在社區中的傳播」、影響力又較大的假訊息相對比較多。</p>
+        </div>
+        <div
+          class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="5"
+        >
+          <p>都是影片：一位醫生嘗試想要擁抱據說感染了武漢肺炎而被隔離的嬰兒的影片，在推特上瘋傳；義大利人於隔離期間在自己的陽台上唱歌跳舞；違反檢疫規定的義大利人被警察當場逮捕；居住在中國的黑人被亞洲人圍毆攻擊⋯⋯</p>
+          <br>
+          <p>被感人的、開心的、可怕的，都是會令人感到「共鳴」的元素，讓人想要分享。這是假訊息傳播的要件之一。</p>
+        </div>
+        <div
+          class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="6"
+        >
+          <p>「醫學相關」的內容中，除了奎寧以外，「布洛芬」會對患者造成負面影響的訊息也在推特上傳佈。</p>
+          <br>
+          <p>從這些內容中可以看見，武漢肺炎沒有特效藥的恐懼還在驅動著人們找尋解答。</p>
+        </div>
+      </article>
+    </section>
+    <section class="text-only-section">
+      <p>武漢肺炎疫情仍在全球延燒，但除了病毒之外，還需要注意的是與病毒一樣會奪取人們性命、甚至跑得比病毒還快的假訊息。關於這些假訊息的影響力，請見 READr 製作的另一篇報導：武漢肺炎——跑得比病毒還快的假訊息。</p>
+    </section>
+    <Footer style="margin-top: 50px" />
   </div>
 </template>
 
@@ -163,6 +299,7 @@
       return {
         chartIndexScrolly: 0,
         chartIndexScrollyTopics: 0,
+        chartIndexScrollyRetweet: 0,
         showLongChartsCountry: false,
         showLongChartsPlatform: false,
         showLongChartsTopic: false,
@@ -188,6 +325,15 @@
         },
         exit: (el) => {
           this.chartIndexScrollyTopics = parseInt(el.dataset.chart) - 1
+        },
+      })
+      enterView({
+        selector: '.enter-view-step-retweet',
+        enter: (el) => {
+          this.chartIndexScrollyRetweet = parseInt(el.dataset.chart)
+        },
+        exit: (el) => {
+          this.chartIndexScrollyRetweet = parseInt(el.dataset.chart) - 1
         },
       })
 
@@ -315,6 +461,30 @@
     right: 10px;
   }
 
+  .text-only-section {
+    max-width: 820px;
+    font-size: 16px;
+    line-height: 1.75;
+    text-align: justify;
+    color: #4a4a4a;
+    margin: 0 20px;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
+  img {
+    display: block;
+    height: calc(100% - 50px);
+    object-fit: contain;
+    margin: 0 auto;
+    padding-top: 50px;
+  }
+
   @media (min-width: 768px) {
     .mobile-only {
       display: none;
@@ -331,6 +501,18 @@
     }
     .long-chart__textboxes.fix {
       right: 200px;
+    }
+
+    .text-only-section {
+      margin: 0 auto;
+    }
+
+    img {
+      display: block;
+      height: calc(100% - 50px);
+      object-fit: contain;
+      margin: 0 auto;
+      padding-top: 50px;
     }
   }
 </style>

@@ -6,10 +6,10 @@
         <span>設計：陳怡蒨</span>
         <span>工程：熊凱文</span>
       </p>
-      <p>資料：李又如、簡信昌、吳冠賢</p>
+      <p>資料：李又如、簡信昌、吳冠賢、政治大學鄭宇君團隊</p>
     </div>
     <TheDonateFooter class="footer__item" />
-    <TheNewsletterSubscribe class="footer__item" />
+    <TheNewsletterSubscribe class="footer__item" style="margin-left: 20px; margin-right: 20px" />
   </footer>
 </template>
 
@@ -41,9 +41,11 @@ footer {
   align-items: center;
   color: #9f9f9f;
   font-size: 15px;
+  margin: 0 20px;
 }
 .credits-wrapper p {
   margin: 5px 0;
+  line-height: 1.75;
 }
 .credits-wrapper span + span {
   margin: 0 0 0 10px;
