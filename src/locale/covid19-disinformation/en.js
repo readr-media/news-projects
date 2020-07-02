@@ -4,8 +4,8 @@ export const COVID19_D = {
   SOURCE: 'Source:',
   ANNOTATION: 'Note:',
   CHAPTER_1: {
-    P_1: 'Back to the origin of Severe Pneumonia with Novel Pathogens (commonly known as COVID-19), the key for the public to learn about the virus comes from a piece of “fake news”, according to the PRC official.',
-    P_2: 'In December 2019, Chinese doctor Li Wenliang sent a message in his medical school group, mentioning that 7 patients who had been to Huanan seafood market got a SARS-symptoms-related disease. The patients were put into isolation rooms in the hospital where he worked. In January 2020, after the message spread through the internet, the message was identified as “fake news” by the government. As we all know what happened thereafter, the virus mentioned in this “fake news” spreads worldwide, and has taken more than five hundred thousand lives.',
+    P_1: 'Back to the origin of Severe Pneumonia with Novel Pathogens (commonly known as COVID-19), the key for the public to learn about the virus comes from a piece of disinformation, according to the PRC official.',
+    P_2: 'In December 2019, Chinese doctor Li Wenliang sent a message in his medical school group, mentioning that 7 patients who had been to Huanan seafood market got a SARS-symptoms-related disease. The patients were put into isolation rooms in the hospital where he worked. In January 2020, after the message spread through the internet, the message was identified as disinformation by the government. As we all know what happened thereafter, the virus mentioned in this disinformation spreads worldwide, and has taken more than five hundred thousand lives.',
     P_3: {
       TEXT_1: 'In the past six months, besides the medical staff combating the virus on the front line, a group of people have been fighting the real “disinformation” spreading worldwide like the virus. “At that time (late January), the spread of the virus was restricted to China, but already causing rampant disinformation globally. It is the largest collaborative project ever launched in the fact-checking world, ”Harrison Mantas, reporter from ICFN, ',
       LINK: 'stated',
@@ -65,7 +65,7 @@ export const COVID19_D = {
       LINK: 'video',
       BOLD_2: ' of “Muslim men swaying and sneezing in unison in a mosque” is shared with the claim that the Muslims are sneezing deliberately to spread virus into the air, and they will come close and make people infected: it is their new Jihad.'
     },
-    P_6: 'Lots of fake news accusing Muslims deliberately spreading COVID-19 were going viral from April.',
+    P_6: 'Lots of disinformation accusing Muslims deliberately spreading COVID-19 were going viral from April.',
     P_7: {
       TEXT_1: 'Based on ',
       LINK: 'a report from AFP',
@@ -121,7 +121,7 @@ export const COVID19_D = {
     P_2: 'Angie Holan, the editor-in-chief of PolitiFact, shared with us: “In our fact-checking work, PolitiFact comes across conspiracy theories regularly. They seem to have become a part of the American disinformation landscape. We\'ve seen many conspiracies before COVID19, and I expect to see more afterward.” She was not sure why there were so many conspiracy theories in the US, and said, “We know we have been targeted to some extent by outside governments, but we also seem susceptible to home-grown conspiracy theories as well.”',
     P_3: 'Conspiracy directly points out the origins of the epidemic. With the evolution of the epidemic, “the origins of the virus” begin to diversify:',
     P_4: 'It is worth noting that, compared with other types of disinformation, the conspiracy theory disinformation is not diverse, and most of them center around these topics. Even if they have been checked as a mistake, disinformation on the same topic have spread to different countries along with the epidemic.',
-    P_5: 'For example, from January 29, the day that the IFCN CoronaVirusFacts Alliance Database was launched, disinformation like “Bill Gates is behind COVID-19”, “5G will spread COVID-19” had appeared. As we can see in the data, similar disinformation ㄋ still there until May.',
+    P_5: 'For example, from January 29, the day that the IFCN CoronaVirusFacts Alliance Database was launched, disinformation like “Bill Gates is behind COVID-19”, “5G will spread COVID-19” had appeared. As we can see in the data, similar disinformation still there until May.',
     P_6: 'Summer Chen also mentioned: among all conspiracy theories, disinformation of “origins of virus” was commonly spread on Taiwanese social media, and it became a popular topic of late stage fact-check. According to the research by Doublethink Lab, it was the most often spread message apart from “masks”.',
     P_7: 'From Summer Chen’s observation, disinformation after March centered around 4 topics: the virus was man-made; the virus was made in lab; the virus was China’s bioweapon; the origin of the virus was either Wuhan or the US.',
     P_8: '“This type of disinformation is very tricky, because it is interspersed with scientific articles and seems to be confirmed by experts, but the cited research actually does not mention these things at all,” Chen indicated, “Or, disinformation will make use of language gaps, such as Japanese TV reports, US President Trump’s statement, Italian Minister of Health’s speech, etc.”',
