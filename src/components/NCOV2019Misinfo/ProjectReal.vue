@@ -39,7 +39,7 @@
           class="enter-view-step textboxes__textbox textboxes__textbox--scrolly"
           data-chart="2"
         >
-          <p>在二月時，主要的假訊息的主題跟「中國」有關。</p>
+          <p>從事實查核報告的數量變化可以觀察到，2 月初期有一波小高峰，這時因為疫情主要都在中國，各國主要的假訊息主題跟和「中國」有關。</p>
         </div>
         <div
           class="enter-view-step textboxes__textbox textboxes__textbox--scrolly"
@@ -125,6 +125,9 @@
           <p>「暴動」（riots）——英國倫敦因為食物不足引起了暴動，但事實上挪用了舊影片</p>
         </div>
       </article>
+    </section>
+    <section class="text-only-section">
+      <p>除了主題以外，READr 也嘗試探索這些假訊息的影響力。根據事實查核組織的註記，在這些報告中，有 782 篇是在 Twitter 上散佈的假訊息。我們人工抓出報告中假訊息的原文（由於有些事實查核報吿沒有標記原文、有些原文在 Twitter 上已經佚失，共找到 351 篇，佔整體 45%），並在 Twitter 以及政治大學鄭宇君團隊提供的 Twitter 封存推文資料中查詢它們的影響力。發現了不太一樣的趨勢。</p>
     </section>
     <Footer />
   </div>
@@ -315,6 +318,15 @@
     right: 10px;
   }
 
+  .text-only-section {
+    max-width: 820px;
+    font-size: 16px;
+    line-height: 1.75;
+    text-align: justify;
+    color: #4a4a4a;
+    margin: 0 20px;
+  }
+
   @media (min-width: 768px) {
     .mobile-only {
       display: none;
@@ -331,6 +343,10 @@
     }
     .long-chart__textboxes.fix {
       right: 200px;
+    }
+
+    .text-only-section {
+      margin: 0 auto;
     }
   }
 </style>
