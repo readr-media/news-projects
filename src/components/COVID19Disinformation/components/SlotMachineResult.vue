@@ -46,8 +46,11 @@
 
 import {
   SLOT_MACHINE_COLUMN_1_TW,
+  SLOT_MACHINE_COLUMN_1_EN,
   SLOT_MACHINE_COLUMN_2_TW,
+  SLOT_MACHINE_COLUMN_2_EN,
   SLOT_MACHINE_COLUMN_3_TW,
+  SLOT_MACHINE_COLUMN_3_EN,
   SLOT_MACHINE_RESULTS_EXIST_LINk
 } from '../const.js'
 
@@ -90,13 +93,19 @@ export default {
   },
   computed: {
     textColumn1 () {
-      return SLOT_MACHINE_COLUMN_1_TW[this.column1]
+      return this.$route.params.params === 'en'
+        ? SLOT_MACHINE_COLUMN_1_EN[this.column1]
+        : SLOT_MACHINE_COLUMN_1_TW[this.column1]
     },
     textColumn2 () {
-      return SLOT_MACHINE_COLUMN_2_TW[this.column2]
+      return this.$route.params.params === 'en'
+        ? SLOT_MACHINE_COLUMN_2_EN[this.column2]
+        : SLOT_MACHINE_COLUMN_2_TW[this.column2]
     },
     textColumn3 () {
-      return SLOT_MACHINE_COLUMN_3_TW[this.column3]
+      return this.$route.params.params === 'en'
+        ? SLOT_MACHINE_COLUMN_3_EN[this.column3]
+        : SLOT_MACHINE_COLUMN_3_TW[this.column3]
     }
   },
   methods: {

@@ -1,6 +1,6 @@
 <template>
-  <div class="covid19-disinformation">
-    <TheOpening />
+  <div :class="[ $i18n.locale ]" class="covid19-disinformation">
+    <TheOpening :locale="locale" />
     <TheGame />
     <TheArticle />
     <TheCredit />
@@ -49,11 +49,19 @@ export default {
       gaElements: []
     }
   },
-  // created () {
-  //   if (this.$route.params.params === 'en') {
-  //     this.$i18n.locale = 'en'
-  //   }
-  // },
+  computed: {
+    locale () {
+      if (this.$route.params.params === 'en') {
+        return 'en'
+      }
+      return 'tw'
+    }
+  },
+  created () {
+    if (this.$route.params.params === 'en') {
+      this.$i18n.locale = 'en'
+    }
+  },
   mounted () {
     this.gaElements = [
       ...document.querySelectorAll('.covid-game'),

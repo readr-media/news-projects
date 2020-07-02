@@ -15,6 +15,22 @@ export const SLOT_MACHINE_COLUMN_1_TW = [
   '政府'
 ]
 
+export const SLOT_MACHINE_COLUMN_1_EN = [
+  'China',
+  'Humans',
+  'Bill Gates',
+  'Chinese Spy',
+  'Havard Professor',
+  'Vladimir Putin, President of Russia',
+  'Donald Trump, President of the United States',
+  'Doctors',
+  'Virus expert',
+  'Researchers',
+  'The media',
+  'My uncle who is a doctor in China',
+  'The government'
+]
+
 // 17
 export const SLOT_MACHINE_COLUMN_2_TW = [
   '在實驗室裡創造新型冠狀病毒',
@@ -36,6 +52,26 @@ export const SLOT_MACHINE_COLUMN_2_TW = [
   '實施封城和宵禁'
 ]
 
+export const SLOT_MACHINE_COLUMN_2_EN = [
+  'created COVID-19 in a lab',
+  'created COVID-19',
+  'stole COVID-19 from a lab in Canada',
+  'who sold COVID-19 to China',
+  'released hundreds of lions on the streets',
+  'got a Muslim priest to put a spell on him',
+  'found a solution',
+  'said drinking water every 15 minutes',
+  'found black people',
+  'found eating bananas',
+  'said drinking alcohol',
+  'found hot lemon water',
+  'is killing tens of thousands of bears for their biles',
+  'said having sex everyday',
+  'said soaking up the sun',
+  'will send helicopters spraying disinfectant',
+  'implemented lockdowns and curfews'
+]
+
 // 14
 export const SLOT_MACHINE_COLUMN_3_TW = [
   '來作為生物武器',
@@ -52,6 +88,23 @@ export const SLOT_MACHINE_COLUMN_3_TW = [
   '讓北極臭氧層的大洞縮小了',
   '讓大批動物來到街道上',
   '讓大批鳥類回到森林'
+]
+
+export const SLOT_MACHINE_COLUMN_3_EN = [
+  'for a biological weapon.',
+  'to ruin the Chinese economy.',
+  'to reduce the world population.',
+  'and spread it in Wuhan, China.',
+  'to regain its economic status in the world.',
+  'was arrested.',
+  'to ensure people stay indoors.',
+  'can prevent coronavirus infection.',
+  'to cure COVID-19.',
+  'are immune to COVID-19.',
+  'to kill COVID-19.',
+  'to close the Arctic ozone hole.',
+  'to let a large number of animals come back to streets.',
+  'to let a big amount of birds return to forests.'
 ]
 
 export const SLOT_MACHINE_RESULTS_EXIST = [

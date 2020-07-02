@@ -20,10 +20,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-01-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-01-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-01.png"
+          :src="`/proj-assets/covid19-disinformation/chart-01${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_1.TITLE')"
         >
       </picture>
@@ -46,10 +46,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-02-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-02-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-02.png"
+          :src="`/proj-assets/covid19-disinformation/chart-02${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_2.TITLE')"
         >
       </picture>
@@ -72,10 +72,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-03-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-03-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-03.png"
+          :src="`/proj-assets/covid19-disinformation/chart-03${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_3.TITLE')"
         >
       </picture>
@@ -113,10 +113,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-04-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-04-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-04.png"
+          :src="`/proj-assets/covid19-disinformation/chart-04${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_4.TITLE')"
         >
       </picture>
@@ -138,10 +138,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-05-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-05-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-05.png"
+          :src="`/proj-assets/covid19-disinformation/chart-05${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_5.TITLE')"
         >
       </picture>
@@ -213,10 +213,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-06-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-06-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-06.png"
+          :src="`/proj-assets/covid19-disinformation/chart-06${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_6.TITLE')"
         >
       </picture>
@@ -239,10 +239,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-07-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-07-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-07.png"
+          :src="`/proj-assets/covid19-disinformation/chart-07${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_7.TITLE')"
         >
       </picture>
@@ -265,10 +265,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-08-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-08-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-08.png"
+          :src="`/proj-assets/covid19-disinformation/chart-08${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_8.TITLE')"
         >
       </picture>
@@ -296,10 +296,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-09-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-09-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-09.png"
+          :src="`/proj-assets/covid19-disinformation/chart-09${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_9.TITLE')"
         >
       </picture>
@@ -341,10 +341,10 @@
       <picture class="chart-10-img">
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-10-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-10-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-10.png"
+          :src="`/proj-assets/covid19-disinformation/chart-10${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_10.TITLE')"
         >
       </picture>
@@ -458,7 +458,12 @@
 <script>
 
 export default {
-  name: 'TheArticle'
+  name: 'TheArticle',
+  computed: {
+    isLocaleEN () {
+      return this.$route.params.params === 'en'
+    }
+  }
 }
 </script>
 

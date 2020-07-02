@@ -1,8 +1,11 @@
 <template>
   <section class="covid-credit">
-    <p><span>記者：李又如</span></p>
-    <p><span>設計：陳怡蒨</span><span>工程：HY Tan</span></p>
-    <p><span>資料：李又如、簡信昌、吳冠賢、<br>政治大學鄭宇君團隊</span></p>
+    <p><span>{{ $t('COVID19_D.CREDIT_J') }}{{ $t('COVID19_D.CREDIT_J_1') }}</span></p>
+    <p>
+      <span>{{ $t('COVID19_D.CREDIT_D') }}{{ $t('COVID19_D.CREDIT_D_1') }}</span>
+      <span>{{ $t('COVID19_D.CREDIT_E') }}HY Tan</span>
+    </p>
+    <p><span>{{ $t('COVID19_D.CREDIT_DA') }}{{ $t('COVID19_D.CREDIT_DA_1') }}{{ $t('COVID19_D.CREDIT_SEPARATOR') }}{{ $t('COVID19_D.CREDIT_DA_2') }}{{ $t('COVID19_D.CREDIT_SEPARATOR') }}{{ $t('COVID19_D.CREDIT_DA_3') }}{{ $t('COVID19_D.CREDIT_SEPARATOR') }}<br>{{ $t('COVID19_D.CREDIT_DA_4') }}</span></p>
   </section>
 </template>
 
@@ -26,4 +29,8 @@ export default {
   span
     + span
       margin-left 1em
+
+.covid19-disinformation.en
+  .covid-credit
+    font-size 13px
 </style>
