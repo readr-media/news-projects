@@ -7,9 +7,9 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/slot-machine-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/slot-machine-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
-        <img src="/proj-assets/covid19-disinformation/slot-machine.png">
+        <img :src="`/proj-assets/covid19-disinformation/slot-machine${isLocaleEN ? '-en' : ''}.png`">
       </picture>
       <div class="slot-machine__content">
         <div class="slot">
@@ -18,7 +18,7 @@
             class="scoll-container column1"
           >
             <div
-              v-for="item in SLOT_MACHINE_COLUMN_1_TW"
+              v-for="item in column1Data"
               :key="item"
               class="option"
               v-text="item"
@@ -31,7 +31,7 @@
             class="scoll-container column2"
           >
             <div
-              v-for="item in SLOT_MACHINE_COLUMN_2_TW"
+              v-for="item in column2Data"
               :key="item"
               class="option"
               v-text="item"
@@ -44,7 +44,7 @@
             class="scoll-container column3"
           >
             <div
-              v-for="item in SLOT_MACHINE_COLUMN_3_TW"
+              v-for="item in column3Data"
               :key="item"
               class="option"
               v-text="item"
@@ -66,8 +66,11 @@
 
 import {
   SLOT_MACHINE_COLUMN_1_TW,
+  SLOT_MACHINE_COLUMN_1_EN,
   SLOT_MACHINE_COLUMN_2_TW,
-  SLOT_MACHINE_COLUMN_3_TW
+  SLOT_MACHINE_COLUMN_2_EN,
+  SLOT_MACHINE_COLUMN_3_TW,
+  SLOT_MACHINE_COLUMN_3_EN
 } from '../const.js'
 import ShakeArrow from './ShakeArrow.vue'
 
@@ -101,8 +104,31 @@ export default {
   data () {
     return {
       SLOT_MACHINE_COLUMN_1_TW,
+      SLOT_MACHINE_COLUMN_1_EN,
       SLOT_MACHINE_COLUMN_2_TW,
-      SLOT_MACHINE_COLUMN_3_TW
+      SLOT_MACHINE_COLUMN_2_EN,
+      SLOT_MACHINE_COLUMN_3_TW,
+      SLOT_MACHINE_COLUMN_3_EN
+    }
+  },
+  computed: {
+    isLocaleEN () {
+      return this.$route.params.params === 'en'
+    },
+    column1Data () {
+      return this.isLocaleEN
+        ? SLOT_MACHINE_COLUMN_1_EN
+        : SLOT_MACHINE_COLUMN_1_TW
+    },
+    column2Data () {
+      return this.isLocaleEN
+        ? SLOT_MACHINE_COLUMN_2_EN
+        : SLOT_MACHINE_COLUMN_2_TW
+    },
+    column3Data () {
+      return this.isLocaleEN
+        ? SLOT_MACHINE_COLUMN_3_EN
+        : SLOT_MACHINE_COLUMN_3_TW
     }
   },
   methods: {
@@ -220,6 +246,21 @@ export default {
       background-image url(/proj-assets/covid19-disinformation/playing.svg) !important
     .slot-machine__arrow
       visibility hidden !important
+
+.covid19-disinformation.en
+  .slot-machine__content
+    .scoll-container
+      .option
+        font-size 16px
+  .slot-machine__btn
+    background-image url(/proj-assets/covid19-disinformation/play-en.svg)
+  .slot-machine.isPlayed
+    .slot-machine__btn
+      background-image url(/proj-assets/covid19-disinformation/replay-en.svg)
+  .slot-machine.transitioning
+    .slot-machine__btn
+      background-image url(/proj-assets/covid19-disinformation/playing-en.svg) !important
+
 .result-0
   transform translateX(0)
   @media (min-width: 1024px)

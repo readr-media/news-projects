@@ -20,10 +20,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-01-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-01-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-01.png"
+          :src="`/proj-assets/covid19-disinformation/chart-01${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_1.TITLE')"
         >
       </picture>
@@ -33,7 +33,7 @@
           href="https://www.poynter.org/ifcn-covid-19-misinformation/"
           target="_blank"
           rel="noopener noreferrer"
-        >The CoronaVirusFacts Alliance Database</a>（2020-01-29~2020-05-12）
+        >The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12)
       </p>
       <p><strong v-text="$t('COVID19_D.ANNOTATION')" />{{ $t('COVID19_D.CHART_1.ANNOTATION') }}</p>
     </figure>
@@ -46,10 +46,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-02-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-02-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-02.png"
+          :src="`/proj-assets/covid19-disinformation/chart-02${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_2.TITLE')"
         >
       </picture>
@@ -59,7 +59,7 @@
           href="https://www.poynter.org/ifcn-covid-19-misinformation/"
           target="_blank"
           rel="noopener noreferrer"
-        >The CoronaVirusFacts Alliance Database</a>（2020-01-29~2020-05-12）
+        >The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12)
       </p>
       <p><strong v-text="$t('COVID19_D.ANNOTATION')" />{{ $t('COVID19_D.CHART_2.ANNOTATION') }}</p>
     </figure>
@@ -72,10 +72,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-03-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-03-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-03.png"
+          :src="`/proj-assets/covid19-disinformation/chart-03${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_3.TITLE')"
         >
       </picture>
@@ -85,10 +85,10 @@
           href="https://www.poynter.org/ifcn-covid-19-misinformation/"
           target="_blank"
           rel="noopener noreferrer"
-        >The CoronaVirusFacts Alliance Database</a>（2020-01-29~2020-05-12）、<a
+        >The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12)、<a
           href="https://reutersinstitute.politics.ox.ac.uk/types-sources-and-claims-covid-19-misinformation"
           target="_blank"
-          rel="noopener noreferrer">路透社新聞研究所</a>（2020-01-01~2020-03-30）
+          rel="noopener noreferrer">{{ $t('COVID19_D.CHART_3.SOURCE') }}</a> (2020-01-01~2020-03-30)
       </p>
       <p><strong v-text="$t('COVID19_D.ANNOTATION')" />{{ $t('COVID19_D.CHART_3.ANNOTATION') }}</p>
     </figure>
@@ -113,10 +113,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-04-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-04-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-04.png"
+          :src="`/proj-assets/covid19-disinformation/chart-04${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_4.TITLE')"
         >
       </picture>
@@ -126,7 +126,7 @@
           href="https://www.poynter.org/ifcn-covid-19-misinformation/"
           target="_blank"
           rel="noopener noreferrer"
-        >The CoronaVirusFacts Alliance Database</a>（2020-01-29~2020-05-12）、{{ $t('COVID19_D.CHART_4.SOURCE') }}</p>
+        >The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12)、<span v-html="$t('COVID19_D.CHART_4.SOURCE')" /></p>
       <p><strong v-text="$t('COVID19_D.ANNOTATION')" />{{ $t('COVID19_D.CHART_4.ANNOTATION') }}</p>
     </figure>
     <p>{{ $t('COVID19_D.CHAPTER_2.P_3') }}</p>
@@ -138,10 +138,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-05-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-05-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-05.png"
+          :src="`/proj-assets/covid19-disinformation/chart-05${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_5.TITLE')"
         >
       </picture>
@@ -151,7 +151,7 @@
           href="https://www.poynter.org/ifcn-covid-19-misinformation/"
           target="_blank"
           rel="noopener noreferrer"
-        >The CoronaVirusFacts Alliance Database</a>（2020-01-29~2020-05-12）、{{ $t('COVID19_D.CHART_5.SOURCE') }}</p>
+        >The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12)、<span v-html="$t('COVID19_D.CHART_5.SOURCE')" /></p>
       <p><strong v-text="$t('COVID19_D.ANNOTATION')" />{{ $t('COVID19_D.CHART_5.ANNOTATION') }}</p>
     </figure>
     <p>{{ $t('COVID19_D.CHAPTER_2.P_4') }}</p>
@@ -213,10 +213,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-06-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-06-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-06.png"
+          :src="`/proj-assets/covid19-disinformation/chart-06${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_6.TITLE')"
         >
       </picture>
@@ -226,7 +226,7 @@
           href="https://www.poynter.org/ifcn-covid-19-misinformation/"
           target="_blank"
           rel="noopener noreferrer"
-        >The CoronaVirusFacts Alliance Database</a>（2020-01-29~2020-05-12）、{{ $t('COVID19_D.CHART_6.SOURCE') }}</p>
+        >The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12)、<span v-html="$t('COVID19_D.CHART_6.SOURCE')" /></p>
       <p><strong v-text="$t('COVID19_D.ANNOTATION')" />{{ $t('COVID19_D.CHART_6.ANNOTATION') }}</p>
     </figure>
     <p>{{ $t('COVID19_D.CHAPTER_5.P_2') }}</p>
@@ -239,10 +239,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-07-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-07-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-07.png"
+          :src="`/proj-assets/covid19-disinformation/chart-07${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_7.TITLE')"
         >
       </picture>
@@ -252,7 +252,7 @@
           href="https://www.poynter.org/ifcn-covid-19-misinformation/"
           target="_blank"
           rel="noopener noreferrer"
-        >The CoronaVirusFacts Alliance Database</a>（2020-01-29~2020-05-12）、{{ $t('COVID19_D.CHART_7.SOURCE') }}</p>
+        >The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12)、{{ $t('COVID19_D.CHART_7.SOURCE') }}</p>
     </figure>
     <p>{{ $t('COVID19_D.CHAPTER_5.P_4') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_5.P_5') }}</p>
@@ -265,10 +265,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-08-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-08-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-08.png"
+          :src="`/proj-assets/covid19-disinformation/chart-08${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_8.TITLE')"
         >
       </picture>
@@ -296,10 +296,10 @@
       <picture>
         <source
           media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-09-desktop.png"
+          :srcset="`/proj-assets/covid19-disinformation/chart-09-desktop${isLocaleEN ? '-en' : ''}.png`"
         >
         <img
-          src="/proj-assets/covid19-disinformation/chart-09.png"
+          :src="`/proj-assets/covid19-disinformation/chart-09${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_9.TITLE')"
         >
       </picture>
@@ -308,7 +308,7 @@
           href="https://www.poynter.org/ifcn-covid-19-misinformation/"
           target="_blank"
           rel="noopener noreferrer"
-        >The CoronaVirusFacts Alliance Database</a>（2020-01-29~2020-05-12）
+        >The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12)
       </p>
       <p><strong v-text="$t('COVID19_D.ANNOTATION')" />{{ $t('COVID19_D.CHART_9.ANNOTATION') }}</p>
     </figure>
@@ -339,17 +339,13 @@
         v-text="$t('COVID19_D.CHART_10.TITLE')"
       />
       <picture class="chart-10-img">
-        <source
-          media="(min-width: 1024px)"
-          srcset="/proj-assets/covid19-disinformation/chart-10-desktop.png"
-        >
         <img
-          src="/proj-assets/covid19-disinformation/chart-10.png"
+          :src="`/proj-assets/covid19-disinformation/chart-10${isLocaleEN ? '-en' : ''}.png`"
           :alt="$t('COVID19_D.CHART_10.TITLE')"
         >
       </picture>
       <div class="chart-10-iframe">
-        <iframe src='https://flo.uri.sh/visualisation/2954585/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe>
+        <iframe src='https://flo.uri.sh/visualisation/3047523/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe>
         <div style='width:100%!;margin-top:4px!important;text-align:right!important;'>
           <a class='flourish-credit' href='https://public.flourish.studio/visualisation/2954585/?utm_source=embed&utm_campaign=visualisation/2954585' target='_top' style='text-decoration:none!important'>
           <img v-lazy="'https://public.flourish.studio/resources/made_with_flourish.svg'" alt='Made with Flourish' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'>
@@ -458,7 +454,12 @@
 <script>
 
 export default {
-  name: 'TheArticle'
+  name: 'TheArticle',
+  computed: {
+    isLocaleEN () {
+      return this.$route.params.params === 'en'
+    }
+  }
 }
 </script>
 

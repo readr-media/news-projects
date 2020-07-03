@@ -1,7 +1,7 @@
 <template>
-  <div class="covid19-disinformation">
-    <TheOpening />
-    <TheGame />
+  <div :class="[ $i18n.locale ]" class="covid19-disinformation">
+    <TheOpening :locale="locale" />
+    <TheGame :locale="locale" />
     <TheArticle />
     <TheCredit />
     <div class="donate">
@@ -36,10 +36,19 @@ export default {
     SubscriptionWithLogoMsg
   },
   metaInfo () {
+    let metaUrl = 'covid19-disinformation'
+    let locale = 'zh_TW'
+    if (this.$route.params.params === 'en') {
+      this.$i18n.locale = 'en'
+      metaUrl = `${metaUrl}/en`
+      locale = 'en_US'
+    }
+
     return {
       title: this.$t('COVID19_D.TITLE'),
       description: this.$t('COVID19_D.DESCRIPTION'),
-      metaUrl: 'covid19-disinformation',
+      locale,
+      metaUrl,
       metaImage: 'covid19-disinformation/og.jpg'
     }
   },
@@ -49,11 +58,14 @@ export default {
       gaElements: []
     }
   },
-  // created () {
-  //   if (this.$route.params.params === 'en') {
-  //     this.$i18n.locale = 'en'
-  //   }
-  // },
+  computed: {
+    locale () {
+      if (this.$route.params.params === 'en') {
+        return 'en'
+      }
+      return 'tw'
+    }
+  },
   mounted () {
     this.gaElements = [
       ...document.querySelectorAll('.covid-game'),

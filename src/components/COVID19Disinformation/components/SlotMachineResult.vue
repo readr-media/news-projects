@@ -19,19 +19,31 @@
     <div class="result__info">
       <template v-if="isExist">
         <h3 v-html="$t('COVID19_D.GAME_RESULT_EXIST_HEADING')" />
-        <p>{{ $t('COVID19_D.GAME_RESULT_EXIST_TEXT_1') }}<a
-          :href="SLOT_MACHINE_RESULTS_EXIST_LINk[result]"
-          target="_blank"
-          rel="noopener noreferrer"
-          @click="sendGAEvent('點我看查核報告')"
-          v-text="$t('COVID19_D.GAME_RESULT_EXIST_LINK')" />{{ $t('COVID19_D.GAME_RESULT_EXIST_TEXT_2') }}</p>
+
+        <p v-if="locale === 'tw'">
+          它曾被{{ resultContent.area.tw }}的事實查核組織{{ resultContent.organization.tw }}查核為假訊息，<a
+            :href="resultContent.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="sendGAEvent('點我看查核報告')"
+          >點我看查核報告</a>。
+        </p>
+        <p v-else>
+          It is confirmed to be disinformation by {{ resultContent.area.en }} fact-checking organization {{ resultContent.organization.en || resultContent.organization.tw }}.
+          <a
+            :href="resultContent.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="sendGAEvent('點我看查核報告')"
+          >Click here to read the fact-checking report</a>.
+        </p>
       </template>
       <template v-else>
         <p v-text="$t('COVID19_D.GAME_RESULT_NOT_EXIST_TEXT')" />
         <h3 v-html="$t('COVID19_D.GAME_RESULT_NOT_EXIST_HEADING')" />
       </template>
       <a
-        :href="`https://www.facebook.com/share.php?u=https://www.readr.tw/project/covid19-disinformation`"
+        :href="`https://www.facebook.com/share.php?u=https://www.readr.tw/project/covid19-disinformation${isLocaleEn ? '/en' : ''}`"
         class="result__share"
         target="_blank"
         rel="noopener noreferrer"
@@ -46,9 +58,12 @@
 
 import {
   SLOT_MACHINE_COLUMN_1_TW,
+  SLOT_MACHINE_COLUMN_1_EN,
   SLOT_MACHINE_COLUMN_2_TW,
+  SLOT_MACHINE_COLUMN_2_EN,
   SLOT_MACHINE_COLUMN_3_TW,
-  SLOT_MACHINE_RESULTS_EXIST_LINk
+  SLOT_MACHINE_COLUMN_3_EN,
+  SLOT_MACHINE_RESULTS_EXIST_CONTENT
 } from '../const.js'
 
 export default {
@@ -81,22 +96,33 @@ export default {
     transitioning: {
       type: Boolean,
       default: false
-    }
-  },
-  data () {
-    return {
-      SLOT_MACHINE_RESULTS_EXIST_LINk
+    },
+    locale: {
+      type: String,
+      default: 'tw'
     }
   },
   computed: {
+    isLocaleEn () {
+      return this.locale === 'en'
+    },
     textColumn1 () {
-      return SLOT_MACHINE_COLUMN_1_TW[this.column1]
+      return this.isLocaleEn
+        ? SLOT_MACHINE_COLUMN_1_EN[this.column1]
+        : SLOT_MACHINE_COLUMN_1_TW[this.column1]
     },
     textColumn2 () {
-      return SLOT_MACHINE_COLUMN_2_TW[this.column2]
+      return this.isLocaleEn
+        ? SLOT_MACHINE_COLUMN_2_EN[this.column2]
+        : SLOT_MACHINE_COLUMN_2_TW[this.column2]
     },
     textColumn3 () {
-      return SLOT_MACHINE_COLUMN_3_TW[this.column3]
+      return this.isLocaleEn
+        ? SLOT_MACHINE_COLUMN_3_EN[this.column3]
+        : SLOT_MACHINE_COLUMN_3_TW[this.column3]
+    },
+    resultContent () {
+      return SLOT_MACHINE_RESULTS_EXIST_CONTENT[this.result]
     }
   },
   methods: {

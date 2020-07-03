@@ -96,7 +96,7 @@ export default {
 
 @media (max-width 768px)
   .subscr
-    width 100%
+    width calc(100% - 40px)
     &__intro
       flex-direction row
       align-items center
