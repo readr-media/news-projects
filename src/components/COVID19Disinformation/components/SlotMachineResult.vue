@@ -43,7 +43,7 @@
         <h3 v-html="$t('COVID19_D.GAME_RESULT_NOT_EXIST_HEADING')" />
       </template>
       <a
-        :href="`https://www.facebook.com/share.php?u=https://www.readr.tw/project/covid19-disinformation`"
+        :href="`https://www.facebook.com/share.php?u=https://www.readr.tw/project/covid19-disinformation${isLocaleEn ? '/en' : ''}`"
         class="result__share"
         target="_blank"
         rel="noopener noreferrer"
@@ -102,24 +102,22 @@ export default {
       default: 'tw'
     }
   },
-  // data () {
-  //   return {
-  //     SLOT_MACHINE_RESULTS_EXIST_CONTENT
-  //   }
-  // },
   computed: {
+    isLocaleEn () {
+      return this.locale === 'en'
+    },
     textColumn1 () {
-      return this.$route.params.params === 'en'
+      return this.isLocaleEn
         ? SLOT_MACHINE_COLUMN_1_EN[this.column1]
         : SLOT_MACHINE_COLUMN_1_TW[this.column1]
     },
     textColumn2 () {
-      return this.$route.params.params === 'en'
+      return this.isLocaleEn
         ? SLOT_MACHINE_COLUMN_2_EN[this.column2]
         : SLOT_MACHINE_COLUMN_2_TW[this.column2]
     },
     textColumn3 () {
-      return this.$route.params.params === 'en'
+      return this.isLocaleEn
         ? SLOT_MACHINE_COLUMN_3_EN[this.column3]
         : SLOT_MACHINE_COLUMN_3_TW[this.column3]
     },
