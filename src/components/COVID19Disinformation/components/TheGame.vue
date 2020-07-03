@@ -16,6 +16,7 @@
       :isPlayed="isPlayed"
       :result="result"
       :transitioning="transitioning"
+      :locale="locale"
     />
   </section>
 </template>
@@ -31,6 +32,7 @@ export default {
     SlotMachine,
     SlotMachineResult
   },
+  props: ['locale'],
   data () {
     return {
       column1: 12,
@@ -63,9 +65,19 @@ export default {
     generateResult () {
       this.isPlayed = true
       this.transitioning = true
-      this.column1 = Math.floor(Math.random() * 13)
-      this.column2 = Math.floor(Math.random() * 17)
-      this.column3 = Math.floor(Math.random() * 14)
+
+      if (Math.random() >= 0.5) {
+        this.column1 = Math.floor(Math.random() * 13)
+        this.column2 = Math.floor(Math.random() * 17)
+        this.column3 = Math.floor(Math.random() * 14)
+      } else {
+        const slot = SLOT_MACHINE_RESULTS_EXIST[Math.floor(Math.random() * 22)]
+        const [column1, column2, column3] = slot.split('/')
+        this.column1 = Number(column1)
+        this.column2 = Number(column2)
+        this.column3 = Number(column3)
+      }
+
       window.ga && window.ga('send', 'event', 'projects', 'click', '拉霸鈕')
     }
   }

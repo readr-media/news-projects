@@ -1,10 +1,10 @@
 export const COVID19_D = {
   TITLE: 'The Visible Virus: COVID-19 Disinformation',
-  DESCRIPTION: 'Severe special infectious pneumonia (commonly known as Wuhan pneumonia) has claimed 500,000 lives. Not only the virus but also "disinformation" spreads globally and causes harm, and it even travels faster than the virus, kills people and increases the risk of racial discrimination.<br>READr analyzes more than 5,000 fact-checking reports and gain insights into the status and trends of the “infodemic”.',
-  SOURCE: 'Source:',
-  ANNOTATION: 'Note:',
+  DESCRIPTION: 'Severe special infectious pneumonia (commonly known as Wuhan pneumonia) has claimed 500,000 lives. Not only the virus but also disinformation spreads globally and causes harm, and it even travels faster than the virus, kills people and increases the risk of racial discrimination. READr analyzes more than 5,000 fact-checking reports and gain insights into the status and trends of the infodemic.',
+  SOURCE: 'Source: ',
+  ANNOTATION: 'Note: ',
   CHAPTER_1: {
-    P_1: 'Back to the origin of Severe Pneumonia with Novel Pathogens (commonly known as COVID-19), the key for the public to learn about the virus comes from a piece of disinformation, according to the PRC official.',
+    P_1: 'Back to the origin of Severe Pneumonia with Novel Pathogens (commonly known as COVID-19), the key for the public to learn about the virus comes from a piece of “disinformation”, according to the PRC official.',
     P_2: 'In December 2019, Chinese doctor Li Wenliang sent a message in his medical school group, mentioning that 7 patients who had been to Huanan seafood market got a SARS-symptoms-related disease. The patients were put into isolation rooms in the hospital where he worked. In January 2020, after the message spread through the internet, the message was identified as disinformation by the government. As we all know what happened thereafter, the virus mentioned in this disinformation spreads worldwide, and has taken more than five hundred thousand lives.',
     P_3: {
       TEXT_1: 'In the past six months, besides the medical staff combating the virus on the front line, a group of people have been fighting the real “disinformation” spreading worldwide like the virus. “At that time (late January), the spread of the virus was restricted to China, but already causing rampant disinformation globally. It is the largest collaborative project ever launched in the fact-checking world, ”Harrison Mantas, reporter from ICFN, ',
@@ -156,7 +156,7 @@ export const COVID19_D = {
     P_2: {
       TEXT_1: 'According to the notes made by fact-checking organizations, 782 of the reports were disinformation spread on Twitter. ',
       ANNOTATION: 'We manually extracted the original text of the disinformation in the reports. (Notes: Some fact check reports do not mark the original text. Some original text have been lost on Twitter. We found a total of 351 articles, accounting for 45% of the total)',
-      TEXT_2: ', and we checked their influence in the archived tweet data provided by Twitter and Yu-Chung Cheng’s team at National Chengchi University.'
+      TEXT_2: ', and we checked their influence in Twitter and the archived tweet data provided by Yu-Chung Cheng’s team at National Chengchi University.'
     },
     P_3: 'The influence of disinformation in the type of "incidents caused by the epidemic" is obviously more powerful than other types. In the total statistics of fact-checking reports, this type of disinformation only accounts for 8% of the total, which is not much.',
     P_4: 'This type of disinformation is not directly related to COVID-19, but incidents caused by the epidemic. For example, many countries have stopped events and festivals due to the epidemic, allowing nature to return to peace; political struggles or criticisms among politicians; frauds that occur when the public needs supplies and detection, and so on.',
@@ -194,21 +194,22 @@ export const COVID19_D = {
   },
   CHART_3: {
     TITLE: 'Compared with the Disinformation Research by Reuters Institute for the Study of Journalism',
+    SOURCE: 'Reuters Institute for the Study of Journalism',
     ANNOTATION: 'Note: READr refers to the research method of Reuters Institute for the Study of Journalism. We classify the samples (n=5216) manually. A disinformation may include one or more types. The definition of each type can be found in the last paragraph “Research Methods”.'
   },
   CHART_4: {
     TITLE: 'Popular Disinformation Topics in India',
-    SOURCE: '，散佈地點在「印度」的查核報告',
+    SOURCE: 'reports with distribution location in “India” from <a href="https://www.poynter.org/ifcn-covid-19-misinformation/" target="_blank" rel="noopener noreferrer">The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12)',
     ANNOTATION: 'READr refers to the research method of Reuters Institute for the Study of Journalism. We classify the samples (n=5216) manually. A disinformation may include one or more types. The definition of each type can be found in the last paragraph “Research Method”.'
   },
   CHART_5: {
     TITLE: 'The Number of Disinformation and the Change of Confirmed Cases in India',
-    SOURCE: '，散佈地點在「印度」的查核報告; Johns Hopkins University',
+    SOURCE: 'reports with distribution location in “India” from <a href="https://www.poynter.org/ifcn-covid-19-misinformation/" target="_blank" rel="noopener noreferrer">The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12); Johns Hopkins University',
     ANNOTATION: 'READr refers to the research method of Reuters Institute for the Study of Journalism. We classify the samples (n=5216) manually. A disinformation may include one or more types. The definition of each type can be found in the last paragraph “Research Method”.'
   },
   CHART_6: {
     TITLE: 'Popular Disinformation Topics in the US',
-    SOURCE: '，散佈地點在「美國」的查核報告',
+    SOURCE: 'reports with distribution location in “United States” from <a href="https://www.poynter.org/ifcn-covid-19-misinformation/" target="_blank" rel="noopener noreferrer">The CoronaVirusFacts Alliance Database</a> (2020-01-29~2020-05-12)',
     ANNOTATION: 'READr refers to the research method of Reuters Institute for the Study of Journalism. We classify the samples (n=5216) manually. A disinformation may include one or more types. The definition of each type can be found in the last paragraph “Research Method”.'
   },
   CHART_7: {
@@ -292,13 +293,10 @@ export const COVID19_D = {
       COLUMN_2: 'claims about COVID-19 pandemic is not serious at all, including comparing the death rate with the flu and other diseases, or using pictures of an empty hospital to imply this claim.'
     }
   },
-  GAME_RESULT_EXIST_HEADING: '這個假訊息<br>真實存在過！',
-  GAME_RESULT_EXIST_TEXT_1: '它曾被國際查核組織查核為假訊息，',
-  GAME_RESULT_EXIST_LINK: '點我看查核報告',
-  GAME_RESULT_EXIST_TEXT_2: '。',
-  GAME_RESULT_NOT_EXIST_HEADING: '就創造了<br>一個假訊息！',
-  GAME_RESULT_NOT_EXIST_TEXT: '恭喜你在不到 1 秒鐘內',
-  GAME_RESULT_SHARE: '分享<br>我製造的假訊息',
+  GAME_RESULT_EXIST_HEADING: 'This disinformation really exists!',
+  GAME_RESULT_NOT_EXIST_HEADING: 'You create a disinformation in less than one second.',
+  GAME_RESULT_NOT_EXIST_TEXT: 'Congratulations! ',
+  GAME_RESULT_SHARE: 'Share the disinformation I made.',
   CREDIT_J: 'Journalist: ',
   CREDIT_J_1: 'Yu-Ju Lee',
   CREDIT_DA: 'Data Analyze: ',
