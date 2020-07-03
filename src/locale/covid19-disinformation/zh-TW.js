@@ -194,6 +194,7 @@ export const COVID19_D = {
   },
   CHART_3: {
     TITLE: '與路透社新聞研究所假訊息研究比較',
+    SOURCE: '路透社新聞研究所',
     ANNOTATION: 'READr 參考路透社新聞研究所的研究方法，人工對樣本（n=5216）分類。同一則假訊息可能會包含一個以上的分類。每個分類的意義請見文末「研究方法」區塊。'
   },
   CHART_4: {
@@ -213,7 +214,7 @@ export const COVID19_D = {
   },
   CHART_7: {
     TITLE: '武漢肺炎陰謀論假訊息常見的主題',
-    SOURCE: '，READr 人工整理及歸類'
+    SOURCE: 'READr 人工整理及歸類'
   },
   CHART_8: {
     TITLE: '武漢肺炎期間台灣社群常見的 3 個主題',
@@ -293,9 +294,6 @@ export const COVID19_D = {
     }
   },
   GAME_RESULT_EXIST_HEADING: '這個假訊息<br>真實存在過！',
-  GAME_RESULT_EXIST_TEXT_1: '它曾被國際查核組織查核為假訊息，',
-  GAME_RESULT_EXIST_LINK: '點我看查核報告',
-  GAME_RESULT_EXIST_TEXT_2: '。',
   GAME_RESULT_NOT_EXIST_HEADING: '就創造了<br>一個假訊息！',
   GAME_RESULT_NOT_EXIST_TEXT: '恭喜你在不到 1 秒鐘內',
   GAME_RESULT_SHARE: '分享<br>我製造的假訊息',
