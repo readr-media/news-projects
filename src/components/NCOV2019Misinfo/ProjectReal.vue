@@ -103,16 +103,22 @@
     <section class="scrolly">
       <figure class="scrolly__sticky-chart sticky-chart">
         <template v-if="$store.state.viewport[0] >= 768">
-          <br>
-          <br>
-          <br>
-          <p>pending</p>
+          <template v-for="order in 8">
+            <component
+              :is="`ChartTopics${order}`"
+              v-if="chartIndexScrollyTopics >= order * 2 - 1 && chartIndexScrollyTopics <= order * 2"
+              :showKeywords="chartIndexScrollyTopics === order * 2"
+            />
+          </template>
         </template>
         <template v-else>
-          <br>
-          <br>
-          <br>
-          <p>pending</p>
+          <template v-for="order in 8">
+            <component
+              :is="`ChartTopics${order}Mobile`"
+              v-if="chartIndexScrollyTopics >= order * 2 - 1 && chartIndexScrollyTopics <= order * 2"
+              :showKeywords="chartIndexScrollyTopics === order * 2"
+            />
+          </template>
         </template>
       </figure>
       <article class="scrolly__textboxes textboxes">
@@ -126,11 +132,112 @@
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="2"
         >
-          <p>「棺材」（coffins）——用滿地是棺材的照片傳言該地區已經因為武漢肺炎死了很多人</p>
-          <p>「病例」（case）——宣稱某個地區已經有了第一起武漢肺炎病例</p>
-          <p>「圖片」（images）——挪用各式各樣不相干的圖片來誇大疫情的影響</p>
-          <p>「委內瑞拉」（venezuela）——佯稱義大利人覺得「錢對挽救生命毫無用處」，把錢撒在馬路上。但原本的故事發生在委內瑞拉，且與武漢肺炎無關</p>
-          <p>「暴動」（riots）——英國倫敦因為食物不足引起了暴動，但事實上挪用了舊影片</p>
+          <p><span style="color: #f5867a;">「棺材」（coffins）</span>——用滿地是棺材的照片傳言該地區已經因為武漢肺炎死了很多人；</p>
+          <p><span style="color: #ffad61;">「病例」（case）</span>——宣稱某個地區已經有了第一起武漢肺炎病例；</p>
+          <p><span style="color: #ffd663;">「圖片」（images）</span>——挪用各式各樣不相干的圖片來誇大疫情的影響；</p>
+          <p><span style="color: #b2d199;">「委內瑞拉」（venezuela）</span>——佯稱義大利人覺得「錢對挽救生命毫無用處」，把錢撒在馬路上。但原本的故事發生在委內瑞拉，且與武漢肺炎無關；</p>
+          <p><span style="color: #78b8cc;">「暴動」（riots）</span>——英國倫敦因為食物不足引起了暴動，但事實上挪用了舊影片。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="3"
+        >
+          <p>假訊息中常常可以見到「權威」的存在，因為這會增加信息的可信度。「官方機構的作為」分類代表這些假訊息的內容佯裝成國家政策或 WHO 建議的主張，也會誇大政策的內容。這一類的假訊息數量排名第二。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="4"
+        >
+          <p><span style="color: #f5867a;">「聯合國兒童基金會」（unicef）</span>——宣稱該組織發布了一系列如何避免染疫的措施，包括飲用熱水、不要吃冰淇淋等；</p>
+          <p><span style="color: #ffad61;">「世界衛生組織」（WHO）</span>——世界衛生組織是最常被引用的權威，包括各種偏方或疫情的最新進展；</p>
+          <p><span style="color: #ffd663;">「軍方」（military）</span>——因為疫情，政府準備動員軍隊來採取更嚴格的防疫措施。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="5"
+        >
+          <p>數量排名第三的是最危險的假訊息主題：「醫學相關、疾病的影響」。這類的假訊息謠傳各種可以治癒武漢肺炎的偏方，甚至有人誤信偏方而死亡——例如伊朗有超過 2 千人喝到假酒中毒，244 人因此身亡。</p>
+          <br>
+          <p>武漢肺炎至今仍然沒有特效藥，這也讓這類的假訊息持續猖獗地傳播。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="6"
+        >
+          <p><span style="color: #f5867a;">治癒（cures）</span>——是這類假訊息最常見的詞。宣稱某種食物或方式可以治癒武漢肺炎，例如<span style="color: #ffad61;">維他命（vitamin）</span>、<span style="color: #ffd663;">咖啡（coffee）</span>、<span style="color: #b2d199;">茶（tea）</span>、<span style="color: #78b8cc;">大蒜（garlic）</span>。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="7"
+        >
+          <p>「名人宣稱或相關活動」的假訊息是關於名人、政客、公司企業的談話或作為。常見的內容是名人被確診武漢肺炎，或某公司因為武漢肺炎提供什麼樣的優惠。例如英國女王伊麗莎白、中國男星成龍等都曾被謠傳確診。這一類的假訊息數量排名第四。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="8"
+        >
+          <p><span style="color: #f5867a;">「否認」（denied）</span>——是這類假訊息的查核報告常出現的詞。因為假訊息會佯稱名人確診、名人捐錢、名人做了什麼事⋯⋯但事實上都沒有。</p>
+          <br>
+          <p>例如梵蒂岡<span style="color: #ffad61;">「教宗」（pope）</span>被謠傳確診；葡萄牙球星<span style="color: #ffd663;">「羅納度」（ronaldo）</span>還被宣稱要將自己的家捐出來當作醫院使用。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="9"
+        >
+          <p>「因為疫情衍生出的行為」代表內容並非直接和武漢肺炎有關，而是因為疫情引起的事件，例如政客之間的政治鬥爭、因為民眾需要檢疫發生的詐騙案，或是因為武漢肺炎許多國家停止了商業活動，讓大自然恢復平靜等等。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="10"
+        >
+          <p><span style="color: #f5867a;">漢他病毒（hantavirus）</span>——繼武漢肺炎之後，中國又出現新的人傳人病毒。但漢他病毒早就存在；</p>
+          <p><span style="color: #ffad61;">清真寺（mosque）</span>——中國主席習近平參觀清真寺，為國家祈禱；</p>
+          <p><span style="color: #ffd663;">搶劫（rob）</span>——有人會上門提供免費口罩。而當你戴上口罩時，就會陷入昏迷，歹徒藉此搶劫。這是一個古老謠言的變形。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="11"
+        >
+          <p>「病毒是如何傳播」分類中的假訊息，主要是謠傳各種病毒傳播的方式。例如病毒可能透過未刮的鬍鬚、報紙傳播，或因為某些國家丟棄染疫的屍體在海灘上，所以不要吃海鮮。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="12"
+        >
+          <p>武漢肺炎可以傳染給<span style="color: #f5867a;">動物（animal）</span>、<span style="color: #ffad61;">寵物（pets）</span>，或是在<span style="color: #ffd663;">雞（broiler）</span>身上發現了新型冠狀病毒。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="13"
+        >
+          <p>「陰謀論」、「病毒的起源」、「疫情其實不嚴重」這三個分類的主題常常出現在同一則假訊息中。這類的假訊息常常謠傳病毒早就已經存在、大流行早就被預言會發生、或是誰是病毒背後的幕後黑手。也會用流感、愛滋病等等病症的死亡人數來暗示武漢肺炎其實並不嚴重。</p>
+          <br>
+          <p>這些假訊息也和後期美國與中國在爭論病毒起源來自哪裡有關，也有研究認為部分訊息是中國發起的資訊戰。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="14"
+        >
+          <p><span style="color: #f5867a;">諾斯特拉達穆斯（Nostradamus）</span>——是 1500 年代法國的占星家。留下以詩體呈現的預言集，有研究者從這些短詩中看到發生在「未來」的歷史事件，如法國大革命、希特勒的崛起等等，武漢肺炎也沒有缺席；</p>
+          <p><span style="color: #ffad61;">被預言（predicted）</span>——武漢肺炎早就被預言會發生。除了占星家以外，小說、電視劇或卡通辛普森都曾「預言」過；</p>
+          <p><span style="color: #ffd663;">5G（5G）</span>——中國在去年年底啟用了首批 5G 網路，跟武漢肺炎興起的時機不謀而合。有心人士就造謠病毒是透過 5G 基地台傳播，英國有基地台因此被拆毀；</p>
+          <p><span style="color: #b2d199;">比爾蓋茲（Bill Gates）</span>——比爾蓋茲被指稱是武漢肺炎的幕後黑手。他創造病毒是為了疫苗的暴利或為了減少世界人口；</p>
+          <p><span style="color: #78b8cc;">實驗室（laboratory）</span>——武漢肺炎是人類在中國實驗室做出來的生物武器。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="15"
+        >
+          <p>「疫苗研發」的假訊息內容跟疫苗的發展有關。各地都有宣稱已經成功研發對抗武漢肺炎疫苗的訊息，但這些都是假的，因為迄今仍然沒有成功的研發案例。</p>
+          <br>
+          <p>「準備與預防」則是關於人們囤積或購買物資、遵守（或不遵守）政府規定衍生出的行為。例如挪用舊影片宣稱人們驚恐地衝進超市搶購物資，或是空蕩蕩的貨架照片等等。</p>
+        </div>
+        <div
+          class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
+          data-chart="16"
+        >
+          <p><span style="color: #f5867a;">研發（developed）</span>——疫苗研發的進度，或宣稱已經被研發出來；</p>
+          <p><span style="color: #ffad61;">塞內加爾（senegal）</span>——疫苗在塞內加爾進行實驗，死了 7 個小孩。</p>
         </div>
       </article>
     </section>
@@ -279,7 +386,28 @@
   import ChartGroupByPlatformMobile from './ChartGroupByPlatformMobile.vue'
   import ChartGroupByTopic from './ChartGroupByTopic.vue'
   import ChartGroupByTopicMobile from './ChartGroupByTopicMobile.vue'
+  import ChartTopics1 from './ChartTopics1.vue'
+  import ChartTopics2 from './ChartTopics2.vue'
+  import ChartTopics3 from './ChartTopics3.vue'
+  import ChartTopics4 from './ChartTopics4.vue'
+  import ChartTopics5 from './ChartTopics5.vue'
+  import ChartTopics6 from './ChartTopics6.vue'
+  import ChartTopics7 from './ChartTopics7.vue'
+  import ChartTopics8 from './ChartTopics8.vue'
+  import ChartTopics1Mobile from './ChartTopics1Mobile.vue'
+  import ChartTopics2Mobile from './ChartTopics2Mobile.vue'
+  import ChartTopics3Mobile from './ChartTopics3Mobile.vue'
+  import ChartTopics4Mobile from './ChartTopics4Mobile.vue'
+  import ChartTopics5Mobile from './ChartTopics5Mobile.vue'
+  import ChartTopics6Mobile from './ChartTopics6Mobile.vue'
+  import ChartTopics7Mobile from './ChartTopics7Mobile.vue'
+  import ChartTopics8Mobile from './ChartTopics8Mobile.vue'
   import Footer from './Footer.vue'
+
+  import Vue from 'vue'
+import VueObserveVisibility from 'vue-observe-visibility'
+
+Vue.use(VueObserveVisibility)
 
   export default {
     components: {
@@ -293,6 +421,22 @@
       ChartGroupByPlatformMobile,
       ChartGroupByTopic,
       ChartGroupByTopicMobile,
+      ChartTopics1,
+      ChartTopics2,
+      ChartTopics3,
+      ChartTopics4,
+      ChartTopics5,
+      ChartTopics6,
+      ChartTopics7,
+      ChartTopics8,
+      ChartTopics1Mobile,
+      ChartTopics2Mobile,
+      ChartTopics3Mobile,
+      ChartTopics4Mobile,
+      ChartTopics5Mobile,
+      ChartTopics6Mobile,
+      ChartTopics7Mobile,
+      ChartTopics8Mobile,
       Footer
     },
     data() {
@@ -306,6 +450,15 @@
         shouldFixLongChartArticleCountry: false,
         shouldFixLongChartArticlePlatform: false,
         shouldFixLongChartArticleTopic: false
+      }
+    },
+    methods: {
+      visibilityChanged(isVisible) {
+        if (isVisible) {
+          this.showLongChartsTopic = false
+          this.showLongChartsPlatform = false
+          this.showLongChartsCountry = false
+        }
       }
     },
     mounted() {
