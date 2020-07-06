@@ -31,7 +31,7 @@ export default {
   metaInfo () {
     return {
       title: '五千篇事實查核報告分析：武漢肺炎假訊息戰役',
-      description: '在武漢肺炎的疫情仍在中國境內傳播時，假訊息卻已經在全世界傳播。READr 分析國際事實查核組織聯盟超過 5000 篇查核報告，以及它們實際在社群網絡裡傳播的狀況，用視覺化的方式帶你看這 5 個月以來假訊息傳播的趨勢。',
+      description: 'READr 分析國際事實查核組織聯盟超過 5000 篇查核報告，探索「武漢肺炎假訊息」的危害，用視覺化的方式帶你看這 5 個月以來假訊息傳播的趨勢。',
       metaUrl: 'ncov2019misinfo',
       metaImage: 'ncov2019misinfo/og.jpg'
     }

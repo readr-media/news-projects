@@ -262,9 +262,13 @@
           d3.forceCollide().radius((d) => r(d.reportCount) + 1)
         )
       this._force.on('tick', () => {
+        for (let i = 0; i < 10; i++) {
+          this._force.tick();
+        }
         this._circles
           .transition()
           .ease(d3.easeLinear)
+          .delay(function(d,i) {return d.y})
           .attr('cx', (d) => d.x)
           .attr('cy', (d) => d.y)
       })
