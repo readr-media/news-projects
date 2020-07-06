@@ -20,8 +20,8 @@
     data() {
       return {
         width: 1680,
-        height: 1050,
-        margin: { top: 30, right: 100, left: 200, bottom: 30 }
+        height: 500,
+        margin: { top: 0, right: 30, left: 30, bottom: 0 }
       }
     },
     computed: {
@@ -76,7 +76,7 @@
       const height = this.height
       const margin = this.margin
       const innerWidth = this.innerWidth
-      const noSplitHeight = 500
+      const noSplitHeight = 200
 
       const svgElement = this.$refs.svgElement
       const svg = d3
@@ -122,25 +122,25 @@
         .scaleLinear()
         .domain(d3.extent(dataGroupByDate, (d) => d.date))
         .range([0, innerWidth])
-      const xAxis = g => g
-        .call(
-          d3.axisTop(x)
-          .tickFormat(d => d3.timeFormat('%m/%d')(d))
-          .ticks(10)
-          //   .tickValues([
-          //     d3.timeParse('%Y-%m-%d')('2020-01-30'),
-          //     d3.timeParse('%Y-%m-%d')('2020-03-20'),
-          //     d3.timeParse('%Y-%m-%d')('2020-05-12')
-          //   ])
-        )
-        .call(g => g.select('.domain').remove())
-        .call(g => g
-          .selectAll('line')
-          // .style('fill', 'red')
-          .remove()
-        )
-        .call(g => g.selectAll('text').style('font-size', '16px'))
-      wrapper.append('g').call(xAxis)
+      // const xAxis = g => g
+      //   .call(
+      //     d3.axisTop(x)
+      //     .tickFormat(d => d3.timeFormat('%m/%d')(d))
+      //     .ticks(10)
+      //     //   .tickValues([
+      //     //     d3.timeParse('%Y-%m-%d')('2020-01-30'),
+      //     //     d3.timeParse('%Y-%m-%d')('2020-03-20'),
+      //     //     d3.timeParse('%Y-%m-%d')('2020-05-12')
+      //     //   ])
+      //   )
+      //   .call(g => g.select('.domain').remove())
+      //   .call(g => g
+      //     .selectAll('line')
+      //     // .style('fill', 'red')
+      //     .remove()
+      //   )
+      //   .call(g => g.selectAll('text').style('font-size', '16px'))
+      // wrapper.append('g').call(xAxis)
 
       const y = d3.scaleBand().domain(['All']).range([noSplitHeight, 0])
       const r = d3
