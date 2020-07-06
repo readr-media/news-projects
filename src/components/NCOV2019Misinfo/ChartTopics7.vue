@@ -58,6 +58,10 @@
           return '#b2d199'
         } else if (keywords.includes('實驗室')) {
           return '#78b8cc'
+        } else if (keywords.includes('流感')) {
+          return 'black'
+        } else if (keywords.includes('感冒')) {
+          return 'purple'
         }
 
         return '#f2f2f2'

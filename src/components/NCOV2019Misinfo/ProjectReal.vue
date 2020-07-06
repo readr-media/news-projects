@@ -1,6 +1,12 @@
 <template>
   <div>
-    <section class="landing center">
+    <section
+      class="landing center"
+      v-observe-visibility="{
+        callback: (isVisible) => isVisible && handleVisible('landing'),
+        once: true,
+      }"
+    >
       <div class="landing-wrapper">
         <div class="landing-wrapper-chart">
           <ChartLanding/>
@@ -9,8 +15,7 @@
           <h1>五千篇事實查核報告分析</h1>
           <h2>武漢肺炎<span style="color: #ff8261">假訊息</span>戰役</h2>
           <div class="landing-wrapper-text__description-wrapper description-wrapper">
-            <p>武漢肺炎在國外疫情仍在延燒，READr
-              探索了從一月至今在全世界傳播的假訊息。際價的代節究果機文車可未年利助都會點年發格這不文等背樂教父的體師排極才少子人全？去候然近……科書品生向投的神單出態接門只知利因：打隨全：樂你好生品時不例本生溫去人達新可大油是年醫用提選真童被在期會之，技其做業來語山的和家見灣一體國手一論。</p>
+            <p>武漢肺炎在國外疫情仍在延燒，READr 探索了從一月至今在全世界傳播的假訊息。際價的代節究果機文車可未年利助都會點年發格這不文等背樂教父的體師排極才少子人全？去候然近……科書品生向投的神單出態接門只知利因：打隨全：樂你好生品時不例本生溫去人達新可大油是年醫用提選真童被在期會之，技其做業來語山的和家見灣一體國手一論。</p>
           </div>
         </div>
       </div>
@@ -44,18 +49,30 @@
         <div
           class="enter-view-step textboxes__textbox textboxes__textbox--scrolly"
           data-chart="1"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart1-1'),
+            once: true,
+          }"
         >
           <p>在武漢肺炎的疫情仍在中國境內傳播時，假訊息傳播的速度顯然比較快。READr 分析國際事實查核組織聯盟超過 5000 篇查核報告，帶你看這五個月以來假訊息傳播的趨勢。</p>
         </div>
         <div
           class="enter-view-step textboxes__textbox textboxes__textbox--scrolly"
           data-chart="2"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart1-2'),
+            once: true,
+          }"
         >
           <p>從事實查核報告的數量變化可以觀察到，2 月初期有一波小高峰，這時因為疫情主要都在中國，各國主要的假訊息主題跟和「中國」有關。</p>
         </div>
         <div
           class="enter-view-step textboxes__textbox textboxes__textbox--scrolly"
           data-chart="3"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart1-3'),
+            once: true,
+          }"
         >
           <p>但隨著病毒傳播到全世界，各國也開始面臨鋪天蓋地的假訊息。</p>
           <div class="mobile-only">
@@ -77,7 +94,13 @@
         </template>
       </template>
       <article class="long-chart__textboxes textboxes" :class="{ fix: shouldFixLongChartArticleCountry }">
-        <div class="textboxes__textbox">
+        <div
+          class="textboxes__textbox"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart2'),
+            once: true,
+          }"
+        >
           <p>在所有國家中，印度的假訊息查核報告是最多的。除了當地事實查核組織的活躍度以外，也彰顯出印度受到假訊息的危害程度。</p>
         </div>
       </article>
@@ -92,7 +115,13 @@
         </template>
       </template>
       <article class="long-chart__textboxes textboxes" :class="{ fix: shouldFixLongChartArticlePlatform }">
-        <div class="textboxes__textbox">
+        <div
+          class="textboxes__textbox"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart3'),
+            once: true,
+          }"
+        >
           <p>而這些假訊息有超過一半都是透過 Facebook 傳播。社群平台 Twitter 和通訊軟體 Whatsapp 也是散播的主要媒介。</p>
         </div>
       </article>
@@ -107,7 +136,13 @@
         </template>
       </template>
       <article class="long-chart__textboxes textboxes" :class="{ fix: shouldFixLongChartArticleTopic }">
-        <div class="textboxes__textbox">
+        <div
+          class="textboxes__textbox"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart4'),
+            once: true,
+          }"
+        >
           <p>我們參考路透社新聞研究所的研究方法，人工替這些查核報告裡的假訊息分類，發現「病毒在社區中的傳播」（通常是誇大疫情的影響）是最多的。</p>
         </div>
       </article>
@@ -137,12 +172,20 @@
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="1"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-1'),
+            once: true,
+          }"
         >
           <p>數量最多的，是「病毒在社區中的傳播」類的假訊息。內容主要闡述疫情的影響，例如誇大疫情的影響，如疫情造成民眾自殺、引起抗議等；或聲稱某個地方首次遭到病毒感染；指責某些種特定種族傳播病毒等等。平均每 4 則假訊息就有 1 則是這個主題。</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="2"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-2'),
+            once: true,
+          }"
         >
           <p><span style="color: #f5867a;">「棺材」（coffins）</span>——用滿地是棺材的照片傳言該地區已經因為武漢肺炎死了很多人；</p>
           <p><span style="color: #ffad61;">「病例」（case）</span>——宣稱某個地區已經有了第一起武漢肺炎病例；</p>
@@ -153,12 +196,20 @@
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="3"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-3'),
+            once: true,
+          }"
         >
           <p>假訊息中常常可以見到「權威」的存在，因為這會增加信息的可信度。「官方機構的作為」分類代表這些假訊息的內容佯裝成國家政策或 WHO 建議的主張，也會誇大政策的內容。這一類的假訊息數量排名第二。</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="4"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-4'),
+            once: true,
+          }"
         >
           <p><span style="color: #f5867a;">「聯合國兒童基金會」（unicef）</span>——宣稱該組織發布了一系列如何避免染疫的措施，包括飲用熱水、不要吃冰淇淋等；</p>
           <p><span style="color: #ffad61;">「世界衛生組織」（WHO）</span>——世界衛生組織是最常被引用的權威，包括各種偏方或疫情的最新進展；</p>
@@ -167,6 +218,10 @@
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="5"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-5'),
+            once: true,
+          }"
         >
           <p>數量排名第三的是最危險的假訊息主題：「醫學相關、疾病的影響」。這類的假訊息謠傳各種可以治癒武漢肺炎的偏方，甚至有人誤信偏方而死亡——例如伊朗有超過 2 千人喝到假酒中毒，244 人因此身亡。</p>
           <br>
@@ -175,18 +230,30 @@
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="6"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-6'),
+            once: true,
+          }"
         >
           <p><span style="color: #f5867a;">治癒（cures）</span>——是這類假訊息最常見的詞。宣稱某種食物或方式可以治癒武漢肺炎，例如<span style="color: #ffad61;">維他命（vitamin）</span>、<span style="color: #ffd663;">咖啡（coffee）</span>、<span style="color: #b2d199;">茶（tea）</span>、<span style="color: #78b8cc;">大蒜（garlic）</span>。</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="7"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-7'),
+            once: true,
+          }"
         >
           <p>「名人宣稱或相關活動」的假訊息是關於名人、政客、公司企業的談話或作為。常見的內容是名人被確診武漢肺炎，或某公司因為武漢肺炎提供什麼樣的優惠。例如英國女王伊麗莎白、中國男星成龍等都曾被謠傳確診。這一類的假訊息數量排名第四。</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="8"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-8'),
+            once: true,
+          }"
         >
           <p><span style="color: #f5867a;">「否認」（denied）</span>——是這類假訊息的查核報告常出現的詞。因為假訊息會佯稱名人確診、名人捐錢、名人做了什麼事⋯⋯但事實上都沒有。</p>
           <br>
@@ -195,12 +262,20 @@
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="9"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-9'),
+            once: true,
+          }"
         >
           <p>「因為疫情衍生出的行為」代表內容並非直接和武漢肺炎有關，而是因為疫情引起的事件，例如政客之間的政治鬥爭、因為民眾需要檢疫發生的詐騙案，或是因為武漢肺炎許多國家停止了商業活動，讓大自然恢復平靜等等。</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="10"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-10'),
+            once: true,
+          }"
         >
           <p><span style="color: #f5867a;">漢他病毒（hantavirus）</span>——繼武漢肺炎之後，中國又出現新的人傳人病毒。但漢他病毒早就存在；</p>
           <p><span style="color: #ffad61;">清真寺（mosque）</span>——中國主席習近平參觀清真寺，為國家祈禱；</p>
@@ -209,18 +284,30 @@
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="11"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-11'),
+            once: true,
+          }"
         >
           <p>「病毒是如何傳播」分類中的假訊息，主要是謠傳各種病毒傳播的方式。例如病毒可能透過未刮的鬍鬚、報紙傳播，或因為某些國家丟棄染疫的屍體在海灘上，所以不要吃海鮮。</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="12"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-12'),
+            once: true,
+          }"
         >
           <p>武漢肺炎可以傳染給<span style="color: #f5867a;">動物（animal）</span>、<span style="color: #ffad61;">寵物（pets）</span>，或是在<span style="color: #ffd663;">雞（broiler）</span>身上發現了新型冠狀病毒。</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="13"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-13'),
+            once: true,
+          }"
         >
           <p>「陰謀論」、「病毒的起源」、「疫情其實不嚴重」這三個分類的主題常常出現在同一則假訊息中。這類的假訊息常常謠傳病毒早就已經存在、大流行早就被預言會發生、或是誰是病毒背後的幕後黑手。也會用流感、愛滋病等等病症的死亡人數來暗示武漢肺炎其實並不嚴重。</p>
           <br>
@@ -229,16 +316,26 @@
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="14"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-14'),
+            once: true,
+          }"
         >
           <p><span style="color: #f5867a;">諾斯特拉達穆斯（Nostradamus）</span>——是 1500 年代法國的占星家。留下以詩體呈現的預言集，有研究者從這些短詩中看到發生在「未來」的歷史事件，如法國大革命、希特勒的崛起等等，武漢肺炎也沒有缺席；</p>
           <p><span style="color: #ffad61;">被預言（predicted）</span>——武漢肺炎早就被預言會發生。除了占星家以外，小說、電視劇或卡通辛普森都曾「預言」過；</p>
           <p><span style="color: #ffd663;">5G（5G）</span>——中國在去年年底啟用了首批 5G 網路，跟武漢肺炎興起的時機不謀而合。有心人士就造謠病毒是透過 5G 基地台傳播，英國有基地台因此被拆毀；</p>
           <p><span style="color: #b2d199;">比爾蓋茲（Bill Gates）</span>——比爾蓋茲被指稱是武漢肺炎的幕後黑手。他創造病毒是為了疫苗的暴利或為了減少世界人口；</p>
           <p><span style="color: #78b8cc;">實驗室（laboratory）</span>——武漢肺炎是人類在中國實驗室做出來的生物武器。</p>
+          <br>
+          <p>又例如，在「疫情其實不嚴重」的分類中，常見用「流感」（flu）的死亡人數暗示武漢肺炎沒那麼嚴重，或稱武漢肺炎只是感冒（cold）。</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="15"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-15'),
+            once: true,
+          }"
         >
           <p>「疫苗研發」的假訊息內容跟疫苗的發展有關。各地都有宣稱已經成功研發對抗武漢肺炎疫苗的訊息，但這些都是假的，因為迄今仍然沒有成功的研發案例。</p>
           <br>
@@ -247,13 +344,24 @@
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
           data-chart="16"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart5-16'),
+            once: true,
+          }"
         >
           <p><span style="color: #f5867a;">研發（developed）</span>——疫苗研發的進度，或宣稱已經被研發出來；</p>
           <p><span style="color: #ffad61;">塞內加爾（senegal）</span>——疫苗在塞內加爾進行實驗，死了 7 個小孩。</p>
+          <p><span style="color: #ffd663;">超市（supermarket）</span>——以超市空蕩的貨架照片、或一大堆人衝進超市的影片，製造物資缺乏的恐慌。</p>
         </div>
       </article>
     </section>
-    <section class="text-only-section">
+    <section
+      class="text-only-section"
+      v-observe-visibility="{
+        callback: (isVisible) => isVisible && handleVisible('text-only-section-1'),
+        once: true,
+      }"
+    >
       <p>除了主題以外，READr 也嘗試探索這些假訊息的影響力。根據事實查核組織的註記，在這些報告中，有 782 篇是在 Twitter 上散佈的假訊息。我們人工抓出報告中假訊息的原文（由於有些事實查核報吿沒有標記原文、有些原文在 Twitter 上已經佚失，共找到 351 篇，佔整體 45%），並在 Twitter 以及政治大學鄭宇君團隊提供的 Twitter 封存推文資料中查詢它們的影響力。發現了不太一樣的趨勢。</p>
     </section>
     <section class="scrolly">
@@ -327,12 +435,20 @@
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
           data-chart="1"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart6-1'),
+            once: true,
+          }"
         >
           <p>從轉推數可以看到，影響力最大的假訊息分類是「因為疫情衍生出的行為」，但從事實查核報告的統計中，此類型假訊息的數量只佔整體 8%。</p>
         </div>
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
           data-chart="2"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart6-2'),
+            once: true,
+          }"
         >
           <p>轉推數第一名、第二名的假訊息都是有關大自然因為人類減少活動而恢復。</p>
           <br>
@@ -343,6 +459,10 @@
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
           data-chart="3"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart6-3'),
+            once: true,
+          }"
         >
           <p>這類的假訊息除了大自然恢復平靜以外，也包含了政治人物的說法或是政治鬥爭。由於這些人本身在推特上就有很多追蹤者，所說的話自然也容易被關注。</p>
           <br>
@@ -353,6 +473,10 @@
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
           data-chart="4"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart6-4'),
+            once: true,
+          }"
         >
           <p>「病毒在社區中的傳播」、「醫學相關、疾病的影響」這兩個分類，在查核報告的統計中數量是最多的。</p>
           <br>
@@ -363,6 +487,10 @@
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
           data-chart="5"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart6-5'),
+            once: true,
+          }"
         >
           <p>都是影片：一位醫生嘗試想要擁抱據說感染了武漢肺炎而被隔離的嬰兒的影片，在推特上瘋傳；義大利人於隔離期間在自己的陽台上唱歌跳舞；違反檢疫規定的義大利人被警察當場逮捕；居住在中國的黑人被亞洲人圍毆攻擊⋯⋯</p>
           <br>
@@ -371,6 +499,10 @@
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
           data-chart="6"
+          v-observe-visibility="{
+            callback: (isVisible) => isVisible && handleVisible('chart6-6'),
+            once: true,
+          }"
         >
           <p>「醫學相關」的內容中，除了奎寧以外，「布洛芬」會對患者造成負面影響的訊息也在推特上傳佈。</p>
           <br>
@@ -378,10 +510,22 @@
         </div>
       </article>
     </section>
-    <section class="text-only-section">
+    <section
+      class="text-only-section"
+      v-observe-visibility="{
+        callback: (isVisible) => isVisible && handleVisible('text-only-section-2'),
+        once: true,
+      }"
+    >
       <p>武漢肺炎疫情仍在全球延燒，但除了病毒之外，還需要注意的是與病毒一樣會奪取人們性命、甚至跑得比病毒還快的假訊息。關於這些假訊息的影響力，請見 READr 製作的另一篇報導：武漢肺炎——跑得比病毒還快的假訊息。</p>
     </section>
-    <Footer style="margin-top: 50px" />
+    <Footer
+      style="margin-top: 50px"
+      v-observe-visibility="{
+        callback: (isVisible) => isVisible && handleVisible('footer'),
+        once: true,
+      }"
+    />
   </div>
 </template>
 
@@ -467,6 +611,9 @@ Vue.use(VueObserveVisibility)
       }
     },
     methods: {
+      handleVisible(label) {
+        window.ga('send', 'event', 'projects', 'scroll', label, { nonInteraction: false })
+      },
       visibilityChanged(isVisible) {
         if (isVisible) {
           this.showLongChartsTopic = false
@@ -653,8 +800,10 @@ Vue.use(VueObserveVisibility)
     bottom: 10px;
     right: 10px;
     max-width: 80%;
+    display: none;
   }
   .long-chart__textboxes.fix {
+    display: initial;
     position: fixed;
     bottom: 10px;
     right: 10px;
