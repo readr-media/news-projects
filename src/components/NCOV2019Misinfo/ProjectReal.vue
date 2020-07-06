@@ -1,7 +1,19 @@
 <template>
   <div>
     <section class="landing center">
-      <h1>Landing（一屏）</h1>
+      <div class="landing-wrapper">
+        <div class="landing-wrapper-chart">
+          <ChartLanding/>
+        </div>
+        <div class="landing-wrapper-text">
+          <h1>五千篇事實查核報告分析</h1>
+          <h2>武漢肺炎<span style="color: #ff8261">假訊息</span>戰役</h2>
+          <div class="landing-wrapper-text__description-wrapper description-wrapper">
+            <p>武漢肺炎在國外疫情仍在延燒，READr
+              探索了從一月至今在全世界傳播的假訊息。際價的代節究果機文車可未年利助都會點年發格這不文等背樂教父的體師排極才少子人全？去候然近……科書品生向投的神單出態接門只知利因：打隨全：樂你好生品時不例本生溫去人達新可大油是年醫用提選真童被在期會之，技其做業來語山的和家見灣一體國手一論。</p>
+          </div>
+        </div>
+      </div>
     </section>
     <section class="scrolly">
       <figure class="scrolly__sticky-chart sticky-chart">
@@ -376,6 +388,7 @@
 <script>
   import enterView from 'enter-view'
   import scrollama from 'scrollama'
+  import ChartLanding from './ChartLanding.vue'
   import ChartFullData from './ChartFullData.vue'
   import ChartFullDataMobile from './ChartFullDataMobile.vue'
   import ChartLine from './ChartLine.vue'
@@ -411,6 +424,7 @@ Vue.use(VueObserveVisibility)
 
   export default {
     components: {
+      ChartLanding,
       ChartFullData,
       ChartFullDataMobile,
       ChartLine,
@@ -537,6 +551,38 @@ Vue.use(VueObserveVisibility)
 </script>
 
 <style scoped>
+  .landing-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .landing-wrapper-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .landing-wrapper-text h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: normal;
+  }
+  .landing-wrapper-text h2 {
+    margin: 10px 0 0 0;
+    font-size: 30px;
+  }
+  .description-wrapper {
+    background-color: #f9f9f9;
+    padding: 20px;
+    line-height: 1.75;
+    text-align: justify;
+    margin-top: 30px;
+  }
+  .description-wrapper p {
+    margin: 0;
+  }
+
   .mobile-only {
     display: block;
   }
@@ -555,7 +601,7 @@ Vue.use(VueObserveVisibility)
 
   .landing {
     height: 100vh;
-    background-color: rgba(51, 51, 51, 0.9);
+    padding: 0 20px;
   }
 
   .scrolly__sticky-chart {
@@ -639,6 +685,40 @@ Vue.use(VueObserveVisibility)
   }
 
   @media (min-width: 768px) {
+    .landing-wrapper {
+      max-width: 550px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .landing-wrapper-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .landing-wrapper-text h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: normal;
+    }
+    .landing-wrapper-text h2 {
+      margin: 20px 0 0 0;
+      font-size: 60px;
+    }
+    .description-wrapper {
+      background-color: #f9f9f9;
+      padding: 13px 28px;
+      line-height: 1.75;
+      text-align: justify;
+      margin-top: 30px;
+    }
+    .description-wrapper p {
+      margin: 0;
+    }
+
     .mobile-only {
       display: none;
     }
@@ -666,6 +746,11 @@ Vue.use(VueObserveVisibility)
       object-fit: contain;
       margin: 0 auto;
       padding-top: 50px;
+    }
+  }
+  @media (max-width: 320px) {
+    .description-wrapper p {
+      font-size: 14px;
     }
   }
 </style>
