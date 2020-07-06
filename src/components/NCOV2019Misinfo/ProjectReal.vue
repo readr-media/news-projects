@@ -204,6 +204,7 @@
             once: true,
           }"
         >
+          <p>例如：</p>
           <p><span style="color: #f5867a;">「棺材」（coffins）</span>——用滿地是棺材的照片傳言該地區已經因為武漢肺炎死了很多人；</p>
           <p><span style="color: #ffad61;">「病例」（case）</span>——宣稱某個地區已經有了第一起武漢肺炎病例；</p>
           <p><span style="color: #ffd663;">「圖片」（images）</span>——挪用各式各樣不相干的圖片來誇大疫情的影響；</p>
@@ -228,6 +229,7 @@
             once: true,
           }"
         >
+          <p>例如：</p>
           <p><span style="color: #f5867a;">「聯合國兒童基金會」（unicef）</span>——宣稱該組織發布了一系列如何避免染疫的措施，包括飲用熱水、不要吃冰淇淋等；</p>
           <p><span style="color: #ffad61;">「世界衛生組織」（WHO）</span>——世界衛生組織是最常被引用的權威，包括各種偏方或疫情的最新進展；</p>
           <p><span style="color: #ffd663;">「軍方」（military）</span>——因為疫情，政府準備動員軍隊來採取更嚴格的防疫措施。</p>
@@ -272,6 +274,7 @@
             once: true,
           }"
         >
+          <p>例如：</p>
           <p><span style="color: #f5867a;">「否認」（denied）</span>——是這類假訊息的查核報告常出現的詞。因為假訊息會佯稱名人確診、名人捐錢、名人做了什麼事⋯⋯但事實上都沒有。</p>
           <br>
           <p>例如梵蒂岡<span style="color: #ffad61;">「教宗」（pope）</span>被謠傳確診；葡萄牙球星<span style="color: #ffd663;">「羅納度」（ronaldo）</span>還被宣稱要將自己的家捐出來當作醫院使用。</p>
@@ -294,6 +297,7 @@
             once: true,
           }"
         >
+          <p>例如：</p>
           <p><span style="color: #f5867a;">漢他病毒（hantavirus）</span>——繼武漢肺炎之後，中國又出現新的人傳人病毒。但漢他病毒早就存在；</p>
           <p><span style="color: #ffad61;">清真寺（mosque）</span>——中國主席習近平參觀清真寺，為國家祈禱；</p>
           <p><span style="color: #ffd663;">搶劫（rob）</span>——有人會上門提供免費口罩。而當你戴上口罩時，就會陷入昏迷，歹徒藉此搶劫。這是一個古老謠言的變形。</p>
@@ -316,7 +320,7 @@
             once: true,
           }"
         >
-          <p>武漢肺炎可以傳染給<span style="color: #f5867a;">動物（animal）</span>、<span style="color: #ffad61;">寵物（pets）</span>，或是在<span style="color: #ffd663;">雞（broiler）</span>身上發現了新型冠狀病毒。</p>
+          <p>例如：武漢肺炎可以傳染給<span style="color: #f5867a;">動物（animal）</span>、<span style="color: #ffad61;">寵物（pets）</span>，或是在<span style="color: #ffd663;">雞（broiler）</span>身上發現了新型冠狀病毒。</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -338,6 +342,7 @@
             once: true,
           }"
         >
+          <p>例如：</p>
           <p><span style="color: #f5867a;">諾斯特拉達穆斯（Nostradamus）</span>——是 1500 年代法國的占星家。留下以詩體呈現的預言集，有研究者從這些短詩中看到發生在「未來」的歷史事件，如法國大革命、希特勒的崛起等等，武漢肺炎也沒有缺席；</p>
           <p><span style="color: #ffad61;">被預言（predicted）</span>——武漢肺炎早就被預言會發生。除了占星家以外，小說、電視劇或卡通辛普森都曾「預言」過；</p>
           <p><span style="color: #ffd663;">5G（5G）</span>——中國在去年年底啟用了首批 5G 網路，跟武漢肺炎興起的時機不謀而合。有心人士就造謠病毒是透過 5G 基地台傳播，英國有基地台因此被拆毀；</p>
@@ -366,6 +371,7 @@
             once: true,
           }"
         >
+          <p>例如：</p>
           <p><span style="color: #f5867a;">研發（developed）</span>——疫苗研發的進度，或宣稱已經被研發出來；</p>
           <p><span style="color: #ffad61;">塞內加爾（senegal）</span>——疫苗在塞內加爾進行實驗，死了 7 個小孩。</p>
           <p><span style="color: #ffd663;">超市（supermarket）</span>——以超市空蕩的貨架照片、或一大堆人衝進超市的影片，製造物資缺乏的恐慌。</p>
@@ -536,7 +542,7 @@
         once: true,
       }"
     >
-      <p>武漢肺炎疫情仍在全球延燒，但除了病毒之外，還需要注意的是與病毒一樣會奪取人們性命、甚至跑得比病毒還快的假訊息。關於這些假訊息的影響力，請見 READr 製作的另一篇報導：武漢肺炎——跑得比病毒還快的假訊息。</p>
+      <p>武漢肺炎疫情仍在全球延燒，但除了病毒之外，還需要注意的是與病毒一樣會奪取人們性命、甚至跑得比病毒還快的假訊息。關於這些假訊息的影響力，請見 READr 製作的另一篇報導：<a href="https://www.readr.tw/project/covid19-disinformation" target="_blank" style="color: #ff8261;">看得見的病毒：武漢肺炎假訊息。</a></p>
     </section>
     <Footer
       style="margin-top: 50px"
