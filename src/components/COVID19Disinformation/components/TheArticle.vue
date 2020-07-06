@@ -383,6 +383,21 @@
       target="_blank"
       rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_10.P_4.LINK') }}</a>{{ $t('COVID19_D.CHAPTER_10.P_4.TEXT_2') }}
     </p>
+    <figure class="covid-article__img">
+      <p
+        class="title"
+        v-text="$t('COVID19_D.CHART_11.TITLE')"
+      />
+      <div>
+        <iframe :src="`https://flo.uri.sh/visualisation/${$t('COVID19_D.CHART_11.ID')}/embed`"frameborder='0' scrolling='no' style='width:100%;height:600px;'>
+        </iframe>
+        <div style='width:100%!;margin-top:4px!important;text-align:right!important;'>
+          <a class='flourish-credit' :href="`https://public.flourish.studio/visualisation/${$t('COVID19_D.CHART_11.ID')}/?utm_source=embed&utm_campaign=visualisation/${$t('COVID19_D.CHART_11.ID')}`" target='_top' style='text-decoration:none!important'>
+            <img alt='Made with Flourish' v-lazy="'https://public.flourish.studio/resources/made_with_flourish.svg'" style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'>
+          </a>
+        </div>
+      </div>
+    </figure>
 
     <div class="info-box">
       <h3>{{ $t('COVID19_D.INFO_BOX.HEADING') }}</h3>
@@ -437,11 +452,11 @@
           <td>{{ $t('COVID19_D.INFO_BOX_TABLE.ROW_9.COLUMN_2') }}</td>
         </tr>
         <tr>
-          <td>{{ $t('COVID19_D.INFO_BOX_TABLE.ROW_10.COLUMN_1') }}</td>
+          <td>{{ $t('COVID19_D.INFO_BOX_TABLE.ROW_10.COLUMN_1') }}*</td>
           <td>{{ $t('COVID19_D.INFO_BOX_TABLE.ROW_10.COLUMN_2') }}</td>
         </tr>
         <tr>
-          <td>{{ $t('COVID19_D.INFO_BOX_TABLE.ROW_11.COLUMN_1') }}</td>
+          <td>{{ $t('COVID19_D.INFO_BOX_TABLE.ROW_11.COLUMN_1') }}*</td>
           <td>{{ $t('COVID19_D.INFO_BOX_TABLE.ROW_11.COLUMN_2') }}</td>
         </tr>
       </table>
@@ -584,7 +599,7 @@ export default {
       &:first-child
         width 80px
         @media (min-width: 1024px)
-          width 140px
+          width 145px
     + p
       margin-top 30px
 

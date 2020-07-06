@@ -232,6 +232,10 @@ export const COVID19_D = {
       TEXT_2: ', and refers to the research method of Reuters News Institute for manual classification.'
     }
   },
+  CHART_11: {
+    TITLE: 'The Differences of Hot Topics among Countries',
+    ID: '3091219'
+  },
   INFO_BOX: {
     HEADING: '｜Research Method｜',
     P_1: {

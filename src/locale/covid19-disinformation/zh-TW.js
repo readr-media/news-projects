@@ -232,6 +232,10 @@ export const COVID19_D = {
       TEXT_2: '中找出在 Twitter 上散佈的假訊息的原文，並參考路透社新聞研究所的研究方法人工分類。'
     }
   },
+  CHART_11: {
+    TITLE: '世界各國的熱門假訊息主題差異',
+    ID: '3088193'
+  },
   INFO_BOX: {
     HEADING: '｜研究方法｜',
     P_1: {
