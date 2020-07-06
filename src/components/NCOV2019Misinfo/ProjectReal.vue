@@ -16,12 +16,20 @@
           <h2>武漢肺炎<span style="color: #ff8261">假訊息</span>戰役</h2>
           <div class="landing-wrapper-text__description-wrapper description-wrapper">
             <p>武漢肺炎在國外疫情仍在延燒，READr 探索了從一月至今在全世界傳播的假訊息。際價的代節究果機文車可未年利助都會點年發格這不文等背樂教父的體師排極才少子人全？去候然近……科書品生向投的神單出態接門只知利因：打隨全：樂你好生品時不例本生溫去人達新可大油是年醫用提選真童被在期會之，技其做業來語山的和家見灣一體國手一論。</p>
+            <blockquote>註解：關鍵字計算方式：以查核報告作為文本用 TF-IDF 斷詞，佐以人工分析，找出該文本中獨特的詞。</blockquote>
           </div>
         </div>
       </div>
     </section>
     <section class="scrolly">
       <figure class="scrolly__sticky-chart sticky-chart">
+        <div
+          v-show="chartIndexScrolly === 1"
+          class="legend"
+        >
+          <div class="circle-hint circle-hint--orange"></div>
+          <p>一天的查核報告數量</p>
+        </div>
         <template v-if="$store.state.viewport[0] >= 768">
           <ChartFullData
             v-if="chartIndexScrolly >= 1 && chartIndexScrolly <= 3"
@@ -147,8 +155,17 @@
         </div>
       </article>
     </section>
-    <section class="scrolly">
+    <section
+      class="scrolly"
+    >
       <figure class="scrolly__sticky-chart sticky-chart">
+        <div
+          v-show="showChartTopicLegend && chartIndexScrollyTopics >= 1 && chartIndexScrollyRetweet === 0"
+          class="legend"
+        >
+          <div class="circle-hint circle-hint--orange"></div>
+          <p>一篇查核報告</p>
+        </div>
         <template v-if="$store.state.viewport[0] >= 768">
           <template v-for="order in 8">
             <component
@@ -327,7 +344,7 @@
           <p><span style="color: #b2d199;">比爾蓋茲（Bill Gates）</span>——比爾蓋茲被指稱是武漢肺炎的幕後黑手。他創造病毒是為了疫苗的暴利或為了減少世界人口；</p>
           <p><span style="color: #78b8cc;">實驗室（laboratory）</span>——武漢肺炎是人類在中國實驗室做出來的生物武器。</p>
           <br>
-          <p>又例如，在「疫情其實不嚴重」的分類中，常見用「流感」（flu）的死亡人數暗示武漢肺炎沒那麼嚴重，或稱武漢肺炎只是感冒（cold）。</p>
+          <p>又例如，在「疫情其實不嚴重」的分類中，常見用<span style="color: #609EE6">「流感」（flu）</span>的死亡人數暗示武漢肺炎沒那麼嚴重，或稱武漢肺炎只是<span style="color: #B68BDB">感冒（cold）</span>。</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -362,7 +379,9 @@
         once: true,
       }"
     >
-      <p>除了主題以外，READr 也嘗試探索這些假訊息的影響力。根據事實查核組織的註記，在這些報告中，有 782 篇是在 Twitter 上散佈的假訊息。我們人工抓出報告中假訊息的原文（由於有些事實查核報吿沒有標記原文、有些原文在 Twitter 上已經佚失，共找到 351 篇，佔整體 45%），並在 Twitter 以及政治大學鄭宇君團隊提供的 Twitter 封存推文資料中查詢它們的影響力。發現了不太一樣的趨勢。</p>
+      <p
+        v-observe-visibility="isVisible => { showChartTopicLegend = !isVisible }"
+      >除了主題以外，READr 也嘗試探索這些假訊息的影響力。根據事實查核組織的註記，在這些報告中，有 782 篇是在 Twitter 上散佈的假訊息。我們人工抓出報告中假訊息的原文（由於有些事實查核報吿沒有標記原文、有些原文在 Twitter 上已經佚失，共找到 351 篇，佔整體 45%），並在 Twitter 以及政治大學鄭宇君團隊提供的 Twitter 封存推文資料中查詢它們的影響力。發現了不太一樣的趨勢。</p>
     </section>
     <section class="scrolly">
       <figure class="scrolly__sticky-chart sticky-chart">
@@ -607,7 +626,8 @@ Vue.use(VueObserveVisibility)
         showLongChartsTopic: false,
         shouldFixLongChartArticleCountry: false,
         shouldFixLongChartArticlePlatform: false,
-        shouldFixLongChartArticleTopic: false
+        shouldFixLongChartArticleTopic: false,
+        showChartTopicLegend: false,
       }
     },
     methods: {
@@ -698,6 +718,32 @@ Vue.use(VueObserveVisibility)
 </script>
 
 <style scoped>
+  blockquote {
+    margin: 20px 0 0 0;
+    color: #4a4a4a;
+    line-height: 1.5;
+    padding: 0 0 0 13px;
+    border-left: 1px solid #979797;
+    text-align: justify;
+  }
+  .circle-hint {
+    width: 14px;
+    height: 14px;
+    border-radius: 100%;
+    margin: 0 10px 0 0;
+  }
+  .circle-hint--orange {
+    background-color: #ec894c;
+  }
+  .legend {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .landing-wrapper {
     display: flex;
     flex-direction: column;
@@ -721,7 +767,7 @@ Vue.use(VueObserveVisibility)
   }
   .description-wrapper {
     background-color: #f9f9f9;
-    padding: 20px;
+    padding: 20px 20px 24px 20px;
     line-height: 1.75;
     text-align: justify;
     margin-top: 30px;
@@ -747,7 +793,7 @@ Vue.use(VueObserveVisibility)
   }
 
   .landing {
-    height: 100vh;
+    min-height: 100vh;
     padding: 0 20px;
   }
 
@@ -817,6 +863,9 @@ Vue.use(VueObserveVisibility)
     color: #4a4a4a;
     margin: 0 20px;
   }
+  .text-only-section p {
+    margin: 0;
+  }
 
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
@@ -834,6 +883,15 @@ Vue.use(VueObserveVisibility)
   }
 
   @media (min-width: 768px) {
+    .legend {
+      position: fixed;
+      top: auto;
+      bottom: 50px;
+      left: 200px;
+      width: initial;
+      display: flex;
+      align-items: center;
+    }
     .landing-wrapper {
       max-width: 550px;
       margin: 0 auto;
@@ -859,7 +917,7 @@ Vue.use(VueObserveVisibility)
     }
     .description-wrapper {
       background-color: #f9f9f9;
-      padding: 13px 28px;
+      padding: 13px 28px 20px 28px;
       line-height: 1.75;
       text-align: justify;
       margin-top: 30px;
@@ -898,8 +956,11 @@ Vue.use(VueObserveVisibility)
     }
   }
   @media (max-width: 320px) {
-    .description-wrapper p {
-      font-size: 14px;
+    /*.description-wrapper p {*/
+    /*  font-size: 14px;*/
+    /*}*/
+    .landing {
+      padding: 50px 0 0 0;
     }
   }
 </style>
