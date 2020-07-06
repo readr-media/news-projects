@@ -52,6 +52,8 @@
           return '#f5867a'
         } else if (keywords.includes('塞內加爾')) {
           return '#ffad61'
+        } else if (keywords.includes('超市')) {
+          return '#ffd663'
         }
 
         return '#f2f2f2'
