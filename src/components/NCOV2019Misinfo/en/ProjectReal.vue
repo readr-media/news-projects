@@ -72,7 +72,7 @@
             once: true,
           }"
         >
-          <p>From the change of the number of fact-checking reports, we can see a small peak in early February. At that time, the epidemic mainly broke out in China, so the major topics of disinformation were related to “China” in every country.</p>
+          <p>From the change of the number of fact-checking reports, we can see a small peak in early February. At that time, the epidemic mainly broke out in China, so the major topics of disinformation were related to "China" in every country.</p>
         </div>
         <div
           class="enter-view-step textboxes__textbox textboxes__textbox--scrolly"
@@ -151,7 +151,7 @@
             once: true,
           }"
         >
-          <p>READr referred to the <a href="https://reutersinstitute.politics.ox.ac.uk/types-sources-and-claims-covid-19-misinformation" target="_blank" rel="noreferrer noopener" style="color: #ff8261;">research method of Reuters Institute for the Study of Journalism</a> and classified the samples manually. We found that  “community spread” was the type with the largest number. Most contents are about exaggerating the impact of the epidemic.</p>
+          <p>READr referred to the <a href="https://reutersinstitute.politics.ox.ac.uk/types-sources-and-claims-covid-19-misinformation" target="_blank" rel="noreferrer noopener" style="color: #ff8261;">research method of Reuters Institute for the Study of Journalism</a> and classified the samples manually. We found that  "community spread" was the type with the largest number. Most contents are about exaggerating the impact of the epidemic.</p>
         </div>
       </article>
     </section>
@@ -194,7 +194,7 @@
             once: true,
           }"
         >
-          <p>The type “community spread” has the largest number of fact-checking reports. The content mainly describes the impact of the epidemic; for example, exaggerating the impact with suicides or protests caused by the epidemic, by claiming that a certain location was infected with the virus for the first time, or by accusing some specific races spreading the virus. According to the result, 1 out of 4 disinformation is on this topic.</p>
+          <p>The type "community spread" has the largest number of fact-checking reports. The content mainly describes the impact of the epidemic; for example, exaggerating the impact with suicides or protests caused by the epidemic, by claiming that a certain location was infected with the virus for the first time, or by accusing some specific races spreading the virus. According to the result, 1 out of 4 disinformation is on this topic.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -205,7 +205,7 @@
           }"
         >
           <p>For example,</p>
-          <p><span style="color: #f5867a;">“Coffins”</span>, using pictures of piles of coffins to start a rumor about many people having died from COVID-19 in that area.</p>
+          <p><span style="color: #f5867a;">"Coffins"</span>, using pictures of piles of coffins to start a rumor about many people having died from COVID-19 in that area.</p>
           <p><span style="color: #ffad61;">"Case"</span>, claiming a place had the first COVID-19 confirmed case.</p>
           <p><span style="color: #ffd663;">"Images"</span>, using various irrelevant pictures to exaggerate the impact of the epidemic.</p>
           <p><span style="color: #b2d199;">"Venezuela"</span>, claiming that the Italians felt "money is useless for saving lives" and threw money on the streets. But the original story happened in Venezuela and has nothing to do with COVID-19.</p>
@@ -219,7 +219,7 @@
             once: true,
           }"
         >
-          <p>We can often see “authorities” in the disinformation. The authorities make the disinformation persuasive. The content of the type “Public Authority Action/Policy” claims to be the state policies or WHO recommendations. It also exaggerates the content of policies. The number of this type ranks second.</p>
+          <p>We can often see "authorities" in the disinformation. The authorities make the disinformation persuasive. The content of the type "Public Authority Action/Policy" claims to be the state policies or WHO recommendations. It also exaggerates the content of policies. The number of this type ranks second.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -230,8 +230,8 @@
           }"
         >
           <p>For example,</p>
-          <p><span style="color: #f5867a;">“UNICEF”</span>, claiming that the The United Nations Children's Fund recommended a series of measures to avoid infections, including drinking hot water and not eating ice cream.</p>
-          <p><span style="color: #ffad61;">“WHO”</span>, World Health Organization is the most frequently cited authority in the COVID-19 disinformation, including  various remedies or the latest news on epidemics.</p>
+          <p><span style="color: #f5867a;">"UNICEF"</span>, claiming that the The United Nations Children's Fund recommended a series of measures to avoid infections, including drinking hot water and not eating ice cream.</p>
+          <p><span style="color: #ffad61;">"WHO"</span>, World Health Organization is the most frequently cited authority in the COVID-19 disinformation, including  various remedies or the latest news on epidemics.</p>
           <p><span style="color: #ffd663;">"Military"</span>, claiming that the government would mobilize the military to take more stringent prevention measures.</p>
         </div>
         <div
@@ -254,7 +254,7 @@
             once: true,
           }"
         >
-          <p><span style="color: #f5867a;">“Cure”</span>, the most common word in this type of disinformation, claiming certain food or therapy could cure COVID-19, like <span style="color: #ffad61;">"vitamin"</span>, <span style="color: #ffd663;">"coffee"</span>, <span style="color: #b2d199;">"tea"</span>, <span style="color: #78b8cc;">"garlic"</span>.</p>
+          <p><span style="color: #f5867a;">"Cure"</span>, the most common word in this type of disinformation, claiming certain food or therapy could cure COVID-19, like <span style="color: #ffad61;">"vitamin"</span>, <span style="color: #ffd663;">"coffee"</span>, <span style="color: #b2d199;">"tea"</span>, <span style="color: #78b8cc;">"garlic"</span>.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -264,7 +264,7 @@
             once: true,
           }"
         >
-          <p>The type “prominent actors" is about talks or acts of celebrities, politicians, and companies. They often claim that celebrities were infected by COVID-19, or claim a company was offering discounts due to the epidemic. For example, Queen Elizabeth II and Chinese actor Jackie Chan have rumors of being infected. The number of disinformation in this type ranks fourth.</p>
+          <p>The type "prominent actors" is about talks or acts of celebrities, politicians, and companies. They often claim that celebrities were infected by COVID-19, or claim a company was offering discounts due to the epidemic. For example, Queen Elizabeth II and Chinese actor Jackie Chan have rumors of being infected. The number of disinformation in this type ranks fourth.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -287,7 +287,7 @@
             once: true,
           }"
         >
-          <p>The type “other incidents caused by COVID-19” means some incidents happened because of the epidemic, but not directly related to the virus, such as political struggles between politicians, frauds happened when people need quarantine, or nature restoration since many countries stop business activities.</p>
+          <p>The type "other incidents caused by COVID-19" means some incidents happened because of the epidemic, but not directly related to the virus, such as political struggles between politicians, frauds happened when people need quarantine, or nature restoration since many countries stop business activities.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -310,7 +310,7 @@
             once: true,
           }"
         >
-          <p>The type “virus transmission” of disinformation is mainly  spreading rumors about the various ways of virus transmission. For example, claiming the virus may spread through unshaved beards and newspapers. Or, claiming that do not eat seafood because some countries discard infected bodies on the beach.</p>
+          <p>The type "virus transmission" of disinformation is mainly  spreading rumors about the various ways of virus transmission. For example, claiming the virus may spread through unshaved beards and newspapers. Or, claiming that do not eat seafood because some countries discard infected bodies on the beach.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -330,9 +330,9 @@
             once: true,
           }"
         >
-          <p>The types “conspiracies”, “virus transmission” and “the epidemic is not serious” often show up in the same piece of disinformation. These types of disinformation claim that the coronavirus has long existed, the COVID-19 epidemic has been predicted, or someone is behind the epidemic. They also imply that COVID-19 epidemic is not serious by comparing with the death numbers of other illnesses like flu or AIDS.</p>
+          <p>The types "conspiracies", "virus transmission" and "the epidemic is not serious" often show up in the same piece of disinformation. These types of disinformation claim that the coronavirus has long existed, the COVID-19 epidemic has been predicted, or someone is behind the epidemic. They also imply that COVID-19 epidemic is not serious by comparing with the death numbers of other illnesses like flu or AIDS.</p>
           <br>
-          <p>These types of disinformation also relate to the argument about “the origins of virus” between China and the USA. A research finds some disinformation are related to the Information war initiated by China.</p>
+          <p>These types of disinformation also relate to the argument about "the origins of virus" between China and the USA. A research finds some disinformation are related to the Information war initiated by China.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -342,14 +342,14 @@
             once: true,
           }"
         >
-          <p>For example, in type “Conspiracies”,</p>
+          <p>For example, in type "Conspiracies",</p>
           <p><span style="color: #f5867a;">"Nostradamus"</span>, a French astrologer in the 1500s. He left a collection of prophecies in poems. Some researchers saw historical events that occurred in the "future" from these short poems, such as the French Revolution, the rise of Hitler and so on. COVID-19 is included.</p>
-          <p><span style="color: #ffad61;">"Predicted"</span>, claiming that COVID-19 has been predicted to happen. Beside astrologers, novels, TV series or “The Simpsons” have predicted it.</p>
+          <p><span style="color: #ffad61;">"Predicted"</span>, claiming that COVID-19 has been predicted to happen. Beside astrologers, novels, TV series or "The Simpsons" have predicted it.</p>
           <p><span style="color: #ffd663;">"5G"</span>, China launched the first 5G networks in last December, which coincided with the rise of COVID-19. People with bad intentions made the rumor that virus spread through 5G base stations. Some 5G base stations in the UK were destroyed because of the rumor.</p>
           <p><span style="color: #b2d199;">"Bill Gates"</span>, who is rumored behind the COVID-19. The disinformation claims that he created the virus for the huge profits of the vaccine, or to reduce the world population.</p>
           <p><span style="color: #78b8cc;">"Laboratory"</span>, claiming that COVID-19 is a man-made biological weapon in a Chinese laboratory.</p>
           <br>
-          <p>And in type “The epidemic is not serious”, <span style="color: #609EE6">"flu"</span> is the most common word. The disinformation uses the death number of flu to imply that COVID-19 epidemic is not that serious. The disinformation also claims COVID-19 is just a <span style="color: #B68BDB">"cold"</span>.</p>
+          <p>And in type "The epidemic is not serious", <span style="color: #609EE6">"flu"</span> is the most common word. The disinformation uses the death number of flu to imply that COVID-19 epidemic is not that serious. The disinformation also claims COVID-19 is just a <span style="color: #B68BDB">"cold"</span>.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -359,7 +359,7 @@
             once: true,
           }"
         >
-          <p>The type “vaccine development and availability” claims about the development of vaccines. Many countries claim that they have successfully developed a vaccine for COVID-19, but  it is false, because no vaccine is ever developed successfully to date.</p>
+          <p>The type "vaccine development and availability" claims about the development of vaccines. Many countries claim that they have successfully developed a vaccine for COVID-19, but  it is false, because no vaccine is ever developed successfully to date.</p>
           <br>
           <p>"Public preparedness" refers to people hoarding or purchasing materials, or observing (or not observing) government regulations. For example,  embezzle an old video to claim that people rush into the supermarket in panic to buy goods, or photos of empty shelves in the supermarket.</p>
         </div>
@@ -505,9 +505,9 @@
             once: true,
           }"
         >
-          <p>The two types “community spread" and “general medical advice and virus characteristics" are the largest in the statistics of the fact-checking reports.</p>
+          <p>The two types "community spread" and "general medical advice and virus characteristics" are the largest in the statistics of the fact-checking reports.</p>
           <br>
-          <p>From the retweet counts, the influence of "general medical advice and virus characteristics" seems to be greater than “community spread", but that is due to the top 2 highest retweet counts are related to Trump’s praise of the effect of Quinine.</p>
+          <p>From the retweet counts, the influence of "general medical advice and virus characteristics" seems to be greater than "community spread", but that is due to the top 2 highest retweet counts are related to Trump’s praise of the effect of Quinine.</p>
           <br>
           <p>Excluding these two, the two types have similar influence. We also found that the count and the influence of disinformation in "community spread"  are relatively more on Twitter.</p>
         </div>
@@ -531,7 +531,7 @@
             once: true,
           }"
         >
-          <p>In the content of type "general medical advice and virus characteristics",   the information about that “Ibuprofen" can bring negative effects on patients is also spread on Twitter.</p>
+          <p>In the content of type "general medical advice and virus characteristics",   the information about that "Ibuprofen" can bring negative effects on patients is also spread on Twitter.</p>
           <br>
           <p>These contents show the fear of COVID-19 without medicine is still driving people to find answers.</p>
         </div>
@@ -544,7 +544,7 @@
         once: true,
       }"
     >
-      <p>Given the continual spread of COVID-19 around the world, aside from the virus, we should also be aware of the disinformation which can take human lives and spread faster than the virus. For the influence of these kinds of disinformation, please read another report produced by READr: <a href="https://www.readr.tw/project/covid19-disinformation/en" target="_blank" style="color: #ff8261;">“The Visible Virus: COVID-19 Disinformation”</a>.</p>
+      <p>Given the continual spread of COVID-19 around the world, aside from the virus, we should also be aware of the disinformation which can take human lives and spread faster than the virus. For the influence of these kinds of disinformation, please read another report produced by READr: <a href="https://www.readr.tw/project/covid19-disinformation/en" target="_blank" style="color: #ff8261;">"The Visible Virus: COVID-19 Disinformation"</a>.</p>
     </section>
     <Footer
       style="margin-top: 50px"
