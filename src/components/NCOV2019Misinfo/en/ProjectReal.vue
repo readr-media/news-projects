@@ -12,11 +12,11 @@
           <ChartLanding/>
         </div>
         <div class="landing-wrapper-text">
-          <h1>五千篇事實查核報告分析</h1>
-          <h2>武漢肺炎<span style="color: #ff8261">假訊息</span>戰役</h2>
+          <h1>5000 Fact-checking<br> Reports Analysis</h1>
+          <h2>COVID-19 <br><span style="color: #ff8261">Disinformation</span><br> War</h2>
           <div class="landing-wrapper-text__description-wrapper description-wrapper">
-            <p>READr 分析國際事實查核組織聯盟超過 5000 篇查核報告，探索「武漢肺炎假訊息」的危害，用視覺化的方式帶你看這 5 個月以來假訊息傳播的趨勢。</p>
-            <blockquote>註解：關鍵字計算方式：以查核報告作為文本用 TF-IDF 斷詞，佐以人工分析，找出該文本中獨特的詞。</blockquote>
+            <p>READr analyzed over 5000 fact-checking reports, and discovered the danger of "COVID-19 disinformation". We show the trends in the spread of  disinformation in the last 5 months through data visualization.</p>
+            <blockquote>Note: We use the TF-IDF word segmentation method and manual analysis to find the unique words in the text of fact-checking reports.</blockquote>
           </div>
         </div>
       </div>
@@ -62,7 +62,7 @@
             once: true,
           }"
         >
-          <p>在武漢肺炎的疫情仍在中國境內傳播時，假訊息傳播的速度顯然比較快。READr 分析國際事實查核組織聯盟超過 5000 篇查核報告，帶你看這五個月以來假訊息傳播的趨勢。</p>
+          <p>When the spreading of the virus was restricted to China, the spreading of disinformation was remarkably faster. READr analyzed over 5000 IFCN reports and the real situation of disinformation spreading in SNS, to show the trends in the spread of  disinformation in the last 5 months.</p>
         </div>
         <div
           class="enter-view-step textboxes__textbox textboxes__textbox--scrolly"
@@ -72,7 +72,7 @@
             once: true,
           }"
         >
-          <p>從事實查核報告的數量變化可以觀察到，2 月初期有一波小高峰，這時因為疫情主要都在中國，各國主要的假訊息主題跟和「中國」有關。</p>
+          <p>From the change of the number of fact-checking reports, we can see a small peak in early February. At that time, the epidemic mainly broke out in China, so the major topics of disinformation were related to "China" in every country.</p>
         </div>
         <div
           class="enter-view-step textboxes__textbox textboxes__textbox--scrolly"
@@ -82,12 +82,12 @@
             once: true,
           }"
         >
-          <p>但隨著病毒傳播到全世界，各國也開始面臨鋪天蓋地的假訊息。</p>
+          <p>As the virus is spreading to the world, every country begins to face overwhelming disinformation.</p>
           <div class="mobile-only">
             <br>
-            <p><span class="orange">2/21</span> 伊朗開始成為傳染節點</p>
-            <p><span class="orange">2/25</span> 義大利開始成為傳染節點</p>
-            <p><span class="orange">2/29</span> 美國出現第一起死亡案例</p>
+            <p><span class="orange">21 Feb</span>, Iran became a point of mass infection</p>
+            <p><span class="orange">25 Feb</span>, Italy became a point of mass infection</p>
+            <p><span class="orange">29 Feb</span>, the first death case in the United States</p>
           </div>
         </div>
       </article>
@@ -109,7 +109,7 @@
             once: true,
           }"
         >
-          <p>在所有國家中，印度的假訊息查核報告是最多的。除了當地事實查核組織的活躍度以外，也彰顯出印度受到假訊息的危害程度。</p>
+          <p>India has the most fact-checking reports among all countries. Beside the activity of the local fact-checking organization, it also shows how much India is harmed by disinformation.</p>
         </div>
       </article>
     </section>
@@ -130,7 +130,7 @@
             once: true,
           }"
         >
-          <p>而這些假訊息有超過一半都是透過 Facebook 傳播。社群平台 Twitter 和通訊軟體 Whatsapp 也是散播的主要媒介。</p>
+          <p>Ｍore than half of these disinformation are spread on Facebook. The social platform Twitter and the communication software Whatsapp are also the main media for spreading.</p>
         </div>
       </article>
     </section>
@@ -151,7 +151,7 @@
             once: true,
           }"
         >
-          <p>我們參考路透社新聞研究所的研究方法，人工替這些查核報告裡的假訊息分類，發現「病毒在社區中的傳播」（通常是誇大疫情的影響）是最多的。</p>
+          <p>READr referred to the <a href="https://reutersinstitute.politics.ox.ac.uk/types-sources-and-claims-covid-19-misinformation" target="_blank" rel="noreferrer noopener" style="color: #ff8261;">research method of Reuters Institute for the Study of Journalism</a> and classified the samples manually. We found that  "community spread" was the type with the largest number. Most contents are about exaggerating the impact of the epidemic.</p>
         </div>
       </article>
     </section>
@@ -194,7 +194,7 @@
             once: true,
           }"
         >
-          <p>數量最多的，是「病毒在社區中的傳播」類的假訊息。內容主要闡述疫情的影響，例如誇大疫情的影響，如疫情造成民眾自殺、引起抗議等；或聲稱某個地方首次遭到病毒感染；指責某些種特定種族傳播病毒等等。平均每 4 則假訊息就有 1 則是這個主題。</p>
+          <p>The type "community spread" has the largest number of fact-checking reports. The content mainly describes the impact of the epidemic; for example, exaggerating the impact with suicides or protests caused by the epidemic, by claiming that a certain location was infected with the virus for the first time, or by accusing some specific races spreading the virus. According to the result, 1 out of 4 disinformation is on this topic.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -204,12 +204,12 @@
             once: true,
           }"
         >
-          <p>例如：</p>
-          <p><span style="color: #f5867a;">「棺材」（coffins）</span>——用滿地是棺材的照片傳言該地區已經因為武漢肺炎死了很多人；</p>
-          <p><span style="color: #ffad61;">「病例」（case）</span>——宣稱某個地區已經有了第一起武漢肺炎病例；</p>
-          <p><span style="color: #ffd663;">「圖片」（images）</span>——挪用各式各樣不相干的圖片來誇大疫情的影響；</p>
-          <p><span style="color: #b2d199;">「委內瑞拉」（venezuela）</span>——佯稱義大利人覺得「錢對挽救生命毫無用處」，把錢撒在馬路上。但原本的故事發生在委內瑞拉，且與武漢肺炎無關；</p>
-          <p><span style="color: #78b8cc;">「暴動」（riots）</span>——英國倫敦因為食物不足引起了暴動，但事實上挪用了舊影片。</p>
+          <p>For example,</p>
+          <p><span style="color: #f5867a;">"Coffins"</span>, using pictures of piles of coffins to start a rumor about many people having died from COVID-19 in that area.</p>
+          <p><span style="color: #ffad61;">"Case"</span>, claiming a place had the first COVID-19 confirmed case.</p>
+          <p><span style="color: #ffd663;">"Images"</span>, using various irrelevant pictures to exaggerate the impact of the epidemic.</p>
+          <p><span style="color: #b2d199;">"Venezuela"</span>, claiming that the Italians felt "money is useless for saving lives" and threw money on the streets. But the original story happened in Venezuela and has nothing to do with COVID-19.</p>
+          <p><span style="color: #78b8cc;">"Riots"</span>, claiming that insufficient food caused riots in London, but in fact, it embezzled an old video.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -219,7 +219,7 @@
             once: true,
           }"
         >
-          <p>假訊息中常常可以見到「權威」的存在，因為這會增加信息的可信度。「官方機構的作為」分類代表這些假訊息的內容佯裝成國家政策或 WHO 建議的主張，也會誇大政策的內容。這一類的假訊息數量排名第二。</p>
+          <p>We can often see "authorities" in the disinformation. The authorities make the disinformation persuasive. The content of the type "Public Authority Action/Policy" claims to be the state policies or WHO recommendations. It also exaggerates the content of policies. The number of this type ranks second.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -229,10 +229,10 @@
             once: true,
           }"
         >
-          <p>例如：</p>
-          <p><span style="color: #f5867a;">「聯合國兒童基金會」（unicef）</span>——宣稱該組織發布了一系列如何避免染疫的措施，包括飲用熱水、不要吃冰淇淋等；</p>
-          <p><span style="color: #ffad61;">「世界衛生組織」（WHO）</span>——世界衛生組織是最常被引用的權威，包括各種偏方或疫情的最新進展；</p>
-          <p><span style="color: #ffd663;">「軍方」（military）</span>——因為疫情，政府準備動員軍隊來採取更嚴格的防疫措施。</p>
+          <p>For example,</p>
+          <p><span style="color: #f5867a;">"UNICEF"</span>, claiming that the The United Nations Children's Fund recommended a series of measures to avoid infections, including drinking hot water and not eating ice cream.</p>
+          <p><span style="color: #ffad61;">"WHO"</span>, World Health Organization is the most frequently cited authority in the COVID-19 disinformation, including  various remedies or the latest news on epidemics.</p>
+          <p><span style="color: #ffd663;">"Military"</span>, claiming that the government would mobilize the military to take more stringent prevention measures.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -242,9 +242,9 @@
             once: true,
           }"
         >
-          <p>數量排名第三的是最危險的假訊息主題：「醫學相關、疾病的影響」。這類的假訊息謠傳各種可以治癒武漢肺炎的偏方，甚至有人誤信偏方而死亡——例如伊朗有超過 2 千人喝到假酒中毒，244 人因此身亡。</p>
+          <p>The third in number is the most dangerous topic of disinformation, "General medical advice and virus characteristics". This kind of disinformation rumored that various remedies can cure COVID-19. People tried wrong remedies and died. For instance, more than 2,000 people in Iran were poisoned and 244 people died after drinking toxic alcohol.</p>
           <br>
-          <p>武漢肺炎至今仍然沒有特效藥，這也讓這類的假訊息持續猖獗地傳播。</p>
+          <p>There is no effective drugs for COVID-19,  which makes this type of disinformation keep spreading rampantly.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -254,7 +254,7 @@
             once: true,
           }"
         >
-          <p><span style="color: #f5867a;">治癒（cures）</span>——是這類假訊息最常見的詞。宣稱某種食物或方式可以治癒武漢肺炎，例如<span style="color: #ffad61;">維他命（vitamin）</span>、<span style="color: #ffd663;">咖啡（coffee）</span>、<span style="color: #b2d199;">茶（tea）</span>、<span style="color: #78b8cc;">大蒜（garlic）</span>。</p>
+          <p><span style="color: #f5867a;">"Cure"</span>, the most common word in this type of disinformation, claiming certain food or therapy could cure COVID-19, like <span style="color: #ffad61;">"vitamin"</span>, <span style="color: #ffd663;">"coffee"</span>, <span style="color: #b2d199;">"tea"</span>, <span style="color: #78b8cc;">"garlic"</span>.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -264,7 +264,7 @@
             once: true,
           }"
         >
-          <p>「名人宣稱或相關活動」的假訊息是關於名人、政客、公司企業的談話或作為。常見的內容是名人被確診武漢肺炎，或某公司因為武漢肺炎提供什麼樣的優惠。例如英國女王伊麗莎白、中國男星成龍等都曾被謠傳確診。這一類的假訊息數量排名第四。</p>
+          <p>The type "prominent actors" is about talks or acts of celebrities, politicians, and companies. They often claim that celebrities were infected by COVID-19, or claim a company was offering discounts due to the epidemic. For example, Queen Elizabeth II and Chinese actor Jackie Chan have rumors of being infected. The number of disinformation in this type ranks fourth.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -274,10 +274,10 @@
             once: true,
           }"
         >
-          <p>例如：</p>
-          <p><span style="color: #f5867a;">「否認」（denied）</span>——是這類假訊息的查核報告常出現的詞。因為假訊息會佯稱名人確診、名人捐錢、名人做了什麼事⋯⋯但事實上都沒有。</p>
+          <p>For example,</p>
+          <p><span style="color: #f5867a;">"Denied"</span>, the most common word in this type in the fact-checking reports. The disinformation claims  celebrities have been infected, or they donate money, etc. But none of these things happened.</p>
           <br>
-          <p>例如梵蒂岡<span style="color: #ffad61;">「教宗」（pope）</span>被謠傳確診；葡萄牙球星<span style="color: #ffd663;">「羅納度」（ronaldo）</span>還被宣稱要將自己的家捐出來當作醫院使用。</p>
+          <p>For instance, the Vatican <span style="color: #ffad61;">"pope"</span> is rumored to be infected. The Portuguese football player <span style="color: #ffd663;">"ronaldo"</span> has been declared to donate his house for hospital use.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -287,7 +287,7 @@
             once: true,
           }"
         >
-          <p>「因為疫情衍生出的行為」代表內容並非直接和武漢肺炎有關，而是因為疫情引起的事件，例如政客之間的政治鬥爭、因為民眾需要檢疫發生的詐騙案，或是因為武漢肺炎許多國家停止了商業活動，讓大自然恢復平靜等等。</p>
+          <p>The type "other incidents caused by COVID-19" means some incidents happened because of the epidemic, but not directly related to the virus, such as political struggles between politicians, frauds happened when people need quarantine, or nature restoration since many countries stop business activities.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -297,10 +297,10 @@
             once: true,
           }"
         >
-          <p>例如：</p>
-          <p><span style="color: #f5867a;">漢他病毒（hantavirus）</span>——繼武漢肺炎之後，中國又出現新的人傳人病毒。但漢他病毒早就存在；</p>
-          <p><span style="color: #ffad61;">清真寺（mosque）</span>——中國主席習近平參觀清真寺，為國家祈禱；</p>
-          <p><span style="color: #ffd663;">搶劫（rob）</span>——有人會上門提供免費口罩。而當你戴上口罩時，就會陷入昏迷，歹徒藉此搶劫。這是一個古老謠言的變形。</p>
+          <p>For example,</p>
+          <p><span style="color: #f5867a;">"Hantavirus"</span>, claiming that a new virus of human-to-human transmission emerged in China after COVID-19. But the hantavirus has actually been around for a long time.</p>
+          <p><span style="color: #ffad61;">"Mosque"</span>, claiming Chinese President Xi visited the mosque and prayed for the country.</p>
+          <p><span style="color: #ffd663;">"Rob"</span>, claiming somebody would come to the door to provide free masks. When you put on the mask, you would fall into a coma, and the gangster would rob you at that time. This is a variant of an ancient rumor.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -310,7 +310,7 @@
             once: true,
           }"
         >
-          <p>「病毒是如何傳播」分類中的假訊息，主要是謠傳各種病毒傳播的方式。例如病毒可能透過未刮的鬍鬚、報紙傳播，或因為某些國家丟棄染疫的屍體在海灘上，所以不要吃海鮮。</p>
+          <p>The type "virus transmission" of disinformation is mainly  spreading rumors about the various ways of virus transmission. For example, claiming the virus may spread through unshaved beards and newspapers. Or, claiming that do not eat seafood because some countries discard infected bodies on the beach.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -320,7 +320,7 @@
             once: true,
           }"
         >
-          <p>例如：武漢肺炎可以傳染給<span style="color: #f5867a;">動物（animal）</span>、<span style="color: #ffad61;">寵物（pets）</span>，或是在<span style="color: #ffd663;">雞（broiler）</span>身上發現了新型冠狀病毒。</p>
+          <p>For example, they claim that coronavirus could infect <span style="color: #f5867a;">"animals"</span> and <span style="color: #ffad61;">"pets"</span>. Or coronavirus was found in <span style="color: #ffd663;">"broiler"</span> chicken.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -330,9 +330,9 @@
             once: true,
           }"
         >
-          <p>「陰謀論」、「病毒的起源」、「疫情其實不嚴重」這三個分類的主題常常出現在同一則假訊息中。這類的假訊息常常謠傳病毒早就已經存在、大流行早就被預言會發生、或是誰是病毒背後的幕後黑手。也會用流感、愛滋病等等病症的死亡人數來暗示武漢肺炎其實並不嚴重。</p>
+          <p>The types "conspiracies", "virus transmission" and "the epidemic is not serious" often show up in the same piece of disinformation. These types of disinformation claim that the coronavirus has long existed, the COVID-19 epidemic has been predicted, or someone is behind the epidemic. They also imply that COVID-19 epidemic is not serious by comparing with the death numbers of other illnesses like flu or AIDS.</p>
           <br>
-          <p>這些假訊息也和後期美國與中國在爭論病毒起源來自哪裡有關，也有研究認為部分訊息是中國發起的資訊戰。</p>
+          <p>These types of disinformation also relate to the argument about "the origins of virus" between China and the USA. A research finds some disinformation are related to the Information war initiated by China.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -342,14 +342,14 @@
             once: true,
           }"
         >
-          <p>例如在「陰謀論」中：</p>
-          <p><span style="color: #f5867a;">諾斯特拉達穆斯（Nostradamus）</span>——是 1500 年代法國的占星家。留下以詩體呈現的預言集，有研究者從這些短詩中看到發生在「未來」的歷史事件，如法國大革命、希特勒的崛起等等，武漢肺炎也沒有缺席；</p>
-          <p><span style="color: #ffad61;">被預言（predicted）</span>——武漢肺炎早就被預言會發生。除了占星家以外，小說、電視劇或卡通辛普森都曾「預言」過；</p>
-          <p><span style="color: #ffd663;">5G（5G）</span>——中國在去年年底啟用了首批 5G 網路，跟武漢肺炎興起的時機不謀而合。有心人士就造謠病毒是透過 5G 基地台傳播，英國有基地台因此被拆毀；</p>
-          <p><span style="color: #b2d199;">比爾蓋茲（Bill Gates）</span>——比爾蓋茲被指稱是武漢肺炎的幕後黑手。他創造病毒是為了疫苗的暴利或為了減少世界人口；</p>
-          <p><span style="color: #78b8cc;">實驗室（laboratory）</span>——武漢肺炎是人類在中國實驗室做出來的生物武器。</p>
+          <p>For example, in type "Conspiracies",</p>
+          <p><span style="color: #f5867a;">"Nostradamus"</span>, a French astrologer in the 1500s. He left a collection of prophecies in poems. Some researchers saw historical events that occurred in the "future" from these short poems, such as the French Revolution, the rise of Hitler and so on. COVID-19 is included.</p>
+          <p><span style="color: #ffad61;">"Predicted"</span>, claiming that COVID-19 has been predicted to happen. Beside astrologers, novels, TV series or "The Simpsons" have predicted it.</p>
+          <p><span style="color: #ffd663;">"5G"</span>, China launched the first 5G networks in last December, which coincided with the rise of COVID-19. People with bad intentions made the rumor that virus spread through 5G base stations. Some 5G base stations in the UK were destroyed because of the rumor.</p>
+          <p><span style="color: #b2d199;">"Bill Gates"</span>, who is rumored behind the COVID-19. The disinformation claims that he created the virus for the huge profits of the vaccine, or to reduce the world population.</p>
+          <p><span style="color: #78b8cc;">"Laboratory"</span>, claiming that COVID-19 is a man-made biological weapon in a Chinese laboratory.</p>
           <br>
-          <p>又例如，在「疫情其實不嚴重」的分類中，常見用<span style="color: #609EE6">「流感」（flu）</span>的死亡人數暗示武漢肺炎沒那麼嚴重，或稱武漢肺炎只是<span style="color: #B68BDB">感冒（cold）</span>。</p>
+          <p>And in type "The epidemic is not serious", <span style="color: #609EE6">"flu"</span> is the most common word. The disinformation uses the death number of flu to imply that COVID-19 epidemic is not that serious. The disinformation also claims COVID-19 is just a <span style="color: #B68BDB">"cold"</span>.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -359,9 +359,9 @@
             once: true,
           }"
         >
-          <p>「疫苗研發」的假訊息內容跟疫苗的發展有關。各地都有宣稱已經成功研發對抗武漢肺炎疫苗的訊息，但這些都是假的，因為迄今仍然沒有成功的研發案例。</p>
+          <p>The type "vaccine development and availability" claims about the development of vaccines. Many countries claim that they have successfully developed a vaccine for COVID-19, but  it is false, because no vaccine is ever developed successfully to date.</p>
           <br>
-          <p>「準備與預防」則是關於人們囤積或購買物資、遵守（或不遵守）政府規定衍生出的行為。例如挪用舊影片宣稱人們驚恐地衝進超市搶購物資，或是空蕩蕩的貨架照片等等。</p>
+          <p>"Public preparedness" refers to people hoarding or purchasing materials, or observing (or not observing) government regulations. For example,  embezzle an old video to claim that people rush into the supermarket in panic to buy goods, or photos of empty shelves in the supermarket.</p>
         </div>
         <div
           class="enter-view-step-topics textboxes__textbox textboxes__textbox--scrolly"
@@ -371,10 +371,10 @@
             once: true,
           }"
         >
-          <p>例如：</p>
-          <p><span style="color: #f5867a;">研發（developed）</span>——疫苗研發的進度，或宣稱已經被研發出來；</p>
-          <p><span style="color: #ffad61;">塞內加爾（senegal）</span>——疫苗在塞內加爾進行實驗，死了 7 個小孩。</p>
-          <p><span style="color: #ffd663;">超市（supermarket）</span>——以超市空蕩的貨架照片、或一大堆人衝進超市的影片，製造物資缺乏的恐慌。</p>
+          <p>For example,</p>
+          <p><span style="color: #f5867a;">"Developed"</span>, claiming the progress of vaccine development, or claiming the vaccine has been developed successfully.</p>
+          <p><span style="color: #ffad61;">"Senegal"</span>, claiming 7 children died because of the vaccine experiment in Senegal.</p>
+          <p><span style="color: #ffd663;">"Supermarket"</span>, using photos of empty shelves in the supermarket or a crowd rushing into the supermarket, to create fear of supply shortage.</p>
         </div>
       </article>
     </section>
@@ -387,71 +387,71 @@
     >
       <p
         v-observe-visibility="isVisible => { showChartTopicLegend = !isVisible }"
-      >除了主題以外，READr 也嘗試探索這些假訊息的影響力。根據事實查核組織的註記，在這些報告中，有 782 篇是在 Twitter 上散佈的假訊息。我們人工抓出報告中假訊息的原文（由於有些事實查核報吿沒有標記原文、有些原文在 Twitter 上已經佚失，共找到 351 篇，佔整體 45%），並在 Twitter 以及政治大學鄭宇君團隊提供的 Twitter 封存推文資料中查詢它們的影響力。發現了不太一樣的趨勢。</p>
+      >In addition to the topics, we also tried to explore the influence of disinformation. According to the notes made by fact-checking organizations, 782 of the reports were disinformation spread on Twitter. We manually extracted the original text of the disinformation in the reports. (Some fact-checking reports do not mark the original text. Some original text have been lost on Twitter. We found a total of 351 articles, accounting for 45% of the total). We checked their influence in Twitter and in the archived tweet data provided by Yu-Chung Cheng’s team at National Chengchi University. We found a slightly different trend.</p>
     </section>
     <section class="scrolly">
       <figure class="scrolly__sticky-chart sticky-chart">
         <template v-if="$store.state.viewport[0] >= 768">
           <img
             v-show="chartIndexScrollyRetweet === 1"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-1-web.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-web-E.png"
             alt="retweet-chart-1"
           >
           <img
             v-show="chartIndexScrollyRetweet === 2"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-2-web.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C2-web-E.png"
             alt="retweet-chart-2"
           >
           <img
             v-show="chartIndexScrollyRetweet === 3"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-3-web.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C3-web-E.png"
             alt="retweet-chart-3"
           >
           <img
             v-show="chartIndexScrollyRetweet === 4"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-4-web.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C4-web-E.png"
             alt="retweet-chart-4"
           >
           <img
             v-show="chartIndexScrollyRetweet === 5"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-5-web.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C5-web-E.png"
             alt="retweet-chart-5"
           >
           <img
             v-show="chartIndexScrollyRetweet === 6"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-6-web.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C6-web-E.png"
             alt="retweet-chart-6"
           >
         </template>
         <template v-else>
           <img
             v-show="chartIndexScrollyRetweet === 1"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-1-mobile.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C1-mobile-E.png"
             alt="retweet-chart-1"
           >
           <img
             v-show="chartIndexScrollyRetweet === 2"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-2-mobile.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C2-mobile-E.png"
             alt="retweet-chart-2"
           >
           <img
             v-show="chartIndexScrollyRetweet === 3"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-3-mobile.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C3-mobile-E.png"
             alt="retweet-chart-3"
           >
           <img
             v-show="chartIndexScrollyRetweet === 4"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-4-mobile.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C4-mobile-E.png"
             alt="retweet-chart-4"
           >
           <img
             v-show="chartIndexScrollyRetweet === 5"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-5-mobile.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C5-mobile-E.png"
             alt="retweet-chart-5"
           >
           <img
             v-show="chartIndexScrollyRetweet === 6"
-            src="/proj-assets/ncov2019misinfo/static-charts/C1-6-mobile.png"
+            src="/proj-assets/ncov2019misinfo/static-charts/C6-mobile-E.png"
             alt="retweet-chart-6"
           >
         </template>
@@ -465,7 +465,9 @@
             once: true,
           }"
         >
-          <p>從轉推數可以看到，影響力最大的假訊息分類是「因為疫情衍生出的行為」，但從事實查核報告的統計中，此類型假訊息的數量只佔整體 8%。</p>
+          <p>From the retweet count, the influence of disinformation in the type of "incidents caused by the epidemic" is obviously more powerful than the other types. </p>
+          <br>
+          <p>In the total statistics of fact-checking reports, this type of disinformation only accounts for 8% of the total.</p>
         </div>
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
@@ -475,11 +477,11 @@
             once: true,
           }"
         >
-          <p>轉推數第一名、第二名的假訊息都是有關大自然因為人類減少活動而恢復。</p>
+          <p>The first and second popular tweets are about the nature is restored due to the reduction of human activities.</p>
           <br>
-          <p>被轉推了超過 30 萬次的這兩則推文是關於一組海豚與天鵝現身義大利威尼斯水道的照片。但事實上海豚沒有現身在那裡，天鵝也不是因為武漢肺炎封城後才出現，這是一種誤導的假訊息。</p>
+          <p>Two tweets retweeted for more than 300,000 times are a group of photos of dolphins and swans appearing in the Venice canals. However, the dolphins did not show up there, nor did the swans appear after COVID-19 lockdown. This is a misleading disinformation.</p>
           <br>
-          <p>在疾病大流行的氛圍中，這類的訊息是一種「好消息」，但追根究底它們還是假的。</p>
+          <p>These are "good news" in the pandemic gloom. But after all, they are still fake.</p>
         </div>
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
@@ -489,11 +491,11 @@
             once: true,
           }"
         >
-          <p>這類的假訊息除了大自然恢復平靜以外，也包含了政治人物的說法或是政治鬥爭。由於這些人本身在推特上就有很多追蹤者，所說的話自然也容易被關注。</p>
+          <p>This type of disinformation not only contains the idea of nature restoration, but also contains politicians' statements or political struggles. Since politicians have a lot of followers on Twitter, their tweets easily attract attention.</p>
           <br>
-          <p>轉推數第三名的假訊息來自美國總統川普——但需要注意的是，讓它成為假訊息的原因是後續的效應——川普在推特上不斷稱讚奎寧的療效，加上媒體錯誤報導推波助瀾，讓害怕染疫的人在沒有醫囑的狀況下自行服用，造成危險。</p>
+          <p>The third most retweeted disinformation came from US President Donald Trump. It is noticeable that the reason of making it disinformation is the follow-up effect: Trump constantly praised Quinine's efficacy on Twitter which was supported by the media’s misreporting. People who are afraid of infection take Quinine by themselves without medical advice, which will pose a danger.</p>
           <br>
-          <p>前副總統喬・拜登的推文也在榜上。他指出對武漢肺炎提出警告的疾管署官員不再被重用，但被華盛頓郵報查核所言並非全部屬實。</p>
+          <p>The tweets from former US Vice President Joe Biden are also on the list. He pointed out that a CDC official who warned against COVID-19 was silenced. This tweet was retweeted nearly 50,000 times, but it was false, checked by the Washington Post.</p>
         </div>
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
@@ -503,11 +505,11 @@
             once: true,
           }"
         >
-          <p>「病毒在社區中的傳播」、「醫學相關、疾病的影響」這兩個分類，在查核報告的統計中數量是最多的。</p>
+          <p>The two types "community spread" and "general medical advice and virus characteristics" are the largest in the statistics of the fact-checking reports.</p>
           <br>
-          <p>從轉推數來看，「醫學相關」的假訊息的影響力似乎大過於「病毒在社區中的傳播」，但那是因為前 2 則轉推數最高的都與川普稱讚奎寧的療效引發的效應有關。</p>
+          <p>From the retweet counts, the influence of "general medical advice and virus characteristics" seems to be greater than "community spread", but that is due to the top 2 highest retweet counts are related to Trump’s praise of the effect of Quinine.</p>
           <br>
-          <p>若撇除這 2 則，兩個分類的影響力差不多。而在推特上關於「病毒在社區中的傳播」、影響力又較大的假訊息相對比較多。</p>
+          <p>Excluding these two, the two types have similar influence. We also found that the count and the influence of disinformation in "community spread"  are relatively more on Twitter.</p>
         </div>
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
@@ -517,9 +519,9 @@
             once: true,
           }"
         >
-          <p>都是影片：一位醫生嘗試想要擁抱據說感染了武漢肺炎而被隔離的嬰兒的影片，在推特上瘋傳；義大利人於隔離期間在自己的陽台上唱歌跳舞；違反檢疫規定的義大利人被警察當場逮捕；居住在中國的黑人被亞洲人圍毆攻擊⋯⋯</p>
+          <p>They are all videos and are going viral on Twitter: a doctor tried to hug a baby who is rumored to be infected and quarantined. The Italians sang and danced on their balcony during lockdown. An Italian was arrested because he violated the rules of quarantine. A black living in China was attacked by Asians, etc.</p>
           <br>
-          <p>被感人的、開心的、可怕的，都是會令人感到「共鳴」的元素，讓人想要分享。這是假訊息傳播的要件之一。</p>
+          <p>The emotions of touching, delighting, and terrifying are elements that will strike a chord with people and make them want to share. They are the key factors for dissemination of disinformation.</p>
         </div>
         <div
           class="enter-view-step-retweet textboxes__textbox textboxes__textbox--scrolly"
@@ -529,9 +531,9 @@
             once: true,
           }"
         >
-          <p>「醫學相關」的內容中，除了奎寧以外，「布洛芬」會對患者造成負面影響的訊息也在推特上傳佈。</p>
+          <p>In the content of type "general medical advice and virus characteristics",   the information about that "Ibuprofen" can bring negative effects on patients is also spread on Twitter.</p>
           <br>
-          <p>從這些內容中可以看見，武漢肺炎沒有特效藥的恐懼還在驅動著人們找尋解答。</p>
+          <p>These contents show the fear of COVID-19 without medicine is still driving people to find answers.</p>
         </div>
       </article>
     </section>
@@ -542,7 +544,7 @@
         once: true,
       }"
     >
-      <p>武漢肺炎疫情仍在全球延燒，但除了病毒之外，還需要注意的是與病毒一樣會奪取人們性命、甚至跑得比病毒還快的假訊息。關於這些假訊息的影響力，請見 READr 製作的另一篇報導：<a href="https://www.readr.tw/project/covid19-disinformation" target="_blank" style="color: #ff8261;">看得見的病毒：武漢肺炎假訊息</a>。</p>
+      <p>Given the continual spread of COVID-19 around the world, aside from the virus, we should also be aware of the disinformation which can take human lives and spread faster than the virus. For the influence of these kinds of disinformation, please read another report produced by READr: <a href="https://www.readr.tw/project/covid19-disinformation/en" target="_blank" style="color: #ff8261;">"The Visible Virus: COVID-19 Disinformation"</a>.</p>
     </section>
     <Footer
       style="margin-top: 50px"
@@ -730,7 +732,7 @@ Vue.use(VueObserveVisibility)
     line-height: 1.5;
     padding: 0 0 0 13px;
     border-left: 1px solid #979797;
-    text-align: justify;
+    /*text-align: justify;*/
   }
   .circle-hint {
     width: 14px;
@@ -766,16 +768,18 @@ Vue.use(VueObserveVisibility)
     margin: 0;
     font-size: 20px;
     font-weight: normal;
+    text-align: center;
   }
   .landing-wrapper-text h2 {
     margin: 10px 0 0 0;
     font-size: 30px;
+    text-align: center;
   }
   .description-wrapper {
     background-color: #f9f9f9;
     padding: 20px 20px 24px 20px;
     line-height: 1.75;
-    text-align: justify;
+    /*text-align: justify;*/
     margin-top: 30px;
   }
   .description-wrapper p {
@@ -865,7 +869,7 @@ Vue.use(VueObserveVisibility)
     max-width: 820px;
     font-size: 16px;
     line-height: 1.75;
-    text-align: justify;
+    /*text-align: justify;*/
     color: #4a4a4a;
     margin: 0 20px;
   }
@@ -889,6 +893,9 @@ Vue.use(VueObserveVisibility)
   }
 
   @media (min-width: 768px) {
+    .landing-wrapper-chart {
+      width: 50%;
+    }
     .legend {
       position: fixed;
       top: auto;
@@ -899,7 +906,7 @@ Vue.use(VueObserveVisibility)
       align-items: center;
     }
     .landing-wrapper {
-      max-width: 550px;
+      max-width: 1000px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -921,7 +928,11 @@ Vue.use(VueObserveVisibility)
       margin: 20px 0 0 0;
       font-size: 60px;
     }
+    .landing-wrapper-text br {
+      display: none;
+    }
     .description-wrapper {
+      width: 50%;
       background-color: #f9f9f9;
       padding: 13px 28px 20px 28px;
       line-height: 1.75;
