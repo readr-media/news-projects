@@ -21,7 +21,7 @@
       return {
         width: 1680,
         height: 500,
-        margin: { top: 30, right: 100, left: 200, bottom: 30 }
+        margin: { top: 30, right: 100, left: 370, bottom: 30 }
       }
     },
     computed: {
@@ -48,11 +48,11 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('研發')) {
+        if (keywords.includes('developed')) {
           return '#f5867a'
-        } else if (keywords.includes('塞內加爾')) {
+        } else if (keywords.includes('senegal')) {
           return '#ffad61'
-        } else if (keywords.includes('超市')) {
+        } else if (keywords.includes('supermarket')) {
           return '#ffd663'
         }
 
@@ -74,8 +74,8 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
-        if (['疫苗研發', '準備與預防'].includes(d.topics)) {
+      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
+        if (['Vaccine development and availability', 'Public preparedness'].includes(d.topics)) {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
             date: d.date,
@@ -119,7 +119,7 @@
         .call(g => g.selectAll('text').style('font-size', '16px'))
       wrapper.append('g').call(xAxis)
 
-      const y = d3.scaleBand().domain(['疫苗研發', '準備與預防']).range([0, noSplitHeight])
+      const y = d3.scaleBand().domain(['Vaccine development and availability', 'Public preparedness']).range([0, noSplitHeight])
       const yAxis = g => g
         .call(
           d3.axisLeft(y)

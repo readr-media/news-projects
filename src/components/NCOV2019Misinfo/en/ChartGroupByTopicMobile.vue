@@ -45,7 +45,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
+      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
         return {
           // date: d3.timeParse('%Y-%m-%d')(d.date),
           date: d.date,

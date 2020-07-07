@@ -21,7 +21,7 @@
       return {
         width: 1680,
         height: 500,
-        margin: { top: 30, right: 100, left: 200, bottom: 30 }
+        margin: { top: 30, right: 100, left: 300, bottom: 30 }
       }
     },
     computed: {
@@ -48,19 +48,19 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('諾斯特拉達穆斯')) {
+        if (keywords.includes('Nostradamus')) {
           return '#f5867a'
-        } else if (keywords.includes('被預言')) {
+        } else if (keywords.includes('predicted')) {
           return '#ffad61'
         } else if (keywords.includes('5G')) {
           return '#ffd663'
-        } else if (keywords.includes('比爾蓋茲')) {
+        } else if (keywords.includes('Bill Gates')) {
           return '#b2d199'
-        } else if (keywords.includes('實驗室')) {
+        } else if (keywords.includes('laboratory')) {
           return '#78b8cc'
-        } else if (keywords.includes('流感')) {
+        } else if (keywords.includes('flu')) {
           return '#609EE6'
-        } else if (keywords.includes('感冒')) {
+        } else if (keywords.includes('cold')) {
           return '#B68BDB'
         }
 
@@ -82,8 +82,8 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
-        if (['陰謀論', '病毒的起源', '疫情其實不嚴重'].includes(d.topics)) {
+      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
+        if (['Conspiracies', 'Explanation of virus origins', 'The epidemic is not serious'].includes(d.topics)) {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
             date: d.date,
@@ -127,7 +127,7 @@
         .call(g => g.selectAll('text').style('font-size', '16px'))
       wrapper.append('g').call(xAxis)
 
-      const y = d3.scaleBand().domain(['陰謀論', '病毒的起源', '疫情其實不嚴重']).range([0, noSplitHeight])
+      const y = d3.scaleBand().domain(['Conspiracies', 'Explanation of virus origins', 'The epidemic is not serious']).range([0, noSplitHeight])
       const yAxis = g => g
         .call(
           d3.axisLeft(y)

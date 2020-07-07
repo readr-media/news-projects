@@ -15,7 +15,7 @@
       return {
         width: 1680,
         height: 1800,
-        margin: { top: 30, right: 100, left: 200, bottom: 30 }
+        margin: { top: 30, right: 100, left: 250, bottom: 30 }
       }
     },
     computed: {
@@ -45,7 +45,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_platform.csv', (d) => {
+      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_platform.csv', (d) => {
         return {
           // date: d3.timeParse('%Y-%m-%d')(d.date),
           date: d.date,

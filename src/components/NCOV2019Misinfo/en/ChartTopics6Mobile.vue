@@ -55,7 +55,7 @@
         //     keywords: ['漢他病毒', '清真寺', '搶劫']
         //   },
         //   {
-        //     topic: ['病毒是如何傳播'],
+        //     topic: ['Virus transmission'],
         //     keywords: ['動物', '寵物', '雞']
         //   },
         //   {
@@ -149,11 +149,11 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('動物')) {
+        if (keywords.includes('animal')) {
           return '#f5867a'
-        } else if (keywords.includes('寵物')) {
+        } else if (keywords.includes('pet')) {
           return '#ffad61'
-        } else if (keywords.includes('雞')) {
+        } else if (keywords.includes('broiler')) {
           return '#ffd663'
         }
 
@@ -175,7 +175,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
+      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
         // if (d.topics === '病毒在社區中的傳播') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
@@ -188,7 +188,7 @@
           }
         // }
       })
-      const data = this._dataCSV.filter(d => ['病毒是如何傳播'].includes(d.topics))
+      const data = this._dataCSV.filter(d => ['Virus transmission'].includes(d.topics))
 
       // const xDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[0])))
       const x = d3
@@ -214,7 +214,7 @@
       // wrapper.append('g').call(yAxis)
 
 
-       this._y = d3.scaleBand().domain(['病毒是如何傳播']).range([0, noSplitHeight])
+       this._y = d3.scaleBand().domain(['Virus transmission']).range([0, noSplitHeight])
        const y = this._y
 
       // const rDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[1].length)))
@@ -250,9 +250,9 @@
         .attr('text-anchor', 'middle')
         .attr('alignment-baseline', 'ideographic')
         .attr('x', innerWidth / 2)
-        .attr('y', d => y('病毒是如何傳播') + y.bandwidth() / 2 - 70)
+        .attr('y', d => y('Virus transmission') + y.bandwidth() / 2 - 70)
         .style('font-size', '16px')
-        .text('病毒是如何傳播')
+        .text('Virus transmission')
 
       this._force = d3
         .forceSimulation(data)

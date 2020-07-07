@@ -63,7 +63,7 @@
         //     keywords: ['諾斯特拉達穆斯', '被預言', '5G', '比爾蓋茲', '實驗室']
         //   },
         //   {
-        //     topic: ['疫苗研發', '準備與預防'],
+        //     topic: ['Vaccine development and availability', 'Public preparedness'],
         //     keywords: ['研發', '塞內加爾']
         //   },
         // ]
@@ -149,11 +149,11 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('研發')) {
+        if (keywords.includes('developed')) {
           return '#f5867a'
-        } else if (keywords.includes('塞內加爾')) {
+        } else if (keywords.includes('senegal')) {
           return '#ffad61'
-        } else if (keywords.includes('超市')) {
+        } else if (keywords.includes('supermarket')) {
           return '#ffd663'
         }
 
@@ -175,7 +175,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
+      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
         // if (d.topics === '病毒在社區中的傳播') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
@@ -188,7 +188,7 @@
           }
         // }
       })
-      const data = this._dataCSV.filter(d => ['疫苗研發', '準備與預防'].includes(d.topics))
+      const data = this._dataCSV.filter(d => ['Vaccine development and availability', 'Public preparedness'].includes(d.topics))
 
       // const xDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[0])))
       const x = d3
@@ -214,7 +214,7 @@
       // wrapper.append('g').call(yAxis)
 
 
-       this._y = d3.scaleBand().domain(['疫苗研發', '準備與預防']).range([0, noSplitHeight])
+       this._y = d3.scaleBand().domain(['Vaccine development and availability', 'Public preparedness']).range([0, noSplitHeight])
        const y = this._y
 
       // const rDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[1].length)))
@@ -247,7 +247,7 @@
 
       wrapper
         .selectAll('text')
-        .data(['疫苗研發', '準備與預防'])
+        .data(['Vaccine development and availability', 'Public preparedness'])
         .enter()
         .append('text')
         .attr('text-anchor', 'middle')

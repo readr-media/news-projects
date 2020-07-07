@@ -48,15 +48,15 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('棺材')) {
+        if (keywords.includes('coffin')) {
           return '#f5867a'
-        } else if (keywords.includes('病例')) {
+        } else if (keywords.includes('case')) {
           return '#ffad61'
-        } else if (keywords.includes('圖片')) {
+        } else if (keywords.includes('images')) {
           return '#ffd663'
-        } else if (keywords.includes('委內瑞拉')) {
+        } else if (keywords.includes('Venezuela')) {
           return '#b2d199'
-        } else if (keywords.includes('暴動')) {
+        } else if (keywords.includes('riot')) {
           return '#78b8cc'
         }
 
@@ -78,8 +78,8 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
-        if (d.topics === '病毒在社區中的傳播') {
+      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
+        if (d.topics === 'Community spread') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
             date: d.date,
@@ -123,7 +123,7 @@
         .call(g => g.selectAll('text').style('font-size', '16px'))
       wrapper.append('g').call(xAxis)
 
-      const y = d3.scaleBand().domain(['病毒在社區中的傳播']).range([0, noSplitHeight])
+      const y = d3.scaleBand().domain(['Community spread']).range([0, noSplitHeight])
       const yAxis = g => g
         .call(
           d3.axisLeft(y)

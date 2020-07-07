@@ -47,7 +47,7 @@
         //     keywords: ['治癒', '維他命', '咖啡', '茶', '大蒜']
         //   },
         //   {
-        //     topic: ['名人宣稱或相關活動'],
+        //     topic: ['Prominent actors'],
         //     keywords: ['否認', '教宗', '羅納度']
         //   },
         //   {
@@ -149,11 +149,11 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('否認')) {
+        if (keywords.includes('denied')) {
           return '#f5867a'
-        } else if (keywords.includes('教宗')) {
+        } else if (keywords.includes('pope')) {
           return '#ffad61'
-        } else if (keywords.includes('羅納度')) {
+        } else if (keywords.includes('Ronaldo')) {
           return '#ffd663'
         }
 
@@ -175,7 +175,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
+      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
         // if (d.topics === '病毒在社區中的傳播') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
@@ -188,7 +188,7 @@
           }
         // }
       })
-      const data = this._dataCSV.filter(d => ['名人宣稱或相關活動'].includes(d.topics))
+      const data = this._dataCSV.filter(d => ['Prominent actors'].includes(d.topics))
 
       // const xDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[0])))
       const x = d3
@@ -214,7 +214,7 @@
       // wrapper.append('g').call(yAxis)
 
 
-       this._y = d3.scaleBand().domain(['名人宣稱或相關活動']).range([0, noSplitHeight])
+       this._y = d3.scaleBand().domain(['Prominent actors']).range([0, noSplitHeight])
        const y = this._y
 
       // const rDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[1].length)))
@@ -250,9 +250,9 @@
         .attr('text-anchor', 'middle')
         .attr('alignment-baseline', 'ideographic')
         .attr('x', innerWidth / 2)
-        .attr('y', d => y('名人宣稱或相關活動') + y.bandwidth() / 2 - 70)
+        .attr('y', d => y('Prominent actors') + y.bandwidth() / 2 - 70)
         .style('font-size', '16px')
-        .text('名人宣稱或相關活動')
+        .text('Prominent actors')
 
       this._force = d3
         .forceSimulation(data)

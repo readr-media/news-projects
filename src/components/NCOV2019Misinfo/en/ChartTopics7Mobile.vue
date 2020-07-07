@@ -59,7 +59,7 @@
         //     keywords: ['動物', '寵物', '雞']
         //   },
         //   {
-        //     topic: ['陰謀論', '病毒的起源', '疫情其實不嚴重'],
+        //     topic: ['Conspiracies', 'Explanation of virus origins', 'The epidemic is not serious'],
         //     keywords: ['諾斯特拉達穆斯', '被預言', '5G', '比爾蓋茲', '實驗室']
         //   },
         //   {
@@ -149,16 +149,20 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('諾斯特拉達穆斯')) {
+        if (keywords.includes('Nostradamus')) {
           return '#f5867a'
-        } else if (keywords.includes('被預言')) {
+        } else if (keywords.includes('predicted')) {
           return '#ffad61'
         } else if (keywords.includes('5G')) {
           return '#ffd663'
-        } else if (keywords.includes('比爾蓋茲')) {
+        } else if (keywords.includes('Bill Gates')) {
           return '#b2d199'
-        } else if (keywords.includes('實驗室')) {
+        } else if (keywords.includes('laboratory')) {
           return '#78b8cc'
+        } else if (keywords.includes('flu')) {
+          return '#609EE6'
+        } else if (keywords.includes('cold')) {
+          return '#B68BDB'
         }
 
         return '#f2f2f2'
@@ -179,7 +183,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
+      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
         // if (d.topics === '病毒在社區中的傳播') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
@@ -192,7 +196,7 @@
           }
         // }
       })
-      const data = this._dataCSV.filter(d => ['陰謀論', '病毒的起源', '疫情其實不嚴重'].includes(d.topics))
+      const data = this._dataCSV.filter(d => ['Conspiracies', 'Explanation of virus origins', 'The epidemic is not serious'].includes(d.topics))
 
       // const xDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[0])))
       const x = d3
@@ -218,7 +222,7 @@
       // wrapper.append('g').call(yAxis)
 
 
-       this._y = d3.scaleBand().domain(['陰謀論', '病毒的起源', '疫情其實不嚴重']).range([0, noSplitHeight])
+       this._y = d3.scaleBand().domain(['Conspiracies', 'Explanation of virus origins', 'The epidemic is not serious']).range([0, noSplitHeight])
        const y = this._y
 
       // const rDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[1].length)))
@@ -251,7 +255,7 @@
 
       wrapper
         .selectAll('text')
-        .data(['陰謀論', '病毒的起源', '疫情其實不嚴重'])
+        .data(['Conspiracies', 'Explanation of virus origins', 'The epidemic is not serious'])
         .enter()
         .append('text')
         .attr('text-anchor', 'middle')

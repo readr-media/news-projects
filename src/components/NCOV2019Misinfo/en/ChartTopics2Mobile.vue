@@ -39,7 +39,7 @@
         //     keywords: ['棺材', '病例', '圖片', '委內瑞拉', '暴動']
         //   },
         //   {
-        //     topic: ['官方機構的作為'],
+        //     topic: ['Public authority action/policy'],
         //     keywords: ['聯合國兒童基金會', '軍方', '世界衛生組織']
         //   },
         //   {
@@ -149,11 +149,11 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('聯合國兒童基金會')) {
+        if (keywords.includes('unicef')) {
           return '#f5867a'
-        } else if (keywords.includes('世界衛生組織')) {
+        } else if (keywords.includes('WHO')) {
           return '#ffad61'
-        } else if (keywords.includes('軍方')) {
+        } else if (keywords.includes('military')) {
           return '#ffd663'
         }
 
@@ -175,7 +175,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
+      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
         // if (d.topics === '病毒在社區中的傳播') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
@@ -188,7 +188,7 @@
           }
         // }
       })
-      const data = this._dataCSV.filter(d => ['官方機構的作為'].includes(d.topics))
+      const data = this._dataCSV.filter(d => ['Public authority action/policy'].includes(d.topics))
 
       // const xDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[0])))
       const x = d3
@@ -214,7 +214,7 @@
       // wrapper.append('g').call(yAxis)
 
 
-       this._y = d3.scaleBand().domain(['官方機構的作為']).range([0, noSplitHeight])
+       this._y = d3.scaleBand().domain(['Public authority action/policy']).range([0, noSplitHeight])
        const y = this._y
 
       // const rDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[1].length)))
@@ -250,9 +250,9 @@
         .attr('text-anchor', 'middle')
         .attr('alignment-baseline', 'ideographic')
         .attr('x', innerWidth / 2)
-        .attr('y', d => y('官方機構的作為') + y.bandwidth() / 2 - 70)
+        .attr('y', d => y('Public authority action/policy') + y.bandwidth() / 2 - 70)
         .style('font-size', '16px')
-        .text('官方機構的作為')
+        .text('Public authority action/policy')
 
       this._force = d3
         .forceSimulation(data)

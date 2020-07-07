@@ -21,7 +21,7 @@
       return {
         width: 1680,
         height: 500,
-        margin: { top: 30, right: 100, left: 200, bottom: 30 }
+        margin: { top: 30, right: 100, left: 400, bottom: 30 }
       }
     },
     computed: {
@@ -48,15 +48,15 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('治癒')) {
+        if (keywords.includes('cures')) {
           return '#f5867a'
-        } else if (keywords.includes('維他命')) {
+        } else if (keywords.includes('vitamin')) {
           return '#ffad61'
-        } else if (keywords.includes('咖啡')) {
+        } else if (keywords.includes('coffee')) {
           return '#ffd663'
-        } else if (keywords.includes('茶')) {
+        } else if (keywords.includes('tea')) {
           return '#b2d199'
-        } else if (keywords.includes('大蒜')) {
+        } else if (keywords.includes('garlic')) {
           return '#78b8cc'
         }
 
@@ -78,8 +78,8 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
-        if (d.topics === '醫學相關、疾病的影響') {
+      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
+        if (d.topics === 'General medical advice and virus characteristics') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
             date: d.date,
@@ -123,7 +123,7 @@
         .call(g => g.selectAll('text').style('font-size', '16px'))
       wrapper.append('g').call(xAxis)
 
-      const y = d3.scaleBand().domain(['醫學相關、疾病的影響']).range([0, noSplitHeight])
+      const y = d3.scaleBand().domain(['General medical advice and virus characteristics']).range([0, noSplitHeight])
       const yAxis = g => g
         .call(
           d3.axisLeft(y)

@@ -149,15 +149,15 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('棺材')) {
+        if (keywords.includes('coffin')) {
           return '#f5867a'
-        } else if (keywords.includes('病例')) {
+        } else if (keywords.includes('case')) {
           return '#ffad61'
-        } else if (keywords.includes('圖片')) {
+        } else if (keywords.includes('images')) {
           return '#ffd663'
-        } else if (keywords.includes('委內瑞拉')) {
+        } else if (keywords.includes('Venezuela')) {
           return '#b2d199'
-        } else if (keywords.includes('暴動')) {
+        } else if (keywords.includes('riot')) {
           return '#78b8cc'
         }
 
@@ -179,7 +179,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
+      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
         // if (d.topics === '病毒在社區中的傳播') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
@@ -192,7 +192,7 @@
           }
         // }
       })
-      const data = this._dataCSV.filter(d => ['病毒在社區中的傳播'].includes(d.topics))
+      const data = this._dataCSV.filter(d => ['Community spread'].includes(d.topics))
 
       // const xDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[0])))
       const x = d3
@@ -218,7 +218,7 @@
       // wrapper.append('g').call(yAxis)
 
 
-       this._y = d3.scaleBand().domain(['病毒在社區中的傳播']).range([0, noSplitHeight])
+       this._y = d3.scaleBand().domain(['Community spread']).range([0, noSplitHeight])
        const y = this._y
 
       // const rDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[1].length)))
@@ -254,9 +254,9 @@
         .attr('text-anchor', 'middle')
         .attr('alignment-baseline', 'ideographic')
         .attr('x', innerWidth / 2)
-        .attr('y', d => y('病毒在社區中的傳播') + y.bandwidth() / 2 - 70)
+        .attr('y', d => y('Community spread') + y.bandwidth() / 2 - 70)
         .style('font-size', '16px')
-        .text('病毒在社區中的傳播')
+        .text('Community spread')
 
       this._force = d3
         .forceSimulation(data)

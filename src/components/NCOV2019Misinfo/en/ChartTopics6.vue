@@ -48,11 +48,11 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('動物')) {
+        if (keywords.includes('animal')) {
           return '#f5867a'
-        } else if (keywords.includes('寵物')) {
+        } else if (keywords.includes('pet')) {
           return '#ffad61'
-        } else if (keywords.includes('雞')) {
+        } else if (keywords.includes('broiler')) {
           return '#ffd663'
         }
 
@@ -74,8 +74,8 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
-        if (d.topics === '病毒是如何傳播') {
+      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
+        if (d.topics === 'Virus transmission') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
             date: d.date,
@@ -119,7 +119,7 @@
         .call(g => g.selectAll('text').style('font-size', '16px'))
       wrapper.append('g').call(xAxis)
 
-      const y = d3.scaleBand().domain(['病毒是如何傳播']).range([0, noSplitHeight])
+      const y = d3.scaleBand().domain(['Virus transmission']).range([0, noSplitHeight])
       const yAxis = g => g
         .call(
           d3.axisLeft(y)

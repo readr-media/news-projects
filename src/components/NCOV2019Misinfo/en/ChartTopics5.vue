@@ -21,7 +21,7 @@
       return {
         width: 1680,
         height: 500,
-        margin: { top: 30, right: 100, left: 200, bottom: 30 }
+        margin: { top: 30, right: 100, left: 370, bottom: 30 }
       }
     },
     computed: {
@@ -48,11 +48,11 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('漢他病毒')) {
+        if (keywords.includes('hantavirus')) {
           return '#f5867a'
-        } else if (keywords.includes('清真寺')) {
+        } else if (keywords.includes('mosque')) {
           return '#ffad61'
-        } else if (keywords.includes('搶劫')) {
+        } else if (keywords.includes('rob')) {
           return '#ffd663'
         }
 
@@ -74,8 +74,8 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
-        if (d.topics === '因為疫情衍生出的行為') {
+      const data = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
+        if (d.topics === 'Other incidents caused by COVID-19') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
             date: d.date,
@@ -119,7 +119,7 @@
         .call(g => g.selectAll('text').style('font-size', '16px'))
       wrapper.append('g').call(xAxis)
 
-      const y = d3.scaleBand().domain(['因為疫情衍生出的行為']).range([0, noSplitHeight])
+      const y = d3.scaleBand().domain(['Other incidents caused by COVID-19']).range([0, noSplitHeight])
       const yAxis = g => g
         .call(
           d3.axisLeft(y)

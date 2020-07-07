@@ -2,11 +2,15 @@
   <footer>
     <div class="footer__item credits-wrapper">
       <p>
-        <span>記者：李又如</span>
-        <span>設計：陳怡蒨</span>
-        <span>工程：熊凱文</span>
+        <span>Journalist: Yu-Ju Lee</span>
+        <br>
+        <span>Design: Yi-Chian Chen</span>
+        <br>
+        <span>Engineer: Kai-Wen Hsiung</span>
+        <br>
+        <span>Translation: Wen-Yen Chen</span>
       </p>
-      <p>資料：李又如、簡信昌、吳冠賢、政治大學鄭宇君團隊</p>
+      <p>Data Analysis: Yu-Ju Lee, Hsin-Chan Chieh, Meg Wu, Yu-Chung Cheng’s team at National Chengchi University</p>
     </div>
     <TheDonateFooter class="footer__item" />
     <TheNewsletterSubscribe class="footer__item" style="margin-left: 20px; margin-right: 20px" />
@@ -42,6 +46,7 @@ footer {
   color: #9f9f9f;
   font-size: 15px;
   margin: 0 20px;
+  text-align: center;
 }
 .credits-wrapper p {
   margin: 5px 0;

@@ -43,7 +43,7 @@
         //     keywords: ['聯合國兒童基金會', '軍方', '世界衛生組織']
         //   },
         //   {
-        //     topic: ['醫學相關、疾病的影響'],
+        //     topic: ['General medical advice and virus characteristics'],
         //     keywords: ['治癒', '維他命', '咖啡', '茶', '大蒜']
         //   },
         //   {
@@ -149,15 +149,15 @@
       },
       colorHandler(d) {
         const keywords = d.keywords
-        if (keywords.includes('治癒')) {
+        if (keywords.includes('cures')) {
           return '#f5867a'
-        } else if (keywords.includes('維他命')) {
+        } else if (keywords.includes('vitamin')) {
           return '#ffad61'
-        } else if (keywords.includes('咖啡')) {
+        } else if (keywords.includes('coffee')) {
           return '#ffd663'
-        } else if (keywords.includes('茶')) {
+        } else if (keywords.includes('tea')) {
           return '#b2d199'
-        } else if (keywords.includes('大蒜')) {
+        } else if (keywords.includes('garlic')) {
           return '#78b8cc'
         }
 
@@ -179,7 +179,7 @@
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/factcheck_report_split_topic.csv', (d) => {
+      this._dataCSV = await d3.csv('/proj-assets/ncov2019misinfo/data/en/factcheck_report_split_topic.csv', (d) => {
         // if (d.topics === '病毒在社區中的傳播') {
           return {
             // date: d3.timeParse('%Y-%m-%d')(d.date),
@@ -192,7 +192,7 @@
           }
         // }
       })
-      const data = this._dataCSV.filter(d => ['醫學相關、疾病的影響'].includes(d.topics))
+      const data = this._dataCSV.filter(d => ['General medical advice and virus characteristics'].includes(d.topics))
 
       // const xDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[0])))
       const x = d3
@@ -218,7 +218,7 @@
       // wrapper.append('g').call(yAxis)
 
 
-       this._y = d3.scaleBand().domain(['醫學相關、疾病的影響']).range([0, noSplitHeight])
+       this._y = d3.scaleBand().domain(['General medical advice and virus characteristics']).range([0, noSplitHeight])
        const y = this._y
 
       // const rDomainData = _.flatten(dataGroupByCountryTopTen.map(values => values[1].map(values => values[1].length)))
@@ -254,9 +254,9 @@
         .attr('text-anchor', 'middle')
         .attr('alignment-baseline', 'ideographic')
         .attr('x', innerWidth / 2)
-        .attr('y', d => y('醫學相關、疾病的影響') + y.bandwidth() / 2 - 70)
+        .attr('y', d => y('General medical advice and virus characteristics') + y.bandwidth() / 2 - 70)
         .style('font-size', '16px')
-        .text('醫學相關、疾病的影響')
+        .text('General medical advice and virus characteristics')
 
       this._force = d3
         .forceSimulation(data)
