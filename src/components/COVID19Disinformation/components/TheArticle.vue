@@ -11,7 +11,7 @@
     <p><a href="https://reutersinstitute.politics.ox.ac.uk/risj-review/how-fact-checkers-are-fighting-coronavirus-misinformation-worldwide" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_9.LINK') }}</a>{{ $t('COVID19_D.CHAPTER_1.P_9.TEXT_1') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_1.P_10.TEXT_1') }}<a href="https://www.poynter.org/ifcn-covid-19-misinformation/" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_10.LINK') }}</a>{{ $t('COVID19_D.CHAPTER_1.P_10.TEXT_2') }}</p>
     <p>{{ $t('COVID19_D.CHAPTER_1.P_11') }}</p>
-    <p>{{ $t('COVID19_D.CHAPTER_1.P_12.TEXT_1') }}<a href="/" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_12.LINK') }}</a></p>
+    <p>{{ $t('COVID19_D.CHAPTER_1.P_12.TEXT_1') }}<a href="https://www.readr.tw/project/covid19-disinformation-vis" target="_blank" rel="noopener noreferrer">{{ $t('COVID19_D.CHAPTER_1.P_12.LINK') }}</a>{{ $t('COVID19_D.CHAPTER_1.P_12.TEXT_2') }}</p>
     <figure class="covid-article__img">
       <p
         class="title"
@@ -345,7 +345,12 @@
         >
       </picture>
       <div class="chart-10-iframe">
-        <iframe src='https://flo.uri.sh/visualisation/3047523/embed' frameborder='0' scrolling='no' style='width:100%;height:600px;'></iframe>
+        <iframe
+          :src="`https://flo.uri.sh/visualisation/${$t('COVID19_D.CHART_10.SOURCE.ID')}/embed`"
+          frameborder='0'
+          scrolling='no'
+          style='width:100%;height:600px;'
+        />
         <div style='width:100%!;margin-top:4px!important;text-align:right!important;'>
           <a class='flourish-credit' href='https://public.flourish.studio/visualisation/2954585/?utm_source=embed&utm_campaign=visualisation/2954585' target='_top' style='text-decoration:none!important'>
           <img v-lazy="'https://public.flourish.studio/resources/made_with_flourish.svg'" alt='Made with Flourish' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'>
@@ -389,7 +394,7 @@
         v-text="$t('COVID19_D.CHART_11.TITLE')"
       />
       <div>
-        <iframe :src="`https://flo.uri.sh/visualisation/${$t('COVID19_D.CHART_11.ID')}/embed`"frameborder='0' scrolling='no' style='width:100%;height:600px;'>
+        <iframe :src="`https://flo.uri.sh/visualisation/${$t('COVID19_D.CHART_11.ID')}/embed`" frameborder='0' scrolling='no' style='width:100%;height:600px;'>
         </iframe>
         <div style='width:100%!;margin-top:4px!important;text-align:right!important;'>
           <a class='flourish-credit' :href="`https://public.flourish.studio/visualisation/${$t('COVID19_D.CHART_11.ID')}/?utm_source=embed&utm_campaign=visualisation/${$t('COVID19_D.CHART_11.ID')}`" target='_top' style='text-decoration:none!important'>
