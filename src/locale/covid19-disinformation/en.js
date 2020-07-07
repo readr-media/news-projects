@@ -31,8 +31,9 @@ export const COVID19_D = {
     },
     P_11: 'When observing the “influence” of disinformation, aside from the fact that horrible news is easy to strike a chord, we discovered that people tend to share “good news” of the pandemic. As celebrities have many followers, their influence on spreading disinformation are much stronger.',
     P_12: {
-      TEXT_1: 'We made a visualized project with more than 5000 fact-checking reports and their influence, as you can read here.',
-      LINK: ''
+      TEXT_1: 'We made a visualized project with more than 5000 fact-checking reports and their influence, as you can ',
+      LINK: 'read here',
+      TEXT_2: '.'
     },
     P_13: 'Although the number of fact-checking report does not directly represent the real number of disinformation,  the quantity gap may also be related to the activity level of local fact-checking organizations, and it represents the activity level of disinformation to some degrees.',
     P_14: {
@@ -229,7 +230,8 @@ export const COVID19_D = {
     SOURCE: {
       TEXT_1: 'READr manually finds the original text of the disinformation spread on Twitter in the ',
       LINK: 'IFCN fact check reports',
-      TEXT_2: ', and refers to the research method of Reuters News Institute for manual classification.'
+      TEXT_2: ', and refers to the research method of Reuters News Institute for manual classification.',
+      ID: '3047523'
     }
   },
   CHART_11: {
