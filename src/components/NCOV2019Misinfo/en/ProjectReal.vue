@@ -28,7 +28,7 @@
           class="legend"
         >
           <div class="circle-hint circle-hint--orange"></div>
-          <p>一天的查核報告數量</p>
+          <p>the number of fact checking reports a day</p>
         </div>
         <template v-if="$store.state.viewport[0] >= 768">
           <ChartFullData
@@ -164,7 +164,7 @@
           class="legend"
         >
           <div class="circle-hint circle-hint--orange"></div>
-          <p>一篇查核報告</p>
+          <p>a fact checking report</p>
         </div>
         <template v-if="$store.state.viewport[0] >= 768">
           <template v-for="order in 8">
@@ -330,7 +330,7 @@
             once: true,
           }"
         >
-          <p>The types "conspiracies", "virus transmission" and "the epidemic is not serious" often show up in the same piece of disinformation. These types of disinformation claim that the coronavirus has long existed, the COVID-19 epidemic has been predicted, or someone is behind the epidemic. They also imply that COVID-19 epidemic is not serious by comparing with the death numbers of other illnesses like flu or AIDS.</p>
+          <p>The types "conspiracies", "explanation of virus origins" and "the epidemic is not serious" often show up in the same piece of disinformation. These types of disinformation claim that the coronavirus has long existed, the COVID-19 epidemic has been predicted, or someone is behind the epidemic. They also imply that COVID-19 epidemic is not serious by comparing with the death numbers of other illnesses like flu or AIDS.</p>
           <br>
           <p>These types of disinformation also relate to the argument about "the origins of virus" between China and the USA. A research finds some disinformation are related to the Information war initiated by China.</p>
         </div>
