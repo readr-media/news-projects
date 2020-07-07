@@ -342,7 +342,7 @@
             once: true,
           }"
         >
-          <p>例如：</p>
+          <p>例如在「陰謀論」中：</p>
           <p><span style="color: #f5867a;">諾斯特拉達穆斯（Nostradamus）</span>——是 1500 年代法國的占星家。留下以詩體呈現的預言集，有研究者從這些短詩中看到發生在「未來」的歷史事件，如法國大革命、希特勒的崛起等等，武漢肺炎也沒有缺席；</p>
           <p><span style="color: #ffad61;">被預言（predicted）</span>——武漢肺炎早就被預言會發生。除了占星家以外，小說、電視劇或卡通辛普森都曾「預言」過；</p>
           <p><span style="color: #ffd663;">5G（5G）</span>——中國在去年年底啟用了首批 5G 網路，跟武漢肺炎興起的時機不謀而合。有心人士就造謠病毒是透過 5G 基地台傳播，英國有基地台因此被拆毀；</p>
@@ -542,7 +542,7 @@
         once: true,
       }"
     >
-      <p>武漢肺炎疫情仍在全球延燒，但除了病毒之外，還需要注意的是與病毒一樣會奪取人們性命、甚至跑得比病毒還快的假訊息。關於這些假訊息的影響力，請見 READr 製作的另一篇報導：<a href="https://www.readr.tw/project/covid19-disinformation" target="_blank" style="color: #ff8261;">看得見的病毒：武漢肺炎假訊息。</a></p>
+      <p>武漢肺炎疫情仍在全球延燒，但除了病毒之外，還需要注意的是與病毒一樣會奪取人們性命、甚至跑得比病毒還快的假訊息。關於這些假訊息的影響力，請見 READr 製作的另一篇報導：<a href="https://www.readr.tw/project/covid19-disinformation" target="_blank" style="color: #ff8261;">看得見的病毒：武漢肺炎假訊息</a>。</p>
     </section>
     <Footer
       style="margin-top: 50px"
