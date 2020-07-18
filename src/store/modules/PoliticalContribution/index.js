@@ -15,7 +15,7 @@ export default {
     section: {
       explore: {
         navs: {
-          radioPicked: 'ninth',
+          radioPicked: 'tenth',
           sortedBy: 'GroupByParty',
         },
         force: {

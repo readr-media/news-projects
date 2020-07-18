@@ -1,7 +1,7 @@
 <template>
   <div class="section-content-explore-candidate-portrait-round">
     <div :class="[ 'candidate-portrait', `candidate-portrait--${$t(`POLITICAL_CONTRIBUTION.PARTY['${candidateParty}']`)}` ]">
-      <img class="candidate-portrait__portrait-img" :src="`/proj-assets/political-contribution/candidate-portraits/${candidateName}.png`" :alt="candidateName">
+      <img class="candidate-portrait__portrait-img" :src="`/proj-assets/political-contribution/candidate-portraits/${candidateName}.png`" :alt="candidateName" @error="setAltImg">
     </div>
     <img v-if="isWon" class="section-content-explore-candidate-portrait-round__won-stamp" src="/proj-assets/political-contribution/elected.png" alt="">
   </div>
@@ -22,7 +22,12 @@ export default {
       type: Boolean,
       default: false,
     },
-  }  
+  },
+  methods: {
+    setAltImg (event) {
+      event.target.src = '/proj-assets/political-contribution/candidate-portraits/default.jpg'
+    }
+  }
 }
 </script>
 

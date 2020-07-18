@@ -50,14 +50,17 @@ export default {
     },
     percentageDPP () {
       return this.toFixedWithRounded(this.donatesDPP / this.donatesKMTDPP * 100, 1)
-    },
+    }
   },
   methods: {
     toFixedWithRounded (num, fixed) {
+      if (num === 0 | isNaN(num)) {
+        return 0
+      }
       const re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?')
       return num.toString().match(re)[0]
     }
-  }  
+  }
 }
 </script>
 

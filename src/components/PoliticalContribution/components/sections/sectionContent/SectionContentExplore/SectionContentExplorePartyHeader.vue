@@ -40,6 +40,10 @@ export default {
       background-color #736357
     &--pfp
       background-color #eb6c1f
+    &--tsp
+      background-color #A63F24
+    &--tpp
+      background-color #29C7C7
   &__count
     margin 0 0 0 20px
     font-size 40px
@@ -55,5 +59,9 @@ export default {
       color #736357
     &--pfp
       color #eb6c1f
+    &--tsp
+      color #A63F24
+    &--tpp
+      color #29C7C7
 </style>
 

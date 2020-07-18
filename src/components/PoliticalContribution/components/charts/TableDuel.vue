@@ -100,7 +100,7 @@ export default {
       return this.ordinal === '' ? this.ordinalRadioPicked : this.ordinal
     },
     dataCurrentOrdinal () {
-      return this.data[this.shouldVisualizeOrdinal]
+      return this.data[this.shouldVisualizeOrdinal] || this.data['ninth']
     },
     wonChanceLeft () {
       return `${(this.dataCurrentOrdinal.left.countWon / this.dataCurrentOrdinal.left.countCandidates * 100).toFixed(0)}%`
@@ -117,6 +117,9 @@ export default {
       const containerWidth = this.$el.getBoundingClientRect().width
       this.currentWidth = containerWidth
       this.currentHeight = Math.round(containerWidth / this.defaultAspect)
+      if (this.currentHeight <= 0) {
+        this.currentWidth = this.defaultHeight
+      }
     },
   },
   mounted () {

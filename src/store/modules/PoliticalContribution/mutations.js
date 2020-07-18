@@ -5,6 +5,7 @@ import { returnGroupThenCompany, } from './util'
 
 export default {
   SET_DATA: (state, { ordinal, body, field, }) => {
+    console.log(state.data)
     Vue.set(state.data[ordinal], field, body)
 
     const groupByCandidate = groupBy(body, '候選人')
