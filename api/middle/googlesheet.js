@@ -70,23 +70,24 @@ router.get('/', authGoogleAPI, fetchFromRedis, async (req, res, next) => {
   }
 }, insertIntoRedis)
 
-router.post('/', authGoogleAPI, (req, res) => {
+router.post('/', authGoogleAPI, async (req, res) => {
   const auth = req.auth
-  const sheets = google.sheets({version: 'v4', auth})
-  sheets.spreadsheets.values.append({
-    spreadsheetId: req.query.spreadsheet_id,
-    range: req.query.range,
-    valueInputOption: req.query.value_input_option,
+  const sheets = google.sheets({ version: 'v4', auth })
+  const { spreadsheet_id: spreadsheetId, range, value_input_option: valueInputOption } = req.query
+  const request = {
+    spreadsheetId,
+    range,
+    valueInputOption,
     resource: req.body
-  }, (err, {data}) => {
-    if (err) res.status(500).send(`The Google Sheet API returned an error while append: ${err}`)
-    const updates = data.updates
-    if (updates) {
-      res.status(200).send(updates)
-    } else {
-      res.status(200).send('No updates found in Google Sheet.')
-    }
-  })
+  }
+  try {
+    const response = (await sheets.spreadsheets.values.append(request)) || {}
+    const { data: { updates } = {} } = response
+
+    res.status(200).send(updates || 'No updates found in Google Sheet.')
+  } catch (err) {
+    res.status(500).send(`The Google Sheet API returned an error while append: ${err}`)
+  }
 })
 
 router.get('/nonredis', authGoogleAPI, async (req, res) => {

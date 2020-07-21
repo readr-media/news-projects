@@ -13,11 +13,9 @@
   "plugins": [
     "vue"
   ],
-  // "rules": { 
-  //   "array-bracket-spacing": [ 2, "always" ],
-  //   "camelcase": [ 0, "" ],
-  //   "yoda": [ 0, "never" ]
-  // },
+  "rules": {
+    "vue/attribute-hyphenation": ["error", "never"]
+  },
   "globals": {
     "location": true,
     "source": true
