@@ -126,7 +126,8 @@ export const PROJECTS_NEED_FB_SDK = [
 export const PROJECTS_NEED_FB_QUOTE = [
   'nanfangao-bridge',
   'food-delivery',
-  'backtoformosa'
+  'backtoformosa',
+  'eid'
 ]
 
 // include project url path which NOT need to reset scroll position in vue router
@@ -144,10 +145,11 @@ export const PROJECTS_NOT_NEED_APP_HEADER = [
   '/project/puyuma',
   '/project/disinformation',
   '/project/fake-news',
-  '/project/food-delivery',
+  '/project/food-delivery/:order?',
   '/project/election-2020',
   '/project/maskmap',
-  '/project/ncov2019search'
+  '/project/ncov2019search',
+  '/project/eid/:year?'
 ]
 
 export const SCRIPT_GOOGLE_MAP_REQUIRED = `<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&" async defer></script>`
