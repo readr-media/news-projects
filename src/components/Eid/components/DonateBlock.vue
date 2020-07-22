@@ -6,6 +6,7 @@
       class="normal"
       href="https://www.readr.tw/donate"
       target="_blank"
+      @click="$emit('sendGa')"
     >
       按下贊助鈕，當更多優質報導的金主
     </a>

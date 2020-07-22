@@ -125,6 +125,8 @@ export default {
       const totalMatchedFieldsOfIdCards = this.countMatchedFieldsOfIdCards()
       const idCardsIdx = this.idxOfMax(totalMatchedFieldsOfIdCards)
       this.$emit('generateResult', [idCardsIdx, this.checkedProfileIdx])
+
+      window.ga('send', 'event', 'projects', 'click', '送出鈕')
     },
     submitFields () {
       if (this.hasSubmitted) {
@@ -277,6 +279,7 @@ export default {
       display flex
       justify-content center
       align-items center
+      flex 0 0 auto
       @media (min-width $breakpoint-md)
         width 30px
         height 30px

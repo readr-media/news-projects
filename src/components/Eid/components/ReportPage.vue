@@ -39,7 +39,7 @@
         <p>針對這 3 大訴求，READr 訪問國發會和內政部，均得到初步的解答。而內政部也表示，自 2016 年起就不斷與民眾、民間專家學者溝通關於換發數位身分證引起的爭議。為爭取民眾的安心與信任，換發初期會選定部分縣市進行小規模試行，試行期間如有問題，會修正後再全面推行。</p>
       </div>
 
-      <h1>爭點一：會不會有獨立專責機構保護民眾隱私？</h1>
+      <h1 ref="title1">爭點一：會不會有獨立專責機構保護民眾隱私？</h1>
       <h2 class="sub">政府：正在研議，但不是為了數位身分證的換發</h2>
       <div class="intro intro--report">
         <p>數位身分證上路後，民眾用數位身份使用更多元的政府服務，將會累積愈來愈多數位資料。在 READr 的調查中，政府可不可以使用民眾的個人資訊，就是一個相當分歧的題目。</p>
@@ -68,7 +68,7 @@
         <p>國發會以建置「數位服務個人化（MyData）平臺」為例。民眾若要申請高中生中低收入戶的學雜費減免服務，可以在 MyData 平臺經身分驗證後，從衛福部下載所屬低收入證明資料。經過經民眾再次線上同意後，才將該證明資料傳輸給教育部國教署，辦理學雜費減免服務。民眾的「同意」僅限於當次資料傳輸，不是永久授權這份資料可以無限制地傳給其他部會。</p>
       </div>
 
-      <h1>爭點二：法律完備了嗎？應就資安及隱私風險立法或修法</h1>
+      <h1 ref="title2">爭點二：法律完備了嗎？應就資安及隱私風險立法或修法</h1>
       <h2 class="sub">政府：不用立專法，也無修法必要</h2>
       <div class="intro intro--report">
         <p>除了沒有專責機構，民間團體也認為現有的法律不夠完備。如愛沙尼亞、德國都有為數位身分證的發行訂定專法，明確以法條限制數位個資的傳輸、利用，何明諠認為，臺灣最理想的情況是訂定數位身分證專法，並讓人民可以自由選擇是否領取數位身分證。</p>
@@ -90,7 +90,7 @@
         class="report-page__situation"
       />
 
-      <h1>爭點三：一卡多用好可怕，我可以不要使用數位身分證嗎？</h1>
+      <h1 ref="title3">爭點三：一卡多用好可怕，我可以不要使用數位身分證嗎？</h1>
       <h2 class="sub">政府讓步：可以</h2>
       <div class="intro intro--report">
         <p>其實臺灣政府不是第一次推動「一卡多用」的超級卡片，1998 年，就曾有結合身分證、健保卡、電子簽章、指紋等功能的「國民卡」BOT 計畫，但最後因反對一卡多用的聲音而終止。同時具有政府和學界經驗的中研院資訊科學研究所研究員何建明，當時也是反對者。事隔多年，他再次站上反對數位身分證的前線，堅定反對「一卡多用」，他認為，政府不能一味跟民眾強調「多方便」，卻避談可能的風險。</p>
@@ -124,7 +124,7 @@
         <p>內政部進一步解釋，還是會全面換成有晶片的數位身分證，不會同時存在紙本、晶片兩種。數位身分證裡的晶片不能取出、難以破壞，民眾可以選擇關閉自然人憑證區、可以選擇不讓人讀取晶片。</p>
       </div>
 
-      <h1>爭點四：攜帶數位身分證等於被政府時時監控？</h1>
+      <h1 ref="title4">爭點四：攜帶數位身分證等於被政府時時監控？</h1>
       <h2 class="sub">政府：要靠很近才感應得到，感應到也不能做什麼事</h2>
       <div class="intro intro--report">
         <p>去年 9 月，當時的國民黨籍立委許毓仁針質疑，數位身分證具有 RFID （無線射頻辨識）功能，等於政府在人民身上安裝追蹤器。對此內政部嚴正否認，表示身分證中的晶片需要近到以「公分」為單位才能感應，不存在遠端感應的功能。且民眾要自行輸入密碼，加密區的資料才能被取用，單單感應到身分證也不能做什麼事。</p>
@@ -187,7 +187,7 @@
         </ul>
       </div>
 
-      <DonateBlock class="report-page__donate-block" />
+      <DonateBlock class="report-page__donate-block" @sendGa="sendGa({ label: '按下贊助鈕' })" />
 
       <ReportSituation
         v-if="hasCheckedSituation"
@@ -228,6 +228,8 @@ import { READR_SITE_URL } from 'src/constants'
 import { GOOGLE_SHEET_ID_EID, GOOGLE_SHEET_RANGES_EID } from 'api/config.js'
 import { getSheetWithoutRedis, appendSheet } from 'src/api/index.js'
 import { situations, results } from '../data/situations.js'
+import { rafWithDebounce } from 'src/util/comm.js'
+
 import ReportSituation from './ReportSituation.vue'
 import ReportFigure from './ReportFigure.vue'
 import NotationUnfolded from './NotationUnfolded.vue'
@@ -235,6 +237,9 @@ import DonateBlock from './DonateBlock.vue'
 
 const [, RANGE_SITUATION] = GOOGLE_SHEET_RANGES_EID
 const SHARED_URL = `${READR_SITE_URL}eid`
+
+let scrollDepthTriggers = []
+let curtScrollDepth = 0
 
 export default {
   name: 'ReportPage',
@@ -255,6 +260,9 @@ export default {
   computed: {
     result () {
       return results[this.agrees.join('')]
+    },
+    wh () {
+      return this.$store.state.viewport[1]
     }
   },
   async mounted () {
@@ -263,13 +271,40 @@ export default {
       const [disagree, agree] = percentages.splice(0, 2)
       situation.percentages = { disagree, agree }
     })
+
+    const { title1, title2, title3, title4 } = this.$refs
+    scrollDepthTriggers = [
+      {
+        el: title1,
+        label: 'scroll to title 1'
+      },
+      {
+        el: title2,
+        label: 'scroll to title 2'
+      },
+      {
+        el: title3,
+        label: 'scroll to title 3'
+      },
+      {
+        el: title4,
+        label: 'scroll to title 4'
+      }
+    ]
+
+    window.addEventListener('scroll', this.sendScrollDepth)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.sendScrollDepth)
   },
   methods: {
     shareToFb () {
       window.open(`https://www.facebook.com/share.php?u=${SHARED_URL}`)
+      this.sendGa({ label: '分享報導到 fb 鈕' })
     },
     shareToLine () {
       window.open(`https://line.me/R/msg/text/?${SHARED_URL}`)
+      this.sendGa({ label: '分享報導到 line 鈕' })
     },
     async fetchPercentageOfSituations () {
       const response = await getSheetWithoutRedis({
@@ -301,6 +336,37 @@ export default {
     },
     agreeText (agree) {
       return agree === 1 ? '同意' : '不同意'
+    },
+    sendGa ({ action = 'click', label, value = 1 }) {
+      window.ga('send', 'event', 'projects', action, label, value)
+    },
+    sendScrollDepth () {
+      rafWithDebounce(() => {
+        const totalScrollTriggers = scrollDepthTriggers.length
+
+        if (curtScrollDepth > totalScrollTriggers) {
+          return
+        }
+
+        if (curtScrollDepth === totalScrollTriggers) {
+          const scrollH = window.pageYOffset
+          const totalH = document.documentElement.scrollHeight
+          if (scrollH >= totalH - this.wh - 8) {
+            this.sendGa({ action: 'scroll', label: 'scroll to report end', value: totalScrollTriggers + 1 })
+
+            window.removeEventListener('scroll', this.sendScrollDepth)
+          }
+          return
+        }
+
+        const { el, label } = scrollDepthTriggers[curtScrollDepth]
+        const { top: triggerT } = el.getBoundingClientRect()
+
+        if (triggerT < 0) {
+          this.sendGa({ action: 'scroll', label, value: curtScrollDepth + 1 })
+          curtScrollDepth += 1
+        }
+      })
     }
   }
 }
