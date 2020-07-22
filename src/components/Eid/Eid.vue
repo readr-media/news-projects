@@ -1,5 +1,5 @@
 <template>
-  <div class="eid">
+  <div class="eid" ref="eid">
     <TheCover
       v-if="shouldOpenTheCover"
       @changePage="handleChangePageOfTheCover"
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+const scrollIntoView = require('scroll-into-view')
+
 import HeaderBar from './components/HeaderBar.vue'
 import TheCover from './components/TheCover.vue'
 import GamePage from './components/GamePage.vue'
@@ -119,7 +121,7 @@ export default {
       this.backToTop()
     },
     backToTop () {
-      document.documentElement.scrollTop = 0
+      scrollIntoView(this.$refs.eid, { time: 0, align: { top: 0, left: 0 } })
     },
     shouldOpenThePage (page) {
       return this.hasRendered[page] || this.currentPage === page
