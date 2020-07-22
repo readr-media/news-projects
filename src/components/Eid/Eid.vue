@@ -49,6 +49,7 @@ export default {
   name: 'Eid',
   metaInfo () {
     const year = this.$route.params.params
+    const metaUrl = `eid${year ? `/${year}` : ''}`
     const metaImage = `eid/og/${year || 'default'}.png`
     let title = '智慧政府還是全面監控？數位身分證一篇就懂！'
     const description = year ?
@@ -79,7 +80,7 @@ export default {
     return {
       title,
       description,
-      metaUrl: 'eid',
+      metaUrl,
       metaImage
     }
   },
