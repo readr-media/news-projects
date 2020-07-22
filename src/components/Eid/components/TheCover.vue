@@ -19,14 +19,14 @@
         <button
           type="button"
           class="normal normal--two"
-          @click="$emit('changePage', 'interactive')"
+          @click="handleClickInteractive"
         >
           開始製作
         </button>
         <button
           type="button"
           class="normal normal--two"
-          @click="$emit('changePage', 'report')"
+          @click="handleClickReport"
         >
           跳過遊戲看報導
         </button>
@@ -53,6 +53,16 @@ export default {
   name: 'TheCover',
   components: {
     ReadrLogo
+  },
+  methods: {
+    handleClickInteractive () {
+      this.$emit('changePage', 'interactive')
+      window.ga('send', 'event', 'projects', 'click', '開始製作鈕')
+    },
+    handleClickReport () {
+      this.$emit('changePage', 'report')
+      window.ga('send', 'event', 'projects', 'click', '跳過遊戲看報導鈕')
+    }
   }
 }
 </script>

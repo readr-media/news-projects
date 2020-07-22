@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <DonateBlock class="result-page__donate-block" />
+      <DonateBlock class="result-page__donate-block" @sendGa="sendGa('按下贊助鈕')" />
     </div>
 
     <div class="btn-wrapper-bottom">
@@ -66,7 +66,7 @@
       <button
         type="button"
         class="normal normal--three emphasize"
-        @click="$emit('gotoReport', 'report')"
+        @click="handleClickReport"
       >
         閱讀專題報導
       </button>
@@ -76,6 +76,7 @@
 
 <script>
 import { READR_SITE_URL } from 'src/constants'
+import { rafWithDebounce } from 'src/util/comm.js'
 
 import DonateBlock from './DonateBlock.vue'
 
@@ -85,15 +86,46 @@ export default {
     DonateBlock
   },
   props: ['result', 'profileId'],
+  computed: {
+    wh () {
+      return this.$store.state.viewport[1]
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.sendGaOfScollingToEnd)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.sendGaOfScollingToEnd)
+  },
   methods: {
     sharedUrl (year) {
       return `${READR_SITE_URL}eid/${year}`
     },
     shareToFb (year) {
       window.open(`https://www.facebook.com/share.php?u=${this.sharedUrl(year)}`)
+      this.sendGa('分享結果到 fb 鈕')
     },
     shareToLine (year) {
       window.open(`https://line.me/R/msg/text/?${this.sharedUrl(year)}`)
+      this.sendGa('分享結果到 line 鈕')
+    },
+    handleClickReport () {
+      this.$emit('gotoReport', 'report')
+      this.sendGa('閱讀專題報導鈕')
+    },
+    sendGa (label, action = 'click') {
+      window.ga('send', 'event', 'projects', action, label)
+    },
+    sendGaOfScollingToEnd () {
+      rafWithDebounce(() => {
+        const scrollH = window.pageYOffset
+        const totalH = document.documentElement.scrollHeight
+        if (scrollH >= totalH - this.wh - 8) {
+          this.sendGa('scroll to game result end', 'scroll')
+
+          window.removeEventListener('scroll', this.sendGaOfScollingToEnd)
+        }
+      })
     }
   }
 }
