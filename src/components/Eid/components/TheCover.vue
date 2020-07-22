@@ -19,7 +19,7 @@
         <button
           type="button"
           class="normal normal--two"
-          @click="$emit('changePage', 'game')"
+          @click="$emit('changePage', 'interactive')"
         >
           開始製作
         </button>
@@ -62,7 +62,10 @@ export default {
 
 .the-cover
   background-color #5f6c11
-  position relative
+  position absolute
+  top 0
+  left 0
+  z-index 99
   overflow hidden
   @media (min-width $breakpoint-md)
     &__readr-logo

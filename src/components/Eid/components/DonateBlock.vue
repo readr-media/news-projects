@@ -26,6 +26,8 @@ export default {
   border-radius 4px
   padding 32px 20px
   letter-spacing 2.5px
+  position relative
+  z-index 1
   @media (min-width $breakpoint-md)
     padding-left 60px
     padding-right 60px
