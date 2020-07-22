@@ -5,7 +5,7 @@
       <li :class="{ active: currentPage === 'report' }" @click="$emit('changePage', 'report')">
         看專題報導
       </li>
-      <li :class="{ active: currentPage === 'game' }" @click="$emit('changePage', 'game')">
+      <li :class="{ active: currentPage === 'interactive' }" @click="$emit('changePage', 'interactive')">
         製作身分證
       </li>
     </ul>

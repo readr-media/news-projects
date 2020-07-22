@@ -38,6 +38,13 @@
         <p>​​​晶片內資料實施分區保護，第一區可直接讀取的資料，是僅顯示到村里鄰的戶籍地址。第二區公開區需輸入身分證號後 6 碼，可讀取姓名、身份證統一編號、出生日期、詳細戶籍地址、役別、結婚狀態、證件號碼、應換領日期、製證日期、個人相片。第三區加密區，由本人輸入自訂的 6 位密碼，可讀取父母姓名、配偶姓名、出生地、性別、個人相片、證件號碼後 6 碼，以及公開區的資料。第四區自然人憑證區，由本人輸入憑證密碼才能使用，民眾可自行決定是否開通自然人憑證連接數位身分證的功能，隨時可申請停用或重新啟用。</p>
       </div>
 
+      <div class="replay-wrapper">
+        <div class="replay" @click="$emit('replayGame')">
+          <svg fill="none" height="44" viewBox="0 0 44 44" width="44" xmlns="http://www.w3.org/2000/svg"><g fill="#5f6c11"><path d="m5.28482 24.0289c-.08493-.7076-.12857-1.4106-.12857-2.0289 0-9.2299 7.61385-16.84375 16.84375-16.84375 4.3053 0 8.3359 1.73587 11.3008 4.4429l-1.4868 1.51265c-.335.335-.4639.8248-.335 1.289.1547.4381.5156.7735.9795.8765.2595.0521 8.7841 2.7991 8.2413 2.69.6905.2299 1.7117-.5066 1.5214-1.5211-.0524-.2598-1.9397-9.72937-1.8306-9.18689-.103-.46393-.4384-.85065-.9023-.97956-.4381-.1289-.9282 0-1.2632.33503l-1.2632 1.23736c-3.8931-3.63489-9.2387-5.85214-14.9619-5.85214-12.09134 0-22 9.90866-22 22v.0514c0 .7267.0332337 1.2884.0718384 1.718.0513606.5694.4709776 1.0357 1.0315816 1.1481l2.64829.5294c.86206.1725 1.63718-.5502 1.53311-1.418z"/><path d="m42.9042 19.0804-2.656-.5412c-.8631-.1759-1.6436.5476-1.5375 1.4194.092.7523.1329 1.4837.1329 2.0413 0 9.2296-7.6139 16.8438-16.8437 16.8438-4.3053 0-8.336-1.7359-11.3008-4.4688l1.4868-1.4868c.335-.335.4639-.8248.335-1.289-.1548-.4384-.5156-.7735-.9796-.8765-.2595-.0524-8.78406-2.799-8.24124-2.6899-.43842-.0772-.87683.0517-1.16016.3608-.30951.2837-.43841.7476-.3612 1.1602.05237.2595 1.93997 9.6431 1.83087 9.1007.10272.4642.43808.8509.90201.9795.53811.135.98727-.0282 1.26321-.335l1.2377-1.2374c3.89271 3.6352 9.23831 5.9384 14.98741 5.9384 12.0913 0 22-9.9086 22-22v-.0775c0-.5714-.0209-1.1323-.0685-1.6899-.049-.5697-.467-1.0376-1.0272-1.1521z"/></g></svg>
+          <p>再玩一次</p>
+        </div>
+      </div>
+
       <DonateBlock class="result-page__donate-block" />
     </div>
 
@@ -58,7 +65,7 @@
       </button>
       <button
         type="button"
-        class="normal normal--three"
+        class="normal normal--three emphasize"
         @click="$emit('gotoReport', 'report')"
       >
         閱讀專題報導
@@ -136,6 +143,7 @@ export default {
     @media (min-width $breakpoint-md)
       display flex
       justify-content space-between
+      align-items flex-start
       flex-wrap wrap
       margin-top 36px
       margin-bottom 0
@@ -157,4 +165,27 @@ export default {
     margin-top 30px
     @media (min-width $breakpoint-md)
       margin-top 36px
+  .replay
+    margin-top 30px
+    cursor pointer
+    user-select none
+    display inline-block
+    @media (min-width $breakpoint-md)
+      margin-top 36px
+    &-wrapper
+      text-align center
+    svg
+      display block
+      margin-left auto
+      margin-right auto
+    p
+      font-size 15px
+      line-height 1.5
+      letter-spacing 2.5px
+      border-bottom 1px solid #5f6c11
+      color #5f6c11
+      font-weight 700
+      margin-top 10px
+      display inline-block
+      margin-left 2.5px
 </style>

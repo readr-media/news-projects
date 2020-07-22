@@ -2,7 +2,6 @@
   <div class="eid">
     <TheCover
       v-if="shouldOpenTheCover"
-      class="eid__the-cover"
       @changePage="handleChangePageOfTheCover"
     />
     <div class="eid__container">
@@ -12,18 +11,21 @@
         @changePage="setPage"
       />
       <div
-        v-if="shouldOpenThePage('game')"
-        v-show="shouldShowThePage('game')"
+        v-if="shouldOpenThePage('interactive')"
+        v-show="shouldShowThePage('interactive')"
       >
         <GamePage
-          v-if="shouldOpenGamePage"
+          v-show="shouldOpenGamePage"
           @generateResult="handleGenerateResult"
+          ref="gamePage"
         />
         <ResultPage
-          v-else
+          v-if="hasRendered.result || !shouldOpenGamePage"
+          v-show="hasRendered.result && !shouldOpenGamePage"
           :result="gameResult"
           :profileId="profileId"
           @gotoReport="setPage"
+          @replayGame="gotoGame"
         />
       </div>
       <ReportPage
@@ -93,7 +95,7 @@ export default {
       currentPage: '',
       shouldOpenTheCover: true,
       shouldOpenGamePage: true,
-      hasRendered: { game: false, report: false },
+      hasRendered: { interactive: false, report: false, result: false },
       gameResult: {},
       profileId: 1
     }
@@ -125,7 +127,16 @@ export default {
       return this.hasRendered[page] && this.currentPage === page
     },
     gotoResult () {
+      if (!this.hasRendered.result) {
+        this.hasRendered.result = true
+      }
+
       this.shouldOpenGamePage = false
+      this.backToTop()
+    },
+    gotoGame () {
+      this.shouldOpenGamePage = true
+      this.$refs.gamePage.refreshFields()
       this.backToTop()
     },
     handleGenerateResult ([resultIdx, profileIdx]) {
@@ -147,11 +158,6 @@ $ff-sans-serif = -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helveti
 html
   font-family $ff-sans-serif
 .eid
-  &__the-cover
-    position absolute
-    top 0
-    left 0
-    z-index 99
   &__container
     padding-top 60px
     @media (min-width $breakpoint-md)
@@ -194,23 +200,6 @@ a
     transition background-color 0.15s
     @media (min-width $breakpoint-md)
       max-width 200px
-    &--two
-      @media (min-width $breakpoint-md)
-        &:first-child
-          order: 2
-        &:last-child
-          order: 1
-      &:last-child
-        margin-top 12px
-        @media (min-width $breakpoint-md)
-          margin-top 0
-          margin-right 60px
-    &--three
-      + button.normal--three
-        margin-top 12px
-        @media (min-width $breakpoint-md)
-          margin-top 0
-          margin-left 60px
     &:hover
       background-color #ffbd00
     &:active
@@ -228,6 +217,33 @@ a
       z-index -1
       @media (min-width $breakpoint-md)
         transform translateY(6px)
+    &--two
+      @media (min-width $breakpoint-md)
+        &:first-child
+          order: 2
+        &:last-child
+          order: 1
+      &:last-child
+        margin-top 12px
+        @media (min-width $breakpoint-md)
+          margin-top 0
+          margin-right 60px
+    &--three
+      + button.normal--three
+        margin-top 12px
+        @media (min-width $breakpoint-md)
+          margin-top 0
+          margin-left 60px
+    &.emphasize
+      background-color #5f6c11
+      color #fff
+      &::after
+        background-color #3d450b
+      &:hover
+        background-color #687900
+      &:active
+        background-color rgba(95, 108, 17, 0.5)
+        
 a:focus
   outline none
 h1

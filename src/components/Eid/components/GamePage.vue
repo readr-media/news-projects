@@ -72,7 +72,7 @@
       <button
         type="button"
         class="normal normal--two"
-        @click="clearFields"
+        @click="refreshFields"
       >
         清除重選
       </button>
@@ -167,7 +167,8 @@ export default {
     generateCheckedValues (field) {
       return Number(this.isChecked(field.name))
     },
-    clearFields () {
+    refreshFields () {
+      this.checkedProfileIdx = 0
       this.checkedFields = []
     },
     checkProfile (idx) {

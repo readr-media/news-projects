@@ -40,6 +40,7 @@ export default {
     padding-left 4px
     padding-right 6.5px
     box-sizing content-box
+    transition transform 0.3s
     &.open
       transform rotate(180deg)
   &__content
