@@ -10,8 +10,6 @@ export const fetchSheetBasic = (store, ordinal) => {
   })
   .then(data => {
     if (!isEmpty(data)) {
-      console.log(ordinal)
-      console.log(data)
       store.commit('PoliticalContribution/SET_DATA', { ordinal: ordinal, body: data, field: 'rawDataBasic' })
     }
   })

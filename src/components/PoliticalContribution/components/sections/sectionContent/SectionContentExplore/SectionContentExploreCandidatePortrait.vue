@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     setAltImg (event) {
-      event.target.src = '/proj-assets/political-contribution/candidate-portraits/default.jpg'
+      event.target.src = '/proj-assets/political-contribution/candidate-portraits/default.png'
     }
   }
 }
@@ -63,6 +63,8 @@ export default {
     background-color #c7b299
   &--pfp
     background-color #f2c1a5
+  &--tsp
+    background-color #EAB2A7
   &__portrait
     // width 100px
     // min-width 100px

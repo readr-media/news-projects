@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     setAltImg (event) {
-      event.target.src = '/proj-assets/political-contribution/candidate-portraits/default.jpg'
+      event.target.src = '/proj-assets/political-contribution/candidate-portraits/default.png'
     }
   }
 }
