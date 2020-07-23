@@ -269,7 +269,7 @@ export default {
             const donatesToKMT = uniqBy(get(d, [ 'candidates', '中國國民黨' ], []), '候選人').length
             const donatesToDPP = uniqBy(get(d, [ 'candidates', '民主進步黨' ], []), '候選人').length
             const total = donatesToKMT + donatesToDPP
-            return this.xScale(donatesToDPP / total)
+            return this.xScale(isNaN(donatesToDPP / total) ? 0.5 : (donatesToDPP / total))
           })
           .attr('cy', d => this.yScale(d.donatesSum))
           .style('fill', 'transparent')
@@ -290,7 +290,7 @@ export default {
             const donatesToKMT = uniqBy(get(d, [ 'candidates', '中國國民黨' ], []), '候選人').length
             const donatesToDPP = uniqBy(get(d, [ 'candidates', '民主進步黨' ], []), '候選人').length
             const total = donatesToKMT + donatesToDPP
-            return this.xScale(donatesToDPP / total)
+            return this.xScale(isNaN(donatesToDPP / total) ? 0.5 : (donatesToDPP / total))
           })
           .attr('y', d => this.yScale(d.donatesSum) + 40)
           .text(d => d.name)

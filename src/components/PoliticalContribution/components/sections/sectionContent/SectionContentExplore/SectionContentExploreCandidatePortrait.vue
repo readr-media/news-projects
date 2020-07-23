@@ -3,7 +3,7 @@
     :class="[ 'section-content-explore-candidate-portrait', `section-content-explore-candidate-portrait--${$t(`POLITICAL_CONTRIBUTION.PARTY['${candidateParty}']`)}` ]"
     :to="`/project/political-contribution/explore?name=${candidateName}&ordinal=${electionOrdinalNum}`"
   >
-    <img class="section-content-explore-candidate-portrait__portrait" :src="`/proj-assets/political-contribution/candidate-portraits/${candidateName}.png`" :alt="candidateName">
+    <img class="section-content-explore-candidate-portrait__portrait" :src="`/proj-assets/political-contribution/candidate-portraits/${candidateName}.png`" :alt="candidateName" @error="setAltImg">
   </router-link>
 </template>
 
@@ -29,8 +29,15 @@ export default {
     electionOrdinalNum () {
       return DATA[this.electionOrdinal].oridinalNum
     },
+  },
+  methods: {
+    setAltImg (event) {
+      event.target.src = '/proj-assets/political-contribution/candidate-portraits/default.png'
+    }
   }
 }
+
+
 </script>
 
 <style lang="stylus" scoped>
@@ -56,6 +63,8 @@ export default {
     background-color #c7b299
   &--pfp
     background-color #f2c1a5
+  &--tsp
+    background-color #EAB2A7
   &__portrait
     // width 100px
     // min-width 100px

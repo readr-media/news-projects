@@ -2,9 +2,10 @@ import { get, isEmpty, } from 'lodash'
 import { DEFAULT_SHEET_RANGE, DATA, CORP_NAME_TAXID_MAPPING_SHEETID, } from 'src/components/PoliticalContribution/constants'
 
 export const fetchSheetBasic = (store, ordinal) => {
+  const target = ordinal !== 'tenth' ? ordinal : 'tenth_v3';
   return store.dispatch('PoliticalContribution/FETCH_DATA_ASSETS', {
     params: {
-      filePath: `/proj-assets/political-contribution/data/basic/${ordinal}.csv`
+      filePath: `/proj-assets/political-contribution/data/basic/${target}.csv`
     }
   })
   .then(data => {
@@ -16,9 +17,10 @@ export const fetchSheetBasic = (store, ordinal) => {
 }
 
 export const fetchSheetCompanyDonate = (store, ordinal) => {
+  const target = ordinal !== 'tenth' ? ordinal : 'tenth_v3';
   return store.dispatch('PoliticalContribution/FETCH_DATA_ASSETS', {
     params: {
-      filePath: `/proj-assets/political-contribution/data/companyDonate/${ordinal}-dropped.csv`
+      filePath: `/proj-assets/political-contribution/data/companyDonate/${target}-dropped.csv`
     }
   })
   .then(data => {

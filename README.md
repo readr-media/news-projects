@@ -4,7 +4,7 @@
 |--------------------------------------------------------------|
 | [關鍵 43 分鐘，圖解對話紀錄](https://www.readr.tw/project/puyuma) |
 | [看板追追追——2018選舉看板紀錄](https://www.readr.tw/project/election-board) |
-| [數讀政治獻金 2.0：翻開立委（八年份）的金主投資名冊](https://www.readr.tw/project/political-contribution) |
+| [數讀政治獻金 3.0：翻開立委（12年份）的金主投資名冊](https://www.readr.tw/project/political-contribution) |
 | [小英，說好的承諾呢？三個月追蹤](https://www.readr.tw/project/president-promise-interest) |
 | [入不敷租——六都租屋市場大解密](https://www.readr.tw/project/rent) |
 | [殺死那個酒店小姐](https://www.readr.tw/project/hotel-hostess) |

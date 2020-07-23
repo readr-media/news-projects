@@ -63,6 +63,14 @@ export default {
             this.$router.replace(`explore?name=${selected.item.name}&ordinal=${this.getOrdinalNum(selected.name)}`)
             this.$store.commit('PoliticalContribution/SET_SECTION_EXPLORE_RADIO_PICKED', selected.name)
           }
+        },
+        tenth: {
+          limit: 6,
+          label: '第十屆',
+          onSelected: selected => {
+            this.$router.replace(`explore?name=${selected.item.name}&ordinal=${this.getOrdinalNum(selected.name)}`)
+            this.$store.commit('PoliticalContribution/SET_SECTION_EXPLORE_RADIO_PICKED', selected.name)
+          }
         }
       }
     }
@@ -151,6 +159,8 @@ export default {
           return 8
         case 'ninth':
           return 9
+        case 'tenth':
+          return 10
       }
     },
     getOrdinalString (ordinalNum) {
@@ -161,6 +171,8 @@ export default {
           return 'eighth'
         case '9':
           return 'ninth'
+        case '10':
+          return 'tenth'
       }
     },
   },

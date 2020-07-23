@@ -6,7 +6,7 @@
     <h1 class="section-landing-titles__h1">
       {{ $t('POLITICAL_CONTRIBUTION.LANDING.TITLE') }}
       <div class="v2">
-        2.0
+        3.0
       </div>
     </h1>
     <h2 class="section-landing-titles__h2">

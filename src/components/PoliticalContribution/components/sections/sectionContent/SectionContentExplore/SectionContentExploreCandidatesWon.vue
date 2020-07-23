@@ -51,6 +51,7 @@ export default {
           fetchSheetBasic(this.$store, 'seventh'),
           fetchSheetBasic(this.$store, 'eighth'),
           fetchSheetBasic(this.$store, 'ninth'),
+          fetchSheetBasic(this.$store, 'tenth'),
         ]).then(() => { this.fetchLoading = false })
 
         fetchSheetCorpNameTaxIdMapping(this.$store)
