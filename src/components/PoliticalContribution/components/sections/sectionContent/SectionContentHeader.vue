@@ -25,7 +25,7 @@
           {{ $t('POLITICAL_CONTRIBUTION.CONTENT_HEADER.SHARE') }}
         </p>
       </a>
-      <a class="section-content-header__nav-item navigation-figure" target="_blank" href="https://www.readr.tw/series/political-contribution/donate">
+      <a class="section-content-header__nav-item navigation-figure" target="_blank" href="https://www.readr.tw/donate">
         <img class="navigation-figure__img" src="/proj-assets/political-contribution/donate-white.png" alt="share-w">
         <p class="navigation-figure__figcaption">
           {{ $t('POLITICAL_CONTRIBUTION.CONTENT_HEADER.DONATE') }}
