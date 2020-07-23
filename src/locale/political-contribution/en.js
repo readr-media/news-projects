@@ -92,7 +92,7 @@ export const POLITICAL_CONTRIBUTION = {
     },
     'FE': {
       'WORDING': 'Web production by ',
-      'MEMBER': 'Kai-Wen Hsiung'
+      'MEMBER': 'Kai-Wen Hsiung, Chaowen Chang'
     },
     'DESIGN': {
       'WORDING': 'Design by ',
@@ -114,7 +114,8 @@ export const POLITICAL_CONTRIBUTION = {
       'WORDING': 'Data consultant by ',
       'MEMBER': 'Chung-pei Pien'
     },
-    'RELEASE_DATE': 'Release date: '
+    'RELEASE_DATE': 'Release date: ',
+    'UPDATED_DATE': 'Last updated date: '
   },
   'EXPLORE': {
     'TITLE': 'Search for politics-business relations',

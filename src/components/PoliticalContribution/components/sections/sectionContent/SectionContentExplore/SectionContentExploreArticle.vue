@@ -7,6 +7,7 @@
       :isNewCredit="true"
       :showSpecialThanks="true"
       :publishedDate="'2018/09/27'"
+      :updatedDate="'2020/07/23'"
     />
     <div class="section-content-explore-article__caution">
       <p class="section-content-explore-article__caution-placeholder">註：</p>

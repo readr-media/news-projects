@@ -42,7 +42,7 @@
         />
       </div>
     </div>
-    <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart">
+    <div v-if="!isNameLightboxShownCorp && ordinalUrlQuery !== 10" class="section-content-explore-lightbox-info-donates-from__chart">
       <h1 class="section-content-explore-lightbox-info-donates-from__title">營利事業選區內／選區外</h1>
       <div class="bar-chart-container">
         <div
@@ -57,7 +57,7 @@
         />
       </div>
     </div>
-    <div v-if="!isNameLightboxShownCorp" class="section-content-explore-lightbox-info-donates-from__chart">
+    <div v-if="!isNameLightboxShownCorp && ordinalUrlQuery !== 10" class="section-content-explore-lightbox-info-donates-from__chart">
       <h1 class="section-content-explore-lightbox-info-donates-from__title">營利事業選區縣市／外縣市</h1>
       <div class="bar-chart-container">
         <div
@@ -119,6 +119,7 @@ export default {
       ]
     },
     ...mapGetters([
+      'ordinalUrlQuery',
       'isNameLightboxShownCorp',
       'rawDataCompanyDonateCurrentOrdinal',
       // 'dataCompanyDonateCurrentOrdinalNameLightboxShownGroupByIndustryType',
@@ -128,6 +129,7 @@ export default {
       'dataIndustryPercentageMOFCurrentOrdinalNameLightboxShown',
     ]),
     isRawDataCompanyDonateCurrentOrdinalEmpty () {
+      console.log(this.rawDataCompanyDonateCurrentOrdinal)
       return isEmpty(this.rawDataCompanyDonateCurrentOrdinal)
     },
     isIndustryPercentageMOFEmpty () {

@@ -269,6 +269,7 @@ export default {
             .style('-webkit-clip-path', d => d.party !== '公司' ? `circle(50% at ${this.getNodeRadius(d)}px ${this.getNodeRadius(d)}px)` : '')
             .attr('width', setNodeImage(this, 'size'))
             .attr('height', setNodeImage(this, 'size'))
+            .attr('onerror', "this.href.baseVal='/proj-assets/political-contribution/candidate-portraits/default.png'; this.onerror='';")
     },
     applySimulation () {
       this.simulation

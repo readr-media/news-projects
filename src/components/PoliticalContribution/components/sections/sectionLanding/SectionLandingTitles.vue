@@ -1,8 +1,5 @@
 <template>
   <div class="section-landing-titles">
-    <a class="section-landing-titles__readr-link" :href="`https://${READR_DOMAIN_PROD}`" target="_blank">
-      <img class="section-landing-titles__readr-logo" src="/proj-assets/political-contribution/logo.png" alt="section-landing-titles__readr-logo">
-    </a>
     <h1 class="section-landing-titles__h1">
       {{ $t('POLITICAL_CONTRIBUTION.LANDING.TITLE') }}
       <div class="v2">
@@ -67,6 +64,7 @@ export default {
   &__h1
     font-size 90px
     margin 15px 0
+    margin-top calc(84px + 34px)
     display flex
     align-items center
   &__h2

@@ -6,7 +6,7 @@
         v-for="candidate in countyCandidates"
         :key="getCandidateName(candidate)"
         :class="[ 'section-content-explore-duel-county-list__list-item', { 'section-content-explore-duel-county-list__list-item--on-stage': candidatesOnStage.includes(getCandidateName(candidate)) } ]"
-        v-text="getCandidateName(candidate)"
+        v-text="getCandidateName(candidate).replace(/南投/,'')"
         @click="pushCandidateToStage(getCandidateName(candidate))"
       >
       </li>

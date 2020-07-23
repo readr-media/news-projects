@@ -1,6 +1,6 @@
 <template>
   <div class="section-content-explore-lightbox-ranks-list-donate">
-    <h1 class="section-content-explore-lightbox-ranks-list-donate__title">{{ nameUrlQuery }}的營利事業捐贈排名</h1>
+    <h1 class="section-content-explore-lightbox-ranks-list-donate__title">{{ checkName }}的營利事業捐贈排名</h1>
     <AppFingerHint class="section-content-explore-lightbox-ranks-list-donate__finger-hint--mobile" :hint="fingerHint"/>
     <ol class="section-content-explore-lightbox-ranks-list-donate__list">
       <SectionContentExploreLightboxRanksListDonateListItem
@@ -34,6 +34,9 @@ export default {
     ]),
     fingerHint () {
       return this.isNameLightboxShownCorp ? '點選這些候選人看獻金資訊' : '點選這些企業看捐給了誰'
+    },
+    checkName () {
+      return this.nameUrlQuery.replace(/南投/, '')
     }
   }
 }

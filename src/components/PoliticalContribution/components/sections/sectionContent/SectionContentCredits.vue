@@ -64,6 +64,9 @@
         <p class="story-credits__published-date">
           {{ $t('POLITICAL_CONTRIBUTION.CREDITS.RELEASE_DATE') }}{{ publishedDate }}
         </p>
+        <p v-if="!!updatedDate" class="story-credits__updated-date">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.UPDATED_DATE') }}{{ updatedDate }}
+        </p>
       </div>
     </template>
   </div>
@@ -79,6 +82,10 @@ export default {
     publishedDate: {
       type: String,
       required: true,
+    },
+    updatedDate: {
+      type: String,
+      required: false,
     },
     isNewCredit: {
       type: Boolean,
@@ -121,6 +128,9 @@ export default {
         display none
   &__published-date
     margin 0
+  &__updated-date
+    margin 0
+    margin-left 8px
 
 @media (max-width 1024px)
   .story-credits
