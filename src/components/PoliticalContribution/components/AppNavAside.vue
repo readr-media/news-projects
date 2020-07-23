@@ -47,14 +47,12 @@
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story5" v-scroll-to="'.section-content'">
-        <span class="new-content-wording">NEW</span>
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
           :hintText="$t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY5')"
         />
       </router-link>
       <router-link class="app-nav-aside__article-nav" to="story6" v-scroll-to="'.section-content'">
-        <span class="new-content-wording">NEW</span>
         <AppArrowTooltip
           class="app-nav-aside__tooltip"
           :hintText="$t('POLITICAL_CONTRIBUTION.NAVS.ANALYSIS_STORY6')"

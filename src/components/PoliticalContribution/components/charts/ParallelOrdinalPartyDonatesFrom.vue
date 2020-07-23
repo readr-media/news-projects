@@ -155,8 +155,8 @@ export default {
           .range([ this.innerHeight, 0 ])
       this.colorScale =
         d3.scaleOrdinal()
-          .domain([ '中國國民黨', '民主進步黨', '時代力量', '親民黨', '無黨籍', '無黨團結聯盟', '民國黨' ])
-          .range([ '#0071bc', '#53a66f', '#fcc037', '#eb6c1f', '#736357', '#c7195c', '#d8d8d8' ])
+          .domain([ '中國國民黨', '民主進步黨', '時代力量', '親民黨', '無黨籍', '無黨團結聯盟', '民國黨', '台灣基進' ])
+          .range([ '#0071bc', '#53a66f', '#fcc037', '#eb6c1f', '#736357', '#c7195c', '#d8d8d8', '#A63F24' ])
 
       // init line generator
       this.line =
@@ -213,6 +213,14 @@ export default {
         this.svg
           .selectAll('path.line-npp')
           .data([this.dataCurrentOrdinal.npp || null])
+      const circlesTSP =
+        this.svg
+          .selectAll('circle.circle-tsp')
+          .data(this.dataCurrentOrdinal.tsp || [])
+      const lineTSP = 
+        this.svg
+          .selectAll('path.line-tsp')
+          .data([this.dataCurrentOrdinal.tsp || null])
 
       // Update
       circlesKMT
@@ -337,6 +345,33 @@ export default {
             .style('stroke', d => this.colorScale(d[0]['party']))
             .style('stroke-width', '5px')
             .style('fill', 'none')
+        circlesTSP
+          .enter()
+          .append('circle')
+            .attr('class', 'circle-tsp')
+            .attr('r', 10)
+            .attr('cx', d => this.xScale(d['category']))
+            .attr('cy', d => this.yScale(d['percentage']))
+            .on('mouseover', d => this.handleTooltip(d, 'mouseover'))
+            .on('mousemove', d => this.handleTooltip(d, 'mousemove'))
+            .on('mouseout', d => this.handleTooltip(d, 'mouseout'))
+            .style('fill', 'white')
+            .transition()
+            .ease(d3.easeCubicOut)
+            .duration(500)
+            .style('fill', d => this.colorScale(d['party']))
+        lineTSP
+          .enter()
+          .append('path')
+          .lower()
+            .attr('class', 'line-tsp')
+            .attr('d', this.line)
+            .transition()
+            .ease(d3.easeCubicOut)
+            .duration(500)
+            .style('stroke', d => this.colorScale(d[0]['party']))
+            .style('stroke-width', '5px')
+            .style('fill', 'none')
       }
 
       // Exit
@@ -359,8 +394,21 @@ export default {
         .duration(500)
         .style('fill', 'transparent')
         .remove()
+      circlesTSP
+        .exit()
+        .transition()
+        .ease(d3.easeCubicOut)
+        .duration(500)
+        .style('fill', 'transparent')
+        .remove()
       if (!['ninth', 'tenth'].includes(this.shouldVisualizeOrdinal)) {
         d3.select(`${this.containerSelector} path.line-npp`)
+          .transition()
+          .ease(d3.easeCubicOut)
+          .duration(500)
+          .style('stroke', 'transparent')
+          .remove()
+        d3.select(`${this.containerSelector} path.line-tsp`)
           .transition()
           .ease(d3.easeCubicOut)
           .duration(500)

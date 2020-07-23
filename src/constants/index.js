@@ -138,7 +138,7 @@ export const PROJECTS_PREVENT_SCROLL_BEHAVIOR = [
 
 export const PROJECTS_NOT_NEED_APP_HEADER = [
   '/project/hong-kong-protests-2019',
-  '/project/political-contribution',
+  '/project/political-contribution/:foo?',
   '/project/newtype',
   '/project/election-board',
   '/project/marathon',
