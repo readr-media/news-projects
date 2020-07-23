@@ -1,6 +1,6 @@
 import { flatten, } from 'lodash'
 import { CORP_NAMES, } from './namesCorp'
-import { CANDIDATES_SEVENTH, CANDIDATES_EIGHTH, CANDIDATES_NINTH, } from './namesCandidate'
+import { CANDIDATES_SEVENTH, CANDIDATES_EIGHTH, CANDIDATES_NINTH, CANDIDATES_TENTH, } from './namesCandidate'
 
 export const SLUG_CONTENT_SECTION_EXPLORE = 'explore'
 export const SLUG_CONTENT_SECTION_DASHBOARD = 'dashboard'
@@ -41,6 +41,13 @@ export const DATA = {
     spreadsheetIdBasic: '1ytZDez78Qbp9eTKwkbVWdFYYtYQ-0-RJQ3ZEBGzTTw0',
     spreadsheetIdCompanyDonate: '1VWknt78U-aZsFgEqMmvcgLicgHFkS0cZbjREOt6CxT0',
     candidateNames: CANDIDATES_NINTH
+  },
+  tenth: {
+    ordinal: 'tenth',
+    oridinalNum: 10,
+    spreadsheetIdBasic: '1ytZDez78Qbp9eTKwkbVWdFYYtYQ-0-RJQ3ZEBGzTTw0',
+    spreadsheetIdCompanyDonate: '1VWknt78U-aZsFgEqMmvcgLicgHFkS0cZbjREOt6CxT0',
+    candidateNames: CANDIDATES_TENTH
   },
 }
 

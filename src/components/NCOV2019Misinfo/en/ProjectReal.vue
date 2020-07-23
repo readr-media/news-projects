@@ -28,7 +28,7 @@
           class="legend"
         >
           <div class="circle-hint circle-hint--orange"></div>
-          <p>the number of fact checking reports a day</p>
+          <p>the number of fact checking reports per day</p>
         </div>
         <template v-if="$store.state.viewport[0] >= 768">
           <ChartFullData

@@ -172,6 +172,16 @@ export default {
               .style('font-size', '32px')
               .text('第九屆')
         }
+        if (this.ordinal === 'tenth' || this.ordinal === '') {
+          this.svg
+            .append('text')
+              .attr('x', () => this.xScale(0.5))
+              .attr('y', () => this.yScale('第十屆') - 40)
+              .attr('text-anchor', 'middle')
+              .attr('alignment-baseline', 'central')
+              .style('font-size', '32px')
+              .text('第十屆')
+        }
       }
     },
     updateScale () {

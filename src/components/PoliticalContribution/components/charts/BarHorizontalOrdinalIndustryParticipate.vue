@@ -106,7 +106,7 @@ export default {
       return this.ordinal === '' ? this.ordinalRadioPicked : this.ordinal
     },
     dataCurrentOrdinal () {
-      return this.data[this.shouldVisualizeOrdinal]
+      return this.data[this.shouldVisualizeOrdinal] || this.data['ninth']
     },
     isChartReady () {
       return this.svg !== undefined

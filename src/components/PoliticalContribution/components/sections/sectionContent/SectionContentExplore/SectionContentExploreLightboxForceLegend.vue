@@ -13,6 +13,14 @@
         <div class="legend__circle legend__circle--npp"></div>
         時代力量
       </div>
+      <div :class="[ 'legend', 'legend--pointer', { 'legend--fadeout': !toogleStatus['tpp'] } ]" v-show="hasWonCandidateIn('台灣民眾黨')" @click="toogleCircle('tpp')">
+        <div class="legend__circle legend__circle--npp"></div>
+        台灣民眾黨
+      </div>
+      <div :class="[ 'legend', 'legend--pointer', { 'legend--fadeout': !toogleStatus['tsp'] } ]" v-show="hasWonCandidateIn('台灣基進')" @click="toogleCircle('tsp')">
+        <div class="legend__circle legend__circle--tsp"></div>
+        台灣基進
+      </div>
       <div :class="[ 'legend', 'legend--pointer', { 'legend--fadeout': !toogleStatus['pfp'] } ]" v-show="hasWonCandidateIn('親民黨')" @click="toogleCircle('pfp')">
         <div class="legend__circle legend__circle--pfp"></div>
         親民黨

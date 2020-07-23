@@ -33,11 +33,24 @@
     >
       <div 
         id="ninth-radio-icon"
-        :class="[ 'section-content-explore-radios__custom-radio', { 'section-content-explore-radios__custom-radio--active': ordinalRadioPicked === 'ninth' || showNinthOnly } ]"
+        :class="[ 'section-content-explore-radios__custom-radio', { 'section-content-explore-radios__custom-radio--active': ordinalRadioPicked === 'ninth' || showNinthOnly || hideTenth } ]"
         @click="selectPicked('ninth')"
       >
       </div>
       <label for="ninth-radio-icon" @click="selectPicked('ninth')">第九屆</label>
+    </div>
+    <div 
+      v-if="(!isLightboxNavigation || showRadioInLightbox['tenth']) && !showNinthOnly && !hideTenth"
+      class="section-content-explore-radios__container"
+      @click="navigateRoute(10)"
+    >
+      <div
+        id="tenth-radio-icon"
+        :class="[ 'section-content-explore-radios__custom-radio', { 'section-content-explore-radios__custom-radio--active': ordinalRadioPicked === 'tenth' } ]"
+        @click="selectPicked('tenth')"
+      >
+      </div>
+      <label for="tenth-radio-icon" @click="selectPicked('tenth')">第十屆</label>
     </div>
   </div>
 </template>
@@ -58,6 +71,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    hideTenth: {
+      type: Boolean,
+      default: false,
+    }
   },
   computed: {
     ...mapState({
@@ -84,6 +101,7 @@ export default {
           seventh: find(mappingObjs, [ '屆數', '7' ]) !== undefined,
           eighth: find(mappingObjs, [ '屆數', '8' ]) !== undefined,
           ninth: find(mappingObjs, [ '屆數', '9' ]) !== undefined,
+          tenth: find(mappingObjs, [ '屆數', '10' ]) !== undefined,
         }
       }
     }

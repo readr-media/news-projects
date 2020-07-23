@@ -114,6 +114,8 @@ export default {
           return '第八屆'
         case 'ninth':
           return '第九屆'
+        case 'tenth':
+          return '第十屆'
         default:
           return ''
       }
@@ -307,6 +309,36 @@ export default {
             .style('fill', 'none')
       }
 
+      if (this.shouldVisualizeOrdinal === 'tenth') {
+        circlesNPP
+          .enter()
+          .append('circle')
+            .attr('class', 'circle-npp')
+            .attr('r', 10)
+            .attr('cx', d => this.xScale(d['category']))
+            .attr('cy', d => this.yScale(d['percentage']))
+            .on('mouseover', d => this.handleTooltip(d, 'mouseover'))
+            .on('mousemove', d => this.handleTooltip(d, 'mousemove'))
+            .on('mouseout', d => this.handleTooltip(d, 'mouseout'))
+            .style('fill', 'white')
+            .transition()
+            .ease(d3.easeCubicOut)
+            .duration(500)
+            .style('fill', d => this.colorScale(d['party']))
+        lineNPP
+          .enter()
+          .append('path')
+          .lower()
+            .attr('class', 'line-npp')
+            .attr('d', this.line)
+            .transition()
+            .ease(d3.easeCubicOut)
+            .duration(500)
+            .style('stroke', d => this.colorScale(d[0]['party']))
+            .style('stroke-width', '5px')
+            .style('fill', 'none')
+      }
+
       // Exit
       circlesKMT
         .exit()
@@ -327,7 +359,7 @@ export default {
         .duration(500)
         .style('fill', 'transparent')
         .remove()
-      if (this.shouldVisualizeOrdinal !== 'ninth') {
+      if (!['ninth', 'tenth'].includes(this.shouldVisualizeOrdinal)) {
         d3.select(`${this.containerSelector} path.line-npp`)
           .transition()
           .ease(d3.easeCubicOut)

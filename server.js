@@ -13,6 +13,7 @@ const useragent = require('express-useragent')
 const uuidv4 = require('uuid/v4')
 // const { VALID_PREVIEW_IP_ADD } = require('./api/config')
 const { createBundleRenderer } = require('vue-server-renderer')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 
 const config = require('./api/config')
 const isProd = process.env.NODE_ENV === 'production'
@@ -87,7 +88,7 @@ app.use('/project/service-worker.js', serve(path.join(__dirname, './dist/service
 app.use('/service-worker.js', serve(path.join(__dirname, './dist/service-worker.js')))
 
 if (!isProd) {
-  app.use('/proj-assets', serve(path.join(__dirname, './proj-assets'), true))
+  app.use('/proj-assets', createProxyMiddleware({ target: 'https://www.readr.tw/', changeOrigin: true }))
 }
 
 // since this app has no user-specific content, every page is micro-cacheable.
