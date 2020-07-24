@@ -1,9 +1,6 @@
 <template>
   <header class="section-content-header">
     <nav class="section-content-header__nav">
-      <a class="section-content-header__nav-item section-content-header__readr-link" :href="`https://${READR_DOMAIN_PROD}`" target="_blank">
-        <img class="section-content-header__readr-logo" src="/proj-assets/political-contribution/logo-white.png" alt="">
-      </a>
       <a class="section-content-header__nav-item navigation-figure" href="http://www.readr.tw/series/political-contribution" target="_blank">
         <img class="navigation-figure__img navigation-figure__img--star" src="/proj-assets/political-contribution/star.png" alt="bell-w">
         <p class="navigation-figure__figcaption">
@@ -28,7 +25,7 @@
           {{ $t('POLITICAL_CONTRIBUTION.CONTENT_HEADER.SHARE') }}
         </p>
       </a>
-      <a class="section-content-header__nav-item navigation-figure" target="_blank" href="https://www.readr.tw/series/political-contribution/donate">
+      <a class="section-content-header__nav-item navigation-figure" target="_blank" href="https://www.readr.tw/donate">
         <img class="navigation-figure__img" src="/proj-assets/political-contribution/donate-white.png" alt="share-w">
         <p class="navigation-figure__figcaption">
           {{ $t('POLITICAL_CONTRIBUTION.CONTENT_HEADER.DONATE') }}

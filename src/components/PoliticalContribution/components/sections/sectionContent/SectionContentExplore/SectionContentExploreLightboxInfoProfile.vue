@@ -2,7 +2,7 @@
   <div class="section-content-explore-lightbox-info-profile">
     <div class="section-content-explore-lightbox-info-profile__description">
       <div class="section-content-explore-lightbox-info-profile__name-age">
-        <p class="section-content-explore-lightbox-info-profile__name">{{ candidateName }}</p>
+        <p class="section-content-explore-lightbox-info-profile__name">{{ checkCandidateName }}</p>
         <p class="section-content-explore-lightbox-info-profile__age">({{ candidateAge }} 歲)</p>
       </div>
       <div class="section-content-explore-lightbox-info-profile__party-veteran-committee">
@@ -57,6 +57,9 @@ export default {
     SectionContentExploreCandidatePortraitRound,
   },
   computed: {
+    checkCandidateName () {
+      return this.candidateName.replace(/南投/, '')
+    },
     candidateAge () {
       const currentYear = (new Date()).getFullYear()
       return currentYear - (+this.candidateBornYear)

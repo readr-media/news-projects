@@ -1,6 +1,6 @@
 <template>
   <div class="section-content-explore-lightbox-ranks-list-relationship">
-    <h1 class="section-content-explore-lightbox-ranks-list-relationship__title">誰跟{{ nameUrlQuery }}的政商關係最接近</h1>
+    <h1 class="section-content-explore-lightbox-ranks-list-relationship__title">誰跟{{ checkName }}的政商關係最接近</h1>
     <AppFingerHint class="section-content-explore-lightbox-ranks-list-relationship__finger-hint--mobile" :hint="'點選這些候選人看獻金資訊'"/>
     <ol class="section-content-explore-lightbox-ranks-list-relationship__list">
       <li 
@@ -12,7 +12,7 @@
       >
         <p class="section-content-explore-lightbox-ranks-list-relationship__index" v-text="`${i + 1}.`"></p>
         <p class="section-content-explore-lightbox-ranks-list-relationship__list-item-content">
-          <span :class="`section-content-explore-lightbox-ranks-list-relationship__candidate--${$t(`POLITICAL_CONTRIBUTION.PARTY['${getCandidateParty(candidate)}']`)}`">{{ getCandidateName(candidate) }}</span>
+          <span :class="`section-content-explore-lightbox-ranks-list-relationship__candidate--${$t(`POLITICAL_CONTRIBUTION.PARTY['${getCandidateParty(candidate)}']`)}`">{{ getCandidateName(candidate).replace(/南投/, '') }}</span>
           重複 {{ getOverlappingCompanyCount(candidate) }} 家子公司
         </p>
       </li>
@@ -37,7 +37,10 @@ export default {
       'nameUrlQuery',
       'ordinalUrlQuery',
       'rankDataRelationshipCurrentOrdinalCandidateLightboxShown'
-    ])
+    ]),
+    checkName () {
+      return this.nameUrlQuery.replace(/南投/, '')
+    },
   },
   methods: {
     getCandidateName (entry) {

@@ -2736,11 +2736,6 @@ export const DATA_ORDINAL_PARTY_DONATES_FROM_LEGENDS = {
     },
     {
       type: 'round-icon',
-      text: '第十屆台灣民眾黨',
-      color: '#29C7C7'
-    },
-    {
-      type: 'round-icon',
       text: '第十屆中國國民黨',
       color: '#0071bc'
     }
@@ -3080,38 +3075,6 @@ export const DATA_ORDINAL_PARTY_DONATES_FROM = {
         party: '台灣基進',
         category: '其他收入',
         percentage: 0.01
-      }
-    ],
-    tpp: [
-      {
-        party: '台灣民眾黨',
-        category: '個人',
-        percentage: 43.78
-      },
-      {
-        party: '台灣民眾黨',
-        category: '營利事業',
-        percentage: 11.66
-      },
-      {
-        party: '台灣民眾黨',
-        category: '政黨',
-        percentage: 39.53
-      },
-      {
-        party: '台灣民眾黨',
-        category: '人民團體',
-        percentage: 1.40
-      },
-      {
-        party: '台灣民眾黨',
-        category: '匿名',
-        percentage: 3.62
-      },
-      {
-        party: '台灣民眾黨',
-        category: '其他收入',
-        percentage: 0.00
       }
     ],
     kmt: [
