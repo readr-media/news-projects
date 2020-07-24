@@ -151,7 +151,7 @@ export default {
           .range([ 0, this.innerWidth ])
       this.yScale =
         d3.scaleLinear()
-          .domain([ 0, 80 ])
+          .domain([ 0, 85 ])
           .range([ this.innerHeight, 0 ])
       this.colorScale =
         d3.scaleOrdinal()
@@ -287,7 +287,8 @@ export default {
           .style('stroke', d => this.colorScale(d[0]['party']))
           .style('stroke-width', '5px')
           .style('fill', 'none')
-      if (this.shouldVisualizeOrdinal === 'ninth') {
+
+      if (['ninth', 'tenth'].includes(this.shouldVisualizeOrdinal)) {
         circlesNPP
           .enter()
           .append('circle')
@@ -316,35 +317,7 @@ export default {
             .style('stroke-width', '5px')
             .style('fill', 'none')
       }
-
-      if (this.shouldVisualizeOrdinal === 'tenth') {
-        circlesNPP
-          .enter()
-          .append('circle')
-            .attr('class', 'circle-npp')
-            .attr('r', 10)
-            .attr('cx', d => this.xScale(d['category']))
-            .attr('cy', d => this.yScale(d['percentage']))
-            .on('mouseover', d => this.handleTooltip(d, 'mouseover'))
-            .on('mousemove', d => this.handleTooltip(d, 'mousemove'))
-            .on('mouseout', d => this.handleTooltip(d, 'mouseout'))
-            .style('fill', 'white')
-            .transition()
-            .ease(d3.easeCubicOut)
-            .duration(500)
-            .style('fill', d => this.colorScale(d['party']))
-        lineNPP
-          .enter()
-          .append('path')
-          .lower()
-            .attr('class', 'line-npp')
-            .attr('d', this.line)
-            .transition()
-            .ease(d3.easeCubicOut)
-            .duration(500)
-            .style('stroke', d => this.colorScale(d[0]['party']))
-            .style('stroke-width', '5px')
-            .style('fill', 'none')
+      if (['tenth'].includes(this.shouldVisualizeOrdinal)) {
         circlesTSP
           .enter()
           .append('circle')
@@ -394,6 +367,9 @@ export default {
         .duration(500)
         .style('fill', 'transparent')
         .remove()
+      lineTSP
+        .exit()
+        .remove()
       circlesTSP
         .exit()
         .transition()
@@ -401,14 +377,16 @@ export default {
         .duration(500)
         .style('fill', 'transparent')
         .remove()
-      if (!['ninth', 'tenth'].includes(this.shouldVisualizeOrdinal)) {
-        d3.select(`${this.containerSelector} path.line-npp`)
+      if (!['tenth'].includes(this.shouldVisualizeOrdinal)) {
+        d3.select(`${this.containerSelector} path.line-tsp`)
           .transition()
           .ease(d3.easeCubicOut)
           .duration(500)
           .style('stroke', 'transparent')
           .remove()
-        d3.select(`${this.containerSelector} path.line-tsp`)
+      }
+      if (!['ninth', 'tenth'].includes(this.shouldVisualizeOrdinal)) {
+        d3.select(`${this.containerSelector} path.line-npp`)
           .transition()
           .ease(d3.easeCubicOut)
           .duration(500)
