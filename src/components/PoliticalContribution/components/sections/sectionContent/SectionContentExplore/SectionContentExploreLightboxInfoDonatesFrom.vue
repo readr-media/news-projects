@@ -129,7 +129,6 @@ export default {
       'dataIndustryPercentageMOFCurrentOrdinalNameLightboxShown',
     ]),
     isRawDataCompanyDonateCurrentOrdinalEmpty () {
-      console.log(this.rawDataCompanyDonateCurrentOrdinal)
       return isEmpty(this.rawDataCompanyDonateCurrentOrdinal)
     },
     isIndustryPercentageMOFEmpty () {
