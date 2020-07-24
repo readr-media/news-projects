@@ -1,10 +1,5 @@
 <template>
   <div class="story-credits">
-    <div class="story-credits__row story-credits__row--more-margin-bottom">
-      <a href="https://www.mirrormedia.mg" target="_blank">
-        <img class="story-credits__mm-logo" src="/proj-assets/political-contribution/mm.png" alt="">
-      </a>
-    </div>
     <template v-if="!isNewCredit">
       <div class="story-credits__row story-credits__row--mobile-break">
         <p class="story-credits__credit">
@@ -30,6 +25,9 @@
       <div class="story-credits__row">
         <p class="story-credits__published-date">
           {{ $t('POLITICAL_CONTRIBUTION.CREDITS.RELEASE_DATE') }}{{ publishedDate }}
+        </p>
+        <p v-if="!!updatedDate" class="story-credits__updated-date">
+          {{ $t('POLITICAL_CONTRIBUTION.CREDITS.UPDATED_DATE') }}{{ updatedDate }}
         </p>
       </div>
     </template>
