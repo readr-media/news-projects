@@ -87,7 +87,7 @@ export const POLITICAL_CONTRIBUTION = {
       ]
     },
     WRITER: {
-      WORDING: '文字：',
+      WORDING: '記者：',
       MEMBER: '李又如'
     },
     FE: {
@@ -99,7 +99,7 @@ export const POLITICAL_CONTRIBUTION = {
       MEMBER: '陳怡蒨'
     },
     COOP: {
-      WORDING: '資料協力：',
+      WORDING: '資料分析協力：',
       MEMBER: [
         'Ronny Wang',
         'Timothy Lee',
