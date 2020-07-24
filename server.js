@@ -88,7 +88,7 @@ app.use('/project/service-worker.js', serve(path.join(__dirname, './dist/service
 app.use('/service-worker.js', serve(path.join(__dirname, './dist/service-worker.js')))
 
 if (!isProd) {
-  app.use('/proj-assets', createProxyMiddleware({ target: 'https://www.readr.tw/', changeOrigin: true }))
+  app.use('/proj-assets', createProxyMiddleware({ target: 'http://dev.readr.tw/', changeOrigin: true }))
 }
 
 // since this app has no user-specific content, every page is micro-cacheable.
