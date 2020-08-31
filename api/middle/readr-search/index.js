@@ -55,11 +55,18 @@ router.get('/', async (req, res) => {
 
   console.log(`[readr-search] READR_SEARCH_HOST: ${READR_SEARCH_HOST}`)
   console.log(`[readr-search] READR_SEARCH_PORT: ${READR_SEARCH_PORT}`)
-  const result = await axios.post(
-    `http://${READR_SEARCH_HOST}:${READR_SEARCH_PORT}/readr.posts/_doc/_search`,
-    payload
-  )
-  res.send(result.data)
+
+  try {
+    const result = await axios({
+      method: 'post',
+      timeout: 1000 * 10,
+      url: `http://${READR_SEARCH_HOST}:${READR_SEARCH_PORT}/readr.posts/_doc/_search`,
+      data: payload
+    })
+    res.send(result.data)
+  } catch (e) {
+    res.status(500).send(e)
+  }
 })
 
 module.exports = router
