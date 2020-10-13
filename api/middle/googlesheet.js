@@ -10,7 +10,7 @@ const { authGoogleAPI, } = require('../service/google/auth')
 const { fetchFromRedis, insertIntoRedis, } = require('./ioredisHandler')
 
 router.use(cors({
-  origin: /(localhost|mirrormedia)/,
+  origin: [/(localhost|mirrormedia|)/, /\.readr\.tw$/],
   methods: 'GET,HEAD,PATCH,POST'
 }))
 
