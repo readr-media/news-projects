@@ -28,7 +28,7 @@
     "@readr-ui/app-header": "^1.4.2",
     "@readr-ui/subscription": "^1.1.0",
     "autotrack": "^2.4.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "big-integer": "^1.6.48",
     "body-parser": "^1.19.0",
     "body-scroll-lock": "^2.6.1",
