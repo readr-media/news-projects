@@ -3,6 +3,11 @@ import VueI18n from 'vue-i18n'
 import VueLazyload from 'vue-lazyload'
 import VueFirestore from 'vue-firestore'
 import VueMasonry from 'vue-masonry-css'
+
+// How to integrate stencil web component in Vue: https://stenciljs.com/docs/vue
+// @readr-media/web-components: https://github.com/readr-media/readr-ui
+import { defineCustomElements } from '@readr-media/web-components/loader'
+
 import App from './App.vue'
 import { createStore } from './store'
 import { createRouter } from './router'
@@ -23,6 +28,11 @@ Vue.use(VueLazyload, {
 
 Vue.use(VueFirestore)
 Vue.use(VueMasonry)
+
+// Tell Vue to ignore the components. We can provide regex here
+Vue.config.ignoredElements = ['readr-latest-coverages']
+// Bind the custom elements to the window object
+defineCustomElements()
 
 // mixin for handling title
 Vue.mixin(titleMeta)

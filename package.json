@@ -24,6 +24,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.3",
     "@google-cloud/storage": "1.7",
+    "@readr-media/web-components": "^2.1.0",
     "@readr-ui/app-header": "^1.4.2",
     "@readr-ui/subscription": "^1.1.0",
     "autotrack": "^2.4.1",
