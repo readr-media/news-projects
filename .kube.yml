@@ -4,20 +4,20 @@ metadata:
   name: project-service
 spec:
   selector:
-    app: {{.app}}
-    tier: {{.tier}}
+    app: "{{.app}}"
+    tier: "{{.tier}}"
   ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 80
+    - port: 80
+      protocol: TCP
+      targetPort: 80
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{.app}}
-    tier: {{.tier}}
+    app: "{{.app}}"
+    tier: "{{.tier}}"
   name: project-deploy
 spec:
   replicas: 1
@@ -32,16 +32,16 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: {{.image}}
-        # imagePullPolicy: IfNotPresent
-        name: news-projects
-        ports:
-        - containerPort: 80
-          protocol: TCP
-        # volumeMounts:
-        # - mountPath: /usr/src/api/config.js
-        #   name: projects-config
-        #   subPath: config.js
+        - image: "{{.image}}"
+          # imagePullPolicy: IfNotPresent
+          name: news-projects
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          # volumeMounts:
+          # - mountPath: /usr/src/api/config.js
+          #   name: projects-config
+          #   subPath: config.js
       terminationGracePeriodSeconds: 30
       # volumes:
       # - name: projects-config
