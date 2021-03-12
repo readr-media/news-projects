@@ -18,23 +18,23 @@ metadata:
   labels:
     app: "{{.app}}"
     tier: "{{.tier}}"
-  name: project-deploy
+  name: "{{.app}}"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: news-projects
+      app: "{{.app}}"
       tier: frontend
   template:
     metadata:
       labels:
-        app: news-projects
+        app: "{{.app}}"
         tier: frontend
     spec:
       containers:
         - image: "{{.image}}"
           # imagePullPolicy: IfNotPresent
-          name: news-projects
+          name: "{{.app}}"
           ports:
             - containerPort: 80
               protocol: TCP
