@@ -11,11 +11,13 @@
               <span v-text="targetSourceCount" class="source"></span>
               <span v-text="$t('RENT.INFOGRAPHIC_BODY.BASED_ON_YOUR_CASE_POSTFIX')"></span>
             </div>
-            <div class="filter__total" v-if="isDesktop" v-show="isFilterBarActive">
-              <span v-text="$t('RENT.INFOGRAPHIC_BODY.TOTAL_PREFIX')"></span>     
-              <span v-text="source_count" class="source"></span>
-              <span v-text="$t('RENT.INFOGRAPHIC_BODY.TOTAL_POSTFIX')"></span>     
-            </div>
+            <NoSSR>
+              <div class="filter__total" v-if="isDesktop" v-show="isFilterBarActive">
+                <span v-text="$t('RENT.INFOGRAPHIC_BODY.TOTAL_PREFIX')"></span>     
+                <span v-text="source_count" class="source"></span>
+                <span v-text="$t('RENT.INFOGRAPHIC_BODY.TOTAL_POSTFIX')"></span>     
+              </div>
+            </NoSSR>
           </div>
           <div class="infographic-body">
             <Infographic :isDefaultBlock="!isFilterBarActive"></Infographic>
@@ -27,6 +29,8 @@
   </main>
 </template>
 <script>
+  import NoSSR from 'vue-no-ssr'
+
   import Infographic from 'src/components/Rent/Infographic.vue'
   import MainContentAside from 'src/components/Rent/MainContentAside.vue'
   import verge from 'verge'
@@ -38,6 +42,8 @@
   export default {
     name: 'MainContent',
     components: {
+      NoSSR,
+
       Infographic,
       MainContentAside,
     },
