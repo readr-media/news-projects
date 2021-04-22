@@ -30,7 +30,7 @@ Vue.use(VueFirestore)
 Vue.use(VueMasonry)
 
 // Tell Vue to ignore the components. We can provide regex here
-Vue.config.ignoredElements = ['readr-latest-coverages']
+Vue.config.ignoredElements = []
 // Bind the custom elements to the window object
 defineCustomElements()
 
@@ -38,13 +38,13 @@ defineCustomElements()
 Vue.mixin(titleMeta)
 
 // register global utility filters.
-Object.keys(filters).forEach(key => {
+Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key])
 })
 
 // Expose a factory function that creates a fresh set of store, router,
 // app instances on each call (which is called for each SSR request)
-export function createApp () {
+export function createApp() {
   // create store and router instances
   const store = createStore()
   const router = createRouter()
@@ -53,8 +53,8 @@ export function createApp () {
     locale: 'zh-TW',
     messages: {
       'zh-TW': i18nZHTW,
-      'vi': i18nVI,
-      'en': i18nEN
+      vi: i18nVI,
+      en: i18nEN
     }
   })
 
@@ -69,7 +69,7 @@ export function createApp () {
     i18n,
     router,
     store,
-    render: h => h(App)
+    render: (h) => h(App)
   })
 
   // expose the app, the router and the store.
