@@ -467,7 +467,7 @@
 import EnergyPolicyQuiz from './EnergyPolicyQuiz.vue'
 import Logo from '../Logo.vue'
 import ReadMoreButton from './ReadMoreButton.vue'
-import LatestNews from './LatestNews.vue'
+import LatestNews from 'src/components/LatestNews.vue'
 import RelatedReports from 'src/components/RelatedReports.vue'
 import Share from '../Share.vue'
 import { READ_MORE_CONTENT } from './constant'
