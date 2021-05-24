@@ -7,9 +7,13 @@
         <span>工程：熊凱文</span>
       </p>
       <p>資料：李又如、簡信昌、吳冠賢、政治大學鄭宇君團隊</p>
+      <p>出版時間 2020/07/07</p>
     </div>
     <TheDonateFooter class="footer__item" />
-    <TheNewsletterSubscribe class="footer__item" style="margin-left: 20px; margin-right: 20px" />
+    <TheNewsletterSubscribe
+      class="footer__item"
+      style="margin-left: 20px; margin-right: 20px"
+    />
   </footer>
 </template>
 
