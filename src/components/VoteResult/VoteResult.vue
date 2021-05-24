@@ -10,7 +10,7 @@
     <VoteArticle />
     <RelatedReports :theme="'light'"/>
     <div class="vote-result__comment">
-      <iframe src="https://www.readr.tw/comment?resource_url=https://www.readr.tw/series/2018-vote" frameborder="0"></iframe>
+      <readr-latest-coverages />
     </div>
   </section>
 </template>
@@ -98,15 +98,7 @@ export default {
         background-size 34px auto !important
         background-position center center !important
   &__comment
-    margin-top 40px
-    > iframe
-      width 100%
-      min-height 400px
-
-@media (min-width: 900px)
-  .vote-result
-    &__comment
-      width 800px
-      margin 0 auto
+    max-width 600px
+    margin 0 auto
+    padding 24px 8px
 </style>
-

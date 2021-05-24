@@ -15,11 +15,15 @@
           :program="p"></InfographicGraph>
       </div>
     </template>
-    <div class="infographic__tip" v-show="tip" v-if="isDesktop"><span v-html="tip"></span></div>
+    <NoSSR>
+      <div class="infographic__tip" v-show="tip" v-if="isDesktop"><span v-html="tip"></span></div>
+    </NoSSR>
     <div class="infographic__loading" v-show="isLoading"><Spinner show="true"></Spinner></div>    
   </InfographicLayout>
 </template>
 <script>
+  import NoSSR from 'vue-no-ssr'
+
   import InfographicLayout from 'src/components/Rent/InfographicLayout.vue'
   import InfographicGraph from 'src/components/Rent/InfographicGraph.vue'
   import Spinner from 'src/components/Spinner.vue'
@@ -34,6 +38,8 @@
   export default {
     name: 'Infographic',
     components: {
+      NoSSR,
+
       InfographicGraph,
       InfographicLayout,
       Spinner,

@@ -1312,6 +1312,20 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
+"@readr-media/old-news-project-slugs@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@readr-media/old-news-project-slugs/-/old-news-project-slugs-1.1.1.tgz#e3fc56166c213b10d217c6c9d75e9c0e65ac35fc"
+  integrity sha512-bdfYgoTFsmbpPlyQay6EQGIHwombFB1+w6gq9/gEeyy+9fA9u6W2ah+gX2XQ9SnMIFvLfbWauPiI4xb4C5I64A==
+
+"@readr-media/web-components@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@readr-media/web-components/-/web-components-2.1.0.tgz#2c758cca1ee6728b5e6a68d62290af26247aa15c"
+  integrity sha512-3KDMdIo+bjBq1Drkgd+VweLVPJ0QOm3DtkSK5ZWmAkU+AgHJG4cBzngl+FZXz74jo8d4L0QI0XgwoWKf/2aCJw==
+  dependencies:
+    "@readr-media/old-news-project-slugs" "^1.1.1"
+    "@stencil/core" "^2.3.0"
+    "@stencil/sass" "^1.3.2"
+
 "@readr-ui/app-header@^1.4.2":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@readr-ui/app-header/-/app-header-1.4.2.tgz#15d5427f88990ddec6443f39f82d78a8983a7411"
@@ -1357,6 +1371,16 @@
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@readr-ui/subscription/-/subscription-1.1.1.tgz#082afd8811572be9ca9e6c4be4c580fd200cfa4a"
   integrity sha512-8YT6iN6139XyvsLLrYtn6Q8tJOBKukN1S8HqGoiMIulc6nZVZinvXGX3WhhGZLpdMFbCax6qeoDxjTd1scscvA==
+
+"@stencil/core@^2.3.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.4.0.tgz#17b45629c8986e35dcbce3f7dab7d64beede83f2"
+  integrity sha512-gU6+Yyd6O0KrCSS/O6j8KKqmRo+/Dcs2fI0+APCpbAWK+nqhwDISpdnSEfGDCLMoAC08XOZCycBRk2K1VGnEcg==
+
+"@stencil/sass@^1.3.2":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@stencil/sass/-/sass-1.4.1.tgz#ef5a1dd1b56c024ed08e80475e8a6f8d1c25bb10"
+  integrity sha512-aFKoqtxZ/8BRbvNFiWRycGiqvMI22Ifn5qsKfq0U23j43XD81jT6d7K0WQd55ejNpoSpdxJcbOuFgQy3mXizfA==
 
 "@types/bytebuffer@^5.0.40":
   version "5.0.40"
