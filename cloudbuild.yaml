@@ -1,0 +1,84 @@
+steps:
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - source
+      - repos
+      - clone
+      - default
+      - default
+  - name: bash
+    args:
+      - cp
+      - ./default/news-projects/$BRANCH_NAME/config.js
+      - api/config.js
+  - name: bash
+    args:
+      - cp
+      - ./default/readr-site/gcskeyfile.json
+      - ./gcskeyfile.json
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '-t'
+      - 'gcr.io/${PROJECT_ID}/news-projects:${BRANCH_NAME}_${SHORT_SHA}'
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - gcr.io/$PROJECT_ID/news-projects
+  - name: launcher.gcr.io/google/ubuntu1604
+    args:
+      - '-c'
+      - >
+        # install kustomize
+
+        curl -s
+        "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"
+        | bash
+
+
+        # mv kubernetes-configs folder
+
+        mv ./dockerignore/kubernetes-configs /workspace/kubernetes-configs
+
+
+        # cd to (dev|staging) environment kustimzation root
+
+        cd
+        /workspace/kubernetes-configs/news-projects/overlays/${BRANCH_NAME}
+
+
+        # update docker image
+
+        /workspace/kustomize edit set image
+        news-projects=gcr.io/${PROJECT_ID}/news-projects:${BRANCH_NAME}_${SHORT_SHA}
+
+
+        # back to kubernetes-configs root
+
+        cd /workspace/kubernetes-configs
+
+
+        /workspace/kustomize build
+        "./news-projects/overlays/${BRANCH_NAME}" >>
+        $_FILE_TO_DEPLOY
+
+        # print out configs
+
+        cat $_FILE_TO_DEPLOY
+    entrypoint: bash
+  - name: gcr.io/cloud-builders/kubectl
+    env:
+      - CLOUDSDK_COMPUTE_REGION=asia-east1
+      - CLOUDSDK_CONTAINER_CLUSTER=readr-prod-v2
+    args:
+      - apply
+      - '-f'
+      - $_FILE_TO_DEPLOY
+      - '--validate=true'
+timeout: 900s
+images:
+  - gcr.io/$PROJECT_ID/news-projects
+substitutions:
+  _FILE_TO_DEPLOY: /workspace/config-to-deploy.txt
+
