@@ -14,6 +14,8 @@ FROM node:12.16.2-alpine
 
 WORKDIR /app
 
+COPY --from=build /app .
+
 RUN yarn install
 RUN yarn run build
 
