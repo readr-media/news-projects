@@ -4,17 +4,19 @@ steps:
       - source
       - repos
       - clone
-      - default
-      - default
+      - github_mirror-media_kubernetes-configs
+      - ./dockerignore/kubernetes-configs
   - name: bash
     args:
       - cp
-      - ./default/news-projects/$BRANCH_NAME/config.js
+      - >-
+        ./dockerignore/kubernetes-configs/news-projects/overlays/${BRANCH_NAME}/configs/config.js
       - api/config.js
   - name: bash
     args:
       - cp
-      - ./default/readr-site/gcskeyfile.json
+      - >-
+        ./dockerignore/kubernetes-configs/news-projects/overlays/${BRANCH_NAME}/configs/gcskeyfile.json
       - ./gcskeyfile.json
   - name: gcr.io/cloud-builders/docker
     args:
