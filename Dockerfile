@@ -1,6 +1,6 @@
 FROM node:12.10.0-alpine AS build
 
-WORKDIR /app
+WORKDIR /usr/src
 
 # ADD default/news-projects/config.js $NODE_SOURCE/api/config.js
 
@@ -12,9 +12,9 @@ RUN apk update \
 
 FROM node:12.16.2-alpine
 
-WORKDIR /app
+WORKDIR /usr/src/
 
-COPY --from=build /app .
+COPY --from=build /usr/src .
 
 RUN yarn install
 RUN yarn run build
