@@ -78,7 +78,7 @@ steps:
       - '-f'
       - $_FILE_TO_DEPLOY
       - '--validate=true'
-timeout: 900s
+timeout: 2400s
 images:
   - gcr.io/$PROJECT_ID/news-projects
 substitutions:
