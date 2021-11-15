@@ -36,7 +36,11 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - gcr.io/$PROJECT_ID/news-projects
+      - gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}_${SHORT_SHA}
   - name: launcher.gcr.io/google/ubuntu1604
     args:
       - '-c'
