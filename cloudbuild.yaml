@@ -19,7 +19,7 @@ steps:
         ./dockerignore/kubernetes-configs/news-projects/overlays/${BRANCH_NAME}/configs/gcskeyfile.json
       - ./gcskeyfile.json
   - name: gcr.io/cloud-builders/docker
-    entrypoint:"bash
+    entrypoint: bash
     args:
       - "-c"
       - "docker pull gcr.io/${PROJECT_ID}/mirror-media-nuxt:${BRANCH_NAME} || exit 0"
