@@ -58,7 +58,7 @@
     "intersection-observer": "^0.5.1",
     "ioredis": "^4.17.3",
     "jquery": "^3.3.1",
-    "jsonwebtoken": "^8.5.0",
+    "jsonwebtoken": "^9.0.0",
     "kc-scroll": "^0.2.71",
     "lodash": "^4.17.15",
     "lru-cache": "^5.1.1",
