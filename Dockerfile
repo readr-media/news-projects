@@ -24,7 +24,7 @@ EXPOSE $NUXT_PORT
 # CMD [ "yarn", "start" ]
 
 COPY . $APP_DIR
-RUN chmod +x run.sh
+RUN chmod +x /app/run.sh
 RUN ls /app
 
 RUN yarn build \
