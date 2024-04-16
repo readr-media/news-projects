@@ -25,6 +25,7 @@ EXPOSE $NUXT_PORT
 
 COPY . $APP_DIR
 RUN chmod +x run.sh
+RUN ls /app
 
 RUN yarn build \
     && apk add --no-cache ca-certificates \
