@@ -12,6 +12,10 @@ steps:
       - >-
         ./dockerignore/kubernetes-configs/news-projects/overlays/cloudrun/configs/config.js
       - api/config.js
+  - name: bash
+    args:
+      - cat
+      - api/config.js
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
