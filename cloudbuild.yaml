@@ -10,7 +10,7 @@ steps:
     args:
       - cp
       - >-
-        ./dockerignore/kubernetes-configs/news-projects/overlays/prod/configs/config.js
+        ./dockerignore/kubernetes-configs/news-projects/overlays/cloudrun/configs/config.js
       - api/config.js
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
