@@ -14,8 +14,7 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install
 
-RUN apt-get update && apt-get -y install redis-server
-RUN pip install redis
+RUN apk update && apk add --update redis
 
 ENV NUXT_HOST 0.0.0.0
 ENV NUXT_PORT 3000
