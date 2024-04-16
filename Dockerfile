@@ -23,6 +23,7 @@ EXPOSE $NUXT_PORT
 # CMD [ "yarn", "start" ]
 
 COPY . .
+RUN chmod +x run.sh
 
 RUN yarn build \
     && apk add --no-cache ca-certificates \
