@@ -1,7 +1,8 @@
 FROM node:12.10.0-alpine
 
-WORKDIR /usr/src
-
+ENV APP_DIR /app 
+RUN mkdir -p $APP_DIR
+WORKDIR $APP_DIR
 # ADD default/news-projects/config.js $NODE_SOURCE/api/config.js
 
 COPY . .
@@ -22,11 +23,11 @@ ENV NUXT_PORT 3000
 EXPOSE $NUXT_PORT
 # CMD [ "yarn", "start" ]
 
-COPY . .
+COPY . $APP_DIR
 RUN chmod +x run.sh
 
 RUN yarn build \
     && apk add --no-cache ca-certificates \
     && apk del .build-deps
 
-CMD run.sh
+CMD [ "/app/run.sh"] 
