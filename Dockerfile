@@ -5,11 +5,11 @@ RUN mkdir -p $APP_DIR
 WORKDIR $APP_DIR
 # ADD default/news-projects/config.js $NODE_SOURCE/api/config.js
 
-COPY . .
-
 RUN apk update \
 	&& apk upgrade --no-cache \
 	&& apk add --no-cache --virtual .build-deps python build-base make 
+
+RUN apk update && apk add --no-cache dumb-init curl ca-certificates && rm -rf /var/cache/apk/*
 
 COPY package.json .
 COPY yarn.lock .
@@ -30,6 +30,6 @@ RUN yarn build \
     && apk del .build-deps
 
 RUN chmod +x /app/run.sh
-RUN ls -l /app
 
+ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD [ "/app/run.sh"] 
