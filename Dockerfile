@@ -14,11 +14,14 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install
 
+RUN apt-get update && apt-get -y install redis-server
+RUN pip install redis
+
 ENV NUXT_HOST 0.0.0.0
 ENV NUXT_PORT 3000
 
 EXPOSE $NUXT_PORT
-CMD [ "yarn", "start" ]
+# CMD [ "yarn", "start" ]
 
 COPY . .
 
@@ -26,3 +29,4 @@ RUN yarn build \
     && apk add --no-cache ca-certificates \
     && apk del .build-deps
 
+CMD run.sh
