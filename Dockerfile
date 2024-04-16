@@ -24,11 +24,12 @@ EXPOSE $NUXT_PORT
 # CMD [ "yarn", "start" ]
 
 COPY . $APP_DIR
-RUN chmod +x /app/run.sh
-RUN ls /app
 
 RUN yarn build \
     && apk add --no-cache ca-certificates \
     && apk del .build-deps
+
+RUN chmod +x /app/run.sh
+RUN ls -l /app
 
 CMD [ "/app/run.sh"] 
