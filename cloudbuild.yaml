@@ -30,12 +30,7 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}_${COMMIT_SHA}
-
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - push
-      - gcr.io/$PROJECT_ID/news-projects:latest
+      - 'gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}_${COMMIT_SHA}'
 
   # Deploy container image to Cloud Runs
   - name: gcr.io/cloud-builders/gcloud
@@ -55,6 +50,11 @@ steps:
         gcloud run deploy "$cr" --image gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}_${COMMIT_SHA} --region asia-east1
 
         done
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - 'gcr.io/$PROJECT_ID/news-projects:latest'
 
 timeout: 4200s
 images:
