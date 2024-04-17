@@ -12,10 +12,6 @@ steps:
       - >-
         ./dockerignore/kubernetes-configs/news-projects/overlays/cloudrun/configs/config.js
       - api/config.js
-  - name: bash
-    args:
-      - cat
-      - api/config.js
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
@@ -35,6 +31,10 @@ steps:
     args:
       - push
       - gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}_${COMMIT_SHA}
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}
 
 
   # Deploy container image to Cloud Runs
@@ -52,7 +52,7 @@ steps:
         do
 
         # deploy cloud run service iteratively
-        gcloud run deploy "$cr" --image gcr.io/$PROJECT_ID/$_IMAGE_NAME:${BRANCH_NAME}_${COMMIT_SHA} --region asia-east1
+        gcloud run deploy "$cr" --image gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}_${COMMIT_SHA} --region asia-east1
 
         done
 
