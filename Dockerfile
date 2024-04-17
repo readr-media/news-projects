@@ -9,13 +9,9 @@ RUN apk update \
 	&& apk upgrade --no-cache \
 	&& apk add --no-cache --virtual .build-deps python build-base make 
 
-RUN apk add --no-cache tini
-
 COPY package.json .
 COPY yarn.lock .
 RUN yarn install
-
-RUN apk update && apk add --update redis
 
 ENV NUXT_HOST 0.0.0.0
 ENV NUXT_PORT 3000
@@ -28,9 +24,5 @@ RUN yarn build \
     && apk add --no-cache ca-certificates \
     && apk del .build-deps
 
-RUN chmod +x /app/run.sh
-RUN ls -l /app
-
 EXPOSE $NUXT_PORT
-ENTRYPOINT ["/sbin/tini", "--"]
 CMD [ "yarn", "start" ] 
