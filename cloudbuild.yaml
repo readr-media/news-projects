@@ -16,26 +16,26 @@ steps:
     entrypoint: bash
     args:
       - "-c"
-      - "docker pull gcr.io/${PROJECT_ID}/news-projects:${BRANCH_NAME} || exit 0"
+      - "docker pull gcr.io/${PROJECT_ID}/news-projects:latest || exit 0"
   - name: gcr.io/cloud-builders/docker
     args:
       - build
       - '-t'
-      - "gcr.io/${PROJECT_ID}/news-project:${BRANCH_NAME}"
+      - "gcr.io/${PROJECT_ID}/news-project:latest"
       - '-t'
       - 'gcr.io/${PROJECT_ID}/news-projects:${BRANCH_NAME}_${COMMIT_SHA}'
       - "--cache-from"
-      - "gcr.io/${PROJECT_ID}/news-project:${BRANCH_NAME}"
+      - "gcr.io/${PROJECT_ID}/news-project:latest"
       - .
   - name: gcr.io/cloud-builders/docker
     args:
       - push
       - gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}_${COMMIT_SHA}
+
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}
-
+      - gcr.io/$PROJECT_ID/news-projects:latest
 
   # Deploy container image to Cloud Runs
   - name: gcr.io/cloud-builders/gcloud
