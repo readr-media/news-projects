@@ -33,4 +33,4 @@ RUN ls -l /app
 
 EXPOSE $NUXT_PORT
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD [ "/app/run.sh" ] 
+CMD [ "yarn", "start" ] 
