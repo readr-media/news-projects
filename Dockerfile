@@ -9,7 +9,7 @@ RUN apk update \
 	&& apk upgrade --no-cache \
 	&& apk add --no-cache --virtual .build-deps python build-base make 
 
-RUN apk update && apk add --no-cache dumb-init curl ca-certificates && rm -rf /var/cache/apk/*
+RUN apk add --no-cache tini
 
 COPY package.json .
 COPY yarn.lock .
@@ -31,5 +31,5 @@ RUN yarn build \
 
 RUN chmod +x /app/run.sh
 
-ENTRYPOINT ["/usr/bin/tini", "--"]
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD [ "/app/run.sh"] 
