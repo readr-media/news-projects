@@ -22,12 +22,12 @@ ENV NUXT_PORT 3000
 EXPOSE $NUXT_PORT
 # CMD [ "yarn", "start" ]
 
+WORKDIR $APP_DIR
+COPY . $APP_DIR
+
 RUN yarn build \
     && apk add --no-cache ca-certificates \
     && apk del .build-deps
-
-WORKDIR $APP_DIR
-COPY . $APP_DIR
 
 RUN chmod +x /app/run.sh
 RUN ls -l /app
