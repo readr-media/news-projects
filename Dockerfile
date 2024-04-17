@@ -2,6 +2,7 @@ FROM node:12.10.0-alpine
 
 ENV APP_DIR /app 
 RUN mkdir -p $APP_DIR
+WORKDIR $APP_DIR
 # ADD default/news-projects/config.js $NODE_SOURCE/api/config.js
 
 RUN apk update \
@@ -19,10 +20,8 @@ RUN apk update && apk add --update redis
 ENV NUXT_HOST 0.0.0.0
 ENV NUXT_PORT 3000
 
-EXPOSE $NUXT_PORT
 # CMD [ "yarn", "start" ]
 
-WORKDIR $APP_DIR
 COPY . $APP_DIR
 
 RUN yarn build \
@@ -32,5 +31,6 @@ RUN yarn build \
 RUN chmod +x /app/run.sh
 RUN ls -l /app
 
+EXPOSE $NUXT_PORT
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD [ "/app/run.sh" ] 
