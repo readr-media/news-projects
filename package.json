@@ -75,7 +75,7 @@
     "redis-connection-pool": "^1.7.2",
     "request-ip": "^2.1.3",
     "route-cache": "0.4.5",
-    "sanitize-html": "^1.27.0",
+    "sanitize-html": "^2.3.2",
     "scroll-into-view": "^1.12.2",
     "scrollama": "^1.4.4",
     "serve-favicon": "^2.4.4",
