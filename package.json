@@ -84,7 +84,7 @@
     "topojson": "^3.0.2",
     "uuid": "^3.3.3",
     "v-viewer": "^1.4.0",
-    "validator": "^10.11.0",
+    "validator": "^13.7.0",
     "verge": "^1.10.2",
     "vue": "^2.6.11",
     "vue-autosuggest": "^1.4.3",
