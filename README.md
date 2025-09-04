@@ -1,5 +1,8 @@
 # READr News Project
 
+## UPDATED
+2025/09/04: update the config to change the redis hosts ip
+
 | Project |
 |--------------------------------------------------------------|
 | [關鍵 43 分鐘，圖解對話紀錄](https://www.readr.tw/project/puyuma) |
