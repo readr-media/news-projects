@@ -1,4 +1,6 @@
-FROM node:12.10.0-alpine
+FROM node:24.22.1-slim
+
+ENV NODE_OPTIONS --openssl-legacy-provider
 
 WORKDIR /usr/src
 
@@ -6,9 +8,9 @@ WORKDIR /usr/src
 
 COPY . .
 
-RUN apk update \
-	&& apk upgrade --no-cache \
-	&& apk add --no-cache --virtual .build-deps python build-base make 
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends python3 build-essential make ca-certificates \
+	&& rm -rf /var/lib/apt/lists/*
 
 COPY package.json .
 COPY yarn.lock .
@@ -22,7 +24,5 @@ CMD [ "yarn", "start" ]
 
 COPY . .
 
-RUN yarn build \
-    && apk add --no-cache ca-certificates \
-    && apk del .build-deps
+RUN yarn build
 
