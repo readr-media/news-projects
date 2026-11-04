@@ -1,4 +1,6 @@
-FROM node:12.10.0-alpine AS build
+FROM node:24.22.1-slim
+
+ENV NODE_OPTIONS --openssl-legacy-provider
 
 WORKDIR /usr/src
 
@@ -6,18 +8,21 @@ WORKDIR /usr/src
 
 COPY . .
 
-RUN apk update \
-	&& apk upgrade \
-	&& apk add python build-base make 
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends python3 build-essential make ca-certificates \
+	&& rm -rf /var/lib/apt/lists/*
 
-FROM node:12.16.2-alpine
-
-WORKDIR /usr/src/
-
-COPY --from=build /usr/src .
-
+COPY package.json .
+COPY yarn.lock .
 RUN yarn install
-RUN yarn run build
 
-EXPOSE 3000
-CMD ["yarn", "start"]
+ENV NUXT_HOST 0.0.0.0
+ENV NUXT_PORT 3000
+
+EXPOSE $NUXT_PORT
+CMD [ "yarn", "start" ]
+
+COPY . .
+
+RUN yarn build
+

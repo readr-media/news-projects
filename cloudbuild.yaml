@@ -19,15 +19,24 @@ steps:
         ./dockerignore/kubernetes-configs/news-projects/overlays/${BRANCH_NAME}/configs/gcskeyfile.json
       - ./gcskeyfile.json
   - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - "-c"
+      - "docker pull gcr.io/${PROJECT_ID}/mirror-media-nuxt:${BRANCH_NAME} || exit 0"
+  - name: gcr.io/cloud-builders/docker
     args:
       - build
       - '-t'
+      - "gcr.io/${PROJECT_ID}/news-project:${BRANCH_NAME}"
+      - '-t'
       - 'gcr.io/${PROJECT_ID}/news-projects:${BRANCH_NAME}_${SHORT_SHA}'
+      - "--cache-from"
+      - "gcr.io/${PROJECT_ID}/news-project:${BRANCH_NAME}"
       - .
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - gcr.io/$PROJECT_ID/news-projects
+      - gcr.io/$PROJECT_ID/news-projects:${BRANCH_NAME}_${SHORT_SHA}
   - name: launcher.gcr.io/google/ubuntu1604
     args:
       - '-c'
