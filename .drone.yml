@@ -39,10 +39,11 @@ pipeline:
       branch: master
   
   builds:
-    image: node:12.10.0-alpine
+    image: node:24.22.1-slim
+    environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
     commands:
-    - apk update
-    - apk add --no-cache python build-base make
+    - apt-get update && apt-get install -y python3 build-essential make
     - yarn install
     - yarn run build
     when:
