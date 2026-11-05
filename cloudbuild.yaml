@@ -21,11 +21,11 @@ steps:
     args:
       - build
       - '-t'
-      - "gcr.io/${PROJECT_ID}/news-project:latest"
+      - "gcr.io/${PROJECT_ID}/news-projects:latest"
       - '-t'
       - 'gcr.io/${PROJECT_ID}/news-projects:${BRANCH_NAME}_${COMMIT_SHA}'
       - "--cache-from"
-      - "gcr.io/${PROJECT_ID}/news-project:latest"
+      - "gcr.io/${PROJECT_ID}/news-projects:latest"
       - .
   - name: gcr.io/cloud-builders/docker
     args:
